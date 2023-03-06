@@ -129,13 +129,13 @@ export class MediaApp extends Chart {
 
                 livenessProbe: props.enableProbes
                   ? this.getProbe(props.port)
-                  : {},
+                  : undefined,
                 readinessProbe: props.enableProbes
                   ? this.getProbe(props.port)
-                  : {},
+                  : undefined,
                 startupProbe: props.enableProbes
                   ? this.getProbe(props.port)
-                  : {},
+                  : undefined,
               },
             ],
             dnsConfig: props.useExternalDNS
