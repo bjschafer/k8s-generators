@@ -29,6 +29,36 @@ export type NfsVolumes =
   | "videos-movies"
   | "videos-tvshows";
 
+export interface UnifiedVolumeProps {
+  readonly name: string;
+  readonly pvcClaimName: string;
+  readonly mountPath: string;
+}
+
+export class UnifiedVolume {
+  private props: UnifiedVolumeProps;
+
+  constructor(props: UnifiedVolumeProps) {
+    this.props = props;
+  }
+
+  public ToVolume(): Volume {
+    return {
+      name: this.props.name,
+      persistentVolumeClaim: {
+        claimName: this.props.pvcClaimName,
+      },
+    };
+  }
+
+  public ToVolumeMount(): VolumeMount {
+    return {
+      name: this.props.name,
+      mountPath: this.props.mountPath,
+    };
+  }
+}
+
 export interface MediaAppProps {
   readonly name: string;
   readonly namespace: string;
@@ -37,7 +67,8 @@ export interface MediaAppProps {
   readonly enableProbes: boolean;
   readonly image: string;
   readonly resources: ResourceRequirements;
-  readonly nfsMounts: { mountPath: string; vol: NfsVolumes }[];
+  // readonly nfsMounts: { mountPath: string; vol: NfsVolumes }[];
+  readonly nfsMounts: UnifiedVolume[];
   readonly configMountPath?: string;
   readonly configVolumeSize?: Quantity;
   readonly configEnableBackups: boolean;
@@ -118,12 +149,9 @@ export class MediaApp extends Chart {
                     props.configMountPath ?? "/config"
                   ),
                   ...props.nfsMounts.map<VolumeMount>(function (
-                    value
+                    vol
                   ): VolumeMount {
-                    return {
-                      name: value.vol,
-                      mountPath: value.mountPath,
-                    };
+                    return vol.ToVolumeMount();
                   }),
                 ],
 
@@ -146,13 +174,8 @@ export class MediaApp extends Chart {
               : undefined,
             volumes: [
               ...this.getConfigVolume(),
-              ...props.nfsMounts.map<Volume>(function (value): Volume {
-                return {
-                  name: value.vol,
-                  persistentVolumeClaim: {
-                    claimName: `nfs-media-${value.vol}`,
-                  },
-                };
+              ...props.nfsMounts.map<Volume>(function (vol): Volume {
+                return vol.ToVolume();
               }),
             ],
           },
