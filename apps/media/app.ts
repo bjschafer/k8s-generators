@@ -42,11 +42,7 @@ new NFSVolume(app, "nfs-media-videos-tvshows", {
 new MediaApp(app, {
   name: "sonarr",
   namespace: namespace,
-  port: {
-    name: "http",
-    containerPort: 8989,
-    protocol: "TCP",
-  },
+  port: 8989,
   useExternalDNS: false,
   enableProbes: true,
   image: "ghcr.io/linuxserver/sonarr:develop",

@@ -1,5 +1,4 @@
 import {
-  ContainerPort,
   IntOrString,
   KubeDeployment,
   KubePersistentVolumeClaim,
@@ -17,7 +16,12 @@ import {
   PersistentVolumeMode,
 } from "cdk8s-plus-25";
 import { StorageClass } from "./volume";
-import { BACKUP_ANNOTATION_NAME, DNS_NAMESERVERS, DNS_SEARCH, LSIO_ENV } from "./consts";
+import {
+  BACKUP_ANNOTATION_NAME,
+  DNS_NAMESERVERS,
+  DNS_SEARCH,
+  LSIO_ENV,
+} from "./consts";
 
 export type NfsVolumes =
   | "downloads"
@@ -28,7 +32,7 @@ export type NfsVolumes =
 export interface MediaAppProps {
   readonly name: string;
   readonly namespace: string;
-  readonly port: ContainerPort;
+  readonly port: number;
   readonly useExternalDNS: boolean;
   readonly enableProbes: boolean;
   readonly image: string;
@@ -101,7 +105,13 @@ export class MediaApp extends Chart {
                 env: LSIO_ENV,
                 image: props.image,
                 imagePullPolicy: ImagePullPolicy.ALWAYS,
-                ports: [props.port],
+                ports: [
+                  {
+                    name: "http",
+                    protocol: "TCP",
+                    containerPort: props.port,
+                  },
+                ],
                 resources: props.resources,
                 volumeMounts: [
                   ...this.getConfigVolumeMount(
@@ -118,13 +128,13 @@ export class MediaApp extends Chart {
                 ],
 
                 livenessProbe: props.enableProbes
-                  ? this.getProbe(props.port.containerPort)
+                  ? this.getProbe(props.port)
                   : {},
                 readinessProbe: props.enableProbes
-                  ? this.getProbe(props.port.containerPort)
+                  ? this.getProbe(props.port)
                   : {},
                 startupProbe: props.enableProbes
-                  ? this.getProbe(props.port.containerPort)
+                  ? this.getProbe(props.port)
                   : {},
               },
             ],
