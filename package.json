@@ -1,0 +1,39 @@
+{
+  "name": "cdk8s",
+  "version": "1.0.0",
+  "main": "main.js",
+  "types": "main.ts",
+  "license": "Apache-2.0",
+  "private": true,
+  "scripts": {
+    "import": "cdk8s import",
+    "synth": "for file in apps/*/*.js; do npx node \"${file}\"; done",
+    "compile": "tsc --build",
+    "watch": "tsc --build -w",
+    "test": "jest",
+    "upgrade": "npm i cdk8s@latest cdk8s-cli@latest",
+    "upgrade:next": "npm i cdk8s@next cdk8s-cli@next",
+    "lint": "npx eslint \"**/*.ts\"",
+    "fmt": "npx prettier --check --write \"**/*.ts\"",
+    "clean": "rm -rf dist/",
+    "fullbuild": "yarn run clean && yarn run fmt && yarn run lint && yarn run compile && yarn run synth",
+    "build": "yarn run clean && yarn run compile && yarn run synth"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
+    "cdk8s": "^2.6.46",
+    "cdk8s-plus-25": "^2.3.25",
+    "constructs": "^10.1.222",
+    "eslint": "^8.31.0",
+    "prettier": "^2.8.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.24",
+    "@types/node": "^14.18.36",
+    "cdk8s-cli": "^2.1.133",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.6",
+    "typescript": "^4.9.4"
+  }
+}
