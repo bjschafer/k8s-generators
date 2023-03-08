@@ -5,7 +5,10 @@ import {
   KubePersistentVolume,
   KubePersistentVolumeClaim,
   Quantity,
+  Volume,
+  VolumeMount,
 } from "../imports/k8s";
+import { UnifiedVolumeMount } from "./volume";
 
 export const NFS_SERVER = "10.0.151.3";
 const DEFAULT_CAPACITY = Quantity.fromString("50Ti");
@@ -19,8 +22,11 @@ export interface NFSVolumeProps {
 }
 
 export class NFSVolume extends Chart {
+  private name: string;
+
   constructor(scope: Construct, name: string, props: NFSVolumeProps) {
     super(scope, name);
+    this.name = name;
 
     new KubePersistentVolume(this, `${name}-pv`, {
       metadata: {
@@ -64,5 +70,29 @@ export class NFSVolume extends Chart {
         volumeName: name,
       },
     });
+  }
+
+  public ToVolume(): Volume {
+    return {
+      name: this.name,
+      persistentVolumeClaim: {
+        claimName: this.name,
+      },
+    };
+  }
+
+  public ToVolumeMount(mountPath: string): VolumeMount {
+    return {
+      name: this.name,
+      mountPath: mountPath,
+    };
+  }
+
+  public AsUnifiedVolumeMount(mountPath: string): UnifiedVolumeMount {
+    return {
+      mountPath: mountPath,
+      volume: this.ToVolume(),
+      volumeMount: this.ToVolumeMount(mountPath),
+    };
   }
 }

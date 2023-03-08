@@ -15,49 +15,13 @@ import {
   PersistentVolumeAccessMode,
   PersistentVolumeMode,
 } from "cdk8s-plus-25";
-import { StorageClass } from "./volume";
+import { StorageClass, UnifiedVolumeMount } from "./volume";
 import {
   BACKUP_ANNOTATION_NAME,
   DNS_NAMESERVERS,
   DNS_SEARCH,
   LSIO_ENV,
 } from "./consts";
-
-export type NfsVolumes =
-  | "downloads"
-  | "music"
-  | "videos-movies"
-  | "videos-tvshows";
-
-export interface UnifiedVolumeProps {
-  readonly name: string;
-  readonly pvcClaimName: string;
-  readonly mountPath: string;
-}
-
-export class UnifiedVolume {
-  private props: UnifiedVolumeProps;
-
-  constructor(props: UnifiedVolumeProps) {
-    this.props = props;
-  }
-
-  public ToVolume(): Volume {
-    return {
-      name: this.props.name,
-      persistentVolumeClaim: {
-        claimName: this.props.pvcClaimName,
-      },
-    };
-  }
-
-  public ToVolumeMount(): VolumeMount {
-    return {
-      name: this.props.name,
-      mountPath: this.props.mountPath,
-    };
-  }
-}
 
 export interface MediaAppProps {
   readonly name: string;
@@ -68,7 +32,7 @@ export interface MediaAppProps {
   readonly image: string;
   readonly resources: ResourceRequirements;
   // readonly nfsMounts: { mountPath: string; vol: NfsVolumes }[];
-  readonly nfsMounts: UnifiedVolume[];
+  readonly nfsMounts: UnifiedVolumeMount[];
   readonly configMountPath?: string;
   readonly configVolumeSize?: Quantity;
   readonly configEnableBackups: boolean;
@@ -151,7 +115,7 @@ export class MediaApp extends Chart {
                   ...props.nfsMounts.map<VolumeMount>(function (
                     vol
                   ): VolumeMount {
-                    return vol.ToVolumeMount();
+                    return vol.volumeMount;
                   }),
                 ],
 
@@ -175,7 +139,7 @@ export class MediaApp extends Chart {
             volumes: [
               ...this.getConfigVolume(),
               ...props.nfsMounts.map<Volume>(function (vol): Volume {
-                return vol.ToVolume();
+                return vol.volume;
               }),
             ],
           },

@@ -13,6 +13,15 @@ export enum StorageClass {
   CEPH_RBD = "ceph-rbd",
 }
 
+export interface UnifiedVolume {
+  volume: Volume;
+  volumeMount: VolumeMount;
+}
+
+export interface UnifiedVolumeMount extends UnifiedVolume {
+  mountPath: string;
+}
+
 export interface PVCProps {
   readonly name: string;
   readonly storageClass: StorageClass;
