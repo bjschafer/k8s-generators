@@ -1,12 +1,13 @@
-import { App } from "cdk8s";
-import { NFSVolume } from "../../lib/nfs";
-import { ArgoApp } from "../../lib/argo";
-import { Quantity } from "../../imports/k8s";
-import { MediaApp } from "../../lib/media-app";
-
-const app = new App({ outdir: "dist/media" });
+import {App} from "cdk8s";
+import {NFSVolume} from "../../lib/nfs";
+import {ArgoApp} from "../../lib/argo";
+import {Quantity} from "../../imports/k8s";
+import {MediaApp} from "../../lib/media-app";
+import {DEFAULT_APP_PROPS} from "../../lib/consts";
 
 const namespace = "media";
+const app = new App(DEFAULT_APP_PROPS(namespace));
+
 
 new ArgoApp(app, "media", {
   sync_policy: {
@@ -72,7 +73,7 @@ const mediaApps = [
   {
     name: "lidarr",
     port: 8686,
-    image: "ghcr.io/linuxserver/lidarr:nightly",
+    image: "ghcr.io/linuxserver/lidarr:develop",
     nfsMounts: [
       nfsVols.get("nfs-media-downloads")!.AsUnifiedVolumeMount("/downloads"),
       nfsVols.get("nfs-media-music")!.AsUnifiedVolumeMount("/music"),
