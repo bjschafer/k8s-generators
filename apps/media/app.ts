@@ -1,13 +1,13 @@
-import {App} from "cdk8s";
-import {NFSVolume} from "../../lib/nfs";
-import {ArgoApp} from "../../lib/argo";
-import {Quantity} from "../../imports/k8s";
-import {MediaApp} from "../../lib/media-app";
-import {DEFAULT_APP_PROPS} from "../../lib/consts";
+import { App } from "cdk8s";
+import { NFSVolume } from "../../lib/nfs";
+import { ArgoApp } from "../../lib/argo";
+import { Quantity } from "../../imports/k8s";
+import { MediaApp } from "../../lib/media-app";
+import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { basename } from "../../lib/util";
 
-const namespace = "media";
+const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
-
 
 new ArgoApp(app, "media", {
   sync_policy: {

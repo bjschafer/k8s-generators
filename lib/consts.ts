@@ -1,5 +1,5 @@
-import {EnvVar, Quantity} from "../imports/k8s";
-import {AppProps, YamlOutputType} from "cdk8s";
+import { EnvVar, Quantity } from "../imports/k8s";
+import { AppProps, YamlOutputType } from "cdk8s";
 
 export const DEFAULT_CPU_LIMIT = Quantity.fromString("250m");
 export const DEFAULT_MEM_LIMIT = Quantity.fromString("256Mi");
@@ -31,5 +31,22 @@ export function DEFAULT_APP_PROPS(namespace: string): AppProps {
   return {
     outdir: `dist/${namespace}`,
     yamlOutputType: YamlOutputType.FILE_PER_RESOURCE,
+  };
+}
+
+export const INGRESS_CLASS_NAME = "traefik";
+
+export const CLUSTER_ISSUER = {
+  kind: "ClusterIssuer",
+  name: "letsencrypt",
+};
+
+export function GET_COMMON_LABELS(
+  name: string,
+  instance?: string
+): { [name: string]: string } {
+  return {
+    "app.kubernetes.io/name": name,
+    "app.kubernetes.io/instance": instance ?? name,
   };
 }

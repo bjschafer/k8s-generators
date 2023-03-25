@@ -1,6 +1,7 @@
 import { Application, ApplicationSpecSyncPolicy } from "../imports/argoproj.io";
 import { Chart } from "cdk8s";
 import { Construct } from "constructs";
+import { KubeNamespace } from "../imports/k8s";
 
 export const ARGO_NAMESPACE = "argocd";
 export const ARGO_GIT_REPO_URL = "git@github.com:bjschafer/k8s-prod.git";
@@ -23,6 +24,12 @@ export class ArgoApp extends Chart {
       labels: {
         "app.kubernetes.io/name": name,
         ...props.labels,
+      },
+    });
+
+    new KubeNamespace(this, `${name}-ns`, {
+      metadata: {
+        name: props.namespace,
       },
     });
 

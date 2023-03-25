@@ -1,7 +1,9 @@
 import {
   IntOrString,
   KubeDeployment,
+  KubeIngress,
   KubePersistentVolumeClaim,
+  KubeService,
   Probe,
   Quantity,
   ResourceRequirements,
@@ -20,8 +22,12 @@ import {
   BACKUP_ANNOTATION_NAME,
   DNS_NAMESERVERS,
   DNS_SEARCH,
+  GET_COMMON_LABELS,
+  INGRESS_CLASS_NAME,
   LSIO_ENV,
 } from "./consts";
+
+const tlsSecretName = "media-tls";
 
 export interface MediaAppProps {
   readonly name: string;
@@ -74,21 +80,21 @@ export class MediaApp extends Chart {
 
     new KubeDeployment(this, `${props.name}-deployment`, {
       metadata: {
-        labels: this.getCommonLabels(props.name),
+        labels: GET_COMMON_LABELS(props.name),
         name: props.name,
         namespace: props.namespace,
       },
       spec: {
         replicas: 1,
         selector: {
-          matchLabels: this.getCommonLabels(props.name),
+          matchLabels: GET_COMMON_LABELS(props.name),
         },
         strategy: {
           type: "Recreate",
         },
         template: {
           metadata: {
-            labels: this.getCommonLabels(props.name),
+            labels: GET_COMMON_LABELS(props.name),
             annotations: props.configEnableBackups
               ? { [BACKUP_ANNOTATION_NAME]: `${props.name}-config` }
               : {},
@@ -146,13 +152,66 @@ export class MediaApp extends Chart {
         },
       },
     });
-  }
 
-  private getCommonLabels(name: string): { [name: string]: string } {
-    return {
-      "app.kubernetes.io/name": name,
-      "app.kubernetes.io/instance": name,
-    };
+    new KubeService(this, `${props.name}-service`, {
+      metadata: {
+        name: props.name,
+        namespace: props.namespace,
+        labels: GET_COMMON_LABELS(props.name),
+      },
+      spec: {
+        ports: [
+          {
+            name: "http",
+            port: props.port,
+            protocol: "TCP",
+            targetPort: IntOrString.fromNumber(props.port),
+          },
+        ],
+        selector: GET_COMMON_LABELS(props.name),
+        type: "ClusterIP",
+      },
+    });
+
+    new KubeIngress(this, `${props.name}-ingress`, {
+      metadata: {
+        name: props.name,
+        namespace: props.namespace,
+        labels: GET_COMMON_LABELS(props.name),
+      },
+      spec: {
+        ingressClassName: INGRESS_CLASS_NAME,
+        rules: [
+          {
+            host: `${props.name}.cmdcentral.xyz`, // TODO make this more dynamic
+            http: {
+              paths: [
+                {
+                  backend: {
+                    service: {
+                      name: props.name,
+                      port: {
+                        number: props.port,
+                      },
+                    },
+                  },
+                  path: "/",
+                  pathType: "Prefix",
+                },
+              ],
+            },
+          },
+        ],
+        tls: [
+          {
+            hosts: [
+              `${props.name}.cmdcentral.xyz`, // TODO make this more dynamic
+            ],
+            secretName: tlsSecretName,
+          },
+        ],
+      },
+    });
   }
 
   private getProbe(port: number): Probe {

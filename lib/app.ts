@@ -57,7 +57,7 @@ export class BasicApp extends Chart {
     this.name = name;
     this.props = props;
 
-    new KubeDeployment(this, name, {
+    new KubeDeployment(this, `${name}-deployment`, {
       metadata: {
         name: name,
         namespace: props.namespace,
