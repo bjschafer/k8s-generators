@@ -1,5 +1,5 @@
 import { Chart } from "cdk8s";
-import { PersistentVolumeAccessMode } from "cdk8s-plus-25";
+import { PersistentVolumeAccessMode } from "cdk8s-plus-26";
 import { Construct } from "constructs";
 import {
   KubePersistentVolume,

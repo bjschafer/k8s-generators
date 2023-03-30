@@ -16,7 +16,7 @@ import {
   ImagePullPolicy,
   PersistentVolumeAccessMode,
   PersistentVolumeMode,
-} from "cdk8s-plus-25";
+} from "cdk8s-plus-26";
 import { StorageClass, UnifiedVolumeMount } from "./volume";
 import {
   BACKUP_ANNOTATION_NAME,

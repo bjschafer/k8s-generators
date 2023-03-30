@@ -10,7 +10,7 @@ import {
   Ingress,
   IngressBackend,
   Secret,
-} from "cdk8s-plus-25";
+} from "cdk8s-plus-26";
 
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));

@@ -5,7 +5,7 @@ import {
   Deployment,
   PersistentVolumeClaimProps,
   ServicePort,
-} from "cdk8s-plus-25";
+} from "cdk8s-plus-26";
 
 export interface AppPlusVolume {
   props: PersistentVolumeClaimProps;
