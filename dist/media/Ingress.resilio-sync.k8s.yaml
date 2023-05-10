@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: resilio-sync
+  namespace: media
+spec:
+  rules:
+    - host: resilio-sync.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: resilio-sync
+                port:
+                  number: 8888
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - resilio-sync.cmdcentral.xyz
+      secretName: media-tls

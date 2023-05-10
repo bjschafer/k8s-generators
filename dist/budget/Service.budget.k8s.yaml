@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: budget
+  namespace: budget
+spec:
+  externalIPs: []
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    cdk8s.io/metadata.addr: parent-chart-deployment-c8ae4184
+  type: ClusterIP

@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resilio-sync
+  namespace: media
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 2
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: resilio-sync-resilio-sync-deployment-c84e1f54
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        backup.velero.io/backup-volumes: pvc-resilio-sync-config
+      labels:
+        cdk8s.io/metadata.addr: resilio-sync-resilio-sync-deployment-c84e1f54
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: TZ
+              value: America/Chicago
+            - name: PUID
+              value: "8675309"
+            - name: PGID
+              value: "8675309"
+          image: ghcr.io/linuxserver/resilio-sync:latest
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8888
+              scheme: HTTP
+          name: resilio-sync
+          ports:
+            - containerPort: 8888
+              name: http
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8888
+              scheme: HTTP
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /config
+              name: pvc-resilio-sync-config
+            - mountPath: /downloads
+              name: pvc-nfs-media-downloads
+              subPath: seedbox/downloads
+            - mountPath: /sync
+              name: pvc-nfs-media-downloads
+              subPath: seedbox/sync
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      volumes:
+        - name: pvc-resilio-sync-config
+          persistentVolumeClaim:
+            claimName: resilio-sync-config
+            readOnly: false
+        - name: pvc-nfs-media-downloads
+          persistentVolumeClaim:
+            claimName: nfs-media-downloads
+            readOnly: false

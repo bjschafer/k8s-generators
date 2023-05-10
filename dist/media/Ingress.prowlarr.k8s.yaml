@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: prowlarr
+  namespace: media
+spec:
+  rules:
+    - host: prowlarr.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: prowlarr
+                port:
+                  number: 9696
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - prowlarr.cmdcentral.xyz
+      secretName: media-tls

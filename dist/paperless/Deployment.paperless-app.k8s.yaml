@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: paperless-app
+    component: web
+  name: paperless-app
+  namespace: paperless
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: paperless-app
+      component: web
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: paperless-app
+        component: web
+    spec:
+      containers:
+        - env:
+            - name: TZ
+              value: America/Chicago
+          image: ghcr.io/paperless-ngx/paperless-ngx:latest
+          imagePullPolicy: IfNotPresent
+          name: paperless-app
+          ports:
+            - containerPort: 8000
+              name: paperless-app-8000
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 250m
+              memory: 256Mi
+          volumeMounts:
+            - mountPath: ""
+              name: paperless-data-new
+      volumes:
+        - name: paperless-data-new
+          persistentVolumeClaim:
+            claimName: paperless-data-new

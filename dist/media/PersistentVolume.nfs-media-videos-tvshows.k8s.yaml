@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-media-videos-tvshows
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 51200Gi
+  nfs:
+    path: /warp/Media/Videos/TVShows
+    server: 10.0.151.3
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem

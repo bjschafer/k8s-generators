@@ -1,0 +1,127 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarr
+  namespace: media
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 2
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: sonarr-sonarr-deployment-c8de73e9
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        backup.velero.io/backup-volumes: pvc-sonarr-config
+      labels:
+        cdk8s.io/metadata.addr: sonarr-sonarr-deployment-c8de73e9
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: TZ
+              value: America/Chicago
+            - name: PUID
+              value: "8675309"
+            - name: PGID
+              value: "8675309"
+          image: ghcr.io/linuxserver/sonarr:develop
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8989
+              scheme: HTTP
+          name: sonarr
+          ports:
+            - containerPort: 8989
+              name: http
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8989
+              scheme: HTTP
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /config
+              name: pvc-sonarr-config
+            - mountPath: /downloads
+              name: pvc-nfs-media-downloads
+            - mountPath: /tv
+              name: pvc-nfs-media-videos-tvshows
+        - args:
+            - sonarr
+          env:
+            - name: PORT
+              value: "9707"
+            - name: URL
+              value: http://sonarr.media.svc.cluster.local:8989
+          image: ghcr.io/onedr0p/exportarr:v1.2.4
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 9707
+              scheme: HTTP
+          name: exportarr
+          ports:
+            - containerPort: 9707
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 9707
+              scheme: HTTP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          startupProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 9707
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      volumes:
+        - name: pvc-sonarr-config
+          persistentVolumeClaim:
+            claimName: sonarr-config
+            readOnly: false
+        - name: pvc-nfs-media-downloads
+          persistentVolumeClaim:
+            claimName: nfs-media-downloads
+            readOnly: false
+        - name: pvc-nfs-media-videos-tvshows
+          persistentVolumeClaim:
+            claimName: nfs-media-videos-tvshows
+            readOnly: false

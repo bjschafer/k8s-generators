@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: lidarr
+  namespace: media
+spec:
+  rules:
+    - host: lidarr.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: lidarr
+                port:
+                  number: 8686
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - lidarr.cmdcentral.xyz
+      secretName: media-tls

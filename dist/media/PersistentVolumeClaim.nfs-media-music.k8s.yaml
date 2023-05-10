@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-media-music
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 51200Gi
+  storageClassName: ""
+  volumeMode: Filesystem
+  volumeName: nfs-media-music

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: resilio-sync
+  namespace: media
+spec:
+  externalIPs: []
+  ports:
+    - name: http
+      port: 8888
+      targetPort: 8888
+  selector:
+    cdk8s.io/metadata.addr: resilio-sync-resilio-sync-deployment-c84e1f54
+  type: ClusterIP
