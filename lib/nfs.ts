@@ -42,8 +42,9 @@ export class NFSVolumeContainer extends Chart {
       metadata: {
         name: name,
       },
-      accessModes: vol.accessModes,
+      accessModes: [PersistentVolumeAccessMode.READ_WRITE_MANY],
       storage: vol.storage,
+      storageClassName: "",
     });
     pvc.bind(vol);
 
