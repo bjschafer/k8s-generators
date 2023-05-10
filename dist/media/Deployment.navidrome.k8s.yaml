@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: navidrome
+  namespace: media
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 2
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: navidrome-navidrome-deployment-c811d449
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        backup.velero.io/backup-volumes: pvc-navidrome-config
+      labels:
+        cdk8s.io/metadata.addr: navidrome-navidrome-deployment-c811d449
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: TZ
+              value: America/Chicago
+            - name: PUID
+              value: "8675309"
+            - name: PGID
+              value: "8675309"
+            - name: ND_PROMETHEUS_ENABLED
+              value: "true"
+          image: deluan/navidrome:latest
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 4533
+              scheme: HTTP
+          name: navidrome
+          ports:
+            - containerPort: 4533
+              name: http
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 4533
+              scheme: HTTP
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /data
+              name: pvc-navidrome-config
+            - mountPath: /music
+              name: pvc-nfs-media-music
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      volumes:
+        - name: pvc-navidrome-config
+          persistentVolumeClaim:
+            claimName: navidrome-config
+            readOnly: false
+        - name: pvc-nfs-media-music
+          persistentVolumeClaim:
+            claimName: nfs-media-music
+            readOnly: false

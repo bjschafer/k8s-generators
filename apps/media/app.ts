@@ -1,10 +1,10 @@
 import { App, Size } from "cdk8s";
 import { NFSVolumeContainer } from "../../lib/nfs";
 import { ArgoApp } from "../../lib/argo";
-import { MediaApp } from "../../lib/media-app";
+import { MediaApp, MediaAppProps } from "../../lib/media-app";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { basename } from "../../lib/util";
-import { Cpu, Secret } from "cdk8s-plus-26";
+import { Cpu, EnvValue, Secret } from "cdk8s-plus-26";
 
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
@@ -34,7 +34,10 @@ nfsVols.Add("nfs-media-videos-tvshows", {
   exportPath: "/warp/Media/Videos/TVShows",
 });
 
-const mediaApps = [
+const mediaApps: Omit<
+  MediaAppProps,
+  "namespace" | "ingressSecret" | "resources"
+>[] = [
   {
     name: "sonarr",
     port: 8989,
@@ -101,6 +104,26 @@ const mediaApps = [
     image: "ghcr.io/linuxserver/prowlarr:latest",
     enableExportarr: false,
   },
+  {
+    name: "navidrome",
+    port: 4533,
+    image: "deluan/navidrome:latest",
+    enableExportarr: false,
+    nfsMounts: [
+      {
+        mountPoint: "/music",
+        nfsConcreteVolume: nfsVols.Get("nfs-media-music"),
+      },
+    ],
+    configVolume: {
+      mountPath: "/data",
+      size: Size.gibibytes(5),
+      enableBackups: true,
+    },
+    extraEnv: {
+      ND_PROMETHEUS_ENABLED: EnvValue.fromValue("true"), // TODO add scrape config
+    },
+  },
 ];
 
 const ingressSecret = Secret.fromSecretName(app, "media-tls", "media-tls");
@@ -110,8 +133,6 @@ for (const mediaApp of mediaApps) {
     name: mediaApp.name,
     namespace: namespace,
     port: mediaApp.port,
-    useExternalDNS: false,
-    enableProbes: true,
     image: mediaApp.image,
     resources: {
       cpu: {
@@ -122,10 +143,13 @@ for (const mediaApp of mediaApps) {
       },
     },
     nfsMounts: mediaApp.nfsMounts ?? [],
-    configVolumeSize: Size.gibibytes(5),
-    configEnableBackups: true,
+    configVolume: mediaApp.configVolume ?? {
+      size: Size.gibibytes(5),
+      enableBackups: true,
+    },
     enableExportarr: mediaApp.enableExportarr,
     ingressSecret: ingressSecret,
+    extraEnv: mediaApp.extraEnv,
   });
 }
 
@@ -134,8 +158,6 @@ new MediaApp(app, {
   name: "resilio-sync",
   namespace: namespace,
   port: 8888,
-  useExternalDNS: false,
-  enableProbes: true,
   image: "ghcr.io/linuxserver/resilio-sync:latest",
   resources: {
     cpu: {
@@ -161,8 +183,11 @@ new MediaApp(app, {
       },
     },
   ],
-  configVolumeSize: Size.gibibytes(5),
-  configEnableBackups: true,
+  configVolume: {
+    size: Size.gibibytes(5),
+    enableBackups: true,
+    mountPath: "/config",
+  },
   enableExportarr: false,
   ingressSecret: ingressSecret,
 });

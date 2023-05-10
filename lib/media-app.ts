@@ -30,49 +30,38 @@ export interface MediaAppProps {
   readonly name: string;
   readonly namespace: string;
   readonly port: number;
-  readonly useExternalDNS: boolean;
-  readonly enableProbes: boolean;
   readonly image: string;
   readonly resources: ContainerResources;
+  readonly extraEnv?: { [key: string]: EnvValue };
   readonly nfsMounts?: {
     mountPoint: string;
     nfsConcreteVolume: NFSConcreteVolume;
     mountOptions?: MountOptions;
   }[];
-  readonly configMountPath?: string;
-  readonly configVolumeSize?: Size;
-  readonly configEnableBackups: boolean;
+  readonly configVolume?: {
+    size?: Size;
+    mountPath?: string;
+    enableBackups: boolean;
+  };
   readonly enableExportarr: boolean;
   readonly ingressSecret: ISecret;
 }
 
 export class MediaApp extends Chart {
-  private readonly configPVCName: string;
-  private readonly hasConfigPVC: boolean;
-
   constructor(scope: Construct, props: MediaAppProps) {
     super(scope, props.name);
 
     // early setup of PVC so we can get its name for backup config
-    this.configPVCName = `${props.name}-config`;
-    this.hasConfigPVC =
-      props.configMountPath !== undefined ||
-      props.configVolumeSize !== undefined;
-
-    if (!this.hasConfigPVC && props.configEnableBackups) {
-      throw new Error(
-        `Requested to configure backups for ${props.name} but no config volume was specified.`
-      );
-    }
+    const configPVCName = `${props.name}-config`;
 
     let configVol: Volume | undefined;
-    if (this.hasConfigPVC) {
-      const pvc = new PersistentVolumeClaim(this, this.configPVCName, {
+    if (props.configVolume) {
+      const pvc = new PersistentVolumeClaim(this, configPVCName, {
         metadata: {
-          name: this.configPVCName,
+          name: configPVCName,
         },
         accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
-        storage: props.configVolumeSize ?? Size.gibibytes(5),
+        storage: props.configVolume.size ?? Size.gibibytes(5),
         storageClassName: StorageClass.CEPH_RBD,
         volumeMode: PersistentVolumeMode.FILE_SYSTEM,
       });
@@ -90,8 +79,8 @@ export class MediaApp extends Chart {
       },
       securityContext: DEFAULT_SECURITY_CONTEXT,
       podMetadata: {
-        annotations: props.configEnableBackups
-          ? { [BACKUP_ANNOTATION_NAME]: configVol!.name }
+        annotations: props.configVolume?.enableBackups
+          ? { [BACKUP_ANNOTATION_NAME]: configVol!.name } // if backups are enabled, then configVol must be defined.
           : {},
       },
       containers: [
@@ -109,7 +98,10 @@ export class MediaApp extends Chart {
             },
           ],
           resources: props.resources,
-          envVariables: LSIO_ENVVALUE,
+          envVariables: {
+            ...LSIO_ENVVALUE,
+            ...props.extraEnv,
+          },
           readiness: Probe.fromHttpGet("/", {
             port: props.port,
           }),
@@ -120,10 +112,10 @@ export class MediaApp extends Chart {
       ],
     });
 
-    if (this.hasConfigPVC) {
+    if (props.configVolume) {
       deploy.addVolume(configVol!);
       deploy.containers[0].mount(
-        props.configMountPath ?? "/config",
+        props.configVolume.mountPath ?? "/config",
         configVol!
       );
     }
