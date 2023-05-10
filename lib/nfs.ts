@@ -1,98 +1,90 @@
-import { Chart } from "cdk8s";
-import { PersistentVolumeAccessMode } from "cdk8s-plus-26";
-import { Construct } from "constructs";
+import { Chart, Size } from "cdk8s";
 import {
-  KubePersistentVolume,
-  KubePersistentVolumeClaim,
-  Quantity,
-  Volume,
-  VolumeMount,
-} from "../imports/k8s";
-import { UnifiedVolumeMount } from "./volume";
+  IPersistentVolume,
+  k8s,
+  PersistentVolume,
+  PersistentVolumeAccessMode,
+  PersistentVolumeClaim,
+  PersistentVolumeMode,
+  PersistentVolumeProps,
+  PersistentVolumeReclaimPolicy,
+} from "cdk8s-plus-26";
+import { Construct } from "constructs";
 
 export const NFS_SERVER = "10.0.151.3";
-const DEFAULT_CAPACITY = Quantity.fromString("50Ti");
+const DEFAULT_CAPACITY = Size.tebibytes(50);
 
-export interface NFSVolumeProps {
-  readonly namespace: string;
-  readonly accessMode?: PersistentVolumeAccessMode;
-  readonly capacity?: Quantity;
-  readonly nfsHost?: string;
-  readonly exportPath: string;
+export interface NFSConcreteVolume {
+  volume: NFSVolume;
+  pvc: PersistentVolumeClaim;
 }
 
-export class NFSVolume extends Chart {
-  private name: string;
+export class NFSVolumeContainer extends Chart {
+  public nfsVols: Map<string, NFSConcreteVolume>;
+
+  constructor(scope: Construct, name: string) {
+    super(scope, name);
+    this.nfsVols = new Map<
+      string,
+      { volume: NFSVolume; pvc: PersistentVolumeClaim }
+    >();
+  }
+
+  public Add(name: string, props: NFSVolumeProps) {
+    props = {
+      ...props,
+      metadata: {
+        name: name,
+      },
+    };
+    const vol = new NFSVolume(this, name, props);
+    const pvc = new PersistentVolumeClaim(this, `${name}-pvc`, {
+      metadata: {
+        name: name,
+      },
+      accessModes: vol.accessModes,
+      storage: vol.storage,
+    });
+    pvc.bind(vol);
+
+    this.nfsVols.set(name, { volume: vol, pvc: pvc });
+  }
+
+  public Get(name: string): NFSConcreteVolume {
+    return this.nfsVols.get(name)!;
+  }
+}
+
+export interface NFSVolumeProps extends PersistentVolumeProps {
+  readonly nfsHost?: string;
+  readonly exportPath: string;
+  readonly storage?: Size;
+}
+
+export class NFSVolume extends PersistentVolume implements IPersistentVolume {
+  public readonly nfsHost: string;
+  public readonly exportPath: string;
+  public readonly storage: Size;
 
   constructor(scope: Construct, name: string, props: NFSVolumeProps) {
-    super(scope, name);
-    this.name = name;
+    super(scope, name, props);
 
-    new KubePersistentVolume(this, `${name}-pv`, {
-      metadata: {
-        name: name,
-        labels: {
-          "app.kubernetes.io/instance": "media",
-        },
-      },
-      spec: {
-        accessModes: [
-          props.accessMode ?? PersistentVolumeAccessMode.READ_WRITE_MANY,
-        ],
-        capacity: {
-          storage: props.capacity ?? DEFAULT_CAPACITY,
-        },
-        nfs: {
-          path: props.exportPath,
-          server: props.nfsHost ?? NFS_SERVER,
-        },
-      },
-    });
-
-    new KubePersistentVolumeClaim(this, `${name}-pvc`, {
-      metadata: {
-        name: name,
-        namespace: props.namespace,
-        labels: {
-          "app.kubernetes.io/instance": "media",
-        },
-      },
-      spec: {
-        accessModes: [
-          props.accessMode ?? PersistentVolumeAccessMode.READ_WRITE_MANY,
-        ],
-        resources: {
-          requests: {
-            storage: props.capacity ?? DEFAULT_CAPACITY,
-          },
-        },
-        storageClassName: "",
-        volumeName: name,
-      },
-    });
+    this.nfsHost = props.nfsHost ?? NFS_SERVER;
+    this.exportPath = props.exportPath;
+    this.storage = props.storage ?? DEFAULT_CAPACITY;
   }
 
-  public ToVolume(): Volume {
+  public _toKube(): k8s.PersistentVolumeSpec {
+    const spec = super._toKube();
     return {
-      name: this.name,
-      persistentVolumeClaim: {
-        claimName: this.name,
+      ...spec,
+      accessModes: [PersistentVolumeAccessMode.READ_WRITE_MANY],
+      persistentVolumeReclaimPolicy: PersistentVolumeReclaimPolicy.RETAIN,
+      volumeMode: PersistentVolumeMode.FILE_SYSTEM,
+      nfs: {
+        path: this.exportPath,
+        server: this.nfsHost,
       },
-    };
-  }
-
-  public ToVolumeMount(mountPath: string): VolumeMount {
-    return {
-      name: this.name,
-      mountPath: mountPath,
-    };
-  }
-
-  public AsUnifiedVolumeMount(mountPath: string): UnifiedVolumeMount {
-    return {
-      mountPath: mountPath,
-      volume: this.ToVolume(),
-      volumeMount: this.ToVolumeMount(mountPath),
     };
   }
 }

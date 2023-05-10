@@ -1,33 +1,30 @@
-import {
-  IntOrString,
-  KubeDeployment,
-  KubeIngress,
-  KubePersistentVolumeClaim,
-  KubeService,
-  Probe,
-  Quantity,
-  ResourceRequirements,
-  Volume,
-  VolumeMount,
-} from "../imports/k8s";
 import { Construct } from "constructs";
-import { Chart } from "cdk8s";
+import { Chart, Size } from "cdk8s";
 import {
-  ImagePullPolicy,
+  ContainerResources,
+  Cpu,
+  Deployment,
+  EnvValue,
+  Ingress,
+  IngressBackend,
+  ISecret,
+  MountOptions,
   PersistentVolumeAccessMode,
+  PersistentVolumeClaim,
   PersistentVolumeMode,
+  Probe,
+  Volume,
 } from "cdk8s-plus-26";
-import { StorageClass, UnifiedVolumeMount } from "./volume";
+import { StorageClass } from "./volume";
 import {
   BACKUP_ANNOTATION_NAME,
-  DNS_NAMESERVERS,
-  DNS_SEARCH,
-  GET_COMMON_LABELS,
-  INGRESS_CLASS_NAME,
-  LSIO_ENV,
+  DEFAULT_SECURITY_CONTEXT,
+  GET_SERVICE_URL,
+  LSIO_ENVVALUE,
 } from "./consts";
+import { NFSConcreteVolume } from "./nfs";
 
-const tlsSecretName = "media-tls";
+const exportarrVersion = "v1.2.4";
 
 export interface MediaAppProps {
   readonly name: string;
@@ -36,12 +33,17 @@ export interface MediaAppProps {
   readonly useExternalDNS: boolean;
   readonly enableProbes: boolean;
   readonly image: string;
-  readonly resources: ResourceRequirements;
-  // readonly nfsMounts: { mountPath: string; vol: NfsVolumes }[];
-  readonly nfsMounts: UnifiedVolumeMount[];
+  readonly resources: ContainerResources;
+  readonly nfsMounts?: {
+    mountPoint: string;
+    nfsConcreteVolume: NFSConcreteVolume;
+    mountOptions?: MountOptions;
+  }[];
   readonly configMountPath?: string;
-  readonly configVolumeSize?: Quantity;
+  readonly configVolumeSize?: Size;
   readonly configEnableBackups: boolean;
+  readonly enableExportarr: boolean;
+  readonly ingressSecret: ISecret;
 }
 
 export class MediaApp extends Chart {
@@ -51,204 +53,285 @@ export class MediaApp extends Chart {
   constructor(scope: Construct, props: MediaAppProps) {
     super(scope, props.name);
 
+    // early setup of PVC so we can get its name for backup config
     this.configPVCName = `${props.name}-config`;
     this.hasConfigPVC =
       props.configMountPath !== undefined ||
       props.configVolumeSize !== undefined;
 
+    if (!this.hasConfigPVC && props.configEnableBackups) {
+      throw new Error(
+        `Requested to configure backups for ${props.name} but no config volume was specified.`
+      );
+    }
+
+    let configVol: Volume | undefined;
     if (this.hasConfigPVC) {
-      new KubePersistentVolumeClaim(this, this.configPVCName, {
+      const pvc = new PersistentVolumeClaim(this, this.configPVCName, {
         metadata: {
-          labels: {
-            "app.kubernetes.io/name": props.name,
-          },
           name: this.configPVCName,
-          namespace: props.namespace,
         },
-        spec: {
-          accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
-          resources: {
-            requests: {
-              storage: props.configVolumeSize ?? Quantity.fromString("5Gi"),
-            },
+        accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
+        storage: props.configVolumeSize ?? Size.gibibytes(5),
+        storageClassName: StorageClass.CEPH_RBD,
+        volumeMode: PersistentVolumeMode.FILE_SYSTEM,
+      });
+      configVol = Volume.fromPersistentVolumeClaim(
+        this,
+        `${props.name}-vol`,
+        pvc
+      );
+    }
+
+    const deploy = new Deployment(this, `${props.name}-deployment`, {
+      metadata: {
+        name: props.name,
+        namespace: props.namespace,
+      },
+      securityContext: DEFAULT_SECURITY_CONTEXT,
+      podMetadata: {
+        annotations: props.configEnableBackups
+          ? { [BACKUP_ANNOTATION_NAME]: configVol!.name }
+          : {},
+      },
+      containers: [
+        {
+          name: props.name,
+          securityContext: {
+            ensureNonRoot: false,
+            readOnlyRootFilesystem: false,
           },
-          storageClassName: StorageClass.CEPH_RBD,
-          volumeMode: PersistentVolumeMode.FILE_SYSTEM,
+          image: props.image,
+          ports: [
+            {
+              name: "http",
+              number: props.port,
+            },
+          ],
+          resources: props.resources,
+          envVariables: LSIO_ENVVALUE,
+          readiness: Probe.fromHttpGet("/", {
+            port: props.port,
+          }),
+          liveness: Probe.fromHttpGet("/", {
+            port: props.port,
+          }),
         },
+      ],
+    });
+
+    if (this.hasConfigPVC) {
+      deploy.addVolume(configVol!);
+      deploy.containers[0].mount(
+        props.configMountPath ?? "/config",
+        configVol!
+      );
+    }
+
+    let existingVolumes = new Map<string, Volume>();
+
+    for (const nfsMount of props.nfsMounts ?? []) {
+      // we need to handle the edge case where the same volume is mounted at multiple (sub)paths.
+      const existingVol = existingVolumes.get(
+        nfsMount.nfsConcreteVolume.volume.name
+      );
+      let vol: Volume;
+      if (!existingVol) {
+        vol = Volume.fromPersistentVolumeClaim(
+          this,
+          nfsMount.nfsConcreteVolume.volume.name,
+          nfsMount.nfsConcreteVolume.pvc
+        );
+        existingVolumes.set(nfsMount.nfsConcreteVolume.volume.name, vol);
+        deploy.addVolume(vol);
+      } else {
+        vol = existingVol;
+      }
+
+      deploy.containers[0].mount(
+        nfsMount.mountPoint,
+        vol,
+        nfsMount.mountOptions
+      );
+    }
+
+    if (props.enableExportarr) {
+      deploy.addContainer({
+        securityContext: DEFAULT_SECURITY_CONTEXT,
+        image: `ghcr.io/onedr0p/exportarr:${exportarrVersion}`,
+        name: "exportarr",
+        args: [props.name],
+        portNumber: 9707,
+        envVariables: {
+          PORT: EnvValue.fromValue("9707"),
+          URL: EnvValue.fromValue(
+            GET_SERVICE_URL(props.name, props.namespace, true, props.port)
+          ),
+        },
+        resources: {
+          cpu: {
+            request: Cpu.millis(100),
+            limit: Cpu.millis(500),
+          },
+          memory: {
+            request: Size.mebibytes(64),
+            limit: Size.mebibytes(256),
+          },
+        },
+        readiness: Probe.fromHttpGet("/healthz", {
+          port: 9707,
+        }),
+        liveness: Probe.fromHttpGet("/healthz", {
+          port: 9707,
+        }),
       });
     }
 
-    new KubeDeployment(this, `${props.name}-deployment`, {
-      metadata: {
-        labels: GET_COMMON_LABELS(props.name),
-        name: props.name,
-        namespace: props.namespace,
-      },
-      spec: {
-        replicas: 1,
-        selector: {
-          matchLabels: GET_COMMON_LABELS(props.name),
-        },
-        strategy: {
-          type: "Recreate",
-        },
-        template: {
-          metadata: {
-            labels: GET_COMMON_LABELS(props.name),
-            annotations: props.configEnableBackups
-              ? { [BACKUP_ANNOTATION_NAME]: `${props.name}-config` }
-              : {},
-          },
-          spec: {
-            containers: [
-              {
-                name: props.name,
-                env: LSIO_ENV,
-                image: props.image,
-                imagePullPolicy: ImagePullPolicy.ALWAYS,
-                ports: [
-                  {
-                    name: "http",
-                    protocol: "TCP",
-                    containerPort: props.port,
-                  },
-                ],
-                resources: props.resources,
-                volumeMounts: [
-                  ...this.getConfigVolumeMount(
-                    props.configMountPath ?? "/config"
-                  ),
-                  ...props.nfsMounts.map<VolumeMount>(function (
-                    vol
-                  ): VolumeMount {
-                    return vol.volumeMount;
-                  }),
-                ],
-
-                livenessProbe: props.enableProbes
-                  ? this.getProbe(props.port)
-                  : undefined,
-                readinessProbe: props.enableProbes
-                  ? this.getProbe(props.port)
-                  : undefined,
-                startupProbe: props.enableProbes
-                  ? this.getProbe(props.port)
-                  : undefined,
-              },
-            ],
-            dnsConfig: props.useExternalDNS
-              ? {
-                  nameservers: DNS_NAMESERVERS,
-                  searches: DNS_SEARCH,
-                }
-              : undefined,
-            volumes: [
-              ...this.getConfigVolume(),
-              ...props.nfsMounts.map<Volume>(function (vol): Volume {
-                return vol.volume;
-              }),
-            ],
-          },
-        },
-      },
-    });
-
-    new KubeService(this, `${props.name}-service`, {
-      metadata: {
-        name: props.name,
-        namespace: props.namespace,
-        labels: GET_COMMON_LABELS(props.name),
-      },
-      spec: {
-        ports: [
-          {
-            name: "http",
-            port: props.port,
-            protocol: "TCP",
-            targetPort: IntOrString.fromNumber(props.port),
-          },
-        ],
-        selector: GET_COMMON_LABELS(props.name),
-        type: "ClusterIP",
-      },
-    });
-
-    new KubeIngress(this, `${props.name}-ingress`, {
-      metadata: {
-        name: props.name,
-        namespace: props.namespace,
-        labels: GET_COMMON_LABELS(props.name),
-      },
-      spec: {
-        ingressClassName: INGRESS_CLASS_NAME,
-        rules: [
-          {
-            host: `${props.name}.cmdcentral.xyz`, // TODO make this more dynamic
-            http: {
-              paths: [
-                {
-                  backend: {
-                    service: {
-                      name: props.name,
-                      port: {
-                        number: props.port,
-                      },
-                    },
-                  },
-                  path: "/",
-                  pathType: "Prefix",
-                },
-              ],
-            },
-          },
-        ],
-        tls: [
-          {
-            hosts: [
-              `${props.name}.cmdcentral.xyz`, // TODO make this more dynamic
-            ],
-            secretName: tlsSecretName,
-          },
-        ],
-      },
-    });
-  }
-
-  private getProbe(port: number): Probe {
-    return {
-      failureThreshold: 3,
-      initialDelaySeconds: 30,
-      periodSeconds: 10,
-      tcpSocket: {
-        port: IntOrString.fromNumber(port),
-      },
-      timeoutSeconds: 1,
-    };
-  }
-
-  private getConfigVolumeMount(mountPath: string): VolumeMount[] {
-    if (this.hasConfigPVC) {
-      return [
+    const svc = deploy.exposeViaService({
+      name: props.name,
+      ports: [
         {
-          name: "config",
-          mountPath: mountPath,
+          name: "http",
+          targetPort: props.port,
+          port: props.port,
         },
-      ];
-    }
-    return [];
+      ],
+    });
+
+    // new KubeDeployment(this, `${props.name}-deployment`, {
+    //   metadata: {
+    //     labels: GET_COMMON_LABELS(props.name),
+    //     name: props.name,
+    //     namespace: props.namespace,
+    //   },
+    //   spec: {
+    //     replicas: 1,
+    //     selector: {
+    //       matchLabels: GET_COMMON_LABELS(props.name),
+    //     },
+    //     strategy: {
+    //       type: "Recreate",
+    //     },
+    //     template: {
+    //       metadata: {
+    //         labels: GET_COMMON_LABELS(props.name),
+    //         annotations: props.configEnableBackups
+    //           ? { [BACKUP_ANNOTATION_NAME]: `${props.name}-config` }
+    //           : {},
+    //       },
+    //       spec: {
+    //         containers: [
+    //           {
+    //             name: props.name,
+    //             env: LSIO_ENV,
+    //             image: props.image,
+    //             imagePullPolicy: ImagePullPolicy.ALWAYS,
+    //             ports: [
+    //               {
+    //                 name: "http",
+    //                 protocol: "TCP",
+    //                 containerPort: props.port,
+    //               },
+    //             ],
+    //             // resources: props.resources,
+    //             volumeMounts: [
+    //               ...this.getConfigVolumeMount(
+    //                 props.configMountPath ?? "/config"
+    //               ),
+    //               ...props.nfsMounts.map<VolumeMount>(function (
+    //                 vol
+    //               ): VolumeMount {
+    //                 return vol.volumeMount;
+    //               }),
+    //             ],
+    //
+    //             livenessProbe: props.enableProbes
+    //               ? this.getProbe(props.port)
+    //               : undefined,
+    //             readinessProbe: props.enableProbes
+    //               ? this.getProbe(props.port)
+    //               : undefined,
+    //             startupProbe: props.enableProbes
+    //               ? this.getProbe(props.port)
+    //               : undefined,
+    //           },
+    //           {
+    //             name: "exportarr",
+    //             image: `ghcr.io/onedr0p/exportarr:${exportarrVersion}`,
+    //           },
+    //         ],
+    //         dnsConfig: props.useExternalDNS
+    //           ? {
+    //               nameservers: DNS_NAMESERVERS,
+    //               searches: DNS_SEARCH,
+    //             }
+    //           : undefined,
+    //         volumes: [
+    //           ...this.getConfigVolume(),
+    //           ...props.nfsMounts.map<Volume>(function (vol): Volume {
+    //             return vol.volume;
+    //           }),
+    //         ],
+    //       },
+    //     },
+    //   },
+    // });
+
+    const ingress = new Ingress(this, `${props.name}-ingress`, {
+      metadata: {
+        name: props.name,
+        namespace: props.namespace,
+      },
+    });
+    ingress.addHostRule(
+      `${props.name}.cmdcentral.xyz`,
+      "/",
+      IngressBackend.fromService(svc)
+    );
+    ingress.addTls([
+      { hosts: [`${props.name}.cmdcentral.xyz`], secret: props.ingressSecret },
+    ]);
+    ingress.metadata.addAnnotation(
+      "cert-manager.io/cluster-issuer",
+      "letsencrypt"
+    );
   }
 
-  private getConfigVolume(): Volume[] {
-    if (this.hasConfigPVC) {
-      return [
-        {
-          name: "config",
-          persistentVolumeClaim: {
-            claimName: this.configPVCName,
-          },
-        },
-      ];
-    }
-    return [];
-  }
+  // private getProbe(port: number): Probe {
+  //   return {
+  //     failureThreshold: 3,
+  //     initialDelaySeconds: 30,
+  //     periodSeconds: 10,
+  //     tcpSocket: {
+  //       port: IntOrString.fromNumber(port),
+  //     },
+  //     timeoutSeconds: 1,
+  //   };
+  // }
+  //
+  // private getConfigVolumeMount(mountPath: string): VolumeMount[] {
+  //   if (this.hasConfigPVC) {
+  //     return [
+  //       {
+  //         name: "config",
+  //         mountPath: mountPath,
+  //       },
+  //     ];
+  //   }
+  //   return [];
+  // }
+  //
+  // private getConfigVolume(): Volume[] {
+  //   if (this.hasConfigPVC) {
+  //     return [
+  //       {
+  //         name: "config",
+  //         persistentVolumeClaim: {
+  //           claimName: this.configPVCName,
+  //         },
+  //       },
+  //     ];
+  //   }
+  //   return [];
+  // }
 }

@@ -1,10 +1,10 @@
-import { App } from "cdk8s";
-import { NFSVolume } from "../../lib/nfs";
+import { App, Size } from "cdk8s";
+import { NFSVolumeContainer } from "../../lib/nfs";
 import { ArgoApp } from "../../lib/argo";
-import { Quantity } from "../../imports/k8s";
 import { MediaApp } from "../../lib/media-app";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { basename } from "../../lib/util";
+import { Cpu, Secret } from "cdk8s-plus-26";
 
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
@@ -20,36 +20,19 @@ new ArgoApp(app, "media", {
   recurse: true,
 });
 
-const nfsVols = new Map<string, NFSVolume>([
-  [
-    "nfs-media-downloads",
-    new NFSVolume(app, "nfs-media-downloads", {
-      namespace: namespace,
-      exportPath: "/warp/Media/Downloads",
-    }),
-  ],
-  [
-    "nfs-media-music",
-    new NFSVolume(app, "nfs-media-music", {
-      namespace: namespace,
-      exportPath: "/warp/Media/Music",
-    }),
-  ],
-  [
-    "nfs-media-videos-movies",
-    new NFSVolume(app, "nfs-media-videos-movies", {
-      namespace: namespace,
-      exportPath: "/warp/Media/Videos/Movies",
-    }),
-  ],
-  [
-    "nfs-media-videos-tvshows",
-    new NFSVolume(app, "nfs-media-videos-tvshows", {
-      namespace: namespace,
-      exportPath: "/warp/Media/Videos/TVShows",
-    }),
-  ],
-]);
+const nfsVols = new NFSVolumeContainer(app, "nfs-volume-container");
+nfsVols.Add("nfs-media-downloads", {
+  exportPath: "/warp/Media/Downloads",
+});
+nfsVols.Add("nfs-media-music", {
+  exportPath: "/warp/Media/Music",
+});
+nfsVols.Add("nfs-media-videos-movies", {
+  exportPath: "/warp/Media/Videos/Movies",
+});
+nfsVols.Add("nfs-media-videos-tvshows", {
+  exportPath: "/warp/Media/Videos/TVShows",
+});
 
 const mediaApps = [
   {
@@ -57,42 +40,70 @@ const mediaApps = [
     port: 8989,
     image: "ghcr.io/linuxserver/sonarr:develop",
     nfsMounts: [
-      nfsVols.get("nfs-media-downloads")!.AsUnifiedVolumeMount("/downloads"),
-      nfsVols.get("nfs-media-videos-tvshows")!.AsUnifiedVolumeMount("/tv"),
+      {
+        mountPoint: "/downloads",
+        nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
+      },
+      {
+        mountPoint: "/tv",
+        nfsConcreteVolume: nfsVols.Get("nfs-media-videos-tvshows"),
+      },
     ],
+    enableExportarr: true,
   },
   {
     name: "radarr",
     port: 7878,
     image: "ghcr.io/linuxserver/radarr:nightly",
     nfsMounts: [
-      nfsVols.get("nfs-media-downloads")!.AsUnifiedVolumeMount("/downloads"),
-      nfsVols.get("nfs-media-videos-movies")!.AsUnifiedVolumeMount("/movies"),
+      {
+        mountPoint: "/downloads",
+        nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
+      },
+      {
+        mountPoint: "/movies",
+        nfsConcreteVolume: nfsVols.Get("nfs-media-videos-movies"),
+      },
     ],
+    enableExportarr: true,
   },
   {
     name: "lidarr",
     port: 8686,
     image: "ghcr.io/linuxserver/lidarr:develop",
     nfsMounts: [
-      nfsVols.get("nfs-media-downloads")!.AsUnifiedVolumeMount("/downloads"),
-      nfsVols.get("nfs-media-music")!.AsUnifiedVolumeMount("/music"),
+      {
+        mountPoint: "/downloads",
+        nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
+      },
+      {
+        mountPoint: "/music",
+        nfsConcreteVolume: nfsVols.Get("nfs-media-music"),
+      },
     ],
+    enableExportarr: true,
   },
   {
     name: "nzbget",
     port: 6789,
     image: "ghcr.io/linuxserver/nzbget:latest",
     nfsMounts: [
-      nfsVols.get("nfs-media-downloads")!.AsUnifiedVolumeMount("/downloads"),
+      {
+        mountPoint: "/downloads",
+        nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
+      },
     ],
+    enableExportarr: false,
   },
   {
     name: "prowlarr",
     port: 9696,
     image: "ghcr.io/linuxserver/prowlarr:latest",
+    enableExportarr: false,
   },
 ];
+
+const ingressSecret = Secret.fromSecretName(app, "media-tls", "media-tls");
 
 for (const mediaApp of mediaApps) {
   new MediaApp(app, {
@@ -103,14 +114,18 @@ for (const mediaApp of mediaApps) {
     enableProbes: true,
     image: mediaApp.image,
     resources: {
-      requests: {
-        cpu: Quantity.fromString("250m"),
-        memory: Quantity.fromString("256Mi"),
+      cpu: {
+        request: Cpu.millis(250),
+      },
+      memory: {
+        request: Size.mebibytes(256),
       },
     },
     nfsMounts: mediaApp.nfsMounts ?? [],
-    configVolumeSize: Quantity.fromString("5Gi"),
+    configVolumeSize: Size.gibibytes(5),
     configEnableBackups: true,
+    enableExportarr: mediaApp.enableExportarr,
+    ingressSecret: ingressSecret,
   });
 }
 
@@ -123,33 +138,33 @@ new MediaApp(app, {
   enableProbes: true,
   image: "ghcr.io/linuxserver/resilio-sync:latest",
   resources: {
-    requests: {
-      cpu: Quantity.fromString("250m"),
-      memory: Quantity.fromString("256Mi"),
+    cpu: {
+      request: Cpu.millis(250),
+    },
+    memory: {
+      request: Size.mebibytes(256),
     },
   },
   nfsMounts: [
     {
-      mountPath: "/downloads",
-      volume: nfsVols.get("nfs-media-downloads")!.ToVolume(),
-      volumeMount: {
-        name: "nfs-media-downloads",
-        mountPath: "/downloads",
+      mountPoint: "/downloads",
+      nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
+      mountOptions: {
         subPath: "seedbox/downloads",
       },
     },
     {
-      mountPath: "/sync",
-      volume: nfsVols.get("nfs-media-downloads")!.ToVolume(),
-      volumeMount: {
-        name: "nfs-media-downloads",
-        mountPath: "/sync",
+      mountPoint: "/sync",
+      nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
+      mountOptions: {
         subPath: "seedbox/sync",
       },
     },
   ],
-  configVolumeSize: Quantity.fromString("5Gi"),
+  configVolumeSize: Size.gibibytes(5),
   configEnableBackups: true,
+  enableExportarr: false,
+  ingressSecret: ingressSecret,
 });
 
 app.synth();
