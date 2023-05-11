@@ -136,6 +136,7 @@ const mediaApps: Omit<
         nfsConcreteVolume: nfsVols.Get("nfs-media-music"),
       },
     ],
+    extraHostnames: ["music.cmdcentral.xyz"],
     configVolume: {
       mountPath: "/data",
       size: Size.gibibytes(5),
@@ -163,6 +164,7 @@ for (const mediaApp of mediaApps) {
         request: Size.mebibytes(256),
       },
     },
+    extraHostnames: mediaApp.extraHostnames,
     nfsMounts: mediaApp.nfsMounts ?? [],
     configVolume: mediaApp.configVolume ?? {
       size: Size.gibibytes(5),

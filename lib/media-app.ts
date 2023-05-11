@@ -38,6 +38,7 @@ export interface MediaAppProps {
   readonly port: number;
   readonly image: string;
   readonly resources: ContainerResources;
+  readonly extraHostnames?: string[];
   readonly extraEnv?: { [key: string]: EnvValue };
   readonly nfsMounts?: {
     mountPoint: string;
@@ -254,6 +255,13 @@ export class MediaApp extends Chart {
       "/",
       IngressBackend.fromService(svc, { port: props.port })
     );
+    for (const hostname of props.extraHostnames ?? []) {
+      ingress.addHostRule(
+        hostname,
+        "/",
+        IngressBackend.fromService(svc, { port: props.port })
+      );
+    }
     ingress.addTls([
       { hosts: [`${props.name}.cmdcentral.xyz`], secret: props.ingressSecret },
     ]);

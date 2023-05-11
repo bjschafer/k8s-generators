@@ -15,6 +15,16 @@ spec:
                   number: 4533
             path: /
             pathType: Prefix
+    - host: music.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: navidrome
+                port:
+                  number: 4533
+            path: /
+            pathType: Prefix
   tls:
     - hosts:
         - navidrome.cmdcentral.xyz
