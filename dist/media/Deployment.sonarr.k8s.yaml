@@ -72,6 +72,11 @@ spec:
               value: "9707"
             - name: URL
               value: http://sonarr.media.svc.cluster.local:8989
+            - name: APIKEY
+              valueFrom:
+                secretKeyRef:
+                  key: APIKEY
+                  name: sonarr-api
           image: ghcr.io/onedr0p/exportarr:v1.2.4
           imagePullPolicy: Always
           livenessProbe:

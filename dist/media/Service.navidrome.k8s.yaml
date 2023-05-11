@@ -1,6 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
+  labels:
+    cdk8s.io/metadata.addr: navidrome-navidrome-deployment-c811d449
   name: navidrome
   namespace: media
 spec:

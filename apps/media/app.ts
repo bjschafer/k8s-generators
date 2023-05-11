@@ -52,7 +52,10 @@ const mediaApps: Omit<
         nfsConcreteVolume: nfsVols.Get("nfs-media-videos-tvshows"),
       },
     ],
-    enableExportarr: true,
+    monitoringConfig: {
+      enableExportarr: true,
+      existingApiSecretName: "sonarr-api",
+    },
   },
   {
     name: "radarr",
@@ -68,7 +71,10 @@ const mediaApps: Omit<
         nfsConcreteVolume: nfsVols.Get("nfs-media-videos-movies"),
       },
     ],
-    enableExportarr: true,
+    monitoringConfig: {
+      enableExportarr: true,
+      existingApiSecretName: "radarr-api",
+    },
   },
   {
     name: "lidarr",
@@ -84,7 +90,10 @@ const mediaApps: Omit<
         nfsConcreteVolume: nfsVols.Get("nfs-media-music"),
       },
     ],
-    enableExportarr: true,
+    monitoringConfig: {
+      enableExportarr: true,
+      existingApiSecretName: "lidarr-api",
+    },
   },
   {
     name: "nzbget",
@@ -96,19 +105,25 @@ const mediaApps: Omit<
         nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
       },
     ],
-    enableExportarr: false,
+    monitoringConfig: {
+      enableExportarr: false,
+    },
   },
   {
     name: "prowlarr",
     port: 9696,
     image: "ghcr.io/linuxserver/prowlarr:latest",
-    enableExportarr: false,
+    monitoringConfig: {
+      enableExportarr: false,
+    },
   },
   {
     name: "navidrome",
     port: 4533,
     image: "deluan/navidrome:latest",
-    enableExportarr: false,
+    monitoringConfig: {
+      enableExportarr: false,
+    },
     nfsMounts: [
       {
         mountPoint: "/music",
@@ -147,7 +162,7 @@ for (const mediaApp of mediaApps) {
       size: Size.gibibytes(5),
       enableBackups: true,
     },
-    enableExportarr: mediaApp.enableExportarr,
+    monitoringConfig: mediaApp.monitoringConfig,
     ingressSecret: ingressSecret,
     extraEnv: mediaApp.extraEnv,
   });
@@ -188,7 +203,9 @@ new MediaApp(app, {
     enableBackups: true,
     mountPath: "/config",
   },
-  enableExportarr: false,
+  monitoringConfig: {
+    enableExportarr: false,
+  },
   ingressSecret: ingressSecret,
 });
 

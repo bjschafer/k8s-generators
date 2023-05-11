@@ -72,6 +72,11 @@ spec:
               value: "9707"
             - name: URL
               value: http://lidarr.media.svc.cluster.local:8686
+            - name: APIKEY
+              valueFrom:
+                secretKeyRef:
+                  key: APIKEY
+                  name: lidarr-api
           image: ghcr.io/onedr0p/exportarr:v1.2.4
           imagePullPolicy: Always
           livenessProbe:

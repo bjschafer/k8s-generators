@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    release: prometheus-kube-prometheus-stack
+  name: lidarr
+  namespace: media
+spec:
+  endpoints:
+    - path: /metrics
+      port: metrics
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: lidarr-lidarr-deployment-c8c0031b

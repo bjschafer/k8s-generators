@@ -13,6 +13,8 @@ import {
   PersistentVolumeClaim,
   PersistentVolumeMode,
   Probe,
+  Secret,
+  ServicePort,
   Volume,
 } from "cdk8s-plus-26";
 import { StorageClass } from "./volume";
@@ -21,10 +23,13 @@ import {
   DEFAULT_SECURITY_CONTEXT,
   GET_SERVICE_URL,
   LSIO_ENVVALUE,
+  PROMETHEUS_RELEASE_LABEL,
 } from "./consts";
 import { NFSConcreteVolume } from "./nfs";
+import { ServiceMonitor } from "../imports/monitoring.coreos.com";
 
 const exportarrVersion = "v1.2.4";
+const exportarrPort = 9707;
 
 export interface MediaAppProps {
   readonly name: string;
@@ -43,7 +48,10 @@ export interface MediaAppProps {
     mountPath?: string;
     enableBackups: boolean;
   };
-  readonly enableExportarr: boolean;
+  readonly monitoringConfig?: {
+    enableExportarr: boolean;
+    existingApiSecretName?: string;
+  };
   readonly ingressSecret: ISecret;
 }
 
@@ -147,7 +155,13 @@ export class MediaApp extends Chart {
       );
     }
 
-    if (props.enableExportarr) {
+    const labels = deploy.matchLabels;
+    if (props.monitoringConfig?.enableExportarr) {
+      const secret = Secret.fromSecretName(
+        this,
+        props.monitoringConfig?.existingApiSecretName!,
+        props.monitoringConfig?.existingApiSecretName!
+      );
       deploy.addContainer({
         securityContext: DEFAULT_SECURITY_CONTEXT,
         image: `ghcr.io/onedr0p/exportarr:${exportarrVersion}`,
@@ -155,10 +169,11 @@ export class MediaApp extends Chart {
         args: [props.name],
         portNumber: 9707,
         envVariables: {
-          PORT: EnvValue.fromValue("9707"),
+          PORT: EnvValue.fromValue(`${exportarrPort}`),
           URL: EnvValue.fromValue(
             GET_SERVICE_URL(props.name, props.namespace, true, props.port)
           ),
+          APIKEY: EnvValue.fromSecretValue({ secret: secret, key: "APIKEY" }),
         },
         resources: {
           cpu: {
@@ -177,18 +192,70 @@ export class MediaApp extends Chart {
           port: 9707,
         }),
       });
+
+      new ServiceMonitor(this, `${props.name}-servicemonitor`, {
+        metadata: {
+          name: props.name,
+          namespace: props.namespace,
+          labels: {
+            release: PROMETHEUS_RELEASE_LABEL,
+          },
+        },
+        spec: {
+          selector: {
+            matchLabels: labels,
+          },
+          endpoints: [
+            {
+              port: "metrics",
+              path: "/metrics",
+            },
+          ],
+        },
+      });
+
+      /*
+      apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: sonarr-exporter
+  namespace: monitoring
+  labels:
+    app.kubernetes.io/name: sonarr-exporter
+    app.kubernetes.io/instance: sonarr-exporter
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: sonarr-exporter
+      app.kubernetes.io/instance: sonarr-exporter
+  endpoints:
+    - port: monitoring
+      interval: 4m
+      scrapeTimeout: 90s
+      path: /metrics
+       */
+    }
+
+    let portsToExpose: ServicePort[] = [
+      { name: "http", targetPort: props.port, port: props.port },
+    ];
+
+    if (props.monitoringConfig?.enableExportarr) {
+      portsToExpose.push({
+        name: "metrics",
+        targetPort: exportarrPort,
+        port: exportarrPort,
+      });
     }
 
     const svc = deploy.exposeViaService({
       name: props.name,
-      ports: [
-        {
-          name: "http",
-          targetPort: props.port,
-          port: props.port,
-        },
-      ],
+      ports: portsToExpose,
     });
+    for (const key of Object.keys(labels)) {
+      // HACK: this sucks, records are awful.
+      svc.metadata.addLabel(key, labels[key]);
+    }
 
     const ingress = new Ingress(this, `${props.name}-ingress`, {
       metadata: {
@@ -199,7 +266,7 @@ export class MediaApp extends Chart {
     ingress.addHostRule(
       `${props.name}.cmdcentral.xyz`,
       "/",
-      IngressBackend.fromService(svc)
+      IngressBackend.fromService(svc, { port: props.port })
     );
     ingress.addTls([
       { hosts: [`${props.name}.cmdcentral.xyz`], secret: props.ingressSecret },
