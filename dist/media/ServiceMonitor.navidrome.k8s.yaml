@@ -8,7 +8,7 @@ metadata:
 spec:
   endpoints:
     - path: /metrics
-      port: metrics
+      port: http
   selector:
     matchLabels:
       cdk8s.io/metadata.addr: navidrome-navidrome-deployment-c811d449

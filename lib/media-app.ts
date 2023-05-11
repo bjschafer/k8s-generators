@@ -215,7 +215,7 @@ export class MediaApp extends Chart {
           },
           endpoints: [
             {
-              port: "metrics",
+              port: props.monitoringConfig.enableExportarr ? "metrics" : "http",
               path: "/metrics",
             },
           ],
