@@ -6,15 +6,12 @@ metadata:
 spec:
   minReadySeconds: 0
   progressDeadlineSeconds: 600
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       cdk8s.io/metadata.addr: navidrome-navidrome-deployment-c811d449
   strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
+    type: Recreate
   template:
     metadata:
       annotations:
@@ -37,20 +34,16 @@ spec:
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
-            httpGet:
-              path: /
+            tcpSocket:
               port: 4533
-              scheme: HTTP
           name: navidrome
           ports:
             - containerPort: 4533
               name: http
           readinessProbe:
             failureThreshold: 3
-            httpGet:
-              path: /
+            tcpSocket:
               port: 4533
-              scheme: HTTP
           resources:
             requests:
               cpu: 250m

@@ -4,6 +4,7 @@ import {
   ContainerResources,
   Cpu,
   Deployment,
+  DeploymentStrategy,
   EnvValue,
   Ingress,
   IngressBackend,
@@ -67,6 +68,7 @@ export class MediaApp extends Chart {
       const pvc = new PersistentVolumeClaim(this, configPVCName, {
         metadata: {
           name: configPVCName,
+          namespace: props.namespace,
         },
         accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
         storage: props.configVolume.size ?? Size.gibibytes(5),
@@ -85,6 +87,8 @@ export class MediaApp extends Chart {
         name: props.name,
         namespace: props.namespace,
       },
+      replicas: 1,
+      strategy: DeploymentStrategy.recreate(),
       securityContext: DEFAULT_SECURITY_CONTEXT,
       podMetadata: {
         annotations: props.configVolume?.enableBackups
@@ -110,10 +114,10 @@ export class MediaApp extends Chart {
             ...LSIO_ENVVALUE,
             ...props.extraEnv,
           },
-          readiness: Probe.fromHttpGet("/", {
+          readiness: Probe.fromTcpSocket({
             port: props.port,
           }),
-          liveness: Probe.fromHttpGet("/", {
+          liveness: Probe.fromTcpSocket({
             port: props.port,
           }),
         },
@@ -213,27 +217,6 @@ export class MediaApp extends Chart {
           ],
         },
       });
-
-      /*
-      apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: sonarr-exporter
-  namespace: monitoring
-  labels:
-    app.kubernetes.io/name: sonarr-exporter
-    app.kubernetes.io/instance: sonarr-exporter
-spec:
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: sonarr-exporter
-      app.kubernetes.io/instance: sonarr-exporter
-  endpoints:
-    - port: monitoring
-      interval: 4m
-      scrapeTimeout: 90s
-      path: /metrics
-       */
     }
 
     let portsToExpose: ServicePort[] = [
@@ -271,9 +254,5 @@ spec:
     ingress.addTls([
       { hosts: [`${props.name}.cmdcentral.xyz`], secret: props.ingressSecret },
     ]);
-    ingress.metadata.addAnnotation(
-      "cert-manager.io/cluster-issuer",
-      "letsencrypt"
-    );
   }
 }
