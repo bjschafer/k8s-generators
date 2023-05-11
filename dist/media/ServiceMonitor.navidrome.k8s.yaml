@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    release: prometheus-kube-prometheus-stack
+  name: navidrome
+  namespace: media
+spec:
+  endpoints:
+    - path: /metrics
+      port: metrics
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: navidrome-navidrome-deployment-c811d449

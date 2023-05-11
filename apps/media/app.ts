@@ -54,6 +54,7 @@ const mediaApps: Omit<
     ],
     monitoringConfig: {
       enableExportarr: true,
+      enableServiceMonitor: true,
       existingApiSecretName: "sonarr-api",
     },
   },
@@ -73,6 +74,7 @@ const mediaApps: Omit<
     ],
     monitoringConfig: {
       enableExportarr: true,
+      enableServiceMonitor: true,
       existingApiSecretName: "radarr-api",
     },
   },
@@ -92,6 +94,7 @@ const mediaApps: Omit<
     ],
     monitoringConfig: {
       enableExportarr: true,
+      enableServiceMonitor: true,
       existingApiSecretName: "lidarr-api",
     },
   },
@@ -107,6 +110,7 @@ const mediaApps: Omit<
     ],
     monitoringConfig: {
       enableExportarr: false,
+      enableServiceMonitor: false,
     },
   },
   {
@@ -115,6 +119,7 @@ const mediaApps: Omit<
     image: "ghcr.io/linuxserver/prowlarr:latest",
     monitoringConfig: {
       enableExportarr: false,
+      enableServiceMonitor: false,
     },
   },
   {
@@ -123,6 +128,7 @@ const mediaApps: Omit<
     image: "deluan/navidrome:latest",
     monitoringConfig: {
       enableExportarr: false,
+      enableServiceMonitor: true,
     },
     nfsMounts: [
       {
@@ -205,6 +211,7 @@ new MediaApp(app, {
   },
   monitoringConfig: {
     enableExportarr: false,
+    enableServiceMonitor: false,
   },
   ingressSecret: ingressSecret,
 });

@@ -51,6 +51,7 @@ export interface MediaAppProps {
   };
   readonly monitoringConfig?: {
     enableExportarr: boolean;
+    enableServiceMonitor: boolean;
     existingApiSecretName?: string;
   };
   readonly ingressSecret: ISecret;
@@ -196,7 +197,9 @@ export class MediaApp extends Chart {
           port: 9707,
         }),
       });
+    }
 
+    if (props.monitoringConfig?.enableServiceMonitor) {
       new ServiceMonitor(this, `${props.name}-servicemonitor`, {
         metadata: {
           name: props.name,
