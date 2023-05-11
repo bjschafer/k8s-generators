@@ -125,7 +125,7 @@ const mediaApps: Omit<
   {
     name: "navidrome",
     port: 4533,
-    image: "deluan/navidrome:latest",
+    image: "ghcr.io/navidrome/navidrome:latest",
     monitoringConfig: {
       enableExportarr: false,
       enableServiceMonitor: true,
@@ -134,6 +134,9 @@ const mediaApps: Omit<
       {
         mountPoint: "/music",
         nfsConcreteVolume: nfsVols.Get("nfs-media-music"),
+        mountOptions: {
+          readOnly: true,
+        },
       },
     ],
     extraHostnames: ["music.cmdcentral.xyz"],
