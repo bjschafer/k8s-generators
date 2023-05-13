@@ -134,7 +134,7 @@ export class MediaApp extends Chart {
       );
     }
 
-    let existingVolumes = new Map<string, Volume>();
+    const existingVolumes = new Map<string, Volume>();
 
     for (const nfsMount of props.nfsMounts ?? []) {
       // we need to handle the edge case where the same volume is mounted at multiple (sub)paths.
@@ -165,8 +165,8 @@ export class MediaApp extends Chart {
     if (props.monitoringConfig?.enableExportarr) {
       const secret = Secret.fromSecretName(
         this,
-        props.monitoringConfig?.existingApiSecretName!,
-        props.monitoringConfig?.existingApiSecretName!
+        props.monitoringConfig!.existingApiSecretName!,
+        props.monitoringConfig!.existingApiSecretName!
       );
       deploy.addContainer({
         securityContext: DEFAULT_SECURITY_CONTEXT,
@@ -223,7 +223,7 @@ export class MediaApp extends Chart {
       });
     }
 
-    let portsToExpose: ServicePort[] = [
+    const portsToExpose: ServicePort[] = [
       { name: "http", targetPort: props.port, port: props.port },
     ];
 
