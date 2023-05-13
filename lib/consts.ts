@@ -39,6 +39,7 @@ export const BACKUP_ANNOTATION_NAME = "backup.velero.io/backup-volumes";
 export function DEFAULT_APP_PROPS(namespace: string): AppProps {
   return {
     outdir: `dist/${namespace}`,
+    outputFileExtension: ".yaml",
     yamlOutputType: YamlOutputType.FILE_PER_RESOURCE,
   };
 }
