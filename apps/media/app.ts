@@ -210,7 +210,7 @@ new MediaApp(app, {
     },
   ],
   configVolume: {
-    size: Size.gibibytes(5),
+    size: Size.gibibytes(1),
     enableBackups: true,
     mountPath: "/config",
   },
