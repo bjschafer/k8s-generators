@@ -67,3 +67,4 @@ spec:
         fsGroupChangePolicy: Always
         runAsNonRoot: false
       setHostnameAsFQDN: false
+      terminationGracePeriodSeconds: 30
