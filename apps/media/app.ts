@@ -1,6 +1,6 @@
 import { App, Size } from "cdk8s";
 import { NFSVolumeContainer } from "../../lib/nfs";
-import { ArgoApp } from "../../lib/argo";
+import { NewArgoApp } from "../../lib/argo";
 import { MediaApp, MediaAppProps } from "../../lib/media-app";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { basename } from "../../lib/util";
@@ -9,7 +9,7 @@ import { Cpu, EnvValue, Secret } from "cdk8s-plus-26";
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
-new ArgoApp(app, "media", {
+NewArgoApp("media", {
   sync_policy: {
     automated: {
       prune: true,
@@ -18,6 +18,19 @@ new ArgoApp(app, "media", {
   },
   namespace: namespace,
   recurse: true,
+  autoUpdate: {
+    writebackMethod: {
+      method: "git",
+      gitBranch: "main",
+    },
+    images: [
+      {
+        image: "ghcr.io/linuxserver/sonarr",
+        alias: "sonarr",
+        strategy: "digest",
+      },
+    ],
+  },
 });
 
 const nfsVols = new NFSVolumeContainer(app, "nfs-volume-container");

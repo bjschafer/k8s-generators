@@ -1,6 +1,11 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: sonarr=ghcr.io/linuxserver/sonarr
+    argocd-image-updater.argoproj.io/sonarr.update-strategy: digest
+    argocd-image-updater.argoproj.io/write-back-git-branch: main
+    argocd-image-updater.argoproj.io/write-back-method: git
   labels:
     app.kubernetes.io/name: media
   name: media
@@ -20,3 +25,5 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
