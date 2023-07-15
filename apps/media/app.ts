@@ -5,6 +5,7 @@ import { MediaApp, MediaAppProps } from "../../lib/media-app";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { basename } from "../../lib/util";
 import { Cpu, EnvValue, Secret } from "cdk8s-plus-26";
+import { NewKustomize } from "../../lib/kustomize";
 
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
@@ -26,6 +27,30 @@ NewArgoApp("media", {
     images: [
       {
         image: "ghcr.io/linuxserver/sonarr",
+        strategy: "digest",
+      },
+      {
+        image: "ghcr.io/linuxserver/radarr",
+        strategy: "digest",
+      },
+      {
+        image: "ghcr.io/linuxserver/lidarr",
+        strategy: "digest",
+      },
+      {
+        image: "ghcr.io/linuxserver/nzbget",
+        strategy: "digest",
+      },
+      {
+        image: "ghcr.io/linuxserver/prowlarr",
+        strategy: "digest",
+      },
+      {
+        image: "ghcr.io/navidrome/navidrome",
+        strategy: "digest",
+      },
+      {
+        image: "ghcr.io/linuxserver/resilio-sync",
         strategy: "digest",
       },
     ],
@@ -234,3 +259,6 @@ new MediaApp(app, {
 });
 
 app.synth();
+
+// after synth, all files are written out to disk
+NewKustomize(app.outdir);
