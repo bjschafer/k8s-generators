@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db
+  namespace: monica
+spec:
+  minReadySeconds: 0
+  podManagementPolicy: OrderedReady
+  replicas: 1
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: db-db-sts-c843c760
+  serviceName: db
+  template:
+    metadata:
+      annotations:
+        backup.velero.io/backup-volumes: pvc-db
+      labels:
+        cdk8s.io/metadata.addr: db-db-sts-c843c760
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: MARIADB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: MARIADB_ROOT_PASSWORD
+                  name: db-creds
+          image: mariadb:10.11
+          imagePullPolicy: Always
+          name: main
+          ports:
+            - containerPort: 3306
+              name: mysql
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 50m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: pvc-db
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: pvc-db
+          persistentVolumeClaim:
+            claimName: db
+            readOnly: false
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate

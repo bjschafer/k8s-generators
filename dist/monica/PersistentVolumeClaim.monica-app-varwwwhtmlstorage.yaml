@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: monica-app-/var/www/html/storage
+  namespace: monica
+spec:
+  resources:
+    requests:
+      storage: 2Gi
+  storageClassName: ceph-rbd
+  volumeMode: Filesystem

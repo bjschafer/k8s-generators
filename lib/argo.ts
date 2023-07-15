@@ -1,11 +1,22 @@
 import { Application, ApplicationSpecSyncPolicy } from "../imports/argoproj.io";
-import { Chart } from "cdk8s";
+import { App, Chart, YamlOutputType } from "cdk8s";
 import { Construct } from "constructs";
-import { KubeNamespace } from "../imports/k8s";
+import { SecretReference } from "cdk8s-plus-26/lib/imports/k8s";
 
 export const ARGO_NAMESPACE = "argocd";
 export const ARGO_GIT_REPO_URL = "git@github.com:bjschafer/k8s-prod.git";
 const ARGO_DESTINATION_SERVER = "https://kubernetes.default.svc";
+
+export function NewArgoApp(name: string, props: ArgoAppProps) {
+  const app = new App({
+    outdir: "dist/apps",
+    outputFileExtension: ".yaml",
+    yamlOutputType: YamlOutputType.FILE_PER_RESOURCE,
+  });
+
+  new ArgoApp(app, name, props);
+  app.synth();
+}
 
 export interface ArgoAppProps {
   readonly namespace: string;
@@ -15,6 +26,7 @@ export interface ArgoAppProps {
   readonly git_repo_url?: string;
   readonly sync_policy: ApplicationSpecSyncPolicy;
   readonly recurse?: boolean;
+  readonly autoUpdate?: ArgoUpdaterProps;
 }
 
 export class ArgoApp extends Chart {
@@ -27,13 +39,7 @@ export class ArgoApp extends Chart {
       },
     });
 
-    new KubeNamespace(this, `${name}-ns`, {
-      metadata: {
-        name: props.namespace,
-      },
-    });
-
-    new Application(this, `${name}-application`, {
+    const app = new Application(this, `${name}-application`, {
       metadata: {
         name: name,
         namespace: ARGO_NAMESPACE,
@@ -52,8 +58,97 @@ export class ArgoApp extends Chart {
           repoUrl: props.git_repo_url ?? ARGO_GIT_REPO_URL,
           targetRevision: "HEAD",
         },
-        syncPolicy: props.sync_policy,
+        syncPolicy: {
+          syncOptions: ["CreateNamespace=true"],
+          ...props.sync_policy,
+        },
       },
     });
+
+    if (props.autoUpdate) {
+      app.metadata.addAnnotation(
+        `${argoUpdateAnnotationBase}/write-back-method`,
+        props.autoUpdate.writebackMethod?.method ?? "git"
+      );
+      if (props.autoUpdate.writebackMethod?.method === "git") {
+        app.metadata.addAnnotation(
+          `${argoUpdateAnnotationBase}/write-back-git-branch`,
+          props.autoUpdate.writebackMethod?.gitBranch ?? "main"
+        );
+      }
+
+      // the annotation expects images to be in the format
+      // alias=image:version,alias=image:version
+      const imageList = props.autoUpdate.images
+        .map(function (image) {
+          const versionConstraint = image.versionConstraint
+            ? `:${image.versionConstraint}`
+            : "";
+          return `${image.alias}=${image.image}${versionConstraint}`;
+        })
+        .join(",");
+
+      app.metadata.addAnnotation(
+        `${argoUpdateAnnotationBase}/image-list`,
+        imageList
+      );
+
+      for (const image of props.autoUpdate.images) {
+        app.metadata.addAnnotation(
+          `${argoUpdateAnnotationBase}/${image.alias}.update-strategy`,
+          image.strategy
+        );
+
+        if (image.allowTags) {
+          app.metadata.addAnnotation(
+            `${argoUpdateAnnotationBase}/${image.alias}.allow-tags`,
+            `regexp:${image.allowTags}`
+          );
+        }
+        if (image.ignoreTags) {
+          app.metadata.addAnnotation(
+            `${argoUpdateAnnotationBase}/${image.alias}.ignore-tags`,
+            image.ignoreTags.join(", ")
+          );
+        }
+
+        if (image.imagePullSecret) {
+          app.metadata.addAnnotation(
+            `${argoUpdateAnnotationBase}/${image.alias}.imagePullSecret`,
+            `pullsecret:${image.imagePullSecret.namespace}/${image.imagePullSecret.name}}`
+          );
+        }
+      }
+    }
   }
+}
+
+const argoUpdateAnnotationBase = "argocd-image-updater.argoproj.io";
+
+/**
+ * How ArgoCD Image Updater will determine if an image is out of date.
+ * @see - https://argocd-image-updater.readthedocs.io/en/stable/basics/update-strategies/
+ */
+export type ArgoUpdateStrategy = "digest" | "semver" | "latest" | "name";
+
+export type ArgoWritebackMethod = "git" | "argocd";
+
+export type ArgoWritebackProps = {
+  readonly method: ArgoWritebackMethod;
+  readonly gitBranch?: string;
+};
+
+export interface ArgoUpdaterImageProps {
+  readonly alias: string; // TODO autoconstruct this from the image name
+  readonly image: string;
+  readonly strategy: ArgoUpdateStrategy;
+  readonly versionConstraint?: string;
+  readonly allowTags?: string;
+  readonly ignoreTags?: string[];
+  readonly imagePullSecret?: SecretReference;
+}
+
+export interface ArgoUpdaterProps {
+  readonly images: ArgoUpdaterImageProps[];
+  readonly writebackMethod?: ArgoWritebackProps;
 }

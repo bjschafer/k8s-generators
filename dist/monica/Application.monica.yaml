@@ -2,21 +2,23 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   labels:
-    app.kubernetes.io/name: calibre
-  name: calibre
+    app.kubernetes.io/name: monica
+  name: monica
   namespace: argocd
 spec:
   destination:
-    namespace: calibre
+    namespace: monica
     server: https://kubernetes.default.svc
   project: default
   source:
     directory:
       recurse: true
-    path: calibre
+    path: monica
     repoURL: git@github.com:bjschafer/k8s-prod.git
     targetRevision: HEAD
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

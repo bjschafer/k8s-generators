@@ -66,6 +66,7 @@ spec:
         fsGroupChangePolicy: Always
         runAsNonRoot: false
       setHostnameAsFQDN: false
+      terminationGracePeriodSeconds: 30
       volumes:
         - name: pvc-navidrome-config
           persistentVolumeClaim:

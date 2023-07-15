@@ -1,59 +1,56 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: prowlarr
-  namespace: media
+  name: monica
+  namespace: monica
 spec:
   minReadySeconds: 0
   progressDeadlineSeconds: 600
   replicas: 1
   selector:
     matchLabels:
-      cdk8s.io/metadata.addr: prowlarr-prowlarr-deployment-c8603109
+      cdk8s.io/metadata.addr: monica-app-monica-app-deployment-c8b445f6
   strategy:
-    type: Recreate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
       annotations:
-        backup.velero.io/backup-volumes: pvc-prowlarr-config
+        backup.velero.io/backup-volumes: pvc-monica-app-/var/www/html/storage
       labels:
-        cdk8s.io/metadata.addr: prowlarr-prowlarr-deployment-c8603109
+        cdk8s.io/metadata.addr: monica-app-monica-app-deployment-c8b445f6
     spec:
       automountServiceAccountToken: false
       containers:
-        - env:
-            - name: TZ
-              value: America/Chicago
-            - name: PUID
-              value: "8675309"
-            - name: PGID
-              value: "8675309"
-          image: ghcr.io/linuxserver/prowlarr:latest
+        - image: monica:4.0.0-apache
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
             tcpSocket:
-              port: 9696
-          name: prowlarr
+              port: 80
+          name: monica
           ports:
-            - containerPort: 9696
-              name: http
+            - containerPort: 80
           readinessProbe:
             failureThreshold: 3
             tcpSocket:
-              port: 9696
+              port: 80
           resources:
+            limits:
+              memory: 512Mi
             requests:
-              cpu: 250m
-              memory: 256Mi
+              cpu: 50m
+              memory: 128Mi
           securityContext:
             allowPrivilegeEscalation: false
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
           volumeMounts:
-            - mountPath: /config
-              name: pvc-prowlarr-config
+            - mountPath: /var/www/html/storage
+              name: pvc-monica-app-/var/www/html/storage
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
@@ -63,7 +60,7 @@ spec:
       setHostnameAsFQDN: false
       terminationGracePeriodSeconds: 30
       volumes:
-        - name: pvc-prowlarr-config
+        - name: pvc-monica-app-/var/www/html/storage
           persistentVolumeClaim:
-            claimName: prowlarr-config
+            claimName: monica-app-/var/www/html/storage
             readOnly: false

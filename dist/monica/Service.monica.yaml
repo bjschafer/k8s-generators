@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: monica
+  namespace: monica
+spec:
+  externalIPs: []
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    cdk8s.io/metadata.addr: monica-app-monica-app-deployment-c8b445f6
+  type: ClusterIP
