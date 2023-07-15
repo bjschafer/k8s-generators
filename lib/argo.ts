@@ -80,11 +80,12 @@ export class ArgoApp extends Chart {
       // the annotation expects images to be in the format
       // alias=image:version,alias=image:version
       const imageList = props.autoUpdate.images
-        .map(function (image) {
+        .map((image) => {
+          const alias = this.getImageAlias(image.image);
           const versionConstraint = image.versionConstraint
             ? `:${image.versionConstraint}`
             : "";
-          return `${image.alias}=${image.image}${versionConstraint}`;
+          return `${alias}=${image.image}${versionConstraint}`;
         })
         .join(",");
 
@@ -94,32 +95,42 @@ export class ArgoApp extends Chart {
       );
 
       for (const image of props.autoUpdate.images) {
+        const alias = this.getImageAlias(image.image);
+
         app.metadata.addAnnotation(
-          `${argoUpdateAnnotationBase}/${image.alias}.update-strategy`,
+          `${argoUpdateAnnotationBase}/${alias}.update-strategy`,
           image.strategy,
         );
 
         if (image.allowTags) {
           app.metadata.addAnnotation(
-            `${argoUpdateAnnotationBase}/${image.alias}.allow-tags`,
+            `${argoUpdateAnnotationBase}/${alias}.allow-tags`,
             `regexp:${image.allowTags}`,
           );
         }
         if (image.ignoreTags) {
           app.metadata.addAnnotation(
-            `${argoUpdateAnnotationBase}/${image.alias}.ignore-tags`,
+            `${argoUpdateAnnotationBase}/${alias}.ignore-tags`,
             image.ignoreTags.join(", "),
           );
         }
 
         if (image.imagePullSecret) {
           app.metadata.addAnnotation(
-            `${argoUpdateAnnotationBase}/${image.alias}.imagePullSecret`,
+            `${argoUpdateAnnotationBase}/${alias}.imagePullSecret`,
             `pullsecret:${image.imagePullSecret.namespace}/${image.imagePullSecret.name}}`,
           );
         }
       }
     }
+  }
+
+  private getImageAlias(image: string): string {
+    const alias = image.split("/").pop();
+    if (!alias) {
+      return image;
+    }
+    return alias;
   }
 }
 
@@ -139,7 +150,6 @@ export type ArgoWritebackProps = {
 };
 
 export interface ArgoUpdaterImageProps {
-  readonly alias: string; // TODO autoconstruct this from the image name
   readonly image: string;
   readonly strategy: ArgoUpdateStrategy;
   readonly versionConstraint?: string;

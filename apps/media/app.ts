@@ -26,7 +26,6 @@ NewArgoApp("media", {
     images: [
       {
         image: "ghcr.io/linuxserver/sonarr",
-        alias: "sonarr",
         strategy: "digest",
       },
     ],
