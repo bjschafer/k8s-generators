@@ -75,118 +75,118 @@ const mediaApps: Omit<
   MediaAppProps,
   "namespace" | "ingressSecret" | "resources"
 >[] = [
-  {
-    name: "sonarr",
-    port: 8989,
-    image: "ghcr.io/linuxserver/sonarr:develop",
-    nfsMounts: [
-      {
-        mountPoint: "/downloads",
-        nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
-      },
-      {
-        mountPoint: "/tv",
-        nfsConcreteVolume: nfsVols.Get("nfs-media-videos-tvshows"),
-      },
-    ],
-    monitoringConfig: {
-      enableExportarr: true,
-      enableServiceMonitor: true,
-      existingApiSecretName: "sonarr-api",
-    },
-  },
-  {
-    name: "radarr",
-    port: 7878,
-    image: "ghcr.io/linuxserver/radarr:nightly",
-    nfsMounts: [
-      {
-        mountPoint: "/downloads",
-        nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
-      },
-      {
-        mountPoint: "/movies",
-        nfsConcreteVolume: nfsVols.Get("nfs-media-videos-movies"),
-      },
-    ],
-    monitoringConfig: {
-      enableExportarr: true,
-      enableServiceMonitor: true,
-      existingApiSecretName: "radarr-api",
-    },
-  },
-  {
-    name: "lidarr",
-    port: 8686,
-    image: "ghcr.io/linuxserver/lidarr:develop",
-    nfsMounts: [
-      {
-        mountPoint: "/downloads",
-        nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
-      },
-      {
-        mountPoint: "/music",
-        nfsConcreteVolume: nfsVols.Get("nfs-media-music"),
-      },
-    ],
-    monitoringConfig: {
-      enableExportarr: true,
-      enableServiceMonitor: true,
-      existingApiSecretName: "lidarr-api",
-    },
-  },
-  {
-    name: "nzbget",
-    port: 6789,
-    image: "ghcr.io/linuxserver/nzbget:latest",
-    nfsMounts: [
-      {
-        mountPoint: "/downloads",
-        nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
-      },
-    ],
-    monitoringConfig: {
-      enableExportarr: false,
-      enableServiceMonitor: false,
-    },
-  },
-  {
-    name: "prowlarr",
-    port: 9696,
-    image: "ghcr.io/linuxserver/prowlarr:latest",
-    monitoringConfig: {
-      enableExportarr: false,
-      enableServiceMonitor: false,
-    },
-  },
-  {
-    name: "navidrome",
-    port: 4533,
-    image: "ghcr.io/navidrome/navidrome:latest",
-    monitoringConfig: {
-      enableExportarr: false,
-      enableServiceMonitor: true,
-    },
-    nfsMounts: [
-      {
-        mountPoint: "/music",
-        nfsConcreteVolume: nfsVols.Get("nfs-media-music"),
-        mountOptions: {
-          readOnly: true,
+    {
+      name: "sonarr",
+      port: 8989,
+      image: "ghcr.io/linuxserver/sonarr:develop",
+      nfsMounts: [
+        {
+          mountPoint: "/downloads",
+          nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
         },
+        {
+          mountPoint: "/tv",
+          nfsConcreteVolume: nfsVols.Get("nfs-media-videos-tvshows"),
+        },
+      ],
+      monitoringConfig: {
+        enableExportarr: true,
+        enableServiceMonitor: true,
+        existingApiSecretName: "sonarr-api",
       },
-    ],
-    extraHostnames: ["music.cmdcentral.xyz"],
-    configVolume: {
-      mountPath: "/data",
-      size: Size.gibibytes(5),
-      enableBackups: true,
     },
-    extraEnv: {
-      ND_PROMETHEUS_ENABLED: EnvValue.fromValue("true"), // TODO add scrape config
+    {
+      name: "radarr",
+      port: 7878,
+      image: "ghcr.io/linuxserver/radarr:nightly",
+      nfsMounts: [
+        {
+          mountPoint: "/downloads",
+          nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
+        },
+        {
+          mountPoint: "/movies",
+          nfsConcreteVolume: nfsVols.Get("nfs-media-videos-movies"),
+        },
+      ],
+      monitoringConfig: {
+        enableExportarr: true,
+        enableServiceMonitor: true,
+        existingApiSecretName: "radarr-api",
+      },
     },
-  },
-];
+    {
+      name: "lidarr",
+      port: 8686,
+      image: "ghcr.io/linuxserver/lidarr:develop",
+      nfsMounts: [
+        {
+          mountPoint: "/downloads",
+          nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
+        },
+        {
+          mountPoint: "/music",
+          nfsConcreteVolume: nfsVols.Get("nfs-media-music"),
+        },
+      ],
+      monitoringConfig: {
+        enableExportarr: true,
+        enableServiceMonitor: true,
+        existingApiSecretName: "lidarr-api",
+      },
+    },
+    {
+      name: "nzbget",
+      port: 6789,
+      image: "ghcr.io/linuxserver/nzbget:latest",
+      nfsMounts: [
+        {
+          mountPoint: "/downloads",
+          nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
+        },
+      ],
+      monitoringConfig: {
+        enableExportarr: false,
+        enableServiceMonitor: false,
+      },
+    },
+    {
+      name: "prowlarr",
+      port: 9696,
+      image: "ghcr.io/linuxserver/prowlarr:latest",
+      monitoringConfig: {
+        enableExportarr: false,
+        enableServiceMonitor: false,
+      },
+    },
+    {
+      name: "navidrome",
+      port: 4533,
+      image: "ghcr.io/navidrome/navidrome:latest",
+      monitoringConfig: {
+        enableExportarr: false,
+        enableServiceMonitor: true,
+      },
+      nfsMounts: [
+        {
+          mountPoint: "/music",
+          nfsConcreteVolume: nfsVols.Get("nfs-media-music"),
+          mountOptions: {
+            readOnly: true,
+          },
+        },
+      ],
+      extraHostnames: ["music.cmdcentral.xyz"],
+      configVolume: {
+        mountPath: "/data",
+        size: Size.gibibytes(5),
+        enableBackups: true,
+      },
+      extraEnv: {
+        ND_PROMETHEUS_ENABLED: EnvValue.fromValue("true"), // TODO add scrape config
+      },
+    },
+  ];
 
 const ingressSecret = Secret.fromSecretName(app, "media-tls", "media-tls");
 
