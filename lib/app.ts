@@ -267,7 +267,7 @@ export class CustomApp extends Chart {
           spec: {
             // TODO nodeSelector / arch
             containers: props.containers.map(function (
-              container: CustomContainerProps
+              container: CustomContainerProps,
             ): Container {
               return {
                 name: container.name ?? props.name,
@@ -278,7 +278,7 @@ export class CustomApp extends Chart {
                 ports: container.ports,
                 resources: container.resources,
                 volumeMounts: volumes.map<VolumeMount>(function (
-                  vol: CustomVolume
+                  vol: CustomVolume,
                 ): VolumeMount {
                   return vol.GetVolumeMount();
                 }),

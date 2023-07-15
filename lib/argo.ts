@@ -68,12 +68,12 @@ export class ArgoApp extends Chart {
     if (props.autoUpdate) {
       app.metadata.addAnnotation(
         `${argoUpdateAnnotationBase}/write-back-method`,
-        props.autoUpdate.writebackMethod?.method ?? "git"
+        props.autoUpdate.writebackMethod?.method ?? "git",
       );
       if (props.autoUpdate.writebackMethod?.method === "git") {
         app.metadata.addAnnotation(
           `${argoUpdateAnnotationBase}/write-back-git-branch`,
-          props.autoUpdate.writebackMethod?.gitBranch ?? "main"
+          props.autoUpdate.writebackMethod?.gitBranch ?? "main",
         );
       }
 
@@ -90,32 +90,32 @@ export class ArgoApp extends Chart {
 
       app.metadata.addAnnotation(
         `${argoUpdateAnnotationBase}/image-list`,
-        imageList
+        imageList,
       );
 
       for (const image of props.autoUpdate.images) {
         app.metadata.addAnnotation(
           `${argoUpdateAnnotationBase}/${image.alias}.update-strategy`,
-          image.strategy
+          image.strategy,
         );
 
         if (image.allowTags) {
           app.metadata.addAnnotation(
             `${argoUpdateAnnotationBase}/${image.alias}.allow-tags`,
-            `regexp:${image.allowTags}`
+            `regexp:${image.allowTags}`,
           );
         }
         if (image.ignoreTags) {
           app.metadata.addAnnotation(
             `${argoUpdateAnnotationBase}/${image.alias}.ignore-tags`,
-            image.ignoreTags.join(", ")
+            image.ignoreTags.join(", "),
           );
         }
 
         if (image.imagePullSecret) {
           app.metadata.addAnnotation(
             `${argoUpdateAnnotationBase}/${image.alias}.imagePullSecret`,
-            `pullsecret:${image.imagePullSecret.namespace}/${image.imagePullSecret.name}}`
+            `pullsecret:${image.imagePullSecret.namespace}/${image.imagePullSecret.name}}`,
           );
         }
       }

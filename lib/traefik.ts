@@ -24,7 +24,7 @@ export class AuthentikIngressRoute extends Chart {
   constructor(
     scope: Construct,
     name: string,
-    props: AuthentikIngressRouteProps
+    props: AuthentikIngressRouteProps,
   ) {
     super(scope, `${name}-authentik-ingressroute`);
 

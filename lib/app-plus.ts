@@ -56,8 +56,8 @@ export class AppPlus extends Chart {
           Volume.fromPersistentVolumeClaim(
             this,
             `${id}-${vol.mountPath}-vol`,
-            pvc
-          )
+            pvc,
+          ),
         );
       }
       // backup annotation is comma-separated volume name
@@ -123,7 +123,7 @@ export class AppPlus extends Chart {
     ingress.addHostRule(
       `${props.name}.cmdcentral.xyz`,
       "/",
-      IngressBackend.fromService(svc, { port: props.ports?.at(0) })
+      IngressBackend.fromService(svc, { port: props.ports?.at(0) }),
     );
     ingress.addTls([
       {
