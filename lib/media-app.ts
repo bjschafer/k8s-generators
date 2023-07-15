@@ -80,7 +80,7 @@ export class MediaApp extends Chart {
       configVol = Volume.fromPersistentVolumeClaim(
         this,
         `${props.name}-vol`,
-        pvc
+        pvc,
       );
     }
 
@@ -130,7 +130,7 @@ export class MediaApp extends Chart {
       deploy.addVolume(configVol!);
       deploy.containers[0].mount(
         props.configVolume.mountPath ?? "/config",
-        configVol!
+        configVol!,
       );
     }
 
@@ -139,14 +139,14 @@ export class MediaApp extends Chart {
     for (const nfsMount of props.nfsMounts ?? []) {
       // we need to handle the edge case where the same volume is mounted at multiple (sub)paths.
       const existingVol = existingVolumes.get(
-        nfsMount.nfsConcreteVolume.volume.name
+        nfsMount.nfsConcreteVolume.volume.name,
       );
       let vol: Volume;
       if (!existingVol) {
         vol = Volume.fromPersistentVolumeClaim(
           this,
           nfsMount.nfsConcreteVolume.volume.name,
-          nfsMount.nfsConcreteVolume.pvc
+          nfsMount.nfsConcreteVolume.pvc,
         );
         existingVolumes.set(nfsMount.nfsConcreteVolume.volume.name, vol);
         deploy.addVolume(vol);
@@ -157,7 +157,7 @@ export class MediaApp extends Chart {
       deploy.containers[0].mount(
         nfsMount.mountPoint,
         vol,
-        nfsMount.mountOptions
+        nfsMount.mountOptions,
       );
     }
 
@@ -166,7 +166,7 @@ export class MediaApp extends Chart {
       const secret = Secret.fromSecretName(
         this,
         props.monitoringConfig!.existingApiSecretName!,
-        props.monitoringConfig!.existingApiSecretName!
+        props.monitoringConfig!.existingApiSecretName!,
       );
       deploy.addContainer({
         securityContext: DEFAULT_SECURITY_CONTEXT,
@@ -177,7 +177,7 @@ export class MediaApp extends Chart {
         envVariables: {
           PORT: EnvValue.fromValue(`${exportarrPort}`),
           URL: EnvValue.fromValue(
-            GET_SERVICE_URL(props.name, props.namespace, true, props.port)
+            GET_SERVICE_URL(props.name, props.namespace, true, props.port),
           ),
           APIKEY: EnvValue.fromSecretValue({ secret: secret, key: "APIKEY" }),
         },
@@ -253,13 +253,13 @@ export class MediaApp extends Chart {
     ingress.addHostRule(
       `${props.name}.cmdcentral.xyz`,
       "/",
-      IngressBackend.fromService(svc, { port: props.port })
+      IngressBackend.fromService(svc, { port: props.port }),
     );
     for (const hostname of props.extraHostnames ?? []) {
       ingress.addHostRule(
         hostname,
         "/",
-        IngressBackend.fromService(svc, { port: props.port })
+        IngressBackend.fromService(svc, { port: props.port }),
       );
     }
     ingress.addTls([

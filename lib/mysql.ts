@@ -71,7 +71,7 @@ export class MysqlInstance extends Chart {
     const secret = Secret.fromSecretName(
       this,
       `${name}-creds`,
-      `${name}-creds`
+      `${name}-creds`,
     );
     const pvc = new PersistentVolumeClaim(this, `${name}-pvc`, {
       storageClassName: StorageClass.CEPH_RBD,
@@ -86,7 +86,7 @@ export class MysqlInstance extends Chart {
     const volume = Volume.fromPersistentVolumeClaim(
       this,
       `${name}-volume`,
-      pvc
+      pvc,
     );
 
     sts.containers[0].mount("/var/lib/mysql", volume);
@@ -96,7 +96,7 @@ export class MysqlInstance extends Chart {
       EnvValue.fromSecretValue({
         secret: secret,
         key: "MARIADB_ROOT_PASSWORD",
-      })
+      }),
     );
 
     const baseObj = ApiObject.of(sts);
@@ -105,8 +105,8 @@ export class MysqlInstance extends Chart {
         JsonPatch.add("/spec/template/metadata/annotations", {}),
         JsonPatch.add(
           "/spec/template/metadata/annotations/backup.velero.io~1backup-volumes",
-          volume.name
-        )
+          volume.name,
+        ),
       );
     }
   }

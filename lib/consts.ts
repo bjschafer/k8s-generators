@@ -55,7 +55,7 @@ export function GET_SERVICE_URL(
   name: string,
   namespace: string,
   includeScheme: boolean,
-  port?: number
+  port?: number,
 ): string {
   const pieces = [];
   if (includeScheme) {
@@ -70,7 +70,7 @@ export function GET_SERVICE_URL(
 
 export function GET_COMMON_LABELS(
   name: string,
-  instance?: string
+  instance?: string,
 ): { [name: string]: string } {
   return {
     "app.kubernetes.io/name": name,
