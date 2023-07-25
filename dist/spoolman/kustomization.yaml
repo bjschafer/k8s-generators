@@ -1,0 +1,4 @@
+resources:
+  - Deployment.spoolman.yaml
+  - Ingress.spoolman.yaml
+  - Service.spoolman.yaml

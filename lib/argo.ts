@@ -11,7 +11,7 @@ export function NewArgoApp(name: string, props: ArgoAppProps) {
   const app = new App({
     outdir: "dist/apps",
     outputFileExtension: ".yaml",
-    yamlOutputType: YamlOutputType.FILE_PER_RESOURCE,
+    yamlOutputType: YamlOutputType.FILE_PER_CHART,
   });
 
   new ArgoApp(app, name, props);
@@ -56,7 +56,7 @@ export class ArgoApp extends Chart {
           },
           path: props.namespace,
           repoUrl: props.git_repo_url ?? ARGO_GIT_REPO_URL,
-          targetRevision: "HEAD",
+          targetRevision: "main",
         },
         syncPolicy: {
           syncOptions: ["CreateNamespace=true"],

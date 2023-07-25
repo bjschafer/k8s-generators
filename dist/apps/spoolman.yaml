@@ -1,19 +1,24 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: spoolman=ghcr.io/donkie/spoolman
+    argocd-image-updater.argoproj.io/spoolman.update-strategy: digest
+    argocd-image-updater.argoproj.io/write-back-git-branch: main
+    argocd-image-updater.argoproj.io/write-back-method: git
   labels:
-    app.kubernetes.io/name: paperless
-  name: paperless
+    app.kubernetes.io/name: spoolman
+  name: spoolman
   namespace: argocd
 spec:
   destination:
-    namespace: paperless
+    namespace: spoolman
     server: https://kubernetes.default.svc
   project: default
   source:
     directory:
       recurse: true
-    path: paperless
+    path: spoolman
     repoURL: git@github.com:bjschafer/k8s-prod.git
     targetRevision: main
   syncPolicy:
