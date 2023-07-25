@@ -15,7 +15,7 @@ spec:
       recurse: true
     path: monica
     repoURL: git@github.com:bjschafer/k8s-prod.git
-    targetRevision: HEAD
+    targetRevision: main
   syncPolicy:
     automated:
       prune: true
