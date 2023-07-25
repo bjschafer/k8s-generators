@@ -15,7 +15,11 @@ import {
   Volume,
 } from "cdk8s-plus-26";
 import { StorageClass } from "./volume";
-import { BACKUP_ANNOTATION_NAME, DEFAULT_SECURITY_CONTEXT } from "./consts";
+import {
+  BACKUP_ANNOTATION_NAME,
+  CLUSTER_ISSUER,
+  DEFAULT_SECURITY_CONTEXT,
+} from "./consts";
 
 export interface AppPlusVolume {
   readonly props: PersistentVolumeClaimProps;
@@ -117,6 +121,9 @@ export class AppPlus extends Chart {
       metadata: {
         name: props.name,
         namespace: props.namespace,
+        annotations: {
+          "cert-manager.io/cluster-issuer": CLUSTER_ISSUER.name,
+        },
       },
     });
 
