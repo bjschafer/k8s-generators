@@ -11,6 +11,7 @@ import {
   PersistentVolumeClaimProps,
   PersistentVolumeMode,
   Probe,
+  Secret,
   ServicePort,
   Volume,
 } from "cdk8s-plus-26";
@@ -135,6 +136,11 @@ export class AppPlus extends Chart {
     ingress.addTls([
       {
         hosts: [`${props.name}.cmdcentral.xyz`],
+        secret: Secret.fromSecretName(
+          this,
+          `${props.name}-tls`,
+          `${props.name}-tls`,
+        ),
       },
     ]);
   }
