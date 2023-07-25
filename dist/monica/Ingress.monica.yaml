@@ -20,3 +20,4 @@ spec:
   tls:
     - hosts:
         - monica.cmdcentral.xyz
+      secretName: monica-tls

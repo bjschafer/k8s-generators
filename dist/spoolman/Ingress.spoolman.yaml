@@ -20,3 +20,4 @@ spec:
   tls:
     - hosts:
         - spoolman.cmdcentral.xyz
+      secretName: spoolman-tls
