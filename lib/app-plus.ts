@@ -36,6 +36,8 @@ export interface AppPlusProps {
   readonly ports?: number[];
   readonly volumes?: AppPlusVolume[];
   readonly extraEnv?: { [key: string]: EnvValue };
+  readonly livenessProbe?: Probe;
+  readonly readinessProbe?: Probe;
 }
 
 export class AppPlus extends Chart {
@@ -97,8 +99,12 @@ export class AppPlus extends Chart {
           }),
           resources: props.resources,
           envVariables: props.extraEnv,
-          readiness: Probe.fromTcpSocket({ port: props.ports?.at(0) }),
-          liveness: Probe.fromTcpSocket({ port: props.ports?.at(0) }),
+          readiness:
+            props.readinessProbe ??
+            Probe.fromTcpSocket({ port: props.ports?.at(0) }),
+          liveness:
+            props.livenessProbe ??
+            Probe.fromTcpSocket({ port: props.ports?.at(0) }),
         },
       ],
     });
