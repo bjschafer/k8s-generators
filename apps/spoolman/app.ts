@@ -2,7 +2,7 @@ import { App, Size } from "cdk8s";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { basename } from "../../lib/util";
 import { NewArgoApp } from "../../lib/argo";
-import { Cpu, EnvValue, Secret } from "cdk8s-plus-26";
+import { Cpu, EnvValue, Probe, Secret } from "cdk8s-plus-26";
 import { AppPlus } from "../../lib/app-plus";
 import { NewKustomize } from "../../lib/kustomize";
 
@@ -62,6 +62,8 @@ new AppPlus(app, `${name}-app`, {
     }),
     TZ: EnvValue.fromValue("America/Chicago"),
   },
+  livenessProbe: Probe.fromHttpGet("/api/v1/health", { port: 8000 }),
+  readinessProbe: Probe.fromHttpGet("/api/v1/health", { port: 8000 }),
 });
 
 app.synth();

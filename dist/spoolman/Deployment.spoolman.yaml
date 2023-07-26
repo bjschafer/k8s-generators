@@ -44,15 +44,19 @@ spec:
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
-            tcpSocket:
+            httpGet:
+              path: /api/v1/health
               port: 8000
+              scheme: HTTP
           name: spoolman
           ports:
             - containerPort: 8000
           readinessProbe:
             failureThreshold: 3
-            tcpSocket:
+            httpGet:
+              path: /api/v1/health
               port: 8000
+              scheme: HTTP
           resources:
             limits:
               memory: 512Mi
