@@ -9,7 +9,7 @@ import {
   Service,
   StatefulSet,
   Volume,
-} from "cdk8s-plus-26";
+} from "cdk8s-plus-27";
 import { StorageClass } from "./volume";
 
 export interface MysqlInstanceProps {

@@ -3,7 +3,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { basename } from "../../lib/util";
 import { ArgoApp } from "../../lib/argo";
 import { MysqlInstance } from "../../lib/mysql";
-import { Cpu } from "cdk8s-plus-26";
+import { Cpu } from "cdk8s-plus-27";
 import { AppPlus } from "../../lib/app-plus";
 
 const namespace = basename(__dirname);
