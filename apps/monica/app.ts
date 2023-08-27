@@ -56,6 +56,7 @@ new AppPlus(app, "monica-app", {
       },
       mountPath: "/var/www/html/storage",
       enableBackups: true,
+      name: "data",
     },
   ],
 });
