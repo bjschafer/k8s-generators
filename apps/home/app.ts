@@ -115,7 +115,6 @@ new HomeConfig(app, `${name}-config`, {
             key: "HOMEPAGE_VAR_SONARR",
           },
         ),
-        MakeService("Test", "https://", ""),
       ],
     },
   ],
