@@ -5,18 +5,45 @@ metadata:
   namespace: home
 data:
   bookmarks.yaml: |
-    - Developer:
-        - github:
-            - href: https://github.com
-              abbrev: GH
+    - Other:
+        - LibraryCat:
+            - href: https://library.cmdcentral.xyz
+              abbr: LI
   kubernetes.yaml: |
     mode: cluster
   services.yaml: |
     - Media:
-        - sonarr:
+        - Lidarr:
+            href: https://lidarr.cmdcentral.xyz
+            icon: lidarr
+            ping: https://lidarr.cmdcentral.xyz
+            description: Music
+            widget:
+              type: lidarr
+              key: HOMEPAGE_VAR_LIDARR
+              url: https://lidarr.cmdcentral.xyz
+        - Radarr:
+            href: https://radarr.cmdcentral.xyz
+            icon: radarr
+            ping: https://radarr.cmdcentral.xyz
+            description: Movies
+            widget:
+              type: radarr
+              key: HOMEPAGE_VAR_RADARR
+              url: https://radarr.cmdcentral.xyz
+        - Sonarr:
             href: https://sonarr.cmdcentral.xyz
             icon: sonarr
             ping: https://sonarr.cmdcentral.xyz
+            description: TV Shows
+            widget:
+              type: sonarr
+              key: HOMEPAGE_VAR_SONARR
+              url: https://sonarr.cmdcentral.xyz
+        - Test:
+            href: https://
+            icon: ""
+            ping: https://
   settings.yaml: |
     {}
   widgets.yaml: |
