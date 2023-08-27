@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: home
+  namespace: home
+spec:
+  externalIPs: []
+  ports:
+    - port: 3000
+      targetPort: 3000
+  selector:
+    cdk8s.io/metadata.addr: home-app-home-app-deployment-c8467b6c
+  type: ClusterIP

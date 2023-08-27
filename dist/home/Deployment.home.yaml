@@ -1,15 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: monica
-  namespace: monica
+  name: home
+  namespace: home
 spec:
   minReadySeconds: 0
   progressDeadlineSeconds: 600
   replicas: 1
   selector:
     matchLabels:
-      cdk8s.io/metadata.addr: monica-app-monica-app-deployment-c8b445f6
+      cdk8s.io/metadata.addr: home-app-home-app-deployment-c8467b6c
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -18,30 +18,33 @@ spec:
   template:
     metadata:
       annotations:
-        backup.velero.io/backup-volumes: pvc-monica-app-data
+        backup.velero.io/backup-volumes: pvc-home-app-config
       labels:
-        cdk8s.io/metadata.addr: monica-app-monica-app-deployment-c8b445f6
+        cdk8s.io/metadata.addr: home-app-home-app-deployment-c8467b6c
     spec:
-      automountServiceAccountToken: false
+      automountServiceAccountToken: true
       containers:
-        - image: monica:4.0.0-apache
+        - image: ghcr.io/benphelps/homepage:latest
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
-            tcpSocket:
-              port: 80
-          name: monica
+            httpGet:
+              path: ""
+              port: 3000
+              scheme: HTTP
+          name: home
           ports:
-            - containerPort: 80
+            - containerPort: 3000
           readinessProbe:
             failureThreshold: 3
-            tcpSocket:
-              port: 80
+            httpGet:
+              path: ""
+              port: 3000
+              scheme: HTTP
           resources:
             limits:
-              memory: 512Mi
+              memory: 256Mi
             requests:
-              cpu: 50m
               memory: 128Mi
           securityContext:
             allowPrivilegeEscalation: false
@@ -49,18 +52,19 @@ spec:
             readOnlyRootFilesystem: false
             runAsNonRoot: false
           volumeMounts:
-            - mountPath: /var/www/html/storage
-              name: pvc-monica-app-data
+            - mountPath: /app/config
+              name: pvc-home-app-config
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
       securityContext:
         fsGroupChangePolicy: Always
         runAsNonRoot: false
+      serviceAccountName: home
       setHostnameAsFQDN: false
       terminationGracePeriodSeconds: 30
       volumes:
-        - name: pvc-monica-app-data
+        - name: pvc-home-app-config
           persistentVolumeClaim:
-            claimName: monica-app-data
+            claimName: home-app-config
             readOnly: false

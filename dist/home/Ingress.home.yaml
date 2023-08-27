@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: home
+  namespace: home
+spec:
+  rules:
+    - host: home.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: home
+                port:
+                  number: 3000
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - home.cmdcentral.xyz
+      secretName: home-tls

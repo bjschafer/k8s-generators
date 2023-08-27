@@ -12,6 +12,7 @@ import {
   PersistentVolumeMode,
   Probe,
   Secret,
+  ServiceAccount,
   ServicePort,
   Volume,
 } from "cdk8s-plus-27";
@@ -24,6 +25,7 @@ import {
 
 export interface AppPlusVolume {
   readonly props: PersistentVolumeClaimProps;
+  readonly name: string;
   readonly mountPath: string;
   readonly enableBackups: boolean;
 }
@@ -38,6 +40,8 @@ export interface AppPlusProps {
   readonly extraEnv?: { [key: string]: EnvValue };
   readonly livenessProbe?: Probe;
   readonly readinessProbe?: Probe;
+  readonly serviceAccountName?: string;
+  readonly automountServiceAccount?: boolean;
 }
 
 export class AppPlus extends Chart {
@@ -51,7 +55,7 @@ export class AppPlus extends Chart {
       for (const vol of props.volumes) {
         const pvc = new PersistentVolumeClaim(this, `${id}-${vol.mountPath}`, {
           metadata: {
-            name: `${id}-${vol.mountPath}`,
+            name: `${id}-${vol.name}`,
             namespace: props.namespace,
           },
           accessModes: vol.props.accessModes,
@@ -76,6 +80,14 @@ export class AppPlus extends Chart {
           .join(","),
       };
     }
+    let serviceAccount;
+    if (props.serviceAccountName) {
+      serviceAccount = ServiceAccount.fromServiceAccountName(
+        this,
+        `${props.name}-sa`,
+        props.serviceAccountName,
+      );
+    }
 
     const deploy = new Deployment(this, `${id}-deployment`, {
       metadata: {
@@ -87,6 +99,8 @@ export class AppPlus extends Chart {
         annotations: volumeBackupAnnotation,
       },
       securityContext: DEFAULT_SECURITY_CONTEXT,
+      serviceAccount: serviceAccount,
+      automountServiceAccountToken: props.automountServiceAccount,
       containers: [
         {
           name: props.name,
