@@ -45,5 +45,7 @@ export class HomeRbac extends Chart {
       toApiEndpoint("metrics.k8s.io", "nodes"),
       toApiEndpoint("metrics.k8s.io", "pods"),
     );
+
+    role.bind(sa);
   }
 }
