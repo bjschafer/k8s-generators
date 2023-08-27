@@ -1,12 +1,13 @@
 import { basename } from "path";
 import { App, Size } from "cdk8s";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, TZ } from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
 import { StorageClass } from "../../lib/volume";
 import { PersistentVolumeAccessMode, Probe } from "cdk8s-plus-27";
 import { NewKustomize } from "../../lib/kustomize";
 import { HomeRbac } from "./rbac";
+import { HomeConfig } from "./config";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -67,6 +68,69 @@ new AppPlus(app, `${name}-app`, {
 });
 
 new HomeRbac(app, `${name}-rbac`, name, namespace);
+
+new HomeConfig(app, `${name}-config`, {
+  namespace: namespace,
+  name: name,
+  Kubernetes: { mode: "cluster" },
+  Settings: {},
+  Bookmarks: [
+    {
+      Developer: [
+        {
+          github: [
+            {
+              href: "https://github.com",
+              abbrev: "GH",
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  Services: [
+    {
+      Media: [
+        {
+          sonarr: {
+            href: "https://sonarr.cmdcentral.xyz",
+            icon: "sonarr",
+            ping: "https://sonarr.cmdcentral.xyz",
+          },
+        },
+      ],
+    },
+  ],
+  Widgets: [
+    {
+      kubernetes: {
+        cluster: {
+          show: true,
+          cpu: true,
+          memory: true,
+          showLabel: true,
+          label: "cluster",
+        },
+        nodes: {
+          show: true,
+          cpu: true,
+          memory: true,
+          showLabel: true,
+        },
+      },
+    },
+    {
+      openmeteo: {
+        label: "Madison",
+        latitude: "43.073929",
+        longitude: "-89.385239",
+        timezone: TZ,
+        units: "imperial",
+        cache: 15, // Time in minutes to cache API responses, to stay within limits
+      },
+    },
+  ],
+});
 
 app.synth();
 

@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: home
+  namespace: home
+data:
+  bookmarks.yaml: |
+    - Developer:
+        - github:
+            - href: https://github.com
+              abbrev: GH
+  kubernetes.yaml: |
+    mode: cluster
+  services.yaml: |
+    - Media:
+        - sonarr:
+            href: https://sonarr.cmdcentral.xyz
+            icon: sonarr
+            ping: https://sonarr.cmdcentral.xyz
+  settings.yaml: |
+    {}
+  widgets.yaml: |
+    - kubernetes:
+        cluster:
+          show: true
+          cpu: true
+          memory: true
+          showLabel: true
+          label: cluster
+        nodes:
+          show: true
+          cpu: true
+          memory: true
+          showLabel: true
+    - openmeteo:
+        label: Madison
+        latitude: "43.073929"
+        longitude: "-89.385239"
+        timezone: America/Chicago
+        units: imperial
+        cache: 15
+immutable: false
