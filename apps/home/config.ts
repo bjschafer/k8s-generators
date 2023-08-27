@@ -60,12 +60,22 @@ export class HomeConfig extends Chart {
   }
 }
 
+/**
+ * Less repetitive service generation
+ * @param name
+ * @param url
+ * @param icon Can be dashboard icon, si-simpleicon, mdi-material. Latter two can have -#<hex> suffixed.
+ * @param description
+ * @param widget
+ * @constructor
+ * @see https://gethomepage.dev/en/configs/services/
+ */
 export function MakeService(
   name: string,
   url: string,
   icon?: string,
   description?: string,
-  widget?: { type: string; key?: string },
+  widget?: { type: string; key?: string; username?: string; password?: string },
 ): Service {
   let w;
   if (widget) {
@@ -73,6 +83,8 @@ export function MakeService(
       type: widget.type,
       key: widget.key ? `{{${widget.key}}}` : undefined,
       url: url,
+      username: widget.username,
+      password: widget.password ? `{{${widget.password}}}` : undefined,
     };
   }
 
