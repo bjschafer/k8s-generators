@@ -5,7 +5,7 @@ import { stringify as yamlStringify } from "yaml";
 
 export interface Bookmark {
   [name: string]: {
-    abbrev: string;
+    abbr: string;
     href: string;
     description?: string;
     icon?: string;
@@ -57,4 +57,31 @@ export class HomeConfig extends Chart {
     cm.addData("services.yaml", yamlStringify(props.Services));
     cm.addData("widgets.yaml", yamlStringify(props.Widgets));
   }
+}
+
+export function MakeService(
+  name: string,
+  url: string,
+  icon?: string,
+  description?: string,
+  widget?: { type: string; key: string },
+): Service {
+  let w;
+  if (widget) {
+    w = {
+      type: widget.type,
+      key: widget.key,
+      url: url,
+    };
+  }
+
+  return {
+    [name]: {
+      href: url,
+      icon: icon,
+      ping: url,
+      description: description,
+      widget: w,
+    },
+  };
 }

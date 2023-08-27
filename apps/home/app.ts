@@ -7,7 +7,7 @@ import { StorageClass } from "../../lib/volume";
 import { PersistentVolumeAccessMode, Probe } from "cdk8s-plus-27";
 import { NewKustomize } from "../../lib/kustomize";
 import { HomeRbac } from "./rbac";
-import { HomeConfig } from "./config";
+import { HomeConfig, MakeService } from "./config";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -70,37 +70,56 @@ new AppPlus(app, `${name}-app`, {
 new HomeRbac(app, `${name}-rbac`, name, namespace);
 
 new HomeConfig(app, `${name}-config`, {
-  namespace: namespace,
-  name: name,
-  Kubernetes: { mode: "cluster" },
-  Settings: {},
   Bookmarks: [
     {
-      Developer: [
+      Other: [
         {
-          github: [
+          LibraryCat: [
             {
-              href: "https://github.com",
-              abbrev: "GH",
+              href: "https://library.cmdcentral.xyz",
+              abbr: "LI",
             },
           ],
         },
       ],
     },
   ],
+  Kubernetes: { mode: "cluster" },
   Services: [
     {
       Media: [
-        {
-          sonarr: {
-            href: "https://sonarr.cmdcentral.xyz",
-            icon: "sonarr",
-            ping: "https://sonarr.cmdcentral.xyz",
+        MakeService(
+          "Lidarr",
+          "https://lidarr.cmdcentral.xyz",
+          "lidarr",
+          "Music",
+          { type: "lidarr", key: "HOMEPAGE_VAR_LIDARR" },
+        ),
+        MakeService(
+          "Radarr",
+          "https://radarr.cmdcentral.xyz",
+          "radarr",
+          "Movies",
+          {
+            type: "radarr",
+            key: "HOMEPAGE_VAR_RADARR",
           },
-        },
+        ),
+        MakeService(
+          "Sonarr",
+          "https://sonarr.cmdcentral.xyz",
+          "sonarr",
+          "TV Shows",
+          {
+            type: "sonarr",
+            key: "HOMEPAGE_VAR_SONARR",
+          },
+        ),
+        MakeService("Test", "https://", ""),
       ],
     },
   ],
+  Settings: {},
   Widgets: [
     {
       kubernetes: {
@@ -130,6 +149,8 @@ new HomeConfig(app, `${name}-config`, {
       },
     },
   ],
+  name: name,
+  namespace: namespace,
 });
 
 app.synth();
