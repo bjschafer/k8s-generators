@@ -5,9 +5,9 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: home-rbac
+  name: home
 subjects:
   - apiGroup: ""
     kind: ServiceAccount
-    name: home-rbac
-    namespace: home-rbac
+    name: home
+    namespace: home
