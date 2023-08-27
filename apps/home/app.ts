@@ -115,19 +115,70 @@ new HomeConfig(app, `${name}-config`, {
             key: "HOMEPAGE_VAR_SONARR",
           },
         ),
+        MakeService(
+          "Overseerr",
+          "https://plexrequests.cmdcentral.xyz",
+          "overseerr",
+          "Plex Requests",
+          {
+            type: "overseerr",
+            key: "HOMEPAGE_VAR_OVERSEER", // [sic]
+          },
+        ),
+        {
+          Plex: {
+            href: "https://plex.tv/web",
+            icon: "plex",
+            ping: "http://plex.cmdcentral.xyz:32400",
+            widget: {
+              type: "plex",
+              key: "{{HOMEPAGE_VAR_PLEX}}",
+              url: "http://plex.cmdcentral.xyz:32400",
+            },
+          },
+        },
+        MakeService(
+          "NZBGet",
+          "https://nzbget.cmdcentral.xyz",
+          "nzbget",
+          "Usenet Downloads",
+          {
+            type: "nzbget",
+            username: "nzbget",
+            password: "HOMEPAGE_VAR_NZBGET",
+          },
+        ),
+        MakeService(
+          "Prowlarr",
+          "https://prowlarr.cmdcentral.xyz",
+          "prowlarr",
+          "Indexer Manager",
+          {
+            type: "prowlarr",
+            key: "HOMEPAGE_VAR_PROWLARR",
+          },
+        ),
+        MakeService(
+          "Seedbox",
+          "https://psb52743.seedbox.io/",
+          "rutorrent",
+          "Torrent Downloads",
+        ),
       ],
+    },
+    {
       Printers: [
         MakeService(
           "Ender Tres",
           "https://endertres.cmdcentral.xyz",
-          "fluidd",
+          "si-creality", // #F31679
           "Ender 3",
           { type: "moonraker" },
         ),
         MakeService(
           "Replicator",
           "https://replicator.cmdcentral.xyz",
-          "fluidd-#F31679",
+          "fluidd",
           "Prusa Mini+",
           {
             type: "moonraker",

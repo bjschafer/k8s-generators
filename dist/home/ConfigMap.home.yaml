@@ -41,10 +41,51 @@ data:
               type: sonarr
               key: "{{HOMEPAGE_VAR_SONARR}}"
               url: https://sonarr.cmdcentral.xyz
-      Printers:
+        - Overseerr:
+            href: https://plexrequests.cmdcentral.xyz
+            icon: overseerr
+            ping: https://plexrequests.cmdcentral.xyz
+            description: Plex Requests
+            widget:
+              type: overseerr
+              key: "{{HOMEPAGE_VAR_OVERSEER}}"
+              url: https://plexrequests.cmdcentral.xyz
+        - Plex:
+            href: https://plex.tv/web
+            icon: plex
+            ping: http://plex.cmdcentral.xyz:32400
+            widget:
+              type: plex
+              key: "{{HOMEPAGE_VAR_PLEX}}"
+              url: http://plex.cmdcentral.xyz:32400
+        - NZBGet:
+            href: https://nzbget.cmdcentral.xyz
+            icon: nzbget
+            ping: https://nzbget.cmdcentral.xyz
+            description: Usenet Downloads
+            widget:
+              type: nzbget
+              url: https://nzbget.cmdcentral.xyz
+              username: nzbget
+              password: "{{HOMEPAGE_VAR_NZBGET}}"
+        - Prowlarr:
+            href: https://prowlarr.cmdcentral.xyz
+            icon: prowlarr
+            ping: https://prowlarr.cmdcentral.xyz
+            description: Indexer Manager
+            widget:
+              type: prowlarr
+              key: "{{HOMEPAGE_VAR_PROWLARR}}"
+              url: https://prowlarr.cmdcentral.xyz
+        - Seedbox:
+            href: https://psb52743.seedbox.io/
+            icon: rutorrent
+            ping: https://psb52743.seedbox.io/
+            description: Torrent Downloads
+    - Printers:
         - Ender Tres:
             href: https://endertres.cmdcentral.xyz
-            icon: fluidd
+            icon: si-creality
             ping: https://endertres.cmdcentral.xyz
             description: Ender 3
             widget:
@@ -52,7 +93,7 @@ data:
               url: https://endertres.cmdcentral.xyz
         - Replicator:
             href: https://replicator.cmdcentral.xyz
-            icon: fluidd-#F31679
+            icon: fluidd
             ping: https://replicator.cmdcentral.xyz
             description: Prusa Mini+
             widget:
