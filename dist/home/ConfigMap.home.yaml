@@ -9,6 +9,7 @@ data:
         - LibraryCat:
             - href: https://library.cmdcentral.xyz
               abbr: LI
+  docker.yaml: ""
   kubernetes.yaml: |
     mode: cluster
   services.yaml: |
@@ -20,7 +21,7 @@ data:
             description: Music
             widget:
               type: lidarr
-              key: HOMEPAGE_VAR_LIDARR
+              key: "{{HOMEPAGE_VAR_LIDARR}}"
               url: https://lidarr.cmdcentral.xyz
         - Radarr:
             href: https://radarr.cmdcentral.xyz
@@ -29,7 +30,7 @@ data:
             description: Movies
             widget:
               type: radarr
-              key: HOMEPAGE_VAR_RADARR
+              key: "{{HOMEPAGE_VAR_RADARR}}"
               url: https://radarr.cmdcentral.xyz
         - Sonarr:
             href: https://sonarr.cmdcentral.xyz
@@ -38,12 +39,8 @@ data:
             description: TV Shows
             widget:
               type: sonarr
-              key: HOMEPAGE_VAR_SONARR
+              key: "{{HOMEPAGE_VAR_SONARR}}"
               url: https://sonarr.cmdcentral.xyz
-        - Test:
-            href: https://
-            icon: ""
-            ping: https://
   settings.yaml: |
     {}
   widgets.yaml: |

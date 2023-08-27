@@ -56,6 +56,7 @@ export class HomeConfig extends Chart {
     cm.addData("bookmarks.yaml", yamlStringify(props.Bookmarks));
     cm.addData("services.yaml", yamlStringify(props.Services));
     cm.addData("widgets.yaml", yamlStringify(props.Widgets));
+    cm.addData("docker.yaml", "");
   }
 }
 
@@ -70,7 +71,7 @@ export function MakeService(
   if (widget) {
     w = {
       type: widget.type,
-      key: widget.key,
+      key: `{{${widget.key}}}`,
       url: url,
     };
   }
