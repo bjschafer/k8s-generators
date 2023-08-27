@@ -10,13 +10,13 @@ import { IngressRoute } from "../../imports/traefik.containo.us";
 import { toApiEndpoint } from "../../lib/util";
 
 export class HomeRbac extends Chart {
-  constructor(scope: Construct, id: string) {
+  constructor(scope: Construct, id: string, name: string, namespace: string) {
     super(scope, id);
 
     const sa = new ServiceAccount(this, `${id}-serviceAccount`, {
       metadata: {
-        name: id,
-        namespace: id,
+        name: name,
+        namespace: namespace,
       },
     });
     new Secret(this, `${id}-sa-secret`, {
@@ -25,15 +25,15 @@ export class HomeRbac extends Chart {
         annotations: {
           "kubernetes.io/service-account.name": sa.name,
         },
-        name: id,
-        namespace: id,
+        name: name,
+        namespace: namespace,
       },
     });
 
     const role = new ClusterRole(this, `${id}-role`, {
       metadata: {
-        name: id,
-        namespace: id,
+        name: name,
+        namespace: namespace,
       },
     });
     role.allowRead(

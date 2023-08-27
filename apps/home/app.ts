@@ -66,7 +66,7 @@ new AppPlus(app, `${name}-app`, {
   extraIngressHosts: ["cmdcentral.xyz"],
 });
 
-new HomeRbac(app, `${name}-rbac`);
+new HomeRbac(app, `${name}-rbac`, name, namespace);
 
 app.synth();
 
