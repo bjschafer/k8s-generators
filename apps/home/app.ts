@@ -63,6 +63,7 @@ new AppPlus(app, `${name}-app`, {
   readinessProbe: Probe.fromHttpGet("", { port: 3000 }),
   serviceAccountName: name,
   automountServiceAccount: true,
+  extraIngressHosts: ["cmdcentral.xyz"],
 });
 
 new HomeRbac(app, `${name}-rbac`);

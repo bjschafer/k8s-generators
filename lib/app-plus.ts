@@ -42,6 +42,7 @@ export interface AppPlusProps {
   readonly readinessProbe?: Probe;
   readonly serviceAccountName?: string;
   readonly automountServiceAccount?: boolean;
+  readonly extraIngressHosts?: string[];
 }
 
 export class AppPlus extends Chart {
@@ -148,14 +149,21 @@ export class AppPlus extends Chart {
       },
     });
 
-    ingress.addHostRule(
-      `${props.name}.cmdcentral.xyz`,
-      "/",
-      IngressBackend.fromService(svc, { port: props.ports?.at(0) }),
-    );
+    const ingressHosts = [`${props.name}.cmdcentral.xyz`];
+    if (props.extraIngressHosts) {
+      ingressHosts.push(...props.extraIngressHosts);
+    }
+
+    for (const host of ingressHosts) {
+      ingress.addHostRule(
+        host,
+        "/",
+        IngressBackend.fromService(svc, { port: props.ports?.at(0) }),
+      );
+    }
     ingress.addTls([
       {
-        hosts: [`${props.name}.cmdcentral.xyz`],
+        hosts: ingressHosts,
         secret: Secret.fromSecretName(
           this,
           `${props.name}-tls`,

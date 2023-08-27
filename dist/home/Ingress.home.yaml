@@ -17,7 +17,18 @@ spec:
                   number: 3000
             path: /
             pathType: Prefix
+    - host: cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: home
+                port:
+                  number: 3000
+            path: /
+            pathType: Prefix
   tls:
     - hosts:
         - home.cmdcentral.xyz
+        - cmdcentral.xyz
       secretName: home-tls
