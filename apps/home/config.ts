@@ -65,13 +65,13 @@ export function MakeService(
   url: string,
   icon?: string,
   description?: string,
-  widget?: { type: string; key: string },
+  widget?: { type: string; key?: string },
 ): Service {
   let w;
   if (widget) {
     w = {
       type: widget.type,
-      key: `{{${widget.key}}}`,
+      key: widget.key ? `{{${widget.key}}}` : undefined,
       url: url,
     };
   }

@@ -116,6 +116,24 @@ new HomeConfig(app, `${name}-config`, {
           },
         ),
       ],
+      Printers: [
+        MakeService(
+          "Ender Tres",
+          "https://endertres.cmdcentral.xyz",
+          "fluidd",
+          "Ender 3",
+          { type: "moonraker" },
+        ),
+        MakeService(
+          "Replicator",
+          "https://replicator.cmdcentral.xyz",
+          "fluidd-#F31679",
+          "Prusa Mini+",
+          {
+            type: "moonraker",
+          },
+        ),
+      ],
     },
   ],
   Settings: {},

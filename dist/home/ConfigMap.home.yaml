@@ -41,6 +41,23 @@ data:
               type: sonarr
               key: "{{HOMEPAGE_VAR_SONARR}}"
               url: https://sonarr.cmdcentral.xyz
+      Printers:
+        - Ender Tres:
+            href: https://endertres.cmdcentral.xyz
+            icon: fluidd
+            ping: https://endertres.cmdcentral.xyz
+            description: Ender 3
+            widget:
+              type: moonraker
+              url: https://endertres.cmdcentral.xyz
+        - Replicator:
+            href: https://replicator.cmdcentral.xyz
+            icon: fluidd-#F31679
+            ping: https://replicator.cmdcentral.xyz
+            description: Prusa Mini+
+            widget:
+              type: moonraker
+              url: https://replicator.cmdcentral.xyz
   settings.yaml: |
     {}
   widgets.yaml: |
