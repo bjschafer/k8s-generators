@@ -89,9 +89,9 @@ const mediaApps: Omit<
     },
   },
   {
-    name: "nzbget",
+    name: "sabnzbd",
     port: 6789,
-    image: "ghcr.io/linuxserver/nzbget:latest",
+    image: "ghcr.io/linuxserver/sabnzbd:latest",
     nfsMounts: [
       {
         mountPoint: "/downloads",

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nzbget
+  name: sabnzbd
   namespace: media
 spec:
   minReadySeconds: 0
@@ -9,15 +9,15 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      cdk8s.io/metadata.addr: nzbget-nzbget-deployment-c84a8bf3
+      cdk8s.io/metadata.addr: sabnzbd-sabnzbd-deployment-c8b1bd00
   strategy:
     type: Recreate
   template:
     metadata:
       annotations:
-        backup.velero.io/backup-volumes: pvc-nzbget-config
+        backup.velero.io/backup-volumes: pvc-sabnzbd-config
       labels:
-        cdk8s.io/metadata.addr: nzbget-nzbget-deployment-c84a8bf3
+        cdk8s.io/metadata.addr: sabnzbd-sabnzbd-deployment-c8b1bd00
     spec:
       automountServiceAccountToken: false
       containers:
@@ -28,13 +28,13 @@ spec:
               value: "8675309"
             - name: PGID
               value: "8675309"
-          image: ghcr.io/linuxserver/nzbget:latest
+          image: ghcr.io/linuxserver/sabnzbd:latest
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
             tcpSocket:
               port: 6789
-          name: nzbget
+          name: sabnzbd
           ports:
             - containerPort: 6789
               name: http
@@ -53,7 +53,7 @@ spec:
             runAsNonRoot: false
           volumeMounts:
             - mountPath: /config
-              name: pvc-nzbget-config
+              name: pvc-sabnzbd-config
             - mountPath: /downloads
               name: pvc-nfs-media-downloads
       dnsPolicy: ClusterFirst
@@ -65,9 +65,9 @@ spec:
       setHostnameAsFQDN: false
       terminationGracePeriodSeconds: 30
       volumes:
-        - name: pvc-nzbget-config
+        - name: pvc-sabnzbd-config
           persistentVolumeClaim:
-            claimName: nzbget-config
+            claimName: sabnzbd-config
             readOnly: false
         - name: pvc-nfs-media-downloads
           persistentVolumeClaim:
