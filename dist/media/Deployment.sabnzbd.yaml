@@ -33,15 +33,15 @@ spec:
           livenessProbe:
             failureThreshold: 3
             tcpSocket:
-              port: 6789
+              port: 8080
           name: sabnzbd
           ports:
-            - containerPort: 6789
+            - containerPort: 8080
               name: http
           readinessProbe:
             failureThreshold: 3
             tcpSocket:
-              port: 6789
+              port: 8080
           resources:
             requests:
               cpu: 250m

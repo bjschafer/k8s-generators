@@ -90,7 +90,7 @@ const mediaApps: Omit<
   },
   {
     name: "sabnzbd",
-    port: 6789,
+    port: 8080,
     image: "ghcr.io/linuxserver/sabnzbd:latest",
     nfsMounts: [
       {
