@@ -14,6 +14,9 @@ const nfsVols = new NFSVolumeContainer(app, "nfs-volume-container");
 nfsVols.Add("nfs-media-downloads", {
   exportPath: "/warp/Media/Downloads",
 });
+nfsVols.Add("nfs-media-ebooks", {
+  exportPath: "/warp/Media/Ebooks",
+});
 nfsVols.Add("nfs-media-music", {
   exportPath: "/warp/Media/Music",
 });
@@ -86,6 +89,26 @@ const mediaApps: Omit<
       enableExportarr: true,
       enableServiceMonitor: true,
       existingApiSecretName: "lidarr-api",
+    },
+  },
+  {
+    name: "readarr",
+    port: 8787,
+    image: "lscr.io/linuxserver/readarr:develop",
+    nfsMounts: [
+      {
+        mountPoint: "/downloads",
+        nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
+      },
+      {
+        mountPoint: "/books",
+        nfsConcreteVolume: nfsVols.Get("nfs-media-ebooks"),
+      },
+    ],
+    monitoringConfig: {
+      enableExportarr: true,
+      enableServiceMonitor: true,
+      existingApiSecretName: "readarr-api",
     },
   },
   {

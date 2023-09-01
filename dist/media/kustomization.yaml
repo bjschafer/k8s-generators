@@ -3,6 +3,7 @@ resources:
   - Deployment.navidrome.yaml
   - Deployment.prowlarr.yaml
   - Deployment.radarr.yaml
+  - Deployment.readarr.yaml
   - Deployment.resilio-sync.yaml
   - Deployment.sabnzbd.yaml
   - Deployment.sonarr.yaml
@@ -10,21 +11,25 @@ resources:
   - Ingress.navidrome.yaml
   - Ingress.prowlarr.yaml
   - Ingress.radarr.yaml
+  - Ingress.readarr.yaml
   - Ingress.resilio-sync.yaml
   - Ingress.sabnzbd.yaml
   - Ingress.sonarr.yaml
   - PersistentVolume.nfs-media-downloads.yaml
+  - PersistentVolume.nfs-media-ebooks.yaml
   - PersistentVolume.nfs-media-music.yaml
   - PersistentVolume.nfs-media-videos-movies.yaml
   - PersistentVolume.nfs-media-videos-tvshows.yaml
   - PersistentVolumeClaim.lidarr-config.yaml
   - PersistentVolumeClaim.navidrome-config.yaml
   - PersistentVolumeClaim.nfs-media-downloads.yaml
+  - PersistentVolumeClaim.nfs-media-ebooks.yaml
   - PersistentVolumeClaim.nfs-media-music.yaml
   - PersistentVolumeClaim.nfs-media-videos-movies.yaml
   - PersistentVolumeClaim.nfs-media-videos-tvshows.yaml
   - PersistentVolumeClaim.prowlarr-config.yaml
   - PersistentVolumeClaim.radarr-config.yaml
+  - PersistentVolumeClaim.readarr-config.yaml
   - PersistentVolumeClaim.resilio-sync-config.yaml
   - PersistentVolumeClaim.sabnzbd-config.yaml
   - PersistentVolumeClaim.sonarr-config.yaml
@@ -32,10 +37,12 @@ resources:
   - Service.navidrome.yaml
   - Service.prowlarr.yaml
   - Service.radarr.yaml
+  - Service.readarr.yaml
   - Service.resilio-sync.yaml
   - Service.sabnzbd.yaml
   - Service.sonarr.yaml
   - ServiceMonitor.lidarr.yaml
   - ServiceMonitor.navidrome.yaml
   - ServiceMonitor.radarr.yaml
+  - ServiceMonitor.readarr.yaml
   - ServiceMonitor.sonarr.yaml
