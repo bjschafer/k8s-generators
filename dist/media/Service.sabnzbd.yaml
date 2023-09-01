@@ -9,8 +9,8 @@ spec:
   externalIPs: []
   ports:
     - name: http
-      port: 6789
-      targetPort: 6789
+      port: 8080
+      targetPort: 8080
   selector:
     cdk8s.io/metadata.addr: sabnzbd-sabnzbd-deployment-c8b1bd00
   type: ClusterIP
