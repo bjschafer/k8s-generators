@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    release: prometheus-kube-prometheus-stack
+  name: readarr
+  namespace: media
+spec:
+  endpoints:
+    - path: /metrics
+      port: metrics
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: readarr-readarr-deployment-c86ffbf3
