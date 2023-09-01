@@ -1,17 +1,17 @@
 resources:
   - Deployment.lidarr.yaml
   - Deployment.navidrome.yaml
-  - Deployment.nzbget.yaml
   - Deployment.prowlarr.yaml
   - Deployment.radarr.yaml
   - Deployment.resilio-sync.yaml
+  - Deployment.sabnzbd.yaml
   - Deployment.sonarr.yaml
   - Ingress.lidarr.yaml
   - Ingress.navidrome.yaml
-  - Ingress.nzbget.yaml
   - Ingress.prowlarr.yaml
   - Ingress.radarr.yaml
   - Ingress.resilio-sync.yaml
+  - Ingress.sabnzbd.yaml
   - Ingress.sonarr.yaml
   - PersistentVolume.nfs-media-downloads.yaml
   - PersistentVolume.nfs-media-music.yaml
@@ -23,17 +23,17 @@ resources:
   - PersistentVolumeClaim.nfs-media-music.yaml
   - PersistentVolumeClaim.nfs-media-videos-movies.yaml
   - PersistentVolumeClaim.nfs-media-videos-tvshows.yaml
-  - PersistentVolumeClaim.nzbget-config.yaml
   - PersistentVolumeClaim.prowlarr-config.yaml
   - PersistentVolumeClaim.radarr-config.yaml
   - PersistentVolumeClaim.resilio-sync-config.yaml
+  - PersistentVolumeClaim.sabnzbd-config.yaml
   - PersistentVolumeClaim.sonarr-config.yaml
   - Service.lidarr.yaml
   - Service.navidrome.yaml
-  - Service.nzbget.yaml
   - Service.prowlarr.yaml
   - Service.radarr.yaml
   - Service.resilio-sync.yaml
+  - Service.sabnzbd.yaml
   - Service.sonarr.yaml
   - ServiceMonitor.lidarr.yaml
   - ServiceMonitor.navidrome.yaml
