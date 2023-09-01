@@ -11,8 +11,6 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    directory:
-      recurse: true
     path: monica
     repoURL: git@github.com:bjschafer/k8s-prod.git
     targetRevision: main

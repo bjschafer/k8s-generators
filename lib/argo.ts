@@ -51,9 +51,6 @@ export class ArgoApp extends Chart {
         },
         project: props.project ?? "default",
         source: {
-          directory: {
-            recurse: props.recurse,
-          },
           path: props.namespace,
           repoUrl: props.git_repo_url ?? ARGO_GIT_REPO_URL,
           targetRevision: "main",
@@ -72,7 +69,7 @@ export class ArgoApp extends Chart {
       );
       if (props.autoUpdate.writebackMethod?.method === "git") {
         app.metadata.addAnnotation(
-          `${argoUpdateAnnotationBase}/write-back-git-branch`,
+          `${argoUpdateAnnotationBase}/git-branch`,
           props.autoUpdate.writebackMethod?.gitBranch ?? "main",
         );
       }
