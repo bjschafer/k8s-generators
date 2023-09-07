@@ -42,8 +42,8 @@ new AppPlus(app, `${name}-app`, {
   image: `${image}:latest`,
   resources: {
     memory: {
-      request: Size.mebibytes(64),
-      limit: Size.mebibytes(256),
+      request: Size.mebibytes(192),
+      limit: Size.mebibytes(512),
     },
   },
   ports: [80],

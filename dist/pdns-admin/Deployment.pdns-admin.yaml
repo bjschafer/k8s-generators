@@ -40,9 +40,9 @@ spec:
               scheme: HTTP
           resources:
             limits:
-              memory: 256Mi
+              memory: 512Mi
             requests:
-              memory: 64Mi
+              memory: 192Mi
           securityContext:
             allowPrivilegeEscalation: false
             privileged: false
