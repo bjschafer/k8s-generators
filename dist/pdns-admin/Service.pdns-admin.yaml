@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pdns-admin
+  namespace: pdns-admin
+spec:
+  externalIPs: []
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    cdk8s.io/metadata.addr: pdns-admin-app-pdns-admin-app-deployment-c878a4f5
+  type: ClusterIP
