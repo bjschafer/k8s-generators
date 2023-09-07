@@ -62,6 +62,7 @@ new AppPlus(app, `${name}-app`, {
   livenessProbe: Probe.fromHttpGet("", { port: 80 }),
   readinessProbe: Probe.fromHttpGet("", { port: 80 }),
   extraIngressHosts: ["dnsadmin.cmdcentral.xyz"],
+  limitToAMD64: true,
 });
 
 app.synth();

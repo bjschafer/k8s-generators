@@ -1,4 +1,4 @@
-import { Chart, Size } from "cdk8s";
+import { ApiObject, Chart, JsonPatch, Size } from "cdk8s";
 import { Construct } from "constructs";
 import {
   ContainerPort,
@@ -43,6 +43,7 @@ export interface AppPlusProps {
   readonly serviceAccountName?: string;
   readonly automountServiceAccount?: boolean;
   readonly extraIngressHosts?: string[];
+  readonly limitToAMD64?: boolean;
 }
 
 export class AppPlus extends Chart {
@@ -123,6 +124,15 @@ export class AppPlus extends Chart {
         },
       ],
     });
+
+    if (props.limitToAMD64) {
+      const deployObj = ApiObject.of(deploy);
+      deployObj.addJsonPatch(
+        JsonPatch.add("/spec/template/spec/nodeSelector", {
+          "kubernetes.io/arch": "amd64",
+        }),
+      );
+    }
 
     for (let i = 0; i < volumes.length; i++) {
       deploy.addVolume(volumes[i]);
