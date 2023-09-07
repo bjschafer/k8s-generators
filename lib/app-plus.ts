@@ -4,6 +4,7 @@ import {
   ContainerPort,
   ContainerResources,
   Deployment,
+  DeploymentStrategy,
   EnvValue,
   Ingress,
   IngressBackend,
@@ -97,6 +98,12 @@ export class AppPlus extends Chart {
         namespace: props.namespace,
       },
       replicas: 1,
+      // ceph rbd vols are RWO, so we have to set the deployment to recreate to avoid multiattach issues
+      strategy: props.volumes?.some(
+        (vol) => vol.props.storageClassName == StorageClass.CEPH_RBD,
+      )
+        ? DeploymentStrategy.recreate()
+        : undefined,
       podMetadata: {
         annotations: volumeBackupAnnotation,
       },
