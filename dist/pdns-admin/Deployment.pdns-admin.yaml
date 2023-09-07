@@ -11,10 +11,7 @@ spec:
     matchLabels:
       cdk8s.io/metadata.addr: pdns-admin-app-pdns-admin-app-deployment-c878a4f5
   strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
+    type: Recreate
   template:
     metadata:
       annotations:
