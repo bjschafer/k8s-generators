@@ -20,22 +20,22 @@
     "build": "yarn run clean && yarn run compile && yarn run synth"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.6.0",
-    "@typescript-eslint/parser": "^6.6.0",
-    "cdk8s": "^2.64.5",
-    "cdk8s-plus-27": "^2.7.6",
+    "@typescript-eslint/eslint-plugin": "^6.7.2",
+    "@typescript-eslint/parser": "^6.7.2",
+    "cdk8s": "^2.64.14",
+    "cdk8s-plus-27": "^2.7.15",
     "constructs": "^10.2.70",
-    "eslint": "^8.48.0",
+    "eslint": "^8.49.0",
     "js-yaml": "4.1.0",
     "prettier": "^3.0.3",
     "yaml": "^2.3.2"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.4",
-    "@types/js-yaml": "^4.0.5",
-    "@types/node": "^20.5.9",
-    "cdk8s-cli": "^2.76.0",
-    "jest": "^29.6.4",
+    "@types/jest": "^29.5.5",
+    "@types/js-yaml": "^4.0.6",
+    "@types/node": "^20.6.2",
+    "cdk8s-cli": "^2.93.0",
+    "jest": "^29.7.0",
     "ts-jest": "^29.1.1",
     "typescript": "^5.2.2",
     "yarn": "^1.22.19"
