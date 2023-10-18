@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: filestash
+  namespace: filestash
+spec:
+  externalIPs: []
+  ports:
+    - port: 8334
+      targetPort: 8334
+  selector:
+    cdk8s.io/metadata.addr: filestash-app-filestash-app-deployment-c8dfe337
+  type: ClusterIP

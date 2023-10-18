@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd-image-updater.argoproj.io/filestash.update-strategy: digest
+    argocd-image-updater.argoproj.io/git-branch: main
+    argocd-image-updater.argoproj.io/image-list: filestash=machines/filestash:latest
+    argocd-image-updater.argoproj.io/write-back-method: git
+  labels:
+    app.kubernetes.io/name: filestash
+  name: filestash
+  namespace: argocd
+spec:
+  destination:
+    namespace: filestash
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: filestash
+    repoURL: git@github.com:bjschafer/k8s-prod.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
