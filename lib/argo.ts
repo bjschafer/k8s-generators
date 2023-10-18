@@ -81,7 +81,7 @@ export class ArgoApp extends Chart {
           const alias = this.getImageAlias(image.image);
           const versionConstraint = image.versionConstraint
             ? `:${image.versionConstraint}`
-            : "";
+            : ":latest";
           return `${alias}=${image.image}${versionConstraint}`;
         })
         .join(",");

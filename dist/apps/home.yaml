@@ -4,7 +4,7 @@ metadata:
   annotations:
     argocd-image-updater.argoproj.io/git-branch: main
     argocd-image-updater.argoproj.io/homepage.update-strategy: digest
-    argocd-image-updater.argoproj.io/image-list: homepage=ghcr.io/benphelps/homepage
+    argocd-image-updater.argoproj.io/image-list: homepage=ghcr.io/benphelps/homepage:latest
     argocd-image-updater.argoproj.io/write-back-method: git
   labels:
     app.kubernetes.io/name: home

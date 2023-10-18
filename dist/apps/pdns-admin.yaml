@@ -3,7 +3,7 @@ kind: Application
 metadata:
   annotations:
     argocd-image-updater.argoproj.io/git-branch: main
-    argocd-image-updater.argoproj.io/image-list: pda-legacy=powerdnsadmin/pda-legacy
+    argocd-image-updater.argoproj.io/image-list: pda-legacy=powerdnsadmin/pda-legacy:latest
     argocd-image-updater.argoproj.io/pda-legacy.update-strategy: digest
     argocd-image-updater.argoproj.io/write-back-method: git
   labels:
