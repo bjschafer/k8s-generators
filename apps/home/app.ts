@@ -30,7 +30,7 @@ NewArgoApp(name, {
     },
     images: [
       {
-        image: "ghcr.io/benphelps/homepage",
+        image: "ghcr.io/gethomepage/homepage",
         strategy: "digest",
       },
     ],
