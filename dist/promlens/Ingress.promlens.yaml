@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: promlens
+  namespace: promlens
+spec:
+  rules:
+    - host: promlens.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: promlens
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - promlens.cmdcentral.xyz
+      secretName: promlens-tls
