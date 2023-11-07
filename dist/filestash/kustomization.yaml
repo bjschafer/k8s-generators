@@ -1,0 +1,5 @@
+resources:
+  - Deployment.filestash.yaml
+  - Ingress.filestash.yaml
+  - PersistentVolumeClaim.filestash-app-state.yaml
+  - Service.filestash.yaml
