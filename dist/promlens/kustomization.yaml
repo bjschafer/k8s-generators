@@ -1,0 +1,4 @@
+resources:
+  - Deployment.promlens.yaml
+  - Ingress.promlens.yaml
+  - Service.promlens.yaml
