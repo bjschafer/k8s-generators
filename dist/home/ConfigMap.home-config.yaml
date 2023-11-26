@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: home-config
+  namespace: home
+data:
+  config.json: '[{"category":"Bookmarks","services":[{"name":"LibraryCat","uri":"https://library.cmdcentral.xyz","icon":"mdi-library"},{"name":"Plex","uri":"https://plex.tv/web","icon":"plex"}]},{"category":"Media","services":[{"name":"Plex Requests/Overseerr","uri":"https://plexrequests.cmdcentral.xyz","icon":"overseerr","description":"Download yes"},{"name":"Lidarr","uri":"https://lidarr.cmdcentral.xyz","icon":"lidarr","description":"Download music"},{"name":"Radarr","uri":"https://radarr.cmdcentral.xyz","icon":"radarr","description":"Download movies"},{"name":"Sonarr","uri":"https://sonarr.cmdcentral.xyz","icon":"sonarr","description":"Download TV shows"},{"name":"Prowlarr","uri":"https://prowlarr.cmdcentral.xyz","icon":"prowlarr","description":"Indexer manager"},{"name":"Sabnzbd","uri":"https://sabnzbd.cmdcentral.xyz","icon":"sabnzbd","description":"Usenet downloads"},{"name":"Seedbox","uri":"https://psb52743.seedbox.io","icon":"rutorrent","description":"Torrent downloads"}]},{"category":"Printers","services":[{"name":"Trident","uri":"https://trident.cmdcentral.xyz","icon":"mdi-triforce","description":"VT350"},{"name":"Prusa Mini","uri":"https://prusamini.cmdcentral.xyz","icon":"fluidd"},{"name":"Ender Tres","uri":"https://endertres.cmdcentral.xyz","icon":"mdi-blender","description":"Ender 3"},{"name":"Veronica","uri":"http://veronica.cmdcentral.xyz","icon":"voron","description":"V0.2"}]}]'
+immutable: false

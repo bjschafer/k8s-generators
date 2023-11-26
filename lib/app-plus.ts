@@ -1,6 +1,8 @@
 import { ApiObject, Chart, JsonPatch, Size } from "cdk8s";
 import { Construct } from "constructs";
 import {
+  ConfigMap,
+  ConfigMapVolumeOptions,
   ContainerPort,
   ContainerResources,
   Deployment,
@@ -31,13 +33,22 @@ export interface AppPlusVolume {
   readonly enableBackups: boolean;
 }
 
+export interface ConfigMapVolume {
+  readonly name: string;
+  readonly mountPath: string;
+  readonly subPath?: string;
+  readonly options?: ConfigMapVolumeOptions;
+}
+
 export interface AppPlusProps {
   readonly name: string;
   readonly namespace: string;
   readonly image: string;
   readonly resources: ContainerResources;
+  readonly annotations?: { [p: string]: string };
   readonly ports?: number[];
   readonly volumes?: AppPlusVolume[];
+  readonly configmapMounts?: ConfigMapVolume[];
   readonly extraEnv?: { [key: string]: EnvValue };
   readonly livenessProbe?: Probe;
   readonly readinessProbe?: Probe;
@@ -96,6 +107,7 @@ export class AppPlus extends Chart {
       metadata: {
         name: props.name,
         namespace: props.namespace,
+        annotations: props.annotations,
       },
       replicas: 1,
       // ceph rbd vols are RWO, so we have to set the deployment to recreate to avoid multiattach issues
@@ -144,6 +156,26 @@ export class AppPlus extends Chart {
     for (let i = 0; i < volumes.length; i++) {
       deploy.addVolume(volumes[i]);
       deploy.containers[0].mount(props.volumes![i].mountPath, volumes[i]);
+    }
+
+    if (props.configmapMounts) {
+      for (const vol of props.configmapMounts) {
+        const cm = ConfigMap.fromConfigMapName(
+          this,
+          `${id}-${vol.name}-cm`,
+          vol.name,
+        );
+        const deployVol = Volume.fromConfigMap(
+          this,
+          `${id}-${vol.name}-vol`,
+          cm,
+          vol.options,
+        );
+        deploy.addVolume(deployVol);
+        deploy.containers[0].mount(vol.mountPath, deployVol, {
+          subPath: vol.subPath,
+        });
+      }
     }
 
     const svc = deploy.exposeViaService({

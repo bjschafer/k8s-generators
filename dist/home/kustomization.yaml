@@ -1,10 +1,5 @@
 resources:
-  - ClusterRole.home.yaml
-  - ClusterRoleBinding.home-rbac-home-rbac-role-clusterrolebinding-c8f68338.yaml
-  - ConfigMap.home.yaml
+  - ConfigMap.home-config.yaml
   - Deployment.home.yaml
   - Ingress.home.yaml
-  - PersistentVolumeClaim.home-app-config.yaml
-  - Secret.home.yaml
   - Service.home.yaml
-  - ServiceAccount.home.yaml
