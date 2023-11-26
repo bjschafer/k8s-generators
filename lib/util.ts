@@ -21,12 +21,17 @@ export function toApiEndpoint(
   })();
 }
 
+export interface IHashable {
+  toJson(): any[];
+}
+
 /**
  * Used to hash a string to be used in forcing updates of configmaps. Prepends const "bjs" to avoid accidentally getting yaml'd
- * @param str the string to hash
+ * @param obj any object that supports CDK8S' toJson()
  * @return the hash of str with "bjs" prepended
  */
-export function hashString(str: string): string {
+export function hashObj(obj: IHashable): string {
   const prefix = "bjs";
+  const str = JSON.stringify(obj.toJson());
   return prefix + crypto.createHash("sha256").update(str).digest("hex");
 }

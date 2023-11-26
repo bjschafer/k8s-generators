@@ -6,7 +6,7 @@ import { AppPlus } from "../../lib/app-plus";
 import { EnvValue, Probe } from "cdk8s-plus-27";
 import { NewKustomize } from "../../lib/kustomize";
 import { HomeConfig } from "./config";
-import { hashString } from "../../lib/util";
+import { hashObj } from "../../lib/util";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -41,12 +41,75 @@ NewArgoApp(name, {
 const conf = new HomeConfig(app, `${name}-config`, {
   links: [
     {
+      services: [
+        {
+          name: "Gitea",
+          uri: "https://git.cmdcentral.xyz",
+          icon: "gitea",
+          description: "Local code repository",
+        },
+        {
+          name: "Grafana",
+          uri: "https://grafana.cmdcentral.xyz",
+          icon: "grafana",
+          description: "Dashboards",
+        },
+        {
+          name: "Home Assistant",
+          uri: "https://hass.cmdcentral.xyz",
+          icon: "home-assistant",
+          description: "Control the house",
+        },
+        {
+          name: "Miniflux",
+          uri: "https://rss.cmdcentral.xyz",
+          icon: "miniflux-light",
+          description: "Read RSS feeds",
+        },
+        {
+          name: "Nextcloud",
+          uri: "https://nextcloud.cmdcentral.xyz",
+          icon: "nextcloud",
+          description: "Web storage access",
+        },
+        {
+          name: "NVR",
+          uri: "https://nvr.cmdcentral.xyz",
+          icon: "amcrest",
+          description: "View cameras",
+        },
+        {
+          name: "Paperless",
+          uri: "https://paperless.cmdcentral.xyz",
+          icon: "paperless-ngx",
+          description: "Document management",
+        },
+        {
+          name: "Recipes",
+          uri: "https://recipes.cmdcentral.xyz",
+          icon: "mealie",
+        },
+        {
+          name: "Wallabag",
+          uri: "https://wallabag.cmdcentral.xyz",
+          icon: "wallabag",
+          description: "Webpage saver/reading list",
+        },
+      ],
+    },
+    {
       category: "Bookmarks",
       services: [
         {
-          name: "LibraryCat",
+          name: "Email",
+          uri: "https://app.fastmail.com",
+          icon: "fastmail",
+        },
+        {
+          name: "Library",
           uri: "https://library.cmdcentral.xyz",
           icon: "mdi-library",
+          description: "Books n shiet",
         },
         {
           name: "Plex",
@@ -59,10 +122,10 @@ const conf = new HomeConfig(app, `${name}-config`, {
       category: "Media",
       services: [
         {
-          name: "Plex Requests/Overseerr",
+          name: "PlexRequests",
           uri: "https://plexrequests.cmdcentral.xyz",
           icon: "overseerr",
-          description: "Download yes",
+          description: "Download *yes*",
         },
         {
           name: "Lidarr",
@@ -75,6 +138,12 @@ const conf = new HomeConfig(app, `${name}-config`, {
           uri: "https://radarr.cmdcentral.xyz",
           icon: "radarr",
           description: "Download movies",
+        },
+        {
+          name: "Readarr",
+          uri: "https://readarr.cmdcentral.xyz",
+          icon: "readarr",
+          description: "Download ebooks",
         },
         {
           name: "Sonarr",
@@ -100,11 +169,23 @@ const conf = new HomeConfig(app, `${name}-config`, {
           icon: "rutorrent",
           description: "Torrent downloads",
         },
+        {
+          name: "Calibre",
+          uri: "https://calibre.cmdcentral.xyz",
+          icon: "calibre",
+          description: "Ebook collection",
+        },
       ],
     },
     {
       category: "Printers",
       services: [
+        {
+          name: "Spoolman",
+          uri: "https://spoolman.cmdcentral.xyz",
+          icon: "mdi-library-shelves",
+          description: "Filament manager",
+        },
         {
           name: "Trident",
           uri: "https://trident.cmdcentral.xyz",
@@ -128,6 +209,77 @@ const conf = new HomeConfig(app, `${name}-config`, {
           icon: "voron",
           description: "V0.2",
         },
+        {
+          name: "Voron V2",
+          uri: "http://voronv2.cmdcentral.xyz",
+          icon: "voron",
+          description: "V2.4",
+        },
+      ],
+    },
+    {
+      category: "Homelab",
+      services: [
+        {
+          name: "Alertmanager",
+          uri: "https://alertmanager.cmdcentral.xyz",
+          icon: "alertmanager",
+        },
+        {
+          name: "ArgoCD",
+          uri: "https://argo.cmdcentral.xyz",
+          icon: "argocd",
+          description: "Manage K8S apps",
+        },
+        {
+          name: "Authentik",
+          uri: "https://login.cmdcentral.xyz",
+          icon: "authentik",
+          description: "Cmdcentral Login",
+        },
+        {
+          name: "Ceph",
+          uri: "https://ceph.cmdcentral.xyz",
+          icon: "ceph",
+          description: "Ceph storage dashboard",
+        },
+        {
+          name: "DNS Admin",
+          uri: "https://dnsadmin.cmdcentral.xyz",
+          icon: "powerdns",
+        },
+        {
+          name: "Gateway",
+          uri: "https://gateway.cmdcentral.xyz",
+          icon: "opnsense",
+        },
+        {
+          name: "Minio",
+          uri: "https://minio.cmdcentral.xyz",
+          icon: "minio-light",
+        },
+        {
+          name: "Netbox",
+          uri: "https://netbox.cmdcentral.xyz",
+          icon: "netbox",
+        },
+        {
+          name: "Prometheus",
+          uri: "https://prometheus.cmdcentral.xyz",
+          icon: "prometheus",
+        },
+        {
+          name: "Promlens",
+          uri: "https://promlens.cmdcentral.xyz",
+          icon: "mdi-hololens",
+          description: "Prometheus helper",
+        },
+        {
+          name: "Proxmox",
+          uri: "https://vmhost.cmdcentral.xyz",
+          icon: "proxmox",
+          description: "VM hosts",
+        },
       ],
     },
   ],
@@ -135,7 +287,7 @@ const conf = new HomeConfig(app, `${name}-config`, {
   namespace: namespace,
 });
 
-const configHash = hashString(conf.toJson().join());
+const configHash = hashObj(conf);
 
 new AppPlus(app, `${name}-app`, {
   name: name,
@@ -150,14 +302,15 @@ new AppPlus(app, `${name}-app`, {
       limit: Size.mebibytes(256),
     },
   },
+  replicas: 2,
   ports: [port],
   livenessProbe: Probe.fromHttpGet("", { port: port }),
   readinessProbe: Probe.fromHttpGet("", { port: port }),
   extraIngressHosts: ["cmdcentral.xyz"],
   extraEnv: {
     TITLE: EnvValue.fromValue("Cmdcentral Home"), // defaults to "My Website", set to TITLE= to hide the title
-    // LOGO=/starbase80.jpg # defaults to /logo.png, set to LOGO= to hide the logo
-    // HEADER=true # defaults to true, set to false to hide the title and logo
+    LOGO: EnvValue.fromValue(""), // defaults to /logo.png, set to LOGO= to hide the logo
+    HEADER: EnvValue.fromValue("false"), // defaults to true, set to false to hide the title and logo
     // HEADERLINE=true # defaults to true, set to false to turn off the header border line
     // HEADERTOP=true # defaults to false, set to true to force the header to always stay on top
     // CATEGORIES=small # defaults to normal, set to small for smaller, uppercase category labels
