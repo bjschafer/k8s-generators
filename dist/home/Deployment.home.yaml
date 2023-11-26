@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    config-hash: b28c94b2195c8ed259f0b415aaee3f39b0b2920a4537611499fa044956917a21
+    config-hash: bjsb28c94b2195c8ed259f0b415aaee3f39b0b2920a4537611499fa044956917a21
   name: home
   namespace: home
 spec:
