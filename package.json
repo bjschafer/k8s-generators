@@ -14,7 +14,7 @@
     "upgrade": "ncu -u && npm install",
     "lint": "npx eslint \"**/*.ts\"",
     "fmt": "npx prettier --check --write \"**/*.ts\"",
-    "clean": "rm -rf dist/",
+    "clean": "find dist \\! -name '.argocd-source-*.yaml' -delete",
     "fullbuild": "yarn run clean && yarn run fmt && yarn run lint && yarn run compile && yarn run synth",
     "build": "yarn run clean && yarn run compile && yarn run synth"
   },

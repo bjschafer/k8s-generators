@@ -9,6 +9,7 @@ export function NewKustomize(outdir: string) {
       (f) =>
         f.endsWith(".yaml") &&
         !f.startsWith("Namespace") &&
+        !f.startsWith(".argocd-source-") &&
         f != "kustomization.yaml",
     );
   // while we could use the kustomize construct, it's not really necessary
