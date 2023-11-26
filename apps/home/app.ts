@@ -1,17 +1,18 @@
 import { basename } from "path";
 import { App, Size } from "cdk8s";
-import { DEFAULT_APP_PROPS, TZ } from "../../lib/consts";
+import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
-import { StorageClass } from "../../lib/volume";
-import { PersistentVolumeAccessMode, Probe } from "cdk8s-plus-27";
+import { EnvValue, Probe } from "cdk8s-plus-27";
 import { NewKustomize } from "../../lib/kustomize";
-import { HomeRbac } from "./rbac";
-import { HomeConfig, MakeService } from "./config";
+import { HomeConfig } from "./config";
+import { hashString } from "../../lib/util";
 
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
+const image = "jordanroher/starbase-80";
+const port = 4173;
 
 NewArgoApp(name, {
   sync_policy: {
@@ -30,195 +31,147 @@ NewArgoApp(name, {
     },
     images: [
       {
-        image: "ghcr.io/gethomepage/homepage",
+        image: image,
         strategy: "digest",
       },
     ],
   },
 });
 
+const conf = new HomeConfig(app, `${name}-config`, {
+  links: [
+    {
+      category: "Bookmarks",
+      services: [
+        {
+          name: "LibraryCat",
+          uri: "https://library.cmdcentral.xyz",
+          icon: "mdi-library",
+        },
+        {
+          name: "Plex",
+          uri: "https://plex.tv/web",
+          icon: "plex",
+        },
+      ],
+    },
+    {
+      category: "Media",
+      services: [
+        {
+          name: "Plex Requests/Overseerr",
+          uri: "https://plexrequests.cmdcentral.xyz",
+          icon: "overseerr",
+          description: "Download yes",
+        },
+        {
+          name: "Lidarr",
+          uri: "https://lidarr.cmdcentral.xyz",
+          icon: "lidarr",
+          description: "Download music",
+        },
+        {
+          name: "Radarr",
+          uri: "https://radarr.cmdcentral.xyz",
+          icon: "radarr",
+          description: "Download movies",
+        },
+        {
+          name: "Sonarr",
+          uri: "https://sonarr.cmdcentral.xyz",
+          icon: "sonarr",
+          description: "Download TV shows",
+        },
+        {
+          name: "Prowlarr",
+          uri: "https://prowlarr.cmdcentral.xyz",
+          icon: "prowlarr",
+          description: "Indexer manager",
+        },
+        {
+          name: "Sabnzbd",
+          uri: "https://sabnzbd.cmdcentral.xyz",
+          icon: "sabnzbd",
+          description: "Usenet downloads",
+        },
+        {
+          name: "Seedbox",
+          uri: "https://psb52743.seedbox.io",
+          icon: "rutorrent",
+          description: "Torrent downloads",
+        },
+      ],
+    },
+    {
+      category: "Printers",
+      services: [
+        {
+          name: "Trident",
+          uri: "https://trident.cmdcentral.xyz",
+          icon: "mdi-triforce",
+          description: "VT350",
+        },
+        {
+          name: "Prusa Mini",
+          uri: "https://prusamini.cmdcentral.xyz",
+          icon: "fluidd",
+        },
+        {
+          name: "Ender Tres",
+          uri: "https://endertres.cmdcentral.xyz",
+          icon: "mdi-blender",
+          description: "Ender 3",
+        },
+        {
+          name: "Veronica",
+          uri: "http://veronica.cmdcentral.xyz",
+          icon: "voron",
+          description: "V0.2",
+        },
+      ],
+    },
+  ],
+  name: `${name}-config`,
+  namespace: namespace,
+});
+
+const configHash = hashString(conf.toJson().join());
+
 new AppPlus(app, `${name}-app`, {
   name: name,
   namespace: namespace,
-  image: "ghcr.io/benphelps/homepage:latest",
+  image: image,
+  annotations: {
+    "config-hash": configHash,
+  },
   resources: {
     memory: {
       request: Size.mebibytes(128),
       limit: Size.mebibytes(256),
     },
   },
-  ports: [3000],
-  volumes: [
-    {
-      props: {
-        storageClassName: StorageClass.CEPHFS,
-        storage: Size.gibibytes(1),
-        accessModes: [PersistentVolumeAccessMode.READ_WRITE_MANY],
-      },
-      mountPath: "/app/config",
-      enableBackups: true,
-      name: "config",
-    },
-  ],
-  livenessProbe: Probe.fromHttpGet("", { port: 3000 }),
-  readinessProbe: Probe.fromHttpGet("", { port: 3000 }),
-  serviceAccountName: name,
-  automountServiceAccount: true,
+  ports: [port],
+  livenessProbe: Probe.fromHttpGet("", { port: port }),
+  readinessProbe: Probe.fromHttpGet("", { port: port }),
   extraIngressHosts: ["cmdcentral.xyz"],
-});
-
-new HomeRbac(app, `${name}-rbac`, name, namespace);
-
-new HomeConfig(app, `${name}-config`, {
-  Bookmarks: [
+  extraEnv: {
+    TITLE: EnvValue.fromValue("Cmdcentral Home"), // defaults to "My Website", set to TITLE= to hide the title
+    // LOGO=/starbase80.jpg # defaults to /logo.png, set to LOGO= to hide the logo
+    // HEADER=true # defaults to true, set to false to hide the title and logo
+    // HEADERLINE=true # defaults to true, set to false to turn off the header border line
+    // HEADERTOP=true # defaults to false, set to true to force the header to always stay on top
+    // CATEGORIES=small # defaults to normal, set to small for smaller, uppercase category labels
+    // BGCOLOR=#fff # defaults to theme(colors.slate.50), set to any hex color or Tailwind color using the theme syntax
+    // BGCOLORDARK=#000 # defaults to theme(colors.gray.950), set to any hex color or Tailwind color using the theme syntax
+    // NEWWINDOW=true # defaults to true, set to false to not have links open in a new window
+  },
+  configmapMounts: [
     {
-      Other: [
-        {
-          LibraryCat: [
-            {
-              href: "https://library.cmdcentral.xyz",
-              abbr: "LI",
-            },
-          ],
-        },
-      ],
+      name: `${name}-config`,
+      mountPath: "/app/src/config.json",
+      subPath: "config.json",
     },
   ],
-  Kubernetes: { mode: "cluster" },
-  Services: [
-    {
-      Media: [
-        MakeService(
-          "Lidarr",
-          "https://lidarr.cmdcentral.xyz",
-          "lidarr",
-          "Music",
-          { type: "lidarr", key: "HOMEPAGE_VAR_LIDARR" },
-        ),
-        MakeService(
-          "Radarr",
-          "https://radarr.cmdcentral.xyz",
-          "radarr",
-          "Movies",
-          {
-            type: "radarr",
-            key: "HOMEPAGE_VAR_RADARR",
-          },
-        ),
-        MakeService(
-          "Sonarr",
-          "https://sonarr.cmdcentral.xyz",
-          "sonarr",
-          "TV Shows",
-          {
-            type: "sonarr",
-            key: "HOMEPAGE_VAR_SONARR",
-          },
-        ),
-        MakeService(
-          "Overseerr",
-          "https://plexrequests.cmdcentral.xyz",
-          "overseerr",
-          "Plex Requests",
-          {
-            type: "overseerr",
-            key: "HOMEPAGE_VAR_OVERSEER", // [sic]
-          },
-        ),
-        {
-          Plex: {
-            href: "https://plex.tv/web",
-            icon: "plex",
-            ping: "http://plex.cmdcentral.xyz:32400",
-            widget: {
-              type: "plex",
-              key: "{{HOMEPAGE_VAR_PLEX}}",
-              url: "http://plex.cmdcentral.xyz:32400",
-            },
-          },
-        },
-        MakeService(
-          "NZBGet",
-          "https://nzbget.cmdcentral.xyz",
-          "nzbget",
-          "Usenet Downloads",
-          {
-            type: "nzbget",
-            username: "nzbget",
-            password: "HOMEPAGE_VAR_NZBGET",
-          },
-        ),
-        MakeService(
-          "Prowlarr",
-          "https://prowlarr.cmdcentral.xyz",
-          "prowlarr",
-          "Indexer Manager",
-          {
-            type: "prowlarr",
-            key: "HOMEPAGE_VAR_PROWLARR",
-          },
-        ),
-        MakeService(
-          "Seedbox",
-          "https://psb52743.seedbox.io/",
-          "rutorrent",
-          "Torrent Downloads",
-        ),
-      ],
-    },
-    {
-      Printers: [
-        MakeService(
-          "Ender Tres",
-          "https://endertres.cmdcentral.xyz",
-          "si-creality", // #F31679
-          "Ender 3",
-          { type: "moonraker" },
-        ),
-        MakeService(
-          "Replicator",
-          "https://replicator.cmdcentral.xyz",
-          "fluidd",
-          "Prusa Mini+",
-          {
-            type: "moonraker",
-          },
-        ),
-      ],
-    },
-  ],
-  Settings: {},
-  Widgets: [
-    {
-      kubernetes: {
-        cluster: {
-          show: true,
-          cpu: true,
-          memory: true,
-          showLabel: true,
-          label: "cluster",
-        },
-        nodes: {
-          show: true,
-          cpu: true,
-          memory: true,
-          showLabel: true,
-        },
-      },
-    },
-    {
-      openmeteo: {
-        label: "Madison",
-        latitude: "43.073929",
-        longitude: "-89.385239",
-        timezone: TZ,
-        units: "imperial",
-        cache: 15, // Time in minutes to cache API responses, to stay within limits
-      },
-    },
-  ],
-  name: name,
-  namespace: namespace,
 });
 
 app.synth();

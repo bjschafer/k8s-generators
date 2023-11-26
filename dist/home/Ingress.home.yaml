@@ -14,7 +14,7 @@ spec:
               service:
                 name: home
                 port:
-                  number: 3000
+                  number: 4173
             path: /
             pathType: Prefix
     - host: cmdcentral.xyz
@@ -24,7 +24,7 @@ spec:
               service:
                 name: home
                 port:
-                  number: 3000
+                  number: 4173
             path: /
             pathType: Prefix
   tls:

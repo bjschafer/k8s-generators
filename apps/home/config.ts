@@ -1,43 +1,32 @@
 import { Chart } from "cdk8s";
 import { Construct } from "constructs";
 import { ConfigMap } from "cdk8s-plus-27";
-import { stringify as yamlStringify } from "yaml";
 
-export interface Bookmark {
-  [name: string]: {
-    abbr: string;
-    href: string;
-    description?: string;
-    icon?: string;
-  }[];
-}
-
-export interface BookmarkCategory {
-  [category: string]: Bookmark[];
-}
-
+/**
+ * icon can be a URL, a Dashboard Icon https://github.com/walkxcode/dashboard-icons or an MD Icon https://icon-sets.iconify.design/mdi/
+ */
 export interface Service {
-  [name: string]: {
-    href: string;
-    description?: string;
-    icon?: string;
-    ping?: string;
-    widget?: { [key: string]: any };
-  };
+  name: string;
+  uri: string;
+  description?: string;
+  icon?: string;
+  iconBG?: string; // hex color or tailwind color
+  iconColor?: string;
+  iconBubble?: boolean;
+  iconAspect?: "square" | "width" | "height";
+  newWindow?: boolean;
 }
 
-export interface ServiceCategory {
-  [category: string]: Service[];
+export interface Category {
+  category?: string;
+  bubble?: boolean;
+  services: Service[];
 }
 
 export interface HomeConfigProps {
   readonly name: string;
   readonly namespace: string;
-  readonly Kubernetes: { [key: string]: any };
-  readonly Settings: { [key: string]: any };
-  readonly Bookmarks: BookmarkCategory[];
-  readonly Services: ServiceCategory[];
-  readonly Widgets: { [key: string]: any }[];
+  readonly links: Category[];
 }
 
 export class HomeConfig extends Chart {
@@ -51,50 +40,6 @@ export class HomeConfig extends Chart {
       },
     });
 
-    cm.addData("kubernetes.yaml", yamlStringify(props.Kubernetes));
-    cm.addData("settings.yaml", yamlStringify(props.Settings));
-    cm.addData("bookmarks.yaml", yamlStringify(props.Bookmarks));
-    cm.addData("services.yaml", yamlStringify(props.Services));
-    cm.addData("widgets.yaml", yamlStringify(props.Widgets));
-    cm.addData("docker.yaml", "");
+    cm.addData("config.json", JSON.stringify(props.links));
   }
-}
-
-/**
- * Less repetitive service generation
- * @param name
- * @param url
- * @param icon Can be dashboard icon, si-simpleicon, mdi-material. Latter two can have -#<hex> suffixed.
- * @param description
- * @param widget
- * @constructor
- * @see https://gethomepage.dev/en/configs/services/
- */
-export function MakeService(
-  name: string,
-  url: string,
-  icon?: string,
-  description?: string,
-  widget?: { type: string; key?: string; username?: string; password?: string },
-): Service {
-  let w;
-  if (widget) {
-    w = {
-      type: widget.type,
-      key: widget.key ? `{{${widget.key}}}` : undefined,
-      url: url,
-      username: widget.username,
-      password: widget.password ? `{{${widget.password}}}` : undefined,
-    };
-  }
-
-  return {
-    [name]: {
-      href: url,
-      icon: icon,
-      ping: url,
-      description: description,
-      widget: w,
-    },
-  };
 }

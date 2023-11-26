@@ -1,6 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    config-hash: b28c94b2195c8ed259f0b415aaee3f39b0b2920a4537611499fa044956917a21
   name: home
   namespace: home
 spec:
@@ -17,29 +19,30 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      annotations:
-        backup.velero.io/backup-volumes: pvc-home-app-config
       labels:
         cdk8s.io/metadata.addr: home-app-home-app-deployment-c8467b6c
     spec:
-      automountServiceAccountToken: true
+      automountServiceAccountToken: false
       containers:
-        - image: ghcr.io/benphelps/homepage:latest
+        - env:
+            - name: TITLE
+              value: Cmdcentral Home
+          image: jordanroher/starbase-80
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
             httpGet:
               path: ""
-              port: 3000
+              port: 4173
               scheme: HTTP
           name: home
           ports:
-            - containerPort: 3000
+            - containerPort: 4173
           readinessProbe:
             failureThreshold: 3
             httpGet:
               path: ""
-              port: 3000
+              port: 4173
               scheme: HTTP
           resources:
             limits:
@@ -52,19 +55,18 @@ spec:
             readOnlyRootFilesystem: false
             runAsNonRoot: false
           volumeMounts:
-            - mountPath: /app/config
-              name: pvc-home-app-config
+            - mountPath: /app/src/config.json
+              name: configmap-home-config
+              subPath: config.json
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
       securityContext:
         fsGroupChangePolicy: Always
         runAsNonRoot: false
-      serviceAccountName: home
       setHostnameAsFQDN: false
       terminationGracePeriodSeconds: 30
       volumes:
-        - name: pvc-home-app-config
-          persistentVolumeClaim:
-            claimName: home-app-config
-            readOnly: false
+        - configMap:
+            name: home-config
+          name: configmap-home-config
