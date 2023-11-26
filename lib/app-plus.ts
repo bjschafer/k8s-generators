@@ -46,6 +46,7 @@ export interface AppPlusProps {
   readonly image: string;
   readonly resources: ContainerResources;
   readonly annotations?: { [p: string]: string };
+  readonly replicas?: number;
   readonly ports?: number[];
   readonly volumes?: AppPlusVolume[];
   readonly configmapMounts?: ConfigMapVolume[];
@@ -109,7 +110,7 @@ export class AppPlus extends Chart {
         namespace: props.namespace,
         annotations: props.annotations,
       },
-      replicas: 1,
+      replicas: props.replicas ?? 1,
       // ceph rbd vols are RWO, so we have to set the deployment to recreate to avoid multiattach issues
       strategy: props.volumes?.some(
         (vol) => vol.props.storageClassName == StorageClass.CEPH_RBD,

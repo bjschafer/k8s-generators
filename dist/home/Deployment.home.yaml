@@ -2,13 +2,13 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    config-hash: bjsb28c94b2195c8ed259f0b415aaee3f39b0b2920a4537611499fa044956917a21
+    config-hash: bjs2484ba8235402967a91a99a62a8eb8f29329c1f88c2598a8c90884734317b8ea
   name: home
   namespace: home
 spec:
   minReadySeconds: 0
   progressDeadlineSeconds: 600
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       cdk8s.io/metadata.addr: home-app-home-app-deployment-c8467b6c
@@ -27,6 +27,10 @@ spec:
         - env:
             - name: TITLE
               value: Cmdcentral Home
+            - name: LOGO
+              value: ""
+            - name: HEADER
+              value: "false"
           image: jordanroher/starbase-80
           imagePullPolicy: Always
           livenessProbe:
