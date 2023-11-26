@@ -6,7 +6,6 @@ import { AppPlus } from "../../lib/app-plus";
 import { EnvValue, Probe } from "cdk8s-plus-27";
 import { NewKustomize } from "../../lib/kustomize";
 import { HomeConfig } from "./config";
-import { hashObj } from "../../lib/util";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -38,7 +37,45 @@ NewArgoApp(name, {
   },
 });
 
-const conf = new HomeConfig(app, `${name}-config`, {
+new AppPlus(app, `${name}-app`, {
+  name: name,
+  namespace: namespace,
+  image: image,
+  annotations: {
+    "reloader.stakater.com/auto": "true",
+  },
+  resources: {
+    memory: {
+      request: Size.mebibytes(128),
+      limit: Size.mebibytes(256),
+    },
+  },
+  replicas: 2,
+  ports: [port],
+  livenessProbe: Probe.fromHttpGet("", { port: port }),
+  readinessProbe: Probe.fromHttpGet("", { port: port }),
+  extraIngressHosts: ["cmdcentral.xyz"],
+  extraEnv: {
+    TITLE: EnvValue.fromValue("Cmdcentral Home"), // defaults to "My Website", set to TITLE= to hide the title
+    LOGO: EnvValue.fromValue(""), // defaults to /logo.png, set to LOGO= to hide the logo
+    HEADER: EnvValue.fromValue("false"), // defaults to true, set to false to hide the title and logo
+    // HEADERLINE=true # defaults to true, set to false to turn off the header border line
+    // HEADERTOP=true # defaults to false, set to true to force the header to always stay on top
+    // CATEGORIES=small # defaults to normal, set to small for smaller, uppercase category labels
+    // BGCOLOR=#fff # defaults to theme(colors.slate.50), set to any hex color or Tailwind color using the theme syntax
+    // BGCOLORDARK=#000 # defaults to theme(colors.gray.950), set to any hex color or Tailwind color using the theme syntax
+    // NEWWINDOW=true # defaults to true, set to false to not have links open in a new window
+  },
+  configmapMounts: [
+    {
+      name: `${name}-config`,
+      mountPath: "/app/src/config.json",
+      subPath: "config.json",
+    },
+  ],
+});
+
+new HomeConfig(app, `${name}-config`, {
   links: [
     {
       services: [
@@ -285,46 +322,6 @@ const conf = new HomeConfig(app, `${name}-config`, {
   ],
   name: `${name}-config`,
   namespace: namespace,
-});
-
-const configHash = hashObj(conf);
-
-new AppPlus(app, `${name}-app`, {
-  name: name,
-  namespace: namespace,
-  image: image,
-  annotations: {
-    "config-hash": configHash,
-  },
-  resources: {
-    memory: {
-      request: Size.mebibytes(128),
-      limit: Size.mebibytes(256),
-    },
-  },
-  replicas: 2,
-  ports: [port],
-  livenessProbe: Probe.fromHttpGet("", { port: port }),
-  readinessProbe: Probe.fromHttpGet("", { port: port }),
-  extraIngressHosts: ["cmdcentral.xyz"],
-  extraEnv: {
-    TITLE: EnvValue.fromValue("Cmdcentral Home"), // defaults to "My Website", set to TITLE= to hide the title
-    LOGO: EnvValue.fromValue(""), // defaults to /logo.png, set to LOGO= to hide the logo
-    HEADER: EnvValue.fromValue("false"), // defaults to true, set to false to hide the title and logo
-    // HEADERLINE=true # defaults to true, set to false to turn off the header border line
-    // HEADERTOP=true # defaults to false, set to true to force the header to always stay on top
-    // CATEGORIES=small # defaults to normal, set to small for smaller, uppercase category labels
-    // BGCOLOR=#fff # defaults to theme(colors.slate.50), set to any hex color or Tailwind color using the theme syntax
-    // BGCOLORDARK=#000 # defaults to theme(colors.gray.950), set to any hex color or Tailwind color using the theme syntax
-    // NEWWINDOW=true # defaults to true, set to false to not have links open in a new window
-  },
-  configmapMounts: [
-    {
-      name: `${name}-config`,
-      mountPath: "/app/src/config.json",
-      subPath: "config.json",
-    },
-  ],
 });
 
 app.synth();
