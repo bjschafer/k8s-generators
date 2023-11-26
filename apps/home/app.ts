@@ -252,6 +252,12 @@ new HomeConfig(app, `${name}-config`, {
           icon: "voron",
           description: "V2.4",
         },
+        {
+          name: "Replicator",
+          uri: "http://replicator.cmdcentral.xyz:8000",
+          icon: "mdi-bolt",
+          description: "CNC machine",
+        },
       ],
     },
     {
