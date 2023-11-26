@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    config-hash: bjs2484ba8235402967a91a99a62a8eb8f29329c1f88c2598a8c90884734317b8ea
+    reloader.stakater.com/auto: "true"
   name: home
   namespace: home
 spec:
