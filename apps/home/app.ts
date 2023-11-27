@@ -131,6 +131,7 @@ new HomeConfig(app, `${name}-config`, {
           uri: "https://wallabag.cmdcentral.xyz",
           icon: "wallabag",
           description: "Webpage saver/reading list",
+          iconBubble: false,
         },
       ],
     },
@@ -141,6 +142,7 @@ new HomeConfig(app, `${name}-config`, {
           name: "Email",
           uri: "https://app.fastmail.com",
           icon: "fastmail",
+          iconBubble: false,
         },
         {
           name: "Library",
@@ -245,12 +247,14 @@ new HomeConfig(app, `${name}-config`, {
           uri: "http://veronica.cmdcentral.xyz",
           icon: "voron",
           description: "V0.2",
+          iconBubble: false,
         },
         {
           name: "Voron V2",
           uri: "http://voronv2.cmdcentral.xyz",
           icon: "voron",
           description: "V2.4",
+          iconBubble: false,
         },
         {
           name: "Replicator",
