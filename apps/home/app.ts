@@ -323,6 +323,11 @@ new HomeConfig(app, `${name}-config`, {
           icon: "proxmox",
           description: "VM hosts",
         },
+        {
+          name: "Unifi",
+          uri: "https://unifi.cmdcentral.xyz",
+          icon: "unifi",
+        },
       ],
     },
   ],
