@@ -84,18 +84,21 @@ new HomeConfig(app, `${name}-config`, {
           uri: "https://git.cmdcentral.xyz",
           icon: "gitea",
           description: "Local code repository",
+          iconBubble: false,
         },
         {
           name: "Grafana",
           uri: "https://grafana.cmdcentral.xyz",
           icon: "grafana",
           description: "Dashboards",
+          iconBubble: false,
         },
         {
           name: "Home Assistant",
           uri: "https://hass.cmdcentral.xyz",
           icon: "home-assistant",
           description: "Control the house",
+          iconBubble: false,
         },
         {
           name: "Miniflux",
@@ -108,6 +111,7 @@ new HomeConfig(app, `${name}-config`, {
           uri: "https://nextcloud.cmdcentral.xyz",
           icon: "nextcloud",
           description: "Web storage access",
+          iconBubble: false,
         },
         {
           name: "NVR",
@@ -165,6 +169,7 @@ new HomeConfig(app, `${name}-config`, {
           uri: "https://plexrequests.cmdcentral.xyz",
           icon: "overseerr",
           description: "Download *yes*",
+          iconBubble: false,
         },
         {
           name: "Lidarr",
@@ -207,6 +212,7 @@ new HomeConfig(app, `${name}-config`, {
           uri: "https://psb52743.seedbox.io",
           icon: "rutorrent",
           description: "Torrent downloads",
+          iconBubble: false,
         },
         {
           name: "Calibre",
@@ -271,6 +277,7 @@ new HomeConfig(app, `${name}-config`, {
           name: "Alertmanager",
           uri: "https://alertmanager.cmdcentral.xyz",
           icon: "alertmanager",
+          iconBubble: false,
         },
         {
           name: "ArgoCD",
@@ -314,6 +321,7 @@ new HomeConfig(app, `${name}-config`, {
           name: "Prometheus",
           uri: "https://prometheus.cmdcentral.xyz",
           icon: "prometheus",
+          iconBubble: false,
         },
         {
           name: "Promlens",
@@ -331,6 +339,7 @@ new HomeConfig(app, `${name}-config`, {
           name: "Unifi",
           uri: "https://unifi.cmdcentral.xyz",
           icon: "unifi",
+          iconBubble: false,
         },
       ],
     },
