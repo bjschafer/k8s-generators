@@ -16,16 +16,11 @@ NewArgoApp(name, {
       prune: true,
       selfHeal: true,
     },
-    syncOptions: ["CreateNamespace=true"],
   },
   namespace: namespace,
   source: ArgoAppSource.PROD,
   recurse: true,
   autoUpdate: {
-    writebackMethod: {
-      method: "git",
-      gitBranch: "main",
-    },
     images: [
       {
         image: "ghcr.io/donkie/spoolman",
