@@ -18,12 +18,25 @@ export function NewArgoApp(name: string, props: ArgoAppProps) {
   app.synth();
 }
 
+export enum ArgoAppSource {
+  GENERATORS,
+  PROD,
+}
+const sources = {
+  [ArgoAppSource.GENERATORS]: {
+    url: "git@github.com:bjschafer/k8s-generators.git",
+  },
+  [ArgoAppSource.PROD]: {
+    url: "git@github.com:bjschafer/k8s-prod.git",
+  },
+};
+
 export interface ArgoAppProps {
   readonly namespace: string;
   readonly labels?: { [name: string]: string };
   readonly destination_server?: string;
   readonly project?: string;
-  readonly git_repo_url?: string;
+  readonly source: ArgoAppSource;
   readonly sync_policy: ApplicationSpecSyncPolicy;
   readonly recurse?: boolean;
   readonly autoUpdate?: ArgoUpdaterProps;
@@ -52,7 +65,7 @@ export class ArgoApp extends Chart {
         project: props.project ?? "default",
         source: {
           path: props.namespace,
-          repoUrl: props.git_repo_url ?? ARGO_GIT_REPO_URL,
+          repoUrl: sources[props.source].url,
           targetRevision: "main",
         },
         syncPolicy: {

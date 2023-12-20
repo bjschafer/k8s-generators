@@ -1,6 +1,6 @@
 import { App } from "cdk8s";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
-import { ArgoApp } from "../../lib/argo";
+import { ArgoApp, ArgoAppSource } from "../../lib/argo";
 import { AuthentikIngressRoute } from "../../lib/traefik";
 import { IntOrString, Quantity } from "../../imports/k8s";
 import { basename } from "../../lib/util";
@@ -19,6 +19,7 @@ new ArgoApp(app, "paperless", {
     },
   },
   namespace: namespace,
+  source: ArgoAppSource.PROD,
   recurse: true,
 });
 

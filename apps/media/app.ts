@@ -1,6 +1,10 @@
 import { App, Size } from "cdk8s";
 import { NFSVolumeContainer } from "../../lib/nfs";
-import { ArgoUpdaterImageProps, NewArgoApp } from "../../lib/argo";
+import {
+  ArgoAppSource,
+  ArgoUpdaterImageProps,
+  NewArgoApp,
+} from "../../lib/argo";
 import { MediaApp, MediaAppProps } from "../../lib/media-app";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { basename } from "../../lib/util";
@@ -242,6 +246,7 @@ NewArgoApp("media", {
     },
   },
   namespace: namespace,
+  source: ArgoAppSource.PROD,
   recurse: true,
   autoUpdate: {
     writebackMethod: {
