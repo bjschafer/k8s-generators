@@ -19,16 +19,11 @@ NewArgoApp(name, {
       prune: true,
       selfHeal: true,
     },
-    syncOptions: ["CreateNamespace=true"],
   },
   namespace: namespace,
   source: ArgoAppSource.GENERATORS,
   recurse: true,
   autoUpdate: {
-    writebackMethod: {
-      method: "git",
-      gitBranch: "main",
-    },
     images: [
       {
         image: image,

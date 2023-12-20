@@ -80,7 +80,10 @@ export class ArgoApp extends Chart {
         `${argoUpdateAnnotationBase}/write-back-method`,
         props.autoUpdate.writebackMethod?.method ?? "git",
       );
-      if (props.autoUpdate.writebackMethod?.method === "git") {
+      if (
+        !props.autoUpdate.writebackMethod?.method ||
+        props.autoUpdate.writebackMethod?.method === "git"
+      ) {
         app.metadata.addAnnotation(
           `${argoUpdateAnnotationBase}/git-branch`,
           props.autoUpdate.writebackMethod?.gitBranch ?? "main",

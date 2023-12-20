@@ -249,10 +249,6 @@ NewArgoApp("media", {
   source: ArgoAppSource.PROD,
   recurse: true,
   autoUpdate: {
-    writebackMethod: {
-      method: "git",
-      gitBranch: "main",
-    },
     images: [
       {
         image: "ghcr.io/linuxserver/resilio-sync",
