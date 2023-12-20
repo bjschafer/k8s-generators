@@ -1,7 +1,7 @@
 import { basename } from "path";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { App } from "cdk8s/lib/app";
-import { NewArgoApp } from "../../lib/argo";
+import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
 import { Size } from "cdk8s";
 import { StorageClass } from "../../lib/volume";
@@ -22,6 +22,7 @@ NewArgoApp(name, {
     syncOptions: ["CreateNamespace=true"],
   },
   namespace: namespace,
+  source: ArgoAppSource.PROD,
   autoUpdate: {
     writebackMethod: {
       method: "git",

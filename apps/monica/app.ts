@@ -1,7 +1,7 @@
 import { App, Size } from "cdk8s";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { basename } from "../../lib/util";
-import { ArgoApp } from "../../lib/argo";
+import { ArgoApp, ArgoAppSource } from "../../lib/argo";
 import { MysqlInstance } from "../../lib/mysql";
 import { Cpu } from "cdk8s-plus-27";
 import { AppPlus } from "../../lib/app-plus";
@@ -17,6 +17,7 @@ new ArgoApp(app, namespace, {
     },
   },
   namespace: namespace,
+  source: ArgoAppSource.PROD,
   recurse: true,
 });
 new MysqlInstance(app, "db", {

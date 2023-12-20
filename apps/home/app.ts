@@ -1,7 +1,7 @@
 import { basename } from "path";
 import { App, Size } from "cdk8s";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
-import { NewArgoApp } from "../../lib/argo";
+import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
 import { EnvValue, Probe } from "cdk8s-plus-27";
 import { NewKustomize } from "../../lib/kustomize";
@@ -22,6 +22,7 @@ NewArgoApp(name, {
     syncOptions: ["CreateNamespace=true"],
   },
   namespace: namespace,
+  source: ArgoAppSource.GENERATORS,
   recurse: true,
   autoUpdate: {
     writebackMethod: {

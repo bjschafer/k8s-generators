@@ -17,7 +17,7 @@ spec:
   project: default
   source:
     path: home
-    repoURL: git@github.com:bjschafer/k8s-prod.git
+    repoURL: git@github.com:bjschafer/k8s-generators.git
     targetRevision: main
   syncPolicy:
     automated:
