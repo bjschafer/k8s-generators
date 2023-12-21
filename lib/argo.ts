@@ -2,6 +2,7 @@ import { Application, ApplicationSpecSyncPolicy } from "../imports/argoproj.io";
 import { App, Chart, YamlOutputType } from "cdk8s";
 import { Construct } from "constructs";
 import { SecretReference } from "cdk8s-plus-27/lib/imports/k8s";
+import path = require("path");
 
 export const ARGO_NAMESPACE = "argocd";
 export const ARGO_GIT_REPO_URL = "git@github.com:bjschafer/k8s-prod.git";
@@ -25,9 +26,11 @@ export enum ArgoAppSource {
 const sources = {
   [ArgoAppSource.GENERATORS]: {
     url: "git@github.com:bjschafer/k8s-generators.git",
+    basePath: "dist",
   },
   [ArgoAppSource.PROD]: {
     url: "git@github.com:bjschafer/k8s-prod.git",
+    basePath: "",
   },
 };
 
@@ -64,7 +67,7 @@ export class ArgoApp extends Chart {
         },
         project: props.project ?? "default",
         source: {
-          path: props.namespace,
+          path: path.join(sources[props.source].basePath, props.namespace),
           repoUrl: sources[props.source].url,
           targetRevision: "main",
         },
