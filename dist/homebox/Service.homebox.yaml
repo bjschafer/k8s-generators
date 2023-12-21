@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: homebox
+  namespace: homebox
+spec:
+  externalIPs: []
+  ports:
+    - port: 7745
+      targetPort: 7745
+  selector:
+    cdk8s.io/metadata.addr: homebox-app-homebox-app-deployment-c8cf2749
+  type: ClusterIP
