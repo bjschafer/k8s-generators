@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - ghcr.io/hay-kot/homebox@sha256:1419b6e22aa06ab307fe0ed6c68906484905484f73df02485ebe8d94760812b8
