@@ -103,6 +103,11 @@ export interface HelmChartSpec {
   readonly authSecret?: HelmChartSpecAuthSecret;
 
   /**
+   * @schema HelmChartSpec#backOffLimit
+   */
+  readonly backOffLimit?: number;
+
+  /**
    * @schema HelmChartSpec#bootstrap
    */
   readonly bootstrap?: boolean;
@@ -193,6 +198,7 @@ export function toJson_HelmChartSpec(obj: HelmChartSpec | undefined): Record<str
   const result = {
     'authPassCredentials': obj.authPassCredentials,
     'authSecret': toJson_HelmChartSpecAuthSecret(obj.authSecret),
+    'backOffLimit': obj.backOffLimit,
     'bootstrap': obj.bootstrap,
     'chart': obj.chart,
     'chartContent': obj.chartContent,

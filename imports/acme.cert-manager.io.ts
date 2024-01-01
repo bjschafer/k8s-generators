@@ -278,9 +278,9 @@ export function toJson_ChallengeSpecSolver(obj: ChallengeSpecSolver | undefined)
  */
 export enum ChallengeSpecType {
   /** HTTP-01 */
-  HTTP_01 = "HTTP-01",
+  HTTP_HYPHEN_01 = "HTTP-01",
   /** DNS-01 */
-  DNS_01 = "DNS-01",
+  DNS_HYPHEN_01 = "DNS-01",
 }
 
 /**
