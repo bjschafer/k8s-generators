@@ -113,6 +113,16 @@ export interface PlanSpec {
   readonly drain?: PlanSpecDrain;
 
   /**
+   * @schema PlanSpec#exclusive
+   */
+  readonly exclusive?: boolean;
+
+  /**
+   * @schema PlanSpec#imagePullSecrets
+   */
+  readonly imagePullSecrets?: PlanSpecImagePullSecrets[];
+
+  /**
    * @schema PlanSpec#jobActiveDeadlineSecs
    */
   readonly jobActiveDeadlineSecs?: number;
@@ -165,6 +175,8 @@ export function toJson_PlanSpec(obj: PlanSpec | undefined): Record<string, any> 
     'concurrency': obj.concurrency,
     'cordon': obj.cordon,
     'drain': toJson_PlanSpecDrain(obj.drain),
+    'exclusive': obj.exclusive,
+    'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_PlanSpecImagePullSecrets(y)),
     'jobActiveDeadlineSecs': obj.jobActiveDeadlineSecs,
     'nodeSelector': toJson_PlanSpecNodeSelector(obj.nodeSelector),
     'prepare': toJson_PlanSpecPrepare(obj.prepare),
@@ -253,6 +265,31 @@ export function toJson_PlanSpecDrain(obj: PlanSpecDrain | undefined): Record<str
 /* eslint-enable max-len, quote-props */
 
 /**
+ * @schema PlanSpecImagePullSecrets
+ */
+export interface PlanSpecImagePullSecrets {
+  /**
+   * @schema PlanSpecImagePullSecrets#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'PlanSpecImagePullSecrets' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PlanSpecImagePullSecrets(obj: PlanSpecImagePullSecrets | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * @schema PlanSpecNodeSelector
  */
 export interface PlanSpecNodeSelector {
@@ -313,6 +350,11 @@ export interface PlanSpecPrepare {
   readonly image?: string;
 
   /**
+   * @schema PlanSpecPrepare#securityContext
+   */
+  readonly securityContext?: PlanSpecPrepareSecurityContext;
+
+  /**
    * @schema PlanSpecPrepare#volumes
    */
   readonly volumes?: PlanSpecPrepareVolumes[];
@@ -331,6 +373,7 @@ export function toJson_PlanSpecPrepare(obj: PlanSpecPrepare | undefined): Record
     'envFrom': obj.envFrom?.map(y => toJson_PlanSpecPrepareEnvFrom(y)),
     'envs': obj.envs?.map(y => toJson_PlanSpecPrepareEnvs(y)),
     'image': obj.image,
+    'securityContext': toJson_PlanSpecPrepareSecurityContext(obj.securityContext),
     'volumes': obj.volumes?.map(y => toJson_PlanSpecPrepareVolumes(y)),
   };
   // filter undefined values
@@ -342,6 +385,11 @@ export function toJson_PlanSpecPrepare(obj: PlanSpecPrepare | undefined): Record
  * @schema PlanSpecSecrets
  */
 export interface PlanSpecSecrets {
+  /**
+   * @schema PlanSpecSecrets#ignoreUpdates
+   */
+  readonly ignoreUpdates?: boolean;
+
   /**
    * @schema PlanSpecSecrets#name
    */
@@ -361,6 +409,7 @@ export interface PlanSpecSecrets {
 export function toJson_PlanSpecSecrets(obj: PlanSpecSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'ignoreUpdates': obj.ignoreUpdates,
     'name': obj.name,
     'path': obj.path,
   };
@@ -448,6 +497,11 @@ export interface PlanSpecUpgrade {
   readonly image?: string;
 
   /**
+   * @schema PlanSpecUpgrade#securityContext
+   */
+  readonly securityContext?: PlanSpecUpgradeSecurityContext;
+
+  /**
    * @schema PlanSpecUpgrade#volumes
    */
   readonly volumes?: PlanSpecUpgradeVolumes[];
@@ -466,6 +520,7 @@ export function toJson_PlanSpecUpgrade(obj: PlanSpecUpgrade | undefined): Record
     'envFrom': obj.envFrom?.map(y => toJson_PlanSpecUpgradeEnvFrom(y)),
     'envs': obj.envs?.map(y => toJson_PlanSpecUpgradeEnvs(y)),
     'image': obj.image,
+    'securityContext': toJson_PlanSpecUpgradeSecurityContext(obj.securityContext),
     'volumes': obj.volumes?.map(y => toJson_PlanSpecUpgradeVolumes(y)),
   };
   // filter undefined values
@@ -616,6 +671,91 @@ export function toJson_PlanSpecPrepareEnvs(obj: PlanSpecPrepareEnvs | undefined)
 /* eslint-enable max-len, quote-props */
 
 /**
+ * @schema PlanSpecPrepareSecurityContext
+ */
+export interface PlanSpecPrepareSecurityContext {
+  /**
+   * @schema PlanSpecPrepareSecurityContext#allowPrivilegeEscalation
+   */
+  readonly allowPrivilegeEscalation?: boolean;
+
+  /**
+   * @schema PlanSpecPrepareSecurityContext#capabilities
+   */
+  readonly capabilities?: PlanSpecPrepareSecurityContextCapabilities;
+
+  /**
+   * @schema PlanSpecPrepareSecurityContext#privileged
+   */
+  readonly privileged?: boolean;
+
+  /**
+   * @schema PlanSpecPrepareSecurityContext#procMount
+   */
+  readonly procMount?: string;
+
+  /**
+   * @schema PlanSpecPrepareSecurityContext#readOnlyRootFilesystem
+   */
+  readonly readOnlyRootFilesystem?: boolean;
+
+  /**
+   * @schema PlanSpecPrepareSecurityContext#runAsGroup
+   */
+  readonly runAsGroup?: number;
+
+  /**
+   * @schema PlanSpecPrepareSecurityContext#runAsNonRoot
+   */
+  readonly runAsNonRoot?: boolean;
+
+  /**
+   * @schema PlanSpecPrepareSecurityContext#runAsUser
+   */
+  readonly runAsUser?: number;
+
+  /**
+   * @schema PlanSpecPrepareSecurityContext#seLinuxOptions
+   */
+  readonly seLinuxOptions?: PlanSpecPrepareSecurityContextSeLinuxOptions;
+
+  /**
+   * @schema PlanSpecPrepareSecurityContext#seccompProfile
+   */
+  readonly seccompProfile?: PlanSpecPrepareSecurityContextSeccompProfile;
+
+  /**
+   * @schema PlanSpecPrepareSecurityContext#windowsOptions
+   */
+  readonly windowsOptions?: PlanSpecPrepareSecurityContextWindowsOptions;
+
+}
+
+/**
+ * Converts an object of type 'PlanSpecPrepareSecurityContext' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PlanSpecPrepareSecurityContext(obj: PlanSpecPrepareSecurityContext | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'allowPrivilegeEscalation': obj.allowPrivilegeEscalation,
+    'capabilities': toJson_PlanSpecPrepareSecurityContextCapabilities(obj.capabilities),
+    'privileged': obj.privileged,
+    'procMount': obj.procMount,
+    'readOnlyRootFilesystem': obj.readOnlyRootFilesystem,
+    'runAsGroup': obj.runAsGroup,
+    'runAsNonRoot': obj.runAsNonRoot,
+    'runAsUser': obj.runAsUser,
+    'seLinuxOptions': toJson_PlanSpecPrepareSecurityContextSeLinuxOptions(obj.seLinuxOptions),
+    'seccompProfile': toJson_PlanSpecPrepareSecurityContextSeccompProfile(obj.seccompProfile),
+    'windowsOptions': toJson_PlanSpecPrepareSecurityContextWindowsOptions(obj.windowsOptions),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * @schema PlanSpecPrepareVolumes
  */
 export interface PlanSpecPrepareVolumes {
@@ -720,6 +860,91 @@ export function toJson_PlanSpecUpgradeEnvs(obj: PlanSpecUpgradeEnvs | undefined)
     'name': obj.name,
     'value': obj.value,
     'valueFrom': toJson_PlanSpecUpgradeEnvsValueFrom(obj.valueFrom),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema PlanSpecUpgradeSecurityContext
+ */
+export interface PlanSpecUpgradeSecurityContext {
+  /**
+   * @schema PlanSpecUpgradeSecurityContext#allowPrivilegeEscalation
+   */
+  readonly allowPrivilegeEscalation?: boolean;
+
+  /**
+   * @schema PlanSpecUpgradeSecurityContext#capabilities
+   */
+  readonly capabilities?: PlanSpecUpgradeSecurityContextCapabilities;
+
+  /**
+   * @schema PlanSpecUpgradeSecurityContext#privileged
+   */
+  readonly privileged?: boolean;
+
+  /**
+   * @schema PlanSpecUpgradeSecurityContext#procMount
+   */
+  readonly procMount?: string;
+
+  /**
+   * @schema PlanSpecUpgradeSecurityContext#readOnlyRootFilesystem
+   */
+  readonly readOnlyRootFilesystem?: boolean;
+
+  /**
+   * @schema PlanSpecUpgradeSecurityContext#runAsGroup
+   */
+  readonly runAsGroup?: number;
+
+  /**
+   * @schema PlanSpecUpgradeSecurityContext#runAsNonRoot
+   */
+  readonly runAsNonRoot?: boolean;
+
+  /**
+   * @schema PlanSpecUpgradeSecurityContext#runAsUser
+   */
+  readonly runAsUser?: number;
+
+  /**
+   * @schema PlanSpecUpgradeSecurityContext#seLinuxOptions
+   */
+  readonly seLinuxOptions?: PlanSpecUpgradeSecurityContextSeLinuxOptions;
+
+  /**
+   * @schema PlanSpecUpgradeSecurityContext#seccompProfile
+   */
+  readonly seccompProfile?: PlanSpecUpgradeSecurityContextSeccompProfile;
+
+  /**
+   * @schema PlanSpecUpgradeSecurityContext#windowsOptions
+   */
+  readonly windowsOptions?: PlanSpecUpgradeSecurityContextWindowsOptions;
+
+}
+
+/**
+ * Converts an object of type 'PlanSpecUpgradeSecurityContext' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PlanSpecUpgradeSecurityContext(obj: PlanSpecUpgradeSecurityContext | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'allowPrivilegeEscalation': obj.allowPrivilegeEscalation,
+    'capabilities': toJson_PlanSpecUpgradeSecurityContextCapabilities(obj.capabilities),
+    'privileged': obj.privileged,
+    'procMount': obj.procMount,
+    'readOnlyRootFilesystem': obj.readOnlyRootFilesystem,
+    'runAsGroup': obj.runAsGroup,
+    'runAsNonRoot': obj.runAsNonRoot,
+    'runAsUser': obj.runAsUser,
+    'seLinuxOptions': toJson_PlanSpecUpgradeSecurityContextSeLinuxOptions(obj.seLinuxOptions),
+    'seccompProfile': toJson_PlanSpecUpgradeSecurityContextSeccompProfile(obj.seccompProfile),
+    'windowsOptions': toJson_PlanSpecUpgradeSecurityContextWindowsOptions(obj.windowsOptions),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -906,6 +1131,154 @@ export function toJson_PlanSpecPrepareEnvsValueFrom(obj: PlanSpecPrepareEnvsValu
 /* eslint-enable max-len, quote-props */
 
 /**
+ * @schema PlanSpecPrepareSecurityContextCapabilities
+ */
+export interface PlanSpecPrepareSecurityContextCapabilities {
+  /**
+   * @schema PlanSpecPrepareSecurityContextCapabilities#add
+   */
+  readonly add?: string[];
+
+  /**
+   * @schema PlanSpecPrepareSecurityContextCapabilities#drop
+   */
+  readonly drop?: string[];
+
+}
+
+/**
+ * Converts an object of type 'PlanSpecPrepareSecurityContextCapabilities' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PlanSpecPrepareSecurityContextCapabilities(obj: PlanSpecPrepareSecurityContextCapabilities | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'add': obj.add?.map(y => y),
+    'drop': obj.drop?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema PlanSpecPrepareSecurityContextSeLinuxOptions
+ */
+export interface PlanSpecPrepareSecurityContextSeLinuxOptions {
+  /**
+   * @schema PlanSpecPrepareSecurityContextSeLinuxOptions#level
+   */
+  readonly level?: string;
+
+  /**
+   * @schema PlanSpecPrepareSecurityContextSeLinuxOptions#role
+   */
+  readonly role?: string;
+
+  /**
+   * @schema PlanSpecPrepareSecurityContextSeLinuxOptions#type
+   */
+  readonly type?: string;
+
+  /**
+   * @schema PlanSpecPrepareSecurityContextSeLinuxOptions#user
+   */
+  readonly user?: string;
+
+}
+
+/**
+ * Converts an object of type 'PlanSpecPrepareSecurityContextSeLinuxOptions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PlanSpecPrepareSecurityContextSeLinuxOptions(obj: PlanSpecPrepareSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'level': obj.level,
+    'role': obj.role,
+    'type': obj.type,
+    'user': obj.user,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema PlanSpecPrepareSecurityContextSeccompProfile
+ */
+export interface PlanSpecPrepareSecurityContextSeccompProfile {
+  /**
+   * @schema PlanSpecPrepareSecurityContextSeccompProfile#localhostProfile
+   */
+  readonly localhostProfile?: string;
+
+  /**
+   * @schema PlanSpecPrepareSecurityContextSeccompProfile#type
+   */
+  readonly type?: string;
+
+}
+
+/**
+ * Converts an object of type 'PlanSpecPrepareSecurityContextSeccompProfile' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PlanSpecPrepareSecurityContextSeccompProfile(obj: PlanSpecPrepareSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'localhostProfile': obj.localhostProfile,
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema PlanSpecPrepareSecurityContextWindowsOptions
+ */
+export interface PlanSpecPrepareSecurityContextWindowsOptions {
+  /**
+   * @schema PlanSpecPrepareSecurityContextWindowsOptions#gmsaCredentialSpec
+   */
+  readonly gmsaCredentialSpec?: string;
+
+  /**
+   * @schema PlanSpecPrepareSecurityContextWindowsOptions#gmsaCredentialSpecName
+   */
+  readonly gmsaCredentialSpecName?: string;
+
+  /**
+   * @schema PlanSpecPrepareSecurityContextWindowsOptions#hostProcess
+   */
+  readonly hostProcess?: boolean;
+
+  /**
+   * @schema PlanSpecPrepareSecurityContextWindowsOptions#runAsUserName
+   */
+  readonly runAsUserName?: string;
+
+}
+
+/**
+ * Converts an object of type 'PlanSpecPrepareSecurityContextWindowsOptions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PlanSpecPrepareSecurityContextWindowsOptions(obj: PlanSpecPrepareSecurityContextWindowsOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'gmsaCredentialSpec': obj.gmsaCredentialSpec,
+    'gmsaCredentialSpecName': obj.gmsaCredentialSpecName,
+    'hostProcess': obj.hostProcess,
+    'runAsUserName': obj.runAsUserName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * @schema PlanSpecUpgradeEnvFromConfigMapRef
  */
 export interface PlanSpecUpgradeEnvFromConfigMapRef {
@@ -1004,6 +1377,154 @@ export function toJson_PlanSpecUpgradeEnvsValueFrom(obj: PlanSpecUpgradeEnvsValu
     'fieldRef': toJson_PlanSpecUpgradeEnvsValueFromFieldRef(obj.fieldRef),
     'resourceFieldRef': toJson_PlanSpecUpgradeEnvsValueFromResourceFieldRef(obj.resourceFieldRef),
     'secretKeyRef': toJson_PlanSpecUpgradeEnvsValueFromSecretKeyRef(obj.secretKeyRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema PlanSpecUpgradeSecurityContextCapabilities
+ */
+export interface PlanSpecUpgradeSecurityContextCapabilities {
+  /**
+   * @schema PlanSpecUpgradeSecurityContextCapabilities#add
+   */
+  readonly add?: string[];
+
+  /**
+   * @schema PlanSpecUpgradeSecurityContextCapabilities#drop
+   */
+  readonly drop?: string[];
+
+}
+
+/**
+ * Converts an object of type 'PlanSpecUpgradeSecurityContextCapabilities' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PlanSpecUpgradeSecurityContextCapabilities(obj: PlanSpecUpgradeSecurityContextCapabilities | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'add': obj.add?.map(y => y),
+    'drop': obj.drop?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema PlanSpecUpgradeSecurityContextSeLinuxOptions
+ */
+export interface PlanSpecUpgradeSecurityContextSeLinuxOptions {
+  /**
+   * @schema PlanSpecUpgradeSecurityContextSeLinuxOptions#level
+   */
+  readonly level?: string;
+
+  /**
+   * @schema PlanSpecUpgradeSecurityContextSeLinuxOptions#role
+   */
+  readonly role?: string;
+
+  /**
+   * @schema PlanSpecUpgradeSecurityContextSeLinuxOptions#type
+   */
+  readonly type?: string;
+
+  /**
+   * @schema PlanSpecUpgradeSecurityContextSeLinuxOptions#user
+   */
+  readonly user?: string;
+
+}
+
+/**
+ * Converts an object of type 'PlanSpecUpgradeSecurityContextSeLinuxOptions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PlanSpecUpgradeSecurityContextSeLinuxOptions(obj: PlanSpecUpgradeSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'level': obj.level,
+    'role': obj.role,
+    'type': obj.type,
+    'user': obj.user,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema PlanSpecUpgradeSecurityContextSeccompProfile
+ */
+export interface PlanSpecUpgradeSecurityContextSeccompProfile {
+  /**
+   * @schema PlanSpecUpgradeSecurityContextSeccompProfile#localhostProfile
+   */
+  readonly localhostProfile?: string;
+
+  /**
+   * @schema PlanSpecUpgradeSecurityContextSeccompProfile#type
+   */
+  readonly type?: string;
+
+}
+
+/**
+ * Converts an object of type 'PlanSpecUpgradeSecurityContextSeccompProfile' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PlanSpecUpgradeSecurityContextSeccompProfile(obj: PlanSpecUpgradeSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'localhostProfile': obj.localhostProfile,
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema PlanSpecUpgradeSecurityContextWindowsOptions
+ */
+export interface PlanSpecUpgradeSecurityContextWindowsOptions {
+  /**
+   * @schema PlanSpecUpgradeSecurityContextWindowsOptions#gmsaCredentialSpec
+   */
+  readonly gmsaCredentialSpec?: string;
+
+  /**
+   * @schema PlanSpecUpgradeSecurityContextWindowsOptions#gmsaCredentialSpecName
+   */
+  readonly gmsaCredentialSpecName?: string;
+
+  /**
+   * @schema PlanSpecUpgradeSecurityContextWindowsOptions#hostProcess
+   */
+  readonly hostProcess?: boolean;
+
+  /**
+   * @schema PlanSpecUpgradeSecurityContextWindowsOptions#runAsUserName
+   */
+  readonly runAsUserName?: string;
+
+}
+
+/**
+ * Converts an object of type 'PlanSpecUpgradeSecurityContextWindowsOptions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PlanSpecUpgradeSecurityContextWindowsOptions(obj: PlanSpecUpgradeSecurityContextWindowsOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'gmsaCredentialSpec': obj.gmsaCredentialSpec,
+    'gmsaCredentialSpecName': obj.gmsaCredentialSpecName,
+    'hostProcess': obj.hostProcess,
+    'runAsUserName': obj.runAsUserName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});

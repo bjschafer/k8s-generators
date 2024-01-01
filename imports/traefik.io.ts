@@ -13,7 +13,7 @@ export class IngressRoute extends ApiObject {
    * Returns the apiVersion and kind for "IngressRoute"
    */
   public static readonly GVK: GroupVersionKind = {
-    apiVersion: 'traefik.containo.us/v1alpha1',
+    apiVersion: 'traefik.io/v1alpha1',
     kind: 'IngressRoute',
   }
 
@@ -684,7 +684,7 @@ export class IngressRouteTcp extends ApiObject {
    * Returns the apiVersion and kind for "IngressRouteTCP"
    */
   public static readonly GVK: GroupVersionKind = {
-    apiVersion: 'traefik.containo.us/v1alpha1',
+    apiVersion: 'traefik.io/v1alpha1',
     kind: 'IngressRouteTCP',
   }
 
@@ -1211,7 +1211,7 @@ export class IngressRouteUdp extends ApiObject {
    * Returns the apiVersion and kind for "IngressRouteUDP"
    */
   public static readonly GVK: GroupVersionKind = {
-    apiVersion: 'traefik.containo.us/v1alpha1',
+    apiVersion: 'traefik.io/v1alpha1',
     kind: 'IngressRouteUDP',
   }
 
@@ -1444,7 +1444,7 @@ export class Middleware extends ApiObject {
    * Returns the apiVersion and kind for "Middleware"
    */
   public static readonly GVK: GroupVersionKind = {
-    apiVersion: 'traefik.containo.us/v1alpha1',
+    apiVersion: 'traefik.io/v1alpha1',
     kind: 'Middleware',
   }
 
@@ -3753,7 +3753,7 @@ export class MiddlewareTcp extends ApiObject {
    * Returns the apiVersion and kind for "MiddlewareTCP"
    */
   public static readonly GVK: GroupVersionKind = {
-    apiVersion: 'traefik.containo.us/v1alpha1',
+    apiVersion: 'traefik.io/v1alpha1',
     kind: 'MiddlewareTCP',
   }
 
@@ -3938,7 +3938,7 @@ export class ServersTransport extends ApiObject {
    * Returns the apiVersion and kind for "ServersTransport"
    */
   public static readonly GVK: GroupVersionKind = {
-    apiVersion: 'traefik.containo.us/v1alpha1',
+    apiVersion: 'traefik.io/v1alpha1',
     kind: 'ServersTransport',
   }
 
@@ -4245,6 +4245,303 @@ export class ServersTransportSpecForwardingTimeoutsResponseHeaderTimeout {
 
 
 /**
+ * ServersTransportTCP is the CRD implementation of a TCPServersTransport. If no tcpServersTransport is specified, a default one named default@internal will be used. The default@internal tcpServersTransport can be configured in the static configuration. More info: https://doc.traefik.io/traefik/v3.0/routing/services/#serverstransport_3
+ *
+ * @schema ServersTransportTCP
+ */
+export class ServersTransportTcp extends ApiObject {
+  /**
+   * Returns the apiVersion and kind for "ServersTransportTCP"
+   */
+  public static readonly GVK: GroupVersionKind = {
+    apiVersion: 'traefik.io/v1alpha1',
+    kind: 'ServersTransportTCP',
+  }
+
+  /**
+   * Renders a Kubernetes manifest for "ServersTransportTCP".
+   *
+   * This can be used to inline resource manifests inside other objects (e.g. as templates).
+   *
+   * @param props initialization props
+   */
+  public static manifest(props: ServersTransportTcpProps): any {
+    return {
+      ...ServersTransportTcp.GVK,
+      ...toJson_ServersTransportTcpProps(props),
+    };
+  }
+
+  /**
+   * Defines a "ServersTransportTCP" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialization props
+   */
+  public constructor(scope: Construct, id: string, props: ServersTransportTcpProps) {
+    super(scope, id, {
+      ...ServersTransportTcp.GVK,
+      ...props,
+    });
+  }
+
+  /**
+   * Renders the object to Kubernetes JSON.
+   */
+  public toJson(): any {
+    const resolved = super.toJson();
+
+    return {
+      ...ServersTransportTcp.GVK,
+      ...toJson_ServersTransportTcpProps(resolved),
+    };
+  }
+}
+
+/**
+ * ServersTransportTCP is the CRD implementation of a TCPServersTransport. If no tcpServersTransport is specified, a default one named default@internal will be used. The default@internal tcpServersTransport can be configured in the static configuration. More info: https://doc.traefik.io/traefik/v3.0/routing/services/#serverstransport_3
+ *
+ * @schema ServersTransportTCP
+ */
+export interface ServersTransportTcpProps {
+  /**
+   * @schema ServersTransportTCP#metadata
+   */
+  readonly metadata: ApiObjectMetadata;
+
+  /**
+   * ServersTransportTCPSpec defines the desired state of a ServersTransportTCP.
+   *
+   * @schema ServersTransportTCP#spec
+   */
+  readonly spec: ServersTransportTcpSpec;
+
+}
+
+/**
+ * Converts an object of type 'ServersTransportTcpProps' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ServersTransportTcpProps(obj: ServersTransportTcpProps | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': obj.metadata,
+    'spec': toJson_ServersTransportTcpSpec(obj.spec),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ServersTransportTCPSpec defines the desired state of a ServersTransportTCP.
+ *
+ * @schema ServersTransportTcpSpec
+ */
+export interface ServersTransportTcpSpec {
+  /**
+   * DialKeepAlive is the interval between keep-alive probes for an active network connection. If zero, keep-alive probes are sent with a default value (currently 15 seconds), if supported by the protocol and operating system. Network protocols or operating systems that do not support keep-alives ignore this field. If negative, keep-alive probes are disabled.
+   *
+   * @schema ServersTransportTcpSpec#dialKeepAlive
+   */
+  readonly dialKeepAlive?: ServersTransportTcpSpecDialKeepAlive;
+
+  /**
+   * DialTimeout is the amount of time to wait until a connection to a backend server can be established.
+   *
+   * @schema ServersTransportTcpSpec#dialTimeout
+   */
+  readonly dialTimeout?: ServersTransportTcpSpecDialTimeout;
+
+  /**
+   * TerminationDelay defines the delay to wait before fully terminating the connection, after one connected peer has closed its writing capability.
+   *
+   * @schema ServersTransportTcpSpec#terminationDelay
+   */
+  readonly terminationDelay?: ServersTransportTcpSpecTerminationDelay;
+
+  /**
+   * TLS defines the TLS configuration
+   *
+   * @schema ServersTransportTcpSpec#tls
+   */
+  readonly tls?: ServersTransportTcpSpecTls;
+
+}
+
+/**
+ * Converts an object of type 'ServersTransportTcpSpec' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ServersTransportTcpSpec(obj: ServersTransportTcpSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'dialKeepAlive': obj.dialKeepAlive?.value,
+    'dialTimeout': obj.dialTimeout?.value,
+    'terminationDelay': obj.terminationDelay?.value,
+    'tls': toJson_ServersTransportTcpSpecTls(obj.tls),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * DialKeepAlive is the interval between keep-alive probes for an active network connection. If zero, keep-alive probes are sent with a default value (currently 15 seconds), if supported by the protocol and operating system. Network protocols or operating systems that do not support keep-alives ignore this field. If negative, keep-alive probes are disabled.
+ *
+ * @schema ServersTransportTcpSpecDialKeepAlive
+ */
+export class ServersTransportTcpSpecDialKeepAlive {
+  public static fromNumber(value: number): ServersTransportTcpSpecDialKeepAlive {
+    return new ServersTransportTcpSpecDialKeepAlive(value);
+  }
+  public static fromString(value: string): ServersTransportTcpSpecDialKeepAlive {
+    return new ServersTransportTcpSpecDialKeepAlive(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * DialTimeout is the amount of time to wait until a connection to a backend server can be established.
+ *
+ * @schema ServersTransportTcpSpecDialTimeout
+ */
+export class ServersTransportTcpSpecDialTimeout {
+  public static fromNumber(value: number): ServersTransportTcpSpecDialTimeout {
+    return new ServersTransportTcpSpecDialTimeout(value);
+  }
+  public static fromString(value: string): ServersTransportTcpSpecDialTimeout {
+    return new ServersTransportTcpSpecDialTimeout(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * TerminationDelay defines the delay to wait before fully terminating the connection, after one connected peer has closed its writing capability.
+ *
+ * @schema ServersTransportTcpSpecTerminationDelay
+ */
+export class ServersTransportTcpSpecTerminationDelay {
+  public static fromNumber(value: number): ServersTransportTcpSpecTerminationDelay {
+    return new ServersTransportTcpSpecTerminationDelay(value);
+  }
+  public static fromString(value: string): ServersTransportTcpSpecTerminationDelay {
+    return new ServersTransportTcpSpecTerminationDelay(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * TLS defines the TLS configuration
+ *
+ * @schema ServersTransportTcpSpecTls
+ */
+export interface ServersTransportTcpSpecTls {
+  /**
+   * CertificatesSecrets defines a list of secret storing client certificates for mTLS.
+   *
+   * @schema ServersTransportTcpSpecTls#certificatesSecrets
+   */
+  readonly certificatesSecrets?: string[];
+
+  /**
+   * InsecureSkipVerify disables TLS certificate verification.
+   *
+   * @schema ServersTransportTcpSpecTls#insecureSkipVerify
+   */
+  readonly insecureSkipVerify?: boolean;
+
+  /**
+   * MaxIdleConnsPerHost controls the maximum idle (keep-alive) to keep per-host. PeerCertURI defines the peer cert URI used to match against SAN URI during the peer certificate verification.
+   *
+   * @schema ServersTransportTcpSpecTls#peerCertURI
+   */
+  readonly peerCertUri?: string;
+
+  /**
+   * RootCAsSecrets defines a list of CA secret used to validate self-signed certificates.
+   *
+   * @schema ServersTransportTcpSpecTls#rootCAsSecrets
+   */
+  readonly rootCAsSecrets?: string[];
+
+  /**
+   * ServerName defines the server name used to contact the server.
+   *
+   * @schema ServersTransportTcpSpecTls#serverName
+   */
+  readonly serverName?: string;
+
+  /**
+   * Spiffe defines the SPIFFE configuration.
+   *
+   * @schema ServersTransportTcpSpecTls#spiffe
+   */
+  readonly spiffe?: ServersTransportTcpSpecTlsSpiffe;
+
+}
+
+/**
+ * Converts an object of type 'ServersTransportTcpSpecTls' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ServersTransportTcpSpecTls(obj: ServersTransportTcpSpecTls | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'certificatesSecrets': obj.certificatesSecrets?.map(y => y),
+    'insecureSkipVerify': obj.insecureSkipVerify,
+    'peerCertURI': obj.peerCertUri,
+    'rootCAsSecrets': obj.rootCAsSecrets?.map(y => y),
+    'serverName': obj.serverName,
+    'spiffe': toJson_ServersTransportTcpSpecTlsSpiffe(obj.spiffe),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Spiffe defines the SPIFFE configuration.
+ *
+ * @schema ServersTransportTcpSpecTlsSpiffe
+ */
+export interface ServersTransportTcpSpecTlsSpiffe {
+  /**
+   * IDs defines the allowed SPIFFE IDs (takes precedence over the SPIFFE TrustDomain).
+   *
+   * @schema ServersTransportTcpSpecTlsSpiffe#ids
+   */
+  readonly ids?: string[];
+
+  /**
+   * TrustDomain defines the allowed SPIFFE trust domain.
+   *
+   * @schema ServersTransportTcpSpecTlsSpiffe#trustDomain
+   */
+  readonly trustDomain?: string;
+
+}
+
+/**
+ * Converts an object of type 'ServersTransportTcpSpecTlsSpiffe' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ServersTransportTcpSpecTlsSpiffe(obj: ServersTransportTcpSpecTlsSpiffe | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'ids': obj.ids?.map(y => y),
+    'trustDomain': obj.trustDomain,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+
+/**
  * TLSOption is the CRD implementation of a Traefik TLS Option, allowing to configure some parameters of the TLS connection. More info: https://doc.traefik.io/traefik/v2.10/https/tls/#tls-options
  *
  * @schema TLSOption
@@ -4254,7 +4551,7 @@ export class TlsOption extends ApiObject {
    * Returns the apiVersion and kind for "TLSOption"
    */
   public static readonly GVK: GroupVersionKind = {
-    apiVersion: 'traefik.containo.us/v1alpha1',
+    apiVersion: 'traefik.io/v1alpha1',
     kind: 'TLSOption',
   }
 
@@ -4484,7 +4781,7 @@ export class TlsStore extends ApiObject {
    * Returns the apiVersion and kind for "TLSStore"
    */
   public static readonly GVK: GroupVersionKind = {
-    apiVersion: 'traefik.containo.us/v1alpha1',
+    apiVersion: 'traefik.io/v1alpha1',
     kind: 'TLSStore',
   }
 
@@ -4751,7 +5048,7 @@ export class TraefikService extends ApiObject {
    * Returns the apiVersion and kind for "TraefikService"
    */
   public static readonly GVK: GroupVersionKind = {
-    apiVersion: 'traefik.containo.us/v1alpha1',
+    apiVersion: 'traefik.io/v1alpha1',
     kind: 'TraefikService',
   }
 
