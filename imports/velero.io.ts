@@ -106,6 +106,13 @@ export interface BackupSpec {
   readonly csiSnapshotTimeout?: string;
 
   /**
+   * DataMover specifies the data mover to be used by the backup. If DataMover is "" or "velero", the built-in data mover will be used.
+   *
+   * @schema BackupSpec#datamover
+   */
+  readonly datamover?: string;
+
+  /**
    * DefaultVolumesToFsBackup specifies whether pod volume file system backup should be used for all volumes by default.
    *
    * @schema BackupSpec#defaultVolumesToFsBackup
@@ -231,6 +238,13 @@ export interface BackupSpec {
   readonly resourcePolicy?: BackupSpecResourcePolicy;
 
   /**
+   * SnapshotMoveData specifies whether snapshot data should be moved
+   *
+   * @schema BackupSpec#snapshotMoveData
+   */
+  readonly snapshotMoveData?: boolean;
+
+  /**
    * SnapshotVolumes specifies whether to take snapshots of any PV's referenced in the set of objects included in the Backup.
    *
    * @schema BackupSpec#snapshotVolumes
@@ -268,6 +282,7 @@ export function toJson_BackupSpec(obj: BackupSpec | undefined): Record<string, a
   if (obj === undefined) { return undefined; }
   const result = {
     'csiSnapshotTimeout': obj.csiSnapshotTimeout,
+    'datamover': obj.datamover,
     'defaultVolumesToFsBackup': obj.defaultVolumesToFsBackup,
     'defaultVolumesToRestic': obj.defaultVolumesToRestic,
     'excludedClusterScopedResources': obj.excludedClusterScopedResources?.map(y => y),
@@ -286,6 +301,7 @@ export function toJson_BackupSpec(obj: BackupSpec | undefined): Record<string, a
     'orLabelSelectors': obj.orLabelSelectors?.map(y => toJson_BackupSpecOrLabelSelectors(y)),
     'orderedResources': ((obj.orderedResources) === undefined) ? undefined : (Object.entries(obj.orderedResources).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'resourcePolicy': toJson_BackupSpecResourcePolicy(obj.resourcePolicy),
+    'snapshotMoveData': obj.snapshotMoveData,
     'snapshotVolumes': obj.snapshotVolumes,
     'storageLocation': obj.storageLocation,
     'ttl': obj.ttl,
@@ -1073,8 +1089,6 @@ export enum BackupRepositorySpecRepositoryType {
   KOPIA = "kopia",
   /** restic */
   RESTIC = "restic",
-  /**  */
-  VALUE_ = "",
 }
 
 
@@ -1356,6 +1370,450 @@ export function toJson_BackupStorageLocationSpecObjectStorage(obj: BackupStorage
 
 
 /**
+ *
+ *
+ * @schema DataDownload
+ */
+export class DataDownload extends ApiObject {
+  /**
+   * Returns the apiVersion and kind for "DataDownload"
+   */
+  public static readonly GVK: GroupVersionKind = {
+    apiVersion: 'velero.io/v2alpha1',
+    kind: 'DataDownload',
+  }
+
+  /**
+   * Renders a Kubernetes manifest for "DataDownload".
+   *
+   * This can be used to inline resource manifests inside other objects (e.g. as templates).
+   *
+   * @param props initialization props
+   */
+  public static manifest(props: DataDownloadProps = {}): any {
+    return {
+      ...DataDownload.GVK,
+      ...toJson_DataDownloadProps(props),
+    };
+  }
+
+  /**
+   * Defines a "DataDownload" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialization props
+   */
+  public constructor(scope: Construct, id: string, props: DataDownloadProps = {}) {
+    super(scope, id, {
+      ...DataDownload.GVK,
+      ...props,
+    });
+  }
+
+  /**
+   * Renders the object to Kubernetes JSON.
+   */
+  public toJson(): any {
+    const resolved = super.toJson();
+
+    return {
+      ...DataDownload.GVK,
+      ...toJson_DataDownloadProps(resolved),
+    };
+  }
+}
+
+/**
+ * @schema DataDownload
+ */
+export interface DataDownloadProps {
+  /**
+   * @schema DataDownload#metadata
+   */
+  readonly metadata?: ApiObjectMetadata;
+
+  /**
+   * DataDownloadSpec is the specification for a DataDownload.
+   *
+   * @schema DataDownload#spec
+   */
+  readonly spec?: DataDownloadSpec;
+
+}
+
+/**
+ * Converts an object of type 'DataDownloadProps' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_DataDownloadProps(obj: DataDownloadProps | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': obj.metadata,
+    'spec': toJson_DataDownloadSpec(obj.spec),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * DataDownloadSpec is the specification for a DataDownload.
+ *
+ * @schema DataDownloadSpec
+ */
+export interface DataDownloadSpec {
+  /**
+   * BackupStorageLocation is the name of the backup storage location where the backup repository is stored.
+   *
+   * @schema DataDownloadSpec#backupStorageLocation
+   */
+  readonly backupStorageLocation: string;
+
+  /**
+   * Cancel indicates request to cancel the ongoing DataDownload. It can be set when the DataDownload is in InProgress phase
+   *
+   * @schema DataDownloadSpec#cancel
+   */
+  readonly cancel?: boolean;
+
+  /**
+   * DataMoverConfig is for data-mover-specific configuration fields.
+   *
+   * @schema DataDownloadSpec#dataMoverConfig
+   */
+  readonly dataMoverConfig?: { [key: string]: string };
+
+  /**
+   * DataMover specifies the data mover to be used by the backup. If DataMover is "" or "velero", the built-in data mover will be used.
+   *
+   * @schema DataDownloadSpec#datamover
+   */
+  readonly datamover?: string;
+
+  /**
+   * OperationTimeout specifies the time used to wait internal operations, before returning error as timeout.
+   *
+   * @schema DataDownloadSpec#operationTimeout
+   */
+  readonly operationTimeout: string;
+
+  /**
+   * SnapshotID is the ID of the Velero backup snapshot to be restored from.
+   *
+   * @schema DataDownloadSpec#snapshotID
+   */
+  readonly snapshotId: string;
+
+  /**
+   * SourceNamespace is the original namespace where the volume is backed up from. It may be different from SourcePVC's namespace if namespace is remapped during restore.
+   *
+   * @schema DataDownloadSpec#sourceNamespace
+   */
+  readonly sourceNamespace: string;
+
+  /**
+   * TargetVolume is the information of the target PVC and PV.
+   *
+   * @schema DataDownloadSpec#targetVolume
+   */
+  readonly targetVolume: DataDownloadSpecTargetVolume;
+
+}
+
+/**
+ * Converts an object of type 'DataDownloadSpec' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_DataDownloadSpec(obj: DataDownloadSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'backupStorageLocation': obj.backupStorageLocation,
+    'cancel': obj.cancel,
+    'dataMoverConfig': ((obj.dataMoverConfig) === undefined) ? undefined : (Object.entries(obj.dataMoverConfig).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'datamover': obj.datamover,
+    'operationTimeout': obj.operationTimeout,
+    'snapshotID': obj.snapshotId,
+    'sourceNamespace': obj.sourceNamespace,
+    'targetVolume': toJson_DataDownloadSpecTargetVolume(obj.targetVolume),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * TargetVolume is the information of the target PVC and PV.
+ *
+ * @schema DataDownloadSpecTargetVolume
+ */
+export interface DataDownloadSpecTargetVolume {
+  /**
+   * Namespace is the target namespace
+   *
+   * @schema DataDownloadSpecTargetVolume#namespace
+   */
+  readonly namespace: string;
+
+  /**
+   * PV is the name of the target PV that is created by Velero restore
+   *
+   * @schema DataDownloadSpecTargetVolume#pv
+   */
+  readonly pv: string;
+
+  /**
+   * PVC is the name of the target PVC that is created by Velero restore
+   *
+   * @schema DataDownloadSpecTargetVolume#pvc
+   */
+  readonly pvc: string;
+
+}
+
+/**
+ * Converts an object of type 'DataDownloadSpecTargetVolume' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_DataDownloadSpecTargetVolume(obj: DataDownloadSpecTargetVolume | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'namespace': obj.namespace,
+    'pv': obj.pv,
+    'pvc': obj.pvc,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+
+/**
+ *
+ *
+ * @schema DataUpload
+ */
+export class DataUpload extends ApiObject {
+  /**
+   * Returns the apiVersion and kind for "DataUpload"
+   */
+  public static readonly GVK: GroupVersionKind = {
+    apiVersion: 'velero.io/v2alpha1',
+    kind: 'DataUpload',
+  }
+
+  /**
+   * Renders a Kubernetes manifest for "DataUpload".
+   *
+   * This can be used to inline resource manifests inside other objects (e.g. as templates).
+   *
+   * @param props initialization props
+   */
+  public static manifest(props: DataUploadProps = {}): any {
+    return {
+      ...DataUpload.GVK,
+      ...toJson_DataUploadProps(props),
+    };
+  }
+
+  /**
+   * Defines a "DataUpload" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialization props
+   */
+  public constructor(scope: Construct, id: string, props: DataUploadProps = {}) {
+    super(scope, id, {
+      ...DataUpload.GVK,
+      ...props,
+    });
+  }
+
+  /**
+   * Renders the object to Kubernetes JSON.
+   */
+  public toJson(): any {
+    const resolved = super.toJson();
+
+    return {
+      ...DataUpload.GVK,
+      ...toJson_DataUploadProps(resolved),
+    };
+  }
+}
+
+/**
+ * @schema DataUpload
+ */
+export interface DataUploadProps {
+  /**
+   * @schema DataUpload#metadata
+   */
+  readonly metadata?: ApiObjectMetadata;
+
+  /**
+   * DataUploadSpec is the specification for a DataUpload.
+   *
+   * @schema DataUpload#spec
+   */
+  readonly spec?: DataUploadSpec;
+
+}
+
+/**
+ * Converts an object of type 'DataUploadProps' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_DataUploadProps(obj: DataUploadProps | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': obj.metadata,
+    'spec': toJson_DataUploadSpec(obj.spec),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * DataUploadSpec is the specification for a DataUpload.
+ *
+ * @schema DataUploadSpec
+ */
+export interface DataUploadSpec {
+  /**
+   * BackupStorageLocation is the name of the backup storage location where the backup repository is stored.
+   *
+   * @schema DataUploadSpec#backupStorageLocation
+   */
+  readonly backupStorageLocation: string;
+
+  /**
+   * Cancel indicates request to cancel the ongoing DataUpload. It can be set when the DataUpload is in InProgress phase
+   *
+   * @schema DataUploadSpec#cancel
+   */
+  readonly cancel?: boolean;
+
+  /**
+   * If SnapshotType is CSI, CSISnapshot provides the information of the CSI snapshot.
+   *
+   * @schema DataUploadSpec#csiSnapshot
+   */
+  readonly csiSnapshot?: DataUploadSpecCsiSnapshot;
+
+  /**
+   * DataMoverConfig is for data-mover-specific configuration fields.
+   *
+   * @schema DataUploadSpec#dataMoverConfig
+   */
+  readonly dataMoverConfig?: { [key: string]: string };
+
+  /**
+   * DataMover specifies the data mover to be used by the backup. If DataMover is "" or "velero", the built-in data mover will be used.
+   *
+   * @schema DataUploadSpec#datamover
+   */
+  readonly datamover?: string;
+
+  /**
+   * OperationTimeout specifies the time used to wait internal operations, before returning error as timeout.
+   *
+   * @schema DataUploadSpec#operationTimeout
+   */
+  readonly operationTimeout: string;
+
+  /**
+   * SnapshotType is the type of the snapshot to be backed up.
+   *
+   * @schema DataUploadSpec#snapshotType
+   */
+  readonly snapshotType: string;
+
+  /**
+   * SourceNamespace is the original namespace where the volume is backed up from. It is the same namespace for SourcePVC and CSI namespaced objects.
+   *
+   * @schema DataUploadSpec#sourceNamespace
+   */
+  readonly sourceNamespace: string;
+
+  /**
+   * SourcePVC is the name of the PVC which the snapshot is taken for.
+   *
+   * @schema DataUploadSpec#sourcePVC
+   */
+  readonly sourcePvc: string;
+
+}
+
+/**
+ * Converts an object of type 'DataUploadSpec' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_DataUploadSpec(obj: DataUploadSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'backupStorageLocation': obj.backupStorageLocation,
+    'cancel': obj.cancel,
+    'csiSnapshot': toJson_DataUploadSpecCsiSnapshot(obj.csiSnapshot),
+    'dataMoverConfig': ((obj.dataMoverConfig) === undefined) ? undefined : (Object.entries(obj.dataMoverConfig).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'datamover': obj.datamover,
+    'operationTimeout': obj.operationTimeout,
+    'snapshotType': obj.snapshotType,
+    'sourceNamespace': obj.sourceNamespace,
+    'sourcePVC': obj.sourcePvc,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * If SnapshotType is CSI, CSISnapshot provides the information of the CSI snapshot.
+ *
+ * @schema DataUploadSpecCsiSnapshot
+ */
+export interface DataUploadSpecCsiSnapshot {
+  /**
+   * SnapshotClass is the name of the snapshot class that the volume snapshot is created with
+   *
+   * @schema DataUploadSpecCsiSnapshot#snapshotClass
+   */
+  readonly snapshotClass?: string;
+
+  /**
+   * StorageClass is the name of the storage class of the PVC that the volume snapshot is created from
+   *
+   * @schema DataUploadSpecCsiSnapshot#storageClass
+   */
+  readonly storageClass: string;
+
+  /**
+   * VolumeSnapshot is the name of the volume snapshot to be backed up
+   *
+   * @schema DataUploadSpecCsiSnapshot#volumeSnapshot
+   */
+  readonly volumeSnapshot: string;
+
+}
+
+/**
+ * Converts an object of type 'DataUploadSpecCsiSnapshot' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_DataUploadSpecCsiSnapshot(obj: DataUploadSpecCsiSnapshot | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'snapshotClass': obj.snapshotClass,
+    'storageClass': obj.storageClass,
+    'volumeSnapshot': obj.volumeSnapshot,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+
+/**
  * DeleteBackupRequest is a request to delete one or more backups.
  *
  * @schema DeleteBackupRequest
@@ -1604,7 +2062,7 @@ export interface DownloadRequestSpecTarget {
   readonly kind: DownloadRequestSpecTargetKind;
 
   /**
-   * Name is the name of the kubernetes resource with which the file is associated.
+   * Name is the name of the Kubernetes resource with which the file is associated.
    *
    * @schema DownloadRequestSpecTarget#name
    */
@@ -1911,8 +2369,6 @@ export enum PodVolumeBackupSpecUploaderType {
   KOPIA = "kopia",
   /** restic */
   RESTIC = "restic",
-  /**  */
-  VALUE_ = "",
 }
 
 
@@ -2167,8 +2623,6 @@ export enum PodVolumeRestoreSpecUploaderType {
   KOPIA = "kopia",
   /** restic */
   RESTIC = "restic",
-  /**  */
-  VALUE_ = "",
 }
 
 
@@ -2430,7 +2884,7 @@ export interface RestoreSpec {
   readonly excludedResources?: string[];
 
   /**
-   * ExistingResourcePolicy specifies the restore behavior for the kubernetes resource to be restored
+   * ExistingResourcePolicy specifies the restore behavior for the Kubernetes resource to be restored
    *
    * @schema RestoreSpec#existingResourcePolicy
    */
@@ -2500,6 +2954,13 @@ export interface RestoreSpec {
   readonly preserveNodePorts?: boolean;
 
   /**
+   * ResourceModifier specifies the reference to JSON resource patches that should be applied to resources before restoration.
+   *
+   * @schema RestoreSpec#resourceModifier
+   */
+  readonly resourceModifier?: RestoreSpecResourceModifier;
+
+  /**
    * RestorePVs specifies whether to restore all included PVs from snapshot
    *
    * @schema RestoreSpec#restorePVs
@@ -2542,6 +3003,7 @@ export function toJson_RestoreSpec(obj: RestoreSpec | undefined): Record<string,
     'namespaceMapping': ((obj.namespaceMapping) === undefined) ? undefined : (Object.entries(obj.namespaceMapping).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'orLabelSelectors': obj.orLabelSelectors?.map(y => toJson_RestoreSpecOrLabelSelectors(y)),
     'preserveNodePorts': obj.preserveNodePorts,
+    'resourceModifier': toJson_RestoreSpecResourceModifier(obj.resourceModifier),
     'restorePVs': obj.restorePVs,
     'restoreStatus': toJson_RestoreSpecRestoreStatus(obj.restoreStatus),
     'scheduleName': obj.scheduleName,
@@ -2646,6 +3108,51 @@ export function toJson_RestoreSpecOrLabelSelectors(obj: RestoreSpecOrLabelSelect
   const result = {
     'matchExpressions': obj.matchExpressions?.map(y => toJson_RestoreSpecOrLabelSelectorsMatchExpressions(y)),
     'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ResourceModifier specifies the reference to JSON resource patches that should be applied to resources before restoration.
+ *
+ * @schema RestoreSpecResourceModifier
+ */
+export interface RestoreSpecResourceModifier {
+  /**
+   * APIGroup is the group for the resource being referenced. If APIGroup is not specified, the specified Kind must be in the core API group. For any other third-party types, APIGroup is required.
+   *
+   * @schema RestoreSpecResourceModifier#apiGroup
+   */
+  readonly apiGroup?: string;
+
+  /**
+   * Kind is the type of resource being referenced
+   *
+   * @schema RestoreSpecResourceModifier#kind
+   */
+  readonly kind: string;
+
+  /**
+   * Name is the name of resource being referenced
+   *
+   * @schema RestoreSpecResourceModifier#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * Converts an object of type 'RestoreSpecResourceModifier' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_RestoreSpecResourceModifier(obj: RestoreSpecResourceModifier | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apiGroup': obj.apiGroup,
+    'kind': obj.kind,
+    'name': obj.name,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -3242,6 +3749,13 @@ export interface ScheduleSpecTemplate {
   readonly csiSnapshotTimeout?: string;
 
   /**
+   * DataMover specifies the data mover to be used by the backup. If DataMover is "" or "velero", the built-in data mover will be used.
+   *
+   * @schema ScheduleSpecTemplate#datamover
+   */
+  readonly datamover?: string;
+
+  /**
    * DefaultVolumesToFsBackup specifies whether pod volume file system backup should be used for all volumes by default.
    *
    * @schema ScheduleSpecTemplate#defaultVolumesToFsBackup
@@ -3367,6 +3881,13 @@ export interface ScheduleSpecTemplate {
   readonly resourcePolicy?: ScheduleSpecTemplateResourcePolicy;
 
   /**
+   * SnapshotMoveData specifies whether snapshot data should be moved
+   *
+   * @schema ScheduleSpecTemplate#snapshotMoveData
+   */
+  readonly snapshotMoveData?: boolean;
+
+  /**
    * SnapshotVolumes specifies whether to take snapshots of any PV's referenced in the set of objects included in the Backup.
    *
    * @schema ScheduleSpecTemplate#snapshotVolumes
@@ -3404,6 +3925,7 @@ export function toJson_ScheduleSpecTemplate(obj: ScheduleSpecTemplate | undefine
   if (obj === undefined) { return undefined; }
   const result = {
     'csiSnapshotTimeout': obj.csiSnapshotTimeout,
+    'datamover': obj.datamover,
     'defaultVolumesToFsBackup': obj.defaultVolumesToFsBackup,
     'defaultVolumesToRestic': obj.defaultVolumesToRestic,
     'excludedClusterScopedResources': obj.excludedClusterScopedResources?.map(y => y),
@@ -3422,6 +3944,7 @@ export function toJson_ScheduleSpecTemplate(obj: ScheduleSpecTemplate | undefine
     'orLabelSelectors': obj.orLabelSelectors?.map(y => toJson_ScheduleSpecTemplateOrLabelSelectors(y)),
     'orderedResources': ((obj.orderedResources) === undefined) ? undefined : (Object.entries(obj.orderedResources).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'resourcePolicy': toJson_ScheduleSpecTemplateResourcePolicy(obj.resourcePolicy),
+    'snapshotMoveData': obj.snapshotMoveData,
     'snapshotVolumes': obj.snapshotVolumes,
     'storageLocation': obj.storageLocation,
     'ttl': obj.ttl,
