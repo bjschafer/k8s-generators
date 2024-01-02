@@ -99,7 +99,7 @@ export function toJson_IngressRouteProps(obj: IngressRouteProps | undefined): Re
  */
 export interface IngressRouteSpec {
   /**
-   * EntryPoints defines the list of entry point names to bind to. Entry points have to be configured in the static configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/entrypoints/ Default: all.
+   * EntryPoints defines the list of entry point names to bind to. Entry points have to be configured in the static configuration. More info: https://doc.traefik.io/traefik/v2.9/routing/entrypoints/ Default: all.
    *
    * @schema IngressRouteSpec#entryPoints
    */
@@ -113,7 +113,7 @@ export interface IngressRouteSpec {
   readonly routes: IngressRouteSpecRoutes[];
 
   /**
-   * TLS defines the TLS configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/routers/#tls
+   * TLS defines the TLS configuration. More info: https://doc.traefik.io/traefik/v2.9/routing/routers/#tls
    *
    * @schema IngressRouteSpec#tls
    */
@@ -151,21 +151,21 @@ export interface IngressRouteSpecRoutes {
   readonly kind: IngressRouteSpecRoutesKind;
 
   /**
-   * Match defines the router's rule. More info: https://doc.traefik.io/traefik/v2.10/routing/routers/#rule
+   * Match defines the router's rule. More info: https://doc.traefik.io/traefik/v2.9/routing/routers/#rule
    *
    * @schema IngressRouteSpecRoutes#match
    */
   readonly match: string;
 
   /**
-   * Middlewares defines the list of references to Middleware resources. More info: https://doc.traefik.io/traefik/v2.10/routing/providers/kubernetes-crd/#kind-middleware
+   * Middlewares defines the list of references to Middleware resources. More info: https://doc.traefik.io/traefik/v2.9/routing/providers/kubernetes-crd/#kind-middleware
    *
    * @schema IngressRouteSpecRoutes#middlewares
    */
   readonly middlewares?: IngressRouteSpecRoutesMiddlewares[];
 
   /**
-   * Priority defines the router's priority. More info: https://doc.traefik.io/traefik/v2.10/routing/routers/#priority
+   * Priority defines the router's priority. More info: https://doc.traefik.io/traefik/v2.9/routing/routers/#priority
    *
    * @schema IngressRouteSpecRoutes#priority
    */
@@ -199,27 +199,27 @@ export function toJson_IngressRouteSpecRoutes(obj: IngressRouteSpecRoutes | unde
 /* eslint-enable max-len, quote-props */
 
 /**
- * TLS defines the TLS configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/routers/#tls
+ * TLS defines the TLS configuration. More info: https://doc.traefik.io/traefik/v2.9/routing/routers/#tls
  *
  * @schema IngressRouteSpecTls
  */
 export interface IngressRouteSpecTls {
   /**
-   * CertResolver defines the name of the certificate resolver to use. Cert resolvers have to be configured in the static configuration. More info: https://doc.traefik.io/traefik/v2.10/https/acme/#certificate-resolvers
+   * CertResolver defines the name of the certificate resolver to use. Cert resolvers have to be configured in the static configuration. More info: https://doc.traefik.io/traefik/v2.9/https/acme/#certificate-resolvers
    *
    * @schema IngressRouteSpecTls#certResolver
    */
   readonly certResolver?: string;
 
   /**
-   * Domains defines the list of domains that will be used to issue certificates. More info: https://doc.traefik.io/traefik/v2.10/routing/routers/#domains
+   * Domains defines the list of domains that will be used to issue certificates. More info: https://doc.traefik.io/traefik/v2.9/routing/routers/#domains
    *
    * @schema IngressRouteSpecTls#domains
    */
   readonly domains?: IngressRouteSpecTlsDomains[];
 
   /**
-   * Options defines the reference to a TLSOption, that specifies the parameters of the TLS connection. If not defined, the `default` TLSOption is used. More info: https://doc.traefik.io/traefik/v2.10/https/tls/#tls-options
+   * Options defines the reference to a TLSOption, that specifies the parameters of the TLS connection. If not defined, the `default` TLSOption is used. More info: https://doc.traefik.io/traefik/v2.9/https/tls/#tls-options
    *
    * @schema IngressRouteSpecTls#options
    */
@@ -334,13 +334,6 @@ export interface IngressRouteSpecRoutesServices {
   readonly namespace?: string;
 
   /**
-   * NativeLB controls, when creating the load-balancer, whether the LB's children are directly the pods IPs or if the only child is the Kubernetes Service clusterIP. The Kubernetes Service itself does load-balance to the pods. By default, NativeLB is false.
-   *
-   * @schema IngressRouteSpecRoutesServices#nativeLB
-   */
-  readonly nativeLb?: boolean;
-
-  /**
    * PassHostHeader defines whether the client Host header is forwarded to the upstream Kubernetes Service. By default, passHostHeader is true.
    *
    * @schema IngressRouteSpecRoutesServices#passHostHeader
@@ -376,7 +369,7 @@ export interface IngressRouteSpecRoutesServices {
   readonly serversTransport?: string;
 
   /**
-   * Sticky defines the sticky sessions configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/services/#sticky-sessions
+   * Sticky defines the sticky sessions configuration. More info: https://doc.traefik.io/traefik/v2.9/routing/services/#sticky-sessions
    *
    * @schema IngressRouteSpecRoutesServices#sticky
    */
@@ -408,7 +401,6 @@ export function toJson_IngressRouteSpecRoutesServices(obj: IngressRouteSpecRoute
     'kind': obj.kind,
     'name': obj.name,
     'namespace': obj.namespace,
-    'nativeLB': obj.nativeLb,
     'passHostHeader': obj.passHostHeader,
     'port': obj.port?.value,
     'responseForwarding': toJson_IngressRouteSpecRoutesServicesResponseForwarding(obj.responseForwarding),
@@ -461,20 +453,20 @@ export function toJson_IngressRouteSpecTlsDomains(obj: IngressRouteSpecTlsDomain
 /* eslint-enable max-len, quote-props */
 
 /**
- * Options defines the reference to a TLSOption, that specifies the parameters of the TLS connection. If not defined, the `default` TLSOption is used. More info: https://doc.traefik.io/traefik/v2.10/https/tls/#tls-options
+ * Options defines the reference to a TLSOption, that specifies the parameters of the TLS connection. If not defined, the `default` TLSOption is used. More info: https://doc.traefik.io/traefik/v2.9/https/tls/#tls-options
  *
  * @schema IngressRouteSpecTlsOptions
  */
 export interface IngressRouteSpecTlsOptions {
   /**
-   * Name defines the name of the referenced TLSOption. More info: https://doc.traefik.io/traefik/v2.10/routing/providers/kubernetes-crd/#kind-tlsoption
+   * Name defines the name of the referenced TLSOption. More info: https://doc.traefik.io/traefik/v2.9/routing/providers/kubernetes-crd/#kind-tlsoption
    *
    * @schema IngressRouteSpecTlsOptions#name
    */
   readonly name: string;
 
   /**
-   * Namespace defines the namespace of the referenced TLSOption. More info: https://doc.traefik.io/traefik/v2.10/routing/providers/kubernetes-crd/#kind-tlsoption
+   * Namespace defines the namespace of the referenced TLSOption. More info: https://doc.traefik.io/traefik/v2.9/routing/providers/kubernetes-crd/#kind-tlsoption
    *
    * @schema IngressRouteSpecTlsOptions#namespace
    */
@@ -504,14 +496,14 @@ export function toJson_IngressRouteSpecTlsOptions(obj: IngressRouteSpecTlsOption
  */
 export interface IngressRouteSpecTlsStore {
   /**
-   * Name defines the name of the referenced TLSStore. More info: https://doc.traefik.io/traefik/v2.10/routing/providers/kubernetes-crd/#kind-tlsstore
+   * Name defines the name of the referenced TLSStore. More info: https://doc.traefik.io/traefik/v2.9/routing/providers/kubernetes-crd/#kind-tlsstore
    *
    * @schema IngressRouteSpecTlsStore#name
    */
   readonly name: string;
 
   /**
-   * Namespace defines the namespace of the referenced TLSStore. More info: https://doc.traefik.io/traefik/v2.10/routing/providers/kubernetes-crd/#kind-tlsstore
+   * Namespace defines the namespace of the referenced TLSStore. More info: https://doc.traefik.io/traefik/v2.9/routing/providers/kubernetes-crd/#kind-tlsstore
    *
    * @schema IngressRouteSpecTlsStore#namespace
    */
@@ -592,7 +584,7 @@ export function toJson_IngressRouteSpecRoutesServicesResponseForwarding(obj: Ing
 /* eslint-enable max-len, quote-props */
 
 /**
- * Sticky defines the sticky sessions configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/services/#sticky-sessions
+ * Sticky defines the sticky sessions configuration. More info: https://doc.traefik.io/traefik/v2.9/routing/services/#sticky-sessions
  *
  * @schema IngressRouteSpecRoutesServicesSticky
  */
@@ -770,7 +762,7 @@ export function toJson_IngressRouteTcpProps(obj: IngressRouteTcpProps | undefine
  */
 export interface IngressRouteTcpSpec {
   /**
-   * EntryPoints defines the list of entry point names to bind to. Entry points have to be configured in the static configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/entrypoints/ Default: all.
+   * EntryPoints defines the list of entry point names to bind to. Entry points have to be configured in the static configuration. More info: https://doc.traefik.io/traefik/v2.9/routing/entrypoints/ Default: all.
    *
    * @schema IngressRouteTcpSpec#entryPoints
    */
@@ -784,7 +776,7 @@ export interface IngressRouteTcpSpec {
   readonly routes: IngressRouteTcpSpecRoutes[];
 
   /**
-   * TLS defines the TLS configuration on a layer 4 / TCP Route. More info: https://doc.traefik.io/traefik/v2.10/routing/routers/#tls_1
+   * TLS defines the TLS configuration on a layer 4 / TCP Route. More info: https://doc.traefik.io/traefik/v2.9/routing/routers/#tls_1
    *
    * @schema IngressRouteTcpSpec#tls
    */
@@ -815,7 +807,7 @@ export function toJson_IngressRouteTcpSpec(obj: IngressRouteTcpSpec | undefined)
  */
 export interface IngressRouteTcpSpecRoutes {
   /**
-   * Match defines the router's rule. More info: https://doc.traefik.io/traefik/v2.10/routing/routers/#rule_1
+   * Match defines the router's rule. More info: https://doc.traefik.io/traefik/v2.9/routing/routers/#rule_1
    *
    * @schema IngressRouteTcpSpecRoutes#match
    */
@@ -829,7 +821,7 @@ export interface IngressRouteTcpSpecRoutes {
   readonly middlewares?: IngressRouteTcpSpecRoutesMiddlewares[];
 
   /**
-   * Priority defines the router's priority. More info: https://doc.traefik.io/traefik/v2.10/routing/routers/#priority_1
+   * Priority defines the router's priority. More info: https://doc.traefik.io/traefik/v2.9/routing/routers/#priority_1
    *
    * @schema IngressRouteTcpSpecRoutes#priority
    */
@@ -862,27 +854,27 @@ export function toJson_IngressRouteTcpSpecRoutes(obj: IngressRouteTcpSpecRoutes 
 /* eslint-enable max-len, quote-props */
 
 /**
- * TLS defines the TLS configuration on a layer 4 / TCP Route. More info: https://doc.traefik.io/traefik/v2.10/routing/routers/#tls_1
+ * TLS defines the TLS configuration on a layer 4 / TCP Route. More info: https://doc.traefik.io/traefik/v2.9/routing/routers/#tls_1
  *
  * @schema IngressRouteTcpSpecTls
  */
 export interface IngressRouteTcpSpecTls {
   /**
-   * CertResolver defines the name of the certificate resolver to use. Cert resolvers have to be configured in the static configuration. More info: https://doc.traefik.io/traefik/v2.10/https/acme/#certificate-resolvers
+   * CertResolver defines the name of the certificate resolver to use. Cert resolvers have to be configured in the static configuration. More info: https://doc.traefik.io/traefik/v2.9/https/acme/#certificate-resolvers
    *
    * @schema IngressRouteTcpSpecTls#certResolver
    */
   readonly certResolver?: string;
 
   /**
-   * Domains defines the list of domains that will be used to issue certificates. More info: https://doc.traefik.io/traefik/v2.10/routing/routers/#domains
+   * Domains defines the list of domains that will be used to issue certificates. More info: https://doc.traefik.io/traefik/v2.9/routing/routers/#domains
    *
    * @schema IngressRouteTcpSpecTls#domains
    */
   readonly domains?: IngressRouteTcpSpecTlsDomains[];
 
   /**
-   * Options defines the reference to a TLSOption, that specifies the parameters of the TLS connection. If not defined, the `default` TLSOption is used. More info: https://doc.traefik.io/traefik/v2.10/https/tls/#tls-options
+   * Options defines the reference to a TLSOption, that specifies the parameters of the TLS connection. If not defined, the `default` TLSOption is used. More info: https://doc.traefik.io/traefik/v2.9/https/tls/#tls-options
    *
    * @schema IngressRouteTcpSpecTls#options
    */
@@ -988,13 +980,6 @@ export interface IngressRouteTcpSpecRoutesServices {
   readonly namespace?: string;
 
   /**
-   * NativeLB controls, when creating the load-balancer, whether the LB's children are directly the pods IPs or if the only child is the Kubernetes Service clusterIP. The Kubernetes Service itself does load-balance to the pods. By default, NativeLB is false.
-   *
-   * @schema IngressRouteTcpSpecRoutesServices#nativeLB
-   */
-  readonly nativeLb?: boolean;
-
-  /**
    * Port defines the port of a Kubernetes Service. This can be a reference to a named port.
    *
    * @schema IngressRouteTcpSpecRoutesServices#port
@@ -1002,7 +987,7 @@ export interface IngressRouteTcpSpecRoutesServices {
   readonly port: IngressRouteTcpSpecRoutesServicesPort;
 
   /**
-   * ProxyProtocol defines the PROXY protocol configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/services/#proxy-protocol
+   * ProxyProtocol defines the PROXY protocol configuration. More info: https://doc.traefik.io/traefik/v2.9/routing/services/#proxy-protocol
    *
    * @schema IngressRouteTcpSpecRoutesServices#proxyProtocol
    */
@@ -1033,7 +1018,6 @@ export function toJson_IngressRouteTcpSpecRoutesServices(obj: IngressRouteTcpSpe
   const result = {
     'name': obj.name,
     'namespace': obj.namespace,
-    'nativeLB': obj.nativeLb,
     'port': obj.port?.value,
     'proxyProtocol': toJson_IngressRouteTcpSpecRoutesServicesProxyProtocol(obj.proxyProtocol),
     'terminationDelay': obj.terminationDelay,
@@ -1082,7 +1066,7 @@ export function toJson_IngressRouteTcpSpecTlsDomains(obj: IngressRouteTcpSpecTls
 /* eslint-enable max-len, quote-props */
 
 /**
- * Options defines the reference to a TLSOption, that specifies the parameters of the TLS connection. If not defined, the `default` TLSOption is used. More info: https://doc.traefik.io/traefik/v2.10/https/tls/#tls-options
+ * Options defines the reference to a TLSOption, that specifies the parameters of the TLS connection. If not defined, the `default` TLSOption is used. More info: https://doc.traefik.io/traefik/v2.9/https/tls/#tls-options
  *
  * @schema IngressRouteTcpSpecTlsOptions
  */
@@ -1172,7 +1156,7 @@ export class IngressRouteTcpSpecRoutesServicesPort {
 }
 
 /**
- * ProxyProtocol defines the PROXY protocol configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/services/#proxy-protocol
+ * ProxyProtocol defines the PROXY protocol configuration. More info: https://doc.traefik.io/traefik/v2.9/routing/services/#proxy-protocol
  *
  * @schema IngressRouteTcpSpecRoutesServicesProxyProtocol
  */
@@ -1297,7 +1281,7 @@ export function toJson_IngressRouteUdpProps(obj: IngressRouteUdpProps | undefine
  */
 export interface IngressRouteUdpSpec {
   /**
-   * EntryPoints defines the list of entry point names to bind to. Entry points have to be configured in the static configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/entrypoints/ Default: all.
+   * EntryPoints defines the list of entry point names to bind to. Entry points have to be configured in the static configuration. More info: https://doc.traefik.io/traefik/v2.9/routing/entrypoints/ Default: all.
    *
    * @schema IngressRouteUdpSpec#entryPoints
    */
@@ -1377,13 +1361,6 @@ export interface IngressRouteUdpSpecRoutesServices {
   readonly namespace?: string;
 
   /**
-   * NativeLB controls, when creating the load-balancer, whether the LB's children are directly the pods IPs or if the only child is the Kubernetes Service clusterIP. The Kubernetes Service itself does load-balance to the pods. By default, NativeLB is false.
-   *
-   * @schema IngressRouteUdpSpecRoutesServices#nativeLB
-   */
-  readonly nativeLb?: boolean;
-
-  /**
    * Port defines the port of a Kubernetes Service. This can be a reference to a named port.
    *
    * @schema IngressRouteUdpSpecRoutesServices#port
@@ -1408,7 +1385,6 @@ export function toJson_IngressRouteUdpSpecRoutesServices(obj: IngressRouteUdpSpe
   const result = {
     'name': obj.name,
     'namespace': obj.namespace,
-    'nativeLB': obj.nativeLb,
     'port': obj.port?.value,
     'weight': obj.weight,
   };
@@ -1435,7 +1411,7 @@ export class IngressRouteUdpSpecRoutesServicesPort {
 
 
 /**
- * Middleware is the CRD implementation of a Traefik Middleware. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/overview/
+ * Middleware is the CRD implementation of a Traefik Middleware. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/overview/
  *
  * @schema Middleware
  */
@@ -1489,7 +1465,7 @@ export class Middleware extends ApiObject {
 }
 
 /**
- * Middleware is the CRD implementation of a Traefik Middleware. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/overview/
+ * Middleware is the CRD implementation of a Traefik Middleware. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/overview/
  *
  * @schema Middleware
  */
@@ -1530,28 +1506,28 @@ export function toJson_MiddlewareProps(obj: MiddlewareProps | undefined): Record
  */
 export interface MiddlewareSpec {
   /**
-   * AddPrefix holds the add prefix middleware configuration. This middleware updates the path of a request before forwarding it. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/addprefix/
+   * AddPrefix holds the add prefix middleware configuration. This middleware updates the path of a request before forwarding it. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/addprefix/
    *
    * @schema MiddlewareSpec#addPrefix
    */
   readonly addPrefix?: MiddlewareSpecAddPrefix;
 
   /**
-   * BasicAuth holds the basic auth middleware configuration. This middleware restricts access to your services to known users. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/basicauth/
+   * BasicAuth holds the basic auth middleware configuration. This middleware restricts access to your services to known users. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/basicauth/
    *
    * @schema MiddlewareSpec#basicAuth
    */
   readonly basicAuth?: MiddlewareSpecBasicAuth;
 
   /**
-   * Buffering holds the buffering middleware configuration. This middleware retries or limits the size of requests that can be forwarded to backends. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/buffering/#maxrequestbodybytes
+   * Buffering holds the buffering middleware configuration. This middleware retries or limits the size of requests that can be forwarded to backends. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/buffering/#maxrequestbodybytes
    *
    * @schema MiddlewareSpec#buffering
    */
   readonly buffering?: MiddlewareSpecBuffering;
 
   /**
-   * Chain holds the configuration of the chain middleware. This middleware enables to define reusable combinations of other pieces of middleware. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/chain/
+   * Chain holds the configuration of the chain middleware. This middleware enables to define reusable combinations of other pieces of middleware. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/chain/
    *
    * @schema MiddlewareSpec#chain
    */
@@ -1565,7 +1541,7 @@ export interface MiddlewareSpec {
   readonly circuitBreaker?: MiddlewareSpecCircuitBreaker;
 
   /**
-   * Compress holds the compress middleware configuration. This middleware compresses responses before sending them to the client, using gzip compression. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/compress/
+   * Compress holds the compress middleware configuration. This middleware compresses responses before sending them to the client, using gzip compression. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/compress/
    *
    * @schema MiddlewareSpec#compress
    */
@@ -1579,49 +1555,49 @@ export interface MiddlewareSpec {
   readonly contentType?: MiddlewareSpecContentType;
 
   /**
-   * DigestAuth holds the digest auth middleware configuration. This middleware restricts access to your services to known users. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/digestauth/
+   * DigestAuth holds the digest auth middleware configuration. This middleware restricts access to your services to known users. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/digestauth/
    *
    * @schema MiddlewareSpec#digestAuth
    */
   readonly digestAuth?: MiddlewareSpecDigestAuth;
 
   /**
-   * ErrorPage holds the custom error middleware configuration. This middleware returns a custom page in lieu of the default, according to configured ranges of HTTP Status codes. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/errorpages/
+   * ErrorPage holds the custom error middleware configuration. This middleware returns a custom page in lieu of the default, according to configured ranges of HTTP Status codes. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/errorpages/
    *
    * @schema MiddlewareSpec#errors
    */
   readonly errors?: MiddlewareSpecErrors;
 
   /**
-   * ForwardAuth holds the forward auth middleware configuration. This middleware delegates the request authentication to a Service. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/forwardauth/
+   * ForwardAuth holds the forward auth middleware configuration. This middleware delegates the request authentication to a Service. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/forwardauth/
    *
    * @schema MiddlewareSpec#forwardAuth
    */
   readonly forwardAuth?: MiddlewareSpecForwardAuth;
 
   /**
-   * Headers holds the headers middleware configuration. This middleware manages the requests and responses headers. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/headers/#customrequestheaders
+   * Headers holds the headers middleware configuration. This middleware manages the requests and responses headers. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/headers/#customrequestheaders
    *
    * @schema MiddlewareSpec#headers
    */
   readonly headers?: MiddlewareSpecHeaders;
 
   /**
-   * InFlightReq holds the in-flight request middleware configuration. This middleware limits the number of requests being processed and served concurrently. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/inflightreq/
+   * InFlightReq holds the in-flight request middleware configuration. This middleware limits the number of requests being processed and served concurrently. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/inflightreq/
    *
    * @schema MiddlewareSpec#inFlightReq
    */
   readonly inFlightReq?: MiddlewareSpecInFlightReq;
 
   /**
-   * IPWhiteList holds the IP whitelist middleware configuration. This middleware accepts / refuses requests based on the client IP. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/ipwhitelist/
+   * IPWhiteList holds the IP whitelist middleware configuration. This middleware accepts / refuses requests based on the client IP. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/ipwhitelist/
    *
    * @schema MiddlewareSpec#ipWhiteList
    */
   readonly ipWhiteList?: MiddlewareSpecIpWhiteList;
 
   /**
-   * PassTLSClientCert holds the pass TLS client cert middleware configuration. This middleware adds the selected data from the passed client TLS certificate to a header. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/passtlsclientcert/
+   * PassTLSClientCert holds the pass TLS client cert middleware configuration. This middleware adds the selected data from the passed client TLS certificate to a header. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/passtlsclientcert/
    *
    * @schema MiddlewareSpec#passTLSClientCert
    */
@@ -1635,56 +1611,56 @@ export interface MiddlewareSpec {
   readonly plugin?: { [key: string]: any };
 
   /**
-   * RateLimit holds the rate limit configuration. This middleware ensures that services will receive a fair amount of requests, and allows one to define what fair is. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/ratelimit/
+   * RateLimit holds the rate limit configuration. This middleware ensures that services will receive a fair amount of requests, and allows one to define what fair is. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/ratelimit/
    *
    * @schema MiddlewareSpec#rateLimit
    */
   readonly rateLimit?: MiddlewareSpecRateLimit;
 
   /**
-   * RedirectRegex holds the redirect regex middleware configuration. This middleware redirects a request using regex matching and replacement. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/redirectregex/#regex
+   * RedirectRegex holds the redirect regex middleware configuration. This middleware redirects a request using regex matching and replacement. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/redirectregex/#regex
    *
    * @schema MiddlewareSpec#redirectRegex
    */
   readonly redirectRegex?: MiddlewareSpecRedirectRegex;
 
   /**
-   * RedirectScheme holds the redirect scheme middleware configuration. This middleware redirects requests from a scheme/port to another. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/redirectscheme/
+   * RedirectScheme holds the redirect scheme middleware configuration. This middleware redirects requests from a scheme/port to another. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/redirectscheme/
    *
    * @schema MiddlewareSpec#redirectScheme
    */
   readonly redirectScheme?: MiddlewareSpecRedirectScheme;
 
   /**
-   * ReplacePath holds the replace path middleware configuration. This middleware replaces the path of the request URL and store the original path in an X-Replaced-Path header. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/replacepath/
+   * ReplacePath holds the replace path middleware configuration. This middleware replaces the path of the request URL and store the original path in an X-Replaced-Path header. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/replacepath/
    *
    * @schema MiddlewareSpec#replacePath
    */
   readonly replacePath?: MiddlewareSpecReplacePath;
 
   /**
-   * ReplacePathRegex holds the replace path regex middleware configuration. This middleware replaces the path of a URL using regex matching and replacement. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/replacepathregex/
+   * ReplacePathRegex holds the replace path regex middleware configuration. This middleware replaces the path of a URL using regex matching and replacement. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/replacepathregex/
    *
    * @schema MiddlewareSpec#replacePathRegex
    */
   readonly replacePathRegex?: MiddlewareSpecReplacePathRegex;
 
   /**
-   * Retry holds the retry middleware configuration. This middleware reissues requests a given number of times to a backend server if that server does not reply. As soon as the server answers, the middleware stops retrying, regardless of the response status. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/retry/
+   * Retry holds the retry middleware configuration. This middleware reissues requests a given number of times to a backend server if that server does not reply. As soon as the server answers, the middleware stops retrying, regardless of the response status. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/retry/
    *
    * @schema MiddlewareSpec#retry
    */
   readonly retry?: MiddlewareSpecRetry;
 
   /**
-   * StripPrefix holds the strip prefix middleware configuration. This middleware removes the specified prefixes from the URL path. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/stripprefix/
+   * StripPrefix holds the strip prefix middleware configuration. This middleware removes the specified prefixes from the URL path. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/stripprefix/
    *
    * @schema MiddlewareSpec#stripPrefix
    */
   readonly stripPrefix?: MiddlewareSpecStripPrefix;
 
   /**
-   * StripPrefixRegex holds the strip prefix regex middleware configuration. This middleware removes the matching prefixes from the URL path. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/stripprefixregex/
+   * StripPrefixRegex holds the strip prefix regex middleware configuration. This middleware removes the matching prefixes from the URL path. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/stripprefixregex/
    *
    * @schema MiddlewareSpec#stripPrefixRegex
    */
@@ -1729,7 +1705,7 @@ export function toJson_MiddlewareSpec(obj: MiddlewareSpec | undefined): Record<s
 /* eslint-enable max-len, quote-props */
 
 /**
- * AddPrefix holds the add prefix middleware configuration. This middleware updates the path of a request before forwarding it. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/addprefix/
+ * AddPrefix holds the add prefix middleware configuration. This middleware updates the path of a request before forwarding it. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/addprefix/
  *
  * @schema MiddlewareSpecAddPrefix
  */
@@ -1758,13 +1734,13 @@ export function toJson_MiddlewareSpecAddPrefix(obj: MiddlewareSpecAddPrefix | un
 /* eslint-enable max-len, quote-props */
 
 /**
- * BasicAuth holds the basic auth middleware configuration. This middleware restricts access to your services to known users. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/basicauth/
+ * BasicAuth holds the basic auth middleware configuration. This middleware restricts access to your services to known users. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/basicauth/
  *
  * @schema MiddlewareSpecBasicAuth
  */
 export interface MiddlewareSpecBasicAuth {
   /**
-   * HeaderField defines a header field to store the authenticated user. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/basicauth/#headerfield
+   * HeaderField defines a header field to store the authenticated user. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/basicauth/#headerfield
    *
    * @schema MiddlewareSpecBasicAuth#headerField
    */
@@ -1811,7 +1787,7 @@ export function toJson_MiddlewareSpecBasicAuth(obj: MiddlewareSpecBasicAuth | un
 /* eslint-enable max-len, quote-props */
 
 /**
- * Buffering holds the buffering middleware configuration. This middleware retries or limits the size of requests that can be forwarded to backends. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/buffering/#maxrequestbodybytes
+ * Buffering holds the buffering middleware configuration. This middleware retries or limits the size of requests that can be forwarded to backends. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/buffering/#maxrequestbodybytes
  *
  * @schema MiddlewareSpecBuffering
  */
@@ -1845,7 +1821,7 @@ export interface MiddlewareSpecBuffering {
   readonly memResponseBodyBytes?: number;
 
   /**
-   * RetryExpression defines the retry conditions. It is a logical combination of functions with operators AND (&&) and OR (||). More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/buffering/#retryexpression
+   * RetryExpression defines the retry conditions. It is a logical combination of functions with operators AND (&&) and OR (||). More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/buffering/#retryexpression
    *
    * @schema MiddlewareSpecBuffering#retryExpression
    */
@@ -1872,7 +1848,7 @@ export function toJson_MiddlewareSpecBuffering(obj: MiddlewareSpecBuffering | un
 /* eslint-enable max-len, quote-props */
 
 /**
- * Chain holds the configuration of the chain middleware. This middleware enables to define reusable combinations of other pieces of middleware. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/chain/
+ * Chain holds the configuration of the chain middleware. This middleware enables to define reusable combinations of other pieces of middleware. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/chain/
  *
  * @schema MiddlewareSpecChain
  */
@@ -1954,7 +1930,7 @@ export function toJson_MiddlewareSpecCircuitBreaker(obj: MiddlewareSpecCircuitBr
 /* eslint-enable max-len, quote-props */
 
 /**
- * Compress holds the compress middleware configuration. This middleware compresses responses before sending them to the client, using gzip compression. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/compress/
+ * Compress holds the compress middleware configuration. This middleware compresses responses before sending them to the client, using gzip compression. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/compress/
  *
  * @schema MiddlewareSpecCompress
  */
@@ -2020,13 +1996,13 @@ export function toJson_MiddlewareSpecContentType(obj: MiddlewareSpecContentType 
 /* eslint-enable max-len, quote-props */
 
 /**
- * DigestAuth holds the digest auth middleware configuration. This middleware restricts access to your services to known users. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/digestauth/
+ * DigestAuth holds the digest auth middleware configuration. This middleware restricts access to your services to known users. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/digestauth/
  *
  * @schema MiddlewareSpecDigestAuth
  */
 export interface MiddlewareSpecDigestAuth {
   /**
-   * HeaderField defines a header field to store the authenticated user. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/basicauth/#headerfield
+   * HeaderField defines a header field to store the authenticated user. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/basicauth/#headerfield
    *
    * @schema MiddlewareSpecDigestAuth#headerField
    */
@@ -2073,7 +2049,7 @@ export function toJson_MiddlewareSpecDigestAuth(obj: MiddlewareSpecDigestAuth | 
 /* eslint-enable max-len, quote-props */
 
 /**
- * ErrorPage holds the custom error middleware configuration. This middleware returns a custom page in lieu of the default, according to configured ranges of HTTP Status codes. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/errorpages/
+ * ErrorPage holds the custom error middleware configuration. This middleware returns a custom page in lieu of the default, according to configured ranges of HTTP Status codes. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/errorpages/
  *
  * @schema MiddlewareSpecErrors
  */
@@ -2086,7 +2062,7 @@ export interface MiddlewareSpecErrors {
   readonly query?: string;
 
   /**
-   * Service defines the reference to a Kubernetes Service that will serve the error page. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/errorpages/#service
+   * Service defines the reference to a Kubernetes Service that will serve the error page. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/errorpages/#service
    *
    * @schema MiddlewareSpecErrors#service
    */
@@ -2118,7 +2094,7 @@ export function toJson_MiddlewareSpecErrors(obj: MiddlewareSpecErrors | undefine
 /* eslint-enable max-len, quote-props */
 
 /**
- * ForwardAuth holds the forward auth middleware configuration. This middleware delegates the request authentication to a Service. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/forwardauth/
+ * ForwardAuth holds the forward auth middleware configuration. This middleware delegates the request authentication to a Service. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/forwardauth/
  *
  * @schema MiddlewareSpecForwardAuth
  */
@@ -2145,7 +2121,7 @@ export interface MiddlewareSpecForwardAuth {
   readonly authResponseHeaders?: string[];
 
   /**
-   * AuthResponseHeadersRegex defines the regex to match headers to copy from the authentication server response and set on forwarded request, after stripping all headers that match the regex. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/forwardauth/#authresponseheadersregex
+   * AuthResponseHeadersRegex defines the regex to match headers to copy from the authentication server response and set on forwarded request, after stripping all headers that match the regex. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/forwardauth/#authresponseheadersregex
    *
    * @schema MiddlewareSpecForwardAuth#authResponseHeadersRegex
    */
@@ -2187,7 +2163,7 @@ export function toJson_MiddlewareSpecForwardAuth(obj: MiddlewareSpecForwardAuth 
 /* eslint-enable max-len, quote-props */
 
 /**
- * Headers holds the headers middleware configuration. This middleware manages the requests and responses headers. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/headers/#customrequestheaders
+ * Headers holds the headers middleware configuration. This middleware manages the requests and responses headers. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/headers/#customrequestheaders
  *
  * @schema MiddlewareSpecHeaders
  */
@@ -2464,7 +2440,7 @@ export function toJson_MiddlewareSpecHeaders(obj: MiddlewareSpecHeaders | undefi
 /* eslint-enable max-len, quote-props */
 
 /**
- * InFlightReq holds the in-flight request middleware configuration. This middleware limits the number of requests being processed and served concurrently. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/inflightreq/
+ * InFlightReq holds the in-flight request middleware configuration. This middleware limits the number of requests being processed and served concurrently. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/inflightreq/
  *
  * @schema MiddlewareSpecInFlightReq
  */
@@ -2477,7 +2453,7 @@ export interface MiddlewareSpecInFlightReq {
   readonly amount?: number;
 
   /**
-   * SourceCriterion defines what criterion is used to group requests as originating from a common source. If several strategies are defined at the same time, an error will be raised. If none are set, the default is to use the requestHost. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/inflightreq/#sourcecriterion
+   * SourceCriterion defines what criterion is used to group requests as originating from a common source. If several strategies are defined at the same time, an error will be raised. If none are set, the default is to use the requestHost. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/inflightreq/#sourcecriterion
    *
    * @schema MiddlewareSpecInFlightReq#sourceCriterion
    */
@@ -2501,13 +2477,13 @@ export function toJson_MiddlewareSpecInFlightReq(obj: MiddlewareSpecInFlightReq 
 /* eslint-enable max-len, quote-props */
 
 /**
- * IPWhiteList holds the IP whitelist middleware configuration. This middleware accepts / refuses requests based on the client IP. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/ipwhitelist/
+ * IPWhiteList holds the IP whitelist middleware configuration. This middleware accepts / refuses requests based on the client IP. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/ipwhitelist/
  *
  * @schema MiddlewareSpecIpWhiteList
  */
 export interface MiddlewareSpecIpWhiteList {
   /**
-   * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/ipwhitelist/#ipstrategy
+   * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/ipwhitelist/#ipstrategy
    *
    * @schema MiddlewareSpecIpWhiteList#ipStrategy
    */
@@ -2538,7 +2514,7 @@ export function toJson_MiddlewareSpecIpWhiteList(obj: MiddlewareSpecIpWhiteList 
 /* eslint-enable max-len, quote-props */
 
 /**
- * PassTLSClientCert holds the pass TLS client cert middleware configuration. This middleware adds the selected data from the passed client TLS certificate to a header. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/passtlsclientcert/
+ * PassTLSClientCert holds the pass TLS client cert middleware configuration. This middleware adds the selected data from the passed client TLS certificate to a header. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/passtlsclientcert/
  *
  * @schema MiddlewareSpecPassTlsClientCert
  */
@@ -2551,7 +2527,7 @@ export interface MiddlewareSpecPassTlsClientCert {
   readonly info?: MiddlewareSpecPassTlsClientCertInfo;
 
   /**
-   * PEM sets the X-Forwarded-Tls-Client-Cert header with the certificate.
+   * PEM sets the X-Forwarded-Tls-Client-Cert header with the escaped certificate.
    *
    * @schema MiddlewareSpecPassTlsClientCert#pem
    */
@@ -2575,7 +2551,7 @@ export function toJson_MiddlewareSpecPassTlsClientCert(obj: MiddlewareSpecPassTl
 /* eslint-enable max-len, quote-props */
 
 /**
- * RateLimit holds the rate limit configuration. This middleware ensures that services will receive a fair amount of requests, and allows one to define what fair is. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/ratelimit/
+ * RateLimit holds the rate limit configuration. This middleware ensures that services will receive a fair amount of requests, and allows one to define what fair is. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/ratelimit/
  *
  * @schema MiddlewareSpecRateLimit
  */
@@ -2628,7 +2604,7 @@ export function toJson_MiddlewareSpecRateLimit(obj: MiddlewareSpecRateLimit | un
 /* eslint-enable max-len, quote-props */
 
 /**
- * RedirectRegex holds the redirect regex middleware configuration. This middleware redirects a request using regex matching and replacement. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/redirectregex/#regex
+ * RedirectRegex holds the redirect regex middleware configuration. This middleware redirects a request using regex matching and replacement. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/redirectregex/#regex
  *
  * @schema MiddlewareSpecRedirectRegex
  */
@@ -2673,7 +2649,7 @@ export function toJson_MiddlewareSpecRedirectRegex(obj: MiddlewareSpecRedirectRe
 /* eslint-enable max-len, quote-props */
 
 /**
- * RedirectScheme holds the redirect scheme middleware configuration. This middleware redirects requests from a scheme/port to another. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/redirectscheme/
+ * RedirectScheme holds the redirect scheme middleware configuration. This middleware redirects requests from a scheme/port to another. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/redirectscheme/
  *
  * @schema MiddlewareSpecRedirectScheme
  */
@@ -2718,7 +2694,7 @@ export function toJson_MiddlewareSpecRedirectScheme(obj: MiddlewareSpecRedirectS
 /* eslint-enable max-len, quote-props */
 
 /**
- * ReplacePath holds the replace path middleware configuration. This middleware replaces the path of the request URL and store the original path in an X-Replaced-Path header. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/replacepath/
+ * ReplacePath holds the replace path middleware configuration. This middleware replaces the path of the request URL and store the original path in an X-Replaced-Path header. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/replacepath/
  *
  * @schema MiddlewareSpecReplacePath
  */
@@ -2747,7 +2723,7 @@ export function toJson_MiddlewareSpecReplacePath(obj: MiddlewareSpecReplacePath 
 /* eslint-enable max-len, quote-props */
 
 /**
- * ReplacePathRegex holds the replace path regex middleware configuration. This middleware replaces the path of a URL using regex matching and replacement. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/replacepathregex/
+ * ReplacePathRegex holds the replace path regex middleware configuration. This middleware replaces the path of a URL using regex matching and replacement. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/replacepathregex/
  *
  * @schema MiddlewareSpecReplacePathRegex
  */
@@ -2784,7 +2760,7 @@ export function toJson_MiddlewareSpecReplacePathRegex(obj: MiddlewareSpecReplace
 /* eslint-enable max-len, quote-props */
 
 /**
- * Retry holds the retry middleware configuration. This middleware reissues requests a given number of times to a backend server if that server does not reply. As soon as the server answers, the middleware stops retrying, regardless of the response status. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/retry/
+ * Retry holds the retry middleware configuration. This middleware reissues requests a given number of times to a backend server if that server does not reply. As soon as the server answers, the middleware stops retrying, regardless of the response status. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/retry/
  *
  * @schema MiddlewareSpecRetry
  */
@@ -2821,7 +2797,7 @@ export function toJson_MiddlewareSpecRetry(obj: MiddlewareSpecRetry | undefined)
 /* eslint-enable max-len, quote-props */
 
 /**
- * StripPrefix holds the strip prefix middleware configuration. This middleware removes the specified prefixes from the URL path. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/stripprefix/
+ * StripPrefix holds the strip prefix middleware configuration. This middleware removes the specified prefixes from the URL path. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/stripprefix/
  *
  * @schema MiddlewareSpecStripPrefix
  */
@@ -2858,7 +2834,7 @@ export function toJson_MiddlewareSpecStripPrefix(obj: MiddlewareSpecStripPrefix 
 /* eslint-enable max-len, quote-props */
 
 /**
- * StripPrefixRegex holds the strip prefix regex middleware configuration. This middleware removes the matching prefixes from the URL path. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/stripprefixregex/
+ * StripPrefixRegex holds the strip prefix regex middleware configuration. This middleware removes the matching prefixes from the URL path. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/stripprefixregex/
  *
  * @schema MiddlewareSpecStripPrefixRegex
  */
@@ -2972,7 +2948,7 @@ export class MiddlewareSpecCircuitBreakerRecoveryDuration {
 }
 
 /**
- * Service defines the reference to a Kubernetes Service that will serve the error page. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/errorpages/#service
+ * Service defines the reference to a Kubernetes Service that will serve the error page. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/errorpages/#service
  *
  * @schema MiddlewareSpecErrorsService
  */
@@ -2997,13 +2973,6 @@ export interface MiddlewareSpecErrorsService {
    * @schema MiddlewareSpecErrorsService#namespace
    */
   readonly namespace?: string;
-
-  /**
-   * NativeLB controls, when creating the load-balancer, whether the LB's children are directly the pods IPs or if the only child is the Kubernetes Service clusterIP. The Kubernetes Service itself does load-balance to the pods. By default, NativeLB is false.
-   *
-   * @schema MiddlewareSpecErrorsService#nativeLB
-   */
-  readonly nativeLb?: boolean;
 
   /**
    * PassHostHeader defines whether the client Host header is forwarded to the upstream Kubernetes Service. By default, passHostHeader is true.
@@ -3041,7 +3010,7 @@ export interface MiddlewareSpecErrorsService {
   readonly serversTransport?: string;
 
   /**
-   * Sticky defines the sticky sessions configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/services/#sticky-sessions
+   * Sticky defines the sticky sessions configuration. More info: https://doc.traefik.io/traefik/v2.9/routing/services/#sticky-sessions
    *
    * @schema MiddlewareSpecErrorsService#sticky
    */
@@ -3073,7 +3042,6 @@ export function toJson_MiddlewareSpecErrorsService(obj: MiddlewareSpecErrorsServ
     'kind': obj.kind,
     'name': obj.name,
     'namespace': obj.namespace,
-    'nativeLB': obj.nativeLb,
     'passHostHeader': obj.passHostHeader,
     'port': obj.port?.value,
     'responseForwarding': toJson_MiddlewareSpecErrorsServiceResponseForwarding(obj.responseForwarding),
@@ -3140,13 +3108,13 @@ export function toJson_MiddlewareSpecForwardAuthTls(obj: MiddlewareSpecForwardAu
 /* eslint-enable max-len, quote-props */
 
 /**
- * SourceCriterion defines what criterion is used to group requests as originating from a common source. If several strategies are defined at the same time, an error will be raised. If none are set, the default is to use the requestHost. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/inflightreq/#sourcecriterion
+ * SourceCriterion defines what criterion is used to group requests as originating from a common source. If several strategies are defined at the same time, an error will be raised. If none are set, the default is to use the requestHost. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/inflightreq/#sourcecriterion
  *
  * @schema MiddlewareSpecInFlightReqSourceCriterion
  */
 export interface MiddlewareSpecInFlightReqSourceCriterion {
   /**
-   * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/ipwhitelist/#ipstrategy
+   * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/ipwhitelist/#ipstrategy
    *
    * @schema MiddlewareSpecInFlightReqSourceCriterion#ipStrategy
    */
@@ -3185,7 +3153,7 @@ export function toJson_MiddlewareSpecInFlightReqSourceCriterion(obj: MiddlewareS
 /* eslint-enable max-len, quote-props */
 
 /**
- * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/ipwhitelist/#ipstrategy
+ * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/ipwhitelist/#ipstrategy
  *
  * @schema MiddlewareSpecIpWhiteListIpStrategy
  */
@@ -3313,7 +3281,7 @@ export class MiddlewareSpecRateLimitPeriod {
  */
 export interface MiddlewareSpecRateLimitSourceCriterion {
   /**
-   * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/ipwhitelist/#ipstrategy
+   * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/ipwhitelist/#ipstrategy
    *
    * @schema MiddlewareSpecRateLimitSourceCriterion#ipStrategy
    */
@@ -3425,7 +3393,7 @@ export function toJson_MiddlewareSpecErrorsServiceResponseForwarding(obj: Middle
 /* eslint-enable max-len, quote-props */
 
 /**
- * Sticky defines the sticky sessions configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/services/#sticky-sessions
+ * Sticky defines the sticky sessions configuration. More info: https://doc.traefik.io/traefik/v2.9/routing/services/#sticky-sessions
  *
  * @schema MiddlewareSpecErrorsServiceSticky
  */
@@ -3454,7 +3422,7 @@ export function toJson_MiddlewareSpecErrorsServiceSticky(obj: MiddlewareSpecErro
 /* eslint-enable max-len, quote-props */
 
 /**
- * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/ipwhitelist/#ipstrategy
+ * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/ipwhitelist/#ipstrategy
  *
  * @schema MiddlewareSpecInFlightReqSourceCriterionIpStrategy
  */
@@ -3653,7 +3621,7 @@ export function toJson_MiddlewareSpecPassTlsClientCertInfoSubject(obj: Middlewar
 /* eslint-enable max-len, quote-props */
 
 /**
- * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP. More info: https://doc.traefik.io/traefik/v2.10/middlewares/http/ipwhitelist/#ipstrategy
+ * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP. More info: https://doc.traefik.io/traefik/v2.9/middlewares/http/ipwhitelist/#ipstrategy
  *
  * @schema MiddlewareSpecRateLimitSourceCriterionIpStrategy
  */
@@ -3744,7 +3712,7 @@ export function toJson_MiddlewareSpecErrorsServiceStickyCookie(obj: MiddlewareSp
 
 
 /**
- * MiddlewareTCP is the CRD implementation of a Traefik TCP middleware. More info: https://doc.traefik.io/traefik/v2.10/middlewares/overview/
+ * MiddlewareTCP is the CRD implementation of a Traefik TCP middleware. More info: https://doc.traefik.io/traefik/v2.9/middlewares/overview/
  *
  * @schema MiddlewareTCP
  */
@@ -3798,7 +3766,7 @@ export class MiddlewareTcp extends ApiObject {
 }
 
 /**
- * MiddlewareTCP is the CRD implementation of a Traefik TCP middleware. More info: https://doc.traefik.io/traefik/v2.10/middlewares/overview/
+ * MiddlewareTCP is the CRD implementation of a Traefik TCP middleware. More info: https://doc.traefik.io/traefik/v2.9/middlewares/overview/
  *
  * @schema MiddlewareTCP
  */
@@ -3929,7 +3897,7 @@ export function toJson_MiddlewareTcpSpecIpWhiteList(obj: MiddlewareTcpSpecIpWhit
 
 
 /**
- * ServersTransport is the CRD implementation of a ServersTransport. If no serversTransport is specified, the default@internal will be used. The default@internal serversTransport is created from the static configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/services/#serverstransport_1
+ * ServersTransport is the CRD implementation of a ServersTransport. If no serversTransport is specified, the default@internal will be used. The default@internal serversTransport is created from the static configuration. More info: https://doc.traefik.io/traefik/v2.9/routing/services/#serverstransport_1
  *
  * @schema ServersTransport
  */
@@ -3983,7 +3951,7 @@ export class ServersTransport extends ApiObject {
 }
 
 /**
- * ServersTransport is the CRD implementation of a ServersTransport. If no serversTransport is specified, the default@internal will be used. The default@internal serversTransport is created from the static configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/services/#serverstransport_1
+ * ServersTransport is the CRD implementation of a ServersTransport. If no serversTransport is specified, the default@internal will be used. The default@internal serversTransport is created from the static configuration. More info: https://doc.traefik.io/traefik/v2.9/routing/services/#serverstransport_1
  *
  * @schema ServersTransport
  */
@@ -4245,7 +4213,7 @@ export class ServersTransportSpecForwardingTimeoutsResponseHeaderTimeout {
 
 
 /**
- * TLSOption is the CRD implementation of a Traefik TLS Option, allowing to configure some parameters of the TLS connection. More info: https://doc.traefik.io/traefik/v2.10/https/tls/#tls-options
+ * TLSOption is the CRD implementation of a Traefik TLS Option, allowing to configure some parameters of the TLS connection. More info: https://doc.traefik.io/traefik/v2.9/https/tls/#tls-options
  *
  * @schema TLSOption
  */
@@ -4299,7 +4267,7 @@ export class TlsOption extends ApiObject {
 }
 
 /**
- * TLSOption is the CRD implementation of a Traefik TLS Option, allowing to configure some parameters of the TLS connection. More info: https://doc.traefik.io/traefik/v2.10/https/tls/#tls-options
+ * TLSOption is the CRD implementation of a Traefik TLS Option, allowing to configure some parameters of the TLS connection. More info: https://doc.traefik.io/traefik/v2.9/https/tls/#tls-options
  *
  * @schema TLSOption
  */
@@ -4340,14 +4308,14 @@ export function toJson_TlsOptionProps(obj: TlsOptionProps | undefined): Record<s
  */
 export interface TlsOptionSpec {
   /**
-   * ALPNProtocols defines the list of supported application level protocols for the TLS handshake, in order of preference. More info: https://doc.traefik.io/traefik/v2.10/https/tls/#alpn-protocols
+   * ALPNProtocols defines the list of supported application level protocols for the TLS handshake, in order of preference. More info: https://doc.traefik.io/traefik/v2.9/https/tls/#alpn-protocols
    *
    * @schema TlsOptionSpec#alpnProtocols
    */
   readonly alpnProtocols?: string[];
 
   /**
-   * CipherSuites defines the list of supported cipher suites for TLS versions up to TLS 1.2. More info: https://doc.traefik.io/traefik/v2.10/https/tls/#cipher-suites
+   * CipherSuites defines the list of supported cipher suites for TLS versions up to TLS 1.2. More info: https://doc.traefik.io/traefik/v2.9/https/tls/#cipher-suites
    *
    * @schema TlsOptionSpec#cipherSuites
    */
@@ -4361,7 +4329,7 @@ export interface TlsOptionSpec {
   readonly clientAuth?: TlsOptionSpecClientAuth;
 
   /**
-   * CurvePreferences defines the preferred elliptic curves in a specific order. More info: https://doc.traefik.io/traefik/v2.10/https/tls/#curve-preferences
+   * CurvePreferences defines the preferred elliptic curves in a specific order. More info: https://doc.traefik.io/traefik/v2.9/https/tls/#curve-preferences
    *
    * @schema TlsOptionSpec#curvePreferences
    */
@@ -4475,7 +4443,7 @@ export enum TlsOptionSpecClientAuthClientAuthType {
 
 
 /**
- * TLSStore is the CRD implementation of a Traefik TLS Store. For the time being, only the TLSStore named default is supported. This means that you cannot have two stores that are named default in different Kubernetes namespaces. More info: https://doc.traefik.io/traefik/v2.10/https/tls/#certificates-stores
+ * TLSStore is the CRD implementation of a Traefik TLS Store. For the time being, only the TLSStore named default is supported. This means that you cannot have two stores that are named default in different Kubernetes namespaces. More info: https://doc.traefik.io/traefik/v2.9/https/tls/#certificates-stores
  *
  * @schema TLSStore
  */
@@ -4529,7 +4497,7 @@ export class TlsStore extends ApiObject {
 }
 
 /**
- * TLSStore is the CRD implementation of a Traefik TLS Store. For the time being, only the TLSStore named default is supported. This means that you cannot have two stores that are named default in different Kubernetes namespaces. More info: https://doc.traefik.io/traefik/v2.10/https/tls/#certificates-stores
+ * TLSStore is the CRD implementation of a Traefik TLS Store. For the time being, only the TLSStore named default is supported. This means that you cannot have two stores that are named default in different Kubernetes namespaces. More info: https://doc.traefik.io/traefik/v2.9/https/tls/#certificates-stores
  *
  * @schema TLSStore
  */
@@ -4742,7 +4710,7 @@ export function toJson_TlsStoreSpecDefaultGeneratedCertDomain(obj: TlsStoreSpecD
 
 
 /**
- * TraefikService is the CRD implementation of a Traefik Service. TraefikService object allows to: - Apply weight to Services on load-balancing - Mirror traffic on services More info: https://doc.traefik.io/traefik/v2.10/routing/providers/kubernetes-crd/#kind-traefikservice
+ * TraefikService is the CRD implementation of a Traefik Service. TraefikService object allows to: - Apply weight to Services on load-balancing - Mirror traffic on services More info: https://doc.traefik.io/traefik/v2.9/routing/providers/kubernetes-crd/#kind-traefikservice
  *
  * @schema TraefikService
  */
@@ -4796,7 +4764,7 @@ export class TraefikService extends ApiObject {
 }
 
 /**
- * TraefikService is the CRD implementation of a Traefik Service. TraefikService object allows to: - Apply weight to Services on load-balancing - Mirror traffic on services More info: https://doc.traefik.io/traefik/v2.10/routing/providers/kubernetes-crd/#kind-traefikservice
+ * TraefikService is the CRD implementation of a Traefik Service. TraefikService object allows to: - Apply weight to Services on load-balancing - Mirror traffic on services More info: https://doc.traefik.io/traefik/v2.9/routing/providers/kubernetes-crd/#kind-traefikservice
  *
  * @schema TraefikService
  */
@@ -4909,13 +4877,6 @@ export interface TraefikServiceSpecMirroring {
   readonly namespace?: string;
 
   /**
-   * NativeLB controls, when creating the load-balancer, whether the LB's children are directly the pods IPs or if the only child is the Kubernetes Service clusterIP. The Kubernetes Service itself does load-balance to the pods. By default, NativeLB is false.
-   *
-   * @schema TraefikServiceSpecMirroring#nativeLB
-   */
-  readonly nativeLb?: boolean;
-
-  /**
    * PassHostHeader defines whether the client Host header is forwarded to the upstream Kubernetes Service. By default, passHostHeader is true.
    *
    * @schema TraefikServiceSpecMirroring#passHostHeader
@@ -4951,7 +4912,7 @@ export interface TraefikServiceSpecMirroring {
   readonly serversTransport?: string;
 
   /**
-   * Sticky defines the sticky sessions configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/services/#sticky-sessions
+   * Sticky defines the sticky sessions configuration. More info: https://doc.traefik.io/traefik/v2.9/routing/services/#sticky-sessions
    *
    * @schema TraefikServiceSpecMirroring#sticky
    */
@@ -4985,7 +4946,6 @@ export function toJson_TraefikServiceSpecMirroring(obj: TraefikServiceSpecMirror
     'mirrors': obj.mirrors?.map(y => toJson_TraefikServiceSpecMirroringMirrors(y)),
     'name': obj.name,
     'namespace': obj.namespace,
-    'nativeLB': obj.nativeLb,
     'passHostHeader': obj.passHostHeader,
     'port': obj.port?.value,
     'responseForwarding': toJson_TraefikServiceSpecMirroringResponseForwarding(obj.responseForwarding),
@@ -5014,7 +4974,7 @@ export interface TraefikServiceSpecWeighted {
   readonly services?: TraefikServiceSpecWeightedServices[];
 
   /**
-   * Sticky defines whether sticky sessions are enabled. More info: https://doc.traefik.io/traefik/v2.10/routing/providers/kubernetes-crd/#stickiness-and-load-balancing
+   * Sticky defines whether sticky sessions are enabled. More info: https://doc.traefik.io/traefik/v2.9/routing/providers/kubernetes-crd/#stickiness-and-load-balancing
    *
    * @schema TraefikServiceSpecWeighted#sticky
    */
@@ -5077,13 +5037,6 @@ export interface TraefikServiceSpecMirroringMirrors {
   readonly namespace?: string;
 
   /**
-   * NativeLB controls, when creating the load-balancer, whether the LB's children are directly the pods IPs or if the only child is the Kubernetes Service clusterIP. The Kubernetes Service itself does load-balance to the pods. By default, NativeLB is false.
-   *
-   * @schema TraefikServiceSpecMirroringMirrors#nativeLB
-   */
-  readonly nativeLb?: boolean;
-
-  /**
    * PassHostHeader defines whether the client Host header is forwarded to the upstream Kubernetes Service. By default, passHostHeader is true.
    *
    * @schema TraefikServiceSpecMirroringMirrors#passHostHeader
@@ -5126,7 +5079,7 @@ export interface TraefikServiceSpecMirroringMirrors {
   readonly serversTransport?: string;
 
   /**
-   * Sticky defines the sticky sessions configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/services/#sticky-sessions
+   * Sticky defines the sticky sessions configuration. More info: https://doc.traefik.io/traefik/v2.9/routing/services/#sticky-sessions
    *
    * @schema TraefikServiceSpecMirroringMirrors#sticky
    */
@@ -5158,7 +5111,6 @@ export function toJson_TraefikServiceSpecMirroringMirrors(obj: TraefikServiceSpe
     'kind': obj.kind,
     'name': obj.name,
     'namespace': obj.namespace,
-    'nativeLB': obj.nativeLb,
     'passHostHeader': obj.passHostHeader,
     'percent': obj.percent,
     'port': obj.port?.value,
@@ -5220,7 +5172,7 @@ export function toJson_TraefikServiceSpecMirroringResponseForwarding(obj: Traefi
 /* eslint-enable max-len, quote-props */
 
 /**
- * Sticky defines the sticky sessions configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/services/#sticky-sessions
+ * Sticky defines the sticky sessions configuration. More info: https://doc.traefik.io/traefik/v2.9/routing/services/#sticky-sessions
  *
  * @schema TraefikServiceSpecMirroringSticky
  */
@@ -5276,13 +5228,6 @@ export interface TraefikServiceSpecWeightedServices {
   readonly namespace?: string;
 
   /**
-   * NativeLB controls, when creating the load-balancer, whether the LB's children are directly the pods IPs or if the only child is the Kubernetes Service clusterIP. The Kubernetes Service itself does load-balance to the pods. By default, NativeLB is false.
-   *
-   * @schema TraefikServiceSpecWeightedServices#nativeLB
-   */
-  readonly nativeLb?: boolean;
-
-  /**
    * PassHostHeader defines whether the client Host header is forwarded to the upstream Kubernetes Service. By default, passHostHeader is true.
    *
    * @schema TraefikServiceSpecWeightedServices#passHostHeader
@@ -5318,7 +5263,7 @@ export interface TraefikServiceSpecWeightedServices {
   readonly serversTransport?: string;
 
   /**
-   * Sticky defines the sticky sessions configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/services/#sticky-sessions
+   * Sticky defines the sticky sessions configuration. More info: https://doc.traefik.io/traefik/v2.9/routing/services/#sticky-sessions
    *
    * @schema TraefikServiceSpecWeightedServices#sticky
    */
@@ -5350,7 +5295,6 @@ export function toJson_TraefikServiceSpecWeightedServices(obj: TraefikServiceSpe
     'kind': obj.kind,
     'name': obj.name,
     'namespace': obj.namespace,
-    'nativeLB': obj.nativeLb,
     'passHostHeader': obj.passHostHeader,
     'port': obj.port?.value,
     'responseForwarding': toJson_TraefikServiceSpecWeightedServicesResponseForwarding(obj.responseForwarding),
@@ -5366,7 +5310,7 @@ export function toJson_TraefikServiceSpecWeightedServices(obj: TraefikServiceSpe
 /* eslint-enable max-len, quote-props */
 
 /**
- * Sticky defines whether sticky sessions are enabled. More info: https://doc.traefik.io/traefik/v2.10/routing/providers/kubernetes-crd/#stickiness-and-load-balancing
+ * Sticky defines whether sticky sessions are enabled. More info: https://doc.traefik.io/traefik/v2.9/routing/providers/kubernetes-crd/#stickiness-and-load-balancing
  *
  * @schema TraefikServiceSpecWeightedSticky
  */
@@ -5452,7 +5396,7 @@ export function toJson_TraefikServiceSpecMirroringMirrorsResponseForwarding(obj:
 /* eslint-enable max-len, quote-props */
 
 /**
- * Sticky defines the sticky sessions configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/services/#sticky-sessions
+ * Sticky defines the sticky sessions configuration. More info: https://doc.traefik.io/traefik/v2.9/routing/services/#sticky-sessions
  *
  * @schema TraefikServiceSpecMirroringMirrorsSticky
  */
@@ -5591,7 +5535,7 @@ export function toJson_TraefikServiceSpecWeightedServicesResponseForwarding(obj:
 /* eslint-enable max-len, quote-props */
 
 /**
- * Sticky defines the sticky sessions configuration. More info: https://doc.traefik.io/traefik/v2.10/routing/services/#sticky-sessions
+ * Sticky defines the sticky sessions configuration. More info: https://doc.traefik.io/traefik/v2.9/routing/services/#sticky-sessions
  *
  * @schema TraefikServiceSpecWeightedServicesSticky
  */

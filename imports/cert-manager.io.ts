@@ -594,7 +594,7 @@ export enum CertificateSpecUsages {
   /** email protection */
   EMAIL_PROTECTION = "email protection",
   /** s/mime */
-  S_FORWARD_SLASH_MIME = "s/mime",
+  S_MIME = "s/mime",
   /** ipsec end system */
   IPSEC_END_SYSTEM = "ipsec end system",
   /** ipsec tunnel */
@@ -1082,7 +1082,7 @@ export enum CertificateRequestSpecUsages {
   /** email protection */
   EMAIL_PROTECTION = "email protection",
   /** s/mime */
-  S_FORWARD_SLASH_MIME = "s/mime",
+  S_MIME = "s/mime",
   /** ipsec end system */
   IPSEC_END_SYSTEM = "ipsec end system",
   /** ipsec tunnel */
