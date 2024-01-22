@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pfwiki
+  namespace: pfwiki
+spec:
+  externalIPs: []
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    cdk8s.io/metadata.addr: pfwiki-pfwiki-deployment-c86ec103
+  type: ClusterIP
