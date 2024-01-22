@@ -89,7 +89,7 @@ new AppPlus(app, "pfwiki", {
     DB_PORT: EnvValue.fromValue("3306"),
     DB_USER: EnvValue.fromValue("root"),
     DB_PASS: EnvValue.fromSecretValue({
-      secret: Secret.fromSecretName(app, "app-creds", "mariadb-creds"),
+      secret: Secret.fromSecretName(app, "app-creds", "db-creds"),
       key: "MARIADB_ROOT_PASSWORD",
     }),
     DB_DATABASE: EnvValue.fromValue("bookstack"),
