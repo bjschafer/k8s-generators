@@ -36,7 +36,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: MARIADB_ROOT_PASSWORD
-                  name: mariadb-creds
+                  name: db-creds
             - name: DB_DATABASE
               value: bookstack
           image: lscr.io/linuxserver/bookstack:latest
