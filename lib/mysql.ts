@@ -1,5 +1,4 @@
 import { ApiObject, Chart, JsonPatch, Size } from "cdk8s";
-import { Construct } from "constructs";
 import {
   ContainerResources,
   EnvValue,
@@ -10,6 +9,7 @@ import {
   StatefulSet,
   Volume,
 } from "cdk8s-plus-27";
+import { Construct } from "constructs";
 import { StorageClass } from "./volume";
 
 export interface MysqlInstanceProps {
@@ -21,7 +21,7 @@ export interface MysqlInstanceProps {
   pvcSize: Size;
 }
 
-const DEFAULT_IMAGE = "mariadb:10.11";
+const DEFAULT_IMAGE = "mariadb:11.2";
 
 export class MysqlInstance extends Chart {
   constructor(scope: Construct, name: string, props: MysqlInstanceProps) {
