@@ -70,7 +70,7 @@ new AppPlus(app, `${name}-app`, {
     NEXT_PUBLIC_AUTHENTIK_ENABLED: EnvValue.fromValue("true"),
     AUTHENTIK_CUSTOM_NAME: EnvValue.fromValue("Cmdcentral Login"),
     AUTHENTIK_ISSUER: EnvValue.fromValue(
-      "https://login.cmdcentral.xyz/application/o/linkwarden/",
+      "https://login.cmdcentral.xyz/application/o/linkwarden",
     ),
     AUTHENTIK_CLIENT_ID: EnvValue.fromSecretValue({
       secret: secrets,
