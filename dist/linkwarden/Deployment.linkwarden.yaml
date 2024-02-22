@@ -41,7 +41,7 @@ spec:
             - name: AUTHENTIK_CUSTOM_NAME
               value: Cmdcentral Login
             - name: AUTHENTIK_ISSUER
-              value: https://login.cmdcentral.xyz/application/o/linkwarden/
+              value: https://login.cmdcentral.xyz/application/o/linkwarden
             - name: AUTHENTIK_CLIENT_ID
               valueFrom:
                 secretKeyRef:
