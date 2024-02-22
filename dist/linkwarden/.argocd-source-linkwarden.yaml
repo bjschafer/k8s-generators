@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - ghcr.io/linkwarden/linkwarden@sha256:e11a4b39a94d1acfd6e2684833b622614a69f87cb07d97d3c20d368fb6147411
