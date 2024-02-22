@@ -1,0 +1,5 @@
+resources:
+  - Deployment.linkwarden.yaml
+  - Ingress.linkwarden.yaml
+  - PersistentVolumeClaim.linkwarden-app-data.yaml
+  - Service.linkwarden.yaml

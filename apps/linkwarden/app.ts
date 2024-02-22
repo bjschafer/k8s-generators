@@ -1,0 +1,103 @@
+import { App, Size } from "cdk8s";
+import {
+  EnvValue,
+  PersistentVolumeAccessMode,
+  Probe,
+  Secret,
+} from "cdk8s-plus-27";
+import { AppPlus } from "../../lib/app-plus";
+import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
+import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { NewKustomize } from "../../lib/kustomize";
+import { basename } from "../../lib/util";
+import { StorageClass } from "../../lib/volume";
+
+const namespace = basename(__dirname);
+const name = namespace;
+const image = "ghcr.io/linkwarden/linkwarden";
+const port = 3000;
+const app = new App(DEFAULT_APP_PROPS(namespace));
+
+NewArgoApp(name, {
+  sync_policy: {
+    automated: {
+      prune: true,
+      selfHeal: true,
+    },
+  },
+  namespace: namespace,
+  source: ArgoAppSource.GENERATORS,
+  recurse: true,
+  autoUpdate: {
+    images: [
+      {
+        image: image,
+        strategy: "digest",
+      },
+    ],
+  },
+});
+
+const secrets = Secret.fromSecretName(app, `${name}-creds`, "secrets");
+
+new AppPlus(app, `${name}-app`, {
+  name: name,
+  namespace: namespace,
+  image: image,
+  resources: {
+    memory: {
+      request: Size.mebibytes(128),
+      limit: Size.mebibytes(512),
+    },
+  },
+  ports: [port],
+  extraEnv: {
+    NEXTAUTH_URL: EnvValue.fromValue(
+      "https://bookmarks.cmdcentral.xyz/api/v1/auth",
+    ),
+    NEXTAUTH_SECRET: EnvValue.fromSecretValue({
+      secret: secrets,
+      key: "NEXTAUTH_SECRET",
+    }),
+    DATABASE_URL: EnvValue.fromSecretValue({
+      secret: secrets,
+      key: "DATABASE_URL",
+    }),
+
+    NEXT_PUBLIC_DISABLE_REGISTRATION: EnvValue.fromValue("true"),
+
+    // Authentik SSO
+    NEXT_PUBLIC_AUTHENTIK_ENABLED: EnvValue.fromValue("true"),
+    AUTHENTIK_CUSTOM_NAME: EnvValue.fromValue("Cmdcentral Login"),
+    AUTHENTIK_ISSUER: EnvValue.fromValue(
+      "https://login.cmdcentral.xyz/application/o/linkwarden/",
+    ),
+    AUTHENTIK_CLIENT_ID: EnvValue.fromSecretValue({
+      secret: secrets,
+      key: "AUTHENTIK_CLIENT_ID",
+    }),
+    AUTHENTIK_CLIENT_SECRET: EnvValue.fromSecretValue({
+      secret: secrets,
+      key: "AUTHENTIK_CLIENT_SECRET",
+    }),
+  },
+  livenessProbe: Probe.fromHttpGet("/", { port: 3000 }),
+  readinessProbe: Probe.fromHttpGet("/", { port: 3000 }),
+  extraIngressHosts: ["bookmarks.cmdcentral.xyz"],
+  volumes: [
+    {
+      name: "data",
+      mountPath: "/data",
+      enableBackups: true,
+      props: {
+        storage: Size.gibibytes(5),
+        storageClassName: StorageClass.CEPH_RBD,
+        accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
+      },
+    },
+  ],
+});
+
+app.synth();
+
+NewKustomize(app.outdir);
