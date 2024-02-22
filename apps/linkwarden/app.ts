@@ -87,7 +87,7 @@ new AppPlus(app, `${name}-app`, {
   volumes: [
     {
       name: "data",
-      mountPath: "/data",
+      mountPath: "/data/data",
       enableBackups: true,
       props: {
         storage: Size.gibibytes(5),

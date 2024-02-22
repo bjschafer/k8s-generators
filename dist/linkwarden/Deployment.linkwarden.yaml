@@ -80,7 +80,7 @@ spec:
             readOnlyRootFilesystem: false
             runAsNonRoot: false
           volumeMounts:
-            - mountPath: /data
+            - mountPath: /data/data
               name: pvc-linkwarden-app-data
       dnsPolicy: ClusterFirst
       hostNetwork: false
