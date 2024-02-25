@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd-image-updater.argoproj.io/git-branch: main
+    argocd-image-updater.argoproj.io/image-list: image:v1.x.x-simple=image:v1.x.x-simple:latest
+    argocd-image-updater.argoproj.io/image:v1.x.x-simple.update-strategy: semver
+    argocd-image-updater.argoproj.io/write-back-method: git
+  labels:
+    app.kubernetes.io/name: bookmarks
+  name: bookmarks
+  namespace: argocd
+spec:
+  destination:
+    namespace: bookmarks
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: dist/bookmarks
+    repoURL: git@github.com:bjschafer/k8s-generators.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

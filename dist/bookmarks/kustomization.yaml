@@ -1,0 +1,4 @@
+resources:
+  - Deployment.bookmarks.yaml
+  - Ingress.bookmarks.yaml
+  - Service.bookmarks.yaml

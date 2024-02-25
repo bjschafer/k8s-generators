@@ -1,21 +1,16 @@
 import { App, Size } from "cdk8s";
-import {
-  EnvValue,
-  PersistentVolumeAccessMode,
-  Probe,
-  Secret,
-} from "cdk8s-plus-27";
+import { EnvValue, Probe, Secret } from "cdk8s-plus-27";
 import { AppPlus } from "../../lib/app-plus";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { basename } from "../../lib/util";
-import { StorageClass } from "../../lib/volume";
 
 const namespace = basename(__dirname);
 const name = namespace;
-const image = "ghcr.io/linkwarden/linkwarden";
-const port = 3000;
+const image = "ghcr.io/kovah/linkace";
+const semverConstraint = "v1.x.x-simple";
+const port = 80;
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
 NewArgoApp(name, {
@@ -31,19 +26,19 @@ NewArgoApp(name, {
   autoUpdate: {
     images: [
       {
-        image: image,
-        strategy: "digest",
+        image: `image:${semverConstraint}`,
+        strategy: "semver",
       },
     ],
   },
 });
 
-const secrets = Secret.fromSecretName(app, `${name}-creds`, "secrets");
+const secrets = Secret.fromSecretName(app, `${name}-creds`, "db-creds");
 
 new AppPlus(app, `${name}-app`, {
   name: name,
   namespace: namespace,
-  image: image,
+  image: `${image}:v1.14.1-simple`,
   resources: {
     memory: {
       request: Size.mebibytes(384),
@@ -52,50 +47,19 @@ new AppPlus(app, `${name}-app`, {
   },
   ports: [port],
   extraEnv: {
-    NEXTAUTH_URL: EnvValue.fromValue(
-      "https://bookmarks.cmdcentral.xyz/api/v1/auth",
-    ),
-    NEXTAUTH_SECRET: EnvValue.fromSecretValue({
+    DB_CONNECTION: EnvValue.fromValue("pgsql"),
+    DB_HOST: EnvValue.fromValue("postgres.cmdcentral.xyz"),
+    DB_DATABASE: EnvValue.fromValue("linkace"),
+    DB_USERNAME: EnvValue.fromValue("linkace"),
+    DB_PORT: EnvValue.fromValue("5432"),
+    DB_PASSWORD: EnvValue.fromSecretValue({
       secret: secrets,
-      key: "NEXTAUTH_SECRET",
+      key: "DB_PASSWORD",
     }),
-    DATABASE_URL: EnvValue.fromSecretValue({
-      secret: secrets,
-      key: "DATABASE_URL",
-    }),
-
-    NEXT_PUBLIC_DISABLE_REGISTRATION: EnvValue.fromValue("true"),
-
-    // Authentik SSO
-    NEXT_PUBLIC_AUTHENTIK_ENABLED: EnvValue.fromValue("true"),
-    AUTHENTIK_CUSTOM_NAME: EnvValue.fromValue("Cmdcentral Login"),
-    AUTHENTIK_ISSUER: EnvValue.fromValue(
-      "https://login.cmdcentral.xyz/application/o/linkwarden",
-    ),
-    AUTHENTIK_CLIENT_ID: EnvValue.fromSecretValue({
-      secret: secrets,
-      key: "AUTHENTIK_CLIENT_ID",
-    }),
-    AUTHENTIK_CLIENT_SECRET: EnvValue.fromSecretValue({
-      secret: secrets,
-      key: "AUTHENTIK_CLIENT_SECRET",
-    }),
+    SETUP_COMPLETED: EnvValue.fromValue("true"), // required for postgres
   },
-  livenessProbe: Probe.fromHttpGet("/", { port: 3000 }),
-  readinessProbe: Probe.fromHttpGet("/", { port: 3000 }),
-  extraIngressHosts: ["bookmarks.cmdcentral.xyz"],
-  volumes: [
-    {
-      name: "data",
-      mountPath: "/data/data",
-      enableBackups: true,
-      props: {
-        storage: Size.gibibytes(5),
-        storageClassName: StorageClass.CEPH_RBD,
-        accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
-      },
-    },
-  ],
+  livenessProbe: Probe.fromHttpGet("/", { port: port }),
+  readinessProbe: Probe.fromHttpGet("/", { port: port }),
 });
 
 app.synth();
