@@ -1,5 +1,7 @@
 resources:
+  - CronJob.cronjob.yaml
   - Deployment.bookmarks.yaml
   - Ingress.bookmarks.yaml
   - Service.bookmarks.yaml
+  - sealedsecret.cron.yaml
   - sealedsecret.db-creds.yaml
