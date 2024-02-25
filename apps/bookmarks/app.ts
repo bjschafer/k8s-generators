@@ -1,5 +1,12 @@
-import { App, Size } from "cdk8s";
-import { EnvValue, Probe, Secret } from "cdk8s-plus-27";
+import { App, Chart, Cron, Size } from "cdk8s";
+import {
+  ConcurrencyPolicy,
+  CronJob,
+  EnvValue,
+  Probe,
+  RestartPolicy,
+  Secret,
+} from "cdk8s-plus-27";
 import { AppPlus } from "../../lib/app-plus";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
@@ -61,6 +68,44 @@ new AppPlus(app, `${name}-app`, {
   },
   livenessProbe: Probe.fromHttpGet("/", { port: port }),
   readinessProbe: Probe.fromHttpGet("/", { port: port }),
+});
+
+const cronChart = new Chart(app, `${name}-cron`);
+const cronSecret = Secret.fromSecretName(app, `${name}-cron-secret`, "cron");
+
+new CronJob(cronChart, `${name}-cronjob`, {
+  metadata: {
+    name: "cronjob",
+  },
+  schedule: Cron.schedule({ minute: "*/15" }),
+  containers: [
+    {
+      image: "ubuntu:latest",
+      args: ["curl", "http://bookmarks:80/cron/$(CRON_TOKEN)"],
+      envVariables: {
+        CRON_TOKEN: EnvValue.fromSecretValue({
+          secret: cronSecret,
+          key: "CRON_TOKEN",
+        }),
+      },
+      securityContext: {
+        privileged: false,
+        ensureNonRoot: true,
+        allowPrivilegeEscalation: false,
+        readOnlyRootFilesystem: true,
+      },
+      resources: {
+        memory: {
+          request: Size.mebibytes(32),
+          limit: Size.mebibytes(32),
+        },
+      },
+    },
+  ],
+  restartPolicy: RestartPolicy.NEVER,
+  concurrencyPolicy: ConcurrencyPolicy.FORBID,
+  failedJobsRetained: 1,
+  successfulJobsRetained: 1,
 });
 
 app.synth();
