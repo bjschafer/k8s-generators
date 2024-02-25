@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: bookmarks
+  namespace: bookmarks
+spec:
+  rules:
+    - host: bookmarks.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: bookmarks
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - bookmarks.cmdcentral.xyz
+      secretName: bookmarks-tls

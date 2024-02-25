@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookmarks
+  namespace: bookmarks
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: bookmarks-app-bookmarks-app-deployment-c8465c2f
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        cdk8s.io/metadata.addr: bookmarks-app-bookmarks-app-deployment-c8465c2f
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: DB_CONNECTION
+              value: pgsql
+            - name: DB_HOST
+              value: postgres.cmdcentral.xyz
+            - name: DB_DATABASE
+              value: linkace
+            - name: DB_USERNAME
+              value: linkace
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: DB_PASSWORD
+                  name: db-creds
+            - name: SETUP_COMPLETED
+              value: "true"
+          image: ghcr.io/kovah/linkace:v1.14.1-simple
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+          name: bookmarks
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+          resources:
+            limits:
+              memory: 1024Mi
+            requests:
+              memory: 384Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      terminationGracePeriodSeconds: 30
