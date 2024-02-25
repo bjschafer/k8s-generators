@@ -26,7 +26,8 @@ NewArgoApp(name, {
   autoUpdate: {
     images: [
       {
-        image: `image:${semverConstraint}`,
+        image: image,
+        versionConstraint: semverConstraint,
         strategy: "semver",
       },
     ],
