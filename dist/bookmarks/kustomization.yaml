@@ -2,3 +2,4 @@ resources:
   - Deployment.bookmarks.yaml
   - Ingress.bookmarks.yaml
   - Service.bookmarks.yaml
+  - sealedsecret.db-creds.yaml

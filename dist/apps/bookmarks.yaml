@@ -3,8 +3,8 @@ kind: Application
 metadata:
   annotations:
     argocd-image-updater.argoproj.io/git-branch: main
-    argocd-image-updater.argoproj.io/image-list: image:v1.x.x-simple=image:v1.x.x-simple:latest
-    argocd-image-updater.argoproj.io/image:v1.x.x-simple.update-strategy: semver
+    argocd-image-updater.argoproj.io/image-list: linkace=ghcr.io/kovah/linkace:v1.x.x-simple
+    argocd-image-updater.argoproj.io/linkace.update-strategy: semver
     argocd-image-updater.argoproj.io/write-back-method: git
   labels:
     app.kubernetes.io/name: bookmarks
