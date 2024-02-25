@@ -36,6 +36,7 @@ NewArgoApp(name, {
         image: image,
         versionConstraint: semverConstraint,
         strategy: "semver",
+        allowTags: String.raw`^v[0-9]+\.[0-9]+\.[0-9]+-simple$`,
       },
     ],
   },
