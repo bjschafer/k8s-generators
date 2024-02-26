@@ -1,8 +1,10 @@
-import { App, Chart, Cron, Size } from "cdk8s";
+import { App, Chart, Cron, Duration, Size } from "cdk8s";
 import {
   ConcurrencyPolicy,
+  Cpu,
   CronJob,
   EnvValue,
+  ImagePullPolicy,
   Probe,
   RestartPolicy,
   Secret,
@@ -51,8 +53,11 @@ new AppPlus(app, `${name}-app`, {
   image: `${image}:v1.14.1-simple`,
   resources: {
     memory: {
-      request: Size.mebibytes(384),
-      limit: Size.gibibytes(1),
+      request: Size.mebibytes(256),
+      limit: Size.mebibytes(512),
+    },
+    cpu: {
+      request: Cpu.millis(200),
     },
   },
   ports: [port],
@@ -69,8 +74,14 @@ new AppPlus(app, `${name}-app`, {
     }),
     SETUP_COMPLETED: EnvValue.fromValue("true"), // required for postgres
   },
-  livenessProbe: Probe.fromHttpGet("/", { port: port }),
-  readinessProbe: Probe.fromHttpGet("/", { port: port }),
+  livenessProbe: Probe.fromHttpGet("/", {
+    port: port,
+    initialDelaySeconds: Duration.seconds(5),
+  }),
+  readinessProbe: Probe.fromHttpGet("/", {
+    port: port,
+    initialDelaySeconds: Duration.seconds(5),
+  }),
 });
 
 const cronChart = new Chart(app, `${name}-cron`);
@@ -88,6 +99,7 @@ new CronJob(cronChart, `${name}-cronjob`, {
   containers: [
     {
       image: "quay.io/curl/curl",
+      imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,
       args: ["curl", "http://bookmarks:80/cron/$(CRON_TOKEN)"],
       envVariables: {
         CRON_TOKEN: EnvValue.fromSecretValue({

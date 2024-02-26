@@ -24,7 +24,7 @@ spec:
                       key: CRON_TOKEN
                       name: cron
               image: quay.io/curl/curl
-              imagePullPolicy: Always
+              imagePullPolicy: IfNotPresent
               name: main
               resources:
                 limits:
