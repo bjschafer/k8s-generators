@@ -41,7 +41,9 @@ spec:
           restartPolicy: Never
           securityContext:
             fsGroupChangePolicy: Always
+            runAsGroup: 568
             runAsNonRoot: true
+            runAsUser: 568
           setHostnameAsFQDN: false
           terminationGracePeriodSeconds: 30
   schedule: "*/15 * * * *"
