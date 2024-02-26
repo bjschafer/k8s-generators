@@ -23,6 +23,11 @@ spec:
       automountServiceAccountToken: false
       containers:
         - env:
+            - name: APP_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: APP_KEY
+                  name: appkey
             - name: DB_CONNECTION
               value: pgsql
             - name: DB_HOST

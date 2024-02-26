@@ -42,7 +42,8 @@ NewArgoApp(name, {
   },
 });
 
-const secrets = Secret.fromSecretName(app, `${name}-creds`, "db-creds");
+const dbCreds = Secret.fromSecretName(app, `${name}-creds`, "db-creds");
+const appKey = Secret.fromSecretName(app, `${name}-appkey`, "appkey");
 
 new AppPlus(app, `${name}-app`, {
   name: name,
@@ -56,13 +57,14 @@ new AppPlus(app, `${name}-app`, {
   },
   ports: [port],
   extraEnv: {
+    APP_KEY: EnvValue.fromSecretValue({ secret: appKey, key: "APP_KEY" }),
     DB_CONNECTION: EnvValue.fromValue("pgsql"),
     DB_HOST: EnvValue.fromValue("postgres.cmdcentral.xyz"),
     DB_DATABASE: EnvValue.fromValue("linkace"),
     DB_USERNAME: EnvValue.fromValue("linkace"),
     DB_PORT: EnvValue.fromValue("5432"),
     DB_PASSWORD: EnvValue.fromSecretValue({
-      secret: secrets,
+      secret: dbCreds,
       key: "DB_PASSWORD",
     }),
     SETUP_COMPLETED: EnvValue.fromValue("true"), // required for postgres
