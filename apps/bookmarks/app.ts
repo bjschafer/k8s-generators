@@ -81,6 +81,10 @@ new CronJob(cronChart, `${name}-cronjob`, {
     name: "cronjob",
   },
   schedule: Cron.schedule({ minute: "*/15" }),
+  securityContext: {
+    user: 568,
+    group: 568,
+  },
   containers: [
     {
       image: "ubuntu:latest",
