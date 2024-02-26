@@ -87,7 +87,7 @@ new CronJob(cronChart, `${name}-cronjob`, {
   },
   containers: [
     {
-      image: "ubuntu:latest",
+      image: "quay.io/curl/curl",
       args: ["curl", "http://bookmarks:80/cron/$(CRON_TOKEN)"],
       envVariables: {
         CRON_TOKEN: EnvValue.fromSecretValue({
