@@ -23,7 +23,7 @@ spec:
                     secretKeyRef:
                       key: CRON_TOKEN
                       name: cron
-              image: ubuntu:latest
+              image: quay.io/curl/curl
               imagePullPolicy: Always
               name: main
               resources:
