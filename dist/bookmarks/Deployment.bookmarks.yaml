@@ -53,6 +53,7 @@ spec:
               path: /
               port: 80
               scheme: HTTP
+            initialDelaySeconds: 5
           name: bookmarks
           ports:
             - containerPort: 80
@@ -62,11 +63,13 @@ spec:
               path: /
               port: 80
               scheme: HTTP
+            initialDelaySeconds: 5
           resources:
             limits:
-              memory: 1024Mi
+              memory: 512Mi
             requests:
-              memory: 384Mi
+              cpu: 200m
+              memory: 256Mi
           securityContext:
             allowPrivilegeEscalation: false
             privileged: false

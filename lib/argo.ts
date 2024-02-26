@@ -5,7 +5,6 @@ import { SecretReference } from "cdk8s-plus-27/lib/imports/k8s";
 import path = require("path");
 
 export const ARGO_NAMESPACE = "argocd";
-export const ARGO_GIT_REPO_URL = "git@github.com:bjschafer/k8s-prod.git";
 const ARGO_DESTINATION_SERVER = "https://kubernetes.default.svc";
 
 export function NewArgoApp(name: string, props: ArgoAppProps) {
