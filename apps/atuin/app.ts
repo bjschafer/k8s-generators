@@ -72,6 +72,8 @@ new AppPlus(app, "atuin", {
       secret: Secret.fromSecretName(app, "db-creds", "db-creds"),
       key: "ATUIN_DB_URI",
     }),
+    ATUIN_METRICS__ENABLE: EnvValue.fromValue("true"), // at 9001
+    ATUIN_METRICS__HOST: EnvValue.fromValue("0.0.0.0"),
   },
 });
 
