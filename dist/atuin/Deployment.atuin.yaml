@@ -36,6 +36,10 @@ spec:
                 secretKeyRef:
                   key: ATUIN_DB_URI
                   name: db-creds
+            - name: ATUIN_METRICS__ENABLE
+              value: "true"
+            - name: ATUIN_METRICS__HOST
+              value: 0.0.0.0
           image: ghcr.io/atuinsh/atuin
           imagePullPolicy: Always
           livenessProbe:
