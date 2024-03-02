@@ -3,6 +3,9 @@ kind: Deployment
 metadata:
   annotations:
     reloader.stakater.com/auto: "true"
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: home
   name: home
   namespace: home
 spec:
@@ -20,6 +23,7 @@ spec:
   template:
     metadata:
       labels:
+        app.kubernetes.io/name: home
         cdk8s.io/metadata.addr: home-app-home-app-deployment-c8467b6c
     spec:
       automountServiceAccountToken: false

@@ -1,6 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: spoolman
   name: spoolman
   namespace: spoolman
 spec:
@@ -18,6 +21,7 @@ spec:
   template:
     metadata:
       labels:
+        app.kubernetes.io/name: spoolman
         cdk8s.io/metadata.addr: spoolman-app-spoolman-app-deployment-c828c0db
     spec:
       automountServiceAccountToken: false

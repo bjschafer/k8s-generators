@@ -1,6 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: bookmarks
   name: bookmarks
   namespace: bookmarks
 spec:
@@ -18,6 +21,7 @@ spec:
   template:
     metadata:
       labels:
+        app.kubernetes.io/name: bookmarks
         cdk8s.io/metadata.addr: bookmarks-app-bookmarks-app-deployment-c8465c2f
     spec:
       automountServiceAccountToken: false

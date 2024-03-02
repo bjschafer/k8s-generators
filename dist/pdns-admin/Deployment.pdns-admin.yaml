@@ -1,6 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: pdns-admin
   name: pdns-admin
   namespace: pdns-admin
 spec:
@@ -17,6 +20,7 @@ spec:
       annotations:
         backup.velero.io/backup-volumes: pvc-pdns-admin-app-config
       labels:
+        app.kubernetes.io/name: pdns-admin
         cdk8s.io/metadata.addr: pdns-admin-app-pdns-admin-app-deployment-c878a4f5
     spec:
       automountServiceAccountToken: false

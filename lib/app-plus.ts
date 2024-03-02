@@ -58,6 +58,9 @@ export interface AppPlusProps {
   readonly extraIngressHosts?: string[];
   readonly limitToAMD64?: boolean;
   readonly args?: string[];
+  readonly monitoringConfig?: {
+    readonly port: number;
+  };
 }
 
 export class AppPlus extends Chart {
@@ -105,10 +108,31 @@ export class AppPlus extends Chart {
       );
     }
 
+    const ports: ContainerPort[] = [];
+    if (props.ports) {
+      ports.push(
+        ...props.ports.map(function (port: number): ContainerPort {
+          return {
+            number: port,
+          };
+        }),
+      );
+    }
+    if (props.monitoringConfig) {
+      ports.push({
+        number: props.monitoringConfig.port,
+        name: "metrics",
+      });
+    }
+
     const deploy = new Deployment(this, `${id}-deployment`, {
       metadata: {
         name: props.name,
         namespace: props.namespace,
+        labels: {
+          "app.kubernetes.io/name": props.name,
+          "app.kubernetes.io/managed-by": "generators",
+        },
         annotations: props.annotations,
       },
       replicas: props.replicas ?? 1,
@@ -119,6 +143,9 @@ export class AppPlus extends Chart {
         ? DeploymentStrategy.recreate()
         : undefined,
       podMetadata: {
+        labels: {
+          "app.kubernetes.io/name": props.name,
+        },
         annotations: volumeBackupAnnotation,
       },
       securityContext: DEFAULT_SECURITY_CONTEXT,
@@ -130,11 +157,7 @@ export class AppPlus extends Chart {
           securityContext: DEFAULT_SECURITY_CONTEXT,
           args: props.args,
           image: props.image,
-          ports: props.ports?.map(function (port: number): ContainerPort {
-            return {
-              number: port,
-            };
-          }),
+          ports: ports,
           resources: props.resources,
           envVariables: props.extraEnv,
           readiness:

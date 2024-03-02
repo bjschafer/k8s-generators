@@ -51,6 +51,9 @@ new AppPlus(app, "atuin", {
     },
   },
   ports: [port],
+  monitoringConfig: {
+    port: 9001,
+  },
   volumes: [
     {
       name: "data",
