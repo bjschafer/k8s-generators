@@ -1,9 +1,9 @@
-import { basename } from "path";
-import { App, Size } from "cdk8s";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
-import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
-import { AppPlus } from "../../lib/app-plus";
+import { App, Duration, Size } from "cdk8s";
 import { EnvValue, Probe } from "cdk8s-plus-27";
+import { basename } from "path";
+import { AppPlus } from "../../lib/app-plus";
+import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
+import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { HomeConfig } from "./config";
 
@@ -48,8 +48,14 @@ new AppPlus(app, `${name}-app`, {
   },
   replicas: 2,
   ports: [port],
-  livenessProbe: Probe.fromHttpGet("", { port: port }),
-  readinessProbe: Probe.fromHttpGet("", { port: port }),
+  livenessProbe: Probe.fromHttpGet("", {
+    port: port,
+    initialDelaySeconds: Duration.seconds(60),
+  }),
+  readinessProbe: Probe.fromHttpGet("", {
+    port: port,
+    initialDelaySeconds: Duration.seconds(30),
+  }),
   extraIngressHosts: ["cmdcentral.xyz"],
   extraEnv: {
     TITLE: EnvValue.fromValue("Cmdcentral Home"), // defaults to "My Website", set to TITLE= to hide the title
