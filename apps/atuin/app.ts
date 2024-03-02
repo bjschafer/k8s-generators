@@ -43,12 +43,11 @@ new AppPlus(app, "atuin", {
   args: ["server", "start"],
   resources: {
     cpu: {
-      limit: Cpu.millis(250),
-      request: Cpu.millis(50),
+      request: Cpu.millis(5),
     },
     memory: {
-      limit: Size.mebibytes(512),
-      request: Size.mebibytes(128),
+      request: Size.mebibytes(32),
+      limit: Size.mebibytes(128),
     },
   },
   ports: [port],
