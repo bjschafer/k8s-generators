@@ -1,6 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: atuin
   name: atuin
   namespace: atuin
 spec:
@@ -17,6 +20,7 @@ spec:
       annotations:
         backup.velero.io/backup-volumes: pvc-atuin-data
       labels:
+        app.kubernetes.io/name: atuin
         cdk8s.io/metadata.addr: atuin-atuin-deployment-c8aa6d7f
     spec:
       automountServiceAccountToken: false
@@ -49,6 +53,8 @@ spec:
           name: atuin
           ports:
             - containerPort: 8888
+            - containerPort: 9001
+              name: metrics
           readinessProbe:
             failureThreshold: 3
             tcpSocket:

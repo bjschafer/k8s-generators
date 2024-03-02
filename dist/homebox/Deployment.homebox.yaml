@@ -1,6 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: homebox
   name: homebox
   namespace: homebox
 spec:
@@ -17,6 +20,7 @@ spec:
       annotations:
         backup.velero.io/backup-volumes: pvc-homebox-app-data
       labels:
+        app.kubernetes.io/name: homebox
         cdk8s.io/metadata.addr: homebox-app-homebox-app-deployment-c8cf2749
     spec:
       automountServiceAccountToken: false

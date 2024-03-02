@@ -1,6 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: monica
   name: monica
   namespace: monica
 spec:
@@ -20,6 +23,7 @@ spec:
       annotations:
         backup.velero.io/backup-volumes: pvc-monica-app-data
       labels:
+        app.kubernetes.io/name: monica
         cdk8s.io/metadata.addr: monica-app-monica-app-deployment-c8b445f6
     spec:
       automountServiceAccountToken: false

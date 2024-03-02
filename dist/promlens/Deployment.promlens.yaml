@@ -1,6 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: promlens
   name: promlens
   namespace: promlens
 spec:
@@ -18,6 +21,7 @@ spec:
   template:
     metadata:
       labels:
+        app.kubernetes.io/name: promlens
         cdk8s.io/metadata.addr: promlens-app-promlens-app-deployment-c87e6e6e
     spec:
       automountServiceAccountToken: false
