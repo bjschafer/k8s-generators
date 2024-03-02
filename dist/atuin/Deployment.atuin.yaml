@@ -55,11 +55,10 @@ spec:
               port: 8888
           resources:
             limits:
-              cpu: 250m
-              memory: 512Mi
-            requests:
-              cpu: 50m
               memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 32Mi
           securityContext:
             allowPrivilegeEscalation: false
             privileged: false
