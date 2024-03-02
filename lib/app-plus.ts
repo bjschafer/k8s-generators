@@ -1,5 +1,4 @@
 import { ApiObject, Chart, JsonPatch, Size } from "cdk8s";
-import { Construct } from "constructs";
 import {
   ConfigMap,
   ConfigMapVolumeOptions,
@@ -19,12 +18,13 @@ import {
   ServicePort,
   Volume,
 } from "cdk8s-plus-27";
-import { StorageClass } from "./volume";
+import { Construct } from "constructs";
 import {
   BACKUP_ANNOTATION_NAME,
   CLUSTER_ISSUER,
   DEFAULT_SECURITY_CONTEXT,
 } from "./consts";
+import { StorageClass } from "./volume";
 
 export interface AppPlusVolume {
   readonly props: PersistentVolumeClaimProps;
@@ -57,6 +57,7 @@ export interface AppPlusProps {
   readonly automountServiceAccount?: boolean;
   readonly extraIngressHosts?: string[];
   readonly limitToAMD64?: boolean;
+  readonly args?: string[];
 }
 
 export class AppPlus extends Chart {
@@ -127,6 +128,7 @@ export class AppPlus extends Chart {
         {
           name: props.name,
           securityContext: DEFAULT_SECURITY_CONTEXT,
+          args: props.args,
           image: props.image,
           ports: props.ports?.map(function (port: number): ContainerPort {
             return {
