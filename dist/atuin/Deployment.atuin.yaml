@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: atuin
+  namespace: atuin
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: atuin-atuin-deployment-c8aa6d7f
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        backup.velero.io/backup-volumes: pvc-atuin-data
+      labels:
+        cdk8s.io/metadata.addr: atuin-atuin-deployment-c8aa6d7f
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: ATUIN_HOST
+              value: 0.0.0.0
+            - name: ATUIN_PORT
+              value: "8888"
+            - name: ATUIN_OPEN_REGISTRATION
+              value: "false"
+            - name: ATUIN_DB_URI
+              valueFrom:
+                secretKeyRef:
+                  key: ATUIN_DB_URI
+                  name: db-creds
+          image: ghcr.io/atuinsh/atuin
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 8888
+          name: atuin
+          ports:
+            - containerPort: 8888
+          readinessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 8888
+          resources:
+            limits:
+              cpu: 250m
+              memory: 512Mi
+            requests:
+              cpu: 50m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /config
+              name: pvc-atuin-data
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: pvc-atuin-data
+          persistentVolumeClaim:
+            claimName: atuin-data
+            readOnly: false

@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd-image-updater.argoproj.io/atuin.update-strategy: latest
+    argocd-image-updater.argoproj.io/git-branch: main
+    argocd-image-updater.argoproj.io/image-list: atuin=ghcr.io/atuinsh/atuin:latest
+    argocd-image-updater.argoproj.io/write-back-method: git
+  labels:
+    app.kubernetes.io/name: atuin
+  name: atuin
+  namespace: argocd
+spec:
+  destination:
+    namespace: atuin
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: dist/atuin
+    repoURL: git@github.com:bjschafer/k8s-generators.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
