@@ -39,6 +39,7 @@ spec:
               path: ""
               port: 4173
               scheme: HTTP
+            initialDelaySeconds: 60
           name: home
           ports:
             - containerPort: 4173
@@ -48,6 +49,7 @@ spec:
               path: ""
               port: 4173
               scheme: HTTP
+            initialDelaySeconds: 30
           resources:
             limits:
               memory: 256Mi
