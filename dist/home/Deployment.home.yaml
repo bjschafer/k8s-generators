@@ -65,7 +65,7 @@ spec:
             readOnlyRootFilesystem: false
             runAsNonRoot: false
           volumeMounts:
-            - mountPath: /app/src/config.json
+            - mountPath: /app/src/config/config.json
               name: configmap-home-config
               subPath: config.json
       dnsPolicy: ClusterFirst

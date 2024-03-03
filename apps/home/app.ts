@@ -71,7 +71,7 @@ new AppPlus(app, `${name}-app`, {
   configmapMounts: [
     {
       name: `${name}-config`,
-      mountPath: "/app/src/config.json",
+      mountPath: "/app/src/config/config.json",
       subPath: "config.json",
     },
   ],
@@ -81,6 +81,13 @@ new HomeConfig(app, `${name}-config`, {
   links: [
     {
       services: [
+        {
+          name: "Bookmarks",
+          uri: "https://bookmarks.cmdcentral.xyz",
+          icon: "linkace",
+          description: "Webpage saver/reading list",
+          iconBubble: false,
+        },
         {
           name: "Gitea",
           uri: "https://git.cmdcentral.xyz",
@@ -131,13 +138,6 @@ new HomeConfig(app, `${name}-config`, {
           name: "Recipes",
           uri: "https://recipes.cmdcentral.xyz",
           icon: "mealie",
-        },
-        {
-          name: "Wallabag",
-          uri: "https://wallabag.cmdcentral.xyz",
-          icon: "wallabag",
-          description: "Webpage saver/reading list",
-          iconBubble: false,
         },
       ],
     },
