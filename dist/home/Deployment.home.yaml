@@ -11,7 +11,7 @@ metadata:
 spec:
   minReadySeconds: 0
   progressDeadlineSeconds: 600
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       cdk8s.io/metadata.addr: home-app-home-app-deployment-c8467b6c
