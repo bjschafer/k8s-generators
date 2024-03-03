@@ -46,7 +46,7 @@ new AppPlus(app, `${name}-app`, {
       limit: Size.mebibytes(256),
     },
   },
-  replicas: 2,
+  replicas: 1, // TODO: replicas 2 breaks css :/
   ports: [port],
   livenessProbe: Probe.fromHttpGet("", {
     port: port,
