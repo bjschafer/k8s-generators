@@ -154,6 +154,7 @@ new HomeConfig(app, `${name}-config`, {
           name: "Library",
           uri: "https://library.cmdcentral.xyz",
           icon: "mdi-library",
+          iconColor: "black",
           description: "Books n shiet",
         },
         {
