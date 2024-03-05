@@ -80,6 +80,7 @@ new AppPlus(app, `${name}-app`, {
 new HomeConfig(app, `${name}-config`, {
   links: [
     {
+      category: "",
       services: [
         {
           name: "Bookmarks",
