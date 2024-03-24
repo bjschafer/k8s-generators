@@ -49,6 +49,8 @@ spec:
                   name: db-creds
             - name: SETUP_COMPLETED
               value: "true"
+            - name: SESSION_LIFETIME
+              value: "525600"
           image: ghcr.io/kovah/linkace:v1.14.1-simple
           imagePullPolicy: Always
           livenessProbe:

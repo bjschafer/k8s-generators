@@ -73,6 +73,8 @@ new AppPlus(app, `${name}-app`, {
       key: "DB_PASSWORD",
     }),
     SETUP_COMPLETED: EnvValue.fromValue("true"), // required for postgres
+
+    SESSION_LIFETIME: EnvValue.fromValue(`${60 * 24 * 365}`), // in minutes, 1 year
   },
   livenessProbe: Probe.fromHttpGet("/", {
     port: port,
