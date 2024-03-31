@@ -266,6 +266,13 @@ export interface BackupSpec {
   readonly ttl?: string;
 
   /**
+   * UploaderConfig specifies the configuration for the uploader.
+   *
+   * @schema BackupSpec#uploaderConfig
+   */
+  readonly uploaderConfig?: BackupSpecUploaderConfig;
+
+  /**
    * VolumeSnapshotLocations is a list containing names of VolumeSnapshotLocations associated with this backup.
    *
    * @schema BackupSpec#volumeSnapshotLocations
@@ -305,6 +312,7 @@ export function toJson_BackupSpec(obj: BackupSpec | undefined): Record<string, a
     'snapshotVolumes': obj.snapshotVolumes,
     'storageLocation': obj.storageLocation,
     'ttl': obj.ttl,
+    'uploaderConfig': toJson_BackupSpecUploaderConfig(obj.uploaderConfig),
     'volumeSnapshotLocations': obj.volumeSnapshotLocations?.map(y => y),
   };
   // filter undefined values
@@ -479,6 +487,35 @@ export function toJson_BackupSpecResourcePolicy(obj: BackupSpecResourcePolicy | 
     'apiGroup': obj.apiGroup,
     'kind': obj.kind,
     'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * UploaderConfig specifies the configuration for the uploader.
+ *
+ * @schema BackupSpecUploaderConfig
+ */
+export interface BackupSpecUploaderConfig {
+  /**
+   * ParallelFilesUpload is the number of files parallel uploads to perform when using the uploader.
+   *
+   * @schema BackupSpecUploaderConfig#parallelFilesUpload
+   */
+  readonly parallelFilesUpload?: number;
+
+}
+
+/**
+ * Converts an object of type 'BackupSpecUploaderConfig' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_BackupSpecUploaderConfig(obj: BackupSpecUploaderConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'parallelFilesUpload': obj.parallelFilesUpload,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -1370,7 +1407,7 @@ export function toJson_BackupStorageLocationSpecObjectStorage(obj: BackupStorage
 
 
 /**
- *
+ * DataDownload acts as the protocol between data mover plugins and data mover controller for the datamover restore operation
  *
  * @schema DataDownload
  */
@@ -1424,6 +1461,8 @@ export class DataDownload extends ApiObject {
 }
 
 /**
+ * DataDownload acts as the protocol between data mover plugins and data mover controller for the datamover restore operation
+ *
  * @schema DataDownload
  */
 export interface DataDownloadProps {
@@ -1588,7 +1627,7 @@ export function toJson_DataDownloadSpecTargetVolume(obj: DataDownloadSpecTargetV
 
 
 /**
- *
+ * DataUpload acts as the protocol between data mover plugins and data mover controller for the datamover backup operation
  *
  * @schema DataUpload
  */
@@ -1642,6 +1681,8 @@ export class DataUpload extends ApiObject {
 }
 
 /**
+ * DataUpload acts as the protocol between data mover plugins and data mover controller for the datamover backup operation
+ *
  * @schema DataUpload
  */
 export interface DataUploadProps {
@@ -2115,6 +2156,8 @@ export enum DownloadRequestSpecTargetKind {
   CSI_BACKUP_VOLUME_SNAPSHOTS = "CSIBackupVolumeSnapshots",
   /** CSIBackupVolumeSnapshotContents */
   CSI_BACKUP_VOLUME_SNAPSHOT_CONTENTS = "CSIBackupVolumeSnapshotContents",
+  /** BackupVolumeInfos */
+  BACKUP_VOLUME_INFOS = "BackupVolumeInfos",
 }
 
 
@@ -2247,6 +2290,13 @@ export interface PodVolumeBackupSpec {
   readonly tags?: { [key: string]: string };
 
   /**
+   * UploaderSettings are a map of key-value pairs that should be applied to the uploader configuration.
+   *
+   * @schema PodVolumeBackupSpec#uploaderSettings
+   */
+  readonly uploaderSettings?: { [key: string]: string };
+
+  /**
    * UploaderType is the type of the uploader to handle the data transfer.
    *
    * @schema PodVolumeBackupSpec#uploaderType
@@ -2274,6 +2324,7 @@ export function toJson_PodVolumeBackupSpec(obj: PodVolumeBackupSpec | undefined)
     'pod': toJson_PodVolumeBackupSpecPod(obj.pod),
     'repoIdentifier': obj.repoIdentifier,
     'tags': ((obj.tags) === undefined) ? undefined : (Object.entries(obj.tags).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'uploaderSettings': ((obj.uploaderSettings) === undefined) ? undefined : (Object.entries(obj.uploaderSettings).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'uploaderType': obj.uploaderType,
     'volume': obj.volume,
   };
@@ -2501,6 +2552,13 @@ export interface PodVolumeRestoreSpec {
   readonly sourceNamespace: string;
 
   /**
+   * UploaderSettings are a map of key-value pairs that should be applied to the uploader configuration.
+   *
+   * @schema PodVolumeRestoreSpec#uploaderSettings
+   */
+  readonly uploaderSettings?: { [key: string]: string };
+
+  /**
    * UploaderType is the type of the uploader to handle the data transfer.
    *
    * @schema PodVolumeRestoreSpec#uploaderType
@@ -2528,6 +2586,7 @@ export function toJson_PodVolumeRestoreSpec(obj: PodVolumeRestoreSpec | undefine
     'repoIdentifier': obj.repoIdentifier,
     'snapshotID': obj.snapshotId,
     'sourceNamespace': obj.sourceNamespace,
+    'uploaderSettings': ((obj.uploaderSettings) === undefined) ? undefined : (Object.entries(obj.uploaderSettings).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'uploaderType': obj.uploaderType,
     'volume': obj.volume,
   };
@@ -2981,6 +3040,13 @@ export interface RestoreSpec {
    */
   readonly scheduleName?: string;
 
+  /**
+   * UploaderConfig specifies the configuration for the restore.
+   *
+   * @schema RestoreSpec#uploaderConfig
+   */
+  readonly uploaderConfig?: RestoreSpecUploaderConfig;
+
 }
 
 /**
@@ -3007,6 +3073,7 @@ export function toJson_RestoreSpec(obj: RestoreSpec | undefined): Record<string,
     'restorePVs': obj.restorePVs,
     'restoreStatus': toJson_RestoreSpecRestoreStatus(obj.restoreStatus),
     'scheduleName': obj.scheduleName,
+    'uploaderConfig': toJson_RestoreSpecUploaderConfig(obj.uploaderConfig),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -3190,6 +3257,35 @@ export function toJson_RestoreSpecRestoreStatus(obj: RestoreSpecRestoreStatus | 
   const result = {
     'excludedResources': obj.excludedResources?.map(y => y),
     'includedResources': obj.includedResources?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * UploaderConfig specifies the configuration for the restore.
+ *
+ * @schema RestoreSpecUploaderConfig
+ */
+export interface RestoreSpecUploaderConfig {
+  /**
+   * WriteSparseFiles is a flag to indicate whether write files sparsely or not.
+   *
+   * @schema RestoreSpecUploaderConfig#writeSparseFiles
+   */
+  readonly writeSparseFiles?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'RestoreSpecUploaderConfig' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_RestoreSpecUploaderConfig(obj: RestoreSpecUploaderConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'writeSparseFiles': obj.writeSparseFiles,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -3517,6 +3613,13 @@ export interface RestoreSpecHooksResourcesPostHooksExec {
   readonly onError?: RestoreSpecHooksResourcesPostHooksExecOnError;
 
   /**
+   * WaitForReady ensures command will be launched when container is Ready instead of Running.
+   *
+   * @schema RestoreSpecHooksResourcesPostHooksExec#waitForReady
+   */
+  readonly waitForReady?: boolean;
+
+  /**
    * WaitTimeout defines the maximum amount of time Velero should wait for the container to be Ready before attempting to run the command.
    *
    * @schema RestoreSpecHooksResourcesPostHooksExec#waitTimeout
@@ -3536,6 +3639,7 @@ export function toJson_RestoreSpecHooksResourcesPostHooksExec(obj: RestoreSpecHo
     'container': obj.container,
     'execTimeout': obj.execTimeout,
     'onError': obj.onError,
+    'waitForReady': obj.waitForReady,
     'waitTimeout': obj.waitTimeout,
   };
   // filter undefined values
@@ -3703,6 +3807,13 @@ export interface ScheduleSpec {
   readonly schedule: string;
 
   /**
+   * SkipImmediately specifies whether to skip backup if schedule is due immediately from `schedule.status.lastBackup` timestamp when schedule is unpaused or if schedule is new. If true, backup will be skipped immediately when schedule is unpaused if it is due based on .Status.LastBackupTimestamp or schedule is new, and will run at next schedule time. If false, backup will not be skipped immediately when schedule is unpaused, but will run at next schedule time. If empty, will follow server configuration (default: false).
+   *
+   * @schema ScheduleSpec#skipImmediately
+   */
+  readonly skipImmediately?: boolean;
+
+  /**
    * Template is the definition of the Backup to be run on the provided schedule
    *
    * @schema ScheduleSpec#template
@@ -3727,6 +3838,7 @@ export function toJson_ScheduleSpec(obj: ScheduleSpec | undefined): Record<strin
   const result = {
     'paused': obj.paused,
     'schedule': obj.schedule,
+    'skipImmediately': obj.skipImmediately,
     'template': toJson_ScheduleSpecTemplate(obj.template),
     'useOwnerReferencesInBackup': obj.useOwnerReferencesInBackup,
   };
@@ -3909,6 +4021,13 @@ export interface ScheduleSpecTemplate {
   readonly ttl?: string;
 
   /**
+   * UploaderConfig specifies the configuration for the uploader.
+   *
+   * @schema ScheduleSpecTemplate#uploaderConfig
+   */
+  readonly uploaderConfig?: ScheduleSpecTemplateUploaderConfig;
+
+  /**
    * VolumeSnapshotLocations is a list containing names of VolumeSnapshotLocations associated with this backup.
    *
    * @schema ScheduleSpecTemplate#volumeSnapshotLocations
@@ -3948,6 +4067,7 @@ export function toJson_ScheduleSpecTemplate(obj: ScheduleSpecTemplate | undefine
     'snapshotVolumes': obj.snapshotVolumes,
     'storageLocation': obj.storageLocation,
     'ttl': obj.ttl,
+    'uploaderConfig': toJson_ScheduleSpecTemplateUploaderConfig(obj.uploaderConfig),
     'volumeSnapshotLocations': obj.volumeSnapshotLocations?.map(y => y),
   };
   // filter undefined values
@@ -4122,6 +4242,35 @@ export function toJson_ScheduleSpecTemplateResourcePolicy(obj: ScheduleSpecTempl
     'apiGroup': obj.apiGroup,
     'kind': obj.kind,
     'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * UploaderConfig specifies the configuration for the uploader.
+ *
+ * @schema ScheduleSpecTemplateUploaderConfig
+ */
+export interface ScheduleSpecTemplateUploaderConfig {
+  /**
+   * ParallelFilesUpload is the number of files parallel uploads to perform when using the uploader.
+   *
+   * @schema ScheduleSpecTemplateUploaderConfig#parallelFilesUpload
+   */
+  readonly parallelFilesUpload?: number;
+
+}
+
+/**
+ * Converts an object of type 'ScheduleSpecTemplateUploaderConfig' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScheduleSpecTemplateUploaderConfig(obj: ScheduleSpecTemplateUploaderConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'parallelFilesUpload': obj.parallelFilesUpload,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});

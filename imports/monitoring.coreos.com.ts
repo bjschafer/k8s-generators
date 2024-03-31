@@ -148,7 +148,7 @@ export interface AlertmanagerSpec {
   readonly automountServiceAccountToken?: boolean;
 
   /**
-   * Base image that is used to deploy pods, without tag. Deprecated: use 'image' instead
+   * Base image that is used to deploy pods, without tag. Deprecated: use 'image' instead.
    *
    * @schema AlertmanagerSpec#baseImage
    */
@@ -167,6 +167,13 @@ export interface AlertmanagerSpec {
    * @schema AlertmanagerSpec#clusterGossipInterval
    */
   readonly clusterGossipInterval?: string;
+
+  /**
+   * Defines the identifier that uniquely identifies the Alertmanager cluster. You should only set it when the Alertmanager cluster includes Alertmanager instances which are external to this Alertmanager resource. In practice, the addresses of the external instances are provided via the `.spec.additionalPeers` field.
+   *
+   * @schema AlertmanagerSpec#clusterLabel
+   */
+  readonly clusterLabel?: string;
 
   /**
    * Timeout for cluster peering.
@@ -371,9 +378,9 @@ export interface AlertmanagerSpec {
   readonly serviceAccountName?: string;
 
   /**
-   * SHA of Alertmanager container image to be deployed. Defaults to the value of `version`. Similar to a tag, but the SHA explicitly deploys an immutable container image. Version and Tag are ignored if SHA is set. Deprecated: use 'image' instead.  The image digest can be specified as part of the image URL.
+   * SHA of Alertmanager container image to be deployed. Defaults to the value of `version`. Similar to a tag, but the SHA explicitly deploys an immutable container image. Version and Tag are ignored if SHA is set. Deprecated: use 'image' instead. The image digest can be specified as part of the image URL.
    *
-   * @default the value of `version`. Similar to a tag, but the SHA explicitly deploys an immutable container image. Version and Tag are ignored if SHA is set. Deprecated: use 'image' instead.  The image digest can be specified as part of the image URL.
+   * @default the value of `version`. Similar to a tag, but the SHA explicitly deploys an immutable container image. Version and Tag are ignored if SHA is set. Deprecated: use 'image' instead. The image digest can be specified as part of the image URL.
    * @schema AlertmanagerSpec#sha
    */
   readonly sha?: string;
@@ -386,9 +393,9 @@ export interface AlertmanagerSpec {
   readonly storage?: AlertmanagerSpecStorage;
 
   /**
-   * Tag of Alertmanager container image to be deployed. Defaults to the value of `version`. Version is ignored if Tag is set. Deprecated: use 'image' instead.  The image tag can be specified as part of the image URL.
+   * Tag of Alertmanager container image to be deployed. Defaults to the value of `version`. Version is ignored if Tag is set. Deprecated: use 'image' instead. The image tag can be specified as part of the image URL.
    *
-   * @default the value of `version`. Version is ignored if Tag is set. Deprecated: use 'image' instead.  The image tag can be specified as part of the image URL.
+   * @default the value of `version`. Version is ignored if Tag is set. Deprecated: use 'image' instead. The image tag can be specified as part of the image URL.
    * @schema AlertmanagerSpec#tag
    */
   readonly tag?: string;
@@ -454,6 +461,7 @@ export function toJson_AlertmanagerSpec(obj: AlertmanagerSpec | undefined): Reco
     'baseImage': obj.baseImage,
     'clusterAdvertiseAddress': obj.clusterAdvertiseAddress,
     'clusterGossipInterval': obj.clusterGossipInterval,
+    'clusterLabel': obj.clusterLabel,
     'clusterPeerTimeout': obj.clusterPeerTimeout,
     'clusterPushpullInterval': obj.clusterPushpullInterval,
     'configMaps': obj.configMaps?.map(y => y),
@@ -1441,7 +1449,7 @@ export function toJson_AlertmanagerSpecSecurityContext(obj: AlertmanagerSpecSecu
  */
 export interface AlertmanagerSpecStorage {
   /**
-   * *Deprecated: subPath usage will be removed in a future release.*
+   * Deprecated: subPath usage will be removed in a future release.
    *
    * @schema AlertmanagerSpecStorage#disableMountSubPath
    */
@@ -4322,7 +4330,7 @@ export interface AlertmanagerSpecStorageVolumeClaimTemplate {
   readonly spec?: AlertmanagerSpecStorageVolumeClaimTemplateSpec;
 
   /**
-   * *Deprecated: this field is never set.*
+   * Deprecated: this field is never set.
    *
    * @schema AlertmanagerSpecStorageVolumeClaimTemplate#status
    */
@@ -6235,11 +6243,25 @@ export function toJson_AlertmanagerSpecAffinityPodAffinityPreferredDuringSchedul
  */
 export interface AlertmanagerSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution {
   /**
-   * A label query over a set of resources, in this case pods.
+   * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
    *
    * @schema AlertmanagerSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#labelSelector
    */
   readonly labelSelector?: AlertmanagerSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MatchLabelKeys and LabelSelector. Also, MatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema AlertmanagerSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector. Also, MismatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema AlertmanagerSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
 
   /**
    * A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces.
@@ -6272,6 +6294,8 @@ export function toJson_AlertmanagerSpecAffinityPodAffinityRequiredDuringScheduli
   if (obj === undefined) { return undefined; }
   const result = {
     'labelSelector': toJson_AlertmanagerSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
     'namespaceSelector': toJson_AlertmanagerSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj.namespaceSelector),
     'namespaces': obj.namespaces?.map(y => y),
     'topologyKey': obj.topologyKey,
@@ -6325,11 +6349,25 @@ export function toJson_AlertmanagerSpecAffinityPodAntiAffinityPreferredDuringSch
  */
 export interface AlertmanagerSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution {
   /**
-   * A label query over a set of resources, in this case pods.
+   * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
    *
    * @schema AlertmanagerSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#labelSelector
    */
   readonly labelSelector?: AlertmanagerSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MatchLabelKeys and LabelSelector. Also, MatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema AlertmanagerSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector. Also, MismatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema AlertmanagerSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
 
   /**
    * A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces.
@@ -6362,6 +6400,8 @@ export function toJson_AlertmanagerSpecAffinityPodAntiAffinityRequiredDuringSche
   if (obj === undefined) { return undefined; }
   const result = {
     'labelSelector': toJson_AlertmanagerSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
     'namespaceSelector': toJson_AlertmanagerSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj.namespaceSelector),
     'namespaces': obj.namespaces?.map(y => y),
     'topologyKey': obj.topologyKey,
@@ -6906,6 +6946,13 @@ export interface AlertmanagerSpecContainersLifecyclePostStart {
   readonly httpGet?: AlertmanagerSpecContainersLifecyclePostStartHttpGet;
 
   /**
+   * Sleep represents the duration that the container should sleep before being terminated.
+   *
+   * @schema AlertmanagerSpecContainersLifecyclePostStart#sleep
+   */
+  readonly sleep?: AlertmanagerSpecContainersLifecyclePostStartSleep;
+
+  /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
    *
    * @schema AlertmanagerSpecContainersLifecyclePostStart#tcpSocket
@@ -6923,6 +6970,7 @@ export function toJson_AlertmanagerSpecContainersLifecyclePostStart(obj: Alertma
   const result = {
     'exec': toJson_AlertmanagerSpecContainersLifecyclePostStartExec(obj.exec),
     'httpGet': toJson_AlertmanagerSpecContainersLifecyclePostStartHttpGet(obj.httpGet),
+    'sleep': toJson_AlertmanagerSpecContainersLifecyclePostStartSleep(obj.sleep),
     'tcpSocket': toJson_AlertmanagerSpecContainersLifecyclePostStartTcpSocket(obj.tcpSocket),
   };
   // filter undefined values
@@ -6951,6 +6999,13 @@ export interface AlertmanagerSpecContainersLifecyclePreStop {
   readonly httpGet?: AlertmanagerSpecContainersLifecyclePreStopHttpGet;
 
   /**
+   * Sleep represents the duration that the container should sleep before being terminated.
+   *
+   * @schema AlertmanagerSpecContainersLifecyclePreStop#sleep
+   */
+  readonly sleep?: AlertmanagerSpecContainersLifecyclePreStopSleep;
+
+  /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
    *
    * @schema AlertmanagerSpecContainersLifecyclePreStop#tcpSocket
@@ -6968,6 +7023,7 @@ export function toJson_AlertmanagerSpecContainersLifecyclePreStop(obj: Alertmana
   const result = {
     'exec': toJson_AlertmanagerSpecContainersLifecyclePreStopExec(obj.exec),
     'httpGet': toJson_AlertmanagerSpecContainersLifecyclePreStopHttpGet(obj.httpGet),
+    'sleep': toJson_AlertmanagerSpecContainersLifecyclePreStopSleep(obj.sleep),
     'tcpSocket': toJson_AlertmanagerSpecContainersLifecyclePreStopTcpSocket(obj.tcpSocket),
   };
   // filter undefined values
@@ -7861,6 +7917,13 @@ export interface AlertmanagerSpecInitContainersLifecyclePostStart {
   readonly httpGet?: AlertmanagerSpecInitContainersLifecyclePostStartHttpGet;
 
   /**
+   * Sleep represents the duration that the container should sleep before being terminated.
+   *
+   * @schema AlertmanagerSpecInitContainersLifecyclePostStart#sleep
+   */
+  readonly sleep?: AlertmanagerSpecInitContainersLifecyclePostStartSleep;
+
+  /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
    *
    * @schema AlertmanagerSpecInitContainersLifecyclePostStart#tcpSocket
@@ -7878,6 +7941,7 @@ export function toJson_AlertmanagerSpecInitContainersLifecyclePostStart(obj: Ale
   const result = {
     'exec': toJson_AlertmanagerSpecInitContainersLifecyclePostStartExec(obj.exec),
     'httpGet': toJson_AlertmanagerSpecInitContainersLifecyclePostStartHttpGet(obj.httpGet),
+    'sleep': toJson_AlertmanagerSpecInitContainersLifecyclePostStartSleep(obj.sleep),
     'tcpSocket': toJson_AlertmanagerSpecInitContainersLifecyclePostStartTcpSocket(obj.tcpSocket),
   };
   // filter undefined values
@@ -7906,6 +7970,13 @@ export interface AlertmanagerSpecInitContainersLifecyclePreStop {
   readonly httpGet?: AlertmanagerSpecInitContainersLifecyclePreStopHttpGet;
 
   /**
+   * Sleep represents the duration that the container should sleep before being terminated.
+   *
+   * @schema AlertmanagerSpecInitContainersLifecyclePreStop#sleep
+   */
+  readonly sleep?: AlertmanagerSpecInitContainersLifecyclePreStopSleep;
+
+  /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
    *
    * @schema AlertmanagerSpecInitContainersLifecyclePreStop#tcpSocket
@@ -7923,6 +7994,7 @@ export function toJson_AlertmanagerSpecInitContainersLifecyclePreStop(obj: Alert
   const result = {
     'exec': toJson_AlertmanagerSpecInitContainersLifecyclePreStopExec(obj.exec),
     'httpGet': toJson_AlertmanagerSpecInitContainersLifecyclePreStopHttpGet(obj.httpGet),
+    'sleep': toJson_AlertmanagerSpecInitContainersLifecyclePreStopSleep(obj.sleep),
     'tcpSocket': toJson_AlertmanagerSpecInitContainersLifecyclePreStopTcpSocket(obj.tcpSocket),
   };
   // filter undefined values
@@ -8818,6 +8890,13 @@ export interface AlertmanagerSpecStorageVolumeClaimTemplateSpec {
   readonly storageClassName?: string;
 
   /**
+   * volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim. If specified, the CSI driver will create or update the volume with the attributes defined in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName, it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass will be applied to the claim but it's not allowed to reset this field to empty string once it is set. If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass will be set by the persistentvolume controller if it exists. If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource exists. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#volumeattributesclass (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   *
+   * @schema AlertmanagerSpecStorageVolumeClaimTemplateSpec#volumeAttributesClassName
+   */
+  readonly volumeAttributesClassName?: string;
+
+  /**
    * volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec.
    *
    * @schema AlertmanagerSpecStorageVolumeClaimTemplateSpec#volumeMode
@@ -8846,6 +8925,7 @@ export function toJson_AlertmanagerSpecStorageVolumeClaimTemplateSpec(obj: Alert
     'resources': toJson_AlertmanagerSpecStorageVolumeClaimTemplateSpecResources(obj.resources),
     'selector': toJson_AlertmanagerSpecStorageVolumeClaimTemplateSpecSelector(obj.selector),
     'storageClassName': obj.storageClassName,
+    'volumeAttributesClassName': obj.volumeAttributesClassName,
     'volumeMode': obj.volumeMode,
     'volumeName': obj.volumeName,
   };
@@ -8855,7 +8935,7 @@ export function toJson_AlertmanagerSpecStorageVolumeClaimTemplateSpec(obj: Alert
 /* eslint-enable max-len, quote-props */
 
 /**
- * *Deprecated: this field is never set.*
+ * Deprecated: this field is never set.
  *
  * @schema AlertmanagerSpecStorageVolumeClaimTemplateStatus
  */
@@ -8902,6 +8982,20 @@ export interface AlertmanagerSpecStorageVolumeClaimTemplateStatus {
   readonly conditions?: AlertmanagerSpecStorageVolumeClaimTemplateStatusConditions[];
 
   /**
+   * currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using. When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim This is an alpha field and requires enabling VolumeAttributesClass feature.
+   *
+   * @schema AlertmanagerSpecStorageVolumeClaimTemplateStatus#currentVolumeAttributesClassName
+   */
+  readonly currentVolumeAttributesClassName?: string;
+
+  /**
+   * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation. When this is unset, there is no ModifyVolume operation being attempted. This is an alpha field and requires enabling VolumeAttributesClass feature.
+   *
+   * @schema AlertmanagerSpecStorageVolumeClaimTemplateStatus#modifyVolumeStatus
+   */
+  readonly modifyVolumeStatus?: AlertmanagerSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus;
+
+  /**
    * phase represents the current phase of PersistentVolumeClaim.
    *
    * @schema AlertmanagerSpecStorageVolumeClaimTemplateStatus#phase
@@ -8922,6 +9016,8 @@ export function toJson_AlertmanagerSpecStorageVolumeClaimTemplateStatus(obj: Ale
     'allocatedResources': ((obj.allocatedResources) === undefined) ? undefined : (Object.entries(obj.allocatedResources).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'capacity': ((obj.capacity) === undefined) ? undefined : (Object.entries(obj.capacity).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'conditions': obj.conditions?.map(y => toJson_AlertmanagerSpecStorageVolumeClaimTemplateStatusConditions(y)),
+    'currentVolumeAttributesClassName': obj.currentVolumeAttributesClassName,
+    'modifyVolumeStatus': toJson_AlertmanagerSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus(obj.modifyVolumeStatus),
     'phase': obj.phase,
   };
   // filter undefined values
@@ -9280,6 +9376,16 @@ export function toJson_AlertmanagerSpecVolumesIscsiSecretRef(obj: AlertmanagerSp
  */
 export interface AlertmanagerSpecVolumesProjectedSources {
   /**
+   * ClusterTrustBundle allows a pod to access the `.spec.trustBundle` field of ClusterTrustBundle objects in an auto-updating file.
+   * Alpha, gated by the ClusterTrustBundleProjection feature gate.
+   * ClusterTrustBundle objects can either be selected by name, or by the combination of signer name and a label selector.
+   * Kubelet performs aggressive normalization of the PEM contents written into the pod filesystem.  Esoteric PEM features such as inter-block comments and block headers are stripped.  Certificates are deduplicated. The ordering of certificates within the file is arbitrary, and Kubelet may change the order over time.
+   *
+   * @schema AlertmanagerSpecVolumesProjectedSources#clusterTrustBundle
+   */
+  readonly clusterTrustBundle?: AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundle;
+
+  /**
    * configMap information about the configMap data to project
    *
    * @schema AlertmanagerSpecVolumesProjectedSources#configMap
@@ -9316,6 +9422,7 @@ export interface AlertmanagerSpecVolumesProjectedSources {
 export function toJson_AlertmanagerSpecVolumesProjectedSources(obj: AlertmanagerSpecVolumesProjectedSources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'clusterTrustBundle': toJson_AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundle(obj.clusterTrustBundle),
     'configMap': toJson_AlertmanagerSpecVolumesProjectedSourcesConfigMap(obj.configMap),
     'downwardAPI': toJson_AlertmanagerSpecVolumesProjectedSourcesDownwardApi(obj.downwardApi),
     'secret': toJson_AlertmanagerSpecVolumesProjectedSourcesSecret(obj.secret),
@@ -9720,11 +9827,25 @@ export function toJson_AlertmanagerSpecAffinityNodeAffinityRequiredDuringSchedul
  */
 export interface AlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm {
   /**
-   * A label query over a set of resources, in this case pods.
+   * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
    *
    * @schema AlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#labelSelector
    */
   readonly labelSelector?: AlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MatchLabelKeys and LabelSelector. Also, MatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema AlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector. Also, MismatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema AlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
 
   /**
    * A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces.
@@ -9757,6 +9878,8 @@ export function toJson_AlertmanagerSpecAffinityPodAffinityPreferredDuringSchedul
   if (obj === undefined) { return undefined; }
   const result = {
     'labelSelector': toJson_AlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
     'namespaceSelector': toJson_AlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj.namespaceSelector),
     'namespaces': obj.namespaces?.map(y => y),
     'topologyKey': obj.topologyKey,
@@ -9767,7 +9890,7 @@ export function toJson_AlertmanagerSpecAffinityPodAffinityPreferredDuringSchedul
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label query over a set of resources, in this case pods.
+ * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
  *
  * @schema AlertmanagerSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector
  */
@@ -9847,11 +9970,25 @@ export function toJson_AlertmanagerSpecAffinityPodAffinityRequiredDuringScheduli
  */
 export interface AlertmanagerSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm {
   /**
-   * A label query over a set of resources, in this case pods.
+   * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
    *
    * @schema AlertmanagerSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#labelSelector
    */
   readonly labelSelector?: AlertmanagerSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MatchLabelKeys and LabelSelector. Also, MatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema AlertmanagerSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector. Also, MismatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema AlertmanagerSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
 
   /**
    * A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces.
@@ -9884,6 +10021,8 @@ export function toJson_AlertmanagerSpecAffinityPodAntiAffinityPreferredDuringSch
   if (obj === undefined) { return undefined; }
   const result = {
     'labelSelector': toJson_AlertmanagerSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
     'namespaceSelector': toJson_AlertmanagerSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj.namespaceSelector),
     'namespaces': obj.namespaces?.map(y => y),
     'topologyKey': obj.topologyKey,
@@ -9894,7 +10033,7 @@ export function toJson_AlertmanagerSpecAffinityPodAntiAffinityPreferredDuringSch
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label query over a set of resources, in this case pods.
+ * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
  *
  * @schema AlertmanagerSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector
  */
@@ -10601,6 +10740,35 @@ export function toJson_AlertmanagerSpecContainersLifecyclePostStartHttpGet(obj: 
 /* eslint-enable max-len, quote-props */
 
 /**
+ * Sleep represents the duration that the container should sleep before being terminated.
+ *
+ * @schema AlertmanagerSpecContainersLifecyclePostStartSleep
+ */
+export interface AlertmanagerSpecContainersLifecyclePostStartSleep {
+  /**
+   * Seconds is the number of seconds to sleep.
+   *
+   * @schema AlertmanagerSpecContainersLifecyclePostStartSleep#seconds
+   */
+  readonly seconds: number;
+
+}
+
+/**
+ * Converts an object of type 'AlertmanagerSpecContainersLifecyclePostStartSleep' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_AlertmanagerSpecContainersLifecyclePostStartSleep(obj: AlertmanagerSpecContainersLifecyclePostStartSleep | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'seconds': obj.seconds,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
  *
  * @schema AlertmanagerSpecContainersLifecyclePostStartTcpSocket
@@ -10722,6 +10890,35 @@ export function toJson_AlertmanagerSpecContainersLifecyclePreStopHttpGet(obj: Al
     'path': obj.path,
     'port': obj.port?.value,
     'scheme': obj.scheme,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Sleep represents the duration that the container should sleep before being terminated.
+ *
+ * @schema AlertmanagerSpecContainersLifecyclePreStopSleep
+ */
+export interface AlertmanagerSpecContainersLifecyclePreStopSleep {
+  /**
+   * Seconds is the number of seconds to sleep.
+   *
+   * @schema AlertmanagerSpecContainersLifecyclePreStopSleep#seconds
+   */
+  readonly seconds: number;
+
+}
+
+/**
+ * Converts an object of type 'AlertmanagerSpecContainersLifecyclePreStopSleep' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_AlertmanagerSpecContainersLifecyclePreStopSleep(obj: AlertmanagerSpecContainersLifecyclePreStopSleep | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'seconds': obj.seconds,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -11236,6 +11433,35 @@ export function toJson_AlertmanagerSpecInitContainersLifecyclePostStartHttpGet(o
 /* eslint-enable max-len, quote-props */
 
 /**
+ * Sleep represents the duration that the container should sleep before being terminated.
+ *
+ * @schema AlertmanagerSpecInitContainersLifecyclePostStartSleep
+ */
+export interface AlertmanagerSpecInitContainersLifecyclePostStartSleep {
+  /**
+   * Seconds is the number of seconds to sleep.
+   *
+   * @schema AlertmanagerSpecInitContainersLifecyclePostStartSleep#seconds
+   */
+  readonly seconds: number;
+
+}
+
+/**
+ * Converts an object of type 'AlertmanagerSpecInitContainersLifecyclePostStartSleep' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_AlertmanagerSpecInitContainersLifecyclePostStartSleep(obj: AlertmanagerSpecInitContainersLifecyclePostStartSleep | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'seconds': obj.seconds,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
  *
  * @schema AlertmanagerSpecInitContainersLifecyclePostStartTcpSocket
@@ -11357,6 +11583,35 @@ export function toJson_AlertmanagerSpecInitContainersLifecyclePreStopHttpGet(obj
     'path': obj.path,
     'port': obj.port?.value,
     'scheme': obj.scheme,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Sleep represents the duration that the container should sleep before being terminated.
+ *
+ * @schema AlertmanagerSpecInitContainersLifecyclePreStopSleep
+ */
+export interface AlertmanagerSpecInitContainersLifecyclePreStopSleep {
+  /**
+   * Seconds is the number of seconds to sleep.
+   *
+   * @schema AlertmanagerSpecInitContainersLifecyclePreStopSleep#seconds
+   */
+  readonly seconds: number;
+
+}
+
+/**
+ * Converts an object of type 'AlertmanagerSpecInitContainersLifecyclePreStopSleep' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_AlertmanagerSpecInitContainersLifecyclePreStopSleep(obj: AlertmanagerSpecInitContainersLifecyclePreStopSleep | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'seconds': obj.seconds,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -11656,6 +11911,13 @@ export interface AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpec {
   readonly storageClassName?: string;
 
   /**
+   * volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim. If specified, the CSI driver will create or update the volume with the attributes defined in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName, it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass will be applied to the claim but it's not allowed to reset this field to empty string once it is set. If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass will be set by the persistentvolume controller if it exists. If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource exists. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#volumeattributesclass (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   *
+   * @schema AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpec#volumeAttributesClassName
+   */
+  readonly volumeAttributesClassName?: string;
+
+  /**
    * volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec.
    *
    * @schema AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpec#volumeMode
@@ -11684,6 +11946,7 @@ export function toJson_AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpec(o
     'resources': toJson_AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecResources(obj.resources),
     'selector': toJson_AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecSelector(obj.selector),
     'storageClassName': obj.storageClassName,
+    'volumeAttributesClassName': obj.volumeAttributesClassName,
     'volumeMode': obj.volumeMode,
     'volumeName': obj.volumeName,
   };
@@ -11797,15 +12060,6 @@ export function toJson_AlertmanagerSpecStorageVolumeClaimTemplateSpecDataSourceR
  */
 export interface AlertmanagerSpecStorageVolumeClaimTemplateSpecResources {
   /**
-   * Claims lists the names of resources, defined in spec.resourceClaims, that are used by this container.
-   * This is an alpha field and requires enabling the DynamicResourceAllocation feature gate.
-   * This field is immutable. It can only be set for containers.
-   *
-   * @schema AlertmanagerSpecStorageVolumeClaimTemplateSpecResources#claims
-   */
-  readonly claims?: AlertmanagerSpecStorageVolumeClaimTemplateSpecResourcesClaims[];
-
-  /**
    * Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    *
    * @schema AlertmanagerSpecStorageVolumeClaimTemplateSpecResources#limits
@@ -11828,7 +12082,6 @@ export interface AlertmanagerSpecStorageVolumeClaimTemplateSpecResources {
 export function toJson_AlertmanagerSpecStorageVolumeClaimTemplateSpecResources(obj: AlertmanagerSpecStorageVolumeClaimTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'claims': obj.claims?.map(y => toJson_AlertmanagerSpecStorageVolumeClaimTemplateSpecResourcesClaims(y)),
     'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
   };
@@ -11970,6 +12223,43 @@ export function toJson_AlertmanagerSpecStorageVolumeClaimTemplateStatusCondition
 /* eslint-enable max-len, quote-props */
 
 /**
+ * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation. When this is unset, there is no ModifyVolume operation being attempted. This is an alpha field and requires enabling VolumeAttributesClass feature.
+ *
+ * @schema AlertmanagerSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus
+ */
+export interface AlertmanagerSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus {
+  /**
+   * status is the status of the ControllerModifyVolume operation. It can be in any of following states: - Pending Pending indicates that the PersistentVolumeClaim cannot be modified due to unmet requirements, such as the specified VolumeAttributesClass not existing. - InProgress InProgress indicates that the volume is being modified. - Infeasible Infeasible indicates that the request has been rejected as invalid by the CSI driver. To resolve the error, a valid VolumeAttributesClass needs to be specified. Note: New statuses can be added in the future. Consumers should check for unknown statuses and fail appropriately.
+   *
+   * @schema AlertmanagerSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus#status
+   */
+  readonly status: string;
+
+  /**
+   * targetVolumeAttributesClassName is the name of the VolumeAttributesClass the PVC currently being reconciled
+   *
+   * @schema AlertmanagerSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus#targetVolumeAttributesClassName
+   */
+  readonly targetVolumeAttributesClassName?: string;
+
+}
+
+/**
+ * Converts an object of type 'AlertmanagerSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_AlertmanagerSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus(obj: AlertmanagerSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'status': obj.status,
+    'targetVolumeAttributesClassName': obj.targetVolumeAttributesClassName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * Required: Selects a field of the pod: only annotations, labels, name and namespace are supported.
  *
  * @schema AlertmanagerSpecVolumesDownwardApiItemsFieldRef
@@ -12100,6 +12390,13 @@ export interface AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpec {
   readonly storageClassName?: string;
 
   /**
+   * volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim. If specified, the CSI driver will create or update the volume with the attributes defined in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName, it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass will be applied to the claim but it's not allowed to reset this field to empty string once it is set. If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass will be set by the persistentvolume controller if it exists. If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource exists. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#volumeattributesclass (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   *
+   * @schema AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpec#volumeAttributesClassName
+   */
+  readonly volumeAttributesClassName?: string;
+
+  /**
    * volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec.
    *
    * @schema AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpec#volumeMode
@@ -12128,8 +12425,73 @@ export function toJson_AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpec(o
     'resources': toJson_AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecResources(obj.resources),
     'selector': toJson_AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecSelector(obj.selector),
     'storageClassName': obj.storageClassName,
+    'volumeAttributesClassName': obj.volumeAttributesClassName,
     'volumeMode': obj.volumeMode,
     'volumeName': obj.volumeName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ClusterTrustBundle allows a pod to access the `.spec.trustBundle` field of ClusterTrustBundle objects in an auto-updating file.
+ * Alpha, gated by the ClusterTrustBundleProjection feature gate.
+ * ClusterTrustBundle objects can either be selected by name, or by the combination of signer name and a label selector.
+ * Kubelet performs aggressive normalization of the PEM contents written into the pod filesystem.  Esoteric PEM features such as inter-block comments and block headers are stripped.  Certificates are deduplicated. The ordering of certificates within the file is arbitrary, and Kubelet may change the order over time.
+ *
+ * @schema AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundle
+ */
+export interface AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundle {
+  /**
+   * Select all ClusterTrustBundles that match this label selector.  Only has effect if signerName is set.  Mutually-exclusive with name.  If unset, interpreted as "match nothing".  If set but empty, interpreted as "match everything".
+   *
+   * @schema AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundle#labelSelector
+   */
+  readonly labelSelector?: AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector;
+
+  /**
+   * Select a single ClusterTrustBundle by object name.  Mutually-exclusive with signerName and labelSelector.
+   *
+   * @schema AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundle#name
+   */
+  readonly name?: string;
+
+  /**
+   * If true, don't block pod startup if the referenced ClusterTrustBundle(s) aren't available.  If using name, then the named ClusterTrustBundle is allowed not to exist.  If using signerName, then the combination of signerName and labelSelector is allowed to match zero ClusterTrustBundles.
+   *
+   * @schema AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundle#optional
+   */
+  readonly optional?: boolean;
+
+  /**
+   * Relative path from the volume root to write the bundle.
+   *
+   * @schema AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundle#path
+   */
+  readonly path: string;
+
+  /**
+   * Select all ClusterTrustBundles that match this signer name. Mutually-exclusive with name.  The contents of all selected ClusterTrustBundles will be unified and deduplicated.
+   *
+   * @schema AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundle#signerName
+   */
+  readonly signerName?: string;
+
+}
+
+/**
+ * Converts an object of type 'AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundle' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundle(obj: AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundle | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'labelSelector': toJson_AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector(obj.labelSelector),
+    'name': obj.name,
+    'optional': obj.optional,
+    'path': obj.path,
+    'signerName': obj.signerName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -12684,7 +13046,7 @@ export function toJson_AlertmanagerSpecAffinityNodeAffinityRequiredDuringSchedul
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label query over a set of resources, in this case pods.
+ * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
  *
  * @schema AlertmanagerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector
  */
@@ -12848,7 +13210,7 @@ export function toJson_AlertmanagerSpecAffinityPodAffinityRequiredDuringScheduli
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label query over a set of resources, in this case pods.
+ * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
  *
  * @schema AlertmanagerSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector
  */
@@ -13760,15 +14122,6 @@ export function toJson_AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecDa
  */
 export interface AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecResources {
   /**
-   * Claims lists the names of resources, defined in spec.resourceClaims, that are used by this container.
-   * This is an alpha field and requires enabling the DynamicResourceAllocation feature gate.
-   * This field is immutable. It can only be set for containers.
-   *
-   * @schema AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecResources#claims
-   */
-  readonly claims?: AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims[];
-
-  /**
    * Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    *
    * @schema AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecResources#limits
@@ -13791,7 +14144,6 @@ export interface AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecResource
 export function toJson_AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecResources(obj: AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'claims': obj.claims?.map(y => toJson_AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims(y)),
     'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
   };
@@ -13831,35 +14183,6 @@ export function toJson_AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecSe
   const result = {
     'matchExpressions': obj.matchExpressions?.map(y => toJson_AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions(y)),
     'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, quote-props */
-
-/**
- * ResourceClaim references one entry in PodSpec.ResourceClaims.
- *
- * @schema AlertmanagerSpecStorageVolumeClaimTemplateSpecResourcesClaims
- */
-export interface AlertmanagerSpecStorageVolumeClaimTemplateSpecResourcesClaims {
-  /**
-   * Name must match the name of one entry in pod.spec.resourceClaims of the Pod where this field is used. It makes that resource available inside a container.
-   *
-   * @schema AlertmanagerSpecStorageVolumeClaimTemplateSpecResourcesClaims#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * Converts an object of type 'AlertmanagerSpecStorageVolumeClaimTemplateSpecResourcesClaims' to JSON representation.
- */
-/* eslint-disable max-len, quote-props */
-export function toJson_AlertmanagerSpecStorageVolumeClaimTemplateSpecResourcesClaims(obj: AlertmanagerSpecStorageVolumeClaimTemplateSpecResourcesClaims | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'name': obj.name,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -14060,15 +14383,6 @@ export function toJson_AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecDa
  */
 export interface AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecResources {
   /**
-   * Claims lists the names of resources, defined in spec.resourceClaims, that are used by this container.
-   * This is an alpha field and requires enabling the DynamicResourceAllocation feature gate.
-   * This field is immutable. It can only be set for containers.
-   *
-   * @schema AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecResources#claims
-   */
-  readonly claims?: AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims[];
-
-  /**
    * Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    *
    * @schema AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecResources#limits
@@ -14091,7 +14405,6 @@ export interface AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecResource
 export function toJson_AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecResources(obj: AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'claims': obj.claims?.map(y => toJson_AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims(y)),
     'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
   };
@@ -14130,6 +14443,43 @@ export function toJson_AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecSe
   if (obj === undefined) { return undefined; }
   const result = {
     'matchExpressions': obj.matchExpressions?.map(y => toJson_AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Select all ClusterTrustBundles that match this label selector.  Only has effect if signerName is set.  Mutually-exclusive with name.  If unset, interpreted as "match nothing".  If set but empty, interpreted as "match everything".
+ *
+ * @schema AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector
+ */
+export interface AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector#matchExpressions
+   */
+  readonly matchExpressions?: AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector(obj: AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions(y)),
     'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
   };
   // filter undefined values
@@ -14731,35 +15081,6 @@ export function toJson_AlertmanagerSpecAlertmanagerConfigurationGlobalHttpConfig
 /* eslint-enable max-len, quote-props */
 
 /**
- * ResourceClaim references one entry in PodSpec.ResourceClaims.
- *
- * @schema AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims
- */
-export interface AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims {
-  /**
-   * Name must match the name of one entry in pod.spec.resourceClaims of the Pod where this field is used. It makes that resource available inside a container.
-   *
-   * @schema AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * Converts an object of type 'AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims' to JSON representation.
- */
-/* eslint-disable max-len, quote-props */
-export function toJson_AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims(obj: AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'name': obj.name,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, quote-props */
-
-/**
  * @schema AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecResourcesLimits
  */
 export class AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecResourcesLimits {
@@ -14833,35 +15154,6 @@ export function toJson_AlertmanagerSpecStorageEphemeralVolumeClaimTemplateSpecSe
 /* eslint-enable max-len, quote-props */
 
 /**
- * ResourceClaim references one entry in PodSpec.ResourceClaims.
- *
- * @schema AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims
- */
-export interface AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims {
-  /**
-   * Name must match the name of one entry in pod.spec.resourceClaims of the Pod where this field is used. It makes that resource available inside a container.
-   *
-   * @schema AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * Converts an object of type 'AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims' to JSON representation.
- */
-/* eslint-disable max-len, quote-props */
-export function toJson_AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims(obj: AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'name': obj.name,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, quote-props */
-
-/**
  * @schema AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesLimits
  */
 export class AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesLimits {
@@ -14923,6 +15215,51 @@ export interface AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecSelector
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions(obj: AlertmanagerSpecVolumesEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ *
+ * @schema AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions
+ */
+export interface AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   *
+   * @schema AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions(obj: AlertmanagerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -15512,7 +15849,7 @@ export interface AlertmanagerConfigSpecInhibitRulesSourceMatch {
   readonly name: string;
 
   /**
-   * Whether to match on equality (false) or regular-expression (true). Deprecated as of AlertManager >= v0.22.0 where a user should use MatchType instead.
+   * Whether to match on equality (false) or regular-expression (true). Deprecated: for AlertManager >= v0.22.0, `matchType` should be used instead.
    *
    * @schema AlertmanagerConfigSpecInhibitRulesSourceMatch#regex
    */
@@ -15565,7 +15902,7 @@ export interface AlertmanagerConfigSpecInhibitRulesTargetMatch {
   readonly name: string;
 
   /**
-   * Whether to match on equality (false) or regular-expression (true). Deprecated as of AlertManager >= v0.22.0 where a user should use MatchType instead.
+   * Whether to match on equality (false) or regular-expression (true). Deprecated: for AlertManager >= v0.22.0, `matchType` should be used instead.
    *
    * @schema AlertmanagerConfigSpecInhibitRulesTargetMatch#regex
    */
@@ -17048,7 +17385,7 @@ export interface AlertmanagerConfigSpecRouteMatchers {
   readonly name: string;
 
   /**
-   * Whether to match on equality (false) or regular-expression (true). Deprecated as of AlertManager >= v0.22.0 where a user should use MatchType instead.
+   * Whether to match on equality (false) or regular-expression (true). Deprecated: for AlertManager >= v0.22.0, `matchType` should be used instead.
    *
    * @schema AlertmanagerConfigSpecRouteMatchers#regex
    */
@@ -30094,6 +30431,22 @@ export interface PodMonitorSpec {
   readonly sampleLimit?: number;
 
   /**
+   * The scrape class to apply.
+   *
+   * @schema PodMonitorSpec#scrapeClass
+   */
+  readonly scrapeClass?: string;
+
+  /**
+   * `scrapeProtocols` defines the protocols to negotiate during a scrape. It tells clients the protocols supported by Prometheus in order of preference (from most to least preferred).
+   * If unset, Prometheus uses its default value.
+   * It requires Prometheus >= v2.49.0.
+   *
+   * @schema PodMonitorSpec#scrapeProtocols
+   */
+  readonly scrapeProtocols?: PodMonitorSpecScrapeProtocols[];
+
+  /**
    * Label selector to select the Kubernetes `Pod` objects.
    *
    * @schema PodMonitorSpec#selector
@@ -30126,6 +30479,8 @@ export function toJson_PodMonitorSpec(obj: PodMonitorSpec | undefined): Record<s
     'podMetricsEndpoints': obj.podMetricsEndpoints?.map(y => toJson_PodMonitorSpecPodMetricsEndpoints(y)),
     'podTargetLabels': obj.podTargetLabels?.map(y => y),
     'sampleLimit': obj.sampleLimit,
+    'scrapeClass': obj.scrapeClass,
+    'scrapeProtocols': obj.scrapeProtocols?.map(y => y),
     'selector': toJson_PodMonitorSpecSelector(obj.selector),
     'targetLimit': obj.targetLimit,
   };
@@ -30407,6 +30762,22 @@ export function toJson_PodMonitorSpecPodMetricsEndpoints(obj: PodMonitorSpecPodM
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
+
+/**
+ * ScrapeProtocol represents a protocol used by Prometheus for scraping metrics. Supported values are: * `OpenMetricsText0.0.1` * `OpenMetricsText1.0.0` * `PrometheusProto` * `PrometheusText0.0.4`
+ *
+ * @schema PodMonitorSpecScrapeProtocols
+ */
+export enum PodMonitorSpecScrapeProtocols {
+  /** PrometheusProto */
+  PROMETHEUS_PROTO = "PrometheusProto",
+  /** OpenMetricsText0.0.1 */
+  OPEN_METRICS_TEXT0_0_1 = "OpenMetricsText0.0.1",
+  /** OpenMetricsText1.0.0 */
+  OPEN_METRICS_TEXT1_0_0 = "OpenMetricsText1.0.0",
+  /** PrometheusText0.0.4 */
+  PROMETHEUS_TEXT0_0_4 = "PrometheusText0.0.4",
+}
 
 /**
  * Label selector to select the Kubernetes `Pod` objects.
@@ -31803,6 +32174,22 @@ export interface ProbeSpec {
   readonly sampleLimit?: number;
 
   /**
+   * The scrape class to apply.
+   *
+   * @schema ProbeSpec#scrapeClass
+   */
+  readonly scrapeClass?: string;
+
+  /**
+   * `scrapeProtocols` defines the protocols to negotiate during a scrape. It tells clients the protocols supported by Prometheus in order of preference (from most to least preferred).
+   * If unset, Prometheus uses its default value.
+   * It requires Prometheus >= v2.49.0.
+   *
+   * @schema ProbeSpec#scrapeProtocols
+   */
+  readonly scrapeProtocols?: ProbeSpecScrapeProtocols[];
+
+  /**
    * Timeout for scraping metrics from the Prometheus exporter. If not specified, the Prometheus global scrape timeout is used.
    *
    * @schema ProbeSpec#scrapeTimeout
@@ -31853,6 +32240,8 @@ export function toJson_ProbeSpec(obj: ProbeSpec | undefined): Record<string, any
     'oauth2': toJson_ProbeSpecOauth2(obj.oauth2),
     'prober': toJson_ProbeSpecProber(obj.prober),
     'sampleLimit': obj.sampleLimit,
+    'scrapeClass': obj.scrapeClass,
+    'scrapeProtocols': obj.scrapeProtocols?.map(y => y),
     'scrapeTimeout': obj.scrapeTimeout,
     'targetLimit': obj.targetLimit,
     'targets': toJson_ProbeSpecTargets(obj.targets),
@@ -32182,6 +32571,22 @@ export function toJson_ProbeSpecProber(obj: ProbeSpecProber | undefined): Record
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
+
+/**
+ * ScrapeProtocol represents a protocol used by Prometheus for scraping metrics. Supported values are: * `OpenMetricsText0.0.1` * `OpenMetricsText1.0.0` * `PrometheusProto` * `PrometheusText0.0.4`
+ *
+ * @schema ProbeSpecScrapeProtocols
+ */
+export enum ProbeSpecScrapeProtocols {
+  /** PrometheusProto */
+  PROMETHEUS_PROTO = "PrometheusProto",
+  /** OpenMetricsText0.0.1 */
+  OPEN_METRICS_TEXT0_0_1 = "OpenMetricsText0.0.1",
+  /** OpenMetricsText1.0.0 */
+  OPEN_METRICS_TEXT1_0_0 = "OpenMetricsText1.0.0",
+  /** PrometheusText0.0.4 */
+  PROMETHEUS_TEXT0_0_4 = "PrometheusText0.0.4",
+}
 
 /**
  * Targets defines a set of static or dynamically discovered targets to probe.
@@ -33520,7 +33925,7 @@ export interface PrometheusSpec {
 
   /**
    * AllowOverlappingBlocks enables vertical compaction and vertical query merge in Prometheus.
-   * *Deprecated: this flag has no effect for Prometheus >= 2.39.0 where overlapping blocks are enabled by default.*
+   * Deprecated: this flag has no effect for Prometheus >= 2.39.0 where overlapping blocks are enabled by default.
    *
    * @schema PrometheusSpec#allowOverlappingBlocks
    */
@@ -33541,7 +33946,7 @@ export interface PrometheusSpec {
   readonly arbitraryFsAccessThroughSMs?: PrometheusSpecArbitraryFsAccessThroughSMs;
 
   /**
-   * *Deprecated: use 'spec.image' instead.*
+   * Deprecated: use 'spec.image' instead.
    *
    * @schema PrometheusSpec#baseImage
    */
@@ -33812,6 +34217,13 @@ export interface PrometheusSpec {
   readonly logLevel?: PrometheusSpecLogLevel;
 
   /**
+   * Defines the maximum time that the `prometheus` container's startup probe will wait before being considered failed. The startup probe will return success after the WAL replay is complete. If set, the value should be greater than 60 (seconds). Otherwise it will be equal to 600 seconds (15 minutes).
+   *
+   * @schema PrometheusSpec#maximumStartupDurationSeconds
+   */
+  readonly maximumStartupDurationSeconds?: number;
+
+  /**
    * Minimum number of seconds for which a newly created Pod should be ready without any of its container crashing for it to be considered available. Defaults to 0 (pod will be considered available as soon as it is ready)
    * This is an alpha field from kubernetes 1.22 until 1.24 which requires enabling the StatefulSetMinReadySeconds feature gate.
    *
@@ -33923,7 +34335,7 @@ export interface PrometheusSpec {
   readonly prometheusExternalLabelName?: string;
 
   /**
-   * Defines the list of PrometheusRule objects to which the namespace label enforcement doesn't apply. This is only relevant when `spec.enforcedNamespaceLabel` is set to true. *Deprecated: use `spec.excludedFromEnforcement` instead.*
+   * Defines the list of PrometheusRule objects to which the namespace label enforcement doesn't apply. This is only relevant when `spec.enforcedNamespaceLabel` is set to true. Deprecated: use `spec.excludedFromEnforcement` instead.
    *
    * @schema PrometheusSpec#prometheusRulesExcludedFromEnforce
    */
@@ -34040,6 +34452,13 @@ export interface PrometheusSpec {
   readonly sampleLimit?: number;
 
   /**
+   * EXPERIMENTAL List of scrape classes to expose to monitors and other scrape configs. This is experimental feature and might change in the future.
+   *
+   * @schema PrometheusSpec#scrapeClasses
+   */
+  readonly scrapeClasses?: PrometheusSpecScrapeClasses[];
+
+  /**
    * Namespaces to match for ScrapeConfig discovery. An empty label selector matches all namespaces. A null label selector matches the current current namespace only.
    *
    * @schema PrometheusSpec#scrapeConfigNamespaceSelector
@@ -34061,6 +34480,15 @@ export interface PrometheusSpec {
    * @schema PrometheusSpec#scrapeInterval
    */
   readonly scrapeInterval?: string;
+
+  /**
+   * The protocols to negotiate during a scrape. It tells clients the protocols supported by Prometheus in order of preference (from most to least preferred).
+   * If unset, Prometheus uses its default value.
+   * It requires Prometheus >= v2.49.0.
+   *
+   * @schema PrometheusSpec#scrapeProtocols
+   */
+  readonly scrapeProtocols?: PrometheusSpecScrapeProtocols[];
 
   /**
    * Number of seconds to wait until a scrape request times out.
@@ -34106,7 +34534,7 @@ export interface PrometheusSpec {
   readonly serviceMonitorSelector?: PrometheusSpecServiceMonitorSelector;
 
   /**
-   * *Deprecated: use 'spec.image' instead. The image's digest can be specified as part of the image name.*
+   * Deprecated: use 'spec.image' instead. The image's digest can be specified as part of the image name.
    *
    * @schema PrometheusSpec#sha
    */
@@ -34130,7 +34558,7 @@ export interface PrometheusSpec {
   readonly storage?: PrometheusSpecStorage;
 
   /**
-   * *Deprecated: use 'spec.image' instead. The image's tag can be specified as part of the image name.*
+   * Deprecated: use 'spec.image' instead. The image's tag can be specified as part of the image name.
    *
    * @schema PrometheusSpec#tag
    */
@@ -34271,6 +34699,7 @@ export function toJson_PrometheusSpec(obj: PrometheusSpec | undefined): Record<s
     'listenLocal': obj.listenLocal,
     'logFormat': obj.logFormat,
     'logLevel': obj.logLevel,
+    'maximumStartupDurationSeconds': obj.maximumStartupDurationSeconds,
     'minReadySeconds': obj.minReadySeconds,
     'nodeSelector': ((obj.nodeSelector) === undefined) ? undefined : (Object.entries(obj.nodeSelector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'overrideHonorLabels': obj.overrideHonorLabels,
@@ -34302,9 +34731,11 @@ export function toJson_PrometheusSpec(obj: PrometheusSpec | undefined): Record<s
     'ruleSelector': toJson_PrometheusSpecRuleSelector(obj.ruleSelector),
     'rules': toJson_PrometheusSpecRules(obj.rules),
     'sampleLimit': obj.sampleLimit,
+    'scrapeClasses': obj.scrapeClasses?.map(y => toJson_PrometheusSpecScrapeClasses(y)),
     'scrapeConfigNamespaceSelector': toJson_PrometheusSpecScrapeConfigNamespaceSelector(obj.scrapeConfigNamespaceSelector),
     'scrapeConfigSelector': toJson_PrometheusSpecScrapeConfigSelector(obj.scrapeConfigSelector),
     'scrapeInterval': obj.scrapeInterval,
+    'scrapeProtocols': obj.scrapeProtocols?.map(y => y),
     'scrapeTimeout': obj.scrapeTimeout,
     'secrets': obj.secrets?.map(y => y),
     'securityContext': toJson_PrometheusSpecSecurityContext(obj.securityContext),
@@ -34608,7 +35039,7 @@ export interface PrometheusSpecApiserverConfig {
 
   /**
    * *Warning: this field shouldn't be used because the token value appears in clear-text. Prefer using `authorization`.*
-   * *Deprecated: this will be removed in a future release.*
+   * Deprecated: this will be removed in a future release.
    *
    * @schema PrometheusSpecApiserverConfig#bearerToken
    */
@@ -34617,7 +35048,7 @@ export interface PrometheusSpecApiserverConfig {
   /**
    * File to read bearer token for accessing apiserver.
    * Cannot be set at the same time as `basicAuth`, `authorization`, or `bearerToken`.
-   * *Deprecated: this will be removed in a future release. Prefer using `authorization`.*
+   * Deprecated: this will be removed in a future release. Prefer using `authorization`.
    *
    * @schema PrometheusSpecApiserverConfig#bearerTokenFile
    */
@@ -35675,7 +36106,7 @@ export interface PrometheusSpecRemoteRead {
 
   /**
    * *Warning: this field shouldn't be used because the token value appears in clear-text. Prefer using `authorization`.*
-   * *Deprecated: this will be removed in a future release.*
+   * Deprecated: this will be removed in a future release.
    *
    * @schema PrometheusSpecRemoteRead#bearerToken
    */
@@ -35683,7 +36114,7 @@ export interface PrometheusSpecRemoteRead {
 
   /**
    * File from which to read the bearer token for the URL.
-   * *Deprecated: this will be removed in a future release. Prefer using `authorization`.*
+   * Deprecated: this will be removed in a future release. Prefer using `authorization`.
    *
    * @schema PrometheusSpecRemoteRead#bearerTokenFile
    */
@@ -35835,7 +36266,7 @@ export interface PrometheusSpecRemoteWrite {
 
   /**
    * *Warning: this field shouldn't be used because the token value appears in clear-text. Prefer using `authorization`.*
-   * *Deprecated: this will be removed in a future release.*
+   * Deprecated: this will be removed in a future release.
    *
    * @schema PrometheusSpecRemoteWrite#bearerToken
    */
@@ -35843,11 +36274,18 @@ export interface PrometheusSpecRemoteWrite {
 
   /**
    * File from which to read bearer token for the URL.
-   * *Deprecated: this will be removed in a future release. Prefer using `authorization`.*
+   * Deprecated: this will be removed in a future release. Prefer using `authorization`.
    *
    * @schema PrometheusSpecRemoteWrite#bearerTokenFile
    */
   readonly bearerTokenFile?: string;
+
+  /**
+   * Whether to enable HTTP2.
+   *
+   * @schema PrometheusSpecRemoteWrite#enableHTTP2
+   */
+  readonly enableHttp2?: boolean;
 
   /**
    * Custom HTTP headers to be sent along with each remote write request. Be aware that headers that are set by Prometheus itself can't be overwritten.
@@ -35962,6 +36400,7 @@ export function toJson_PrometheusSpecRemoteWrite(obj: PrometheusSpecRemoteWrite 
     'basicAuth': toJson_PrometheusSpecRemoteWriteBasicAuth(obj.basicAuth),
     'bearerToken': obj.bearerToken,
     'bearerTokenFile': obj.bearerTokenFile,
+    'enableHTTP2': obj.enableHttp2,
     'headers': ((obj.headers) === undefined) ? undefined : (Object.entries(obj.headers).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'metadataConfig': toJson_PrometheusSpecRemoteWriteMetadataConfig(obj.metadataConfig),
     'name': obj.name,
@@ -36133,6 +36572,50 @@ export function toJson_PrometheusSpecRules(obj: PrometheusSpecRules | undefined)
 /* eslint-enable max-len, quote-props */
 
 /**
+ * @schema PrometheusSpecScrapeClasses
+ */
+export interface PrometheusSpecScrapeClasses {
+  /**
+   * Default indicates that the scrape applies to all scrape objects that don't configure an explicit scrape class name.
+   * Only one scrape class can be set as default.
+   *
+   * @schema PrometheusSpecScrapeClasses#default
+   */
+  readonly default?: boolean;
+
+  /**
+   * Name of the scrape class.
+   *
+   * @schema PrometheusSpecScrapeClasses#name
+   */
+  readonly name: string;
+
+  /**
+   * TLSConfig section for scrapes.
+   *
+   * @schema PrometheusSpecScrapeClasses#tlsConfig
+   */
+  readonly tlsConfig?: PrometheusSpecScrapeClassesTlsConfig;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusSpecScrapeClasses' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusSpecScrapeClasses(obj: PrometheusSpecScrapeClasses | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'default': obj.default,
+    'name': obj.name,
+    'tlsConfig': toJson_PrometheusSpecScrapeClassesTlsConfig(obj.tlsConfig),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * Namespaces to match for ScrapeConfig discovery. An empty label selector matches all namespaces. A null label selector matches the current current namespace only.
  *
  * @schema PrometheusSpecScrapeConfigNamespaceSelector
@@ -36206,6 +36689,22 @@ export function toJson_PrometheusSpecScrapeConfigSelector(obj: PrometheusSpecScr
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
+
+/**
+ * ScrapeProtocol represents a protocol used by Prometheus for scraping metrics. Supported values are: * `OpenMetricsText0.0.1` * `OpenMetricsText1.0.0` * `PrometheusProto` * `PrometheusText0.0.4`
+ *
+ * @schema PrometheusSpecScrapeProtocols
+ */
+export enum PrometheusSpecScrapeProtocols {
+  /** PrometheusProto */
+  PROMETHEUS_PROTO = "PrometheusProto",
+  /** OpenMetricsText0.0.1 */
+  OPEN_METRICS_TEXT0_0_1 = "OpenMetricsText0.0.1",
+  /** OpenMetricsText1.0.0 */
+  OPEN_METRICS_TEXT1_0_0 = "OpenMetricsText1.0.0",
+  /** PrometheusText0.0.4 */
+  PROMETHEUS_TEXT0_0_4 = "PrometheusText0.0.4",
+}
 
 /**
  * SecurityContext holds pod-level security attributes and common container settings. This defaults to the default PodSecurityContext.
@@ -36393,7 +36892,7 @@ export function toJson_PrometheusSpecServiceMonitorSelector(obj: PrometheusSpecS
  */
 export interface PrometheusSpecStorage {
   /**
-   * *Deprecated: subPath usage will be removed in a future release.*
+   * Deprecated: subPath usage will be removed in a future release.
    *
    * @schema PrometheusSpecStorage#disableMountSubPath
    */
@@ -36454,7 +36953,7 @@ export interface PrometheusSpecThanos {
   readonly additionalArgs?: PrometheusSpecThanosAdditionalArgs[];
 
   /**
-   * *Deprecated: use 'image' instead.*
+   * Deprecated: use 'image' instead.
    *
    * @schema PrometheusSpecThanos#baseImage
    */
@@ -36516,7 +37015,7 @@ export interface PrometheusSpecThanos {
   readonly image?: string;
 
   /**
-   * *Deprecated: use `grpcListenLocal` and `httpListenLocal` instead.*
+   * Deprecated: use `grpcListenLocal` and `httpListenLocal` instead.
    *
    * @schema PrometheusSpecThanos#listenLocal
    */
@@ -36576,14 +37075,14 @@ export interface PrometheusSpecThanos {
   readonly resources?: PrometheusSpecThanosResources;
 
   /**
-   * *Deprecated: use 'image' instead.  The image digest can be specified as part of the image name.*
+   * Deprecated: use 'image' instead.  The image digest can be specified as part of the image name.
    *
    * @schema PrometheusSpecThanos#sha
    */
   readonly sha?: string;
 
   /**
-   * *Deprecated: use 'image' instead. The image's tag can be specified as part of the image name.*
+   * Deprecated: use 'image' instead. The image's tag can be specified as as part of the image name.
    *
    * @schema PrometheusSpecThanos#tag
    */
@@ -36725,11 +37224,16 @@ export function toJson_PrometheusSpecTolerations(obj: PrometheusSpecTolerations 
 /* eslint-enable max-len, quote-props */
 
 /**
- * TopologySpreadConstraint specifies how to spread matching pods among the given topology.
- *
  * @schema PrometheusSpecTopologySpreadConstraints
  */
 export interface PrometheusSpecTopologySpreadConstraints {
+  /**
+   * Defines what Prometheus Operator managed labels should be added to labelSelector on the topologySpreadConstraint.
+   *
+   * @schema PrometheusSpecTopologySpreadConstraints#additionalLabelSelectors
+   */
+  readonly additionalLabelSelectors?: PrometheusSpecTopologySpreadConstraintsAdditionalLabelSelectors;
+
   /**
    * LabelSelector is used to find matching pods. Pods that match this label selector are counted to determine the number of pods in their corresponding topology domain.
    *
@@ -36800,6 +37304,7 @@ export interface PrometheusSpecTopologySpreadConstraints {
 export function toJson_PrometheusSpecTopologySpreadConstraints(obj: PrometheusSpecTopologySpreadConstraints | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'additionalLabelSelectors': obj.additionalLabelSelectors,
     'labelSelector': toJson_PrometheusSpecTopologySpreadConstraintsLabelSelector(obj.labelSelector),
     'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
     'maxSkew': obj.maxSkew,
@@ -37464,7 +37969,7 @@ export interface PrometheusSpecAlertingAlertmanagers {
   /**
    * File to read bearer token for Alertmanager.
    * Cannot be set at the same time as `basicAuth`, `authorization`, or `sigv4`.
-   * *Deprecated: this will be removed in a future release. Prefer using `authorization`.*
+   * Deprecated: this will be removed in a future release. Prefer using `authorization`.
    *
    * @schema PrometheusSpecAlertingAlertmanagers#bearerTokenFile
    */
@@ -40554,6 +41059,91 @@ export function toJson_PrometheusSpecRulesAlert(obj: PrometheusSpecRulesAlert | 
 /* eslint-enable max-len, quote-props */
 
 /**
+ * TLSConfig section for scrapes.
+ *
+ * @schema PrometheusSpecScrapeClassesTlsConfig
+ */
+export interface PrometheusSpecScrapeClassesTlsConfig {
+  /**
+   * Certificate authority used when verifying server certificates.
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfig#ca
+   */
+  readonly ca?: PrometheusSpecScrapeClassesTlsConfigCa;
+
+  /**
+   * Path to the CA cert in the Prometheus container to use for the targets.
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfig#caFile
+   */
+  readonly caFile?: string;
+
+  /**
+   * Client certificate to present when doing client-authentication.
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfig#cert
+   */
+  readonly cert?: PrometheusSpecScrapeClassesTlsConfigCert;
+
+  /**
+   * Path to the client cert file in the Prometheus container for the targets.
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfig#certFile
+   */
+  readonly certFile?: string;
+
+  /**
+   * Disable target certificate validation.
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfig#insecureSkipVerify
+   */
+  readonly insecureSkipVerify?: boolean;
+
+  /**
+   * Path to the client key file in the Prometheus container for the targets.
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfig#keyFile
+   */
+  readonly keyFile?: string;
+
+  /**
+   * Secret containing the client key file for the targets.
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfig#keySecret
+   */
+  readonly keySecret?: PrometheusSpecScrapeClassesTlsConfigKeySecret;
+
+  /**
+   * Used to verify the hostname for the targets.
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfig#serverName
+   */
+  readonly serverName?: string;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusSpecScrapeClassesTlsConfig' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusSpecScrapeClassesTlsConfig(obj: PrometheusSpecScrapeClassesTlsConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'ca': toJson_PrometheusSpecScrapeClassesTlsConfigCa(obj.ca),
+    'caFile': obj.caFile,
+    'cert': toJson_PrometheusSpecScrapeClassesTlsConfigCert(obj.cert),
+    'certFile': obj.certFile,
+    'insecureSkipVerify': obj.insecureSkipVerify,
+    'keyFile': obj.keyFile,
+    'keySecret': toJson_PrometheusSpecScrapeClassesTlsConfigKeySecret(obj.keySecret),
+    'serverName': obj.serverName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
  *
  * @schema PrometheusSpecScrapeConfigNamespaceSelectorMatchExpressions
@@ -41019,7 +41609,7 @@ export interface PrometheusSpecStorageVolumeClaimTemplate {
   readonly spec?: PrometheusSpecStorageVolumeClaimTemplateSpec;
 
   /**
-   * *Deprecated: this field is never set.*
+   * Deprecated: this field is never set.
    *
    * @schema PrometheusSpecStorageVolumeClaimTemplate#status
    */
@@ -41409,6 +41999,18 @@ export function toJson_PrometheusSpecThanosVolumeMounts(obj: PrometheusSpecThano
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
+
+/**
+ * Defines what Prometheus Operator managed labels should be added to labelSelector on the topologySpreadConstraint.
+ *
+ * @schema PrometheusSpecTopologySpreadConstraintsAdditionalLabelSelectors
+ */
+export enum PrometheusSpecTopologySpreadConstraintsAdditionalLabelSelectors {
+  /** OnResource */
+  ON_RESOURCE = "OnResource",
+  /** OnShard */
+  ON_SHARD = "OnShard",
+}
 
 /**
  * LabelSelector is used to find matching pods. Pods that match this label selector are counted to determine the number of pods in their corresponding topology domain.
@@ -43420,11 +44022,25 @@ export function toJson_PrometheusSpecAffinityPodAffinityPreferredDuringSchedulin
  */
 export interface PrometheusSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution {
   /**
-   * A label query over a set of resources, in this case pods.
+   * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
    *
    * @schema PrometheusSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#labelSelector
    */
   readonly labelSelector?: PrometheusSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MatchLabelKeys and LabelSelector. Also, MatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema PrometheusSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector. Also, MismatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema PrometheusSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
 
   /**
    * A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces.
@@ -43457,6 +44073,8 @@ export function toJson_PrometheusSpecAffinityPodAffinityRequiredDuringScheduling
   if (obj === undefined) { return undefined; }
   const result = {
     'labelSelector': toJson_PrometheusSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
     'namespaceSelector': toJson_PrometheusSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj.namespaceSelector),
     'namespaces': obj.namespaces?.map(y => y),
     'topologyKey': obj.topologyKey,
@@ -43510,11 +44128,25 @@ export function toJson_PrometheusSpecAffinityPodAntiAffinityPreferredDuringSched
  */
 export interface PrometheusSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution {
   /**
-   * A label query over a set of resources, in this case pods.
+   * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
    *
    * @schema PrometheusSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#labelSelector
    */
   readonly labelSelector?: PrometheusSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MatchLabelKeys and LabelSelector. Also, MatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema PrometheusSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector. Also, MismatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema PrometheusSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
 
   /**
    * A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces.
@@ -43547,6 +44179,8 @@ export function toJson_PrometheusSpecAffinityPodAntiAffinityRequiredDuringSchedu
   if (obj === undefined) { return undefined; }
   const result = {
     'labelSelector': toJson_PrometheusSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
     'namespaceSelector': toJson_PrometheusSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj.namespaceSelector),
     'namespaces': obj.namespaces?.map(y => y),
     'topologyKey': obj.topologyKey,
@@ -44200,6 +44834,13 @@ export interface PrometheusSpecContainersLifecyclePostStart {
   readonly httpGet?: PrometheusSpecContainersLifecyclePostStartHttpGet;
 
   /**
+   * Sleep represents the duration that the container should sleep before being terminated.
+   *
+   * @schema PrometheusSpecContainersLifecyclePostStart#sleep
+   */
+  readonly sleep?: PrometheusSpecContainersLifecyclePostStartSleep;
+
+  /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
    *
    * @schema PrometheusSpecContainersLifecyclePostStart#tcpSocket
@@ -44217,6 +44858,7 @@ export function toJson_PrometheusSpecContainersLifecyclePostStart(obj: Prometheu
   const result = {
     'exec': toJson_PrometheusSpecContainersLifecyclePostStartExec(obj.exec),
     'httpGet': toJson_PrometheusSpecContainersLifecyclePostStartHttpGet(obj.httpGet),
+    'sleep': toJson_PrometheusSpecContainersLifecyclePostStartSleep(obj.sleep),
     'tcpSocket': toJson_PrometheusSpecContainersLifecyclePostStartTcpSocket(obj.tcpSocket),
   };
   // filter undefined values
@@ -44245,6 +44887,13 @@ export interface PrometheusSpecContainersLifecyclePreStop {
   readonly httpGet?: PrometheusSpecContainersLifecyclePreStopHttpGet;
 
   /**
+   * Sleep represents the duration that the container should sleep before being terminated.
+   *
+   * @schema PrometheusSpecContainersLifecyclePreStop#sleep
+   */
+  readonly sleep?: PrometheusSpecContainersLifecyclePreStopSleep;
+
+  /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
    *
    * @schema PrometheusSpecContainersLifecyclePreStop#tcpSocket
@@ -44262,6 +44911,7 @@ export function toJson_PrometheusSpecContainersLifecyclePreStop(obj: PrometheusS
   const result = {
     'exec': toJson_PrometheusSpecContainersLifecyclePreStopExec(obj.exec),
     'httpGet': toJson_PrometheusSpecContainersLifecyclePreStopHttpGet(obj.httpGet),
+    'sleep': toJson_PrometheusSpecContainersLifecyclePreStopSleep(obj.sleep),
     'tcpSocket': toJson_PrometheusSpecContainersLifecyclePreStopTcpSocket(obj.tcpSocket),
   };
   // filter undefined values
@@ -45155,6 +45805,13 @@ export interface PrometheusSpecInitContainersLifecyclePostStart {
   readonly httpGet?: PrometheusSpecInitContainersLifecyclePostStartHttpGet;
 
   /**
+   * Sleep represents the duration that the container should sleep before being terminated.
+   *
+   * @schema PrometheusSpecInitContainersLifecyclePostStart#sleep
+   */
+  readonly sleep?: PrometheusSpecInitContainersLifecyclePostStartSleep;
+
+  /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
    *
    * @schema PrometheusSpecInitContainersLifecyclePostStart#tcpSocket
@@ -45172,6 +45829,7 @@ export function toJson_PrometheusSpecInitContainersLifecyclePostStart(obj: Prome
   const result = {
     'exec': toJson_PrometheusSpecInitContainersLifecyclePostStartExec(obj.exec),
     'httpGet': toJson_PrometheusSpecInitContainersLifecyclePostStartHttpGet(obj.httpGet),
+    'sleep': toJson_PrometheusSpecInitContainersLifecyclePostStartSleep(obj.sleep),
     'tcpSocket': toJson_PrometheusSpecInitContainersLifecyclePostStartTcpSocket(obj.tcpSocket),
   };
   // filter undefined values
@@ -45200,6 +45858,13 @@ export interface PrometheusSpecInitContainersLifecyclePreStop {
   readonly httpGet?: PrometheusSpecInitContainersLifecyclePreStopHttpGet;
 
   /**
+   * Sleep represents the duration that the container should sleep before being terminated.
+   *
+   * @schema PrometheusSpecInitContainersLifecyclePreStop#sleep
+   */
+  readonly sleep?: PrometheusSpecInitContainersLifecyclePreStopSleep;
+
+  /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
    *
    * @schema PrometheusSpecInitContainersLifecyclePreStop#tcpSocket
@@ -45217,6 +45882,7 @@ export function toJson_PrometheusSpecInitContainersLifecyclePreStop(obj: Prometh
   const result = {
     'exec': toJson_PrometheusSpecInitContainersLifecyclePreStopExec(obj.exec),
     'httpGet': toJson_PrometheusSpecInitContainersLifecyclePreStopHttpGet(obj.httpGet),
+    'sleep': toJson_PrometheusSpecInitContainersLifecyclePreStopSleep(obj.sleep),
     'tcpSocket': toJson_PrometheusSpecInitContainersLifecyclePreStopTcpSocket(obj.tcpSocket),
   };
   // filter undefined values
@@ -46846,6 +47512,125 @@ export enum PrometheusSpecRemoteWriteWriteRelabelConfigsAction {
 }
 
 /**
+ * Certificate authority used when verifying server certificates.
+ *
+ * @schema PrometheusSpecScrapeClassesTlsConfigCa
+ */
+export interface PrometheusSpecScrapeClassesTlsConfigCa {
+  /**
+   * ConfigMap containing data to use for the targets.
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfigCa#configMap
+   */
+  readonly configMap?: PrometheusSpecScrapeClassesTlsConfigCaConfigMap;
+
+  /**
+   * Secret containing data to use for the targets.
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfigCa#secret
+   */
+  readonly secret?: PrometheusSpecScrapeClassesTlsConfigCaSecret;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusSpecScrapeClassesTlsConfigCa' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusSpecScrapeClassesTlsConfigCa(obj: PrometheusSpecScrapeClassesTlsConfigCa | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMap': toJson_PrometheusSpecScrapeClassesTlsConfigCaConfigMap(obj.configMap),
+    'secret': toJson_PrometheusSpecScrapeClassesTlsConfigCaSecret(obj.secret),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Client certificate to present when doing client-authentication.
+ *
+ * @schema PrometheusSpecScrapeClassesTlsConfigCert
+ */
+export interface PrometheusSpecScrapeClassesTlsConfigCert {
+  /**
+   * ConfigMap containing data to use for the targets.
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfigCert#configMap
+   */
+  readonly configMap?: PrometheusSpecScrapeClassesTlsConfigCertConfigMap;
+
+  /**
+   * Secret containing data to use for the targets.
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfigCert#secret
+   */
+  readonly secret?: PrometheusSpecScrapeClassesTlsConfigCertSecret;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusSpecScrapeClassesTlsConfigCert' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusSpecScrapeClassesTlsConfigCert(obj: PrometheusSpecScrapeClassesTlsConfigCert | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMap': toJson_PrometheusSpecScrapeClassesTlsConfigCertConfigMap(obj.configMap),
+    'secret': toJson_PrometheusSpecScrapeClassesTlsConfigCertSecret(obj.secret),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Secret containing the client key file for the targets.
+ *
+ * @schema PrometheusSpecScrapeClassesTlsConfigKeySecret
+ */
+export interface PrometheusSpecScrapeClassesTlsConfigKeySecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfigKeySecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfigKeySecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfigKeySecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusSpecScrapeClassesTlsConfigKeySecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusSpecScrapeClassesTlsConfigKeySecret(obj: PrometheusSpecScrapeClassesTlsConfigKeySecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * sizeLimit is the total amount of local storage required for this EmptyDir volume. The size limit is also applicable for memory medium. The maximum usage on memory medium EmptyDir would be the minimum value between the SizeLimit specified here and the sum of memory limits of all containers in a pod. The default is nil which means that the limit is undefined. More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
  *
  * @schema PrometheusSpecStorageEmptyDirSizeLimit
@@ -46995,6 +47780,13 @@ export interface PrometheusSpecStorageVolumeClaimTemplateSpec {
   readonly storageClassName?: string;
 
   /**
+   * volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim. If specified, the CSI driver will create or update the volume with the attributes defined in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName, it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass will be applied to the claim but it's not allowed to reset this field to empty string once it is set. If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass will be set by the persistentvolume controller if it exists. If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource exists. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#volumeattributesclass (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   *
+   * @schema PrometheusSpecStorageVolumeClaimTemplateSpec#volumeAttributesClassName
+   */
+  readonly volumeAttributesClassName?: string;
+
+  /**
    * volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec.
    *
    * @schema PrometheusSpecStorageVolumeClaimTemplateSpec#volumeMode
@@ -47023,6 +47815,7 @@ export function toJson_PrometheusSpecStorageVolumeClaimTemplateSpec(obj: Prometh
     'resources': toJson_PrometheusSpecStorageVolumeClaimTemplateSpecResources(obj.resources),
     'selector': toJson_PrometheusSpecStorageVolumeClaimTemplateSpecSelector(obj.selector),
     'storageClassName': obj.storageClassName,
+    'volumeAttributesClassName': obj.volumeAttributesClassName,
     'volumeMode': obj.volumeMode,
     'volumeName': obj.volumeName,
   };
@@ -47032,7 +47825,7 @@ export function toJson_PrometheusSpecStorageVolumeClaimTemplateSpec(obj: Prometh
 /* eslint-enable max-len, quote-props */
 
 /**
- * *Deprecated: this field is never set.*
+ * Deprecated: this field is never set.
  *
  * @schema PrometheusSpecStorageVolumeClaimTemplateStatus
  */
@@ -47079,6 +47872,20 @@ export interface PrometheusSpecStorageVolumeClaimTemplateStatus {
   readonly conditions?: PrometheusSpecStorageVolumeClaimTemplateStatusConditions[];
 
   /**
+   * currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using. When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim This is an alpha field and requires enabling VolumeAttributesClass feature.
+   *
+   * @schema PrometheusSpecStorageVolumeClaimTemplateStatus#currentVolumeAttributesClassName
+   */
+  readonly currentVolumeAttributesClassName?: string;
+
+  /**
+   * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation. When this is unset, there is no ModifyVolume operation being attempted. This is an alpha field and requires enabling VolumeAttributesClass feature.
+   *
+   * @schema PrometheusSpecStorageVolumeClaimTemplateStatus#modifyVolumeStatus
+   */
+  readonly modifyVolumeStatus?: PrometheusSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus;
+
+  /**
    * phase represents the current phase of PersistentVolumeClaim.
    *
    * @schema PrometheusSpecStorageVolumeClaimTemplateStatus#phase
@@ -47099,6 +47906,8 @@ export function toJson_PrometheusSpecStorageVolumeClaimTemplateStatus(obj: Prome
     'allocatedResources': ((obj.allocatedResources) === undefined) ? undefined : (Object.entries(obj.allocatedResources).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'capacity': ((obj.capacity) === undefined) ? undefined : (Object.entries(obj.capacity).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'conditions': obj.conditions?.map(y => toJson_PrometheusSpecStorageVolumeClaimTemplateStatusConditions(y)),
+    'currentVolumeAttributesClassName': obj.currentVolumeAttributesClassName,
+    'modifyVolumeStatus': toJson_PrometheusSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus(obj.modifyVolumeStatus),
     'phase': obj.phase,
   };
   // filter undefined values
@@ -47752,6 +48561,16 @@ export function toJson_PrometheusSpecVolumesIscsiSecretRef(obj: PrometheusSpecVo
  */
 export interface PrometheusSpecVolumesProjectedSources {
   /**
+   * ClusterTrustBundle allows a pod to access the `.spec.trustBundle` field of ClusterTrustBundle objects in an auto-updating file.
+   * Alpha, gated by the ClusterTrustBundleProjection feature gate.
+   * ClusterTrustBundle objects can either be selected by name, or by the combination of signer name and a label selector.
+   * Kubelet performs aggressive normalization of the PEM contents written into the pod filesystem.  Esoteric PEM features such as inter-block comments and block headers are stripped.  Certificates are deduplicated. The ordering of certificates within the file is arbitrary, and Kubelet may change the order over time.
+   *
+   * @schema PrometheusSpecVolumesProjectedSources#clusterTrustBundle
+   */
+  readonly clusterTrustBundle?: PrometheusSpecVolumesProjectedSourcesClusterTrustBundle;
+
+  /**
    * configMap information about the configMap data to project
    *
    * @schema PrometheusSpecVolumesProjectedSources#configMap
@@ -47788,6 +48607,7 @@ export interface PrometheusSpecVolumesProjectedSources {
 export function toJson_PrometheusSpecVolumesProjectedSources(obj: PrometheusSpecVolumesProjectedSources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'clusterTrustBundle': toJson_PrometheusSpecVolumesProjectedSourcesClusterTrustBundle(obj.clusterTrustBundle),
     'configMap': toJson_PrometheusSpecVolumesProjectedSourcesConfigMap(obj.configMap),
     'downwardAPI': toJson_PrometheusSpecVolumesProjectedSourcesDownwardApi(obj.downwardApi),
     'secret': toJson_PrometheusSpecVolumesProjectedSourcesSecret(obj.secret),
@@ -48192,11 +49012,25 @@ export function toJson_PrometheusSpecAffinityNodeAffinityRequiredDuringSchedulin
  */
 export interface PrometheusSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm {
   /**
-   * A label query over a set of resources, in this case pods.
+   * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
    *
    * @schema PrometheusSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#labelSelector
    */
   readonly labelSelector?: PrometheusSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MatchLabelKeys and LabelSelector. Also, MatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema PrometheusSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector. Also, MismatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema PrometheusSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
 
   /**
    * A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces.
@@ -48229,6 +49063,8 @@ export function toJson_PrometheusSpecAffinityPodAffinityPreferredDuringSchedulin
   if (obj === undefined) { return undefined; }
   const result = {
     'labelSelector': toJson_PrometheusSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
     'namespaceSelector': toJson_PrometheusSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj.namespaceSelector),
     'namespaces': obj.namespaces?.map(y => y),
     'topologyKey': obj.topologyKey,
@@ -48239,7 +49075,7 @@ export function toJson_PrometheusSpecAffinityPodAffinityPreferredDuringSchedulin
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label query over a set of resources, in this case pods.
+ * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
  *
  * @schema PrometheusSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector
  */
@@ -48319,11 +49155,25 @@ export function toJson_PrometheusSpecAffinityPodAffinityRequiredDuringScheduling
  */
 export interface PrometheusSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm {
   /**
-   * A label query over a set of resources, in this case pods.
+   * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
    *
    * @schema PrometheusSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#labelSelector
    */
   readonly labelSelector?: PrometheusSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MatchLabelKeys and LabelSelector. Also, MatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema PrometheusSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector. Also, MismatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema PrometheusSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
 
   /**
    * A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces.
@@ -48356,6 +49206,8 @@ export function toJson_PrometheusSpecAffinityPodAntiAffinityPreferredDuringSched
   if (obj === undefined) { return undefined; }
   const result = {
     'labelSelector': toJson_PrometheusSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
     'namespaceSelector': toJson_PrometheusSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj.namespaceSelector),
     'namespaces': obj.namespaces?.map(y => y),
     'topologyKey': obj.topologyKey,
@@ -48366,7 +49218,7 @@ export function toJson_PrometheusSpecAffinityPodAntiAffinityPreferredDuringSched
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label query over a set of resources, in this case pods.
+ * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
  *
  * @schema PrometheusSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector
  */
@@ -49227,6 +50079,35 @@ export function toJson_PrometheusSpecContainersLifecyclePostStartHttpGet(obj: Pr
 /* eslint-enable max-len, quote-props */
 
 /**
+ * Sleep represents the duration that the container should sleep before being terminated.
+ *
+ * @schema PrometheusSpecContainersLifecyclePostStartSleep
+ */
+export interface PrometheusSpecContainersLifecyclePostStartSleep {
+  /**
+   * Seconds is the number of seconds to sleep.
+   *
+   * @schema PrometheusSpecContainersLifecyclePostStartSleep#seconds
+   */
+  readonly seconds: number;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusSpecContainersLifecyclePostStartSleep' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusSpecContainersLifecyclePostStartSleep(obj: PrometheusSpecContainersLifecyclePostStartSleep | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'seconds': obj.seconds,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
  *
  * @schema PrometheusSpecContainersLifecyclePostStartTcpSocket
@@ -49348,6 +50229,35 @@ export function toJson_PrometheusSpecContainersLifecyclePreStopHttpGet(obj: Prom
     'path': obj.path,
     'port': obj.port?.value,
     'scheme': obj.scheme,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Sleep represents the duration that the container should sleep before being terminated.
+ *
+ * @schema PrometheusSpecContainersLifecyclePreStopSleep
+ */
+export interface PrometheusSpecContainersLifecyclePreStopSleep {
+  /**
+   * Seconds is the number of seconds to sleep.
+   *
+   * @schema PrometheusSpecContainersLifecyclePreStopSleep#seconds
+   */
+  readonly seconds: number;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusSpecContainersLifecyclePreStopSleep' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusSpecContainersLifecyclePreStopSleep(obj: PrometheusSpecContainersLifecyclePreStopSleep | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'seconds': obj.seconds,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -49862,6 +50772,35 @@ export function toJson_PrometheusSpecInitContainersLifecyclePostStartHttpGet(obj
 /* eslint-enable max-len, quote-props */
 
 /**
+ * Sleep represents the duration that the container should sleep before being terminated.
+ *
+ * @schema PrometheusSpecInitContainersLifecyclePostStartSleep
+ */
+export interface PrometheusSpecInitContainersLifecyclePostStartSleep {
+  /**
+   * Seconds is the number of seconds to sleep.
+   *
+   * @schema PrometheusSpecInitContainersLifecyclePostStartSleep#seconds
+   */
+  readonly seconds: number;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusSpecInitContainersLifecyclePostStartSleep' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusSpecInitContainersLifecyclePostStartSleep(obj: PrometheusSpecInitContainersLifecyclePostStartSleep | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'seconds': obj.seconds,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
  *
  * @schema PrometheusSpecInitContainersLifecyclePostStartTcpSocket
@@ -49983,6 +50922,35 @@ export function toJson_PrometheusSpecInitContainersLifecyclePreStopHttpGet(obj: 
     'path': obj.path,
     'port': obj.port?.value,
     'scheme': obj.scheme,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Sleep represents the duration that the container should sleep before being terminated.
+ *
+ * @schema PrometheusSpecInitContainersLifecyclePreStopSleep
+ */
+export interface PrometheusSpecInitContainersLifecyclePreStopSleep {
+  /**
+   * Seconds is the number of seconds to sleep.
+   *
+   * @schema PrometheusSpecInitContainersLifecyclePreStopSleep#seconds
+   */
+  readonly seconds: number;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusSpecInitContainersLifecyclePreStopSleep' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusSpecInitContainersLifecyclePreStopSleep(obj: PrometheusSpecInitContainersLifecyclePreStopSleep | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'seconds': obj.seconds,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -50819,6 +51787,186 @@ export function toJson_PrometheusSpecRemoteWriteTlsConfigCertSecret(obj: Prometh
 /* eslint-enable max-len, quote-props */
 
 /**
+ * ConfigMap containing data to use for the targets.
+ *
+ * @schema PrometheusSpecScrapeClassesTlsConfigCaConfigMap
+ */
+export interface PrometheusSpecScrapeClassesTlsConfigCaConfigMap {
+  /**
+   * The key to select.
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfigCaConfigMap#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfigCaConfigMap#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap or its key must be defined
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfigCaConfigMap#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusSpecScrapeClassesTlsConfigCaConfigMap' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusSpecScrapeClassesTlsConfigCaConfigMap(obj: PrometheusSpecScrapeClassesTlsConfigCaConfigMap | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Secret containing data to use for the targets.
+ *
+ * @schema PrometheusSpecScrapeClassesTlsConfigCaSecret
+ */
+export interface PrometheusSpecScrapeClassesTlsConfigCaSecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfigCaSecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfigCaSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfigCaSecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusSpecScrapeClassesTlsConfigCaSecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusSpecScrapeClassesTlsConfigCaSecret(obj: PrometheusSpecScrapeClassesTlsConfigCaSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ConfigMap containing data to use for the targets.
+ *
+ * @schema PrometheusSpecScrapeClassesTlsConfigCertConfigMap
+ */
+export interface PrometheusSpecScrapeClassesTlsConfigCertConfigMap {
+  /**
+   * The key to select.
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfigCertConfigMap#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfigCertConfigMap#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap or its key must be defined
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfigCertConfigMap#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusSpecScrapeClassesTlsConfigCertConfigMap' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusSpecScrapeClassesTlsConfigCertConfigMap(obj: PrometheusSpecScrapeClassesTlsConfigCertConfigMap | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Secret containing data to use for the targets.
+ *
+ * @schema PrometheusSpecScrapeClassesTlsConfigCertSecret
+ */
+export interface PrometheusSpecScrapeClassesTlsConfigCertSecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfigCertSecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfigCertSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema PrometheusSpecScrapeClassesTlsConfigCertSecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusSpecScrapeClassesTlsConfigCertSecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusSpecScrapeClassesTlsConfigCertSecret(obj: PrometheusSpecScrapeClassesTlsConfigCertSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * The specification for the PersistentVolumeClaim. The entire content is copied unchanged into the PVC that gets created from this template. The same fields as in a PersistentVolumeClaim are also valid here.
  *
  * @schema PrometheusSpecStorageEphemeralVolumeClaimTemplateSpec
@@ -50867,6 +52015,13 @@ export interface PrometheusSpecStorageEphemeralVolumeClaimTemplateSpec {
   readonly storageClassName?: string;
 
   /**
+   * volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim. If specified, the CSI driver will create or update the volume with the attributes defined in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName, it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass will be applied to the claim but it's not allowed to reset this field to empty string once it is set. If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass will be set by the persistentvolume controller if it exists. If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource exists. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#volumeattributesclass (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   *
+   * @schema PrometheusSpecStorageEphemeralVolumeClaimTemplateSpec#volumeAttributesClassName
+   */
+  readonly volumeAttributesClassName?: string;
+
+  /**
    * volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec.
    *
    * @schema PrometheusSpecStorageEphemeralVolumeClaimTemplateSpec#volumeMode
@@ -50895,6 +52050,7 @@ export function toJson_PrometheusSpecStorageEphemeralVolumeClaimTemplateSpec(obj
     'resources': toJson_PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecResources(obj.resources),
     'selector': toJson_PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecSelector(obj.selector),
     'storageClassName': obj.storageClassName,
+    'volumeAttributesClassName': obj.volumeAttributesClassName,
     'volumeMode': obj.volumeMode,
     'volumeName': obj.volumeName,
   };
@@ -51008,15 +52164,6 @@ export function toJson_PrometheusSpecStorageVolumeClaimTemplateSpecDataSourceRef
  */
 export interface PrometheusSpecStorageVolumeClaimTemplateSpecResources {
   /**
-   * Claims lists the names of resources, defined in spec.resourceClaims, that are used by this container.
-   * This is an alpha field and requires enabling the DynamicResourceAllocation feature gate.
-   * This field is immutable. It can only be set for containers.
-   *
-   * @schema PrometheusSpecStorageVolumeClaimTemplateSpecResources#claims
-   */
-  readonly claims?: PrometheusSpecStorageVolumeClaimTemplateSpecResourcesClaims[];
-
-  /**
    * Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    *
    * @schema PrometheusSpecStorageVolumeClaimTemplateSpecResources#limits
@@ -51039,7 +52186,6 @@ export interface PrometheusSpecStorageVolumeClaimTemplateSpecResources {
 export function toJson_PrometheusSpecStorageVolumeClaimTemplateSpecResources(obj: PrometheusSpecStorageVolumeClaimTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'claims': obj.claims?.map(y => toJson_PrometheusSpecStorageVolumeClaimTemplateSpecResourcesClaims(y)),
     'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
   };
@@ -51174,6 +52320,43 @@ export function toJson_PrometheusSpecStorageVolumeClaimTemplateStatusConditions(
     'reason': obj.reason,
     'status': obj.status,
     'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation. When this is unset, there is no ModifyVolume operation being attempted. This is an alpha field and requires enabling VolumeAttributesClass feature.
+ *
+ * @schema PrometheusSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus
+ */
+export interface PrometheusSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus {
+  /**
+   * status is the status of the ControllerModifyVolume operation. It can be in any of following states: - Pending Pending indicates that the PersistentVolumeClaim cannot be modified due to unmet requirements, such as the specified VolumeAttributesClass not existing. - InProgress InProgress indicates that the volume is being modified. - Infeasible Infeasible indicates that the request has been rejected as invalid by the CSI driver. To resolve the error, a valid VolumeAttributesClass needs to be specified. Note: New statuses can be added in the future. Consumers should check for unknown statuses and fail appropriately.
+   *
+   * @schema PrometheusSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus#status
+   */
+  readonly status: string;
+
+  /**
+   * targetVolumeAttributesClassName is the name of the VolumeAttributesClass the PVC currently being reconciled
+   *
+   * @schema PrometheusSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus#targetVolumeAttributesClassName
+   */
+  readonly targetVolumeAttributesClassName?: string;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus(obj: PrometheusSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'status': obj.status,
+    'targetVolumeAttributesClassName': obj.targetVolumeAttributesClassName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -51671,6 +52854,13 @@ export interface PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpec {
   readonly storageClassName?: string;
 
   /**
+   * volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim. If specified, the CSI driver will create or update the volume with the attributes defined in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName, it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass will be applied to the claim but it's not allowed to reset this field to empty string once it is set. If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass will be set by the persistentvolume controller if it exists. If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource exists. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#volumeattributesclass (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   *
+   * @schema PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpec#volumeAttributesClassName
+   */
+  readonly volumeAttributesClassName?: string;
+
+  /**
    * volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec.
    *
    * @schema PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpec#volumeMode
@@ -51699,8 +52889,73 @@ export function toJson_PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpec(obj
     'resources': toJson_PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecResources(obj.resources),
     'selector': toJson_PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecSelector(obj.selector),
     'storageClassName': obj.storageClassName,
+    'volumeAttributesClassName': obj.volumeAttributesClassName,
     'volumeMode': obj.volumeMode,
     'volumeName': obj.volumeName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ClusterTrustBundle allows a pod to access the `.spec.trustBundle` field of ClusterTrustBundle objects in an auto-updating file.
+ * Alpha, gated by the ClusterTrustBundleProjection feature gate.
+ * ClusterTrustBundle objects can either be selected by name, or by the combination of signer name and a label selector.
+ * Kubelet performs aggressive normalization of the PEM contents written into the pod filesystem.  Esoteric PEM features such as inter-block comments and block headers are stripped.  Certificates are deduplicated. The ordering of certificates within the file is arbitrary, and Kubelet may change the order over time.
+ *
+ * @schema PrometheusSpecVolumesProjectedSourcesClusterTrustBundle
+ */
+export interface PrometheusSpecVolumesProjectedSourcesClusterTrustBundle {
+  /**
+   * Select all ClusterTrustBundles that match this label selector.  Only has effect if signerName is set.  Mutually-exclusive with name.  If unset, interpreted as "match nothing".  If set but empty, interpreted as "match everything".
+   *
+   * @schema PrometheusSpecVolumesProjectedSourcesClusterTrustBundle#labelSelector
+   */
+  readonly labelSelector?: PrometheusSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector;
+
+  /**
+   * Select a single ClusterTrustBundle by object name.  Mutually-exclusive with signerName and labelSelector.
+   *
+   * @schema PrometheusSpecVolumesProjectedSourcesClusterTrustBundle#name
+   */
+  readonly name?: string;
+
+  /**
+   * If true, don't block pod startup if the referenced ClusterTrustBundle(s) aren't available.  If using name, then the named ClusterTrustBundle is allowed not to exist.  If using signerName, then the combination of signerName and labelSelector is allowed to match zero ClusterTrustBundles.
+   *
+   * @schema PrometheusSpecVolumesProjectedSourcesClusterTrustBundle#optional
+   */
+  readonly optional?: boolean;
+
+  /**
+   * Relative path from the volume root to write the bundle.
+   *
+   * @schema PrometheusSpecVolumesProjectedSourcesClusterTrustBundle#path
+   */
+  readonly path: string;
+
+  /**
+   * Select all ClusterTrustBundles that match this signer name. Mutually-exclusive with name.  The contents of all selected ClusterTrustBundles will be unified and deduplicated.
+   *
+   * @schema PrometheusSpecVolumesProjectedSourcesClusterTrustBundle#signerName
+   */
+  readonly signerName?: string;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusSpecVolumesProjectedSourcesClusterTrustBundle' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusSpecVolumesProjectedSourcesClusterTrustBundle(obj: PrometheusSpecVolumesProjectedSourcesClusterTrustBundle | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'labelSelector': toJson_PrometheusSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector(obj.labelSelector),
+    'name': obj.name,
+    'optional': obj.optional,
+    'path': obj.path,
+    'signerName': obj.signerName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -52255,7 +53510,7 @@ export function toJson_PrometheusSpecAffinityNodeAffinityRequiredDuringSchedulin
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label query over a set of resources, in this case pods.
+ * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
  *
  * @schema PrometheusSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector
  */
@@ -52419,7 +53674,7 @@ export function toJson_PrometheusSpecAffinityPodAffinityRequiredDuringScheduling
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label query over a set of resources, in this case pods.
+ * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
  *
  * @schema PrometheusSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector
  */
@@ -53175,15 +54430,6 @@ export function toJson_PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecData
  */
 export interface PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecResources {
   /**
-   * Claims lists the names of resources, defined in spec.resourceClaims, that are used by this container.
-   * This is an alpha field and requires enabling the DynamicResourceAllocation feature gate.
-   * This field is immutable. It can only be set for containers.
-   *
-   * @schema PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecResources#claims
-   */
-  readonly claims?: PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims[];
-
-  /**
    * Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    *
    * @schema PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecResources#limits
@@ -53206,7 +54452,6 @@ export interface PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecResources 
 export function toJson_PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecResources(obj: PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'claims': obj.claims?.map(y => toJson_PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims(y)),
     'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
   };
@@ -53246,35 +54491,6 @@ export function toJson_PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecSele
   const result = {
     'matchExpressions': obj.matchExpressions?.map(y => toJson_PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions(y)),
     'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, quote-props */
-
-/**
- * ResourceClaim references one entry in PodSpec.ResourceClaims.
- *
- * @schema PrometheusSpecStorageVolumeClaimTemplateSpecResourcesClaims
- */
-export interface PrometheusSpecStorageVolumeClaimTemplateSpecResourcesClaims {
-  /**
-   * Name must match the name of one entry in pod.spec.resourceClaims of the Pod where this field is used. It makes that resource available inside a container.
-   *
-   * @schema PrometheusSpecStorageVolumeClaimTemplateSpecResourcesClaims#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * Converts an object of type 'PrometheusSpecStorageVolumeClaimTemplateSpecResourcesClaims' to JSON representation.
- */
-/* eslint-disable max-len, quote-props */
-export function toJson_PrometheusSpecStorageVolumeClaimTemplateSpecResourcesClaims(obj: PrometheusSpecStorageVolumeClaimTemplateSpecResourcesClaims | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'name': obj.name,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -53475,15 +54691,6 @@ export function toJson_PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecData
  */
 export interface PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecResources {
   /**
-   * Claims lists the names of resources, defined in spec.resourceClaims, that are used by this container.
-   * This is an alpha field and requires enabling the DynamicResourceAllocation feature gate.
-   * This field is immutable. It can only be set for containers.
-   *
-   * @schema PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecResources#claims
-   */
-  readonly claims?: PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims[];
-
-  /**
    * Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    *
    * @schema PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecResources#limits
@@ -53506,7 +54713,6 @@ export interface PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecResources 
 export function toJson_PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecResources(obj: PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'claims': obj.claims?.map(y => toJson_PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims(y)),
     'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
   };
@@ -53545,6 +54751,43 @@ export function toJson_PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecSele
   if (obj === undefined) { return undefined; }
   const result = {
     'matchExpressions': obj.matchExpressions?.map(y => toJson_PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Select all ClusterTrustBundles that match this label selector.  Only has effect if signerName is set.  Mutually-exclusive with name.  If unset, interpreted as "match nothing".  If set but empty, interpreted as "match everything".
+ *
+ * @schema PrometheusSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector
+ */
+export interface PrometheusSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema PrometheusSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector#matchExpressions
+   */
+  readonly matchExpressions?: PrometheusSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema PrometheusSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'PrometheusSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector(obj: PrometheusSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_PrometheusSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions(y)),
     'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
   };
   // filter undefined values
@@ -53876,35 +55119,6 @@ export function toJson_PrometheusSpecAffinityPodAntiAffinityPreferredDuringSched
 /* eslint-enable max-len, quote-props */
 
 /**
- * ResourceClaim references one entry in PodSpec.ResourceClaims.
- *
- * @schema PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims
- */
-export interface PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims {
-  /**
-   * Name must match the name of one entry in pod.spec.resourceClaims of the Pod where this field is used. It makes that resource available inside a container.
-   *
-   * @schema PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * Converts an object of type 'PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims' to JSON representation.
- */
-/* eslint-disable max-len, quote-props */
-export function toJson_PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims(obj: PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'name': obj.name,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, quote-props */
-
-/**
  * @schema PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecResourcesLimits
  */
 export class PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecResourcesLimits {
@@ -53978,35 +55192,6 @@ export function toJson_PrometheusSpecStorageEphemeralVolumeClaimTemplateSpecSele
 /* eslint-enable max-len, quote-props */
 
 /**
- * ResourceClaim references one entry in PodSpec.ResourceClaims.
- *
- * @schema PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims
- */
-export interface PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims {
-  /**
-   * Name must match the name of one entry in pod.spec.resourceClaims of the Pod where this field is used. It makes that resource available inside a container.
-   *
-   * @schema PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * Converts an object of type 'PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims' to JSON representation.
- */
-/* eslint-disable max-len, quote-props */
-export function toJson_PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims(obj: PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'name': obj.name,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, quote-props */
-
-/**
  * @schema PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesLimits
  */
 export class PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesLimits {
@@ -54068,6 +55253,51 @@ export interface PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecSelectorMa
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions(obj: PrometheusSpecVolumesEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ *
+ * @schema PrometheusSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions
+ */
+export interface PrometheusSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema PrometheusSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema PrometheusSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   *
+   * @schema PrometheusSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'PrometheusSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions(obj: PrometheusSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -54545,6 +55775,13 @@ export interface PrometheusAgentSpec {
   readonly logLevel?: PrometheusAgentSpecLogLevel;
 
   /**
+   * Defines the maximum time that the `prometheus` container's startup probe will wait before being considered failed. The startup probe will return success after the WAL replay is complete. If set, the value should be greater than 60 (seconds). Otherwise it will be equal to 600 seconds (15 minutes).
+   *
+   * @schema PrometheusAgentSpec#maximumStartupDurationSeconds
+   */
+  readonly maximumStartupDurationSeconds?: number;
+
+  /**
    * Minimum number of seconds for which a newly created Pod should be ready without any of its container crashing for it to be considered available. Defaults to 0 (pod will be considered available as soon as it is ready)
    * This is an alpha field from kubernetes 1.22 until 1.24 which requires enabling the StatefulSetMinReadySeconds feature gate.
    *
@@ -54708,6 +55945,13 @@ export interface PrometheusAgentSpec {
   readonly sampleLimit?: number;
 
   /**
+   * EXPERIMENTAL List of scrape classes to expose to monitors and other scrape configs. This is experimental feature and might change in the future.
+   *
+   * @schema PrometheusAgentSpec#scrapeClasses
+   */
+  readonly scrapeClasses?: PrometheusAgentSpecScrapeClasses[];
+
+  /**
    * Namespaces to match for ScrapeConfig discovery. An empty label selector matches all namespaces. A null label selector matches the current current namespace only.
    *
    * @schema PrometheusAgentSpec#scrapeConfigNamespaceSelector
@@ -54729,6 +55973,15 @@ export interface PrometheusAgentSpec {
    * @schema PrometheusAgentSpec#scrapeInterval
    */
   readonly scrapeInterval?: string;
+
+  /**
+   * The protocols to negotiate during a scrape. It tells clients the protocols supported by Prometheus in order of preference (from most to least preferred).
+   * If unset, Prometheus uses its default value.
+   * It requires Prometheus >= v2.49.0.
+   *
+   * @schema PrometheusAgentSpec#scrapeProtocols
+   */
+  readonly scrapeProtocols?: PrometheusAgentSpecScrapeProtocols[];
 
   /**
    * Number of seconds to wait until a scrape request times out.
@@ -54901,6 +56154,7 @@ export function toJson_PrometheusAgentSpec(obj: PrometheusAgentSpec | undefined)
     'listenLocal': obj.listenLocal,
     'logFormat': obj.logFormat,
     'logLevel': obj.logLevel,
+    'maximumStartupDurationSeconds': obj.maximumStartupDurationSeconds,
     'minReadySeconds': obj.minReadySeconds,
     'nodeSelector': ((obj.nodeSelector) === undefined) ? undefined : (Object.entries(obj.nodeSelector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'overrideHonorLabels': obj.overrideHonorLabels,
@@ -54923,9 +56177,11 @@ export function toJson_PrometheusAgentSpec(obj: PrometheusAgentSpec | undefined)
     'resources': toJson_PrometheusAgentSpecResources(obj.resources),
     'routePrefix': obj.routePrefix,
     'sampleLimit': obj.sampleLimit,
+    'scrapeClasses': obj.scrapeClasses?.map(y => toJson_PrometheusAgentSpecScrapeClasses(y)),
     'scrapeConfigNamespaceSelector': toJson_PrometheusAgentSpecScrapeConfigNamespaceSelector(obj.scrapeConfigNamespaceSelector),
     'scrapeConfigSelector': toJson_PrometheusAgentSpecScrapeConfigSelector(obj.scrapeConfigSelector),
     'scrapeInterval': obj.scrapeInterval,
+    'scrapeProtocols': obj.scrapeProtocols?.map(y => y),
     'scrapeTimeout': obj.scrapeTimeout,
     'secrets': obj.secrets?.map(y => y),
     'securityContext': toJson_PrometheusAgentSpecSecurityContext(obj.securityContext),
@@ -55100,7 +56356,7 @@ export interface PrometheusAgentSpecApiserverConfig {
 
   /**
    * *Warning: this field shouldn't be used because the token value appears in clear-text. Prefer using `authorization`.*
-   * *Deprecated: this will be removed in a future release.*
+   * Deprecated: this will be removed in a future release.
    *
    * @schema PrometheusAgentSpecApiserverConfig#bearerToken
    */
@@ -55109,7 +56365,7 @@ export interface PrometheusAgentSpecApiserverConfig {
   /**
    * File to read bearer token for accessing apiserver.
    * Cannot be set at the same time as `basicAuth`, `authorization`, or `bearerToken`.
-   * *Deprecated: this will be removed in a future release. Prefer using `authorization`.*
+   * Deprecated: this will be removed in a future release. Prefer using `authorization`.
    *
    * @schema PrometheusAgentSpecApiserverConfig#bearerTokenFile
    */
@@ -56055,7 +57311,7 @@ export interface PrometheusAgentSpecRemoteWrite {
 
   /**
    * *Warning: this field shouldn't be used because the token value appears in clear-text. Prefer using `authorization`.*
-   * *Deprecated: this will be removed in a future release.*
+   * Deprecated: this will be removed in a future release.
    *
    * @schema PrometheusAgentSpecRemoteWrite#bearerToken
    */
@@ -56063,11 +57319,18 @@ export interface PrometheusAgentSpecRemoteWrite {
 
   /**
    * File from which to read bearer token for the URL.
-   * *Deprecated: this will be removed in a future release. Prefer using `authorization`.*
+   * Deprecated: this will be removed in a future release. Prefer using `authorization`.
    *
    * @schema PrometheusAgentSpecRemoteWrite#bearerTokenFile
    */
   readonly bearerTokenFile?: string;
+
+  /**
+   * Whether to enable HTTP2.
+   *
+   * @schema PrometheusAgentSpecRemoteWrite#enableHTTP2
+   */
+  readonly enableHttp2?: boolean;
 
   /**
    * Custom HTTP headers to be sent along with each remote write request. Be aware that headers that are set by Prometheus itself can't be overwritten.
@@ -56182,6 +57445,7 @@ export function toJson_PrometheusAgentSpecRemoteWrite(obj: PrometheusAgentSpecRe
     'basicAuth': toJson_PrometheusAgentSpecRemoteWriteBasicAuth(obj.basicAuth),
     'bearerToken': obj.bearerToken,
     'bearerTokenFile': obj.bearerTokenFile,
+    'enableHTTP2': obj.enableHttp2,
     'headers': ((obj.headers) === undefined) ? undefined : (Object.entries(obj.headers).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'metadataConfig': toJson_PrometheusAgentSpecRemoteWriteMetadataConfig(obj.metadataConfig),
     'name': obj.name,
@@ -56242,6 +57506,50 @@ export function toJson_PrometheusAgentSpecResources(obj: PrometheusAgentSpecReso
     'claims': obj.claims?.map(y => toJson_PrometheusAgentSpecResourcesClaims(y)),
     'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema PrometheusAgentSpecScrapeClasses
+ */
+export interface PrometheusAgentSpecScrapeClasses {
+  /**
+   * Default indicates that the scrape applies to all scrape objects that don't configure an explicit scrape class name.
+   * Only one scrape class can be set as default.
+   *
+   * @schema PrometheusAgentSpecScrapeClasses#default
+   */
+  readonly default?: boolean;
+
+  /**
+   * Name of the scrape class.
+   *
+   * @schema PrometheusAgentSpecScrapeClasses#name
+   */
+  readonly name: string;
+
+  /**
+   * TLSConfig section for scrapes.
+   *
+   * @schema PrometheusAgentSpecScrapeClasses#tlsConfig
+   */
+  readonly tlsConfig?: PrometheusAgentSpecScrapeClassesTlsConfig;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusAgentSpecScrapeClasses' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusAgentSpecScrapeClasses(obj: PrometheusAgentSpecScrapeClasses | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'default': obj.default,
+    'name': obj.name,
+    'tlsConfig': toJson_PrometheusAgentSpecScrapeClassesTlsConfig(obj.tlsConfig),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -56322,6 +57630,22 @@ export function toJson_PrometheusAgentSpecScrapeConfigSelector(obj: PrometheusAg
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
+
+/**
+ * ScrapeProtocol represents a protocol used by Prometheus for scraping metrics. Supported values are: * `OpenMetricsText0.0.1` * `OpenMetricsText1.0.0` * `PrometheusProto` * `PrometheusText0.0.4`
+ *
+ * @schema PrometheusAgentSpecScrapeProtocols
+ */
+export enum PrometheusAgentSpecScrapeProtocols {
+  /** PrometheusProto */
+  PROMETHEUS_PROTO = "PrometheusProto",
+  /** OpenMetricsText0.0.1 */
+  OPEN_METRICS_TEXT0_0_1 = "OpenMetricsText0.0.1",
+  /** OpenMetricsText1.0.0 */
+  OPEN_METRICS_TEXT1_0_0 = "OpenMetricsText1.0.0",
+  /** PrometheusText0.0.4 */
+  PROMETHEUS_TEXT0_0_4 = "PrometheusText0.0.4",
+}
 
 /**
  * SecurityContext holds pod-level security attributes and common container settings. This defaults to the default PodSecurityContext.
@@ -56509,7 +57833,7 @@ export function toJson_PrometheusAgentSpecServiceMonitorSelector(obj: Prometheus
  */
 export interface PrometheusAgentSpecStorage {
   /**
-   * *Deprecated: subPath usage will be removed in a future release.*
+   * Deprecated: subPath usage will be removed in a future release.
    *
    * @schema PrometheusAgentSpecStorage#disableMountSubPath
    */
@@ -56618,11 +57942,16 @@ export function toJson_PrometheusAgentSpecTolerations(obj: PrometheusAgentSpecTo
 /* eslint-enable max-len, quote-props */
 
 /**
- * TopologySpreadConstraint specifies how to spread matching pods among the given topology.
- *
  * @schema PrometheusAgentSpecTopologySpreadConstraints
  */
 export interface PrometheusAgentSpecTopologySpreadConstraints {
+  /**
+   * Defines what Prometheus Operator managed labels should be added to labelSelector on the topologySpreadConstraint.
+   *
+   * @schema PrometheusAgentSpecTopologySpreadConstraints#additionalLabelSelectors
+   */
+  readonly additionalLabelSelectors?: PrometheusAgentSpecTopologySpreadConstraintsAdditionalLabelSelectors;
+
   /**
    * LabelSelector is used to find matching pods. Pods that match this label selector are counted to determine the number of pods in their corresponding topology domain.
    *
@@ -56693,6 +58022,7 @@ export interface PrometheusAgentSpecTopologySpreadConstraints {
 export function toJson_PrometheusAgentSpecTopologySpreadConstraints(obj: PrometheusAgentSpecTopologySpreadConstraints | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'additionalLabelSelectors': obj.additionalLabelSelectors,
     'labelSelector': toJson_PrometheusAgentSpecTopologySpreadConstraintsLabelSelector(obj.labelSelector),
     'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
     'maxSkew': obj.maxSkew,
@@ -59912,6 +61242,91 @@ export class PrometheusAgentSpecResourcesRequests {
 }
 
 /**
+ * TLSConfig section for scrapes.
+ *
+ * @schema PrometheusAgentSpecScrapeClassesTlsConfig
+ */
+export interface PrometheusAgentSpecScrapeClassesTlsConfig {
+  /**
+   * Certificate authority used when verifying server certificates.
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfig#ca
+   */
+  readonly ca?: PrometheusAgentSpecScrapeClassesTlsConfigCa;
+
+  /**
+   * Path to the CA cert in the Prometheus container to use for the targets.
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfig#caFile
+   */
+  readonly caFile?: string;
+
+  /**
+   * Client certificate to present when doing client-authentication.
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfig#cert
+   */
+  readonly cert?: PrometheusAgentSpecScrapeClassesTlsConfigCert;
+
+  /**
+   * Path to the client cert file in the Prometheus container for the targets.
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfig#certFile
+   */
+  readonly certFile?: string;
+
+  /**
+   * Disable target certificate validation.
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfig#insecureSkipVerify
+   */
+  readonly insecureSkipVerify?: boolean;
+
+  /**
+   * Path to the client key file in the Prometheus container for the targets.
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfig#keyFile
+   */
+  readonly keyFile?: string;
+
+  /**
+   * Secret containing the client key file for the targets.
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfig#keySecret
+   */
+  readonly keySecret?: PrometheusAgentSpecScrapeClassesTlsConfigKeySecret;
+
+  /**
+   * Used to verify the hostname for the targets.
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfig#serverName
+   */
+  readonly serverName?: string;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusAgentSpecScrapeClassesTlsConfig' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusAgentSpecScrapeClassesTlsConfig(obj: PrometheusAgentSpecScrapeClassesTlsConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'ca': toJson_PrometheusAgentSpecScrapeClassesTlsConfigCa(obj.ca),
+    'caFile': obj.caFile,
+    'cert': toJson_PrometheusAgentSpecScrapeClassesTlsConfigCert(obj.cert),
+    'certFile': obj.certFile,
+    'insecureSkipVerify': obj.insecureSkipVerify,
+    'keyFile': obj.keyFile,
+    'keySecret': toJson_PrometheusAgentSpecScrapeClassesTlsConfigKeySecret(obj.keySecret),
+    'serverName': obj.serverName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
  *
  * @schema PrometheusAgentSpecScrapeConfigNamespaceSelectorMatchExpressions
@@ -60377,7 +61792,7 @@ export interface PrometheusAgentSpecStorageVolumeClaimTemplate {
   readonly spec?: PrometheusAgentSpecStorageVolumeClaimTemplateSpec;
 
   /**
-   * *Deprecated: this field is never set.*
+   * Deprecated: this field is never set.
    *
    * @schema PrometheusAgentSpecStorageVolumeClaimTemplate#status
    */
@@ -60402,6 +61817,18 @@ export function toJson_PrometheusAgentSpecStorageVolumeClaimTemplate(obj: Promet
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
+
+/**
+ * Defines what Prometheus Operator managed labels should be added to labelSelector on the topologySpreadConstraint.
+ *
+ * @schema PrometheusAgentSpecTopologySpreadConstraintsAdditionalLabelSelectors
+ */
+export enum PrometheusAgentSpecTopologySpreadConstraintsAdditionalLabelSelectors {
+  /** OnResource */
+  ON_RESOURCE = "OnResource",
+  /** OnShard */
+  ON_SHARD = "OnShard",
+}
 
 /**
  * LabelSelector is used to find matching pods. Pods that match this label selector are counted to determine the number of pods in their corresponding topology domain.
@@ -62413,11 +63840,25 @@ export function toJson_PrometheusAgentSpecAffinityPodAffinityPreferredDuringSche
  */
 export interface PrometheusAgentSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution {
   /**
-   * A label query over a set of resources, in this case pods.
+   * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
    *
    * @schema PrometheusAgentSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#labelSelector
    */
   readonly labelSelector?: PrometheusAgentSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MatchLabelKeys and LabelSelector. Also, MatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema PrometheusAgentSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector. Also, MismatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema PrometheusAgentSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
 
   /**
    * A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces.
@@ -62450,6 +63891,8 @@ export function toJson_PrometheusAgentSpecAffinityPodAffinityRequiredDuringSched
   if (obj === undefined) { return undefined; }
   const result = {
     'labelSelector': toJson_PrometheusAgentSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
     'namespaceSelector': toJson_PrometheusAgentSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj.namespaceSelector),
     'namespaces': obj.namespaces?.map(y => y),
     'topologyKey': obj.topologyKey,
@@ -62503,11 +63946,25 @@ export function toJson_PrometheusAgentSpecAffinityPodAntiAffinityPreferredDuring
  */
 export interface PrometheusAgentSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution {
   /**
-   * A label query over a set of resources, in this case pods.
+   * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
    *
    * @schema PrometheusAgentSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#labelSelector
    */
   readonly labelSelector?: PrometheusAgentSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MatchLabelKeys and LabelSelector. Also, MatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema PrometheusAgentSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector. Also, MismatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema PrometheusAgentSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
 
   /**
    * A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces.
@@ -62540,6 +63997,8 @@ export function toJson_PrometheusAgentSpecAffinityPodAntiAffinityRequiredDuringS
   if (obj === undefined) { return undefined; }
   const result = {
     'labelSelector': toJson_PrometheusAgentSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
     'namespaceSelector': toJson_PrometheusAgentSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj.namespaceSelector),
     'namespaces': obj.namespaces?.map(y => y),
     'topologyKey': obj.topologyKey,
@@ -62951,6 +64410,13 @@ export interface PrometheusAgentSpecContainersLifecyclePostStart {
   readonly httpGet?: PrometheusAgentSpecContainersLifecyclePostStartHttpGet;
 
   /**
+   * Sleep represents the duration that the container should sleep before being terminated.
+   *
+   * @schema PrometheusAgentSpecContainersLifecyclePostStart#sleep
+   */
+  readonly sleep?: PrometheusAgentSpecContainersLifecyclePostStartSleep;
+
+  /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
    *
    * @schema PrometheusAgentSpecContainersLifecyclePostStart#tcpSocket
@@ -62968,6 +64434,7 @@ export function toJson_PrometheusAgentSpecContainersLifecyclePostStart(obj: Prom
   const result = {
     'exec': toJson_PrometheusAgentSpecContainersLifecyclePostStartExec(obj.exec),
     'httpGet': toJson_PrometheusAgentSpecContainersLifecyclePostStartHttpGet(obj.httpGet),
+    'sleep': toJson_PrometheusAgentSpecContainersLifecyclePostStartSleep(obj.sleep),
     'tcpSocket': toJson_PrometheusAgentSpecContainersLifecyclePostStartTcpSocket(obj.tcpSocket),
   };
   // filter undefined values
@@ -62996,6 +64463,13 @@ export interface PrometheusAgentSpecContainersLifecyclePreStop {
   readonly httpGet?: PrometheusAgentSpecContainersLifecyclePreStopHttpGet;
 
   /**
+   * Sleep represents the duration that the container should sleep before being terminated.
+   *
+   * @schema PrometheusAgentSpecContainersLifecyclePreStop#sleep
+   */
+  readonly sleep?: PrometheusAgentSpecContainersLifecyclePreStopSleep;
+
+  /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
    *
    * @schema PrometheusAgentSpecContainersLifecyclePreStop#tcpSocket
@@ -63013,6 +64487,7 @@ export function toJson_PrometheusAgentSpecContainersLifecyclePreStop(obj: Promet
   const result = {
     'exec': toJson_PrometheusAgentSpecContainersLifecyclePreStopExec(obj.exec),
     'httpGet': toJson_PrometheusAgentSpecContainersLifecyclePreStopHttpGet(obj.httpGet),
+    'sleep': toJson_PrometheusAgentSpecContainersLifecyclePreStopSleep(obj.sleep),
     'tcpSocket': toJson_PrometheusAgentSpecContainersLifecyclePreStopTcpSocket(obj.tcpSocket),
   };
   // filter undefined values
@@ -63906,6 +65381,13 @@ export interface PrometheusAgentSpecInitContainersLifecyclePostStart {
   readonly httpGet?: PrometheusAgentSpecInitContainersLifecyclePostStartHttpGet;
 
   /**
+   * Sleep represents the duration that the container should sleep before being terminated.
+   *
+   * @schema PrometheusAgentSpecInitContainersLifecyclePostStart#sleep
+   */
+  readonly sleep?: PrometheusAgentSpecInitContainersLifecyclePostStartSleep;
+
+  /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
    *
    * @schema PrometheusAgentSpecInitContainersLifecyclePostStart#tcpSocket
@@ -63923,6 +65405,7 @@ export function toJson_PrometheusAgentSpecInitContainersLifecyclePostStart(obj: 
   const result = {
     'exec': toJson_PrometheusAgentSpecInitContainersLifecyclePostStartExec(obj.exec),
     'httpGet': toJson_PrometheusAgentSpecInitContainersLifecyclePostStartHttpGet(obj.httpGet),
+    'sleep': toJson_PrometheusAgentSpecInitContainersLifecyclePostStartSleep(obj.sleep),
     'tcpSocket': toJson_PrometheusAgentSpecInitContainersLifecyclePostStartTcpSocket(obj.tcpSocket),
   };
   // filter undefined values
@@ -63951,6 +65434,13 @@ export interface PrometheusAgentSpecInitContainersLifecyclePreStop {
   readonly httpGet?: PrometheusAgentSpecInitContainersLifecyclePreStopHttpGet;
 
   /**
+   * Sleep represents the duration that the container should sleep before being terminated.
+   *
+   * @schema PrometheusAgentSpecInitContainersLifecyclePreStop#sleep
+   */
+  readonly sleep?: PrometheusAgentSpecInitContainersLifecyclePreStopSleep;
+
+  /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
    *
    * @schema PrometheusAgentSpecInitContainersLifecyclePreStop#tcpSocket
@@ -63968,6 +65458,7 @@ export function toJson_PrometheusAgentSpecInitContainersLifecyclePreStop(obj: Pr
   const result = {
     'exec': toJson_PrometheusAgentSpecInitContainersLifecyclePreStopExec(obj.exec),
     'httpGet': toJson_PrometheusAgentSpecInitContainersLifecyclePreStopHttpGet(obj.httpGet),
+    'sleep': toJson_PrometheusAgentSpecInitContainersLifecyclePreStopSleep(obj.sleep),
     'tcpSocket': toJson_PrometheusAgentSpecInitContainersLifecyclePreStopTcpSocket(obj.tcpSocket),
   };
   // filter undefined values
@@ -65261,6 +66752,125 @@ export enum PrometheusAgentSpecRemoteWriteWriteRelabelConfigsAction {
 }
 
 /**
+ * Certificate authority used when verifying server certificates.
+ *
+ * @schema PrometheusAgentSpecScrapeClassesTlsConfigCa
+ */
+export interface PrometheusAgentSpecScrapeClassesTlsConfigCa {
+  /**
+   * ConfigMap containing data to use for the targets.
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfigCa#configMap
+   */
+  readonly configMap?: PrometheusAgentSpecScrapeClassesTlsConfigCaConfigMap;
+
+  /**
+   * Secret containing data to use for the targets.
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfigCa#secret
+   */
+  readonly secret?: PrometheusAgentSpecScrapeClassesTlsConfigCaSecret;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusAgentSpecScrapeClassesTlsConfigCa' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusAgentSpecScrapeClassesTlsConfigCa(obj: PrometheusAgentSpecScrapeClassesTlsConfigCa | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMap': toJson_PrometheusAgentSpecScrapeClassesTlsConfigCaConfigMap(obj.configMap),
+    'secret': toJson_PrometheusAgentSpecScrapeClassesTlsConfigCaSecret(obj.secret),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Client certificate to present when doing client-authentication.
+ *
+ * @schema PrometheusAgentSpecScrapeClassesTlsConfigCert
+ */
+export interface PrometheusAgentSpecScrapeClassesTlsConfigCert {
+  /**
+   * ConfigMap containing data to use for the targets.
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfigCert#configMap
+   */
+  readonly configMap?: PrometheusAgentSpecScrapeClassesTlsConfigCertConfigMap;
+
+  /**
+   * Secret containing data to use for the targets.
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfigCert#secret
+   */
+  readonly secret?: PrometheusAgentSpecScrapeClassesTlsConfigCertSecret;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusAgentSpecScrapeClassesTlsConfigCert' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusAgentSpecScrapeClassesTlsConfigCert(obj: PrometheusAgentSpecScrapeClassesTlsConfigCert | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMap': toJson_PrometheusAgentSpecScrapeClassesTlsConfigCertConfigMap(obj.configMap),
+    'secret': toJson_PrometheusAgentSpecScrapeClassesTlsConfigCertSecret(obj.secret),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Secret containing the client key file for the targets.
+ *
+ * @schema PrometheusAgentSpecScrapeClassesTlsConfigKeySecret
+ */
+export interface PrometheusAgentSpecScrapeClassesTlsConfigKeySecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfigKeySecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfigKeySecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfigKeySecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusAgentSpecScrapeClassesTlsConfigKeySecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusAgentSpecScrapeClassesTlsConfigKeySecret(obj: PrometheusAgentSpecScrapeClassesTlsConfigKeySecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * sizeLimit is the total amount of local storage required for this EmptyDir volume. The size limit is also applicable for memory medium. The maximum usage on memory medium EmptyDir would be the minimum value between the SizeLimit specified here and the sum of memory limits of all containers in a pod. The default is nil which means that the limit is undefined. More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
  *
  * @schema PrometheusAgentSpecStorageEmptyDirSizeLimit
@@ -65410,6 +67020,13 @@ export interface PrometheusAgentSpecStorageVolumeClaimTemplateSpec {
   readonly storageClassName?: string;
 
   /**
+   * volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim. If specified, the CSI driver will create or update the volume with the attributes defined in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName, it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass will be applied to the claim but it's not allowed to reset this field to empty string once it is set. If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass will be set by the persistentvolume controller if it exists. If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource exists. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#volumeattributesclass (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   *
+   * @schema PrometheusAgentSpecStorageVolumeClaimTemplateSpec#volumeAttributesClassName
+   */
+  readonly volumeAttributesClassName?: string;
+
+  /**
    * volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec.
    *
    * @schema PrometheusAgentSpecStorageVolumeClaimTemplateSpec#volumeMode
@@ -65438,6 +67055,7 @@ export function toJson_PrometheusAgentSpecStorageVolumeClaimTemplateSpec(obj: Pr
     'resources': toJson_PrometheusAgentSpecStorageVolumeClaimTemplateSpecResources(obj.resources),
     'selector': toJson_PrometheusAgentSpecStorageVolumeClaimTemplateSpecSelector(obj.selector),
     'storageClassName': obj.storageClassName,
+    'volumeAttributesClassName': obj.volumeAttributesClassName,
     'volumeMode': obj.volumeMode,
     'volumeName': obj.volumeName,
   };
@@ -65447,7 +67065,7 @@ export function toJson_PrometheusAgentSpecStorageVolumeClaimTemplateSpec(obj: Pr
 /* eslint-enable max-len, quote-props */
 
 /**
- * *Deprecated: this field is never set.*
+ * Deprecated: this field is never set.
  *
  * @schema PrometheusAgentSpecStorageVolumeClaimTemplateStatus
  */
@@ -65494,6 +67112,20 @@ export interface PrometheusAgentSpecStorageVolumeClaimTemplateStatus {
   readonly conditions?: PrometheusAgentSpecStorageVolumeClaimTemplateStatusConditions[];
 
   /**
+   * currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using. When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim This is an alpha field and requires enabling VolumeAttributesClass feature.
+   *
+   * @schema PrometheusAgentSpecStorageVolumeClaimTemplateStatus#currentVolumeAttributesClassName
+   */
+  readonly currentVolumeAttributesClassName?: string;
+
+  /**
+   * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation. When this is unset, there is no ModifyVolume operation being attempted. This is an alpha field and requires enabling VolumeAttributesClass feature.
+   *
+   * @schema PrometheusAgentSpecStorageVolumeClaimTemplateStatus#modifyVolumeStatus
+   */
+  readonly modifyVolumeStatus?: PrometheusAgentSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus;
+
+  /**
    * phase represents the current phase of PersistentVolumeClaim.
    *
    * @schema PrometheusAgentSpecStorageVolumeClaimTemplateStatus#phase
@@ -65514,6 +67146,8 @@ export function toJson_PrometheusAgentSpecStorageVolumeClaimTemplateStatus(obj: 
     'allocatedResources': ((obj.allocatedResources) === undefined) ? undefined : (Object.entries(obj.allocatedResources).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'capacity': ((obj.capacity) === undefined) ? undefined : (Object.entries(obj.capacity).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'conditions': obj.conditions?.map(y => toJson_PrometheusAgentSpecStorageVolumeClaimTemplateStatusConditions(y)),
+    'currentVolumeAttributesClassName': obj.currentVolumeAttributesClassName,
+    'modifyVolumeStatus': toJson_PrometheusAgentSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus(obj.modifyVolumeStatus),
     'phase': obj.phase,
   };
   // filter undefined values
@@ -65991,6 +67625,16 @@ export function toJson_PrometheusAgentSpecVolumesIscsiSecretRef(obj: PrometheusA
  */
 export interface PrometheusAgentSpecVolumesProjectedSources {
   /**
+   * ClusterTrustBundle allows a pod to access the `.spec.trustBundle` field of ClusterTrustBundle objects in an auto-updating file.
+   * Alpha, gated by the ClusterTrustBundleProjection feature gate.
+   * ClusterTrustBundle objects can either be selected by name, or by the combination of signer name and a label selector.
+   * Kubelet performs aggressive normalization of the PEM contents written into the pod filesystem.  Esoteric PEM features such as inter-block comments and block headers are stripped.  Certificates are deduplicated. The ordering of certificates within the file is arbitrary, and Kubelet may change the order over time.
+   *
+   * @schema PrometheusAgentSpecVolumesProjectedSources#clusterTrustBundle
+   */
+  readonly clusterTrustBundle?: PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundle;
+
+  /**
    * configMap information about the configMap data to project
    *
    * @schema PrometheusAgentSpecVolumesProjectedSources#configMap
@@ -66027,6 +67671,7 @@ export interface PrometheusAgentSpecVolumesProjectedSources {
 export function toJson_PrometheusAgentSpecVolumesProjectedSources(obj: PrometheusAgentSpecVolumesProjectedSources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'clusterTrustBundle': toJson_PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundle(obj.clusterTrustBundle),
     'configMap': toJson_PrometheusAgentSpecVolumesProjectedSourcesConfigMap(obj.configMap),
     'downwardAPI': toJson_PrometheusAgentSpecVolumesProjectedSourcesDownwardApi(obj.downwardApi),
     'secret': toJson_PrometheusAgentSpecVolumesProjectedSourcesSecret(obj.secret),
@@ -66431,11 +68076,25 @@ export function toJson_PrometheusAgentSpecAffinityNodeAffinityRequiredDuringSche
  */
 export interface PrometheusAgentSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm {
   /**
-   * A label query over a set of resources, in this case pods.
+   * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
    *
    * @schema PrometheusAgentSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#labelSelector
    */
   readonly labelSelector?: PrometheusAgentSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MatchLabelKeys and LabelSelector. Also, MatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema PrometheusAgentSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector. Also, MismatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema PrometheusAgentSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
 
   /**
    * A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces.
@@ -66468,6 +68127,8 @@ export function toJson_PrometheusAgentSpecAffinityPodAffinityPreferredDuringSche
   if (obj === undefined) { return undefined; }
   const result = {
     'labelSelector': toJson_PrometheusAgentSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
     'namespaceSelector': toJson_PrometheusAgentSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj.namespaceSelector),
     'namespaces': obj.namespaces?.map(y => y),
     'topologyKey': obj.topologyKey,
@@ -66478,7 +68139,7 @@ export function toJson_PrometheusAgentSpecAffinityPodAffinityPreferredDuringSche
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label query over a set of resources, in this case pods.
+ * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
  *
  * @schema PrometheusAgentSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector
  */
@@ -66558,11 +68219,25 @@ export function toJson_PrometheusAgentSpecAffinityPodAffinityRequiredDuringSched
  */
 export interface PrometheusAgentSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm {
   /**
-   * A label query over a set of resources, in this case pods.
+   * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
    *
    * @schema PrometheusAgentSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#labelSelector
    */
   readonly labelSelector?: PrometheusAgentSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MatchLabelKeys and LabelSelector. Also, MatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema PrometheusAgentSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector. Also, MismatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema PrometheusAgentSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
 
   /**
    * A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces.
@@ -66595,6 +68270,8 @@ export function toJson_PrometheusAgentSpecAffinityPodAntiAffinityPreferredDuring
   if (obj === undefined) { return undefined; }
   const result = {
     'labelSelector': toJson_PrometheusAgentSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
     'namespaceSelector': toJson_PrometheusAgentSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj.namespaceSelector),
     'namespaces': obj.namespaces?.map(y => y),
     'topologyKey': obj.topologyKey,
@@ -66605,7 +68282,7 @@ export function toJson_PrometheusAgentSpecAffinityPodAntiAffinityPreferredDuring
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label query over a set of resources, in this case pods.
+ * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
  *
  * @schema PrometheusAgentSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector
  */
@@ -67122,6 +68799,35 @@ export function toJson_PrometheusAgentSpecContainersLifecyclePostStartHttpGet(ob
 /* eslint-enable max-len, quote-props */
 
 /**
+ * Sleep represents the duration that the container should sleep before being terminated.
+ *
+ * @schema PrometheusAgentSpecContainersLifecyclePostStartSleep
+ */
+export interface PrometheusAgentSpecContainersLifecyclePostStartSleep {
+  /**
+   * Seconds is the number of seconds to sleep.
+   *
+   * @schema PrometheusAgentSpecContainersLifecyclePostStartSleep#seconds
+   */
+  readonly seconds: number;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusAgentSpecContainersLifecyclePostStartSleep' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusAgentSpecContainersLifecyclePostStartSleep(obj: PrometheusAgentSpecContainersLifecyclePostStartSleep | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'seconds': obj.seconds,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
  *
  * @schema PrometheusAgentSpecContainersLifecyclePostStartTcpSocket
@@ -67243,6 +68949,35 @@ export function toJson_PrometheusAgentSpecContainersLifecyclePreStopHttpGet(obj:
     'path': obj.path,
     'port': obj.port?.value,
     'scheme': obj.scheme,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Sleep represents the duration that the container should sleep before being terminated.
+ *
+ * @schema PrometheusAgentSpecContainersLifecyclePreStopSleep
+ */
+export interface PrometheusAgentSpecContainersLifecyclePreStopSleep {
+  /**
+   * Seconds is the number of seconds to sleep.
+   *
+   * @schema PrometheusAgentSpecContainersLifecyclePreStopSleep#seconds
+   */
+  readonly seconds: number;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusAgentSpecContainersLifecyclePreStopSleep' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusAgentSpecContainersLifecyclePreStopSleep(obj: PrometheusAgentSpecContainersLifecyclePreStopSleep | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'seconds': obj.seconds,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -67757,6 +69492,35 @@ export function toJson_PrometheusAgentSpecInitContainersLifecyclePostStartHttpGe
 /* eslint-enable max-len, quote-props */
 
 /**
+ * Sleep represents the duration that the container should sleep before being terminated.
+ *
+ * @schema PrometheusAgentSpecInitContainersLifecyclePostStartSleep
+ */
+export interface PrometheusAgentSpecInitContainersLifecyclePostStartSleep {
+  /**
+   * Seconds is the number of seconds to sleep.
+   *
+   * @schema PrometheusAgentSpecInitContainersLifecyclePostStartSleep#seconds
+   */
+  readonly seconds: number;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusAgentSpecInitContainersLifecyclePostStartSleep' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusAgentSpecInitContainersLifecyclePostStartSleep(obj: PrometheusAgentSpecInitContainersLifecyclePostStartSleep | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'seconds': obj.seconds,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
  *
  * @schema PrometheusAgentSpecInitContainersLifecyclePostStartTcpSocket
@@ -67878,6 +69642,35 @@ export function toJson_PrometheusAgentSpecInitContainersLifecyclePreStopHttpGet(
     'path': obj.path,
     'port': obj.port?.value,
     'scheme': obj.scheme,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Sleep represents the duration that the container should sleep before being terminated.
+ *
+ * @schema PrometheusAgentSpecInitContainersLifecyclePreStopSleep
+ */
+export interface PrometheusAgentSpecInitContainersLifecyclePreStopSleep {
+  /**
+   * Seconds is the number of seconds to sleep.
+   *
+   * @schema PrometheusAgentSpecInitContainersLifecyclePreStopSleep#seconds
+   */
+  readonly seconds: number;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusAgentSpecInitContainersLifecyclePreStopSleep' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusAgentSpecInitContainersLifecyclePreStopSleep(obj: PrometheusAgentSpecInitContainersLifecyclePreStopSleep | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'seconds': obj.seconds,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -68444,6 +70237,186 @@ export function toJson_PrometheusAgentSpecRemoteWriteTlsConfigCertSecret(obj: Pr
 /* eslint-enable max-len, quote-props */
 
 /**
+ * ConfigMap containing data to use for the targets.
+ *
+ * @schema PrometheusAgentSpecScrapeClassesTlsConfigCaConfigMap
+ */
+export interface PrometheusAgentSpecScrapeClassesTlsConfigCaConfigMap {
+  /**
+   * The key to select.
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfigCaConfigMap#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfigCaConfigMap#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap or its key must be defined
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfigCaConfigMap#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusAgentSpecScrapeClassesTlsConfigCaConfigMap' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusAgentSpecScrapeClassesTlsConfigCaConfigMap(obj: PrometheusAgentSpecScrapeClassesTlsConfigCaConfigMap | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Secret containing data to use for the targets.
+ *
+ * @schema PrometheusAgentSpecScrapeClassesTlsConfigCaSecret
+ */
+export interface PrometheusAgentSpecScrapeClassesTlsConfigCaSecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfigCaSecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfigCaSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfigCaSecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusAgentSpecScrapeClassesTlsConfigCaSecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusAgentSpecScrapeClassesTlsConfigCaSecret(obj: PrometheusAgentSpecScrapeClassesTlsConfigCaSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ConfigMap containing data to use for the targets.
+ *
+ * @schema PrometheusAgentSpecScrapeClassesTlsConfigCertConfigMap
+ */
+export interface PrometheusAgentSpecScrapeClassesTlsConfigCertConfigMap {
+  /**
+   * The key to select.
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfigCertConfigMap#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfigCertConfigMap#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap or its key must be defined
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfigCertConfigMap#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusAgentSpecScrapeClassesTlsConfigCertConfigMap' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusAgentSpecScrapeClassesTlsConfigCertConfigMap(obj: PrometheusAgentSpecScrapeClassesTlsConfigCertConfigMap | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Secret containing data to use for the targets.
+ *
+ * @schema PrometheusAgentSpecScrapeClassesTlsConfigCertSecret
+ */
+export interface PrometheusAgentSpecScrapeClassesTlsConfigCertSecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfigCertSecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfigCertSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema PrometheusAgentSpecScrapeClassesTlsConfigCertSecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusAgentSpecScrapeClassesTlsConfigCertSecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusAgentSpecScrapeClassesTlsConfigCertSecret(obj: PrometheusAgentSpecScrapeClassesTlsConfigCertSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * The specification for the PersistentVolumeClaim. The entire content is copied unchanged into the PVC that gets created from this template. The same fields as in a PersistentVolumeClaim are also valid here.
  *
  * @schema PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpec
@@ -68492,6 +70465,13 @@ export interface PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpec {
   readonly storageClassName?: string;
 
   /**
+   * volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim. If specified, the CSI driver will create or update the volume with the attributes defined in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName, it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass will be applied to the claim but it's not allowed to reset this field to empty string once it is set. If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass will be set by the persistentvolume controller if it exists. If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource exists. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#volumeattributesclass (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   *
+   * @schema PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpec#volumeAttributesClassName
+   */
+  readonly volumeAttributesClassName?: string;
+
+  /**
    * volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec.
    *
    * @schema PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpec#volumeMode
@@ -68520,6 +70500,7 @@ export function toJson_PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpe
     'resources': toJson_PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpecResources(obj.resources),
     'selector': toJson_PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpecSelector(obj.selector),
     'storageClassName': obj.storageClassName,
+    'volumeAttributesClassName': obj.volumeAttributesClassName,
     'volumeMode': obj.volumeMode,
     'volumeName': obj.volumeName,
   };
@@ -68633,15 +70614,6 @@ export function toJson_PrometheusAgentSpecStorageVolumeClaimTemplateSpecDataSour
  */
 export interface PrometheusAgentSpecStorageVolumeClaimTemplateSpecResources {
   /**
-   * Claims lists the names of resources, defined in spec.resourceClaims, that are used by this container.
-   * This is an alpha field and requires enabling the DynamicResourceAllocation feature gate.
-   * This field is immutable. It can only be set for containers.
-   *
-   * @schema PrometheusAgentSpecStorageVolumeClaimTemplateSpecResources#claims
-   */
-  readonly claims?: PrometheusAgentSpecStorageVolumeClaimTemplateSpecResourcesClaims[];
-
-  /**
    * Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    *
    * @schema PrometheusAgentSpecStorageVolumeClaimTemplateSpecResources#limits
@@ -68664,7 +70636,6 @@ export interface PrometheusAgentSpecStorageVolumeClaimTemplateSpecResources {
 export function toJson_PrometheusAgentSpecStorageVolumeClaimTemplateSpecResources(obj: PrometheusAgentSpecStorageVolumeClaimTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'claims': obj.claims?.map(y => toJson_PrometheusAgentSpecStorageVolumeClaimTemplateSpecResourcesClaims(y)),
     'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
   };
@@ -68799,6 +70770,43 @@ export function toJson_PrometheusAgentSpecStorageVolumeClaimTemplateStatusCondit
     'reason': obj.reason,
     'status': obj.status,
     'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation. When this is unset, there is no ModifyVolume operation being attempted. This is an alpha field and requires enabling VolumeAttributesClass feature.
+ *
+ * @schema PrometheusAgentSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus
+ */
+export interface PrometheusAgentSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus {
+  /**
+   * status is the status of the ControllerModifyVolume operation. It can be in any of following states: - Pending Pending indicates that the PersistentVolumeClaim cannot be modified due to unmet requirements, such as the specified VolumeAttributesClass not existing. - InProgress InProgress indicates that the volume is being modified. - Infeasible Infeasible indicates that the request has been rejected as invalid by the CSI driver. To resolve the error, a valid VolumeAttributesClass needs to be specified. Note: New statuses can be added in the future. Consumers should check for unknown statuses and fail appropriately.
+   *
+   * @schema PrometheusAgentSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus#status
+   */
+  readonly status: string;
+
+  /**
+   * targetVolumeAttributesClassName is the name of the VolumeAttributesClass the PVC currently being reconciled
+   *
+   * @schema PrometheusAgentSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus#targetVolumeAttributesClassName
+   */
+  readonly targetVolumeAttributesClassName?: string;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusAgentSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusAgentSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus(obj: PrometheusAgentSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'status': obj.status,
+    'targetVolumeAttributesClassName': obj.targetVolumeAttributesClassName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -69116,6 +71124,13 @@ export interface PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpec {
   readonly storageClassName?: string;
 
   /**
+   * volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim. If specified, the CSI driver will create or update the volume with the attributes defined in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName, it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass will be applied to the claim but it's not allowed to reset this field to empty string once it is set. If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass will be set by the persistentvolume controller if it exists. If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource exists. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#volumeattributesclass (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   *
+   * @schema PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpec#volumeAttributesClassName
+   */
+  readonly volumeAttributesClassName?: string;
+
+  /**
    * volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec.
    *
    * @schema PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpec#volumeMode
@@ -69144,8 +71159,73 @@ export function toJson_PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpe
     'resources': toJson_PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecResources(obj.resources),
     'selector': toJson_PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecSelector(obj.selector),
     'storageClassName': obj.storageClassName,
+    'volumeAttributesClassName': obj.volumeAttributesClassName,
     'volumeMode': obj.volumeMode,
     'volumeName': obj.volumeName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ClusterTrustBundle allows a pod to access the `.spec.trustBundle` field of ClusterTrustBundle objects in an auto-updating file.
+ * Alpha, gated by the ClusterTrustBundleProjection feature gate.
+ * ClusterTrustBundle objects can either be selected by name, or by the combination of signer name and a label selector.
+ * Kubelet performs aggressive normalization of the PEM contents written into the pod filesystem.  Esoteric PEM features such as inter-block comments and block headers are stripped.  Certificates are deduplicated. The ordering of certificates within the file is arbitrary, and Kubelet may change the order over time.
+ *
+ * @schema PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundle
+ */
+export interface PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundle {
+  /**
+   * Select all ClusterTrustBundles that match this label selector.  Only has effect if signerName is set.  Mutually-exclusive with name.  If unset, interpreted as "match nothing".  If set but empty, interpreted as "match everything".
+   *
+   * @schema PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundle#labelSelector
+   */
+  readonly labelSelector?: PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector;
+
+  /**
+   * Select a single ClusterTrustBundle by object name.  Mutually-exclusive with signerName and labelSelector.
+   *
+   * @schema PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundle#name
+   */
+  readonly name?: string;
+
+  /**
+   * If true, don't block pod startup if the referenced ClusterTrustBundle(s) aren't available.  If using name, then the named ClusterTrustBundle is allowed not to exist.  If using signerName, then the combination of signerName and labelSelector is allowed to match zero ClusterTrustBundles.
+   *
+   * @schema PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundle#optional
+   */
+  readonly optional?: boolean;
+
+  /**
+   * Relative path from the volume root to write the bundle.
+   *
+   * @schema PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundle#path
+   */
+  readonly path: string;
+
+  /**
+   * Select all ClusterTrustBundles that match this signer name. Mutually-exclusive with name.  The contents of all selected ClusterTrustBundles will be unified and deduplicated.
+   *
+   * @schema PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundle#signerName
+   */
+  readonly signerName?: string;
+
+}
+
+/**
+ * Converts an object of type 'PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundle' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundle(obj: PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundle | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'labelSelector': toJson_PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector(obj.labelSelector),
+    'name': obj.name,
+    'optional': obj.optional,
+    'path': obj.path,
+    'signerName': obj.signerName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -69700,7 +71780,7 @@ export function toJson_PrometheusAgentSpecAffinityNodeAffinityRequiredDuringSche
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label query over a set of resources, in this case pods.
+ * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
  *
  * @schema PrometheusAgentSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector
  */
@@ -69864,7 +71944,7 @@ export function toJson_PrometheusAgentSpecAffinityPodAffinityRequiredDuringSched
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label query over a set of resources, in this case pods.
+ * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
  *
  * @schema PrometheusAgentSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector
  */
@@ -70440,15 +72520,6 @@ export function toJson_PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpe
  */
 export interface PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpecResources {
   /**
-   * Claims lists the names of resources, defined in spec.resourceClaims, that are used by this container.
-   * This is an alpha field and requires enabling the DynamicResourceAllocation feature gate.
-   * This field is immutable. It can only be set for containers.
-   *
-   * @schema PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpecResources#claims
-   */
-  readonly claims?: PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims[];
-
-  /**
    * Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    *
    * @schema PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpecResources#limits
@@ -70471,7 +72542,6 @@ export interface PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpecResou
 export function toJson_PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpecResources(obj: PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'claims': obj.claims?.map(y => toJson_PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims(y)),
     'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
   };
@@ -70511,35 +72581,6 @@ export function toJson_PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpe
   const result = {
     'matchExpressions': obj.matchExpressions?.map(y => toJson_PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions(y)),
     'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, quote-props */
-
-/**
- * ResourceClaim references one entry in PodSpec.ResourceClaims.
- *
- * @schema PrometheusAgentSpecStorageVolumeClaimTemplateSpecResourcesClaims
- */
-export interface PrometheusAgentSpecStorageVolumeClaimTemplateSpecResourcesClaims {
-  /**
-   * Name must match the name of one entry in pod.spec.resourceClaims of the Pod where this field is used. It makes that resource available inside a container.
-   *
-   * @schema PrometheusAgentSpecStorageVolumeClaimTemplateSpecResourcesClaims#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * Converts an object of type 'PrometheusAgentSpecStorageVolumeClaimTemplateSpecResourcesClaims' to JSON representation.
- */
-/* eslint-disable max-len, quote-props */
-export function toJson_PrometheusAgentSpecStorageVolumeClaimTemplateSpecResourcesClaims(obj: PrometheusAgentSpecStorageVolumeClaimTemplateSpecResourcesClaims | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'name': obj.name,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -70740,15 +72781,6 @@ export function toJson_PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpe
  */
 export interface PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecResources {
   /**
-   * Claims lists the names of resources, defined in spec.resourceClaims, that are used by this container.
-   * This is an alpha field and requires enabling the DynamicResourceAllocation feature gate.
-   * This field is immutable. It can only be set for containers.
-   *
-   * @schema PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecResources#claims
-   */
-  readonly claims?: PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims[];
-
-  /**
    * Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    *
    * @schema PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecResources#limits
@@ -70771,7 +72803,6 @@ export interface PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecResou
 export function toJson_PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecResources(obj: PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'claims': obj.claims?.map(y => toJson_PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims(y)),
     'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
   };
@@ -70810,6 +72841,43 @@ export function toJson_PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpe
   if (obj === undefined) { return undefined; }
   const result = {
     'matchExpressions': obj.matchExpressions?.map(y => toJson_PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Select all ClusterTrustBundles that match this label selector.  Only has effect if signerName is set.  Mutually-exclusive with name.  If unset, interpreted as "match nothing".  If set but empty, interpreted as "match everything".
+ *
+ * @schema PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector
+ */
+export interface PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector#matchExpressions
+   */
+  readonly matchExpressions?: PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector(obj: PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions(y)),
     'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
   };
   // filter undefined values
@@ -71141,35 +73209,6 @@ export function toJson_PrometheusAgentSpecAffinityPodAntiAffinityPreferredDuring
 /* eslint-enable max-len, quote-props */
 
 /**
- * ResourceClaim references one entry in PodSpec.ResourceClaims.
- *
- * @schema PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims
- */
-export interface PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims {
-  /**
-   * Name must match the name of one entry in pod.spec.resourceClaims of the Pod where this field is used. It makes that resource available inside a container.
-   *
-   * @schema PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * Converts an object of type 'PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims' to JSON representation.
- */
-/* eslint-disable max-len, quote-props */
-export function toJson_PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims(obj: PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'name': obj.name,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, quote-props */
-
-/**
  * @schema PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpecResourcesLimits
  */
 export class PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpecResourcesLimits {
@@ -71243,35 +73282,6 @@ export function toJson_PrometheusAgentSpecStorageEphemeralVolumeClaimTemplateSpe
 /* eslint-enable max-len, quote-props */
 
 /**
- * ResourceClaim references one entry in PodSpec.ResourceClaims.
- *
- * @schema PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims
- */
-export interface PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims {
-  /**
-   * Name must match the name of one entry in pod.spec.resourceClaims of the Pod where this field is used. It makes that resource available inside a container.
-   *
-   * @schema PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * Converts an object of type 'PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims' to JSON representation.
- */
-/* eslint-disable max-len, quote-props */
-export function toJson_PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims(obj: PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'name': obj.name,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, quote-props */
-
-/**
  * @schema PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesLimits
  */
 export class PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesLimits {
@@ -71333,6 +73343,51 @@ export interface PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecSelec
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions(obj: PrometheusAgentSpecVolumesEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ *
+ * @schema PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions
+ */
+export interface PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   *
+   * @schema PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions(obj: PrometheusAgentSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -71840,6 +73895,13 @@ export interface ScrapeConfigSpec {
   readonly consulSdConfigs?: ScrapeConfigSpecConsulSdConfigs[];
 
   /**
+   * DigitalOceanSDConfigs defines a list of DigitalOcean service discovery configurations.
+   *
+   * @schema ScrapeConfigSpec#digitalOceanSDConfigs
+   */
+  readonly digitalOceanSdConfigs?: ScrapeConfigSpecDigitalOceanSdConfigs[];
+
+  /**
    * DNSSDConfigs defines a list of DNS service discovery configurations.
    *
    * @schema ScrapeConfigSpec#dnsSDConfigs
@@ -71852,6 +73914,15 @@ export interface ScrapeConfigSpec {
    * @schema ScrapeConfigSpec#ec2SDConfigs
    */
   readonly ec2SdConfigs?: ScrapeConfigSpecEc2SdConfigs[];
+
+  /**
+   * When false, Prometheus will request uncompressed response from the scraped target.
+   * It requires Prometheus >= v2.49.0.
+   * If unset, Prometheus uses true by default.
+   *
+   * @schema ScrapeConfigSpec#enableCompression
+   */
+  readonly enableCompression?: boolean;
 
   /**
    * FileSDConfigs defines a list of file service discovery configurations.
@@ -71939,11 +74010,50 @@ export interface ScrapeConfigSpec {
   readonly metricsPath?: string;
 
   /**
+   * `noProxy` is a comma-separated string that can contain IPs, CIDR notation, domain names that should be excluded from proxying. IP and domain names can contain port numbers.
+   * It requires Prometheus >= v2.43.0.
+   *
+   * @schema ScrapeConfigSpec#noProxy
+   */
+  readonly noProxy?: string;
+
+  /**
+   * OpenStackSDConfigs defines a list of OpenStack service discovery configurations.
+   *
+   * @schema ScrapeConfigSpec#openstackSDConfigs
+   */
+  readonly openstackSdConfigs?: ScrapeConfigSpecOpenstackSdConfigs[];
+
+  /**
    * Optional HTTP URL parameters
    *
    * @schema ScrapeConfigSpec#params
    */
   readonly params?: { [key: string]: string[] };
+
+  /**
+   * ProxyConnectHeader optionally specifies headers to send to proxies during CONNECT requests.
+   * It requires Prometheus >= v2.43.0.
+   *
+   * @schema ScrapeConfigSpec#proxyConnectHeader
+   */
+  readonly proxyConnectHeader?: { [key: string]: ScrapeConfigSpecProxyConnectHeader };
+
+  /**
+   * Whether to use the proxy configuration defined by environment variables (HTTP_PROXY, HTTPS_PROXY, and NO_PROXY). If unset, Prometheus uses its default value.
+   * It requires Prometheus >= v2.43.0.
+   *
+   * @schema ScrapeConfigSpec#proxyFromEnvironment
+   */
+  readonly proxyFromEnvironment?: boolean;
+
+  /**
+   * `proxyURL` defines the HTTP proxy server to use.
+   * It requires Prometheus >= v2.43.0.
+   *
+   * @schema ScrapeConfigSpec#proxyUrl
+   */
+  readonly proxyUrl?: string;
 
   /**
    * RelabelConfigs defines how to rewrite the target's labels before scraping. Prometheus Operator automatically adds relabelings for a few standard Kubernetes fields. The original scrape job's name is available via the `__tmp_prometheus_job_name` label. More info: https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config
@@ -71967,11 +74077,27 @@ export interface ScrapeConfigSpec {
   readonly scheme?: ScrapeConfigSpecScheme;
 
   /**
+   * The scrape class to apply.
+   *
+   * @schema ScrapeConfigSpec#scrapeClass
+   */
+  readonly scrapeClass?: string;
+
+  /**
    * ScrapeInterval is the interval between consecutive scrapes.
    *
    * @schema ScrapeConfigSpec#scrapeInterval
    */
   readonly scrapeInterval?: string;
+
+  /**
+   * The protocols to negotiate during a scrape. It tells clients the protocols supported by Prometheus in order of preference (from most to least preferred).
+   * If unset, Prometheus uses its default value.
+   * It requires Prometheus >= v2.49.0.
+   *
+   * @schema ScrapeConfigSpec#scrapeProtocols
+   */
+  readonly scrapeProtocols?: ScrapeConfigSpecScrapeProtocols[];
 
   /**
    * ScrapeTimeout is the number of seconds to wait until a scrape request times out.
@@ -72021,8 +74147,10 @@ export function toJson_ScrapeConfigSpec(obj: ScrapeConfigSpec | undefined): Reco
     'azureSDConfigs': obj.azureSdConfigs?.map(y => toJson_ScrapeConfigSpecAzureSdConfigs(y)),
     'basicAuth': toJson_ScrapeConfigSpecBasicAuth(obj.basicAuth),
     'consulSDConfigs': obj.consulSdConfigs?.map(y => toJson_ScrapeConfigSpecConsulSdConfigs(y)),
+    'digitalOceanSDConfigs': obj.digitalOceanSdConfigs?.map(y => toJson_ScrapeConfigSpecDigitalOceanSdConfigs(y)),
     'dnsSDConfigs': obj.dnsSdConfigs?.map(y => toJson_ScrapeConfigSpecDnsSdConfigs(y)),
     'ec2SDConfigs': obj.ec2SdConfigs?.map(y => toJson_ScrapeConfigSpecEc2SdConfigs(y)),
+    'enableCompression': obj.enableCompression,
     'fileSDConfigs': obj.fileSdConfigs?.map(y => toJson_ScrapeConfigSpecFileSdConfigs(y)),
     'gceSDConfigs': obj.gceSdConfigs?.map(y => toJson_ScrapeConfigSpecGceSdConfigs(y)),
     'honorLabels': obj.honorLabels,
@@ -72035,11 +74163,18 @@ export function toJson_ScrapeConfigSpec(obj: ScrapeConfigSpec | undefined): Reco
     'labelValueLengthLimit': obj.labelValueLengthLimit,
     'metricRelabelings': obj.metricRelabelings?.map(y => toJson_ScrapeConfigSpecMetricRelabelings(y)),
     'metricsPath': obj.metricsPath,
+    'noProxy': obj.noProxy,
+    'openstackSDConfigs': obj.openstackSdConfigs?.map(y => toJson_ScrapeConfigSpecOpenstackSdConfigs(y)),
     'params': ((obj.params) === undefined) ? undefined : (Object.entries(obj.params).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.map(y => y) }), {})),
+    'proxyConnectHeader': ((obj.proxyConnectHeader) === undefined) ? undefined : (Object.entries(obj.proxyConnectHeader).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_ScrapeConfigSpecProxyConnectHeader(i[1]) }), {})),
+    'proxyFromEnvironment': obj.proxyFromEnvironment,
+    'proxyUrl': obj.proxyUrl,
     'relabelings': obj.relabelings?.map(y => toJson_ScrapeConfigSpecRelabelings(y)),
     'sampleLimit': obj.sampleLimit,
     'scheme': obj.scheme,
+    'scrapeClass': obj.scrapeClass,
     'scrapeInterval': obj.scrapeInterval,
+    'scrapeProtocols': obj.scrapeProtocols?.map(y => y),
     'scrapeTimeout': obj.scrapeTimeout,
     'staticConfigs': obj.staticConfigs?.map(y => toJson_ScrapeConfigSpecStaticConfigs(y)),
     'targetLimit': obj.targetLimit,
@@ -72276,7 +74411,8 @@ export interface ScrapeConfigSpecConsulSdConfigs {
   readonly namespace?: string;
 
   /**
-   * Comma-separated string that can contain IPs, CIDR notation, domain names that should be excluded from proxying. IP and domain names can contain port numbers.
+   * `noProxy` is a comma-separated string that can contain IPs, CIDR notation, domain names that should be excluded from proxying. IP and domain names can contain port numbers.
+   * It requires Prometheus >= v2.43.0.
    *
    * @schema ScrapeConfigSpecConsulSdConfigs#noProxy
    */
@@ -72304,21 +74440,24 @@ export interface ScrapeConfigSpecConsulSdConfigs {
   readonly partition?: string;
 
   /**
-   * Specifies headers to send to proxies during CONNECT requests.
+   * ProxyConnectHeader optionally specifies headers to send to proxies during CONNECT requests.
+   * It requires Prometheus >= v2.43.0.
    *
    * @schema ScrapeConfigSpecConsulSdConfigs#proxyConnectHeader
    */
   readonly proxyConnectHeader?: { [key: string]: ScrapeConfigSpecConsulSdConfigsProxyConnectHeader };
 
   /**
-   * Use proxy URL indicated by environment variables (HTTP_PROXY, https_proxy, HTTPs_PROXY, https_proxy, and no_proxy) If unset, Prometheus uses its default value.
+   * Whether to use the proxy configuration defined by environment variables (HTTP_PROXY, HTTPS_PROXY, and NO_PROXY). If unset, Prometheus uses its default value.
+   * It requires Prometheus >= v2.43.0.
    *
    * @schema ScrapeConfigSpecConsulSdConfigs#proxyFromEnvironment
    */
   readonly proxyFromEnvironment?: boolean;
 
   /**
-   * Optional proxy URL.
+   * `proxyURL` defines the HTTP proxy server to use.
+   * It requires Prometheus >= v2.43.0.
    *
    * @schema ScrapeConfigSpecConsulSdConfigs#proxyUrl
    */
@@ -72418,6 +74557,119 @@ export function toJson_ScrapeConfigSpecConsulSdConfigs(obj: ScrapeConfigSpecCons
 /* eslint-enable max-len, quote-props */
 
 /**
+ * DigitalOceanSDConfig allow retrieving scrape targets from DigitalOcean's Droplets API. This service discovery uses the public IPv4 address by default, by that can be changed with relabeling See https://prometheus.io/docs/prometheus/latest/configuration/configuration/#digitalocean_sd_config
+ *
+ * @schema ScrapeConfigSpecDigitalOceanSdConfigs
+ */
+export interface ScrapeConfigSpecDigitalOceanSdConfigs {
+  /**
+   * Authorization header configuration to authenticate against the DigitalOcean API. Cannot be set at the same time as `oauth2`.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigs#authorization
+   */
+  readonly authorization?: ScrapeConfigSpecDigitalOceanSdConfigsAuthorization;
+
+  /**
+   * Whether to enable HTTP2.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigs#enableHTTP2
+   */
+  readonly enableHttp2?: boolean;
+
+  /**
+   * Configure whether HTTP requests follow HTTP 3xx redirects.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigs#followRedirects
+   */
+  readonly followRedirects?: boolean;
+
+  /**
+   * `noProxy` is a comma-separated string that can contain IPs, CIDR notation, domain names that should be excluded from proxying. IP and domain names can contain port numbers.
+   * It requires Prometheus >= v2.43.0.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigs#noProxy
+   */
+  readonly noProxy?: string;
+
+  /**
+   * Optional OAuth 2.0 configuration. Cannot be set at the same time as `authorization`.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigs#oauth2
+   */
+  readonly oauth2?: ScrapeConfigSpecDigitalOceanSdConfigsOauth2;
+
+  /**
+   * The port to scrape metrics from.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigs#port
+   */
+  readonly port?: number;
+
+  /**
+   * ProxyConnectHeader optionally specifies headers to send to proxies during CONNECT requests.
+   * It requires Prometheus >= v2.43.0.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigs#proxyConnectHeader
+   */
+  readonly proxyConnectHeader?: { [key: string]: ScrapeConfigSpecDigitalOceanSdConfigsProxyConnectHeader };
+
+  /**
+   * Whether to use the proxy configuration defined by environment variables (HTTP_PROXY, HTTPS_PROXY, and NO_PROXY). If unset, Prometheus uses its default value.
+   * It requires Prometheus >= v2.43.0.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigs#proxyFromEnvironment
+   */
+  readonly proxyFromEnvironment?: boolean;
+
+  /**
+   * `proxyURL` defines the HTTP proxy server to use.
+   * It requires Prometheus >= v2.43.0.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigs#proxyUrl
+   */
+  readonly proxyUrl?: string;
+
+  /**
+   * Refresh interval to re-read the instance list.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigs#refreshInterval
+   */
+  readonly refreshInterval?: string;
+
+  /**
+   * TLS configuration applying to the target HTTP endpoint.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigs#tlsConfig
+   */
+  readonly tlsConfig?: ScrapeConfigSpecDigitalOceanSdConfigsTlsConfig;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecDigitalOceanSdConfigs' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecDigitalOceanSdConfigs(obj: ScrapeConfigSpecDigitalOceanSdConfigs | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'authorization': toJson_ScrapeConfigSpecDigitalOceanSdConfigsAuthorization(obj.authorization),
+    'enableHTTP2': obj.enableHttp2,
+    'followRedirects': obj.followRedirects,
+    'noProxy': obj.noProxy,
+    'oauth2': toJson_ScrapeConfigSpecDigitalOceanSdConfigsOauth2(obj.oauth2),
+    'port': obj.port,
+    'proxyConnectHeader': ((obj.proxyConnectHeader) === undefined) ? undefined : (Object.entries(obj.proxyConnectHeader).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_ScrapeConfigSpecDigitalOceanSdConfigsProxyConnectHeader(i[1]) }), {})),
+    'proxyFromEnvironment': obj.proxyFromEnvironment,
+    'proxyUrl': obj.proxyUrl,
+    'refreshInterval': obj.refreshInterval,
+    'tlsConfig': toJson_ScrapeConfigSpecDigitalOceanSdConfigsTlsConfig(obj.tlsConfig),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * DNSSDConfig allows specifying a set of DNS domain names which are periodically queried to discover a list of targets. The DNS servers to be contacted are read from /etc/resolv.conf. See https://prometheus.io/docs/prometheus/latest/configuration/configuration/#dns_sd_config
  *
  * @schema ScrapeConfigSpecDnsSdConfigs
@@ -72445,7 +74697,8 @@ export interface ScrapeConfigSpecDnsSdConfigs {
   readonly refreshInterval?: string;
 
   /**
-   * The type of DNS query to perform. One of SRV, A, AAAA or MX. If not set, Prometheus uses its default value.
+   * The type of DNS query to perform. One of SRV, A, AAAA, MX or NS. If not set, Prometheus uses its default value.
+   * When set to NS, It requires Prometheus >= 2.49.0.
    *
    * @schema ScrapeConfigSpecDnsSdConfigs#type
    */
@@ -72676,6 +74929,38 @@ export interface ScrapeConfigSpecHttpSdConfigs {
   readonly basicAuth?: ScrapeConfigSpecHttpSdConfigsBasicAuth;
 
   /**
+   * `noProxy` is a comma-separated string that can contain IPs, CIDR notation, domain names that should be excluded from proxying. IP and domain names can contain port numbers.
+   * It requires Prometheus >= v2.43.0.
+   *
+   * @schema ScrapeConfigSpecHttpSdConfigs#noProxy
+   */
+  readonly noProxy?: string;
+
+  /**
+   * ProxyConnectHeader optionally specifies headers to send to proxies during CONNECT requests.
+   * It requires Prometheus >= v2.43.0.
+   *
+   * @schema ScrapeConfigSpecHttpSdConfigs#proxyConnectHeader
+   */
+  readonly proxyConnectHeader?: { [key: string]: ScrapeConfigSpecHttpSdConfigsProxyConnectHeader };
+
+  /**
+   * Whether to use the proxy configuration defined by environment variables (HTTP_PROXY, HTTPS_PROXY, and NO_PROXY). If unset, Prometheus uses its default value.
+   * It requires Prometheus >= v2.43.0.
+   *
+   * @schema ScrapeConfigSpecHttpSdConfigs#proxyFromEnvironment
+   */
+  readonly proxyFromEnvironment?: boolean;
+
+  /**
+   * `proxyURL` defines the HTTP proxy server to use.
+   * It requires Prometheus >= v2.43.0.
+   *
+   * @schema ScrapeConfigSpecHttpSdConfigs#proxyUrl
+   */
+  readonly proxyUrl?: string;
+
+  /**
    * RefreshInterval configures the refresh interval at which Prometheus will re-query the endpoint to update the target list.
    *
    * @schema ScrapeConfigSpecHttpSdConfigs#refreshInterval
@@ -72707,6 +74992,10 @@ export function toJson_ScrapeConfigSpecHttpSdConfigs(obj: ScrapeConfigSpecHttpSd
   const result = {
     'authorization': toJson_ScrapeConfigSpecHttpSdConfigsAuthorization(obj.authorization),
     'basicAuth': toJson_ScrapeConfigSpecHttpSdConfigsBasicAuth(obj.basicAuth),
+    'noProxy': obj.noProxy,
+    'proxyConnectHeader': ((obj.proxyConnectHeader) === undefined) ? undefined : (Object.entries(obj.proxyConnectHeader).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_ScrapeConfigSpecHttpSdConfigsProxyConnectHeader(i[1]) }), {})),
+    'proxyFromEnvironment': obj.proxyFromEnvironment,
+    'proxyUrl': obj.proxyUrl,
     'refreshInterval': obj.refreshInterval,
     'tlsConfig': toJson_ScrapeConfigSpecHttpSdConfigsTlsConfig(obj.tlsConfig),
     'url': obj.url,
@@ -72723,6 +75012,94 @@ export function toJson_ScrapeConfigSpecHttpSdConfigs(obj: ScrapeConfigSpecHttpSd
  */
 export interface ScrapeConfigSpecKubernetesSdConfigs {
   /**
+   * The API server address consisting of a hostname or IP address followed by an optional port number. If left empty, Prometheus is assumed to run inside of the cluster. It will discover API servers automatically and use the pod's CA certificate and bearer token file at /var/run/secrets/kubernetes.io/serviceaccount/.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigs#apiServer
+   */
+  readonly apiServer?: string;
+
+  /**
+   * Optional metadata to attach to discovered targets. It requires Prometheus >= v2.35.0 for `pod` role and Prometheus >= v2.37.0 for `endpoints` and `endpointslice` roles.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigs#attachMetadata
+   */
+  readonly attachMetadata?: ScrapeConfigSpecKubernetesSdConfigsAttachMetadata;
+
+  /**
+   * Authorization header to use on every scrape request. Cannot be set at the same time as `basicAuth`, or `oauth2`.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigs#authorization
+   */
+  readonly authorization?: ScrapeConfigSpecKubernetesSdConfigsAuthorization;
+
+  /**
+   * BasicAuth information to use on every scrape request. Cannot be set at the same time as `authorization`, or `oauth2`.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigs#basicAuth
+   */
+  readonly basicAuth?: ScrapeConfigSpecKubernetesSdConfigsBasicAuth;
+
+  /**
+   * Whether to enable HTTP2.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigs#enableHTTP2
+   */
+  readonly enableHttp2?: boolean;
+
+  /**
+   * Configure whether HTTP requests follow HTTP 3xx redirects.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigs#followRedirects
+   */
+  readonly followRedirects?: boolean;
+
+  /**
+   * Optional namespace discovery. If omitted, Prometheus discovers targets across all namespaces.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigs#namespaces
+   */
+  readonly namespaces?: ScrapeConfigSpecKubernetesSdConfigsNamespaces;
+
+  /**
+   * `noProxy` is a comma-separated string that can contain IPs, CIDR notation, domain names that should be excluded from proxying. IP and domain names can contain port numbers.
+   * It requires Prometheus >= v2.43.0.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigs#noProxy
+   */
+  readonly noProxy?: string;
+
+  /**
+   * Optional OAuth 2.0 configuration. Cannot be set at the same time as `authorization`, or `basicAuth`.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigs#oauth2
+   */
+  readonly oauth2?: ScrapeConfigSpecKubernetesSdConfigsOauth2;
+
+  /**
+   * ProxyConnectHeader optionally specifies headers to send to proxies during CONNECT requests.
+   * It requires Prometheus >= v2.43.0.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigs#proxyConnectHeader
+   */
+  readonly proxyConnectHeader?: { [key: string]: ScrapeConfigSpecKubernetesSdConfigsProxyConnectHeader };
+
+  /**
+   * Whether to use the proxy configuration defined by environment variables (HTTP_PROXY, HTTPS_PROXY, and NO_PROXY). If unset, Prometheus uses its default value.
+   * It requires Prometheus >= v2.43.0.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigs#proxyFromEnvironment
+   */
+  readonly proxyFromEnvironment?: boolean;
+
+  /**
+   * `proxyURL` defines the HTTP proxy server to use.
+   * It requires Prometheus >= v2.43.0.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigs#proxyUrl
+   */
+  readonly proxyUrl?: string;
+
+  /**
    * Role of the Kubernetes entities that should be discovered.
    *
    * @schema ScrapeConfigSpecKubernetesSdConfigs#role
@@ -72736,6 +75113,13 @@ export interface ScrapeConfigSpecKubernetesSdConfigs {
    */
   readonly selectors?: ScrapeConfigSpecKubernetesSdConfigsSelectors[];
 
+  /**
+   * TLS configuration to use on every scrape request.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigs#tlsConfig
+   */
+  readonly tlsConfig?: ScrapeConfigSpecKubernetesSdConfigsTlsConfig;
+
 }
 
 /**
@@ -72745,8 +75129,21 @@ export interface ScrapeConfigSpecKubernetesSdConfigs {
 export function toJson_ScrapeConfigSpecKubernetesSdConfigs(obj: ScrapeConfigSpecKubernetesSdConfigs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiServer': obj.apiServer,
+    'attachMetadata': toJson_ScrapeConfigSpecKubernetesSdConfigsAttachMetadata(obj.attachMetadata),
+    'authorization': toJson_ScrapeConfigSpecKubernetesSdConfigsAuthorization(obj.authorization),
+    'basicAuth': toJson_ScrapeConfigSpecKubernetesSdConfigsBasicAuth(obj.basicAuth),
+    'enableHTTP2': obj.enableHttp2,
+    'followRedirects': obj.followRedirects,
+    'namespaces': toJson_ScrapeConfigSpecKubernetesSdConfigsNamespaces(obj.namespaces),
+    'noProxy': obj.noProxy,
+    'oauth2': toJson_ScrapeConfigSpecKubernetesSdConfigsOauth2(obj.oauth2),
+    'proxyConnectHeader': ((obj.proxyConnectHeader) === undefined) ? undefined : (Object.entries(obj.proxyConnectHeader).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_ScrapeConfigSpecKubernetesSdConfigsProxyConnectHeader(i[1]) }), {})),
+    'proxyFromEnvironment': obj.proxyFromEnvironment,
+    'proxyUrl': obj.proxyUrl,
     'role': obj.role,
     'selectors': obj.selectors?.map(y => toJson_ScrapeConfigSpecKubernetesSdConfigsSelectors(y)),
+    'tlsConfig': toJson_ScrapeConfigSpecKubernetesSdConfigsTlsConfig(obj.tlsConfig),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -72831,6 +75228,216 @@ export function toJson_ScrapeConfigSpecMetricRelabelings(obj: ScrapeConfigSpecMe
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * OpenStackSDConfig allow retrieving scrape targets from OpenStack Nova instances. See https://prometheus.io/docs/prometheus/latest/configuration/configuration/#openstack_sd_config
+ *
+ * @schema ScrapeConfigSpecOpenstackSdConfigs
+ */
+export interface ScrapeConfigSpecOpenstackSdConfigs {
+  /**
+   * Whether the service discovery should list all instances for all projects. It is only relevant for the 'instance' role and usually requires admin permissions.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigs#allTenants
+   */
+  readonly allTenants?: boolean;
+
+  /**
+   * ApplicationCredentialID
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigs#applicationCredentialId
+   */
+  readonly applicationCredentialId?: string;
+
+  /**
+   * The ApplicationCredentialID or ApplicationCredentialName fields are required if using an application credential to authenticate. Some providers allow you to create an application credential to authenticate rather than a password.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigs#applicationCredentialName
+   */
+  readonly applicationCredentialName?: string;
+
+  /**
+   * The applicationCredentialSecret field is required if using an application credential to authenticate.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigs#applicationCredentialSecret
+   */
+  readonly applicationCredentialSecret?: ScrapeConfigSpecOpenstackSdConfigsApplicationCredentialSecret;
+
+  /**
+   * Availability of the endpoint to connect to.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigs#availability
+   */
+  readonly availability?: ScrapeConfigSpecOpenstackSdConfigsAvailability;
+
+  /**
+   * DomainID
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigs#domainID
+   */
+  readonly domainId?: string;
+
+  /**
+   * At most one of domainId and domainName must be provided if using username with Identity V3. Otherwise, either are optional.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigs#domainName
+   */
+  readonly domainName?: string;
+
+  /**
+   * IdentityEndpoint specifies the HTTP endpoint that is required to work with the Identity API of the appropriate version.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigs#identityEndpoint
+   */
+  readonly identityEndpoint?: string;
+
+  /**
+   * Password for the Identity V2 and V3 APIs. Consult with your provider's control panel to discover your account's preferred method of authentication.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigs#password
+   */
+  readonly password?: ScrapeConfigSpecOpenstackSdConfigsPassword;
+
+  /**
+   * The port to scrape metrics from. If using the public IP address, this must instead be specified in the relabeling rule.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigs#port
+   */
+  readonly port?: number;
+
+  /**
+   * ProjectID
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigs#projectID
+   */
+  readonly projectId?: string;
+
+  /**
+   * The ProjectId and ProjectName fields are optional for the Identity V2 API. Some providers allow you to specify a ProjectName instead of the ProjectId. Some require both. Your provider's authentication policies will determine how these fields influence authentication.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigs#projectName
+   */
+  readonly projectName?: string;
+
+  /**
+   * Refresh interval to re-read the instance list.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigs#refreshInterval
+   */
+  readonly refreshInterval?: string;
+
+  /**
+   * The OpenStack Region.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigs#region
+   */
+  readonly region: string;
+
+  /**
+   * The OpenStack role of entities that should be discovered.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigs#role
+   */
+  readonly role: ScrapeConfigSpecOpenstackSdConfigsRole;
+
+  /**
+   * TLS configuration applying to the target HTTP endpoint.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigs#tlsConfig
+   */
+  readonly tlsConfig?: ScrapeConfigSpecOpenstackSdConfigsTlsConfig;
+
+  /**
+   * UserID
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigs#userid
+   */
+  readonly userid?: string;
+
+  /**
+   * Username is required if using Identity V2 API. Consult with your provider's control panel to discover your account's username. In Identity V3, either userid or a combination of username and domainId or domainName are needed
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigs#username
+   */
+  readonly username?: string;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecOpenstackSdConfigs' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecOpenstackSdConfigs(obj: ScrapeConfigSpecOpenstackSdConfigs | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'allTenants': obj.allTenants,
+    'applicationCredentialId': obj.applicationCredentialId,
+    'applicationCredentialName': obj.applicationCredentialName,
+    'applicationCredentialSecret': toJson_ScrapeConfigSpecOpenstackSdConfigsApplicationCredentialSecret(obj.applicationCredentialSecret),
+    'availability': obj.availability,
+    'domainID': obj.domainId,
+    'domainName': obj.domainName,
+    'identityEndpoint': obj.identityEndpoint,
+    'password': toJson_ScrapeConfigSpecOpenstackSdConfigsPassword(obj.password),
+    'port': obj.port,
+    'projectID': obj.projectId,
+    'projectName': obj.projectName,
+    'refreshInterval': obj.refreshInterval,
+    'region': obj.region,
+    'role': obj.role,
+    'tlsConfig': toJson_ScrapeConfigSpecOpenstackSdConfigsTlsConfig(obj.tlsConfig),
+    'userid': obj.userid,
+    'username': obj.username,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * SecretKeySelector selects a key of a Secret.
+ *
+ * @schema ScrapeConfigSpecProxyConnectHeader
+ */
+export interface ScrapeConfigSpecProxyConnectHeader {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecProxyConnectHeader#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecProxyConnectHeader#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecProxyConnectHeader#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecProxyConnectHeader' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecProxyConnectHeader(obj: ScrapeConfigSpecProxyConnectHeader | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -72931,6 +75538,22 @@ export enum ScrapeConfigSpecScheme {
   HTTP = "HTTP",
   /** HTTPS */
   HTTPS = "HTTPS",
+}
+
+/**
+ * ScrapeProtocol represents a protocol used by Prometheus for scraping metrics. Supported values are: * `OpenMetricsText0.0.1` * `OpenMetricsText1.0.0` * `PrometheusProto` * `PrometheusText0.0.4`
+ *
+ * @schema ScrapeConfigSpecScrapeProtocols
+ */
+export enum ScrapeConfigSpecScrapeProtocols {
+  /** PrometheusProto */
+  PROMETHEUS_PROTO = "PrometheusProto",
+  /** OpenMetricsText0.0.1 */
+  OPEN_METRICS_TEXT0_0_1 = "OpenMetricsText0.0.1",
+  /** OpenMetricsText1.0.0 */
+  OPEN_METRICS_TEXT1_0_0 = "OpenMetricsText1.0.0",
+  /** PrometheusText0.0.4 */
+  PROMETHEUS_TEXT0_0_4 = "PrometheusText0.0.4",
 }
 
 /**
@@ -73524,7 +76147,214 @@ export function toJson_ScrapeConfigSpecConsulSdConfigsTokenRef(obj: ScrapeConfig
 /* eslint-enable max-len, quote-props */
 
 /**
- * The type of DNS query to perform. One of SRV, A, AAAA or MX. If not set, Prometheus uses its default value.
+ * Authorization header configuration to authenticate against the DigitalOcean API. Cannot be set at the same time as `oauth2`.
+ *
+ * @schema ScrapeConfigSpecDigitalOceanSdConfigsAuthorization
+ */
+export interface ScrapeConfigSpecDigitalOceanSdConfigsAuthorization {
+  /**
+   * Selects a key of a Secret in the namespace that contains the credentials for authentication.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsAuthorization#credentials
+   */
+  readonly credentials?: ScrapeConfigSpecDigitalOceanSdConfigsAuthorizationCredentials;
+
+  /**
+   * Defines the authentication type. The value is case-insensitive.
+   * "Basic" is not a supported value.
+   * Default: "Bearer"
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsAuthorization#type
+   */
+  readonly type?: string;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecDigitalOceanSdConfigsAuthorization' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecDigitalOceanSdConfigsAuthorization(obj: ScrapeConfigSpecDigitalOceanSdConfigsAuthorization | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'credentials': toJson_ScrapeConfigSpecDigitalOceanSdConfigsAuthorizationCredentials(obj.credentials),
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Optional OAuth 2.0 configuration. Cannot be set at the same time as `authorization`.
+ *
+ * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2
+ */
+export interface ScrapeConfigSpecDigitalOceanSdConfigsOauth2 {
+  /**
+   * `clientId` specifies a key of a Secret or ConfigMap containing the OAuth2 client's ID.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2#clientId
+   */
+  readonly clientId: ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientId;
+
+  /**
+   * `clientSecret` specifies a key of a Secret containing the OAuth2 client's secret.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2#clientSecret
+   */
+  readonly clientSecret: ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientSecret;
+
+  /**
+   * `endpointParams` configures the HTTP parameters to append to the token URL.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2#endpointParams
+   */
+  readonly endpointParams?: { [key: string]: string };
+
+  /**
+   * `scopes` defines the OAuth2 scopes used for the token request.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2#scopes
+   */
+  readonly scopes?: string[];
+
+  /**
+   * `tokenURL` configures the URL to fetch the token from.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2#tokenUrl
+   */
+  readonly tokenUrl: string;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecDigitalOceanSdConfigsOauth2' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecDigitalOceanSdConfigsOauth2(obj: ScrapeConfigSpecDigitalOceanSdConfigsOauth2 | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'clientId': toJson_ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientId(obj.clientId),
+    'clientSecret': toJson_ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientSecret(obj.clientSecret),
+    'endpointParams': ((obj.endpointParams) === undefined) ? undefined : (Object.entries(obj.endpointParams).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'scopes': obj.scopes?.map(y => y),
+    'tokenUrl': obj.tokenUrl,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * SecretKeySelector selects a key of a Secret.
+ *
+ * @schema ScrapeConfigSpecDigitalOceanSdConfigsProxyConnectHeader
+ */
+export interface ScrapeConfigSpecDigitalOceanSdConfigsProxyConnectHeader {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsProxyConnectHeader#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsProxyConnectHeader#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsProxyConnectHeader#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecDigitalOceanSdConfigsProxyConnectHeader' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecDigitalOceanSdConfigsProxyConnectHeader(obj: ScrapeConfigSpecDigitalOceanSdConfigsProxyConnectHeader | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * TLS configuration applying to the target HTTP endpoint.
+ *
+ * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfig
+ */
+export interface ScrapeConfigSpecDigitalOceanSdConfigsTlsConfig {
+  /**
+   * Certificate authority used when verifying server certificates.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfig#ca
+   */
+  readonly ca?: ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCa;
+
+  /**
+   * Client certificate to present when doing client-authentication.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfig#cert
+   */
+  readonly cert?: ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCert;
+
+  /**
+   * Disable target certificate validation.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfig#insecureSkipVerify
+   */
+  readonly insecureSkipVerify?: boolean;
+
+  /**
+   * Secret containing the client key file for the targets.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfig#keySecret
+   */
+  readonly keySecret?: ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigKeySecret;
+
+  /**
+   * Used to verify the hostname for the targets.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfig#serverName
+   */
+  readonly serverName?: string;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecDigitalOceanSdConfigsTlsConfig' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecDigitalOceanSdConfigsTlsConfig(obj: ScrapeConfigSpecDigitalOceanSdConfigsTlsConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'ca': toJson_ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCa(obj.ca),
+    'cert': toJson_ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCert(obj.cert),
+    'insecureSkipVerify': obj.insecureSkipVerify,
+    'keySecret': toJson_ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigKeySecret(obj.keySecret),
+    'serverName': obj.serverName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The type of DNS query to perform. One of SRV, A, AAAA, MX or NS. If not set, Prometheus uses its default value.
+ * When set to NS, It requires Prometheus >= 2.49.0.
  *
  * @schema ScrapeConfigSpecDnsSdConfigsType
  */
@@ -73537,6 +76367,8 @@ export enum ScrapeConfigSpecDnsSdConfigsType {
   AAAA = "AAAA",
   /** MX */
   MX = "MX",
+  /** NS */
+  NS = "NS",
 }
 
 /**
@@ -73739,6 +76571,51 @@ export function toJson_ScrapeConfigSpecHttpSdConfigsBasicAuth(obj: ScrapeConfigS
 /* eslint-enable max-len, quote-props */
 
 /**
+ * SecretKeySelector selects a key of a Secret.
+ *
+ * @schema ScrapeConfigSpecHttpSdConfigsProxyConnectHeader
+ */
+export interface ScrapeConfigSpecHttpSdConfigsProxyConnectHeader {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecHttpSdConfigsProxyConnectHeader#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecHttpSdConfigsProxyConnectHeader#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecHttpSdConfigsProxyConnectHeader#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecHttpSdConfigsProxyConnectHeader' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecHttpSdConfigsProxyConnectHeader(obj: ScrapeConfigSpecHttpSdConfigsProxyConnectHeader | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * TLS configuration applying to the target HTTP endpoint.
  *
  * @schema ScrapeConfigSpecHttpSdConfigsTlsConfig
@@ -73793,6 +76670,254 @@ export function toJson_ScrapeConfigSpecHttpSdConfigsTlsConfig(obj: ScrapeConfigS
     'insecureSkipVerify': obj.insecureSkipVerify,
     'keySecret': toJson_ScrapeConfigSpecHttpSdConfigsTlsConfigKeySecret(obj.keySecret),
     'serverName': obj.serverName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Optional metadata to attach to discovered targets. It requires Prometheus >= v2.35.0 for `pod` role and Prometheus >= v2.37.0 for `endpoints` and `endpointslice` roles.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsAttachMetadata
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsAttachMetadata {
+  /**
+   * Attaches node metadata to discovered targets. When set to true, Prometheus must have the `get` permission on the `Nodes` objects. Only valid for Pod, Endpoint and Endpointslice roles.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsAttachMetadata#node
+   */
+  readonly node?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsAttachMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsAttachMetadata(obj: ScrapeConfigSpecKubernetesSdConfigsAttachMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'node': obj.node,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Authorization header to use on every scrape request. Cannot be set at the same time as `basicAuth`, or `oauth2`.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsAuthorization
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsAuthorization {
+  /**
+   * Selects a key of a Secret in the namespace that contains the credentials for authentication.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsAuthorization#credentials
+   */
+  readonly credentials?: ScrapeConfigSpecKubernetesSdConfigsAuthorizationCredentials;
+
+  /**
+   * Defines the authentication type. The value is case-insensitive.
+   * "Basic" is not a supported value.
+   * Default: "Bearer"
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsAuthorization#type
+   */
+  readonly type?: string;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsAuthorization' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsAuthorization(obj: ScrapeConfigSpecKubernetesSdConfigsAuthorization | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'credentials': toJson_ScrapeConfigSpecKubernetesSdConfigsAuthorizationCredentials(obj.credentials),
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * BasicAuth information to use on every scrape request. Cannot be set at the same time as `authorization`, or `oauth2`.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsBasicAuth
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsBasicAuth {
+  /**
+   * `password` specifies a key of a Secret containing the password for authentication.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsBasicAuth#password
+   */
+  readonly password?: ScrapeConfigSpecKubernetesSdConfigsBasicAuthPassword;
+
+  /**
+   * `username` specifies a key of a Secret containing the username for authentication.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsBasicAuth#username
+   */
+  readonly username?: ScrapeConfigSpecKubernetesSdConfigsBasicAuthUsername;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsBasicAuth' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsBasicAuth(obj: ScrapeConfigSpecKubernetesSdConfigsBasicAuth | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'password': toJson_ScrapeConfigSpecKubernetesSdConfigsBasicAuthPassword(obj.password),
+    'username': toJson_ScrapeConfigSpecKubernetesSdConfigsBasicAuthUsername(obj.username),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Optional namespace discovery. If omitted, Prometheus discovers targets across all namespaces.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsNamespaces
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsNamespaces {
+  /**
+   * List of namespaces where to watch for resources. If empty and `ownNamespace` isn't true, Prometheus watches for resources in all namespaces.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsNamespaces#names
+   */
+  readonly names?: string[];
+
+  /**
+   * Includes the namespace in which the Prometheus pod exists to the list of watched namesapces.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsNamespaces#ownNamespace
+   */
+  readonly ownNamespace?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsNamespaces' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsNamespaces(obj: ScrapeConfigSpecKubernetesSdConfigsNamespaces | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'names': obj.names?.map(y => y),
+    'ownNamespace': obj.ownNamespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Optional OAuth 2.0 configuration. Cannot be set at the same time as `authorization`, or `basicAuth`.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsOauth2 {
+  /**
+   * `clientId` specifies a key of a Secret or ConfigMap containing the OAuth2 client's ID.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2#clientId
+   */
+  readonly clientId: ScrapeConfigSpecKubernetesSdConfigsOauth2ClientId;
+
+  /**
+   * `clientSecret` specifies a key of a Secret containing the OAuth2 client's secret.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2#clientSecret
+   */
+  readonly clientSecret: ScrapeConfigSpecKubernetesSdConfigsOauth2ClientSecret;
+
+  /**
+   * `endpointParams` configures the HTTP parameters to append to the token URL.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2#endpointParams
+   */
+  readonly endpointParams?: { [key: string]: string };
+
+  /**
+   * `scopes` defines the OAuth2 scopes used for the token request.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2#scopes
+   */
+  readonly scopes?: string[];
+
+  /**
+   * `tokenURL` configures the URL to fetch the token from.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2#tokenUrl
+   */
+  readonly tokenUrl: string;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsOauth2' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsOauth2(obj: ScrapeConfigSpecKubernetesSdConfigsOauth2 | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'clientId': toJson_ScrapeConfigSpecKubernetesSdConfigsOauth2ClientId(obj.clientId),
+    'clientSecret': toJson_ScrapeConfigSpecKubernetesSdConfigsOauth2ClientSecret(obj.clientSecret),
+    'endpointParams': ((obj.endpointParams) === undefined) ? undefined : (Object.entries(obj.endpointParams).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'scopes': obj.scopes?.map(y => y),
+    'tokenUrl': obj.tokenUrl,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * SecretKeySelector selects a key of a Secret.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsProxyConnectHeader
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsProxyConnectHeader {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsProxyConnectHeader#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsProxyConnectHeader#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsProxyConnectHeader#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsProxyConnectHeader' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsProxyConnectHeader(obj: ScrapeConfigSpecKubernetesSdConfigsProxyConnectHeader | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -73861,6 +76986,67 @@ export function toJson_ScrapeConfigSpecKubernetesSdConfigsSelectors(obj: ScrapeC
 /* eslint-enable max-len, quote-props */
 
 /**
+ * TLS configuration to use on every scrape request.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfig
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsTlsConfig {
+  /**
+   * Certificate authority used when verifying server certificates.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfig#ca
+   */
+  readonly ca?: ScrapeConfigSpecKubernetesSdConfigsTlsConfigCa;
+
+  /**
+   * Client certificate to present when doing client-authentication.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfig#cert
+   */
+  readonly cert?: ScrapeConfigSpecKubernetesSdConfigsTlsConfigCert;
+
+  /**
+   * Disable target certificate validation.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfig#insecureSkipVerify
+   */
+  readonly insecureSkipVerify?: boolean;
+
+  /**
+   * Secret containing the client key file for the targets.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfig#keySecret
+   */
+  readonly keySecret?: ScrapeConfigSpecKubernetesSdConfigsTlsConfigKeySecret;
+
+  /**
+   * Used to verify the hostname for the targets.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfig#serverName
+   */
+  readonly serverName?: string;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsTlsConfig' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsTlsConfig(obj: ScrapeConfigSpecKubernetesSdConfigsTlsConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'ca': toJson_ScrapeConfigSpecKubernetesSdConfigsTlsConfigCa(obj.ca),
+    'cert': toJson_ScrapeConfigSpecKubernetesSdConfigsTlsConfigCert(obj.cert),
+    'insecureSkipVerify': obj.insecureSkipVerify,
+    'keySecret': toJson_ScrapeConfigSpecKubernetesSdConfigsTlsConfigKeySecret(obj.keySecret),
+    'serverName': obj.serverName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * Action to perform based on the regex matching.
  * `Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0. `DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.
  * Default: "Replace"
@@ -73891,6 +77077,183 @@ export enum ScrapeConfigSpecMetricRelabelingsAction {
   /** dropequal */
   DROPEQUAL = "dropequal",
 }
+
+/**
+ * The applicationCredentialSecret field is required if using an application credential to authenticate.
+ *
+ * @schema ScrapeConfigSpecOpenstackSdConfigsApplicationCredentialSecret
+ */
+export interface ScrapeConfigSpecOpenstackSdConfigsApplicationCredentialSecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsApplicationCredentialSecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsApplicationCredentialSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsApplicationCredentialSecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecOpenstackSdConfigsApplicationCredentialSecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecOpenstackSdConfigsApplicationCredentialSecret(obj: ScrapeConfigSpecOpenstackSdConfigsApplicationCredentialSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Availability of the endpoint to connect to.
+ *
+ * @schema ScrapeConfigSpecOpenstackSdConfigsAvailability
+ */
+export enum ScrapeConfigSpecOpenstackSdConfigsAvailability {
+  /** Public */
+  PUBLIC = "Public",
+  /** Admin */
+  ADMIN = "Admin",
+  /** Internal */
+  INTERNAL = "Internal",
+}
+
+/**
+ * Password for the Identity V2 and V3 APIs. Consult with your provider's control panel to discover your account's preferred method of authentication.
+ *
+ * @schema ScrapeConfigSpecOpenstackSdConfigsPassword
+ */
+export interface ScrapeConfigSpecOpenstackSdConfigsPassword {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsPassword#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsPassword#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsPassword#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecOpenstackSdConfigsPassword' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecOpenstackSdConfigsPassword(obj: ScrapeConfigSpecOpenstackSdConfigsPassword | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The OpenStack role of entities that should be discovered.
+ *
+ * @schema ScrapeConfigSpecOpenstackSdConfigsRole
+ */
+export enum ScrapeConfigSpecOpenstackSdConfigsRole {
+  /** Instance */
+  INSTANCE = "Instance",
+  /** Hypervisor */
+  HYPERVISOR = "Hypervisor",
+}
+
+/**
+ * TLS configuration applying to the target HTTP endpoint.
+ *
+ * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfig
+ */
+export interface ScrapeConfigSpecOpenstackSdConfigsTlsConfig {
+  /**
+   * Certificate authority used when verifying server certificates.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfig#ca
+   */
+  readonly ca?: ScrapeConfigSpecOpenstackSdConfigsTlsConfigCa;
+
+  /**
+   * Client certificate to present when doing client-authentication.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfig#cert
+   */
+  readonly cert?: ScrapeConfigSpecOpenstackSdConfigsTlsConfigCert;
+
+  /**
+   * Disable target certificate validation.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfig#insecureSkipVerify
+   */
+  readonly insecureSkipVerify?: boolean;
+
+  /**
+   * Secret containing the client key file for the targets.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfig#keySecret
+   */
+  readonly keySecret?: ScrapeConfigSpecOpenstackSdConfigsTlsConfigKeySecret;
+
+  /**
+   * Used to verify the hostname for the targets.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfig#serverName
+   */
+  readonly serverName?: string;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecOpenstackSdConfigsTlsConfig' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecOpenstackSdConfigsTlsConfig(obj: ScrapeConfigSpecOpenstackSdConfigsTlsConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'ca': toJson_ScrapeConfigSpecOpenstackSdConfigsTlsConfigCa(obj.ca),
+    'cert': toJson_ScrapeConfigSpecOpenstackSdConfigsTlsConfigCert(obj.cert),
+    'insecureSkipVerify': obj.insecureSkipVerify,
+    'keySecret': toJson_ScrapeConfigSpecOpenstackSdConfigsTlsConfigKeySecret(obj.keySecret),
+    'serverName': obj.serverName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * Action to perform based on the regex matching.
@@ -74382,6 +77745,252 @@ export function toJson_ScrapeConfigSpecConsulSdConfigsTlsConfigKeySecret(obj: Sc
 /**
  * Selects a key of a Secret in the namespace that contains the credentials for authentication.
  *
+ * @schema ScrapeConfigSpecDigitalOceanSdConfigsAuthorizationCredentials
+ */
+export interface ScrapeConfigSpecDigitalOceanSdConfigsAuthorizationCredentials {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsAuthorizationCredentials#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsAuthorizationCredentials#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsAuthorizationCredentials#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecDigitalOceanSdConfigsAuthorizationCredentials' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecDigitalOceanSdConfigsAuthorizationCredentials(obj: ScrapeConfigSpecDigitalOceanSdConfigsAuthorizationCredentials | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * `clientId` specifies a key of a Secret or ConfigMap containing the OAuth2 client's ID.
+ *
+ * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientId
+ */
+export interface ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientId {
+  /**
+   * ConfigMap containing data to use for the targets.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientId#configMap
+   */
+  readonly configMap?: ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdConfigMap;
+
+  /**
+   * Secret containing data to use for the targets.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientId#secret
+   */
+  readonly secret?: ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdSecret;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientId' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientId(obj: ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMap': toJson_ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdConfigMap(obj.configMap),
+    'secret': toJson_ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdSecret(obj.secret),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * `clientSecret` specifies a key of a Secret containing the OAuth2 client's secret.
+ *
+ * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientSecret
+ */
+export interface ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientSecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientSecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientSecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientSecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientSecret(obj: ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Certificate authority used when verifying server certificates.
+ *
+ * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCa
+ */
+export interface ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCa {
+  /**
+   * ConfigMap containing data to use for the targets.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCa#configMap
+   */
+  readonly configMap?: ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaConfigMap;
+
+  /**
+   * Secret containing data to use for the targets.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCa#secret
+   */
+  readonly secret?: ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaSecret;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCa' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCa(obj: ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCa | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMap': toJson_ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaConfigMap(obj.configMap),
+    'secret': toJson_ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaSecret(obj.secret),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Client certificate to present when doing client-authentication.
+ *
+ * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCert
+ */
+export interface ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCert {
+  /**
+   * ConfigMap containing data to use for the targets.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCert#configMap
+   */
+  readonly configMap?: ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertConfigMap;
+
+  /**
+   * Secret containing data to use for the targets.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCert#secret
+   */
+  readonly secret?: ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertSecret;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCert' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCert(obj: ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCert | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMap': toJson_ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertConfigMap(obj.configMap),
+    'secret': toJson_ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertSecret(obj.secret),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Secret containing the client key file for the targets.
+ *
+ * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigKeySecret
+ */
+export interface ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigKeySecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigKeySecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigKeySecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigKeySecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigKeySecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigKeySecret(obj: ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigKeySecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Selects a key of a Secret in the namespace that contains the credentials for authentication.
+ *
  * @schema ScrapeConfigSpecHttpSdConfigsAuthorizationCredentials
  */
 export interface ScrapeConfigSpecHttpSdConfigsAuthorizationCredentials {
@@ -74634,6 +78243,223 @@ export function toJson_ScrapeConfigSpecHttpSdConfigsTlsConfigKeySecret(obj: Scra
 /* eslint-enable max-len, quote-props */
 
 /**
+ * Selects a key of a Secret in the namespace that contains the credentials for authentication.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsAuthorizationCredentials
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsAuthorizationCredentials {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsAuthorizationCredentials#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsAuthorizationCredentials#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsAuthorizationCredentials#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsAuthorizationCredentials' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsAuthorizationCredentials(obj: ScrapeConfigSpecKubernetesSdConfigsAuthorizationCredentials | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * `password` specifies a key of a Secret containing the password for authentication.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsBasicAuthPassword
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsBasicAuthPassword {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsBasicAuthPassword#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsBasicAuthPassword#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsBasicAuthPassword#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsBasicAuthPassword' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsBasicAuthPassword(obj: ScrapeConfigSpecKubernetesSdConfigsBasicAuthPassword | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * `username` specifies a key of a Secret containing the username for authentication.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsBasicAuthUsername
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsBasicAuthUsername {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsBasicAuthUsername#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsBasicAuthUsername#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsBasicAuthUsername#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsBasicAuthUsername' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsBasicAuthUsername(obj: ScrapeConfigSpecKubernetesSdConfigsBasicAuthUsername | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * `clientId` specifies a key of a Secret or ConfigMap containing the OAuth2 client's ID.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2ClientId
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsOauth2ClientId {
+  /**
+   * ConfigMap containing data to use for the targets.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2ClientId#configMap
+   */
+  readonly configMap?: ScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdConfigMap;
+
+  /**
+   * Secret containing data to use for the targets.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2ClientId#secret
+   */
+  readonly secret?: ScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdSecret;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsOauth2ClientId' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsOauth2ClientId(obj: ScrapeConfigSpecKubernetesSdConfigsOauth2ClientId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMap': toJson_ScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdConfigMap(obj.configMap),
+    'secret': toJson_ScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdSecret(obj.secret),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * `clientSecret` specifies a key of a Secret containing the OAuth2 client's secret.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2ClientSecret
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsOauth2ClientSecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2ClientSecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2ClientSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2ClientSecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsOauth2ClientSecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsOauth2ClientSecret(obj: ScrapeConfigSpecKubernetesSdConfigsOauth2ClientSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * Role is role of the service in Kubernetes.
  *
  * @schema ScrapeConfigSpecKubernetesSdConfigsSelectorsRole
@@ -74652,6 +78478,244 @@ export enum ScrapeConfigSpecKubernetesSdConfigsSelectorsRole {
   /** Ingress */
   INGRESS = "Ingress",
 }
+
+/**
+ * Certificate authority used when verifying server certificates.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCa
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsTlsConfigCa {
+  /**
+   * ConfigMap containing data to use for the targets.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCa#configMap
+   */
+  readonly configMap?: ScrapeConfigSpecKubernetesSdConfigsTlsConfigCaConfigMap;
+
+  /**
+   * Secret containing data to use for the targets.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCa#secret
+   */
+  readonly secret?: ScrapeConfigSpecKubernetesSdConfigsTlsConfigCaSecret;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsTlsConfigCa' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsTlsConfigCa(obj: ScrapeConfigSpecKubernetesSdConfigsTlsConfigCa | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMap': toJson_ScrapeConfigSpecKubernetesSdConfigsTlsConfigCaConfigMap(obj.configMap),
+    'secret': toJson_ScrapeConfigSpecKubernetesSdConfigsTlsConfigCaSecret(obj.secret),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Client certificate to present when doing client-authentication.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCert
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsTlsConfigCert {
+  /**
+   * ConfigMap containing data to use for the targets.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCert#configMap
+   */
+  readonly configMap?: ScrapeConfigSpecKubernetesSdConfigsTlsConfigCertConfigMap;
+
+  /**
+   * Secret containing data to use for the targets.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCert#secret
+   */
+  readonly secret?: ScrapeConfigSpecKubernetesSdConfigsTlsConfigCertSecret;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsTlsConfigCert' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsTlsConfigCert(obj: ScrapeConfigSpecKubernetesSdConfigsTlsConfigCert | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMap': toJson_ScrapeConfigSpecKubernetesSdConfigsTlsConfigCertConfigMap(obj.configMap),
+    'secret': toJson_ScrapeConfigSpecKubernetesSdConfigsTlsConfigCertSecret(obj.secret),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Secret containing the client key file for the targets.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigKeySecret
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsTlsConfigKeySecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigKeySecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigKeySecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigKeySecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsTlsConfigKeySecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsTlsConfigKeySecret(obj: ScrapeConfigSpecKubernetesSdConfigsTlsConfigKeySecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Certificate authority used when verifying server certificates.
+ *
+ * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCa
+ */
+export interface ScrapeConfigSpecOpenstackSdConfigsTlsConfigCa {
+  /**
+   * ConfigMap containing data to use for the targets.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCa#configMap
+   */
+  readonly configMap?: ScrapeConfigSpecOpenstackSdConfigsTlsConfigCaConfigMap;
+
+  /**
+   * Secret containing data to use for the targets.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCa#secret
+   */
+  readonly secret?: ScrapeConfigSpecOpenstackSdConfigsTlsConfigCaSecret;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecOpenstackSdConfigsTlsConfigCa' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecOpenstackSdConfigsTlsConfigCa(obj: ScrapeConfigSpecOpenstackSdConfigsTlsConfigCa | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMap': toJson_ScrapeConfigSpecOpenstackSdConfigsTlsConfigCaConfigMap(obj.configMap),
+    'secret': toJson_ScrapeConfigSpecOpenstackSdConfigsTlsConfigCaSecret(obj.secret),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Client certificate to present when doing client-authentication.
+ *
+ * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCert
+ */
+export interface ScrapeConfigSpecOpenstackSdConfigsTlsConfigCert {
+  /**
+   * ConfigMap containing data to use for the targets.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCert#configMap
+   */
+  readonly configMap?: ScrapeConfigSpecOpenstackSdConfigsTlsConfigCertConfigMap;
+
+  /**
+   * Secret containing data to use for the targets.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCert#secret
+   */
+  readonly secret?: ScrapeConfigSpecOpenstackSdConfigsTlsConfigCertSecret;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecOpenstackSdConfigsTlsConfigCert' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecOpenstackSdConfigsTlsConfigCert(obj: ScrapeConfigSpecOpenstackSdConfigsTlsConfigCert | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMap': toJson_ScrapeConfigSpecOpenstackSdConfigsTlsConfigCertConfigMap(obj.configMap),
+    'secret': toJson_ScrapeConfigSpecOpenstackSdConfigsTlsConfigCertSecret(obj.secret),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Secret containing the client key file for the targets.
+ *
+ * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigKeySecret
+ */
+export interface ScrapeConfigSpecOpenstackSdConfigsTlsConfigKeySecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigKeySecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigKeySecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigKeySecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecOpenstackSdConfigsTlsConfigKeySecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecOpenstackSdConfigsTlsConfigKeySecret(obj: ScrapeConfigSpecOpenstackSdConfigsTlsConfigKeySecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * ConfigMap containing data to use for the targets.
@@ -75106,6 +79170,276 @@ export function toJson_ScrapeConfigSpecConsulSdConfigsTlsConfigCertSecret(obj: S
 /**
  * ConfigMap containing data to use for the targets.
  *
+ * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdConfigMap
+ */
+export interface ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdConfigMap {
+  /**
+   * The key to select.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdConfigMap#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdConfigMap#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap or its key must be defined
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdConfigMap#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdConfigMap' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdConfigMap(obj: ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdConfigMap | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Secret containing data to use for the targets.
+ *
+ * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdSecret
+ */
+export interface ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdSecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdSecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdSecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdSecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdSecret(obj: ScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ConfigMap containing data to use for the targets.
+ *
+ * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaConfigMap
+ */
+export interface ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaConfigMap {
+  /**
+   * The key to select.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaConfigMap#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaConfigMap#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap or its key must be defined
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaConfigMap#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaConfigMap' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaConfigMap(obj: ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaConfigMap | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Secret containing data to use for the targets.
+ *
+ * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaSecret
+ */
+export interface ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaSecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaSecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaSecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaSecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaSecret(obj: ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ConfigMap containing data to use for the targets.
+ *
+ * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertConfigMap
+ */
+export interface ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertConfigMap {
+  /**
+   * The key to select.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertConfigMap#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertConfigMap#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap or its key must be defined
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertConfigMap#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertConfigMap' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertConfigMap(obj: ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertConfigMap | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Secret containing data to use for the targets.
+ *
+ * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertSecret
+ */
+export interface ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertSecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertSecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertSecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertSecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertSecret(obj: ScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ConfigMap containing data to use for the targets.
+ *
  * @schema ScrapeConfigSpecHttpSdConfigsTlsConfigCaConfigMap
  */
 export interface ScrapeConfigSpecHttpSdConfigsTlsConfigCaConfigMap {
@@ -75272,6 +79606,456 @@ export interface ScrapeConfigSpecHttpSdConfigsTlsConfigCertSecret {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_ScrapeConfigSpecHttpSdConfigsTlsConfigCertSecret(obj: ScrapeConfigSpecHttpSdConfigsTlsConfigCertSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ConfigMap containing data to use for the targets.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdConfigMap
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdConfigMap {
+  /**
+   * The key to select.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdConfigMap#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdConfigMap#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap or its key must be defined
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdConfigMap#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdConfigMap' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdConfigMap(obj: ScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdConfigMap | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Secret containing data to use for the targets.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdSecret
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdSecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdSecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdSecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdSecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdSecret(obj: ScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ConfigMap containing data to use for the targets.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCaConfigMap
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsTlsConfigCaConfigMap {
+  /**
+   * The key to select.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCaConfigMap#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCaConfigMap#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap or its key must be defined
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCaConfigMap#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsTlsConfigCaConfigMap' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsTlsConfigCaConfigMap(obj: ScrapeConfigSpecKubernetesSdConfigsTlsConfigCaConfigMap | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Secret containing data to use for the targets.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCaSecret
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsTlsConfigCaSecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCaSecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCaSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCaSecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsTlsConfigCaSecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsTlsConfigCaSecret(obj: ScrapeConfigSpecKubernetesSdConfigsTlsConfigCaSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ConfigMap containing data to use for the targets.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCertConfigMap
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsTlsConfigCertConfigMap {
+  /**
+   * The key to select.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCertConfigMap#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCertConfigMap#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap or its key must be defined
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCertConfigMap#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsTlsConfigCertConfigMap' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsTlsConfigCertConfigMap(obj: ScrapeConfigSpecKubernetesSdConfigsTlsConfigCertConfigMap | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Secret containing data to use for the targets.
+ *
+ * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCertSecret
+ */
+export interface ScrapeConfigSpecKubernetesSdConfigsTlsConfigCertSecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCertSecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCertSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecKubernetesSdConfigsTlsConfigCertSecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecKubernetesSdConfigsTlsConfigCertSecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecKubernetesSdConfigsTlsConfigCertSecret(obj: ScrapeConfigSpecKubernetesSdConfigsTlsConfigCertSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ConfigMap containing data to use for the targets.
+ *
+ * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCaConfigMap
+ */
+export interface ScrapeConfigSpecOpenstackSdConfigsTlsConfigCaConfigMap {
+  /**
+   * The key to select.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCaConfigMap#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCaConfigMap#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap or its key must be defined
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCaConfigMap#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecOpenstackSdConfigsTlsConfigCaConfigMap' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecOpenstackSdConfigsTlsConfigCaConfigMap(obj: ScrapeConfigSpecOpenstackSdConfigsTlsConfigCaConfigMap | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Secret containing data to use for the targets.
+ *
+ * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCaSecret
+ */
+export interface ScrapeConfigSpecOpenstackSdConfigsTlsConfigCaSecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCaSecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCaSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCaSecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecOpenstackSdConfigsTlsConfigCaSecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecOpenstackSdConfigsTlsConfigCaSecret(obj: ScrapeConfigSpecOpenstackSdConfigsTlsConfigCaSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ConfigMap containing data to use for the targets.
+ *
+ * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCertConfigMap
+ */
+export interface ScrapeConfigSpecOpenstackSdConfigsTlsConfigCertConfigMap {
+  /**
+   * The key to select.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCertConfigMap#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCertConfigMap#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap or its key must be defined
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCertConfigMap#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecOpenstackSdConfigsTlsConfigCertConfigMap' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecOpenstackSdConfigsTlsConfigCertConfigMap(obj: ScrapeConfigSpecOpenstackSdConfigsTlsConfigCertConfigMap | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Secret containing data to use for the targets.
+ *
+ * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCertSecret
+ */
+export interface ScrapeConfigSpecOpenstackSdConfigsTlsConfigCertSecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCertSecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCertSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema ScrapeConfigSpecOpenstackSdConfigsTlsConfigCertSecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'ScrapeConfigSpecOpenstackSdConfigsTlsConfigCertSecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ScrapeConfigSpecOpenstackSdConfigsTlsConfigCertSecret(obj: ScrapeConfigSpecOpenstackSdConfigsTlsConfigCertSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -75457,6 +80241,22 @@ export interface ServiceMonitorSpec {
   readonly sampleLimit?: number;
 
   /**
+   * The scrape class to apply.
+   *
+   * @schema ServiceMonitorSpec#scrapeClass
+   */
+  readonly scrapeClass?: string;
+
+  /**
+   * `scrapeProtocols` defines the protocols to negotiate during a scrape. It tells clients the protocols supported by Prometheus in order of preference (from most to least preferred).
+   * If unset, Prometheus uses its default value.
+   * It requires Prometheus >= v2.49.0.
+   *
+   * @schema ServiceMonitorSpec#scrapeProtocols
+   */
+  readonly scrapeProtocols?: ServiceMonitorSpecScrapeProtocols[];
+
+  /**
    * Label selector to select the Kubernetes `Endpoints` objects.
    *
    * @schema ServiceMonitorSpec#selector
@@ -75496,6 +80296,8 @@ export function toJson_ServiceMonitorSpec(obj: ServiceMonitorSpec | undefined): 
     'namespaceSelector': toJson_ServiceMonitorSpecNamespaceSelector(obj.namespaceSelector),
     'podTargetLabels': obj.podTargetLabels?.map(y => y),
     'sampleLimit': obj.sampleLimit,
+    'scrapeClass': obj.scrapeClass,
+    'scrapeProtocols': obj.scrapeProtocols?.map(y => y),
     'selector': toJson_ServiceMonitorSpecSelector(obj.selector),
     'targetLabels': obj.targetLabels?.map(y => y),
     'targetLimit': obj.targetLimit,
@@ -75692,8 +80494,7 @@ export interface ServiceMonitorSpecEndpoints {
   readonly scrapeTimeout?: string;
 
   /**
-   * Name or number of the target port of the `Pod` object behind the Service, the port must be specified with container port property.
-   * Deprecated: use `port` instead.
+   * Name or number of the target port of the `Pod` object behind the Service. The port must be specified with the container's port property.
    *
    * @schema ServiceMonitorSpecEndpoints#targetPort
    */
@@ -75787,6 +80588,22 @@ export function toJson_ServiceMonitorSpecNamespaceSelector(obj: ServiceMonitorSp
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
+
+/**
+ * ScrapeProtocol represents a protocol used by Prometheus for scraping metrics. Supported values are: * `OpenMetricsText0.0.1` * `OpenMetricsText1.0.0` * `PrometheusProto` * `PrometheusText0.0.4`
+ *
+ * @schema ServiceMonitorSpecScrapeProtocols
+ */
+export enum ServiceMonitorSpecScrapeProtocols {
+  /** PrometheusProto */
+  PROMETHEUS_PROTO = "PrometheusProto",
+  /** OpenMetricsText0.0.1 */
+  OPEN_METRICS_TEXT0_0_1 = "OpenMetricsText0.0.1",
+  /** OpenMetricsText1.0.0 */
+  OPEN_METRICS_TEXT1_0_0 = "OpenMetricsText1.0.0",
+  /** PrometheusText0.0.4 */
+  PROMETHEUS_TEXT0_0_4 = "PrometheusText0.0.4",
+}
 
 /**
  * Label selector to select the Kubernetes `Endpoints` objects.
@@ -76195,8 +81012,7 @@ export enum ServiceMonitorSpecEndpointsScheme {
 }
 
 /**
- * Name or number of the target port of the `Pod` object behind the Service, the port must be specified with container port property.
- * Deprecated: use `port` instead.
+ * Name or number of the target port of the `Pod` object behind the Service. The port must be specified with the container's port property.
  *
  * @schema ServiceMonitorSpecEndpointsTargetPort
  */
@@ -78787,7 +83603,7 @@ export function toJson_ThanosRulerSpecSecurityContext(obj: ThanosRulerSpecSecuri
  */
 export interface ThanosRulerSpecStorage {
   /**
-   * *Deprecated: subPath usage will be removed in a future release.*
+   * Deprecated: subPath usage will be removed in a future release.
    *
    * @schema ThanosRulerSpecStorage#disableMountSubPath
    */
@@ -81680,7 +86496,7 @@ export interface ThanosRulerSpecStorageVolumeClaimTemplate {
   readonly spec?: ThanosRulerSpecStorageVolumeClaimTemplateSpec;
 
   /**
-   * *Deprecated: this field is never set.*
+   * Deprecated: this field is never set.
    *
    * @schema ThanosRulerSpecStorageVolumeClaimTemplate#status
    */
@@ -83461,11 +88277,25 @@ export function toJson_ThanosRulerSpecAffinityPodAffinityPreferredDuringScheduli
  */
 export interface ThanosRulerSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution {
   /**
-   * A label query over a set of resources, in this case pods.
+   * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
    *
    * @schema ThanosRulerSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#labelSelector
    */
   readonly labelSelector?: ThanosRulerSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MatchLabelKeys and LabelSelector. Also, MatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema ThanosRulerSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector. Also, MismatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema ThanosRulerSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
 
   /**
    * A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces.
@@ -83498,6 +88328,8 @@ export function toJson_ThanosRulerSpecAffinityPodAffinityRequiredDuringSchedulin
   if (obj === undefined) { return undefined; }
   const result = {
     'labelSelector': toJson_ThanosRulerSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
     'namespaceSelector': toJson_ThanosRulerSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj.namespaceSelector),
     'namespaces': obj.namespaces?.map(y => y),
     'topologyKey': obj.topologyKey,
@@ -83551,11 +88383,25 @@ export function toJson_ThanosRulerSpecAffinityPodAntiAffinityPreferredDuringSche
  */
 export interface ThanosRulerSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution {
   /**
-   * A label query over a set of resources, in this case pods.
+   * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
    *
    * @schema ThanosRulerSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#labelSelector
    */
   readonly labelSelector?: ThanosRulerSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MatchLabelKeys and LabelSelector. Also, MatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema ThanosRulerSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector. Also, MismatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema ThanosRulerSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
 
   /**
    * A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces.
@@ -83588,6 +88434,8 @@ export function toJson_ThanosRulerSpecAffinityPodAntiAffinityRequiredDuringSched
   if (obj === undefined) { return undefined; }
   const result = {
     'labelSelector': toJson_ThanosRulerSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
     'namespaceSelector': toJson_ThanosRulerSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj.namespaceSelector),
     'namespaces': obj.namespaces?.map(y => y),
     'topologyKey': obj.topologyKey,
@@ -83745,6 +88593,13 @@ export interface ThanosRulerSpecContainersLifecyclePostStart {
   readonly httpGet?: ThanosRulerSpecContainersLifecyclePostStartHttpGet;
 
   /**
+   * Sleep represents the duration that the container should sleep before being terminated.
+   *
+   * @schema ThanosRulerSpecContainersLifecyclePostStart#sleep
+   */
+  readonly sleep?: ThanosRulerSpecContainersLifecyclePostStartSleep;
+
+  /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
    *
    * @schema ThanosRulerSpecContainersLifecyclePostStart#tcpSocket
@@ -83762,6 +88617,7 @@ export function toJson_ThanosRulerSpecContainersLifecyclePostStart(obj: ThanosRu
   const result = {
     'exec': toJson_ThanosRulerSpecContainersLifecyclePostStartExec(obj.exec),
     'httpGet': toJson_ThanosRulerSpecContainersLifecyclePostStartHttpGet(obj.httpGet),
+    'sleep': toJson_ThanosRulerSpecContainersLifecyclePostStartSleep(obj.sleep),
     'tcpSocket': toJson_ThanosRulerSpecContainersLifecyclePostStartTcpSocket(obj.tcpSocket),
   };
   // filter undefined values
@@ -83790,6 +88646,13 @@ export interface ThanosRulerSpecContainersLifecyclePreStop {
   readonly httpGet?: ThanosRulerSpecContainersLifecyclePreStopHttpGet;
 
   /**
+   * Sleep represents the duration that the container should sleep before being terminated.
+   *
+   * @schema ThanosRulerSpecContainersLifecyclePreStop#sleep
+   */
+  readonly sleep?: ThanosRulerSpecContainersLifecyclePreStopSleep;
+
+  /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
    *
    * @schema ThanosRulerSpecContainersLifecyclePreStop#tcpSocket
@@ -83807,6 +88670,7 @@ export function toJson_ThanosRulerSpecContainersLifecyclePreStop(obj: ThanosRule
   const result = {
     'exec': toJson_ThanosRulerSpecContainersLifecyclePreStopExec(obj.exec),
     'httpGet': toJson_ThanosRulerSpecContainersLifecyclePreStopHttpGet(obj.httpGet),
+    'sleep': toJson_ThanosRulerSpecContainersLifecyclePreStopSleep(obj.sleep),
     'tcpSocket': toJson_ThanosRulerSpecContainersLifecyclePreStopTcpSocket(obj.tcpSocket),
   };
   // filter undefined values
@@ -84880,6 +89744,13 @@ export interface ThanosRulerSpecInitContainersLifecyclePostStart {
   readonly httpGet?: ThanosRulerSpecInitContainersLifecyclePostStartHttpGet;
 
   /**
+   * Sleep represents the duration that the container should sleep before being terminated.
+   *
+   * @schema ThanosRulerSpecInitContainersLifecyclePostStart#sleep
+   */
+  readonly sleep?: ThanosRulerSpecInitContainersLifecyclePostStartSleep;
+
+  /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
    *
    * @schema ThanosRulerSpecInitContainersLifecyclePostStart#tcpSocket
@@ -84897,6 +89768,7 @@ export function toJson_ThanosRulerSpecInitContainersLifecyclePostStart(obj: Than
   const result = {
     'exec': toJson_ThanosRulerSpecInitContainersLifecyclePostStartExec(obj.exec),
     'httpGet': toJson_ThanosRulerSpecInitContainersLifecyclePostStartHttpGet(obj.httpGet),
+    'sleep': toJson_ThanosRulerSpecInitContainersLifecyclePostStartSleep(obj.sleep),
     'tcpSocket': toJson_ThanosRulerSpecInitContainersLifecyclePostStartTcpSocket(obj.tcpSocket),
   };
   // filter undefined values
@@ -84925,6 +89797,13 @@ export interface ThanosRulerSpecInitContainersLifecyclePreStop {
   readonly httpGet?: ThanosRulerSpecInitContainersLifecyclePreStopHttpGet;
 
   /**
+   * Sleep represents the duration that the container should sleep before being terminated.
+   *
+   * @schema ThanosRulerSpecInitContainersLifecyclePreStop#sleep
+   */
+  readonly sleep?: ThanosRulerSpecInitContainersLifecyclePreStopSleep;
+
+  /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
    *
    * @schema ThanosRulerSpecInitContainersLifecyclePreStop#tcpSocket
@@ -84942,6 +89821,7 @@ export function toJson_ThanosRulerSpecInitContainersLifecyclePreStop(obj: Thanos
   const result = {
     'exec': toJson_ThanosRulerSpecInitContainersLifecyclePreStopExec(obj.exec),
     'httpGet': toJson_ThanosRulerSpecInitContainersLifecyclePreStopHttpGet(obj.httpGet),
+    'sleep': toJson_ThanosRulerSpecInitContainersLifecyclePreStopSleep(obj.sleep),
     'tcpSocket': toJson_ThanosRulerSpecInitContainersLifecyclePreStopTcpSocket(obj.tcpSocket),
   };
   // filter undefined values
@@ -85837,6 +90717,13 @@ export interface ThanosRulerSpecStorageVolumeClaimTemplateSpec {
   readonly storageClassName?: string;
 
   /**
+   * volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim. If specified, the CSI driver will create or update the volume with the attributes defined in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName, it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass will be applied to the claim but it's not allowed to reset this field to empty string once it is set. If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass will be set by the persistentvolume controller if it exists. If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource exists. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#volumeattributesclass (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   *
+   * @schema ThanosRulerSpecStorageVolumeClaimTemplateSpec#volumeAttributesClassName
+   */
+  readonly volumeAttributesClassName?: string;
+
+  /**
    * volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec.
    *
    * @schema ThanosRulerSpecStorageVolumeClaimTemplateSpec#volumeMode
@@ -85865,6 +90752,7 @@ export function toJson_ThanosRulerSpecStorageVolumeClaimTemplateSpec(obj: Thanos
     'resources': toJson_ThanosRulerSpecStorageVolumeClaimTemplateSpecResources(obj.resources),
     'selector': toJson_ThanosRulerSpecStorageVolumeClaimTemplateSpecSelector(obj.selector),
     'storageClassName': obj.storageClassName,
+    'volumeAttributesClassName': obj.volumeAttributesClassName,
     'volumeMode': obj.volumeMode,
     'volumeName': obj.volumeName,
   };
@@ -85874,7 +90762,7 @@ export function toJson_ThanosRulerSpecStorageVolumeClaimTemplateSpec(obj: Thanos
 /* eslint-enable max-len, quote-props */
 
 /**
- * *Deprecated: this field is never set.*
+ * Deprecated: this field is never set.
  *
  * @schema ThanosRulerSpecStorageVolumeClaimTemplateStatus
  */
@@ -85921,6 +90809,20 @@ export interface ThanosRulerSpecStorageVolumeClaimTemplateStatus {
   readonly conditions?: ThanosRulerSpecStorageVolumeClaimTemplateStatusConditions[];
 
   /**
+   * currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using. When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim This is an alpha field and requires enabling VolumeAttributesClass feature.
+   *
+   * @schema ThanosRulerSpecStorageVolumeClaimTemplateStatus#currentVolumeAttributesClassName
+   */
+  readonly currentVolumeAttributesClassName?: string;
+
+  /**
+   * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation. When this is unset, there is no ModifyVolume operation being attempted. This is an alpha field and requires enabling VolumeAttributesClass feature.
+   *
+   * @schema ThanosRulerSpecStorageVolumeClaimTemplateStatus#modifyVolumeStatus
+   */
+  readonly modifyVolumeStatus?: ThanosRulerSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus;
+
+  /**
    * phase represents the current phase of PersistentVolumeClaim.
    *
    * @schema ThanosRulerSpecStorageVolumeClaimTemplateStatus#phase
@@ -85941,6 +90843,8 @@ export function toJson_ThanosRulerSpecStorageVolumeClaimTemplateStatus(obj: Than
     'allocatedResources': ((obj.allocatedResources) === undefined) ? undefined : (Object.entries(obj.allocatedResources).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'capacity': ((obj.capacity) === undefined) ? undefined : (Object.entries(obj.capacity).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'conditions': obj.conditions?.map(y => toJson_ThanosRulerSpecStorageVolumeClaimTemplateStatusConditions(y)),
+    'currentVolumeAttributesClassName': obj.currentVolumeAttributesClassName,
+    'modifyVolumeStatus': toJson_ThanosRulerSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus(obj.modifyVolumeStatus),
     'phase': obj.phase,
   };
   // filter undefined values
@@ -86299,6 +91203,16 @@ export function toJson_ThanosRulerSpecVolumesIscsiSecretRef(obj: ThanosRulerSpec
  */
 export interface ThanosRulerSpecVolumesProjectedSources {
   /**
+   * ClusterTrustBundle allows a pod to access the `.spec.trustBundle` field of ClusterTrustBundle objects in an auto-updating file.
+   * Alpha, gated by the ClusterTrustBundleProjection feature gate.
+   * ClusterTrustBundle objects can either be selected by name, or by the combination of signer name and a label selector.
+   * Kubelet performs aggressive normalization of the PEM contents written into the pod filesystem.  Esoteric PEM features such as inter-block comments and block headers are stripped.  Certificates are deduplicated. The ordering of certificates within the file is arbitrary, and Kubelet may change the order over time.
+   *
+   * @schema ThanosRulerSpecVolumesProjectedSources#clusterTrustBundle
+   */
+  readonly clusterTrustBundle?: ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundle;
+
+  /**
    * configMap information about the configMap data to project
    *
    * @schema ThanosRulerSpecVolumesProjectedSources#configMap
@@ -86335,6 +91249,7 @@ export interface ThanosRulerSpecVolumesProjectedSources {
 export function toJson_ThanosRulerSpecVolumesProjectedSources(obj: ThanosRulerSpecVolumesProjectedSources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'clusterTrustBundle': toJson_ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundle(obj.clusterTrustBundle),
     'configMap': toJson_ThanosRulerSpecVolumesProjectedSourcesConfigMap(obj.configMap),
     'downwardAPI': toJson_ThanosRulerSpecVolumesProjectedSourcesDownwardApi(obj.downwardApi),
     'secret': toJson_ThanosRulerSpecVolumesProjectedSourcesSecret(obj.secret),
@@ -86559,11 +91474,25 @@ export function toJson_ThanosRulerSpecAffinityNodeAffinityRequiredDuringScheduli
  */
 export interface ThanosRulerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm {
   /**
-   * A label query over a set of resources, in this case pods.
+   * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
    *
    * @schema ThanosRulerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#labelSelector
    */
   readonly labelSelector?: ThanosRulerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MatchLabelKeys and LabelSelector. Also, MatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema ThanosRulerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector. Also, MismatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema ThanosRulerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
 
   /**
    * A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces.
@@ -86596,6 +91525,8 @@ export function toJson_ThanosRulerSpecAffinityPodAffinityPreferredDuringScheduli
   if (obj === undefined) { return undefined; }
   const result = {
     'labelSelector': toJson_ThanosRulerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
     'namespaceSelector': toJson_ThanosRulerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj.namespaceSelector),
     'namespaces': obj.namespaces?.map(y => y),
     'topologyKey': obj.topologyKey,
@@ -86606,7 +91537,7 @@ export function toJson_ThanosRulerSpecAffinityPodAffinityPreferredDuringScheduli
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label query over a set of resources, in this case pods.
+ * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
  *
  * @schema ThanosRulerSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector
  */
@@ -86686,11 +91617,25 @@ export function toJson_ThanosRulerSpecAffinityPodAffinityRequiredDuringSchedulin
  */
 export interface ThanosRulerSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm {
   /**
-   * A label query over a set of resources, in this case pods.
+   * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
    *
    * @schema ThanosRulerSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#labelSelector
    */
   readonly labelSelector?: ThanosRulerSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MatchLabelKeys and LabelSelector. Also, MatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema ThanosRulerSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector. Also, MismatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   *
+   * @schema ThanosRulerSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
 
   /**
    * A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces.
@@ -86723,6 +91668,8 @@ export function toJson_ThanosRulerSpecAffinityPodAntiAffinityPreferredDuringSche
   if (obj === undefined) { return undefined; }
   const result = {
     'labelSelector': toJson_ThanosRulerSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
     'namespaceSelector': toJson_ThanosRulerSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj.namespaceSelector),
     'namespaces': obj.namespaces?.map(y => y),
     'topologyKey': obj.topologyKey,
@@ -86733,7 +91680,7 @@ export function toJson_ThanosRulerSpecAffinityPodAntiAffinityPreferredDuringSche
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label query over a set of resources, in this case pods.
+ * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
  *
  * @schema ThanosRulerSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector
  */
@@ -87070,6 +92017,35 @@ export function toJson_ThanosRulerSpecContainersLifecyclePostStartHttpGet(obj: T
 /* eslint-enable max-len, quote-props */
 
 /**
+ * Sleep represents the duration that the container should sleep before being terminated.
+ *
+ * @schema ThanosRulerSpecContainersLifecyclePostStartSleep
+ */
+export interface ThanosRulerSpecContainersLifecyclePostStartSleep {
+  /**
+   * Seconds is the number of seconds to sleep.
+   *
+   * @schema ThanosRulerSpecContainersLifecyclePostStartSleep#seconds
+   */
+  readonly seconds: number;
+
+}
+
+/**
+ * Converts an object of type 'ThanosRulerSpecContainersLifecyclePostStartSleep' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ThanosRulerSpecContainersLifecyclePostStartSleep(obj: ThanosRulerSpecContainersLifecyclePostStartSleep | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'seconds': obj.seconds,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
  *
  * @schema ThanosRulerSpecContainersLifecyclePostStartTcpSocket
@@ -87191,6 +92167,35 @@ export function toJson_ThanosRulerSpecContainersLifecyclePreStopHttpGet(obj: Tha
     'path': obj.path,
     'port': obj.port?.value,
     'scheme': obj.scheme,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Sleep represents the duration that the container should sleep before being terminated.
+ *
+ * @schema ThanosRulerSpecContainersLifecyclePreStopSleep
+ */
+export interface ThanosRulerSpecContainersLifecyclePreStopSleep {
+  /**
+   * Seconds is the number of seconds to sleep.
+   *
+   * @schema ThanosRulerSpecContainersLifecyclePreStopSleep#seconds
+   */
+  readonly seconds: number;
+
+}
+
+/**
+ * Converts an object of type 'ThanosRulerSpecContainersLifecyclePreStopSleep' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ThanosRulerSpecContainersLifecyclePreStopSleep(obj: ThanosRulerSpecContainersLifecyclePreStopSleep | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'seconds': obj.seconds,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -87705,6 +92710,35 @@ export function toJson_ThanosRulerSpecInitContainersLifecyclePostStartHttpGet(ob
 /* eslint-enable max-len, quote-props */
 
 /**
+ * Sleep represents the duration that the container should sleep before being terminated.
+ *
+ * @schema ThanosRulerSpecInitContainersLifecyclePostStartSleep
+ */
+export interface ThanosRulerSpecInitContainersLifecyclePostStartSleep {
+  /**
+   * Seconds is the number of seconds to sleep.
+   *
+   * @schema ThanosRulerSpecInitContainersLifecyclePostStartSleep#seconds
+   */
+  readonly seconds: number;
+
+}
+
+/**
+ * Converts an object of type 'ThanosRulerSpecInitContainersLifecyclePostStartSleep' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ThanosRulerSpecInitContainersLifecyclePostStartSleep(obj: ThanosRulerSpecInitContainersLifecyclePostStartSleep | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'seconds': obj.seconds,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified.
  *
  * @schema ThanosRulerSpecInitContainersLifecyclePostStartTcpSocket
@@ -87826,6 +92860,35 @@ export function toJson_ThanosRulerSpecInitContainersLifecyclePreStopHttpGet(obj:
     'path': obj.path,
     'port': obj.port?.value,
     'scheme': obj.scheme,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Sleep represents the duration that the container should sleep before being terminated.
+ *
+ * @schema ThanosRulerSpecInitContainersLifecyclePreStopSleep
+ */
+export interface ThanosRulerSpecInitContainersLifecyclePreStopSleep {
+  /**
+   * Seconds is the number of seconds to sleep.
+   *
+   * @schema ThanosRulerSpecInitContainersLifecyclePreStopSleep#seconds
+   */
+  readonly seconds: number;
+
+}
+
+/**
+ * Converts an object of type 'ThanosRulerSpecInitContainersLifecyclePreStopSleep' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ThanosRulerSpecInitContainersLifecyclePreStopSleep(obj: ThanosRulerSpecInitContainersLifecyclePreStopSleep | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'seconds': obj.seconds,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -88125,6 +93188,13 @@ export interface ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpec {
   readonly storageClassName?: string;
 
   /**
+   * volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim. If specified, the CSI driver will create or update the volume with the attributes defined in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName, it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass will be applied to the claim but it's not allowed to reset this field to empty string once it is set. If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass will be set by the persistentvolume controller if it exists. If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource exists. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#volumeattributesclass (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   *
+   * @schema ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpec#volumeAttributesClassName
+   */
+  readonly volumeAttributesClassName?: string;
+
+  /**
    * volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec.
    *
    * @schema ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpec#volumeMode
@@ -88153,6 +93223,7 @@ export function toJson_ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpec(ob
     'resources': toJson_ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecResources(obj.resources),
     'selector': toJson_ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecSelector(obj.selector),
     'storageClassName': obj.storageClassName,
+    'volumeAttributesClassName': obj.volumeAttributesClassName,
     'volumeMode': obj.volumeMode,
     'volumeName': obj.volumeName,
   };
@@ -88266,15 +93337,6 @@ export function toJson_ThanosRulerSpecStorageVolumeClaimTemplateSpecDataSourceRe
  */
 export interface ThanosRulerSpecStorageVolumeClaimTemplateSpecResources {
   /**
-   * Claims lists the names of resources, defined in spec.resourceClaims, that are used by this container.
-   * This is an alpha field and requires enabling the DynamicResourceAllocation feature gate.
-   * This field is immutable. It can only be set for containers.
-   *
-   * @schema ThanosRulerSpecStorageVolumeClaimTemplateSpecResources#claims
-   */
-  readonly claims?: ThanosRulerSpecStorageVolumeClaimTemplateSpecResourcesClaims[];
-
-  /**
    * Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    *
    * @schema ThanosRulerSpecStorageVolumeClaimTemplateSpecResources#limits
@@ -88297,7 +93359,6 @@ export interface ThanosRulerSpecStorageVolumeClaimTemplateSpecResources {
 export function toJson_ThanosRulerSpecStorageVolumeClaimTemplateSpecResources(obj: ThanosRulerSpecStorageVolumeClaimTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'claims': obj.claims?.map(y => toJson_ThanosRulerSpecStorageVolumeClaimTemplateSpecResourcesClaims(y)),
     'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
   };
@@ -88439,6 +93500,43 @@ export function toJson_ThanosRulerSpecStorageVolumeClaimTemplateStatusConditions
 /* eslint-enable max-len, quote-props */
 
 /**
+ * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation. When this is unset, there is no ModifyVolume operation being attempted. This is an alpha field and requires enabling VolumeAttributesClass feature.
+ *
+ * @schema ThanosRulerSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus
+ */
+export interface ThanosRulerSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus {
+  /**
+   * status is the status of the ControllerModifyVolume operation. It can be in any of following states: - Pending Pending indicates that the PersistentVolumeClaim cannot be modified due to unmet requirements, such as the specified VolumeAttributesClass not existing. - InProgress InProgress indicates that the volume is being modified. - Infeasible Infeasible indicates that the request has been rejected as invalid by the CSI driver. To resolve the error, a valid VolumeAttributesClass needs to be specified. Note: New statuses can be added in the future. Consumers should check for unknown statuses and fail appropriately.
+   *
+   * @schema ThanosRulerSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus#status
+   */
+  readonly status: string;
+
+  /**
+   * targetVolumeAttributesClassName is the name of the VolumeAttributesClass the PVC currently being reconciled
+   *
+   * @schema ThanosRulerSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus#targetVolumeAttributesClassName
+   */
+  readonly targetVolumeAttributesClassName?: string;
+
+}
+
+/**
+ * Converts an object of type 'ThanosRulerSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ThanosRulerSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus(obj: ThanosRulerSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'status': obj.status,
+    'targetVolumeAttributesClassName': obj.targetVolumeAttributesClassName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * Required: Selects a field of the pod: only annotations, labels, name and namespace are supported.
  *
  * @schema ThanosRulerSpecVolumesDownwardApiItemsFieldRef
@@ -88569,6 +93667,13 @@ export interface ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpec {
   readonly storageClassName?: string;
 
   /**
+   * volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim. If specified, the CSI driver will create or update the volume with the attributes defined in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName, it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass will be applied to the claim but it's not allowed to reset this field to empty string once it is set. If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass will be set by the persistentvolume controller if it exists. If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource exists. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#volumeattributesclass (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   *
+   * @schema ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpec#volumeAttributesClassName
+   */
+  readonly volumeAttributesClassName?: string;
+
+  /**
    * volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec.
    *
    * @schema ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpec#volumeMode
@@ -88597,8 +93702,73 @@ export function toJson_ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpec(ob
     'resources': toJson_ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecResources(obj.resources),
     'selector': toJson_ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecSelector(obj.selector),
     'storageClassName': obj.storageClassName,
+    'volumeAttributesClassName': obj.volumeAttributesClassName,
     'volumeMode': obj.volumeMode,
     'volumeName': obj.volumeName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ClusterTrustBundle allows a pod to access the `.spec.trustBundle` field of ClusterTrustBundle objects in an auto-updating file.
+ * Alpha, gated by the ClusterTrustBundleProjection feature gate.
+ * ClusterTrustBundle objects can either be selected by name, or by the combination of signer name and a label selector.
+ * Kubelet performs aggressive normalization of the PEM contents written into the pod filesystem.  Esoteric PEM features such as inter-block comments and block headers are stripped.  Certificates are deduplicated. The ordering of certificates within the file is arbitrary, and Kubelet may change the order over time.
+ *
+ * @schema ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundle
+ */
+export interface ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundle {
+  /**
+   * Select all ClusterTrustBundles that match this label selector.  Only has effect if signerName is set.  Mutually-exclusive with name.  If unset, interpreted as "match nothing".  If set but empty, interpreted as "match everything".
+   *
+   * @schema ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundle#labelSelector
+   */
+  readonly labelSelector?: ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector;
+
+  /**
+   * Select a single ClusterTrustBundle by object name.  Mutually-exclusive with signerName and labelSelector.
+   *
+   * @schema ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundle#name
+   */
+  readonly name?: string;
+
+  /**
+   * If true, don't block pod startup if the referenced ClusterTrustBundle(s) aren't available.  If using name, then the named ClusterTrustBundle is allowed not to exist.  If using signerName, then the combination of signerName and labelSelector is allowed to match zero ClusterTrustBundles.
+   *
+   * @schema ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundle#optional
+   */
+  readonly optional?: boolean;
+
+  /**
+   * Relative path from the volume root to write the bundle.
+   *
+   * @schema ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundle#path
+   */
+  readonly path: string;
+
+  /**
+   * Select all ClusterTrustBundles that match this signer name. Mutually-exclusive with name.  The contents of all selected ClusterTrustBundles will be unified and deduplicated.
+   *
+   * @schema ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundle#signerName
+   */
+  readonly signerName?: string;
+
+}
+
+/**
+ * Converts an object of type 'ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundle' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundle(obj: ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundle | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'labelSelector': toJson_ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector(obj.labelSelector),
+    'name': obj.name,
+    'optional': obj.optional,
+    'path': obj.path,
+    'signerName': obj.signerName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -88951,7 +94121,7 @@ export function toJson_ThanosRulerSpecAffinityNodeAffinityRequiredDuringScheduli
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label query over a set of resources, in this case pods.
+ * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
  *
  * @schema ThanosRulerSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector
  */
@@ -89115,7 +94285,7 @@ export function toJson_ThanosRulerSpecAffinityPodAffinityRequiredDuringSchedulin
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label query over a set of resources, in this case pods.
+ * A label query over a set of resources, in this case pods. If it's null, this PodAffinityTerm matches with no Pods.
  *
  * @schema ThanosRulerSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector
  */
@@ -89691,15 +94861,6 @@ export function toJson_ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecDat
  */
 export interface ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecResources {
   /**
-   * Claims lists the names of resources, defined in spec.resourceClaims, that are used by this container.
-   * This is an alpha field and requires enabling the DynamicResourceAllocation feature gate.
-   * This field is immutable. It can only be set for containers.
-   *
-   * @schema ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecResources#claims
-   */
-  readonly claims?: ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims[];
-
-  /**
    * Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    *
    * @schema ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecResources#limits
@@ -89722,7 +94883,6 @@ export interface ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecResources
 export function toJson_ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecResources(obj: ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'claims': obj.claims?.map(y => toJson_ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims(y)),
     'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
   };
@@ -89762,35 +94922,6 @@ export function toJson_ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecSel
   const result = {
     'matchExpressions': obj.matchExpressions?.map(y => toJson_ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions(y)),
     'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, quote-props */
-
-/**
- * ResourceClaim references one entry in PodSpec.ResourceClaims.
- *
- * @schema ThanosRulerSpecStorageVolumeClaimTemplateSpecResourcesClaims
- */
-export interface ThanosRulerSpecStorageVolumeClaimTemplateSpecResourcesClaims {
-  /**
-   * Name must match the name of one entry in pod.spec.resourceClaims of the Pod where this field is used. It makes that resource available inside a container.
-   *
-   * @schema ThanosRulerSpecStorageVolumeClaimTemplateSpecResourcesClaims#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * Converts an object of type 'ThanosRulerSpecStorageVolumeClaimTemplateSpecResourcesClaims' to JSON representation.
- */
-/* eslint-disable max-len, quote-props */
-export function toJson_ThanosRulerSpecStorageVolumeClaimTemplateSpecResourcesClaims(obj: ThanosRulerSpecStorageVolumeClaimTemplateSpecResourcesClaims | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'name': obj.name,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -89991,15 +95122,6 @@ export function toJson_ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecDat
  */
 export interface ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecResources {
   /**
-   * Claims lists the names of resources, defined in spec.resourceClaims, that are used by this container.
-   * This is an alpha field and requires enabling the DynamicResourceAllocation feature gate.
-   * This field is immutable. It can only be set for containers.
-   *
-   * @schema ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecResources#claims
-   */
-  readonly claims?: ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims[];
-
-  /**
    * Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    *
    * @schema ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecResources#limits
@@ -90022,7 +95144,6 @@ export interface ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecResources
 export function toJson_ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecResources(obj: ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'claims': obj.claims?.map(y => toJson_ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims(y)),
     'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
   };
@@ -90061,6 +95182,43 @@ export function toJson_ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecSel
   if (obj === undefined) { return undefined; }
   const result = {
     'matchExpressions': obj.matchExpressions?.map(y => toJson_ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Select all ClusterTrustBundles that match this label selector.  Only has effect if signerName is set.  Mutually-exclusive with name.  If unset, interpreted as "match nothing".  If set but empty, interpreted as "match everything".
+ *
+ * @schema ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector
+ */
+export interface ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector#matchExpressions
+   */
+  readonly matchExpressions?: ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector(obj: ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions(y)),
     'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
   };
   // filter undefined values
@@ -90392,35 +95550,6 @@ export function toJson_ThanosRulerSpecAffinityPodAntiAffinityPreferredDuringSche
 /* eslint-enable max-len, quote-props */
 
 /**
- * ResourceClaim references one entry in PodSpec.ResourceClaims.
- *
- * @schema ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims
- */
-export interface ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims {
-  /**
-   * Name must match the name of one entry in pod.spec.resourceClaims of the Pod where this field is used. It makes that resource available inside a container.
-   *
-   * @schema ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * Converts an object of type 'ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims' to JSON representation.
- */
-/* eslint-disable max-len, quote-props */
-export function toJson_ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims(obj: ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecResourcesClaims | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'name': obj.name,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, quote-props */
-
-/**
  * @schema ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecResourcesLimits
  */
 export class ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecResourcesLimits {
@@ -90494,35 +95623,6 @@ export function toJson_ThanosRulerSpecStorageEphemeralVolumeClaimTemplateSpecSel
 /* eslint-enable max-len, quote-props */
 
 /**
- * ResourceClaim references one entry in PodSpec.ResourceClaims.
- *
- * @schema ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims
- */
-export interface ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims {
-  /**
-   * Name must match the name of one entry in pod.spec.resourceClaims of the Pod where this field is used. It makes that resource available inside a container.
-   *
-   * @schema ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * Converts an object of type 'ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims' to JSON representation.
- */
-/* eslint-disable max-len, quote-props */
-export function toJson_ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims(obj: ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesClaims | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'name': obj.name,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, quote-props */
-
-/**
  * @schema ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesLimits
  */
 export class ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesLimits {
@@ -90584,6 +95684,51 @@ export interface ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecSelectorM
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions(obj: ThanosRulerSpecVolumesEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ *
+ * @schema ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions
+ */
+export interface ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   *
+   * @schema ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions(obj: ThanosRulerSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,

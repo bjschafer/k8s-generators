@@ -148,6 +148,11 @@ export interface HelmChartSpec {
   readonly jobImage?: string;
 
   /**
+   * @schema HelmChartSpec#podSecurityContext
+   */
+  readonly podSecurityContext?: HelmChartSpecPodSecurityContext;
+
+  /**
    * @schema HelmChartSpec#repo
    */
   readonly repo?: string;
@@ -161,6 +166,11 @@ export interface HelmChartSpec {
    * @schema HelmChartSpec#repoCAConfigMap
    */
   readonly repoCaConfigMap?: HelmChartSpecRepoCaConfigMap;
+
+  /**
+   * @schema HelmChartSpec#securityContext
+   */
+  readonly securityContext?: HelmChartSpecSecurityContext;
 
   /**
    * @schema HelmChartSpec#set
@@ -207,9 +217,11 @@ export function toJson_HelmChartSpec(obj: HelmChartSpec | undefined): Record<str
     'failurePolicy': obj.failurePolicy,
     'helmVersion': obj.helmVersion,
     'jobImage': obj.jobImage,
+    'podSecurityContext': toJson_HelmChartSpecPodSecurityContext(obj.podSecurityContext),
     'repo': obj.repo,
     'repoCA': obj.repoCa,
     'repoCAConfigMap': toJson_HelmChartSpecRepoCaConfigMap(obj.repoCaConfigMap),
+    'securityContext': toJson_HelmChartSpecSecurityContext(obj.securityContext),
     'set': ((obj.set) === undefined) ? undefined : (Object.entries(obj.set).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'targetNamespace': obj.targetNamespace,
     'timeout': obj.timeout,
@@ -272,6 +284,85 @@ export function toJson_HelmChartSpecDockerRegistrySecret(obj: HelmChartSpecDocke
 /* eslint-enable max-len, quote-props */
 
 /**
+ * @schema HelmChartSpecPodSecurityContext
+ */
+export interface HelmChartSpecPodSecurityContext {
+  /**
+   * @schema HelmChartSpecPodSecurityContext#fsGroup
+   */
+  readonly fsGroup?: number;
+
+  /**
+   * @schema HelmChartSpecPodSecurityContext#fsGroupChangePolicy
+   */
+  readonly fsGroupChangePolicy?: string;
+
+  /**
+   * @schema HelmChartSpecPodSecurityContext#runAsGroup
+   */
+  readonly runAsGroup?: number;
+
+  /**
+   * @schema HelmChartSpecPodSecurityContext#runAsNonRoot
+   */
+  readonly runAsNonRoot?: boolean;
+
+  /**
+   * @schema HelmChartSpecPodSecurityContext#runAsUser
+   */
+  readonly runAsUser?: number;
+
+  /**
+   * @schema HelmChartSpecPodSecurityContext#seLinuxOptions
+   */
+  readonly seLinuxOptions?: HelmChartSpecPodSecurityContextSeLinuxOptions;
+
+  /**
+   * @schema HelmChartSpecPodSecurityContext#seccompProfile
+   */
+  readonly seccompProfile?: HelmChartSpecPodSecurityContextSeccompProfile;
+
+  /**
+   * @schema HelmChartSpecPodSecurityContext#supplementalGroups
+   */
+  readonly supplementalGroups?: number[];
+
+  /**
+   * @schema HelmChartSpecPodSecurityContext#sysctls
+   */
+  readonly sysctls?: HelmChartSpecPodSecurityContextSysctls[];
+
+  /**
+   * @schema HelmChartSpecPodSecurityContext#windowsOptions
+   */
+  readonly windowsOptions?: HelmChartSpecPodSecurityContextWindowsOptions;
+
+}
+
+/**
+ * Converts an object of type 'HelmChartSpecPodSecurityContext' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_HelmChartSpecPodSecurityContext(obj: HelmChartSpecPodSecurityContext | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'fsGroup': obj.fsGroup,
+    'fsGroupChangePolicy': obj.fsGroupChangePolicy,
+    'runAsGroup': obj.runAsGroup,
+    'runAsNonRoot': obj.runAsNonRoot,
+    'runAsUser': obj.runAsUser,
+    'seLinuxOptions': toJson_HelmChartSpecPodSecurityContextSeLinuxOptions(obj.seLinuxOptions),
+    'seccompProfile': toJson_HelmChartSpecPodSecurityContextSeccompProfile(obj.seccompProfile),
+    'supplementalGroups': obj.supplementalGroups?.map(y => y),
+    'sysctls': obj.sysctls?.map(y => toJson_HelmChartSpecPodSecurityContextSysctls(y)),
+    'windowsOptions': toJson_HelmChartSpecPodSecurityContextWindowsOptions(obj.windowsOptions),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * @schema HelmChartSpecRepoCaConfigMap
  */
 export interface HelmChartSpecRepoCaConfigMap {
@@ -290,6 +381,387 @@ export function toJson_HelmChartSpecRepoCaConfigMap(obj: HelmChartSpecRepoCaConf
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema HelmChartSpecSecurityContext
+ */
+export interface HelmChartSpecSecurityContext {
+  /**
+   * @schema HelmChartSpecSecurityContext#allowPrivilegeEscalation
+   */
+  readonly allowPrivilegeEscalation?: boolean;
+
+  /**
+   * @schema HelmChartSpecSecurityContext#capabilities
+   */
+  readonly capabilities?: HelmChartSpecSecurityContextCapabilities;
+
+  /**
+   * @schema HelmChartSpecSecurityContext#privileged
+   */
+  readonly privileged?: boolean;
+
+  /**
+   * @schema HelmChartSpecSecurityContext#procMount
+   */
+  readonly procMount?: string;
+
+  /**
+   * @schema HelmChartSpecSecurityContext#readOnlyRootFilesystem
+   */
+  readonly readOnlyRootFilesystem?: boolean;
+
+  /**
+   * @schema HelmChartSpecSecurityContext#runAsGroup
+   */
+  readonly runAsGroup?: number;
+
+  /**
+   * @schema HelmChartSpecSecurityContext#runAsNonRoot
+   */
+  readonly runAsNonRoot?: boolean;
+
+  /**
+   * @schema HelmChartSpecSecurityContext#runAsUser
+   */
+  readonly runAsUser?: number;
+
+  /**
+   * @schema HelmChartSpecSecurityContext#seLinuxOptions
+   */
+  readonly seLinuxOptions?: HelmChartSpecSecurityContextSeLinuxOptions;
+
+  /**
+   * @schema HelmChartSpecSecurityContext#seccompProfile
+   */
+  readonly seccompProfile?: HelmChartSpecSecurityContextSeccompProfile;
+
+  /**
+   * @schema HelmChartSpecSecurityContext#windowsOptions
+   */
+  readonly windowsOptions?: HelmChartSpecSecurityContextWindowsOptions;
+
+}
+
+/**
+ * Converts an object of type 'HelmChartSpecSecurityContext' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_HelmChartSpecSecurityContext(obj: HelmChartSpecSecurityContext | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'allowPrivilegeEscalation': obj.allowPrivilegeEscalation,
+    'capabilities': toJson_HelmChartSpecSecurityContextCapabilities(obj.capabilities),
+    'privileged': obj.privileged,
+    'procMount': obj.procMount,
+    'readOnlyRootFilesystem': obj.readOnlyRootFilesystem,
+    'runAsGroup': obj.runAsGroup,
+    'runAsNonRoot': obj.runAsNonRoot,
+    'runAsUser': obj.runAsUser,
+    'seLinuxOptions': toJson_HelmChartSpecSecurityContextSeLinuxOptions(obj.seLinuxOptions),
+    'seccompProfile': toJson_HelmChartSpecSecurityContextSeccompProfile(obj.seccompProfile),
+    'windowsOptions': toJson_HelmChartSpecSecurityContextWindowsOptions(obj.windowsOptions),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema HelmChartSpecPodSecurityContextSeLinuxOptions
+ */
+export interface HelmChartSpecPodSecurityContextSeLinuxOptions {
+  /**
+   * @schema HelmChartSpecPodSecurityContextSeLinuxOptions#level
+   */
+  readonly level?: string;
+
+  /**
+   * @schema HelmChartSpecPodSecurityContextSeLinuxOptions#role
+   */
+  readonly role?: string;
+
+  /**
+   * @schema HelmChartSpecPodSecurityContextSeLinuxOptions#type
+   */
+  readonly type?: string;
+
+  /**
+   * @schema HelmChartSpecPodSecurityContextSeLinuxOptions#user
+   */
+  readonly user?: string;
+
+}
+
+/**
+ * Converts an object of type 'HelmChartSpecPodSecurityContextSeLinuxOptions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_HelmChartSpecPodSecurityContextSeLinuxOptions(obj: HelmChartSpecPodSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'level': obj.level,
+    'role': obj.role,
+    'type': obj.type,
+    'user': obj.user,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema HelmChartSpecPodSecurityContextSeccompProfile
+ */
+export interface HelmChartSpecPodSecurityContextSeccompProfile {
+  /**
+   * @schema HelmChartSpecPodSecurityContextSeccompProfile#localhostProfile
+   */
+  readonly localhostProfile?: string;
+
+  /**
+   * @schema HelmChartSpecPodSecurityContextSeccompProfile#type
+   */
+  readonly type?: string;
+
+}
+
+/**
+ * Converts an object of type 'HelmChartSpecPodSecurityContextSeccompProfile' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_HelmChartSpecPodSecurityContextSeccompProfile(obj: HelmChartSpecPodSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'localhostProfile': obj.localhostProfile,
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema HelmChartSpecPodSecurityContextSysctls
+ */
+export interface HelmChartSpecPodSecurityContextSysctls {
+  /**
+   * @schema HelmChartSpecPodSecurityContextSysctls#name
+   */
+  readonly name?: string;
+
+  /**
+   * @schema HelmChartSpecPodSecurityContextSysctls#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'HelmChartSpecPodSecurityContextSysctls' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_HelmChartSpecPodSecurityContextSysctls(obj: HelmChartSpecPodSecurityContextSysctls | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema HelmChartSpecPodSecurityContextWindowsOptions
+ */
+export interface HelmChartSpecPodSecurityContextWindowsOptions {
+  /**
+   * @schema HelmChartSpecPodSecurityContextWindowsOptions#gmsaCredentialSpec
+   */
+  readonly gmsaCredentialSpec?: string;
+
+  /**
+   * @schema HelmChartSpecPodSecurityContextWindowsOptions#gmsaCredentialSpecName
+   */
+  readonly gmsaCredentialSpecName?: string;
+
+  /**
+   * @schema HelmChartSpecPodSecurityContextWindowsOptions#hostProcess
+   */
+  readonly hostProcess?: boolean;
+
+  /**
+   * @schema HelmChartSpecPodSecurityContextWindowsOptions#runAsUserName
+   */
+  readonly runAsUserName?: string;
+
+}
+
+/**
+ * Converts an object of type 'HelmChartSpecPodSecurityContextWindowsOptions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_HelmChartSpecPodSecurityContextWindowsOptions(obj: HelmChartSpecPodSecurityContextWindowsOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'gmsaCredentialSpec': obj.gmsaCredentialSpec,
+    'gmsaCredentialSpecName': obj.gmsaCredentialSpecName,
+    'hostProcess': obj.hostProcess,
+    'runAsUserName': obj.runAsUserName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema HelmChartSpecSecurityContextCapabilities
+ */
+export interface HelmChartSpecSecurityContextCapabilities {
+  /**
+   * @schema HelmChartSpecSecurityContextCapabilities#add
+   */
+  readonly add?: string[];
+
+  /**
+   * @schema HelmChartSpecSecurityContextCapabilities#drop
+   */
+  readonly drop?: string[];
+
+}
+
+/**
+ * Converts an object of type 'HelmChartSpecSecurityContextCapabilities' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_HelmChartSpecSecurityContextCapabilities(obj: HelmChartSpecSecurityContextCapabilities | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'add': obj.add?.map(y => y),
+    'drop': obj.drop?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema HelmChartSpecSecurityContextSeLinuxOptions
+ */
+export interface HelmChartSpecSecurityContextSeLinuxOptions {
+  /**
+   * @schema HelmChartSpecSecurityContextSeLinuxOptions#level
+   */
+  readonly level?: string;
+
+  /**
+   * @schema HelmChartSpecSecurityContextSeLinuxOptions#role
+   */
+  readonly role?: string;
+
+  /**
+   * @schema HelmChartSpecSecurityContextSeLinuxOptions#type
+   */
+  readonly type?: string;
+
+  /**
+   * @schema HelmChartSpecSecurityContextSeLinuxOptions#user
+   */
+  readonly user?: string;
+
+}
+
+/**
+ * Converts an object of type 'HelmChartSpecSecurityContextSeLinuxOptions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_HelmChartSpecSecurityContextSeLinuxOptions(obj: HelmChartSpecSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'level': obj.level,
+    'role': obj.role,
+    'type': obj.type,
+    'user': obj.user,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema HelmChartSpecSecurityContextSeccompProfile
+ */
+export interface HelmChartSpecSecurityContextSeccompProfile {
+  /**
+   * @schema HelmChartSpecSecurityContextSeccompProfile#localhostProfile
+   */
+  readonly localhostProfile?: string;
+
+  /**
+   * @schema HelmChartSpecSecurityContextSeccompProfile#type
+   */
+  readonly type?: string;
+
+}
+
+/**
+ * Converts an object of type 'HelmChartSpecSecurityContextSeccompProfile' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_HelmChartSpecSecurityContextSeccompProfile(obj: HelmChartSpecSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'localhostProfile': obj.localhostProfile,
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema HelmChartSpecSecurityContextWindowsOptions
+ */
+export interface HelmChartSpecSecurityContextWindowsOptions {
+  /**
+   * @schema HelmChartSpecSecurityContextWindowsOptions#gmsaCredentialSpec
+   */
+  readonly gmsaCredentialSpec?: string;
+
+  /**
+   * @schema HelmChartSpecSecurityContextWindowsOptions#gmsaCredentialSpecName
+   */
+  readonly gmsaCredentialSpecName?: string;
+
+  /**
+   * @schema HelmChartSpecSecurityContextWindowsOptions#hostProcess
+   */
+  readonly hostProcess?: boolean;
+
+  /**
+   * @schema HelmChartSpecSecurityContextWindowsOptions#runAsUserName
+   */
+  readonly runAsUserName?: string;
+
+}
+
+/**
+ * Converts an object of type 'HelmChartSpecSecurityContextWindowsOptions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_HelmChartSpecSecurityContextWindowsOptions(obj: HelmChartSpecSecurityContextWindowsOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'gmsaCredentialSpec': obj.gmsaCredentialSpec,
+    'gmsaCredentialSpecName': obj.gmsaCredentialSpecName,
+    'hostProcess': obj.hostProcess,
+    'runAsUserName': obj.runAsUserName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});

@@ -2,6 +2,5 @@ output: dist
 pluginsDirectory: /Users/bschafer/.cdk8s/plugins
 language: typescript
 imports:
-  - k8s
+  - k8s@1.28.0
   - /dev/fd/11
-  - k8s@1.27.0
