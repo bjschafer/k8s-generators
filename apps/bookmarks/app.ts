@@ -68,6 +68,7 @@ new AppPlus(app, `${name}-app`, {
       key: "DATABASE_URL",
     }),
     NEXT_PUBLIC_DISABLE_REGISTRATION: EnvValue.fromValue("true"),
+    NEXT_PUBLIC_CREDENTIALS_ENABLED: EnvValue.fromValue("false"), // disable non-SSO signin
 
     // Authentik SSO
     NEXT_PUBLIC_AUTHENTIK_ENABLED: EnvValue.fromValue("true"),

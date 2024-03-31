@@ -40,6 +40,8 @@ spec:
                   name: secrets
             - name: NEXT_PUBLIC_DISABLE_REGISTRATION
               value: "true"
+            - name: NEXT_PUBLIC_CREDENTIALS_ENABLED
+              value: "false"
             - name: NEXT_PUBLIC_AUTHENTIK_ENABLED
               value: "true"
             - name: AUTHENTIK_CUSTOM_NAME
