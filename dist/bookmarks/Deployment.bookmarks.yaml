@@ -14,12 +14,11 @@ spec:
     matchLabels:
       cdk8s.io/metadata.addr: bookmarks-app-bookmarks-app-deployment-c8465c2f
   strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
+    type: Recreate
   template:
     metadata:
+      annotations:
+        backup.velero.io/backup-volumes: pvc-bookmarks-app-data
       labels:
         app.kubernetes.io/name: bookmarks
         cdk8s.io/metadata.addr: bookmarks-app-bookmarks-app-deployment-c8465c2f
@@ -27,47 +26,53 @@ spec:
       automountServiceAccountToken: false
       containers:
         - env:
-            - name: APP_KEY
+            - name: NEXTAUTH_URL
+              value: https://bookmarks.cmdcentral.xyz/api/v1/auth
+            - name: NEXTAUTH_SECRET
               valueFrom:
                 secretKeyRef:
-                  key: APP_KEY
-                  name: appkey
-            - name: DB_CONNECTION
-              value: pgsql
-            - name: DB_HOST
-              value: postgres.cmdcentral.xyz
-            - name: DB_DATABASE
-              value: linkace
-            - name: DB_USERNAME
-              value: linkace
-            - name: DB_PORT
-              value: "5432"
-            - name: DB_PASSWORD
+                  key: NEXTAUTH_SECRET
+                  name: secrets
+            - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
-                  key: DB_PASSWORD
-                  name: db-creds
-            - name: SETUP_COMPLETED
+                  key: DATABASE_URL
+                  name: secrets
+            - name: NEXT_PUBLIC_DISABLE_REGISTRATION
               value: "true"
-            - name: SESSION_LIFETIME
-              value: "525600"
-          image: ghcr.io/kovah/linkace:v1.14.1-simple
+            - name: NEXT_PUBLIC_AUTHENTIK_ENABLED
+              value: "true"
+            - name: AUTHENTIK_CUSTOM_NAME
+              value: Cmdcentral Login
+            - name: AUTHENTIK_ISSUER
+              value: https://login.cmdcentral.xyz/application/o/bookmarks
+            - name: AUTHENTIK_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  key: AUTHENTIK_CLIENT_ID
+                  name: secrets
+            - name: AUTHENTIK_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: AUTHENTIK_CLIENT_SECRET
+                  name: secrets
+          image: ghcr.io/linkwarden/linkwarden
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
             httpGet:
               path: /
-              port: 80
+              port: 3000
               scheme: HTTP
             initialDelaySeconds: 5
           name: bookmarks
           ports:
-            - containerPort: 80
+            - containerPort: 3000
           readinessProbe:
             failureThreshold: 3
             httpGet:
               path: /
-              port: 80
+              port: 3000
               scheme: HTTP
             initialDelaySeconds: 5
           resources:
@@ -81,6 +86,9 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /data/data
+              name: pvc-bookmarks-app-data
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
@@ -89,3 +97,8 @@ spec:
         runAsNonRoot: false
       setHostnameAsFQDN: false
       terminationGracePeriodSeconds: 30
+      volumes:
+        - name: pvc-bookmarks-app-data
+          persistentVolumeClaim:
+            claimName: bookmarks-app-data
+            readOnly: false
