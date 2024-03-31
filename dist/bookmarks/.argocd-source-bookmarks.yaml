@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - ghcr.io/kovah/linkace:v1.14.1-simple
+  - ghcr.io/linkwarden/linkwarden@sha256:c2c7f50d414e8789d5ef77067bf9c9ead30ce9c43b0a7e453fa71dbdc943d194
