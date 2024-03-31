@@ -48,7 +48,7 @@ new AppPlus(app, `${name}-app`, {
   resources: {
     memory: {
       request: Size.mebibytes(420),
-      limit: Size.mebibytes(768),
+      limit: Size.gibibytes(1),
     },
     cpu: {
       request: Cpu.millis(200),
