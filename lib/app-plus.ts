@@ -17,7 +17,7 @@ import {
   ServiceAccount,
   ServicePort,
   Volume,
-} from "cdk8s-plus-27";
+} from "cdk8s-plus-28";
 import { Construct } from "constructs";
 import {
   BACKUP_ANNOTATION_NAME,

@@ -4,7 +4,7 @@ import { App } from "cdk8s/lib/app";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
 import { Size } from "cdk8s";
-import { EnvValue, PersistentVolumeAccessMode, Probe } from "cdk8s-plus-27";
+import { EnvValue, PersistentVolumeAccessMode, Probe } from "cdk8s-plus-28";
 import { NewKustomize } from "../../lib/kustomize";
 import { StorageClass } from "../../lib/volume";
 

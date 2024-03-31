@@ -1,7 +1,7 @@
 import { Application, ApplicationSpecSyncPolicy } from "../imports/argoproj.io";
 import { App, Chart, YamlOutputType } from "cdk8s";
 import { Construct } from "constructs";
-import { SecretReference } from "cdk8s-plus-27/lib/imports/k8s";
+import { SecretReference } from "cdk8s-plus-28/lib/imports/k8s";
 import path = require("path");
 
 export const ARGO_NAMESPACE = "argocd";
