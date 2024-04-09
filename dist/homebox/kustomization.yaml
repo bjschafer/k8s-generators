@@ -1,5 +1,0 @@
-resources:
-  - Deployment.homebox.yaml
-  - Ingress.homebox.yaml
-  - PersistentVolumeClaim.homebox-app-data.yaml
-  - Service.homebox.yaml
