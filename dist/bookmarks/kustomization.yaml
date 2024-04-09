@@ -3,4 +3,3 @@ resources:
   - Ingress.bookmarks.yaml
   - PersistentVolumeClaim.bookmarks-app-data.yaml
   - Service.bookmarks.yaml
-  - sealedsecret.secrets.yaml
