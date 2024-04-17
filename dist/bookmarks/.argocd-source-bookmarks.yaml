@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - ghcr.io/linkwarden/linkwarden@sha256:c2c7f50d414e8789d5ef77067bf9c9ead30ce9c43b0a7e453fa71dbdc943d194
+  - ghcr.io/linkwarden/linkwarden@sha256:8ca93fd2e47378639b37ac8745334b01161b78e0397e798c066c594c6bc2d85a
