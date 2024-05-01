@@ -85,7 +85,7 @@ new HomeConfig(app, `${name}-config`, {
         {
           name: "Bookmarks",
           uri: "https://bookmarks.cmdcentral.xyz",
-          icon: "linkace",
+          icon: "linkwarden",
           description: "Webpage saver/reading list",
           iconBubble: false,
         },
@@ -115,13 +115,6 @@ new HomeConfig(app, `${name}-config`, {
           uri: "https://rss.cmdcentral.xyz",
           icon: "miniflux-light",
           description: "Read RSS feeds",
-        },
-        {
-          name: "Nextcloud",
-          uri: "https://nextcloud.cmdcentral.xyz",
-          icon: "nextcloud",
-          description: "Web storage access",
-          iconBubble: false,
         },
         {
           name: "NVR",
