@@ -46,7 +46,7 @@ spec:
           name: rclone
           ports:
             - containerPort: 8042
-              name: crypt-b2-cmdcentral-k8s-backups
+              name: crypt-b2-cmdcen
           readinessProbe:
             failureThreshold: 3
             httpGet:

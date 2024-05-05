@@ -93,7 +93,10 @@ export class Rclone extends Chart {
           ],
           ports: props.backends.map(
             (backend: RcloneServeBackend): ContainerPort => {
-              return { number: backend.port, name: backend.name };
+              return {
+                number: backend.port,
+                name: backend.name.substring(0, 15),
+              };
             },
           ),
           resources: props.resources,
