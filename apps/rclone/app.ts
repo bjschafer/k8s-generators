@@ -42,7 +42,7 @@ new Rclone(app, "rclone", {
     },
     memory: {
       request: Size.mebibytes(64),
-      limit: Size.mebibytes(256),
+      limit: Size.gibibytes(2), // it needs a lot of room to cache stuff
     },
   },
   configSecretName: "rclone-config",
