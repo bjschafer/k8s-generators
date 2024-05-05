@@ -10,6 +10,7 @@ import {
   NetworkPolicyPort,
   NetworkPolicyRule,
   NetworkPolicyTrafficDefault,
+  Pods,
   Probe,
   Secret,
   Volume,
@@ -233,6 +234,7 @@ export class Rclone extends Chart {
           );
         }
       }
+
       new NetworkPolicy(this, `${props.name}-allow-internal`, {
         metadata: {
           name: `${props.name}-allow-internal`,
@@ -252,6 +254,49 @@ export class Rclone extends Chart {
           }),
         },
       });
+
+      const allowTraefikPorts: number[] = [];
+
+      for (const backend of props.backends) {
+        if (backend.ingressHost) {
+          allowTraefikPorts.push(backend.port);
+        }
+
+        if (allowTraefikPorts.length > 0) {
+          const traefikNS = Namespaces.select(
+            this,
+            `${props.name}-traefik-ns`,
+            {
+              names: ["kube-system"],
+            },
+          );
+          const traefikSelector = Pods.select(this, `${props.name}-traefik`, {
+            namespaces: traefikNS,
+            labels: {
+              "app.kubernetes.io/name": "traefik",
+            },
+          });
+          new NetworkPolicy(this, `${props.name}-allow-traefik`, {
+            metadata: {
+              name: `${props.name}-allow-traefik`,
+              namespace: props.namespace,
+            },
+            selector: deploy,
+            ingress: {
+              rules: [
+                {
+                  peer: traefikSelector,
+                  ports: allowTraefikPorts.map(
+                    (port: number): NetworkPolicyPort => {
+                      return NetworkPolicyPort.tcp(port);
+                    },
+                  ),
+                },
+              ],
+            },
+          });
+        }
+      }
     }
   }
 
