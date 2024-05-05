@@ -87,7 +87,7 @@ export class Rclone extends Chart {
             "--fast-list",
             "serve",
             "s3",
-            props.backends[0].name, // TODO this needs to support multiple backends
+            `${props.backends[0].name}:`, // TODO this needs to support multiple backends
             "--addr",
             `:${props.backends[0].port}`, // TODO this needs to support multiple backends
           ],

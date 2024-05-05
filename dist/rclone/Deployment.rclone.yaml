@@ -32,7 +32,7 @@ spec:
             - --fast-list
             - serve
             - s3
-            - crypt-b2-cmdcentral-k8s-backups
+            - "crypt-b2-cmdcentral-k8s-backups:"
             - --addr
             - :8042
           image: rclone/rclone
