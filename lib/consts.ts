@@ -1,6 +1,6 @@
 import { EnvVar, Quantity } from "../imports/k8s";
 import { AppProps, YamlOutputType } from "cdk8s";
-import { EnvValue } from "cdk8s-plus-25";
+import { EnvValue } from "cdk8s-plus-28";
 
 export const PROMETHEUS_RELEASE_LABEL = "prometheus-kube-prometheus-stack";
 
@@ -81,4 +81,16 @@ export function GET_COMMON_LABELS(
 export const DEFAULT_SECURITY_CONTEXT = {
   ensureNonRoot: false,
   readOnlyRootFilesystem: false,
+};
+
+export const IP_CIDRS_V4: { [name: string]: string } = {
+  WIRED_LAN: "10.0.3.0/24",
+  DMZ: "10.0.4.0/24",
+  GUEST: "10.5.0.0/23",
+  SERVERS_STATIC: "10.0.10.0/24",
+  SERVERS_DHCP: "10.0.11.0/24",
+  WIRELESS_LAN: "10.0.30.0/24",
+  IOT: "10.50.0.0/24",
+  IP_CAMERAS: "10.0.45.0/24",
+  NETWORK_MANAGEMENT: "10.0.99.0/24",
 };

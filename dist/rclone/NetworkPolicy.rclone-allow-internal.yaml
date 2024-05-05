@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: rclone-allow-internal
+  namespace: rclone
+spec:
+  ingress:
+    - from:
+        - ipBlock:
+            cidr: 10.0.3.0/24
+      ports:
+        - port: 8042
+          protocol: TCP
+    - from:
+        - ipBlock:
+            cidr: 10.0.30.0/24
+      ports:
+        - port: 8042
+          protocol: TCP
+    - from:
+        - ipBlock:
+            cidr: 10.0.10.0/24
+      ports:
+        - port: 8042
+          protocol: TCP
+    - from:
+        - ipBlock:
+            cidr: 10.0.11.0/24
+      ports:
+        - port: 8042
+          protocol: TCP
+  podSelector:
+    matchLabels:
+      cdk8s.io/metadata.addr: rclone-rclone-deployment-c80b70e9
+  policyTypes:
+    - Ingress

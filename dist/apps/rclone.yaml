@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd-image-updater.argoproj.io/git-branch: main
+    argocd-image-updater.argoproj.io/image-list: rclone=rclone/rclone:1.xx
+    argocd-image-updater.argoproj.io/rclone.update-strategy: semver
+    argocd-image-updater.argoproj.io/write-back-method: git
+  labels:
+    app.kubernetes.io/name: rclone
+  name: rclone
+  namespace: argocd
+spec:
+  destination:
+    namespace: rclone
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: dist/rclone
+    repoURL: git@github.com:bjschafer/k8s-generators.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
