@@ -2,9 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
+    app.kubernetes.io/instance: rclone
     app.kubernetes.io/managed-by: generators
     app.kubernetes.io/name: rclone
-  name: rclone
+  name: rclone-crypt-b2-cmdcentral-k8s-backups
   namespace: rclone
 spec:
   minReadySeconds: 0
@@ -12,7 +13,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      cdk8s.io/metadata.addr: rclone-rclone-deployment-c80b70e9
+      cdk8s.io/metadata.addr: rclo-rclone-crypt-b2-cmdcentral-k8s-backups-deployment-c8b40f75
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -21,8 +22,8 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: rclone
-        cdk8s.io/metadata.addr: rclone-rclone-deployment-c80b70e9
+        app.kubernetes.io/name: rclone-crypt-b2-cmdcentral-k8s-backups
+        cdk8s.io/metadata.addr: rclo-rclone-crypt-b2-cmdcentral-k8s-backups-deployment-c8b40f75
     spec:
       automountServiceAccountToken: false
       containers:

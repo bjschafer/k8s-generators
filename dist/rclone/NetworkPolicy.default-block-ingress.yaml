@@ -4,8 +4,6 @@ metadata:
   name: default-block-ingress
   namespace: rclone
 spec:
-  podSelector:
-    matchLabels:
-      cdk8s.io/metadata.addr: rclone-rclone-deployment-c80b70e9
+  podSelector: {}
   policyTypes:
     - Ingress

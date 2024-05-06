@@ -75,6 +75,7 @@ export function GET_COMMON_LABELS(
   return {
     "app.kubernetes.io/name": name,
     "app.kubernetes.io/instance": instance ?? name,
+    "app.kubernetes.io/managed-by": "generators",
   };
 }
 

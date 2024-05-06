@@ -1,5 +1,4 @@
 import {
-  ContainerPort,
   ContainerResources,
   Deployment,
   Ingress,
@@ -20,6 +19,7 @@ import { Chart } from "cdk8s";
 import {
   CLUSTER_ISSUER,
   DEFAULT_SECURITY_CONTEXT,
+  GET_COMMON_LABELS,
   IP_CIDRS_V4,
 } from "./consts";
 
@@ -59,68 +59,77 @@ export class Rclone extends Chart {
       `${id}-config-secret`,
       props.configSecretName,
     );
+    const tlsSecret = Secret.fromSecretName(
+      this,
+      `${props.name}-tls`,
+      `${props.name}-tls`,
+    );
     const configVolume = Volume.fromSecret(this, `${id}-config`, configSecret);
-
-    const deploy = new Deployment(this, `${id}-deployment`, {
-      metadata: {
-        name: props.name,
-        namespace: props.namespace,
-        labels: {
-          "app.kubernetes.io/name": props.name,
-          "app.kubernetes.io/managed-by": "generators",
-        },
-      },
-      replicas: 1,
-      podMetadata: {
-        labels: {
-          "app.kubernetes.io/name": props.name,
-        },
-      },
-      securityContext: DEFAULT_SECURITY_CONTEXT,
-      containers: [
-        {
-          name: props.name,
-          securityContext: DEFAULT_SECURITY_CONTEXT,
-          image: props.image ?? DEFAULT_IMAGE,
-          args: [
-            "--config",
-            "/config/rclone.conf",
-            "--fast-list",
-            "serve",
-            "s3",
-            `${props.backends[0].name}:`, // TODO this needs to support multiple backends
-            "--addr",
-            `:${props.backends[0].port}`, // TODO this needs to support multiple backends
-          ],
-          ports: props.backends.map(
-            (backend: RcloneServeBackend): ContainerPort => {
-              return {
-                number: backend.port,
-                name: backend.name.substring(0, 15),
-              };
-            },
-          ),
-          resources: props.resources,
-          // TODO these could be done better, i'd imagine
-          readiness: Probe.fromHttpGet("/", { port: props.backends[0].port }),
-          liveness: Probe.fromHttpGet("/", { port: props.backends[0].port }),
-          volumeMounts: [
-            {
-              volume: configVolume,
-              path: "/config", // TODO fix
-            },
-          ],
-        },
-      ],
+    const peers: NetworkPolicyIpBlock[] = [
+      IP_CIDRS_V4.WIRED_LAN,
+      IP_CIDRS_V4.WIRELESS_LAN,
+      IP_CIDRS_V4.SERVERS_STATIC,
+      IP_CIDRS_V4.SERVERS_DHCP,
+    ].map((cidr: string, index: number): NetworkPolicyIpBlock => {
+      return NetworkPolicyIpBlock.ipv4(
+        this,
+        `${props.name}-local-peers-${index}`,
+        cidr,
+      );
     });
 
-    const svcs = [];
-
-    // unconditionally create services from backends
     for (const backend of props.backends) {
-      const backendName = this.getBackendName(props, backend);
+      const baseName = `${props.name}-${backend.name}`;
+
+      const deploy = new Deployment(this, `${id}-${backend.name}-deployment`, {
+        metadata: {
+          name: baseName,
+          namespace: props.namespace,
+          labels: GET_COMMON_LABELS(props.name),
+        },
+        replicas: 1,
+        podMetadata: {
+          labels: {
+            "app.kubernetes.io/name": baseName,
+          },
+        },
+        securityContext: DEFAULT_SECURITY_CONTEXT,
+        containers: [
+          {
+            name: props.name,
+            securityContext: DEFAULT_SECURITY_CONTEXT,
+            image: props.image ?? DEFAULT_IMAGE,
+            args: [
+              "--config",
+              "/config/rclone.conf",
+              "--fast-list",
+              "serve",
+              "s3",
+              `${backend.name}:`,
+              "--addr",
+              `:${backend.port}`,
+            ],
+            ports: [
+              {
+                name: backend.name.substring(0, 15),
+                number: backend.port,
+              },
+            ],
+            resources: props.resources,
+            readiness: Probe.fromHttpGet("/", { port: backend.port }),
+            liveness: Probe.fromHttpGet("/", { port: backend.port }),
+            volumeMounts: [
+              {
+                volume: configVolume,
+                path: "/config",
+              },
+            ],
+          },
+        ],
+      });
+
       const svc = deploy.exposeViaService({
-        name: backendName,
+        name: this.getBackendName(props, backend),
         ports: [
           {
             port: backend.port,
@@ -130,46 +139,102 @@ export class Rclone extends Chart {
       });
 
       if (backend.ingressHost) {
-        svcs.push({
-          host: backend.ingressHost,
-          port: backend.port,
-          svc: svc,
+        const ingress = new Ingress(this, `${baseName}-ingress`, {
+          metadata: {
+            name: baseName,
+            namespace: props.namespace,
+            annotations: {
+              "cert-manager.io/cluster-issuer": CLUSTER_ISSUER.name,
+            },
+          },
+        });
+
+        ingress.addHostRule(
+          backend.ingressHost,
+          "/",
+          IngressBackend.fromService(svc, { port: backend.port }),
+        );
+        ingress.addTls([
+          {
+            hosts: [backend.ingressHost],
+            secret: tlsSecret,
+          },
+        ]);
+      }
+
+      if (backend.allowIngressFromInternal) {
+        new NetworkPolicy(this, `${baseName}-allow-internal`, {
+          metadata: {
+            name: `${baseName}-allow-internal`,
+            namespace: props.namespace,
+          },
+          selector: deploy,
+          ingress: {
+            rules: peers.map(
+              (peer: NetworkPolicyIpBlock): NetworkPolicyRule => {
+                return {
+                  peer: peer,
+                  ports: [NetworkPolicyPort.tcp(backend.port)],
+                };
+              },
+            ),
+          },
         });
       }
-    }
 
-    if (svcs.length > 0) {
-      const ingress = new Ingress(this, `${props.name}-ingress`, {
-        metadata: {
-          name: props.name,
-          namespace: props.namespace,
-          annotations: {
-            "cert-manager.io/cluster-issuer": CLUSTER_ISSUER.name,
+      if (backend.allowIngressFromNS) {
+        const nsSelector = Namespaces.select(this, `${baseName}-ns`, {
+          names: backend.allowIngressFromNS,
+        });
+
+        new NetworkPolicy(
+          this,
+          `${this.getBackendName(props, backend)}-ns-allow`,
+          {
+            metadata: {
+              name: `${this.getBackendName(props, backend)}-allow-namespaces`,
+              namespace: props.namespace,
+            },
+            selector: deploy,
+            ingress: {
+              rules: [
+                {
+                  peer: nsSelector,
+                  ports: [NetworkPolicyPort.tcp(backend.port)],
+                },
+              ],
+            },
           },
-        },
-      });
-
-      const hosts: string[] = [];
-
-      for (const svc of svcs) {
-        hosts.push(svc.host);
-        ingress.addHostRule(
-          svc.host,
-          "/",
-          IngressBackend.fromService(svc.svc, { port: svc.port }),
         );
       }
 
-      ingress.addTls([
-        {
-          hosts: hosts,
-          secret: Secret.fromSecretName(
-            this,
-            `${props.name}-tls`,
-            `${props.name}-tls`,
-          ),
+      const traefikNS = Namespaces.select(this, `${baseName}-traefik-ns`, {
+        names: ["kube-system"],
+      });
+      const traefikSelector = Pods.select(this, `${baseName}-traefik`, {
+        namespaces: traefikNS,
+        labels: {
+          "app.kubernetes.io/name": "traefik",
         },
-      ]);
+      });
+
+      if (backend.ingressHost) {
+        new NetworkPolicy(this, `${baseName}-allow-traefik`, {
+          metadata: {
+            name: `${baseName}-allow-traefik`,
+            namespace: props.namespace,
+          },
+          selector: deploy,
+          ingress: {
+            rules: [
+              {
+                peer: traefikSelector,
+                ports: [NetworkPolicyPort.tcp(backend.port)],
+              },
+            ],
+          },
+        });
+      }
     }
 
     if (props.defaultBlockIngress) {
@@ -178,125 +243,10 @@ export class Rclone extends Chart {
           name: "default-block-ingress",
           namespace: props.namespace,
         },
-        selector: deploy,
         ingress: {
           default: NetworkPolicyTrafficDefault.DENY,
         },
       });
-
-      const peers: NetworkPolicyIpBlock[] = [
-        IP_CIDRS_V4.WIRED_LAN,
-        IP_CIDRS_V4.WIRELESS_LAN,
-        IP_CIDRS_V4.SERVERS_STATIC,
-        IP_CIDRS_V4.SERVERS_DHCP,
-      ].map((cidr: string, index: number): NetworkPolicyIpBlock => {
-        return NetworkPolicyIpBlock.ipv4(
-          this,
-          `${props.name}-local-peers-${index}`,
-          cidr,
-        );
-      });
-
-      const allowIngressFromInternalPorts: number[] = [];
-
-      for (const backend of props.backends) {
-        if (backend.allowIngressFromInternal) {
-          allowIngressFromInternalPorts.push(backend.port);
-        }
-
-        if (backend.allowIngressFromNS) {
-          const nsSelector = Namespaces.select(
-            this,
-            `${props.name}-${backend.name}-ns`,
-            {
-              names: backend.allowIngressFromNS,
-            },
-          );
-
-          new NetworkPolicy(
-            this,
-            `${this.getBackendName(props, backend)}-ns-allow`,
-            {
-              metadata: {
-                name: `${this.getBackendName(props, backend)}-allow-namespaces`,
-                namespace: props.namespace,
-              },
-              selector: deploy,
-              ingress: {
-                rules: [
-                  {
-                    peer: nsSelector,
-                    ports: [NetworkPolicyPort.tcp(backend.port)],
-                  },
-                ],
-              },
-            },
-          );
-        }
-      }
-
-      new NetworkPolicy(this, `${props.name}-allow-internal`, {
-        metadata: {
-          name: `${props.name}-allow-internal`,
-          namespace: props.namespace,
-        },
-        selector: deploy,
-        ingress: {
-          rules: peers.map((peer: NetworkPolicyIpBlock): NetworkPolicyRule => {
-            return {
-              peer: peer,
-              ports: allowIngressFromInternalPorts.map(
-                (port: number): NetworkPolicyPort => {
-                  return NetworkPolicyPort.tcp(port);
-                },
-              ),
-            };
-          }),
-        },
-      });
-
-      const allowTraefikPorts: number[] = [];
-
-      for (const backend of props.backends) {
-        if (backend.ingressHost) {
-          allowTraefikPorts.push(backend.port);
-        }
-
-        if (allowTraefikPorts.length > 0) {
-          const traefikNS = Namespaces.select(
-            this,
-            `${props.name}-traefik-ns`,
-            {
-              names: ["kube-system"],
-            },
-          );
-          const traefikSelector = Pods.select(this, `${props.name}-traefik`, {
-            namespaces: traefikNS,
-            labels: {
-              "app.kubernetes.io/name": "traefik",
-            },
-          });
-          new NetworkPolicy(this, `${props.name}-allow-traefik`, {
-            metadata: {
-              name: `${props.name}-allow-traefik`,
-              namespace: props.namespace,
-            },
-            selector: deploy,
-            ingress: {
-              rules: [
-                {
-                  peer: traefikSelector,
-                  ports: allowTraefikPorts.map(
-                    (port: number): NetworkPolicyPort => {
-                      return NetworkPolicyPort.tcp(port);
-                    },
-                  ),
-                },
-              ],
-            },
-          });
-        }
-      }
     }
   }
 

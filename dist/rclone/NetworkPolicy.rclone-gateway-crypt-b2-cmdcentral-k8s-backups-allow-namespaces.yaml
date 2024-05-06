@@ -15,6 +15,6 @@ spec:
           protocol: TCP
   podSelector:
     matchLabels:
-      cdk8s.io/metadata.addr: rclone-rclone-deployment-c80b70e9
+      cdk8s.io/metadata.addr: rclo-rclone-crypt-b2-cmdcentral-k8s-backups-deployment-c8b40f75
   policyTypes:
     - Ingress
