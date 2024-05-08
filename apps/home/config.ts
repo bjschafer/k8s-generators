@@ -1,6 +1,6 @@
 import { Chart } from "cdk8s";
 import { Construct } from "constructs";
-import { ConfigMap } from "cdk8s-plus-28";
+import { ConfigMap } from "cdk8s-plus-29";
 
 /**
  * icon can be a URL, a Dashboard Icon https://github.com/walkxcode/dashboard-icons or an MD Icon https://icon-sets.iconify.design/mdi/

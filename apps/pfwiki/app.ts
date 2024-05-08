@@ -5,7 +5,7 @@ import {
   PersistentVolumeAccessMode,
   Probe,
   Secret,
-} from "cdk8s-plus-28";
+} from "cdk8s-plus-29";
 import { AppPlus } from "../../lib/app-plus";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
