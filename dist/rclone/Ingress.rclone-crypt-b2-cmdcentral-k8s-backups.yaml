@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: rclone-crypt-b2-cmdcentral-k8s-backups
+  namespace: rclone
+spec:
+  rules:
+    - host: rclone-gateway-crypt-b2-cmdcentral-k8s-backups.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: rclone-gateway-crypt-b2-cmdcentral-k8s-backups
+                port:
+                  number: 8042
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - rclone-gateway-crypt-b2-cmdcentral-k8s-backups.cmdcentral.xyz
+      secretName: rclone-tls

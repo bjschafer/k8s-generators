@@ -51,6 +51,8 @@ new Rclone(app, "rclone", {
     {
       name: "crypt-b2-cmdcentral-k8s-backups",
       port: port,
+      ingressHost:
+        "rclone-gateway-crypt-b2-cmdcentral-k8s-backups.cmdcentral.xyz",
       allowIngressFromInternal: true,
       allowIngressFromNS: ["velero"],
     },
