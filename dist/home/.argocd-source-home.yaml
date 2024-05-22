@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - jordanroher/starbase-80@sha256:488163310d8ac035db6bffc9557a9b9a3541a376d665f1bd11540a32f83efa0d
+  - jordanroher/starbase-80@sha256:6c88a52160e2ee0ffd199cb6339b5105a0cf32041441a04ae5221b470a9c2625
