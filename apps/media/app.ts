@@ -8,7 +8,7 @@ import {
 import { MediaApp, MediaAppProps } from "../../lib/media-app";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { basename } from "../../lib/util";
-import { Cpu, EnvValue, Secret } from "cdk8s-plus-29";
+import { Cpu, Secret } from "cdk8s-plus-29";
 import { NewKustomize } from "../../lib/kustomize";
 
 const namespace = basename(__dirname);
@@ -137,33 +137,6 @@ const mediaApps: Omit<
     monitoringConfig: {
       enableExportarr: false,
       enableServiceMonitor: false,
-    },
-  },
-  {
-    name: "navidrome",
-    port: 4533,
-    image: "ghcr.io/navidrome/navidrome:latest",
-    monitoringConfig: {
-      enableExportarr: false,
-      enableServiceMonitor: true,
-    },
-    nfsMounts: [
-      {
-        mountPoint: "/music",
-        nfsConcreteVolume: nfsVols.Get("nfs-media-music"),
-        mountOptions: {
-          readOnly: true,
-        },
-      },
-    ],
-    extraHostnames: ["music.cmdcentral.xyz"],
-    configVolume: {
-      mountPath: "/data",
-      size: Size.gibibytes(5),
-      enableBackups: true,
-    },
-    extraEnv: {
-      ND_PROMETHEUS_ENABLED: EnvValue.fromValue("true"), // TODO add scrape config
     },
   },
 ];

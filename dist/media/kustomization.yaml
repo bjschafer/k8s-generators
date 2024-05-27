@@ -1,6 +1,5 @@
 resources:
   - Deployment.lidarr.yaml
-  - Deployment.navidrome.yaml
   - Deployment.prowlarr.yaml
   - Deployment.radarr.yaml
   - Deployment.readarr.yaml
@@ -8,7 +7,6 @@ resources:
   - Deployment.sabnzbd.yaml
   - Deployment.sonarr.yaml
   - Ingress.lidarr.yaml
-  - Ingress.navidrome.yaml
   - Ingress.prowlarr.yaml
   - Ingress.radarr.yaml
   - Ingress.readarr.yaml
@@ -21,7 +19,6 @@ resources:
   - PersistentVolume.nfs-media-videos-movies.yaml
   - PersistentVolume.nfs-media-videos-tvshows.yaml
   - PersistentVolumeClaim.lidarr-config.yaml
-  - PersistentVolumeClaim.navidrome-config.yaml
   - PersistentVolumeClaim.nfs-media-downloads.yaml
   - PersistentVolumeClaim.nfs-media-ebooks.yaml
   - PersistentVolumeClaim.nfs-media-music.yaml
@@ -34,7 +31,6 @@ resources:
   - PersistentVolumeClaim.sabnzbd-config.yaml
   - PersistentVolumeClaim.sonarr-config.yaml
   - Service.lidarr.yaml
-  - Service.navidrome.yaml
   - Service.prowlarr.yaml
   - Service.radarr.yaml
   - Service.readarr.yaml
@@ -42,7 +38,6 @@ resources:
   - Service.sabnzbd.yaml
   - Service.sonarr.yaml
   - ServiceMonitor.lidarr.yaml
-  - ServiceMonitor.navidrome.yaml
   - ServiceMonitor.radarr.yaml
   - ServiceMonitor.readarr.yaml
   - ServiceMonitor.sonarr.yaml

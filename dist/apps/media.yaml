@@ -3,9 +3,8 @@ kind: Application
 metadata:
   annotations:
     argocd-image-updater.argoproj.io/git-branch: main
-    argocd-image-updater.argoproj.io/image-list: resilio-sync=ghcr.io/linuxserver/resilio-sync:latest,sonarr=ghcr.io/linuxserver/sonarr:latest,radarr=ghcr.io/linuxserver/radarr:latest,lidarr=ghcr.io/linuxserver/lidarr:latest,readarr=lscr.io/linuxserver/readarr:latest,sabnzbd=ghcr.io/linuxserver/sabnzbd:latest,prowlarr=ghcr.io/linuxserver/prowlarr:latest,navidrome=ghcr.io/navidrome/navidrome:latest
+    argocd-image-updater.argoproj.io/image-list: resilio-sync=ghcr.io/linuxserver/resilio-sync:latest,sonarr=ghcr.io/linuxserver/sonarr:latest,radarr=ghcr.io/linuxserver/radarr:latest,lidarr=ghcr.io/linuxserver/lidarr:latest,readarr=lscr.io/linuxserver/readarr:latest,sabnzbd=ghcr.io/linuxserver/sabnzbd:latest,prowlarr=ghcr.io/linuxserver/prowlarr:latest
     argocd-image-updater.argoproj.io/lidarr.update-strategy: digest
-    argocd-image-updater.argoproj.io/navidrome.update-strategy: digest
     argocd-image-updater.argoproj.io/prowlarr.update-strategy: digest
     argocd-image-updater.argoproj.io/radarr.update-strategy: digest
     argocd-image-updater.argoproj.io/readarr.update-strategy: digest
