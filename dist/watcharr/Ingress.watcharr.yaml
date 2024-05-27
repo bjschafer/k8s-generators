@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: watcharr
+  namespace: watcharr
+spec:
+  rules:
+    - host: watcharr.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: watcharr
+                port:
+                  number: 3080
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - watcharr.cmdcentral.xyz
+      secretName: watcharr-tls

@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: watcharr
+  name: watcharr
+  namespace: watcharr
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: watcharr-watcharr-deployment-c86dec6d
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        backup.velero.io/backup-volumes: pvc-watcharr-data
+      labels:
+        app.kubernetes.io/name: watcharr
+        cdk8s.io/metadata.addr: watcharr-watcharr-deployment-c86dec6d
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - image: ghcr.io/sbondco/watcharr
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 3080
+          name: watcharr
+          ports:
+            - containerPort: 3080
+          readinessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 3080
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /data
+              name: pvc-watcharr-data
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: pvc-watcharr-data
+          persistentVolumeClaim:
+            claimName: watcharr-data
+            readOnly: false
