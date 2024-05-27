@@ -14,11 +14,12 @@ spec:
     matchLabels:
       cdk8s.io/metadata.addr: atuin-atuin-deployment-c8aa6d7f
   strategy:
-    type: Recreate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
-      annotations:
-        backup.velero.io/backup-volumes: pvc-atuin-data
       labels:
         app.kubernetes.io/name: atuin
         cdk8s.io/metadata.addr: atuin-atuin-deployment-c8aa6d7f
@@ -70,9 +71,6 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
-          volumeMounts:
-            - mountPath: /config
-              name: pvc-atuin-data
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
@@ -81,8 +79,3 @@ spec:
         runAsNonRoot: false
       setHostnameAsFQDN: false
       terminationGracePeriodSeconds: 30
-      volumes:
-        - name: pvc-atuin-data
-          persistentVolumeClaim:
-            claimName: atuin-data
-            readOnly: false

@@ -1,15 +1,9 @@
 import { App, Size } from "cdk8s";
-import {
-  Cpu,
-  EnvValue,
-  PersistentVolumeAccessMode,
-  Secret,
-} from "cdk8s-plus-29";
+import { Cpu, EnvValue, Secret } from "cdk8s-plus-29";
 import { AppPlus } from "../../lib/app-plus";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { basename } from "../../lib/util";
-import { StorageClass } from "../../lib/volume";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -54,18 +48,6 @@ new AppPlus(app, "atuin", {
   monitoringConfig: {
     port: 9001,
   },
-  volumes: [
-    {
-      name: "data",
-      mountPath: "/config",
-      enableBackups: true,
-      props: {
-        storage: Size.gibibytes(1),
-        storageClassName: StorageClass.CEPH_RBD,
-        accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
-      },
-    },
-  ],
   extraEnv: {
     ATUIN_HOST: EnvValue.fromValue("0.0.0.0"), // bind address
     ATUIN_PORT: EnvValue.fromValue("8888"),
