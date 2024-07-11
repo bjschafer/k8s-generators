@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - ghcr.io/atuinsh/atuin:8f5af52-amd64
