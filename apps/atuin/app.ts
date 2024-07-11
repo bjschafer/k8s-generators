@@ -9,6 +9,7 @@ import { basename } from "../../lib/util";
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
+const image = "ghcr.io/atuinsh/atuin";
 const port = 8888;
 
 NewArgoApp(name, {
@@ -24,8 +25,9 @@ NewArgoApp(name, {
   autoUpdate: {
     images: [
       {
-        image: "ghcr.io/atuinsh/atuin",
-        strategy: "latest", // until and unless they publish any stable tags
+        image: image,
+        strategy: "semver",
+        versionConstraint: "18.x.x",
       },
     ],
   },
@@ -34,7 +36,7 @@ NewArgoApp(name, {
 new AppPlus(app, "atuin", {
   name,
   namespace,
-  image: "ghcr.io/atuinsh/atuin",
+  image: image,
   args: ["server", "start"],
   resources: {
     cpu: {
