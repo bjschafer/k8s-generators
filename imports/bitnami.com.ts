@@ -149,6 +149,13 @@ export interface SealedSecretSpecTemplate {
   readonly data?: { [key: string]: string };
 
   /**
+   * Immutable, if set to true, ensures that data stored in the Secret cannot be updated (only object metadata can be modified). If not set to true, the field can be modified at any time. Defaulted to nil.
+   *
+   * @schema SealedSecretSpecTemplate#immutable
+   */
+  readonly immutable?: boolean;
+
+  /**
    * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
    *
    * @schema SealedSecretSpecTemplate#metadata
@@ -172,6 +179,7 @@ export function toJson_SealedSecretSpecTemplate(obj: SealedSecretSpecTemplate | 
   if (obj === undefined) { return undefined; }
   const result = {
     'data': ((obj.data) === undefined) ? undefined : (Object.entries(obj.data).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'immutable': obj.immutable,
     'metadata': toJson_SealedSecretSpecTemplateMetadata(obj.metadata),
     'type': obj.type,
   };

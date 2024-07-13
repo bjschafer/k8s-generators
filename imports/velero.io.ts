@@ -4,7 +4,8 @@ import { Construct } from 'constructs';
 
 
 /**
- * Backup is a Velero resource that represents the capture of Kubernetes cluster state at a point in time (API objects and associated volume state).
+ * Backup is a Velero resource that represents the capture of Kubernetes
+cluster state at a point in time (API objects and associated volume state).
  *
  * @schema Backup
  */
@@ -58,7 +59,8 @@ export class Backup extends ApiObject {
 }
 
 /**
- * Backup is a Velero resource that represents the capture of Kubernetes cluster state at a point in time (API objects and associated volume state).
+ * Backup is a Velero resource that represents the capture of Kubernetes
+ * cluster state at a point in time (API objects and associated volume state).
  *
  * @schema Backup
  */
@@ -99,28 +101,35 @@ export function toJson_BackupProps(obj: BackupProps | undefined): Record<string,
  */
 export interface BackupSpec {
   /**
-   * CSISnapshotTimeout specifies the time used to wait for CSI VolumeSnapshot status turns to ReadyToUse during creation, before returning error as timeout. The default value is 10 minute.
+   * CSISnapshotTimeout specifies the time used to wait for CSI VolumeSnapshot status turns to
+   * ReadyToUse during creation, before returning error as timeout.
+   * The default value is 10 minute.
    *
    * @schema BackupSpec#csiSnapshotTimeout
    */
   readonly csiSnapshotTimeout?: string;
 
   /**
-   * DataMover specifies the data mover to be used by the backup. If DataMover is "" or "velero", the built-in data mover will be used.
+   * DataMover specifies the data mover to be used by the backup.
+   * If DataMover is "" or "velero", the built-in data mover will be used.
    *
    * @schema BackupSpec#datamover
    */
   readonly datamover?: string;
 
   /**
-   * DefaultVolumesToFsBackup specifies whether pod volume file system backup should be used for all volumes by default.
+   * DefaultVolumesToFsBackup specifies whether pod volume file system backup should be used
+   * for all volumes by default.
    *
    * @schema BackupSpec#defaultVolumesToFsBackup
    */
   readonly defaultVolumesToFsBackup?: boolean;
 
   /**
-   * DefaultVolumesToRestic specifies whether restic should be used to take a backup of all pod volumes by default.
+   * DefaultVolumesToRestic specifies whether restic should be used to take a
+   * backup of all pod volumes by default.
+   *
+   *
    * Deprecated: this field is no longer used and will be removed entirely in future. Use DefaultVolumesToFsBackup instead.
    *
    * @schema BackupSpec#defaultVolumesToRestic
@@ -128,28 +137,36 @@ export interface BackupSpec {
   readonly defaultVolumesToRestic?: boolean;
 
   /**
-   * ExcludedClusterScopedResources is a slice of cluster-scoped resource type names to exclude from the backup. If set to "*", all cluster-scoped resource types are excluded. The default value is empty.
+   * ExcludedClusterScopedResources is a slice of cluster-scoped
+   * resource type names to exclude from the backup.
+   * If set to "*", all cluster-scoped resource types are excluded.
+   * The default value is empty.
    *
    * @schema BackupSpec#excludedClusterScopedResources
    */
   readonly excludedClusterScopedResources?: string[];
 
   /**
-   * ExcludedNamespaceScopedResources is a slice of namespace-scoped resource type names to exclude from the backup. If set to "*", all namespace-scoped resource types are excluded. The default value is empty.
+   * ExcludedNamespaceScopedResources is a slice of namespace-scoped
+   * resource type names to exclude from the backup.
+   * If set to "*", all namespace-scoped resource types are excluded.
+   * The default value is empty.
    *
    * @schema BackupSpec#excludedNamespaceScopedResources
    */
   readonly excludedNamespaceScopedResources?: string[];
 
   /**
-   * ExcludedNamespaces contains a list of namespaces that are not included in the backup.
+   * ExcludedNamespaces contains a list of namespaces that are not
+   * included in the backup.
    *
    * @schema BackupSpec#excludedNamespaces
    */
   readonly excludedNamespaces?: string[];
 
   /**
-   * ExcludedResources is a slice of resource names that are not included in the backup.
+   * ExcludedResources is a slice of resource names that are not
+   * included in the backup.
    *
    * @schema BackupSpec#excludedResources
    */
@@ -163,49 +180,61 @@ export interface BackupSpec {
   readonly hooks?: BackupSpecHooks;
 
   /**
-   * IncludeClusterResources specifies whether cluster-scoped resources should be included for consideration in the backup.
+   * IncludeClusterResources specifies whether cluster-scoped resources
+   * should be included for consideration in the backup.
    *
    * @schema BackupSpec#includeClusterResources
    */
   readonly includeClusterResources?: boolean;
 
   /**
-   * IncludedClusterScopedResources is a slice of cluster-scoped resource type names to include in the backup. If set to "*", all cluster-scoped resource types are included. The default value is empty, which means only related cluster-scoped resources are included.
+   * IncludedClusterScopedResources is a slice of cluster-scoped
+   * resource type names to include in the backup.
+   * If set to "*", all cluster-scoped resource types are included.
+   * The default value is empty, which means only related
+   * cluster-scoped resources are included.
    *
    * @schema BackupSpec#includedClusterScopedResources
    */
   readonly includedClusterScopedResources?: string[];
 
   /**
-   * IncludedNamespaceScopedResources is a slice of namespace-scoped resource type names to include in the backup. The default value is "*".
+   * IncludedNamespaceScopedResources is a slice of namespace-scoped
+   * resource type names to include in the backup.
+   * The default value is "*".
    *
    * @schema BackupSpec#includedNamespaceScopedResources
    */
   readonly includedNamespaceScopedResources?: string[];
 
   /**
-   * IncludedNamespaces is a slice of namespace names to include objects from. If empty, all namespaces are included.
+   * IncludedNamespaces is a slice of namespace names to include objects
+   * from. If empty, all namespaces are included.
    *
    * @schema BackupSpec#includedNamespaces
    */
   readonly includedNamespaces?: string[];
 
   /**
-   * IncludedResources is a slice of resource names to include in the backup. If empty, all resources are included.
+   * IncludedResources is a slice of resource names to include
+   * in the backup. If empty, all resources are included.
    *
    * @schema BackupSpec#includedResources
    */
   readonly includedResources?: string[];
 
   /**
-   * ItemOperationTimeout specifies the time used to wait for asynchronous BackupItemAction operations The default value is 1 hour.
+   * ItemOperationTimeout specifies the time used to wait for asynchronous BackupItemAction operations
+   * The default value is 4 hour.
    *
    * @schema BackupSpec#itemOperationTimeout
    */
   readonly itemOperationTimeout?: string;
 
   /**
-   * LabelSelector is a metav1.LabelSelector to filter with when adding individual objects to the backup. If empty or nil, all objects are included. Optional.
+   * LabelSelector is a metav1.LabelSelector to filter with
+   * when adding individual objects to the backup. If empty
+   * or nil, all objects are included. Optional.
    *
    * @schema BackupSpec#labelSelector
    */
@@ -217,14 +246,20 @@ export interface BackupSpec {
   readonly metadata?: BackupSpecMetadata;
 
   /**
-   * OrLabelSelectors is list of metav1.LabelSelector to filter with when adding individual objects to the backup. If multiple provided they will be joined by the OR operator. LabelSelector as well as OrLabelSelectors cannot co-exist in backup request, only one of them can be used.
+   * OrLabelSelectors is list of metav1.LabelSelector to filter with
+   * when adding individual objects to the backup. If multiple provided
+   * they will be joined by the OR operator. LabelSelector as well as
+   * OrLabelSelectors cannot co-exist in backup request, only one of them
+   * can be used.
    *
    * @schema BackupSpec#orLabelSelectors
    */
   readonly orLabelSelectors?: BackupSpecOrLabelSelectors[];
 
   /**
-   * OrderedResources specifies the backup order of resources of specific Kind. The map key is the resource name and value is a list of object names separated by commas. Each resource name has format "namespace/objectname".  For cluster resources, simply use "objectname".
+   * OrderedResources specifies the backup order of resources of specific Kind.
+   * The map key is the resource name and value is a list of object names separated by commas.
+   * Each resource name has format "namespace/objectname".  For cluster resources, simply use "objectname".
    *
    * @schema BackupSpec#orderedResources
    */
@@ -245,7 +280,9 @@ export interface BackupSpec {
   readonly snapshotMoveData?: boolean;
 
   /**
-   * SnapshotVolumes specifies whether to take snapshots of any PV's referenced in the set of objects included in the Backup.
+   * SnapshotVolumes specifies whether to take snapshots
+   * of any PV's referenced in the set of objects included
+   * in the Backup.
    *
    * @schema BackupSpec#snapshotVolumes
    */
@@ -259,7 +296,8 @@ export interface BackupSpec {
   readonly storageLocation?: string;
 
   /**
-   * TTL is a time.Duration-parseable string describing how long the Backup should be retained for.
+   * TTL is a time.Duration-parseable string describing how long
+   * the Backup should be retained for.
    *
    * @schema BackupSpec#ttl
    */
@@ -350,7 +388,9 @@ export function toJson_BackupSpecHooks(obj: BackupSpecHooks | undefined): Record
 /* eslint-enable max-len, quote-props */
 
 /**
- * LabelSelector is a metav1.LabelSelector to filter with when adding individual objects to the backup. If empty or nil, all objects are included. Optional.
+ * LabelSelector is a metav1.LabelSelector to filter with
+ * when adding individual objects to the backup. If empty
+ * or nil, all objects are included. Optional.
  *
  * @schema BackupSpecLabelSelector
  */
@@ -363,7 +403,9 @@ export interface BackupSpecLabelSelector {
   readonly matchExpressions?: BackupSpecLabelSelectorMatchExpressions[];
 
   /**
-   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". The requirements are ANDed.
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
    *
    * @schema BackupSpecLabelSelector#matchLabels
    */
@@ -412,7 +454,9 @@ export function toJson_BackupSpecMetadata(obj: BackupSpecMetadata | undefined): 
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.
+ * A label selector is a label query over a set of resources. The result of matchLabels and
+ * matchExpressions are ANDed. An empty label selector matches all objects. A null
+ * label selector matches no objects.
  *
  * @schema BackupSpecOrLabelSelectors
  */
@@ -425,7 +469,9 @@ export interface BackupSpecOrLabelSelectors {
   readonly matchExpressions?: BackupSpecOrLabelSelectorsMatchExpressions[];
 
   /**
-   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". The requirements are ANDed.
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
    *
    * @schema BackupSpecOrLabelSelectors#matchLabels
    */
@@ -455,7 +501,9 @@ export function toJson_BackupSpecOrLabelSelectors(obj: BackupSpecOrLabelSelector
  */
 export interface BackupSpecResourcePolicy {
   /**
-   * APIGroup is the group for the resource being referenced. If APIGroup is not specified, the specified Kind must be in the core API group. For any other third-party types, APIGroup is required.
+   * APIGroup is the group for the resource being referenced.
+   * If APIGroup is not specified, the specified Kind must be in the core API group.
+   * For any other third-party types, APIGroup is required.
    *
    * @schema BackupSpecResourcePolicy#apiGroup
    */
@@ -523,7 +571,8 @@ export function toJson_BackupSpecUploaderConfig(obj: BackupSpecUploaderConfig | 
 /* eslint-enable max-len, quote-props */
 
 /**
- * BackupResourceHookSpec defines one or more BackupResourceHooks that should be executed based on the rules defined for namespaces, resources, and label selector.
+ * BackupResourceHookSpec defines one or more BackupResourceHooks that should be executed based on
+ * the rules defined for namespaces, resources, and label selector.
  *
  * @schema BackupSpecHooksResources
  */
@@ -543,14 +592,16 @@ export interface BackupSpecHooksResources {
   readonly excludedResources?: string[];
 
   /**
-   * IncludedNamespaces specifies the namespaces to which this hook spec applies. If empty, it applies to all namespaces.
+   * IncludedNamespaces specifies the namespaces to which this hook spec applies. If empty, it applies
+   * to all namespaces.
    *
    * @schema BackupSpecHooksResources#includedNamespaces
    */
   readonly includedNamespaces?: string[];
 
   /**
-   * IncludedResources specifies the resources to which this hook spec applies. If empty, it applies to all resources.
+   * IncludedResources specifies the resources to which this hook spec applies. If empty, it applies
+   * to all resources.
    *
    * @schema BackupSpecHooksResources#includedResources
    */
@@ -571,14 +622,16 @@ export interface BackupSpecHooksResources {
   readonly name: string;
 
   /**
-   * PostHooks is a list of BackupResourceHooks to execute after storing the item in the backup. These are executed after all "additional items" from item actions are processed.
+   * PostHooks is a list of BackupResourceHooks to execute after storing the item in the backup.
+   * These are executed after all "additional items" from item actions are processed.
    *
    * @schema BackupSpecHooksResources#post
    */
   readonly post?: BackupSpecHooksResourcesPost[];
 
   /**
-   * PreHooks is a list of BackupResourceHooks to execute prior to storing the item in the backup. These are executed before any "additional items" from item actions are processed.
+   * PreHooks is a list of BackupResourceHooks to execute prior to storing the item in the backup.
+   * These are executed before any "additional items" from item actions are processed.
    *
    * @schema BackupSpecHooksResources#pre
    */
@@ -608,7 +661,8 @@ export function toJson_BackupSpecHooksResources(obj: BackupSpecHooksResources | 
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
  *
  * @schema BackupSpecLabelSelectorMatchExpressions
  */
@@ -621,14 +675,18 @@ export interface BackupSpecLabelSelectorMatchExpressions {
   readonly key: string;
 
   /**
-   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
    * @schema BackupSpecLabelSelectorMatchExpressions#operator
    */
   readonly operator: string;
 
   /**
-   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
    *
    * @schema BackupSpecLabelSelectorMatchExpressions#values
    */
@@ -653,7 +711,8 @@ export function toJson_BackupSpecLabelSelectorMatchExpressions(obj: BackupSpecLa
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
  *
  * @schema BackupSpecOrLabelSelectorsMatchExpressions
  */
@@ -666,14 +725,18 @@ export interface BackupSpecOrLabelSelectorsMatchExpressions {
   readonly key: string;
 
   /**
-   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
    * @schema BackupSpecOrLabelSelectorsMatchExpressions#operator
    */
   readonly operator: string;
 
   /**
-   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
    *
    * @schema BackupSpecOrLabelSelectorsMatchExpressions#values
    */
@@ -711,7 +774,9 @@ export interface BackupSpecHooksResourcesLabelSelector {
   readonly matchExpressions?: BackupSpecHooksResourcesLabelSelectorMatchExpressions[];
 
   /**
-   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". The requirements are ANDed.
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
    *
    * @schema BackupSpecHooksResourcesLabelSelector#matchLabels
    */
@@ -793,7 +858,8 @@ export function toJson_BackupSpecHooksResourcesPre(obj: BackupSpecHooksResources
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
  *
  * @schema BackupSpecHooksResourcesLabelSelectorMatchExpressions
  */
@@ -806,14 +872,18 @@ export interface BackupSpecHooksResourcesLabelSelectorMatchExpressions {
   readonly key: string;
 
   /**
-   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
    * @schema BackupSpecHooksResourcesLabelSelectorMatchExpressions#operator
    */
   readonly operator: string;
 
   /**
-   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
    *
    * @schema BackupSpecHooksResourcesLabelSelectorMatchExpressions#values
    */
@@ -851,7 +921,8 @@ export interface BackupSpecHooksResourcesPostExec {
   readonly command: string[];
 
   /**
-   * Container is the container in the pod where the command should be executed. If not specified, the pod's first container is used.
+   * Container is the container in the pod where the command should be executed. If not specified,
+   * the pod's first container is used.
    *
    * @schema BackupSpecHooksResourcesPostExec#container
    */
@@ -865,7 +936,8 @@ export interface BackupSpecHooksResourcesPostExec {
   readonly onError?: BackupSpecHooksResourcesPostExecOnError;
 
   /**
-   * Timeout defines the maximum amount of time Velero should wait for the hook to complete before considering the execution a failure.
+   * Timeout defines the maximum amount of time Velero should wait for the hook to complete before
+   * considering the execution a failure.
    *
    * @schema BackupSpecHooksResourcesPostExec#timeout
    */
@@ -904,7 +976,8 @@ export interface BackupSpecHooksResourcesPreExec {
   readonly command: string[];
 
   /**
-   * Container is the container in the pod where the command should be executed. If not specified, the pod's first container is used.
+   * Container is the container in the pod where the command should be executed. If not specified,
+   * the pod's first container is used.
    *
    * @schema BackupSpecHooksResourcesPreExec#container
    */
@@ -918,7 +991,8 @@ export interface BackupSpecHooksResourcesPreExec {
   readonly onError?: BackupSpecHooksResourcesPreExecOnError;
 
   /**
-   * Timeout defines the maximum amount of time Velero should wait for the hook to complete before considering the execution a failure.
+   * Timeout defines the maximum amount of time Velero should wait for the hook to complete before
+   * considering the execution a failure.
    *
    * @schema BackupSpecHooksResourcesPreExec#timeout
    */
@@ -1062,7 +1136,8 @@ export function toJson_BackupRepositoryProps(obj: BackupRepositoryProps | undefi
  */
 export interface BackupRepositorySpec {
   /**
-   * BackupStorageLocation is the name of the BackupStorageLocation that should contain this repository.
+   * BackupStorageLocation is the name of the BackupStorageLocation
+   * that should contain this repository.
    *
    * @schema BackupRepositorySpec#backupStorageLocation
    */
@@ -1083,14 +1158,16 @@ export interface BackupRepositorySpec {
   readonly repositoryType?: BackupRepositorySpecRepositoryType;
 
   /**
-   * ResticIdentifier is the full restic-compatible string for identifying this repository.
+   * ResticIdentifier is the full restic-compatible string for identifying
+   * this repository.
    *
    * @schema BackupRepositorySpec#resticIdentifier
    */
   readonly resticIdentifier: string;
 
   /**
-   * VolumeNamespace is the namespace this backup repository contains pod volume backups for.
+   * VolumeNamespace is the namespace this backup repository contains
+   * pod volume backups for.
    *
    * @schema BackupRepositorySpec#volumeNamespace
    */
@@ -1329,7 +1406,9 @@ export interface BackupStorageLocationSpecCredential {
   readonly key: string;
 
   /**
-   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   * Name of the referent.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   * TODO: Add other useful fields. apiVersion, kind, uid?
    *
    * @schema BackupStorageLocationSpecCredential#name
    */
@@ -1502,14 +1581,16 @@ export function toJson_DataDownloadProps(obj: DataDownloadProps | undefined): Re
  */
 export interface DataDownloadSpec {
   /**
-   * BackupStorageLocation is the name of the backup storage location where the backup repository is stored.
+   * BackupStorageLocation is the name of the backup storage location
+   * where the backup repository is stored.
    *
    * @schema DataDownloadSpec#backupStorageLocation
    */
   readonly backupStorageLocation: string;
 
   /**
-   * Cancel indicates request to cancel the ongoing DataDownload. It can be set when the DataDownload is in InProgress phase
+   * Cancel indicates request to cancel the ongoing DataDownload. It can be set
+   * when the DataDownload is in InProgress phase
    *
    * @schema DataDownloadSpec#cancel
    */
@@ -1523,14 +1604,16 @@ export interface DataDownloadSpec {
   readonly dataMoverConfig?: { [key: string]: string };
 
   /**
-   * DataMover specifies the data mover to be used by the backup. If DataMover is "" or "velero", the built-in data mover will be used.
+   * DataMover specifies the data mover to be used by the backup.
+   * If DataMover is "" or "velero", the built-in data mover will be used.
    *
    * @schema DataDownloadSpec#datamover
    */
   readonly datamover?: string;
 
   /**
-   * OperationTimeout specifies the time used to wait internal operations, before returning error as timeout.
+   * OperationTimeout specifies the time used to wait internal operations,
+   * before returning error as timeout.
    *
    * @schema DataDownloadSpec#operationTimeout
    */
@@ -1544,7 +1627,8 @@ export interface DataDownloadSpec {
   readonly snapshotId: string;
 
   /**
-   * SourceNamespace is the original namespace where the volume is backed up from. It may be different from SourcePVC's namespace if namespace is remapped during restore.
+   * SourceNamespace is the original namespace where the volume is backed up from.
+   * It may be different from SourcePVC's namespace if namespace is remapped during restore.
    *
    * @schema DataDownloadSpec#sourceNamespace
    */
@@ -1722,14 +1806,16 @@ export function toJson_DataUploadProps(obj: DataUploadProps | undefined): Record
  */
 export interface DataUploadSpec {
   /**
-   * BackupStorageLocation is the name of the backup storage location where the backup repository is stored.
+   * BackupStorageLocation is the name of the backup storage location
+   * where the backup repository is stored.
    *
    * @schema DataUploadSpec#backupStorageLocation
    */
   readonly backupStorageLocation: string;
 
   /**
-   * Cancel indicates request to cancel the ongoing DataUpload. It can be set when the DataUpload is in InProgress phase
+   * Cancel indicates request to cancel the ongoing DataUpload. It can be set
+   * when the DataUpload is in InProgress phase
    *
    * @schema DataUploadSpec#cancel
    */
@@ -1750,14 +1836,16 @@ export interface DataUploadSpec {
   readonly dataMoverConfig?: { [key: string]: string };
 
   /**
-   * DataMover specifies the data mover to be used by the backup. If DataMover is "" or "velero", the built-in data mover will be used.
+   * DataMover specifies the data mover to be used by the backup.
+   * If DataMover is "" or "velero", the built-in data mover will be used.
    *
    * @schema DataUploadSpec#datamover
    */
   readonly datamover?: string;
 
   /**
-   * OperationTimeout specifies the time used to wait internal operations, before returning error as timeout.
+   * OperationTimeout specifies the time used to wait internal operations,
+   * before returning error as timeout.
    *
    * @schema DataUploadSpec#operationTimeout
    */
@@ -1771,7 +1859,8 @@ export interface DataUploadSpec {
   readonly snapshotType: string;
 
   /**
-   * SourceNamespace is the original namespace where the volume is backed up from. It is the same namespace for SourcePVC and CSI namespaced objects.
+   * SourceNamespace is the original namespace where the volume is backed up from.
+   * It is the same namespace for SourcePVC and CSI namespaced objects.
    *
    * @schema DataUploadSpec#sourceNamespace
    */
@@ -1972,7 +2061,8 @@ export function toJson_DeleteBackupRequestSpec(obj: DeleteBackupRequestSpec | un
 
 
 /**
- * DownloadRequest is a request to download an artifact from backup object storage, such as a backup log file.
+ * DownloadRequest is a request to download an artifact from backup object storage, such as a backup
+log file.
  *
  * @schema DownloadRequest
  */
@@ -2026,7 +2116,8 @@ export class DownloadRequest extends ApiObject {
 }
 
 /**
- * DownloadRequest is a request to download an artifact from backup object storage, such as a backup log file.
+ * DownloadRequest is a request to download an artifact from backup object storage, such as a backup
+ * log file.
  *
  * @schema DownloadRequest
  */
@@ -2158,6 +2249,8 @@ export enum DownloadRequestSpecTargetKind {
   CSI_BACKUP_VOLUME_SNAPSHOT_CONTENTS = "CSIBackupVolumeSnapshotContents",
   /** BackupVolumeInfos */
   BACKUP_VOLUME_INFOS = "BackupVolumeInfos",
+  /** RestoreVolumeInfo */
+  RESTORE_VOLUME_INFO = "RestoreVolumeInfo",
 }
 
 
@@ -2255,7 +2348,8 @@ export function toJson_PodVolumeBackupProps(obj: PodVolumeBackupProps | undefine
  */
 export interface PodVolumeBackupSpec {
   /**
-   * BackupStorageLocation is the name of the backup storage location where the backup repository is stored.
+   * BackupStorageLocation is the name of the backup storage location
+   * where the backup repository is stored.
    *
    * @schema PodVolumeBackupSpec#backupStorageLocation
    */
@@ -2283,14 +2377,16 @@ export interface PodVolumeBackupSpec {
   readonly repoIdentifier: string;
 
   /**
-   * Tags are a map of key-value pairs that should be applied to the volume backup as tags.
+   * Tags are a map of key-value pairs that should be applied to the
+   * volume backup as tags.
    *
    * @schema PodVolumeBackupSpec#tags
    */
   readonly tags?: { [key: string]: string };
 
   /**
-   * UploaderSettings are a map of key-value pairs that should be applied to the uploader configuration.
+   * UploaderSettings are a map of key-value pairs that should be applied to the
+   * uploader configuration.
    *
    * @schema PodVolumeBackupSpec#uploaderSettings
    */
@@ -2304,7 +2400,8 @@ export interface PodVolumeBackupSpec {
   readonly uploaderType?: PodVolumeBackupSpecUploaderType;
 
   /**
-   * Volume is the name of the volume within the Pod to be backed up.
+   * Volume is the name of the volume within the Pod to be backed
+   * up.
    *
    * @schema PodVolumeBackupSpec#volume
    */
@@ -2347,42 +2444,54 @@ export interface PodVolumeBackupSpecPod {
   readonly apiVersion?: string;
 
   /**
-   * If referring to a piece of an object instead of an entire object, this string should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2]. For example, if the object reference is to a container within a pod, this would take on a value like: "spec.containers{name}" (where "name" refers to the name of the container that triggered the event) or if no container name is specified "spec.containers[2]" (container with index 2 in this pod). This syntax is chosen only to have some well-defined way of referencing a part of an object. TODO: this design is not final and this field is subject to change in the future.
+   * If referring to a piece of an object instead of an entire object, this string
+   * should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2].
+   * For example, if the object reference is to a container within a pod, this would take on a value like:
+   * "spec.containers{name}" (where "name" refers to the name of the container that triggered
+   * the event) or if no container name is specified "spec.containers[2]" (container with
+   * index 2 in this pod). This syntax is chosen only to have some well-defined way of
+   * referencing a part of an object.
+   * TODO: this design is not final and this field is subject to change in the future.
    *
    * @schema PodVolumeBackupSpecPod#fieldPath
    */
   readonly fieldPath?: string;
 
   /**
-   * Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+   * Kind of the referent.
+   * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
    *
    * @schema PodVolumeBackupSpecPod#kind
    */
   readonly kind?: string;
 
   /**
-   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   * Name of the referent.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
    *
    * @schema PodVolumeBackupSpecPod#name
    */
   readonly name?: string;
 
   /**
-   * Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+   * Namespace of the referent.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
    *
    * @schema PodVolumeBackupSpecPod#namespace
    */
   readonly namespace?: string;
 
   /**
-   * Specific resourceVersion to which this reference is made, if any. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+   * Specific resourceVersion to which this reference is made, if any.
+   * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
    *
    * @schema PodVolumeBackupSpecPod#resourceVersion
    */
   readonly resourceVersion?: string;
 
   /**
-   * UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
+   * UID of the referent.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
    *
    * @schema PodVolumeBackupSpecPod#uid
    */
@@ -2517,7 +2626,8 @@ export function toJson_PodVolumeRestoreProps(obj: PodVolumeRestoreProps | undefi
  */
 export interface PodVolumeRestoreSpec {
   /**
-   * BackupStorageLocation is the name of the backup storage location where the backup repository is stored.
+   * BackupStorageLocation is the name of the backup storage location
+   * where the backup repository is stored.
    *
    * @schema PodVolumeRestoreSpec#backupStorageLocation
    */
@@ -2552,7 +2662,8 @@ export interface PodVolumeRestoreSpec {
   readonly sourceNamespace: string;
 
   /**
-   * UploaderSettings are a map of key-value pairs that should be applied to the uploader configuration.
+   * UploaderSettings are a map of key-value pairs that should be applied to the
+   * uploader configuration.
    *
    * @schema PodVolumeRestoreSpec#uploaderSettings
    */
@@ -2609,42 +2720,54 @@ export interface PodVolumeRestoreSpecPod {
   readonly apiVersion?: string;
 
   /**
-   * If referring to a piece of an object instead of an entire object, this string should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2]. For example, if the object reference is to a container within a pod, this would take on a value like: "spec.containers{name}" (where "name" refers to the name of the container that triggered the event) or if no container name is specified "spec.containers[2]" (container with index 2 in this pod). This syntax is chosen only to have some well-defined way of referencing a part of an object. TODO: this design is not final and this field is subject to change in the future.
+   * If referring to a piece of an object instead of an entire object, this string
+   * should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2].
+   * For example, if the object reference is to a container within a pod, this would take on a value like:
+   * "spec.containers{name}" (where "name" refers to the name of the container that triggered
+   * the event) or if no container name is specified "spec.containers[2]" (container with
+   * index 2 in this pod). This syntax is chosen only to have some well-defined way of
+   * referencing a part of an object.
+   * TODO: this design is not final and this field is subject to change in the future.
    *
    * @schema PodVolumeRestoreSpecPod#fieldPath
    */
   readonly fieldPath?: string;
 
   /**
-   * Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+   * Kind of the referent.
+   * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
    *
    * @schema PodVolumeRestoreSpecPod#kind
    */
   readonly kind?: string;
 
   /**
-   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   * Name of the referent.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
    *
    * @schema PodVolumeRestoreSpecPod#name
    */
   readonly name?: string;
 
   /**
-   * Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+   * Namespace of the referent.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
    *
    * @schema PodVolumeRestoreSpecPod#namespace
    */
   readonly namespace?: string;
 
   /**
-   * Specific resourceVersion to which this reference is made, if any. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+   * Specific resourceVersion to which this reference is made, if any.
+   * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
    *
    * @schema PodVolumeRestoreSpecPod#resourceVersion
    */
   readonly resourceVersion?: string;
 
   /**
-   * UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
+   * UID of the referent.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
    *
    * @schema PodVolumeRestoreSpecPod#uid
    */
@@ -2827,7 +2950,8 @@ export function toJson_ResticRepositorySpec(obj: ResticRepositorySpec | undefine
 
 
 /**
- * Restore is a Velero resource that represents the application of resources from a Velero backup to a target Kubernetes cluster.
+ * Restore is a Velero resource that represents the application of
+resources from a Velero backup to a target Kubernetes cluster.
  *
  * @schema Restore
  */
@@ -2881,7 +3005,8 @@ export class Restore extends ApiObject {
 }
 
 /**
- * Restore is a Velero resource that represents the application of resources from a Velero backup to a target Kubernetes cluster.
+ * Restore is a Velero resource that represents the application of
+ * resources from a Velero backup to a target Kubernetes cluster.
  *
  * @schema Restore
  */
@@ -2922,21 +3047,24 @@ export function toJson_RestoreProps(obj: RestoreProps | undefined): Record<strin
  */
 export interface RestoreSpec {
   /**
-   * BackupName is the unique name of the Velero backup to restore from.
+   * BackupName is the unique name of the Velero backup to restore
+   * from.
    *
    * @schema RestoreSpec#backupName
    */
-  readonly backupName: string;
+  readonly backupName?: string;
 
   /**
-   * ExcludedNamespaces contains a list of namespaces that are not included in the restore.
+   * ExcludedNamespaces contains a list of namespaces that are not
+   * included in the restore.
    *
    * @schema RestoreSpec#excludedNamespaces
    */
   readonly excludedNamespaces?: string[];
 
   /**
-   * ExcludedResources is a slice of resource names that are not included in the restore.
+   * ExcludedResources is a slice of resource names that are not
+   * included in the restore.
    *
    * @schema RestoreSpec#excludedResources
    */
@@ -2957,49 +3085,63 @@ export interface RestoreSpec {
   readonly hooks?: RestoreSpecHooks;
 
   /**
-   * IncludeClusterResources specifies whether cluster-scoped resources should be included for consideration in the restore. If null, defaults to true.
+   * IncludeClusterResources specifies whether cluster-scoped resources
+   * should be included for consideration in the restore. If null, defaults
+   * to true.
    *
    * @schema RestoreSpec#includeClusterResources
    */
   readonly includeClusterResources?: boolean;
 
   /**
-   * IncludedNamespaces is a slice of namespace names to include objects from. If empty, all namespaces are included.
+   * IncludedNamespaces is a slice of namespace names to include objects
+   * from. If empty, all namespaces are included.
    *
    * @schema RestoreSpec#includedNamespaces
    */
   readonly includedNamespaces?: string[];
 
   /**
-   * IncludedResources is a slice of resource names to include in the restore. If empty, all resources in the backup are included.
+   * IncludedResources is a slice of resource names to include
+   * in the restore. If empty, all resources in the backup are included.
    *
    * @schema RestoreSpec#includedResources
    */
   readonly includedResources?: string[];
 
   /**
-   * ItemOperationTimeout specifies the time used to wait for RestoreItemAction operations The default value is 1 hour.
+   * ItemOperationTimeout specifies the time used to wait for RestoreItemAction operations
+   * The default value is 4 hour.
    *
    * @schema RestoreSpec#itemOperationTimeout
    */
   readonly itemOperationTimeout?: string;
 
   /**
-   * LabelSelector is a metav1.LabelSelector to filter with when restoring individual objects from the backup. If empty or nil, all objects are included. Optional.
+   * LabelSelector is a metav1.LabelSelector to filter with
+   * when restoring individual objects from the backup. If empty
+   * or nil, all objects are included. Optional.
    *
    * @schema RestoreSpec#labelSelector
    */
   readonly labelSelector?: RestoreSpecLabelSelector;
 
   /**
-   * NamespaceMapping is a map of source namespace names to target namespace names to restore into. Any source namespaces not included in the map will be restored into namespaces of the same name.
+   * NamespaceMapping is a map of source namespace names
+   * to target namespace names to restore into. Any source
+   * namespaces not included in the map will be restored into
+   * namespaces of the same name.
    *
    * @schema RestoreSpec#namespaceMapping
    */
   readonly namespaceMapping?: { [key: string]: string };
 
   /**
-   * OrLabelSelectors is list of metav1.LabelSelector to filter with when restoring individual objects from the backup. If multiple provided they will be joined by the OR operator. LabelSelector as well as OrLabelSelectors cannot co-exist in restore request, only one of them can be used
+   * OrLabelSelectors is list of metav1.LabelSelector to filter with
+   * when restoring individual objects from the backup. If multiple provided
+   * they will be joined by the OR operator. LabelSelector as well as
+   * OrLabelSelectors cannot co-exist in restore request, only one of them
+   * can be used
    *
    * @schema RestoreSpec#orLabelSelectors
    */
@@ -3020,21 +3162,25 @@ export interface RestoreSpec {
   readonly resourceModifier?: RestoreSpecResourceModifier;
 
   /**
-   * RestorePVs specifies whether to restore all included PVs from snapshot
+   * RestorePVs specifies whether to restore all included
+   * PVs from snapshot
    *
    * @schema RestoreSpec#restorePVs
    */
   readonly restorePVs?: boolean;
 
   /**
-   * RestoreStatus specifies which resources we should restore the status field. If nil, no objects are included. Optional.
+   * RestoreStatus specifies which resources we should restore the status
+   * field. If nil, no objects are included. Optional.
    *
    * @schema RestoreSpec#restoreStatus
    */
   readonly restoreStatus?: RestoreSpecRestoreStatus;
 
   /**
-   * ScheduleName is the unique name of the Velero schedule to restore from. If specified, and BackupName is empty, Velero will restore from the most recent successful backup created from this schedule.
+   * ScheduleName is the unique name of the Velero schedule to restore
+   * from. If specified, and BackupName is empty, Velero will restore
+   * from the most recent successful backup created from this schedule.
    *
    * @schema RestoreSpec#scheduleName
    */
@@ -3108,7 +3254,9 @@ export function toJson_RestoreSpecHooks(obj: RestoreSpecHooks | undefined): Reco
 /* eslint-enable max-len, quote-props */
 
 /**
- * LabelSelector is a metav1.LabelSelector to filter with when restoring individual objects from the backup. If empty or nil, all objects are included. Optional.
+ * LabelSelector is a metav1.LabelSelector to filter with
+ * when restoring individual objects from the backup. If empty
+ * or nil, all objects are included. Optional.
  *
  * @schema RestoreSpecLabelSelector
  */
@@ -3121,7 +3269,9 @@ export interface RestoreSpecLabelSelector {
   readonly matchExpressions?: RestoreSpecLabelSelectorMatchExpressions[];
 
   /**
-   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". The requirements are ANDed.
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
    *
    * @schema RestoreSpecLabelSelector#matchLabels
    */
@@ -3145,7 +3295,9 @@ export function toJson_RestoreSpecLabelSelector(obj: RestoreSpecLabelSelector | 
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.
+ * A label selector is a label query over a set of resources. The result of matchLabels and
+ * matchExpressions are ANDed. An empty label selector matches all objects. A null
+ * label selector matches no objects.
  *
  * @schema RestoreSpecOrLabelSelectors
  */
@@ -3158,7 +3310,9 @@ export interface RestoreSpecOrLabelSelectors {
   readonly matchExpressions?: RestoreSpecOrLabelSelectorsMatchExpressions[];
 
   /**
-   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". The requirements are ANDed.
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
    *
    * @schema RestoreSpecOrLabelSelectors#matchLabels
    */
@@ -3188,7 +3342,9 @@ export function toJson_RestoreSpecOrLabelSelectors(obj: RestoreSpecOrLabelSelect
  */
 export interface RestoreSpecResourceModifier {
   /**
-   * APIGroup is the group for the resource being referenced. If APIGroup is not specified, the specified Kind must be in the core API group. For any other third-party types, APIGroup is required.
+   * APIGroup is the group for the resource being referenced.
+   * If APIGroup is not specified, the specified Kind must be in the core API group.
+   * For any other third-party types, APIGroup is required.
    *
    * @schema RestoreSpecResourceModifier#apiGroup
    */
@@ -3227,7 +3383,8 @@ export function toJson_RestoreSpecResourceModifier(obj: RestoreSpecResourceModif
 /* eslint-enable max-len, quote-props */
 
 /**
- * RestoreStatus specifies which resources we should restore the status field. If nil, no objects are included. Optional.
+ * RestoreStatus specifies which resources we should restore the status
+ * field. If nil, no objects are included. Optional.
  *
  * @schema RestoreSpecRestoreStatus
  */
@@ -3240,7 +3397,8 @@ export interface RestoreSpecRestoreStatus {
   readonly excludedResources?: string[];
 
   /**
-   * IncludedResources specifies the resources to which will restore the status. If empty, it applies to all resources.
+   * IncludedResources specifies the resources to which will restore the status.
+   * If empty, it applies to all resources.
    *
    * @schema RestoreSpecRestoreStatus#includedResources
    */
@@ -3270,6 +3428,13 @@ export function toJson_RestoreSpecRestoreStatus(obj: RestoreSpecRestoreStatus | 
  */
 export interface RestoreSpecUploaderConfig {
   /**
+   * ParallelFilesDownload is the concurrency number setting for restore.
+   *
+   * @schema RestoreSpecUploaderConfig#parallelFilesDownload
+   */
+  readonly parallelFilesDownload?: number;
+
+  /**
    * WriteSparseFiles is a flag to indicate whether write files sparsely or not.
    *
    * @schema RestoreSpecUploaderConfig#writeSparseFiles
@@ -3285,6 +3450,7 @@ export interface RestoreSpecUploaderConfig {
 export function toJson_RestoreSpecUploaderConfig(obj: RestoreSpecUploaderConfig | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'parallelFilesDownload': obj.parallelFilesDownload,
     'writeSparseFiles': obj.writeSparseFiles,
   };
   // filter undefined values
@@ -3293,7 +3459,8 @@ export function toJson_RestoreSpecUploaderConfig(obj: RestoreSpecUploaderConfig 
 /* eslint-enable max-len, quote-props */
 
 /**
- * RestoreResourceHookSpec defines one or more RestoreResrouceHooks that should be executed based on the rules defined for namespaces, resources, and label selector.
+ * RestoreResourceHookSpec defines one or more RestoreResrouceHooks that should be executed based on
+ * the rules defined for namespaces, resources, and label selector.
  *
  * @schema RestoreSpecHooksResources
  */
@@ -3313,14 +3480,16 @@ export interface RestoreSpecHooksResources {
   readonly excludedResources?: string[];
 
   /**
-   * IncludedNamespaces specifies the namespaces to which this hook spec applies. If empty, it applies to all namespaces.
+   * IncludedNamespaces specifies the namespaces to which this hook spec applies. If empty, it applies
+   * to all namespaces.
    *
    * @schema RestoreSpecHooksResources#includedNamespaces
    */
   readonly includedNamespaces?: string[];
 
   /**
-   * IncludedResources specifies the resources to which this hook spec applies. If empty, it applies to all resources.
+   * IncludedResources specifies the resources to which this hook spec applies. If empty, it applies
+   * to all resources.
    *
    * @schema RestoreSpecHooksResources#includedResources
    */
@@ -3370,7 +3539,8 @@ export function toJson_RestoreSpecHooksResources(obj: RestoreSpecHooksResources 
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
  *
  * @schema RestoreSpecLabelSelectorMatchExpressions
  */
@@ -3383,14 +3553,18 @@ export interface RestoreSpecLabelSelectorMatchExpressions {
   readonly key: string;
 
   /**
-   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
    * @schema RestoreSpecLabelSelectorMatchExpressions#operator
    */
   readonly operator: string;
 
   /**
-   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
    *
    * @schema RestoreSpecLabelSelectorMatchExpressions#values
    */
@@ -3415,7 +3589,8 @@ export function toJson_RestoreSpecLabelSelectorMatchExpressions(obj: RestoreSpec
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
  *
  * @schema RestoreSpecOrLabelSelectorsMatchExpressions
  */
@@ -3428,14 +3603,18 @@ export interface RestoreSpecOrLabelSelectorsMatchExpressions {
   readonly key: string;
 
   /**
-   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
    * @schema RestoreSpecOrLabelSelectorsMatchExpressions#operator
    */
   readonly operator: string;
 
   /**
-   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
    *
    * @schema RestoreSpecOrLabelSelectorsMatchExpressions#values
    */
@@ -3473,7 +3652,9 @@ export interface RestoreSpecHooksResourcesLabelSelector {
   readonly matchExpressions?: RestoreSpecHooksResourcesLabelSelectorMatchExpressions[];
 
   /**
-   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". The requirements are ANDed.
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
    *
    * @schema RestoreSpecHooksResourcesLabelSelector#matchLabels
    */
@@ -3534,7 +3715,8 @@ export function toJson_RestoreSpecHooksResourcesPostHooks(obj: RestoreSpecHooksR
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
  *
  * @schema RestoreSpecHooksResourcesLabelSelectorMatchExpressions
  */
@@ -3547,14 +3729,18 @@ export interface RestoreSpecHooksResourcesLabelSelectorMatchExpressions {
   readonly key: string;
 
   /**
-   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
    * @schema RestoreSpecHooksResourcesLabelSelectorMatchExpressions#operator
    */
   readonly operator: string;
 
   /**
-   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
    *
    * @schema RestoreSpecHooksResourcesLabelSelectorMatchExpressions#values
    */
@@ -3592,14 +3778,16 @@ export interface RestoreSpecHooksResourcesPostHooksExec {
   readonly command: string[];
 
   /**
-   * Container is the container in the pod where the command should be executed. If not specified, the pod's first container is used.
+   * Container is the container in the pod where the command should be executed. If not specified,
+   * the pod's first container is used.
    *
    * @schema RestoreSpecHooksResourcesPostHooksExec#container
    */
   readonly container?: string;
 
   /**
-   * ExecTimeout defines the maximum amount of time Velero should wait for the hook to complete before considering the execution a failure.
+   * ExecTimeout defines the maximum amount of time Velero should wait for the hook to complete before
+   * considering the execution a failure.
    *
    * @schema RestoreSpecHooksResourcesPostHooksExec#execTimeout
    */
@@ -3620,7 +3808,8 @@ export interface RestoreSpecHooksResourcesPostHooksExec {
   readonly waitForReady?: boolean;
 
   /**
-   * WaitTimeout defines the maximum amount of time Velero should wait for the container to be Ready before attempting to run the command.
+   * WaitTimeout defines the maximum amount of time Velero should wait for the container to be Ready
+   * before attempting to run the command.
    *
    * @schema RestoreSpecHooksResourcesPostHooksExec#waitTimeout
    */
@@ -3698,7 +3887,8 @@ export enum RestoreSpecHooksResourcesPostHooksExecOnError {
 
 
 /**
- * Schedule is a Velero resource that represents a pre-scheduled or periodic Backup that should be run.
+ * Schedule is a Velero resource that represents a pre-scheduled or
+periodic Backup that should be run.
  *
  * @schema Schedule
  */
@@ -3752,7 +3942,8 @@ export class Schedule extends ApiObject {
 }
 
 /**
- * Schedule is a Velero resource that represents a pre-scheduled or periodic Backup that should be run.
+ * Schedule is a Velero resource that represents a pre-scheduled or
+ * periodic Backup that should be run.
  *
  * @schema Schedule
  */
@@ -3800,28 +3991,34 @@ export interface ScheduleSpec {
   readonly paused?: boolean;
 
   /**
-   * Schedule is a Cron expression defining when to run the Backup.
+   * Schedule is a Cron expression defining when to run
+   * the Backup.
    *
    * @schema ScheduleSpec#schedule
    */
   readonly schedule: string;
 
   /**
-   * SkipImmediately specifies whether to skip backup if schedule is due immediately from `schedule.status.lastBackup` timestamp when schedule is unpaused or if schedule is new. If true, backup will be skipped immediately when schedule is unpaused if it is due based on .Status.LastBackupTimestamp or schedule is new, and will run at next schedule time. If false, backup will not be skipped immediately when schedule is unpaused, but will run at next schedule time. If empty, will follow server configuration (default: false).
+   * SkipImmediately specifies whether to skip backup if schedule is due immediately from `schedule.status.lastBackup` timestamp when schedule is unpaused or if schedule is new.
+   * If true, backup will be skipped immediately when schedule is unpaused if it is due based on .Status.LastBackupTimestamp or schedule is new, and will run at next schedule time.
+   * If false, backup will not be skipped immediately when schedule is unpaused, but will run at next schedule time.
+   * If empty, will follow server configuration (default: false).
    *
    * @schema ScheduleSpec#skipImmediately
    */
   readonly skipImmediately?: boolean;
 
   /**
-   * Template is the definition of the Backup to be run on the provided schedule
+   * Template is the definition of the Backup to be run
+   * on the provided schedule
    *
    * @schema ScheduleSpec#template
    */
   readonly template: ScheduleSpecTemplate;
 
   /**
-   * UseOwnerReferencesBackup specifies whether to use OwnerReferences on backups created by this Schedule.
+   * UseOwnerReferencesBackup specifies whether to use
+   * OwnerReferences on backups created by this Schedule.
    *
    * @schema ScheduleSpec#useOwnerReferencesInBackup
    */
@@ -3848,34 +4045,42 @@ export function toJson_ScheduleSpec(obj: ScheduleSpec | undefined): Record<strin
 /* eslint-enable max-len, quote-props */
 
 /**
- * Template is the definition of the Backup to be run on the provided schedule
+ * Template is the definition of the Backup to be run
+ * on the provided schedule
  *
  * @schema ScheduleSpecTemplate
  */
 export interface ScheduleSpecTemplate {
   /**
-   * CSISnapshotTimeout specifies the time used to wait for CSI VolumeSnapshot status turns to ReadyToUse during creation, before returning error as timeout. The default value is 10 minute.
+   * CSISnapshotTimeout specifies the time used to wait for CSI VolumeSnapshot status turns to
+   * ReadyToUse during creation, before returning error as timeout.
+   * The default value is 10 minute.
    *
    * @schema ScheduleSpecTemplate#csiSnapshotTimeout
    */
   readonly csiSnapshotTimeout?: string;
 
   /**
-   * DataMover specifies the data mover to be used by the backup. If DataMover is "" or "velero", the built-in data mover will be used.
+   * DataMover specifies the data mover to be used by the backup.
+   * If DataMover is "" or "velero", the built-in data mover will be used.
    *
    * @schema ScheduleSpecTemplate#datamover
    */
   readonly datamover?: string;
 
   /**
-   * DefaultVolumesToFsBackup specifies whether pod volume file system backup should be used for all volumes by default.
+   * DefaultVolumesToFsBackup specifies whether pod volume file system backup should be used
+   * for all volumes by default.
    *
    * @schema ScheduleSpecTemplate#defaultVolumesToFsBackup
    */
   readonly defaultVolumesToFsBackup?: boolean;
 
   /**
-   * DefaultVolumesToRestic specifies whether restic should be used to take a backup of all pod volumes by default.
+   * DefaultVolumesToRestic specifies whether restic should be used to take a
+   * backup of all pod volumes by default.
+   *
+   *
    * Deprecated: this field is no longer used and will be removed entirely in future. Use DefaultVolumesToFsBackup instead.
    *
    * @schema ScheduleSpecTemplate#defaultVolumesToRestic
@@ -3883,28 +4088,36 @@ export interface ScheduleSpecTemplate {
   readonly defaultVolumesToRestic?: boolean;
 
   /**
-   * ExcludedClusterScopedResources is a slice of cluster-scoped resource type names to exclude from the backup. If set to "*", all cluster-scoped resource types are excluded. The default value is empty.
+   * ExcludedClusterScopedResources is a slice of cluster-scoped
+   * resource type names to exclude from the backup.
+   * If set to "*", all cluster-scoped resource types are excluded.
+   * The default value is empty.
    *
    * @schema ScheduleSpecTemplate#excludedClusterScopedResources
    */
   readonly excludedClusterScopedResources?: string[];
 
   /**
-   * ExcludedNamespaceScopedResources is a slice of namespace-scoped resource type names to exclude from the backup. If set to "*", all namespace-scoped resource types are excluded. The default value is empty.
+   * ExcludedNamespaceScopedResources is a slice of namespace-scoped
+   * resource type names to exclude from the backup.
+   * If set to "*", all namespace-scoped resource types are excluded.
+   * The default value is empty.
    *
    * @schema ScheduleSpecTemplate#excludedNamespaceScopedResources
    */
   readonly excludedNamespaceScopedResources?: string[];
 
   /**
-   * ExcludedNamespaces contains a list of namespaces that are not included in the backup.
+   * ExcludedNamespaces contains a list of namespaces that are not
+   * included in the backup.
    *
    * @schema ScheduleSpecTemplate#excludedNamespaces
    */
   readonly excludedNamespaces?: string[];
 
   /**
-   * ExcludedResources is a slice of resource names that are not included in the backup.
+   * ExcludedResources is a slice of resource names that are not
+   * included in the backup.
    *
    * @schema ScheduleSpecTemplate#excludedResources
    */
@@ -3918,49 +4131,61 @@ export interface ScheduleSpecTemplate {
   readonly hooks?: ScheduleSpecTemplateHooks;
 
   /**
-   * IncludeClusterResources specifies whether cluster-scoped resources should be included for consideration in the backup.
+   * IncludeClusterResources specifies whether cluster-scoped resources
+   * should be included for consideration in the backup.
    *
    * @schema ScheduleSpecTemplate#includeClusterResources
    */
   readonly includeClusterResources?: boolean;
 
   /**
-   * IncludedClusterScopedResources is a slice of cluster-scoped resource type names to include in the backup. If set to "*", all cluster-scoped resource types are included. The default value is empty, which means only related cluster-scoped resources are included.
+   * IncludedClusterScopedResources is a slice of cluster-scoped
+   * resource type names to include in the backup.
+   * If set to "*", all cluster-scoped resource types are included.
+   * The default value is empty, which means only related
+   * cluster-scoped resources are included.
    *
    * @schema ScheduleSpecTemplate#includedClusterScopedResources
    */
   readonly includedClusterScopedResources?: string[];
 
   /**
-   * IncludedNamespaceScopedResources is a slice of namespace-scoped resource type names to include in the backup. The default value is "*".
+   * IncludedNamespaceScopedResources is a slice of namespace-scoped
+   * resource type names to include in the backup.
+   * The default value is "*".
    *
    * @schema ScheduleSpecTemplate#includedNamespaceScopedResources
    */
   readonly includedNamespaceScopedResources?: string[];
 
   /**
-   * IncludedNamespaces is a slice of namespace names to include objects from. If empty, all namespaces are included.
+   * IncludedNamespaces is a slice of namespace names to include objects
+   * from. If empty, all namespaces are included.
    *
    * @schema ScheduleSpecTemplate#includedNamespaces
    */
   readonly includedNamespaces?: string[];
 
   /**
-   * IncludedResources is a slice of resource names to include in the backup. If empty, all resources are included.
+   * IncludedResources is a slice of resource names to include
+   * in the backup. If empty, all resources are included.
    *
    * @schema ScheduleSpecTemplate#includedResources
    */
   readonly includedResources?: string[];
 
   /**
-   * ItemOperationTimeout specifies the time used to wait for asynchronous BackupItemAction operations The default value is 1 hour.
+   * ItemOperationTimeout specifies the time used to wait for asynchronous BackupItemAction operations
+   * The default value is 4 hour.
    *
    * @schema ScheduleSpecTemplate#itemOperationTimeout
    */
   readonly itemOperationTimeout?: string;
 
   /**
-   * LabelSelector is a metav1.LabelSelector to filter with when adding individual objects to the backup. If empty or nil, all objects are included. Optional.
+   * LabelSelector is a metav1.LabelSelector to filter with
+   * when adding individual objects to the backup. If empty
+   * or nil, all objects are included. Optional.
    *
    * @schema ScheduleSpecTemplate#labelSelector
    */
@@ -3972,14 +4197,20 @@ export interface ScheduleSpecTemplate {
   readonly metadata?: ScheduleSpecTemplateMetadata;
 
   /**
-   * OrLabelSelectors is list of metav1.LabelSelector to filter with when adding individual objects to the backup. If multiple provided they will be joined by the OR operator. LabelSelector as well as OrLabelSelectors cannot co-exist in backup request, only one of them can be used.
+   * OrLabelSelectors is list of metav1.LabelSelector to filter with
+   * when adding individual objects to the backup. If multiple provided
+   * they will be joined by the OR operator. LabelSelector as well as
+   * OrLabelSelectors cannot co-exist in backup request, only one of them
+   * can be used.
    *
    * @schema ScheduleSpecTemplate#orLabelSelectors
    */
   readonly orLabelSelectors?: ScheduleSpecTemplateOrLabelSelectors[];
 
   /**
-   * OrderedResources specifies the backup order of resources of specific Kind. The map key is the resource name and value is a list of object names separated by commas. Each resource name has format "namespace/objectname".  For cluster resources, simply use "objectname".
+   * OrderedResources specifies the backup order of resources of specific Kind.
+   * The map key is the resource name and value is a list of object names separated by commas.
+   * Each resource name has format "namespace/objectname".  For cluster resources, simply use "objectname".
    *
    * @schema ScheduleSpecTemplate#orderedResources
    */
@@ -4000,7 +4231,9 @@ export interface ScheduleSpecTemplate {
   readonly snapshotMoveData?: boolean;
 
   /**
-   * SnapshotVolumes specifies whether to take snapshots of any PV's referenced in the set of objects included in the Backup.
+   * SnapshotVolumes specifies whether to take snapshots
+   * of any PV's referenced in the set of objects included
+   * in the Backup.
    *
    * @schema ScheduleSpecTemplate#snapshotVolumes
    */
@@ -4014,7 +4247,8 @@ export interface ScheduleSpecTemplate {
   readonly storageLocation?: string;
 
   /**
-   * TTL is a time.Duration-parseable string describing how long the Backup should be retained for.
+   * TTL is a time.Duration-parseable string describing how long
+   * the Backup should be retained for.
    *
    * @schema ScheduleSpecTemplate#ttl
    */
@@ -4105,7 +4339,9 @@ export function toJson_ScheduleSpecTemplateHooks(obj: ScheduleSpecTemplateHooks 
 /* eslint-enable max-len, quote-props */
 
 /**
- * LabelSelector is a metav1.LabelSelector to filter with when adding individual objects to the backup. If empty or nil, all objects are included. Optional.
+ * LabelSelector is a metav1.LabelSelector to filter with
+ * when adding individual objects to the backup. If empty
+ * or nil, all objects are included. Optional.
  *
  * @schema ScheduleSpecTemplateLabelSelector
  */
@@ -4118,7 +4354,9 @@ export interface ScheduleSpecTemplateLabelSelector {
   readonly matchExpressions?: ScheduleSpecTemplateLabelSelectorMatchExpressions[];
 
   /**
-   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". The requirements are ANDed.
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
    *
    * @schema ScheduleSpecTemplateLabelSelector#matchLabels
    */
@@ -4167,7 +4405,9 @@ export function toJson_ScheduleSpecTemplateMetadata(obj: ScheduleSpecTemplateMet
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.
+ * A label selector is a label query over a set of resources. The result of matchLabels and
+ * matchExpressions are ANDed. An empty label selector matches all objects. A null
+ * label selector matches no objects.
  *
  * @schema ScheduleSpecTemplateOrLabelSelectors
  */
@@ -4180,7 +4420,9 @@ export interface ScheduleSpecTemplateOrLabelSelectors {
   readonly matchExpressions?: ScheduleSpecTemplateOrLabelSelectorsMatchExpressions[];
 
   /**
-   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". The requirements are ANDed.
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
    *
    * @schema ScheduleSpecTemplateOrLabelSelectors#matchLabels
    */
@@ -4210,7 +4452,9 @@ export function toJson_ScheduleSpecTemplateOrLabelSelectors(obj: ScheduleSpecTem
  */
 export interface ScheduleSpecTemplateResourcePolicy {
   /**
-   * APIGroup is the group for the resource being referenced. If APIGroup is not specified, the specified Kind must be in the core API group. For any other third-party types, APIGroup is required.
+   * APIGroup is the group for the resource being referenced.
+   * If APIGroup is not specified, the specified Kind must be in the core API group.
+   * For any other third-party types, APIGroup is required.
    *
    * @schema ScheduleSpecTemplateResourcePolicy#apiGroup
    */
@@ -4278,7 +4522,8 @@ export function toJson_ScheduleSpecTemplateUploaderConfig(obj: ScheduleSpecTempl
 /* eslint-enable max-len, quote-props */
 
 /**
- * BackupResourceHookSpec defines one or more BackupResourceHooks that should be executed based on the rules defined for namespaces, resources, and label selector.
+ * BackupResourceHookSpec defines one or more BackupResourceHooks that should be executed based on
+ * the rules defined for namespaces, resources, and label selector.
  *
  * @schema ScheduleSpecTemplateHooksResources
  */
@@ -4298,14 +4543,16 @@ export interface ScheduleSpecTemplateHooksResources {
   readonly excludedResources?: string[];
 
   /**
-   * IncludedNamespaces specifies the namespaces to which this hook spec applies. If empty, it applies to all namespaces.
+   * IncludedNamespaces specifies the namespaces to which this hook spec applies. If empty, it applies
+   * to all namespaces.
    *
    * @schema ScheduleSpecTemplateHooksResources#includedNamespaces
    */
   readonly includedNamespaces?: string[];
 
   /**
-   * IncludedResources specifies the resources to which this hook spec applies. If empty, it applies to all resources.
+   * IncludedResources specifies the resources to which this hook spec applies. If empty, it applies
+   * to all resources.
    *
    * @schema ScheduleSpecTemplateHooksResources#includedResources
    */
@@ -4326,14 +4573,16 @@ export interface ScheduleSpecTemplateHooksResources {
   readonly name: string;
 
   /**
-   * PostHooks is a list of BackupResourceHooks to execute after storing the item in the backup. These are executed after all "additional items" from item actions are processed.
+   * PostHooks is a list of BackupResourceHooks to execute after storing the item in the backup.
+   * These are executed after all "additional items" from item actions are processed.
    *
    * @schema ScheduleSpecTemplateHooksResources#post
    */
   readonly post?: ScheduleSpecTemplateHooksResourcesPost[];
 
   /**
-   * PreHooks is a list of BackupResourceHooks to execute prior to storing the item in the backup. These are executed before any "additional items" from item actions are processed.
+   * PreHooks is a list of BackupResourceHooks to execute prior to storing the item in the backup.
+   * These are executed before any "additional items" from item actions are processed.
    *
    * @schema ScheduleSpecTemplateHooksResources#pre
    */
@@ -4363,7 +4612,8 @@ export function toJson_ScheduleSpecTemplateHooksResources(obj: ScheduleSpecTempl
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
  *
  * @schema ScheduleSpecTemplateLabelSelectorMatchExpressions
  */
@@ -4376,14 +4626,18 @@ export interface ScheduleSpecTemplateLabelSelectorMatchExpressions {
   readonly key: string;
 
   /**
-   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
    * @schema ScheduleSpecTemplateLabelSelectorMatchExpressions#operator
    */
   readonly operator: string;
 
   /**
-   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
    *
    * @schema ScheduleSpecTemplateLabelSelectorMatchExpressions#values
    */
@@ -4408,7 +4662,8 @@ export function toJson_ScheduleSpecTemplateLabelSelectorMatchExpressions(obj: Sc
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
  *
  * @schema ScheduleSpecTemplateOrLabelSelectorsMatchExpressions
  */
@@ -4421,14 +4676,18 @@ export interface ScheduleSpecTemplateOrLabelSelectorsMatchExpressions {
   readonly key: string;
 
   /**
-   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
    * @schema ScheduleSpecTemplateOrLabelSelectorsMatchExpressions#operator
    */
   readonly operator: string;
 
   /**
-   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
    *
    * @schema ScheduleSpecTemplateOrLabelSelectorsMatchExpressions#values
    */
@@ -4466,7 +4725,9 @@ export interface ScheduleSpecTemplateHooksResourcesLabelSelector {
   readonly matchExpressions?: ScheduleSpecTemplateHooksResourcesLabelSelectorMatchExpressions[];
 
   /**
-   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". The requirements are ANDed.
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
    *
    * @schema ScheduleSpecTemplateHooksResourcesLabelSelector#matchLabels
    */
@@ -4548,7 +4809,8 @@ export function toJson_ScheduleSpecTemplateHooksResourcesPre(obj: ScheduleSpecTe
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
  *
  * @schema ScheduleSpecTemplateHooksResourcesLabelSelectorMatchExpressions
  */
@@ -4561,14 +4823,18 @@ export interface ScheduleSpecTemplateHooksResourcesLabelSelectorMatchExpressions
   readonly key: string;
 
   /**
-   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
    * @schema ScheduleSpecTemplateHooksResourcesLabelSelectorMatchExpressions#operator
    */
   readonly operator: string;
 
   /**
-   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
    *
    * @schema ScheduleSpecTemplateHooksResourcesLabelSelectorMatchExpressions#values
    */
@@ -4606,7 +4872,8 @@ export interface ScheduleSpecTemplateHooksResourcesPostExec {
   readonly command: string[];
 
   /**
-   * Container is the container in the pod where the command should be executed. If not specified, the pod's first container is used.
+   * Container is the container in the pod where the command should be executed. If not specified,
+   * the pod's first container is used.
    *
    * @schema ScheduleSpecTemplateHooksResourcesPostExec#container
    */
@@ -4620,7 +4887,8 @@ export interface ScheduleSpecTemplateHooksResourcesPostExec {
   readonly onError?: ScheduleSpecTemplateHooksResourcesPostExecOnError;
 
   /**
-   * Timeout defines the maximum amount of time Velero should wait for the hook to complete before considering the execution a failure.
+   * Timeout defines the maximum amount of time Velero should wait for the hook to complete before
+   * considering the execution a failure.
    *
    * @schema ScheduleSpecTemplateHooksResourcesPostExec#timeout
    */
@@ -4659,7 +4927,8 @@ export interface ScheduleSpecTemplateHooksResourcesPreExec {
   readonly command: string[];
 
   /**
-   * Container is the container in the pod where the command should be executed. If not specified, the pod's first container is used.
+   * Container is the container in the pod where the command should be executed. If not specified,
+   * the pod's first container is used.
    *
    * @schema ScheduleSpecTemplateHooksResourcesPreExec#container
    */
@@ -4673,7 +4942,8 @@ export interface ScheduleSpecTemplateHooksResourcesPreExec {
   readonly onError?: ScheduleSpecTemplateHooksResourcesPreExecOnError;
 
   /**
-   * Timeout defines the maximum amount of time Velero should wait for the hook to complete before considering the execution a failure.
+   * Timeout defines the maximum amount of time Velero should wait for the hook to complete before
+   * considering the execution a failure.
    *
    * @schema ScheduleSpecTemplateHooksResourcesPreExec#timeout
    */
@@ -4724,7 +4994,8 @@ export enum ScheduleSpecTemplateHooksResourcesPreExecOnError {
 
 
 /**
- * ServerStatusRequest is a request to access current status information about the Velero server.
+ * ServerStatusRequest is a request to access current status information about
+the Velero server.
  *
  * @schema ServerStatusRequest
  */
@@ -4778,7 +5049,8 @@ export class ServerStatusRequest extends ApiObject {
 }
 
 /**
- * ServerStatusRequest is a request to access current status information about the Velero server.
+ * ServerStatusRequest is a request to access current status information about
+ * the Velero server.
  *
  * @schema ServerStatusRequest
  */
@@ -4961,7 +5233,9 @@ export interface VolumeSnapshotLocationSpecCredential {
   readonly key: string;
 
   /**
-   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   * Name of the referent.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   * TODO: Add other useful fields. apiVersion, kind, uid?
    *
    * @schema VolumeSnapshotLocationSpecCredential#name
    */

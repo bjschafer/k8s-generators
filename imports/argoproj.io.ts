@@ -1348,6 +1348,13 @@ export interface ApplicationSpecSourceKustomize {
   readonly images?: string[];
 
   /**
+   * LabelWithoutSelector specifies whether to apply common labels to resource selectors or not
+   *
+   * @schema ApplicationSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * NamePrefix is a prefix appended to resources for Kustomize apps
    *
    * @schema ApplicationSpecSourceKustomize#namePrefix
@@ -1405,6 +1412,7 @@ export function toJson_ApplicationSpecSourceKustomize(obj: ApplicationSpecSource
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -1668,6 +1676,13 @@ export interface ApplicationSpecSourcesKustomize {
   readonly images?: string[];
 
   /**
+   * LabelWithoutSelector specifies whether to apply common labels to resource selectors or not
+   *
+   * @schema ApplicationSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * NamePrefix is a prefix appended to resources for Kustomize apps
    *
    * @schema ApplicationSpecSourcesKustomize#namePrefix
@@ -1725,6 +1740,7 @@ export function toJson_ApplicationSpecSourcesKustomize(obj: ApplicationSpecSourc
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -2103,6 +2119,13 @@ export interface ApplicationOperationSyncSourceKustomize {
   readonly images?: string[];
 
   /**
+   * LabelWithoutSelector specifies whether to apply common labels to resource selectors or not
+   *
+   * @schema ApplicationOperationSyncSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * NamePrefix is a prefix appended to resources for Kustomize apps
    *
    * @schema ApplicationOperationSyncSourceKustomize#namePrefix
@@ -2160,6 +2183,7 @@ export function toJson_ApplicationOperationSyncSourceKustomize(obj: ApplicationO
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -2423,6 +2447,13 @@ export interface ApplicationOperationSyncSourcesKustomize {
   readonly images?: string[];
 
   /**
+   * LabelWithoutSelector specifies whether to apply common labels to resource selectors or not
+   *
+   * @schema ApplicationOperationSyncSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * NamePrefix is a prefix appended to resources for Kustomize apps
    *
    * @schema ApplicationOperationSyncSourcesKustomize#namePrefix
@@ -2480,6 +2511,7 @@ export function toJson_ApplicationOperationSyncSourcesKustomize(obj: Application
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -4999,7 +5031,7 @@ export interface ApplicationSetSpecGeneratorsList {
   /**
    * @schema ApplicationSetSpecGeneratorsList#elements
    */
-  readonly elements: any[];
+  readonly elements?: any[];
 
   /**
    * @schema ApplicationSetSpecGeneratorsList#elementsYaml
@@ -7920,7 +7952,7 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsList {
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsList#elements
    */
-  readonly elements: any[];
+  readonly elements?: any[];
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsList#elementsYaml
@@ -8476,7 +8508,7 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsList {
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsList#elements
    */
-  readonly elements: any[];
+  readonly elements?: any[];
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsList#elementsYaml
@@ -9855,6 +9887,11 @@ export interface ApplicationSetSpecTemplateSpecSourceKustomize {
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -9900,6 +9937,7 @@ export function toJson_ApplicationSetSpecTemplateSpecSourceKustomize(obj: Applic
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -10111,6 +10149,11 @@ export interface ApplicationSetSpecTemplateSpecSourcesKustomize {
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -10156,6 +10199,7 @@ export function toJson_ApplicationSetSpecTemplateSpecSourcesKustomize(obj: Appli
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -16297,6 +16341,11 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -16342,6 +16391,7 @@ export function toJson_ApplicationSetSpecGeneratorsClusterDecisionResourceTempla
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -16553,6 +16603,11 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -16598,6 +16653,7 @@ export function toJson_ApplicationSetSpecGeneratorsClusterDecisionResourceTempla
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -16908,6 +16964,11 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomize
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -16953,6 +17014,7 @@ export function toJson_ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKus
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -17164,6 +17226,11 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomiz
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -17209,6 +17276,7 @@ export function toJson_ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKu
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -17519,6 +17587,11 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomize {
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -17564,6 +17637,7 @@ export function toJson_ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomiz
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -17775,6 +17849,11 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomize {
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -17820,6 +17899,7 @@ export function toJson_ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomi
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -18130,6 +18210,11 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomize {
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -18175,6 +18260,7 @@ export function toJson_ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomi
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -18386,6 +18472,11 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomize {
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -18431,6 +18522,7 @@ export function toJson_ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustom
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -20055,6 +20147,11 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomize {
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -20100,6 +20197,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKusto
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -20311,6 +20409,11 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomize 
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -20356,6 +20459,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKust
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -21980,6 +22084,11 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomize {
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -22025,6 +22134,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustom
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -22236,6 +22346,11 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomize {
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -22281,6 +22396,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKusto
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -22591,6 +22707,11 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomize {
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -22636,6 +22757,7 @@ export function toJson_ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKusto
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -22847,6 +22969,11 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomize 
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -22892,6 +23019,7 @@ export function toJson_ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKust
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -23202,6 +23330,11 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustom
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -23247,6 +23380,7 @@ export function toJson_ApplicationSetSpecGeneratorsPullRequestTemplateSpecSource
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -23458,6 +23592,11 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKusto
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -23503,6 +23642,7 @@ export function toJson_ApplicationSetSpecGeneratorsPullRequestTemplateSpecSource
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -23813,6 +23953,11 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustom
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -23858,6 +24003,7 @@ export function toJson_ApplicationSetSpecGeneratorsScmProviderTemplateSpecSource
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -24069,6 +24215,11 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKusto
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -24114,6 +24265,7 @@ export function toJson_ApplicationSetSpecGeneratorsScmProviderTemplateSpecSource
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -35501,6 +35653,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -35546,6 +35703,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisi
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -35757,6 +35915,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -35802,6 +35965,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisi
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -36112,6 +36276,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -36157,6 +36326,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTempl
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -36368,6 +36538,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -36413,6 +36588,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTempl
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -36723,6 +36899,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -36768,6 +36949,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSp
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -36979,6 +37161,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -37024,6 +37211,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSp
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -37334,6 +37522,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -37379,6 +37572,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateS
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -37590,6 +37784,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -37635,6 +37834,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateS
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -37945,6 +38145,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -37990,6 +38195,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplat
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -38201,6 +38407,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -38246,6 +38457,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplat
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -38556,6 +38768,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -38601,6 +38818,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTe
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -38812,6 +39030,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -38857,6 +39080,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTe
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -39167,6 +39391,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -39212,6 +39441,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTe
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -39423,6 +39653,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -39468,6 +39703,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTe
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -40076,6 +40312,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -40121,6 +40362,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisio
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -40332,6 +40574,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -40377,6 +40624,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisio
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -40687,6 +40935,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -40732,6 +40985,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClustersTempla
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -40943,6 +41197,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -40988,6 +41247,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClustersTempla
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -41298,6 +41558,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -41343,6 +41608,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpe
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -41554,6 +41820,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -41599,6 +41870,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpe
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -41909,6 +42181,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -41954,6 +42231,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSp
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -42165,6 +42443,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -42210,6 +42493,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSp
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -42520,6 +42804,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -42565,6 +42854,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplate
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -42776,6 +43066,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -42821,6 +43116,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplate
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -43131,6 +43427,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -43176,6 +43477,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTem
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -43387,6 +43689,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -43432,6 +43739,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTem
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -43742,6 +44050,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -43787,6 +44100,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTem
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,
@@ -43998,6 +44312,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
   readonly images?: string[];
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesKustomize#namePrefix
    */
   readonly namePrefix?: string;
@@ -44043,6 +44362,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTem
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
     'namespace': obj.namespace,

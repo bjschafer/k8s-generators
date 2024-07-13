@@ -416,7 +416,8 @@ export enum AddressPoolV1Beta1SpecProtocol {
 
 
 /**
- * BFDProfile represents the settings of the bfd session that can be optionally associated with a BGP session.
+ * BFDProfile represents the settings of the bfd session that can be
+optionally associated with a BGP session.
  *
  * @schema BFDProfile
  */
@@ -470,7 +471,8 @@ export class BfdProfile extends ApiObject {
 }
 
 /**
- * BFDProfile represents the settings of the bfd session that can be optionally associated with a BGP session.
+ * BFDProfile represents the settings of the bfd session that can be
+ * optionally associated with a BGP session.
  *
  * @schema BFDProfile
  */
@@ -511,14 +513,18 @@ export function toJson_BfdProfileProps(obj: BfdProfileProps | undefined): Record
  */
 export interface BfdProfileSpec {
   /**
-   * Configures the detection multiplier to determine packet loss. The remote transmission interval will be multiplied by this value to determine the connection loss detection timer.
+   * Configures the detection multiplier to determine
+   * packet loss. The remote transmission interval will be multiplied
+   * by this value to determine the connection loss detection timer.
    *
    * @schema BfdProfileSpec#detectMultiplier
    */
   readonly detectMultiplier?: number;
 
   /**
-   * Configures the minimal echo receive transmission interval that this system is capable of handling in milliseconds. Defaults to 50ms
+   * Configures the minimal echo receive transmission
+   * interval that this system is capable of handling in milliseconds.
+   * Defaults to 50ms
    *
    * @default 50ms
    * @schema BfdProfileSpec#echoInterval
@@ -526,28 +532,35 @@ export interface BfdProfileSpec {
   readonly echoInterval?: number;
 
   /**
-   * Enables or disables the echo transmission mode. This mode is disabled by default, and not supported on multi hops setups.
+   * Enables or disables the echo transmission mode.
+   * This mode is disabled by default, and not supported on multi
+   * hops setups.
    *
    * @schema BfdProfileSpec#echoMode
    */
   readonly echoMode?: boolean;
 
   /**
-   * For multi hop sessions only: configure the minimum expected TTL for an incoming BFD control packet.
+   * For multi hop sessions only: configure the minimum
+   * expected TTL for an incoming BFD control packet.
    *
    * @schema BfdProfileSpec#minimumTtl
    */
   readonly minimumTtl?: number;
 
   /**
-   * Mark session as passive: a passive session will not attempt to start the connection and will wait for control packets from peer before it begins replying.
+   * Mark session as passive: a passive session will not
+   * attempt to start the connection and will wait for control packets
+   * from peer before it begins replying.
    *
    * @schema BfdProfileSpec#passiveMode
    */
   readonly passiveMode?: boolean;
 
   /**
-   * The minimum interval that this system is capable of receiving control packets in milliseconds. Defaults to 300ms.
+   * The minimum interval that this system is capable of
+   * receiving control packets in milliseconds.
+   * Defaults to 300ms.
    *
    * @default 300ms.
    * @schema BfdProfileSpec#receiveInterval
@@ -555,7 +568,9 @@ export interface BfdProfileSpec {
   readonly receiveInterval?: number;
 
   /**
-   * The minimum transmission interval (less jitter) that this system wants to use to send BFD control packets in milliseconds. Defaults to 300ms
+   * The minimum transmission interval (less jitter)
+   * that this system wants to use to send BFD control packets in
+   * milliseconds. Defaults to 300ms
    *
    * @default 300ms
    * @schema BfdProfileSpec#transmitInterval
@@ -586,7 +601,9 @@ export function toJson_BfdProfileSpec(obj: BfdProfileSpec | undefined): Record<s
 
 
 /**
- * BGPAdvertisement allows to advertise the IPs coming from the selected IPAddressPools via BGP, setting the parameters of the BGP Advertisement.
+ * BGPAdvertisement allows to advertise the IPs coming
+from the selected IPAddressPools via BGP, setting the parameters of the
+BGP Advertisement.
  *
  * @schema BGPAdvertisement
  */
@@ -640,7 +657,9 @@ export class BgpAdvertisement extends ApiObject {
 }
 
 /**
- * BGPAdvertisement allows to advertise the IPs coming from the selected IPAddressPools via BGP, setting the parameters of the BGP Advertisement.
+ * BGPAdvertisement allows to advertise the IPs coming
+ * from the selected IPAddressPools via BGP, setting the parameters of the
+ * BGP Advertisement.
  *
  * @schema BGPAdvertisement
  */
@@ -697,14 +716,17 @@ export interface BgpAdvertisementSpec {
   readonly aggregationLengthV6?: number;
 
   /**
-   * The BGP communities to be associated with the announcement. Each item can be a standard community of the form 1234:1234, a large community of the form large:1234:1234:1234 or the name of an alias defined in the Community CRD.
+   * The BGP communities to be associated with the announcement. Each item can be a standard community of the
+   * form 1234:1234, a large community of the form large:1234:1234:1234 or the name of an alias defined in the
+   * Community CRD.
    *
    * @schema BgpAdvertisementSpec#communities
    */
   readonly communities?: string[];
 
   /**
-   * A selector for the IPAddressPools which would get advertised via this advertisement. If no IPAddressPool is selected by this or by the list, the advertisement is applied to all the IPAddressPools.
+   * A selector for the IPAddressPools which would get advertised via this advertisement.
+   * If no IPAddressPool is selected by this or by the list, the advertisement is applied to all the IPAddressPools.
    *
    * @schema BgpAdvertisementSpec#ipAddressPoolSelectors
    */
@@ -718,7 +740,8 @@ export interface BgpAdvertisementSpec {
   readonly ipAddressPools?: string[];
 
   /**
-   * The BGP LOCAL_PREF attribute which is used by BGP best path algorithm, Path with higher localpref is preferred over one with lower localpref.
+   * The BGP LOCAL_PREF attribute which is used by BGP best path algorithm,
+   * Path with higher localpref is preferred over one with lower localpref.
    *
    * @schema BgpAdvertisementSpec#localPref
    */
@@ -732,7 +755,8 @@ export interface BgpAdvertisementSpec {
   readonly nodeSelectors?: BgpAdvertisementSpecNodeSelectors[];
 
   /**
-   * Peers limits the bgppeer to advertise the ips of the selected pools to. When empty, the loadbalancer IP is announced to all the BGPPeers configured.
+   * Peers limits the bgppeer to advertise the ips of the selected pools to.
+   * When empty, the loadbalancer IP is announced to all the BGPPeers configured.
    *
    * @schema BgpAdvertisementSpec#peers
    */
@@ -762,7 +786,9 @@ export function toJson_BgpAdvertisementSpec(obj: BgpAdvertisementSpec | undefine
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.
+ * A label selector is a label query over a set of resources. The result of matchLabels and
+ * matchExpressions are ANDed. An empty label selector matches all objects. A null
+ * label selector matches no objects.
  *
  * @schema BgpAdvertisementSpecIpAddressPoolSelectors
  */
@@ -775,7 +801,9 @@ export interface BgpAdvertisementSpecIpAddressPoolSelectors {
   readonly matchExpressions?: BgpAdvertisementSpecIpAddressPoolSelectorsMatchExpressions[];
 
   /**
-   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". The requirements are ANDed.
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
    *
    * @schema BgpAdvertisementSpecIpAddressPoolSelectors#matchLabels
    */
@@ -799,7 +827,9 @@ export function toJson_BgpAdvertisementSpecIpAddressPoolSelectors(obj: BgpAdvert
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.
+ * A label selector is a label query over a set of resources. The result of matchLabels and
+ * matchExpressions are ANDed. An empty label selector matches all objects. A null
+ * label selector matches no objects.
  *
  * @schema BgpAdvertisementSpecNodeSelectors
  */
@@ -812,7 +842,9 @@ export interface BgpAdvertisementSpecNodeSelectors {
   readonly matchExpressions?: BgpAdvertisementSpecNodeSelectorsMatchExpressions[];
 
   /**
-   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". The requirements are ANDed.
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
    *
    * @schema BgpAdvertisementSpecNodeSelectors#matchLabels
    */
@@ -836,7 +868,8 @@ export function toJson_BgpAdvertisementSpecNodeSelectors(obj: BgpAdvertisementSp
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
  *
  * @schema BgpAdvertisementSpecIpAddressPoolSelectorsMatchExpressions
  */
@@ -849,14 +882,18 @@ export interface BgpAdvertisementSpecIpAddressPoolSelectorsMatchExpressions {
   readonly key: string;
 
   /**
-   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
    * @schema BgpAdvertisementSpecIpAddressPoolSelectorsMatchExpressions#operator
    */
   readonly operator: string;
 
   /**
-   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
    *
    * @schema BgpAdvertisementSpecIpAddressPoolSelectorsMatchExpressions#values
    */
@@ -881,7 +918,8 @@ export function toJson_BgpAdvertisementSpecIpAddressPoolSelectorsMatchExpression
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
  *
  * @schema BgpAdvertisementSpecNodeSelectorsMatchExpressions
  */
@@ -894,14 +932,18 @@ export interface BgpAdvertisementSpecNodeSelectorsMatchExpressions {
   readonly key: string;
 
   /**
-   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
    * @schema BgpAdvertisementSpecNodeSelectorsMatchExpressions#operator
    */
   readonly operator: string;
 
   /**
-   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
    *
    * @schema BgpAdvertisementSpecNodeSelectorsMatchExpressions#values
    */
@@ -1055,7 +1097,8 @@ export interface BgpPeerSpec {
   readonly myAsn: number;
 
   /**
-   * Only connect to this peer on nodes that match one of these selectors.
+   * Only connect to this peer on nodes that match one of these
+   * selectors.
    *
    * @schema BgpPeerSpec#nodeSelectors
    */
@@ -1302,6 +1345,20 @@ export interface BgpPeerV1Beta2Spec {
   readonly bfdProfile?: string;
 
   /**
+   * Requested BGP connect time, controls how long BGP waits between connection attempts to a neighbor.
+   *
+   * @schema BgpPeerV1Beta2Spec#connectTime
+   */
+  readonly connectTime?: string;
+
+  /**
+   * To set if we want to disable MP BGP that will separate IPv4 and IPv6 route exchanges into distinct BGP sessions.
+   *
+   * @schema BgpPeerV1Beta2Spec#disableMP
+   */
+  readonly disableMp?: boolean;
+
+  /**
    * To set if the BGPPeer is multi-hops away. Needed for FRR mode only.
    *
    * @schema BgpPeerV1Beta2Spec#ebgpMultiHop
@@ -1330,7 +1387,8 @@ export interface BgpPeerV1Beta2Spec {
   readonly myAsn: number;
 
   /**
-   * Only connect to this peer on nodes that match one of these selectors.
+   * Only connect to this peer on nodes that match one of these
+   * selectors.
    *
    * @schema BgpPeerV1Beta2Spec#nodeSelectors
    */
@@ -1344,7 +1402,10 @@ export interface BgpPeerV1Beta2Spec {
   readonly password?: string;
 
   /**
-   * passwordSecret is name of the authentication secret for BGP Peer. the secret must be of type "kubernetes.io/basic-auth", and created in the same namespace as the MetalLB deployment. The password is stored in the secret as the key "password".
+   * passwordSecret is name of the authentication secret for BGP Peer.
+   * the secret must be of type "kubernetes.io/basic-auth", and created in the
+   * same namespace as the MetalLB deployment. The password is stored in the
+   * secret as the key "password".
    *
    * @schema BgpPeerV1Beta2Spec#passwordSecret
    */
@@ -1386,7 +1447,8 @@ export interface BgpPeerV1Beta2Spec {
   readonly sourceAddress?: string;
 
   /**
-   * To set if we want to peer with the BGPPeer using an interface belonging to a host vrf
+   * To set if we want to peer with the BGPPeer using an interface belonging to
+   * a host vrf
    *
    * @schema BgpPeerV1Beta2Spec#vrf
    */
@@ -1402,6 +1464,8 @@ export function toJson_BgpPeerV1Beta2Spec(obj: BgpPeerV1Beta2Spec | undefined): 
   if (obj === undefined) { return undefined; }
   const result = {
     'bfdProfile': obj.bfdProfile,
+    'connectTime': obj.connectTime,
+    'disableMP': obj.disableMp,
     'ebgpMultiHop': obj.ebgpMultiHop,
     'holdTime': obj.holdTime,
     'keepaliveTime': obj.keepaliveTime,
@@ -1422,7 +1486,9 @@ export function toJson_BgpPeerV1Beta2Spec(obj: BgpPeerV1Beta2Spec | undefined): 
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.
+ * A label selector is a label query over a set of resources. The result of matchLabels and
+ * matchExpressions are ANDed. An empty label selector matches all objects. A null
+ * label selector matches no objects.
  *
  * @schema BgpPeerV1Beta2SpecNodeSelectors
  */
@@ -1435,7 +1501,9 @@ export interface BgpPeerV1Beta2SpecNodeSelectors {
   readonly matchExpressions?: BgpPeerV1Beta2SpecNodeSelectorsMatchExpressions[];
 
   /**
-   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". The requirements are ANDed.
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
    *
    * @schema BgpPeerV1Beta2SpecNodeSelectors#matchLabels
    */
@@ -1459,7 +1527,10 @@ export function toJson_BgpPeerV1Beta2SpecNodeSelectors(obj: BgpPeerV1Beta2SpecNo
 /* eslint-enable max-len, quote-props */
 
 /**
- * passwordSecret is name of the authentication secret for BGP Peer. the secret must be of type "kubernetes.io/basic-auth", and created in the same namespace as the MetalLB deployment. The password is stored in the secret as the key "password".
+ * passwordSecret is name of the authentication secret for BGP Peer.
+ * the secret must be of type "kubernetes.io/basic-auth", and created in the
+ * same namespace as the MetalLB deployment. The password is stored in the
+ * secret as the key "password".
  *
  * @schema BgpPeerV1Beta2SpecPasswordSecret
  */
@@ -1496,7 +1567,8 @@ export function toJson_BgpPeerV1Beta2SpecPasswordSecret(obj: BgpPeerV1Beta2SpecP
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
  *
  * @schema BgpPeerV1Beta2SpecNodeSelectorsMatchExpressions
  */
@@ -1509,14 +1581,18 @@ export interface BgpPeerV1Beta2SpecNodeSelectorsMatchExpressions {
   readonly key: string;
 
   /**
-   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
    * @schema BgpPeerV1Beta2SpecNodeSelectorsMatchExpressions#operator
    */
   readonly operator: string;
 
   /**
-   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
    *
    * @schema BgpPeerV1Beta2SpecNodeSelectorsMatchExpressions#values
    */
@@ -1542,7 +1618,8 @@ export function toJson_BgpPeerV1Beta2SpecNodeSelectorsMatchExpressions(obj: BgpP
 
 
 /**
- * Community is a collection of aliases for communities. Users can define named aliases to be used in the BGPPeer CRD.
+ * Community is a collection of aliases for communities.
+Users can define named aliases to be used in the BGPPeer CRD.
  *
  * @schema Community
  */
@@ -1596,7 +1673,8 @@ export class Community extends ApiObject {
 }
 
 /**
- * Community is a collection of aliases for communities. Users can define named aliases to be used in the BGPPeer CRD.
+ * Community is a collection of aliases for communities.
+ * Users can define named aliases to be used in the BGPPeer CRD.
  *
  * @schema Community
  */
@@ -1669,7 +1747,8 @@ export interface CommunitySpecCommunities {
   readonly name?: string;
 
   /**
-   * The BGP community value corresponding to the given name. Can be a standard community of the form 1234:1234 or a large community of the form large:1234:1234:1234.
+   * The BGP community value corresponding to the given name. Can be a standard community of the form 1234:1234
+   * or a large community of the form large:1234:1234:1234.
    *
    * @schema CommunitySpecCommunities#value
    */
@@ -1694,7 +1773,8 @@ export function toJson_CommunitySpecCommunities(obj: CommunitySpecCommunities | 
 
 
 /**
- * IPAddressPool represents a pool of IP addresses that can be allocated to LoadBalancer services.
+ * IPAddressPool represents a pool of IP addresses that can be allocated
+to LoadBalancer services.
  *
  * @schema IPAddressPool
  */
@@ -1748,7 +1828,8 @@ export class IpAddressPool extends ApiObject {
 }
 
 /**
- * IPAddressPool represents a pool of IP addresses that can be allocated to LoadBalancer services.
+ * IPAddressPool represents a pool of IP addresses that can be allocated
+ * to LoadBalancer services.
  *
  * @schema IPAddressPool
  */
@@ -1789,28 +1870,39 @@ export function toJson_IpAddressPoolProps(obj: IpAddressPoolProps | undefined): 
  */
 export interface IpAddressPoolSpec {
   /**
-   * A list of IP address ranges over which MetalLB has authority. You can list multiple ranges in a single pool, they will all share the same settings. Each range can be either a CIDR prefix, or an explicit start-end range of IPs.
+   * A list of IP address ranges over which MetalLB has authority.
+   * You can list multiple ranges in a single pool, they will all share the
+   * same settings. Each range can be either a CIDR prefix, or an explicit
+   * start-end range of IPs.
    *
    * @schema IpAddressPoolSpec#addresses
    */
   readonly addresses: string[];
 
   /**
-   * AutoAssign flag used to prevent MetallB from automatic allocation for a pool.
+   * AutoAssign flag used to prevent MetallB from automatic allocation
+   * for a pool.
    *
    * @schema IpAddressPoolSpec#autoAssign
    */
   readonly autoAssign?: boolean;
 
   /**
-   * AvoidBuggyIPs prevents addresses ending with .0 and .255 to be used by a pool.
+   * AvoidBuggyIPs prevents addresses ending with .0 and .255
+   * to be used by a pool.
    *
    * @schema IpAddressPoolSpec#avoidBuggyIPs
    */
   readonly avoidBuggyIPs?: boolean;
 
   /**
-   * AllocateTo makes ip pool allocation to specific namespace and/or service. The controller will use the pool with lowest value of priority in case of multiple matches. A pool with no priority set will be used only if the pools with priority can't be used. If multiple matching IPAddressPools are available it will check for the availability of IPs sorting the matching IPAddressPools by priority, starting from the highest to the lowest. If multiple IPAddressPools have the same priority, choice will be random.
+   * AllocateTo makes ip pool allocation to specific namespace and/or service.
+   * The controller will use the pool with lowest value of priority in case of
+   * multiple matches. A pool with no priority set will be used only if the
+   * pools with priority can't be used. If multiple matching IPAddressPools are
+   * available it will check for the availability of IPs sorting the matching
+   * IPAddressPools by priority, starting from the highest to the lowest. If
+   * multiple IPAddressPools have the same priority, choice will be random.
    *
    * @schema IpAddressPoolSpec#serviceAllocation
    */
@@ -1836,13 +1928,20 @@ export function toJson_IpAddressPoolSpec(obj: IpAddressPoolSpec | undefined): Re
 /* eslint-enable max-len, quote-props */
 
 /**
- * AllocateTo makes ip pool allocation to specific namespace and/or service. The controller will use the pool with lowest value of priority in case of multiple matches. A pool with no priority set will be used only if the pools with priority can't be used. If multiple matching IPAddressPools are available it will check for the availability of IPs sorting the matching IPAddressPools by priority, starting from the highest to the lowest. If multiple IPAddressPools have the same priority, choice will be random.
+ * AllocateTo makes ip pool allocation to specific namespace and/or service.
+ * The controller will use the pool with lowest value of priority in case of
+ * multiple matches. A pool with no priority set will be used only if the
+ * pools with priority can't be used. If multiple matching IPAddressPools are
+ * available it will check for the availability of IPs sorting the matching
+ * IPAddressPools by priority, starting from the highest to the lowest. If
+ * multiple IPAddressPools have the same priority, choice will be random.
  *
  * @schema IpAddressPoolSpecServiceAllocation
  */
 export interface IpAddressPoolSpecServiceAllocation {
   /**
-   * NamespaceSelectors list of label selectors to select namespace(s) for ip pool, an alternative to using namespace list.
+   * NamespaceSelectors list of label selectors to select namespace(s) for ip pool,
+   * an alternative to using namespace list.
    *
    * @schema IpAddressPoolSpecServiceAllocation#namespaceSelectors
    */
@@ -1863,7 +1962,8 @@ export interface IpAddressPoolSpecServiceAllocation {
   readonly priority?: number;
 
   /**
-   * ServiceSelectors list of label selector to select service(s) for which ip pool can be used for ip allocation.
+   * ServiceSelectors list of label selector to select service(s) for which ip pool
+   * can be used for ip allocation.
    *
    * @schema IpAddressPoolSpecServiceAllocation#serviceSelectors
    */
@@ -1889,7 +1989,9 @@ export function toJson_IpAddressPoolSpecServiceAllocation(obj: IpAddressPoolSpec
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.
+ * A label selector is a label query over a set of resources. The result of matchLabels and
+ * matchExpressions are ANDed. An empty label selector matches all objects. A null
+ * label selector matches no objects.
  *
  * @schema IpAddressPoolSpecServiceAllocationNamespaceSelectors
  */
@@ -1902,7 +2004,9 @@ export interface IpAddressPoolSpecServiceAllocationNamespaceSelectors {
   readonly matchExpressions?: IpAddressPoolSpecServiceAllocationNamespaceSelectorsMatchExpressions[];
 
   /**
-   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". The requirements are ANDed.
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
    *
    * @schema IpAddressPoolSpecServiceAllocationNamespaceSelectors#matchLabels
    */
@@ -1926,7 +2030,9 @@ export function toJson_IpAddressPoolSpecServiceAllocationNamespaceSelectors(obj:
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.
+ * A label selector is a label query over a set of resources. The result of matchLabels and
+ * matchExpressions are ANDed. An empty label selector matches all objects. A null
+ * label selector matches no objects.
  *
  * @schema IpAddressPoolSpecServiceAllocationServiceSelectors
  */
@@ -1939,7 +2045,9 @@ export interface IpAddressPoolSpecServiceAllocationServiceSelectors {
   readonly matchExpressions?: IpAddressPoolSpecServiceAllocationServiceSelectorsMatchExpressions[];
 
   /**
-   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". The requirements are ANDed.
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
    *
    * @schema IpAddressPoolSpecServiceAllocationServiceSelectors#matchLabels
    */
@@ -1963,7 +2071,8 @@ export function toJson_IpAddressPoolSpecServiceAllocationServiceSelectors(obj: I
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
  *
  * @schema IpAddressPoolSpecServiceAllocationNamespaceSelectorsMatchExpressions
  */
@@ -1976,14 +2085,18 @@ export interface IpAddressPoolSpecServiceAllocationNamespaceSelectorsMatchExpres
   readonly key: string;
 
   /**
-   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
    * @schema IpAddressPoolSpecServiceAllocationNamespaceSelectorsMatchExpressions#operator
    */
   readonly operator: string;
 
   /**
-   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
    *
    * @schema IpAddressPoolSpecServiceAllocationNamespaceSelectorsMatchExpressions#values
    */
@@ -2008,7 +2121,8 @@ export function toJson_IpAddressPoolSpecServiceAllocationNamespaceSelectorsMatch
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
  *
  * @schema IpAddressPoolSpecServiceAllocationServiceSelectorsMatchExpressions
  */
@@ -2021,14 +2135,18 @@ export interface IpAddressPoolSpecServiceAllocationServiceSelectorsMatchExpressi
   readonly key: string;
 
   /**
-   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
    * @schema IpAddressPoolSpecServiceAllocationServiceSelectorsMatchExpressions#operator
    */
   readonly operator: string;
 
   /**
-   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
    *
    * @schema IpAddressPoolSpecServiceAllocationServiceSelectorsMatchExpressions#values
    */
@@ -2054,7 +2172,8 @@ export function toJson_IpAddressPoolSpecServiceAllocationServiceSelectorsMatchEx
 
 
 /**
- * L2Advertisement allows to advertise the LoadBalancer IPs provided by the selected pools via L2.
+ * L2Advertisement allows to advertise the LoadBalancer IPs provided
+by the selected pools via L2.
  *
  * @schema L2Advertisement
  */
@@ -2108,7 +2227,8 @@ export class L2Advertisement extends ApiObject {
 }
 
 /**
- * L2Advertisement allows to advertise the LoadBalancer IPs provided by the selected pools via L2.
+ * L2Advertisement allows to advertise the LoadBalancer IPs provided
+ * by the selected pools via L2.
  *
  * @schema L2Advertisement
  */
@@ -2149,14 +2269,16 @@ export function toJson_L2AdvertisementProps(obj: L2AdvertisementProps | undefine
  */
 export interface L2AdvertisementSpec {
   /**
-   * A list of interfaces to announce from. The LB IP will be announced only from these interfaces. If the field is not set, we advertise from all the interfaces on the host.
+   * A list of interfaces to announce from. The LB IP will be announced only from these interfaces.
+   * If the field is not set, we advertise from all the interfaces on the host.
    *
    * @schema L2AdvertisementSpec#interfaces
    */
   readonly interfaces?: string[];
 
   /**
-   * A selector for the IPAddressPools which would get advertised via this advertisement. If no IPAddressPool is selected by this or by the list, the advertisement is applied to all the IPAddressPools.
+   * A selector for the IPAddressPools which would get advertised via this advertisement.
+   * If no IPAddressPool is selected by this or by the list, the advertisement is applied to all the IPAddressPools.
    *
    * @schema L2AdvertisementSpec#ipAddressPoolSelectors
    */
@@ -2196,7 +2318,9 @@ export function toJson_L2AdvertisementSpec(obj: L2AdvertisementSpec | undefined)
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.
+ * A label selector is a label query over a set of resources. The result of matchLabels and
+ * matchExpressions are ANDed. An empty label selector matches all objects. A null
+ * label selector matches no objects.
  *
  * @schema L2AdvertisementSpecIpAddressPoolSelectors
  */
@@ -2209,7 +2333,9 @@ export interface L2AdvertisementSpecIpAddressPoolSelectors {
   readonly matchExpressions?: L2AdvertisementSpecIpAddressPoolSelectorsMatchExpressions[];
 
   /**
-   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". The requirements are ANDed.
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
    *
    * @schema L2AdvertisementSpecIpAddressPoolSelectors#matchLabels
    */
@@ -2233,7 +2359,9 @@ export function toJson_L2AdvertisementSpecIpAddressPoolSelectors(obj: L2Advertis
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.
+ * A label selector is a label query over a set of resources. The result of matchLabels and
+ * matchExpressions are ANDed. An empty label selector matches all objects. A null
+ * label selector matches no objects.
  *
  * @schema L2AdvertisementSpecNodeSelectors
  */
@@ -2246,7 +2374,9 @@ export interface L2AdvertisementSpecNodeSelectors {
   readonly matchExpressions?: L2AdvertisementSpecNodeSelectorsMatchExpressions[];
 
   /**
-   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". The requirements are ANDed.
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
    *
    * @schema L2AdvertisementSpecNodeSelectors#matchLabels
    */
@@ -2270,7 +2400,8 @@ export function toJson_L2AdvertisementSpecNodeSelectors(obj: L2AdvertisementSpec
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
  *
  * @schema L2AdvertisementSpecIpAddressPoolSelectorsMatchExpressions
  */
@@ -2283,14 +2414,18 @@ export interface L2AdvertisementSpecIpAddressPoolSelectorsMatchExpressions {
   readonly key: string;
 
   /**
-   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
    * @schema L2AdvertisementSpecIpAddressPoolSelectorsMatchExpressions#operator
    */
   readonly operator: string;
 
   /**
-   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
    *
    * @schema L2AdvertisementSpecIpAddressPoolSelectorsMatchExpressions#values
    */
@@ -2315,7 +2450,8 @@ export function toJson_L2AdvertisementSpecIpAddressPoolSelectorsMatchExpressions
 /* eslint-enable max-len, quote-props */
 
 /**
- * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
  *
  * @schema L2AdvertisementSpecNodeSelectorsMatchExpressions
  */
@@ -2328,14 +2464,18 @@ export interface L2AdvertisementSpecNodeSelectorsMatchExpressions {
   readonly key: string;
 
   /**
-   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
    * @schema L2AdvertisementSpecNodeSelectorsMatchExpressions#operator
    */
   readonly operator: string;
 
   /**
-   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
    *
    * @schema L2AdvertisementSpecNodeSelectorsMatchExpressions#values
    */
@@ -2353,6 +2493,96 @@ export function toJson_L2AdvertisementSpecNodeSelectorsMatchExpressions(obj: L2A
     'key': obj.key,
     'operator': obj.operator,
     'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+
+/**
+ * ServiceL2Status reveals the actual traffic status of loadbalancer services in layer2 mode.
+ *
+ * @schema ServiceL2Status
+ */
+export class ServiceL2Status extends ApiObject {
+  /**
+   * Returns the apiVersion and kind for "ServiceL2Status"
+   */
+  public static readonly GVK: GroupVersionKind = {
+    apiVersion: 'metallb.io/v1beta1',
+    kind: 'ServiceL2Status',
+  }
+
+  /**
+   * Renders a Kubernetes manifest for "ServiceL2Status".
+   *
+   * This can be used to inline resource manifests inside other objects (e.g. as templates).
+   *
+   * @param props initialization props
+   */
+  public static manifest(props: ServiceL2StatusProps = {}): any {
+    return {
+      ...ServiceL2Status.GVK,
+      ...toJson_ServiceL2StatusProps(props),
+    };
+  }
+
+  /**
+   * Defines a "ServiceL2Status" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialization props
+   */
+  public constructor(scope: Construct, id: string, props: ServiceL2StatusProps = {}) {
+    super(scope, id, {
+      ...ServiceL2Status.GVK,
+      ...props,
+    });
+  }
+
+  /**
+   * Renders the object to Kubernetes JSON.
+   */
+  public toJson(): any {
+    const resolved = super.toJson();
+
+    return {
+      ...ServiceL2Status.GVK,
+      ...toJson_ServiceL2StatusProps(resolved),
+    };
+  }
+}
+
+/**
+ * ServiceL2Status reveals the actual traffic status of loadbalancer services in layer2 mode.
+ *
+ * @schema ServiceL2Status
+ */
+export interface ServiceL2StatusProps {
+  /**
+   * @schema ServiceL2Status#metadata
+   */
+  readonly metadata?: ApiObjectMetadata;
+
+  /**
+   * ServiceL2StatusSpec defines the desired state of ServiceL2Status.
+   *
+   * @schema ServiceL2Status#spec
+   */
+  readonly spec?: any;
+
+}
+
+/**
+ * Converts an object of type 'ServiceL2StatusProps' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ServiceL2StatusProps(obj: ServiceL2StatusProps | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': obj.metadata,
+    'spec': obj.spec,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
