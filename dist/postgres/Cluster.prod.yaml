@@ -1,0 +1,32 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: prod
+  namespace: postgres
+spec:
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://postgres/k8s/prod
+      endpointURL: https://ceph.cmdcentral.xyz
+      s3Credentials:
+        accessKeyId:
+          key: ACCESS_KEY_ID
+          name: backups
+        secretAccessKey:
+          key: SECRET_ACCESS_KEY
+          name: backups
+      wal:
+        compression: gzip
+  instances: 3
+  monitoring:
+    enablePodMonitor: true
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 500m
+      memory: 1Gi
+  storage:
+    size: 5Gi
+    storageClass: ceph-rbd
