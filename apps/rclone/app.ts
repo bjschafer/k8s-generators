@@ -4,6 +4,7 @@ import { App, Size } from "cdk8s";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { Cpu } from "cdk8s-plus-29";
 import { Rclone } from "../../lib/rclone";
+import { NewKustomize } from "../../lib/kustomize";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -60,3 +61,5 @@ new Rclone(app, "rclone", {
 });
 
 app.synth();
+
+NewKustomize(app.outdir);
