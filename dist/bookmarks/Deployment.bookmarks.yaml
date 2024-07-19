@@ -79,7 +79,7 @@ spec:
             initialDelaySeconds: 5
           resources:
             limits:
-              memory: 2048Mi
+              memory: 3072Mi
             requests:
               cpu: 200m
               memory: 420Mi
