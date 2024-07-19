@@ -20,7 +20,7 @@ compile: node_modules clean
 
 .PHONY: apps/%
 apps/%: compile
-	npx node apps/$(@F)/app.js
+	node apps/$(@F)/app.js
 
 .PHONY: watch
 watch: node_modules 
