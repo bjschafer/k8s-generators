@@ -17,6 +17,7 @@ spec:
           name: backups
       wal:
         compression: gzip
+  enableSuperuserAccess: true
   instances: 3
   monitoring:
     enablePodMonitor: true

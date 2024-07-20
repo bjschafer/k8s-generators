@@ -54,6 +54,7 @@ class ProdPostgres extends Chart {
           size: "5Gi",
           storageClass: StorageClass.CEPH_RBD,
         },
+        enableSuperuserAccess: true,
 
         backup: {
           barmanObjectStore: {
