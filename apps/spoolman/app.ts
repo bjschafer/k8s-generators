@@ -18,7 +18,7 @@ NewArgoApp(name, {
     },
   },
   namespace: namespace,
-  source: ArgoAppSource.PROD,
+  source: ArgoAppSource.GENERATORS,
   recurse: true,
   autoUpdate: {
     images: [
@@ -56,6 +56,8 @@ new AppPlus(app, `${name}-app`, {
       secret: dbCreds,
       key: "SPOOLMAN_DB_PASSWORD",
     }),
+    SPOOLMAN_HOST: EnvValue.fromValue("0.0.0.0"),
+    SPOOLMAN_PORT: EnvValue.fromValue("8000"),
     TZ: EnvValue.fromValue("America/Chicago"),
   },
   livenessProbe: Probe.fromHttpGet("/api/v1/health", { port: 8000 }),

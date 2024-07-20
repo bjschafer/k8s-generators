@@ -42,6 +42,10 @@ spec:
                 secretKeyRef:
                   key: SPOOLMAN_DB_PASSWORD
                   name: spoolman-creds
+            - name: SPOOLMAN_HOST
+              value: 0.0.0.0
+            - name: SPOOLMAN_PORT
+              value: "8000"
             - name: TZ
               value: America/Chicago
           image: ghcr.io/donkie/spoolman:latest

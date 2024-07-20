@@ -16,8 +16,8 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: spoolman
-    repoURL: git@github.com:bjschafer/k8s-prod.git
+    path: dist/spoolman
+    repoURL: git@github.com:bjschafer/k8s-generators.git
     targetRevision: main
   syncPolicy:
     automated:
