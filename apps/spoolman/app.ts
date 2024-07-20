@@ -48,7 +48,7 @@ new AppPlus(app, `${name}-app`, {
   ports: [8000],
   extraEnv: {
     SPOOLMAN_DB_TYPE: EnvValue.fromValue("postgres"),
-    SPOOLMAN_DB_HOST: EnvValue.fromValue("postgres.cmdcentral.xyz"),
+    SPOOLMAN_DB_HOST: EnvValue.fromValue("prod-rw.postgres.svc.cluster.local"),
     SPOOLMAN_DB_PORT: EnvValue.fromValue("5432"),
     SPOOLMAN_DB_NAME: EnvValue.fromValue(name),
     SPOOLMAN_DB_USERNAME: EnvValue.fromValue(name),

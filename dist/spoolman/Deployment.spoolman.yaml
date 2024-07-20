@@ -30,7 +30,7 @@ spec:
             - name: SPOOLMAN_DB_TYPE
               value: postgres
             - name: SPOOLMAN_DB_HOST
-              value: postgres.cmdcentral.xyz
+              value: prod-rw.postgres.svc.cluster.local
             - name: SPOOLMAN_DB_PORT
               value: "5432"
             - name: SPOOLMAN_DB_NAME
