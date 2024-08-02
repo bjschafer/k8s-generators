@@ -8,7 +8,7 @@ import {
   ClusterSpecBackupBarmanObjectStoreWalCompression,
 } from "../../imports/postgresql.cnpg.io";
 import { StorageClass } from "../../lib/volume";
-import { Quantity } from "../../imports/k8s";
+import { IntOrString, KubeService, Quantity } from "../../imports/k8s";
 
 const namespace = basename(__dirname);
 
@@ -55,6 +55,12 @@ class ProdPostgres extends Chart {
           storageClass: StorageClass.CEPH_RBD,
         },
         enableSuperuserAccess: true,
+        postgresql: {
+          pgHba: [
+            "host pdns pdns 10.0.10.0/24 scram-sha-256",
+            "hostssl pdns pdns 10.0.10.0/24 scram-sha-256",
+          ],
+        },
 
         backup: {
           barmanObjectStore: {
@@ -75,6 +81,32 @@ class ProdPostgres extends Chart {
                 ClusterSpecBackupBarmanObjectStoreWalCompression.GZIP,
             },
           },
+        },
+      },
+    });
+
+    new KubeService(this, "lb", {
+      metadata: {
+        name: "prod",
+        namespace: namespace,
+        annotations: {
+          "external-dns.alpha.kubernetes.io/hostname": "pg-prod.cmdcentral.xyz",
+        },
+      },
+      spec: {
+        type: "LoadBalancer",
+        ports: [
+          {
+            name: "postgres",
+            port: 5432,
+            targetPort: IntOrString.fromNumber(5432),
+            protocol: "TCP",
+          },
+        ],
+        selector: {
+          // TODO make this better
+          "cnpg.io/cluster": "prod",
+          role: "primary",
         },
       },
     });

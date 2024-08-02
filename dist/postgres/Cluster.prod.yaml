@@ -21,6 +21,10 @@ spec:
   instances: 3
   monitoring:
     enablePodMonitor: true
+  postgresql:
+    pg_hba:
+      - host pdns pdns 10.0.10.0/24 scram-sha-256
+      - hostssl pdns pdns 10.0.10.0/24 scram-sha-256
   resources:
     limits:
       cpu: 500m
