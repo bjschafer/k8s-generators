@@ -6,6 +6,7 @@ import { Construct } from "constructs";
 import {
   Cluster,
   ClusterSpecBackupBarmanObjectStoreWalCompression,
+  ScheduledBackup,
 } from "../../imports/postgresql.cnpg.io";
 import { StorageClass } from "../../lib/volume";
 import { IntOrString, KubeService, Quantity } from "../../imports/k8s";
@@ -82,6 +83,19 @@ class ProdPostgres extends Chart {
             },
           },
         },
+      },
+    });
+
+    new ScheduledBackup(this, "nightly", {
+      metadata: {
+        name: "nightly",
+        namespace: namespace,
+      },
+      spec: {
+        cluster: {
+          name: "prod",
+        },
+        schedule: "0 33 3 * * *",
       },
     });
 

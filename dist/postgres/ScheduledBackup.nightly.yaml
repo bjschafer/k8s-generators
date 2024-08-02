@@ -1,0 +1,9 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: nightly
+  namespace: postgres
+spec:
+  cluster:
+    name: prod
+  schedule: 0 33 3 * * *
