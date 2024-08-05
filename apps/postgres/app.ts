@@ -43,11 +43,11 @@ class ProdPostgres extends Chart {
         },
         resources: {
           requests: {
-            cpu: Quantity.fromString("500m"),
+            cpu: Quantity.fromString("750m"),
             memory: Quantity.fromString("1Gi"),
           },
           limits: {
-            cpu: Quantity.fromString("500m"),
+            cpu: Quantity.fromString("750m"),
             memory: Quantity.fromString("1Gi"),
           },
         },
