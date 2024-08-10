@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - ghcr.io/donkie/spoolman@sha256:be65a28c57aeac9efd32ddff3c3a361eac9d9fdeb54a06a8a8054c9865957897
+  - ghcr.io/donkie/spoolman@sha256:199a014fdbf582548afc025105761dd14981b74ac97588f250b4c47f54b64415
