@@ -1,15 +1,15 @@
 import { App, Chart } from "cdk8s";
-import { basename } from "path";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
-import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { Construct } from "constructs";
+import { basename } from "path";
+import { IntOrString, KubeService, Quantity } from "../../imports/k8s";
 import {
   Cluster,
   ClusterSpecBackupBarmanObjectStoreWalCompression,
   ScheduledBackup,
 } from "../../imports/postgresql.cnpg.io";
+import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
+import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { StorageClass } from "../../lib/volume";
-import { IntOrString, KubeService, Quantity } from "../../imports/k8s";
 
 const namespace = basename(__dirname);
 
@@ -40,6 +40,25 @@ class ProdPostgres extends Chart {
         instances: 3,
         monitoring: {
           enablePodMonitor: true,
+        },
+        // prefer to schedule on non-pis
+        affinity: {
+          nodeAffinity: {
+            preferredDuringSchedulingIgnoredDuringExecution: [
+              {
+                weight: 1,
+                preference: {
+                  matchExpressions: [
+                    {
+                      key: "kubernetes.io/arch",
+                      operator: "NotIn",
+                      values: ["arm64"],
+                    },
+                  ],
+                },
+              },
+            ],
+          },
         },
         resources: {
           requests: {
@@ -120,7 +139,7 @@ class ProdPostgres extends Chart {
         selector: {
           // TODO make this better
           "cnpg.io/cluster": "prod",
-          role: "primary",
+          "role": "primary",
         },
       },
     });
