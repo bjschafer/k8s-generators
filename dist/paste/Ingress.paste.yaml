@@ -1,0 +1,45 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: paste
+  namespace: paste
+spec:
+  rules:
+    - host: paste.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: paste
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+    - host: p.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: paste
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+    - host: share.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: paste
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - paste.cmdcentral.xyz
+        - p.cmdcentral.xyz
+        - share.cmdcentral.xyz
+      secretName: paste-tls

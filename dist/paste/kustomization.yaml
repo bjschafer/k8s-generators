@@ -1,0 +1,5 @@
+resources:
+  - Deployment.paste.yaml
+  - Ingress.paste.yaml
+  - PersistentVolumeClaim.paste-data.yaml
+  - Service.paste.yaml

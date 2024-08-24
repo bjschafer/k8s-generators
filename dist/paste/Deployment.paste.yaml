@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: paste
+  name: paste
+  namespace: paste
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: paste-paste-deployment-c8eece2b
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        backup.velero.io/backup-volumes: pvc-paste-data
+      labels:
+        app.kubernetes.io/name: paste
+        cdk8s.io/metadata.addr: paste-paste-deployment-c8eece2b
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: MICROBIN_DISABLE_TELEMETRY
+              value: "true"
+            - name: MICROBIN_JSON_DB
+              value: "true"
+            - name: MICROBIN_HASH_IDS
+              value: "true"
+            - name: MICROBIN_TITLE
+              value: Cmdcentral Paste
+          image: danielszabo99/microbin
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 5
+          name: paste
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 5
+          resources:
+            limits:
+              memory: 2048Mi
+            requests:
+              cpu: 100m
+              memory: 32Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /app/microbin_data
+              name: pvc-paste-data
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: pvc-paste-data
+          persistentVolumeClaim:
+            claimName: paste-data
+            readOnly: false
