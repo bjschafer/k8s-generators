@@ -68,7 +68,7 @@ spec:
             readOnlyRootFilesystem: false
             runAsNonRoot: false
           volumeMounts:
-            - mountPath: /app/microbin_data
+            - mountPath: /app
               name: pvc-paste-data
       dnsPolicy: ClusterFirst
       hostNetwork: false

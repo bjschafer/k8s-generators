@@ -64,7 +64,7 @@ new AppPlus(app, "paste", {
   volumes: [
     {
       name: "data",
-      mountPath: "/app/microbin_data",
+      mountPath: "/app",
       enableBackups: false,
       props: {
         storage: Size.gibibytes(25),
