@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - danielszabo99/microbin@sha256:c5bd4643135540a68a2846950fe4f65f3bcc94b62ed7c7644e563dfde6f1732c
