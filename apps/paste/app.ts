@@ -93,6 +93,7 @@ new AppPlus(app, "paste", {
     MICROBIN_HIGHLIGHTSYNTAX: EnvValue.fromValue("true"),
     MICROBIN_NO_LISTING: EnvValue.fromValue("true"),
     MICROBIN_PRIVATE: EnvValue.fromValue("true"),
+    MICROBIN_PUBLIC_PATH: EnvValue.fromValue("https://paste.cmdcentral.xyz/"),
     MICROBIN_QR: EnvValue.fromValue("true"),
     MICROBIN_TITLE: EnvValue.fromValue("Cmdcentral Paste"),
   },

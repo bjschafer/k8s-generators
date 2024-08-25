@@ -58,6 +58,8 @@ spec:
               value: "true"
             - name: MICROBIN_PRIVATE
               value: "true"
+            - name: MICROBIN_PUBLIC_PATH
+              value: https://paste.cmdcentral.xyz/
             - name: MICROBIN_QR
               value: "true"
             - name: MICROBIN_TITLE
