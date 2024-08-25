@@ -139,7 +139,7 @@ class ProdPostgres extends Chart {
         selector: {
           // TODO make this better
           "cnpg.io/cluster": "prod",
-          "role": "primary",
+          role: "primary",
         },
       },
     });
