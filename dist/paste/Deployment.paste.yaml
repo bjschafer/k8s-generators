@@ -49,8 +49,6 @@ spec:
               value: "true"
             - name: MICROBIN_HIGHLIGHTSYNTAX
               value: "true"
-            - name: MICROBIN_NO_LISTING
-              value: "true"
             - name: MICROBIN_PRIVATE
               value: "true"
             - name: MICROBIN_PUBLIC_PATH
