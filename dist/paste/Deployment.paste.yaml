@@ -29,11 +29,23 @@ spec:
       automountServiceAccountToken: false
       containers:
         - env:
+            - name: MICROBIN_DEFAULT_EXPIRY
+              value: 1week
             - name: MICROBIN_DISABLE_TELEMETRY
+              value: "true"
+            - name: MICROBIN_ENABLE_READONLY
               value: "true"
             - name: MICROBIN_JSON_DB
               value: "true"
             - name: MICROBIN_HASH_IDS
+              value: "true"
+            - name: MICROBIN_HIDE_FOOTER
+              value: "true"
+            - name: MICROBIN_HIGHLIGHTSYNTAX
+              value: "true"
+            - name: MICROBIN_PRIVATE
+              value: "true"
+            - name: MICROBIN_QR
               value: "true"
             - name: MICROBIN_TITLE
               value: Cmdcentral Paste
