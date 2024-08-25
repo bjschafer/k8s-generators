@@ -5,9 +5,9 @@ metadata:
   namespace: paste
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 25Gi
-  storageClassName: cephfs
+  storageClassName: ceph-rbd
   volumeMode: Filesystem

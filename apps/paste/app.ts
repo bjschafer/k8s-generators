@@ -71,8 +71,8 @@ new AppPlus(app, "paste", {
       enableBackups: false,
       props: {
         storage: Size.gibibytes(25),
-        storageClassName: StorageClass.CEPHFS,
-        accessModes: [PersistentVolumeAccessMode.READ_WRITE_MANY],
+        storageClassName: StorageClass.CEPH_RBD,
+        accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
       },
     },
   ],
@@ -86,7 +86,6 @@ new AppPlus(app, "paste", {
     MICROBIN_DISABLE_TELEMETRY: EnvValue.fromValue("true"),
     MICROBIN_ENABLE_READONLY: EnvValue.fromValue("true"),
     MICROBIN_GC_DAYS: EnvValue.fromValue("0"),
-    MICROBIN_JSON_DB: EnvValue.fromValue("true"),
     MICROBIN_HASH_IDS: EnvValue.fromValue("true"),
     MICROBIN_HIDE_FOOTER: EnvValue.fromValue("true"),
     MICROBIN_HIDE_LOGO: EnvValue.fromValue("true"),

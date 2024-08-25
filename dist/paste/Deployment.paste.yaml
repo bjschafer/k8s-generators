@@ -14,10 +14,7 @@ spec:
     matchLabels:
       cdk8s.io/metadata.addr: paste-paste-deployment-c8eece2b
   strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
+    type: Recreate
   template:
     metadata:
       annotations:
@@ -44,8 +41,6 @@ spec:
               value: "true"
             - name: MICROBIN_GC_DAYS
               value: "0"
-            - name: MICROBIN_JSON_DB
-              value: "true"
             - name: MICROBIN_HASH_IDS
               value: "true"
             - name: MICROBIN_HIDE_FOOTER
