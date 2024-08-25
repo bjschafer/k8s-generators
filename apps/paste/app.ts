@@ -8,6 +8,7 @@ import {
   EnvValue,
   PersistentVolumeAccessMode,
   Probe,
+  Secret,
 } from "cdk8s-plus-29";
 import { StorageClass } from "../../lib/volume";
 import { NewKustomize } from "../../lib/kustomize";
@@ -38,6 +39,8 @@ NewArgoApp(name, {
     ],
   },
 });
+
+const secrets = Secret.fromSecretName(app, `${name}-secrets`, "secrets");
 
 new AppPlus(app, "paste", {
   name,
@@ -74,13 +77,21 @@ new AppPlus(app, "paste", {
     },
   ],
   extraEnv: {
+    MICROBIN_ADMIN_USERNAME: EnvValue.fromValue("bschafer"),
+    MICROBIN_ADMIN_PASSWORD: EnvValue.fromSecretValue({
+      secret: secrets,
+      key: "MICROBIN_ADMIN_PASSWORD",
+    }),
     MICROBIN_DEFAULT_EXPIRY: EnvValue.fromValue("1week"),
     MICROBIN_DISABLE_TELEMETRY: EnvValue.fromValue("true"),
     MICROBIN_ENABLE_READONLY: EnvValue.fromValue("true"),
+    MICROBIN_GC_DAYS: EnvValue.fromValue("0"),
     MICROBIN_JSON_DB: EnvValue.fromValue("true"),
     MICROBIN_HASH_IDS: EnvValue.fromValue("true"),
     MICROBIN_HIDE_FOOTER: EnvValue.fromValue("true"),
+    MICROBIN_HIDE_LOGO: EnvValue.fromValue("true"),
     MICROBIN_HIGHLIGHTSYNTAX: EnvValue.fromValue("true"),
+    MICROBIN_NO_LISTING: EnvValue.fromValue("true"),
     MICROBIN_PRIVATE: EnvValue.fromValue("true"),
     MICROBIN_QR: EnvValue.fromValue("true"),
     MICROBIN_TITLE: EnvValue.fromValue("Cmdcentral Paste"),

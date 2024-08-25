@@ -29,19 +29,32 @@ spec:
       automountServiceAccountToken: false
       containers:
         - env:
+            - name: MICROBIN_ADMIN_USERNAME
+              value: bschafer
+            - name: MICROBIN_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: MICROBIN_ADMIN_PASSWORD
+                  name: secrets
             - name: MICROBIN_DEFAULT_EXPIRY
               value: 1week
             - name: MICROBIN_DISABLE_TELEMETRY
               value: "true"
             - name: MICROBIN_ENABLE_READONLY
               value: "true"
+            - name: MICROBIN_GC_DAYS
+              value: "0"
             - name: MICROBIN_JSON_DB
               value: "true"
             - name: MICROBIN_HASH_IDS
               value: "true"
             - name: MICROBIN_HIDE_FOOTER
               value: "true"
+            - name: MICROBIN_HIDE_LOGO
+              value: "true"
             - name: MICROBIN_HIGHLIGHTSYNTAX
+              value: "true"
+            - name: MICROBIN_NO_LISTING
               value: "true"
             - name: MICROBIN_PRIVATE
               value: "true"
