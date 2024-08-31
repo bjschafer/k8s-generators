@@ -28,7 +28,7 @@ NewArgoApp(name, {
       {
         image: image,
         strategy: "semver",
-        versionConstraint: "1.xx",
+        versionConstraint: "1.x",
       },
     ],
   },
