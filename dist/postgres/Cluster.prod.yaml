@@ -29,6 +29,17 @@ spec:
         compression: gzip
   enableSuperuserAccess: true
   instances: 3
+  managed:
+    services:
+      additional:
+        - selectorType: rw
+          serviceTemplate:
+            metadata:
+              annotations:
+                external-dns.alpha.kubernetes.io/hostname: pg-prod.cmdcentral.xyz
+              name: prod
+            spec:
+              type: LoadBalancer
   monitoring:
     enablePodMonitor: true
   postgresql:

@@ -1,7 +1,7 @@
 import { App, Chart } from "cdk8s";
 import { Construct } from "constructs";
 import { basename } from "path";
-import { IntOrString, KubeService, Quantity } from "../../imports/k8s";
+import { Quantity } from "../../imports/k8s";
 import {
   Cluster,
   ClusterSpecBackupBarmanObjectStoreWalCompression,
@@ -82,6 +82,28 @@ class ProdPostgres extends Chart {
           ],
         },
 
+        managed: {
+          services: {
+            additional: [
+              {
+                selectorType: "rw",
+                serviceTemplate: {
+                  metadata: {
+                    name: "prod",
+                    annotations: {
+                      "external-dns.alpha.kubernetes.io/hostname":
+                        "pg-prod.cmdcentral.xyz",
+                    },
+                  },
+                  spec: {
+                    type: "LoadBalancer",
+                  },
+                },
+              },
+            ],
+          },
+        },
+
         backup: {
           barmanObjectStore: {
             endpointUrl: "https://ceph.cmdcentral.xyz",
@@ -115,32 +137,6 @@ class ProdPostgres extends Chart {
           name: "prod",
         },
         schedule: "0 33 3 * * *",
-      },
-    });
-
-    new KubeService(this, "lb", {
-      metadata: {
-        name: "prod",
-        namespace: namespace,
-        annotations: {
-          "external-dns.alpha.kubernetes.io/hostname": "pg-prod.cmdcentral.xyz",
-        },
-      },
-      spec: {
-        type: "LoadBalancer",
-        ports: [
-          {
-            name: "postgres",
-            port: 5432,
-            targetPort: IntOrString.fromNumber(5432),
-            protocol: "TCP",
-          },
-        ],
-        selector: {
-          // TODO make this better
-          "cnpg.io/cluster": "prod",
-          role: "primary",
-        },
       },
     });
   }
