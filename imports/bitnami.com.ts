@@ -4,7 +4,9 @@ import { Construct } from 'constructs';
 
 
 /**
- * SealedSecret is the K8s representation of a "sealed Secret" - a regular k8s Secret that has been sealed (encrypted) using the controller's key.
+ * SealedSecret is the K8s representation of a "sealed Secret" - a
+regular k8s Secret that has been sealed (encrypted) using the
+controller's key.
  *
  * @schema SealedSecret
  */
@@ -58,7 +60,9 @@ export class SealedSecret extends ApiObject {
 }
 
 /**
- * SealedSecret is the K8s representation of a "sealed Secret" - a regular k8s Secret that has been sealed (encrypted) using the controller's key.
+ * SealedSecret is the K8s representation of a "sealed Secret" - a
+ * regular k8s Secret that has been sealed (encrypted) using the
+ * controller's key.
  *
  * @schema SealedSecret
  */
@@ -69,7 +73,7 @@ export interface SealedSecretProps {
   readonly metadata?: ApiObjectMetadata;
 
   /**
-   * SealedSecretSpec is the specification of a SealedSecret
+   * SealedSecretSpec is the specification of a SealedSecret.
    *
    * @schema SealedSecret#spec
    */
@@ -93,7 +97,7 @@ export function toJson_SealedSecretProps(obj: SealedSecretProps | undefined): Re
 /* eslint-enable max-len, quote-props */
 
 /**
- * SealedSecretSpec is the specification of a SealedSecret
+ * SealedSecretSpec is the specification of a SealedSecret.
  *
  * @schema SealedSecretSpec
  */
@@ -111,7 +115,8 @@ export interface SealedSecretSpec {
   readonly encryptedData: { [key: string]: string };
 
   /**
-   * Template defines the structure of the Secret that will be created from this sealed secret.
+   * Template defines the structure of the Secret that will be
+   * created from this sealed secret.
    *
    * @schema SealedSecretSpec#template
    */
@@ -136,27 +141,32 @@ export function toJson_SealedSecretSpec(obj: SealedSecretSpec | undefined): Reco
 /* eslint-enable max-len, quote-props */
 
 /**
- * Template defines the structure of the Secret that will be created from this sealed secret.
+ * Template defines the structure of the Secret that will be
+ * created from this sealed secret.
  *
  * @schema SealedSecretSpecTemplate
  */
 export interface SealedSecretSpecTemplate {
   /**
-   * Keys that should be templated using decrypted data
+   * Keys that should be templated using decrypted data.
    *
    * @schema SealedSecretSpecTemplate#data
    */
   readonly data?: { [key: string]: string };
 
   /**
-   * Immutable, if set to true, ensures that data stored in the Secret cannot be updated (only object metadata can be modified). If not set to true, the field can be modified at any time. Defaulted to nil.
+   * Immutable, if set to true, ensures that data stored in the Secret cannot
+   * be updated (only object metadata can be modified).
+   * If not set to true, the field can be modified at any time.
+   * Defaulted to nil.
    *
    * @schema SealedSecretSpecTemplate#immutable
    */
   readonly immutable?: boolean;
 
   /**
-   * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
+   * Standard object's metadata.
+   * More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
    *
    * @schema SealedSecretSpecTemplate#metadata
    */
@@ -189,7 +199,8 @@ export function toJson_SealedSecretSpecTemplate(obj: SealedSecretSpecTemplate | 
 /* eslint-enable max-len, quote-props */
 
 /**
- * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
+ * Standard object's metadata.
+ * More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
  *
  * @schema SealedSecretSpecTemplateMetadata
  */

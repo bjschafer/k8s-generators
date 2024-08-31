@@ -181,14 +181,19 @@ export interface ApplicationSpec {
   readonly info?: ApplicationSpecInfo[];
 
   /**
-   * Project is a reference to the project this application belongs to. The empty string means that application belongs to the 'default' project.
+   * Project is a reference to the project this application belongs to.
+   * The empty string means that application belongs to the 'default' project.
    *
    * @schema ApplicationSpec#project
    */
   readonly project: string;
 
   /**
-   * RevisionHistoryLimit limits the number of items kept in the application's revision history, which is used for informational purposes as well as for rollbacks to previous versions. This should only be changed in exceptional circumstances. Setting to zero will store no history. This will reduce storage used. Increasing will increase the space used to store the history, so we do not recommend increasing it. Default is 10.
+   * RevisionHistoryLimit limits the number of items kept in the application's revision history, which is used for informational purposes as well as for rollbacks to previous versions.
+   * This should only be changed in exceptional circumstances.
+   * Setting to zero will store no history. This will reduce storage used.
+   * Increasing will increase the space used to store the history, so we do not recommend increasing it.
+   * Default is 10.
    *
    * @default 10.
    * @schema ApplicationSpec#revisionHistoryLimit
@@ -379,28 +384,32 @@ export interface ApplicationOperationSync {
   readonly resources?: ApplicationOperationSyncResources[];
 
   /**
-   * Revision is the revision (Git) or chart version (Helm) which to sync the application to If omitted, will use the revision specified in app spec.
+   * Revision is the revision (Git) or chart version (Helm) which to sync the application to
+   * If omitted, will use the revision specified in app spec.
    *
    * @schema ApplicationOperationSync#revision
    */
   readonly revision?: string;
 
   /**
-   * Revisions is the list of revision (Git) or chart version (Helm) which to sync each source in sources field for the application to If omitted, will use the revision specified in app spec.
+   * Revisions is the list of revision (Git) or chart version (Helm) which to sync each source in sources field for the application to
+   * If omitted, will use the revision specified in app spec.
    *
    * @schema ApplicationOperationSync#revisions
    */
   readonly revisions?: string[];
 
   /**
-   * Source overrides the source definition set in the application. This is typically set in a Rollback operation and is nil during a Sync operation
+   * Source overrides the source definition set in the application.
+   * This is typically set in a Rollback operation and is nil during a Sync operation
    *
    * @schema ApplicationOperationSync#source
    */
   readonly source?: ApplicationOperationSyncSource;
 
   /**
-   * Sources overrides the source definition set in the application. This is typically set in a Rollback operation and is nil during a Sync operation
+   * Sources overrides the source definition set in the application.
+   * This is typically set in a Rollback operation and is nil during a Sync operation
    *
    * @schema ApplicationOperationSync#sources
    */
@@ -459,7 +468,8 @@ export interface ApplicationSpecDestination {
   readonly name?: string;
 
   /**
-   * Namespace specifies the target namespace for the application's resources. The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace
+   * Namespace specifies the target namespace for the application's resources.
+   * The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace
    *
    * @schema ApplicationSpecDestination#namespace
    */
@@ -517,7 +527,8 @@ export interface ApplicationSpecIgnoreDifferences {
   readonly kind: string;
 
   /**
-   * ManagedFieldsManagers is a list of trusted managers. Fields mutated by those managers will take precedence over the desired state defined in the SCM and won't be displayed in diffs
+   * ManagedFieldsManagers is a list of trusted managers. Fields mutated by those managers will take precedence over the
+   * desired state defined in the SCM and won't be displayed in diffs
    *
    * @schema ApplicationSpecIgnoreDifferences#managedFieldsManagers
    */
@@ -649,7 +660,9 @@ export interface ApplicationSpecSource {
   readonly repoUrl: string;
 
   /**
-   * TargetRevision defines the revision of the source to sync the application to. In case of Git, this can be commit, tag, or branch. If omitted, will equal to HEAD. In case of Helm, this is a semver tag for the Chart's version.
+   * TargetRevision defines the revision of the source to sync the application to.
+   * In case of Git, this can be commit, tag, or branch. If omitted, will equal to HEAD.
+   * In case of Helm, this is a semver tag for the Chart's version.
    *
    * @schema ApplicationSpecSource#targetRevision
    */
@@ -742,7 +755,9 @@ export interface ApplicationSpecSources {
   readonly repoUrl: string;
 
   /**
-   * TargetRevision defines the revision of the source to sync the application to. In case of Git, this can be commit, tag, or branch. If omitted, will equal to HEAD. In case of Helm, this is a semver tag for the Chart's version.
+   * TargetRevision defines the revision of the source to sync the application to.
+   * In case of Git, this can be commit, tag, or branch. If omitted, will equal to HEAD.
+   * In case of Helm, this is a semver tag for the Chart's version.
    *
    * @schema ApplicationSpecSources#targetRevision
    */
@@ -916,7 +931,8 @@ export function toJson_ApplicationOperationSyncResources(obj: ApplicationOperati
 /* eslint-enable max-len, quote-props */
 
 /**
- * Source overrides the source definition set in the application. This is typically set in a Rollback operation and is nil during a Sync operation
+ * Source overrides the source definition set in the application.
+ * This is typically set in a Rollback operation and is nil during a Sync operation
  *
  * @schema ApplicationOperationSyncSource
  */
@@ -978,7 +994,9 @@ export interface ApplicationOperationSyncSource {
   readonly repoUrl: string;
 
   /**
-   * TargetRevision defines the revision of the source to sync the application to. In case of Git, this can be commit, tag, or branch. If omitted, will equal to HEAD. In case of Helm, this is a semver tag for the Chart's version.
+   * TargetRevision defines the revision of the source to sync the application to.
+   * In case of Git, this can be commit, tag, or branch. If omitted, will equal to HEAD.
+   * In case of Helm, this is a semver tag for the Chart's version.
    *
    * @schema ApplicationOperationSyncSource#targetRevision
    */
@@ -1071,7 +1089,9 @@ export interface ApplicationOperationSyncSources {
   readonly repoUrl: string;
 
   /**
-   * TargetRevision defines the revision of the source to sync the application to. In case of Git, this can be commit, tag, or branch. If omitted, will equal to HEAD. In case of Helm, this is a semver tag for the Chart's version.
+   * TargetRevision defines the revision of the source to sync the application to.
+   * In case of Git, this can be commit, tag, or branch. If omitted, will equal to HEAD.
+   * In case of Helm, this is a semver tag for the Chart's version.
    *
    * @schema ApplicationOperationSyncSources#targetRevision
    */
@@ -2572,7 +2592,9 @@ export function toJson_ApplicationOperationSyncSourcesPlugin(obj: ApplicationOpe
  */
 export interface ApplicationOperationSyncSyncStrategyApply {
   /**
-   * Force indicates whether or not to supply the --force flag to `kubectl apply`. The --force flag deletes and re-create the resource, when PATCH encounters conflict and has retried for 5 times.
+   * Force indicates whether or not to supply the --force flag to `kubectl apply`.
+   * The --force flag deletes and re-create the resource, when PATCH encounters conflict and has
+   * retried for 5 times.
    *
    * @schema ApplicationOperationSyncSyncStrategyApply#force
    */
@@ -2601,7 +2623,9 @@ export function toJson_ApplicationOperationSyncSyncStrategyApply(obj: Applicatio
  */
 export interface ApplicationOperationSyncSyncStrategyHook {
   /**
-   * Force indicates whether or not to supply the --force flag to `kubectl apply`. The --force flag deletes and re-create the resource, when PATCH encounters conflict and has retried for 5 times.
+   * Force indicates whether or not to supply the --force flag to `kubectl apply`.
+   * The --force flag deletes and re-create the resource, when PATCH encounters conflict and has
+   * retried for 5 times.
    *
    * @schema ApplicationOperationSyncSyncStrategyHook#force
    */
@@ -57479,7 +57503,12 @@ export class ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecS
 
 
 /**
- * AppProject provides a logical grouping of applications, providing controls for: * where the apps may deploy to (cluster whitelist) * what may be deployed (repository whitelist, resource whitelist/blacklist) * who can access these applications (roles, OIDC group claims bindings) * and what they can do (RBAC policies) * automation access to these roles (JWT tokens)
+ * AppProject provides a logical grouping of applications, providing controls for:
+* where the apps may deploy to (cluster whitelist)
+* what may be deployed (repository whitelist, resource whitelist/blacklist)
+* who can access these applications (roles, OIDC group claims bindings)
+* and what they can do (RBAC policies)
+* automation access to these roles (JWT tokens)
  *
  * @schema AppProject
  */
@@ -57533,7 +57562,12 @@ export class AppProject extends ApiObject {
 }
 
 /**
- * AppProject provides a logical grouping of applications, providing controls for: * where the apps may deploy to (cluster whitelist) * what may be deployed (repository whitelist, resource whitelist/blacklist) * who can access these applications (roles, OIDC group claims bindings) * and what they can do (RBAC policies) * automation access to these roles (JWT tokens)
+ * AppProject provides a logical grouping of applications, providing controls for:
+ * * where the apps may deploy to (cluster whitelist)
+ * * what may be deployed (repository whitelist, resource whitelist/blacklist)
+ * * who can access these applications (roles, OIDC group claims bindings)
+ * * and what they can do (RBAC policies)
+ * * automation access to these roles (JWT tokens)
  *
  * @schema AppProject
  */
@@ -57693,7 +57727,8 @@ export function toJson_AppProjectSpec(obj: AppProjectSpec | undefined): Record<s
 /* eslint-enable max-len, quote-props */
 
 /**
- * GroupKind specifies a Group and a Kind, but does not force a version.  This is useful for identifying concepts during lookup stages without having partially valid types
+ * GroupKind specifies a Group and a Kind, but does not force a version.  This is useful for identifying
+ * concepts during lookup stages without having partially valid types
  *
  * @schema AppProjectSpecClusterResourceBlacklist
  */
@@ -57726,7 +57761,8 @@ export function toJson_AppProjectSpecClusterResourceBlacklist(obj: AppProjectSpe
 /* eslint-enable max-len, quote-props */
 
 /**
- * GroupKind specifies a Group and a Kind, but does not force a version.  This is useful for identifying concepts during lookup stages without having partially valid types
+ * GroupKind specifies a Group and a Kind, but does not force a version.  This is useful for identifying
+ * concepts during lookup stages without having partially valid types
  *
  * @schema AppProjectSpecClusterResourceWhitelist
  */
@@ -57772,7 +57808,8 @@ export interface AppProjectSpecDestinations {
   readonly name?: string;
 
   /**
-   * Namespace specifies the target namespace for the application's resources. The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace
+   * Namespace specifies the target namespace for the application's resources.
+   * The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace
    *
    * @schema AppProjectSpecDestinations#namespace
    */
@@ -57804,7 +57841,8 @@ export function toJson_AppProjectSpecDestinations(obj: AppProjectSpecDestination
 /* eslint-enable max-len, quote-props */
 
 /**
- * GroupKind specifies a Group and a Kind, but does not force a version.  This is useful for identifying concepts during lookup stages without having partially valid types
+ * GroupKind specifies a Group and a Kind, but does not force a version.  This is useful for identifying
+ * concepts during lookup stages without having partially valid types
  *
  * @schema AppProjectSpecNamespaceResourceBlacklist
  */
@@ -57837,7 +57875,8 @@ export function toJson_AppProjectSpecNamespaceResourceBlacklist(obj: AppProjectS
 /* eslint-enable max-len, quote-props */
 
 /**
- * GroupKind specifies a Group and a Kind, but does not force a version.  This is useful for identifying concepts during lookup stages without having partially valid types
+ * GroupKind specifies a Group and a Kind, but does not force a version.  This is useful for identifying
+ * concepts during lookup stages without having partially valid types
  *
  * @schema AppProjectSpecNamespaceResourceWhitelist
  */

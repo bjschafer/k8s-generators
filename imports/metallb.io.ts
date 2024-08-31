@@ -1366,6 +1366,16 @@ export interface BgpPeerV1Beta2Spec {
   readonly ebgpMultiHop?: boolean;
 
   /**
+   * EnableGracefulRestart allows BGP peer to continue to forward data packets along
+   * known routes while the routing protocol information is being restored.
+   * This field is immutable because it requires restart of the BGP session
+   * Supported for FRR mode only.
+   *
+   * @schema BgpPeerV1Beta2Spec#enableGracefulRestart
+   */
+  readonly enableGracefulRestart?: boolean;
+
+  /**
    * Requested BGP hold time, per RFC4271.
    *
    * @schema BgpPeerV1Beta2Spec#holdTime
@@ -1467,6 +1477,7 @@ export function toJson_BgpPeerV1Beta2Spec(obj: BgpPeerV1Beta2Spec | undefined): 
     'connectTime': obj.connectTime,
     'disableMP': obj.disableMp,
     'ebgpMultiHop': obj.ebgpMultiHop,
+    'enableGracefulRestart': obj.enableGracefulRestart,
     'holdTime': obj.holdTime,
     'keepaliveTime': obj.keepaliveTime,
     'myASN': obj.myAsn,
