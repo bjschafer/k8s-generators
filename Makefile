@@ -54,3 +54,9 @@ test: node_modules
 
 .PHONY: check
 check: fmt lint test
+
+.PHONY: imports
+imports:
+	$(eval VERSION=$(shell kubectl get node | tail -n1 | awk '{ print $$NF }' | sed -e 's/\+.*$$//' -e 's/[0-9]$$/0/' -e 's/^v//'))
+	cdk8s import k8s@$(VERSION)
+	bash -c 'cdk8s import <(kubectl get crd -ojson)'
