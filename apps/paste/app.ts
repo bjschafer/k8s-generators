@@ -9,7 +9,7 @@ import {
   PersistentVolumeAccessMode,
   Probe,
   Secret,
-} from "cdk8s-plus-29";
+} from "cdk8s-plus-30";
 import { StorageClass } from "../../lib/volume";
 import { NewKustomize } from "../../lib/kustomize";
 

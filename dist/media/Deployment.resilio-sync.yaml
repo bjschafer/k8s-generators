@@ -28,7 +28,7 @@ spec:
               value: "8675309"
             - name: PGID
               value: "8675309"
-          image: ghcr.io/linuxserver/resilio-sync:latest
+          image: ghcr.io/linuxserver/resilio-sync:2.8.1
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3

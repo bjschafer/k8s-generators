@@ -1,5 +1,5 @@
 import { App, Size } from "cdk8s";
-import { PersistentVolumeAccessMode } from "cdk8s-plus-29";
+import { PersistentVolumeAccessMode } from "cdk8s-plus-30";
 import { AppPlus } from "../../lib/app-plus";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";

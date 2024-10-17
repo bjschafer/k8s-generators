@@ -8,7 +8,7 @@ import {
   PersistentVolumeMode,
   PersistentVolumeProps,
   PersistentVolumeReclaimPolicy,
-} from "cdk8s-plus-29";
+} from "cdk8s-plus-30";
 import { Construct } from "constructs";
 
 export const NFS_SERVER = "10.0.151.3";

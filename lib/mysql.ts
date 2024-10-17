@@ -8,7 +8,7 @@ import {
   Service,
   StatefulSet,
   Volume,
-} from "cdk8s-plus-29";
+} from "cdk8s-plus-30";
 import { Construct } from "constructs";
 import { StorageClass } from "./volume";
 

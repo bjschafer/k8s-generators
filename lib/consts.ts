@@ -1,6 +1,6 @@
 import { EnvVar, Quantity } from "../imports/k8s";
 import { AppProps, YamlOutputType } from "cdk8s";
-import { EnvValue } from "cdk8s-plus-29";
+import { EnvValue } from "cdk8s-plus-30";
 
 export const PROMETHEUS_RELEASE_LABEL = "prometheus-kube-prometheus-stack";
 
