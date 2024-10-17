@@ -174,7 +174,7 @@ new MediaApp(app, {
   name: "resilio-sync",
   namespace: namespace,
   port: 8888,
-  image: "ghcr.io/linuxserver/resilio-sync:latest",
+  image: "ghcr.io/linuxserver/resilio-sync:2.8.1",
   resources: {
     cpu: {
       request: Cpu.millis(250),
@@ -223,10 +223,6 @@ NewArgoApp("media", {
   recurse: true,
   autoUpdate: {
     images: [
-      {
-        image: "ghcr.io/linuxserver/resilio-sync",
-        strategy: "digest",
-      },
       ...mediaApps.map(function (app): ArgoUpdaterImageProps {
         return {
           image: app.image.split(":")[0],
