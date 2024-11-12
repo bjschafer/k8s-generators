@@ -21,7 +21,7 @@ export interface MysqlInstanceProps {
   pvcSize: Size;
 }
 
-const DEFAULT_IMAGE = "mariadb:11.2";
+const DEFAULT_IMAGE = "ghcr.io/mariadb/mariadb:11.2.6-jammy";
 
 export class MysqlInstance extends Chart {
   constructor(scope: Construct, name: string, props: MysqlInstanceProps) {
