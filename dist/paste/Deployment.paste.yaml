@@ -57,7 +57,7 @@ spec:
               value: "true"
             - name: MICROBIN_TITLE
               value: Cmdcentral Paste
-          image: danielszabo99/microbin
+          image: git.cmdcentral.xyz/docker/danielszabo99/microbin
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
