@@ -1,3 +1,4 @@
 kustomize:
   images:
   - danielszabo99/microbin@sha256:c5bd4643135540a68a2846950fe4f65f3bcc94b62ed7c7644e563dfde6f1732c
+  - git.cmdcentral.xyz/docker/danielszabo99/microbin:latest@sha256:fec3a9fbde8346f644f1e5a32aa9035e0bfdb52c8a3c376974ddbfe36ce13a6f
