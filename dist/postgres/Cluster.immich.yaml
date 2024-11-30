@@ -1,0 +1,47 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: immich
+  namespace: postgres
+spec:
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://postgres/k8s/immich
+      endpointURL: https://ceph.cmdcentral.xyz
+      s3Credentials:
+        accessKeyId:
+          key: ACCESS_KEY_ID
+          name: backups
+        secretAccessKey:
+          key: SECRET_ACCESS_KEY
+          name: backups
+      wal:
+        compression: gzip
+  bootstrap:
+    initdb:
+      database: immich
+      postInitApplicationSQL:
+        - CREATE EXTENSION earthdistance CASCADE;
+        - ALTER SCHEMA vectors OWNER TO immich;
+      postInitSQL:
+        - ALTER SYSTEM SET search_path TO "$user", public, vectors;
+        - CREATE EXTENSION IF NOT EXISTS "vectors";
+  enableSuperuserAccess: true
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ImageCatalog
+    major: 16
+    name: pgvector
+  instances: 3
+  monitoring:
+    enablePodMonitor: true
+  resources:
+    limits:
+      cpu: 250m
+      memory: 768Mi
+    requests:
+      cpu: 250m
+      memory: 768Mi
+  storage:
+    size: 5Gi
+    storageClass: ceph-rbd

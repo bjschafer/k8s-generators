@@ -5,6 +5,7 @@ import { Quantity } from "../../imports/k8s";
 import {
   Cluster,
   ClusterSpecBackupBarmanObjectStoreWalCompression,
+  ImageCatalog,
   ScheduledBackup,
 } from "../../imports/postgresql.cnpg.io";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
@@ -148,6 +149,96 @@ class ProdPostgres extends Chart {
   }
 }
 
-new ProdPostgres(app, "prod");
+class VectorPostgres extends Chart {
+  constructor(scope: Construct, id: string, name: string) {
+    super(scope, id);
 
+    const catalog = new ImageCatalog(this, "catalog", {
+      metadata: {
+        namespace: namespace,
+        name: "pgvector",
+      },
+      spec: {
+        images: [
+          {
+            // https://immich.app/docs/administration/postgres-standalone#prerequisites 0.3.0 is the latest supported pgvecto.rs
+            image: "ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.5-v0.3.0",
+            major: 16,
+          },
+        ],
+      },
+    });
+
+    new Cluster(this, name, {
+      metadata: {
+        namespace: namespace,
+        name: name,
+      },
+      spec: {
+        instances: 3,
+        imageCatalogRef: {
+          apiGroup: catalog.apiGroup,
+          kind: catalog.kind,
+          major: 16, // this is how we'd do an upgrade
+          name: catalog.name,
+        },
+        monitoring: {
+          enablePodMonitor: true,
+        },
+        resources: {
+          requests: {
+            cpu: Quantity.fromString("250m"),
+            memory: Quantity.fromString("768Mi"),
+          },
+          limits: {
+            cpu: Quantity.fromString("250m"),
+            memory: Quantity.fromString("768Mi"),
+          },
+        },
+        storage: {
+          size: "5Gi",
+          storageClass: StorageClass.CEPH_RBD,
+        },
+        enableSuperuserAccess: true,
+
+        backup: {
+          barmanObjectStore: {
+            endpointUrl: "https://ceph.cmdcentral.xyz",
+            destinationPath: `s3://postgres/k8s/${name}`,
+            s3Credentials: {
+              accessKeyId: {
+                name: "backups",
+                key: "ACCESS_KEY_ID",
+              },
+              secretAccessKey: {
+                name: "backups",
+                key: "SECRET_ACCESS_KEY",
+              },
+            },
+            wal: {
+              compression:
+                ClusterSpecBackupBarmanObjectStoreWalCompression.GZIP,
+            },
+          },
+        },
+        bootstrap: {
+          initdb: {
+            database: name,
+            postInitSql: [
+              'ALTER SYSTEM SET search_path TO "$user", public, vectors;',
+              'CREATE EXTENSION IF NOT EXISTS "vectors";',
+            ],
+            postInitApplicationSql: [
+              "CREATE EXTENSION earthdistance CASCADE;",
+              `ALTER SCHEMA vectors OWNER TO ${name};`,
+            ],
+          },
+        },
+      },
+    });
+  }
+}
+
+new ProdPostgres(app, "prod");
+new VectorPostgres(app, "immich", "immich");
 app.synth();
