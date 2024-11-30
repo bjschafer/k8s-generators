@@ -35,6 +35,9 @@ spec:
   instances: 3
   monitoring:
     enablePodMonitor: true
+  postgresql:
+    shared_preload_libraries:
+      - vectors.so
   resources:
     limits:
       cpu: 250m

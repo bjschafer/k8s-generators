@@ -234,6 +234,10 @@ class VectorPostgres extends Chart {
             ],
           },
         },
+
+        postgresql: {
+          sharedPreloadLibraries: ["vectors.so"],
+        },
       },
     });
   }
