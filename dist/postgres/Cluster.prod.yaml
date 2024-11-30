@@ -28,6 +28,10 @@ spec:
       wal:
         compression: gzip
   enableSuperuserAccess: true
+  imageCatalogRef:
+    kind: ClusterImageCatalog
+    major: 16
+    name: postgresql
   instances: 3
   managed:
     services:

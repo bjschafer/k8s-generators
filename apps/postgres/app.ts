@@ -38,6 +38,11 @@ class ProdPostgres extends Chart {
       },
       spec: {
         instances: 3,
+        imageCatalogRef: {
+          kind: "ClusterImageCatalog",
+          major: 16, // this is how we'd do an upgrade
+          name: "postgresql",
+        },
         monitoring: {
           enablePodMonitor: true,
         },
