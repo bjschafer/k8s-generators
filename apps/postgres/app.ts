@@ -41,7 +41,7 @@ class ProdPostgres extends Chart {
         imageCatalogRef: {
           apiGroup: "postgresql.cnpg.io",
           kind: "ClusterImageCatalog",
-          major: 17, // this is how we'd do an upgrade
+          major: 16, // this is how we'd do an upgrade
           name: "postgresql",
         },
         monitoring: {

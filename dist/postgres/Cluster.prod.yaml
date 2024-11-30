@@ -31,7 +31,7 @@ spec:
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
     kind: ClusterImageCatalog
-    major: 17
+    major: 16
     name: postgresql
   instances: 3
   managed:
