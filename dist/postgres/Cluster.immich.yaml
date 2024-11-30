@@ -21,7 +21,9 @@ spec:
     initdb:
       database: immich
       postInitApplicationSQL:
+        - CREATE EXTENSION VECTORS;
         - CREATE EXTENSION earthdistance CASCADE;
+        - ALTER DATABASE immich SET search_path TO "$user", public, vectors;
         - ALTER SCHEMA vectors OWNER TO immich;
       postInitSQL:
         - ALTER SYSTEM SET search_path TO "$user", public, vectors;

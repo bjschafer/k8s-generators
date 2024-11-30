@@ -229,7 +229,9 @@ class VectorPostgres extends Chart {
               'CREATE EXTENSION IF NOT EXISTS "vectors";',
             ],
             postInitApplicationSql: [
+              "CREATE EXTENSION VECTORS;",
               "CREATE EXTENSION earthdistance CASCADE;",
+              `ALTER DATABASE ${name} SET search_path TO "$user", public, vectors;`,
               `ALTER SCHEMA vectors OWNER TO ${name};`,
             ],
           },
