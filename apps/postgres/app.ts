@@ -227,6 +227,19 @@ class VectorPostgres extends Chart {
         },
       },
     });
+
+    new ScheduledBackup(this, "nightly", {
+      metadata: {
+        name: `${name}-nightly`,
+        namespace: namespace,
+      },
+      spec: {
+        cluster: {
+          name: name,
+        },
+        schedule: "0 33 4 * * *",
+      },
+    });
   }
 }
 
