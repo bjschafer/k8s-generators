@@ -28,7 +28,7 @@ spec:
         dbname: immich
         host: postgres.cmdcentral.xyz
         port: "5433"
-        username: postgres
+        user: postgres
       name: source
       password:
         key: pw
