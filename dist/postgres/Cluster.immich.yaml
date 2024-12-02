@@ -18,16 +18,20 @@ spec:
       wal:
         compression: gzip
   bootstrap:
-    initdb:
+    pg_basebackup:
       database: immich
-      postInitApplicationSQL:
-        - CREATE EXTENSION VECTORS;
-        - CREATE EXTENSION earthdistance CASCADE;
-        - ALTER DATABASE immich SET search_path TO "$user", public, vectors;
-      postInitSQL:
-        - ALTER SYSTEM SET search_path TO "$user", public, vectors;
-        - CREATE EXTENSION IF NOT EXISTS "vectors";
+      owner: immich
+      source: source
   enableSuperuserAccess: true
+  externalClusters:
+    - connectionParameters:
+        dbname: immich
+        host: postgres.cmdcentral.xyz
+        username: postgres
+      name: source
+      password:
+        key: pw
+        name: old-immich-pw
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
     kind: ImageCatalog

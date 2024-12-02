@@ -222,20 +222,26 @@ class VectorPostgres extends Chart {
           },
         },
         bootstrap: {
-          initdb: {
-            database: name,
-            postInitSql: [
-              'ALTER SYSTEM SET search_path TO "$user", public, vectors;',
-              'CREATE EXTENSION IF NOT EXISTS "vectors";',
-            ],
-            postInitApplicationSql: [
-              "CREATE EXTENSION VECTORS;",
-              "CREATE EXTENSION earthdistance CASCADE;",
-              `ALTER DATABASE ${name} SET search_path TO "$user", public, vectors;`,
-              //              `ALTER SCHEMA vectors OWNER TO ${name};`,
-            ],
+          pgBasebackup: {
+            source: "source",
+            database: "immich",
+            owner: "immich",
           },
         },
+        externalClusters: [
+          {
+            name: "source",
+            connectionParameters: {
+              host: "postgres.cmdcentral.xyz",
+              username: "postgres",
+              dbname: "immich",
+            },
+            password: {
+              name: "old-immich-pw",
+              key: "pw",
+            },
+          },
+        ],
 
         postgresql: {
           sharedPreloadLibraries: ["vectors.so"],
