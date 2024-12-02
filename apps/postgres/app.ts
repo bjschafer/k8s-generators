@@ -175,7 +175,7 @@ class VectorPostgres extends Chart {
         name: name,
       },
       spec: {
-        instances: 3,
+        instances: 2,
         imageCatalogRef: {
           apiGroup: catalog.apiGroup,
           kind: catalog.kind,
@@ -221,28 +221,6 @@ class VectorPostgres extends Chart {
             },
           },
         },
-        bootstrap: {
-          pgBasebackup: {
-            source: "source",
-            database: "immich",
-            owner: "immich",
-          },
-        },
-        externalClusters: [
-          {
-            name: "source",
-            connectionParameters: {
-              host: "postgres.cmdcentral.xyz",
-              user: "postgres",
-              dbname: "immich",
-              port: "5433",
-            },
-            password: {
-              name: "old-immich-pw",
-              key: "pw",
-            },
-          },
-        ],
 
         postgresql: {
           sharedPreloadLibraries: ["vectors.so"],

@@ -17,28 +17,13 @@ spec:
           name: backups
       wal:
         compression: gzip
-  bootstrap:
-    pg_basebackup:
-      database: immich
-      owner: immich
-      source: source
   enableSuperuserAccess: true
-  externalClusters:
-    - connectionParameters:
-        dbname: immich
-        host: postgres.cmdcentral.xyz
-        port: "5433"
-        user: postgres
-      name: source
-      password:
-        key: pw
-        name: old-immich-pw
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
     kind: ImageCatalog
     major: 16
     name: pgvector
-  instances: 3
+  instances: 2
   monitoring:
     enablePodMonitor: true
   postgresql:
