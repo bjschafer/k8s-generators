@@ -235,6 +235,7 @@ class VectorPostgres extends Chart {
               host: "postgres.cmdcentral.xyz",
               username: "postgres",
               dbname: "immich",
+              port: "5433",
             },
             password: {
               name: "old-immich-pw",
