@@ -64,15 +64,16 @@ spec:
         vmcluster:
           enabled: true
           ingress:
-            annotations:
-              cert-manager.io/cluster-issuer: letsencrypt
-            enabled: true
-            hosts:
-              - metrics.cmdcentral.xyz
-            tls:
-              - hosts:
-                  - metrics.cmdcentral.xyz
-                secretName: metrics-tls
+            storage:
+              annotations:
+                cert-manager.io/cluster-issuer: letsencrypt
+              enabled: true
+              hosts:
+                - metrics.cmdcentral.xyz
+              tls:
+                - hosts:
+                    - metrics.cmdcentral.xyz
+                  secretName: metrics-tls
           spec:
             retentionPeriod: 90d
             vmstorage:

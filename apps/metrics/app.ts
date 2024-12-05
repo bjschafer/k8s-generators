@@ -80,17 +80,19 @@ class Metrics extends Chart {
                   },
                 },
                 ingress: {
-                  enabled: true,
-                  annotations: {
-                    "cert-manager.io/cluster-issuer": "letsencrypt",
-                  },
-                  hosts: [hostname],
-                  tls: [
-                    {
-                      secretName: "metrics-tls",
-                      hosts: [hostname],
+                  storage: {
+                    enabled: true,
+                    annotations: {
+                      "cert-manager.io/cluster-issuer": "letsencrypt",
                     },
-                  ],
+                    hosts: [hostname],
+                    tls: [
+                      {
+                        secretName: "metrics-tls",
+                        hosts: [hostname],
+                      },
+                    ],
+                  },
                 },
               },
               vmagent: {
