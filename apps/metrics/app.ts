@@ -40,6 +40,11 @@ class Metrics extends Chart {
                   "argocd.argoproj.io/sync-options": "ServerSideApply=true",
                 },
               },
+              "victoria-metrics-operator": {
+                image: {
+                  registry: "public.ecr.aws/docker"
+                }
+              },
               defaultRules: {
                 groups: {
                   // k3s doesn't run kube-scheduler
