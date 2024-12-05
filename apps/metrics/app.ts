@@ -155,6 +155,7 @@ class Metrics extends Chart {
         },
         syncPolicy: {
           automated: {
+            prune: true,
             selfHeal: true,
           },
           syncOptions: ["CreateNamespace=true"],
