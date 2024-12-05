@@ -1,0 +1,75 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: metrics
+  namespace: argocd
+spec:
+  destination:
+    namespace: metrics
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: victoria-metrics-k8s-stack
+    helm:
+      releaseName: metrics
+      valuesObject:
+        alertmanager:
+          ingress:
+            annotations:
+              cert-manager.io/cluster-issuer: letsencrypt
+            enabled: true
+            hosts:
+              - metrics-alerts.cmdcentral.xyz
+            tls:
+              - hosts:
+                  - metrics-alerts.cmdcentral.xyz
+                secretName: metrics-tls
+          spec:
+            externalUrl: https://alertmanager.cmdcentral.xyz
+            resources:
+              limits:
+                memory: 256Mi
+              requests:
+                memory: 256Mi
+        argocdReleaseOverride: metrics
+        defaultDashboards:
+          annotations:
+            argocd.argoproj.io/sync-options: ServerSideApply=true
+          defaultTimezone: america/chicago
+        defaultRules:
+          groups:
+            kubeScheduler:
+              create: false
+            kubernetesSystemControllerManager:
+              create: false
+            kubernetesSystemScheduler:
+              create: false
+        grafana:
+          enabled: false
+        kubeControllerManager:
+          enabled: false
+        kubeScheduler:
+          enabled: false
+        vmcluster:
+          create: true
+          ingress:
+            annotations:
+              cert-manager.io/cluster-issuer: letsencrypt
+            enabled: true
+            hosts:
+              - metrics.cmdcentral.xyz
+            tls:
+              - hosts:
+                  - metrics.cmdcentral.xyz
+                secretName: metrics-tls
+          spec:
+            retentionPeriod: 90d
+        vmsingle:
+          create: false
+    repoURL: https://victoriametrics.github.io/helm-charts/
+    targetRevision: 0.30.2
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
