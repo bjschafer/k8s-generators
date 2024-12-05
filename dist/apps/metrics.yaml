@@ -62,7 +62,7 @@ spec:
                 cpu: 200m
                 memory: 384Mi
         vmcluster:
-          create: true
+          enabled: true
           ingress:
             annotations:
               cert-manager.io/cluster-issuer: letsencrypt
@@ -75,8 +75,16 @@ spec:
                 secretName: metrics-tls
           spec:
             retentionPeriod: 90d
+            vmstorage:
+              storage:
+                volumeClaimTemplate:
+                  spec:
+                    resources:
+                      requests:
+                        storage: 80Gi
+                    storageClassName: ceph-rbd
         vmsingle:
-          create: false
+          enabled: false
     repoURL: https://victoriametrics.github.io/helm-charts/
     targetRevision: 0.30.2
   syncPolicy:

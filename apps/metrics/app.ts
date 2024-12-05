@@ -6,6 +6,7 @@ import {
   ARGO_DESTINATION_SERVER,
   ARGO_NAMESPACE,
 } from "../../lib/argo";
+import { StorageClass } from "../../lib/volume";
 import { Application } from "../../imports/argoproj.io";
 
 const namespace = basename(__dirname);
@@ -57,12 +58,26 @@ class Metrics extends Chart {
                 },
               },
               vmsingle: {
-                create: false,
+                enabled: false,
               },
               vmcluster: {
-                create: true,
+                enabled: true,
                 spec: {
                   retentionPeriod: "90d",
+                  vmstorage: {
+                    storage: {
+                      volumeClaimTemplate: {
+                        spec: {
+                          storageClassName: StorageClass.CEPH_RBD,
+                          resources: {
+                            requests: {
+                              storage: "80Gi",
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
                 },
                 ingress: {
                   enabled: true,
