@@ -78,6 +78,20 @@ class Metrics extends Chart {
                   ],
                 },
               },
+              vmagent: {
+                spec: {
+                  resources: {
+                    limits: {
+                      memory: "1Gi",
+                      cpu: "500m",
+                    },
+                    requests: {
+                      memory: "384Mi",
+                      cpu: "200m",
+                    },
+                  },
+                },
+              },
               alertmanager: {
                 ingress: {
                   enabled: true,
