@@ -26,7 +26,7 @@ NewArgoApp(name, {
     images: [
       {
         image: image,
-        strategy: "latest",
+        strategy: "newest-build",
       },
     ],
   },

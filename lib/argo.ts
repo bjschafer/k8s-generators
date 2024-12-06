@@ -157,7 +157,11 @@ const argoUpdateAnnotationBase = "argocd-image-updater.argoproj.io";
  * Odds are, you probably want digest, not latest.
  * @see - https://argocd-image-updater.readthedocs.io/en/stable/basics/update-strategies/
  */
-export type ArgoUpdateStrategy = "digest" | "semver" | "latest" | "name";
+export type ArgoUpdateStrategy =
+  | "digest"
+  | "semver"
+  | "newest-build"
+  | "alphabetical";
 
 export type ArgoWritebackMethod = "git" | "argocd";
 
