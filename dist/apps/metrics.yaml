@@ -67,7 +67,7 @@ spec:
         vmcluster:
           enabled: true
           ingress:
-            storage:
+            select:
               annotations:
                 cert-manager.io/cluster-issuer: letsencrypt
               enabled: true

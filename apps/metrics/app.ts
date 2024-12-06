@@ -85,7 +85,7 @@ class Metrics extends Chart {
                   },
                 },
                 ingress: {
-                  storage: {
+                  select: {
                     enabled: true,
                     annotations: {
                       "cert-manager.io/cluster-issuer": "letsencrypt",
