@@ -63,55 +63,34 @@ class Metrics extends Chart {
                 },
               },
               vmsingle: {
-                enabled: false,
-              },
-              vmcluster: {
                 enabled: true,
                 spec: {
+                  image: {
+                    repository: "docker.cmdcentral.net",
+                  },
+                  replicaCount: 2, // TODO make sure this does what we think it does
                   retentionPeriod: "90d",
-                  vmstorage: {
-                    storage: {
-                      volumeClaimTemplate: {
-                        spec: {
-                          storageClassName: StorageClass.CEPH_RBD,
-                          resources: {
-                            requests: {
-                              storage: "80Gi",
-                            },
-                          },
-                        },
+                  storage: {
+                    storageClassName: StorageClass.CEPH_RBD,
+                    resources: {
+                      requests: {
+                        storage: "80Gi",
                       },
                     },
                   },
                 },
                 ingress: {
-                  select: {
-                    enabled: true,
-                    annotations: {
-                      "cert-manager.io/cluster-issuer": "letsencrypt",
-                    },
-                    hosts: [hostname],
-                    tls: [
-                      {
-                        secretName: "metrics-tls",
-                        hosts: [hostname],
-                      },
-                    ],
+                  enabled: true,
+                  annotations: {
+                    "cert-manager.io/cluster-issuer": "letsencrypt",
                   },
-                },
-              },
-              vmagent: {
-                spec: {
-                  resources: {
-                    limits: {
-                      memory: "1Gi",
-                      cpu: "500m",
+                  hosts: [hostname],
+                  tls: [
+                    {
+                      secretName: "metrics-tls",
+                      hosts: [hostname],
                     },
-                    requests: {
-                      memory: "384Mi",
-                      cpu: "200m",
-                    },
-                  },
+                  ],
                 },
               },
               alertmanager: {

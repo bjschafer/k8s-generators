@@ -55,40 +55,28 @@ spec:
         victoria-metrics-operator:
           image:
             registry: docker.cmdcentral.net
-        vmagent:
-          spec:
-            resources:
-              limits:
-                cpu: 500m
-                memory: 1Gi
-              requests:
-                cpu: 200m
-                memory: 384Mi
-        vmcluster:
+        vmsingle:
           enabled: true
           ingress:
-            select:
-              annotations:
-                cert-manager.io/cluster-issuer: letsencrypt
-              enabled: true
-              hosts:
-                - metrics.cmdcentral.xyz
-              tls:
-                - hosts:
-                    - metrics.cmdcentral.xyz
-                  secretName: metrics-tls
+            annotations:
+              cert-manager.io/cluster-issuer: letsencrypt
+            enabled: true
+            hosts:
+              - metrics.cmdcentral.xyz
+            tls:
+              - hosts:
+                  - metrics.cmdcentral.xyz
+                secretName: metrics-tls
           spec:
+            image:
+              repository: docker.cmdcentral.net
+            replicaCount: 2
             retentionPeriod: 90d
-            vmstorage:
-              storage:
-                volumeClaimTemplate:
-                  spec:
-                    resources:
-                      requests:
-                        storage: 80Gi
-                    storageClassName: ceph-rbd
-        vmsingle:
-          enabled: false
+            storage:
+              resources:
+                requests:
+                  storage: 80Gi
+              storageClassName: ceph-rbd
     repoURL: https://victoriametrics.github.io/helm-charts/
     targetRevision: 0.30.2
   syncPolicy:
