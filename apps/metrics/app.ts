@@ -43,8 +43,14 @@ class Metrics extends Chart {
               },
               "victoria-metrics-operator": {
                 image: {
-                  registry: "docker.cmdcentral.net",
+                  registry: "docker.cmdcentral.net", // for operator itself
                 },
+                env: [
+                  {
+                    name: "VM_CONTAINERREGISTRY",
+                    value: "docker.cmdcentral.net",
+                  }, // for stuff deployed by operator
+                ],
               },
               defaultRules: {
                 groups: {
@@ -65,10 +71,7 @@ class Metrics extends Chart {
               vmsingle: {
                 enabled: true,
                 spec: {
-                  image: {
-                    repository: "docker.cmdcentral.net",
-                  },
-                  replicaCount: 2, // TODO make sure this does what we think it does
+                  replicaCount: 1, // This'll set replicas=n on deployment, so you run into PVC multi-attach errors
                   retentionPeriod: "90d",
                   storage: {
                     storageClassName: StorageClass.CEPH_RBD,
