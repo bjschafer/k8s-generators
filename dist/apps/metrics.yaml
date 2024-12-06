@@ -52,6 +52,9 @@ spec:
           enabled: false
         prometheus-node-exporter:
           enabled: false
+        victoria-metrics-operator:
+          image:
+            registry: docker.cmdcentral.net
         vmagent:
           spec:
             resources:
