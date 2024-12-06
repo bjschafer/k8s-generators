@@ -1151,6 +1151,13 @@ export interface BackupRepositorySpec {
   readonly maintenanceFrequency: string;
 
   /**
+   * RepositoryConfig is for repository-specific configuration fields.
+   *
+   * @schema BackupRepositorySpec#repositoryConfig
+   */
+  readonly repositoryConfig?: { [key: string]: string };
+
+  /**
    * RepositoryType indicates the type of the backend repository
    *
    * @schema BackupRepositorySpec#repositoryType
@@ -1184,6 +1191,7 @@ export function toJson_BackupRepositorySpec(obj: BackupRepositorySpec | undefine
   const result = {
     'backupStorageLocation': obj.backupStorageLocation,
     'maintenanceFrequency': obj.maintenanceFrequency,
+    'repositoryConfig': ((obj.repositoryConfig) === undefined) ? undefined : (Object.entries(obj.repositoryConfig).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'repositoryType': obj.repositoryType,
     'resticIdentifier': obj.resticIdentifier,
     'volumeNamespace': obj.volumeNamespace,

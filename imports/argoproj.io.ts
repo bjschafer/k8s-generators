@@ -356,6 +356,13 @@ export function toJson_ApplicationOperationRetry(obj: ApplicationOperationRetry 
  */
 export interface ApplicationOperationSync {
   /**
+   * SelfHealAttemptsCount contains the number of auto-heal attempts
+   *
+   * @schema ApplicationOperationSync#autoHealAttemptsCount
+   */
+  readonly autoHealAttemptsCount?: number;
+
+  /**
    * DryRun specifies to perform a `kubectl apply --dry-run` without actually performing the sync
    *
    * @schema ApplicationOperationSync#dryRun
@@ -438,6 +445,7 @@ export interface ApplicationOperationSync {
 export function toJson_ApplicationOperationSync(obj: ApplicationOperationSync | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'autoHealAttemptsCount': obj.autoHealAttemptsCount,
     'dryRun': obj.dryRun,
     'manifests': obj.manifests?.map(y => y),
     'prune': obj.prune,
@@ -1218,6 +1226,14 @@ export function toJson_ApplicationSpecSourceDirectory(obj: ApplicationSpecSource
  */
 export interface ApplicationSpecSourceHelm {
   /**
+   * APIVersions specifies the Kubernetes resource API versions to pass to Helm when templating manifests. By default,
+   * Argo CD uses the API versions of the target cluster. The format is [group/]version/kind.
+   *
+   * @schema ApplicationSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * FileParameters are file parameters to the helm template
    *
    * @schema ApplicationSpecSourceHelm#fileParameters
@@ -1230,6 +1246,21 @@ export interface ApplicationSpecSourceHelm {
    * @schema ApplicationSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * KubeVersion specifies the Kubernetes API version to pass to Helm when templating manifests. By default, Argo CD
+   * uses the Kubernetes version of the target cluster.
+   *
+   * @schema ApplicationSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace.
+   *
+   * @schema ApplicationSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation
@@ -1296,8 +1327,11 @@ export interface ApplicationSpecSourceHelm {
 export function toJson_ApplicationSpecSourceHelm(obj: ApplicationSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -1318,6 +1352,14 @@ export function toJson_ApplicationSpecSourceHelm(obj: ApplicationSpecSourceHelm 
  * @schema ApplicationSpecSourceKustomize
  */
 export interface ApplicationSpecSourceKustomize {
+  /**
+   * APIVersions specifies the Kubernetes resource API versions to pass to Helm when templating manifests. By default,
+   * Argo CD uses the API versions of the target cluster. The format is [group/]version/kind.
+   *
+   * @schema ApplicationSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * CommonAnnotations is a list of additional annotations to add to rendered manifests
    *
@@ -1366,6 +1408,14 @@ export interface ApplicationSpecSourceKustomize {
    * @schema ApplicationSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * KubeVersion specifies the Kubernetes API version to pass to Helm when templating manifests. By default, Argo CD
+   * uses the Kubernetes version of the target cluster.
+   *
+   * @schema ApplicationSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * LabelWithoutSelector specifies whether to apply common labels to resource selectors or not
@@ -1425,6 +1475,7 @@ export interface ApplicationSpecSourceKustomize {
 export function toJson_ApplicationSpecSourceKustomize(obj: ApplicationSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -1432,6 +1483,7 @@ export function toJson_ApplicationSpecSourceKustomize(obj: ApplicationSpecSource
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -1546,6 +1598,14 @@ export function toJson_ApplicationSpecSourcesDirectory(obj: ApplicationSpecSourc
  */
 export interface ApplicationSpecSourcesHelm {
   /**
+   * APIVersions specifies the Kubernetes resource API versions to pass to Helm when templating manifests. By default,
+   * Argo CD uses the API versions of the target cluster. The format is [group/]version/kind.
+   *
+   * @schema ApplicationSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * FileParameters are file parameters to the helm template
    *
    * @schema ApplicationSpecSourcesHelm#fileParameters
@@ -1558,6 +1618,21 @@ export interface ApplicationSpecSourcesHelm {
    * @schema ApplicationSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * KubeVersion specifies the Kubernetes API version to pass to Helm when templating manifests. By default, Argo CD
+   * uses the Kubernetes version of the target cluster.
+   *
+   * @schema ApplicationSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace.
+   *
+   * @schema ApplicationSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation
@@ -1624,8 +1699,11 @@ export interface ApplicationSpecSourcesHelm {
 export function toJson_ApplicationSpecSourcesHelm(obj: ApplicationSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -1646,6 +1724,14 @@ export function toJson_ApplicationSpecSourcesHelm(obj: ApplicationSpecSourcesHel
  * @schema ApplicationSpecSourcesKustomize
  */
 export interface ApplicationSpecSourcesKustomize {
+  /**
+   * APIVersions specifies the Kubernetes resource API versions to pass to Helm when templating manifests. By default,
+   * Argo CD uses the API versions of the target cluster. The format is [group/]version/kind.
+   *
+   * @schema ApplicationSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * CommonAnnotations is a list of additional annotations to add to rendered manifests
    *
@@ -1694,6 +1780,14 @@ export interface ApplicationSpecSourcesKustomize {
    * @schema ApplicationSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * KubeVersion specifies the Kubernetes API version to pass to Helm when templating manifests. By default, Argo CD
+   * uses the Kubernetes version of the target cluster.
+   *
+   * @schema ApplicationSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * LabelWithoutSelector specifies whether to apply common labels to resource selectors or not
@@ -1753,6 +1847,7 @@ export interface ApplicationSpecSourcesKustomize {
 export function toJson_ApplicationSpecSourcesKustomize(obj: ApplicationSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -1760,6 +1855,7 @@ export function toJson_ApplicationSpecSourcesKustomize(obj: ApplicationSpecSourc
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -1989,6 +2085,14 @@ export function toJson_ApplicationOperationSyncSourceDirectory(obj: ApplicationO
  */
 export interface ApplicationOperationSyncSourceHelm {
   /**
+   * APIVersions specifies the Kubernetes resource API versions to pass to Helm when templating manifests. By default,
+   * Argo CD uses the API versions of the target cluster. The format is [group/]version/kind.
+   *
+   * @schema ApplicationOperationSyncSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * FileParameters are file parameters to the helm template
    *
    * @schema ApplicationOperationSyncSourceHelm#fileParameters
@@ -2001,6 +2105,21 @@ export interface ApplicationOperationSyncSourceHelm {
    * @schema ApplicationOperationSyncSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * KubeVersion specifies the Kubernetes API version to pass to Helm when templating manifests. By default, Argo CD
+   * uses the Kubernetes version of the target cluster.
+   *
+   * @schema ApplicationOperationSyncSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace.
+   *
+   * @schema ApplicationOperationSyncSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation
@@ -2067,8 +2186,11 @@ export interface ApplicationOperationSyncSourceHelm {
 export function toJson_ApplicationOperationSyncSourceHelm(obj: ApplicationOperationSyncSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationOperationSyncSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationOperationSyncSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -2089,6 +2211,14 @@ export function toJson_ApplicationOperationSyncSourceHelm(obj: ApplicationOperat
  * @schema ApplicationOperationSyncSourceKustomize
  */
 export interface ApplicationOperationSyncSourceKustomize {
+  /**
+   * APIVersions specifies the Kubernetes resource API versions to pass to Helm when templating manifests. By default,
+   * Argo CD uses the API versions of the target cluster. The format is [group/]version/kind.
+   *
+   * @schema ApplicationOperationSyncSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * CommonAnnotations is a list of additional annotations to add to rendered manifests
    *
@@ -2137,6 +2267,14 @@ export interface ApplicationOperationSyncSourceKustomize {
    * @schema ApplicationOperationSyncSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * KubeVersion specifies the Kubernetes API version to pass to Helm when templating manifests. By default, Argo CD
+   * uses the Kubernetes version of the target cluster.
+   *
+   * @schema ApplicationOperationSyncSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * LabelWithoutSelector specifies whether to apply common labels to resource selectors or not
@@ -2196,6 +2334,7 @@ export interface ApplicationOperationSyncSourceKustomize {
 export function toJson_ApplicationOperationSyncSourceKustomize(obj: ApplicationOperationSyncSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -2203,6 +2342,7 @@ export function toJson_ApplicationOperationSyncSourceKustomize(obj: ApplicationO
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -2317,6 +2457,14 @@ export function toJson_ApplicationOperationSyncSourcesDirectory(obj: Application
  */
 export interface ApplicationOperationSyncSourcesHelm {
   /**
+   * APIVersions specifies the Kubernetes resource API versions to pass to Helm when templating manifests. By default,
+   * Argo CD uses the API versions of the target cluster. The format is [group/]version/kind.
+   *
+   * @schema ApplicationOperationSyncSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * FileParameters are file parameters to the helm template
    *
    * @schema ApplicationOperationSyncSourcesHelm#fileParameters
@@ -2329,6 +2477,21 @@ export interface ApplicationOperationSyncSourcesHelm {
    * @schema ApplicationOperationSyncSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * KubeVersion specifies the Kubernetes API version to pass to Helm when templating manifests. By default, Argo CD
+   * uses the Kubernetes version of the target cluster.
+   *
+   * @schema ApplicationOperationSyncSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace.
+   *
+   * @schema ApplicationOperationSyncSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation
@@ -2395,8 +2558,11 @@ export interface ApplicationOperationSyncSourcesHelm {
 export function toJson_ApplicationOperationSyncSourcesHelm(obj: ApplicationOperationSyncSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationOperationSyncSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationOperationSyncSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -2417,6 +2583,14 @@ export function toJson_ApplicationOperationSyncSourcesHelm(obj: ApplicationOpera
  * @schema ApplicationOperationSyncSourcesKustomize
  */
 export interface ApplicationOperationSyncSourcesKustomize {
+  /**
+   * APIVersions specifies the Kubernetes resource API versions to pass to Helm when templating manifests. By default,
+   * Argo CD uses the API versions of the target cluster. The format is [group/]version/kind.
+   *
+   * @schema ApplicationOperationSyncSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * CommonAnnotations is a list of additional annotations to add to rendered manifests
    *
@@ -2465,6 +2639,14 @@ export interface ApplicationOperationSyncSourcesKustomize {
    * @schema ApplicationOperationSyncSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * KubeVersion specifies the Kubernetes API version to pass to Helm when templating manifests. By default, Argo CD
+   * uses the Kubernetes version of the target cluster.
+   *
+   * @schema ApplicationOperationSyncSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * LabelWithoutSelector specifies whether to apply common labels to resource selectors or not
@@ -2524,6 +2706,7 @@ export interface ApplicationOperationSyncSourcesKustomize {
 export function toJson_ApplicationOperationSyncSourcesKustomize(obj: ApplicationOperationSyncSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -2531,6 +2714,7 @@ export function toJson_ApplicationOperationSyncSourcesKustomize(obj: Application
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -6214,6 +6398,21 @@ export interface ApplicationSetSpecGeneratorsPullRequestBitbucketServer {
   readonly basicAuth?: ApplicationSetSpecGeneratorsPullRequestBitbucketServerBasicAuth;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketServer#bearerToken
+   */
+  readonly bearerToken?: ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerToken;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketServer#caRef
+   */
+  readonly caRef?: ApplicationSetSpecGeneratorsPullRequestBitbucketServerCaRef;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketServer#insecure
+   */
+  readonly insecure?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketServer#project
    */
   readonly project: string;
@@ -6234,6 +6433,9 @@ export function toJson_ApplicationSetSpecGeneratorsPullRequestBitbucketServer(ob
   const result = {
     'api': obj.api,
     'basicAuth': toJson_ApplicationSetSpecGeneratorsPullRequestBitbucketServerBasicAuth(obj.basicAuth),
+    'bearerToken': toJson_ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerToken(obj.bearerToken),
+    'caRef': toJson_ApplicationSetSpecGeneratorsPullRequestBitbucketServerCaRef(obj.caRef),
+    'insecure': obj.insecure,
     'project': obj.project,
     'repo': obj.repo,
   };
@@ -6387,6 +6589,11 @@ export interface ApplicationSetSpecGeneratorsPullRequestGitlab {
   readonly api?: string;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestGitlab#caRef
+   */
+  readonly caRef?: ApplicationSetSpecGeneratorsPullRequestGitlabCaRef;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsPullRequestGitlab#insecure
    */
   readonly insecure?: boolean;
@@ -6421,6 +6628,7 @@ export function toJson_ApplicationSetSpecGeneratorsPullRequestGitlab(obj: Applic
   if (obj === undefined) { return undefined; }
   const result = {
     'api': obj.api,
+    'caRef': toJson_ApplicationSetSpecGeneratorsPullRequestGitlabCaRef(obj.caRef),
     'insecure': obj.insecure,
     'labels': obj.labels?.map(y => y),
     'project': obj.project,
@@ -6618,6 +6826,21 @@ export interface ApplicationSetSpecGeneratorsScmProviderBitbucketServer {
   readonly basicAuth?: ApplicationSetSpecGeneratorsScmProviderBitbucketServerBasicAuth;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderBitbucketServer#bearerToken
+   */
+  readonly bearerToken?: ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerToken;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderBitbucketServer#caRef
+   */
+  readonly caRef?: ApplicationSetSpecGeneratorsScmProviderBitbucketServerCaRef;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderBitbucketServer#insecure
+   */
+  readonly insecure?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsScmProviderBitbucketServer#project
    */
   readonly project: string;
@@ -6634,6 +6857,9 @@ export function toJson_ApplicationSetSpecGeneratorsScmProviderBitbucketServer(ob
     'allBranches': obj.allBranches,
     'api': obj.api,
     'basicAuth': toJson_ApplicationSetSpecGeneratorsScmProviderBitbucketServerBasicAuth(obj.basicAuth),
+    'bearerToken': toJson_ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerToken(obj.bearerToken),
+    'caRef': toJson_ApplicationSetSpecGeneratorsScmProviderBitbucketServerCaRef(obj.caRef),
+    'insecure': obj.insecure,
     'project': obj.project,
   };
   // filter undefined values
@@ -6803,6 +7029,11 @@ export interface ApplicationSetSpecGeneratorsScmProviderGitlab {
   readonly api?: string;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderGitlab#caRef
+   */
+  readonly caRef?: ApplicationSetSpecGeneratorsScmProviderGitlabCaRef;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsScmProviderGitlab#group
    */
   readonly group: string;
@@ -6843,6 +7074,7 @@ export function toJson_ApplicationSetSpecGeneratorsScmProviderGitlab(obj: Applic
   const result = {
     'allBranches': obj.allBranches,
     'api': obj.api,
+    'caRef': toJson_ApplicationSetSpecGeneratorsScmProviderGitlabCaRef(obj.caRef),
     'group': obj.group,
     'includeSharedProjects': obj.includeSharedProjects,
     'includeSubgroups': obj.includeSubgroups,
@@ -9157,6 +9389,62 @@ export function toJson_ApplicationSetSpecGeneratorsPullRequestBitbucketServerBas
 /* eslint-enable max-len, quote-props */
 
 /**
+ * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerToken
+ */
+export interface ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerToken {
+  /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerToken#tokenRef
+   */
+  readonly tokenRef: ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerTokenTokenRef;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerToken' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerToken(obj: ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerToken | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'tokenRef': toJson_ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerTokenTokenRef(obj.tokenRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketServerCaRef
+ */
+export interface ApplicationSetSpecGeneratorsPullRequestBitbucketServerCaRef {
+  /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketServerCaRef#configMapName
+   */
+  readonly configMapName: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketServerCaRef#key
+   */
+  readonly key: string;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsPullRequestBitbucketServerCaRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsPullRequestBitbucketServerCaRef(obj: ApplicationSetSpecGeneratorsPullRequestBitbucketServerCaRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapName': obj.configMapName,
+    'key': obj.key,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * @schema ApplicationSetSpecGeneratorsPullRequestGiteaTokenRef
  */
 export interface ApplicationSetSpecGeneratorsPullRequestGiteaTokenRef {
@@ -9212,6 +9500,37 @@ export function toJson_ApplicationSetSpecGeneratorsPullRequestGithubTokenRef(obj
   const result = {
     'key': obj.key,
     'secretName': obj.secretName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema ApplicationSetSpecGeneratorsPullRequestGitlabCaRef
+ */
+export interface ApplicationSetSpecGeneratorsPullRequestGitlabCaRef {
+  /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestGitlabCaRef#configMapName
+   */
+  readonly configMapName: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestGitlabCaRef#key
+   */
+  readonly key: string;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsPullRequestGitlabCaRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsPullRequestGitlabCaRef(obj: ApplicationSetSpecGeneratorsPullRequestGitlabCaRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapName': obj.configMapName,
+    'key': obj.key,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -9490,6 +9809,62 @@ export function toJson_ApplicationSetSpecGeneratorsScmProviderBitbucketServerBas
 /* eslint-enable max-len, quote-props */
 
 /**
+ * @schema ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerToken
+ */
+export interface ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerToken {
+  /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerToken#tokenRef
+   */
+  readonly tokenRef: ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerTokenTokenRef;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerToken' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerToken(obj: ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerToken | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'tokenRef': toJson_ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerTokenTokenRef(obj.tokenRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema ApplicationSetSpecGeneratorsScmProviderBitbucketServerCaRef
+ */
+export interface ApplicationSetSpecGeneratorsScmProviderBitbucketServerCaRef {
+  /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderBitbucketServerCaRef#configMapName
+   */
+  readonly configMapName: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderBitbucketServerCaRef#key
+   */
+  readonly key: string;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsScmProviderBitbucketServerCaRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsScmProviderBitbucketServerCaRef(obj: ApplicationSetSpecGeneratorsScmProviderBitbucketServerCaRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapName': obj.configMapName,
+    'key': obj.key,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * @schema ApplicationSetSpecGeneratorsScmProviderGiteaTokenRef
  */
 export interface ApplicationSetSpecGeneratorsScmProviderGiteaTokenRef {
@@ -9545,6 +9920,37 @@ export function toJson_ApplicationSetSpecGeneratorsScmProviderGithubTokenRef(obj
   const result = {
     'key': obj.key,
     'secretName': obj.secretName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema ApplicationSetSpecGeneratorsScmProviderGitlabCaRef
+ */
+export interface ApplicationSetSpecGeneratorsScmProviderGitlabCaRef {
+  /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderGitlabCaRef#configMapName
+   */
+  readonly configMapName: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderGitlabCaRef#key
+   */
+  readonly key: string;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsScmProviderGitlabCaRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsScmProviderGitlabCaRef(obj: ApplicationSetSpecGeneratorsScmProviderGitlabCaRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapName': obj.configMapName,
+    'key': obj.key,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -9797,6 +10203,11 @@ export function toJson_ApplicationSetSpecTemplateSpecSourceDirectory(obj: Applic
  */
 export interface ApplicationSetSpecTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecTemplateSpecSourceHelmFileParameters[];
@@ -9805,6 +10216,16 @@ export interface ApplicationSetSpecTemplateSpecSourceHelm {
    * @schema ApplicationSetSpecTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecTemplateSpecSourceHelm#parameters
@@ -9855,8 +10276,11 @@ export interface ApplicationSetSpecTemplateSpecSourceHelm {
 export function toJson_ApplicationSetSpecTemplateSpecSourceHelm(obj: ApplicationSetSpecTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -9875,6 +10299,11 @@ export function toJson_ApplicationSetSpecTemplateSpecSourceHelm(obj: Application
  * @schema ApplicationSetSpecTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -9909,6 +10338,11 @@ export interface ApplicationSetSpecTemplateSpecSourceKustomize {
    * @schema ApplicationSetSpecTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecTemplateSpecSourceKustomize#labelWithoutSelector
@@ -9954,6 +10388,7 @@ export interface ApplicationSetSpecTemplateSpecSourceKustomize {
 export function toJson_ApplicationSetSpecTemplateSpecSourceKustomize(obj: ApplicationSetSpecTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -9961,6 +10396,7 @@ export function toJson_ApplicationSetSpecTemplateSpecSourceKustomize(obj: Applic
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -10059,6 +10495,11 @@ export function toJson_ApplicationSetSpecTemplateSpecSourcesDirectory(obj: Appli
  */
 export interface ApplicationSetSpecTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecTemplateSpecSourcesHelmFileParameters[];
@@ -10067,6 +10508,16 @@ export interface ApplicationSetSpecTemplateSpecSourcesHelm {
    * @schema ApplicationSetSpecTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecTemplateSpecSourcesHelm#parameters
@@ -10117,8 +10568,11 @@ export interface ApplicationSetSpecTemplateSpecSourcesHelm {
 export function toJson_ApplicationSetSpecTemplateSpecSourcesHelm(obj: ApplicationSetSpecTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -10137,6 +10591,11 @@ export function toJson_ApplicationSetSpecTemplateSpecSourcesHelm(obj: Applicatio
  * @schema ApplicationSetSpecTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -10171,6 +10630,11 @@ export interface ApplicationSetSpecTemplateSpecSourcesKustomize {
    * @schema ApplicationSetSpecTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -10216,6 +10680,7 @@ export interface ApplicationSetSpecTemplateSpecSourcesKustomize {
 export function toJson_ApplicationSetSpecTemplateSpecSourcesKustomize(obj: ApplicationSetSpecTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -10223,6 +10688,7 @@ export function toJson_ApplicationSetSpecTemplateSpecSourcesKustomize(obj: Appli
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -12086,6 +12552,21 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucke
   readonly basicAuth?: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBasicAuth;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServer#bearerToken
+   */
+  readonly bearerToken?: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBearerToken;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServer#caRef
+   */
+  readonly caRef?: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerCaRef;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServer#insecure
+   */
+  readonly insecure?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServer#project
    */
   readonly project: string;
@@ -12106,6 +12587,9 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBi
   const result = {
     'api': obj.api,
     'basicAuth': toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBasicAuth(obj.basicAuth),
+    'bearerToken': toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBearerToken(obj.bearerToken),
+    'caRef': toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerCaRef(obj.caRef),
+    'insecure': obj.insecure,
     'project': obj.project,
     'repo': obj.repo,
   };
@@ -12259,6 +12743,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitlab {
   readonly api?: string;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitlab#caRef
+   */
+  readonly caRef?: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitlabCaRef;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitlab#insecure
    */
   readonly insecure?: boolean;
@@ -12293,6 +12782,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGi
   if (obj === undefined) { return undefined; }
   const result = {
     'api': obj.api,
+    'caRef': toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitlabCaRef(obj.caRef),
     'insecure': obj.insecure,
     'labels': obj.labels?.map(y => y),
     'project': obj.project,
@@ -12490,6 +12980,21 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucke
   readonly basicAuth?: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBasicAuth;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServer#bearerToken
+   */
+  readonly bearerToken?: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBearerToken;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServer#caRef
+   */
+  readonly caRef?: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerCaRef;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServer#insecure
+   */
+  readonly insecure?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServer#project
    */
   readonly project: string;
@@ -12506,6 +13011,9 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBi
     'allBranches': obj.allBranches,
     'api': obj.api,
     'basicAuth': toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBasicAuth(obj.basicAuth),
+    'bearerToken': toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBearerToken(obj.bearerToken),
+    'caRef': toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerCaRef(obj.caRef),
+    'insecure': obj.insecure,
     'project': obj.project,
   };
   // filter undefined values
@@ -12675,6 +13183,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGitlab {
   readonly api?: string;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGitlab#caRef
+   */
+  readonly caRef?: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGitlabCaRef;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGitlab#group
    */
   readonly group: string;
@@ -12715,6 +13228,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGi
   const result = {
     'allBranches': obj.allBranches,
     'api': obj.api,
+    'caRef': toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGitlabCaRef(obj.caRef),
     'group': obj.group,
     'includeSharedProjects': obj.includeSharedProjects,
     'includeSubgroups': obj.includeSubgroups,
@@ -13555,6 +14069,21 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucket
   readonly basicAuth?: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBasicAuth;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServer#bearerToken
+   */
+  readonly bearerToken?: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBearerToken;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServer#caRef
+   */
+  readonly caRef?: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerCaRef;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServer#insecure
+   */
+  readonly insecure?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServer#project
    */
   readonly project: string;
@@ -13575,6 +14104,9 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBit
   const result = {
     'api': obj.api,
     'basicAuth': toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBasicAuth(obj.basicAuth),
+    'bearerToken': toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBearerToken(obj.bearerToken),
+    'caRef': toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerCaRef(obj.caRef),
+    'insecure': obj.insecure,
     'project': obj.project,
     'repo': obj.repo,
   };
@@ -13728,6 +14260,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitlab {
   readonly api?: string;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitlab#caRef
+   */
+  readonly caRef?: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitlabCaRef;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitlab#insecure
    */
   readonly insecure?: boolean;
@@ -13762,6 +14299,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGit
   if (obj === undefined) { return undefined; }
   const result = {
     'api': obj.api,
+    'caRef': toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitlabCaRef(obj.caRef),
     'insecure': obj.insecure,
     'labels': obj.labels?.map(y => y),
     'project': obj.project,
@@ -13959,6 +14497,21 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucket
   readonly basicAuth?: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBasicAuth;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServer#bearerToken
+   */
+  readonly bearerToken?: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBearerToken;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServer#caRef
+   */
+  readonly caRef?: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerCaRef;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServer#insecure
+   */
+  readonly insecure?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServer#project
    */
   readonly project: string;
@@ -13975,6 +14528,9 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBit
     'allBranches': obj.allBranches,
     'api': obj.api,
     'basicAuth': toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBasicAuth(obj.basicAuth),
+    'bearerToken': toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBearerToken(obj.bearerToken),
+    'caRef': toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerCaRef(obj.caRef),
+    'insecure': obj.insecure,
     'project': obj.project,
   };
   // filter undefined values
@@ -14144,6 +14700,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGitlab {
   readonly api?: string;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGitlab#caRef
+   */
+  readonly caRef?: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGitlabCaRef;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGitlab#group
    */
   readonly group: string;
@@ -14184,6 +14745,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGit
   const result = {
     'allBranches': obj.allBranches,
     'api': obj.api,
+    'caRef': toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGitlabCaRef(obj.caRef),
     'group': obj.group,
     'includeSharedProjects': obj.includeSharedProjects,
     'includeSubgroups': obj.includeSubgroups,
@@ -14994,6 +15556,37 @@ export function toJson_ApplicationSetSpecGeneratorsPullRequestBitbucketServerBas
 /* eslint-enable max-len, quote-props */
 
 /**
+ * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerTokenTokenRef
+ */
+export interface ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerTokenTokenRef {
+  /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerTokenTokenRef#key
+   */
+  readonly key: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerTokenTokenRef#secretName
+   */
+  readonly secretName: string;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerTokenTokenRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerTokenTokenRef(obj: ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerTokenTokenRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'secretName': obj.secretName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecDestination
  */
 export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecDestination {
@@ -15332,6 +15925,37 @@ export interface ApplicationSetSpecGeneratorsScmProviderBitbucketServerBasicAuth
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_ApplicationSetSpecGeneratorsScmProviderBitbucketServerBasicAuthPasswordRef(obj: ApplicationSetSpecGeneratorsScmProviderBitbucketServerBasicAuthPasswordRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'secretName': obj.secretName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerTokenTokenRef
+ */
+export interface ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerTokenTokenRef {
+  /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerTokenTokenRef#key
+   */
+  readonly key: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerTokenTokenRef#secretName
+   */
+  readonly secretName: string;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerTokenTokenRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerTokenTokenRef(obj: ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerTokenTokenRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -16251,6 +16875,11 @@ export function toJson_ApplicationSetSpecGeneratorsClusterDecisionResourceTempla
  */
 export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceHelmFileParameters[];
@@ -16259,6 +16888,16 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#parameters
@@ -16309,8 +16948,11 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
 export function toJson_ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -16329,6 +16971,11 @@ export function toJson_ApplicationSetSpecGeneratorsClusterDecisionResourceTempla
  * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -16363,6 +17010,11 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#labelWithoutSelector
@@ -16408,6 +17060,7 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
 export function toJson_ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -16415,6 +17068,7 @@ export function toJson_ApplicationSetSpecGeneratorsClusterDecisionResourceTempla
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -16513,6 +17167,11 @@ export function toJson_ApplicationSetSpecGeneratorsClusterDecisionResourceTempla
  */
 export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesHelmFileParameters[];
@@ -16521,6 +17180,16 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#parameters
@@ -16571,8 +17240,11 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
 export function toJson_ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -16591,6 +17263,11 @@ export function toJson_ApplicationSetSpecGeneratorsClusterDecisionResourceTempla
  * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -16625,6 +17302,11 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -16670,6 +17352,7 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
 export function toJson_ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -16677,6 +17360,7 @@ export function toJson_ApplicationSetSpecGeneratorsClusterDecisionResourceTempla
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -16874,6 +17558,11 @@ export function toJson_ApplicationSetSpecGeneratorsClustersTemplateSpecSourceDir
  */
 export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHelmFileParameters[];
@@ -16882,6 +17571,16 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHelm {
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHelm#parameters
@@ -16932,8 +17631,11 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHelm {
 export function toJson_ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -16952,6 +17654,11 @@ export function toJson_ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHel
  * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -16986,6 +17693,11 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomize
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomize#labelWithoutSelector
@@ -17031,6 +17743,7 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomize
 export function toJson_ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -17038,6 +17751,7 @@ export function toJson_ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKus
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -17136,6 +17850,11 @@ export function toJson_ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesDi
  */
 export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHelmFileParameters[];
@@ -17144,6 +17863,16 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHelm {
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHelm#parameters
@@ -17194,8 +17923,11 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHelm {
 export function toJson_ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -17214,6 +17946,11 @@ export function toJson_ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHe
  * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -17248,6 +17985,11 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomiz
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -17293,6 +18035,7 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomiz
 export function toJson_ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -17300,6 +18043,7 @@ export function toJson_ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKu
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -17497,6 +18241,11 @@ export function toJson_ApplicationSetSpecGeneratorsGitTemplateSpecSourceDirector
  */
 export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelmFileParameters[];
@@ -17505,6 +18254,16 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelm {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelm#parameters
@@ -17555,8 +18314,11 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelm {
 export function toJson_ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -17575,6 +18337,11 @@ export function toJson_ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelm(obj
  * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -17609,6 +18376,11 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomize {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomize#labelWithoutSelector
@@ -17654,6 +18426,7 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomize {
 export function toJson_ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -17661,6 +18434,7 @@ export function toJson_ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomiz
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -17759,6 +18533,11 @@ export function toJson_ApplicationSetSpecGeneratorsGitTemplateSpecSourcesDirecto
  */
 export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelmFileParameters[];
@@ -17767,6 +18546,16 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelm {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelm#parameters
@@ -17817,8 +18606,11 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelm {
 export function toJson_ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -17837,6 +18629,11 @@ export function toJson_ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelm(ob
  * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -17871,6 +18668,11 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomize {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -17916,6 +18718,7 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomize {
 export function toJson_ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -17923,6 +18726,7 @@ export function toJson_ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomi
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -18120,6 +18924,11 @@ export function toJson_ApplicationSetSpecGeneratorsListTemplateSpecSourceDirecto
  */
 export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsListTemplateSpecSourceHelmFileParameters[];
@@ -18128,6 +18937,16 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceHelm {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceHelm#parameters
@@ -18178,8 +18997,11 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceHelm {
 export function toJson_ApplicationSetSpecGeneratorsListTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsListTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsListTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsListTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -18198,6 +19020,11 @@ export function toJson_ApplicationSetSpecGeneratorsListTemplateSpecSourceHelm(ob
  * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -18232,6 +19059,11 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomize {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomize#labelWithoutSelector
@@ -18277,6 +19109,7 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomize {
 export function toJson_ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -18284,6 +19117,7 @@ export function toJson_ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomi
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -18382,6 +19216,11 @@ export function toJson_ApplicationSetSpecGeneratorsListTemplateSpecSourcesDirect
  */
 export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelmFileParameters[];
@@ -18390,6 +19229,16 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelm {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelm#parameters
@@ -18440,8 +19289,11 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelm {
 export function toJson_ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -18460,6 +19312,11 @@ export function toJson_ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelm(o
  * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -18494,6 +19351,11 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomize {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -18539,6 +19401,7 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomize {
 export function toJson_ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -18546,6 +19409,7 @@ export function toJson_ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustom
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -19468,6 +20332,62 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBi
 /* eslint-enable max-len, quote-props */
 
 /**
+ * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBearerToken
+ */
+export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBearerToken {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBearerToken#tokenRef
+   */
+  readonly tokenRef: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBearerTokenTokenRef;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBearerToken' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBearerToken(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBearerToken | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'tokenRef': toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBearerTokenTokenRef(obj.tokenRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerCaRef
+ */
+export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerCaRef {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerCaRef#configMapName
+   */
+  readonly configMapName: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerCaRef#key
+   */
+  readonly key: string;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerCaRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerCaRef(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerCaRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapName': obj.configMapName,
+    'key': obj.key,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGiteaTokenRef
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGiteaTokenRef {
@@ -19523,6 +20443,37 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGi
   const result = {
     'key': obj.key,
     'secretName': obj.secretName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitlabCaRef
+ */
+export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitlabCaRef {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitlabCaRef#configMapName
+   */
+  readonly configMapName: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitlabCaRef#key
+   */
+  readonly key: string;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitlabCaRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitlabCaRef(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitlabCaRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapName': obj.configMapName,
+    'key': obj.key,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -19801,6 +20752,62 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBi
 /* eslint-enable max-len, quote-props */
 
 /**
+ * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBearerToken
+ */
+export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBearerToken {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBearerToken#tokenRef
+   */
+  readonly tokenRef: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBearerTokenTokenRef;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBearerToken' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBearerToken(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBearerToken | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'tokenRef': toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBearerTokenTokenRef(obj.tokenRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerCaRef
+ */
+export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerCaRef {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerCaRef#configMapName
+   */
+  readonly configMapName: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerCaRef#key
+   */
+  readonly key: string;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerCaRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerCaRef(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerCaRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapName': obj.configMapName,
+    'key': obj.key,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGiteaTokenRef
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGiteaTokenRef {
@@ -19856,6 +20863,37 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGi
   const result = {
     'key': obj.key,
     'secretName': obj.secretName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGitlabCaRef
+ */
+export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGitlabCaRef {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGitlabCaRef#configMapName
+   */
+  readonly configMapName: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGitlabCaRef#key
+   */
+  readonly key: string;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGitlabCaRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGitlabCaRef(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGitlabCaRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapName': obj.configMapName,
+    'key': obj.key,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -20057,6 +21095,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceDirec
  */
 export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelmFileParameters[];
@@ -20065,6 +21108,16 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelm {
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelm#parameters
@@ -20115,8 +21168,11 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelm {
 export function toJson_ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -20135,6 +21191,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelm(
  * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -20169,6 +21230,11 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomize {
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomize#labelWithoutSelector
@@ -20214,6 +21280,7 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomize {
 export function toJson_ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -20221,6 +21288,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKusto
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -20319,6 +21387,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesDire
  */
 export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelmFileParameters[];
@@ -20327,6 +21400,16 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelm {
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelm#parameters
@@ -20377,8 +21460,11 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelm {
 export function toJson_ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -20397,6 +21483,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelm
  * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -20431,6 +21522,11 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomize 
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -20476,6 +21572,7 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomize 
 export function toJson_ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -20483,6 +21580,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKust
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -21405,6 +22503,62 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBit
 /* eslint-enable max-len, quote-props */
 
 /**
+ * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBearerToken
+ */
+export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBearerToken {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBearerToken#tokenRef
+   */
+  readonly tokenRef: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBearerTokenTokenRef;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBearerToken' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBearerToken(obj: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBearerToken | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'tokenRef': toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBearerTokenTokenRef(obj.tokenRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerCaRef
+ */
+export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerCaRef {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerCaRef#configMapName
+   */
+  readonly configMapName: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerCaRef#key
+   */
+  readonly key: string;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerCaRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerCaRef(obj: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerCaRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapName': obj.configMapName,
+    'key': obj.key,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGiteaTokenRef
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGiteaTokenRef {
@@ -21460,6 +22614,37 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGit
   const result = {
     'key': obj.key,
     'secretName': obj.secretName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitlabCaRef
+ */
+export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitlabCaRef {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitlabCaRef#configMapName
+   */
+  readonly configMapName: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitlabCaRef#key
+   */
+  readonly key: string;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitlabCaRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitlabCaRef(obj: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitlabCaRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapName': obj.configMapName,
+    'key': obj.key,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -21738,6 +22923,62 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBit
 /* eslint-enable max-len, quote-props */
 
 /**
+ * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBearerToken
+ */
+export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBearerToken {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBearerToken#tokenRef
+   */
+  readonly tokenRef: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBearerTokenTokenRef;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBearerToken' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBearerToken(obj: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBearerToken | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'tokenRef': toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBearerTokenTokenRef(obj.tokenRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerCaRef
+ */
+export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerCaRef {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerCaRef#configMapName
+   */
+  readonly configMapName: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerCaRef#key
+   */
+  readonly key: string;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerCaRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerCaRef(obj: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerCaRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapName': obj.configMapName,
+    'key': obj.key,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGiteaTokenRef
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGiteaTokenRef {
@@ -21793,6 +23034,37 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGit
   const result = {
     'key': obj.key,
     'secretName': obj.secretName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGitlabCaRef
+ */
+export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGitlabCaRef {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGitlabCaRef#configMapName
+   */
+  readonly configMapName: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGitlabCaRef#key
+   */
+  readonly key: string;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGitlabCaRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGitlabCaRef(obj: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGitlabCaRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapName': obj.configMapName,
+    'key': obj.key,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -21994,6 +23266,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeTemplateSpecSourceDirect
  */
 export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelmFileParameters[];
@@ -22002,6 +23279,16 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelm {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelm#parameters
@@ -22052,8 +23339,11 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelm {
 export function toJson_ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -22072,6 +23362,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelm(o
  * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -22106,6 +23401,11 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomize {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomize#labelWithoutSelector
@@ -22151,6 +23451,7 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomize {
 export function toJson_ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -22158,6 +23459,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustom
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -22256,6 +23558,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesDirec
  */
 export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelmFileParameters[];
@@ -22264,6 +23571,16 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelm {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelm#parameters
@@ -22314,8 +23631,11 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelm {
 export function toJson_ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -22334,6 +23654,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelm(
  * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -22368,6 +23693,11 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomize {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -22413,6 +23743,7 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomize {
 export function toJson_ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -22420,6 +23751,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKusto
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -22617,6 +23949,11 @@ export function toJson_ApplicationSetSpecGeneratorsPluginTemplateSpecSourceDirec
  */
 export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelmFileParameters[];
@@ -22625,6 +23962,16 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelm {
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelm#parameters
@@ -22675,8 +24022,11 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelm {
 export function toJson_ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -22695,6 +24045,11 @@ export function toJson_ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelm(
  * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -22729,6 +24084,11 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomize {
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomize#labelWithoutSelector
@@ -22774,6 +24134,7 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomize {
 export function toJson_ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -22781,6 +24142,7 @@ export function toJson_ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKusto
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -22879,6 +24241,11 @@ export function toJson_ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesDire
  */
 export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelmFileParameters[];
@@ -22887,6 +24254,16 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelm {
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelm#parameters
@@ -22937,8 +24314,11 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelm {
 export function toJson_ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -22957,6 +24337,11 @@ export function toJson_ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelm
  * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -22991,6 +24376,11 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomize 
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -23036,6 +24426,7 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomize 
 export function toJson_ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -23043,6 +24434,7 @@ export function toJson_ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKust
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -23240,6 +24632,11 @@ export function toJson_ApplicationSetSpecGeneratorsPullRequestTemplateSpecSource
  */
 export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHelmFileParameters[];
@@ -23248,6 +24645,16 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHelm {
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHelm#parameters
@@ -23298,8 +24705,11 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHelm {
 export function toJson_ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -23318,6 +24728,11 @@ export function toJson_ApplicationSetSpecGeneratorsPullRequestTemplateSpecSource
  * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -23352,6 +24767,11 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustom
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustomize#labelWithoutSelector
@@ -23397,6 +24817,7 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustom
 export function toJson_ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -23404,6 +24825,7 @@ export function toJson_ApplicationSetSpecGeneratorsPullRequestTemplateSpecSource
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -23502,6 +24924,11 @@ export function toJson_ApplicationSetSpecGeneratorsPullRequestTemplateSpecSource
  */
 export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesHelmFileParameters[];
@@ -23510,6 +24937,16 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesHelm 
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesHelm#parameters
@@ -23560,8 +24997,11 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesHelm 
 export function toJson_ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -23580,6 +25020,11 @@ export function toJson_ApplicationSetSpecGeneratorsPullRequestTemplateSpecSource
  * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -23614,6 +25059,11 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKusto
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -23659,6 +25109,7 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKusto
 export function toJson_ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -23666,6 +25117,7 @@ export function toJson_ApplicationSetSpecGeneratorsPullRequestTemplateSpecSource
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -23863,6 +25315,11 @@ export function toJson_ApplicationSetSpecGeneratorsScmProviderTemplateSpecSource
  */
 export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHelmFileParameters[];
@@ -23871,6 +25328,16 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHelm {
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHelm#parameters
@@ -23921,8 +25388,11 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHelm {
 export function toJson_ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -23941,6 +25411,11 @@ export function toJson_ApplicationSetSpecGeneratorsScmProviderTemplateSpecSource
  * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -23975,6 +25450,11 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustom
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustomize#labelWithoutSelector
@@ -24020,6 +25500,7 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustom
 export function toJson_ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -24027,6 +25508,7 @@ export function toJson_ApplicationSetSpecGeneratorsScmProviderTemplateSpecSource
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -24125,6 +25607,11 @@ export function toJson_ApplicationSetSpecGeneratorsScmProviderTemplateSpecSource
  */
 export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesHelmFileParameters[];
@@ -24133,6 +25620,16 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesHelm 
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesHelm#parameters
@@ -24183,8 +25680,11 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesHelm 
 export function toJson_ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -24203,6 +25703,11 @@ export function toJson_ApplicationSetSpecGeneratorsScmProviderTemplateSpecSource
  * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -24237,6 +25742,11 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKusto
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -24282,6 +25792,7 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKusto
 export function toJson_ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -24289,6 +25800,7 @@ export function toJson_ApplicationSetSpecGeneratorsScmProviderTemplateSpecSource
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -28592,6 +30104,37 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBi
 /* eslint-enable max-len, quote-props */
 
 /**
+ * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBearerTokenTokenRef
+ */
+export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBearerTokenTokenRef {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBearerTokenTokenRef#key
+   */
+  readonly key: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBearerTokenTokenRef#secretName
+   */
+  readonly secretName: string;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBearerTokenTokenRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBearerTokenTokenRef(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBearerTokenTokenRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'secretName': obj.secretName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecDestination
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecDestination {
@@ -28930,6 +30473,37 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucke
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBasicAuthPasswordRef(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBasicAuthPasswordRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'secretName': obj.secretName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBearerTokenTokenRef
+ */
+export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBearerTokenTokenRef {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBearerTokenTokenRef#key
+   */
+  readonly key: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBearerTokenTokenRef#secretName
+   */
+  readonly secretName: string;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBearerTokenTokenRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBearerTokenTokenRef(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBearerTokenTokenRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -31485,6 +33059,37 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBit
 /* eslint-enable max-len, quote-props */
 
 /**
+ * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBearerTokenTokenRef
+ */
+export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBearerTokenTokenRef {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBearerTokenTokenRef#key
+   */
+  readonly key: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBearerTokenTokenRef#secretName
+   */
+  readonly secretName: string;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBearerTokenTokenRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBearerTokenTokenRef(obj: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBearerTokenTokenRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'secretName': obj.secretName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecDestination
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecDestination {
@@ -31823,6 +33428,37 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucket
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBasicAuthPasswordRef(obj: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBasicAuthPasswordRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'secretName': obj.secretName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBearerTokenTokenRef
+ */
+export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBearerTokenTokenRef {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBearerTokenTokenRef#key
+   */
+  readonly key: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBearerTokenTokenRef#secretName
+   */
+  readonly secretName: string;
+
+}
+
+/**
+ * Converts an object of type 'ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBearerTokenTokenRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBearerTokenTokenRef(obj: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBearerTokenTokenRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -35563,6 +37199,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisi
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceHelmFileParameters[];
@@ -35571,6 +37212,16 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#parameters
@@ -35621,8 +37272,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -35641,6 +37295,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisi
  * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -35675,6 +37334,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#labelWithoutSelector
@@ -35720,6 +37384,7 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -35727,6 +37392,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisi
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -35825,6 +37491,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisi
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesHelmFileParameters[];
@@ -35833,6 +37504,16 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#parameters
@@ -35883,8 +37564,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -35903,6 +37587,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisi
  * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -35937,6 +37626,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -35982,6 +37676,7 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -35989,6 +37684,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisi
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -36186,6 +37882,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTempl
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceHelmFileParameters[];
@@ -36194,6 +37895,16 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceHelm#parameters
@@ -36244,8 +37955,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -36264,6 +37978,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTempl
  * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -36298,6 +38017,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceKustomize#labelWithoutSelector
@@ -36343,6 +38067,7 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -36350,6 +38075,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTempl
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -36448,6 +38174,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTempl
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesHelmFileParameters[];
@@ -36456,6 +38187,16 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesHelm#parameters
@@ -36506,8 +38247,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -36526,6 +38270,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTempl
  * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -36560,6 +38309,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -36605,6 +38359,7 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -36612,6 +38367,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTempl
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -36809,6 +38565,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSp
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceHelmFileParameters[];
@@ -36817,6 +38578,16 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceHelm#parameters
@@ -36867,8 +38638,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -36887,6 +38661,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSp
  * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -36921,6 +38700,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceKustomize#labelWithoutSelector
@@ -36966,6 +38750,7 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -36973,6 +38758,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSp
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -37071,6 +38857,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSp
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesHelmFileParameters[];
@@ -37079,6 +38870,16 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesHelm#parameters
@@ -37129,8 +38930,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -37149,6 +38953,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSp
  * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -37183,6 +38992,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -37228,6 +39042,7 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -37235,6 +39050,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSp
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -37432,6 +39248,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateS
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceHelmFileParameters[];
@@ -37440,6 +39261,16 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceHelm#parameters
@@ -37490,8 +39321,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -37510,6 +39344,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateS
  * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -37544,6 +39383,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceKustomize#labelWithoutSelector
@@ -37589,6 +39433,7 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -37596,6 +39441,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateS
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -37694,6 +39540,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateS
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesHelmFileParameters[];
@@ -37702,6 +39553,16 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesHelm#parameters
@@ -37752,8 +39613,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -37772,6 +39636,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateS
  * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -37806,6 +39675,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -37851,6 +39725,7 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -37858,6 +39733,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateS
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -38055,6 +39931,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplat
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceHelmFileParameters[];
@@ -38063,6 +39944,16 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceHelm#parameters
@@ -38113,8 +40004,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -38133,6 +40027,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplat
  * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -38167,6 +40066,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceKustomize#labelWithoutSelector
@@ -38212,6 +40116,7 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -38219,6 +40124,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplat
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -38317,6 +40223,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplat
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesHelmFileParameters[];
@@ -38325,6 +40236,16 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesHelm#parameters
@@ -38375,8 +40296,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -38395,6 +40319,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplat
  * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -38429,6 +40358,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -38474,6 +40408,7 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -38481,6 +40416,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplat
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -38678,6 +40614,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTe
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceHelmFileParameters[];
@@ -38686,6 +40627,16 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceHelm#parameters
@@ -38736,8 +40687,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -38756,6 +40710,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTe
  * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -38790,6 +40749,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceKustomize#labelWithoutSelector
@@ -38835,6 +40799,7 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -38842,6 +40807,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTe
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -38940,6 +40906,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTe
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesHelmFileParameters[];
@@ -38948,6 +40919,16 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesHelm#parameters
@@ -38998,8 +40979,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -39018,6 +41002,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTe
  * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -39052,6 +41041,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -39097,6 +41091,7 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -39104,6 +41099,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTe
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -39301,6 +41297,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTe
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceHelmFileParameters[];
@@ -39309,6 +41310,16 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceHelm#parameters
@@ -39359,8 +41370,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -39379,6 +41393,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTe
  * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -39413,6 +41432,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceKustomize#labelWithoutSelector
@@ -39458,6 +41482,7 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -39465,6 +41490,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTe
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -39563,6 +41589,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTe
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesHelmFileParameters[];
@@ -39571,6 +41602,16 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesHelm#parameters
@@ -39621,8 +41662,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -39641,6 +41685,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTe
  * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -39675,6 +41724,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -39720,6 +41774,7 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -39727,6 +41782,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTe
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -40222,6 +42278,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisio
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceHelmFileParameters[];
@@ -40230,6 +42291,16 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#parameters
@@ -40280,8 +42351,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -40300,6 +42374,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisio
  * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -40334,6 +42413,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#labelWithoutSelector
@@ -40379,6 +42463,7 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -40386,6 +42471,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisio
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -40484,6 +42570,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisio
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesHelmFileParameters[];
@@ -40492,6 +42583,16 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#parameters
@@ -40542,8 +42643,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -40562,6 +42666,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisio
  * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -40596,6 +42705,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -40641,6 +42755,7 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -40648,6 +42763,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisio
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -40845,6 +42961,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClustersTempla
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceHelmFileParameters[];
@@ -40853,6 +42974,16 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceHelm#parameters
@@ -40903,8 +43034,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -40923,6 +43057,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClustersTempla
  * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -40957,6 +43096,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceKustomize#labelWithoutSelector
@@ -41002,6 +43146,7 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -41009,6 +43154,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClustersTempla
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -41107,6 +43253,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClustersTempla
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesHelmFileParameters[];
@@ -41115,6 +43266,16 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesHelm#parameters
@@ -41165,8 +43326,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -41185,6 +43349,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClustersTempla
  * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -41219,6 +43388,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -41264,6 +43438,7 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -41271,6 +43446,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClustersTempla
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -41468,6 +43644,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpe
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceHelmFileParameters[];
@@ -41476,6 +43657,16 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceHelm#parameters
@@ -41526,8 +43717,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -41546,6 +43740,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpe
  * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -41580,6 +43779,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceKustomize#labelWithoutSelector
@@ -41625,6 +43829,7 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -41632,6 +43837,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpe
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -41730,6 +43936,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpe
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesHelmFileParameters[];
@@ -41738,6 +43949,16 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesHelm#parameters
@@ -41788,8 +44009,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -41808,6 +44032,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpe
  * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -41842,6 +44071,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -41887,6 +44121,7 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -41894,6 +44129,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpe
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -42091,6 +44327,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSp
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceHelmFileParameters[];
@@ -42099,6 +44340,16 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceHelm#parameters
@@ -42149,8 +44400,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -42169,6 +44423,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSp
  * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -42203,6 +44462,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceKustomize#labelWithoutSelector
@@ -42248,6 +44512,7 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -42255,6 +44520,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSp
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -42353,6 +44619,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSp
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesHelmFileParameters[];
@@ -42361,6 +44632,16 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesHelm#parameters
@@ -42411,8 +44692,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -42431,6 +44715,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSp
  * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -42465,6 +44754,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -42510,6 +44804,7 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -42517,6 +44812,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSp
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -42714,6 +45010,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplate
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceHelmFileParameters[];
@@ -42722,6 +45023,16 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceHelm#parameters
@@ -42772,8 +45083,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -42792,6 +45106,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplate
  * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -42826,6 +45145,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceKustomize#labelWithoutSelector
@@ -42871,6 +45195,7 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -42878,6 +45203,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplate
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -42976,6 +45302,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplate
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesHelmFileParameters[];
@@ -42984,6 +45315,16 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesHelm#parameters
@@ -43034,8 +45375,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -43054,6 +45398,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplate
  * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -43088,6 +45437,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -43133,6 +45487,7 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -43140,6 +45495,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplate
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -43337,6 +45693,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTem
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceHelmFileParameters[];
@@ -43345,6 +45706,16 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceHelm#parameters
@@ -43395,8 +45766,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -43415,6 +45789,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTem
  * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -43449,6 +45828,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceKustomize#labelWithoutSelector
@@ -43494,6 +45878,7 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -43501,6 +45886,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTem
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -43599,6 +45985,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTem
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesHelmFileParameters[];
@@ -43607,6 +45998,16 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesHelm#parameters
@@ -43657,8 +46058,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -43677,6 +46081,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTem
  * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -43711,6 +46120,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -43756,6 +46170,7 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -43763,6 +46178,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTem
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -43960,6 +46376,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTem
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceHelmFileParameters[];
@@ -43968,6 +46389,16 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceHelm#parameters
@@ -44018,8 +46449,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceHelm(obj: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -44038,6 +46472,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTem
  * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceKustomize
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceKustomize#commonAnnotations
    */
@@ -44072,6 +46511,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceKustomize#labelWithoutSelector
@@ -44117,6 +46561,7 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceKustomize(obj: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -44124,6 +46569,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTem
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -44222,6 +46668,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTem
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesHelm {
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesHelm#fileParameters
    */
   readonly fileParameters?: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesHelmFileParameters[];
@@ -44230,6 +46681,16 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesHelm#ignoreMissingValueFiles
    */
   readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesHelm#namespace
+   */
+  readonly namespace?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesHelm#parameters
@@ -44280,8 +46741,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesHelm(obj: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesHelmFileParameters(y)),
     'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
     'parameters': obj.parameters?.map(y => toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesHelmParameters(y)),
     'passCredentials': obj.passCredentials,
     'releaseName': obj.releaseName,
@@ -44300,6 +46764,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTem
  * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesKustomize
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesKustomize {
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesKustomize#commonAnnotations
    */
@@ -44334,6 +46803,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesKustomize#images
    */
   readonly images?: string[];
+
+  /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
 
   /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesKustomize#labelWithoutSelector
@@ -44379,6 +46853,7 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesKustomize(obj: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
     'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
     'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -44386,6 +46861,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTem
     'forceCommonAnnotations': obj.forceCommonAnnotations,
     'forceCommonLabels': obj.forceCommonLabels,
     'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
     'labelWithoutSelector': obj.labelWithoutSelector,
     'namePrefix': obj.namePrefix,
     'nameSuffix': obj.nameSuffix,
@@ -57629,6 +60105,13 @@ export interface AppProjectSpec {
   readonly description?: string;
 
   /**
+   * DestinationServiceAccounts holds information about the service accounts to be impersonated for the application sync operation for each destination.
+   *
+   * @schema AppProjectSpec#destinationServiceAccounts
+   */
+  readonly destinationServiceAccounts?: AppProjectSpecDestinationServiceAccounts[];
+
+  /**
    * Destinations contains list of destinations available for deployment
    *
    * @schema AppProjectSpec#destinations
@@ -57710,6 +60193,7 @@ export function toJson_AppProjectSpec(obj: AppProjectSpec | undefined): Record<s
     'clusterResourceBlacklist': obj.clusterResourceBlacklist?.map(y => toJson_AppProjectSpecClusterResourceBlacklist(y)),
     'clusterResourceWhitelist': obj.clusterResourceWhitelist?.map(y => toJson_AppProjectSpecClusterResourceWhitelist(y)),
     'description': obj.description,
+    'destinationServiceAccounts': obj.destinationServiceAccounts?.map(y => toJson_AppProjectSpecDestinationServiceAccounts(y)),
     'destinations': obj.destinations?.map(y => toJson_AppProjectSpecDestinations(y)),
     'namespaceResourceBlacklist': obj.namespaceResourceBlacklist?.map(y => toJson_AppProjectSpecNamespaceResourceBlacklist(y)),
     'namespaceResourceWhitelist': obj.namespaceResourceWhitelist?.map(y => toJson_AppProjectSpecNamespaceResourceWhitelist(y)),
@@ -57788,6 +60272,51 @@ export function toJson_AppProjectSpecClusterResourceWhitelist(obj: AppProjectSpe
   const result = {
     'group': obj.group,
     'kind': obj.kind,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ApplicationDestinationServiceAccount holds information about the service account to be impersonated for the application sync operation.
+ *
+ * @schema AppProjectSpecDestinationServiceAccounts
+ */
+export interface AppProjectSpecDestinationServiceAccounts {
+  /**
+   * DefaultServiceAccount to be used for impersonation during the sync operation
+   *
+   * @schema AppProjectSpecDestinationServiceAccounts#defaultServiceAccount
+   */
+  readonly defaultServiceAccount: string;
+
+  /**
+   * Namespace specifies the target namespace for the application's resources.
+   *
+   * @schema AppProjectSpecDestinationServiceAccounts#namespace
+   */
+  readonly namespace?: string;
+
+  /**
+   * Server specifies the URL of the target cluster's Kubernetes control plane API.
+   *
+   * @schema AppProjectSpecDestinationServiceAccounts#server
+   */
+  readonly server: string;
+
+}
+
+/**
+ * Converts an object of type 'AppProjectSpecDestinationServiceAccounts' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_AppProjectSpecDestinationServiceAccounts(obj: AppProjectSpecDestinationServiceAccounts | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'defaultServiceAccount': obj.defaultServiceAccount,
+    'namespace': obj.namespace,
+    'server': obj.server,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});

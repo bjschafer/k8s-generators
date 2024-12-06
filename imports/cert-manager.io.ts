@@ -7,7 +7,6 @@ import { Construct } from 'constructs';
  * A Certificate resource should be created to ensure an up to date and signed
 X.509 certificate is stored in the Kubernetes Secret resource named in `spec.secretName`.
 
-
 The stored certificate will be renewed before it expires (as configured by `spec.renewBefore`).
  *
  * @schema Certificate
@@ -65,7 +64,6 @@ export class Certificate extends ApiObject {
  * A Certificate resource should be created to ensure an up to date and signed
  * X.509 certificate is stored in the Kubernetes Secret resource named in `spec.secretName`.
  *
- *
  * The stored certificate will be renewed before it expires (as configured by `spec.renewBefore`).
  *
  * @schema Certificate
@@ -112,7 +110,6 @@ export interface CertificateSpec {
    * Defines extra output formats of the private key and signed certificate chain
    * to be written to this Certificate's target Secret.
    *
-   *
    * This is a Beta Feature enabled by default. It can be disabled with the
    * `--feature-gates=AdditionalCertificateOutputFormats=false` option set on both
    * the controller and webhook components.
@@ -126,7 +123,6 @@ export interface CertificateSpec {
    * More info: https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6
    * NOTE: TLS clients will ignore this value when any subject alternative name is
    * set (see https://tools.ietf.org/html/rfc6125#section-6.4.4).
-   *
    *
    * Should have a length of 64 characters or fewer to avoid generating invalid CSRs.
    * Cannot be set if the `literalSubject` field is set.
@@ -147,7 +143,6 @@ export interface CertificateSpec {
    * issuer may choose to ignore the requested duration, just like any other
    * requested attribute.
    *
-   *
    * If unset, this defaults to 90 days.
    * Minimum accepted duration is 1 hour.
    * Value must be in units accepted by Go time.ParseDuration https://golang.org/pkg/time/#ParseDuration.
@@ -165,7 +160,6 @@ export interface CertificateSpec {
 
   /**
    * Whether the KeyUsage and ExtKeyUsage extensions should be set in the encoded CSR.
-   *
    *
    * This option defaults to true, and should only be disabled if the target
    * issuer does not support CSRs with these X509 KeyUsage/ ExtKeyUsage extensions.
@@ -187,7 +181,6 @@ export interface CertificateSpec {
    * resources. Note that the issuer may choose to ignore the requested isCA value, just
    * like any other requested attribute.
    *
-   *
    * If true, this will automatically add the `cert sign` usage to the list
    * of requested `usages`.
    *
@@ -200,7 +193,6 @@ export interface CertificateSpec {
    * If the issuer is namespace-scoped, it must be in the same namespace
    * as the Certificate. If the issuer is cluster-scoped, it can be used
    * from any namespace.
-   *
    *
    * The `name` field of the reference must always be specified.
    *
@@ -225,7 +217,6 @@ export interface CertificateSpec {
    * More info: https://github.com/cert-manager/cert-manager/issues/3203
    * More info: https://github.com/cert-manager/cert-manager/issues/4424
    *
-   *
    * Cannot be set if the `subject` or `commonName` field is set.
    *
    * @schema CertificateSpec#literalSubject
@@ -235,7 +226,6 @@ export interface CertificateSpec {
   /**
    * x.509 certificate NameConstraint extension which MUST NOT be used in a non-CA certificate.
    * More Info: https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10
-   *
    *
    * This is an Alpha Feature and is only enabled with the
    * `--feature-gates=NameConstraints=true` option set on both
@@ -270,19 +260,38 @@ export interface CertificateSpec {
    * 50 minutes after it was issued (i.e. when there are 10 minutes remaining until
    * the certificate is no longer valid).
    *
+   * NOTE: The actual lifetime of the issued certificate is used to determine the
+   * renewal time. If an issuer returns a certificate with a different lifetime than
+   * the one requested, cert-manager will use the lifetime of the issued certificate.
+   *
+   * If unset, this defaults to 1/3 of the issued certificate's lifetime.
+   * Minimum accepted value is 5 minutes.
+   * Value must be in units accepted by Go time.ParseDuration https://golang.org/pkg/time/#ParseDuration.
+   * Cannot be set if the `renewBeforePercentage` field is set.
+   *
+   * @schema CertificateSpec#renewBefore
+   */
+  readonly renewBefore?: string;
+
+  /**
+   * `renewBeforePercentage` is like `renewBefore`, except it is a relative percentage
+   * rather than an absolute duration. For example, if a certificate is valid for 60
+   * minutes, and  `renewBeforePercentage=25`, cert-manager will begin to attempt to
+   * renew the certificate 45 minutes after it was issued (i.e. when there are 15
+   * minutes (25%) remaining until the certificate is no longer valid).
    *
    * NOTE: The actual lifetime of the issued certificate is used to determine the
    * renewal time. If an issuer returns a certificate with a different lifetime than
    * the one requested, cert-manager will use the lifetime of the issued certificate.
    *
+   * Value must be an integer in the range (0,100). The minimum effective
+   * `renewBefore` derived from the `renewBeforePercentage` and `duration` fields is 5
+   * minutes.
+   * Cannot be set if the `renewBefore` field is set.
    *
-   * If unset, this defaults to 1/3 of the issued certificate's lifetime.
-   * Minimum accepted value is 5 minutes.
-   * Value must be in units accepted by Go time.ParseDuration https://golang.org/pkg/time/#ParseDuration.
-   *
-   * @schema CertificateSpec#renewBefore
+   * @schema CertificateSpec#renewBeforePercentage
    */
-  readonly renewBefore?: string;
+  readonly renewBeforePercentage?: number;
 
   /**
    * The maximum number of CertificateRequest revisions that are maintained in
@@ -290,7 +299,6 @@ export interface CertificateSpec {
    * created by this Certificate, either when it was created, renewed, or Spec
    * was changed. Revisions will be removed by oldest first if the number of
    * revisions exceeds this number.
-   *
    *
    * If set, revisionHistoryLimit must be a value of `1` or greater.
    * If unset (`nil`), revisions will not be garbage collected.
@@ -325,7 +333,6 @@ export interface CertificateSpec {
    * Requested set of X509 certificate subject attributes.
    * More info: https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6
    *
-   *
    * The common name attribute is specified separately in the `commonName` field.
    * Cannot be set if the `literalSubject` field is set.
    *
@@ -345,7 +352,6 @@ export interface CertificateSpec {
    * These usages are used to set the `usages` field on the created CertificateRequest
    * resources. If `encodeUsagesInRequest` is unset or set to `true`, the usages
    * will additionally be encoded in the `request` field which contains the CSR blob.
-   *
    *
    * If unset, defaults to `digital signature` and `key encipherment`.
    *
@@ -377,6 +383,7 @@ export function toJson_CertificateSpec(obj: CertificateSpec | undefined): Record
     'otherNames': obj.otherNames?.map(y => toJson_CertificateSpecOtherNames(y)),
     'privateKey': toJson_CertificateSpecPrivateKey(obj.privateKey),
     'renewBefore': obj.renewBefore,
+    'renewBeforePercentage': obj.renewBeforePercentage,
     'revisionHistoryLimit': obj.revisionHistoryLimit,
     'secretName': obj.secretName,
     'secretTemplate': toJson_CertificateSpecSecretTemplate(obj.secretTemplate),
@@ -426,7 +433,6 @@ export function toJson_CertificateSpecAdditionalOutputFormats(obj: CertificateSp
  * If the issuer is namespace-scoped, it must be in the same namespace
  * as the Certificate. If the issuer is cluster-scoped, it can be used
  * from any namespace.
- *
  *
  * The `name` field of the reference must always be specified.
  *
@@ -514,7 +520,6 @@ export function toJson_CertificateSpecKeystores(obj: CertificateSpecKeystores | 
 /**
  * x.509 certificate NameConstraint extension which MUST NOT be used in a non-CA certificate.
  * More Info: https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10
- *
  *
  * This is an Alpha Feature and is only enabled with the
  * `--feature-gates=NameConstraints=true` option set on both
@@ -613,7 +618,6 @@ export interface CertificateSpecPrivateKey {
    * Algorithm is the private key algorithm of the corresponding private key
    * for this certificate.
    *
-   *
    * If provided, allowed values are either `RSA`, `ECDSA` or `Ed25519`.
    * If `algorithm` is specified and `size` is not provided,
    * key size of 2048 will be used for `RSA` key algorithm and
@@ -628,7 +632,6 @@ export interface CertificateSpecPrivateKey {
    * The private key cryptography standards (PKCS) encoding for this
    * certificate's private key to be encoded in.
    *
-   *
    * If provided, allowed values are `PKCS1` and `PKCS8` standing for PKCS#1
    * and PKCS#8, respectively.
    * Defaults to `PKCS1` if not specified.
@@ -642,9 +645,8 @@ export interface CertificateSpecPrivateKey {
    * RotationPolicy controls how private keys should be regenerated when a
    * re-issuance is being processed.
    *
-   *
    * If set to `Never`, a private key will only be generated if one does not
-   * already exist in the target `spec.secretName`. If one does exists but it
+   * already exist in the target `spec.secretName`. If one does exist but it
    * does not have the correct algorithm or size, a warning will be raised
    * to await user intervention.
    * If set to `Always`, a private key matching the specified requirements
@@ -658,7 +660,6 @@ export interface CertificateSpecPrivateKey {
 
   /**
    * Size is the key bit size of the corresponding private key for this certificate.
-   *
    *
    * If `algorithm` is set to `RSA`, valid values are `2048`, `4096` or `8192`,
    * and will default to `2048` if not specified.
@@ -734,7 +735,6 @@ export function toJson_CertificateSpecSecretTemplate(obj: CertificateSpecSecretT
 /**
  * Requested set of X509 certificate subject attributes.
  * More info: https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6
- *
  *
  * The common name attribute is specified separately in the `commonName` field.
  * Cannot be set if the `literalSubject` field is set.
@@ -826,7 +826,6 @@ export function toJson_CertificateSpecSubject(obj: CertificateSpecSubject | unde
  * See:
  * https://tools.ietf.org/html/rfc5280#section-4.2.1.3
  * https://tools.ietf.org/html/rfc5280#section-4.2.1.12
- *
  *
  * Valid KeyUsage values are as follows:
  * "signing",
@@ -1007,7 +1006,6 @@ export interface CertificateSpecKeystoresPkcs12 {
    * Profile specifies the key and certificate encryption algorithms and the HMAC algorithm
    * used to create the PKCS12 keystore. Default value is `LegacyRC2` for backward compatibility.
    *
-   *
    * If provided, allowed values are:
    * `LegacyRC2`: Deprecated. Not supported by default in OpenSSL 3 or Java 20.
    * `LegacyDES`: Less secure algorithm. Use this option for maximal compatibility.
@@ -1151,7 +1149,6 @@ export function toJson_CertificateSpecNameConstraintsPermitted(obj: CertificateS
  * Algorithm is the private key algorithm of the corresponding private key
  * for this certificate.
  *
- *
  * If provided, allowed values are either `RSA`, `ECDSA` or `Ed25519`.
  * If `algorithm` is specified and `size` is not provided,
  * key size of 2048 will be used for `RSA` key algorithm and
@@ -1173,7 +1170,6 @@ export enum CertificateSpecPrivateKeyAlgorithm {
  * The private key cryptography standards (PKCS) encoding for this
  * certificate's private key to be encoded in.
  *
- *
  * If provided, allowed values are `PKCS1` and `PKCS8` standing for PKCS#1
  * and PKCS#8, respectively.
  * Defaults to `PKCS1` if not specified.
@@ -1192,9 +1188,8 @@ export enum CertificateSpecPrivateKeyEncoding {
  * RotationPolicy controls how private keys should be regenerated when a
  * re-issuance is being processed.
  *
- *
  * If set to `Never`, a private key will only be generated if one does not
- * already exist in the target `spec.secretName`. If one does exists but it
+ * already exist in the target `spec.secretName`. If one does exist but it
  * does not have the correct algorithm or size, a warning will be raised
  * to await user intervention.
  * If set to `Always`, a private key matching the specified requirements
@@ -1297,7 +1292,6 @@ export function toJson_CertificateSpecKeystoresPkcs12PasswordSecretRef(obj: Cert
  * Profile specifies the key and certificate encryption algorithms and the HMAC algorithm
  * used to create the PKCS12 keystore. Default value is `LegacyRC2` for backward compatibility.
  *
- *
  * If provided, allowed values are:
  * `LegacyRC2`: Deprecated. Not supported by default in OpenSSL 3 or Java 20.
  * `LegacyDES`: Less secure algorithm. Use this option for maximal compatibility.
@@ -1321,11 +1315,9 @@ export enum CertificateSpecKeystoresPkcs12Profile {
  * A CertificateRequest is used to request a signed certificate from one of the
 configured issuers.
 
-
 All fields within the CertificateRequest's `spec` are immutable after creation.
 A CertificateRequest will either succeed or fail, as denoted by its `Ready` status
 condition and its `status.failureTime` field.
-
 
 A CertificateRequest is a one-shot resource, meaning it represents a single
 point in time request for a certificate and cannot be re-used.
@@ -1385,11 +1377,9 @@ export class CertificateRequest extends ApiObject {
  * A CertificateRequest is used to request a signed certificate from one of the
  * configured issuers.
  *
- *
  * All fields within the CertificateRequest's `spec` are immutable after creation.
  * A CertificateRequest will either succeed or fail, as denoted by its `Ready` status
  * condition and its `status.failureTime` field.
- *
  *
  * A CertificateRequest is a one-shot resource, meaning it represents a single
  * point in time request for a certificate and cannot be re-used.
@@ -1463,10 +1453,8 @@ export interface CertificateRequestSpec {
    * Requested basic constraints isCA value. Note that the issuer may choose
    * to ignore the requested isCA value, just like any other requested attribute.
    *
-   *
    * NOTE: If the CSR in the `Request` field has a BasicConstraints extension,
    * it must have the same isCA value as specified here.
-   *
    *
    * If true, this will automatically add the `cert sign` usage to the list
    * of requested `usages`.
@@ -1481,7 +1469,6 @@ export interface CertificateRequestSpec {
    * as the Certificate. If the issuer is cluster-scoped, it can be used
    * from any namespace.
    *
-   *
    * The `name` field of the reference must always be specified.
    *
    * @schema CertificateRequestSpec#issuerRef
@@ -1491,7 +1478,6 @@ export interface CertificateRequestSpec {
   /**
    * The PEM-encoded X.509 certificate signing request to be submitted to the
    * issuer for signing.
-   *
    *
    * If the CSR has a BasicConstraints extension, its isCA attribute must
    * match the `isCA` value of this CertificateRequest.
@@ -1516,11 +1502,9 @@ export interface CertificateRequestSpec {
   /**
    * Requested key usages and extended key usages.
    *
-   *
    * NOTE: If the CSR in the `Request` field has uses the KeyUsage or
    * ExtKeyUsage extension, these extensions must have the same values
    * as specified here without any additional values.
-   *
    *
    * If unset, defaults to `digital signature` and `key encipherment`.
    *
@@ -1565,7 +1549,6 @@ export function toJson_CertificateRequestSpec(obj: CertificateRequestSpec | unde
  * If the issuer is namespace-scoped, it must be in the same namespace
  * as the Certificate. If the issuer is cluster-scoped, it can be used
  * from any namespace.
- *
  *
  * The `name` field of the reference must always be specified.
  *
@@ -1616,7 +1599,6 @@ export function toJson_CertificateRequestSpecIssuerRef(obj: CertificateRequestSp
  * See:
  * https://tools.ietf.org/html/rfc5280#section-4.2.1.3
  * https://tools.ietf.org/html/rfc5280#section-4.2.1.12
- *
  *
  * Valid KeyUsage values are as follows:
  * "signing",
@@ -2428,6 +2410,15 @@ export interface ClusterIssuerSpecVaultAuth {
   readonly appRole?: ClusterIssuerSpecVaultAuthAppRole;
 
   /**
+   * ClientCertificate authenticates with Vault by presenting a client
+   * certificate during the request's TLS handshake.
+   * Works only when using HTTPS protocol.
+   *
+   * @schema ClusterIssuerSpecVaultAuth#clientCertificate
+   */
+  readonly clientCertificate?: ClusterIssuerSpecVaultAuthClientCertificate;
+
+  /**
    * Kubernetes authenticates with Vault by passing the ServiceAccount
    * token stored in the named Secret resource to the Vault server.
    *
@@ -2452,6 +2443,7 @@ export function toJson_ClusterIssuerSpecVaultAuth(obj: ClusterIssuerSpecVaultAut
   if (obj === undefined) { return undefined; }
   const result = {
     'appRole': toJson_ClusterIssuerSpecVaultAuthAppRole(obj.appRole),
+    'clientCertificate': toJson_ClusterIssuerSpecVaultAuthClientCertificate(obj.clientCertificate),
     'kubernetes': toJson_ClusterIssuerSpecVaultAuthKubernetes(obj.kubernetes),
     'tokenSecretRef': toJson_ClusterIssuerSpecVaultAuthTokenSecretRef(obj.tokenSecretRef),
   };
@@ -2645,9 +2637,20 @@ export interface ClusterIssuerSpecVenafiTpp {
   readonly caBundle?: string;
 
   /**
-   * CredentialsRef is a reference to a Secret containing the username and
-   * password for the TPP server.
-   * The secret must contain two keys, 'username' and 'password'.
+   * Reference to a Secret containing a base64-encoded bundle of PEM CAs
+   * which will be used to validate the certificate chain presented by the TPP server.
+   * Only used if using HTTPS; ignored for HTTP. Mutually exclusive with CABundle.
+   * If neither CABundle nor CABundleSecretRef is defined, the certificate bundle in
+   * the cert-manager controller container is used to validate the TLS connection.
+   *
+   * @schema ClusterIssuerSpecVenafiTpp#caBundleSecretRef
+   */
+  readonly caBundleSecretRef?: ClusterIssuerSpecVenafiTppCaBundleSecretRef;
+
+  /**
+   * CredentialsRef is a reference to a Secret containing the Venafi TPP API credentials.
+   * The secret must contain the key 'access-token' for the Access Token Authentication,
+   * or two keys, 'username' and 'password' for the API Keys Authentication.
    *
    * @schema ClusterIssuerSpecVenafiTpp#credentialsRef
    */
@@ -2671,6 +2674,7 @@ export function toJson_ClusterIssuerSpecVenafiTpp(obj: ClusterIssuerSpecVenafiTp
   if (obj === undefined) { return undefined; }
   const result = {
     'caBundle': obj.caBundle,
+    'caBundleSecretRef': toJson_ClusterIssuerSpecVenafiTppCaBundleSecretRef(obj.caBundleSecretRef),
     'credentialsRef': toJson_ClusterIssuerSpecVenafiTppCredentialsRef(obj.credentialsRef),
     'url': obj.url,
   };
@@ -3009,6 +3013,59 @@ export function toJson_ClusterIssuerSpecVaultAuthAppRole(obj: ClusterIssuerSpecV
 /* eslint-enable max-len, quote-props */
 
 /**
+ * ClientCertificate authenticates with Vault by presenting a client
+ * certificate during the request's TLS handshake.
+ * Works only when using HTTPS protocol.
+ *
+ * @schema ClusterIssuerSpecVaultAuthClientCertificate
+ */
+export interface ClusterIssuerSpecVaultAuthClientCertificate {
+  /**
+   * The Vault mountPath here is the mount path to use when authenticating with
+   * Vault. For example, setting a value to `/v1/auth/foo`, will use the path
+   * `/v1/auth/foo/login` to authenticate with Vault. If unspecified, the
+   * default value "/v1/auth/cert" will be used.
+   *
+   * @schema ClusterIssuerSpecVaultAuthClientCertificate#mountPath
+   */
+  readonly mountPath?: string;
+
+  /**
+   * Name of the certificate role to authenticate against.
+   * If not set, matching any certificate role, if available.
+   *
+   * @schema ClusterIssuerSpecVaultAuthClientCertificate#name
+   */
+  readonly name?: string;
+
+  /**
+   * Reference to Kubernetes Secret of type "kubernetes.io/tls" (hence containing
+   * tls.crt and tls.key) used to authenticate to Vault using TLS client
+   * authentication.
+   *
+   * @schema ClusterIssuerSpecVaultAuthClientCertificate#secretName
+   */
+  readonly secretName?: string;
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecVaultAuthClientCertificate' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecVaultAuthClientCertificate(obj: ClusterIssuerSpecVaultAuthClientCertificate | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'mountPath': obj.mountPath,
+    'name': obj.name,
+    'secretName': obj.secretName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * Kubernetes authenticates with Vault by passing the ServiceAccount
  * token stored in the named Secret resource to the Vault server.
  *
@@ -3153,9 +3210,53 @@ export function toJson_ClusterIssuerSpecVenafiCloudApiTokenSecretRef(obj: Cluste
 /* eslint-enable max-len, quote-props */
 
 /**
- * CredentialsRef is a reference to a Secret containing the username and
- * password for the TPP server.
- * The secret must contain two keys, 'username' and 'password'.
+ * Reference to a Secret containing a base64-encoded bundle of PEM CAs
+ * which will be used to validate the certificate chain presented by the TPP server.
+ * Only used if using HTTPS; ignored for HTTP. Mutually exclusive with CABundle.
+ * If neither CABundle nor CABundleSecretRef is defined, the certificate bundle in
+ * the cert-manager controller container is used to validate the TLS connection.
+ *
+ * @schema ClusterIssuerSpecVenafiTppCaBundleSecretRef
+ */
+export interface ClusterIssuerSpecVenafiTppCaBundleSecretRef {
+  /**
+   * The key of the entry in the Secret resource's `data` field to be used.
+   * Some instances of this field may be defaulted, in others it may be
+   * required.
+   *
+   * @schema ClusterIssuerSpecVenafiTppCaBundleSecretRef#key
+   */
+  readonly key?: string;
+
+  /**
+   * Name of the resource being referred to.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema ClusterIssuerSpecVenafiTppCaBundleSecretRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecVenafiTppCaBundleSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecVenafiTppCaBundleSecretRef(obj: ClusterIssuerSpecVenafiTppCaBundleSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * CredentialsRef is a reference to a Secret containing the Venafi TPP API credentials.
+ * The secret must contain the key 'access-token' for the Access Token Authentication,
+ * or two keys, 'username' and 'password' for the API Keys Authentication.
  *
  * @schema ClusterIssuerSpecVenafiTppCredentialsRef
  */
@@ -3603,18 +3704,39 @@ export interface ClusterIssuerSpecAcmeSolversDns01Route53 {
   readonly auth?: ClusterIssuerSpecAcmeSolversDns01Route53Auth;
 
   /**
-   * If set, the provider will manage only this zone in Route53 and will not do an lookup using the route53:ListHostedZonesByName api call.
+   * If set, the provider will manage only this zone in Route53 and will not do a lookup using the route53:ListHostedZonesByName api call.
    *
    * @schema ClusterIssuerSpecAcmeSolversDns01Route53#hostedZoneID
    */
   readonly hostedZoneId?: string;
 
   /**
-   * Always set the region when using AccessKeyID and SecretAccessKey
+   * Override the AWS region.
+   *
+   * Route53 is a global service and does not have regional endpoints but the
+   * region specified here (or via environment variables) is used as a hint to
+   * help compute the correct AWS credential scope and partition when it
+   * connects to Route53. See:
+   * - [Amazon Route 53 endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/r53.html)
+   * - [Global services](https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/global-services.html)
+   *
+   * If you omit this region field, cert-manager will use the region from
+   * AWS_REGION and AWS_DEFAULT_REGION environment variables, if they are set
+   * in the cert-manager controller Pod.
+   *
+   * The `region` field is not needed if you use [IAM Roles for Service Accounts (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html).
+   * Instead an AWS_REGION environment variable is added to the cert-manager controller Pod by:
+   * [Amazon EKS Pod Identity Webhook](https://github.com/aws/amazon-eks-pod-identity-webhook).
+   * In this case this `region` field value is ignored.
+   *
+   * The `region` field is not needed if you use [EKS Pod Identities](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html).
+   * Instead an AWS_REGION environment variable is added to the cert-manager controller Pod by:
+   * [Amazon EKS Pod Identity Agent](https://github.com/aws/eks-pod-identity-agent),
+   * In this case this `region` field value is ignored.
    *
    * @schema ClusterIssuerSpecAcmeSolversDns01Route53#region
    */
-  readonly region: string;
+  readonly region?: string;
 
   /**
    * Role is a Role ARN which the Route53 provider will assume using either the explicit credentials AccessKeyID/SecretAccessKey
@@ -3742,6 +3864,14 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoute {
   readonly parentRefs?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs[];
 
   /**
+   * Optional pod template used to configure the ACME challenge solver pods
+   * used for HTTP01 challenges.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoute#podTemplate
+   */
+  readonly podTemplate?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate;
+
+  /**
    * Optional service type for Kubernetes solver service. Supported values
    * are NodePort or ClusterIP. If unset, defaults to NodePort.
    *
@@ -3760,6 +3890,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoute(obj: C
   const result = {
     'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'parentRefs': obj.parentRefs?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs(y)),
+    'podTemplate': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate(obj.podTemplate),
     'serviceType': obj.serviceType,
   };
   // filter undefined values
@@ -4570,14 +4701,11 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01Route53SecretAccessKeySe
  * a parent of this resource (usually a route). There are two kinds of parent resources
  * with "Core" support:
  *
- *
  * * Gateway (Gateway conformance profile)
  * * Service (Mesh conformance profile, ClusterIP Services only)
  *
- *
  * This API may be extended in the future to support additional kinds of parent
  * resources.
- *
  *
  * The API object must be valid in the cluster; the Group and Kind must
  * be registered in the cluster for this reference to be valid.
@@ -4591,7 +4719,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * To set the core API group (such as for a "Service" kind referent),
    * Group must be explicitly set to "" (empty string).
    *
-   *
    * Support: Core
    *
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs#group
@@ -4601,13 +4728,10 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
   /**
    * Kind is kind of the referent.
    *
-   *
    * There are two kinds of parent resources with "Core" support:
-   *
    *
    * * Gateway (Gateway conformance profile)
    * * Service (Mesh conformance profile, ClusterIP Services only)
-   *
    *
    * Support for other resources is Implementation-Specific.
    *
@@ -4617,7 +4741,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
 
   /**
    * Name is the name of the referent.
-   *
    *
    * Support: Core
    *
@@ -4629,19 +4752,16 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * Namespace is the namespace of the referent. When unspecified, this refers
    * to the local namespace of the Route.
    *
-   *
    * Note that there are specific rules for ParentRefs which cross namespace
    * boundaries. Cross-namespace references are only valid if they are explicitly
    * allowed by something in the namespace they are referring to. For example:
    * Gateway has the AllowedRoutes field, and ReferenceGrant provides a
    * generic way to enable any other kind of cross-namespace reference.
    *
-   *
    * <gateway:experimental:description>
    * ParentRefs from a Route to a Service in the same namespace are "producer"
    * routes, which apply default routing rules to inbound connections from
    * any namespace to the Service.
-   *
    *
    * ParentRefs from a Route to a Service in a different namespace are
    * "consumer" routes, and these routing rules are only applied to outbound
@@ -4649,7 +4769,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * the intended destination of the connections are a Service targeted as a
    * ParentRef of the Route.
    * </gateway:experimental:description>
-   *
    *
    * Support: Core
    *
@@ -4661,7 +4780,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * Port is the network port this Route targets. It can be interpreted
    * differently based on the type of parent resource.
    *
-   *
    * When the parent resource is a Gateway, this targets all listeners
    * listening on the specified port that also support this kind of Route(and
    * select this Route). It's not recommended to set `Port` unless the
@@ -4670,18 +4788,15 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * and SectionName are specified, the name and port of the selected listener
    * must match both specified values.
    *
-   *
    * <gateway:experimental:description>
    * When the parent resource is a Service, this targets a specific port in the
    * Service spec. When both Port (experimental) and SectionName are specified,
    * the name and port of the selected port must match both specified values.
    * </gateway:experimental:description>
    *
-   *
    * Implementations MAY choose to support other parent resources.
    * Implementations supporting other types of parent resources MUST clearly
    * document how/if Port is interpreted.
-   *
    *
    * For the purpose of status, an attachment is considered successful as
    * long as the parent resource accepts it partially. For example, Gateway
@@ -4690,7 +4805,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * from the referencing Route, the Route MUST be considered successfully
    * attached. If no Gateway listeners accept attachment from this Route,
    * the Route MUST be considered detached from the Gateway.
-   *
    *
    * Support: Extended
    *
@@ -4702,7 +4816,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * SectionName is the name of a section within the target resource. In the
    * following resources, SectionName is interpreted as the following:
    *
-   *
    * * Gateway: Listener name. When both Port (experimental) and SectionName
    * are specified, the name and port of the selected listener must match
    * both specified values.
@@ -4710,11 +4823,9 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * are specified, the name and port of the selected listener must match
    * both specified values.
    *
-   *
    * Implementations MAY choose to support attaching Routes to other resources.
    * If that is the case, they MUST clearly document how SectionName is
    * interpreted.
-   *
    *
    * When unspecified (empty string), this will reference the entire resource.
    * For the purpose of status, an attachment is considered successful if at
@@ -4724,7 +4835,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * the referencing Route, the Route MUST be considered successfully
    * attached. If no Gateway listeners accept attachment from this Route, the
    * Route MUST be considered detached from the Gateway.
-   *
    *
    * Support: Core
    *
@@ -4747,6 +4857,49 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentR
     'namespace': obj.namespace,
     'port': obj.port,
     'sectionName': obj.sectionName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Optional pod template used to configure the ACME challenge solver pods
+ * used for HTTP01 challenges.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate {
+  /**
+   * ObjectMeta overrides for the pod used to solve HTTP01 challenges.
+   * Only the 'labels' and 'annotations' fields may be set.
+   * If labels or annotations overlap with in-built values, the values here
+   * will override the in-built values.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate#metadata
+   */
+  readonly metadata?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata;
+
+  /**
+   * PodSpec defines overrides for the HTTP01 challenge solver pod.
+   * Check ACMEChallengeSolverHTTP01IngressPodSpec to find out currently supported fields.
+   * All other fields will be ignored.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate#spec
+   */
+  readonly spec?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec;
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata(obj.metadata),
+    'spec': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec(obj.spec),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -4862,6 +5015,127 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetes(ob
 /* eslint-enable max-len, quote-props */
 
 /**
+ * ObjectMeta overrides for the pod used to solve HTTP01 challenges.
+ * Only the 'labels' and 'annotations' fields may be set.
+ * If labels or annotations overlap with in-built values, the values here
+ * will override the in-built values.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata {
+  /**
+   * Annotations that should be added to the created ACME HTTP01 solver pods.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels that should be added to the created ACME HTTP01 solver pods.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * PodSpec defines overrides for the HTTP01 challenge solver pod.
+ * Check ACMEChallengeSolverHTTP01IngressPodSpec to find out currently supported fields.
+ * All other fields will be ignored.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec {
+  /**
+   * If specified, the pod's scheduling constraints
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec#affinity
+   */
+  readonly affinity?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity;
+
+  /**
+   * If specified, the pod's imagePullSecrets
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec#imagePullSecrets
+   */
+  readonly imagePullSecrets?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets[];
+
+  /**
+   * NodeSelector is a selector which must be true for the pod to fit on a node.
+   * Selector which must match a node's labels for the pod to be scheduled on that node.
+   * More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec#nodeSelector
+   */
+  readonly nodeSelector?: { [key: string]: string };
+
+  /**
+   * If specified, the pod's priorityClassName.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec#priorityClassName
+   */
+  readonly priorityClassName?: string;
+
+  /**
+   * If specified, the pod's security context
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec#securityContext
+   */
+  readonly securityContext?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext;
+
+  /**
+   * If specified, the pod's service account
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec#serviceAccountName
+   */
+  readonly serviceAccountName?: string;
+
+  /**
+   * If specified, the pod's tolerations.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec#tolerations
+   */
+  readonly tolerations?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations[];
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'affinity': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity(obj.affinity),
+    'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets(y)),
+    'nodeSelector': ((obj.nodeSelector) === undefined) ? undefined : (Object.entries(obj.nodeSelector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'priorityClassName': obj.priorityClassName,
+    'securityContext': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext(obj.securityContext),
+    'serviceAccountName': obj.serviceAccountName,
+    'tolerations': obj.tolerations?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * ObjectMeta overrides for the ingress used to solve HTTP01 challenges.
  * Only the 'labels' and 'annotations' fields may be set.
  * If labels or annotations overlap with in-built values, the values here
@@ -4911,7 +5185,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplateM
  */
 export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata {
   /**
-   * Annotations that should be added to the create ACME HTTP01 solver pods.
+   * Annotations that should be added to the created ACME HTTP01 solver pods.
    *
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata#annotations
    */
@@ -4980,6 +5254,13 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpec {
   readonly priorityClassName?: string;
 
   /**
+   * If specified, the pod's security context
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpec#securityContext
+   */
+  readonly securityContext?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext;
+
+  /**
    * If specified, the pod's service account
    *
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpec#serviceAccountName
@@ -5006,6 +5287,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpec(
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecrets(y)),
     'nodeSelector': ((obj.nodeSelector) === undefined) ? undefined : (Object.entries(obj.nodeSelector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'priorityClassName': obj.priorityClassName,
+    'securityContext': toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext(obj.securityContext),
     'serviceAccountName': obj.serviceAccountName,
     'tolerations': obj.tolerations?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations(y)),
   };
@@ -5050,6 +5332,295 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetesSer
   const result = {
     'audiences': obj.audiences?.map(y => y),
     'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * If specified, the pod's scheduling constraints
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity {
+  /**
+   * Describes node affinity scheduling rules for the pod.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity#nodeAffinity
+   */
+  readonly nodeAffinity?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity;
+
+  /**
+   * Describes pod affinity scheduling rules (e.g. co-locate this pod in the same node, zone, etc. as some other pod(s)).
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity#podAffinity
+   */
+  readonly podAffinity?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity;
+
+  /**
+   * Describes pod anti-affinity scheduling rules (e.g. avoid putting this pod in the same node, zone, etc. as some other pod(s)).
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity#podAntiAffinity
+   */
+  readonly podAntiAffinity?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity;
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'nodeAffinity': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity(obj.nodeAffinity),
+    'podAffinity': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity(obj.podAffinity),
+    'podAntiAffinity': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity(obj.podAntiAffinity),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * LocalObjectReference contains enough information to let you locate the
+ * referenced object inside the same namespace.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * If specified, the pod's security context
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext {
+  /**
+   * A special supplemental group that applies to all containers in a pod.
+   * Some volume types allow the Kubelet to change the ownership of that volume
+   * to be owned by the pod:
+   *
+   * 1. The owning GID will be the FSGroup
+   * 2. The setgid bit is set (new files created in the volume will be owned by FSGroup)
+   * 3. The permission bits are OR'd with rw-rw----
+   *
+   * If unset, the Kubelet will not modify the ownership and permissions of any volume.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#fsGroup
+   */
+  readonly fsGroup?: number;
+
+  /**
+   * fsGroupChangePolicy defines behavior of changing ownership and permission of the volume
+   * before being exposed inside Pod. This field will only apply to
+   * volume types which support fsGroup based ownership(and permissions).
+   * It will have no effect on ephemeral volume types such as: secret, configmaps
+   * and emptydir.
+   * Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#fsGroupChangePolicy
+   */
+  readonly fsGroupChangePolicy?: string;
+
+  /**
+   * The GID to run the entrypoint of the container process.
+   * Uses runtime default if unset.
+   * May also be set in SecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence
+   * for that container.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#runAsGroup
+   */
+  readonly runAsGroup?: number;
+
+  /**
+   * Indicates that the container must run as a non-root user.
+   * If true, the Kubelet will validate the image at runtime to ensure that it
+   * does not run as UID 0 (root) and fail to start the container if it does.
+   * If unset or false, no such validation will be performed.
+   * May also be set in SecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#runAsNonRoot
+   */
+  readonly runAsNonRoot?: boolean;
+
+  /**
+   * The UID to run the entrypoint of the container process.
+   * Defaults to user specified in image metadata if unspecified.
+   * May also be set in SecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence
+   * for that container.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default user specified in image metadata if unspecified.
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#runAsUser
+   */
+  readonly runAsUser?: number;
+
+  /**
+   * The SELinux context to be applied to all containers.
+   * If unspecified, the container runtime will allocate a random SELinux context for each
+   * container.  May also be set in SecurityContext.  If set in
+   * both SecurityContext and PodSecurityContext, the value specified in SecurityContext
+   * takes precedence for that container.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#seLinuxOptions
+   */
+  readonly seLinuxOptions?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions;
+
+  /**
+   * The seccomp options to use by the containers in this pod.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#seccompProfile
+   */
+  readonly seccompProfile?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile;
+
+  /**
+   * A list of groups applied to the first process run in each container, in addition
+   * to the container's primary GID, the fsGroup (if specified), and group memberships
+   * defined in the container image for the uid of the container process. If unspecified,
+   * no additional groups are added to any container. Note that group memberships
+   * defined in the container image for the uid of the container process are still effective,
+   * even if they are not included in this list.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#supplementalGroups
+   */
+  readonly supplementalGroups?: number[];
+
+  /**
+   * Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported
+   * sysctls (by the container runtime) might fail to launch.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#sysctls
+   */
+  readonly sysctls?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls[];
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'fsGroup': obj.fsGroup,
+    'fsGroupChangePolicy': obj.fsGroupChangePolicy,
+    'runAsGroup': obj.runAsGroup,
+    'runAsNonRoot': obj.runAsNonRoot,
+    'runAsUser': obj.runAsUser,
+    'seLinuxOptions': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions(obj.seLinuxOptions),
+    'seccompProfile': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile(obj.seccompProfile),
+    'supplementalGroups': obj.supplementalGroups?.map(y => y),
+    'sysctls': obj.sysctls?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The pod this Toleration is attached to tolerates any taint that matches
+ * the triple <key,value,effect> using the matching operator <operator>.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations {
+  /**
+   * Effect indicates the taint effect to match. Empty means match all taint effects.
+   * When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations#effect
+   */
+  readonly effect?: string;
+
+  /**
+   * Key is the taint key that the toleration applies to. Empty means match all taint keys.
+   * If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations#key
+   */
+  readonly key?: string;
+
+  /**
+   * Operator represents a key's relationship to the value.
+   * Valid operators are Exists and Equal. Defaults to Equal.
+   * Exists is equivalent to wildcard for value, so that a pod can
+   * tolerate all taints of a particular category.
+   *
+   * @default Equal.
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations#operator
+   */
+  readonly operator?: string;
+
+  /**
+   * TolerationSeconds represents the period of time the toleration (which must be
+   * of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default,
+   * it is not set, which means tolerate the taint forever (do not evict). Zero and
+   * negative values will be treated as 0 (evict immediately) by the system.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations#tolerationSeconds
+   */
+  readonly tolerationSeconds?: number;
+
+  /**
+   * Value is the taint value the toleration matches to.
+   * If the operator is Exists, the value should be empty, otherwise just a regular string.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'effect': obj.effect,
+    'key': obj.key,
+    'operator': obj.operator,
+    'tolerationSeconds': obj.tolerationSeconds,
+    'value': obj.value,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -5113,9 +5684,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePu
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecrets#name
    */
@@ -5131,6 +5700,144 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecI
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * If specified, the pod's security context
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext {
+  /**
+   * A special supplemental group that applies to all containers in a pod.
+   * Some volume types allow the Kubelet to change the ownership of that volume
+   * to be owned by the pod:
+   *
+   * 1. The owning GID will be the FSGroup
+   * 2. The setgid bit is set (new files created in the volume will be owned by FSGroup)
+   * 3. The permission bits are OR'd with rw-rw----
+   *
+   * If unset, the Kubelet will not modify the ownership and permissions of any volume.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#fsGroup
+   */
+  readonly fsGroup?: number;
+
+  /**
+   * fsGroupChangePolicy defines behavior of changing ownership and permission of the volume
+   * before being exposed inside Pod. This field will only apply to
+   * volume types which support fsGroup based ownership(and permissions).
+   * It will have no effect on ephemeral volume types such as: secret, configmaps
+   * and emptydir.
+   * Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#fsGroupChangePolicy
+   */
+  readonly fsGroupChangePolicy?: string;
+
+  /**
+   * The GID to run the entrypoint of the container process.
+   * Uses runtime default if unset.
+   * May also be set in SecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence
+   * for that container.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#runAsGroup
+   */
+  readonly runAsGroup?: number;
+
+  /**
+   * Indicates that the container must run as a non-root user.
+   * If true, the Kubelet will validate the image at runtime to ensure that it
+   * does not run as UID 0 (root) and fail to start the container if it does.
+   * If unset or false, no such validation will be performed.
+   * May also be set in SecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#runAsNonRoot
+   */
+  readonly runAsNonRoot?: boolean;
+
+  /**
+   * The UID to run the entrypoint of the container process.
+   * Defaults to user specified in image metadata if unspecified.
+   * May also be set in SecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence
+   * for that container.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default user specified in image metadata if unspecified.
+   * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#runAsUser
+   */
+  readonly runAsUser?: number;
+
+  /**
+   * The SELinux context to be applied to all containers.
+   * If unspecified, the container runtime will allocate a random SELinux context for each
+   * container.  May also be set in SecurityContext.  If set in
+   * both SecurityContext and PodSecurityContext, the value specified in SecurityContext
+   * takes precedence for that container.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#seLinuxOptions
+   */
+  readonly seLinuxOptions?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions;
+
+  /**
+   * The seccomp options to use by the containers in this pod.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#seccompProfile
+   */
+  readonly seccompProfile?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile;
+
+  /**
+   * A list of groups applied to the first process run in each container, in addition
+   * to the container's primary GID, the fsGroup (if specified), and group memberships
+   * defined in the container image for the uid of the container process. If unspecified,
+   * no additional groups are added to any container. Note that group memberships
+   * defined in the container image for the uid of the container process are still effective,
+   * even if they are not included in this list.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#supplementalGroups
+   */
+  readonly supplementalGroups?: number[];
+
+  /**
+   * Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported
+   * sysctls (by the container runtime) might fail to launch.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#sysctls
+   */
+  readonly sysctls?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls[];
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'fsGroup': obj.fsGroup,
+    'fsGroupChangePolicy': obj.fsGroupChangePolicy,
+    'runAsGroup': obj.runAsGroup,
+    'runAsNonRoot': obj.runAsNonRoot,
+    'runAsUser': obj.runAsUser,
+    'seLinuxOptions': toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions(obj.seLinuxOptions),
+    'seccompProfile': toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile(obj.seccompProfile),
+    'supplementalGroups': obj.supplementalGroups?.map(y => y),
+    'sysctls': obj.sysctls?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls(y)),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -5202,6 +5909,298 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecT
     'key': obj.key,
     'operator': obj.operator,
     'tolerationSeconds': obj.tolerationSeconds,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Describes node affinity scheduling rules for the pod.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity {
+  /**
+   * The scheduler will prefer to schedule pods to nodes that satisfy
+   * the affinity expressions specified by this field, but it may choose
+   * a node that violates one or more of the expressions. The node that is
+   * most preferred is the one with the greatest sum of weights, i.e.
+   * for each node that meets all of the scheduling requirements (resource
+   * request, requiredDuringScheduling affinity expressions, etc.),
+   * compute a sum by iterating through the elements of this field and adding
+   * "weight" to the sum if the node matches the corresponding matchExpressions; the
+   * node(s) with the highest sum are the most preferred.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity#preferredDuringSchedulingIgnoredDuringExecution
+   */
+  readonly preferredDuringSchedulingIgnoredDuringExecution?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution[];
+
+  /**
+   * If the affinity requirements specified by this field are not met at
+   * scheduling time, the pod will not be scheduled onto the node.
+   * If the affinity requirements specified by this field cease to be met
+   * at some point during pod execution (e.g. due to an update), the system
+   * may or may not try to eventually evict the pod from its node.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
+   */
+  readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution;
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'preferredDuringSchedulingIgnoredDuringExecution': obj.preferredDuringSchedulingIgnoredDuringExecution?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution(y)),
+    'requiredDuringSchedulingIgnoredDuringExecution': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj.requiredDuringSchedulingIgnoredDuringExecution),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Describes pod affinity scheduling rules (e.g. co-locate this pod in the same node, zone, etc. as some other pod(s)).
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity {
+  /**
+   * The scheduler will prefer to schedule pods to nodes that satisfy
+   * the affinity expressions specified by this field, but it may choose
+   * a node that violates one or more of the expressions. The node that is
+   * most preferred is the one with the greatest sum of weights, i.e.
+   * for each node that meets all of the scheduling requirements (resource
+   * request, requiredDuringScheduling affinity expressions, etc.),
+   * compute a sum by iterating through the elements of this field and adding
+   * "weight" to the sum if the node has pods which matches the corresponding podAffinityTerm; the
+   * node(s) with the highest sum are the most preferred.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity#preferredDuringSchedulingIgnoredDuringExecution
+   */
+  readonly preferredDuringSchedulingIgnoredDuringExecution?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution[];
+
+  /**
+   * If the affinity requirements specified by this field are not met at
+   * scheduling time, the pod will not be scheduled onto the node.
+   * If the affinity requirements specified by this field cease to be met
+   * at some point during pod execution (e.g. due to a pod label update), the
+   * system may or may not try to eventually evict the pod from its node.
+   * When there are multiple elements, the lists of nodes corresponding to each
+   * podAffinityTerm are intersected, i.e. all terms must be satisfied.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity#requiredDuringSchedulingIgnoredDuringExecution
+   */
+  readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'preferredDuringSchedulingIgnoredDuringExecution': obj.preferredDuringSchedulingIgnoredDuringExecution?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution(y)),
+    'requiredDuringSchedulingIgnoredDuringExecution': obj.requiredDuringSchedulingIgnoredDuringExecution?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Describes pod anti-affinity scheduling rules (e.g. avoid putting this pod in the same node, zone, etc. as some other pod(s)).
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity {
+  /**
+   * The scheduler will prefer to schedule pods to nodes that satisfy
+   * the anti-affinity expressions specified by this field, but it may choose
+   * a node that violates one or more of the expressions. The node that is
+   * most preferred is the one with the greatest sum of weights, i.e.
+   * for each node that meets all of the scheduling requirements (resource
+   * request, requiredDuringScheduling anti-affinity expressions, etc.),
+   * compute a sum by iterating through the elements of this field and adding
+   * "weight" to the sum if the node has pods which matches the corresponding podAffinityTerm; the
+   * node(s) with the highest sum are the most preferred.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity#preferredDuringSchedulingIgnoredDuringExecution
+   */
+  readonly preferredDuringSchedulingIgnoredDuringExecution?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution[];
+
+  /**
+   * If the anti-affinity requirements specified by this field are not met at
+   * scheduling time, the pod will not be scheduled onto the node.
+   * If the anti-affinity requirements specified by this field cease to be met
+   * at some point during pod execution (e.g. due to a pod label update), the
+   * system may or may not try to eventually evict the pod from its node.
+   * When there are multiple elements, the lists of nodes corresponding to each
+   * podAffinityTerm are intersected, i.e. all terms must be satisfied.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
+   */
+  readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'preferredDuringSchedulingIgnoredDuringExecution': obj.preferredDuringSchedulingIgnoredDuringExecution?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution(y)),
+    'requiredDuringSchedulingIgnoredDuringExecution': obj.requiredDuringSchedulingIgnoredDuringExecution?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The SELinux context to be applied to all containers.
+ * If unspecified, the container runtime will allocate a random SELinux context for each
+ * container.  May also be set in SecurityContext.  If set in
+ * both SecurityContext and PodSecurityContext, the value specified in SecurityContext
+ * takes precedence for that container.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions {
+  /**
+   * Level is SELinux level label that applies to the container.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions#level
+   */
+  readonly level?: string;
+
+  /**
+   * Role is a SELinux role label that applies to the container.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions#role
+   */
+  readonly role?: string;
+
+  /**
+   * Type is a SELinux type label that applies to the container.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions#type
+   */
+  readonly type?: string;
+
+  /**
+   * User is a SELinux user label that applies to the container.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions#user
+   */
+  readonly user?: string;
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'level': obj.level,
+    'role': obj.role,
+    'type': obj.type,
+    'user': obj.user,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The seccomp options to use by the containers in this pod.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile {
+  /**
+   * localhostProfile indicates a profile defined in a file on the node should be used.
+   * The profile must be preconfigured on the node to work.
+   * Must be a descending path, relative to the kubelet's configured seccomp profile location.
+   * Must be set if type is "Localhost". Must NOT be set for any other type.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile#localhostProfile
+   */
+  readonly localhostProfile?: string;
+
+  /**
+   * type indicates which kind of seccomp profile will be applied.
+   * Valid options are:
+   *
+   * Localhost - a profile defined in a file on the node should be used.
+   * RuntimeDefault - the container runtime default profile should be used.
+   * Unconfined - no profile should be applied.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile#type
+   */
+  readonly type: string;
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'localhostProfile': obj.localhostProfile,
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Sysctl defines a kernel parameter to be set
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls {
+  /**
+   * Name of a property to set
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls#name
+   */
+  readonly name: string;
+
+  /**
+   * Value of a property to set
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls#value
+   */
+  readonly value: string;
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
     'value': obj.value,
   };
   // filter undefined values
@@ -5361,6 +6360,498 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
 /* eslint-enable max-len, quote-props */
 
 /**
+ * The SELinux context to be applied to all containers.
+ * If unspecified, the container runtime will allocate a random SELinux context for each
+ * container.  May also be set in SecurityContext.  If set in
+ * both SecurityContext and PodSecurityContext, the value specified in SecurityContext
+ * takes precedence for that container.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions {
+  /**
+   * Level is SELinux level label that applies to the container.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions#level
+   */
+  readonly level?: string;
+
+  /**
+   * Role is a SELinux role label that applies to the container.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions#role
+   */
+  readonly role?: string;
+
+  /**
+   * Type is a SELinux type label that applies to the container.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions#type
+   */
+  readonly type?: string;
+
+  /**
+   * User is a SELinux user label that applies to the container.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions#user
+   */
+  readonly user?: string;
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'level': obj.level,
+    'role': obj.role,
+    'type': obj.type,
+    'user': obj.user,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The seccomp options to use by the containers in this pod.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile {
+  /**
+   * localhostProfile indicates a profile defined in a file on the node should be used.
+   * The profile must be preconfigured on the node to work.
+   * Must be a descending path, relative to the kubelet's configured seccomp profile location.
+   * Must be set if type is "Localhost". Must NOT be set for any other type.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile#localhostProfile
+   */
+  readonly localhostProfile?: string;
+
+  /**
+   * type indicates which kind of seccomp profile will be applied.
+   * Valid options are:
+   *
+   * Localhost - a profile defined in a file on the node should be used.
+   * RuntimeDefault - the container runtime default profile should be used.
+   * Unconfined - no profile should be applied.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile#type
+   */
+  readonly type: string;
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'localhostProfile': obj.localhostProfile,
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Sysctl defines a kernel parameter to be set
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls {
+  /**
+   * Name of a property to set
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls#name
+   */
+  readonly name: string;
+
+  /**
+   * Value of a property to set
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls#value
+   */
+  readonly value: string;
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * An empty preferred scheduling term matches all objects with implicit weight 0
+ * (i.e. it's a no-op). A null preferred scheduling term matches no objects (i.e. is also a no-op).
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution {
+  /**
+   * A node selector term, associated with the corresponding weight.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#preference
+   */
+  readonly preference: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference;
+
+  /**
+   * Weight associated with matching the corresponding nodeSelectorTerm, in the range 1-100.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
+   */
+  readonly weight: number;
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'preference': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference(obj.preference),
+    'weight': obj.weight,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * If the affinity requirements specified by this field are not met at
+ * scheduling time, the pod will not be scheduled onto the node.
+ * If the affinity requirements specified by this field cease to be met
+ * at some point during pod execution (e.g. due to an update), the system
+ * may or may not try to eventually evict the pod from its node.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution {
+  /**
+   * Required. A list of node selector terms. The terms are ORed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution#nodeSelectorTerms
+   */
+  readonly nodeSelectorTerms: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms[];
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'nodeSelectorTerms': obj.nodeSelectorTerms?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution {
+  /**
+   * Required. A pod affinity term, associated with the corresponding weight.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#podAffinityTerm
+   */
+  readonly podAffinityTerm: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm;
+
+  /**
+   * weight associated with matching the corresponding podAffinityTerm,
+   * in the range 1-100.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
+   */
+  readonly weight: number;
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'podAffinityTerm': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj.podAffinityTerm),
+    'weight': obj.weight,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Defines a set of pods (namely those matching the labelSelector
+ * relative to the given namespace(s)) that this pod should be
+ * co-located (affinity) or not co-located (anti-affinity) with,
+ * where co-located is defined as running on a node whose value of
+ * the label with key <topologyKey> matches that of any node on which
+ * a pod of the set of pods is running
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution {
+  /**
+   * A label query over a set of resources, in this case pods.
+   * If it's null, this PodAffinityTerm matches with no Pods.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#labelSelector
+   */
+  readonly labelSelector?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will
+   * be taken into consideration. The keys are used to lookup values from the
+   * incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
+   * to select the group of existing pods which pods will be taken into consideration
+   * for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+   * pod labels will be ignored. The default value is empty.
+   * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+   * Also, matchLabelKeys cannot be set when labelSelector isn't set.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will
+   * be taken into consideration. The keys are used to lookup values from the
+   * incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
+   * to select the group of existing pods which pods will be taken into consideration
+   * for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+   * pod labels will be ignored. The default value is empty.
+   * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+   * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
+
+  /**
+   * A label query over the set of namespaces that the term applies to.
+   * The term is applied to the union of the namespaces selected by this field
+   * and the ones listed in the namespaces field.
+   * null selector and null or empty namespaces list means "this pod's namespace".
+   * An empty selector ({}) matches all namespaces.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#namespaceSelector
+   */
+  readonly namespaceSelector?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector;
+
+  /**
+   * namespaces specifies a static list of namespace names that the term applies to.
+   * The term is applied to the union of the namespaces listed in this field
+   * and the ones selected by namespaceSelector.
+   * null or empty namespaces list and null namespaceSelector means "this pod's namespace".
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#namespaces
+   */
+  readonly namespaces?: string[];
+
+  /**
+   * This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
+   * the labelSelector in the specified namespaces, where co-located is defined as running on a node
+   * whose value of the label with key topologyKey matches that of any node on which any of the
+   * selected pods is running.
+   * Empty topologyKey is not allowed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
+   */
+  readonly topologyKey: string;
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'labelSelector': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
+    'namespaceSelector': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj.namespaceSelector),
+    'namespaces': obj.namespaces?.map(y => y),
+    'topologyKey': obj.topologyKey,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution {
+  /**
+   * Required. A pod affinity term, associated with the corresponding weight.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#podAffinityTerm
+   */
+  readonly podAffinityTerm: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm;
+
+  /**
+   * weight associated with matching the corresponding podAffinityTerm,
+   * in the range 1-100.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
+   */
+  readonly weight: number;
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'podAffinityTerm': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj.podAffinityTerm),
+    'weight': obj.weight,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Defines a set of pods (namely those matching the labelSelector
+ * relative to the given namespace(s)) that this pod should be
+ * co-located (affinity) or not co-located (anti-affinity) with,
+ * where co-located is defined as running on a node whose value of
+ * the label with key <topologyKey> matches that of any node on which
+ * a pod of the set of pods is running
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution {
+  /**
+   * A label query over a set of resources, in this case pods.
+   * If it's null, this PodAffinityTerm matches with no Pods.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#labelSelector
+   */
+  readonly labelSelector?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will
+   * be taken into consideration. The keys are used to lookup values from the
+   * incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
+   * to select the group of existing pods which pods will be taken into consideration
+   * for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+   * pod labels will be ignored. The default value is empty.
+   * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+   * Also, matchLabelKeys cannot be set when labelSelector isn't set.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will
+   * be taken into consideration. The keys are used to lookup values from the
+   * incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
+   * to select the group of existing pods which pods will be taken into consideration
+   * for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+   * pod labels will be ignored. The default value is empty.
+   * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+   * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
+
+  /**
+   * A label query over the set of namespaces that the term applies to.
+   * The term is applied to the union of the namespaces selected by this field
+   * and the ones listed in the namespaces field.
+   * null selector and null or empty namespaces list means "this pod's namespace".
+   * An empty selector ({}) matches all namespaces.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#namespaceSelector
+   */
+  readonly namespaceSelector?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector;
+
+  /**
+   * namespaces specifies a static list of namespace names that the term applies to.
+   * The term is applied to the union of the namespaces listed in this field
+   * and the ones selected by namespaceSelector.
+   * null or empty namespaces list and null namespaceSelector means "this pod's namespace".
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#namespaces
+   */
+  readonly namespaces?: string[];
+
+  /**
+   * This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
+   * the labelSelector in the specified namespaces, where co-located is defined as running on a node
+   * whose value of the label with key topologyKey matches that of any node on which any of the
+   * selected pods is running.
+   * Empty topologyKey is not allowed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
+   */
+  readonly topologyKey: string;
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'labelSelector': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
+    'namespaceSelector': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj.namespaceSelector),
+    'namespaces': obj.namespaces?.map(y => y),
+    'topologyKey': obj.topologyKey,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * An empty preferred scheduling term matches all objects with implicit weight 0
  * (i.e. it's a no-op). A null preferred scheduling term matches no objects (i.e. is also a no-op).
  *
@@ -5497,7 +6988,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
    */
@@ -5512,7 +7003,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
    */
@@ -5637,7 +7128,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
    */
@@ -5652,7 +7143,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
    */
@@ -5705,6 +7196,442 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
     'namespaceSelector': toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj.namespaceSelector),
     'namespaces': obj.namespaces?.map(y => y),
     'topologyKey': obj.topologyKey,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A node selector term, associated with the corresponding weight.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference {
+  /**
+   * A list of node selector requirements by node's labels.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchExpressions
+   */
+  readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions[];
+
+  /**
+   * A list of node selector requirements by node's fields.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchFields
+   */
+  readonly matchFields?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields[];
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions(y)),
+    'matchFields': obj.matchFields?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A null or empty node selector term matches no objects. The requirements of
+ * them are ANDed.
+ * The TopologySelectorTerm type implements a subset of the NodeSelectorTerm.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms {
+  /**
+   * A list of node selector requirements by node's labels.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchExpressions
+   */
+  readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions[];
+
+  /**
+   * A list of node selector requirements by node's fields.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchFields
+   */
+  readonly matchFields?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields[];
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions(y)),
+    'matchFields': obj.matchFields?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Required. A pod affinity term, associated with the corresponding weight.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm {
+  /**
+   * A label query over a set of resources, in this case pods.
+   * If it's null, this PodAffinityTerm matches with no Pods.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#labelSelector
+   */
+  readonly labelSelector?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will
+   * be taken into consideration. The keys are used to lookup values from the
+   * incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
+   * to select the group of existing pods which pods will be taken into consideration
+   * for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+   * pod labels will be ignored. The default value is empty.
+   * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+   * Also, matchLabelKeys cannot be set when labelSelector isn't set.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will
+   * be taken into consideration. The keys are used to lookup values from the
+   * incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
+   * to select the group of existing pods which pods will be taken into consideration
+   * for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+   * pod labels will be ignored. The default value is empty.
+   * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+   * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
+
+  /**
+   * A label query over the set of namespaces that the term applies to.
+   * The term is applied to the union of the namespaces selected by this field
+   * and the ones listed in the namespaces field.
+   * null selector and null or empty namespaces list means "this pod's namespace".
+   * An empty selector ({}) matches all namespaces.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#namespaceSelector
+   */
+  readonly namespaceSelector?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector;
+
+  /**
+   * namespaces specifies a static list of namespace names that the term applies to.
+   * The term is applied to the union of the namespaces listed in this field
+   * and the ones selected by namespaceSelector.
+   * null or empty namespaces list and null namespaceSelector means "this pod's namespace".
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#namespaces
+   */
+  readonly namespaces?: string[];
+
+  /**
+   * This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
+   * the labelSelector in the specified namespaces, where co-located is defined as running on a node
+   * whose value of the label with key topologyKey matches that of any node on which any of the
+   * selected pods is running.
+   * Empty topologyKey is not allowed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
+   */
+  readonly topologyKey: string;
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'labelSelector': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
+    'namespaceSelector': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj.namespaceSelector),
+    'namespaces': obj.namespaces?.map(y => y),
+    'topologyKey': obj.topologyKey,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label query over a set of resources, in this case pods.
+ * If it's null, this PodAffinityTerm matches with no Pods.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchExpressions
+   */
+  readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label query over the set of namespaces that the term applies to.
+ * The term is applied to the union of the namespaces selected by this field
+ * and the ones listed in the namespaces field.
+ * null selector and null or empty namespaces list means "this pod's namespace".
+ * An empty selector ({}) matches all namespaces.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchExpressions
+   */
+  readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Required. A pod affinity term, associated with the corresponding weight.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm {
+  /**
+   * A label query over a set of resources, in this case pods.
+   * If it's null, this PodAffinityTerm matches with no Pods.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#labelSelector
+   */
+  readonly labelSelector?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will
+   * be taken into consideration. The keys are used to lookup values from the
+   * incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
+   * to select the group of existing pods which pods will be taken into consideration
+   * for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+   * pod labels will be ignored. The default value is empty.
+   * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+   * Also, matchLabelKeys cannot be set when labelSelector isn't set.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will
+   * be taken into consideration. The keys are used to lookup values from the
+   * incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
+   * to select the group of existing pods which pods will be taken into consideration
+   * for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+   * pod labels will be ignored. The default value is empty.
+   * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+   * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
+
+  /**
+   * A label query over the set of namespaces that the term applies to.
+   * The term is applied to the union of the namespaces selected by this field
+   * and the ones listed in the namespaces field.
+   * null selector and null or empty namespaces list means "this pod's namespace".
+   * An empty selector ({}) matches all namespaces.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#namespaceSelector
+   */
+  readonly namespaceSelector?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector;
+
+  /**
+   * namespaces specifies a static list of namespace names that the term applies to.
+   * The term is applied to the union of the namespaces listed in this field
+   * and the ones selected by namespaceSelector.
+   * null or empty namespaces list and null namespaceSelector means "this pod's namespace".
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#namespaces
+   */
+  readonly namespaces?: string[];
+
+  /**
+   * This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
+   * the labelSelector in the specified namespaces, where co-located is defined as running on a node
+   * whose value of the label with key topologyKey matches that of any node on which any of the
+   * selected pods is running.
+   * Empty topologyKey is not allowed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
+   */
+  readonly topologyKey: string;
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'labelSelector': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
+    'namespaceSelector': toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj.namespaceSelector),
+    'namespaces': obj.namespaces?.map(y => y),
+    'topologyKey': obj.topologyKey,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label query over a set of resources, in this case pods.
+ * If it's null, this PodAffinityTerm matches with no Pods.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchExpressions
+   */
+  readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label query over the set of namespaces that the term applies to.
+ * The term is applied to the union of the namespaces selected by this field
+ * and the ones listed in the namespaces field.
+ * null selector and null or empty namespaces list means "this pod's namespace".
+ * An empty selector ({}) matches all namespaces.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchExpressions
+   */
+  readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -5810,7 +7737,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
    */
@@ -5825,7 +7752,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
    */
@@ -5990,7 +7917,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
    */
@@ -6005,7 +7932,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
    */
@@ -6141,6 +8068,576 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   const result = {
     'matchExpressions': obj.matchExpressions?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(y)),
     'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A node selector requirement is a selector that contains values, a key, and an operator
+ * that relates the key and values.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions {
+  /**
+   * The label key that the selector applies to.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * Represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * An array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. If the operator is Gt or Lt, the values
+   * array must have a single element, which will be interpreted as an integer.
+   * This array is replaced during a strategic merge patch.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A node selector requirement is a selector that contains values, a key, and an operator
+ * that relates the key and values.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields {
+  /**
+   * The label key that the selector applies to.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#key
+   */
+  readonly key: string;
+
+  /**
+   * Represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#operator
+   */
+  readonly operator: string;
+
+  /**
+   * An array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. If the operator is Gt or Lt, the values
+   * array must have a single element, which will be interpreted as an integer.
+   * This array is replaced during a strategic merge patch.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A node selector requirement is a selector that contains values, a key, and an operator
+ * that relates the key and values.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions {
+  /**
+   * The label key that the selector applies to.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * Represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * An array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. If the operator is Gt or Lt, the values
+   * array must have a single element, which will be interpreted as an integer.
+   * This array is replaced during a strategic merge patch.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A node selector requirement is a selector that contains values, a key, and an operator
+ * that relates the key and values.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields {
+  /**
+   * The label key that the selector applies to.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#key
+   */
+  readonly key: string;
+
+  /**
+   * Represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#operator
+   */
+  readonly operator: string;
+
+  /**
+   * An array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. If the operator is Gt or Lt, the values
+   * array must have a single element, which will be interpreted as an integer.
+   * This array is replaced during a strategic merge patch.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label query over a set of resources, in this case pods.
+ * If it's null, this PodAffinityTerm matches with no Pods.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchExpressions
+   */
+  readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label query over the set of namespaces that the term applies to.
+ * The term is applied to the union of the namespaces selected by this field
+ * and the ones listed in the namespaces field.
+ * null selector and null or empty namespaces list means "this pod's namespace".
+ * An empty selector ({}) matches all namespaces.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchExpressions
+   */
+  readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label query over a set of resources, in this case pods.
+ * If it's null, this PodAffinityTerm matches with no Pods.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchExpressions
+   */
+  readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label query over the set of namespaces that the term applies to.
+ * The term is applied to the union of the namespaces selected by this field
+ * and the ones listed in the namespaces field.
+ * null selector and null or empty namespaces list means "this pod's namespace".
+ * An empty selector ({}) matches all namespaces.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchExpressions
+   */
+  readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -6706,6 +9203,206 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions
+ */
+export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -7649,6 +10346,15 @@ export interface IssuerSpecVaultAuth {
   readonly appRole?: IssuerSpecVaultAuthAppRole;
 
   /**
+   * ClientCertificate authenticates with Vault by presenting a client
+   * certificate during the request's TLS handshake.
+   * Works only when using HTTPS protocol.
+   *
+   * @schema IssuerSpecVaultAuth#clientCertificate
+   */
+  readonly clientCertificate?: IssuerSpecVaultAuthClientCertificate;
+
+  /**
    * Kubernetes authenticates with Vault by passing the ServiceAccount
    * token stored in the named Secret resource to the Vault server.
    *
@@ -7673,6 +10379,7 @@ export function toJson_IssuerSpecVaultAuth(obj: IssuerSpecVaultAuth | undefined)
   if (obj === undefined) { return undefined; }
   const result = {
     'appRole': toJson_IssuerSpecVaultAuthAppRole(obj.appRole),
+    'clientCertificate': toJson_IssuerSpecVaultAuthClientCertificate(obj.clientCertificate),
     'kubernetes': toJson_IssuerSpecVaultAuthKubernetes(obj.kubernetes),
     'tokenSecretRef': toJson_IssuerSpecVaultAuthTokenSecretRef(obj.tokenSecretRef),
   };
@@ -7866,9 +10573,20 @@ export interface IssuerSpecVenafiTpp {
   readonly caBundle?: string;
 
   /**
-   * CredentialsRef is a reference to a Secret containing the username and
-   * password for the TPP server.
-   * The secret must contain two keys, 'username' and 'password'.
+   * Reference to a Secret containing a base64-encoded bundle of PEM CAs
+   * which will be used to validate the certificate chain presented by the TPP server.
+   * Only used if using HTTPS; ignored for HTTP. Mutually exclusive with CABundle.
+   * If neither CABundle nor CABundleSecretRef is defined, the certificate bundle in
+   * the cert-manager controller container is used to validate the TLS connection.
+   *
+   * @schema IssuerSpecVenafiTpp#caBundleSecretRef
+   */
+  readonly caBundleSecretRef?: IssuerSpecVenafiTppCaBundleSecretRef;
+
+  /**
+   * CredentialsRef is a reference to a Secret containing the Venafi TPP API credentials.
+   * The secret must contain the key 'access-token' for the Access Token Authentication,
+   * or two keys, 'username' and 'password' for the API Keys Authentication.
    *
    * @schema IssuerSpecVenafiTpp#credentialsRef
    */
@@ -7892,6 +10610,7 @@ export function toJson_IssuerSpecVenafiTpp(obj: IssuerSpecVenafiTpp | undefined)
   if (obj === undefined) { return undefined; }
   const result = {
     'caBundle': obj.caBundle,
+    'caBundleSecretRef': toJson_IssuerSpecVenafiTppCaBundleSecretRef(obj.caBundleSecretRef),
     'credentialsRef': toJson_IssuerSpecVenafiTppCredentialsRef(obj.credentialsRef),
     'url': obj.url,
   };
@@ -8230,6 +10949,59 @@ export function toJson_IssuerSpecVaultAuthAppRole(obj: IssuerSpecVaultAuthAppRol
 /* eslint-enable max-len, quote-props */
 
 /**
+ * ClientCertificate authenticates with Vault by presenting a client
+ * certificate during the request's TLS handshake.
+ * Works only when using HTTPS protocol.
+ *
+ * @schema IssuerSpecVaultAuthClientCertificate
+ */
+export interface IssuerSpecVaultAuthClientCertificate {
+  /**
+   * The Vault mountPath here is the mount path to use when authenticating with
+   * Vault. For example, setting a value to `/v1/auth/foo`, will use the path
+   * `/v1/auth/foo/login` to authenticate with Vault. If unspecified, the
+   * default value "/v1/auth/cert" will be used.
+   *
+   * @schema IssuerSpecVaultAuthClientCertificate#mountPath
+   */
+  readonly mountPath?: string;
+
+  /**
+   * Name of the certificate role to authenticate against.
+   * If not set, matching any certificate role, if available.
+   *
+   * @schema IssuerSpecVaultAuthClientCertificate#name
+   */
+  readonly name?: string;
+
+  /**
+   * Reference to Kubernetes Secret of type "kubernetes.io/tls" (hence containing
+   * tls.crt and tls.key) used to authenticate to Vault using TLS client
+   * authentication.
+   *
+   * @schema IssuerSpecVaultAuthClientCertificate#secretName
+   */
+  readonly secretName?: string;
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecVaultAuthClientCertificate' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecVaultAuthClientCertificate(obj: IssuerSpecVaultAuthClientCertificate | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'mountPath': obj.mountPath,
+    'name': obj.name,
+    'secretName': obj.secretName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * Kubernetes authenticates with Vault by passing the ServiceAccount
  * token stored in the named Secret resource to the Vault server.
  *
@@ -8374,9 +11146,53 @@ export function toJson_IssuerSpecVenafiCloudApiTokenSecretRef(obj: IssuerSpecVen
 /* eslint-enable max-len, quote-props */
 
 /**
- * CredentialsRef is a reference to a Secret containing the username and
- * password for the TPP server.
- * The secret must contain two keys, 'username' and 'password'.
+ * Reference to a Secret containing a base64-encoded bundle of PEM CAs
+ * which will be used to validate the certificate chain presented by the TPP server.
+ * Only used if using HTTPS; ignored for HTTP. Mutually exclusive with CABundle.
+ * If neither CABundle nor CABundleSecretRef is defined, the certificate bundle in
+ * the cert-manager controller container is used to validate the TLS connection.
+ *
+ * @schema IssuerSpecVenafiTppCaBundleSecretRef
+ */
+export interface IssuerSpecVenafiTppCaBundleSecretRef {
+  /**
+   * The key of the entry in the Secret resource's `data` field to be used.
+   * Some instances of this field may be defaulted, in others it may be
+   * required.
+   *
+   * @schema IssuerSpecVenafiTppCaBundleSecretRef#key
+   */
+  readonly key?: string;
+
+  /**
+   * Name of the resource being referred to.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema IssuerSpecVenafiTppCaBundleSecretRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecVenafiTppCaBundleSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecVenafiTppCaBundleSecretRef(obj: IssuerSpecVenafiTppCaBundleSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * CredentialsRef is a reference to a Secret containing the Venafi TPP API credentials.
+ * The secret must contain the key 'access-token' for the Access Token Authentication,
+ * or two keys, 'username' and 'password' for the API Keys Authentication.
  *
  * @schema IssuerSpecVenafiTppCredentialsRef
  */
@@ -8824,18 +11640,39 @@ export interface IssuerSpecAcmeSolversDns01Route53 {
   readonly auth?: IssuerSpecAcmeSolversDns01Route53Auth;
 
   /**
-   * If set, the provider will manage only this zone in Route53 and will not do an lookup using the route53:ListHostedZonesByName api call.
+   * If set, the provider will manage only this zone in Route53 and will not do a lookup using the route53:ListHostedZonesByName api call.
    *
    * @schema IssuerSpecAcmeSolversDns01Route53#hostedZoneID
    */
   readonly hostedZoneId?: string;
 
   /**
-   * Always set the region when using AccessKeyID and SecretAccessKey
+   * Override the AWS region.
+   *
+   * Route53 is a global service and does not have regional endpoints but the
+   * region specified here (or via environment variables) is used as a hint to
+   * help compute the correct AWS credential scope and partition when it
+   * connects to Route53. See:
+   * - [Amazon Route 53 endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/r53.html)
+   * - [Global services](https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/global-services.html)
+   *
+   * If you omit this region field, cert-manager will use the region from
+   * AWS_REGION and AWS_DEFAULT_REGION environment variables, if they are set
+   * in the cert-manager controller Pod.
+   *
+   * The `region` field is not needed if you use [IAM Roles for Service Accounts (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html).
+   * Instead an AWS_REGION environment variable is added to the cert-manager controller Pod by:
+   * [Amazon EKS Pod Identity Webhook](https://github.com/aws/amazon-eks-pod-identity-webhook).
+   * In this case this `region` field value is ignored.
+   *
+   * The `region` field is not needed if you use [EKS Pod Identities](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html).
+   * Instead an AWS_REGION environment variable is added to the cert-manager controller Pod by:
+   * [Amazon EKS Pod Identity Agent](https://github.com/aws/eks-pod-identity-agent),
+   * In this case this `region` field value is ignored.
    *
    * @schema IssuerSpecAcmeSolversDns01Route53#region
    */
-  readonly region: string;
+  readonly region?: string;
 
   /**
    * Role is a Role ARN which the Route53 provider will assume using either the explicit credentials AccessKeyID/SecretAccessKey
@@ -8963,6 +11800,14 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoute {
   readonly parentRefs?: IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs[];
 
   /**
+   * Optional pod template used to configure the ACME challenge solver pods
+   * used for HTTP01 challenges.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoute#podTemplate
+   */
+  readonly podTemplate?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate;
+
+  /**
    * Optional service type for Kubernetes solver service. Supported values
    * are NodePort or ClusterIP. If unset, defaults to NodePort.
    *
@@ -8981,6 +11826,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoute(obj: IssuerSp
   const result = {
     'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'parentRefs': obj.parentRefs?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs(y)),
+    'podTemplate': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate(obj.podTemplate),
     'serviceType': obj.serviceType,
   };
   // filter undefined values
@@ -9791,14 +12637,11 @@ export function toJson_IssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef
  * a parent of this resource (usually a route). There are two kinds of parent resources
  * with "Core" support:
  *
- *
  * * Gateway (Gateway conformance profile)
  * * Service (Mesh conformance profile, ClusterIP Services only)
  *
- *
  * This API may be extended in the future to support additional kinds of parent
  * resources.
- *
  *
  * The API object must be valid in the cluster; the Group and Kind must
  * be registered in the cluster for this reference to be valid.
@@ -9812,7 +12655,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * To set the core API group (such as for a "Service" kind referent),
    * Group must be explicitly set to "" (empty string).
    *
-   *
    * Support: Core
    *
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs#group
@@ -9822,13 +12664,10 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
   /**
    * Kind is kind of the referent.
    *
-   *
    * There are two kinds of parent resources with "Core" support:
-   *
    *
    * * Gateway (Gateway conformance profile)
    * * Service (Mesh conformance profile, ClusterIP Services only)
-   *
    *
    * Support for other resources is Implementation-Specific.
    *
@@ -9838,7 +12677,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
 
   /**
    * Name is the name of the referent.
-   *
    *
    * Support: Core
    *
@@ -9850,19 +12688,16 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * Namespace is the namespace of the referent. When unspecified, this refers
    * to the local namespace of the Route.
    *
-   *
    * Note that there are specific rules for ParentRefs which cross namespace
    * boundaries. Cross-namespace references are only valid if they are explicitly
    * allowed by something in the namespace they are referring to. For example:
    * Gateway has the AllowedRoutes field, and ReferenceGrant provides a
    * generic way to enable any other kind of cross-namespace reference.
    *
-   *
    * <gateway:experimental:description>
    * ParentRefs from a Route to a Service in the same namespace are "producer"
    * routes, which apply default routing rules to inbound connections from
    * any namespace to the Service.
-   *
    *
    * ParentRefs from a Route to a Service in a different namespace are
    * "consumer" routes, and these routing rules are only applied to outbound
@@ -9870,7 +12705,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * the intended destination of the connections are a Service targeted as a
    * ParentRef of the Route.
    * </gateway:experimental:description>
-   *
    *
    * Support: Core
    *
@@ -9882,7 +12716,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * Port is the network port this Route targets. It can be interpreted
    * differently based on the type of parent resource.
    *
-   *
    * When the parent resource is a Gateway, this targets all listeners
    * listening on the specified port that also support this kind of Route(and
    * select this Route). It's not recommended to set `Port` unless the
@@ -9891,18 +12724,15 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * and SectionName are specified, the name and port of the selected listener
    * must match both specified values.
    *
-   *
    * <gateway:experimental:description>
    * When the parent resource is a Service, this targets a specific port in the
    * Service spec. When both Port (experimental) and SectionName are specified,
    * the name and port of the selected port must match both specified values.
    * </gateway:experimental:description>
    *
-   *
    * Implementations MAY choose to support other parent resources.
    * Implementations supporting other types of parent resources MUST clearly
    * document how/if Port is interpreted.
-   *
    *
    * For the purpose of status, an attachment is considered successful as
    * long as the parent resource accepts it partially. For example, Gateway
@@ -9911,7 +12741,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * from the referencing Route, the Route MUST be considered successfully
    * attached. If no Gateway listeners accept attachment from this Route,
    * the Route MUST be considered detached from the Gateway.
-   *
    *
    * Support: Extended
    *
@@ -9923,7 +12752,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * SectionName is the name of a section within the target resource. In the
    * following resources, SectionName is interpreted as the following:
    *
-   *
    * * Gateway: Listener name. When both Port (experimental) and SectionName
    * are specified, the name and port of the selected listener must match
    * both specified values.
@@ -9931,11 +12759,9 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * are specified, the name and port of the selected listener must match
    * both specified values.
    *
-   *
    * Implementations MAY choose to support attaching Routes to other resources.
    * If that is the case, they MUST clearly document how SectionName is
    * interpreted.
-   *
    *
    * When unspecified (empty string), this will reference the entire resource.
    * For the purpose of status, an attachment is considered successful if at
@@ -9945,7 +12771,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * the referencing Route, the Route MUST be considered successfully
    * attached. If no Gateway listeners accept attachment from this Route, the
    * Route MUST be considered detached from the Gateway.
-   *
    *
    * Support: Core
    *
@@ -9968,6 +12793,49 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs(obj
     'namespace': obj.namespace,
     'port': obj.port,
     'sectionName': obj.sectionName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Optional pod template used to configure the ACME challenge solver pods
+ * used for HTTP01 challenges.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate {
+  /**
+   * ObjectMeta overrides for the pod used to solve HTTP01 challenges.
+   * Only the 'labels' and 'annotations' fields may be set.
+   * If labels or annotations overlap with in-built values, the values here
+   * will override the in-built values.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate#metadata
+   */
+  readonly metadata?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata;
+
+  /**
+   * PodSpec defines overrides for the HTTP01 challenge solver pod.
+   * Check ACMEChallengeSolverHTTP01IngressPodSpec to find out currently supported fields.
+   * All other fields will be ignored.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate#spec
+   */
+  readonly spec?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec;
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata(obj.metadata),
+    'spec': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec(obj.spec),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -10083,6 +12951,127 @@ export function toJson_IssuerSpecAcmeSolversDns01Route53AuthKubernetes(obj: Issu
 /* eslint-enable max-len, quote-props */
 
 /**
+ * ObjectMeta overrides for the pod used to solve HTTP01 challenges.
+ * Only the 'labels' and 'annotations' fields may be set.
+ * If labels or annotations overlap with in-built values, the values here
+ * will override the in-built values.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata {
+  /**
+   * Annotations that should be added to the created ACME HTTP01 solver pods.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels that should be added to the created ACME HTTP01 solver pods.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * PodSpec defines overrides for the HTTP01 challenge solver pod.
+ * Check ACMEChallengeSolverHTTP01IngressPodSpec to find out currently supported fields.
+ * All other fields will be ignored.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec {
+  /**
+   * If specified, the pod's scheduling constraints
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec#affinity
+   */
+  readonly affinity?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity;
+
+  /**
+   * If specified, the pod's imagePullSecrets
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec#imagePullSecrets
+   */
+  readonly imagePullSecrets?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets[];
+
+  /**
+   * NodeSelector is a selector which must be true for the pod to fit on a node.
+   * Selector which must match a node's labels for the pod to be scheduled on that node.
+   * More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec#nodeSelector
+   */
+  readonly nodeSelector?: { [key: string]: string };
+
+  /**
+   * If specified, the pod's priorityClassName.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec#priorityClassName
+   */
+  readonly priorityClassName?: string;
+
+  /**
+   * If specified, the pod's security context
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec#securityContext
+   */
+  readonly securityContext?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext;
+
+  /**
+   * If specified, the pod's service account
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec#serviceAccountName
+   */
+  readonly serviceAccountName?: string;
+
+  /**
+   * If specified, the pod's tolerations.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec#tolerations
+   */
+  readonly tolerations?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations[];
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'affinity': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity(obj.affinity),
+    'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets(y)),
+    'nodeSelector': ((obj.nodeSelector) === undefined) ? undefined : (Object.entries(obj.nodeSelector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'priorityClassName': obj.priorityClassName,
+    'securityContext': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext(obj.securityContext),
+    'serviceAccountName': obj.serviceAccountName,
+    'tolerations': obj.tolerations?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * ObjectMeta overrides for the ingress used to solve HTTP01 challenges.
  * Only the 'labels' and 'annotations' fields may be set.
  * If labels or annotations overlap with in-built values, the values here
@@ -10132,7 +13121,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata
  */
 export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata {
   /**
-   * Annotations that should be added to the create ACME HTTP01 solver pods.
+   * Annotations that should be added to the created ACME HTTP01 solver pods.
    *
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata#annotations
    */
@@ -10201,6 +13190,13 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpec {
   readonly priorityClassName?: string;
 
   /**
+   * If specified, the pod's security context
+   *
+   * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpec#securityContext
+   */
+  readonly securityContext?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext;
+
+  /**
    * If specified, the pod's service account
    *
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpec#serviceAccountName
@@ -10227,6 +13223,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpec(obj: Is
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecrets(y)),
     'nodeSelector': ((obj.nodeSelector) === undefined) ? undefined : (Object.entries(obj.nodeSelector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'priorityClassName': obj.priorityClassName,
+    'securityContext': toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext(obj.securityContext),
     'serviceAccountName': obj.serviceAccountName,
     'tolerations': obj.tolerations?.map(y => toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations(y)),
   };
@@ -10271,6 +13268,295 @@ export function toJson_IssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAcc
   const result = {
     'audiences': obj.audiences?.map(y => y),
     'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * If specified, the pod's scheduling constraints
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity {
+  /**
+   * Describes node affinity scheduling rules for the pod.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity#nodeAffinity
+   */
+  readonly nodeAffinity?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity;
+
+  /**
+   * Describes pod affinity scheduling rules (e.g. co-locate this pod in the same node, zone, etc. as some other pod(s)).
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity#podAffinity
+   */
+  readonly podAffinity?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity;
+
+  /**
+   * Describes pod anti-affinity scheduling rules (e.g. avoid putting this pod in the same node, zone, etc. as some other pod(s)).
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity#podAntiAffinity
+   */
+  readonly podAntiAffinity?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity;
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'nodeAffinity': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity(obj.nodeAffinity),
+    'podAffinity': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity(obj.podAffinity),
+    'podAntiAffinity': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity(obj.podAntiAffinity),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * LocalObjectReference contains enough information to let you locate the
+ * referenced object inside the same namespace.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * If specified, the pod's security context
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext {
+  /**
+   * A special supplemental group that applies to all containers in a pod.
+   * Some volume types allow the Kubelet to change the ownership of that volume
+   * to be owned by the pod:
+   *
+   * 1. The owning GID will be the FSGroup
+   * 2. The setgid bit is set (new files created in the volume will be owned by FSGroup)
+   * 3. The permission bits are OR'd with rw-rw----
+   *
+   * If unset, the Kubelet will not modify the ownership and permissions of any volume.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#fsGroup
+   */
+  readonly fsGroup?: number;
+
+  /**
+   * fsGroupChangePolicy defines behavior of changing ownership and permission of the volume
+   * before being exposed inside Pod. This field will only apply to
+   * volume types which support fsGroup based ownership(and permissions).
+   * It will have no effect on ephemeral volume types such as: secret, configmaps
+   * and emptydir.
+   * Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#fsGroupChangePolicy
+   */
+  readonly fsGroupChangePolicy?: string;
+
+  /**
+   * The GID to run the entrypoint of the container process.
+   * Uses runtime default if unset.
+   * May also be set in SecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence
+   * for that container.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#runAsGroup
+   */
+  readonly runAsGroup?: number;
+
+  /**
+   * Indicates that the container must run as a non-root user.
+   * If true, the Kubelet will validate the image at runtime to ensure that it
+   * does not run as UID 0 (root) and fail to start the container if it does.
+   * If unset or false, no such validation will be performed.
+   * May also be set in SecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#runAsNonRoot
+   */
+  readonly runAsNonRoot?: boolean;
+
+  /**
+   * The UID to run the entrypoint of the container process.
+   * Defaults to user specified in image metadata if unspecified.
+   * May also be set in SecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence
+   * for that container.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default user specified in image metadata if unspecified.
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#runAsUser
+   */
+  readonly runAsUser?: number;
+
+  /**
+   * The SELinux context to be applied to all containers.
+   * If unspecified, the container runtime will allocate a random SELinux context for each
+   * container.  May also be set in SecurityContext.  If set in
+   * both SecurityContext and PodSecurityContext, the value specified in SecurityContext
+   * takes precedence for that container.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#seLinuxOptions
+   */
+  readonly seLinuxOptions?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions;
+
+  /**
+   * The seccomp options to use by the containers in this pod.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#seccompProfile
+   */
+  readonly seccompProfile?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile;
+
+  /**
+   * A list of groups applied to the first process run in each container, in addition
+   * to the container's primary GID, the fsGroup (if specified), and group memberships
+   * defined in the container image for the uid of the container process. If unspecified,
+   * no additional groups are added to any container. Note that group memberships
+   * defined in the container image for the uid of the container process are still effective,
+   * even if they are not included in this list.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#supplementalGroups
+   */
+  readonly supplementalGroups?: number[];
+
+  /**
+   * Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported
+   * sysctls (by the container runtime) might fail to launch.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#sysctls
+   */
+  readonly sysctls?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls[];
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'fsGroup': obj.fsGroup,
+    'fsGroupChangePolicy': obj.fsGroupChangePolicy,
+    'runAsGroup': obj.runAsGroup,
+    'runAsNonRoot': obj.runAsNonRoot,
+    'runAsUser': obj.runAsUser,
+    'seLinuxOptions': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions(obj.seLinuxOptions),
+    'seccompProfile': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile(obj.seccompProfile),
+    'supplementalGroups': obj.supplementalGroups?.map(y => y),
+    'sysctls': obj.sysctls?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The pod this Toleration is attached to tolerates any taint that matches
+ * the triple <key,value,effect> using the matching operator <operator>.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations {
+  /**
+   * Effect indicates the taint effect to match. Empty means match all taint effects.
+   * When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations#effect
+   */
+  readonly effect?: string;
+
+  /**
+   * Key is the taint key that the toleration applies to. Empty means match all taint keys.
+   * If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations#key
+   */
+  readonly key?: string;
+
+  /**
+   * Operator represents a key's relationship to the value.
+   * Valid operators are Exists and Equal. Defaults to Equal.
+   * Exists is equivalent to wildcard for value, so that a pod can
+   * tolerate all taints of a particular category.
+   *
+   * @default Equal.
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations#operator
+   */
+  readonly operator?: string;
+
+  /**
+   * TolerationSeconds represents the period of time the toleration (which must be
+   * of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default,
+   * it is not set, which means tolerate the taint forever (do not evict). Zero and
+   * negative values will be treated as 0 (evict immediately) by the system.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations#tolerationSeconds
+   */
+  readonly tolerationSeconds?: number;
+
+  /**
+   * Value is the taint value the toleration matches to.
+   * If the operator is Exists, the value should be empty, otherwise just a regular string.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'effect': obj.effect,
+    'key': obj.key,
+    'operator': obj.operator,
+    'tolerationSeconds': obj.tolerationSeconds,
+    'value': obj.value,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -10334,9 +13620,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecre
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecrets#name
    */
@@ -10352,6 +13636,144 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePul
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * If specified, the pod's security context
+ *
+ * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext
+ */
+export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext {
+  /**
+   * A special supplemental group that applies to all containers in a pod.
+   * Some volume types allow the Kubelet to change the ownership of that volume
+   * to be owned by the pod:
+   *
+   * 1. The owning GID will be the FSGroup
+   * 2. The setgid bit is set (new files created in the volume will be owned by FSGroup)
+   * 3. The permission bits are OR'd with rw-rw----
+   *
+   * If unset, the Kubelet will not modify the ownership and permissions of any volume.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#fsGroup
+   */
+  readonly fsGroup?: number;
+
+  /**
+   * fsGroupChangePolicy defines behavior of changing ownership and permission of the volume
+   * before being exposed inside Pod. This field will only apply to
+   * volume types which support fsGroup based ownership(and permissions).
+   * It will have no effect on ephemeral volume types such as: secret, configmaps
+   * and emptydir.
+   * Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#fsGroupChangePolicy
+   */
+  readonly fsGroupChangePolicy?: string;
+
+  /**
+   * The GID to run the entrypoint of the container process.
+   * Uses runtime default if unset.
+   * May also be set in SecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence
+   * for that container.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#runAsGroup
+   */
+  readonly runAsGroup?: number;
+
+  /**
+   * Indicates that the container must run as a non-root user.
+   * If true, the Kubelet will validate the image at runtime to ensure that it
+   * does not run as UID 0 (root) and fail to start the container if it does.
+   * If unset or false, no such validation will be performed.
+   * May also be set in SecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#runAsNonRoot
+   */
+  readonly runAsNonRoot?: boolean;
+
+  /**
+   * The UID to run the entrypoint of the container process.
+   * Defaults to user specified in image metadata if unspecified.
+   * May also be set in SecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence
+   * for that container.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default user specified in image metadata if unspecified.
+   * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#runAsUser
+   */
+  readonly runAsUser?: number;
+
+  /**
+   * The SELinux context to be applied to all containers.
+   * If unspecified, the container runtime will allocate a random SELinux context for each
+   * container.  May also be set in SecurityContext.  If set in
+   * both SecurityContext and PodSecurityContext, the value specified in SecurityContext
+   * takes precedence for that container.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#seLinuxOptions
+   */
+  readonly seLinuxOptions?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions;
+
+  /**
+   * The seccomp options to use by the containers in this pod.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#seccompProfile
+   */
+  readonly seccompProfile?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile;
+
+  /**
+   * A list of groups applied to the first process run in each container, in addition
+   * to the container's primary GID, the fsGroup (if specified), and group memberships
+   * defined in the container image for the uid of the container process. If unspecified,
+   * no additional groups are added to any container. Note that group memberships
+   * defined in the container image for the uid of the container process are still effective,
+   * even if they are not included in this list.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#supplementalGroups
+   */
+  readonly supplementalGroups?: number[];
+
+  /**
+   * Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported
+   * sysctls (by the container runtime) might fail to launch.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#sysctls
+   */
+  readonly sysctls?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls[];
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'fsGroup': obj.fsGroup,
+    'fsGroupChangePolicy': obj.fsGroupChangePolicy,
+    'runAsGroup': obj.runAsGroup,
+    'runAsNonRoot': obj.runAsNonRoot,
+    'runAsUser': obj.runAsUser,
+    'seLinuxOptions': toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions(obj.seLinuxOptions),
+    'seccompProfile': toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile(obj.seccompProfile),
+    'supplementalGroups': obj.supplementalGroups?.map(y => y),
+    'sysctls': obj.sysctls?.map(y => toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls(y)),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -10423,6 +13845,298 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerati
     'key': obj.key,
     'operator': obj.operator,
     'tolerationSeconds': obj.tolerationSeconds,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Describes node affinity scheduling rules for the pod.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity {
+  /**
+   * The scheduler will prefer to schedule pods to nodes that satisfy
+   * the affinity expressions specified by this field, but it may choose
+   * a node that violates one or more of the expressions. The node that is
+   * most preferred is the one with the greatest sum of weights, i.e.
+   * for each node that meets all of the scheduling requirements (resource
+   * request, requiredDuringScheduling affinity expressions, etc.),
+   * compute a sum by iterating through the elements of this field and adding
+   * "weight" to the sum if the node matches the corresponding matchExpressions; the
+   * node(s) with the highest sum are the most preferred.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity#preferredDuringSchedulingIgnoredDuringExecution
+   */
+  readonly preferredDuringSchedulingIgnoredDuringExecution?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution[];
+
+  /**
+   * If the affinity requirements specified by this field are not met at
+   * scheduling time, the pod will not be scheduled onto the node.
+   * If the affinity requirements specified by this field cease to be met
+   * at some point during pod execution (e.g. due to an update), the system
+   * may or may not try to eventually evict the pod from its node.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
+   */
+  readonly requiredDuringSchedulingIgnoredDuringExecution?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution;
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'preferredDuringSchedulingIgnoredDuringExecution': obj.preferredDuringSchedulingIgnoredDuringExecution?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution(y)),
+    'requiredDuringSchedulingIgnoredDuringExecution': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj.requiredDuringSchedulingIgnoredDuringExecution),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Describes pod affinity scheduling rules (e.g. co-locate this pod in the same node, zone, etc. as some other pod(s)).
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity {
+  /**
+   * The scheduler will prefer to schedule pods to nodes that satisfy
+   * the affinity expressions specified by this field, but it may choose
+   * a node that violates one or more of the expressions. The node that is
+   * most preferred is the one with the greatest sum of weights, i.e.
+   * for each node that meets all of the scheduling requirements (resource
+   * request, requiredDuringScheduling affinity expressions, etc.),
+   * compute a sum by iterating through the elements of this field and adding
+   * "weight" to the sum if the node has pods which matches the corresponding podAffinityTerm; the
+   * node(s) with the highest sum are the most preferred.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity#preferredDuringSchedulingIgnoredDuringExecution
+   */
+  readonly preferredDuringSchedulingIgnoredDuringExecution?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution[];
+
+  /**
+   * If the affinity requirements specified by this field are not met at
+   * scheduling time, the pod will not be scheduled onto the node.
+   * If the affinity requirements specified by this field cease to be met
+   * at some point during pod execution (e.g. due to a pod label update), the
+   * system may or may not try to eventually evict the pod from its node.
+   * When there are multiple elements, the lists of nodes corresponding to each
+   * podAffinityTerm are intersected, i.e. all terms must be satisfied.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity#requiredDuringSchedulingIgnoredDuringExecution
+   */
+  readonly requiredDuringSchedulingIgnoredDuringExecution?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'preferredDuringSchedulingIgnoredDuringExecution': obj.preferredDuringSchedulingIgnoredDuringExecution?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution(y)),
+    'requiredDuringSchedulingIgnoredDuringExecution': obj.requiredDuringSchedulingIgnoredDuringExecution?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Describes pod anti-affinity scheduling rules (e.g. avoid putting this pod in the same node, zone, etc. as some other pod(s)).
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity {
+  /**
+   * The scheduler will prefer to schedule pods to nodes that satisfy
+   * the anti-affinity expressions specified by this field, but it may choose
+   * a node that violates one or more of the expressions. The node that is
+   * most preferred is the one with the greatest sum of weights, i.e.
+   * for each node that meets all of the scheduling requirements (resource
+   * request, requiredDuringScheduling anti-affinity expressions, etc.),
+   * compute a sum by iterating through the elements of this field and adding
+   * "weight" to the sum if the node has pods which matches the corresponding podAffinityTerm; the
+   * node(s) with the highest sum are the most preferred.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity#preferredDuringSchedulingIgnoredDuringExecution
+   */
+  readonly preferredDuringSchedulingIgnoredDuringExecution?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution[];
+
+  /**
+   * If the anti-affinity requirements specified by this field are not met at
+   * scheduling time, the pod will not be scheduled onto the node.
+   * If the anti-affinity requirements specified by this field cease to be met
+   * at some point during pod execution (e.g. due to a pod label update), the
+   * system may or may not try to eventually evict the pod from its node.
+   * When there are multiple elements, the lists of nodes corresponding to each
+   * podAffinityTerm are intersected, i.e. all terms must be satisfied.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
+   */
+  readonly requiredDuringSchedulingIgnoredDuringExecution?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'preferredDuringSchedulingIgnoredDuringExecution': obj.preferredDuringSchedulingIgnoredDuringExecution?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution(y)),
+    'requiredDuringSchedulingIgnoredDuringExecution': obj.requiredDuringSchedulingIgnoredDuringExecution?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The SELinux context to be applied to all containers.
+ * If unspecified, the container runtime will allocate a random SELinux context for each
+ * container.  May also be set in SecurityContext.  If set in
+ * both SecurityContext and PodSecurityContext, the value specified in SecurityContext
+ * takes precedence for that container.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions {
+  /**
+   * Level is SELinux level label that applies to the container.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions#level
+   */
+  readonly level?: string;
+
+  /**
+   * Role is a SELinux role label that applies to the container.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions#role
+   */
+  readonly role?: string;
+
+  /**
+   * Type is a SELinux type label that applies to the container.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions#type
+   */
+  readonly type?: string;
+
+  /**
+   * User is a SELinux user label that applies to the container.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions#user
+   */
+  readonly user?: string;
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'level': obj.level,
+    'role': obj.role,
+    'type': obj.type,
+    'user': obj.user,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The seccomp options to use by the containers in this pod.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile {
+  /**
+   * localhostProfile indicates a profile defined in a file on the node should be used.
+   * The profile must be preconfigured on the node to work.
+   * Must be a descending path, relative to the kubelet's configured seccomp profile location.
+   * Must be set if type is "Localhost". Must NOT be set for any other type.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile#localhostProfile
+   */
+  readonly localhostProfile?: string;
+
+  /**
+   * type indicates which kind of seccomp profile will be applied.
+   * Valid options are:
+   *
+   * Localhost - a profile defined in a file on the node should be used.
+   * RuntimeDefault - the container runtime default profile should be used.
+   * Unconfined - no profile should be applied.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile#type
+   */
+  readonly type: string;
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'localhostProfile': obj.localhostProfile,
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Sysctl defines a kernel parameter to be set
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls {
+  /**
+   * Name of a property to set
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls#name
+   */
+  readonly name: string;
+
+  /**
+   * Value of a property to set
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls#value
+   */
+  readonly value: string;
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
     'value': obj.value,
   };
   // filter undefined values
@@ -10582,6 +14296,498 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
 /* eslint-enable max-len, quote-props */
 
 /**
+ * The SELinux context to be applied to all containers.
+ * If unspecified, the container runtime will allocate a random SELinux context for each
+ * container.  May also be set in SecurityContext.  If set in
+ * both SecurityContext and PodSecurityContext, the value specified in SecurityContext
+ * takes precedence for that container.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions
+ */
+export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions {
+  /**
+   * Level is SELinux level label that applies to the container.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions#level
+   */
+  readonly level?: string;
+
+  /**
+   * Role is a SELinux role label that applies to the container.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions#role
+   */
+  readonly role?: string;
+
+  /**
+   * Type is a SELinux type label that applies to the container.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions#type
+   */
+  readonly type?: string;
+
+  /**
+   * User is a SELinux user label that applies to the container.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions#user
+   */
+  readonly user?: string;
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'level': obj.level,
+    'role': obj.role,
+    'type': obj.type,
+    'user': obj.user,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The seccomp options to use by the containers in this pod.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile
+ */
+export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile {
+  /**
+   * localhostProfile indicates a profile defined in a file on the node should be used.
+   * The profile must be preconfigured on the node to work.
+   * Must be a descending path, relative to the kubelet's configured seccomp profile location.
+   * Must be set if type is "Localhost". Must NOT be set for any other type.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile#localhostProfile
+   */
+  readonly localhostProfile?: string;
+
+  /**
+   * type indicates which kind of seccomp profile will be applied.
+   * Valid options are:
+   *
+   * Localhost - a profile defined in a file on the node should be used.
+   * RuntimeDefault - the container runtime default profile should be used.
+   * Unconfined - no profile should be applied.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile#type
+   */
+  readonly type: string;
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'localhostProfile': obj.localhostProfile,
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Sysctl defines a kernel parameter to be set
+ *
+ * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls
+ */
+export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls {
+  /**
+   * Name of a property to set
+   *
+   * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls#name
+   */
+  readonly name: string;
+
+  /**
+   * Value of a property to set
+   *
+   * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls#value
+   */
+  readonly value: string;
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * An empty preferred scheduling term matches all objects with implicit weight 0
+ * (i.e. it's a no-op). A null preferred scheduling term matches no objects (i.e. is also a no-op).
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution {
+  /**
+   * A node selector term, associated with the corresponding weight.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#preference
+   */
+  readonly preference: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference;
+
+  /**
+   * Weight associated with matching the corresponding nodeSelectorTerm, in the range 1-100.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
+   */
+  readonly weight: number;
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'preference': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference(obj.preference),
+    'weight': obj.weight,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * If the affinity requirements specified by this field are not met at
+ * scheduling time, the pod will not be scheduled onto the node.
+ * If the affinity requirements specified by this field cease to be met
+ * at some point during pod execution (e.g. due to an update), the system
+ * may or may not try to eventually evict the pod from its node.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution {
+  /**
+   * Required. A list of node selector terms. The terms are ORed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution#nodeSelectorTerms
+   */
+  readonly nodeSelectorTerms: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms[];
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'nodeSelectorTerms': obj.nodeSelectorTerms?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution {
+  /**
+   * Required. A pod affinity term, associated with the corresponding weight.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#podAffinityTerm
+   */
+  readonly podAffinityTerm: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm;
+
+  /**
+   * weight associated with matching the corresponding podAffinityTerm,
+   * in the range 1-100.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
+   */
+  readonly weight: number;
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'podAffinityTerm': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj.podAffinityTerm),
+    'weight': obj.weight,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Defines a set of pods (namely those matching the labelSelector
+ * relative to the given namespace(s)) that this pod should be
+ * co-located (affinity) or not co-located (anti-affinity) with,
+ * where co-located is defined as running on a node whose value of
+ * the label with key <topologyKey> matches that of any node on which
+ * a pod of the set of pods is running
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution {
+  /**
+   * A label query over a set of resources, in this case pods.
+   * If it's null, this PodAffinityTerm matches with no Pods.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#labelSelector
+   */
+  readonly labelSelector?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will
+   * be taken into consideration. The keys are used to lookup values from the
+   * incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
+   * to select the group of existing pods which pods will be taken into consideration
+   * for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+   * pod labels will be ignored. The default value is empty.
+   * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+   * Also, matchLabelKeys cannot be set when labelSelector isn't set.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will
+   * be taken into consideration. The keys are used to lookup values from the
+   * incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
+   * to select the group of existing pods which pods will be taken into consideration
+   * for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+   * pod labels will be ignored. The default value is empty.
+   * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+   * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
+
+  /**
+   * A label query over the set of namespaces that the term applies to.
+   * The term is applied to the union of the namespaces selected by this field
+   * and the ones listed in the namespaces field.
+   * null selector and null or empty namespaces list means "this pod's namespace".
+   * An empty selector ({}) matches all namespaces.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#namespaceSelector
+   */
+  readonly namespaceSelector?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector;
+
+  /**
+   * namespaces specifies a static list of namespace names that the term applies to.
+   * The term is applied to the union of the namespaces listed in this field
+   * and the ones selected by namespaceSelector.
+   * null or empty namespaces list and null namespaceSelector means "this pod's namespace".
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#namespaces
+   */
+  readonly namespaces?: string[];
+
+  /**
+   * This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
+   * the labelSelector in the specified namespaces, where co-located is defined as running on a node
+   * whose value of the label with key topologyKey matches that of any node on which any of the
+   * selected pods is running.
+   * Empty topologyKey is not allowed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
+   */
+  readonly topologyKey: string;
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'labelSelector': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
+    'namespaceSelector': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj.namespaceSelector),
+    'namespaces': obj.namespaces?.map(y => y),
+    'topologyKey': obj.topologyKey,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution {
+  /**
+   * Required. A pod affinity term, associated with the corresponding weight.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#podAffinityTerm
+   */
+  readonly podAffinityTerm: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm;
+
+  /**
+   * weight associated with matching the corresponding podAffinityTerm,
+   * in the range 1-100.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
+   */
+  readonly weight: number;
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'podAffinityTerm': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj.podAffinityTerm),
+    'weight': obj.weight,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Defines a set of pods (namely those matching the labelSelector
+ * relative to the given namespace(s)) that this pod should be
+ * co-located (affinity) or not co-located (anti-affinity) with,
+ * where co-located is defined as running on a node whose value of
+ * the label with key <topologyKey> matches that of any node on which
+ * a pod of the set of pods is running
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution {
+  /**
+   * A label query over a set of resources, in this case pods.
+   * If it's null, this PodAffinityTerm matches with no Pods.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#labelSelector
+   */
+  readonly labelSelector?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will
+   * be taken into consideration. The keys are used to lookup values from the
+   * incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
+   * to select the group of existing pods which pods will be taken into consideration
+   * for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+   * pod labels will be ignored. The default value is empty.
+   * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+   * Also, matchLabelKeys cannot be set when labelSelector isn't set.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will
+   * be taken into consideration. The keys are used to lookup values from the
+   * incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
+   * to select the group of existing pods which pods will be taken into consideration
+   * for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+   * pod labels will be ignored. The default value is empty.
+   * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+   * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
+
+  /**
+   * A label query over the set of namespaces that the term applies to.
+   * The term is applied to the union of the namespaces selected by this field
+   * and the ones listed in the namespaces field.
+   * null selector and null or empty namespaces list means "this pod's namespace".
+   * An empty selector ({}) matches all namespaces.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#namespaceSelector
+   */
+  readonly namespaceSelector?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector;
+
+  /**
+   * namespaces specifies a static list of namespace names that the term applies to.
+   * The term is applied to the union of the namespaces listed in this field
+   * and the ones selected by namespaceSelector.
+   * null or empty namespaces list and null namespaceSelector means "this pod's namespace".
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#namespaces
+   */
+  readonly namespaces?: string[];
+
+  /**
+   * This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
+   * the labelSelector in the specified namespaces, where co-located is defined as running on a node
+   * whose value of the label with key topologyKey matches that of any node on which any of the
+   * selected pods is running.
+   * Empty topologyKey is not allowed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
+   */
+  readonly topologyKey: string;
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'labelSelector': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
+    'namespaceSelector': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj.namespaceSelector),
+    'namespaces': obj.namespaces?.map(y => y),
+    'topologyKey': obj.topologyKey,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * An empty preferred scheduling term matches all objects with implicit weight 0
  * (i.e. it's a no-op). A null preferred scheduling term matches no objects (i.e. is also a no-op).
  *
@@ -10718,7 +14924,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
    */
@@ -10733,7 +14939,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
    */
@@ -10858,7 +15064,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
    */
@@ -10873,7 +15079,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
    */
@@ -10926,6 +15132,442 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
     'namespaceSelector': toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj.namespaceSelector),
     'namespaces': obj.namespaces?.map(y => y),
     'topologyKey': obj.topologyKey,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A node selector term, associated with the corresponding weight.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference {
+  /**
+   * A list of node selector requirements by node's labels.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchExpressions
+   */
+  readonly matchExpressions?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions[];
+
+  /**
+   * A list of node selector requirements by node's fields.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchFields
+   */
+  readonly matchFields?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields[];
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions(y)),
+    'matchFields': obj.matchFields?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A null or empty node selector term matches no objects. The requirements of
+ * them are ANDed.
+ * The TopologySelectorTerm type implements a subset of the NodeSelectorTerm.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms {
+  /**
+   * A list of node selector requirements by node's labels.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchExpressions
+   */
+  readonly matchExpressions?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions[];
+
+  /**
+   * A list of node selector requirements by node's fields.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchFields
+   */
+  readonly matchFields?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields[];
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions(y)),
+    'matchFields': obj.matchFields?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Required. A pod affinity term, associated with the corresponding weight.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm {
+  /**
+   * A label query over a set of resources, in this case pods.
+   * If it's null, this PodAffinityTerm matches with no Pods.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#labelSelector
+   */
+  readonly labelSelector?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will
+   * be taken into consideration. The keys are used to lookup values from the
+   * incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
+   * to select the group of existing pods which pods will be taken into consideration
+   * for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+   * pod labels will be ignored. The default value is empty.
+   * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+   * Also, matchLabelKeys cannot be set when labelSelector isn't set.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will
+   * be taken into consideration. The keys are used to lookup values from the
+   * incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
+   * to select the group of existing pods which pods will be taken into consideration
+   * for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+   * pod labels will be ignored. The default value is empty.
+   * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+   * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
+
+  /**
+   * A label query over the set of namespaces that the term applies to.
+   * The term is applied to the union of the namespaces selected by this field
+   * and the ones listed in the namespaces field.
+   * null selector and null or empty namespaces list means "this pod's namespace".
+   * An empty selector ({}) matches all namespaces.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#namespaceSelector
+   */
+  readonly namespaceSelector?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector;
+
+  /**
+   * namespaces specifies a static list of namespace names that the term applies to.
+   * The term is applied to the union of the namespaces listed in this field
+   * and the ones selected by namespaceSelector.
+   * null or empty namespaces list and null namespaceSelector means "this pod's namespace".
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#namespaces
+   */
+  readonly namespaces?: string[];
+
+  /**
+   * This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
+   * the labelSelector in the specified namespaces, where co-located is defined as running on a node
+   * whose value of the label with key topologyKey matches that of any node on which any of the
+   * selected pods is running.
+   * Empty topologyKey is not allowed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
+   */
+  readonly topologyKey: string;
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'labelSelector': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
+    'namespaceSelector': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj.namespaceSelector),
+    'namespaces': obj.namespaces?.map(y => y),
+    'topologyKey': obj.topologyKey,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label query over a set of resources, in this case pods.
+ * If it's null, this PodAffinityTerm matches with no Pods.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchExpressions
+   */
+  readonly matchExpressions?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label query over the set of namespaces that the term applies to.
+ * The term is applied to the union of the namespaces selected by this field
+ * and the ones listed in the namespaces field.
+ * null selector and null or empty namespaces list means "this pod's namespace".
+ * An empty selector ({}) matches all namespaces.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchExpressions
+   */
+  readonly matchExpressions?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Required. A pod affinity term, associated with the corresponding weight.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm {
+  /**
+   * A label query over a set of resources, in this case pods.
+   * If it's null, this PodAffinityTerm matches with no Pods.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#labelSelector
+   */
+  readonly labelSelector?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector;
+
+  /**
+   * MatchLabelKeys is a set of pod label keys to select which pods will
+   * be taken into consideration. The keys are used to lookup values from the
+   * incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
+   * to select the group of existing pods which pods will be taken into consideration
+   * for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+   * pod labels will be ignored. The default value is empty.
+   * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+   * Also, matchLabelKeys cannot be set when labelSelector isn't set.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
+   */
+  readonly matchLabelKeys?: string[];
+
+  /**
+   * MismatchLabelKeys is a set of pod label keys to select which pods will
+   * be taken into consideration. The keys are used to lookup values from the
+   * incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
+   * to select the group of existing pods which pods will be taken into consideration
+   * for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+   * pod labels will be ignored. The default value is empty.
+   * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+   * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
+   */
+  readonly mismatchLabelKeys?: string[];
+
+  /**
+   * A label query over the set of namespaces that the term applies to.
+   * The term is applied to the union of the namespaces selected by this field
+   * and the ones listed in the namespaces field.
+   * null selector and null or empty namespaces list means "this pod's namespace".
+   * An empty selector ({}) matches all namespaces.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#namespaceSelector
+   */
+  readonly namespaceSelector?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector;
+
+  /**
+   * namespaces specifies a static list of namespace names that the term applies to.
+   * The term is applied to the union of the namespaces listed in this field
+   * and the ones selected by namespaceSelector.
+   * null or empty namespaces list and null namespaceSelector means "this pod's namespace".
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#namespaces
+   */
+  readonly namespaces?: string[];
+
+  /**
+   * This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
+   * the labelSelector in the specified namespaces, where co-located is defined as running on a node
+   * whose value of the label with key topologyKey matches that of any node on which any of the
+   * selected pods is running.
+   * Empty topologyKey is not allowed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
+   */
+  readonly topologyKey: string;
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'labelSelector': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj.labelSelector),
+    'matchLabelKeys': obj.matchLabelKeys?.map(y => y),
+    'mismatchLabelKeys': obj.mismatchLabelKeys?.map(y => y),
+    'namespaceSelector': toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj.namespaceSelector),
+    'namespaces': obj.namespaces?.map(y => y),
+    'topologyKey': obj.topologyKey,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label query over a set of resources, in this case pods.
+ * If it's null, this PodAffinityTerm matches with no Pods.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchExpressions
+   */
+  readonly matchExpressions?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label query over the set of namespaces that the term applies to.
+ * The term is applied to the union of the namespaces selected by this field
+ * and the ones listed in the namespaces field.
+ * null selector and null or empty namespaces list means "this pod's namespace".
+ * An empty selector ({}) matches all namespaces.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchExpressions
+   */
+  readonly matchExpressions?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -11031,7 +15673,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
    */
@@ -11046,7 +15688,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
    */
@@ -11211,7 +15853,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
    */
@@ -11226,7 +15868,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
    */
@@ -11362,6 +16004,576 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   const result = {
     'matchExpressions': obj.matchExpressions?.map(y => toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(y)),
     'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A node selector requirement is a selector that contains values, a key, and an operator
+ * that relates the key and values.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions {
+  /**
+   * The label key that the selector applies to.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * Represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * An array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. If the operator is Gt or Lt, the values
+   * array must have a single element, which will be interpreted as an integer.
+   * This array is replaced during a strategic merge patch.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A node selector requirement is a selector that contains values, a key, and an operator
+ * that relates the key and values.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields {
+  /**
+   * The label key that the selector applies to.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#key
+   */
+  readonly key: string;
+
+  /**
+   * Represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#operator
+   */
+  readonly operator: string;
+
+  /**
+   * An array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. If the operator is Gt or Lt, the values
+   * array must have a single element, which will be interpreted as an integer.
+   * This array is replaced during a strategic merge patch.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A node selector requirement is a selector that contains values, a key, and an operator
+ * that relates the key and values.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions {
+  /**
+   * The label key that the selector applies to.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * Represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * An array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. If the operator is Gt or Lt, the values
+   * array must have a single element, which will be interpreted as an integer.
+   * This array is replaced during a strategic merge patch.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A node selector requirement is a selector that contains values, a key, and an operator
+ * that relates the key and values.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields {
+  /**
+   * The label key that the selector applies to.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#key
+   */
+  readonly key: string;
+
+  /**
+   * Represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#operator
+   */
+  readonly operator: string;
+
+  /**
+   * An array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. If the operator is Gt or Lt, the values
+   * array must have a single element, which will be interpreted as an integer.
+   * This array is replaced during a strategic merge patch.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label query over a set of resources, in this case pods.
+ * If it's null, this PodAffinityTerm matches with no Pods.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchExpressions
+   */
+  readonly matchExpressions?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label query over the set of namespaces that the term applies to.
+ * The term is applied to the union of the namespaces selected by this field
+ * and the ones listed in the namespaces field.
+ * null selector and null or empty namespaces list means "this pod's namespace".
+ * An empty selector ({}) matches all namespaces.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchExpressions
+   */
+  readonly matchExpressions?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label query over a set of resources, in this case pods.
+ * If it's null, this PodAffinityTerm matches with no Pods.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchExpressions
+   */
+  readonly matchExpressions?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label query over the set of namespaces that the term applies to.
+ * The term is applied to the union of the namespaces selected by this field
+ * and the ones listed in the namespaces field.
+ * null selector and null or empty namespaces list means "this pod's namespace".
+ * An empty selector ({}) matches all namespaces.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchExpressions
+   */
+  readonly matchExpressions?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -11927,6 +17139,206 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions
+ */
+export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,

@@ -1286,7 +1286,6 @@ export interface ClusterSpecEphemeralVolumeSource {
    * entry. Pod validation will reject the pod if the concatenated name
    * is not valid for a PVC (for example, too long).
    *
-   *
    * An existing PVC with that name that is not owned by the pod
    * will *not* be used for the pod to avoid using an unrelated
    * volume by mistake. Starting the pod is then blocked until
@@ -1296,10 +1295,8 @@ export interface ClusterSpecEphemeralVolumeSource {
    * this should not be necessary, but it may be useful when
    * manually reconstructing a broken cluster.
    *
-   *
    * This field is read-only and no changes will be made by Kubernetes
    * to the PVC after it has been created.
-   *
    *
    * Required, must not be nil.
    *
@@ -1927,7 +1924,8 @@ export interface ClusterSpecProjectedVolumeTemplate {
   readonly defaultMode?: number;
 
   /**
-   * sources is the list of volume projections
+   * sources is the list of volume projections. Each entry in this list
+   * handles one source.
    *
    * @schema ClusterSpecProjectedVolumeTemplate#sources
    */
@@ -2087,10 +2085,8 @@ export interface ClusterSpecResources {
    * Claims lists the names of resources, defined in spec.resourceClaims,
    * that are used by this container.
    *
-   *
    * This is an alpha field and requires enabling the
    * DynamicResourceAllocation feature gate.
-   *
    *
    * This field is immutable. It can only be set for containers.
    *
@@ -2155,7 +2151,6 @@ export interface ClusterSpecSeccompProfile {
   /**
    * type indicates which kind of seccomp profile will be applied.
    * Valid options are:
-   *
    *
    * Localhost - a profile defined in a file on the node should be used.
    * RuntimeDefault - the container runtime default profile should be used.
@@ -2382,7 +2377,6 @@ export interface ClusterSpecTopologySpreadConstraints {
    * Keys that don't exist in the incoming pod labels will
    * be ignored. A null or empty list means only match against labelSelector.
    *
-   *
    * This is a beta field and requires the MatchLabelKeysInPodTopologySpread feature gate to be enabled (enabled by default).
    *
    * @schema ClusterSpecTopologySpreadConstraints#matchLabelKeys
@@ -2424,7 +2418,6 @@ export interface ClusterSpecTopologySpreadConstraints {
    * Valid values are integers greater than 0.
    * When value is not nil, WhenUnsatisfiable must be DoNotSchedule.
    *
-   *
    * For example, in a 3-zone cluster, MaxSkew is set to 2, MinDomains is set to 5 and pods with the same
    * labelSelector spread as 2/2/2:
    * | zone1 | zone2 | zone3 |
@@ -2444,7 +2437,6 @@ export interface ClusterSpecTopologySpreadConstraints {
    * - Honor: only nodes matching nodeAffinity/nodeSelector are included in the calculations.
    * - Ignore: nodeAffinity/nodeSelector are ignored. All nodes are included in the calculations.
    *
-   *
    * If this value is nil, the behavior is equivalent to the Honor policy.
    * This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.
    *
@@ -2458,7 +2450,6 @@ export interface ClusterSpecTopologySpreadConstraints {
    * - Honor: nodes without taints, along with tainted nodes for which the incoming pod
    * has a toleration, are included.
    * - Ignore: node taints are ignored. All nodes are included.
-   *
    *
    * If this value is nil, the behavior is equivalent to the Ignore policy.
    * This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.
@@ -3443,9 +3434,7 @@ export interface ClusterSpecEnvFromConfigMapRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema ClusterSpecEnvFromConfigMapRef#name
    */
@@ -3486,9 +3475,7 @@ export interface ClusterSpecEnvFromSecretRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema ClusterSpecEnvFromSecretRef#name
    */
@@ -3527,7 +3514,6 @@ export function toJson_ClusterSpecEnvFromSecretRef(obj: ClusterSpecEnvFromSecret
  * entry. Pod validation will reject the pod if the concatenated name
  * is not valid for a PVC (for example, too long).
  *
- *
  * An existing PVC with that name that is not owned by the pod
  * will *not* be used for the pod to avoid using an unrelated
  * volume by mistake. Starting the pod is then blocked until
@@ -3537,10 +3523,8 @@ export function toJson_ClusterSpecEnvFromSecretRef(obj: ClusterSpecEnvFromSecret
  * this should not be necessary, but it may be useful when
  * manually reconstructing a broken cluster.
  *
- *
  * This field is read-only and no changes will be made by Kubernetes
  * to the PVC after it has been created.
- *
  *
  * Required, must not be nil.
  *
@@ -3761,9 +3745,7 @@ export interface ClusterSpecExternalClustersPassword {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema ClusterSpecExternalClustersPassword#name
    */
@@ -3813,9 +3795,7 @@ export interface ClusterSpecExternalClustersSslCert {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema ClusterSpecExternalClustersSslCert#name
    */
@@ -3865,9 +3845,7 @@ export interface ClusterSpecExternalClustersSslKey {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema ClusterSpecExternalClustersSslKey#name
    */
@@ -3917,9 +3895,7 @@ export interface ClusterSpecExternalClustersSslRootCert {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema ClusterSpecExternalClustersSslRootCert#name
    */
@@ -3954,7 +3930,6 @@ export function toJson_ClusterSpecExternalClustersSslRootCert(obj: ClusterSpecEx
  * RoleConfiguration is the representation, in Kubernetes, of a PostgreSQL role
  * with the additional field Ensure specifying whether to ensure the presence or
  * absence of the role in the database
- *
  *
  * The defaults of the CREATE ROLE command are applied
  * Reference: https://www.postgresql.org/docs/current/sql-createrole.html
@@ -4243,7 +4218,6 @@ export function toJson_ClusterSpecMonitoringCustomQueriesSecret(obj: ClusterSpec
  * RelabelConfig allows dynamic rewriting of the label set for targets, alerts,
  * scraped samples and remote write samples.
  *
- *
  * More info: https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config
  *
  * @schema ClusterSpecMonitoringPodMonitorMetricRelabelings
@@ -4252,10 +4226,8 @@ export interface ClusterSpecMonitoringPodMonitorMetricRelabelings {
   /**
    * Action to perform based on the regex matching.
    *
-   *
    * `Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0.
    * `DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.
-   *
    *
    * Default: "Replace"
    *
@@ -4265,7 +4237,6 @@ export interface ClusterSpecMonitoringPodMonitorMetricRelabelings {
 
   /**
    * Modulus to take of the hash of the source label values.
-   *
    *
    * Only applicable when the action is `HashMod`.
    *
@@ -4283,7 +4254,6 @@ export interface ClusterSpecMonitoringPodMonitorMetricRelabelings {
   /**
    * Replacement value against which a Replace action is performed if the
    * regular expression matches.
-   *
    *
    * Regex capture groups are available.
    *
@@ -4310,10 +4280,8 @@ export interface ClusterSpecMonitoringPodMonitorMetricRelabelings {
   /**
    * Label to which the resulting string is written in a replacement.
    *
-   *
    * It is mandatory for `Replace`, `HashMod`, `Lowercase`, `Uppercase`,
    * `KeepEqual` and `DropEqual` actions.
-   *
    *
    * Regex capture groups are available.
    *
@@ -4347,7 +4315,6 @@ export function toJson_ClusterSpecMonitoringPodMonitorMetricRelabelings(obj: Clu
  * RelabelConfig allows dynamic rewriting of the label set for targets, alerts,
  * scraped samples and remote write samples.
  *
- *
  * More info: https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config
  *
  * @schema ClusterSpecMonitoringPodMonitorRelabelings
@@ -4356,10 +4323,8 @@ export interface ClusterSpecMonitoringPodMonitorRelabelings {
   /**
    * Action to perform based on the regex matching.
    *
-   *
    * `Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0.
    * `DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.
-   *
    *
    * Default: "Replace"
    *
@@ -4369,7 +4334,6 @@ export interface ClusterSpecMonitoringPodMonitorRelabelings {
 
   /**
    * Modulus to take of the hash of the source label values.
-   *
    *
    * Only applicable when the action is `HashMod`.
    *
@@ -4387,7 +4351,6 @@ export interface ClusterSpecMonitoringPodMonitorRelabelings {
   /**
    * Replacement value against which a Replace action is performed if the
    * regular expression matches.
-   *
    *
    * Regex capture groups are available.
    *
@@ -4414,10 +4377,8 @@ export interface ClusterSpecMonitoringPodMonitorRelabelings {
   /**
    * Label to which the resulting string is written in a replacement.
    *
-   *
    * It is mandatory for `Replace`, `HashMod`, `Lowercase`, `Uppercase`,
    * `KeepEqual` and `DropEqual` actions.
-   *
    *
    * Regex capture groups are available.
    *
@@ -4656,7 +4617,8 @@ export function toJson_ClusterSpecPostgresqlSynchronous(obj: ClusterSpecPostgres
 /* eslint-enable max-len, quote-props */
 
 /**
- * Projection that may be projected along with other supported volume types
+ * Projection that may be projected along with other supported volume types.
+ * Exactly one of these fields must be set.
  *
  * @schema ClusterSpecProjectedVolumeTemplateSources
  */
@@ -4665,13 +4627,10 @@ export interface ClusterSpecProjectedVolumeTemplateSources {
    * ClusterTrustBundle allows a pod to access the `.spec.trustBundle` field
    * of ClusterTrustBundle objects in an auto-updating file.
    *
-   *
    * Alpha, gated by the ClusterTrustBundleProjection feature gate.
-   *
    *
    * ClusterTrustBundle objects can either be selected by name, or by the
    * combination of signer name and a label selector.
-   *
    *
    * Kubelet performs aggressive normalization of the PEM contents written
    * into the pod filesystem.  Esoteric PEM features such as inter-block
@@ -4828,6 +4787,15 @@ export interface ClusterSpecResourcesClaims {
    */
   readonly name: string;
 
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema ClusterSpecResourcesClaims#request
+   */
+  readonly request?: string;
+
 }
 
 /**
@@ -4838,6 +4806,7 @@ export function toJson_ClusterSpecResourcesClaims(obj: ClusterSpecResourcesClaim
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+    'request': obj.request,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -5019,7 +4988,7 @@ export interface ClusterSpecStoragePvcTemplate {
    * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
    * exists.
    * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
    *
    * @schema ClusterSpecStoragePvcTemplate#volumeAttributesClassName
    */
@@ -5285,7 +5254,7 @@ export interface ClusterSpecWalStoragePvcTemplate {
    * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
    * exists.
    * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
    *
    * @schema ClusterSpecWalStoragePvcTemplate#volumeAttributesClassName
    */
@@ -5396,7 +5365,7 @@ export interface ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulin
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
    */
@@ -5411,7 +5380,7 @@ export interface ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulin
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
    */
@@ -5536,7 +5505,7 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSched
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
    */
@@ -5551,7 +5520,7 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSched
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
    */
@@ -5759,12 +5728,10 @@ export interface ClusterSpecBackupBarmanObjectStoreData {
    * provide flexibility to customize the backup process further according to
    * specific requirements or configurations.
    *
-   *
    * Example:
    * In a scenario where specialized backup options are required, such as setting
    * a specific timeout or defining custom behavior, users can use this field
    * to specify additional command arguments.
-   *
    *
    * Note:
    * It's essential to ensure that the provided arguments are valid and supported
@@ -5984,12 +5951,10 @@ export interface ClusterSpecBackupBarmanObjectStoreWal {
    * command-line invocation. These arguments provide flexibility to customize
    * the WAL archive process further, according to specific requirements or configurations.
    *
-   *
    * Example:
    * In a scenario where specialized backup options are required, such as setting
    * a specific timeout or defining custom behavior, users can use this field
    * to specify additional command arguments.
-   *
    *
    * Note:
    * It's essential to ensure that the provided arguments are valid and supported
@@ -6035,12 +6000,10 @@ export interface ClusterSpecBackupBarmanObjectStoreWal {
    * command-line invocation. These arguments provide flexibility to customize
    * the WAL restore process further, according to specific requirements or configurations.
    *
-   *
    * Example:
    * In a scenario where specialized backup options are required, such as setting
    * a specific timeout or defining custom behavior, users can use this field
    * to specify additional command arguments.
-   *
    *
    * Note:
    * It's essential to ensure that the provided arguments are valid and supported
@@ -6635,9 +6598,7 @@ export interface ClusterSpecEnvValueFromConfigMapKeyRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema ClusterSpecEnvValueFromConfigMapKeyRef#name
    */
@@ -6770,9 +6731,7 @@ export interface ClusterSpecEnvValueFromSecretKeyRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema ClusterSpecEnvValueFromSecretKeyRef#name
    */
@@ -6901,7 +6860,7 @@ export interface ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpec {
    * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
    * exists.
    * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
    *
    * @schema ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpec#volumeAttributesClassName
    */
@@ -7024,12 +6983,10 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreData {
    * provide flexibility to customize the backup process further according to
    * specific requirements or configurations.
    *
-   *
    * Example:
    * In a scenario where specialized backup options are required, such as setting
    * a specific timeout or defining custom behavior, users can use this field
    * to specify additional command arguments.
-   *
    *
    * Note:
    * It's essential to ensure that the provided arguments are valid and supported
@@ -7249,12 +7206,10 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreWal {
    * command-line invocation. These arguments provide flexibility to customize
    * the WAL archive process further, according to specific requirements or configurations.
    *
-   *
    * Example:
    * In a scenario where specialized backup options are required, such as setting
    * a specific timeout or defining custom behavior, users can use this field
    * to specify additional command arguments.
-   *
    *
    * Note:
    * It's essential to ensure that the provided arguments are valid and supported
@@ -7300,12 +7255,10 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreWal {
    * command-line invocation. These arguments provide flexibility to customize
    * the WAL restore process further, according to specific requirements or configurations.
    *
-   *
    * Example:
    * In a scenario where specialized backup options are required, such as setting
    * a specific timeout or defining custom behavior, users can use this field
    * to specify additional command arguments.
-   *
    *
    * Note:
    * It's essential to ensure that the provided arguments are valid and supported
@@ -7443,10 +7396,8 @@ export enum ClusterSpecManagedServicesDisabledDefaultServices {
 /**
  * Action to perform based on the regex matching.
  *
- *
  * `Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0.
  * `DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.
- *
  *
  * Default: "Replace"
  *
@@ -7480,10 +7431,8 @@ export enum ClusterSpecMonitoringPodMonitorMetricRelabelingsAction {
 /**
  * Action to perform based on the regex matching.
  *
- *
  * `Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0.
  * `DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.
- *
  *
  * Default: "Replace"
  *
@@ -7642,13 +7591,10 @@ export enum ClusterSpecPostgresqlSynchronousMethod {
  * ClusterTrustBundle allows a pod to access the `.spec.trustBundle` field
  * of ClusterTrustBundle objects in an auto-updating file.
  *
- *
  * Alpha, gated by the ClusterTrustBundleProjection feature gate.
- *
  *
  * ClusterTrustBundle objects can either be selected by name, or by the
  * combination of signer name and a label selector.
- *
  *
  * Kubelet performs aggressive normalization of the PEM contents written
  * into the pod filesystem.  Esoteric PEM features such as inter-block
@@ -7748,9 +7694,7 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesConfigMap {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema ClusterSpecProjectedVolumeTemplateSourcesConfigMap#name
    */
@@ -7834,9 +7778,7 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesSecret {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema ClusterSpecProjectedVolumeTemplateSourcesSecret#name
    */
@@ -8234,7 +8176,7 @@ export interface ClusterSpecTablespacesStoragePvcTemplate {
    * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
    * exists.
    * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
    *
    * @schema ClusterSpecTablespacesStoragePvcTemplate#volumeAttributesClassName
    */
@@ -8569,7 +8511,7 @@ export interface ClusterSpecAffinityAdditionalPodAffinityPreferredDuringScheduli
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
    */
@@ -8584,7 +8526,7 @@ export interface ClusterSpecAffinityAdditionalPodAffinityPreferredDuringScheduli
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
    */
@@ -8749,7 +8691,7 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSche
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
    */
@@ -8764,7 +8706,7 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSche
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
    */
@@ -10526,9 +10468,7 @@ export interface ClusterSpecPostgresqlLdapBindSearchAuthBindPassword {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema ClusterSpecPostgresqlLdapBindSearchAuthBindPassword#name
    */
@@ -11901,7 +11841,6 @@ export interface ClusterSpecManagedServicesAdditionalServiceTemplateSpec {
    * clients must ensure that clusterIPs[0] and clusterIP have the same
    * value.
    *
-   *
    * This field may hold a maximum of two entries (dual-stack IPs, in either order).
    * These IPs must correspond to the values of the ipFamilies field. Both
    * clusterIPs and ipFamilies are governed by the ipFamilyPolicy field.
@@ -11991,7 +11930,6 @@ export interface ClusterSpecManagedServicesAdditionalServiceTemplateSpec {
    * and "IPv6".  This field only applies to Services of types ClusterIP,
    * NodePort, and LoadBalancer, and does apply to "headless" services.
    * This field will be wiped when updating a Service to type ExternalName.
-   *
    *
    * This field may hold a maximum of two entries (dual-stack families, in
    * either order).  These families must correspond to the values of the
@@ -12602,16 +12540,13 @@ export interface ClusterSpecManagedServicesAdditionalServiceTemplateSpecPorts {
    * This field follows standard Kubernetes label syntax.
    * Valid values are either:
    *
-   *
    * * Un-prefixed protocol names - reserved for IANA standard service names (as per
    * RFC-6335 and https://www.iana.org/assignments/service-names).
-   *
    *
    * * Kubernetes-defined prefixed names:
    * * 'kubernetes.io/h2c' - HTTP/2 prior knowledge over cleartext as described in https://www.rfc-editor.org/rfc/rfc9113.html#name-starting-http-2-with-prior-
    * * 'kubernetes.io/ws'  - WebSocket over cleartext as described in https://www.rfc-editor.org/rfc/rfc6455
    * * 'kubernetes.io/wss' - WebSocket over TLS as described in https://www.rfc-editor.org/rfc/rfc6455
-   *
    *
    * * Other protocols should use implementation-defined prefixed names such as
    * mycompany.com/my-custom-protocol.
@@ -13329,9 +13264,6 @@ export interface PoolerSpecDeploymentStrategy {
   /**
    * Rolling update config params. Present only if DeploymentStrategyType =
    * RollingUpdate.
-   * ---
-   * TODO: Update this to follow our convention for oneOf, whatever we decide it
-   * to be.
    *
    * @schema PoolerSpecDeploymentStrategy#rollingUpdate
    */
@@ -13580,9 +13512,6 @@ export enum PoolerSpecType {
 /**
  * Rolling update config params. Present only if DeploymentStrategyType =
  * RollingUpdate.
- * ---
- * TODO: Update this to follow our convention for oneOf, whatever we decide it
- * to be.
  *
  * @schema PoolerSpecDeploymentStrategyRollingUpdate
  */
@@ -13643,7 +13572,6 @@ export function toJson_PoolerSpecDeploymentStrategyRollingUpdate(obj: PoolerSpec
  * RelabelConfig allows dynamic rewriting of the label set for targets, alerts,
  * scraped samples and remote write samples.
  *
- *
  * More info: https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config
  *
  * @schema PoolerSpecMonitoringPodMonitorMetricRelabelings
@@ -13652,10 +13580,8 @@ export interface PoolerSpecMonitoringPodMonitorMetricRelabelings {
   /**
    * Action to perform based on the regex matching.
    *
-   *
    * `Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0.
    * `DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.
-   *
    *
    * Default: "Replace"
    *
@@ -13665,7 +13591,6 @@ export interface PoolerSpecMonitoringPodMonitorMetricRelabelings {
 
   /**
    * Modulus to take of the hash of the source label values.
-   *
    *
    * Only applicable when the action is `HashMod`.
    *
@@ -13683,7 +13608,6 @@ export interface PoolerSpecMonitoringPodMonitorMetricRelabelings {
   /**
    * Replacement value against which a Replace action is performed if the
    * regular expression matches.
-   *
    *
    * Regex capture groups are available.
    *
@@ -13710,10 +13634,8 @@ export interface PoolerSpecMonitoringPodMonitorMetricRelabelings {
   /**
    * Label to which the resulting string is written in a replacement.
    *
-   *
    * It is mandatory for `Replace`, `HashMod`, `Lowercase`, `Uppercase`,
    * `KeepEqual` and `DropEqual` actions.
-   *
    *
    * Regex capture groups are available.
    *
@@ -13747,7 +13669,6 @@ export function toJson_PoolerSpecMonitoringPodMonitorMetricRelabelings(obj: Pool
  * RelabelConfig allows dynamic rewriting of the label set for targets, alerts,
  * scraped samples and remote write samples.
  *
- *
  * More info: https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config
  *
  * @schema PoolerSpecMonitoringPodMonitorRelabelings
@@ -13756,10 +13677,8 @@ export interface PoolerSpecMonitoringPodMonitorRelabelings {
   /**
    * Action to perform based on the regex matching.
    *
-   *
    * `Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0.
    * `DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.
-   *
    *
    * Default: "Replace"
    *
@@ -13769,7 +13688,6 @@ export interface PoolerSpecMonitoringPodMonitorRelabelings {
 
   /**
    * Modulus to take of the hash of the source label values.
-   *
    *
    * Only applicable when the action is `HashMod`.
    *
@@ -13787,7 +13705,6 @@ export interface PoolerSpecMonitoringPodMonitorRelabelings {
   /**
    * Replacement value against which a Replace action is performed if the
    * regular expression matches.
-   *
    *
    * Regex capture groups are available.
    *
@@ -13814,10 +13731,8 @@ export interface PoolerSpecMonitoringPodMonitorRelabelings {
   /**
    * Label to which the resulting string is written in a replacement.
    *
-   *
    * It is mandatory for `Replace`, `HashMod`, `Lowercase`, `Uppercase`,
    * `KeepEqual` and `DropEqual` actions.
-   *
    *
    * Regex capture groups are available.
    *
@@ -14005,7 +13920,6 @@ export interface PoolerSpecServiceTemplateSpec {
    * clients must ensure that clusterIPs[0] and clusterIP have the same
    * value.
    *
-   *
    * This field may hold a maximum of two entries (dual-stack IPs, in either order).
    * These IPs must correspond to the values of the ipFamilies field. Both
    * clusterIPs and ipFamilies are governed by the ipFamilyPolicy field.
@@ -14095,7 +14009,6 @@ export interface PoolerSpecServiceTemplateSpec {
    * and "IPv6".  This field only applies to Services of types ClusterIP,
    * NodePort, and LoadBalancer, and does apply to "headless" services.
    * This field will be wiped when updating a Service to type ExternalName.
-   *
    *
    * This field may hold a maximum of two entries (dual-stack families, in
    * either order).  These families must correspond to the values of the
@@ -14506,9 +14419,11 @@ export interface PoolerSpecTemplateSpec {
   readonly initContainers?: PoolerSpecTemplateSpecInitContainers[];
 
   /**
-   * NodeName is a request to schedule this pod onto a specific node. If it is non-empty,
-   * the scheduler simply schedules this pod onto that node, assuming that it fits resource
-   * requirements.
+   * NodeName indicates in which node this pod is scheduled.
+   * If empty, this pod is a candidate for scheduling by the scheduler defined in schedulerName.
+   * Once this field is set, the kubelet for this node becomes responsible for the lifecycle of this pod.
+   * This field should not be used to express a desire for the pod to be scheduled on a specific node.
+   * https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename
    *
    * @schema PoolerSpecTemplateSpec#nodeName
    */
@@ -14527,10 +14442,8 @@ export interface PoolerSpecTemplateSpec {
    * Specifies the OS of the containers in the pod.
    * Some pod and container fields are restricted if this is set.
    *
-   *
    * If the OS field is set to linux, the following fields must be unset:
    * -securityContext.windowsOptions
-   *
    *
    * If the OS field is set to windows, following fields must be unset:
    * - spec.hostPID
@@ -14546,6 +14459,7 @@ export interface PoolerSpecTemplateSpec {
    * - spec.securityContext.runAsUser
    * - spec.securityContext.runAsGroup
    * - spec.securityContext.supplementalGroups
+   * - spec.securityContext.supplementalGroupsPolicy
    * - spec.containers[*].securityContext.appArmorProfile
    * - spec.containers[*].securityContext.seLinuxOptions
    * - spec.containers[*].securityContext.seccompProfile
@@ -14623,10 +14537,8 @@ export interface PoolerSpecTemplateSpec {
    * will be made available to those containers which consume them
    * by name.
    *
-   *
    * This is an alpha field and requires enabling the
    * DynamicResourceAllocation feature gate.
-   *
    *
    * This field is immutable.
    *
@@ -14668,7 +14580,6 @@ export interface PoolerSpecTemplateSpec {
    * SchedulingGates is an opaque list of values that if specified will block scheduling the pod.
    * If schedulingGates is not empty, the pod will stay in the SchedulingGated state and the
    * scheduler will not attempt to schedule the pod.
-   *
    *
    * SchedulingGates can only be set at pod creation time, and be removed only afterwards.
    *
@@ -14882,10 +14793,8 @@ export class PoolerSpecDeploymentStrategyRollingUpdateMaxUnavailable {
 /**
  * Action to perform based on the regex matching.
  *
- *
  * `Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0.
  * `DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.
- *
  *
  * Default: "Replace"
  *
@@ -14919,10 +14828,8 @@ export enum PoolerSpecMonitoringPodMonitorMetricRelabelingsAction {
 /**
  * Action to perform based on the regex matching.
  *
- *
  * `Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0.
  * `DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.
- *
  *
  * Default: "Replace"
  *
@@ -14965,16 +14872,13 @@ export interface PoolerSpecServiceTemplateSpecPorts {
    * This field follows standard Kubernetes label syntax.
    * Valid values are either:
    *
-   *
    * * Un-prefixed protocol names - reserved for IANA standard service names (as per
    * RFC-6335 and https://www.iana.org/assignments/service-names).
-   *
    *
    * * Kubernetes-defined prefixed names:
    * * 'kubernetes.io/h2c' - HTTP/2 prior knowledge over cleartext as described in https://www.rfc-editor.org/rfc/rfc9113.html#name-starting-http-2-with-prior-
    * * 'kubernetes.io/ws'  - WebSocket over cleartext as described in https://www.rfc-editor.org/rfc/rfc6455
    * * 'kubernetes.io/wss' - WebSocket over TLS as described in https://www.rfc-editor.org/rfc/rfc6455
-   *
    *
    * * Other protocols should use implementation-defined prefixed names such as
    * mycompany.com/my-custom-protocol.
@@ -15505,7 +15409,6 @@ export function toJson_PoolerSpecTemplateSpecDnsConfig(obj: PoolerSpecTemplateSp
  * removed or restarted. The kubelet may evict a Pod if an ephemeral container causes the
  * Pod to exceed its resource allocation.
  *
- *
  * To add an ephemeral container, use the ephemeralcontainers subresource of an existing
  * Pod. Ephemeral containers may not be removed or restarted.
  *
@@ -15685,7 +15588,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainers {
    * The ephemeral container will be run in the namespaces (IPC, PID, etc) of this container.
    * If not set then the ephemeral container uses the namespaces configured in the Pod spec.
    *
-   *
    * The container runtime must implement support for this feature. If the runtime does not
    * support namespace targeting then the result of setting this field is undefined.
    *
@@ -15845,9 +15747,7 @@ export interface PoolerSpecTemplateSpecImagePullSecrets {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecImagePullSecrets#name
    */
@@ -16183,10 +16083,8 @@ export function toJson_PoolerSpecTemplateSpecInitContainers(obj: PoolerSpecTempl
  * Specifies the OS of the containers in the pod.
  * Some pod and container fields are restricted if this is set.
  *
- *
  * If the OS field is set to linux, the following fields must be unset:
  * -securityContext.windowsOptions
- *
  *
  * If the OS field is set to windows, following fields must be unset:
  * - spec.hostPID
@@ -16202,6 +16100,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainers(obj: PoolerSpecTempl
  * - spec.securityContext.runAsUser
  * - spec.securityContext.runAsGroup
  * - spec.securityContext.supplementalGroups
+ * - spec.securityContext.supplementalGroupsPolicy
  * - spec.containers[*].securityContext.appArmorProfile
  * - spec.containers[*].securityContext.seLinuxOptions
  * - spec.containers[*].securityContext.seccompProfile
@@ -16286,7 +16185,10 @@ export function toJson_PoolerSpecTemplateSpecReadinessGates(obj: PoolerSpecTempl
 /* eslint-enable max-len, quote-props */
 
 /**
- * PodResourceClaim references exactly one ResourceClaim through a ClaimSource.
+ * PodResourceClaim references exactly one ResourceClaim, either directly
+ * or by naming a ResourceClaimTemplate which is then turned into a ResourceClaim
+ * for the pod.
+ *
  * It adds a name to it that uniquely identifies the ResourceClaim inside the Pod.
  * Containers that need access to the ResourceClaim reference it with this name.
  *
@@ -16302,11 +16204,36 @@ export interface PoolerSpecTemplateSpecResourceClaims {
   readonly name: string;
 
   /**
-   * Source describes where to find the ResourceClaim.
+   * ResourceClaimName is the name of a ResourceClaim object in the same
+   * namespace as this pod.
    *
-   * @schema PoolerSpecTemplateSpecResourceClaims#source
+   * Exactly one of ResourceClaimName and ResourceClaimTemplateName must
+   * be set.
+   *
+   * @schema PoolerSpecTemplateSpecResourceClaims#resourceClaimName
    */
-  readonly source?: PoolerSpecTemplateSpecResourceClaimsSource;
+  readonly resourceClaimName?: string;
+
+  /**
+   * ResourceClaimTemplateName is the name of a ResourceClaimTemplate
+   * object in the same namespace as this pod.
+   *
+   * The template will be used to create a new ResourceClaim, which will
+   * be bound to this pod. When this pod is deleted, the ResourceClaim
+   * will also be deleted. The pod name and resource name, along with a
+   * generated component, will be used to form a unique name for the
+   * ResourceClaim, which will be recorded in pod.status.resourceClaimStatuses.
+   *
+   * This field is immutable and no changes will be made to the
+   * corresponding ResourceClaim by the control plane after creating the
+   * ResourceClaim.
+   *
+   * Exactly one of ResourceClaimName and ResourceClaimTemplateName must
+   * be set.
+   *
+   * @schema PoolerSpecTemplateSpecResourceClaims#resourceClaimTemplateName
+   */
+  readonly resourceClaimTemplateName?: string;
 
 }
 
@@ -16318,7 +16245,8 @@ export function toJson_PoolerSpecTemplateSpecResourceClaims(obj: PoolerSpecTempl
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
-    'source': toJson_PoolerSpecTemplateSpecResourceClaimsSource(obj.source),
+    'resourceClaimName': obj.resourceClaimName,
+    'resourceClaimTemplateName': obj.resourceClaimTemplateName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -16376,11 +16304,9 @@ export interface PoolerSpecTemplateSpecSecurityContext {
    * Some volume types allow the Kubelet to change the ownership of that volume
    * to be owned by the pod:
    *
-   *
    * 1. The owning GID will be the FSGroup
    * 2. The setgid bit is set (new files created in the volume will be owned by FSGroup)
    * 3. The permission bits are OR'd with rw-rw----
-   *
    *
    * If unset, the Kubelet will not modify the ownership and permissions of any volume.
    * Note that this field cannot be set when spec.os.name is windows.
@@ -16460,17 +16386,30 @@ export interface PoolerSpecTemplateSpecSecurityContext {
   readonly seccompProfile?: PoolerSpecTemplateSpecSecurityContextSeccompProfile;
 
   /**
-   * A list of groups applied to the first process run in each container, in addition
-   * to the container's primary GID, the fsGroup (if specified), and group memberships
-   * defined in the container image for the uid of the container process. If unspecified,
-   * no additional groups are added to any container. Note that group memberships
-   * defined in the container image for the uid of the container process are still effective,
-   * even if they are not included in this list.
+   * A list of groups applied to the first process run in each container, in
+   * addition to the container's primary GID and fsGroup (if specified).  If
+   * the SupplementalGroupsPolicy feature is enabled, the
+   * supplementalGroupsPolicy field determines whether these are in addition
+   * to or instead of any group memberships defined in the container image.
+   * If unspecified, no additional groups are added, though group memberships
+   * defined in the container image may still be used, depending on the
+   * supplementalGroupsPolicy field.
    * Note that this field cannot be set when spec.os.name is windows.
    *
    * @schema PoolerSpecTemplateSpecSecurityContext#supplementalGroups
    */
   readonly supplementalGroups?: number[];
+
+  /**
+   * Defines how supplemental groups of the first container processes are calculated.
+   * Valid values are "Merge" and "Strict". If not specified, "Merge" is used.
+   * (Alpha) Using the field requires the SupplementalGroupsPolicy feature gate to be enabled
+   * and the container runtime must implement support for this feature.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema PoolerSpecTemplateSpecSecurityContext#supplementalGroupsPolicy
+   */
+  readonly supplementalGroupsPolicy?: string;
 
   /**
    * Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported
@@ -16509,6 +16448,7 @@ export function toJson_PoolerSpecTemplateSpecSecurityContext(obj: PoolerSpecTemp
     'seLinuxOptions': toJson_PoolerSpecTemplateSpecSecurityContextSeLinuxOptions(obj.seLinuxOptions),
     'seccompProfile': toJson_PoolerSpecTemplateSpecSecurityContextSeccompProfile(obj.seccompProfile),
     'supplementalGroups': obj.supplementalGroups?.map(y => y),
+    'supplementalGroupsPolicy': obj.supplementalGroupsPolicy,
     'sysctls': obj.sysctls?.map(y => toJson_PoolerSpecTemplateSpecSecurityContextSysctls(y)),
     'windowsOptions': toJson_PoolerSpecTemplateSpecSecurityContextWindowsOptions(obj.windowsOptions),
   };
@@ -16614,7 +16554,6 @@ export interface PoolerSpecTemplateSpecTopologySpreadConstraints {
    * Keys that don't exist in the incoming pod labels will
    * be ignored. A null or empty list means only match against labelSelector.
    *
-   *
    * This is a beta field and requires the MatchLabelKeysInPodTopologySpread feature gate to be enabled (enabled by default).
    *
    * @schema PoolerSpecTemplateSpecTopologySpreadConstraints#matchLabelKeys
@@ -16656,7 +16595,6 @@ export interface PoolerSpecTemplateSpecTopologySpreadConstraints {
    * Valid values are integers greater than 0.
    * When value is not nil, WhenUnsatisfiable must be DoNotSchedule.
    *
-   *
    * For example, in a 3-zone cluster, MaxSkew is set to 2, MinDomains is set to 5 and pods with the same
    * labelSelector spread as 2/2/2:
    * | zone1 | zone2 | zone3 |
@@ -16676,7 +16614,6 @@ export interface PoolerSpecTemplateSpecTopologySpreadConstraints {
    * - Honor: only nodes matching nodeAffinity/nodeSelector are included in the calculations.
    * - Ignore: nodeAffinity/nodeSelector are ignored. All nodes are included in the calculations.
    *
-   *
    * If this value is nil, the behavior is equivalent to the Honor policy.
    * This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.
    *
@@ -16690,7 +16627,6 @@ export interface PoolerSpecTemplateSpecTopologySpreadConstraints {
    * - Honor: nodes without taints, along with tainted nodes for which the incoming pod
    * has a toleration, are included.
    * - Ignore: node taints are ignored. All nodes are included.
-   *
    *
    * If this value is nil, the behavior is equivalent to the Ignore policy.
    * This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.
@@ -16840,7 +16776,6 @@ export interface PoolerSpecTemplateSpecVolumes {
    * The volume's lifecycle is tied to the pod that defines it - it will be created before the pod starts,
    * and deleted when the pod is removed.
    *
-   *
    * Use this if:
    * a) the volume is only needed while the pod runs,
    * b) features of normal volumes like restoring from snapshot or capacity
@@ -16851,16 +16786,13 @@ export interface PoolerSpecTemplateSpecVolumes {
    * information on the connection between this volume type
    * and PersistentVolumeClaim).
    *
-   *
    * Use PersistentVolumeClaim or one of the vendor-specific
    * APIs for volumes that persist for longer than the lifecycle
    * of an individual pod.
    *
-   *
    * Use CSI for light-weight local ephemeral volumes if the CSI driver is meant to
    * be used that way - see the documentation of the driver for
    * more information.
-   *
    *
    * A pod can use both types of ephemeral volumes and
    * persistent volumes at the same time.
@@ -16924,13 +16856,30 @@ export interface PoolerSpecTemplateSpecVolumes {
    * used for system agents or other privileged things that are allowed
    * to see the host machine. Most containers will NOT need this.
    * More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath
-   * ---
-   * TODO(jonesdl) We need to restrict who can use host directory mounts and who can/can not
-   * mount host directories as read/write.
    *
    * @schema PoolerSpecTemplateSpecVolumes#hostPath
    */
   readonly hostPath?: PoolerSpecTemplateSpecVolumesHostPath;
+
+  /**
+   * image represents an OCI object (a container image or artifact) pulled and mounted on the kubelet's host machine.
+   * The volume is resolved at pod startup depending on which PullPolicy value is provided:
+   *
+   * - Always: the kubelet always attempts to pull the reference. Container creation will fail If the pull fails.
+   * - Never: the kubelet never pulls the reference and only uses a local image or artifact. Container creation will fail if the reference isn't present.
+   * - IfNotPresent: the kubelet pulls if the reference isn't already present on disk. Container creation will fail if the reference isn't present and the pull fails.
+   *
+   * The volume gets re-resolved if the pod gets deleted and recreated, which means that new remote content will become available on pod recreation.
+   * A failure to resolve or pull the image during pod startup will block containers from starting and may add significant latency. Failures will be retried using normal volume backoff and will be reported on the pod reason and message.
+   * The types of objects that may be mounted by this volume are defined by the container runtime implementation on a host machine and at minimum must include all valid types supported by the container image field.
+   * The OCI object gets mounted in a single directory (spec.containers[*].volumeMounts.mountPath) by merging the manifest layers in the same way as for container images.
+   * The volume will be mounted read-only (ro) and non-executable files (noexec).
+   * Sub path mounts for containers are not supported (spec.containers[*].volumeMounts.subpath).
+   * The field spec.securityContext.fsGroupChangePolicy has no effect on this volume type.
+   *
+   * @schema PoolerSpecTemplateSpecVolumes#image
+   */
+  readonly image?: PoolerSpecTemplateSpecVolumesImage;
 
   /**
    * iscsi represents an ISCSI Disk resource that is attached to a
@@ -17058,6 +17007,7 @@ export function toJson_PoolerSpecTemplateSpecVolumes(obj: PoolerSpecTemplateSpec
     'gitRepo': toJson_PoolerSpecTemplateSpecVolumesGitRepo(obj.gitRepo),
     'glusterfs': toJson_PoolerSpecTemplateSpecVolumesGlusterfs(obj.glusterfs),
     'hostPath': toJson_PoolerSpecTemplateSpecVolumesHostPath(obj.hostPath),
+    'image': toJson_PoolerSpecTemplateSpecVolumesImage(obj.image),
     'iscsi': toJson_PoolerSpecTemplateSpecVolumesIscsi(obj.iscsi),
     'name': obj.name,
     'nfs': toJson_PoolerSpecTemplateSpecVolumesNfs(obj.nfs),
@@ -17796,10 +17746,8 @@ export interface PoolerSpecTemplateSpecContainersResources {
    * Claims lists the names of resources, defined in spec.resourceClaims,
    * that are used by this container.
    *
-   *
    * This is an alpha field and requires enabling the
    * DynamicResourceAllocation feature gate.
-   *
    *
    * This field is immutable. It can only be set for containers.
    *
@@ -17896,7 +17844,7 @@ export interface PoolerSpecTemplateSpecContainersSecurityContext {
 
   /**
    * procMount denotes the type of proc mount to use for the containers.
-   * The default is DefaultProcMount which uses the container runtime defaults for
+   * The default value is Default which uses the container runtime defaults for
    * readonly paths and masked paths.
    * This requires the ProcMountType feature flag to be enabled.
    * Note that this field cannot be set when spec.os.name is windows.
@@ -18217,9 +18165,7 @@ export interface PoolerSpecTemplateSpecContainersVolumeMounts {
    * RecursiveReadOnly specifies whether read-only mounts should be handled
    * recursively.
    *
-   *
    * If ReadOnly is false, this field has no meaning and must be unspecified.
-   *
    *
    * If ReadOnly is true, and this field is set to Disabled, the mount is not made
    * recursively read-only.  If this field is set to IfPossible, the mount is made
@@ -18228,10 +18174,8 @@ export interface PoolerSpecTemplateSpecContainersVolumeMounts {
    * supported by the container runtime, otherwise the pod will not be started and
    * an error will be generated to indicate the reason.
    *
-   *
    * If this field is set to IfPossible or Enabled, MountPropagation must be set to
    * None (or be unspecified, which defaults to None).
-   *
    *
    * If this field is not specified, it is treated as an equivalent of Disabled.
    *
@@ -18822,10 +18766,8 @@ export interface PoolerSpecTemplateSpecEphemeralContainersResources {
    * Claims lists the names of resources, defined in spec.resourceClaims,
    * that are used by this container.
    *
-   *
    * This is an alpha field and requires enabling the
    * DynamicResourceAllocation feature gate.
-   *
    *
    * This field is immutable. It can only be set for containers.
    *
@@ -18921,7 +18863,7 @@ export interface PoolerSpecTemplateSpecEphemeralContainersSecurityContext {
 
   /**
    * procMount denotes the type of proc mount to use for the containers.
-   * The default is DefaultProcMount which uses the container runtime defaults for
+   * The default value is Default which uses the container runtime defaults for
    * readonly paths and masked paths.
    * This requires the ProcMountType feature flag to be enabled.
    * Note that this field cannot be set when spec.os.name is windows.
@@ -19236,9 +19178,7 @@ export interface PoolerSpecTemplateSpecEphemeralContainersVolumeMounts {
    * RecursiveReadOnly specifies whether read-only mounts should be handled
    * recursively.
    *
-   *
    * If ReadOnly is false, this field has no meaning and must be unspecified.
-   *
    *
    * If ReadOnly is true, and this field is set to Disabled, the mount is not made
    * recursively read-only.  If this field is set to IfPossible, the mount is made
@@ -19247,10 +19187,8 @@ export interface PoolerSpecTemplateSpecEphemeralContainersVolumeMounts {
    * supported by the container runtime, otherwise the pod will not be started and
    * an error will be generated to indicate the reason.
    *
-   *
    * If this field is set to IfPossible or Enabled, MountPropagation must be set to
    * None (or be unspecified, which defaults to None).
-   *
    *
    * If this field is not specified, it is treated as an equivalent of Disabled.
    *
@@ -19814,10 +19752,8 @@ export interface PoolerSpecTemplateSpecInitContainersResources {
    * Claims lists the names of resources, defined in spec.resourceClaims,
    * that are used by this container.
    *
-   *
    * This is an alpha field and requires enabling the
    * DynamicResourceAllocation feature gate.
-   *
    *
    * This field is immutable. It can only be set for containers.
    *
@@ -19914,7 +19850,7 @@ export interface PoolerSpecTemplateSpecInitContainersSecurityContext {
 
   /**
    * procMount denotes the type of proc mount to use for the containers.
-   * The default is DefaultProcMount which uses the container runtime defaults for
+   * The default value is Default which uses the container runtime defaults for
    * readonly paths and masked paths.
    * This requires the ProcMountType feature flag to be enabled.
    * Note that this field cannot be set when spec.os.name is windows.
@@ -20235,9 +20171,7 @@ export interface PoolerSpecTemplateSpecInitContainersVolumeMounts {
    * RecursiveReadOnly specifies whether read-only mounts should be handled
    * recursively.
    *
-   *
    * If ReadOnly is false, this field has no meaning and must be unspecified.
-   *
    *
    * If ReadOnly is true, and this field is set to Disabled, the mount is not made
    * recursively read-only.  If this field is set to IfPossible, the mount is made
@@ -20246,10 +20180,8 @@ export interface PoolerSpecTemplateSpecInitContainersVolumeMounts {
    * supported by the container runtime, otherwise the pod will not be started and
    * an error will be generated to indicate the reason.
    *
-   *
    * If this field is set to IfPossible or Enabled, MountPropagation must be set to
    * None (or be unspecified, which defaults to None).
-   *
    *
    * If this field is not specified, it is treated as an equivalent of Disabled.
    *
@@ -20293,57 +20225,6 @@ export function toJson_PoolerSpecTemplateSpecInitContainersVolumeMounts(obj: Poo
     'recursiveReadOnly': obj.recursiveReadOnly,
     'subPath': obj.subPath,
     'subPathExpr': obj.subPathExpr,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, quote-props */
-
-/**
- * Source describes where to find the ResourceClaim.
- *
- * @schema PoolerSpecTemplateSpecResourceClaimsSource
- */
-export interface PoolerSpecTemplateSpecResourceClaimsSource {
-  /**
-   * ResourceClaimName is the name of a ResourceClaim object in the same
-   * namespace as this pod.
-   *
-   * @schema PoolerSpecTemplateSpecResourceClaimsSource#resourceClaimName
-   */
-  readonly resourceClaimName?: string;
-
-  /**
-   * ResourceClaimTemplateName is the name of a ResourceClaimTemplate
-   * object in the same namespace as this pod.
-   *
-   *
-   * The template will be used to create a new ResourceClaim, which will
-   * be bound to this pod. When this pod is deleted, the ResourceClaim
-   * will also be deleted. The pod name and resource name, along with a
-   * generated component, will be used to form a unique name for the
-   * ResourceClaim, which will be recorded in pod.status.resourceClaimStatuses.
-   *
-   *
-   * This field is immutable and no changes will be made to the
-   * corresponding ResourceClaim by the control plane after creating the
-   * ResourceClaim.
-   *
-   * @schema PoolerSpecTemplateSpecResourceClaimsSource#resourceClaimTemplateName
-   */
-  readonly resourceClaimTemplateName?: string;
-
-}
-
-/**
- * Converts an object of type 'PoolerSpecTemplateSpecResourceClaimsSource' to JSON representation.
- */
-/* eslint-disable max-len, quote-props */
-export function toJson_PoolerSpecTemplateSpecResourceClaimsSource(obj: PoolerSpecTemplateSpecResourceClaimsSource | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'resourceClaimName': obj.resourceClaimName,
-    'resourceClaimTemplateName': obj.resourceClaimTemplateName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -20473,7 +20354,6 @@ export interface PoolerSpecTemplateSpecSecurityContextSeccompProfile {
   /**
    * type indicates which kind of seccomp profile will be applied.
    * Valid options are:
-   *
    *
    * Localhost - a profile defined in a file on the node should be used.
    * RuntimeDefault - the container runtime default profile should be used.
@@ -20656,7 +20536,6 @@ export interface PoolerSpecTemplateSpecVolumesAwsElasticBlockStore {
    * Tip: Ensure that the filesystem type is supported by the host operating system.
    * Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
    * More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
-   * TODO: how do we prevent errors in the filesystem from compromising the machine
    *
    * @schema PoolerSpecTemplateSpecVolumesAwsElasticBlockStore#fsType
    */
@@ -21001,9 +20880,7 @@ export interface PoolerSpecTemplateSpecVolumesConfigMap {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecVolumesConfigMap#name
    */
@@ -21202,7 +21079,6 @@ export function toJson_PoolerSpecTemplateSpecVolumesEmptyDir(obj: PoolerSpecTemp
  * The volume's lifecycle is tied to the pod that defines it - it will be created before the pod starts,
  * and deleted when the pod is removed.
  *
- *
  * Use this if:
  * a) the volume is only needed while the pod runs,
  * b) features of normal volumes like restoring from snapshot or capacity
@@ -21213,16 +21089,13 @@ export function toJson_PoolerSpecTemplateSpecVolumesEmptyDir(obj: PoolerSpecTemp
  * information on the connection between this volume type
  * and PersistentVolumeClaim).
  *
- *
  * Use PersistentVolumeClaim or one of the vendor-specific
  * APIs for volumes that persist for longer than the lifecycle
  * of an individual pod.
  *
- *
  * Use CSI for light-weight local ephemeral volumes if the CSI driver is meant to
  * be used that way - see the documentation of the driver for
  * more information.
- *
  *
  * A pod can use both types of ephemeral volumes and
  * persistent volumes at the same time.
@@ -21239,7 +21112,6 @@ export interface PoolerSpecTemplateSpecVolumesEphemeral {
    * entry. Pod validation will reject the pod if the concatenated name
    * is not valid for a PVC (for example, too long).
    *
-   *
    * An existing PVC with that name that is not owned by the pod
    * will *not* be used for the pod to avoid using an unrelated
    * volume by mistake. Starting the pod is then blocked until
@@ -21249,10 +21121,8 @@ export interface PoolerSpecTemplateSpecVolumesEphemeral {
    * this should not be necessary, but it may be useful when
    * manually reconstructing a broken cluster.
    *
-   *
    * This field is read-only and no changes will be made by Kubernetes
    * to the PVC after it has been created.
-   *
    *
    * Required, must not be nil.
    *
@@ -21286,7 +21156,6 @@ export interface PoolerSpecTemplateSpecVolumesFc {
    * fsType is the filesystem type to mount.
    * Must be a filesystem type supported by the host operating system.
    * Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
-   * TODO: how do we prevent errors in the filesystem from compromising the machine
    *
    * @schema PoolerSpecTemplateSpecVolumesFc#fsType
    */
@@ -21463,7 +21332,6 @@ export interface PoolerSpecTemplateSpecVolumesGcePersistentDisk {
    * Tip: Ensure that the filesystem type is supported by the host operating system.
    * Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
    * More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
-   * TODO: how do we prevent errors in the filesystem from compromising the machine
    *
    * @schema PoolerSpecTemplateSpecVolumesGcePersistentDisk#fsType
    */
@@ -21625,9 +21493,6 @@ export function toJson_PoolerSpecTemplateSpecVolumesGlusterfs(obj: PoolerSpecTem
  * used for system agents or other privileged things that are allowed
  * to see the host machine. Most containers will NOT need this.
  * More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath
- * ---
- * TODO(jonesdl) We need to restrict who can use host directory mounts and who can/can not
- * mount host directories as read/write.
  *
  * @schema PoolerSpecTemplateSpecVolumesHostPath
  */
@@ -21669,6 +21534,66 @@ export function toJson_PoolerSpecTemplateSpecVolumesHostPath(obj: PoolerSpecTemp
 /* eslint-enable max-len, quote-props */
 
 /**
+ * image represents an OCI object (a container image or artifact) pulled and mounted on the kubelet's host machine.
+ * The volume is resolved at pod startup depending on which PullPolicy value is provided:
+ *
+ * - Always: the kubelet always attempts to pull the reference. Container creation will fail If the pull fails.
+ * - Never: the kubelet never pulls the reference and only uses a local image or artifact. Container creation will fail if the reference isn't present.
+ * - IfNotPresent: the kubelet pulls if the reference isn't already present on disk. Container creation will fail if the reference isn't present and the pull fails.
+ *
+ * The volume gets re-resolved if the pod gets deleted and recreated, which means that new remote content will become available on pod recreation.
+ * A failure to resolve or pull the image during pod startup will block containers from starting and may add significant latency. Failures will be retried using normal volume backoff and will be reported on the pod reason and message.
+ * The types of objects that may be mounted by this volume are defined by the container runtime implementation on a host machine and at minimum must include all valid types supported by the container image field.
+ * The OCI object gets mounted in a single directory (spec.containers[*].volumeMounts.mountPath) by merging the manifest layers in the same way as for container images.
+ * The volume will be mounted read-only (ro) and non-executable files (noexec).
+ * Sub path mounts for containers are not supported (spec.containers[*].volumeMounts.subpath).
+ * The field spec.securityContext.fsGroupChangePolicy has no effect on this volume type.
+ *
+ * @schema PoolerSpecTemplateSpecVolumesImage
+ */
+export interface PoolerSpecTemplateSpecVolumesImage {
+  /**
+   * Policy for pulling OCI objects. Possible values are:
+   * Always: the kubelet always attempts to pull the reference. Container creation will fail If the pull fails.
+   * Never: the kubelet never pulls the reference and only uses a local image or artifact. Container creation will fail if the reference isn't present.
+   * IfNotPresent: the kubelet pulls if the reference isn't already present on disk. Container creation will fail if the reference isn't present and the pull fails.
+   * Defaults to Always if :latest tag is specified, or IfNotPresent otherwise.
+   *
+   * @default Always if :latest tag is specified, or IfNotPresent otherwise.
+   * @schema PoolerSpecTemplateSpecVolumesImage#pullPolicy
+   */
+  readonly pullPolicy?: string;
+
+  /**
+   * Required: Image or artifact reference to be used.
+   * Behaves in the same way as pod.spec.containers[*].image.
+   * Pull secrets will be assembled in the same way as for the container image by looking up node credentials, SA image pull secrets, and pod spec image pull secrets.
+   * More info: https://kubernetes.io/docs/concepts/containers/images
+   * This field is optional to allow higher level config management to default or override
+   * container images in workload controllers like Deployments and StatefulSets.
+   *
+   * @schema PoolerSpecTemplateSpecVolumesImage#reference
+   */
+  readonly reference?: string;
+
+}
+
+/**
+ * Converts an object of type 'PoolerSpecTemplateSpecVolumesImage' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PoolerSpecTemplateSpecVolumesImage(obj: PoolerSpecTemplateSpecVolumesImage | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'pullPolicy': obj.pullPolicy,
+    'reference': obj.reference,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * iscsi represents an ISCSI Disk resource that is attached to a
  * kubelet's host machine and then exposed to the pod.
  * More info: https://examples.k8s.io/volumes/iscsi/README.md
@@ -21695,7 +21620,6 @@ export interface PoolerSpecTemplateSpecVolumesIscsi {
    * Tip: Ensure that the filesystem type is supported by the host operating system.
    * Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
    * More info: https://kubernetes.io/docs/concepts/storage/volumes#iscsi
-   * TODO: how do we prevent errors in the filesystem from compromising the machine
    *
    * @schema PoolerSpecTemplateSpecVolumesIscsi#fsType
    */
@@ -21989,7 +21913,8 @@ export interface PoolerSpecTemplateSpecVolumesProjected {
   readonly defaultMode?: number;
 
   /**
-   * sources is the list of volume projections
+   * sources is the list of volume projections. Each entry in this list
+   * handles one source.
    *
    * @schema PoolerSpecTemplateSpecVolumesProjected#sources
    */
@@ -22102,7 +22027,6 @@ export interface PoolerSpecTemplateSpecVolumesRbd {
    * Tip: Ensure that the filesystem type is supported by the host operating system.
    * Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
    * More info: https://kubernetes.io/docs/concepts/storage/volumes#rbd
-   * TODO: how do we prevent errors in the filesystem from compromising the machine
    *
    * @schema PoolerSpecTemplateSpecVolumesRbd#fsType
    */
@@ -22640,7 +22564,7 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringScheduli
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
    */
@@ -22655,7 +22579,7 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringScheduli
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
    */
@@ -22780,7 +22704,7 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSche
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
    */
@@ -22795,7 +22719,7 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSche
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
    */
@@ -22920,9 +22844,7 @@ export interface PoolerSpecTemplateSpecContainersEnvFromConfigMapRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecContainersEnvFromConfigMapRef#name
    */
@@ -22963,9 +22885,7 @@ export interface PoolerSpecTemplateSpecContainersEnvFromSecretRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecContainersEnvFromSecretRef#name
    */
@@ -23166,7 +23086,6 @@ export interface PoolerSpecTemplateSpecContainersLivenessProbeGrpc {
    * Service is the name of the service to place in the gRPC HealthCheckRequest
    * (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md).
    *
-   *
    * If this is not specified, the default behavior is defined by gRPC.
    *
    * @schema PoolerSpecTemplateSpecContainersLivenessProbeGrpc#service
@@ -23345,7 +23264,6 @@ export interface PoolerSpecTemplateSpecContainersReadinessProbeGrpc {
    * Service is the name of the service to place in the gRPC HealthCheckRequest
    * (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md).
    *
-   *
    * If this is not specified, the default behavior is defined by gRPC.
    *
    * @schema PoolerSpecTemplateSpecContainersReadinessProbeGrpc#service
@@ -23489,6 +23407,15 @@ export interface PoolerSpecTemplateSpecContainersResourcesClaims {
    */
   readonly name: string;
 
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema PoolerSpecTemplateSpecContainersResourcesClaims#request
+   */
+  readonly request?: string;
+
 }
 
 /**
@@ -23499,6 +23426,7 @@ export function toJson_PoolerSpecTemplateSpecContainersResourcesClaims(obj: Pool
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+    'request': obj.request,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -23699,7 +23627,6 @@ export interface PoolerSpecTemplateSpecContainersSecurityContextSeccompProfile {
    * type indicates which kind of seccomp profile will be applied.
    * Valid options are:
    *
-   *
    * Localhost - a profile defined in a file on the node should be used.
    * RuntimeDefault - the container runtime default profile should be used.
    * Unconfined - no profile should be applied.
@@ -23839,7 +23766,6 @@ export interface PoolerSpecTemplateSpecContainersStartupProbeGrpc {
   /**
    * Service is the name of the service to place in the gRPC HealthCheckRequest
    * (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md).
-   *
    *
    * If this is not specified, the default behavior is defined by gRPC.
    *
@@ -24035,9 +23961,7 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvFromConfigMapRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvFromConfigMapRef#name
    */
@@ -24078,9 +24002,7 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvFromSecretRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvFromSecretRef#name
    */
@@ -24281,7 +24203,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLivenessProbeGrpc {
    * Service is the name of the service to place in the gRPC HealthCheckRequest
    * (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md).
    *
-   *
    * If this is not specified, the default behavior is defined by gRPC.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbeGrpc#service
@@ -24460,7 +24381,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersReadinessProbeGrpc {
    * Service is the name of the service to place in the gRPC HealthCheckRequest
    * (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md).
    *
-   *
    * If this is not specified, the default behavior is defined by gRPC.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbeGrpc#service
@@ -24604,6 +24524,15 @@ export interface PoolerSpecTemplateSpecEphemeralContainersResourcesClaims {
    */
   readonly name: string;
 
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema PoolerSpecTemplateSpecEphemeralContainersResourcesClaims#request
+   */
+  readonly request?: string;
+
 }
 
 /**
@@ -24614,6 +24543,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersResourcesClaims(
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+    'request': obj.request,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -24814,7 +24744,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersSecurityContextSeccomp
    * type indicates which kind of seccomp profile will be applied.
    * Valid options are:
    *
-   *
    * Localhost - a profile defined in a file on the node should be used.
    * RuntimeDefault - the container runtime default profile should be used.
    * Unconfined - no profile should be applied.
@@ -24954,7 +24883,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersStartupProbeGrpc {
   /**
    * Service is the name of the service to place in the gRPC HealthCheckRequest
    * (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md).
-   *
    *
    * If this is not specified, the default behavior is defined by gRPC.
    *
@@ -25150,9 +25078,7 @@ export interface PoolerSpecTemplateSpecInitContainersEnvFromConfigMapRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecInitContainersEnvFromConfigMapRef#name
    */
@@ -25193,9 +25119,7 @@ export interface PoolerSpecTemplateSpecInitContainersEnvFromSecretRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecInitContainersEnvFromSecretRef#name
    */
@@ -25396,7 +25320,6 @@ export interface PoolerSpecTemplateSpecInitContainersLivenessProbeGrpc {
    * Service is the name of the service to place in the gRPC HealthCheckRequest
    * (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md).
    *
-   *
    * If this is not specified, the default behavior is defined by gRPC.
    *
    * @schema PoolerSpecTemplateSpecInitContainersLivenessProbeGrpc#service
@@ -25575,7 +25498,6 @@ export interface PoolerSpecTemplateSpecInitContainersReadinessProbeGrpc {
    * Service is the name of the service to place in the gRPC HealthCheckRequest
    * (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md).
    *
-   *
    * If this is not specified, the default behavior is defined by gRPC.
    *
    * @schema PoolerSpecTemplateSpecInitContainersReadinessProbeGrpc#service
@@ -25719,6 +25641,15 @@ export interface PoolerSpecTemplateSpecInitContainersResourcesClaims {
    */
   readonly name: string;
 
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema PoolerSpecTemplateSpecInitContainersResourcesClaims#request
+   */
+  readonly request?: string;
+
 }
 
 /**
@@ -25729,6 +25660,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersResourcesClaims(obj: 
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+    'request': obj.request,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -25929,7 +25861,6 @@ export interface PoolerSpecTemplateSpecInitContainersSecurityContextSeccompProfi
    * type indicates which kind of seccomp profile will be applied.
    * Valid options are:
    *
-   *
    * Localhost - a profile defined in a file on the node should be used.
    * RuntimeDefault - the container runtime default profile should be used.
    * Unconfined - no profile should be applied.
@@ -26069,7 +26000,6 @@ export interface PoolerSpecTemplateSpecInitContainersStartupProbeGrpc {
   /**
    * Service is the name of the service to place in the gRPC HealthCheckRequest
    * (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md).
-   *
    *
    * If this is not specified, the default behavior is defined by gRPC.
    *
@@ -26261,9 +26191,7 @@ export interface PoolerSpecTemplateSpecVolumesCephfsSecretRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecVolumesCephfsSecretRef#name
    */
@@ -26297,9 +26225,7 @@ export interface PoolerSpecTemplateSpecVolumesCinderSecretRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecVolumesCinderSecretRef#name
    */
@@ -26389,9 +26315,7 @@ export interface PoolerSpecTemplateSpecVolumesCsiNodePublishSecretRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecVolumesCsiNodePublishSecretRef#name
    */
@@ -26502,7 +26426,6 @@ export class PoolerSpecTemplateSpecVolumesEmptyDirSizeLimit {
  * entry. Pod validation will reject the pod if the concatenated name
  * is not valid for a PVC (for example, too long).
  *
- *
  * An existing PVC with that name that is not owned by the pod
  * will *not* be used for the pod to avoid using an unrelated
  * volume by mistake. Starting the pod is then blocked until
@@ -26512,10 +26435,8 @@ export class PoolerSpecTemplateSpecVolumesEmptyDirSizeLimit {
  * this should not be necessary, but it may be useful when
  * manually reconstructing a broken cluster.
  *
- *
  * This field is read-only and no changes will be made by Kubernetes
  * to the PVC after it has been created.
- *
  *
  * Required, must not be nil.
  *
@@ -26573,9 +26494,7 @@ export interface PoolerSpecTemplateSpecVolumesFlexVolumeSecretRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecVolumesFlexVolumeSecretRef#name
    */
@@ -26608,9 +26527,7 @@ export interface PoolerSpecTemplateSpecVolumesIscsiSecretRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecVolumesIscsiSecretRef#name
    */
@@ -26633,7 +26550,8 @@ export function toJson_PoolerSpecTemplateSpecVolumesIscsiSecretRef(obj: PoolerSp
 /* eslint-enable max-len, quote-props */
 
 /**
- * Projection that may be projected along with other supported volume types
+ * Projection that may be projected along with other supported volume types.
+ * Exactly one of these fields must be set.
  *
  * @schema PoolerSpecTemplateSpecVolumesProjectedSources
  */
@@ -26642,13 +26560,10 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSources {
    * ClusterTrustBundle allows a pod to access the `.spec.trustBundle` field
    * of ClusterTrustBundle objects in an auto-updating file.
    *
-   *
    * Alpha, gated by the ClusterTrustBundleProjection feature gate.
-   *
    *
    * ClusterTrustBundle objects can either be selected by name, or by the
    * combination of signer name and a label selector.
-   *
    *
    * Kubelet performs aggressive normalization of the PEM contents written
    * into the pod filesystem.  Esoteric PEM features such as inter-block
@@ -26723,9 +26638,7 @@ export interface PoolerSpecTemplateSpecVolumesRbdSecretRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecVolumesRbdSecretRef#name
    */
@@ -26759,9 +26672,7 @@ export interface PoolerSpecTemplateSpecVolumesScaleIoSecretRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecVolumesScaleIoSecretRef#name
    */
@@ -26848,9 +26759,7 @@ export interface PoolerSpecTemplateSpecVolumesStorageosSecretRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecVolumesStorageosSecretRef#name
    */
@@ -26971,7 +26880,7 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedul
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
    */
@@ -26986,7 +26895,7 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedul
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
    */
@@ -27151,7 +27060,7 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSch
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
    */
@@ -27166,7 +27075,7 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSch
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
    */
@@ -27326,9 +27235,7 @@ export interface PoolerSpecTemplateSpecContainersEnvValueFromConfigMapKeyRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecContainersEnvValueFromConfigMapKeyRef#name
    */
@@ -27461,9 +27368,7 @@ export interface PoolerSpecTemplateSpecContainersEnvValueFromSecretKeyRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecContainersEnvValueFromSecretKeyRef#name
    */
@@ -28072,9 +27977,7 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvValueFromConfigMapK
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvValueFromConfigMapKeyRef#name
    */
@@ -28207,9 +28110,7 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvValueFromSecretKeyR
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvValueFromSecretKeyRef#name
    */
@@ -28818,9 +28719,7 @@ export interface PoolerSpecTemplateSpecInitContainersEnvValueFromConfigMapKeyRef
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecInitContainersEnvValueFromConfigMapKeyRef#name
    */
@@ -28953,9 +28852,7 @@ export interface PoolerSpecTemplateSpecInitContainersEnvValueFromSecretKeyRef {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecInitContainersEnvValueFromSecretKeyRef#name
    */
@@ -29727,7 +29624,7 @@ export interface PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpec {
    * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
    * exists.
    * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
    *
    * @schema PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpec#volumeAttributesClassName
    */
@@ -29776,13 +29673,10 @@ export function toJson_PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplate
  * ClusterTrustBundle allows a pod to access the `.spec.trustBundle` field
  * of ClusterTrustBundle objects in an auto-updating file.
  *
- *
  * Alpha, gated by the ClusterTrustBundleProjection feature gate.
- *
  *
  * ClusterTrustBundle objects can either be selected by name, or by the
  * combination of signer name and a label selector.
- *
  *
  * Kubelet performs aggressive normalization of the PEM contents written
  * into the pod filesystem.  Esoteric PEM features such as inter-block
@@ -29882,9 +29776,7 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesConfigMap {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesConfigMap#name
    */
@@ -29968,9 +29860,7 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesSecret {
    * This field is effectively required, but due to backwards compatibility is
    * allowed to be empty. Instances of this type with an empty value here are
    * almost certainly wrong.
-   * TODO: Add other useful fields. apiVersion, kind, uid?
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   * TODO: Drop `kubebuilder:default` when controller-gen doesn't need it https://github.com/kubernetes-sigs/kubebuilder/issues/3896.
    *
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesSecret#name
    */

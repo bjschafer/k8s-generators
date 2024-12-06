@@ -143,9 +143,19 @@ export interface HelmChartSpec {
   readonly helmVersion?: string;
 
   /**
+   * @schema HelmChartSpec#insecureSkipTLSVerify
+   */
+  readonly insecureSkipTlsVerify?: boolean;
+
+  /**
    * @schema HelmChartSpec#jobImage
    */
   readonly jobImage?: string;
+
+  /**
+   * @schema HelmChartSpec#plainHTTP
+   */
+  readonly plainHttp?: boolean;
 
   /**
    * @schema HelmChartSpec#podSecurityContext
@@ -216,7 +226,9 @@ export function toJson_HelmChartSpec(obj: HelmChartSpec | undefined): Record<str
     'dockerRegistrySecret': toJson_HelmChartSpecDockerRegistrySecret(obj.dockerRegistrySecret),
     'failurePolicy': obj.failurePolicy,
     'helmVersion': obj.helmVersion,
+    'insecureSkipTLSVerify': obj.insecureSkipTlsVerify,
     'jobImage': obj.jobImage,
+    'plainHTTP': obj.plainHttp,
     'podSecurityContext': toJson_HelmChartSpecPodSecurityContext(obj.podSecurityContext),
     'repo': obj.repo,
     'repoCA': obj.repoCa,

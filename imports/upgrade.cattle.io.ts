@@ -680,6 +680,11 @@ export interface PlanSpecPrepareSecurityContext {
   readonly allowPrivilegeEscalation?: boolean;
 
   /**
+   * @schema PlanSpecPrepareSecurityContext#appArmorProfile
+   */
+  readonly appArmorProfile?: PlanSpecPrepareSecurityContextAppArmorProfile;
+
+  /**
    * @schema PlanSpecPrepareSecurityContext#capabilities
    */
   readonly capabilities?: PlanSpecPrepareSecurityContextCapabilities;
@@ -739,6 +744,7 @@ export function toJson_PlanSpecPrepareSecurityContext(obj: PlanSpecPrepareSecuri
   if (obj === undefined) { return undefined; }
   const result = {
     'allowPrivilegeEscalation': obj.allowPrivilegeEscalation,
+    'appArmorProfile': toJson_PlanSpecPrepareSecurityContextAppArmorProfile(obj.appArmorProfile),
     'capabilities': toJson_PlanSpecPrepareSecurityContextCapabilities(obj.capabilities),
     'privileged': obj.privileged,
     'procMount': obj.procMount,
@@ -876,6 +882,11 @@ export interface PlanSpecUpgradeSecurityContext {
   readonly allowPrivilegeEscalation?: boolean;
 
   /**
+   * @schema PlanSpecUpgradeSecurityContext#appArmorProfile
+   */
+  readonly appArmorProfile?: PlanSpecUpgradeSecurityContextAppArmorProfile;
+
+  /**
    * @schema PlanSpecUpgradeSecurityContext#capabilities
    */
   readonly capabilities?: PlanSpecUpgradeSecurityContextCapabilities;
@@ -935,6 +946,7 @@ export function toJson_PlanSpecUpgradeSecurityContext(obj: PlanSpecUpgradeSecuri
   if (obj === undefined) { return undefined; }
   const result = {
     'allowPrivilegeEscalation': obj.allowPrivilegeEscalation,
+    'appArmorProfile': toJson_PlanSpecUpgradeSecurityContextAppArmorProfile(obj.appArmorProfile),
     'capabilities': toJson_PlanSpecUpgradeSecurityContextCapabilities(obj.capabilities),
     'privileged': obj.privileged,
     'procMount': obj.procMount,
@@ -1124,6 +1136,37 @@ export function toJson_PlanSpecPrepareEnvsValueFrom(obj: PlanSpecPrepareEnvsValu
     'fieldRef': toJson_PlanSpecPrepareEnvsValueFromFieldRef(obj.fieldRef),
     'resourceFieldRef': toJson_PlanSpecPrepareEnvsValueFromResourceFieldRef(obj.resourceFieldRef),
     'secretKeyRef': toJson_PlanSpecPrepareEnvsValueFromSecretKeyRef(obj.secretKeyRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema PlanSpecPrepareSecurityContextAppArmorProfile
+ */
+export interface PlanSpecPrepareSecurityContextAppArmorProfile {
+  /**
+   * @schema PlanSpecPrepareSecurityContextAppArmorProfile#localhostProfile
+   */
+  readonly localhostProfile?: string;
+
+  /**
+   * @schema PlanSpecPrepareSecurityContextAppArmorProfile#type
+   */
+  readonly type?: string;
+
+}
+
+/**
+ * Converts an object of type 'PlanSpecPrepareSecurityContextAppArmorProfile' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PlanSpecPrepareSecurityContextAppArmorProfile(obj: PlanSpecPrepareSecurityContextAppArmorProfile | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'localhostProfile': obj.localhostProfile,
+    'type': obj.type,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -1377,6 +1420,37 @@ export function toJson_PlanSpecUpgradeEnvsValueFrom(obj: PlanSpecUpgradeEnvsValu
     'fieldRef': toJson_PlanSpecUpgradeEnvsValueFromFieldRef(obj.fieldRef),
     'resourceFieldRef': toJson_PlanSpecUpgradeEnvsValueFromResourceFieldRef(obj.resourceFieldRef),
     'secretKeyRef': toJson_PlanSpecUpgradeEnvsValueFromSecretKeyRef(obj.secretKeyRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema PlanSpecUpgradeSecurityContextAppArmorProfile
+ */
+export interface PlanSpecUpgradeSecurityContextAppArmorProfile {
+  /**
+   * @schema PlanSpecUpgradeSecurityContextAppArmorProfile#localhostProfile
+   */
+  readonly localhostProfile?: string;
+
+  /**
+   * @schema PlanSpecUpgradeSecurityContextAppArmorProfile#type
+   */
+  readonly type?: string;
+
+}
+
+/**
+ * Converts an object of type 'PlanSpecUpgradeSecurityContextAppArmorProfile' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PlanSpecUpgradeSecurityContextAppArmorProfile(obj: PlanSpecUpgradeSecurityContextAppArmorProfile | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'localhostProfile': obj.localhostProfile,
+    'type': obj.type,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
