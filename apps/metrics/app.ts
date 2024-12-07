@@ -166,6 +166,8 @@ class VmResources extends Chart {
         namespace: namespace,
       },
       spec: {
+        configReloaderImageTag:
+          "quay.io/prometheus-operator/prometheus-config-reloader:v0.78.2",
         extraArgs: {
           "memory.allowedPercent": "80", // https://docs.victoriametrics.com/vmagent/#troubleshooting
           "promscrape.dropOriginalLabels": "true",
