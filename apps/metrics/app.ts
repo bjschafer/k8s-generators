@@ -6,9 +6,13 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { App, Chart } from "cdk8s";
 import { Construct } from "constructs";
 import {
+  VmAgent,
+  VmAgentSpecResourcesLimits,
+  VmAgentSpecResourcesRequests,
   VmScrapeConfig,
   VmScrapeConfigSpecScheme,
 } from "../../imports/operator.victoriametrics.com";
+import { KubeService } from "cdk8s-plus-30/lib/imports/k8s";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -96,18 +100,7 @@ NewHelmApp(
       },
     },
     vmagent: {
-      spec: {
-        resources: {
-          limits: {
-            memory: "1Gi",
-            cpu: "500m",
-          },
-          requests: {
-            memory: "384Mi",
-            cpu: "200m",
-          },
-        },
-      },
+      enabled: false,
     },
     alertmanager: {
       ingress: {
@@ -163,6 +156,60 @@ NewArgoApp(`${name}-config`, {
   recurse: true,
 });
 
+class VmResources extends Chart {
+  constructor(scope: Construct, id: string) {
+    super(scope, id);
+
+    const vmagentPort = 8429;
+    new VmAgent(this, "vmagent", {
+      metadata: {
+        name: "metrics",
+        namespace: namespace,
+      },
+      spec: {
+        extraArgs: {
+          "memory.allowedPercent": "80", // https://docs.victoriametrics.com/vmagent/#troubleshooting
+          "promscrape.dropOriginalLabels": "true",
+          "promscrape.streamParse": "true",
+        },
+        port: `${vmagentPort}`,
+        remoteWrite: [
+          {
+            url: "http://vmsingle-metrics-victoria-metrics-k8s-stack.metrics.svc.cluster.local.:8429/api/v1/write", // TODO this may need to be changed
+          },
+        ],
+        resources: {
+          limits: {
+            memory: VmAgentSpecResourcesLimits.fromString("512Mi"),
+            cpu: VmAgentSpecResourcesLimits.fromString("300m"),
+          },
+          requests: {
+            memory: VmAgentSpecResourcesRequests.fromString("512Mi"),
+            cpu: VmAgentSpecResourcesRequests.fromString("300m"),
+          },
+        },
+        scrapeInterval: "20s",
+        selectAllByDefault: true,
+      },
+    });
+
+    new KubeService(this, "vmagest-svc", {
+      metadata: {
+        name: "vmagent",
+        namespace: namespace,
+      },
+      spec: {
+        ports: [
+          {
+            name: "http",
+            port: vmagentPort,
+          },
+        ],
+      },
+    });
+  }
+}
+
 class ScrapeConfigs extends Chart {
   constructor(scope: Construct, id: string) {
     super(scope, id);
@@ -209,5 +256,6 @@ class ScrapeConfigs extends Chart {
 }
 
 new ScrapeConfigs(app, "scrapes");
+new VmResources(app, "resources");
 
 app.synth();

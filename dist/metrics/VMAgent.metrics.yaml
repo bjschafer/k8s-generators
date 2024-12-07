@@ -1,0 +1,22 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMAgent
+metadata:
+  name: metrics
+  namespace: metrics
+spec:
+  extraArgs:
+    memory.allowedPercent: "80"
+    promscrape.dropOriginalLabels: "true"
+    promscrape.streamParse: "true"
+  port: "8429"
+  remoteWrite:
+    - url: http://vmsingle-metrics-victoria-metrics-k8s-stack.metrics.svc.cluster.local.:8429/api/v1/write
+  resources:
+    limits:
+      cpu: 300m
+      memory: 512Mi
+    requests:
+      cpu: 300m
+      memory: 512Mi
+  scrapeInterval: 20s
+  selectAllByDefault: true
