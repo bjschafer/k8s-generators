@@ -1,7 +1,11 @@
 import { basename } from "path";
-import { ArgoAppSource } from "../../lib/argo";
+import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { StorageClass } from "../../lib/volume";
 import { NewHelmApp } from "../../lib/helm";
+import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { App, Chart } from "cdk8s";
+import { Construct } from "constructs";
+import { VmScrapeConfig } from "../../imports/operator.victoriametrics.com";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -142,3 +146,41 @@ NewHelmApp(
     },
   },
 );
+
+const app = new App(DEFAULT_APP_PROPS(namespace));
+NewArgoApp(`${name}-config`, {
+  sync_policy: {
+    automated: {
+      prune: true,
+      selfHeal: true,
+    },
+  },
+  namespace: namespace,
+  source: ArgoAppSource.GENERATORS,
+  recurse: true,
+});
+
+class ScrapeConfigs extends Chart {
+  constructor(scope: Construct, id: string) {
+    super(scope, id);
+
+    new VmScrapeConfig(this, "ceph", {
+      metadata: {
+        name: "ceph",
+        namespace: namespace,
+      },
+      spec: {
+        staticConfigs: [
+          {
+            targets: ["vmhost03.cmdcentral.xyz:9283"],
+            labels: { job: "ceph" },
+          },
+        ],
+      },
+    });
+  }
+}
+
+new ScrapeConfigs(app, "scrapes");
+
+app.synth();
