@@ -12,7 +12,6 @@ import {
   VmScrapeConfig,
   VmScrapeConfigSpecScheme,
 } from "../../imports/operator.victoriametrics.com";
-import { KubeService } from "cdk8s-plus-30/lib/imports/k8s";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -190,21 +189,6 @@ class VmResources extends Chart {
         },
         scrapeInterval: "20s",
         selectAllByDefault: true,
-      },
-    });
-
-    new KubeService(this, "vmagest-svc", {
-      metadata: {
-        name: "vmagent",
-        namespace: namespace,
-      },
-      spec: {
-        ports: [
-          {
-            name: "http",
-            port: vmagentPort,
-          },
-        ],
       },
     });
   }
