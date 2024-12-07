@@ -5,7 +5,10 @@ import { NewHelmApp } from "../../lib/helm";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { App, Chart } from "cdk8s";
 import { Construct } from "constructs";
-import { VmScrapeConfig } from "../../imports/operator.victoriametrics.com";
+import {
+  VmScrapeConfig,
+  VmScrapeConfigSpecScheme,
+} from "../../imports/operator.victoriametrics.com";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -176,6 +179,30 @@ class ScrapeConfigs extends Chart {
             labels: { job: "ceph" },
           },
         ],
+      },
+    });
+
+    new VmScrapeConfig(this, "hass", {
+      metadata: {
+        name: "hass",
+        namespace: namespace,
+      },
+      spec: {
+        staticConfigs: [
+          {
+            targets: ["home-assistant.hass.svc.cluster.local:8123"],
+            labels: { job: "hass" },
+          },
+        ],
+        path: "/api/prometheus",
+        scheme: VmScrapeConfigSpecScheme.HTTP,
+        // bearer auth
+        authorization: {
+          credentials: {
+            name: "hass-bearer-token",
+            key: "token",
+          },
+        },
       },
     });
   }

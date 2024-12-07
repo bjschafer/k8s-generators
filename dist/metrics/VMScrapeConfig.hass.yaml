@@ -1,0 +1,17 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: hass
+  namespace: metrics
+spec:
+  authorization:
+    credentials:
+      key: token
+      name: hass-bearer-token
+  path: /api/prometheus
+  scheme: http
+  staticConfigs:
+    - labels:
+        job: hass
+      targets:
+        - home-assistant.hass.svc.cluster.local:8123
