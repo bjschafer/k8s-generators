@@ -47,12 +47,12 @@ NewHelmApp(
       image: {
         registry: "docker.cmdcentral.net", // for operator itself
       },
-      // env: [
-      //   {
-      //     name: "VM_CONTAINERREGISTRY",
-      //     value: "docker.cmdcentral.net",
-      //   }, // for stuff deployed by operator
-      // ],
+      env: [
+        {
+          name: "VM_CONTAINERREGISTRY",
+          value: "docker.cmdcentral.net",
+        }, // for stuff deployed by operator
+      ],
     },
     defaultRules: {
       groups: {
