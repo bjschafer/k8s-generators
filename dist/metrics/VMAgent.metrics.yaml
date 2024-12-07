@@ -4,7 +4,6 @@ metadata:
   name: metrics
   namespace: metrics
 spec:
-  configReloaderImageTag: quay.io/prometheus-operator/prometheus-config-reloader:v0.78.2
   extraArgs:
     memory.allowedPercent: "80"
     promscrape.dropOriginalLabels: "true"
