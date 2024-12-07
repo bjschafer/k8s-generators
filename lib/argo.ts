@@ -177,9 +177,17 @@ export interface ArgoUpdaterImageProps {
   readonly allowTags?: string;
   readonly ignoreTags?: string[];
   readonly imagePullSecret?: SecretReference;
+  readonly helm?: ArgoUpdaterImagePropsHelm;
 }
 
 export interface ArgoUpdaterProps {
   readonly images: ArgoUpdaterImageProps[];
   readonly writebackMethod?: ArgoWritebackProps;
+}
+
+export interface ArgoUpdaterImagePropsHelm {
+  // value path for name
+  readonly name: string;
+  // value path for tag
+  readonly tag: string;
 }
