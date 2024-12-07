@@ -56,6 +56,8 @@ spec:
           env:
             - name: VM_CONTAINERREGISTRY
               value: docker.cmdcentral.net
+            - name: VM_CUSTOMCONFIGRELOADERIMAGE
+              value: quay.io/prometheus-operator/prometheus-config-reloader:v0.78.2
           image:
             registry: docker.cmdcentral.net
         vmagent:

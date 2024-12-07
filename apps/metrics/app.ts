@@ -52,6 +52,11 @@ NewHelmApp(
           name: "VM_CONTAINERREGISTRY",
           value: "docker.cmdcentral.net",
         }, // for stuff deployed by operator
+        {
+          name: "VM_CUSTOMCONFIGRELOADERIMAGE",
+          value:
+            "quay.io/prometheus-operator/prometheus-config-reloader:v0.78.2",
+        },
       ],
     },
     defaultRules: {
