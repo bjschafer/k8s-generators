@@ -115,7 +115,7 @@ NewHelmApp(
         hosts: ["metrics-alerts.cmdcentral.xyz"],
         tls: [
           {
-            secretName: "metrics-tls",
+            secretName: "alertmanager-tls",
             hosts: ["metrics-alerts.cmdcentral.xyz"],
           },
         ],

@@ -23,7 +23,7 @@ spec:
             tls:
               - hosts:
                   - metrics-alerts.cmdcentral.xyz
-                secretName: metrics-tls
+                secretName: alertmanager-tls
           spec:
             externalUrl: https://alertmanager.cmdcentral.xyz
             resources:
