@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: alertmanager
+  namespace: metrics
+spec:
+  rules:
+    - host: metrics-alerts.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: vmalertmanager-metrics-alertmanager
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - metrics-alerts.cmdcentral.xyz
+      secretName: alertmanager-tls

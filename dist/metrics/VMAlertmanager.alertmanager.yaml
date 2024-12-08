@@ -1,0 +1,12 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMAlertmanager
+metadata:
+  name: alertmanager
+  namespace: metrics
+spec:
+  externalURL: https://alertmanager.cmdcentral.xyz
+  resources:
+    limits:
+      memory: 256Mi
+    requests:
+      memory: 256Mi

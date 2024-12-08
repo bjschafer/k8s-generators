@@ -14,23 +14,7 @@ spec:
       releaseName: metrics
       valuesObject:
         alertmanager:
-          ingress:
-            annotations:
-              cert-manager.io/cluster-issuer: letsencrypt
-            enabled: true
-            hosts:
-              - metrics-alerts.cmdcentral.xyz
-            tls:
-              - hosts:
-                  - metrics-alerts.cmdcentral.xyz
-                secretName: alertmanager-tls
-          spec:
-            externalUrl: https://alertmanager.cmdcentral.xyz
-            resources:
-              limits:
-                memory: 256Mi
-              requests:
-                memory: 256Mi
+          enabled: false
         argocdReleaseOverride: metrics
         defaultDashboards:
           annotations:

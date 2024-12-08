@@ -9,9 +9,13 @@ import {
   VmAgent,
   VmAgentSpecResourcesLimits,
   VmAgentSpecResourcesRequests,
+  VmAlertmanager,
+  VmAlertmanagerSpecResourcesLimits,
+  VmAlertmanagerSpecResourcesRequests,
   VmScrapeConfig,
   VmScrapeConfigSpecScheme,
 } from "../../imports/operator.victoriametrics.com";
+import { KubeIngress } from "cdk8s-plus-30/lib/imports/k8s";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -102,30 +106,7 @@ NewHelmApp(
       enabled: false,
     },
     alertmanager: {
-      ingress: {
-        enabled: true,
-        annotations: {
-          "cert-manager.io/cluster-issuer": "letsencrypt",
-        },
-        hosts: ["metrics-alerts.cmdcentral.xyz"],
-        tls: [
-          {
-            secretName: "alertmanager-tls",
-            hosts: ["metrics-alerts.cmdcentral.xyz"],
-          },
-        ],
-      },
-      spec: {
-        externalUrl: "https://alertmanager.cmdcentral.xyz",
-        resources: {
-          requests: {
-            memory: "256Mi",
-          },
-          limits: {
-            memory: "256Mi",
-          },
-        },
-      },
+      enabled: false,
     },
     grafana: {
       enabled: false,
@@ -189,6 +170,63 @@ class VmResources extends Chart {
         },
         scrapeInterval: "20s",
         selectAllByDefault: true,
+      },
+    });
+
+    new VmAlertmanager(this, "alertmanager", {
+      metadata: {
+        name: "alertmanager",
+        namespace: namespace,
+      },
+      spec: {
+        externalUrl: "https://alertmanager.cmdcentral.xyz",
+        resources: {
+          requests: {
+            memory: VmAlertmanagerSpecResourcesRequests.fromString("256Mi"),
+          },
+          limits: {
+            memory: VmAlertmanagerSpecResourcesLimits.fromString("256Mi"),
+          },
+        },
+      },
+    });
+
+    new KubeIngress(this, "alertmanager-ingress", {
+      metadata: {
+        name: "alertmanager",
+        namespace: namespace,
+        annotations: {
+          "cert-manager.io/cluster-issuer": "letsencrypt",
+        },
+      },
+      spec: {
+        rules: [
+          {
+            host: "metrics-alerts.cmdcentral.xyz",
+            http: {
+              paths: [
+                {
+                  path: "/",
+                  pathType: "Prefix",
+                  backend: {
+                    service: {
+                      name: "vmalertmanager-metrics-alertmanager",
+                      port: {
+                        name: "http",
+                      },
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        ],
+        tls: [
+          {
+            secretName: "alertmanager-tls",
+            hosts: ["metrics-alerts.cmdcentral.xyz"],
+          },
+        ],
       },
     });
   }
