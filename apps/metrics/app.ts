@@ -9,6 +9,7 @@ import {
   VmAgent,
   VmAgentSpecResourcesLimits,
   VmAgentSpecResourcesRequests,
+  VmAlert,
   VmAlertmanager,
   VmAlertmanagerSpecResourcesLimits,
   VmAlertmanagerSpecResourcesRequests,
@@ -105,6 +106,9 @@ NewHelmApp(
     vmagent: {
       enabled: false,
     },
+    vmalert: {
+      enabled: false,
+    },
     alertmanager: {
       enabled: false,
     },
@@ -169,6 +173,36 @@ class VmResources extends Chart {
           },
         },
         scrapeInterval: "20s",
+        selectAllByDefault: true,
+      },
+    });
+
+    new VmAlert(this, "vmalert", {
+      metadata: {
+        name: "vmalert",
+        namespace: namespace,
+      },
+      spec: {
+        datasource: {
+          url: "http://vmsingle-metrics-victoria-metrics-k8s-stack.metrics.svc.cluster.local.:8429",
+        },
+        evaluationInterval: "15s",
+        extraArgs: {
+          "http.pathPrefix": "/",
+          "remoteWrite.disablePathAppend": "true",
+        },
+        notifiers: [
+          {
+            url: "http://alertmanager-metrics-alertmanager.metrics.svc.cluster.local.:9093",
+          },
+        ],
+        port: "8080",
+        remoteRead: {
+          url: "http://vmsingle-metrics-victoria-metrics-k8s-stack.metrics.svc.cluster.local.:8429",
+        },
+        remoteWrite: {
+          url: "http://vmsingle-metrics-victoria-metrics-k8s-stack.metrics.svc.cluster.local.:8429/api/v1/write",
+        },
         selectAllByDefault: true,
       },
     });

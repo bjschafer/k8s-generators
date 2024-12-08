@@ -44,6 +44,8 @@ spec:
             registry: docker.cmdcentral.net
         vmagent:
           enabled: false
+        vmalert:
+          enabled: false
         vmsingle:
           enabled: true
           ingress:

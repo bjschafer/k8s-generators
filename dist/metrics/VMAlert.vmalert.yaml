@@ -1,0 +1,20 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMAlert
+metadata:
+  name: vmalert
+  namespace: metrics
+spec:
+  datasource:
+    url: http://vmsingle-metrics-victoria-metrics-k8s-stack.metrics.svc.cluster.local.:8429
+  evaluationInterval: 15s
+  extraArgs:
+    http.pathPrefix: /
+    remoteWrite.disablePathAppend: "true"
+  notifiers:
+    - url: http://alertmanager-metrics-alertmanager.metrics.svc.cluster.local.:9093
+  port: "8080"
+  remoteRead:
+    url: http://vmsingle-metrics-victoria-metrics-k8s-stack.metrics.svc.cluster.local.:8429
+  remoteWrite:
+    url: http://vmsingle-metrics-victoria-metrics-k8s-stack.metrics.svc.cluster.local.:8429/api/v1/write
+  selectAllByDefault: true
