@@ -361,7 +361,7 @@ class VmResources extends Chart {
         ],
         tls: [
           {
-            secretName: "alertmanager-tls",
+            secretName: "metrics-tls",
             hosts: [hostname],
           },
         ],

@@ -20,4 +20,4 @@ spec:
   tls:
     - hosts:
         - metrics.cmdcentral.xyz
-      secretName: alertmanager-tls
+      secretName: metrics-tls
