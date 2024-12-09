@@ -14,6 +14,7 @@ import {
   VmAlertmanagerConfig,
   VmAlertmanagerSpecResourcesLimits,
   VmAlertmanagerSpecResourcesRequests,
+  VmRule,
   VmScrapeConfig,
   VmScrapeConfigSpecScheme,
   VmSingle,
@@ -512,6 +513,37 @@ class ScrapeConfigs extends Chart {
             action: "replace",
             replacement: "infra2.cmdcentral.xyz:9995", // address of nut exporter
             targetLabel: "__address__",
+          },
+        ],
+      },
+    });
+    new VmRule(this, "nut-power-usage", {
+      metadata: {
+        name: "nut-power-usage",
+        namespace: namespace,
+      },
+      spec: {
+        groups: [
+          {
+            name: "nut_power_usage_watts",
+            rules: [
+              {
+                record: "ups:power_usage_watts:rackmount",
+                expr: 'nut_load{ups="rackmount"} * nut_power_nominal_watts{ups="rackmount"}',
+              },
+              {
+                record: "ups:power_usage_watts:network",
+                expr: 'nut_load{ups="network"} * nut_power_nominal_watts{ups="network"}',
+              },
+              {
+                record: "ups:power_usage_watts:a_side",
+                expr: 'nut_load{ups="a-side"} * 1000',
+              },
+              {
+                record: "ups:power_usage_watts:b_side",
+                expr: 'nut_load{ups="b-side"} * 1350',
+              },
+            ],
           },
         ],
       },
