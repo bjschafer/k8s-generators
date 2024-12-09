@@ -11,6 +11,7 @@ import {
   VmAgentSpecResourcesRequests,
   VmAlert,
   VmAlertmanager,
+  VmAlertmanagerConfig,
   VmAlertmanagerSpecResourcesLimits,
   VmAlertmanagerSpecResourcesRequests,
   VmScrapeConfig,
@@ -199,6 +200,72 @@ class VmResources extends Chart {
             memory: VmAlertmanagerSpecResourcesLimits.fromString("256Mi"),
           },
         },
+      },
+    });
+    new VmAlertmanagerConfig(this, "alertmanager-config", {
+      metadata: {
+        name: "default",
+        namespace: namespace,
+      },
+      spec: {
+        receivers: [
+          {
+            name: "email",
+            emailConfigs: [
+              {
+                smarthost: "smtp.fastmail.com:465",
+                from: "alertmanager@cmdcentral.xyz",
+                hello: "alertmanager@cmdcentral.xyz",
+                authUsername: "braxton@cmdcentral.xyz",
+                requireTls: false,
+                authPassword: {
+                  key: "email_pass",
+                  name: "alertmanager-secrets",
+                },
+              },
+            ],
+          },
+          {
+            name: "telegram",
+            telegramConfigs: [
+              {
+                apiUrl: "https://api.telegram.org",
+                chatId: 834388479,
+                botToken: {
+                  key: "telegram_bot_token",
+                  name: "alertmanager-secrets",
+                },
+              },
+            ],
+          },
+          {
+            name: "blackhole",
+          },
+        ],
+        route: {
+          receiver: "blackhole",
+          continue: true,
+          groupBy: ["alertname", "cluster"],
+          routes: [
+            {
+              receiver: "telegram",
+              matchers: ['push_notify="true"'],
+            },
+            {
+              receiver: "email",
+              match: {
+                severity: "critical",
+              },
+            },
+          ],
+        },
+        inhibitRules: [
+          {
+            sourceMatchers: ['severity="critical"'],
+            targetMatchers: ['severity="warning"'],
+            equal: ["alertname"]
+          },
+        ],
       },
     });
 

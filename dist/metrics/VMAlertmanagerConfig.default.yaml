@@ -1,0 +1,45 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMAlertmanagerConfig
+metadata:
+  name: default
+  namespace: metrics
+spec:
+  inhibit_rules:
+    - equal:
+        - alertname
+      source_matchers:
+        - severity="critical"
+      target_matchers:
+        - severity="warning"
+  receivers:
+    - email_configs:
+        - auth_password:
+            key: email_pass
+            name: alertmanager-secrets
+          auth_username: braxton@cmdcentral.xyz
+          from: alertmanager@cmdcentral.xyz
+          hello: alertmanager@cmdcentral.xyz
+          require_tls: false
+          smarthost: smtp.fastmail.com:465
+      name: email
+    - name: telegram
+      telegram_configs:
+        - api_url: https://api.telegram.org
+          bot_token:
+            key: telegram_bot_token
+            name: alertmanager-secrets
+          chat_id: 834388479
+    - name: blackhole
+  route:
+    continue: true
+    group_by:
+      - alertname
+      - cluster
+    receiver: blackhole
+    routes:
+      - matchers:
+          - push_notify="true"
+        receiver: telegram
+      - match:
+          severity: critical
+        receiver: email
