@@ -1,0 +1,16 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: minio-node
+  namespace: metrics
+spec:
+  authorization:
+    credentials:
+      key: token
+      name: minio-bearer-token
+  path: /minio/v2/metrics/node
+  staticConfigs:
+    - labels:
+        job: '"minio-node"'
+      targets:
+        - minio.cmdcentral.xyz:9000

@@ -1,0 +1,14 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: pdns
+  namespace: metrics
+spec:
+  staticConfigs:
+    - labels:
+        job: pdns
+      targets:
+        - infra1.cmdcentral.xyz:8081
+        - infra1.cmdcentral.xyz:8082
+        - infra2.cmdcentral.xyz:8081
+        - infra2.cmdcentral.xyz:8082

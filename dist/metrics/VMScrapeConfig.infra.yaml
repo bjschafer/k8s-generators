@@ -1,0 +1,12 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: infra
+  namespace: metrics
+spec:
+  staticConfigs:
+    - labels:
+        job: infra
+      targets:
+        - infra1.cmdcentral.xyz:9100
+        - infra2.cmdcentral.xyz:9100

@@ -1,0 +1,13 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: printers
+  namespace: metrics
+spec:
+  staticConfigs:
+    - labels:
+        job: printers
+      targets:
+        - endertres.cmdcentral.xyz:9100
+        - pandora.cmdcentral.xyz:9100
+        - trident.cmdcentral.xyz:9100

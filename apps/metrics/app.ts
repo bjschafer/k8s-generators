@@ -412,6 +412,219 @@ class ScrapeConfigs extends Chart {
         },
       },
     });
+
+    new VmScrapeConfig(this, "infra", {
+      metadata: {
+        name: "infra",
+        namespace: namespace,
+      },
+      spec: {
+        staticConfigs: [
+          {
+            targets: [
+              "infra1.cmdcentral.xyz:9100",
+              "infra2.cmdcentral.xyz:9100",
+            ],
+            labels: { job: "infra" },
+          },
+        ],
+      },
+    });
+
+    new VmScrapeConfig(this, "lakelair-gateway", {
+      metadata: {
+        name: "lakelair-gateway",
+        namespace: namespace,
+      },
+      spec: {
+        staticConfigs: [
+          {
+            labels: { job: "lakelair-gateway" },
+            targets: ["gateway.lakelair.net:9100"],
+          },
+        ],
+      },
+    });
+
+    new VmScrapeConfig(this, "mgt", {
+      metadata: {
+        name: "mgt",
+        namespace: namespace,
+      },
+      spec: {
+        staticConfigs: [
+          {
+            targets: ["mgt.cmdcentral.xyz:9100"],
+            labels: { job: "mgt" },
+          },
+        ],
+      },
+    });
+
+    ["cluster", "node"].forEach((kind: string) => {
+      new VmScrapeConfig(this, `minio-${kind}`, {
+        metadata: {
+          name: `minio-${kind}`,
+          namespace: namespace,
+        },
+        spec: {
+          staticConfigs: [
+            {
+              labels: { job: `"minio-${kind}"` },
+              targets: ["minio.cmdcentral.xyz:9000"],
+            },
+          ],
+          path: `/minio/v2/metrics/${kind}`,
+          authorization: {
+            credentials: {
+              name: "minio-bearer-token",
+              key: "token",
+            },
+          },
+        },
+      });
+    });
+
+    new VmScrapeConfig(this, "nut", {
+      metadata: {
+        name: "nut",
+        namespace: namespace,
+      },
+      spec: {
+        staticConfigs: [
+          {
+            labels: { job: "nut" },
+            targets: ["infra2.cmdcentral.xyz:3493"], // address of nut server
+          },
+        ],
+        relabelConfigs: [
+          {
+            action: "replace",
+            sourceLabels: ["__address__"],
+            targetLabel: "__param_target",
+          },
+          {
+            action: "replace",
+            sourceLabels: ["__param_target"],
+            targetLabel: "instance",
+          },
+          {
+            action: "replace",
+            replacement: "infra2.cmdcentral.xyz:9995", // address of nut exporter
+            targetLabel: "__address__",
+          },
+        ],
+      },
+    });
+
+    new VmScrapeConfig(this, "pdns", {
+      metadata: {
+        name: "pdns",
+        namespace: namespace,
+      },
+      spec: {
+        staticConfigs: [
+          {
+            targets: [
+              "infra1.cmdcentral.xyz:8081",
+              "infra1.cmdcentral.xyz:8082",
+              "infra2.cmdcentral.xyz:8081",
+              "infra2.cmdcentral.xyz:8082",
+            ],
+            labels: { job: "pdns" },
+          },
+        ],
+      },
+    });
+
+    new VmScrapeConfig(this, "printers", {
+      metadata: {
+        name: "printers",
+        namespace: namespace,
+      },
+      spec: {
+        staticConfigs: [
+          {
+            targets: [
+              "endertres.cmdcentral.xyz:9100",
+              "pandora.cmdcentral.xyz:9100",
+              "trident.cmdcentral.xyz:9100",
+            ],
+            labels: { job: "printers" },
+          },
+        ],
+      },
+    });
+
+    new VmScrapeConfig(this, "snmp", {
+      metadata: {
+        name: "snmp",
+        namespace: namespace,
+      },
+      spec: {
+        staticConfigs: [
+          {
+            targets: ["sw01.cmdcentral.xyz", "sw02.cmdcentral.xyz"], // snmp targets to scrape
+            labels: { job: "snmp" },
+          },
+        ],
+        path: "/snmp",
+        relabelConfigs: [
+          {
+            action: "replace",
+            sourceLabels: ["__address__"],
+            targetLabel: "__param_target",
+          },
+          {
+            action: "replace",
+            sourceLabels: ["__param_target"],
+            targetLabel: "instance",
+          },
+          {
+            action: "replace",
+            targetLabel: "__address__",
+            replacement: "snmp-exporter.prometheus.svc.cluster.local:9116", // address of snmp exporter
+          },
+        ],
+      },
+    });
+
+    new VmScrapeConfig(this, "servers", {
+      metadata: {
+        name: "servers",
+        namespace: namespace,
+      },
+      spec: {
+        staticConfigs: [
+          {
+            targets: [
+              "jellyfin.cmdcentral.xyz:9100",
+              "plex.cmdcentral.xyz:9100",
+            ],
+            labels: { job: "servers" },
+          },
+        ],
+      },
+    });
+
+    new VmScrapeConfig(this, "vmhost", {
+      metadata: {
+        name: "vmhost",
+        namespace: namespace,
+      },
+      spec: {
+        staticConfigs: [
+          {
+            targets: [
+              "vmhost01.cmdcentral.xyz:9100",
+              "vmhost02.cmdcentral.xyz:9100",
+              "vmhost03.cmdcentral.xyz:9100",
+            ],
+            labels: { job: "vmhost" },
+          },
+        ],
+      },
+    });
   }
 }
 

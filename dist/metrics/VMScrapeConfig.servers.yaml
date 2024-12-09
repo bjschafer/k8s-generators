@@ -1,0 +1,12 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: servers
+  namespace: metrics
+spec:
+  staticConfigs:
+    - labels:
+        job: servers
+      targets:
+        - jellyfin.cmdcentral.xyz:9100
+        - plex.cmdcentral.xyz:9100

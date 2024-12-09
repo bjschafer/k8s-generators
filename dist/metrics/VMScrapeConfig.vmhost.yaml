@@ -1,0 +1,13 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: vmhost
+  namespace: metrics
+spec:
+  staticConfigs:
+    - labels:
+        job: vmhost
+      targets:
+        - vmhost01.cmdcentral.xyz:9100
+        - vmhost02.cmdcentral.xyz:9100
+        - vmhost03.cmdcentral.xyz:9100

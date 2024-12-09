@@ -1,0 +1,23 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: nut
+  namespace: metrics
+spec:
+  relabelConfigs:
+    - action: replace
+      sourceLabels:
+        - __address__
+      targetLabel: __param_target
+    - action: replace
+      sourceLabels:
+        - __param_target
+      targetLabel: instance
+    - action: replace
+      replacement: infra2.cmdcentral.xyz:9995
+      targetLabel: __address__
+  staticConfigs:
+    - labels:
+        job: nut
+      targets:
+        - infra2.cmdcentral.xyz:3493
