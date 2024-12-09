@@ -15,6 +15,7 @@ import {
   VmAlertmanagerSpecResourcesLimits,
   VmAlertmanagerSpecResourcesRequests,
   VmPodScrape,
+  VmPodScrapeSpecPodMetricsEndpointsTargetPort,
   VmRule,
   VmScrapeConfig,
   VmScrapeConfigSpecScheme,
@@ -670,7 +671,12 @@ class ScrapeConfigs extends Chart {
         namespaceSelector: {
           matchNames: ["argocd"],
         },
-        podMetricsEndpoints: [{ port: "metrics" }],
+        podMetricsEndpoints: [
+          {
+            targetPort:
+              VmPodScrapeSpecPodMetricsEndpointsTargetPort.fromNumber(8080),
+          },
+        ],
         selector: {
           matchLabels: { "app.kubernetes.io/name": "argocd-image-updater" },
         },

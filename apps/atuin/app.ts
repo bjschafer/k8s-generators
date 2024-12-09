@@ -68,7 +68,7 @@ new AppPlus(app, "atuin", {
 new CmdcentralServiceMonitor(app, "metrics", {
   name: name,
   namespace: namespace,
-  matchLabels: { "app.kubernetes.io/name": name },
+  matchLabels: { "app.kubernetes.io/instance": name },
 });
 
 app.synth();

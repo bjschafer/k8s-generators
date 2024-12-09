@@ -11,4 +11,4 @@ spec:
       - atuin
   selector:
     matchLabels:
-      app.kubernetes.io/name: atuin
+      app.kubernetes.io/instance: atuin
