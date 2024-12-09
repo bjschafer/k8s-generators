@@ -21,6 +21,7 @@ spec:
           hello: alertmanager@cmdcentral.xyz
           require_tls: false
           smarthost: smtp.fastmail.com:465
+          to: braxton@cmdcentral.xyz
       name: email
     - name: telegram
       telegram_configs:

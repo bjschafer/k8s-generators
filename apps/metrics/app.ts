@@ -215,6 +215,7 @@ class VmResources extends Chart {
               {
                 smarthost: "smtp.fastmail.com:465",
                 from: "alertmanager@cmdcentral.xyz",
+                to: "braxton@cmdcentral.xyz",
                 hello: "alertmanager@cmdcentral.xyz",
                 authUsername: "braxton@cmdcentral.xyz",
                 requireTls: false,
@@ -263,7 +264,7 @@ class VmResources extends Chart {
           {
             sourceMatchers: ['severity="critical"'],
             targetMatchers: ['severity="warning"'],
-            equal: ["alertname"]
+            equal: ["alertname"],
           },
         ],
       },
