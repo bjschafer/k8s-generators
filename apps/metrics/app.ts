@@ -14,9 +14,11 @@ import {
   VmAlertmanagerConfig,
   VmAlertmanagerSpecResourcesLimits,
   VmAlertmanagerSpecResourcesRequests,
+  VmPodScrape,
   VmRule,
   VmScrapeConfig,
   VmScrapeConfigSpecScheme,
+  VmServiceScrape,
   VmSingle,
   VmSingleSpecResourcesRequests,
 } from "../../imports/operator.victoriametrics.com";
@@ -656,6 +658,54 @@ class ScrapeConfigs extends Chart {
           },
         ],
       },
+    });
+
+    // --- pods
+    new VmPodScrape(this, "argocd-image-updater", {
+      metadata: {
+        name: "argocd-image-updater",
+        namespace: namespace,
+      },
+      spec: {
+        namespaceSelector: {
+          matchNames: ["argocd"],
+        },
+        podMetricsEndpoints: [{ port: "metrics" }],
+        selector: {
+          matchLabels: { "app.kubernetes.io/name": "argocd-image-updater" },
+        },
+      },
+    });
+
+    // --- services
+
+    [
+      { name: "argocd", serviceName: "argocd-metrics" },
+      { name: "server", serviceName: "server-metrics" },
+      { name: "repo-server", serviceName: "repo-server" },
+      {
+        name: "applicationset-controller",
+        serviceName: "applicationset-controller",
+      },
+    ].forEach((obj: { name: string; serviceName: string }) => {
+      const name = `${obj.name}-metrics`;
+      new VmServiceScrape(this, name, {
+        metadata: {
+          name: name,
+          namespace: namespace,
+        },
+        spec: {
+          namespaceSelector: {
+            matchNames: ["argocd"],
+          },
+          endpoints: [{ port: "metrics" }],
+          selector: {
+            matchLabels: {
+              "app.kubernetes.io/name": `argocd-${obj.serviceName}`,
+            },
+          },
+        },
+      });
     });
   }
 }

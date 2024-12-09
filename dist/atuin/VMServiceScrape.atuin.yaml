@@ -1,0 +1,14 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: atuin
+  namespace: atuin
+spec:
+  endpoints:
+    - port: metrics
+  namespaceSelector:
+    matchNames:
+      - atuin
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: atuin

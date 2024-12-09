@@ -5,6 +5,7 @@ import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { basename } from "../../lib/util";
+import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -62,6 +63,12 @@ new AppPlus(app, "atuin", {
     ATUIN_METRICS__ENABLE: EnvValue.fromValue("true"), // at 9001
     ATUIN_METRICS__HOST: EnvValue.fromValue("0.0.0.0"),
   },
+});
+
+new CmdcentralServiceMonitor(app, "metrics", {
+  name: name,
+  namespace: namespace,
+  matchLabels: { "app.kubernetes.io/name": name },
 });
 
 app.synth();

@@ -2,3 +2,4 @@ resources:
   - Deployment.atuin.yaml
   - Ingress.atuin.yaml
   - Service.atuin.yaml
+  - VMServiceScrape.atuin.yaml
