@@ -359,6 +359,18 @@ class VmResources extends Chart {
                     },
                   },
                 },
+                {
+                  path: "/targets",
+                  pathType: "Prefix",
+                  backend: {
+                    service :{
+                      name: "vmagent-metrics",
+                      port: {
+                        name: "http"
+                      }
+                    }
+                  }
+                },
               ],
             },
           },
