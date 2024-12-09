@@ -24,6 +24,7 @@ import {
   VmSingleSpecResourcesRequests,
 } from "../../imports/operator.victoriametrics.com";
 import { KubeIngress } from "cdk8s-plus-30/lib/imports/k8s";
+import { HttpIngressPath } from "../../imports/k8s";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -359,18 +360,23 @@ class VmResources extends Chart {
                     },
                   },
                 },
-                {
-                  path: "/targets",
-                  pathType: "Prefix",
-                  backend: {
-                    service :{
-                      name: "vmagent-metrics",
-                      port: {
-                        name: "http"
-                      }
-                    }
-                  }
-                },
+                ...[
+                  "/targets",
+                  "/service-discovery",
+                  "/api/v1/targets",
+                  "/config",
+                ].map((path: string): HttpIngressPath => {
+                  return {
+                    path: path,
+                    pathType: "Prefix",
+                    backend: {
+                      service: {
+                        name: "vmagent-metrics",
+                        port: { name: "http" },
+                      },
+                    },
+                  };
+                }),
               ],
             },
           },
