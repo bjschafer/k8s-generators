@@ -704,7 +704,7 @@ class ScrapeConfigs extends Chart {
     // --- services
 
     [
-      { name: "argocd", serviceName: "argocd-metrics" },
+      { name: "argocd", serviceName: "metrics" },
       { name: "server", serviceName: "server-metrics" },
       { name: "repo-server", serviceName: "repo-server" },
       {

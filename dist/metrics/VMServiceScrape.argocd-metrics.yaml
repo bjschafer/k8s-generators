@@ -11,4 +11,4 @@ spec:
       - argocd
   selector:
     matchLabels:
-      app.kubernetes.io/name: argocd-argocd-metrics
+      app.kubernetes.io/name: argocd-metrics
