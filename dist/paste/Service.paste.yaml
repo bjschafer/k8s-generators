@@ -6,7 +6,8 @@ metadata:
 spec:
   externalIPs: []
   ports:
-    - port: 8080
+    - name: http
+      port: 8080
       targetPort: 8080
   selector:
     cdk8s.io/metadata.addr: paste-paste-deployment-c8eece2b

@@ -6,7 +6,8 @@ metadata:
 spec:
   externalIPs: []
   ports:
-    - port: 8080
+    - name: http
+      port: 8080
       targetPort: 8080
   selector:
     cdk8s.io/metadata.addr: promlens-app-promlens-app-deployment-c87e6e6e

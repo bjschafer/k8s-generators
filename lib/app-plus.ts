@@ -204,14 +204,27 @@ export class AppPlus extends Chart {
       }
     }
 
+    const svcPorts = props.ports?.map(function (
+      port: number,
+      index: number,
+    ): ServicePort {
+      return {
+        targetPort: port,
+        port: port,
+        name: index === 0 ? "http" : `http-${index}`,
+      };
+    });
+    if (props.monitoringConfig) {
+      svcPorts?.push({
+        targetPort: props.monitoringConfig.port,
+        port: props.monitoringConfig.port,
+        name: "metrics",
+      });
+    }
+
     const svc = deploy.exposeViaService({
       name: props.name,
-      ports: props.ports?.map(function (port: number): ServicePort {
-        return {
-          targetPort: port,
-          port: port,
-        };
-      }),
+      ports: svcPorts,
     });
 
     const ingress = new Ingress(this, `${props.name}-ingress`, {

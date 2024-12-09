@@ -6,7 +6,8 @@ metadata:
 spec:
   externalIPs: []
   ports:
-    - port: 8000
+    - name: http
+      port: 8000
       targetPort: 8000
   selector:
     cdk8s.io/metadata.addr: spoolman-app-spoolman-app-deployment-c828c0db

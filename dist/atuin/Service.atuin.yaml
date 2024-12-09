@@ -6,8 +6,12 @@ metadata:
 spec:
   externalIPs: []
   ports:
-    - port: 8888
+    - name: http
+      port: 8888
       targetPort: 8888
+    - name: metrics
+      port: 9001
+      targetPort: 9001
   selector:
     cdk8s.io/metadata.addr: atuin-atuin-deployment-c8aa6d7f
   type: ClusterIP

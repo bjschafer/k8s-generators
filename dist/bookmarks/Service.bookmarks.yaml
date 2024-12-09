@@ -6,7 +6,8 @@ metadata:
 spec:
   externalIPs: []
   ports:
-    - port: 3000
+    - name: http
+      port: 3000
       targetPort: 3000
   selector:
     cdk8s.io/metadata.addr: bookmarks-app-bookmarks-app-deployment-c8465c2f

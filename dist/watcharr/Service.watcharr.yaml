@@ -6,7 +6,8 @@ metadata:
 spec:
   externalIPs: []
   ports:
-    - port: 3080
+    - name: http
+      port: 3080
       targetPort: 3080
   selector:
     cdk8s.io/metadata.addr: watcharr-watcharr-deployment-c86dec6d

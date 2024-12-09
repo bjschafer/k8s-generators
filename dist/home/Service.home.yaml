@@ -6,7 +6,8 @@ metadata:
 spec:
   externalIPs: []
   ports:
-    - port: 4173
+    - name: http
+      port: 4173
       targetPort: 4173
   selector:
     cdk8s.io/metadata.addr: home-app-home-app-deployment-c8467b6c
