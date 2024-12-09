@@ -715,7 +715,10 @@ class ScrapeConfigs extends Chart {
         serviceName: "applicationset-controller",
       },
     ].forEach((obj: { name: string; serviceName: string }) => {
-      const name = `${obj.name}-metrics`;
+      const name =
+        obj.name === "argocd"
+          ? `${obj.name}-metrics`
+          : `argocd-${obj.name}-metrics`;
       new VmServiceScrape(this, name, {
         metadata: {
           name: name,

@@ -1,7 +1,7 @@
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMServiceScrape
 metadata:
-  name: server-metrics
+  name: argocd-repo-server-metrics
   namespace: metrics
 spec:
   endpoints:
@@ -11,4 +11,4 @@ spec:
       - argocd
   selector:
     matchLabels:
-      app.kubernetes.io/name: argocd-server-metrics
+      app.kubernetes.io/name: argocd-repo-server

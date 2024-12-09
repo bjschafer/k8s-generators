@@ -1,7 +1,7 @@
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMServiceScrape
 metadata:
-  name: applicationset-controller-metrics
+  name: argocd-applicationset-controller-metrics
   namespace: metrics
 spec:
   endpoints:
