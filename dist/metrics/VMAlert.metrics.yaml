@@ -5,16 +5,16 @@ metadata:
   namespace: metrics
 spec:
   datasource:
-    url: http://vmsingle-metrics-victoria-metrics-k8s-stack.metrics.svc.cluster.local.:8429
+    url: http://vmsingle-metrics.metrics.svc.cluster.local.:8429
   evaluationInterval: 15s
   extraArgs:
     http.pathPrefix: /
     remoteWrite.disablePathAppend: "true"
   notifiers:
-    - url: http://alertmanager-metrics-alertmanager.metrics.svc.cluster.local.:9093
+    - url: http://vmalert-metrics.metrics.svc.cluster.local.:9093
   port: "8080"
   remoteRead:
-    url: http://vmsingle-metrics-victoria-metrics-k8s-stack.metrics.svc.cluster.local.:8429
+    url: http://vmsingle-metrics.metrics.svc.cluster.local.:8429
   remoteWrite:
-    url: http://vmsingle-metrics-victoria-metrics-k8s-stack.metrics.svc.cluster.local.:8429/api/v1/write
+    url: http://vmsingle-metrics.metrics.svc.cluster.local.:8429/api/v1/write
   selectAllByDefault: true

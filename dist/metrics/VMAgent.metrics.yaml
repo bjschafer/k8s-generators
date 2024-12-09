@@ -10,7 +10,7 @@ spec:
     promscrape.streamParse: "true"
   port: "8429"
   remoteWrite:
-    - url: http://vmsingle-metrics-victoria-metrics-k8s-stack.metrics.svc.cluster.local.:8429/api/v1/write
+    - url: http://vmsingle-metrics.metrics.svc.cluster.local.:8429/api/v1/write
   resources:
     limits:
       cpu: 300m

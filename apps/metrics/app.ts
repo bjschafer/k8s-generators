@@ -137,7 +137,7 @@ class VmResources extends Chart {
         port: `${vmagentPort}`,
         remoteWrite: [
           {
-            url: "http://vmsingle-metrics-victoria-metrics-k8s-stack.metrics.svc.cluster.local.:8429/api/v1/write", // TODO this may need to be changed
+            url: "http://vmsingle-metrics.metrics.svc.cluster.local.:8429/api/v1/write",
           },
         ],
         resources: {
@@ -162,7 +162,7 @@ class VmResources extends Chart {
       },
       spec: {
         datasource: {
-          url: "http://vmsingle-metrics-victoria-metrics-k8s-stack.metrics.svc.cluster.local.:8429",
+          url: "http://vmsingle-metrics.metrics.svc.cluster.local.:8429",
         },
         evaluationInterval: "15s",
         extraArgs: {
@@ -171,15 +171,15 @@ class VmResources extends Chart {
         },
         notifiers: [
           {
-            url: "http://alertmanager-metrics-alertmanager.metrics.svc.cluster.local.:9093",
+            url: "http://vmalert-metrics.metrics.svc.cluster.local.:9093",
           },
         ],
         port: "8080",
         remoteRead: {
-          url: "http://vmsingle-metrics-victoria-metrics-k8s-stack.metrics.svc.cluster.local.:8429",
+          url: "http://vmsingle-metrics.metrics.svc.cluster.local.:8429",
         },
         remoteWrite: {
-          url: "http://vmsingle-metrics-victoria-metrics-k8s-stack.metrics.svc.cluster.local.:8429/api/v1/write",
+          url: "http://vmsingle-metrics.metrics.svc.cluster.local.:8429/api/v1/write",
         },
         selectAllByDefault: true,
       },
