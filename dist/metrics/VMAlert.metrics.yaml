@@ -1,7 +1,7 @@
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMAlert
 metadata:
-  name: vmalert
+  name: metrics
   namespace: metrics
 spec:
   datasource:

@@ -179,7 +179,7 @@ class VmResources extends Chart {
 
     new VmAlert(this, "vmalert", {
       metadata: {
-        name: "vmalert",
+        name: "metrics",
         namespace: namespace,
       },
       spec: {
@@ -209,7 +209,7 @@ class VmResources extends Chart {
 
     new VmAlertmanager(this, "alertmanager", {
       metadata: {
-        name: "alertmanager",
+        name: "metrics",
         namespace: namespace,
       },
       spec: {
@@ -244,7 +244,7 @@ class VmResources extends Chart {
                   pathType: "Prefix",
                   backend: {
                     service: {
-                      name: "vmalertmanager-metrics-alertmanager",
+                      name: "vmalertmanager-metrics",
                       port: {
                         name: "http",
                       },

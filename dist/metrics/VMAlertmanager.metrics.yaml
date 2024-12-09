@@ -1,7 +1,7 @@
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMAlertmanager
 metadata:
-  name: alertmanager
+  name: metrics
   namespace: metrics
 spec:
   externalURL: https://alertmanager.cmdcentral.xyz
