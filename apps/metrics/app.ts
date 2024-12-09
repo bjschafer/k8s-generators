@@ -15,6 +15,8 @@ import {
   VmAlertmanagerSpecResourcesRequests,
   VmScrapeConfig,
   VmScrapeConfigSpecScheme,
+  VmSingle,
+  VmSingleSpecResourcesRequests,
 } from "../../imports/operator.victoriametrics.com";
 import { KubeIngress } from "cdk8s-plus-30/lib/imports/k8s";
 
@@ -76,32 +78,7 @@ NewHelmApp(
       },
     },
     vmsingle: {
-      enabled: true,
-      spec: {
-        replicaCount: 1, // This'll set replicas=n on deployment, so you run into PVC multi-attach errors
-        retentionPeriod: "90d",
-        storage: {
-          storageClassName: StorageClass.CEPH_RBD,
-          resources: {
-            requests: {
-              storage: "80Gi",
-            },
-          },
-        },
-      },
-      ingress: {
-        enabled: true,
-        annotations: {
-          "cert-manager.io/cluster-issuer": "letsencrypt",
-        },
-        hosts: [hostname],
-        tls: [
-          {
-            secretName: "metrics-tls",
-            hosts: [hostname],
-          },
-        ],
-      },
+      enabled: false,
     },
     vmagent: {
       enabled: false,
@@ -259,6 +236,64 @@ class VmResources extends Chart {
           {
             secretName: "alertmanager-tls",
             hosts: ["metrics-alerts.cmdcentral.xyz"],
+          },
+        ],
+      },
+    });
+
+    new VmSingle(this, "vmsingle", {
+      metadata: {
+        name: "metrics",
+        namespace: namespace,
+      },
+      spec: {
+        replicaCount: 1, // This'll set replicas=n on deployment, so you run into PVC multi-attach errors
+        retentionPeriod: "90d",
+        storage: {
+          storageClassName: StorageClass.CEPH_RBD,
+          resources: {
+            requests: {
+              storage: VmSingleSpecResourcesRequests.fromString("80Gi"),
+            },
+          },
+        },
+      },
+    });
+
+    new KubeIngress(this, "vmsingle-ingress", {
+      metadata: {
+        name: "metrics",
+        namespace: namespace,
+        annotations: {
+          "cert-manager.io/cluster-issuer": "letsencrypt",
+        },
+      },
+      spec: {
+        rules: [
+          {
+            host: hostname,
+            http: {
+              paths: [
+                {
+                  path: "/",
+                  pathType: "Prefix",
+                  backend: {
+                    service: {
+                      name: "vmsingle-metrics",
+                      port: {
+                        name: "http",
+                      },
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        ],
+        tls: [
+          {
+            secretName: "alertmanager-tls",
+            hosts: [hostname],
           },
         ],
       },

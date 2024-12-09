@@ -47,25 +47,7 @@ spec:
         vmalert:
           enabled: false
         vmsingle:
-          enabled: true
-          ingress:
-            annotations:
-              cert-manager.io/cluster-issuer: letsencrypt
-            enabled: true
-            hosts:
-              - metrics.cmdcentral.xyz
-            tls:
-              - hosts:
-                  - metrics.cmdcentral.xyz
-                secretName: metrics-tls
-          spec:
-            replicaCount: 1
-            retentionPeriod: 90d
-            storage:
-              resources:
-                requests:
-                  storage: 80Gi
-              storageClassName: ceph-rbd
+          enabled: false
     repoURL: https://victoriametrics.github.io/helm-charts/
     targetRevision: 0.30.2
   syncPolicy:
