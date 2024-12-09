@@ -104,6 +104,9 @@ NewHelmApp(
     kubeScheduler: {
       enabled: false,
     },
+    kubeEtcd: {
+      enabled: false,
+    },
     "prometheus-node-exporter": {
       enabled: false, // for now
     },

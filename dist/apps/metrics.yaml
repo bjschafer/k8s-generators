@@ -32,6 +32,8 @@ spec:
           enabled: false
         kubeControllerManager:
           enabled: false
+        kubeEtcd:
+          enabled: false
         kubeScheduler:
           enabled: false
         prometheus-node-exporter:
