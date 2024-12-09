@@ -200,6 +200,7 @@ class VmResources extends Chart {
             memory: VmAlertmanagerSpecResourcesLimits.fromString("256Mi"),
           },
         },
+        selectAllByDefault: true, // automatically pick up all VmAlertmanagerConfigs
       },
     });
     new VmAlertmanagerConfig(this, "alertmanager-config", {
