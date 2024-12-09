@@ -11,6 +11,6 @@ spec:
   path: /minio/v2/metrics/node
   staticConfigs:
     - labels:
-        job: '"minio-node"'
+        job: minio-node
       targets:
         - minio.cmdcentral.xyz:9000

@@ -11,6 +11,6 @@ spec:
   path: /minio/v2/metrics/cluster
   staticConfigs:
     - labels:
-        job: '"minio-cluster"'
+        job: minio-cluster
       targets:
         - minio.cmdcentral.xyz:9000

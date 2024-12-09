@@ -470,7 +470,7 @@ class ScrapeConfigs extends Chart {
         spec: {
           staticConfigs: [
             {
-              labels: { job: `"minio-${kind}"` },
+              labels: { job: `minio-${kind}` },
               targets: ["minio.cmdcentral.xyz:9000"],
             },
           ],
