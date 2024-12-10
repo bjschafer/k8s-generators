@@ -737,6 +737,18 @@ class ScrapeConfigs extends Chart {
         },
       });
     });
+
+    new VmServiceScrape(this, "unifi-exporter", {
+      metadata: {
+        name: "unifi-exporter",
+        namespace: namespace,
+      },
+      spec: {
+        namespaceSelector: { matchNames: ["prometheus"] },
+        selector: { matchLabels: { app: "unifi-exporter" } },
+        endpoints: [{ port: "metrics" }],
+      },
+    });
   }
 }
 
