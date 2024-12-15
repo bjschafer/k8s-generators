@@ -31,10 +31,10 @@ spec:
       - vectors.so
   resources:
     limits:
-      cpu: 250m
+      cpu: 300m
       memory: 768Mi
     requests:
-      cpu: 250m
+      cpu: 300m
       memory: 768Mi
   storage:
     size: 5Gi
