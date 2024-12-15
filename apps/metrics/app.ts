@@ -151,11 +151,11 @@ class VmResources extends Chart {
         resources: {
           limits: {
             memory: VmAgentSpecResourcesLimits.fromString("512Mi"),
-            cpu: VmAgentSpecResourcesLimits.fromString("600m"),
+            cpu: VmAgentSpecResourcesLimits.fromString("1200m"),
           },
           requests: {
             memory: VmAgentSpecResourcesRequests.fromString("512Mi"),
-            cpu: VmAgentSpecResourcesRequests.fromString("600m"),
+            cpu: VmAgentSpecResourcesRequests.fromString("1200m"),
           },
         },
         scrapeInterval: "20s",
