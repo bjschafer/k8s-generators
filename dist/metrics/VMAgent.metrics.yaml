@@ -13,10 +13,10 @@ spec:
     - url: http://vmsingle-metrics.metrics.svc.cluster.local.:8429/api/v1/write
   resources:
     limits:
-      cpu: 300m
+      cpu: 600m
       memory: 512Mi
     requests:
-      cpu: 300m
+      cpu: 600m
       memory: 512Mi
   scrapeInterval: 20s
   selectAllByDefault: true
