@@ -187,11 +187,11 @@ class VectorPostgres extends Chart {
         },
         resources: {
           requests: {
-            cpu: Quantity.fromString("300m"),
+            cpu: Quantity.fromString("600m"),
             memory: Quantity.fromString("768Mi"),
           },
           limits: {
-            cpu: Quantity.fromString("300m"),
+            cpu: Quantity.fromString("600m"),
             memory: Quantity.fromString("768Mi"),
           },
         },
