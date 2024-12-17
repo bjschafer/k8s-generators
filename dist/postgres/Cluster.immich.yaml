@@ -4,6 +4,16 @@ metadata:
   name: immich
   namespace: postgres
 spec:
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - preference:
+            matchExpressions:
+              - key: kubernetes.io/arch
+                operator: NotIn
+                values:
+                  - arm64
+          weight: 1
   backup:
     barmanObjectStore:
       destinationPath: s3://postgres/k8s/immich

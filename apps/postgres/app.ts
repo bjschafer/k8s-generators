@@ -185,6 +185,25 @@ class VectorPostgres extends Chart {
         monitoring: {
           enablePodMonitor: true,
         },
+        // prefer to schedule on non-pis
+        affinity: {
+          nodeAffinity: {
+            preferredDuringSchedulingIgnoredDuringExecution: [
+              {
+                weight: 1,
+                preference: {
+                  matchExpressions: [
+                    {
+                      key: "kubernetes.io/arch",
+                      operator: "NotIn",
+                      values: ["arm64"],
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        },
         resources: {
           requests: {
             cpu: Quantity.fromString("600m"),
