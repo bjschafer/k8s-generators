@@ -5,7 +5,7 @@ import {
   Volume,
   VolumeMount,
 } from "../imports/k8s";
-import { PersistentVolumeAccessMode } from "cdk8s-plus-30";
+import { PersistentVolumeAccessMode } from "cdk8s-plus-31";
 import { Construct } from "constructs";
 
 export enum StorageClass {

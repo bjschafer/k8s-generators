@@ -23,7 +23,7 @@ import {
   VmSingle,
   VmSingleSpecResourcesRequests,
 } from "../../imports/operator.victoriametrics.com";
-import { KubeIngress } from "cdk8s-plus-30/lib/imports/k8s";
+import { KubeIngress } from "cdk8s-plus-31/lib/imports/k8s";
 import { HttpIngressPath } from "../../imports/k8s";
 
 const namespace = basename(__dirname);

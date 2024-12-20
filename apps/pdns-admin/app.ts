@@ -5,7 +5,7 @@ import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
 import { Size } from "cdk8s";
 import { StorageClass } from "../../lib/volume";
-import { PersistentVolumeAccessMode, Probe } from "cdk8s-plus-30";
+import { PersistentVolumeAccessMode, Probe } from "cdk8s-plus-31";
 import { NewKustomize } from "../../lib/kustomize";
 
 const namespace = basename(__dirname);

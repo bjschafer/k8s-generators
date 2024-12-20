@@ -8,7 +8,7 @@ import {
 import { MediaApp, MediaAppProps } from "../../lib/media-app";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { basename } from "../../lib/util";
-import { Cpu, Secret } from "cdk8s-plus-30";
+import { Cpu, Secret } from "cdk8s-plus-31";
 import { NewKustomize } from "../../lib/kustomize";
 
 const namespace = basename(__dirname);
