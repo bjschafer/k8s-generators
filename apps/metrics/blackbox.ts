@@ -49,7 +49,7 @@ export class BlackboxExporter extends Chart {
           image: "quay.io/prometheus/blackbox-exporter:latest",
           imagePullPolicy: ImagePullPolicy.ALWAYS,
           securityContext: DEFAULT_SECURITY_CONTEXT,
-          args: ["--config-file=/config/blackbox.yaml"],
+          args: ["--config.file=/config/blackbox.yaml"],
           ports: [
             {
               name: "metrics",

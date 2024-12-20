@@ -24,7 +24,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - args:
-            - --config-file=/config/blackbox.yaml
+            - --config.file=/config/blackbox.yaml
           image: quay.io/prometheus/blackbox-exporter:latest
           imagePullPolicy: Always
           livenessProbe:
