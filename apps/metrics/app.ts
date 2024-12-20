@@ -5,6 +5,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { App } from "cdk8s";
 import { VmResources } from "./vmresources";
 import { ScrapeConfigs } from "./scrapeconfigs";
+import { BlackboxExporter } from "./blackbox";
 
 export const namespace = basename(__dirname);
 export const name = namespace;
@@ -106,6 +107,7 @@ NewArgoApp(`${name}-config`, {
   recurse: true,
 });
 
+new BlackboxExporter(app, "blackbox");
 new ScrapeConfigs(app, "scrapes");
 new VmResources(app, "resources");
 

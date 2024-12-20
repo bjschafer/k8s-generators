@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    reloader.stakater.com/auto: "true"
+  labels:
+    app: blackbox-exporter
+  name: blackbox-exporter
+  namespace: metrics
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: blackbox-bb-deployment-c87da260
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        cdk8s.io/metadata.addr: blackbox-bb-deployment-c87da260
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - args:
+            - --config-file=/config/blackbox.yaml
+          image: quay.io/prometheus/blackbox-exporter:latest
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 9115
+          name: blackbox-exporter
+          ports:
+            - containerPort: 9115
+              name: metrics
+          readinessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 9115
+          resources:
+            limits:
+              cpu: 200m
+              memory: 64Mi
+            requests:
+              cpu: 100m
+              memory: 32Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /config
+              name: configmap-blackbox-config
+      dnsConfig:
+        nameservers:
+          - 10.0.10.100
+          - 10.0.10.101
+        searches:
+          - cmdcentral.xyz
+      dnsPolicy: None
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - configMap:
+            name: blackbox-config
+          name: configmap-blackbox-config

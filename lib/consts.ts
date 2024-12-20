@@ -95,3 +95,7 @@ export const IP_CIDRS_V4: { [name: string]: string } = {
   IP_CAMERAS: "10.0.45.0/24",
   NETWORK_MANAGEMENT: "10.0.99.0/24",
 };
+
+export const RELOADER_ENABLED = {
+  "reloader.stakater.com/auto": "true",
+};
