@@ -69,8 +69,12 @@ export class BlackboxExporter extends Chart {
               limit: Size.mebibytes(64),
             },
           },
-          liveness: Probe.fromTcpSocket({ port }),
-          readiness: Probe.fromTcpSocket({ port }),
+          liveness: Probe.fromHttpGet("/health", {
+            port: port,
+          }),
+          readiness: Probe.fromHttpGet("/health", {
+            port: port,
+          }),
         },
       ],
     });

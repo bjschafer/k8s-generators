@@ -1,11 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    reloader.stakater.com/auto: "true"
   labels:
-    app: blackbox-exporter
-  name: blackbox-exporter
+    app: proxmox-exporter
+  name: proxmox-exporter
   namespace: metrics
 spec:
   minReadySeconds: 0
@@ -13,42 +11,43 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      cdk8s.io/metadata.addr: blackbox-bb-deployment-c87da260
+      cdk8s.io/metadata.addr: proxmox-proxmox-deployment-c8b6edee
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        cdk8s.io/metadata.addr: blackbox-bb-deployment-c87da260
+        cdk8s.io/metadata.addr: proxmox-proxmox-deployment-c8b6edee
     spec:
       automountServiceAccountToken: false
       containers:
-        - args:
-            - --config.file=/config/blackbox.yaml
-          image: quay.io/prometheus/blackbox-exporter:latest
+        - envFrom:
+            - secretRef:
+                name: proxmox-exporter
+          image: prompve/prometheus-pve-exporter
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
             httpGet:
-              path: /health
-              port: 9115
+              path: /
+              port: 9221
               scheme: HTTP
-          name: blackbox-exporter
+          name: proxmox-exporter
           ports:
-            - containerPort: 9115
+            - containerPort: 9221
               name: metrics
           readinessProbe:
             failureThreshold: 3
             httpGet:
-              path: /health
-              port: 9115
+              path: /
+              port: 9221
               scheme: HTTP
           resources:
             limits:
-              cpu: 200m
+              cpu: 500m
               memory: 64Mi
             requests:
-              cpu: 100m
+              cpu: 50m
               memory: 32Mi
           securityContext:
             allowPrivilegeEscalation: false
@@ -56,8 +55,9 @@ spec:
             readOnlyRootFilesystem: false
             runAsNonRoot: false
           volumeMounts:
-            - mountPath: /config
-              name: configmap-blackbox-config
+            - mountPath: /etc/pve.yml
+              name: configmap-proxmox-exporter
+              subPath: pve.yml
       dnsConfig:
         nameservers:
           - 10.0.10.100
@@ -74,5 +74,5 @@ spec:
       terminationGracePeriodSeconds: 30
       volumes:
         - configMap:
-            name: blackbox-config
-          name: configmap-blackbox-config
+            name: proxmox-exporter
+          name: configmap-proxmox-exporter

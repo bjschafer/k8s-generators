@@ -1,0 +1,30 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMProbe
+metadata:
+  name: proxmox-exporter
+  namespace: metrics
+spec:
+  jobName: proxmox
+  targets:
+    staticConfig:
+      relabelingConfigs:
+        - action: replace
+          sourceLabels:
+            - instance
+          targetLabel: __address__
+        - action: replace
+          sourceLabels:
+            - __address__
+          targetLabel: __param_target
+        - action: replace
+          sourceLabels:
+            - __param_target
+          targetLabel: instance
+        - action: replace
+          replacement: proxmox-exporter:9221
+          targetLabel: __address__
+      targets:
+        - vmhost.cmdcentral.xyz:443
+  vmProberSpec:
+    path: /pve
+    url: proxmox-exporter:port
