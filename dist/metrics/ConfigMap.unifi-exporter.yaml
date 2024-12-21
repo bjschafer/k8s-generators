@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app: unifi-exporter
+  name: unifi-exporter
+  namespace: metrics
+data:
+  up.conf: |
+    [prometheus]
+      disable = false
+      http_listen = "0.0.0.0:9130"
+      report_errors = false
+
+    [influxdb]
+      disable = true
+
+    [unifi]
+      dynamic = false
+
+    [unifi.defaults]
+      url = "https://10.0.10.1"
+      user = "unifipoller"
+      # pass in secret
+
+      sites = ["all"]
+      save_ids = true
+      save_dpi = true
+      save_events = true
+      save_alarms = true
+      save_anomalies = true
+      hash_pii = false
+      verify_ssl = false
+
+    [loki]
+      url = "https://loki.cmdcentral.xyz"
+immutable: false

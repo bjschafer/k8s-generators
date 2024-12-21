@@ -27,6 +27,7 @@
     "eslint": "^9.17.0",
     "js-yaml": "4.1.0",
     "prettier": "^3.4.2",
+    "tsheredoc": "^1.0.1",
     "yaml": "^2.6.1"
   },
   "devDependencies": {

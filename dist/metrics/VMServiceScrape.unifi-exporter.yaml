@@ -8,7 +8,7 @@ spec:
     - port: metrics
   namespaceSelector:
     matchNames:
-      - prometheus
+      - metrics
   selector:
     matchLabels:
       app: unifi-exporter
