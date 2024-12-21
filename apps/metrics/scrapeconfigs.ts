@@ -41,7 +41,7 @@ export class ScrapeConfigs extends Chart {
               {
                 regex: "([^:]+)(:[0-9]+)?",
                 replacement: "$1",
-                sourceLabels: ["__meta_kubernetes_node_name"],
+                sourceLabels: ["__meta_kubernetes_pod_node_name"],
                 targetLabel: "instance",
               },
             ],
