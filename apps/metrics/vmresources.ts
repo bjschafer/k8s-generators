@@ -269,6 +269,8 @@ export class VmResources extends Chart {
                   "/service-discovery",
                   "/api/v1/targets",
                   "/config",
+                  "/target-relabel-debug",
+                  "/metric-relabel-debug",
                 ].map((path: string): HttpIngressPath => {
                   return {
                     path: path,

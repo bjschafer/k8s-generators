@@ -45,6 +45,20 @@ spec:
                   name: http
             path: /config
             pathType: Prefix
+          - backend:
+              service:
+                name: vmagent-metrics
+                port:
+                  name: http
+            path: /target-relabel-debug
+            pathType: Prefix
+          - backend:
+              service:
+                name: vmagent-metrics
+                port:
+                  name: http
+            path: /metric-relabel-debug
+            pathType: Prefix
   tls:
     - hosts:
         - metrics.cmdcentral.xyz
