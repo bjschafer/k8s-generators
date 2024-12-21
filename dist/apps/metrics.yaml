@@ -57,6 +57,19 @@ spec:
               operator: Exists
           vmScrape:
             enabled: true
+            spec:
+              endpoints:
+                - metricRelabelConfigs:
+                    - action: drop
+                      regex: /var/lib/kubelet/pods.+
+                      source_labels:
+                        - mountpoint
+                    - regex: ([^:]+)(:[0-9]+)?
+                      replacement: $1
+                      source_labels:
+                        - __meta_kubernetes_pod_node_name
+                      target_label: instance
+                  port: metrics
         victoria-metrics-operator:
           env:
             - name: VM_CONTAINERREGISTRY
