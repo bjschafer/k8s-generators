@@ -70,7 +70,7 @@ export class VmResources extends Chart {
         },
         notifiers: [
           {
-            url: "http://vmalert-metrics.metrics.svc.cluster.local.:9093",
+            url: "http://vmalertmanager-metrics.metrics.svc.cluster.local.:9093",
           },
         ],
         port: "8080",
