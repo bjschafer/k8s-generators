@@ -122,27 +122,7 @@ NewHelmApp(
         },
       },
       vmScrape: {
-        enabled: true,
-        spec: {
-          endpoints: [
-            {
-              port: "metrics",
-              metricRelabelConfigs: [
-                {
-                  action: "drop",
-                  source_labels: ["mountpoint"],
-                  regex: "/var/lib/kubelet/pods.+",
-                },
-                {
-                  source_labels: ["__meta_kubernetes_node_name"],
-                  target_label: "instance",
-                  regex: "([^:]+)(:[0-9]+)?",
-                  replacement: "$1",
-                },
-              ],
-            },
-          ],
-        },
+        enabled: false, // we'll manually do this, too
       },
     },
   },

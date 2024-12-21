@@ -56,20 +56,7 @@ spec:
               key: k3s-controlplane
               operator: Exists
           vmScrape:
-            enabled: true
-            spec:
-              endpoints:
-                - metricRelabelConfigs:
-                    - action: drop
-                      regex: /var/lib/kubelet/pods.+
-                      source_labels:
-                        - mountpoint
-                    - regex: ([^:]+)(:[0-9]+)?
-                      replacement: $1
-                      source_labels:
-                        - __meta_kubernetes_node_name
-                      target_label: instance
-                  port: metrics
+            enabled: false
         victoria-metrics-operator:
           env:
             - name: VM_CONTAINERREGISTRY

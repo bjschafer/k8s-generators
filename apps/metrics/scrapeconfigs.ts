@@ -14,6 +14,42 @@ export class ScrapeConfigs extends Chart {
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
+    new VmServiceScrape(this, "node-exporter", {
+      metadata: {
+        name: "node-exporter",
+        namespace: namespace,
+      },
+      spec: {
+        jobLabel: "node-exporter",
+        selector: {
+          matchLabels: {
+            "app.kubernetes.io/instance": "metrics",
+            "app.kubernetes.io/name": "prometheus-node-exporter",
+          },
+        },
+        endpoints: [
+          {
+            port: "metrics",
+            metricRelabelConfigs: [
+              {
+                action: "drop",
+                regex: "/var/lib/kubelet/pods.+",
+                sourceLabels: ["mountpoint"],
+              },
+            ],
+            relabelConfigs: [
+              {
+                regex: "([^:]+)(:[0-9]+)?",
+                replacement: "$1",
+                sourceLabels: ["__meta_kubernetes_node_name"],
+                targetLabel: "instance",
+              },
+            ],
+          },
+        ],
+      },
+    });
+
     new VmScrapeConfig(this, "ceph", {
       metadata: {
         name: "ceph",
