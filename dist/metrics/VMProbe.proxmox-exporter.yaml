@@ -10,10 +10,6 @@ spec:
       relabelingConfigs:
         - action: replace
           sourceLabels:
-            - instance
-          targetLabel: __address__
-        - action: replace
-          sourceLabels:
             - __address__
           targetLabel: __param_target
         - action: replace

@@ -138,11 +138,6 @@ export class ProxmoxExporter extends Chart {
             targets: ["vmhost.cmdcentral.xyz:443"],
             relabelingConfigs: [
               {
-                sourceLabels: ["instance"],
-                targetLabel: "__address__",
-                action: "replace",
-              },
-              {
                 sourceLabels: ["__address__"],
                 targetLabel: "__param_target",
                 action: "replace",
