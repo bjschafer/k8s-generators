@@ -1,0 +1,25 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  name: blackbox-exporter
+  namespace: metrics
+spec:
+  groups:
+    - name: blackbox-exporter
+      rules:
+        - alert: BlackboxDNSProbesFailing
+          annotations:
+            summary: Blackbox DNS probes failing for 15 minutes for {{ $labels.instance }}
+          expr: probe_dns_query_succeeded < 1
+          for: 15m
+          labels:
+            push_notify: "true"
+            severity: warning
+        - alert: BlackboxHTTPNotReturningSuccess
+          annotations:
+            summary: Blackbox HTTP probes to {{ $labels.instance }} returning {{ $value }}
+          expr: probe_http_status_code != 200
+          for: 15m
+          labels:
+            push_notify: "true"
+            severity: warning

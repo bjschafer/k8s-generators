@@ -1,0 +1,24 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  name: argo
+  namespace: metrics
+spec:
+  groups:
+    - name: argo
+      rules:
+        - alert: ArgoAppNotSynced
+          annotations:
+            summary: Argo app {{ $labels.name }} not synced for at least 15 minutes
+          expr: count by (name) (argocd_app_info{sync_status!="Synced"}) > 0
+          for: 15m
+          labels:
+            severity: warning
+        - alert: ArgoImageUpdaterFailedUpdates
+          annotations:
+            summary: Argo app {{ $labels.application }} failing to autoupdate
+          expr: increase(argocd_image_updater_images_errors_total[5m]) > 0
+          for: 15m
+          labels:
+            push_notify: "true"
+            severity: warning

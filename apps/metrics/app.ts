@@ -9,6 +9,7 @@ import { BlackboxExporter } from "./blackbox";
 import { ProxmoxExporter } from "./proxmox";
 import { SnmpExporter } from "./snmp";
 import { UnifiExporter } from "./unifi";
+import { addAlerts } from "./alerts";
 
 export const namespace = basename(__dirname);
 export const name = namespace;
@@ -116,5 +117,7 @@ new ScrapeConfigs(app, "scrapes");
 new SnmpExporter(app, "snmp");
 new UnifiExporter(app, "unifi");
 new VmResources(app, "resources");
+
+addAlerts(app, "alerts");
 
 app.synth();

@@ -16,6 +16,7 @@ import {
   VmProbe,
   VmServiceScrape,
 } from "../../imports/operator.victoriametrics.com";
+import { Alert, SEND_TO_TELEGRAM } from "../../lib/monitoring/alerts";
 
 const name = "blackbox-exporter";
 const labels = {
@@ -216,6 +217,39 @@ export class BlackboxExporter extends Chart {
       "https://vmhost03.cmdcentral.xyz:8006",
       "https://vmhost03.cmdcentral.xyz:8007",
     ]);
+
+    new Alert(this, "alerts", {
+      name: name,
+      namespace: namespace,
+      rules: [
+        {
+          alert: "BlackboxDNSProbesFailing",
+          expr: `probe_dns_query_succeeded < 1`,
+          for: "15m",
+          labels: {
+            severity: "warning",
+            ...SEND_TO_TELEGRAM,
+          },
+          annotations: {
+            summary:
+              "Blackbox DNS probes failing for 15 minutes for {{ $labels.instance }}",
+          },
+        },
+        {
+          alert: "BlackboxHTTPNotReturningSuccess",
+          expr: `probe_http_status_code != 200`,
+          for: "15m",
+          labels: {
+            severity: "warning",
+            ...SEND_TO_TELEGRAM,
+          },
+          annotations: {
+            summary:
+              "Blackbox HTTP probes to {{ $labels.instance }} returning {{ $value }}",
+          },
+        },
+      ],
+    });
   }
 
   private newBlackboxProbe(
