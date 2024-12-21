@@ -1,0 +1,18 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMProbe
+metadata:
+  name: ping-dns
+  namespace: metrics
+spec:
+  jobName: blackbox-ping-dns
+  module: ping
+  targets:
+    staticConfig:
+      targets:
+        - 1.1.1.1
+        - 8.8.8.8
+        - 9.9.9.9
+        - 208.67.222.222
+  vmProberSpec:
+    path: /probe
+    url: blackbox-exporter:9115

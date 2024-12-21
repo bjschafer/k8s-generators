@@ -1,0 +1,21 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMProbe
+metadata:
+  name: proxmox
+  namespace: metrics
+spec:
+  jobName: blackbox-proxmox
+  module: http_2xx
+  targets:
+    staticConfig:
+      targets:
+        - https://vmhost01.cmdcentral.xyz
+        - https://vmhost02.cmdcentral.xyz
+        - https://vmhost03.cmdcentral.xyz
+        - https://vmhost01.cmdcentral.xyz:8006
+        - https://vmhost02.cmdcentral.xyz:8006
+        - https://vmhost03.cmdcentral.xyz:8006
+        - https://vmhost03.cmdcentral.xyz:8007
+  vmProberSpec:
+    path: /probe
+    url: blackbox-exporter:9115

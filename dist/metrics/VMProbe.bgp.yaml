@@ -1,0 +1,16 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMProbe
+metadata:
+  name: bgp
+  namespace: metrics
+spec:
+  jobName: blackbox-bgp
+  module: http_2xx
+  targets:
+    staticConfig:
+      targets:
+        - https://ceph.cmdcentral.xyz
+        - https://vmhost.cmdcentral.xyz
+  vmProberSpec:
+    path: /probe
+    url: blackbox-exporter:9115

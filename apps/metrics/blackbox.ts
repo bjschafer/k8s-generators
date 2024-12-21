@@ -12,7 +12,10 @@ import {
   Probe,
   Volume,
 } from "cdk8s-plus-31";
-import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";
+import {
+  VmProbe,
+  VmServiceScrape,
+} from "../../imports/operator.victoriametrics.com";
 
 const name = "blackbox-exporter";
 const labels = {
@@ -179,104 +182,70 @@ export class BlackboxExporter extends Chart {
         selector: { matchLabels: { ...labels } },
       },
     });
+
+    this.newBlackboxProbe("bgp", "http_2xx", [
+      "https://ceph.cmdcentral.xyz",
+      "https://vmhost.cmdcentral.xyz",
+    ]);
+
+    this.newBlackboxProbe("dns", "dns_udp", ["10.0.10.100", "10.0.10.101"]);
+    this.newBlackboxProbe("ping-dns", "ping", [
+      "1.1.1.1",
+      "8.8.8.8",
+      "9.9.9.9",
+      "208.67.222.222",
+    ]);
+
+    this.newBlackboxProbe("ping-lakelair", "ping", [
+      "192.168.0.1", // gateway
+      "192.168.0.3", // west-switch
+    ]);
+
+    this.newBlackboxProbe("ping-other", "ping", ["google.com"]);
+
+    this.newBlackboxProbe("proxmox", "http_2xx", [
+      "https://vmhost01.cmdcentral.xyz",
+      "https://vmhost02.cmdcentral.xyz",
+      "https://vmhost03.cmdcentral.xyz",
+      "https://vmhost01.cmdcentral.xyz:8006",
+      "https://vmhost02.cmdcentral.xyz:8006",
+      "https://vmhost03.cmdcentral.xyz:8006",
+      "https://vmhost03.cmdcentral.xyz:8007",
+    ]);
+  }
+
+  private newBlackboxProbe(
+    probeName: string,
+    module: blackbox_module,
+    targets: string[],
+  ) {
+    new VmProbe(this, `probe-${probeName}`, {
+      metadata: {
+        name: probeName,
+        namespace: namespace,
+      },
+      spec: {
+        jobName: `blackbox-${probeName}`,
+        vmProberSpec: {
+          url: `${name}:${port}`,
+          path: "/probe",
+        },
+        module: module,
+        targets: {
+          staticConfig: {
+            targets: targets,
+          },
+        },
+      },
+    });
   }
 }
 
-/*
----
-          volumeMounts:
-            - name: config
-              mountPath: /config
-      volumes:
-        - name: config
-          configMap:
-            name: blackbox-config
-...
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: blackbox-exporter
-  namespace: prometheus
-  labels:
-    app: blackbox-exporter
-spec:
-  selector:
-    app: blackbox-exporter
-  ports:
-    - name: metrics
-      port: 9115
-      protocol: TCP
-      targetPort: 9115
-...
----
-apiVersion: monitoring.coreos.com/v1
-kind: PodMonitor
-metadata:
-  name: blackbox-exporter-self-metrics
-  namespace: prometheus
-  labels:
-    release: prometheus-kube-prometheus-stack
-spec:
-  namespaceSelector:
-    matchNames:
-      - prometheus
-  selector:
-    matchLabels:
-      app: blackbox-exporter
-  podMetricsEndpoints:
-  - port: metrics
-...
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: blackbox-config
-  namespace: prometheus
-  labels:
-    app: blackbox-exporter
-data:
-  blackbox.yaml: |
-    modules:
-      http_2xx:
-        prober: http
-        http:
-          valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
-          method: GET
-          preferred_ip_protocol: "ip4"
-          follow_redirects: true
-          enable_http2: true
-          tls_config:
-            insecure_skip_verify: true
-      http_post_2xx:
-        prober: http
-        http:
-          method: POST
-          tls_config:
-            insecure_skip_verify: true
-      tcp_connect:
-        prober: tcp
-      pop3s_banner:
-        prober: tcp
-        tcp:
-          query_response:
-          - expect: "^+OK"
-          tls: true
-      ssh_banner:
-        prober: tcp
-        tcp:
-          query_response:
-          - expect: "^SSH-2.0-"
-          - send: "SSH-2.0-blackbox-ssh-check"
-      dns_udp:
-        prober: dns
-        dns:
-          query_name: "gateway.cmdcentral.xyz"
-      ping:
-        prober: icmp
-        timeout: 5s
-        icmp:
-          preferred_ip_protocol: "ipv4"
-...
-
-*/
+type blackbox_module =
+  | "http_2xx"
+  | "http_post_2xx"
+  | "tcp_connect"
+  | "pop3s_banner"
+  | "ssh_banner"
+  | "dns_udp"
+  | "ping";

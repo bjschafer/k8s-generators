@@ -1,0 +1,16 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMProbe
+metadata:
+  name: ping-lakelair
+  namespace: metrics
+spec:
+  jobName: blackbox-ping-lakelair
+  module: ping
+  targets:
+    staticConfig:
+      targets:
+        - 192.168.0.1
+        - 192.168.0.3
+  vmProberSpec:
+    path: /probe
+    url: blackbox-exporter:9115

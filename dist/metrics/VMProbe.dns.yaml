@@ -1,0 +1,16 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMProbe
+metadata:
+  name: dns
+  namespace: metrics
+spec:
+  jobName: blackbox-dns
+  module: dns_udp
+  targets:
+    staticConfig:
+      targets:
+        - 10.0.10.100
+        - 10.0.10.101
+  vmProberSpec:
+    path: /probe
+    url: blackbox-exporter:9115
