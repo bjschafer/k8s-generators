@@ -1,0 +1,25 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  name: velero
+  namespace: metrics
+spec:
+  groups:
+    - name: velero
+      rules:
+        - alert: VeleroBackupPartialFailures
+          annotations:
+            message: Velero backup {{ $labels.schedule }} has partially failed backups.
+          expr: sum by (schedule) (increase(velero_backup_partial_failure_total{schedule!=""}[1h])) > 0
+          for: 0m
+          labels:
+            push_notify: "true"
+            severity: warning
+        - alert: VeleroBackupFailures
+          annotations:
+            message: Velero backup {{ $labels.schedule }} has failed backups.
+          expr: sum by (schedule) (increase(velero_backup_failure_total{schedule!=""}[1h])) > 0
+          for: 0m
+          labels:
+            push_notify: "true"
+            severity: warning

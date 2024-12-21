@@ -1,0 +1,221 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  name: host
+  namespace: metrics
+spec:
+  groups:
+    - name: host
+      rules:
+        - alert: HostOutOfMemory
+          annotations:
+            description: |
+              Node memory is filling up (< 10% left)
+              VALUE = {{ $value }}
+              LABELS = {{ $labels }}
+            summary: Host {{ $labels.instance }} out of memory
+          expr: |
+            (
+                node_memory_MemAvailable_bytes
+                +
+                node_zfs_arc_size
+            )
+            /
+            node_memory_MemTotal_bytes * 100 < 10
+          for: 2m
+          labels:
+            push_notify: "true"
+            severity: warning
+        - alert: HostMemoryUnderMemoryPressure
+          annotations:
+            description: '"The node is under heavy memory pressure. High rate of major page faults\n VALUE = {{ $value }}\n LABELS = {{ $labels }}"'
+            summary: Host memory under memory pressure (instance {{ $labels.instance }})
+          expr: rate(node_vmstat_pgmajfault[1m]) > 1000
+          for: 2m
+          labels:
+            severity: warning
+        - alert: HostOutOfDiskSpace
+          annotations:
+            description: |-
+              Disk is almost full (< 10% left)
+
+              VALUE = {{ $value }}
+
+              LABELS = {{ $labels }}
+            summary: Host {{ $labels.instance }} out of disk space
+          expr: (node_filesystem_avail_bytes{mountpoint!="/boot/firmware"} * 100) / node_filesystem_size_bytes < 10 and ON (instance, device, mountpoint) node_filesystem_readonly == 0
+          for: 2m
+          labels:
+            push_notify: "true"
+            severity: warning
+        - alert: HostOutOfInodes
+          annotations:
+            description: |-
+              Disk is almost running out of available inodes (< 10% left)
+
+              VALUE = {{ $value }}
+
+              LABELS = {{ $labels }}
+            summary: Host {{ $labels.instance }} out of inodes
+          expr: node_filesystem_files_free{} / node_filesystem_files{} * 100 < 10 and ON (instance, device, mountpoint) node_filesystem_readonly{} == 0
+          for: 2m
+          labels:
+            push_notify: "true"
+            severity: warning
+        - alert: HostInodesWillFillIn24Hours
+          annotations:
+            description: |-
+              Filesystem is predicted to run out of inodes within the next 24 hours at current write rate
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+            summary: Host inodes will fill in 24 hours (instance {{ $labels.instance }})
+          expr: node_filesystem_files_free{} / node_filesystem_files{} * 100 < 10 and predict_linear(node_filesystem_files_free{}[1h], 24 * 3600) < 0 and ON (instance, device, mountpoint) node_filesystem_readonly{} == 0
+          for: 2m
+          labels:
+            severity: warning
+        - alert: HostDiskWillFillIn24Hours
+          annotations:
+            description: '"Filesystem is predicted to run out of space within the next 24 hours at current write rate\n VALUE = {{ $value }}\n LABELS = {{ $labels }}"'
+            summary: Host disk will fill in 24 hours (instance {{ $labels.instance }})
+          expr: |-
+            (node_filesystem_avail_bytes * 100) / node_filesystem_size_bytes < 10 and ON (instance, device, mountpoint) predict_linear(node_filesystem_avail_bytes{
+                fstype!="tmpfs"}[1h], 24 * 3600) < 0
+            and ON (instance, device, mountpoint) node_filesystem_readonly == 0
+          for: 2m
+          labels:
+            severity: warning
+        - alert: HostUnusualDiskReadLatency
+          annotations:
+            description: '"Disk latency is growing (read operations > 100ms)\n VALUE = {{ $value }}\n LABELS = {{ $labels }}"'
+            summary: Host unusual disk read latency (instance {{ $labels.instance }})
+          expr: rate(node_disk_read_time_seconds_total[1m]) / rate(node_disk_reads_completed_total[1m]) > 0.1 and rate(node_disk_reads_completed_total[1m]) > 0
+          for: 20m
+          labels:
+            severity: warning
+        - alert: HostUnusualDiskWriteLatency
+          annotations:
+            description: '"Disk latency is growing (write operations > 100ms)\n VALUE = {{ $value }}\n LABELS = {{ $labels }}"'
+            summary: Host unusual disk write latency (instance {{ $labels.instance }})
+          expr: rate(node_disk_write_time_seconds_total[1m]) / rate(node_disk_writes_completed_total[1m]) > 0.1 and rate(node_disk_writes_completed_total[1m]) > 0
+          for: 20m
+          labels:
+            severity: warning
+        - alert: HostHighIOPS
+          annotations:
+            description: '"Host has more than 5k combined IOPS\n VALUE = {{ $value }}\n LABELS = {{ $labels }}"'
+            summary: '"Host {{ $labels.instance }} high total IOPS (>5000)'
+          expr: sum by (instance) (irate(node_disk_writes_completed_total{device=~"[a-z]+|nvme[0-9]+n[0-9]+"}[5m])) + sum by (instance) (irate(node_disk_reads_completed_total{device=~"[a-z]+|nvme[0-9]+n[0-9]+"}[5m])) > 5000
+          for: 15m
+          labels:
+            push_notify: "true"
+            severity: warning
+        - alert: HostHighCpuLoad
+          annotations:
+            description: |-
+              CPU load is > 80%
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+            summary: Host high CPU load (instance {{ $labels.instance }})
+          expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[2m])) * 100) > 80
+          labels:
+            push_notify: "true"
+            severity: warning
+        - alert: HostCpuStealNoisyNeighbor
+          annotations:
+            description: |-
+              CPU steal is > 10%. A noisy neighbor is killing VM performances or a spot instance may be out of credit.
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+            summary: Host CPU steal noisy neighbor (instance {{ $labels.instance }})
+          expr: avg by(instance) (rate(node_cpu_seconds_total{mode="steal"}[5m])) * 100 > 10
+          labels:
+            severity: warning
+        - alert: HostContextSwitching
+          annotations:
+            description: |-
+              Context switching is growing on node (> 1200 / s)
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+            summary: Host context switching (instance {{ $labels.instance }})
+          expr: |-
+            (rate(node_context_switches_total{job!="node-exporter",job!="vmhost"}[5m])) / (
+                count by(instance, job)
+                (node_cpu_seconds_total{mode="idle"})
+            ) > 1200
+          for: 15m
+          labels:
+            severity: warning
+        - alert: HostSwapIsFillingUp
+          annotations:
+            description: |-
+              Swap is filling up (>90%)
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+            summary: Host swap is filling up (instance {{ $labels.instance }})
+          expr: (1 - (node_memory_SwapFree_bytes / node_memory_SwapTotal_bytes)) * 100 > 90
+          for: 20m
+          labels:
+            severity: warning
+        - alert: HostSystemdServiceCrashed
+          annotations:
+            description: |-
+              systemd service crashed
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+            summary: Host systemd service crashed (instance {{ $labels.instance }})
+          expr: |-
+            node_systemd_unit_state{
+                state="failed",
+                name!="motd-news.service",
+                name!~"sssd.*socket",
+                name!~"fwupd.*service",
+                name!="rpc-svcgssd.service"
+            } == 1
+          for: 1h
+          labels:
+            severity: warning
+        - alert: HostOomKillDetected
+          annotations:
+            description: |-
+              OOM kill detected
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+            summary: Host {{ $labels.instance }} OOM kill detected
+          expr: increase(node_vmstat_oom_kill[1m]) > 0
+          labels:
+            push_notify: "true"
+            severity: warning
+        - alert: HostNetworkInterfaceSaturated
+          annotations:
+            description: |-
+              The network interface "{{ $labels.device }}" on "{{ $labels.instance }}" is getting overloaded.
+
+              VALUE = {{ $value }}
+
+              LABELS = {{ $labels }}
+            summary: Host {{ $labels.instance }} Network interface saturated
+          expr: |-
+            (
+                rate(
+                    node_network_receive_bytes_total{device!~"tap.*",job!="vmhost"}[1m]
+                )
+                +
+                rate(
+                    node_network_transmit_bytes_total{device!~"tap.*",job!="vmhost"}[1m]
+                )
+            ) / node_network_speed_bytes{device!~"tap.*",job!="vmhost"} > 0.8 < 10000
+          for: 1m
+          labels:
+            push_notify: "true"
+            severity: warning
+        - alert: HostRequiresReboot
+          annotations:
+            description: |-
+              {{ $labels.instance }} requires a reboot.
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+            summary: Host requires reboot (instance {{ $labels.instance }})
+          expr: kured_reboot_required > 0
+          for: 4h
+          labels:
+            severity: info

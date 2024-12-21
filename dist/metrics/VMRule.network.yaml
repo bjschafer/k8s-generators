@@ -1,0 +1,30 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  name: network
+  namespace: metrics
+spec:
+  groups:
+    - name: network
+      rules:
+        - alert: HighPingLossMax
+          annotations:
+            description: |-
+              Ping loss from at least one source > 10%
+                VALUE = {{ $value }}
+            summary: Ping loss from at least one source > 10%
+          expr: min(probe_success{job!="blackbox-ping-lakelair",job=~"blackbox-ping.*"}) < 0.9
+          for: 10m
+          labels:
+            severity: warning
+        - alert: HighPingLossAvg
+          annotations:
+            description: |-
+              Ping loss across all sources > 10%
+                VALUE = {{ $value }}
+            summary: Ping loss across all sources > 10%
+          expr: avg(probe_success{job!="blackbox-ping-lakelair",job=~"blackbox-ping.*"}) < 0.9
+          for: 10m
+          labels:
+            push_notify: "true"
+            severity: critical

@@ -1,0 +1,20 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  name: ups
+  namespace: metrics
+spec:
+  groups:
+    - name: ups
+      rules:
+        - alert: UpsHighLoad
+          annotations:
+            description: |-
+              UPS load on {{ $labels.ups }}
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+            summary: UPS load over 75% on UPS {{ $labels.ups }}
+          expr: nut_load * 100 > 75
+          for: 5m
+          labels:
+            severity: warning

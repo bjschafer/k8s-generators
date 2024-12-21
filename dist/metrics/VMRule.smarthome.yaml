@@ -1,0 +1,25 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  name: smarthome
+  namespace: metrics
+spec:
+  groups:
+    - name: smarthome
+      rules:
+        - alert: SmartHomeAirQualityDropping
+          annotations:
+            summary: PM2.5 in living room is rising rapidly (delta {{ $value }})
+          expr: delta(hass_sensor_pm25_u0xb5g_per_mu0xb3[30m]) > 2.5
+          for: 5m
+          labels:
+            push_notify: "true"
+            severity: warning
+        - alert: SmartHomeBadAirQuality
+          annotations:
+            summary: PM2.5 in living room has been > 20 for the past hour ({{ $value }})
+          expr: max_over_time(hass_sensor_pm25_u0xb5g_per_mu0xb3[1h]) > 20
+          for: 60m
+          labels:
+            push_notify: "true"
+            severity: warning
