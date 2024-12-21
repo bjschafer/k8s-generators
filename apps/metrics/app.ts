@@ -7,6 +7,7 @@ import { VmResources } from "./vmresources";
 import { ScrapeConfigs } from "./scrapeconfigs";
 import { BlackboxExporter } from "./blackbox";
 import { ProxmoxExporter } from "./proxmox";
+import { SnmpExporter } from "./snmp";
 
 export const namespace = basename(__dirname);
 export const name = namespace;
@@ -111,6 +112,7 @@ NewArgoApp(`${name}-config`, {
 new BlackboxExporter(app, "blackbox");
 new ProxmoxExporter(app, "proxmox");
 new ScrapeConfigs(app, "scrapes");
+new SnmpExporter(app, "snmp");
 new VmResources(app, "resources");
 
 app.synth();

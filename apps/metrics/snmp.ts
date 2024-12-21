@@ -19,7 +19,7 @@ const labels = {
 };
 const port = 9116;
 
-export class ProxmoxExporter extends Chart {
+export class SnmpExporter extends Chart {
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
