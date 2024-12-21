@@ -27,4 +27,4 @@ spec:
         - vmhost.cmdcentral.xyz:443
   vmProberSpec:
     path: /pve
-    url: proxmox-exporter:port
+    url: proxmox-exporter:9221
