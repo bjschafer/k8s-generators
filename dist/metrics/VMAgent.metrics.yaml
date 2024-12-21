@@ -6,7 +6,7 @@ metadata:
 spec:
   extraArgs:
     memory.allowedPercent: "80"
-    promscrape.dropOriginalLabels: "true"
+    promscrape.dropOriginalLabels: "false"
     promscrape.streamParse: "true"
   port: "8429"
   remoteWrite:

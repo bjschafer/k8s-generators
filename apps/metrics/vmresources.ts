@@ -29,7 +29,7 @@ export class VmResources extends Chart {
       spec: {
         extraArgs: {
           "memory.allowedPercent": "80", // https://docs.victoriametrics.com/vmagent/#troubleshooting
-          "promscrape.dropOriginalLabels": "true",
+          "promscrape.dropOriginalLabels": "false",
           "promscrape.streamParse": "true",
         },
         port: `${vmagentPort}`,
