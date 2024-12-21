@@ -93,7 +93,37 @@ NewHelmApp(
       enabled: false,
     },
     "prometheus-node-exporter": {
-      enabled: false, // for now
+      fullnameOverride: "node-exporter",
+      tolerations: [
+        {
+          effect: "NoSchedule",
+          operator: "Exists",
+        },
+        {
+          key: "k3s-controlplane",
+          effect: "NoExecute",
+          operator: "Exists",
+        },
+      ],
+      extraArgs: [
+        // first two are default
+        "--collector.filesystem.mount-points-exclude=^/(dev|proc|sys|var/lib/docker/.+|var/lib/kubelet/.+)($|/)",
+        "--collector.filesystem.fs-types-exclude=^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs)$",
+        "--collector.netdev.address-info",
+      ],
+      resources: {
+        requests: {
+          cpu: "60m",
+          memory: "32Mi",
+        },
+        limits: {
+          cpu: "750m",
+          memory: "96Mi",
+        },
+      },
+      vmScrape: {
+        enabled: true,
+      },
     },
   },
 );

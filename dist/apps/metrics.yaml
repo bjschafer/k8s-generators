@@ -37,7 +37,26 @@ spec:
         kubeScheduler:
           enabled: false
         prometheus-node-exporter:
-          enabled: false
+          extraArgs:
+            - --collector.filesystem.mount-points-exclude=^/(dev|proc|sys|var/lib/docker/.+|var/lib/kubelet/.+)($|/)
+            - --collector.filesystem.fs-types-exclude=^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs)$
+            - --collector.netdev.address-info
+          fullnameOverride: node-exporter
+          resources:
+            limits:
+              cpu: 750m
+              memory: 96Mi
+            requests:
+              cpu: 60m
+              memory: 32Mi
+          tolerations:
+            - effect: NoSchedule
+              operator: Exists
+            - effect: NoExecute
+              key: k3s-controlplane
+              operator: Exists
+          vmScrape:
+            enabled: true
         victoria-metrics-operator:
           env:
             - name: VM_CONTAINERREGISTRY
