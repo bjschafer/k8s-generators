@@ -134,7 +134,7 @@ NewHelmApp(
                   regex: "/var/lib/kubelet/pods.+",
                 },
                 {
-                  source_labels: ["__meta_kubernetes_pod_node_name"],
+                  source_labels: ["__meta_kubernetes_node_name"],
                   target_label: "instance",
                   regex: "([^:]+)(:[0-9]+)?",
                   replacement: "$1",
