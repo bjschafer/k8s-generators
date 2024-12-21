@@ -12,6 +12,7 @@ import {
   VmAlertmanagerConfig,
   VmSingle,
   VmSingleSpecResourcesRequests,
+  VmSingleSpecResourcesLimits,
 } from "../../imports/operator.victoriametrics.com";
 import { StorageClass } from "../../lib/volume";
 import { hostname, namespace } from "./app";
@@ -222,6 +223,16 @@ export class VmResources extends Chart {
             requests: {
               storage: VmSingleSpecResourcesRequests.fromString("80Gi"),
             },
+          },
+        },
+        resources: {
+          limits: {
+            cpu: VmSingleSpecResourcesLimits.fromString("1200m"),
+            memory: VmSingleSpecResourcesLimits.fromString("3Gi"),
+          },
+          requests: {
+            cpu: VmSingleSpecResourcesRequests.fromString("200m"),
+            memory: VmSingleSpecResourcesRequests.fromString("1Gi"),
           },
         },
       },

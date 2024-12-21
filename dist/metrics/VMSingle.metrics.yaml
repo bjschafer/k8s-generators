@@ -5,6 +5,13 @@ metadata:
   namespace: metrics
 spec:
   replicaCount: 1
+  resources:
+    limits:
+      cpu: 1200m
+      memory: 3Gi
+    requests:
+      cpu: 200m
+      memory: 1Gi
   retentionPeriod: 90d
   storage:
     resources:
