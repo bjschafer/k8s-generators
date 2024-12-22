@@ -19,6 +19,13 @@ spec:
             pathType: Prefix
           - backend:
               service:
+                name: vmalert-metrics
+                port:
+                  name: http
+            path: /vmalert
+            pathType: Prefix
+          - backend:
+              service:
                 name: vmagent-metrics
                 port:
                   name: http

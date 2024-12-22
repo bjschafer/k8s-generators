@@ -264,6 +264,18 @@ export class VmResources extends Chart {
                     },
                   },
                 },
+                {
+                  path: "/vmalert",
+                  pathType: "Prefix",
+                  backend: {
+                    service: {
+                      name: "vmalert-metrics",
+                      port: {
+                        name: "http",
+                      },
+                    },
+                  },
+                },
                 ...[
                   "/targets",
                   "/service-discovery",
