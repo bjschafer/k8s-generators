@@ -417,19 +417,6 @@ export function addAlerts(scope: Construct, id: string): void {
         },
       },
       {
-        alert: "KubernetesOutOfCapacity",
-        expr: 'sum by (node) ((kube_pod_status_phase{phase="Running"} == 1) + on(uid) group_left(node) (0 * kube_pod_info{pod_template_hash=""})) / sum by (node) (kube_node_status_allocatable{resource="pods"}) * 100 > 90',
-        for: "2m",
-        labels: {
-          severity: "warning",
-        },
-        annotations: {
-          summary: "Kubernetes out of capacity (node {{ $labels.node }})",
-          description:
-            "{{ $labels.node }} is out of capacity\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
-        },
-      },
-      {
         alert: "KubernetesContainerOomKilled",
         expr: '(kube_pod_container_status_restarts_total - kube_pod_container_status_restarts_total offset 10m >= 1) and ignoring (reason) min_over_time(kube_pod_container_status_last_terminated_reason{reason="OOMKilled"}[10m]) == 1',
         for: "0m",
