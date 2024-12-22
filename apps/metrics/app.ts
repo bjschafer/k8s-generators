@@ -82,6 +82,10 @@ NewHelmApp(
     },
     grafana: {
       enabled: false,
+      ingress: {
+        enabled: false,
+        hosts: ["grafana.cmdcentral.xyz"],
+      },
     },
     kubeControllerManager: {
       enabled: false,
