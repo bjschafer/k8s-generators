@@ -67,6 +67,7 @@ export class VmResources extends Chart {
         extraArgs: {
           "http.pathPrefix": "/",
           "remoteWrite.disablePathAppend": "true",
+          "external.url": "https://metrics.cmdcentral.xyz",
         },
         notifiers: [
           {

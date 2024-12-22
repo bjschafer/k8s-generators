@@ -8,6 +8,7 @@ spec:
     url: http://vmsingle-metrics.metrics.svc.cluster.local.:8429
   evaluationInterval: 15s
   extraArgs:
+    external.url: https://metrics.cmdcentral.xyz
     http.pathPrefix: /
     remoteWrite.disablePathAppend: "true"
   notifiers:
