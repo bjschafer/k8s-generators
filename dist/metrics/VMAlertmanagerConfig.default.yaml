@@ -53,7 +53,7 @@ spec:
           - cluster
         matchers:
           - namespace="metrics"
-        receiver: metrics-default-blackhole
+        receiver: blackhole
         routes:
           - continue: false
             matchers:

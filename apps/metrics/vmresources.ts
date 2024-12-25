@@ -164,7 +164,7 @@ export class VmResources extends Chart {
               continue: false,
             },
             {
-              receiver: "metrics-default-blackhole",
+              receiver: "blackhole",
               group_by: ["alertname", "cluster"],
               matchers: ['namespace="metrics"'],
               continue: true,
