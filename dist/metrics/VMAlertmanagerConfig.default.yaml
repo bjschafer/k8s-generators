@@ -38,15 +38,15 @@ spec:
       - continue: false
         matchers:
           - push_notify="true"
-        receiver: metrics-default-telegram
+        receiver: telegram
       - continue: false
         matchers:
           - priority=~"0|1"
-        receiver: metrics-default-telegram
+        receiver: telegram
       - continue: false
         matchers:
           - priority="2"
-        receiver: metrics-default-email
+        receiver: email
       - continue: true
         group_by:
           - alertname
@@ -58,6 +58,6 @@ spec:
           - continue: false
             matchers:
               - push_notify="true"
-            receiver: metrics-default-telegram
+            receiver: telegram
           - continue: false
-            receiver: metrics-default-email
+            receiver: email

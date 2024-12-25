@@ -149,17 +149,17 @@ export class VmResources extends Chart {
           continue: false,
           routes: [
             {
-              receiver: "metrics-default-telegram",
+              receiver: "telegram",
               matchers: ['push_notify="true"'],
               continue: false,
             },
             {
-              receiver: "metrics-default-telegram",
+              receiver: "telegram",
               matchers: ['priority=~"0|1"'],
               continue: false,
             },
             {
-              receiver: "metrics-default-email",
+              receiver: "email",
               matchers: ['priority="2"'],
               continue: false,
             },
@@ -170,12 +170,12 @@ export class VmResources extends Chart {
               continue: true,
               routes: [
                 {
-                  receiver: "metrics-default-telegram",
+                  receiver: "telegram",
                   matchers: ['push_notify="true"'],
                   continue: false,
                 },
                 {
-                  receiver: "metrics-default-email",
+                  receiver: "email",
                   continue: false,
                 },
               ],
