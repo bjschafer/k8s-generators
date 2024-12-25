@@ -146,18 +146,39 @@ export class VmResources extends Chart {
         ],
         route: {
           receiver: "blackhole",
-          continue: true,
-          groupBy: ["alertname", "cluster"],
+          continue: false,
           routes: [
             {
-              receiver: "telegram",
+              receiver: "metrics-default-telegram",
               matchers: ['push_notify="true"'],
+              continue: false,
             },
             {
-              receiver: "email",
-              match: {
-                severity: "critical",
-              },
+              receiver: "metrics-default-telegram",
+              matchers: ['priority=~"0|1"'],
+              continue: false,
+            },
+            {
+              receiver: "metrics-default-email",
+              matchers: ['priority="2"'],
+              continue: false,
+            },
+            {
+              receiver: "metrics-default-blackhole",
+              group_by: ["alertname", "cluster"],
+              matchers: ['namespace="metrics"'],
+              continue: true,
+              routes: [
+                {
+                  receiver: "metrics-default-telegram",
+                  matchers: ['push_notify="true"'],
+                  continue: false,
+                },
+                {
+                  receiver: "metrics-default-email",
+                  continue: false,
+                },
+              ],
             },
           ],
         },

@@ -32,15 +32,32 @@ spec:
           chat_id: 834388479
     - name: blackhole
   route:
-    continue: true
-    group_by:
-      - alertname
-      - cluster
+    continue: false
     receiver: blackhole
     routes:
-      - matchers:
+      - continue: false
+        matchers:
           - push_notify="true"
-        receiver: telegram
-      - match:
-          severity: critical
-        receiver: email
+        receiver: metrics-default-telegram
+      - continue: false
+        matchers:
+          - priority=~"0|1"
+        receiver: metrics-default-telegram
+      - continue: false
+        matchers:
+          - priority="2"
+        receiver: metrics-default-email
+      - continue: true
+        group_by:
+          - alertname
+          - cluster
+        matchers:
+          - namespace="metrics"
+        receiver: metrics-default-blackhole
+        routes:
+          - continue: false
+            matchers:
+              - push_notify="true"
+            receiver: metrics-default-telegram
+          - continue: false
+            receiver: metrics-default-email
