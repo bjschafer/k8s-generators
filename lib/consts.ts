@@ -2,8 +2,6 @@ import { EnvVar, Quantity } from "../imports/k8s";
 import { AppProps, YamlOutputType } from "cdk8s";
 import { EnvValue } from "cdk8s-plus-31";
 
-export const PROMETHEUS_RELEASE_LABEL = "prometheus-kube-prometheus-stack";
-
 export const DEFAULT_CPU_LIMIT = Quantity.fromString("250m");
 export const DEFAULT_MEM_LIMIT = Quantity.fromString("256Mi");
 

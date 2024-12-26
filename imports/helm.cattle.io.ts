@@ -345,6 +345,11 @@ export interface HelmChartSpecPodSecurityContext {
   readonly supplementalGroups?: number[];
 
   /**
+   * @schema HelmChartSpecPodSecurityContext#supplementalGroupsPolicy
+   */
+  readonly supplementalGroupsPolicy?: string;
+
+  /**
    * @schema HelmChartSpecPodSecurityContext#sysctls
    */
   readonly sysctls?: HelmChartSpecPodSecurityContextSysctls[];
@@ -372,6 +377,7 @@ export function toJson_HelmChartSpecPodSecurityContext(obj: HelmChartSpecPodSecu
     'seLinuxOptions': toJson_HelmChartSpecPodSecurityContextSeLinuxOptions(obj.seLinuxOptions),
     'seccompProfile': toJson_HelmChartSpecPodSecurityContextSeccompProfile(obj.seccompProfile),
     'supplementalGroups': obj.supplementalGroups?.map(y => y),
+    'supplementalGroupsPolicy': obj.supplementalGroupsPolicy,
     'sysctls': obj.sysctls?.map(y => toJson_HelmChartSpecPodSecurityContextSysctls(y)),
     'windowsOptions': toJson_HelmChartSpecPodSecurityContextWindowsOptions(obj.windowsOptions),
   };
