@@ -37,7 +37,7 @@ resources:
   - Service.resilio-sync.yaml
   - Service.sabnzbd.yaml
   - Service.sonarr.yaml
-  - ServiceMonitor.lidarr.yaml
-  - ServiceMonitor.radarr.yaml
-  - ServiceMonitor.readarr.yaml
-  - ServiceMonitor.sonarr.yaml
+  - VMServiceScrape.lidarr.yaml
+  - VMServiceScrape.radarr.yaml
+  - VMServiceScrape.readarr.yaml
+  - VMServiceScrape.sonarr.yaml

@@ -84,7 +84,7 @@ NewHelmApp(
       enabled: false,
       ingress: {
         enabled: false,
-        hosts: ["grafana.cmdcentral.xyz"],
+        hosts: ["grafana.cmdcentral.xyz"], // ensures links to dashboards are correct
       },
     },
     kubeControllerManager: {

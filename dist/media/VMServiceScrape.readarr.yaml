@@ -1,8 +1,6 @@
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
 metadata:
-  labels:
-    release: prometheus-kube-prometheus-stack
   name: readarr
   namespace: media
 spec:

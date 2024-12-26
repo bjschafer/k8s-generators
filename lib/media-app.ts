@@ -24,10 +24,9 @@ import {
   DEFAULT_SECURITY_CONTEXT,
   GET_SERVICE_URL,
   LSIO_ENVVALUE,
-  PROMETHEUS_RELEASE_LABEL,
 } from "./consts";
 import { NFSConcreteVolume } from "./nfs";
-import { ServiceMonitor } from "../imports/monitoring.coreos.com";
+import { VmServiceScrape } from "../imports/operator.victoriametrics.com";
 
 const exportarrVersion = "v1.2.4";
 const exportarrPort = 9707;
@@ -201,13 +200,10 @@ export class MediaApp extends Chart {
     }
 
     if (props.monitoringConfig?.enableServiceMonitor) {
-      new ServiceMonitor(this, `${props.name}-servicemonitor`, {
+      new VmServiceScrape(this, `${props.name}-servicescrape`, {
         metadata: {
           name: props.name,
           namespace: props.namespace,
-          labels: {
-            release: PROMETHEUS_RELEASE_LABEL,
-          },
         },
         spec: {
           selector: {
