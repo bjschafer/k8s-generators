@@ -400,5 +400,47 @@ export class ScrapeConfigs extends Chart {
         endpoints: [{ port: "metrics" }],
       },
     });
+
+    // --- gitlab
+    [
+      { job_name: "gitlab-nginx", port: 8060 },
+      { job_name: "gitlab-redis", port: 9121 },
+      { job_name: "gitlab-postgres", port: 9187 },
+      { job_name: "gitlab-node", port: 9100 },
+      { job_name: "gitlab-workhorse", port: 9229 },
+      {
+        job_name: "gitlab-rails",
+        port: 443,
+        metrics_path: "/-/metrics",
+        scheme: "https",
+      },
+    ].forEach(
+      (obj: {
+        job_name: string;
+        port: number;
+        metrics_path?: string;
+        scheme?: string;
+      }) => {
+        new VmScrapeConfig(this, `scrape-${obj.job_name}`, {
+          metadata: {
+            name: obj.job_name,
+            namespace: namespace,
+          },
+          spec: {
+            staticConfigs: [
+              {
+                targets: [`gitlab.cmdcentral.xyz:${obj.port}`],
+                labels: { job: obj.job_name },
+              },
+            ],
+            path: obj.metrics_path,
+            scheme:
+              obj.scheme === "https"
+                ? VmScrapeConfigSpecScheme.HTTPS
+                : VmScrapeConfigSpecScheme.HTTP,
+          },
+        });
+      },
+    );
   }
 }

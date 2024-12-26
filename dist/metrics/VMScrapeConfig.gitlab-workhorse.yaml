@@ -1,0 +1,12 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: gitlab-workhorse
+  namespace: metrics
+spec:
+  scheme: http
+  staticConfigs:
+    - labels:
+        job: gitlab-workhorse
+      targets:
+        - gitlab.cmdcentral.xyz:9229

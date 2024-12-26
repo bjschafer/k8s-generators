@@ -1,0 +1,12 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: gitlab-nginx
+  namespace: metrics
+spec:
+  scheme: http
+  staticConfigs:
+    - labels:
+        job: gitlab-nginx
+      targets:
+        - gitlab.cmdcentral.xyz:8060

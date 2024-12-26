@@ -1,0 +1,12 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: gitlab-postgres
+  namespace: metrics
+spec:
+  scheme: http
+  staticConfigs:
+    - labels:
+        job: gitlab-postgres
+      targets:
+        - gitlab.cmdcentral.xyz:9187

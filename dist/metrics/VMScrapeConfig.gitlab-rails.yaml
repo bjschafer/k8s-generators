@@ -1,0 +1,13 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: gitlab-rails
+  namespace: metrics
+spec:
+  path: /-/metrics
+  scheme: https
+  staticConfigs:
+    - labels:
+        job: gitlab-rails
+      targets:
+        - gitlab.cmdcentral.xyz:443
