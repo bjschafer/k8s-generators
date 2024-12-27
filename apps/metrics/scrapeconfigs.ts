@@ -407,6 +407,7 @@ export class ScrapeConfigs extends Chart {
       { job_name: "gitlab-redis", port: 9121 },
       { job_name: "gitlab-postgres", port: 9187 },
       { job_name: "gitlab-node", port: 9100 },
+      { job_name: "gitlab-registry", port: 5001 },
       { job_name: "gitlab-workhorse", port: 9229 },
       {
         job_name: "gitlab-rails",
