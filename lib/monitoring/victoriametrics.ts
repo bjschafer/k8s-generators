@@ -1,5 +1,7 @@
 import { Chart } from "cdk8s";
 import {
+  VmRule,
+  VmRuleSpecGroups,
   VmServiceScrape,
   VmServiceScrapeSpec,
 } from "../../imports/operator.victoriametrics.com";
@@ -34,6 +36,28 @@ export class CmdcentralServiceMonitor extends Chart {
           matchLabels: props.matchLabels,
         },
         ...props.extraConfig,
+      },
+    });
+  }
+}
+
+export interface MonitoringRuleProps {
+  name: string;
+  namespace: string;
+  ruleGroups: VmRuleSpecGroups[];
+}
+
+export class MonitoringRule extends Chart {
+  constructor(scope: Construct, id: string, props: MonitoringRuleProps) {
+    super(scope, id);
+
+    new VmRule(this, "rule", {
+      metadata: {
+        name: props.name,
+        namespace: props.namespace,
+      },
+      spec: {
+        groups: props.ruleGroups,
       },
     });
   }
