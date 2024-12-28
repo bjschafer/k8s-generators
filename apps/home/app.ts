@@ -90,9 +90,9 @@ new HomeConfig(app, `${name}-config`, {
           iconBubble: false,
         },
         {
-          name: "Gitea",
+          name: "Forgejo",
           uri: "https://git.cmdcentral.xyz",
-          icon: "gitea",
+          icon: "forgejo",
           description: "Local code repository",
           iconBubble: false,
         },
@@ -234,11 +234,6 @@ new HomeConfig(app, `${name}-config`, {
           description: "VT350",
         },
         {
-          name: "Prusa Mini",
-          uri: "https://prusamini.cmdcentral.xyz",
-          icon: "fluidd",
-        },
-        {
           name: "Ender Tres",
           uri: "https://endertres.cmdcentral.xyz",
           icon: "mdi-blender",
@@ -299,11 +294,6 @@ new HomeConfig(app, `${name}-config`, {
           icon: "powerdns",
         },
         {
-          name: "Gateway",
-          uri: "https://gateway.cmdcentral.xyz",
-          icon: "opnsense",
-        },
-        {
           name: "Minio",
           uri: "https://minio.cmdcentral.xyz",
           icon: "minio-light",
@@ -314,16 +304,10 @@ new HomeConfig(app, `${name}-config`, {
           icon: "netbox",
         },
         {
-          name: "Prometheus",
-          uri: "https://prometheus.cmdcentral.xyz",
+          name: "VictoriaMetrics UI",
+          uri: "https://metrics.cmdcentral.xyz",
           icon: "prometheus",
           iconBubble: false,
-        },
-        {
-          name: "Promlens",
-          uri: "https://promlens.cmdcentral.xyz",
-          icon: "mdi-hololens",
-          description: "Prometheus helper",
         },
         {
           name: "Proxmox",
@@ -333,7 +317,7 @@ new HomeConfig(app, `${name}-config`, {
         },
         {
           name: "Unifi",
-          uri: "https://unifi.cmdcentral.xyz",
+          uri: "https://unifi.ui.com",
           icon: "unifi",
           iconBubble: false,
         },
