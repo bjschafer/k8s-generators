@@ -1,8 +1,10 @@
-import { App } from "cdk8s";
+import { App, Chart, Helm } from "cdk8s";
 import { basename } from "path";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { MonitoringRule } from "../../lib/monitoring/victoriametrics";
+import { Construct } from "constructs";
+import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -19,6 +21,60 @@ NewArgoApp(name, {
   source: ArgoAppSource.GENERATORS,
   recurse: true,
 });
+
+class Runner extends Chart {
+  constructor(scope: Construct, id: string) {
+    super(scope, id);
+
+    new Helm(this, "gitlab-runner", {
+      chart: "gitlab-runner",
+      repo: "https://charts.gitlab.io",
+      releaseName: "prod-runner",
+      namespace: "gitlab",
+      values: {
+        gitlabUrl: "https://gitlab.cmdcentral.xyz",
+        concurrent: 6,
+        logFormat: "json",
+        metrics: {
+          enabled: true,
+          portName: "metrics",
+        },
+        service: {
+          enabled: true,
+          labels: {
+            vmservicescrape: "true",
+          },
+        },
+        rbac: {
+          create: true,
+        },
+        runners: {
+          secret: "runner-registration",
+        },
+      },
+    });
+
+    new VmServiceScrape(this, "servicescrape", {
+      metadata: {
+        name: "prod-runner",
+        namespace: namespace,
+      },
+      spec: {
+        selector: {
+          matchLabels: {
+            vmservicescrape: "true",
+          },
+        },
+        endpoints: [
+          {
+            port: "metrics",
+          },
+        ],
+      },
+    });
+  }
+}
+new Runner(app, "gl-runner");
 
 new MonitoringRule(app, "recording-rules", {
   name: "recording-rules",

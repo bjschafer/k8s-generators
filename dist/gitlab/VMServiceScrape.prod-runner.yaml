@@ -1,0 +1,11 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: prod-runner
+  namespace: gitlab
+spec:
+  endpoints:
+    - port: metrics
+  selector:
+    matchLabels:
+      vmservicescrape: "true"

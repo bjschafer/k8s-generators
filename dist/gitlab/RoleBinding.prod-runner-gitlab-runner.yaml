@@ -1,0 +1,18 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    app: prod-runner-gitlab-runner
+    chart: gitlab-runner-0.72.0
+    heritage: Helm
+    release: prod-runner
+  name: prod-runner-gitlab-runner
+  namespace: gitlab
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: prod-runner-gitlab-runner
+subjects:
+  - kind: ServiceAccount
+    name: prod-runner-gitlab-runner
+    namespace: gitlab
