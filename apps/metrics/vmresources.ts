@@ -16,6 +16,7 @@ import {
 } from "../../imports/operator.victoriametrics.com";
 import { StorageClass } from "../../lib/volume";
 import { hostname, namespace } from "./app";
+import { IngressRule } from "../../imports/k8s";
 
 export class VmResources extends Chart {
   constructor(scope: Construct, id: string) {
@@ -192,6 +193,10 @@ export class VmResources extends Chart {
       },
     });
 
+    const am_hosts = [
+      "metrics-alerts.cmdcentral.xyz",
+      "alertmanager.cmdcentral.xyz",
+    ];
     new KubeIngress(this, "alertmanager-ingress", {
       metadata: {
         name: "alertmanager",
@@ -201,9 +206,9 @@ export class VmResources extends Chart {
         },
       },
       spec: {
-        rules: [
-          {
-            host: "metrics-alerts.cmdcentral.xyz",
+        rules: am_hosts.map((hostname: string): IngressRule => {
+          return {
+            host: hostname,
             http: {
               paths: [
                 {
@@ -220,12 +225,12 @@ export class VmResources extends Chart {
                 },
               ],
             },
-          },
-        ],
+          };
+        }),
         tls: [
           {
             secretName: "alertmanager-tls",
-            hosts: ["metrics-alerts.cmdcentral.xyz"],
+            hosts: am_hosts,
           },
         ],
       },

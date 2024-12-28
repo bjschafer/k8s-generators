@@ -17,7 +17,18 @@ spec:
                   name: http
             path: /
             pathType: Prefix
+    - host: alertmanager.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: vmalertmanager-metrics
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
   tls:
     - hosts:
         - metrics-alerts.cmdcentral.xyz
+        - alertmanager.cmdcentral.xyz
       secretName: alertmanager-tls
