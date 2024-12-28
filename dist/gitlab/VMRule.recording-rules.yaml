@@ -102,7 +102,7 @@ spec:
       name: Service Level Indicators
       rules:
         - expr: |
-            avg by (job{job=~"gitlab.*"}) (
+            avg by (job) (
               avg_over_time(up[30s])
             )
           record: gitlab_sli:job:availability:ratio

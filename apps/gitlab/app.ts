@@ -202,7 +202,7 @@ new MonitoringRule(app, "recording-rules", {
       rules: [
         {
           record: "gitlab_sli:job:availability:ratio",
-          expr: 'avg by (job{job=~"gitlab.*"}) (\n  avg_over_time(up[30s])\n)\n',
+          expr: "avg by (job) (\n  avg_over_time(up[30s])\n)\n",
         },
         {
           record: "gitlab_sli:rails_active_connections:avg30s",
