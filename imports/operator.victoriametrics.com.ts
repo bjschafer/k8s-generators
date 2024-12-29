@@ -250,6 +250,14 @@ export interface VLogsSpec {
   readonly logNewStreams?: boolean;
 
   /**
+   * ManagedMetadata defines metadata that will be added to the all objects
+   * created by operator for the given CustomResource
+   *
+   * @schema VLogsSpec#managedMetadata
+   */
+  readonly managedMetadata?: VLogsSpecManagedMetadata;
+
+  /**
    * MinReadySeconds defines a minim number os seconds to wait before starting update next pod
    * if previous in healthy state
    * Has no effect for VLogs and VMSingle
@@ -520,6 +528,7 @@ export function toJson_VLogsSpec(obj: VLogsSpec | undefined): Record<string, any
     'logIngestedRows': obj.logIngestedRows,
     'logLevel': obj.logLevel,
     'logNewStreams': obj.logNewStreams,
+    'managedMetadata': toJson_VLogsSpecManagedMetadata(obj.managedMetadata),
     'minReadySeconds': obj.minReadySeconds,
     'nodeSelector': ((obj.nodeSelector) === undefined) ? undefined : (Object.entries(obj.nodeSelector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'paused': obj.paused,
@@ -806,6 +815,49 @@ export enum VLogsSpecLogLevel {
 }
 
 /**
+ * ManagedMetadata defines metadata that will be added to the all objects
+ * created by operator for the given CustomResource
+ *
+ * @schema VLogsSpecManagedMetadata
+ */
+export interface VLogsSpecManagedMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VLogsSpecManagedMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VLogsSpecManagedMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'VLogsSpecManagedMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VLogsSpecManagedMetadata(obj: VLogsSpecManagedMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * PodMetadata configures Labels and Annotations which are propagated to the VLogs pods.
  *
  * @schema VLogsSpecPodMetadata
@@ -1089,7 +1141,7 @@ export interface VLogsSpecStorage {
    * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
    * exists.
    * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
    *
    * @schema VLogsSpecStorage#volumeAttributesClassName
    */
@@ -1418,6 +1470,15 @@ export interface VLogsSpecResourcesClaims {
    */
   readonly name: string;
 
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VLogsSpecResourcesClaims#request
+   */
+  readonly request?: string;
+
 }
 
 /**
@@ -1428,6 +1489,7 @@ export function toJson_VLogsSpecResourcesClaims(obj: VLogsSpecResourcesClaims | 
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+    'request': obj.request,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -2175,6 +2237,14 @@ export interface VmAgentSpec {
   readonly logLevel?: VmAgentSpecLogLevel;
 
   /**
+   * ManagedMetadata defines metadata that will be added to the all objects
+   * created by operator for the given CustomResource
+   *
+   * @schema VmAgentSpec#managedMetadata
+   */
+  readonly managedMetadata?: VmAgentSpecManagedMetadata;
+
+  /**
    * MaxScrapeInterval allows limiting maximum scrape interval for VMServiceScrape, VMPodScrape and other scrapes
    * If interval is higher than defined limit, `maxScrapeInterval` will be used.
    *
@@ -2613,7 +2683,7 @@ export interface VmAgentSpec {
   readonly staticScrapeRelabelTemplate?: VmAgentSpecStaticScrapeRelabelTemplate[];
 
   /**
-   * StaticScrapeSelector defines PodScrapes to be selected for target discovery.
+   * StaticScrapeSelector defines VMStaticScrape to be selected for target discovery.
    * Works in combination with NamespaceSelector.
    * If both nil - match everything.
    * NamespaceSelector nil - only objects at VMAgent namespace.
@@ -2756,6 +2826,7 @@ export function toJson_VmAgentSpec(obj: VmAgentSpec | undefined): Record<string,
     'livenessProbe': obj.livenessProbe,
     'logFormat': obj.logFormat,
     'logLevel': obj.logLevel,
+    'managedMetadata': toJson_VmAgentSpecManagedMetadata(obj.managedMetadata),
     'maxScrapeInterval': obj.maxScrapeInterval,
     'minReadySeconds': obj.minReadySeconds,
     'minScrapeInterval': obj.minScrapeInterval,
@@ -3500,6 +3571,13 @@ export function toJson_VmAgentSpecInsertPorts(obj: VmAgentSpecInsertPorts | unde
  */
 export interface VmAgentSpecLicense {
   /**
+   * Enforce offline verification of the license key.
+   *
+   * @schema VmAgentSpecLicense#forceOffline
+   */
+  readonly forceOffline?: boolean;
+
+  /**
    * Enterprise license key. This flag is available only in [VictoriaMetrics enterprise](https://docs.victoriametrics.com/enterprise).
    * To request a trial license, [go to](https://victoriametrics.com/products/enterprise/trial)
    *
@@ -3514,6 +3592,13 @@ export interface VmAgentSpecLicense {
    */
   readonly keyRef?: VmAgentSpecLicenseKeyRef;
 
+  /**
+   * Interval to be used for checking for license key changes. Note that this is only applicable when using KeyRef.
+   *
+   * @schema VmAgentSpecLicense#reloadInterval
+   */
+  readonly reloadInterval?: string;
+
 }
 
 /**
@@ -3523,8 +3608,10 @@ export interface VmAgentSpecLicense {
 export function toJson_VmAgentSpecLicense(obj: VmAgentSpecLicense | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'forceOffline': obj.forceOffline,
     'key': obj.key,
     'keyRef': toJson_VmAgentSpecLicenseKeyRef(obj.keyRef),
+    'reloadInterval': obj.reloadInterval,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -3561,6 +3648,49 @@ export enum VmAgentSpecLogLevel {
   /** PANIC */
   PANIC = "PANIC",
 }
+
+/**
+ * ManagedMetadata defines metadata that will be added to the all objects
+ * created by operator for the given CustomResource
+ *
+ * @schema VmAgentSpecManagedMetadata
+ */
+export interface VmAgentSpecManagedMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VmAgentSpecManagedMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VmAgentSpecManagedMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'VmAgentSpecManagedMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VmAgentSpecManagedMetadata(obj: VmAgentSpecManagedMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * NodeScrapeNamespaceSelector defines Namespaces to be selected for VMNodeScrape discovery.
@@ -5302,7 +5432,7 @@ export function toJson_VmAgentSpecStaticScrapeRelabelTemplate(obj: VmAgentSpecSt
 /* eslint-enable max-len, quote-props */
 
 /**
- * StaticScrapeSelector defines PodScrapes to be selected for target discovery.
+ * StaticScrapeSelector defines VMStaticScrape to be selected for target discovery.
  * Works in combination with NamespaceSelector.
  * If both nil - match everything.
  * NamespaceSelector nil - only objects at VMAgent namespace.
@@ -5894,7 +6024,7 @@ export interface VmAgentSpecClaimTemplatesSpec {
    * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
    * exists.
    * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
    *
    * @schema VmAgentSpecClaimTemplatesSpec#volumeAttributesClassName
    */
@@ -6042,7 +6172,7 @@ export interface VmAgentSpecClaimTemplatesStatus {
   /**
    * currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using.
    * When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim
-   * This is an alpha field and requires enabling VolumeAttributesClass feature.
+   * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
    *
    * @schema VmAgentSpecClaimTemplatesStatus#currentVolumeAttributesClassName
    */
@@ -6051,7 +6181,7 @@ export interface VmAgentSpecClaimTemplatesStatus {
   /**
    * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
    * When this is unset, there is no ModifyVolume operation being attempted.
-   * This is an alpha field and requires enabling VolumeAttributesClass feature.
+   * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
    *
    * @schema VmAgentSpecClaimTemplatesStatus#modifyVolumeStatus
    */
@@ -6102,6 +6232,15 @@ export interface VmAgentSpecConfigReloaderResourcesClaims {
    */
   readonly name: string;
 
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VmAgentSpecConfigReloaderResourcesClaims#request
+   */
+  readonly request?: string;
+
 }
 
 /**
@@ -6112,6 +6251,7 @@ export function toJson_VmAgentSpecConfigReloaderResourcesClaims(obj: VmAgentSpec
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+    'request': obj.request,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -7079,6 +7219,15 @@ export interface VmAgentSpecResourcesClaims {
    */
   readonly name: string;
 
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VmAgentSpecResourcesClaims#request
+   */
+  readonly request?: string;
+
 }
 
 /**
@@ -7089,6 +7238,7 @@ export function toJson_VmAgentSpecResourcesClaims(obj: VmAgentSpecResourcesClaim
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+    'request': obj.request,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -8437,7 +8587,15 @@ export interface VmAgentSpecClaimTemplatesStatusConditions {
   readonly status: string;
 
   /**
-   * PersistentVolumeClaimConditionType is a valid value of PersistentVolumeClaimCondition.Type
+   * PersistentVolumeClaimConditionType defines the condition of PV claim.
+   * Valid values are:
+   * - "Resizing", "FileSystemResizePending"
+   *
+   * If RecoverVolumeExpansionFailure feature gate is enabled, then following additional values can be expected:
+   * - "ControllerResizeError", "NodeResizeError"
+   *
+   * If VolumeAttributesClass feature gate is enabled, then following additional values can be expected:
+   * - "ModifyVolumeError", "ModifyingVolume"
    *
    * @schema VmAgentSpecClaimTemplatesStatusConditions#type
    */
@@ -8467,7 +8625,7 @@ export function toJson_VmAgentSpecClaimTemplatesStatusConditions(obj: VmAgentSpe
 /**
  * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
  * When this is unset, there is no ModifyVolume operation being attempted.
- * This is an alpha field and requires enabling VolumeAttributesClass feature.
+ * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
  *
  * @schema VmAgentSpecClaimTemplatesStatusModifyVolumeStatus
  */
@@ -9223,7 +9381,7 @@ export interface VmAgentSpecStatefulStorageVolumeClaimTemplateSpec {
    * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
    * exists.
    * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
    *
    * @schema VmAgentSpecStatefulStorageVolumeClaimTemplateSpec#volumeAttributesClassName
    */
@@ -9371,7 +9529,7 @@ export interface VmAgentSpecStatefulStorageVolumeClaimTemplateStatus {
   /**
    * currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using.
    * When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim
-   * This is an alpha field and requires enabling VolumeAttributesClass feature.
+   * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
    *
    * @schema VmAgentSpecStatefulStorageVolumeClaimTemplateStatus#currentVolumeAttributesClassName
    */
@@ -9380,7 +9538,7 @@ export interface VmAgentSpecStatefulStorageVolumeClaimTemplateStatus {
   /**
    * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
    * When this is unset, there is no ModifyVolume operation being attempted.
-   * This is an alpha field and requires enabling VolumeAttributesClass feature.
+   * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
    *
    * @schema VmAgentSpecStatefulStorageVolumeClaimTemplateStatus#modifyVolumeStatus
    */
@@ -10715,7 +10873,15 @@ export interface VmAgentSpecStatefulStorageVolumeClaimTemplateStatusConditions {
   readonly status: string;
 
   /**
-   * PersistentVolumeClaimConditionType is a valid value of PersistentVolumeClaimCondition.Type
+   * PersistentVolumeClaimConditionType defines the condition of PV claim.
+   * Valid values are:
+   * - "Resizing", "FileSystemResizePending"
+   *
+   * If RecoverVolumeExpansionFailure feature gate is enabled, then following additional values can be expected:
+   * - "ControllerResizeError", "NodeResizeError"
+   *
+   * If VolumeAttributesClass feature gate is enabled, then following additional values can be expected:
+   * - "ModifyVolumeError", "ModifyingVolume"
    *
    * @schema VmAgentSpecStatefulStorageVolumeClaimTemplateStatusConditions#type
    */
@@ -10745,7 +10911,7 @@ export function toJson_VmAgentSpecStatefulStorageVolumeClaimTemplateStatusCondit
 /**
  * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
  * When this is unset, there is no ModifyVolume operation being attempted.
- * This is an alpha field and requires enabling VolumeAttributesClass feature.
+ * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
  *
  * @schema VmAgentSpecStatefulStorageVolumeClaimTemplateStatusModifyVolumeStatus
  */
@@ -11155,6 +11321,14 @@ export interface VmAlertSpec {
   readonly logLevel?: VmAlertSpecLogLevel;
 
   /**
+   * ManagedMetadata defines metadata that will be added to the all objects
+   * created by operator for the given CustomResource
+   *
+   * @schema VmAlertSpec#managedMetadata
+   */
+  readonly managedMetadata?: VmAlertSpecManagedMetadata;
+
+  /**
    * MinReadySeconds defines a minim number os seconds to wait before starting update next pod
    * if previous in healthy state
    * Has no effect for VLogs and VMSingle
@@ -11514,6 +11688,7 @@ export function toJson_VmAlertSpec(obj: VmAlertSpec | undefined): Record<string,
     'livenessProbe': obj.livenessProbe,
     'logFormat': obj.logFormat,
     'logLevel': obj.logLevel,
+    'managedMetadata': toJson_VmAlertSpecManagedMetadata(obj.managedMetadata),
     'minReadySeconds': obj.minReadySeconds,
     'nodeSelector': ((obj.nodeSelector) === undefined) ? undefined : (Object.entries(obj.nodeSelector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'notifier': toJson_VmAlertSpecNotifier(obj.notifier),
@@ -11923,6 +12098,13 @@ export function toJson_VmAlertSpecImagePullSecrets(obj: VmAlertSpecImagePullSecr
  */
 export interface VmAlertSpecLicense {
   /**
+   * Enforce offline verification of the license key.
+   *
+   * @schema VmAlertSpecLicense#forceOffline
+   */
+  readonly forceOffline?: boolean;
+
+  /**
    * Enterprise license key. This flag is available only in [VictoriaMetrics enterprise](https://docs.victoriametrics.com/enterprise).
    * To request a trial license, [go to](https://victoriametrics.com/products/enterprise/trial)
    *
@@ -11937,6 +12119,13 @@ export interface VmAlertSpecLicense {
    */
   readonly keyRef?: VmAlertSpecLicenseKeyRef;
 
+  /**
+   * Interval to be used for checking for license key changes. Note that this is only applicable when using KeyRef.
+   *
+   * @schema VmAlertSpecLicense#reloadInterval
+   */
+  readonly reloadInterval?: string;
+
 }
 
 /**
@@ -11946,8 +12135,10 @@ export interface VmAlertSpecLicense {
 export function toJson_VmAlertSpecLicense(obj: VmAlertSpecLicense | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'forceOffline': obj.forceOffline,
     'key': obj.key,
     'keyRef': toJson_VmAlertSpecLicenseKeyRef(obj.keyRef),
+    'reloadInterval': obj.reloadInterval,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -11984,6 +12175,49 @@ export enum VmAlertSpecLogLevel {
   /** PANIC */
   PANIC = "PANIC",
 }
+
+/**
+ * ManagedMetadata defines metadata that will be added to the all objects
+ * created by operator for the given CustomResource
+ *
+ * @schema VmAlertSpecManagedMetadata
+ */
+export interface VmAlertSpecManagedMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VmAlertSpecManagedMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VmAlertSpecManagedMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'VmAlertSpecManagedMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VmAlertSpecManagedMetadata(obj: VmAlertSpecManagedMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * Notifier prometheus alertmanager endpoint spec. Required at least one of notifier or notifiers when there are alerting rules. e.g. http://127.0.0.1:9093
@@ -13019,6 +13253,15 @@ export interface VmAlertSpecConfigReloaderResourcesClaims {
    */
   readonly name: string;
 
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VmAlertSpecConfigReloaderResourcesClaims#request
+   */
+  readonly request?: string;
+
 }
 
 /**
@@ -13029,6 +13272,7 @@ export function toJson_VmAlertSpecConfigReloaderResourcesClaims(obj: VmAlertSpec
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+    'request': obj.request,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -13769,6 +14013,15 @@ export interface VmAlertSpecResourcesClaims {
    */
   readonly name: string;
 
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VmAlertSpecResourcesClaims#request
+   */
+  readonly request?: string;
+
 }
 
 /**
@@ -13779,6 +14032,7 @@ export function toJson_VmAlertSpecResourcesClaims(obj: VmAlertSpecResourcesClaim
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+    'request': obj.request,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -15157,6 +15411,14 @@ export interface VmAlertmanagerSpec {
   readonly logLevel?: VmAlertmanagerSpecLogLevel;
 
   /**
+   * ManagedMetadata defines metadata that will be added to the all objects
+   * created by operator for the given CustomResource
+   *
+   * @schema VmAlertmanagerSpec#managedMetadata
+   */
+  readonly managedMetadata?: VmAlertmanagerSpecManagedMetadata;
+
+  /**
    * MinReadySeconds defines a minim number os seconds to wait before starting update next pod
    * if previous in healthy state
    * Has no effect for VLogs and VMSingle
@@ -15490,6 +15752,7 @@ export function toJson_VmAlertmanagerSpec(obj: VmAlertmanagerSpec | undefined): 
     'livenessProbe': obj.livenessProbe,
     'logFormat': obj.logFormat,
     'logLevel': obj.logLevel,
+    'managedMetadata': toJson_VmAlertmanagerSpecManagedMetadata(obj.managedMetadata),
     'minReadySeconds': obj.minReadySeconds,
     'nodeSelector': ((obj.nodeSelector) === undefined) ? undefined : (Object.entries(obj.nodeSelector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'paused': obj.paused,
@@ -16028,6 +16291,49 @@ export enum VmAlertmanagerSpecLogLevel {
   /** error */
   ERROR = "error",
 }
+
+/**
+ * ManagedMetadata defines metadata that will be added to the all objects
+ * created by operator for the given CustomResource
+ *
+ * @schema VmAlertmanagerSpecManagedMetadata
+ */
+export interface VmAlertmanagerSpecManagedMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VmAlertmanagerSpecManagedMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VmAlertmanagerSpecManagedMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'VmAlertmanagerSpecManagedMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VmAlertmanagerSpecManagedMetadata(obj: VmAlertmanagerSpecManagedMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * PodDisruptionBudget created by operator
@@ -16679,7 +16985,7 @@ export interface VmAlertmanagerSpecClaimTemplatesSpec {
    * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
    * exists.
    * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
    *
    * @schema VmAlertmanagerSpecClaimTemplatesSpec#volumeAttributesClassName
    */
@@ -16827,7 +17133,7 @@ export interface VmAlertmanagerSpecClaimTemplatesStatus {
   /**
    * currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using.
    * When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim
-   * This is an alpha field and requires enabling VolumeAttributesClass feature.
+   * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
    *
    * @schema VmAlertmanagerSpecClaimTemplatesStatus#currentVolumeAttributesClassName
    */
@@ -16836,7 +17142,7 @@ export interface VmAlertmanagerSpecClaimTemplatesStatus {
   /**
    * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
    * When this is unset, there is no ModifyVolume operation being attempted.
-   * This is an alpha field and requires enabling VolumeAttributesClass feature.
+   * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
    *
    * @schema VmAlertmanagerSpecClaimTemplatesStatus#modifyVolumeStatus
    */
@@ -16937,6 +17243,15 @@ export interface VmAlertmanagerSpecConfigReloaderResourcesClaims {
    */
   readonly name: string;
 
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VmAlertmanagerSpecConfigReloaderResourcesClaims#request
+   */
+  readonly request?: string;
+
 }
 
 /**
@@ -16947,6 +17262,7 @@ export function toJson_VmAlertmanagerSpecConfigReloaderResourcesClaims(obj: VmAl
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+    'request': obj.request,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -17341,6 +17657,15 @@ export interface VmAlertmanagerSpecResourcesClaims {
    */
   readonly name: string;
 
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VmAlertmanagerSpecResourcesClaims#request
+   */
+  readonly request?: string;
+
 }
 
 /**
@@ -17351,6 +17676,7 @@ export function toJson_VmAlertmanagerSpecResourcesClaims(obj: VmAlertmanagerSpec
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+    'request': obj.request,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -18013,7 +18339,15 @@ export interface VmAlertmanagerSpecClaimTemplatesStatusConditions {
   readonly status: string;
 
   /**
-   * PersistentVolumeClaimConditionType is a valid value of PersistentVolumeClaimCondition.Type
+   * PersistentVolumeClaimConditionType defines the condition of PV claim.
+   * Valid values are:
+   * - "Resizing", "FileSystemResizePending"
+   *
+   * If RecoverVolumeExpansionFailure feature gate is enabled, then following additional values can be expected:
+   * - "ControllerResizeError", "NodeResizeError"
+   *
+   * If VolumeAttributesClass feature gate is enabled, then following additional values can be expected:
+   * - "ModifyVolumeError", "ModifyingVolume"
    *
    * @schema VmAlertmanagerSpecClaimTemplatesStatusConditions#type
    */
@@ -18043,7 +18377,7 @@ export function toJson_VmAlertmanagerSpecClaimTemplatesStatusConditions(obj: VmA
 /**
  * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
  * When this is unset, there is no ModifyVolume operation being attempted.
- * This is an alpha field and requires enabling VolumeAttributesClass feature.
+ * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
  *
  * @schema VmAlertmanagerSpecClaimTemplatesStatusModifyVolumeStatus
  */
@@ -18609,7 +18943,7 @@ export interface VmAlertmanagerSpecStorageVolumeClaimTemplateSpec {
    * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
    * exists.
    * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
    *
    * @schema VmAlertmanagerSpecStorageVolumeClaimTemplateSpec#volumeAttributesClassName
    */
@@ -18757,7 +19091,7 @@ export interface VmAlertmanagerSpecStorageVolumeClaimTemplateStatus {
   /**
    * currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using.
    * When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim
-   * This is an alpha field and requires enabling VolumeAttributesClass feature.
+   * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
    *
    * @schema VmAlertmanagerSpecStorageVolumeClaimTemplateStatus#currentVolumeAttributesClassName
    */
@@ -18766,7 +19100,7 @@ export interface VmAlertmanagerSpecStorageVolumeClaimTemplateStatus {
   /**
    * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
    * When this is unset, there is no ModifyVolume operation being attempted.
-   * This is an alpha field and requires enabling VolumeAttributesClass feature.
+   * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
    *
    * @schema VmAlertmanagerSpecStorageVolumeClaimTemplateStatus#modifyVolumeStatus
    */
@@ -19365,7 +19699,15 @@ export interface VmAlertmanagerSpecStorageVolumeClaimTemplateStatusConditions {
   readonly status: string;
 
   /**
-   * PersistentVolumeClaimConditionType is a valid value of PersistentVolumeClaimCondition.Type
+   * PersistentVolumeClaimConditionType defines the condition of PV claim.
+   * Valid values are:
+   * - "Resizing", "FileSystemResizePending"
+   *
+   * If RecoverVolumeExpansionFailure feature gate is enabled, then following additional values can be expected:
+   * - "ControllerResizeError", "NodeResizeError"
+   *
+   * If VolumeAttributesClass feature gate is enabled, then following additional values can be expected:
+   * - "ModifyVolumeError", "ModifyingVolume"
    *
    * @schema VmAlertmanagerSpecStorageVolumeClaimTemplateStatusConditions#type
    */
@@ -19395,7 +19737,7 @@ export function toJson_VmAlertmanagerSpecStorageVolumeClaimTemplateStatusConditi
 /**
  * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
  * When this is unset, there is no ModifyVolume operation being attempted.
- * This is an alpha field and requires enabling VolumeAttributesClass feature.
+ * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
  *
  * @schema VmAlertmanagerSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus
  */
@@ -29383,14 +29725,6 @@ export interface VmAuthSpec {
   readonly containers?: any[];
 
   /**
-   * DefaultURLs backend url for non-matching paths filter
-   * usually used for default backend with error message
-   *
-   * @schema VmAuthSpec#default_url
-   */
-  readonly defaultUrl?: string[];
-
-  /**
    * DisableSelfServiceScrape controls creation of VMServiceScrape by operator
    * for the application.
    * Has priority over `VM_DISABLESELFSERVICESCRAPECREATION` operator env variable
@@ -29398,13 +29732,6 @@ export interface VmAuthSpec {
    * @schema VmAuthSpec#disableSelfServiceScrape
    */
   readonly disableSelfServiceScrape?: boolean;
-
-  /**
-   * DiscoverBackendIPs instructs discovering URLPrefix backend IPs via DNS.
-   *
-   * @schema VmAuthSpec#discover_backend_ips
-   */
-  readonly discoverBackendIps?: boolean;
 
   /**
    * Specifies the DNS parameters of a pod.
@@ -29421,14 +29748,6 @@ export interface VmAuthSpec {
    * @schema VmAuthSpec#dnsPolicy
    */
   readonly dnsPolicy?: string;
-
-  /**
-   * DropSrcPathPrefixParts is the number of `/`-delimited request path prefix parts to drop before proxying the request to backend.
-   * See [here](https://docs.victoriametrics.com/vmauth#dropping-request-path-prefix) for more details.
-   *
-   * @schema VmAuthSpec#drop_src_path_prefix_parts
-   */
-  readonly dropSrcPathPrefixParts?: number;
 
   /**
    * ExternalConfig defines a source of external VMAuth configuration.
@@ -29452,17 +29771,6 @@ export interface VmAuthSpec {
    * @schema VmAuthSpec#extraEnvs
    */
   readonly extraEnvs?: VmAuthSpecExtraEnvs[];
-
-  /**
-   * Headers represent additional http headers, that vmauth uses
-   * in form of ["header_key: header_value"]
-   * multiple values for header key:
-   * ["header_key: value1,value2"]
-   * it's available since 1.68.0 version of vmauth
-   *
-   * @schema VmAuthSpec#headers
-   */
-  readonly headers?: string[];
 
   /**
    * HostAliases provides mapping for ip and hostname,
@@ -29514,14 +29822,6 @@ export interface VmAuthSpec {
   readonly initContainers?: any[];
 
   /**
-   * IPFilters defines per target src ip filters
-   * supported only with enterprise version of [vmauth](https://docs.victoriametrics.com/vmauth/#ip-filters)
-   *
-   * @schema VmAuthSpec#ip_filters
-   */
-  readonly ipFilters?: VmAuthSpecIpFilters;
-
-  /**
    * License allows to configure license key to be used for enterprise features.
    * Using license key is supported starting from VictoriaMetrics v1.94.0.
    * See [here](https://docs.victoriametrics.com/enterprise)
@@ -29538,15 +29838,6 @@ export interface VmAuthSpec {
   readonly livenessProbe?: any;
 
   /**
-   * LoadBalancingPolicy defines load balancing policy to use for backend urls.
-   * Supported policies: least_loaded, first_available.
-   * See [here](https://docs.victoriametrics.com/vmauth#load-balancing) for more details (default "least_loaded")
-   *
-   * @schema VmAuthSpec#load_balancing_policy
-   */
-  readonly loadBalancingPolicy?: VmAuthSpecLoadBalancingPolicy;
-
-  /**
    * LogFormat for VMAuth to be configured with.
    *
    * @schema VmAuthSpec#logFormat
@@ -29561,12 +29852,12 @@ export interface VmAuthSpec {
   readonly logLevel?: VmAuthSpecLogLevel;
 
   /**
-   * MaxConcurrentRequests defines max concurrent requests per user
-   * 300 is default value for vmauth
+   * ManagedMetadata defines metadata that will be added to the all objects
+   * created by operator for the given CustomResource
    *
-   * @schema VmAuthSpec#max_concurrent_requests
+   * @schema VmAuthSpec#managedMetadata
    */
-  readonly maxConcurrentRequests?: number;
+  readonly managedMetadata?: VmAuthSpecManagedMetadata;
 
   /**
    * MinReadySeconds defines a minim number os seconds to wait before starting update next pod
@@ -29648,25 +29939,6 @@ export interface VmAuthSpec {
    * @schema VmAuthSpec#resources
    */
   readonly resources?: VmAuthSpecResources;
-
-  /**
-   * ResponseHeaders represent additional http headers, that vmauth adds for request response
-   * in form of ["header_key: header_value"]
-   * multiple values for header key:
-   * ["header_key: value1,value2"]
-   * it's available since 1.93.0 version of vmauth
-   *
-   * @schema VmAuthSpec#response_headers
-   */
-  readonly responseHeaders?: string[];
-
-  /**
-   * RetryStatusCodes defines http status codes in numeric format for request retries
-   * e.g. [429,503]
-   *
-   * @schema VmAuthSpec#retry_status_codes
-   */
-  readonly retryStatusCodes?: number[];
 
   /**
    * The number of old ReplicaSets to retain to allow rollback in deployment or
@@ -29757,13 +30029,6 @@ export interface VmAuthSpec {
   readonly terminationGracePeriodSeconds?: number;
 
   /**
-   * TLSConfig specifies TLSConfig configuration parameters.
-   *
-   * @schema VmAuthSpec#tlsConfig
-   */
-  readonly tlsConfig?: VmAuthSpecTlsConfig;
-
-  /**
    * Tolerations If specified, the pod's tolerations.
    *
    * @schema VmAuthSpec#tolerations
@@ -29783,9 +30048,19 @@ export interface VmAuthSpec {
   /**
    * UnauthorizedAccessConfig configures access for un authorized users
    *
+   * Deprecated, use unauthorizedUserAccessSpec instead
+   * will be removed at v1.0 release
+   *
    * @schema VmAuthSpec#unauthorizedAccessConfig
    */
-  readonly unauthorizedAccessConfig?: VmAuthSpecUnauthorizedAccessConfig[];
+  readonly unauthorizedAccessConfig?: any;
+
+  /**
+   * UnauthorizedUserAccessSpec defines unauthorized_user config section of vmauth config
+   *
+   * @schema VmAuthSpec#unauthorizedUserAccessSpec
+   */
+  readonly unauthorizedUserAccessSpec?: VmAuthSpecUnauthorizedUserAccessSpec;
 
   /**
    * UseDefaultResources controls resource settings
@@ -29868,29 +30143,23 @@ export function toJson_VmAuthSpec(obj: VmAuthSpec | undefined): Record<string, a
     'configReloaderResources': toJson_VmAuthSpecConfigReloaderResources(obj.configReloaderResources),
     'configSecret': obj.configSecret,
     'containers': obj.containers?.map(y => y),
-    'default_url': obj.defaultUrl?.map(y => y),
     'disableSelfServiceScrape': obj.disableSelfServiceScrape,
-    'discover_backend_ips': obj.discoverBackendIps,
     'dnsConfig': toJson_VmAuthSpecDnsConfig(obj.dnsConfig),
     'dnsPolicy': obj.dnsPolicy,
-    'drop_src_path_prefix_parts': obj.dropSrcPathPrefixParts,
     'externalConfig': toJson_VmAuthSpecExternalConfig(obj.externalConfig),
     'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'extraEnvs': obj.extraEnvs?.map(y => toJson_VmAuthSpecExtraEnvs(y)),
-    'headers': obj.headers?.map(y => y),
     'hostAliases': obj.hostAliases?.map(y => toJson_VmAuthSpecHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
     'image': toJson_VmAuthSpecImage(obj.image),
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VmAuthSpecImagePullSecrets(y)),
     'ingress': toJson_VmAuthSpecIngress(obj.ingress),
     'initContainers': obj.initContainers?.map(y => y),
-    'ip_filters': toJson_VmAuthSpecIpFilters(obj.ipFilters),
     'license': toJson_VmAuthSpecLicense(obj.license),
     'livenessProbe': obj.livenessProbe,
-    'load_balancing_policy': obj.loadBalancingPolicy,
     'logFormat': obj.logFormat,
     'logLevel': obj.logLevel,
-    'max_concurrent_requests': obj.maxConcurrentRequests,
+    'managedMetadata': toJson_VmAuthSpecManagedMetadata(obj.managedMetadata),
     'minReadySeconds': obj.minReadySeconds,
     'nodeSelector': ((obj.nodeSelector) === undefined) ? undefined : (Object.entries(obj.nodeSelector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'paused': obj.paused,
@@ -29902,8 +30171,6 @@ export function toJson_VmAuthSpec(obj: VmAuthSpec | undefined): Record<string, a
     'readinessProbe': obj.readinessProbe,
     'replicaCount': obj.replicaCount,
     'resources': toJson_VmAuthSpecResources(obj.resources),
-    'response_headers': obj.responseHeaders?.map(y => y),
-    'retry_status_codes': obj.retryStatusCodes?.map(y => y),
     'revisionHistoryLimitCount': obj.revisionHistoryLimitCount,
     'runtimeClassName': obj.runtimeClassName,
     'schedulerName': obj.schedulerName,
@@ -29915,10 +30182,10 @@ export function toJson_VmAuthSpec(obj: VmAuthSpec | undefined): Record<string, a
     'serviceSpec': toJson_VmAuthSpecServiceSpec(obj.serviceSpec),
     'startupProbe': obj.startupProbe,
     'terminationGracePeriodSeconds': obj.terminationGracePeriodSeconds,
-    'tlsConfig': toJson_VmAuthSpecTlsConfig(obj.tlsConfig),
     'tolerations': obj.tolerations?.map(y => toJson_VmAuthSpecTolerations(y)),
     'topologySpreadConstraints': obj.topologySpreadConstraints?.map(y => y),
-    'unauthorizedAccessConfig': obj.unauthorizedAccessConfig?.map(y => toJson_VmAuthSpecUnauthorizedAccessConfig(y)),
+    'unauthorizedAccessConfig': obj.unauthorizedAccessConfig,
+    'unauthorizedUserAccessSpec': toJson_VmAuthSpecUnauthorizedUserAccessSpec(obj.unauthorizedUserAccessSpec),
     'useDefaultResources': obj.useDefaultResources,
     'useStrictSecurity': obj.useStrictSecurity,
     'useVMConfigReloader': obj.useVmConfigReloader,
@@ -30354,40 +30621,6 @@ export function toJson_VmAuthSpecIngress(obj: VmAuthSpecIngress | undefined): Re
 /* eslint-enable max-len, quote-props */
 
 /**
- * IPFilters defines per target src ip filters
- * supported only with enterprise version of [vmauth](https://docs.victoriametrics.com/vmauth/#ip-filters)
- *
- * @schema VmAuthSpecIpFilters
- */
-export interface VmAuthSpecIpFilters {
-  /**
-   * @schema VmAuthSpecIpFilters#allow_list
-   */
-  readonly allowList?: string[];
-
-  /**
-   * @schema VmAuthSpecIpFilters#deny_list
-   */
-  readonly denyList?: string[];
-
-}
-
-/**
- * Converts an object of type 'VmAuthSpecIpFilters' to JSON representation.
- */
-/* eslint-disable max-len, quote-props */
-export function toJson_VmAuthSpecIpFilters(obj: VmAuthSpecIpFilters | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'allow_list': obj.allowList?.map(y => y),
-    'deny_list': obj.denyList?.map(y => y),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, quote-props */
-
-/**
  * License allows to configure license key to be used for enterprise features.
  * Using license key is supported starting from VictoriaMetrics v1.94.0.
  * See [here](https://docs.victoriametrics.com/enterprise)
@@ -30395,6 +30628,13 @@ export function toJson_VmAuthSpecIpFilters(obj: VmAuthSpecIpFilters | undefined)
  * @schema VmAuthSpecLicense
  */
 export interface VmAuthSpecLicense {
+  /**
+   * Enforce offline verification of the license key.
+   *
+   * @schema VmAuthSpecLicense#forceOffline
+   */
+  readonly forceOffline?: boolean;
+
   /**
    * Enterprise license key. This flag is available only in [VictoriaMetrics enterprise](https://docs.victoriametrics.com/enterprise).
    * To request a trial license, [go to](https://victoriametrics.com/products/enterprise/trial)
@@ -30410,6 +30650,13 @@ export interface VmAuthSpecLicense {
    */
   readonly keyRef?: VmAuthSpecLicenseKeyRef;
 
+  /**
+   * Interval to be used for checking for license key changes. Note that this is only applicable when using KeyRef.
+   *
+   * @schema VmAuthSpecLicense#reloadInterval
+   */
+  readonly reloadInterval?: string;
+
 }
 
 /**
@@ -30419,27 +30666,15 @@ export interface VmAuthSpecLicense {
 export function toJson_VmAuthSpecLicense(obj: VmAuthSpecLicense | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'forceOffline': obj.forceOffline,
     'key': obj.key,
     'keyRef': toJson_VmAuthSpecLicenseKeyRef(obj.keyRef),
+    'reloadInterval': obj.reloadInterval,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
-
-/**
- * LoadBalancingPolicy defines load balancing policy to use for backend urls.
- * Supported policies: least_loaded, first_available.
- * See [here](https://docs.victoriametrics.com/vmauth#load-balancing) for more details (default "least_loaded")
- *
- * @schema VmAuthSpecLoadBalancingPolicy
- */
-export enum VmAuthSpecLoadBalancingPolicy {
-  /** least_loaded */
-  LEAST_UNDERSCORE_LOADED = "least_loaded",
-  /** first_available */
-  FIRST_UNDERSCORE_AVAILABLE = "first_available",
-}
 
 /**
  * LogFormat for VMAuth to be configured with.
@@ -30470,6 +30705,49 @@ export enum VmAuthSpecLogLevel {
   /** PANIC */
   PANIC = "PANIC",
 }
+
+/**
+ * ManagedMetadata defines metadata that will be added to the all objects
+ * created by operator for the given CustomResource
+ *
+ * @schema VmAuthSpecManagedMetadata
+ */
+export interface VmAuthSpecManagedMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VmAuthSpecManagedMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VmAuthSpecManagedMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'VmAuthSpecManagedMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VmAuthSpecManagedMetadata(obj: VmAuthSpecManagedMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * PodDisruptionBudget created by operator
@@ -30712,91 +30990,6 @@ export function toJson_VmAuthSpecServiceSpec(obj: VmAuthSpecServiceSpec | undefi
 /* eslint-enable max-len, quote-props */
 
 /**
- * TLSConfig specifies TLSConfig configuration parameters.
- *
- * @schema VmAuthSpecTlsConfig
- */
-export interface VmAuthSpecTlsConfig {
-  /**
-   * Stuct containing the CA cert to use for the targets.
-   *
-   * @schema VmAuthSpecTlsConfig#ca
-   */
-  readonly ca?: VmAuthSpecTlsConfigCa;
-
-  /**
-   * Path to the CA cert in the container to use for the targets.
-   *
-   * @schema VmAuthSpecTlsConfig#caFile
-   */
-  readonly caFile?: string;
-
-  /**
-   * Struct containing the client cert file for the targets.
-   *
-   * @schema VmAuthSpecTlsConfig#cert
-   */
-  readonly cert?: VmAuthSpecTlsConfigCert;
-
-  /**
-   * Path to the client cert file in the container for the targets.
-   *
-   * @schema VmAuthSpecTlsConfig#certFile
-   */
-  readonly certFile?: string;
-
-  /**
-   * Disable target certificate validation.
-   *
-   * @schema VmAuthSpecTlsConfig#insecureSkipVerify
-   */
-  readonly insecureSkipVerify?: boolean;
-
-  /**
-   * Path to the client key file in the container for the targets.
-   *
-   * @schema VmAuthSpecTlsConfig#keyFile
-   */
-  readonly keyFile?: string;
-
-  /**
-   * Secret containing the client key file for the targets.
-   *
-   * @schema VmAuthSpecTlsConfig#keySecret
-   */
-  readonly keySecret?: VmAuthSpecTlsConfigKeySecret;
-
-  /**
-   * Used to verify the hostname for the targets.
-   *
-   * @schema VmAuthSpecTlsConfig#serverName
-   */
-  readonly serverName?: string;
-
-}
-
-/**
- * Converts an object of type 'VmAuthSpecTlsConfig' to JSON representation.
- */
-/* eslint-disable max-len, quote-props */
-export function toJson_VmAuthSpecTlsConfig(obj: VmAuthSpecTlsConfig | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'ca': toJson_VmAuthSpecTlsConfigCa(obj.ca),
-    'caFile': obj.caFile,
-    'cert': toJson_VmAuthSpecTlsConfigCert(obj.cert),
-    'certFile': obj.certFile,
-    'insecureSkipVerify': obj.insecureSkipVerify,
-    'keyFile': obj.keyFile,
-    'keySecret': toJson_VmAuthSpecTlsConfigKeySecret(obj.keySecret),
-    'serverName': obj.serverName,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, quote-props */
-
-/**
  * The pod this Toleration is attached to tolerates any taint that matches
  * the triple <key,value,effect> using the matching operator <operator>.
  *
@@ -30869,13 +31062,23 @@ export function toJson_VmAuthSpecTolerations(obj: VmAuthSpecTolerations | undefi
 /* eslint-enable max-len, quote-props */
 
 /**
- * @schema VmAuthSpecUnauthorizedAccessConfig
+ * UnauthorizedUserAccessSpec defines unauthorized_user config section of vmauth config
+ *
+ * @schema VmAuthSpecUnauthorizedUserAccessSpec
  */
-export interface VmAuthSpecUnauthorizedAccessConfig {
+export interface VmAuthSpecUnauthorizedUserAccessSpec {
+  /**
+   * DefaultURLs backend url for non-matching paths filter
+   * usually used for default backend with error message
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpec#default_url
+   */
+  readonly defaultUrl?: string[];
+
   /**
    * DiscoverBackendIPs instructs discovering URLPrefix backend IPs via DNS.
    *
-   * @schema VmAuthSpecUnauthorizedAccessConfig#discover_backend_ips
+   * @schema VmAuthSpecUnauthorizedUserAccessSpec#discover_backend_ips
    */
   readonly discoverBackendIps?: boolean;
 
@@ -30883,29 +31086,63 @@ export interface VmAuthSpecUnauthorizedAccessConfig {
    * DropSrcPathPrefixParts is the number of `/`-delimited request path prefix parts to drop before proxying the request to backend.
    * See [here](https://docs.victoriametrics.com/vmauth#dropping-request-path-prefix) for more details.
    *
-   * @schema VmAuthSpecUnauthorizedAccessConfig#drop_src_path_prefix_parts
+   * @schema VmAuthSpecUnauthorizedUserAccessSpec#drop_src_path_prefix_parts
    */
   readonly dropSrcPathPrefixParts?: number;
 
   /**
-   * RequestHeaders represent additional http headers, that vmauth uses
+   * DumpRequestOnErrors instructs vmauth to return detailed request params to the client
+   * if routing rules don't allow to forward request to the backends.
+   * Useful for debugging `src_hosts` and `src_headers` based routing rules
+   *
+   * available since v1.107.0 vmauth version
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpec#dump_request_on_errors
+   */
+  readonly dumpRequestOnErrors?: boolean;
+
+  /**
+   * Headers represent additional http headers, that vmauth uses
    * in form of ["header_key: header_value"]
    * multiple values for header key:
    * ["header_key: value1,value2"]
    * it's available since 1.68.0 version of vmauth
    *
-   * @schema VmAuthSpecUnauthorizedAccessConfig#headers
+   * @schema VmAuthSpecUnauthorizedUserAccessSpec#headers
    */
   readonly headers?: string[];
+
+  /**
+   * IPFilters defines per target src ip filters
+   * supported only with enterprise version of [vmauth](https://docs.victoriametrics.com/vmauth/#ip-filters)
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpec#ip_filters
+   */
+  readonly ipFilters?: VmAuthSpecUnauthorizedUserAccessSpecIpFilters;
 
   /**
    * LoadBalancingPolicy defines load balancing policy to use for backend urls.
    * Supported policies: least_loaded, first_available.
    * See [here](https://docs.victoriametrics.com/vmauth#load-balancing) for more details (default "least_loaded")
    *
-   * @schema VmAuthSpecUnauthorizedAccessConfig#load_balancing_policy
+   * @schema VmAuthSpecUnauthorizedUserAccessSpec#load_balancing_policy
    */
-  readonly loadBalancingPolicy?: VmAuthSpecUnauthorizedAccessConfigLoadBalancingPolicy;
+  readonly loadBalancingPolicy?: VmAuthSpecUnauthorizedUserAccessSpecLoadBalancingPolicy;
+
+  /**
+   * MaxConcurrentRequests defines max concurrent requests per user
+   * 300 is default value for vmauth
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpec#max_concurrent_requests
+   */
+  readonly maxConcurrentRequests?: number;
+
+  /**
+   * MetricLabels - additional labels for metrics exported by vmauth for given user.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpec#metric_labels
+   */
+  readonly metricLabels?: { [key: string]: string };
 
   /**
    * ResponseHeaders represent additional http headers, that vmauth adds for request response
@@ -30914,74 +31151,60 @@ export interface VmAuthSpecUnauthorizedAccessConfig {
    * ["header_key: value1,value2"]
    * it's available since 1.93.0 version of vmauth
    *
-   * @schema VmAuthSpecUnauthorizedAccessConfig#response_headers
+   * @schema VmAuthSpecUnauthorizedUserAccessSpec#response_headers
    */
   readonly responseHeaders?: string[];
 
   /**
    * RetryStatusCodes defines http status codes in numeric format for request retries
-   * Can be defined per target or at VMUser.spec level
    * e.g. [429,503]
    *
-   * @schema VmAuthSpecUnauthorizedAccessConfig#retry_status_codes
+   * @schema VmAuthSpecUnauthorizedUserAccessSpec#retry_status_codes
    */
   readonly retryStatusCodes?: number[];
 
   /**
-   * SrcHeaders is an optional list of headers, which must match request headers.
+   * TLSConfig defines tls configuration for the backend connection
    *
-   * @schema VmAuthSpecUnauthorizedAccessConfig#src_headers
+   * @schema VmAuthSpecUnauthorizedUserAccessSpec#tlsConfig
    */
-  readonly srcHeaders?: string[];
+  readonly tlsConfig?: VmAuthSpecUnauthorizedUserAccessSpecTlsConfig;
 
   /**
-   * SrcHosts is an optional list of regular expressions, which must match the request hostname.
-   *
-   * @schema VmAuthSpecUnauthorizedAccessConfig#src_hosts
+   * @schema VmAuthSpecUnauthorizedUserAccessSpec#url_map
    */
-  readonly srcHosts?: string[];
+  readonly urlMap?: VmAuthSpecUnauthorizedUserAccessSpecUrlMap[];
 
   /**
-   * SrcPaths is an optional list of regular expressions, which must match the request path.
+   * URLPrefix defines prefix prefix for destination
    *
-   * @schema VmAuthSpecUnauthorizedAccessConfig#src_paths
+   * @schema VmAuthSpecUnauthorizedUserAccessSpec#url_prefix
    */
-  readonly srcPaths?: string[];
-
-  /**
-   * SrcQueryArgs is an optional list of query args, which must match request URL query args.
-   *
-   * @schema VmAuthSpecUnauthorizedAccessConfig#src_query_args
-   */
-  readonly srcQueryArgs?: string[];
-
-  /**
-   * UrlPrefix contains backend url prefixes for the proxied request url.
-   *
-   * @schema VmAuthSpecUnauthorizedAccessConfig#url_prefix
-   */
-  readonly urlPrefix?: string[];
+  readonly urlPrefix?: any;
 
 }
 
 /**
- * Converts an object of type 'VmAuthSpecUnauthorizedAccessConfig' to JSON representation.
+ * Converts an object of type 'VmAuthSpecUnauthorizedUserAccessSpec' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VmAuthSpecUnauthorizedAccessConfig(obj: VmAuthSpecUnauthorizedAccessConfig | undefined): Record<string, any> | undefined {
+export function toJson_VmAuthSpecUnauthorizedUserAccessSpec(obj: VmAuthSpecUnauthorizedUserAccessSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'default_url': obj.defaultUrl?.map(y => y),
     'discover_backend_ips': obj.discoverBackendIps,
     'drop_src_path_prefix_parts': obj.dropSrcPathPrefixParts,
+    'dump_request_on_errors': obj.dumpRequestOnErrors,
     'headers': obj.headers?.map(y => y),
+    'ip_filters': toJson_VmAuthSpecUnauthorizedUserAccessSpecIpFilters(obj.ipFilters),
     'load_balancing_policy': obj.loadBalancingPolicy,
+    'max_concurrent_requests': obj.maxConcurrentRequests,
+    'metric_labels': ((obj.metricLabels) === undefined) ? undefined : (Object.entries(obj.metricLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'response_headers': obj.responseHeaders?.map(y => y),
     'retry_status_codes': obj.retryStatusCodes?.map(y => y),
-    'src_headers': obj.srcHeaders?.map(y => y),
-    'src_hosts': obj.srcHosts?.map(y => y),
-    'src_paths': obj.srcPaths?.map(y => y),
-    'src_query_args': obj.srcQueryArgs?.map(y => y),
-    'url_prefix': obj.urlPrefix?.map(y => y),
+    'tlsConfig': toJson_VmAuthSpecUnauthorizedUserAccessSpecTlsConfig(obj.tlsConfig),
+    'url_map': obj.urlMap?.map(y => toJson_VmAuthSpecUnauthorizedUserAccessSpecUrlMap(y)),
+    'url_prefix': obj.urlPrefix,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -31194,6 +31417,15 @@ export interface VmAuthSpecConfigReloaderResourcesClaims {
    */
   readonly name: string;
 
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VmAuthSpecConfigReloaderResourcesClaims#request
+   */
+  readonly request?: string;
+
 }
 
 /**
@@ -31204,6 +31436,7 @@ export function toJson_VmAuthSpecConfigReloaderResourcesClaims(obj: VmAuthSpecCo
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+    'request': obj.request,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -31533,6 +31766,15 @@ export interface VmAuthSpecResourcesClaims {
    */
   readonly name: string;
 
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VmAuthSpecResourcesClaims#request
+   */
+  readonly request?: string;
+
 }
 
 /**
@@ -31543,6 +31785,7 @@ export function toJson_VmAuthSpecResourcesClaims(obj: VmAuthSpecResourcesClaims 
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+    'request': obj.request,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -31634,122 +31877,33 @@ export function toJson_VmAuthSpecServiceSpecMetadata(obj: VmAuthSpecServiceSpecM
 /* eslint-enable max-len, quote-props */
 
 /**
- * Stuct containing the CA cert to use for the targets.
+ * IPFilters defines per target src ip filters
+ * supported only with enterprise version of [vmauth](https://docs.victoriametrics.com/vmauth/#ip-filters)
  *
- * @schema VmAuthSpecTlsConfigCa
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecIpFilters
  */
-export interface VmAuthSpecTlsConfigCa {
+export interface VmAuthSpecUnauthorizedUserAccessSpecIpFilters {
   /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmAuthSpecTlsConfigCa#configMap
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecIpFilters#allow_list
    */
-  readonly configMap?: VmAuthSpecTlsConfigCaConfigMap;
+  readonly allowList?: string[];
 
   /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmAuthSpecTlsConfigCa#secret
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecIpFilters#deny_list
    */
-  readonly secret?: VmAuthSpecTlsConfigCaSecret;
+  readonly denyList?: string[];
 
 }
 
 /**
- * Converts an object of type 'VmAuthSpecTlsConfigCa' to JSON representation.
+ * Converts an object of type 'VmAuthSpecUnauthorizedUserAccessSpecIpFilters' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VmAuthSpecTlsConfigCa(obj: VmAuthSpecTlsConfigCa | undefined): Record<string, any> | undefined {
+export function toJson_VmAuthSpecUnauthorizedUserAccessSpecIpFilters(obj: VmAuthSpecUnauthorizedUserAccessSpecIpFilters | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'configMap': toJson_VmAuthSpecTlsConfigCaConfigMap(obj.configMap),
-    'secret': toJson_VmAuthSpecTlsConfigCaSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, quote-props */
-
-/**
- * Struct containing the client cert file for the targets.
- *
- * @schema VmAuthSpecTlsConfigCert
- */
-export interface VmAuthSpecTlsConfigCert {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmAuthSpecTlsConfigCert#configMap
-   */
-  readonly configMap?: VmAuthSpecTlsConfigCertConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmAuthSpecTlsConfigCert#secret
-   */
-  readonly secret?: VmAuthSpecTlsConfigCertSecret;
-
-}
-
-/**
- * Converts an object of type 'VmAuthSpecTlsConfigCert' to JSON representation.
- */
-/* eslint-disable max-len, quote-props */
-export function toJson_VmAuthSpecTlsConfigCert(obj: VmAuthSpecTlsConfigCert | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmAuthSpecTlsConfigCertConfigMap(obj.configMap),
-    'secret': toJson_VmAuthSpecTlsConfigCertSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, quote-props */
-
-/**
- * Secret containing the client key file for the targets.
- *
- * @schema VmAuthSpecTlsConfigKeySecret
- */
-export interface VmAuthSpecTlsConfigKeySecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmAuthSpecTlsConfigKeySecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmAuthSpecTlsConfigKeySecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmAuthSpecTlsConfigKeySecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmAuthSpecTlsConfigKeySecret' to JSON representation.
- */
-/* eslint-disable max-len, quote-props */
-export function toJson_VmAuthSpecTlsConfigKeySecret(obj: VmAuthSpecTlsConfigKeySecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
+    'allow_list': obj.allowList?.map(y => y),
+    'deny_list': obj.denyList?.map(y => y),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -31761,14 +31915,223 @@ export function toJson_VmAuthSpecTlsConfigKeySecret(obj: VmAuthSpecTlsConfigKeyS
  * Supported policies: least_loaded, first_available.
  * See [here](https://docs.victoriametrics.com/vmauth#load-balancing) for more details (default "least_loaded")
  *
- * @schema VmAuthSpecUnauthorizedAccessConfigLoadBalancingPolicy
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecLoadBalancingPolicy
  */
-export enum VmAuthSpecUnauthorizedAccessConfigLoadBalancingPolicy {
+export enum VmAuthSpecUnauthorizedUserAccessSpecLoadBalancingPolicy {
   /** least_loaded */
   LEAST_UNDERSCORE_LOADED = "least_loaded",
   /** first_available */
   FIRST_UNDERSCORE_AVAILABLE = "first_available",
 }
+
+/**
+ * TLSConfig defines tls configuration for the backend connection
+ *
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfig
+ */
+export interface VmAuthSpecUnauthorizedUserAccessSpecTlsConfig {
+  /**
+   * Stuct containing the CA cert to use for the targets.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfig#ca
+   */
+  readonly ca?: VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCa;
+
+  /**
+   * Path to the CA cert in the container to use for the targets.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfig#caFile
+   */
+  readonly caFile?: string;
+
+  /**
+   * Struct containing the client cert file for the targets.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfig#cert
+   */
+  readonly cert?: VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCert;
+
+  /**
+   * Path to the client cert file in the container for the targets.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfig#certFile
+   */
+  readonly certFile?: string;
+
+  /**
+   * Disable target certificate validation.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfig#insecureSkipVerify
+   */
+  readonly insecureSkipVerify?: boolean;
+
+  /**
+   * Path to the client key file in the container for the targets.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfig#keyFile
+   */
+  readonly keyFile?: string;
+
+  /**
+   * Secret containing the client key file for the targets.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfig#keySecret
+   */
+  readonly keySecret?: VmAuthSpecUnauthorizedUserAccessSpecTlsConfigKeySecret;
+
+  /**
+   * Used to verify the hostname for the targets.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfig#serverName
+   */
+  readonly serverName?: string;
+
+}
+
+/**
+ * Converts an object of type 'VmAuthSpecUnauthorizedUserAccessSpecTlsConfig' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VmAuthSpecUnauthorizedUserAccessSpecTlsConfig(obj: VmAuthSpecUnauthorizedUserAccessSpecTlsConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'ca': toJson_VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCa(obj.ca),
+    'caFile': obj.caFile,
+    'cert': toJson_VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCert(obj.cert),
+    'certFile': obj.certFile,
+    'insecureSkipVerify': obj.insecureSkipVerify,
+    'keyFile': obj.keyFile,
+    'keySecret': toJson_VmAuthSpecUnauthorizedUserAccessSpecTlsConfigKeySecret(obj.keySecret),
+    'serverName': obj.serverName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * UnauthorizedAccessConfigURLMap defines element of url_map routing configuration
+ * For UnauthorizedAccessConfig and VMAuthUnauthorizedUserAccessSpec.URLMap
+ *
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecUrlMap
+ */
+export interface VmAuthSpecUnauthorizedUserAccessSpecUrlMap {
+  /**
+   * DiscoverBackendIPs instructs discovering URLPrefix backend IPs via DNS.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecUrlMap#discover_backend_ips
+   */
+  readonly discoverBackendIps?: boolean;
+
+  /**
+   * DropSrcPathPrefixParts is the number of `/`-delimited request path prefix parts to drop before proxying the request to backend.
+   * See [here](https://docs.victoriametrics.com/vmauth#dropping-request-path-prefix) for more details.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecUrlMap#drop_src_path_prefix_parts
+   */
+  readonly dropSrcPathPrefixParts?: number;
+
+  /**
+   * RequestHeaders represent additional http headers, that vmauth uses
+   * in form of ["header_key: header_value"]
+   * multiple values for header key:
+   * ["header_key: value1,value2"]
+   * it's available since 1.68.0 version of vmauth
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecUrlMap#headers
+   */
+  readonly headers?: string[];
+
+  /**
+   * LoadBalancingPolicy defines load balancing policy to use for backend urls.
+   * Supported policies: least_loaded, first_available.
+   * See [here](https://docs.victoriametrics.com/vmauth#load-balancing) for more details (default "least_loaded")
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecUrlMap#load_balancing_policy
+   */
+  readonly loadBalancingPolicy?: VmAuthSpecUnauthorizedUserAccessSpecUrlMapLoadBalancingPolicy;
+
+  /**
+   * ResponseHeaders represent additional http headers, that vmauth adds for request response
+   * in form of ["header_key: header_value"]
+   * multiple values for header key:
+   * ["header_key: value1,value2"]
+   * it's available since 1.93.0 version of vmauth
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecUrlMap#response_headers
+   */
+  readonly responseHeaders?: string[];
+
+  /**
+   * RetryStatusCodes defines http status codes in numeric format for request retries
+   * Can be defined per target or at VMUser.spec level
+   * e.g. [429,503]
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecUrlMap#retry_status_codes
+   */
+  readonly retryStatusCodes?: number[];
+
+  /**
+   * SrcHeaders is an optional list of headers, which must match request headers.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecUrlMap#src_headers
+   */
+  readonly srcHeaders?: string[];
+
+  /**
+   * SrcHosts is an optional list of regular expressions, which must match the request hostname.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecUrlMap#src_hosts
+   */
+  readonly srcHosts?: string[];
+
+  /**
+   * SrcPaths is an optional list of regular expressions, which must match the request path.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecUrlMap#src_paths
+   */
+  readonly srcPaths?: string[];
+
+  /**
+   * SrcQueryArgs is an optional list of query args, which must match request URL query args.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecUrlMap#src_query_args
+   */
+  readonly srcQueryArgs?: string[];
+
+  /**
+   * UrlPrefix contains backend url prefixes for the proxied request url.
+   * URLPrefix defines prefix prefix for destination
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecUrlMap#url_prefix
+   */
+  readonly urlPrefix?: any;
+
+}
+
+/**
+ * Converts an object of type 'VmAuthSpecUnauthorizedUserAccessSpecUrlMap' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VmAuthSpecUnauthorizedUserAccessSpecUrlMap(obj: VmAuthSpecUnauthorizedUserAccessSpecUrlMap | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'discover_backend_ips': obj.discoverBackendIps,
+    'drop_src_path_prefix_parts': obj.dropSrcPathPrefixParts,
+    'headers': obj.headers?.map(y => y),
+    'load_balancing_policy': obj.loadBalancingPolicy,
+    'response_headers': obj.responseHeaders?.map(y => y),
+    'retry_status_codes': obj.retryStatusCodes?.map(y => y),
+    'src_headers': obj.srcHeaders?.map(y => y),
+    'src_hosts': obj.srcHosts?.map(y => y),
+    'src_paths': obj.srcPaths?.map(y => y),
+    'src_query_args': obj.srcQueryArgs?.map(y => y),
+    'url_prefix': obj.urlPrefix,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -31904,48 +32267,36 @@ export function toJson_VmAuthSpecIngressExtraRulesHttp(obj: VmAuthSpecIngressExt
 /* eslint-enable max-len, quote-props */
 
 /**
- * ConfigMap containing data to use for the targets.
+ * Stuct containing the CA cert to use for the targets.
  *
- * @schema VmAuthSpecTlsConfigCaConfigMap
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCa
  */
-export interface VmAuthSpecTlsConfigCaConfigMap {
+export interface VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCa {
   /**
-   * The key to select.
+   * ConfigMap containing data to use for the targets.
    *
-   * @schema VmAuthSpecTlsConfigCaConfigMap#key
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCa#configMap
    */
-  readonly key: string;
+  readonly configMap?: VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaConfigMap;
 
   /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   * Secret containing data to use for the targets.
    *
-   * @schema VmAuthSpecTlsConfigCaConfigMap#name
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCa#secret
    */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmAuthSpecTlsConfigCaConfigMap#optional
-   */
-  readonly optional?: boolean;
+  readonly secret?: VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaSecret;
 
 }
 
 /**
- * Converts an object of type 'VmAuthSpecTlsConfigCaConfigMap' to JSON representation.
+ * Converts an object of type 'VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCa' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VmAuthSpecTlsConfigCaConfigMap(obj: VmAuthSpecTlsConfigCaConfigMap | undefined): Record<string, any> | undefined {
+export function toJson_VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCa(obj: VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCa | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
+    'configMap': toJson_VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaConfigMap(obj.configMap),
+    'secret': toJson_VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaSecret(obj.secret),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -31953,15 +32304,52 @@ export function toJson_VmAuthSpecTlsConfigCaConfigMap(obj: VmAuthSpecTlsConfigCa
 /* eslint-enable max-len, quote-props */
 
 /**
- * Secret containing data to use for the targets.
+ * Struct containing the client cert file for the targets.
  *
- * @schema VmAuthSpecTlsConfigCaSecret
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCert
  */
-export interface VmAuthSpecTlsConfigCaSecret {
+export interface VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCert {
+  /**
+   * ConfigMap containing data to use for the targets.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCert#configMap
+   */
+  readonly configMap?: VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertConfigMap;
+
+  /**
+   * Secret containing data to use for the targets.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCert#secret
+   */
+  readonly secret?: VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertSecret;
+
+}
+
+/**
+ * Converts an object of type 'VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCert' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCert(obj: VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCert | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMap': toJson_VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertConfigMap(obj.configMap),
+    'secret': toJson_VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertSecret(obj.secret),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Secret containing the client key file for the targets.
+ *
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigKeySecret
+ */
+export interface VmAuthSpecUnauthorizedUserAccessSpecTlsConfigKeySecret {
   /**
    * The key of the secret to select from.  Must be a valid secret key.
    *
-   * @schema VmAuthSpecTlsConfigCaSecret#key
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigKeySecret#key
    */
   readonly key: string;
 
@@ -31972,24 +32360,24 @@ export interface VmAuthSpecTlsConfigCaSecret {
    * almost certainly wrong.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
    *
-   * @schema VmAuthSpecTlsConfigCaSecret#name
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigKeySecret#name
    */
   readonly name?: string;
 
   /**
    * Specify whether the Secret or its key must be defined
    *
-   * @schema VmAuthSpecTlsConfigCaSecret#optional
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
 
 }
 
 /**
- * Converts an object of type 'VmAuthSpecTlsConfigCaSecret' to JSON representation.
+ * Converts an object of type 'VmAuthSpecUnauthorizedUserAccessSpecTlsConfigKeySecret' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VmAuthSpecTlsConfigCaSecret(obj: VmAuthSpecTlsConfigCaSecret | undefined): Record<string, any> | undefined {
+export function toJson_VmAuthSpecUnauthorizedUserAccessSpecTlsConfigKeySecret(obj: VmAuthSpecUnauthorizedUserAccessSpecTlsConfigKeySecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -32002,102 +32390,18 @@ export function toJson_VmAuthSpecTlsConfigCaSecret(obj: VmAuthSpecTlsConfigCaSec
 /* eslint-enable max-len, quote-props */
 
 /**
- * ConfigMap containing data to use for the targets.
+ * LoadBalancingPolicy defines load balancing policy to use for backend urls.
+ * Supported policies: least_loaded, first_available.
+ * See [here](https://docs.victoriametrics.com/vmauth#load-balancing) for more details (default "least_loaded")
  *
- * @schema VmAuthSpecTlsConfigCertConfigMap
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecUrlMapLoadBalancingPolicy
  */
-export interface VmAuthSpecTlsConfigCertConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmAuthSpecTlsConfigCertConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmAuthSpecTlsConfigCertConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmAuthSpecTlsConfigCertConfigMap#optional
-   */
-  readonly optional?: boolean;
-
+export enum VmAuthSpecUnauthorizedUserAccessSpecUrlMapLoadBalancingPolicy {
+  /** least_loaded */
+  LEAST_UNDERSCORE_LOADED = "least_loaded",
+  /** first_available */
+  FIRST_UNDERSCORE_AVAILABLE = "first_available",
 }
-
-/**
- * Converts an object of type 'VmAuthSpecTlsConfigCertConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, quote-props */
-export function toJson_VmAuthSpecTlsConfigCertConfigMap(obj: VmAuthSpecTlsConfigCertConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmAuthSpecTlsConfigCertSecret
- */
-export interface VmAuthSpecTlsConfigCertSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmAuthSpecTlsConfigCertSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmAuthSpecTlsConfigCertSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmAuthSpecTlsConfigCertSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmAuthSpecTlsConfigCertSecret' to JSON representation.
- */
-/* eslint-disable max-len, quote-props */
-export function toJson_VmAuthSpecTlsConfigCertSecret(obj: VmAuthSpecTlsConfigCertSecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPIngressPath associates a path with a backend. Incoming urls matching the
@@ -32156,6 +32460,202 @@ export function toJson_VmAuthSpecIngressExtraRulesHttpPaths(obj: VmAuthSpecIngre
     'backend': toJson_VmAuthSpecIngressExtraRulesHttpPathsBackend(obj.backend),
     'path': obj.path,
     'pathType': obj.pathType,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ConfigMap containing data to use for the targets.
+ *
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaConfigMap
+ */
+export interface VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaConfigMap {
+  /**
+   * The key to select.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaConfigMap#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaConfigMap#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap or its key must be defined
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaConfigMap#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaConfigMap' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaConfigMap(obj: VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaConfigMap | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Secret containing data to use for the targets.
+ *
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaSecret
+ */
+export interface VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaSecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaSecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaSecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaSecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaSecret(obj: VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ConfigMap containing data to use for the targets.
+ *
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertConfigMap
+ */
+export interface VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertConfigMap {
+  /**
+   * The key to select.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertConfigMap#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertConfigMap#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap or its key must be defined
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertConfigMap#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertConfigMap' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertConfigMap(obj: VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertConfigMap | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Secret containing data to use for the targets.
+ *
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertSecret
+ */
+export interface VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertSecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertSecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertSecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertSecret' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertSecret(obj: VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -32468,6 +32968,14 @@ export interface VmClusterSpec {
   readonly license?: VmClusterSpecLicense;
 
   /**
+   * ManagedMetadata defines metadata that will be added to the all objects
+   * created by operator for the given CustomResource
+   *
+   * @schema VmClusterSpec#managedMetadata
+   */
+  readonly managedMetadata?: VmClusterSpecManagedMetadata;
+
+  /**
    * Paused If set to true all actions on the underlying managed objects are not
    * going to be performed, except for delete actions.
    *
@@ -32527,6 +33035,8 @@ export interface VmClusterSpec {
   readonly vminsert?: VmClusterSpecVminsert;
 
   /**
+   * VMSelect defines configuration section for vmselect components of the victoria-metrics cluster
+   *
    * @schema VmClusterSpec#vmselect
    */
   readonly vmselect?: VmClusterSpecVmselect;
@@ -32549,6 +33059,7 @@ export function toJson_VmClusterSpec(obj: VmClusterSpec | undefined): Record<str
     'clusterVersion': obj.clusterVersion,
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VmClusterSpecImagePullSecrets(y)),
     'license': toJson_VmClusterSpecLicense(obj.license),
+    'managedMetadata': toJson_VmClusterSpecManagedMetadata(obj.managedMetadata),
     'paused': obj.paused,
     'replicationFactor': obj.replicationFactor,
     'requestsLoadBalancer': toJson_VmClusterSpecRequestsLoadBalancer(obj.requestsLoadBalancer),
@@ -32607,6 +33118,13 @@ export function toJson_VmClusterSpecImagePullSecrets(obj: VmClusterSpecImagePull
  */
 export interface VmClusterSpecLicense {
   /**
+   * Enforce offline verification of the license key.
+   *
+   * @schema VmClusterSpecLicense#forceOffline
+   */
+  readonly forceOffline?: boolean;
+
+  /**
    * Enterprise license key. This flag is available only in [VictoriaMetrics enterprise](https://docs.victoriametrics.com/enterprise).
    * To request a trial license, [go to](https://victoriametrics.com/products/enterprise/trial)
    *
@@ -32621,6 +33139,13 @@ export interface VmClusterSpecLicense {
    */
   readonly keyRef?: VmClusterSpecLicenseKeyRef;
 
+  /**
+   * Interval to be used for checking for license key changes. Note that this is only applicable when using KeyRef.
+   *
+   * @schema VmClusterSpecLicense#reloadInterval
+   */
+  readonly reloadInterval?: string;
+
 }
 
 /**
@@ -32630,8 +33155,53 @@ export interface VmClusterSpecLicense {
 export function toJson_VmClusterSpecLicense(obj: VmClusterSpecLicense | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'forceOffline': obj.forceOffline,
     'key': obj.key,
     'keyRef': toJson_VmClusterSpecLicenseKeyRef(obj.keyRef),
+    'reloadInterval': obj.reloadInterval,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * ManagedMetadata defines metadata that will be added to the all objects
+ * created by operator for the given CustomResource
+ *
+ * @schema VmClusterSpecManagedMetadata
+ */
+export interface VmClusterSpecManagedMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VmClusterSpecManagedMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VmClusterSpecManagedMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecManagedMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VmClusterSpecManagedMetadata(obj: VmClusterSpecManagedMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -33123,6 +33693,8 @@ export function toJson_VmClusterSpecVminsert(obj: VmClusterSpecVminsert | undefi
 /* eslint-enable max-len, quote-props */
 
 /**
+ * VMSelect defines configuration section for vmselect components of the victoria-metrics cluster
+ *
  * @schema VmClusterSpecVmselect
  */
 export interface VmClusterSpecVmselect {
@@ -36798,6 +37370,15 @@ export interface VmClusterSpecVminsertResourcesClaims {
    */
   readonly name: string;
 
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VmClusterSpecVminsertResourcesClaims#request
+   */
+  readonly request?: string;
+
 }
 
 /**
@@ -36808,6 +37389,7 @@ export function toJson_VmClusterSpecVminsertResourcesClaims(obj: VmClusterSpecVm
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+    'request': obj.request,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -37047,7 +37629,7 @@ export interface VmClusterSpecVmselectClaimTemplatesSpec {
    * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
    * exists.
    * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
    *
    * @schema VmClusterSpecVmselectClaimTemplatesSpec#volumeAttributesClassName
    */
@@ -37195,7 +37777,7 @@ export interface VmClusterSpecVmselectClaimTemplatesStatus {
   /**
    * currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using.
    * When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim
-   * This is an alpha field and requires enabling VolumeAttributesClass feature.
+   * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
    *
    * @schema VmClusterSpecVmselectClaimTemplatesStatus#currentVolumeAttributesClassName
    */
@@ -37204,7 +37786,7 @@ export interface VmClusterSpecVmselectClaimTemplatesStatus {
   /**
    * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
    * When this is unset, there is no ModifyVolume operation being attempted.
-   * This is an alpha field and requires enabling VolumeAttributesClass feature.
+   * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
    *
    * @schema VmClusterSpecVmselectClaimTemplatesStatus#modifyVolumeStatus
    */
@@ -37374,6 +37956,15 @@ export interface VmClusterSpecVmselectResourcesClaims {
    */
   readonly name: string;
 
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VmClusterSpecVmselectResourcesClaims#request
+   */
+  readonly request?: string;
+
 }
 
 /**
@@ -37384,6 +37975,7 @@ export function toJson_VmClusterSpecVmselectResourcesClaims(obj: VmClusterSpecVm
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+    'request': obj.request,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -37687,7 +38279,7 @@ export interface VmClusterSpecVmstorageClaimTemplatesSpec {
    * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
    * exists.
    * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
    *
    * @schema VmClusterSpecVmstorageClaimTemplatesSpec#volumeAttributesClassName
    */
@@ -37835,7 +38427,7 @@ export interface VmClusterSpecVmstorageClaimTemplatesStatus {
   /**
    * currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using.
    * When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim
-   * This is an alpha field and requires enabling VolumeAttributesClass feature.
+   * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
    *
    * @schema VmClusterSpecVmstorageClaimTemplatesStatus#currentVolumeAttributesClassName
    */
@@ -37844,7 +38436,7 @@ export interface VmClusterSpecVmstorageClaimTemplatesStatus {
   /**
    * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
    * When this is unset, there is no ModifyVolume operation being attempted.
-   * This is an alpha field and requires enabling VolumeAttributesClass feature.
+   * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
    *
    * @schema VmClusterSpecVmstorageClaimTemplatesStatus#modifyVolumeStatus
    */
@@ -37968,6 +38560,15 @@ export interface VmClusterSpecVmstorageResourcesClaims {
    */
   readonly name: string;
 
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VmClusterSpecVmstorageResourcesClaims#request
+   */
+  readonly request?: string;
+
 }
 
 /**
@@ -37978,6 +38579,7 @@ export function toJson_VmClusterSpecVmstorageResourcesClaims(obj: VmClusterSpecV
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+    'request': obj.request,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -38773,7 +39375,15 @@ export interface VmClusterSpecVmselectClaimTemplatesStatusConditions {
   readonly status: string;
 
   /**
-   * PersistentVolumeClaimConditionType is a valid value of PersistentVolumeClaimCondition.Type
+   * PersistentVolumeClaimConditionType defines the condition of PV claim.
+   * Valid values are:
+   * - "Resizing", "FileSystemResizePending"
+   *
+   * If RecoverVolumeExpansionFailure feature gate is enabled, then following additional values can be expected:
+   * - "ControllerResizeError", "NodeResizeError"
+   *
+   * If VolumeAttributesClass feature gate is enabled, then following additional values can be expected:
+   * - "ModifyVolumeError", "ModifyingVolume"
    *
    * @schema VmClusterSpecVmselectClaimTemplatesStatusConditions#type
    */
@@ -38803,7 +39413,7 @@ export function toJson_VmClusterSpecVmselectClaimTemplatesStatusConditions(obj: 
 /**
  * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
  * When this is unset, there is no ModifyVolume operation being attempted.
- * This is an alpha field and requires enabling VolumeAttributesClass feature.
+ * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
  *
  * @schema VmClusterSpecVmselectClaimTemplatesStatusModifyVolumeStatus
  */
@@ -39042,7 +39652,7 @@ export interface VmClusterSpecVmselectStorageVolumeClaimTemplateSpec {
    * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
    * exists.
    * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
    *
    * @schema VmClusterSpecVmselectStorageVolumeClaimTemplateSpec#volumeAttributesClassName
    */
@@ -39190,7 +39800,7 @@ export interface VmClusterSpecVmselectStorageVolumeClaimTemplateStatus {
   /**
    * currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using.
    * When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim
-   * This is an alpha field and requires enabling VolumeAttributesClass feature.
+   * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
    *
    * @schema VmClusterSpecVmselectStorageVolumeClaimTemplateStatus#currentVolumeAttributesClassName
    */
@@ -39199,7 +39809,7 @@ export interface VmClusterSpecVmselectStorageVolumeClaimTemplateStatus {
   /**
    * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
    * When this is unset, there is no ModifyVolume operation being attempted.
-   * This is an alpha field and requires enabling VolumeAttributesClass feature.
+   * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
    *
    * @schema VmClusterSpecVmselectStorageVolumeClaimTemplateStatus#modifyVolumeStatus
    */
@@ -39522,7 +40132,15 @@ export interface VmClusterSpecVmstorageClaimTemplatesStatusConditions {
   readonly status: string;
 
   /**
-   * PersistentVolumeClaimConditionType is a valid value of PersistentVolumeClaimCondition.Type
+   * PersistentVolumeClaimConditionType defines the condition of PV claim.
+   * Valid values are:
+   * - "Resizing", "FileSystemResizePending"
+   *
+   * If RecoverVolumeExpansionFailure feature gate is enabled, then following additional values can be expected:
+   * - "ControllerResizeError", "NodeResizeError"
+   *
+   * If VolumeAttributesClass feature gate is enabled, then following additional values can be expected:
+   * - "ModifyVolumeError", "ModifyingVolume"
    *
    * @schema VmClusterSpecVmstorageClaimTemplatesStatusConditions#type
    */
@@ -39552,7 +40170,7 @@ export function toJson_VmClusterSpecVmstorageClaimTemplatesStatusConditions(obj:
 /**
  * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
  * When this is unset, there is no ModifyVolume operation being attempted.
- * This is an alpha field and requires enabling VolumeAttributesClass feature.
+ * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
  *
  * @schema VmClusterSpecVmstorageClaimTemplatesStatusModifyVolumeStatus
  */
@@ -39688,6 +40306,15 @@ export interface VmClusterSpecVmstorageVmBackupResourcesClaims {
    */
   readonly name: string;
 
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VmClusterSpecVmstorageVmBackupResourcesClaims#request
+   */
+  readonly request?: string;
+
 }
 
 /**
@@ -39698,6 +40325,7 @@ export function toJson_VmClusterSpecVmstorageVmBackupResourcesClaims(obj: VmClus
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+    'request': obj.request,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -40126,7 +40754,15 @@ export interface VmClusterSpecVmselectStorageVolumeClaimTemplateStatusConditions
   readonly status: string;
 
   /**
-   * PersistentVolumeClaimConditionType is a valid value of PersistentVolumeClaimCondition.Type
+   * PersistentVolumeClaimConditionType defines the condition of PV claim.
+   * Valid values are:
+   * - "Resizing", "FileSystemResizePending"
+   *
+   * If RecoverVolumeExpansionFailure feature gate is enabled, then following additional values can be expected:
+   * - "ControllerResizeError", "NodeResizeError"
+   *
+   * If VolumeAttributesClass feature gate is enabled, then following additional values can be expected:
+   * - "ModifyVolumeError", "ModifyingVolume"
    *
    * @schema VmClusterSpecVmselectStorageVolumeClaimTemplateStatusConditions#type
    */
@@ -40156,7 +40792,7 @@ export function toJson_VmClusterSpecVmselectStorageVolumeClaimTemplateStatusCond
 /**
  * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
  * When this is unset, there is no ModifyVolume operation being attempted.
- * This is an alpha field and requires enabling VolumeAttributesClass feature.
+ * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
  *
  * @schema VmClusterSpecVmselectStorageVolumeClaimTemplateStatusModifyVolumeStatus
  */
@@ -49139,6 +49775,14 @@ export interface VmScrapeConfigSpecConsulSdConfigs {
   readonly datacenter?: string;
 
   /**
+   * Filter defines filter for /v1/catalog/services requests
+   * See https://developer.hashicorp.com/consul/api-docs/features/filtering
+   *
+   * @schema VmScrapeConfigSpecConsulSdConfigs#filter
+   */
+  readonly filter?: string;
+
+  /**
    * Configure whether HTTP requests follow HTTP 3xx redirects.
    * If unset, use its default value.
    *
@@ -49252,6 +49896,7 @@ export function toJson_VmScrapeConfigSpecConsulSdConfigs(obj: VmScrapeConfigSpec
     'authorization': toJson_VmScrapeConfigSpecConsulSdConfigsAuthorization(obj.authorization),
     'basicAuth': toJson_VmScrapeConfigSpecConsulSdConfigsBasicAuth(obj.basicAuth),
     'datacenter': obj.datacenter,
+    'filter': obj.filter,
     'followRedirects': obj.followRedirects,
     'namespace': obj.namespace,
     'nodeMeta': ((obj.nodeMeta) === undefined) ? undefined : (Object.entries(obj.nodeMeta).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -61282,6 +61927,14 @@ export interface VmSingleSpec {
   readonly logLevel?: VmSingleSpecLogLevel;
 
   /**
+   * ManagedMetadata defines metadata that will be added to the all objects
+   * created by operator for the given CustomResource
+   *
+   * @schema VmSingleSpec#managedMetadata
+   */
+  readonly managedMetadata?: VmSingleSpecManagedMetadata;
+
+  /**
    * MinReadySeconds defines a minim number os seconds to wait before starting update next pod
    * if previous in healthy state
    * Has no effect for VLogs and VMSingle
@@ -61570,6 +62223,7 @@ export function toJson_VmSingleSpec(obj: VmSingleSpec | undefined): Record<strin
     'livenessProbe': obj.livenessProbe,
     'logFormat': obj.logFormat,
     'logLevel': obj.logLevel,
+    'managedMetadata': toJson_VmSingleSpecManagedMetadata(obj.managedMetadata),
     'minReadySeconds': obj.minReadySeconds,
     'nodeSelector': ((obj.nodeSelector) === undefined) ? undefined : (Object.entries(obj.nodeSelector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'paused': obj.paused,
@@ -61889,6 +62543,13 @@ export function toJson_VmSingleSpecInsertPorts(obj: VmSingleSpecInsertPorts | un
  */
 export interface VmSingleSpecLicense {
   /**
+   * Enforce offline verification of the license key.
+   *
+   * @schema VmSingleSpecLicense#forceOffline
+   */
+  readonly forceOffline?: boolean;
+
+  /**
    * Enterprise license key. This flag is available only in [VictoriaMetrics enterprise](https://docs.victoriametrics.com/enterprise).
    * To request a trial license, [go to](https://victoriametrics.com/products/enterprise/trial)
    *
@@ -61903,6 +62564,13 @@ export interface VmSingleSpecLicense {
    */
   readonly keyRef?: VmSingleSpecLicenseKeyRef;
 
+  /**
+   * Interval to be used for checking for license key changes. Note that this is only applicable when using KeyRef.
+   *
+   * @schema VmSingleSpecLicense#reloadInterval
+   */
+  readonly reloadInterval?: string;
+
 }
 
 /**
@@ -61912,8 +62580,10 @@ export interface VmSingleSpecLicense {
 export function toJson_VmSingleSpecLicense(obj: VmSingleSpecLicense | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'forceOffline': obj.forceOffline,
     'key': obj.key,
     'keyRef': toJson_VmSingleSpecLicenseKeyRef(obj.keyRef),
+    'reloadInterval': obj.reloadInterval,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -61949,6 +62619,49 @@ export enum VmSingleSpecLogLevel {
   /** PANIC */
   PANIC = "PANIC",
 }
+
+/**
+ * ManagedMetadata defines metadata that will be added to the all objects
+ * created by operator for the given CustomResource
+ *
+ * @schema VmSingleSpecManagedMetadata
+ */
+export interface VmSingleSpecManagedMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VmSingleSpecManagedMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VmSingleSpecManagedMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'VmSingleSpecManagedMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VmSingleSpecManagedMetadata(obj: VmSingleSpecManagedMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * PodMetadata configures Labels and Annotations which are propagated to the VMSingle pods.
@@ -62235,7 +62948,7 @@ export interface VmSingleSpecStorage {
    * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
    * exists.
    * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
    *
    * @schema VmSingleSpecStorage#volumeAttributesClassName
    */
@@ -62895,6 +63608,15 @@ export interface VmSingleSpecResourcesClaims {
    */
   readonly name: string;
 
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VmSingleSpecResourcesClaims#request
+   */
+  readonly request?: string;
+
 }
 
 /**
@@ -62905,6 +63627,7 @@ export function toJson_VmSingleSpecResourcesClaims(obj: VmSingleSpecResourcesCla
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+    'request': obj.request,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -64183,6 +64906,15 @@ export interface VmSingleSpecVmBackupResourcesClaims {
    */
   readonly name: string;
 
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VmSingleSpecVmBackupResourcesClaims#request
+   */
+  readonly request?: string;
+
 }
 
 /**
@@ -64193,6 +64925,7 @@ export function toJson_VmSingleSpecVmBackupResourcesClaims(obj: VmSingleSpecVmBa
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+    'request': obj.request,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -66871,6 +67604,17 @@ export interface VmUserSpec {
   readonly dropSrcPathPrefixParts?: number;
 
   /**
+   * DumpRequestOnErrors instructs vmauth to return detailed request params to the client
+   * if routing rules don't allow to forward request to the backends.
+   * Useful for debugging `src_hosts` and `src_headers` based routing rules
+   *
+   * available since v1.107.0 vmauth version
+   *
+   * @schema VmUserSpec#dump_request_on_errors
+   */
+  readonly dumpRequestOnErrors?: boolean;
+
+  /**
    * GeneratePassword instructs operator to generate password for user
    * if spec.password if empty.
    *
@@ -66969,7 +67713,7 @@ export interface VmUserSpec {
   readonly targetRefs: VmUserSpecTargetRefs[];
 
   /**
-   * TLSConfig specifies TLSConfig configuration parameters.
+   * TLSConfig defines tls configuration for the backend connection
    *
    * @schema VmUserSpec#tlsConfig
    */
@@ -67004,6 +67748,7 @@ export function toJson_VmUserSpec(obj: VmUserSpec | undefined): Record<string, a
     'disable_secret_creation': obj.disableSecretCreation,
     'discover_backend_ips': obj.discoverBackendIps,
     'drop_src_path_prefix_parts': obj.dropSrcPathPrefixParts,
+    'dump_request_on_errors': obj.dumpRequestOnErrors,
     'generatePassword': obj.generatePassword,
     'headers': obj.headers?.map(y => y),
     'ip_filters': toJson_VmUserSpecIpFilters(obj.ipFilters),
@@ -67274,7 +68019,7 @@ export function toJson_VmUserSpecTargetRefs(obj: VmUserSpecTargetRefs | undefine
 /* eslint-enable max-len, quote-props */
 
 /**
- * TLSConfig specifies TLSConfig configuration parameters.
+ * TLSConfig defines tls configuration for the backend connection
  *
  * @schema VmUserSpecTlsConfig
  */
