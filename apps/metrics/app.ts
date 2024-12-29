@@ -41,17 +41,6 @@ NewHelmApp(
         "argocd.argoproj.io/sync-options": "ServerSideApply=true",
       },
     },
-    "victoria-metrics-operator": {
-      image: {
-        registry: "docker.cmdcentral.net", // for operator itself
-      },
-      env: [
-        {
-          name: "VM_CONTAINERREGISTRY",
-          value: "docker.cmdcentral.net",
-        }, // for stuff deployed by operator
-      ],
-    },
     defaultRules: {
       groups: {
         // k3s doesn't run kube-scheduler

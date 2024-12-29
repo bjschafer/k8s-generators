@@ -61,12 +61,6 @@ spec:
               operator: Exists
           vmScrape:
             enabled: false
-        victoria-metrics-operator:
-          env:
-            - name: VM_CONTAINERREGISTRY
-              value: docker.cmdcentral.net
-          image:
-            registry: docker.cmdcentral.net
         vmagent:
           enabled: false
         vmalert:
