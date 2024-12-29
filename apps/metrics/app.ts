@@ -85,6 +85,20 @@ NewHelmApp(
     kubeEtcd: {
       enabled: false,
     },
+    kubelet: {
+      vmScrape: {
+        metricRelabelConfigs: [
+          {
+            action: "labeldrop",
+            regex: "(plan_upgrade_cattle_io.*)",
+          },
+          {
+            action: "labeldrop",
+            regex: "(beta_kubernetes_io.*)",
+          },
+        ],
+      },
+    },
     "prometheus-node-exporter": {
       fullnameOverride: "node-exporter",
       tolerations: [
