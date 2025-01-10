@@ -19,3 +19,4 @@ spec:
     app: server
     app.kubernetes.io/instance: prod
     app.kubernetes.io/name: victoria-logs-single
+  type: LoadBalancer

@@ -155,6 +155,7 @@ class VMLogs extends Chart {
         },
       },
       spec: {
+        type: "LoadBalancer",
         ports: [
           {
             name: "tcp",
