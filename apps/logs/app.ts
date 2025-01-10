@@ -8,6 +8,7 @@ import {
   VmPodScrape,
   VmServiceScrape,
 } from "../../imports/operator.victoriametrics.com";
+import { IntOrString, KubeService } from "../../imports/k8s";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -39,6 +40,11 @@ class VMLogs extends Chart {
           enabled: true,
         },
         server: {
+          extraArgs: {
+            maxConcurrentInserts: "32",
+            "syslog.listenAddr.tcp": ":1514",
+            "syslog.listenAddr.udp": ":1514",
+          },
           retentionPeriod: "3", // months
           retentionDiskSpaceUsage: "75GiB",
           persistentVolume: {
@@ -136,6 +142,35 @@ class VMLogs extends Chart {
               operator: "Exists",
             },
           ],
+        },
+      },
+    });
+
+    new KubeService(this, "syslog", {
+      metadata: {
+        name: "syslog",
+        namespace: namespace,
+        annotations: {
+          "external-dns.alpha.kubernetes.io/hostname": "syslog.cmdcentral.xyz",
+        },
+      },
+      spec: {
+        ports: [
+          {
+            port: 514,
+            targetPort: IntOrString.fromNumber(1514),
+            protocol: "TCP",
+          },
+          {
+            port: 514,
+            targetPort: IntOrString.fromNumber(1514),
+            protocol: "UDP",
+          },
+        ],
+        selector: {
+          app: "server",
+          "app.kubernetes.io/instance": "prod",
+          "app.kubernetes.io/name": "victoria-logs-single",
         },
       },
     });

@@ -33,9 +33,12 @@ spec:
             - --envflag.prefix=VM_
             - --httpListenAddr=:9428
             - --loggerFormat=json
+            - --maxConcurrentInserts=32
             - --retention.maxDiskSpaceUsageBytes=75GiB
             - --retentionPeriod=3
             - --storageDataPath=/storage
+            - --syslog.listenAddr.tcp=:1514
+            - --syslog.listenAddr.udp=:1514
           image: victoriametrics/victoria-logs:v1.4.0-victorialogs
           imagePullPolicy: IfNotPresent
           livenessProbe:
