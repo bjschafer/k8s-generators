@@ -36,9 +36,6 @@ class VMLogs extends Chart {
       releaseName: "prod",
       namespace: namespace,
       values: {
-        podDisruptionBudget: {
-          enabled: true,
-        },
         server: {
           extraArgs: {
             maxConcurrentInserts: "32",
@@ -187,7 +184,6 @@ class VMLogs extends Chart {
         selector: {
           matchLabels: {
             app: "server",
-            "app.kubernetes.io/instance": "prod",
             "app.kubernetes.io/name": "victoria-logs-single",
           },
         },
