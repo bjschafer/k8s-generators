@@ -7,10 +7,12 @@ metadata:
   namespace: logs
 spec:
   ports:
-    - port: 514
+    - name: tcp
+      port: 514
       protocol: TCP
       targetPort: 1514
-    - port: 514
+    - name: udp
+      port: 514
       protocol: UDP
       targetPort: 1514
   selector:

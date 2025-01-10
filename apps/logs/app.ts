@@ -157,11 +157,13 @@ class VMLogs extends Chart {
       spec: {
         ports: [
           {
+            name: "tcp",
             port: 514,
             targetPort: IntOrString.fromNumber(1514),
             protocol: "TCP",
           },
           {
+            name: "udp",
             port: 514,
             targetPort: IntOrString.fromNumber(1514),
             protocol: "UDP",
