@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  labels:
+    app: server
+    app.kubernetes.io/instance: prod
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: victoria-logs-single
+    app.kubernetes.io/version: v1.4.0-victorialogs
+    helm.sh/chart: victoria-logs-single-0.8.12
+  name: prod-victoria-logs-single-server
+  namespace: logs
+spec:
+  rules:
+    - host: logs.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: prod-victoria-logs-single-server
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - logs.cmdcentral.xyz
+      secretName: logs-ingress-tls

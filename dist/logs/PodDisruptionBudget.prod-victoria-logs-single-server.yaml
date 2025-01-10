@@ -1,0 +1,14 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: victoria-logs-single-0.8.12
+  name: prod-victoria-logs-single-server
+  namespace: logs
+spec:
+  selector:
+    matchLabels:
+      app: server
+      app.kubernetes.io/instance: prod
+      app.kubernetes.io/name: victoria-logs-single
