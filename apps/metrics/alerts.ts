@@ -631,7 +631,7 @@ export function addAlerts(scope: Construct, id: string): void {
       },
       {
         alert: "KubernetesApiClientErrors",
-        expr: '(sum(rate(rest_client_requests_total{code=~"(4|5)..",job!=metrics-victoria-metrics-operator}[1m])) by (instance, job) / sum(rate(rest_client_requests_total[1m])) by (instance, job)) * 100 > 1',
+        expr: '(sum(rate(rest_client_requests_total{code=~"(4|5)..",job!="metrics-victoria-metrics-operator"}[1m])) by (instance, job) / sum(rate(rest_client_requests_total[1m])) by (instance, job)) * 100 > 1',
         for: "2m",
         labels: {
           severity: "critical",
