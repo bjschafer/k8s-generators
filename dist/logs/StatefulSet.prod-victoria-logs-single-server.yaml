@@ -39,6 +39,7 @@ spec:
             - --storageDataPath=/storage
             - --syslog.listenAddr.tcp=:1514
             - --syslog.listenAddr.udp=:1514
+            - --syslog.timezone=America/Chicago
           image: victoriametrics/victoria-logs:v1.4.0-victorialogs
           imagePullPolicy: IfNotPresent
           livenessProbe:
