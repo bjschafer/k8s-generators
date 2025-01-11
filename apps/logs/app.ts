@@ -41,6 +41,7 @@ class VMLogs extends Chart {
             maxConcurrentInserts: "32",
             "syslog.listenAddr.tcp": ":1514",
             "syslog.listenAddr.udp": ":1514",
+            "syslog.timezone": "America/Chicago",
           },
           retentionPeriod: "3", // months
           retentionDiskSpaceUsage: "75GiB",
