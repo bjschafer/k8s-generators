@@ -70,6 +70,14 @@ new AppPlus(app, `${name}-app`, {
     NEXT_PUBLIC_DISABLE_REGISTRATION: EnvValue.fromValue("true"),
     NEXT_PUBLIC_CREDENTIALS_ENABLED: EnvValue.fromValue("false"), // disable non-SSO signin
 
+    // Try local LLM categorization
+    // NEXT_PUBLIC_OLLAMA_ENDPOINT_URL=http://localhost:11434
+    // OLLAMA_MODEL=phi3:mini-4k
+    NEXT_PUBLIC_OLLAMA_ENDPOINT_URL: EnvValue.fromValue(
+      "http://swordfish.cmdcentral.xyz.:11434",
+    ),
+    OLLAMA_MODEL: EnvValue.fromValue("phi3:mini-4k"),
+
     // Authentik SSO
     NEXT_PUBLIC_AUTHENTIK_ENABLED: EnvValue.fromValue("true"),
     AUTHENTIK_CUSTOM_NAME: EnvValue.fromValue("Cmdcentral Login"),

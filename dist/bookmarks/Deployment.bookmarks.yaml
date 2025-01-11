@@ -42,6 +42,10 @@ spec:
               value: "true"
             - name: NEXT_PUBLIC_CREDENTIALS_ENABLED
               value: "false"
+            - name: NEXT_PUBLIC_OLLAMA_ENDPOINT_URL
+              value: http://swordfish.cmdcentral.xyz.:11434
+            - name: OLLAMA_MODEL
+              value: phi3:mini-4k
             - name: NEXT_PUBLIC_AUTHENTIK_ENABLED
               value: "true"
             - name: AUTHENTIK_CUSTOM_NAME
