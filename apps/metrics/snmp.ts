@@ -8,7 +8,6 @@ import {
   DeploymentStrategy,
   DnsPolicy,
   Env,
-  Probe,
   Secret,
 } from "cdk8s-plus-31";
 import { VmScrapeConfig } from "../../imports/operator.victoriametrics.com";
@@ -73,12 +72,6 @@ export class SnmpExporter extends Chart {
               limit: Size.mebibytes(64),
             },
           },
-          liveness: Probe.fromHttpGet("/health", {
-            port: port,
-          }),
-          readiness: Probe.fromHttpGet("/health", {
-            port: port,
-          }),
         },
       ],
     });

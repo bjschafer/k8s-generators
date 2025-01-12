@@ -26,22 +26,10 @@ spec:
                 name: proxmox-exporter
           image: quay.io/prometheus/snmp-exporter
           imagePullPolicy: Always
-          livenessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /health
-              port: 9116
-              scheme: HTTP
           name: snmp-exporter
           ports:
             - containerPort: 9116
               name: metrics
-          readinessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /health
-              port: 9116
-              scheme: HTTP
           resources:
             limits:
               cpu: 500m
