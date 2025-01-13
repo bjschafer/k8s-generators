@@ -6,7 +6,7 @@ import { Construct } from "constructs";
 
 const namespace = "longhorn-system";
 const name = "longhorn";
-const app = new App(DEFAULT_APP_PROPS(namespace));
+const app = new App(DEFAULT_APP_PROPS(name));
 
 NewArgoApp(name, {
   namespace: namespace,
