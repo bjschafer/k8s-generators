@@ -3,7 +3,7 @@ kind: DaemonSet
 metadata:
   labels:
     app: longhorn-manager
-    app.kubernetes.io/instance: longhorn-system
+    app.kubernetes.io/instance: longhorn
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: longhorn
     app.kubernetes.io/version: v1.7.2
@@ -18,7 +18,7 @@ spec:
     metadata:
       labels:
         app: longhorn-manager
-        app.kubernetes.io/instance: longhorn-system
+        app.kubernetes.io/instance: longhorn
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: longhorn
         app.kubernetes.io/version: v1.7.2
