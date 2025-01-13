@@ -144,6 +144,7 @@ NewArgoApp(`${name}-config`, {
     },
   },
   namespace: namespace,
+  directoryName: namespace,
   source: ArgoAppSource.GENERATORS,
   recurse: true,
 });

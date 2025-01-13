@@ -36,6 +36,7 @@ const sources = {
 
 export interface ArgoAppProps {
   readonly namespace: string;
+  readonly directoryName?: string;
   readonly labels?: { [name: string]: string };
   readonly destination_server?: string;
   readonly project?: string;
@@ -69,7 +70,10 @@ export class ArgoApp extends Chart {
         },
         project: props.project ?? "default",
         source: {
-          path: path.join(sources[source].basePath, props.namespace),
+          path: path.join(
+            sources[source].basePath,
+            props.directoryName ?? name,
+          ),
           repoUrl: sources[source].url,
           targetRevision: "main",
         },
