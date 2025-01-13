@@ -22,7 +22,11 @@ class Longhorn extends Chart {
       repo: "https://charts.longhorn.io",
       releaseName: name,
       namespace: namespace,
-      values: {}, // surprisingly
+      values: {
+        preUpgradeChecker: {
+          jobEnabled: false,
+        },
+      },
     });
 
     new KubeIngress(this, "longhorn-ui", {
