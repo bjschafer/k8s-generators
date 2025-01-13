@@ -20,7 +20,7 @@ class Longhorn extends Chart {
     new Helm(this, "longhorn", {
       chart: "longhorn",
       repo: "https://charts.longhorn.io",
-      releaseName: name,
+      releaseName: namespace, // to avoid SharedResourceWarning
       namespace: namespace,
       values: {}, // surprisingly
     });

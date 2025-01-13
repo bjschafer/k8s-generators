@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app.kubernetes.io/instance: longhorn
+    app.kubernetes.io/instance: longhorn-system
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: longhorn
     app.kubernetes.io/version: v1.7.2
@@ -18,7 +18,7 @@ spec:
     metadata:
       labels:
         app: longhorn-driver-deployer
-        app.kubernetes.io/instance: longhorn
+        app.kubernetes.io/instance: longhorn-system
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: longhorn
         app.kubernetes.io/version: v1.7.2

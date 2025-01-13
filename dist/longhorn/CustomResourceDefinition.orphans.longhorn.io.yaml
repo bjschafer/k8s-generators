@@ -4,7 +4,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.15.0
   labels:
-    app.kubernetes.io/instance: longhorn
+    app.kubernetes.io/instance: longhorn-system
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: longhorn
     app.kubernetes.io/version: v1.7.2

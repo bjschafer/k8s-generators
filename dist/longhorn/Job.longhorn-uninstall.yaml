@@ -5,7 +5,7 @@ metadata:
     helm.sh/hook: pre-delete
     helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
   labels:
-    app.kubernetes.io/instance: longhorn
+    app.kubernetes.io/instance: longhorn-system
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: longhorn
     app.kubernetes.io/version: v1.7.2
@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/instance: longhorn
+        app.kubernetes.io/instance: longhorn-system
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: longhorn
         app.kubernetes.io/version: v1.7.2
