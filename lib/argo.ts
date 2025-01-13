@@ -39,8 +39,8 @@ export interface ArgoAppProps {
   readonly labels?: { [name: string]: string };
   readonly destination_server?: string;
   readonly project?: string;
-  readonly source: ArgoAppSource;
-  readonly sync_policy: ApplicationSpecSyncPolicy;
+  readonly source?: ArgoAppSource;
+  readonly sync_policy?: ApplicationSpecSyncPolicy;
   readonly recurse?: boolean;
   readonly autoUpdate?: ArgoUpdaterProps;
 }
@@ -55,6 +55,8 @@ export class ArgoApp extends Chart {
       },
     });
 
+    const source = props.source ?? ArgoAppSource.GENERATORS;
+
     const app = new Application(this, `${name}-application`, {
       metadata: {
         name: name,
@@ -67,13 +69,15 @@ export class ArgoApp extends Chart {
         },
         project: props.project ?? "default",
         source: {
-          path: path.join(sources[props.source].basePath, props.namespace),
-          repoUrl: sources[props.source].url,
+          path: path.join(sources[source].basePath, props.namespace),
+          repoUrl: sources[source].url,
           targetRevision: "main",
         },
         syncPolicy: {
           syncOptions: ["CreateNamespace=true"],
-          ...props.sync_policy,
+          ...(props.sync_policy ?? {
+            automated: { prune: true, selfHeal: true },
+          }),
         },
       },
     });
