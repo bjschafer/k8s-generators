@@ -28,6 +28,7 @@ spec:
         - command:
             - longhorn-manager
             - -d
+            - -j
             - daemon
             - --engine-image
             - longhornio/longhorn-engine:v1.7.2

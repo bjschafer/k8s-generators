@@ -3,6 +3,7 @@ import { KubeIngress } from "../../imports/k8s";
 import { NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { Construct } from "constructs";
+import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";
 
 const namespace = "longhorn-system";
 const name = "longhorn";
@@ -25,6 +26,11 @@ class Longhorn extends Chart {
       values: {
         preUpgradeChecker: {
           jobEnabled: false,
+        },
+        longhornManager: {
+          log: {
+            format: "json",
+          },
         },
       },
     });
@@ -63,6 +69,25 @@ class Longhorn extends Chart {
           {
             secretName: "longhorn-tls",
             hosts: ["longhorn.cmdcentral.xyz"],
+          },
+        ],
+      },
+    });
+
+    new VmServiceScrape(this, "servicescrape", {
+      metadata: {
+        name: "longhorn",
+        namespace: namespace,
+      },
+      spec: {
+        selector: {
+          matchLabels: {
+            app: "longhorn-manager",
+          },
+        },
+        endpoints: [
+          {
+            port: "manager",
           },
         ],
       },
