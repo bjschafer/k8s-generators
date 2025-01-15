@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       annotations:
-        backup.velero.io/backup-volumes: pvc-paste-data
+        backup.velero.io/backup-volumes: pvc-data
       labels:
         app.kubernetes.io/name: paste
         cdk8s.io/metadata.addr: paste-paste-deployment-c8eece2b
@@ -89,7 +89,7 @@ spec:
             runAsNonRoot: false
           volumeMounts:
             - mountPath: /app
-              name: pvc-paste-data
+              name: pvc-data
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
@@ -99,7 +99,7 @@ spec:
       setHostnameAsFQDN: false
       terminationGracePeriodSeconds: 30
       volumes:
-        - name: pvc-paste-data
+        - name: pvc-data
           persistentVolumeClaim:
-            claimName: paste-data
+            claimName: data
             readOnly: false

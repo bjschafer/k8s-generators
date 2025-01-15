@@ -71,7 +71,7 @@ new AppPlus(app, "paste", {
       enableBackups: false,
       props: {
         storage: Size.gibibytes(25),
-        storageClassName: StorageClass.CEPH_RBD,
+        storageClassName: StorageClass.LONGHORN,
         accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
       },
     },
