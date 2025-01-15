@@ -17,4 +17,4 @@ spec:
     resources:
       requests:
         storage: 80Gi
-    storageClassName: ceph-rbd
+    storageClassName: longhorn
