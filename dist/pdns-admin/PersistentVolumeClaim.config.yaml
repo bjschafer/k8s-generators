@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pdns-admin-app-config
+  name: config
   namespace: pdns-admin
 spec:
   accessModes:
@@ -9,5 +9,5 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: ceph-rbd
+  storageClassName: longhorn
   volumeMode: Filesystem

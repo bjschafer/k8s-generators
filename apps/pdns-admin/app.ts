@@ -46,7 +46,7 @@ new AppPlus(app, `${name}-app`, {
   volumes: [
     {
       props: {
-        storageClassName: StorageClass.CEPH_RBD,
+        storageClassName: StorageClass.LONGHORN,
         storage: Size.gibibytes(1),
         accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
       },

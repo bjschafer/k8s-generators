@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       annotations:
-        backup.velero.io/backup-volumes: pvc-pdns-admin-app-config
+        backup.velero.io/backup-volumes: pvc-config
       labels:
         app.kubernetes.io/name: pdns-admin
         cdk8s.io/metadata.addr: pdns-admin-app-pdns-admin-app-deployment-c878a4f5
@@ -54,7 +54,7 @@ spec:
             runAsNonRoot: false
           volumeMounts:
             - mountPath: /data
-              name: pvc-pdns-admin-app-config
+              name: pvc-config
       dnsPolicy: ClusterFirst
       hostNetwork: false
       nodeSelector:
@@ -66,7 +66,7 @@ spec:
       setHostnameAsFQDN: false
       terminationGracePeriodSeconds: 30
       volumes:
-        - name: pvc-pdns-admin-app-config
+        - name: pvc-config
           persistentVolumeClaim:
-            claimName: pdns-admin-app-config
+            claimName: config
             readOnly: false
