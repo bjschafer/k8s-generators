@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       annotations:
-        backup.velero.io/backup-volumes: pvc-pfwiki-data
+        backup.velero.io/backup-volumes: pvc-data
       labels:
         app.kubernetes.io/name: pfwiki
         cdk8s.io/metadata.addr: pfwiki-pfwiki-deployment-c86ec103
@@ -73,7 +73,7 @@ spec:
             runAsNonRoot: false
           volumeMounts:
             - mountPath: /config
-              name: pvc-pfwiki-data
+              name: pvc-data
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
@@ -83,7 +83,7 @@ spec:
       setHostnameAsFQDN: false
       terminationGracePeriodSeconds: 30
       volumes:
-        - name: pvc-pfwiki-data
+        - name: pvc-data
           persistentVolumeClaim:
-            claimName: pfwiki-data
+            claimName: data
             readOnly: false

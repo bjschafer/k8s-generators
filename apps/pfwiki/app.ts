@@ -77,7 +77,7 @@ new AppPlus(app, "pfwiki", {
       enableBackups: true,
       props: {
         storage: Size.gibibytes(5),
-        storageClassName: StorageClass.CEPH_RBD,
+        storageClassName: StorageClass.LONGHORN,
         accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
       },
     },

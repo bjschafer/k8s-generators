@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pfwiki-data
+  name: data
   namespace: pfwiki
 spec:
   accessModes:
@@ -9,5 +9,5 @@ spec:
   resources:
     requests:
       storage: 5Gi
-  storageClassName: ceph-rbd
+  storageClassName: longhorn
   volumeMode: Filesystem
