@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       annotations:
-        backup.velero.io/backup-volumes: pvc-bookmarks-app-data
+        backup.velero.io/backup-volumes: pvc-data
       labels:
         app.kubernetes.io/name: bookmarks
         cdk8s.io/metadata.addr: bookmarks-app-bookmarks-app-deployment-c8465c2f
@@ -94,7 +94,7 @@ spec:
             runAsNonRoot: false
           volumeMounts:
             - mountPath: /data/data
-              name: pvc-bookmarks-app-data
+              name: pvc-data
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
@@ -104,7 +104,7 @@ spec:
       setHostnameAsFQDN: false
       terminationGracePeriodSeconds: 30
       volumes:
-        - name: pvc-bookmarks-app-data
+        - name: pvc-data
           persistentVolumeClaim:
-            claimName: bookmarks-app-data
+            claimName: data
             readOnly: false

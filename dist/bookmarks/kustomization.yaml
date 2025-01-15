@@ -1,5 +1,5 @@
 resources:
   - Deployment.bookmarks.yaml
   - Ingress.bookmarks.yaml
-  - PersistentVolumeClaim.bookmarks-app-data.yaml
+  - PersistentVolumeClaim.data.yaml
   - Service.bookmarks.yaml
