@@ -9,6 +9,7 @@ import {
   EnvValue,
   Ingress,
   IngressBackend,
+  PersistentVolumeAccessMode,
   PersistentVolumeClaim,
   PersistentVolumeClaimProps,
   PersistentVolumeMode,
@@ -74,7 +75,7 @@ export class AppPlus extends Chart {
       for (const vol of props.volumes) {
         const pvc = new PersistentVolumeClaim(this, `${id}-${vol.mountPath}`, {
           metadata: {
-            name: `${id}-${vol.name}`,
+            name: `${vol.name}`,
             namespace: props.namespace,
           },
           accessModes: vol.props.accessModes,
@@ -136,9 +137,11 @@ export class AppPlus extends Chart {
         annotations: props.annotations,
       },
       replicas: props.replicas ?? 1,
-      // ceph rbd vols are RWO, so we have to set the deployment to recreate to avoid multiattach issues
-      strategy: props.volumes?.some(
-        (vol) => vol.props.storageClassName == StorageClass.CEPH_RBD,
+      // to avoid multiattach errors, deployments that mount RWO volumes get set to recreate
+      strategy: props.volumes?.some((vol) =>
+        vol.props.accessModes?.some(
+          (am) => am == PersistentVolumeAccessMode.READ_WRITE_ONCE,
+        ),
       )
         ? DeploymentStrategy.recreate()
         : undefined,
