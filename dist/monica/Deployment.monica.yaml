@@ -14,14 +14,11 @@ spec:
     matchLabels:
       cdk8s.io/metadata.addr: monica-app-monica-app-deployment-c8b445f6
   strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
+    type: Recreate
   template:
     metadata:
       annotations:
-        backup.velero.io/backup-volumes: pvc-monica-app-data
+        backup.velero.io/backup-volumes: pvc-data
       labels:
         app.kubernetes.io/name: monica
         cdk8s.io/metadata.addr: monica-app-monica-app-deployment-c8b445f6
@@ -54,7 +51,7 @@ spec:
             runAsNonRoot: false
           volumeMounts:
             - mountPath: /var/www/html/storage
-              name: pvc-monica-app-data
+              name: pvc-data
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
@@ -64,7 +61,7 @@ spec:
       setHostnameAsFQDN: false
       terminationGracePeriodSeconds: 30
       volumes:
-        - name: pvc-monica-app-data
+        - name: pvc-data
           persistentVolumeClaim:
-            claimName: monica-app-data
+            claimName: data
             readOnly: false

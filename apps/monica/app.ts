@@ -3,8 +3,9 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { basename } from "../../lib/util";
 import { ArgoApp, ArgoAppSource } from "../../lib/argo";
 import { MysqlInstance } from "../../lib/mysql";
-import { Cpu } from "cdk8s-plus-31";
+import { Cpu, PersistentVolumeAccessMode } from "cdk8s-plus-31";
 import { AppPlus } from "../../lib/app-plus";
+import { StorageClass } from "../../lib/volume";
 
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
@@ -54,6 +55,8 @@ new AppPlus(app, "monica-app", {
     {
       props: {
         storage: Size.gibibytes(2),
+        storageClassName: StorageClass.LONGHORN,
+        accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
       },
       mountPath: "/var/www/html/storage",
       enableBackups: true,

@@ -74,7 +74,7 @@ export class MysqlInstance extends Chart {
       `${name}-creds`,
     );
     const pvc = new PersistentVolumeClaim(this, `${name}-pvc`, {
-      storageClassName: StorageClass.CEPH_RBD,
+      storageClassName: StorageClass.LONGHORN,
       storage: props.pvcSize,
       metadata: {
         name: name,
