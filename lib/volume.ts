@@ -11,6 +11,7 @@ import { Construct } from "constructs";
 export enum StorageClass {
   CEPHFS = "cephfs",
   CEPH_RBD = "ceph-rbd",
+  LONGHORN = "longhorn",
 }
 
 export interface UnifiedVolume {
