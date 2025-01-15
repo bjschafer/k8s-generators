@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       annotations:
-        backup.velero.io/backup-volumes: pvc-watcharr-data
+        backup.velero.io/backup-volumes: pvc-data
       labels:
         app.kubernetes.io/name: watcharr
         cdk8s.io/metadata.addr: watcharr-watcharr-deployment-c86dec6d
@@ -50,7 +50,7 @@ spec:
             runAsNonRoot: false
           volumeMounts:
             - mountPath: /data
-              name: pvc-watcharr-data
+              name: pvc-data
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
@@ -60,7 +60,7 @@ spec:
       setHostnameAsFQDN: false
       terminationGracePeriodSeconds: 30
       volumes:
-        - name: pvc-watcharr-data
+        - name: pvc-data
           persistentVolumeClaim:
-            claimName: watcharr-data
+            claimName: data
             readOnly: false
