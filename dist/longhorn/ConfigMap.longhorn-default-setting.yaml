@@ -11,5 +11,6 @@ metadata:
   namespace: longhorn-system
 data:
   default-setting.yaml: |-
+    default-data-locality: best-effort
     priority-class: longhorn-critical
     disable-revision-counter: true

@@ -32,6 +32,9 @@ class Longhorn extends Chart {
             format: "json",
           },
         },
+        defaultSettings: {
+          defaultDataLocality: "best-effort",
+        },
       },
     });
 
