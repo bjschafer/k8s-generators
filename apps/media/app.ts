@@ -226,6 +226,7 @@ NewArgoApp("media", {
       ...mediaApps.map(function (app): ArgoUpdaterImageProps {
         return {
           image: app.image.split(":")[0],
+          versionConstraint: app.image.split(":").at(1),
           strategy: "digest",
         };
       }),
