@@ -35,6 +35,9 @@ class Longhorn extends Chart {
         defaultSettings: {
           defaultDataLocality: "best-effort",
         },
+        persistence: {
+          defaultDataLocality: "best-effort",
+        },
       },
     });
 
