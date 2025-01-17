@@ -34,65 +34,6 @@ class ProdPostgres extends Chart {
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
-    new Cluster(this, "cluster", {
-      metadata: {
-        namespace: namespace,
-        name: "prod",
-      },
-      spec: {
-        instances: 3,
-        imageCatalogRef: {
-          apiGroup: "postgresql.cnpg.io",
-          kind: "ClusterImageCatalog",
-          major: 16,
-          name: "postgresql",
-        },
-        monitoring: {
-          enablePodMonitor: true,
-        },
-        // prefer to schedule on non-pis
-        affinity: {
-          nodeAffinity: {
-            preferredDuringSchedulingIgnoredDuringExecution: [
-              {
-                weight: 1,
-                preference: {
-                  matchExpressions: [
-                    {
-                      key: "kubernetes.io/arch",
-                      operator: "NotIn",
-                      values: ["arm64"],
-                    },
-                  ],
-                },
-              },
-            ],
-          },
-        },
-        resources: {
-          requests: {
-            cpu: Quantity.fromString("750m"),
-            memory: Quantity.fromString("1Gi"),
-          },
-          limits: {
-            cpu: Quantity.fromString("750m"),
-            memory: Quantity.fromString("1Gi"),
-          },
-        },
-        storage: {
-          size: "5Gi",
-          storageClass: StorageClass.CEPH_RBD,
-        },
-        enableSuperuserAccess: true,
-        postgresql: {
-          pgHba: [
-            "host pdns pdns 10.0.10.0/24 scram-sha-256",
-            "hostssl pdns pdns 10.0.10.0/24 scram-sha-256",
-          ],
-        },
-      },
-    });
-
     new Cluster(this, "cluster-17", {
       metadata: {
         namespace: namespace,
