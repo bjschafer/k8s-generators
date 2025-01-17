@@ -5,6 +5,7 @@ import { Quantity } from "../../imports/k8s";
 import {
   Cluster,
   ClusterSpecBackupBarmanObjectStoreWalCompression,
+  ClusterSpecBootstrapInitdbImportType,
   ImageCatalog,
   ScheduledBackup,
 } from "../../imports/postgresql.cnpg.io";
@@ -42,7 +43,7 @@ class ProdPostgres extends Chart {
         imageCatalogRef: {
           apiGroup: "postgresql.cnpg.io",
           kind: "ClusterImageCatalog",
-          major: 16, // this is how we'd do an upgrade
+          major: 16,
           name: "postgresql",
         },
         monitoring: {
@@ -88,6 +89,65 @@ class ProdPostgres extends Chart {
             "hostssl pdns pdns 10.0.10.0/24 scram-sha-256",
           ],
         },
+      },
+    });
+
+    new Cluster(this, "cluster-17", {
+      metadata: {
+        namespace: namespace,
+        name: "prod-pg17",
+      },
+      spec: {
+        instances: 3,
+        imageCatalogRef: {
+          apiGroup: "postgresql.cnpg.io",
+          kind: "ClusterImageCatalog",
+          major: 17,
+          name: "postgresql",
+        },
+        monitoring: {
+          enablePodMonitor: false,
+        },
+        // prefer to schedule on non-pis
+        affinity: {
+          nodeAffinity: {
+            preferredDuringSchedulingIgnoredDuringExecution: [
+              {
+                weight: 1,
+                preference: {
+                  matchExpressions: [
+                    {
+                      key: "kubernetes.io/arch",
+                      operator: "NotIn",
+                      values: ["arm64"],
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        },
+        resources: {
+          requests: {
+            cpu: Quantity.fromString("750m"),
+            memory: Quantity.fromString("1Gi"),
+          },
+          limits: {
+            cpu: Quantity.fromString("750m"),
+            memory: Quantity.fromString("1Gi"),
+          },
+        },
+        storage: {
+          size: "5Gi",
+          storageClass: StorageClass.LONGHORN,
+        },
+        enableSuperuserAccess: true,
+        postgresql: {
+          pgHba: [
+            "host pdns pdns 10.0.10.0/24 scram-sha-256",
+            "hostssl pdns pdns 10.0.10.0/24 scram-sha-256",
+          ],
+        },
 
         managed: {
           services: {
@@ -107,6 +167,17 @@ class ProdPostgres extends Chart {
                   },
                 },
               },
+              {
+                selectorType: "rw",
+                serviceTemplate: {
+                  metadata: {
+                    name: "prod-rw",
+                  },
+                  spec: {
+                    type: "ClusterIP",
+                  },
+                },
+              },
             ],
           },
         },
@@ -114,7 +185,7 @@ class ProdPostgres extends Chart {
         backup: {
           barmanObjectStore: {
             endpointUrl: "https://ceph.cmdcentral.xyz",
-            destinationPath: "s3://postgres/k8s/prod",
+            destinationPath: "s3://postgres/k8s/prod-pg17",
             s3Credentials: {
               accessKeyId: {
                 name: "backups",
@@ -131,6 +202,62 @@ class ProdPostgres extends Chart {
             },
           },
         },
+        // import stuff
+        externalClusters: [
+          {
+            name: "prod-pg16",
+            connectionParameters: {
+              host: "prod-r.postgres.svc.cluster.local",
+              user: "postgres",
+            },
+            password: {
+              name: "prod-superuser",
+              key: "pgpass",
+            },
+          },
+        ],
+        bootstrap: {
+          initdb: {
+            import: {
+              type: ClusterSpecBootstrapInitdbImportType.MONOLITH,
+              databases: [
+                "atuin",
+                "authentik",
+                "gitea",
+                "grafana",
+                "hass",
+                "linkwarden",
+                "mealie",
+                "miniflux",
+                "netbox",
+                "paperless",
+                "pathfinder",
+                "pathfinder_manual",
+                "pdns",
+                "spoolman",
+              ],
+              roles: [
+                "atuin",
+                "authentik",
+                "gitea",
+                "grafana",
+                "grafanareader",
+                "hass",
+                "linkwarden",
+                "mealie",
+                "miniflux",
+                "netbox",
+                "paperless",
+                "pathfinder",
+                "pdns",
+                "spoolman",
+              ],
+              source: {
+                externalCluster: "prod-pg16",
+              },
+            },
+          },
+        },
       },
     });
 
@@ -141,7 +268,7 @@ class ProdPostgres extends Chart {
       },
       spec: {
         cluster: {
-          name: "prod",
+          name: "prod-pg17",
         },
         schedule: "0 33 3 * * *",
       },

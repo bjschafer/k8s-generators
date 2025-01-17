@@ -1,0 +1,113 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: prod-pg17
+  namespace: postgres
+spec:
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - preference:
+            matchExpressions:
+              - key: kubernetes.io/arch
+                operator: NotIn
+                values:
+                  - arm64
+          weight: 1
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://postgres/k8s/prod-pg17
+      endpointURL: https://ceph.cmdcentral.xyz
+      s3Credentials:
+        accessKeyId:
+          key: ACCESS_KEY_ID
+          name: backups
+        secretAccessKey:
+          key: SECRET_ACCESS_KEY
+          name: backups
+      wal:
+        compression: gzip
+  bootstrap:
+    initdb:
+      import:
+        databases:
+          - atuin
+          - authentik
+          - gitea
+          - grafana
+          - hass
+          - linkwarden
+          - mealie
+          - miniflux
+          - netbox
+          - paperless
+          - pathfinder
+          - pathfinder_manual
+          - pdns
+          - spoolman
+        roles:
+          - atuin
+          - authentik
+          - gitea
+          - grafana
+          - grafanareader
+          - hass
+          - linkwarden
+          - mealie
+          - miniflux
+          - netbox
+          - paperless
+          - pathfinder
+          - pdns
+          - spoolman
+        source:
+          externalCluster: prod-pg16
+        type: monolith
+  enableSuperuserAccess: true
+  externalClusters:
+    - connectionParameters:
+        host: prod-r.postgres.svc.cluster.local
+        user: postgres
+      name: prod-pg16
+      password:
+        key: pgpass
+        name: prod-superuser
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ClusterImageCatalog
+    major: 17
+    name: postgresql
+  instances: 3
+  managed:
+    services:
+      additional:
+        - selectorType: rw
+          serviceTemplate:
+            metadata:
+              annotations:
+                external-dns.alpha.kubernetes.io/hostname: pg-prod.cmdcentral.xyz
+              name: prod
+            spec:
+              type: LoadBalancer
+        - selectorType: rw
+          serviceTemplate:
+            metadata:
+              name: prod-rw
+            spec:
+              type: ClusterIP
+  monitoring:
+    enablePodMonitor: false
+  postgresql:
+    pg_hba:
+      - host pdns pdns 10.0.10.0/24 scram-sha-256
+      - hostssl pdns pdns 10.0.10.0/24 scram-sha-256
+  resources:
+    limits:
+      cpu: 750m
+      memory: 1Gi
+    requests:
+      cpu: 750m
+      memory: 1Gi
+  storage:
+    size: 5Gi
+    storageClass: longhorn

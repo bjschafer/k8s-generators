@@ -14,19 +14,6 @@ spec:
                 values:
                   - arm64
           weight: 1
-  backup:
-    barmanObjectStore:
-      destinationPath: s3://postgres/k8s/prod
-      endpointURL: https://ceph.cmdcentral.xyz
-      s3Credentials:
-        accessKeyId:
-          key: ACCESS_KEY_ID
-          name: backups
-        secretAccessKey:
-          key: SECRET_ACCESS_KEY
-          name: backups
-      wal:
-        compression: gzip
   enableSuperuserAccess: true
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
@@ -34,17 +21,6 @@ spec:
     major: 16
     name: postgresql
   instances: 3
-  managed:
-    services:
-      additional:
-        - selectorType: rw
-          serviceTemplate:
-            metadata:
-              annotations:
-                external-dns.alpha.kubernetes.io/hostname: pg-prod.cmdcentral.xyz
-              name: prod
-            spec:
-              type: LoadBalancer
   monitoring:
     enablePodMonitor: true
   postgresql:
