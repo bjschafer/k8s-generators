@@ -213,7 +213,7 @@ class ProdPostgres extends Chart {
             },
             password: {
               name: "prod-superuser",
-              key: "pgpass",
+              key: "password",
             },
           },
         ],

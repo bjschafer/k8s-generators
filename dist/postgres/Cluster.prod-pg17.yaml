@@ -71,7 +71,7 @@ spec:
         user: postgres
       name: prod-pg16
       password:
-        key: pgpass
+        key: password
         name: prod-superuser
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
