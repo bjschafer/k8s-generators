@@ -12,6 +12,7 @@ import {
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { StorageClass } from "../../lib/volume";
+import { VmPodScrape } from "../../imports/operator.victoriametrics.com";
 
 const namespace = basename(__dirname);
 
@@ -263,6 +264,25 @@ class ProdPostgres extends Chart {
         schedule: "0 33 3 * * *",
       },
     });
+
+    new VmPodScrape(this, "podscrape", {
+      metadata: {
+        name: "prod",
+        namespace: namespace,
+      },
+      spec: {
+        selector: {
+          matchLabels: {
+            "cnpg.io/cluster": "prod-pg17",
+          },
+        },
+        podMetricsEndpoints: [
+          {
+            port: "metrics",
+          },
+        ],
+      },
+    });
   }
 }
 
@@ -374,6 +394,25 @@ class VectorPostgres extends Chart {
           name: name,
         },
         schedule: "0 33 4 * * *",
+      },
+    });
+
+    new VmPodScrape(this, "podscrape", {
+      metadata: {
+        name: name,
+        namespace: namespace,
+      },
+      spec: {
+        selector: {
+          matchLabels: {
+            "cnpg.io/cluster": name,
+          },
+        },
+        podMetricsEndpoints: [
+          {
+            port: "metrics",
+          },
+        ],
       },
     });
   }
