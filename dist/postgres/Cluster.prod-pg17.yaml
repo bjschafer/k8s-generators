@@ -89,12 +89,6 @@ spec:
               name: prod
             spec:
               type: LoadBalancer
-        - selectorType: rw
-          serviceTemplate:
-            metadata:
-              name: prod-rw
-            spec:
-              type: ClusterIP
   monitoring:
     enablePodMonitor: false
   postgresql:
