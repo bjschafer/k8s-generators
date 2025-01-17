@@ -29,6 +29,7 @@ class Runner extends Chart {
     new Helm(this, "gitlab-runner", {
       chart: "gitlab-runner",
       repo: "https://charts.gitlab.io",
+      version: "0.72.0",
       releaseName: "prod-runner",
       namespace: "gitlab",
       values: {
