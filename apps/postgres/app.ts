@@ -167,17 +167,6 @@ class ProdPostgres extends Chart {
                   },
                 },
               },
-              // {
-              //   selectorType: "rw",
-              //   serviceTemplate: {
-              //     metadata: {
-              //       name: "prod-rw",
-              //     },
-              //     spec: {
-              //       type: "ClusterIP",
-              //     },
-              //   },
-              // },
             ],
           },
         },
