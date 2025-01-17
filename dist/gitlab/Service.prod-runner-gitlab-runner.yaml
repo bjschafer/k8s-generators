@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     app: prod-runner-gitlab-runner
-    chart: gitlab-runner-0.72.0
+    chart: gitlab-runner-0.73.0
     heritage: Helm
     release: prod-runner
     vmservicescrape: "true"
