@@ -67,6 +67,7 @@ spec:
   externalClusters:
     - connectionParameters:
         host: prod-r.postgres.svc.cluster.local
+        sslmode: require
         user: postgres
       name: prod-pg16
       password:

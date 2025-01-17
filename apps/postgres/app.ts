@@ -209,6 +209,7 @@ class ProdPostgres extends Chart {
             connectionParameters: {
               host: "prod-r.postgres.svc.cluster.local",
               user: "postgres",
+              sslmode: "require",
             },
             password: {
               name: "prod-superuser",
