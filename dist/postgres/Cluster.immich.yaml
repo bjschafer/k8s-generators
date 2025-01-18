@@ -17,7 +17,7 @@ spec:
   backup:
     barmanObjectStore:
       destinationPath: s3://postgres/k8s/immich
-      endpointURL: https://ceph.cmdcentral.xyz
+      endpointURL: https://minio.cmdcentral.xyz
       s3Credentials:
         accessKeyId:
           key: ACCESS_KEY_ID

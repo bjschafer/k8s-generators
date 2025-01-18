@@ -115,7 +115,7 @@ class ProdPostgres extends Chart {
 
         backup: {
           barmanObjectStore: {
-            endpointUrl: "https://ceph.cmdcentral.xyz",
+            endpointUrl: "https://minio.cmdcentral.xyz",
             destinationPath: "s3://postgres/k8s/prod-pg17",
             s3Credentials: {
               accessKeyId: {
@@ -300,7 +300,7 @@ class VectorPostgres extends Chart {
 
         backup: {
           barmanObjectStore: {
-            endpointUrl: "https://ceph.cmdcentral.xyz",
+            endpointUrl: "https://minio.cmdcentral.xyz",
             destinationPath: `s3://postgres/k8s/${name}`,
             s3Credentials: {
               accessKeyId: {
