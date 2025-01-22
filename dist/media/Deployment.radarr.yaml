@@ -1,6 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app.kubernetes.io/instance: media
   name: radarr
   namespace: media
 spec:
@@ -15,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        backup.velero.io/backup-volumes: pvc-radarr-config
+        backup.velero.io/backup-volumes: pvc-radarr
       labels:
         cdk8s.io/metadata.addr: radarr-radarr-deployment-c823b06c
     spec:
@@ -53,7 +55,7 @@ spec:
             runAsNonRoot: false
           volumeMounts:
             - mountPath: /config
-              name: pvc-radarr-config
+              name: pvc-radarr
             - mountPath: /downloads
               name: pvc-nfs-media-downloads
             - mountPath: /movies
@@ -112,9 +114,9 @@ spec:
       setHostnameAsFQDN: false
       terminationGracePeriodSeconds: 30
       volumes:
-        - name: pvc-radarr-config
+        - name: pvc-radarr
           persistentVolumeClaim:
-            claimName: radarr-config
+            claimName: radarr
             readOnly: false
         - name: pvc-nfs-media-downloads
           persistentVolumeClaim:

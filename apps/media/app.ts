@@ -1,4 +1,4 @@
-import { App, Size } from "cdk8s";
+import { App, Chart, Size } from "cdk8s";
 import { NFSVolumeContainer } from "../../lib/nfs";
 import {
   ArgoAppSource,
@@ -6,29 +6,58 @@ import {
   NewArgoApp,
 } from "../../lib/argo";
 import { MediaApp, MediaAppProps } from "../../lib/media-app";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { CLUSTER_ISSUER, DEFAULT_APP_PROPS } from "../../lib/consts";
 import { basename } from "../../lib/util";
 import { Cpu, Secret } from "cdk8s-plus-31";
 import { NewKustomize } from "../../lib/kustomize";
+import { Construct } from "constructs";
+import { Certificate } from "../../imports/cert-manager.io";
 
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
+const mediaLabel = { "app.kubernetes.io/instance": "media" };
+
 const nfsVols = new NFSVolumeContainer(app, "nfs-volume-container");
 nfsVols.Add("nfs-media-downloads", {
   exportPath: "/warp/Media/Downloads",
+  metadata: {
+    labels: {
+      ...mediaLabel,
+    },
+  },
 });
 nfsVols.Add("nfs-media-ebooks", {
   exportPath: "/warp/Media/Ebooks",
+  metadata: {
+    labels: {
+      ...mediaLabel,
+    },
+  },
 });
 nfsVols.Add("nfs-media-music", {
   exportPath: "/warp/Media/Music",
+  metadata: {
+    labels: {
+      ...mediaLabel,
+    },
+  },
 });
 nfsVols.Add("nfs-media-videos-movies", {
   exportPath: "/warp/Media/Videos/Movies",
+  metadata: {
+    labels: {
+      ...mediaLabel,
+    },
+  },
 });
 nfsVols.Add("nfs-media-videos-tvshows", {
   exportPath: "/warp/Media/Videos/TVShows",
+  metadata: {
+    labels: {
+      ...mediaLabel,
+    },
+  },
 });
 
 const mediaApps: Omit<
@@ -211,6 +240,31 @@ new MediaApp(app, {
   ingressSecret: ingressSecret,
 });
 
+// create the ingress cert manually, for all the cnames
+class MediaCert extends Chart {
+  constructor(scope: Construct, id: string) {
+    super(scope, id);
+
+    new Certificate(this, "cert", {
+      metadata: {
+        name: "media-tls",
+        namespace: namespace,
+        labels: {
+          ...mediaLabel,
+        },
+      },
+      spec: {
+        secretName: ingressSecret.name,
+        issuerRef: CLUSTER_ISSUER,
+        dnsNames: mediaApps.sort().map((props): string => {
+          return `${props.name}.cmdcentral.xyz`;
+        }),
+      },
+    });
+  }
+}
+new MediaCert(app, "certs");
+
 NewArgoApp("media", {
   sync_policy: {
     automated: {
@@ -219,7 +273,7 @@ NewArgoApp("media", {
     },
   },
   namespace: namespace,
-  source: ArgoAppSource.PROD,
+  source: ArgoAppSource.GENERATORS,
   recurse: true,
   autoUpdate: {
     images: [

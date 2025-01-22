@@ -1,7 +1,9 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: lidarr-config
+  labels:
+    app.kubernetes.io/instance: media
+  name: radarr
   namespace: media
 spec:
   accessModes:
@@ -9,5 +11,5 @@ spec:
   resources:
     requests:
       storage: 5Gi
-  storageClassName: ceph-rbd
+  storageClassName: longhorn
   volumeMode: Filesystem

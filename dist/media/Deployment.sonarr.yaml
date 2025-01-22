@@ -1,6 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app.kubernetes.io/instance: media
   name: sonarr
   namespace: media
 spec:
@@ -15,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        backup.velero.io/backup-volumes: pvc-sonarr-config
+        backup.velero.io/backup-volumes: pvc-sonarr
       labels:
         cdk8s.io/metadata.addr: sonarr-sonarr-deployment-c8de73e9
     spec:
@@ -53,7 +55,7 @@ spec:
             runAsNonRoot: false
           volumeMounts:
             - mountPath: /config
-              name: pvc-sonarr-config
+              name: pvc-sonarr
             - mountPath: /downloads
               name: pvc-nfs-media-downloads
             - mountPath: /tv
@@ -112,9 +114,9 @@ spec:
       setHostnameAsFQDN: false
       terminationGracePeriodSeconds: 30
       volumes:
-        - name: pvc-sonarr-config
+        - name: pvc-sonarr
           persistentVolumeClaim:
-            claimName: sonarr-config
+            claimName: sonarr
             readOnly: false
         - name: pvc-nfs-media-downloads
           persistentVolumeClaim:

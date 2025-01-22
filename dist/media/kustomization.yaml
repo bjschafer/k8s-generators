@@ -1,4 +1,5 @@
 resources:
+  - Certificate.media-tls.yaml
   - Deployment.lidarr.yaml
   - Deployment.prowlarr.yaml
   - Deployment.radarr.yaml
@@ -18,18 +19,18 @@ resources:
   - PersistentVolume.nfs-media-music.yaml
   - PersistentVolume.nfs-media-videos-movies.yaml
   - PersistentVolume.nfs-media-videos-tvshows.yaml
-  - PersistentVolumeClaim.lidarr-config.yaml
+  - PersistentVolumeClaim.lidarr.yaml
   - PersistentVolumeClaim.nfs-media-downloads.yaml
   - PersistentVolumeClaim.nfs-media-ebooks.yaml
   - PersistentVolumeClaim.nfs-media-music.yaml
   - PersistentVolumeClaim.nfs-media-videos-movies.yaml
   - PersistentVolumeClaim.nfs-media-videos-tvshows.yaml
-  - PersistentVolumeClaim.prowlarr-config.yaml
-  - PersistentVolumeClaim.radarr-config.yaml
-  - PersistentVolumeClaim.readarr-config.yaml
-  - PersistentVolumeClaim.resilio-sync-config.yaml
-  - PersistentVolumeClaim.sabnzbd-config.yaml
-  - PersistentVolumeClaim.sonarr-config.yaml
+  - PersistentVolumeClaim.prowlarr.yaml
+  - PersistentVolumeClaim.radarr.yaml
+  - PersistentVolumeClaim.readarr.yaml
+  - PersistentVolumeClaim.resilio-sync.yaml
+  - PersistentVolumeClaim.sabnzbd.yaml
+  - PersistentVolumeClaim.sonarr.yaml
   - Service.lidarr.yaml
   - Service.prowlarr.yaml
   - Service.radarr.yaml

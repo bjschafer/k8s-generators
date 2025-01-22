@@ -21,8 +21,8 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: media
-    repoURL: git@github.com:bjschafer/k8s-prod.git
+    path: dist/media
+    repoURL: git@github.com:bjschafer/k8s-generators.git
     targetRevision: main
   syncPolicy:
     automated:

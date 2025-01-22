@@ -30,6 +30,7 @@ import { VmServiceScrape } from "../imports/operator.victoriametrics.com";
 
 const exportarrVersion = "v1.2.4";
 const exportarrPort = 9707;
+const mediaLabel = { "app.kubernetes.io/instance": "media" };
 
 export interface MediaAppProps {
   readonly name: string;
@@ -62,7 +63,7 @@ export class MediaApp extends Chart {
     super(scope, props.name);
 
     // early setup of PVC so we can get its name for backup config
-    const configPVCName = `${props.name}-config`;
+    const configPVCName = `${props.name}`;
 
     let configVol: Volume | undefined;
     if (props.configVolume) {
@@ -70,10 +71,13 @@ export class MediaApp extends Chart {
         metadata: {
           name: configPVCName,
           namespace: props.namespace,
+          labels: {
+            ...mediaLabel,
+          },
         },
         accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
         storage: props.configVolume.size ?? Size.gibibytes(5),
-        storageClassName: StorageClass.CEPH_RBD,
+        storageClassName: StorageClass.LONGHORN,
         volumeMode: PersistentVolumeMode.FILE_SYSTEM,
       });
       configVol = Volume.fromPersistentVolumeClaim(
@@ -87,6 +91,9 @@ export class MediaApp extends Chart {
       metadata: {
         name: props.name,
         namespace: props.namespace,
+        labels: {
+          ...mediaLabel,
+        },
       },
       replicas: 1,
       strategy: DeploymentStrategy.recreate(),
@@ -204,6 +211,9 @@ export class MediaApp extends Chart {
         metadata: {
           name: props.name,
           namespace: props.namespace,
+          labels: {
+            ...mediaLabel,
+          },
         },
         spec: {
           selector: {
@@ -235,6 +245,7 @@ export class MediaApp extends Chart {
       name: props.name,
       ports: portsToExpose,
     });
+    svc.metadata.addLabel("app.kubernetes.io/instance", "media");
     for (const key of Object.keys(labels)) {
       // HACK: this sucks, records are awful.
       svc.metadata.addLabel(key, labels[key]);
@@ -244,6 +255,9 @@ export class MediaApp extends Chart {
       metadata: {
         name: props.name,
         namespace: props.namespace,
+        labels: {
+          ...mediaLabel,
+        },
       },
     });
     ingress.addHostRule(

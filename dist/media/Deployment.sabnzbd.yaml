@@ -1,6 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app.kubernetes.io/instance: media
   name: sabnzbd
   namespace: media
 spec:
@@ -15,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        backup.velero.io/backup-volumes: pvc-sabnzbd-config
+        backup.velero.io/backup-volumes: pvc-sabnzbd
       labels:
         cdk8s.io/metadata.addr: sabnzbd-sabnzbd-deployment-c8b1bd00
     spec:
@@ -53,7 +55,7 @@ spec:
             runAsNonRoot: false
           volumeMounts:
             - mountPath: /config
-              name: pvc-sabnzbd-config
+              name: pvc-sabnzbd
             - mountPath: /downloads
               name: pvc-nfs-media-downloads
       dnsPolicy: ClusterFirst
@@ -65,9 +67,9 @@ spec:
       setHostnameAsFQDN: false
       terminationGracePeriodSeconds: 30
       volumes:
-        - name: pvc-sabnzbd-config
+        - name: pvc-sabnzbd
           persistentVolumeClaim:
-            claimName: sabnzbd-config
+            claimName: sabnzbd
             readOnly: false
         - name: pvc-nfs-media-downloads
           persistentVolumeClaim:

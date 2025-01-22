@@ -1,0 +1,19 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  labels:
+    app.kubernetes.io/instance: media
+  name: media-tls
+  namespace: media
+spec:
+  dnsNames:
+    - sonarr.cmdcentral.xyz
+    - radarr.cmdcentral.xyz
+    - lidarr.cmdcentral.xyz
+    - readarr.cmdcentral.xyz
+    - sabnzbd.cmdcentral.xyz
+    - prowlarr.cmdcentral.xyz
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt
+  secretName: media-tls

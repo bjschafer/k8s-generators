@@ -1,6 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app.kubernetes.io/instance: media
   name: lidarr
   namespace: media
 spec:
@@ -15,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        backup.velero.io/backup-volumes: pvc-lidarr-config
+        backup.velero.io/backup-volumes: pvc-lidarr
       labels:
         cdk8s.io/metadata.addr: lidarr-lidarr-deployment-c8c0031b
     spec:
@@ -53,7 +55,7 @@ spec:
             runAsNonRoot: false
           volumeMounts:
             - mountPath: /config
-              name: pvc-lidarr-config
+              name: pvc-lidarr
             - mountPath: /downloads
               name: pvc-nfs-media-downloads
             - mountPath: /music
@@ -112,9 +114,9 @@ spec:
       setHostnameAsFQDN: false
       terminationGracePeriodSeconds: 30
       volumes:
-        - name: pvc-lidarr-config
+        - name: pvc-lidarr
           persistentVolumeClaim:
-            claimName: lidarr-config
+            claimName: lidarr
             readOnly: false
         - name: pvc-nfs-media-downloads
           persistentVolumeClaim:

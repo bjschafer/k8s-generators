@@ -1,6 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app.kubernetes.io/instance: media
   name: resilio-sync
   namespace: media
 spec:
@@ -15,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        backup.velero.io/backup-volumes: pvc-resilio-sync-config
+        backup.velero.io/backup-volumes: pvc-resilio-sync
       labels:
         cdk8s.io/metadata.addr: resilio-sync-resilio-sync-deployment-c84e1f54
     spec:
@@ -53,7 +55,7 @@ spec:
             runAsNonRoot: false
           volumeMounts:
             - mountPath: /config
-              name: pvc-resilio-sync-config
+              name: pvc-resilio-sync
             - mountPath: /downloads
               name: pvc-nfs-media-downloads
               subPath: seedbox/downloads
@@ -69,9 +71,9 @@ spec:
       setHostnameAsFQDN: false
       terminationGracePeriodSeconds: 30
       volumes:
-        - name: pvc-resilio-sync-config
+        - name: pvc-resilio-sync
           persistentVolumeClaim:
-            claimName: resilio-sync-config
+            claimName: resilio-sync
             readOnly: false
         - name: pvc-nfs-media-downloads
           persistentVolumeClaim:

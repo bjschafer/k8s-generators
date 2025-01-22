@@ -10,8 +10,9 @@ import {
   PersistentVolumeReclaimPolicy,
 } from "cdk8s-plus-31";
 import { Construct } from "constructs";
+import { BACKUP_ANNOTATION_EXCLUDE } from "./consts";
 
-export const NFS_SERVER = "10.0.151.3";
+export const NFS_SERVER = "10.0.151.5";
 const DEFAULT_CAPACITY = Size.tebibytes(50);
 
 export interface NFSConcreteVolume {
@@ -34,14 +35,13 @@ export class NFSVolumeContainer extends Chart {
     props = {
       ...props,
       metadata: {
+        ...props.metadata,
         name: name,
       },
     };
     const vol = new NFSVolume(this, name, props);
     const pvc = new PersistentVolumeClaim(this, `${name}-pvc`, {
-      metadata: {
-        name: name,
-      },
+      ...props,
       accessModes: [PersistentVolumeAccessMode.READ_WRITE_MANY],
       storage: vol.storage,
       storageClassName: "",
@@ -73,6 +73,7 @@ export class NFSVolume extends PersistentVolume implements IPersistentVolume {
     this.nfsHost = props.nfsHost ?? NFS_SERVER;
     this.exportPath = props.exportPath;
     this.storage = props.storage ?? DEFAULT_CAPACITY;
+    this.metadata.addLabel(BACKUP_ANNOTATION_EXCLUDE, "true");
   }
 
   public _toKube(): k8s.PersistentVolumeSpec {

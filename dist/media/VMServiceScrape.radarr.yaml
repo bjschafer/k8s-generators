@@ -1,6 +1,8 @@
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMServiceScrape
 metadata:
+  labels:
+    app.kubernetes.io/instance: media
   name: radarr
   namespace: media
 spec:

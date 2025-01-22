@@ -1,6 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app.kubernetes.io/instance: media
   name: readarr
   namespace: media
 spec:
@@ -15,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        backup.velero.io/backup-volumes: pvc-readarr-config
+        backup.velero.io/backup-volumes: pvc-readarr
       labels:
         cdk8s.io/metadata.addr: readarr-readarr-deployment-c86ffbf3
     spec:
@@ -53,7 +55,7 @@ spec:
             runAsNonRoot: false
           volumeMounts:
             - mountPath: /config
-              name: pvc-readarr-config
+              name: pvc-readarr
             - mountPath: /downloads
               name: pvc-nfs-media-downloads
             - mountPath: /books
@@ -112,9 +114,9 @@ spec:
       setHostnameAsFQDN: false
       terminationGracePeriodSeconds: 30
       volumes:
-        - name: pvc-readarr-config
+        - name: pvc-readarr
           persistentVolumeClaim:
-            claimName: readarr-config
+            claimName: readarr
             readOnly: false
         - name: pvc-nfs-media-downloads
           persistentVolumeClaim:

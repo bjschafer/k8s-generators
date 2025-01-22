@@ -1,6 +1,9 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  labels:
+    app.kubernetes.io/instance: media
+    velero.io/exclude-from-backup: "true"
   name: nfs-media-ebooks
 spec:
   accessModes:
@@ -9,6 +12,6 @@ spec:
     storage: 51200Gi
   nfs:
     path: /warp/Media/Ebooks
-    server: 10.0.151.3
+    server: 10.0.151.5
   persistentVolumeReclaimPolicy: Retain
   volumeMode: Filesystem

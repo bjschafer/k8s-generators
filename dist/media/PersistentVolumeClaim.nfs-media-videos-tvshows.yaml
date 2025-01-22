@@ -1,6 +1,8 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  labels:
+    app.kubernetes.io/instance: media
   name: nfs-media-videos-tvshows
 spec:
   accessModes:

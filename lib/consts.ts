@@ -33,6 +33,7 @@ export const DNS_NAMESERVERS = ["10.0.10.100", "10.0.10.101"];
 export const DNS_SEARCH = ["cmdcentral.xyz"];
 
 export const BACKUP_ANNOTATION_NAME = "backup.velero.io/backup-volumes";
+export const BACKUP_ANNOTATION_EXCLUDE = "velero.io/exclude-from-backup";
 
 export function DEFAULT_APP_PROPS(namespace: string): AppProps {
   return {

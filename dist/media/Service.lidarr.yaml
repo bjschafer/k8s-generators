@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
+    app.kubernetes.io/instance: media
     cdk8s.io/metadata.addr: lidarr-lidarr-deployment-c8c0031b
   name: lidarr
   namespace: media

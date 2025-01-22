@@ -1,6 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app.kubernetes.io/instance: media
   name: prowlarr
   namespace: media
 spec:
@@ -15,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        backup.velero.io/backup-volumes: pvc-prowlarr-config
+        backup.velero.io/backup-volumes: pvc-prowlarr
       labels:
         cdk8s.io/metadata.addr: prowlarr-prowlarr-deployment-c8603109
     spec:
@@ -53,7 +55,7 @@ spec:
             runAsNonRoot: false
           volumeMounts:
             - mountPath: /config
-              name: pvc-prowlarr-config
+              name: pvc-prowlarr
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
@@ -63,7 +65,7 @@ spec:
       setHostnameAsFQDN: false
       terminationGracePeriodSeconds: 30
       volumes:
-        - name: pvc-prowlarr-config
+        - name: pvc-prowlarr
           persistentVolumeClaim:
-            claimName: prowlarr-config
+            claimName: prowlarr
             readOnly: false
