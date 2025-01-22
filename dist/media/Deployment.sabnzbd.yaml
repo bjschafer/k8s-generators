@@ -65,6 +65,11 @@ spec:
               value: "9707"
             - name: URL
               value: http://sabnzbd.media.svc.cluster.local:8080
+            - name: APIKEY
+              valueFrom:
+                secretKeyRef:
+                  key: APIKEY
+                  name: sabnzbd-api
           image: ghcr.io/onedr0p/exportarr:v2.0.1
           imagePullPolicy: Always
           livenessProbe:

@@ -157,6 +157,7 @@ const mediaApps: Omit<
     monitoringConfig: {
       enableExportarr: true,
       enableServiceMonitor: true,
+      existingApiSecretName: "sabnzbd-api",
     },
   },
   {
