@@ -72,7 +72,7 @@ spec:
                 secretKeyRef:
                   key: APIKEY
                   name: lidarr-api
-          image: ghcr.io/onedr0p/exportarr:v1.2.4
+          image: ghcr.io/onedr0p/exportarr:v2.0.1
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3

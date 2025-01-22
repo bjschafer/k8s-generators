@@ -28,7 +28,7 @@ import {
 import { NFSConcreteVolume } from "./nfs";
 import { VmServiceScrape } from "../imports/operator.victoriametrics.com";
 
-const exportarrVersion = "v1.2.4";
+const exportarrVersion = "v2.0.1";
 const exportarrPort = 9707;
 const mediaLabel = { "app.kubernetes.io/instance": "media" };
 
