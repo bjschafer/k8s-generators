@@ -1,0 +1,14 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  labels:
+    app.kubernetes.io/instance: media
+  name: sabnzbd
+  namespace: media
+spec:
+  endpoints:
+    - path: /metrics
+      port: metrics
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: sabnzbd-sabnzbd-deployment-c8b1bd00

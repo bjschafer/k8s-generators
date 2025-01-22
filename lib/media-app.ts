@@ -169,11 +169,17 @@ export class MediaApp extends Chart {
 
     const labels = deploy.matchLabels;
     if (props.monitoringConfig?.enableExportarr) {
-      const secret = Secret.fromSecretName(
-        this,
-        props.monitoringConfig!.existingApiSecretName!,
-        props.monitoringConfig!.existingApiSecretName!,
-      );
+      let apiKey: { [name: string]: EnvValue } = {};
+      if (props.monitoringConfig.existingApiSecretName) {
+        const secret = Secret.fromSecretName(
+          this,
+          props.monitoringConfig!.existingApiSecretName!,
+          props.monitoringConfig!.existingApiSecretName!,
+        );
+        apiKey = {
+          APIKEY: EnvValue.fromSecretValue({ secret: secret, key: "APIKEY" }),
+        };
+      }
       deploy.addContainer({
         securityContext: DEFAULT_SECURITY_CONTEXT,
         image: `ghcr.io/onedr0p/exportarr:${exportarrVersion}`,
@@ -185,7 +191,7 @@ export class MediaApp extends Chart {
           URL: EnvValue.fromValue(
             GET_SERVICE_URL(props.name, props.namespace, true, props.port),
           ),
-          APIKEY: EnvValue.fromSecretValue({ secret: secret, key: "APIKEY" }),
+          ...apiKey,
         },
         resources: {
           cpu: {

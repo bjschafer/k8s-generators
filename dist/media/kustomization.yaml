@@ -41,4 +41,5 @@ resources:
   - VMServiceScrape.lidarr.yaml
   - VMServiceScrape.radarr.yaml
   - VMServiceScrape.readarr.yaml
+  - VMServiceScrape.sabnzbd.yaml
   - VMServiceScrape.sonarr.yaml

@@ -58,6 +58,46 @@ spec:
               name: pvc-sabnzbd
             - mountPath: /downloads
               name: pvc-nfs-media-downloads
+        - args:
+            - sabnzbd
+          env:
+            - name: PORT
+              value: "9707"
+            - name: URL
+              value: http://sabnzbd.media.svc.cluster.local:8080
+          image: ghcr.io/onedr0p/exportarr:v2.0.1
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 9707
+              scheme: HTTP
+          name: exportarr
+          ports:
+            - containerPort: 9707
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 9707
+              scheme: HTTP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          startupProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 9707
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always

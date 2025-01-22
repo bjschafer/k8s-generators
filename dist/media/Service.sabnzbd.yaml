@@ -12,6 +12,9 @@ spec:
     - name: http
       port: 8080
       targetPort: 8080
+    - name: metrics
+      port: 9707
+      targetPort: 9707
   selector:
     cdk8s.io/metadata.addr: sabnzbd-sabnzbd-deployment-c8b1bd00
   type: ClusterIP

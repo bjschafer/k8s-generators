@@ -155,8 +155,8 @@ const mediaApps: Omit<
       },
     ],
     monitoringConfig: {
-      enableExportarr: false,
-      enableServiceMonitor: false,
+      enableExportarr: true,
+      enableServiceMonitor: true,
     },
   },
   {
