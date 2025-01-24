@@ -188,6 +188,7 @@ export class Navidrome extends Chart {
               {
                 kind: IngressRouteSpecRoutesServicesKind.SERVICE,
                 name: "ak-outpost-authentik-embedded-outpost",
+                namespace: "authentik",
                 port: IntOrString.fromNumber(9000),
               },
             ],
