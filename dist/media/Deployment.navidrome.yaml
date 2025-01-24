@@ -33,12 +33,17 @@ spec:
               value: 10.0.0.0/8,127.0.0.0/8
             - name: ND_REVERSEPROXYUSERHEADER
               value: X-authentik-username
+            - name: ND_ENABLEUSEREDITING
+              value: "false"
             - name: TZ
               value: America/Chicago
             - name: PUID
               value: "8675309"
             - name: PGID
               value: "8675309"
+          envFrom:
+            - secretRef:
+                name: navidrome-lastfm
           image: ghcr.io/navidrome/navidrome:latest
           imagePullPolicy: Always
           livenessProbe:

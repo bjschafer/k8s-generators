@@ -21,13 +21,15 @@ spec:
           name: navidrome
           port: 4533
     - kind: Rule
-      match: (Host(`music.cmdcentral.xyz`) || Host(`navidrome.cmdcentral.xyz`)) && Path(`/metrics`)
-      priority: 1000
+      match: (Host(`music.cmdcentral.xyz`) || Host(`navidrome.cmdcentral.xyz`)) && PathPrefix(`/outpost.goauthentik.io/`)
+      priority: 15
       services:
         - kind: Service
-          name: blackhole
+          name: ak-outpost-authentik-embedded-outpost
+          namespace: authentik
+          port: 9000
     - kind: Rule
-      match: (Host(`music.cmdcentral.xyz`) || Host(`navidrome.cmdcentral.xyz`)) && PathPrefix(`/outpost.goauthentik.io/`)
+      match: (Host(`music.cmdcentral.xyz`) || Host(`navidrome.cmdcentral.xyz`)) && PathPrefix(`/rest/`) && !Query(`c`, `NavidromeUI`)
       priority: 15
       services:
         - kind: Service

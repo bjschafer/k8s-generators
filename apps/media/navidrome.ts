@@ -6,12 +6,14 @@ import {
   Cpu,
   Deployment,
   DeploymentStrategy,
+  Env,
   EnvValue,
   PersistentVolumeAccessMode,
   PersistentVolumeClaim,
   PersistentVolumeMode,
   Probe,
   Protocol,
+  Secret,
   Volume,
 } from "cdk8s-plus-31";
 import {
@@ -85,8 +87,14 @@ export class Navidrome extends Chart {
             ND_REVERSEPROXYUSERHEADER: EnvValue.fromValue(
               "X-authentik-username",
             ),
+            ND_ENABLEUSEREDITING: EnvValue.fromValue("false"),
             ...LSIO_ENVVALUE,
           },
+          envFrom: [
+            Env.fromSecret(
+              Secret.fromSecretName(this, `${name}-lastfm`, "navidrome-lastfm"),
+            ),
+          ],
           readiness: Probe.fromHttpGet("/ping", {
             port: 4533,
           }),
@@ -172,19 +180,21 @@ export class Navidrome extends Chart {
           {
             kind: IngressRouteSpecRoutesKind.RULE,
             match:
-              "(Host(`music.cmdcentral.xyz`) || Host(`navidrome.cmdcentral.xyz`)) && Path(`/metrics`)",
-            priority: 1000,
+              "(Host(`music.cmdcentral.xyz`) || Host(`navidrome.cmdcentral.xyz`)) && PathPrefix(`/outpost.goauthentik.io/`)",
+            priority: 15,
             services: [
               {
-                name: "blackhole",
                 kind: IngressRouteSpecRoutesServicesKind.SERVICE,
+                name: "ak-outpost-authentik-embedded-outpost",
+                namespace: "authentik",
+                port: IntOrString.fromNumber(9000),
               },
             ],
           },
           {
             kind: IngressRouteSpecRoutesKind.RULE,
             match:
-              "(Host(`music.cmdcentral.xyz`) || Host(`navidrome.cmdcentral.xyz`)) && PathPrefix(`/outpost.goauthentik.io/`)",
+              "(Host(`music.cmdcentral.xyz`) || Host(`navidrome.cmdcentral.xyz`)) && PathPrefix(`/rest/`) && !Query(`c`, `NavidromeUI`)",
             priority: 15,
             services: [
               {
