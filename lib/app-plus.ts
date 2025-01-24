@@ -80,7 +80,7 @@ export class AppPlus extends Chart {
           },
           accessModes: vol.props.accessModes,
           storage: vol.props.storage ?? Size.gibibytes(5),
-          storageClassName: vol.props.storageClassName ?? StorageClass.CEPH_RBD,
+          storageClassName: vol.props.storageClassName ?? StorageClass.LONGHORN,
           volumeMode: vol.props.volumeMode ?? PersistentVolumeMode.FILE_SYSTEM,
         });
         volumes.push(

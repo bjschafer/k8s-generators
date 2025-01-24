@@ -42,7 +42,7 @@ new BasicApp(app, "paperless-app", {
   labels: { component: "web" },
   pvcProps: {
     name: "paperless-data-new",
-    storageClass: StorageClass.CEPH_RBD,
+    storageClass: StorageClass.LONGHORN,
     size: Quantity.fromString("5Gi"),
     accessMode: PersistentVolumeAccessMode.READ_WRITE_ONCE,
     mountPath: "",

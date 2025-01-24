@@ -9,8 +9,6 @@ import { PersistentVolumeAccessMode } from "cdk8s-plus-31";
 import { Construct } from "constructs";
 
 export enum StorageClass {
-  CEPHFS = "cephfs",
-  CEPH_RBD = "ceph-rbd",
   LONGHORN = "longhorn",
 }
 

@@ -177,7 +177,7 @@ export class BasicApp extends Chart {
   private getStrategy(): DeploymentStrategy {
     if (
       this.props.pvcProps &&
-      this.props.pvcProps.storageClass == StorageClass.CEPH_RBD
+      this.props.pvcProps.storageClass == StorageClass.LONGHORN
     ) {
       return {
         type: "Recreate",
