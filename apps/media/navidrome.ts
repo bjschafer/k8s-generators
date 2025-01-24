@@ -79,7 +79,9 @@ export class Navidrome extends Chart {
           },
           envVariables: {
             ND_PROMETHEUS_ENABLED: EnvValue.fromValue("true"),
-            ND_REVERSEPROXYWHITELIST: EnvValue.fromValue("10.0.0.0/8"),
+            ND_REVERSEPROXYWHITELIST: EnvValue.fromValue(
+              "10.0.0.0/8,127.0.0.0/8",
+            ),
             ND_REVERSEPROXYUSERHEADER: EnvValue.fromValue(
               "X-authentik-username",
             ),
