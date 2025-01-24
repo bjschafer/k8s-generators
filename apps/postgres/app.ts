@@ -10,7 +10,10 @@ import {
   ScheduledBackup,
 } from "../../imports/postgresql.cnpg.io";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import {
+  DEFAULT_APP_PROPS,
+  EXTERNAL_DNS_ANNOTATION_KEY,
+} from "../../lib/consts";
 import { StorageClass } from "../../lib/volume";
 import { VmPodScrape } from "../../imports/operator.victoriametrics.com";
 
@@ -100,8 +103,7 @@ class ProdPostgres extends Chart {
                   metadata: {
                     name: "prod",
                     annotations: {
-                      "external-dns.alpha.kubernetes.io/hostname":
-                        "pg-prod.cmdcentral.xyz",
+                      [EXTERNAL_DNS_ANNOTATION_KEY]: "pg-prod.cmdcentral.xyz",
                     },
                   },
                   spec: {

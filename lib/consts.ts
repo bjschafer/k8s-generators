@@ -98,3 +98,6 @@ export const IP_CIDRS_V4: { [name: string]: string } = {
 export const RELOADER_ENABLED = {
   "reloader.stakater.com/auto": "true",
 };
+
+export const EXTERNAL_DNS_ANNOTATION_KEY =
+  "external-dns.alpha.kubernetes.io/hostname";
