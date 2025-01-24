@@ -143,7 +143,7 @@ export class Navidrome extends Chart {
         namespace: namespace,
         labels: labels,
         annotations: {
-          "external-dns.alpha.kubernetes.io/target": "music.cmdcentral.xyz",
+          "external-dns.alpha.kubernetes.io/target": "10.0.10.80", // ew
         },
       },
       spec: {
