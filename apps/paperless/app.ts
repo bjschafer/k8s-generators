@@ -31,6 +31,7 @@ new AuthentikIngressRoute(app, "paperless-ingress", {
     port: IntOrString.fromNumber(8000),
   },
   tlsSecretName: "paperless-tls",
+  createCertificate: true,
 });
 
 new BasicApp(app, "paperless-app", {

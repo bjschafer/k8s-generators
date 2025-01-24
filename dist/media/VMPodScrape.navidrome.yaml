@@ -1,0 +1,15 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMPodScrape
+metadata:
+  labels:
+    app.kubernetes.io/instance: media
+    app.kubernetes.io/name: navidrome
+  name: navidrome
+  namespace: media
+spec:
+  podMetricsEndpoints:
+    - port: http
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: media
+      app.kubernetes.io/name: navidrome

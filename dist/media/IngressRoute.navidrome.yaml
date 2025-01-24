@@ -1,0 +1,35 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  labels:
+    app.kubernetes.io/instance: media
+    app.kubernetes.io/name: navidrome
+  name: navidrome
+  namespace: media
+spec:
+  routes:
+    - kind: Rule
+      match: Host(`music.cmdcentral.xyz`) || Host(`navidrome.cmdcentral.xyz`)
+      middlewares:
+        - name: authentik
+          namespace: authentik
+      priority: 10
+      services:
+        - kind: Service
+          name: navidrome
+          port: 4533
+    - kind: Rule
+      match: (Host(`music.cmdcentral.xyz`) || Host(`navidrome.cmdcentral.xyz`)) && Path(`/metrics`)
+      priority: 1000
+      services:
+        - kind: Service
+          name: blackhole
+    - kind: Rule
+      match: (Host(`music.cmdcentral.xyz`) || Host(`navidrome.cmdcentral.xyz`)) && PathPrefix(`/outpost.goauthentik.io/`)
+      priority: 15
+      services:
+        - kind: Service
+          name: ak-outpost-authentik-embedded-outpost
+          port: 9000
+  tls:
+    secretName: media-tls

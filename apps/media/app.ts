@@ -12,11 +12,12 @@ import { Cpu, Secret } from "cdk8s-plus-31";
 import { NewKustomize } from "../../lib/kustomize";
 import { Construct } from "constructs";
 import { Certificate } from "../../imports/cert-manager.io";
+import { Navidrome } from "./navidrome";
 
-const namespace = basename(__dirname);
+export const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
-const mediaLabel = { "app.kubernetes.io/instance": "media" };
+export const mediaLabel = { "app.kubernetes.io/instance": "media" };
 
 const nfsVols = new NFSVolumeContainer(app, "nfs-volume-container");
 nfsVols.Add("nfs-media-downloads", {
@@ -257,14 +258,20 @@ class MediaCert extends Chart {
       spec: {
         secretName: ingressSecret.name,
         issuerRef: CLUSTER_ISSUER,
-        dnsNames: mediaApps.sort().map((props): string => {
-          return `${props.name}.cmdcentral.xyz`;
-        }),
+        dnsNames: [
+          "music.cmdcentral.xyz",
+          "navidrome.cmdcentral.xyz",
+          ...mediaApps.sort().map((props): string => {
+            return `${props.name}.cmdcentral.xyz`;
+          }),
+        ],
       },
     });
   }
 }
 new MediaCert(app, "certs");
+
+new Navidrome(app, "navidrome");
 
 NewArgoApp("media", {
   sync_policy: {
@@ -278,6 +285,11 @@ NewArgoApp("media", {
   recurse: true,
   autoUpdate: {
     images: [
+      {
+        image: "ghcr.io/navidrome/navidrome",
+        versionConstraint: "latest",
+        strategy: "digest",
+      },
       ...mediaApps.map(function (app): ArgoUpdaterImageProps {
         return {
           image: app.image.split(":")[0],

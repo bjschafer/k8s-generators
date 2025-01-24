@@ -18,6 +18,7 @@ export interface AuthentikIngressRouteProps {
     port: IntOrString;
   };
   tlsSecretName: string;
+  createCertificate: boolean;
 }
 
 export class AuthentikIngressRoute extends Chart {
@@ -28,17 +29,19 @@ export class AuthentikIngressRoute extends Chart {
   ) {
     super(scope, `${name}-authentik-ingressroute`);
 
-    new Certificate(this, `${name}-certificate`, {
-      metadata: {
-        name: name,
-        namespace: props.namespace,
-      },
-      spec: {
-        dnsNames: [props.hostname],
-        issuerRef: CLUSTER_ISSUER,
-        secretName: props.tlsSecretName,
-      },
-    });
+    if (props.createCertificate) {
+      new Certificate(this, `${name}-certificate`, {
+        metadata: {
+          name: name,
+          namespace: props.namespace,
+        },
+        spec: {
+          dnsNames: [props.hostname],
+          issuerRef: CLUSTER_ISSUER,
+          secretName: props.tlsSecretName,
+        },
+      });
+    }
 
     new IngressRoute(this, `${name}-ingressroute`, {
       metadata: {

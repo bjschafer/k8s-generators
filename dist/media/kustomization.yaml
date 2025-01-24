@@ -1,6 +1,7 @@
 resources:
   - Certificate.media-tls.yaml
   - Deployment.lidarr.yaml
+  - Deployment.navidrome.yaml
   - Deployment.prowlarr.yaml
   - Deployment.radarr.yaml
   - Deployment.readarr.yaml
@@ -14,12 +15,14 @@ resources:
   - Ingress.resilio-sync.yaml
   - Ingress.sabnzbd.yaml
   - Ingress.sonarr.yaml
+  - IngressRoute.navidrome.yaml
   - PersistentVolume.nfs-media-downloads.yaml
   - PersistentVolume.nfs-media-ebooks.yaml
   - PersistentVolume.nfs-media-music.yaml
   - PersistentVolume.nfs-media-videos-movies.yaml
   - PersistentVolume.nfs-media-videos-tvshows.yaml
   - PersistentVolumeClaim.lidarr.yaml
+  - PersistentVolumeClaim.navidrome.yaml
   - PersistentVolumeClaim.nfs-media-downloads.yaml
   - PersistentVolumeClaim.nfs-media-ebooks.yaml
   - PersistentVolumeClaim.nfs-media-music.yaml
@@ -32,12 +35,14 @@ resources:
   - PersistentVolumeClaim.sabnzbd.yaml
   - PersistentVolumeClaim.sonarr.yaml
   - Service.lidarr.yaml
+  - Service.navidrome.yaml
   - Service.prowlarr.yaml
   - Service.radarr.yaml
   - Service.readarr.yaml
   - Service.resilio-sync.yaml
   - Service.sabnzbd.yaml
   - Service.sonarr.yaml
+  - VMPodScrape.navidrome.yaml
   - VMServiceScrape.lidarr.yaml
   - VMServiceScrape.radarr.yaml
   - VMServiceScrape.readarr.yaml
