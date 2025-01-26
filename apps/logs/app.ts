@@ -37,7 +37,7 @@ class VMLogs extends Chart {
     new Helm(this, "vmlogs", {
       chart: "victoria-logs-single",
       repo: "https://victoriametrics.github.io/helm-charts/",
-      version: "0.8.13",
+      version: "0.8.14",
       releaseName: "prod",
       namespace: namespace,
       values: {
