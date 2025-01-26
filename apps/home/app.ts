@@ -97,6 +97,13 @@ new HomeConfig(app, `${name}-config`, {
           iconBubble: false,
         },
         {
+          name: "GitLab",
+          uri: "https://gitlab.cmdcentral.xyz",
+          icon: "gitlab",
+          description: "Local code repository+",
+          iconBubble: false,
+        },
+        {
           name: "Grafana",
           uri: "https://grafana.cmdcentral.xyz",
           icon: "grafana",
@@ -151,9 +158,9 @@ new HomeConfig(app, `${name}-config`, {
           description: "Books n shiet",
         },
         {
-          name: "Plex",
-          uri: "https://plex.tv/web",
-          icon: "plex",
+          name: "Jellyfin",
+          uri: "https://jellyfin.cmdcentral.xyz",
+          icon: "jellyfin",
         },
       ],
     },
@@ -226,6 +233,12 @@ new HomeConfig(app, `${name}-config`, {
           uri: "https://spoolman.cmdcentral.xyz",
           icon: "mdi-library-shelves",
           description: "Filament manager",
+        },
+        {
+          name: "Pandora",
+          uri: "https://pandora.cmdcentral.xyz",
+          icon: "mdi-gun",
+          description: "Pandora's Box (V0)",
         },
         {
           name: "Trident",
