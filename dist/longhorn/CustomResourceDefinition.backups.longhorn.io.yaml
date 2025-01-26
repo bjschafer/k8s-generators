@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/instance: longhorn
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: longhorn
-    app.kubernetes.io/version: v1.7.2
-    helm.sh/chart: longhorn-1.7.2
+    app.kubernetes.io/version: v1.8.0
+    helm.sh/chart: longhorn-1.8.0
     longhorn-manager: ""
   name: backups.longhorn.io
 spec:
@@ -87,6 +87,10 @@ spec:
           jsonPath: .status.snapshotCreatedAt
           name: SnapshotCreatedAt
           type: string
+        - description: The backup target name
+          jsonPath: .status.backupTargetName
+          name: BackupTarget
+          type: string
         - description: The backup state
           jsonPath: .status.state
           name: State
@@ -148,6 +152,9 @@ spec:
               properties:
                 backupCreatedAt:
                   description: The snapshot backup upload finished time.
+                  type: string
+                backupTargetName:
+                  description: The backup target name.
                   type: string
                 compressionMethod:
                   description: Compression method

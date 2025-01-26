@@ -21,7 +21,7 @@ class Longhorn extends Chart {
     new Helm(this, "longhorn", {
       chart: "longhorn",
       repo: "https://charts.longhorn.io",
-      version: "1.7.2",
+      version: "1.8.0",
       releaseName: name,
       namespace: namespace,
       values: {

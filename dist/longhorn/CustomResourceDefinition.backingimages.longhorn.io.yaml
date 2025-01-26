@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/instance: longhorn
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: longhorn
-    app.kubernetes.io/version: v1.7.2
-    helm.sh/chart: longhorn-1.7.2
+    app.kubernetes.io/version: v1.8.0
+    helm.sh/chart: longhorn-1.8.0
     longhorn-manager: ""
   name: backingimages.longhorn.io
 spec:
@@ -120,9 +120,20 @@ spec:
               properties:
                 checksum:
                   type: string
+                dataEngine:
+                  default: v1
+                  enum:
+                    - v1
+                    - v2
+                  type: string
                 diskFileSpecMap:
                   additionalProperties:
                     properties:
+                      dataEngine:
+                        enum:
+                          - v1
+                          - v2
+                        type: string
                       evictionRequested:
                         type: boolean
                     type: object
@@ -167,6 +178,11 @@ spec:
                 diskFileStatusMap:
                   additionalProperties:
                     properties:
+                      dataEngine:
+                        enum:
+                          - v1
+                          - v2
+                        type: string
                       lastStateTransitionTime:
                         type: string
                       message:
@@ -185,13 +201,22 @@ spec:
                   type: object
                 ownerID:
                   type: string
+                realSize:
+                  description: Real size of image in bytes, which may be smaller than the size when the file is a sparse file. Will be zero until known (e.g. while a backing image is uploading)
+                  format: int64
+                  type: integer
                 size:
                   format: int64
                   type: integer
                 uuid:
                   type: string
+                v2FirstCopyDisk:
+                  type: string
+                v2FirstCopyStatus:
+                  description: It is pending -> in-progress -> ready/failed
+                  type: string
                 virtualSize:
-                  description: Virtual size of image, which may be larger than physical size. Will be zero until known (e.g. while a backing image is uploading)
+                  description: Virtual size of image in bytes, which may be larger than physical size. Will be zero until known (e.g. while a backing image is uploading)
                   format: int64
                   type: integer
               type: object
