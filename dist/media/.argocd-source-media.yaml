@@ -1,7 +1,7 @@
 kustomize:
   images:
   - lscr.io/linuxserver/readarr:develop@sha256:d967e910b2f9a86ee98b38d2445e9de3b000c797f7b75685cbc564162e694de5
-  - ghcr.io/linuxserver/sonarr:develop@sha256:069c3fa4384795ae4cf4ffea8e4a907d89c31f0eae965c8e731884e8e7f8b459
+  - ghcr.io/linuxserver/sonarr:develop@sha256:ebd0aef8bfcccf54248f90df5be7d1202b0c3f159140914933c5e0b222763c43
   - ghcr.io/linuxserver/radarr:nightly@sha256:6d0ab117d0f89004625c818d88a64c9ce661a3098d6ca7f15e215203ae78ae95
   - ghcr.io/linuxserver/lidarr:develop@sha256:17100492d648d5bbdaabd0ef2f9b1e91722e6789a942c75cdbb2a4335f045e82
   - ghcr.io/linuxserver/sabnzbd:latest@sha256:9f68851d8fbb4feb09b0cd8aa840c7f140fb3279edfd957f92d78c60591af39f
