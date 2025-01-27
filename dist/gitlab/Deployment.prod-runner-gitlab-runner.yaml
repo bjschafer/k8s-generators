@@ -78,11 +78,11 @@ spec:
             timeoutSeconds: 4
           resources: {}
           securityContext:
-            allowPrivilegeEscalation: true
+            allowPrivilegeEscalation: false
             capabilities:
               drop:
                 - ALL
-            privileged: true
+            privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: true
           volumeMounts:
