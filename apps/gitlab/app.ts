@@ -40,6 +40,9 @@ class Runner extends Chart {
           allowPrivilegeEscalation: true,
           runAsNonRoot: true,
           privileged: true,
+          seccompProfile: {
+            type: "Unconfined",
+          },
         },
         metrics: {
           enabled: true,
