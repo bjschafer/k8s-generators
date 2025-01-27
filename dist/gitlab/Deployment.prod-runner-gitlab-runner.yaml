@@ -16,7 +16,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/configmap: be45afceea40a5b5594c62699c7c1f14d8ee6d3af2c2ad20af51403b087259c6
+        checksum/configmap: 6889b0f974f565d591ef03c9c557bd5121712bb656bd56392cb9331345bf1989
         checksum/secrets: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
         prometheus.io/port: "9252"
         prometheus.io/scrape: "true"

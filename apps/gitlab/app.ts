@@ -5,6 +5,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { MonitoringRule } from "../../lib/monitoring/victoriametrics";
 import { Construct } from "constructs";
 import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";
+import heredoc from "tsheredoc";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -51,6 +52,13 @@ class Runner extends Chart {
         },
         runners: {
           secret: "runner-registration",
+          config: heredoc`
+            [[runners]]
+              [runners.kubernetes]
+                namespace = "{{.Release.Namespace}}"
+                image = "alpine"
+                privileged = true
+`,
         },
       },
     });

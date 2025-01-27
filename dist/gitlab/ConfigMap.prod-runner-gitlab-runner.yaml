@@ -38,6 +38,7 @@ data:
       [runners.kubernetes]
         namespace = "gitlab"
         image = "alpine"
+        privileged = true
   config.toml: |
     shutdown_timeout = 0
     concurrent = 6
