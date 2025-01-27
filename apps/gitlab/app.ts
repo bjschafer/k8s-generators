@@ -36,6 +36,11 @@ class Runner extends Chart {
         gitlabUrl: "https://gitlab.cmdcentral.xyz",
         concurrent: 6,
         logFormat: "json",
+        securityContext: {
+          allowPrivilegeEscalation: true,
+          runAsNonRoot: true,
+          privileged: true,
+        },
         metrics: {
           enabled: true,
           portName: "metrics",
