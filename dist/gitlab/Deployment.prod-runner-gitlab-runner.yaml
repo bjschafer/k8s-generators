@@ -85,8 +85,6 @@ spec:
             privileged: true
             readOnlyRootFilesystem: false
             runAsNonRoot: true
-            seccompProfile:
-              type: Unconfined
           volumeMounts:
             - mountPath: /secrets
               name: projected-secrets
