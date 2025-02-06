@@ -83,7 +83,7 @@ class ProdPostgres extends Chart {
           },
         },
         storage: {
-          size: "5Gi",
+          size: "15Gi",
           storageClass: StorageClass.LONGHORN,
         },
         enableSuperuserAccess: true,
