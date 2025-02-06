@@ -1,0 +1,17 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  name: database
+  namespace: metrics
+spec:
+  groups:
+    - name: database
+      rules:
+        - alert: CNPGVolumeAlmostFull
+          annotations:
+            summary: CNPG volume {{ $labels.persistentvolumeclaim }} is > 85% full
+          expr: max(max by(persistentvolumeclaim) (1 - kubelet_volume_stats_available_bytes{namespace="postgres"} / kubelet_volume_stats_capacity_bytes{namespace="postgres"})) > 0.85
+          for: 15m
+          labels:
+            push_notify: "true"
+            severity: warning

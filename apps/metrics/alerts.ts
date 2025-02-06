@@ -35,6 +35,26 @@ export function addAlerts(scope: Construct, id: string): void {
     ],
   });
 
+  new Alert(scope, `${id}-database`, {
+    name: "database",
+    namespace: namespace,
+    rules: [
+      {
+        alert: "CNPGVolumeAlmostFull",
+        expr: `max(max by(persistentvolumeclaim) (1 - kubelet_volume_stats_available_bytes{namespace="postgres"} / kubelet_volume_stats_capacity_bytes{namespace="postgres"})) > 0.85`,
+        for: "15m",
+        labels: {
+          push_notify: "true",
+          severity: "warning",
+        },
+        annotations: {
+          summary:
+            "CNPG volume {{ $labels.persistentvolumeclaim }} is > 85% full",
+        },
+      },
+    ],
+  });
+
   new Alert(scope, `${id}-host`, {
     name: "host",
     namespace: namespace,
