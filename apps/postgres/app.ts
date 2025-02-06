@@ -92,6 +92,9 @@ class ProdPostgres extends Chart {
             "host pdns pdns 10.0.10.0/24 scram-sha-256",
             "hostssl pdns pdns 10.0.10.0/24 scram-sha-256",
           ],
+          parameters: {
+            max_slot_wal_keep_size: "1GB",
+          },
         },
 
         managed: {
@@ -323,6 +326,9 @@ class VectorPostgres extends Chart {
 
         postgresql: {
           sharedPreloadLibraries: ["vectors.so"],
+          parameters: {
+            max_slot_wal_keep_size: "1GB",
+          },
         },
       },
     });

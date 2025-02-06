@@ -93,6 +93,8 @@ spec:
   monitoring:
     enablePodMonitor: false
   postgresql:
+    parameters:
+      max_slot_wal_keep_size: 1GB
     pg_hba:
       - host pdns pdns 10.0.10.0/24 scram-sha-256
       - hostssl pdns pdns 10.0.10.0/24 scram-sha-256

@@ -37,6 +37,8 @@ spec:
   monitoring:
     enablePodMonitor: true
   postgresql:
+    parameters:
+      max_slot_wal_keep_size: 1GB
     shared_preload_libraries:
       - vectors.so
   resources:
