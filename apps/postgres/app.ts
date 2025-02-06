@@ -266,7 +266,7 @@ class VectorPostgres extends Chart {
           name: catalog.name,
         },
         monitoring: {
-          enablePodMonitor: true,
+          enablePodMonitor: false,
         },
         // prefer to schedule on non-pis
         affinity: {

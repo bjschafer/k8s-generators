@@ -35,7 +35,7 @@ spec:
     name: pgvector
   instances: 2
   monitoring:
-    enablePodMonitor: true
+    enablePodMonitor: false
   postgresql:
     parameters:
       max_slot_wal_keep_size: 1GB
