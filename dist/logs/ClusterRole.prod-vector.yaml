@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: prod
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: vector
-    app.kubernetes.io/version: 0.42.0-distroless-libc
-    helm.sh/chart: vector-0.37.0
+    app.kubernetes.io/version: 0.44.0-distroless-libc
+    helm.sh/chart: vector-0.40.0
   name: prod-vector
 rules:
   - apiGroups:

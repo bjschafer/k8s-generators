@@ -17,6 +17,7 @@ import { IntOrString, KubeService } from "../../imports/k8s";
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
+const version = "0.8.15";
 
 NewArgoApp(name, {
   sync_policy: {
@@ -37,7 +38,7 @@ class VMLogs extends Chart {
     new Helm(this, "vmlogs", {
       chart: "victoria-logs-single",
       repo: "https://victoriametrics.github.io/helm-charts/",
-      version: "0.8.14",
+      version: version,
       releaseName: "prod",
       namespace: namespace,
       values: {
