@@ -13,7 +13,7 @@ import { addAlerts } from "./alerts";
 
 export const namespace = basename(__dirname);
 export const name = namespace;
-export const version = "0.34.0";
+export const version = "0.35.7";
 export const hostname = "metrics.cmdcentral.xyz";
 
 NewHelmApp(
