@@ -10,6 +10,7 @@ import heredoc from "tsheredoc";
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
+const version = "0.73.3";
 
 NewArgoApp(name, {
   sync_policy: {
@@ -30,7 +31,7 @@ class Runner extends Chart {
     new Helm(this, "gitlab-runner", {
       chart: "gitlab-runner",
       repo: "https://charts.gitlab.io",
-      version: "0.73.0",
+      version: version,
       releaseName: "prod-runner",
       namespace: "gitlab",
       values: {
