@@ -1,5 +1,0 @@
-resources:
-  - Deployment.watcharr.yaml
-  - Ingress.watcharr.yaml
-  - PersistentVolumeClaim.data.yaml
-  - Service.watcharr.yaml
