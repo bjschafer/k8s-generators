@@ -1,3 +1,0 @@
-kustomize:
-  images:
-  - ghcr.io/sbondco/watcharr:v2.0.1
