@@ -1,0 +1,5 @@
+resources:
+  - Deployment.todos.yaml
+  - Ingress.todos.yaml
+  - PersistentVolumeClaim.data.yaml
+  - Service.todos.yaml
