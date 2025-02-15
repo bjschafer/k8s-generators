@@ -4,6 +4,7 @@ import { AppPlus } from "../../lib/app-plus";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { basename } from "../../lib/util";
+import { NewKustomize } from "../../lib/kustomize";
 import { StorageClass } from "../../lib/volume";
 
 const namespace = basename(__dirname);
@@ -58,3 +59,4 @@ new AppPlus(app, "watcharr", {
 });
 
 app.synth();
+NewKustomize(app.outdir);
