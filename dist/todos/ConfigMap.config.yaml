@@ -36,6 +36,8 @@ data:
       overdue_job: 3h
       pre_due_job: 3h
     oauth2:
+      client_id: ""
+      client_secret: ""
       auth_url: ""
       token_url: ""
       user_info_url: ""

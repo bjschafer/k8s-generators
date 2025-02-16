@@ -80,6 +80,8 @@ class Config extends Chart {
           pre_due_job: "3h",
         },
         oauth2: {
+          client_id: "",
+          client_secret: "",
           auth_url: "",
           token_url: "",
           user_info_url: "",
@@ -114,7 +116,7 @@ new AppPlus(app, "donetick", {
   extraEnv: {
     DT_ENV: EnvValue.fromValue("selfhosted"),
     DT_NAME: EnvValue.fromValue("Cmdcentral Todos"),
-    DT_IS_USER_CREATION_DISABLED: EnvValue.fromValue("false"),
+    DT_IS_USER_CREATION_DISABLED: EnvValue.fromValue("true"),
 
     // database config
     DT_DATABASE_TYPE: EnvValue.fromValue("postgres"),

@@ -34,7 +34,7 @@ spec:
             - name: DT_NAME
               value: Cmdcentral Todos
             - name: DT_IS_USER_CREATION_DISABLED
-              value: "false"
+              value: "true"
             - name: DT_DATABASE_TYPE
               value: postgres
             - name: DT_DATABASE_HOST
