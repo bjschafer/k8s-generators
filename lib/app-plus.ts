@@ -78,7 +78,9 @@ export class AppPlus extends Chart {
             name: `${vol.name}`,
             namespace: props.namespace,
           },
-          accessModes: vol.props.accessModes,
+          accessModes: vol.props.accessModes ?? [
+            PersistentVolumeAccessMode.READ_WRITE_ONCE,
+          ],
           storage: vol.props.storage ?? Size.gibibytes(5),
           storageClassName: vol.props.storageClassName ?? StorageClass.LONGHORN,
           volumeMode: vol.props.volumeMode ?? PersistentVolumeMode.FILE_SYSTEM,

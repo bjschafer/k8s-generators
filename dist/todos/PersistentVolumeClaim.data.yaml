@@ -4,6 +4,8 @@ metadata:
   name: data
   namespace: todos
 spec:
+  accessModes:
+    - ReadWriteOnce
   resources:
     requests:
       storage: 5Gi
