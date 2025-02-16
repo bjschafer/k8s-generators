@@ -31,29 +31,11 @@ spec:
         - env:
             - name: DT_ENV
               value: selfhosted
-            - name: DT_NAME
-              value: Cmdcentral Todos
-            - name: DT_IS_USER_CREATION_DISABLED
-              value: "true"
-            - name: DT_DATABASE_TYPE
-              value: postgres
-            - name: DT_DATABASE_HOST
-              value: prod.postgres.svc.cluster.local
-            - name: DT_DATABASE_PORT
-              value: "5432"
-            - name: DT_DATABASE_USER
-              value: donetick
-            - name: DT_DATABASE_NAME
-              value: donetick
-            - name: DT_DATABASE_MIGRATION
-              value: "true"
             - name: DT_DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: DT_DATABASE_PASSWORD
                   name: secrets
-            - name: DT_OAUTH2_NAME
-              value: Cmdcentral Login
             - name: DT_OAUTH2_CLIENT_ID
               valueFrom:
                 secretKeyRef:
@@ -64,16 +46,6 @@ spec:
                 secretKeyRef:
                   key: DT_OAUTH2_CLIENT_SECRET
                   name: secrets
-            - name: DT_OAUTH2_REDIRECT_URL
-              value: https://todos.cmdcentral.xyz/auth/oauth2
-            - name: DT_OAUTH2_SCOPES
-              value: openid,profile,email
-            - name: DT_OAUTH2_AUTH_URL
-              value: https://login.cmdcentral.xyz/application/o/authorize/
-            - name: DT_OAUTH2_TOKEN_URL
-              value: https://login.cmdcentral.xyz/application/o/token/
-            - name: DT_OAUTH2_USER_INFO_URL
-              value: https://login.cmdcentral.xyz/application/o/userinfo/
           image: donetick/donetick
           imagePullPolicy: Always
           livenessProbe:
@@ -100,6 +72,9 @@ spec:
           volumeMounts:
             - mountPath: /donetick-data
               name: pvc-data
+            - mountPath: /config/selfhosted.yaml
+              name: configmap-config
+              subPath: selfhosted.yaml
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
@@ -113,3 +88,6 @@ spec:
           persistentVolumeClaim:
             claimName: data
             readOnly: false
+        - configMap:
+            name: config
+          name: configmap-config
