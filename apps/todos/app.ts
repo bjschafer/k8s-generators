@@ -114,7 +114,7 @@ new AppPlus(app, "donetick", {
   extraEnv: {
     DT_ENV: EnvValue.fromValue("selfhosted"),
     DT_NAME: EnvValue.fromValue("Cmdcentral Todos"),
-    DT_IS_USER_CREATION_DISABLED: EnvValue.fromValue("true"),
+    DT_IS_USER_CREATION_DISABLED: EnvValue.fromValue("false"),
 
     // database config
     DT_DATABASE_TYPE: EnvValue.fromValue("postgres"),
