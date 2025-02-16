@@ -153,6 +153,12 @@ new AppPlus(app, "donetick", {
     DT_OAUTH2_USER_INFO_URL: EnvValue.fromValue(
       "https://login.cmdcentral.xyz/application/o/userinfo/",
     ),
+
+    // other
+    DT_TELEGRAM_TOKEN: EnvValue.fromSecretValue({
+      secret: secrets,
+      key: "DT_TELEGRAM_TOKEN",
+    }),
   },
 
   extraIngressHosts: ["donetick.cmdcentral.xyz", "tasks.cmdcentral.xyz"],

@@ -74,6 +74,11 @@ spec:
               value: https://login.cmdcentral.xyz/application/o/token/
             - name: DT_OAUTH2_USER_INFO_URL
               value: https://login.cmdcentral.xyz/application/o/userinfo/
+            - name: DT_TELEGRAM_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: DT_TELEGRAM_TOKEN
+                  name: secrets
           image: donetick/donetick
           imagePullPolicy: Always
           livenessProbe:
