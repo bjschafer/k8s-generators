@@ -122,7 +122,7 @@ new AppPlus(app, "donetick", {
     DT_DATABASE_PORT: EnvValue.fromValue("5432"),
     DT_DATABASE_USER: EnvValue.fromValue("donetick"),
     DT_DATABASE_NAME: EnvValue.fromValue("donetick"),
-    DT_DATABASE_MIGRATION: EnvValue.fromValue("true"), // enable automatic migrations
+    DT_DATABASE_MIGRATION: EnvValue.fromValue("false"), // enable automatic migrations
     DT_DATABASE_PASSWORD: EnvValue.fromSecretValue({
       secret: secrets,
       key: "DT_DATABASE_PASSWORD",

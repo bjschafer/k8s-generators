@@ -46,7 +46,7 @@ spec:
             - name: DT_DATABASE_NAME
               value: donetick
             - name: DT_DATABASE_MIGRATION
-              value: "true"
+              value: "false"
             - name: DT_DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
