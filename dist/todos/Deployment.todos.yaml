@@ -100,6 +100,9 @@ spec:
           volumeMounts:
             - mountPath: /donetick-data
               name: pvc-data
+            - mountPath: /config/selfhosted.yaml
+              name: configmap-config
+              subPath: selfhosted.yaml
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
@@ -113,3 +116,6 @@ spec:
           persistentVolumeClaim:
             claimName: data
             readOnly: false
+        - configMap:
+            name: config
+          name: configmap-config

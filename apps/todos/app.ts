@@ -1,10 +1,11 @@
-import { App, Size } from "cdk8s";
+import { App, Chart, Size, Yaml } from "cdk8s";
 import { basename } from "../../lib/util";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
-import { EnvValue, Secret } from "cdk8s-plus-31";
+import { ConfigMap, EnvValue, Secret } from "cdk8s-plus-31";
 import { NewKustomize } from "../../lib/kustomize";
+import { Construct } from "constructs";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -26,6 +27,72 @@ NewArgoApp(name, {
 
 const secrets = Secret.fromSecretName(app, `${name}-creds`, "secrets");
 
+// Viper only knows about config fields in the config file. The built-in config file does not have some fields we need (such as for database).
+// Meaning, we need a config file that has the format/structure of all the values, but it can be filled with dummy values and overridden by environment variables.
+class Config extends Chart {
+  constructor(scope: Construct, id: string) {
+    super(scope, id);
+
+    const cm = new ConfigMap(this, `${id}-cm`, {
+      metadata: {
+        name: "config",
+        namespace: namespace,
+      },
+    });
+
+    cm.addData(
+      "selfhosted.yaml",
+      Yaml.stringify({
+        name: "Cmdcentral Todos",
+        is_user_creation_disabled: true,
+        telegram: {
+          token: "",
+        },
+        pushover: {
+          token: "",
+        },
+        database: {
+          type: "",
+          host: "",
+          password: "",
+          port: 5432,
+          user: "",
+          name: "",
+          migration: true,
+        },
+        server: {
+          port: 2021,
+          read_timeout: "10s",
+          write_timeout: "10s",
+          rate_period: "60s",
+          rate_limit: 300,
+          cors_allow_origins: [
+            "http://localhost:5173",
+            "http://localhost:7926",
+            "https://localhost",
+            "capacitor://localhost",
+          ],
+          serve_frontend: true,
+        },
+        scheduler_jobs: {
+          due_job: "30m",
+          overdue_job: "3h",
+          pre_due_job: "3h",
+        },
+        oauth2: {
+          auth_url: "",
+          token_url: "",
+          user_info_url: "",
+          redirect_url: "",
+          name: "",
+          scopes: ["openid", "profile", "email"],
+        },
+      }),
+    );
+  }
+}
+new Config(app, "donetick-config");
+
 new AppPlus(app, "donetick", {
   name,
   namespace,
@@ -37,6 +104,13 @@ new AppPlus(app, "donetick", {
     },
   },
   ports: [port],
+  configmapMounts: [
+    {
+      name: "config",
+      mountPath: "/config/selfhosted.yaml",
+      subPath: "selfhosted.yaml",
+    },
+  ],
   extraEnv: {
     DT_ENV: EnvValue.fromValue("selfhosted"),
     DT_NAME: EnvValue.fromValue("Cmdcentral Todos"),
