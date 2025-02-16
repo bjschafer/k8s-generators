@@ -1,11 +1,10 @@
-import { App, Chart, Size, Yaml } from "cdk8s";
+import { App, Size } from "cdk8s";
 import { basename } from "../../lib/util";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
-import { ConfigMap, EnvValue, Secret } from "cdk8s-plus-31";
+import { EnvValue, Secret } from "cdk8s-plus-31";
 import { NewKustomize } from "../../lib/kustomize";
-import { Construct } from "constructs";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -27,69 +26,6 @@ NewArgoApp(name, {
 
 const secrets = Secret.fromSecretName(app, `${name}-creds`, "secrets");
 
-class Config extends Chart {
-  constructor(scope: Construct, id: string) {
-    super(scope, id);
-
-    const cm = new ConfigMap(this, `${id}-cm`, {
-      metadata: {
-        name: "config",
-        namespace: namespace,
-      },
-    });
-
-    cm.addData(
-      "selfhosted.yaml",
-      Yaml.stringify({
-        name: "Cmdcentral Todos",
-        is_user_creation_disabled: true,
-        telegram: {
-          token: "",
-        },
-        pushover: {
-          token: "",
-        },
-        database: {
-          type: "postgres",
-          host: "prod.postgres.svc.cluster.local",
-          port: 5432,
-          user: "donetick",
-          name: "donetick",
-          migration: true,
-        },
-        server: {
-          port: 2021,
-          read_timeout: "10s",
-          write_timeout: "10s",
-          rate_period: "60s",
-          rate_limit: 300,
-          cors_allow_origins: [
-            "http://localhost:5173",
-            "http://localhost:7926",
-            "https://localhost",
-            "capacitor://localhost",
-          ],
-          serve_frontend: true,
-        },
-        scheduler_jobs: {
-          due_job: "30m",
-          overdue_job: "3h",
-          pre_due_job: "3h",
-        },
-        oauth2: {
-          auth_url: "https://login.cmdcentral.xyz/application/o/authorize/",
-          token_url: "https://login.cmdcentral.xyz/application/o/token/",
-          user_info_url: "https://login.cmdcentral.xyz/application/o/userinfo/",
-          redirect_url: "https://todos.cmdcentral.xyz/auth/oauth2",
-          name: "Cmdcentral Login",
-          scopes: ["openid", "profile", "email"],
-        },
-      }),
-    );
-  }
-}
-new Config(app, "donetick-config");
-
 new AppPlus(app, "donetick", {
   name,
   namespace,
@@ -101,23 +37,25 @@ new AppPlus(app, "donetick", {
     },
   },
   ports: [port],
-  configmapMounts: [
-    {
-      name: "config",
-      mountPath: "/config/selfhosted.yaml",
-      subPath: "selfhosted.yaml",
-    },
-  ],
   extraEnv: {
     DT_ENV: EnvValue.fromValue("selfhosted"),
+    DT_NAME: EnvValue.fromValue("Cmdcentral Todos"),
+    DT_IS_USER_CREATION_DISABLED: EnvValue.fromValue("true"),
 
     // database config
+    DT_DATABASE_TYPE: EnvValue.fromValue("postgres"),
+    DT_DATABASE_HOST: EnvValue.fromValue("prod.postgres.svc.cluster.local"),
+    DT_DATABASE_PORT: EnvValue.fromValue("5432"),
+    DT_DATABASE_USER: EnvValue.fromValue("donetick"),
+    DT_DATABASE_NAME: EnvValue.fromValue("donetick"),
+    DT_DATABASE_MIGRATION: EnvValue.fromValue("true"), // enable automatic migrations
     DT_DATABASE_PASSWORD: EnvValue.fromSecretValue({
       secret: secrets,
       key: "DT_DATABASE_PASSWORD",
     }),
 
     // SSO
+    DT_OAUTH2_NAME: EnvValue.fromValue("Cmdcentral Login"),
     DT_OAUTH2_CLIENT_ID: EnvValue.fromSecretValue({
       secret: secrets,
       key: "DT_OAUTH2_CLIENT_ID",
@@ -126,6 +64,19 @@ new AppPlus(app, "donetick", {
       secret: secrets,
       key: "DT_OAUTH2_CLIENT_SECRET",
     }),
+    DT_OAUTH2_REDIRECT_URL: EnvValue.fromValue(
+      "https://todos.cmdcentral.xyz/auth/oauth2",
+    ), // this is weird
+    DT_OAUTH2_SCOPES: EnvValue.fromValue("openid,profile,email"),
+    DT_OAUTH2_AUTH_URL: EnvValue.fromValue(
+      "https://login.cmdcentral.xyz/application/o/authorize/",
+    ),
+    DT_OAUTH2_TOKEN_URL: EnvValue.fromValue(
+      "https://login.cmdcentral.xyz/application/o/token/",
+    ),
+    DT_OAUTH2_USER_INFO_URL: EnvValue.fromValue(
+      "https://login.cmdcentral.xyz/application/o/userinfo/",
+    ),
   },
 
   extraIngressHosts: ["donetick.cmdcentral.xyz", "tasks.cmdcentral.xyz"],

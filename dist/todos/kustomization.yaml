@@ -1,5 +1,4 @@
 resources:
-  - ConfigMap.config.yaml
   - Deployment.todos.yaml
   - Ingress.todos.yaml
   - PersistentVolumeClaim.data.yaml
