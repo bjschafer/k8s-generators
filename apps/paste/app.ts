@@ -17,7 +17,7 @@ const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
-const image = "git.cmdcentral.xyz/docker/danielszabo99/microbin";
+const image = "danielszabo99/microbin";
 const port = 8080;
 
 NewArgoApp(name, {

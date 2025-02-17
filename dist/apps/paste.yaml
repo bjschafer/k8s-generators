@@ -3,7 +3,7 @@ kind: Application
 metadata:
   annotations:
     argocd-image-updater.argoproj.io/git-branch: main
-    argocd-image-updater.argoproj.io/image-list: microbin=git.cmdcentral.xyz/docker/danielszabo99/microbin:latest
+    argocd-image-updater.argoproj.io/image-list: microbin=danielszabo99/microbin:latest
     argocd-image-updater.argoproj.io/microbin.update-strategy: digest
     argocd-image-updater.argoproj.io/write-back-method: git
   labels:
