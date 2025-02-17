@@ -195,12 +195,12 @@ export class MediaApp extends Chart {
         },
         resources: {
           cpu: {
-            request: Cpu.millis(100),
-            limit: Cpu.millis(500),
+            request: Cpu.millis(50),
+            limit: Cpu.millis(100),
           },
           memory: {
-            request: Size.mebibytes(64),
-            limit: Size.mebibytes(256),
+            request: Size.mebibytes(128),
+            limit: Size.mebibytes(384),
           },
         },
         readiness: Probe.fromHttpGet("/healthz", {
