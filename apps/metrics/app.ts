@@ -7,7 +7,6 @@ import { VmResources } from "./vmresources";
 import { ScrapeConfigs } from "./scrapeconfigs";
 import { BlackboxExporter } from "./blackbox";
 import { ProxmoxExporter } from "./proxmox";
-import { SnmpExporter } from "./snmp";
 import { UnifiExporter } from "./unifi";
 import { addAlerts } from "./alerts";
 
@@ -152,7 +151,6 @@ NewArgoApp(`${name}-config`, {
 new BlackboxExporter(app, "blackbox");
 new ProxmoxExporter(app, "proxmox");
 new ScrapeConfigs(app, "scrapes");
-new SnmpExporter(app, "snmp");
 new UnifiExporter(app, "unifi");
 new VmResources(app, "resources");
 

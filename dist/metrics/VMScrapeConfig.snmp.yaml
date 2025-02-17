@@ -15,7 +15,7 @@ spec:
         - __param_target
       targetLabel: instance
     - action: replace
-      replacement: snmp-exporter:9116
+      replacement: snmp-exporter.prometheus.svc.cluster.local:9116
       targetLabel: __address__
   staticConfigs:
     - labels:
