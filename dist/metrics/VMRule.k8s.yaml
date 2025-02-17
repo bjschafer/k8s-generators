@@ -188,17 +188,6 @@ spec:
           for: 1m
           labels:
             severity: critical
-        - alert: KubernetesJobSlowCompletion
-          annotations:
-            description: |-
-              Kubernetes Job {{ $labels.namespace }}/{{ $labels.job_name }} did not complete in time.
-                VALUE = {{ $value }}
-                LABELS = {{ $labels }}
-            summary: Kubernetes job slow completion (instance {{ $labels.instance }})
-          expr: kube_job_spec_completions - kube_job_status_succeeded > 0
-          for: 12h
-          labels:
-            severity: critical
         - alert: KubernetesApiServerErrors
           annotations:
             description: |-

@@ -537,20 +537,6 @@ export function addAlerts(scope: Construct, id: string): void {
         },
       },
       {
-        alert: "KubernetesJobSlowCompletion",
-        expr: "kube_job_spec_completions - kube_job_status_succeeded > 0",
-        for: "12h",
-        labels: {
-          severity: "critical",
-        },
-        annotations: {
-          summary:
-            "Kubernetes job slow completion (instance {{ $labels.instance }})",
-          description:
-            "Kubernetes Job {{ $labels.namespace }}/{{ $labels.job_name }} did not complete in time.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
-        },
-      },
-      {
         alert: "KubernetesApiServerErrors",
         expr: 'sum(rate(apiserver_request_total{job="apiserver",code=~"(?:5..)"}[1m])) / sum(rate(apiserver_request_total{job="apiserver"}[1m])) * 100 > 3',
         for: "2m",
