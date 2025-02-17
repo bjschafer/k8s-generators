@@ -188,10 +188,7 @@ export class BlackboxExporter extends Chart {
       },
     });
 
-    this.newBlackboxProbe("bgp", "http_2xx", [
-      "https://ceph.cmdcentral.xyz",
-      "https://vmhost.cmdcentral.xyz",
-    ]);
+    this.newBlackboxProbe("bgp", "http_2xx", ["https://vmhost.cmdcentral.xyz"]);
 
     this.newBlackboxProbe("dns", "dns_udp", ["10.0.10.100", "10.0.10.101"]);
     this.newBlackboxProbe("ping-dns", "ping", [
@@ -209,11 +206,7 @@ export class BlackboxExporter extends Chart {
     this.newBlackboxProbe("ping-other", "ping", ["google.com"]);
 
     this.newBlackboxProbe("proxmox", "http_2xx", [
-      "https://vmhost01.cmdcentral.xyz",
-      "https://vmhost02.cmdcentral.xyz",
       "https://vmhost03.cmdcentral.xyz",
-      "https://vmhost01.cmdcentral.xyz:8006",
-      "https://vmhost02.cmdcentral.xyz:8006",
       "https://vmhost03.cmdcentral.xyz:8006",
       "https://vmhost03.cmdcentral.xyz:8007",
     ]);

@@ -9,7 +9,6 @@ spec:
   targets:
     staticConfig:
       targets:
-        - https://ceph.cmdcentral.xyz
         - https://vmhost.cmdcentral.xyz
   vmProberSpec:
     path: /probe

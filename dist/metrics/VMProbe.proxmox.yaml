@@ -9,11 +9,7 @@ spec:
   targets:
     staticConfig:
       targets:
-        - https://vmhost01.cmdcentral.xyz
-        - https://vmhost02.cmdcentral.xyz
         - https://vmhost03.cmdcentral.xyz
-        - https://vmhost01.cmdcentral.xyz:8006
-        - https://vmhost02.cmdcentral.xyz:8006
         - https://vmhost03.cmdcentral.xyz:8006
         - https://vmhost03.cmdcentral.xyz:8007
   vmProberSpec:
