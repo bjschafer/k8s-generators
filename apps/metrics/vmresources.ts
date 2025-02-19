@@ -255,11 +255,11 @@ export class VmResources extends Chart {
         resources: {
           limits: {
             cpu: VmSingleSpecResourcesLimits.fromString("1000m"),
-            memory: VmSingleSpecResourcesLimits.fromString("3Gi"),
+            memory: VmSingleSpecResourcesLimits.fromString("4Gi"),
           },
           requests: {
             cpu: VmSingleSpecResourcesRequests.fromString("1000m"),
-            memory: VmSingleSpecResourcesRequests.fromString("3Gi"),
+            memory: VmSingleSpecResourcesRequests.fromString("4Gi"),
           },
         },
       },
