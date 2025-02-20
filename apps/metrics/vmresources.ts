@@ -42,11 +42,11 @@ export class VmResources extends Chart {
         ],
         resources: {
           limits: {
-            memory: VmAgentSpecResourcesLimits.fromString("512Mi"),
+            memory: VmAgentSpecResourcesLimits.fromString("768Mi"),
             cpu: VmAgentSpecResourcesLimits.fromString("1200m"),
           },
           requests: {
-            memory: VmAgentSpecResourcesRequests.fromString("512Mi"),
+            memory: VmAgentSpecResourcesRequests.fromString("768Mi"),
             cpu: VmAgentSpecResourcesRequests.fromString("1200m"),
           },
         },
@@ -255,11 +255,11 @@ export class VmResources extends Chart {
         resources: {
           limits: {
             cpu: VmSingleSpecResourcesLimits.fromString("1000m"),
-            memory: VmSingleSpecResourcesLimits.fromString("4Gi"),
+            memory: VmSingleSpecResourcesLimits.fromString("3Gi"),
           },
           requests: {
             cpu: VmSingleSpecResourcesRequests.fromString("1000m"),
-            memory: VmSingleSpecResourcesRequests.fromString("4Gi"),
+            memory: VmSingleSpecResourcesRequests.fromString("3Gi"),
           },
         },
       },

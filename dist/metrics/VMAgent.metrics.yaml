@@ -14,9 +14,9 @@ spec:
   resources:
     limits:
       cpu: 1200m
-      memory: 512Mi
+      memory: 768Mi
     requests:
       cpu: 1200m
-      memory: 512Mi
+      memory: 768Mi
   scrapeInterval: 20s
   selectAllByDefault: true
