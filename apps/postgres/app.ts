@@ -7,6 +7,9 @@ import {
   ClusterSpecBackupBarmanObjectStoreWalCompression,
   ClusterSpecBootstrapInitdbImportType,
   ImageCatalog,
+  Pooler,
+  PoolerSpecPgbouncerPoolMode,
+  PoolerSpecType,
   ScheduledBackup,
 } from "../../imports/postgresql.cnpg.io";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
@@ -37,10 +40,12 @@ class ProdPostgres extends Chart {
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
+    const name = "prod-pg17";
+
     new Cluster(this, "cluster-17", {
       metadata: {
         namespace: namespace,
-        name: "prod-pg17",
+        name: name,
       },
       spec: {
         instances: 3,
@@ -198,6 +203,28 @@ class ProdPostgres extends Chart {
       },
     });
 
+    new Pooler(this, "pooler", {
+      metadata: {
+        name: `${name}-pooler-rw`, // cannot be same as cluster
+        namespace: namespace,
+      },
+      spec: {
+        cluster: {
+          name: name,
+        },
+
+        instances: 3,
+        type: PoolerSpecType.RW,
+        pgbouncer: {
+          poolMode: PoolerSpecPgbouncerPoolMode.SESSION,
+          parameters: {
+            max_client_conn: "1000",
+            default_pool_size: "20",
+          },
+        },
+      },
+    });
+
     new ScheduledBackup(this, "nightly", {
       metadata: {
         name: "nightly",
@@ -205,7 +232,7 @@ class ProdPostgres extends Chart {
       },
       spec: {
         cluster: {
-          name: "prod-pg17",
+          name: name,
         },
         schedule: "0 33 3 * * *",
       },
@@ -219,7 +246,7 @@ class ProdPostgres extends Chart {
       spec: {
         selector: {
           matchLabels: {
-            "cnpg.io/cluster": "prod-pg17",
+            "cnpg.io/cluster": name,
           },
         },
         podMetricsEndpoints: [

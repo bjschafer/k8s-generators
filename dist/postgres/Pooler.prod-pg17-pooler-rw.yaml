@@ -1,0 +1,15 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Pooler
+metadata:
+  name: prod-pg17-pooler-rw
+  namespace: postgres
+spec:
+  cluster:
+    name: prod-pg17
+  instances: 3
+  pgbouncer:
+    parameters:
+      default_pool_size: "20"
+      max_client_conn: "1000"
+    poolMode: session
+  type: rw
