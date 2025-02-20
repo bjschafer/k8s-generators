@@ -102,27 +102,6 @@ class ProdPostgres extends Chart {
           },
         },
 
-        managed: {
-          services: {
-            additional: [
-              {
-                selectorType: "rw",
-                serviceTemplate: {
-                  metadata: {
-                    name: "prod",
-                    annotations: {
-                      [EXTERNAL_DNS_ANNOTATION_KEY]: "pg-prod.cmdcentral.xyz",
-                    },
-                  },
-                  spec: {
-                    type: "LoadBalancer",
-                  },
-                },
-              },
-            ],
-          },
-        },
-
         backup: {
           barmanObjectStore: {
             endpointUrl: "https://minio.cmdcentral.xyz",
@@ -220,6 +199,18 @@ class ProdPostgres extends Chart {
           parameters: {
             max_client_conn: "1000",
             default_pool_size: "20",
+          },
+        },
+
+        serviceTemplate: {
+          metadata: {
+            name: "prod",
+            annotations: {
+              [EXTERNAL_DNS_ANNOTATION_KEY]: "pg-prod.cmdcentral.xyz",
+            },
+          },
+          spec: {
+            type: "LoadBalancer",
           },
         },
       },
