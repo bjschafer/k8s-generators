@@ -12,11 +12,4 @@ spec:
       default_pool_size: "20"
       max_client_conn: "1000"
     poolMode: session
-  serviceTemplate:
-    metadata:
-      annotations:
-        external-dns.alpha.kubernetes.io/hostname: pg-prod.cmdcentral.xyz
-      name: prod
-    spec:
-      type: LoadBalancer
   type: rw

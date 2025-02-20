@@ -19,6 +19,7 @@ import {
 } from "../../lib/consts";
 import { StorageClass } from "../../lib/volume";
 import { VmPodScrape } from "../../imports/operator.victoriametrics.com";
+import { IntOrString, KubeService } from "cdk8s-plus-31/lib/imports/k8s";
 
 const namespace = basename(__dirname);
 
@@ -201,17 +202,29 @@ class ProdPostgres extends Chart {
             default_pool_size: "20",
           },
         },
+      },
+    });
 
-        serviceTemplate: {
-          metadata: {
-            name: "prod",
-            annotations: {
-              [EXTERNAL_DNS_ANNOTATION_KEY]: "pg-prod.cmdcentral.xyz",
-            },
+    new KubeService(this, "lb-svc", {
+      metadata: {
+        name: "prod",
+        namespace: namespace,
+        annotations: {
+          [EXTERNAL_DNS_ANNOTATION_KEY]: "pg-prod.cmdcentral.xyz",
+        },
+      },
+      spec: {
+        type: "LoadBalancer",
+        ports: [
+          {
+            name: "pgbouncer",
+            port: 5432,
+            protocol: "TCP",
+            targetPort: IntOrString.fromString("pgbouncer"),
           },
-          spec: {
-            type: "LoadBalancer",
-          },
+        ],
+        selector: {
+          "cnpg.io/poolerName": `${name}-pooler-rw`,
         },
       },
     });

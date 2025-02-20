@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: pg-prod.cmdcentral.xyz
+  name: prod
+  namespace: postgres
+spec:
+  ports:
+    - name: pgbouncer
+      port: 5432
+      protocol: TCP
+      targetPort: pgbouncer
+  selector:
+    cnpg.io/poolerName: prod-pg17-pooler-rw
+  type: LoadBalancer
