@@ -52,6 +52,18 @@ export function addAlerts(scope: Construct, id: string): void {
             "CNPG volume {{ $labels.persistentvolumeclaim }} is > 85% full",
         },
       },
+      {
+        alert: "CNPGMaxConnectionsReached",
+        expr: `100 * sum by (pod) (cnpg_backends_total{namespace=~"postgres"}) / sum by (pod) (cnpg_pg_settings_setting{name="max_connections", namespace=~"postgres"}) > 90`,
+        for: "5m",
+        labels: {
+          push_notify: "true",
+          severity: "warning",
+        },
+        annotations: {
+          summary: "CNPG pod {{ $labels.pod }}'s connections are > 90% used",
+        },
+      },
     ],
   });
 
