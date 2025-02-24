@@ -248,39 +248,6 @@ export class ScrapeConfigs extends Chart {
       },
     });
 
-    new VmScrapeConfig(this, "snmp", {
-      metadata: {
-        name: "snmp",
-        namespace: namespace,
-      },
-      spec: {
-        staticConfigs: [
-          {
-            targets: ["sw01.cmdcentral.xyz", "sw02.cmdcentral.xyz"], // snmp targets to scrape
-            labels: { job: "snmp" },
-          },
-        ],
-        path: "/snmp",
-        relabelConfigs: [
-          {
-            action: "replace",
-            sourceLabels: ["__address__"],
-            targetLabel: "__param_target",
-          },
-          {
-            action: "replace",
-            sourceLabels: ["__param_target"],
-            targetLabel: "instance",
-          },
-          {
-            action: "replace",
-            targetLabel: "__address__",
-            replacement: "snmp-exporter.prometheus.svc.cluster.local:9116", // address of snmp exporter
-          },
-        ],
-      },
-    });
-
     new VmScrapeConfig(this, "servers", {
       metadata: {
         name: "servers",
