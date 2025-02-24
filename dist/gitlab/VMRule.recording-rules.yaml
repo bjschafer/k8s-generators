@@ -19,11 +19,6 @@ spec:
               rate(gitlab_workhorse_http_request_duration_seconds_count[5m])
             )
           record: job_route_method_code:gitlab_workhorse_http_request_duration_seconds_count:rate5m
-        - alert: ServiceDown
-          annotations:
-            description: The service {{ $labels.job }} instance {{ $labels.instance }} is not responding for more than 50% of the time for 5 minutes.
-            summary: The service {{ $labels.job }} is not responding
-          expr: avg_over_time(up[5m]) * 100 < 50
         - alert: RedisDown
           annotations:
             description: The Redis service {{ $labels.job }} instance {{ $labels.instance }} is not responding for more than 50% of the time for 5 minutes.

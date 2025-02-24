@@ -103,15 +103,6 @@ new MonitoringRule(app, "recording-rules", {
           expr: "sum by (job, route, method, code) (\n  rate(gitlab_workhorse_http_request_duration_seconds_count[5m])\n)\n",
         },
         {
-          alert: "ServiceDown",
-          expr: "avg_over_time(up[5m]) * 100 < 50",
-          annotations: {
-            description:
-              "The service {{ $labels.job }} instance {{ $labels.instance }} is not responding for more than 50% of the time for 5 minutes.",
-            summary: "The service {{ $labels.job }} is not responding",
-          },
-        },
-        {
           alert: "RedisDown",
           expr: "avg_over_time(redis_up[5m]) * 100 < 50",
           annotations: {
