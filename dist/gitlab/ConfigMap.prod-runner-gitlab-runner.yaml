@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   labels:
     app: prod-runner-gitlab-runner
-    chart: gitlab-runner-0.73.3
+    chart: gitlab-runner-0.74.0
     heritage: Helm
     release: prod-runner
   name: prod-runner-gitlab-runner
@@ -114,6 +114,13 @@ data:
     # Reset/unset the not needed flags when an authentication token
     RUN_UNTAGGED=""
     ACCESS_LEVEL=""
+
+    if [ -n "$CI_SERVER_TOKEN" ] && [ "${CI_SERVER_TOKEN#glrt-}" != "$CI_SERVER_TOKEN" ]; then
+      RUN_UNTAGGED=""
+      ACCESS_LEVEL=""
+      unset REGISTER_LOCKED
+      unset RUNNER_TAG_LIST
+    fi
 
     for i in $(seq 1 "${MAX_REGISTER_ATTEMPTS}"); do
       echo "Registration attempt ${i} of ${MAX_REGISTER_ATTEMPTS}"

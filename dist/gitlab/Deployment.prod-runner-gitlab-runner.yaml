@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: prod-runner-gitlab-runner
-    chart: gitlab-runner-0.73.3
+    chart: gitlab-runner-0.74.0
     heritage: Helm
     release: prod-runner
   name: prod-runner-gitlab-runner
@@ -16,13 +16,13 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/configmap: 69dfa23c25b9f6aa0c1b6315ad6dc3fa0c690228acd2d081f84273e4dbee061b
+        checksum/configmap: bb105a3fca4701f28566c7f16b6be2c3cbe837ee973fddeba0e6527f1c44639d
         checksum/secrets: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
         prometheus.io/port: "9252"
         prometheus.io/scrape: "true"
       labels:
         app: prod-runner-gitlab-runner
-        chart: gitlab-runner-0.73.3
+        chart: gitlab-runner-0.74.0
         heritage: Helm
         release: prod-runner
     spec:
@@ -42,7 +42,7 @@ spec:
             - name: RUNNER_TAG_LIST
               value: ""
             - name: SESSION_SERVER_ADDRESS
-          image: registry.gitlab.com/gitlab-org/gitlab-runner:alpine-v17.8.3
+          image: registry.gitlab.com/gitlab-org/gitlab-runner:alpine-v17.9.0
           imagePullPolicy: IfNotPresent
           lifecycle:
             preStop:
@@ -59,7 +59,7 @@ spec:
                 - "3"
             failureThreshold: 3
             initialDelaySeconds: 60
-            periodSeconds: 10
+            periodSeconds: 60
             successThreshold: 1
             timeoutSeconds: 4
           name: prod-runner-gitlab-runner
@@ -73,7 +73,7 @@ spec:
                 - gitlab.*runner
             failureThreshold: 3
             initialDelaySeconds: 60
-            periodSeconds: 10
+            periodSeconds: 60
             successThreshold: 1
             timeoutSeconds: 4
           resources: {}

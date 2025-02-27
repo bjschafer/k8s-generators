@@ -3,7 +3,7 @@ kind: Role
 metadata:
   labels:
     app: prod-runner-gitlab-runner
-    chart: gitlab-runner-0.73.3
+    chart: gitlab-runner-0.74.0
     heritage: Helm
     release: prod-runner
   name: prod-runner-gitlab-runner
