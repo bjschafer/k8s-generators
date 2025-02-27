@@ -17,7 +17,7 @@ import { IntOrString, KubeService } from "../../imports/k8s";
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
-const version = "0.8.16";
+const version = "0.9.0";
 
 NewArgoApp(name, {
   sync_policy: {

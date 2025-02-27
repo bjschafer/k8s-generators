@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: prod
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-logs-single
-    app.kubernetes.io/version: v1.8.0-victorialogs
-    helm.sh/chart: victoria-logs-single-0.8.16
+    app.kubernetes.io/version: v1.14.0-victorialogs
+    helm.sh/chart: victoria-logs-single-0.9.0
   name: prod-victoria-logs-single-server
   namespace: logs
 spec:
@@ -18,7 +18,6 @@ spec:
       app: server
       app.kubernetes.io/instance: prod
       app.kubernetes.io/name: victoria-logs-single
-  serviceName: prod-victoria-logs-single-server
   template:
     metadata:
       labels:
@@ -40,7 +39,7 @@ spec:
             - --syslog.listenAddr.tcp=:1514
             - --syslog.listenAddr.udp=:1514
             - --syslog.timezone=America/Chicago
-          image: victoriametrics/victoria-logs:v1.8.0-victorialogs
+          image: victoriametrics/victoria-logs:v1.14.0-victorialogs
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 10
@@ -83,6 +82,7 @@ spec:
         runAsNonRoot: true
         runAsUser: 1000
       terminationGracePeriodSeconds: 60
+  updateStrategy: {}
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
