@@ -14,7 +14,7 @@ export interface HelmAppProps {
   readonly targetRevision: string;
 }
 
-export function NewHelmApp(
+export function NewArgoHelmApp(
   name: string,
   props: HelmAppProps,
   argoProps: ArgoAppProps,

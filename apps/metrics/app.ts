@@ -1,6 +1,6 @@
 import { basename } from "path";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
-import { NewHelmApp } from "../../lib/helm";
+import { NewArgoHelmApp } from "../../lib/helm";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { App } from "cdk8s";
 import { VmResources } from "./vmresources";
@@ -15,7 +15,7 @@ export const name = namespace;
 export const version = "0.38.0";
 export const hostname = "metrics.cmdcentral.xyz";
 
-NewHelmApp(
+NewArgoHelmApp(
   name,
   {
     chart: "victoria-metrics-k8s-stack",
