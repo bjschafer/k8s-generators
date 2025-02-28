@@ -21,7 +21,16 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-        - envFrom:
+        - env:
+            - name: GOMAXPROCS
+              valueFrom:
+                resourceFieldRef:
+                  resource: limits.cpu
+            - name: GOMEMLIMIT
+              valueFrom:
+                resourceFieldRef:
+                  resource: limits.memory
+          envFrom:
             - secretRef:
                 name: unifi-creds
           image: ghcr.io/unpoller/unpoller:latest

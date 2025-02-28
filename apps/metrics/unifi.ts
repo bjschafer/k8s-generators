@@ -9,8 +9,10 @@ import {
   DeploymentStrategy,
   DnsPolicy,
   Env,
+  EnvValue,
   ImagePullPolicy,
   Probe,
+  ResourceFieldPaths,
   Secret,
   Volume,
 } from "cdk8s-plus-31";
@@ -52,6 +54,10 @@ export class UnifiExporter extends Chart {
           image: "ghcr.io/unpoller/unpoller:latest",
           imagePullPolicy: ImagePullPolicy.ALWAYS,
           securityContext: DEFAULT_SECURITY_CONTEXT,
+          envVariables: {
+            GOMAXPROCS: EnvValue.fromResource(ResourceFieldPaths.CPU_LIMIT),
+            GOMEMLIMIT: EnvValue.fromResource(ResourceFieldPaths.MEMORY_LIMIT),
+          },
           envFrom: [
             Env.fromSecret(
               Secret.fromSecretName(this, "unifi-secrets", "unifi-creds"),

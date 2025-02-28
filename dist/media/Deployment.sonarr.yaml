@@ -63,6 +63,14 @@ spec:
         - args:
             - sonarr
           env:
+            - name: GOMAXPROCS
+              valueFrom:
+                resourceFieldRef:
+                  resource: limits.cpu
+            - name: GOMEMLIMIT
+              valueFrom:
+                resourceFieldRef:
+                  resource: limits.memory
             - name: PORT
               value: "9707"
             - name: URL

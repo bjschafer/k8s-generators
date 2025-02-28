@@ -14,6 +14,7 @@ import {
   PersistentVolumeClaim,
   PersistentVolumeMode,
   Probe,
+  ResourceFieldPaths,
   Secret,
   ServicePort,
   Volume,
@@ -187,6 +188,8 @@ export class MediaApp extends Chart {
         args: [props.name],
         portNumber: 9707,
         envVariables: {
+          GOMAXPROCS: EnvValue.fromResource(ResourceFieldPaths.CPU_LIMIT),
+          GOMEMLIMIT: EnvValue.fromResource(ResourceFieldPaths.MEMORY_LIMIT),
           PORT: EnvValue.fromValue(`${exportarrPort}`),
           URL: EnvValue.fromValue(
             GET_SERVICE_URL(props.name, props.namespace, true, props.port),
