@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/instance: grafana
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/version: 11.5.1
+    helm.sh/chart: grafana-8.9.0
+  name: grafana
+  namespace: grafana
+data:
+  grafana.ini: |
+    [analytics]
+    check_for_updates = true
+    [auth]
+    oauth_allow_insecure_email_lookup = true
+    oauth_auto_login = true
+    signout_redirect_url = https://login.cmdcentral.xyz/application/o/grafana/end-session/
+    [auth.generic_oauth]
+    api_url = https://login.cmdcentral.xyz/application/o/userinfo/
+    auth_url = https://login.cmdcentral.xyz/application/o/authorize/
+    client_id = $__file{/etc/secrets/auth_cmdcentral_oauth/client_id}
+    client_secret = $__file{/etc/secrets/auth_cmdcentral_oauth/client_secret}
+    enabled = true
+    name = Cmdcentral Login
+    role_attribute_path = contains(groups[*], 'wheel') && 'Admin' || 'Viewer'
+    scopes = openid email profile
+    token_url = https://login.cmdcentral.xyz/application/o/token/
+    [auth.proxy]
+    auto_sign_up = true
+    enable_login_token = false
+    enabled = true
+    header_name = cf-access-authenticated-user-email
+    header_property = email
+    [feature_toggles]
+    publicDashboards = true
+    [grafana_net]
+    url = https://grafana.net
+    [log]
+    mode = console
+    [paths]
+    data = /var/lib/grafana/
+    logs = /var/log/grafana
+    plugins = /var/lib/grafana/plugins
+    provisioning = /etc/grafana/provisioning
+    [plugins]
+    allow_loading_unsigned_plugins = victoriametrics-datasource,victoriametrics-logs-datasource
+    [server]
+    domain = grafana.cmdcentral.xyz
+    root_url = https://grafana.cmdcentral.xyz
+  plugins: grafana-googlesheets-datasource,grafana-piechart-panel,grafana-worldmap-panel,grafana-clock-panel,marcusolsson-dynamictext-panel,victoriametrics-metrics-datasource,victoriametrics-logs-datasource
