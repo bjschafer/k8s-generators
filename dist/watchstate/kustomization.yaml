@@ -1,0 +1,5 @@
+resources:
+  - Deployment.watchstate.yaml
+  - Ingress.watchstate.yaml
+  - PersistentVolumeClaim.config.yaml
+  - Service.watchstate.yaml

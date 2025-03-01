@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd-image-updater.argoproj.io/git-branch: main
+    argocd-image-updater.argoproj.io/image-list: watchstate=ghcr.io/arabcoders/watchstate:latest
+    argocd-image-updater.argoproj.io/watchstate.update-strategy: digest
+    argocd-image-updater.argoproj.io/write-back-method: git
+  labels:
+    app.kubernetes.io/name: watchstate
+  name: watchstate
+  namespace: argocd
+spec:
+  destination:
+    namespace: watchstate
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: dist/watchstate
+    repoURL: git@github.com:bjschafer/k8s-generators.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

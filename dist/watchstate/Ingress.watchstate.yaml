@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: watchstate
+  namespace: watchstate
+spec:
+  rules:
+    - host: watchstate.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: watchstate
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - watchstate.cmdcentral.xyz
+      secretName: watchstate-tls
