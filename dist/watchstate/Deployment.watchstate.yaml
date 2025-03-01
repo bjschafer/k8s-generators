@@ -28,7 +28,10 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-        - image: ghcr.io/arabcoders/watchstate
+        - env:
+            - name: WS_API_AUTO
+              value: "true"
+          image: ghcr.io/arabcoders/watchstate
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
