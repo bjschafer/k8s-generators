@@ -36,6 +36,14 @@ export class ScrapeConfigs extends Chart {
                 regex: "/var/lib/kubelet/pods.+",
                 sourceLabels: ["mountpoint"],
               },
+              {
+                action: "labeldrop",
+                regex: "(plan_upgrade_cattle_io.*)",
+              },
+              {
+                action: "labeldrop",
+                regex: "(beta_kubernetes_io.*)",
+              },
             ],
             relabelConfigs: [
               {
