@@ -5,7 +5,7 @@ metadata:
   namespace: logs
 spec:
   datasource:
-    url: http://prod-victoria-logs-single-server.logs.svc.cluster.local:9428/insert/elasticsearch
+    url: http://prod-victoria-logs-single-server.logs.svc.cluster.local:9428
   extraArgs:
     rule.defaultRuleType: vlogs
   notifiers:

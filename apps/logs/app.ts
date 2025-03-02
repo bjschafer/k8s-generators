@@ -37,8 +37,8 @@ NewArgoApp(name, {
 class VMLogs extends Chart {
   constructor(scope: Construct, id: string) {
     super(scope, id);
-    const url =
-      "http://prod-victoria-logs-single-server.logs.svc.cluster.local:9428/insert/elasticsearch";
+    const hostname =
+      "http://prod-victoria-logs-single-server.logs.svc.cluster.local:9428";
 
     new Helm(this, "vmlogs", {
       chart: "victoria-logs-single",
@@ -107,7 +107,7 @@ class VMLogs extends Chart {
           customConfig: {
             sinks: {
               vlogs: {
-                endpoints: [url],
+                endpoints: [`${hostname}/insert/elasticsearch`],
               },
             },
           },
@@ -237,7 +237,7 @@ class VMLogs extends Chart {
       },
       spec: {
         datasource: {
-          url: url,
+          url: hostname,
         },
         notifiers: [
           {
