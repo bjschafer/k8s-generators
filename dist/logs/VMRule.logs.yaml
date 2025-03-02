@@ -17,3 +17,4 @@ spec:
           labels:
             push_notify: "true"
             severity: critical
+      type: vlogs

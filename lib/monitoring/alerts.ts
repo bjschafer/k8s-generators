@@ -17,7 +17,7 @@ export interface AlertProps {
   name: string;
   namespace: string;
   rules: VmRuleSpecGroupsRules[];
-  labels?: { [key: string]: string };
+  logs?: boolean;
 }
 
 export class Alert extends Chart {
@@ -28,12 +28,15 @@ export class Alert extends Chart {
       metadata: {
         name: props.name,
         namespace: props.namespace,
-        labels: props.labels,
+        labels: {
+          "alerts.cmdcentral.xyz/kind": props.logs ? "logs" : "metrics",
+        },
       },
       spec: {
         groups: [
           {
             name: props.name,
+            type: props.logs ? "vlogs" : undefined,
             rules: props.rules,
           },
         ],

@@ -1,16 +1,12 @@
 import { Construct } from "constructs";
-import {
-  Alert,
-  LOGS_RULE,
-  SEND_TO_TELEGRAM,
-} from "../../lib/monitoring/alerts";
+import { Alert, SEND_TO_TELEGRAM } from "../../lib/monitoring/alerts";
 import { namespace } from "./app";
 
 export function addAlerts(scope: Construct, id: string): void {
   new Alert(scope, `${id}-default`, {
     name: "logs",
     namespace: namespace,
-    labels: LOGS_RULE,
+    logs: true,
     rules: [
       {
         alert: "HostFilesystemReadonly",
