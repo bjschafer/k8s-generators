@@ -12,7 +12,7 @@ spec:
         - alert: HostFilesystemReadonly
           annotations:
             summary: Filesystem on host {{ $labels.hostname }} is read-only, probable longhorn issue
-          expr: '"Remounting filesystem read-only"'
+          expr: hostname:"k8s" AND job:"systemd-journal" AND "Remounting filesystem read-only" | stats by (hostname) count(*)>0
           for: 0m
           labels:
             push_notify: "true"
