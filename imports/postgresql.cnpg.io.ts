@@ -691,6 +691,14 @@ export interface ClusterSpec {
   readonly priorityClassName?: string;
 
   /**
+   * The configuration of the probes to be injected
+   * in the PostgreSQL Pods.
+   *
+   * @schema ClusterSpec#probes
+   */
+  readonly probes?: ClusterSpecProbes;
+
+  /**
    * Template to be used to define projected volumes, projected volumes will be mounted
    * under `/projected` base folder
    *
@@ -863,6 +871,7 @@ export function toJson_ClusterSpec(obj: ClusterSpec | undefined): Record<string,
     'primaryUpdateMethod': obj.primaryUpdateMethod,
     'primaryUpdateStrategy': obj.primaryUpdateStrategy,
     'priorityClassName': obj.priorityClassName,
+    'probes': toJson_ClusterSpecProbes(obj.probes),
     'projectedVolumeTemplate': toJson_ClusterSpecProjectedVolumeTemplate(obj.projectedVolumeTemplate),
     'replica': toJson_ClusterSpecReplica(obj.replica),
     'replicationSlots': toJson_ClusterSpecReplicationSlots(obj.replicationSlots),
@@ -1400,6 +1409,14 @@ export interface ClusterSpecExternalClusters {
   readonly password?: ClusterSpecExternalClustersPassword;
 
   /**
+   * The configuration of the plugin that is taking care
+   * of WAL archiving and backups for this external cluster
+   *
+   * @schema ClusterSpecExternalClusters#plugin
+   */
+  readonly plugin?: ClusterSpecExternalClustersPlugin;
+
+  /**
    * The reference to an SSL certificate to be used to connect to this
    * instance
    *
@@ -1436,6 +1453,7 @@ export function toJson_ClusterSpecExternalClusters(obj: ClusterSpecExternalClust
     'connectionParameters': ((obj.connectionParameters) === undefined) ? undefined : (Object.entries(obj.connectionParameters).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'name': obj.name,
     'password': toJson_ClusterSpecExternalClustersPassword(obj.password),
+    'plugin': toJson_ClusterSpecExternalClustersPlugin(obj.plugin),
     'sslCert': toJson_ClusterSpecExternalClustersSslCert(obj.sslCert),
     'sslKey': toJson_ClusterSpecExternalClustersSslKey(obj.sslKey),
     'sslRootCert': toJson_ClusterSpecExternalClustersSslRootCert(obj.sslRootCert),
@@ -1744,6 +1762,13 @@ export function toJson_ClusterSpecNodeMaintenanceWindow(obj: ClusterSpecNodeMain
  */
 export interface ClusterSpecPlugins {
   /**
+   * Enabled is true if this plugin will be used
+   *
+   * @schema ClusterSpecPlugins#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * Name is the plugin name
    *
    * @schema ClusterSpecPlugins#name
@@ -1766,6 +1791,7 @@ export interface ClusterSpecPlugins {
 export function toJson_ClusterSpecPlugins(obj: ClusterSpecPlugins | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'enabled': obj.enabled,
     'name': obj.name,
     'parameters': ((obj.parameters) === undefined) ? undefined : (Object.entries(obj.parameters).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
   };
@@ -1903,6 +1929,52 @@ export enum ClusterSpecPrimaryUpdateStrategy {
   /** supervised */
   SUPERVISED = "supervised",
 }
+
+/**
+ * The configuration of the probes to be injected
+ * in the PostgreSQL Pods.
+ *
+ * @schema ClusterSpecProbes
+ */
+export interface ClusterSpecProbes {
+  /**
+   * The liveness probe configuration
+   *
+   * @schema ClusterSpecProbes#liveness
+   */
+  readonly liveness?: ClusterSpecProbesLiveness;
+
+  /**
+   * The readiness probe configuration
+   *
+   * @schema ClusterSpecProbes#readiness
+   */
+  readonly readiness?: ClusterSpecProbesReadiness;
+
+  /**
+   * The startup probe configuration
+   *
+   * @schema ClusterSpecProbes#startup
+   */
+  readonly startup?: ClusterSpecProbesStartup;
+
+}
+
+/**
+ * Converts an object of type 'ClusterSpecProbes' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterSpecProbes(obj: ClusterSpecProbes | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'liveness': toJson_ClusterSpecProbesLiveness(obj.liveness),
+    'readiness': toJson_ClusterSpecProbesReadiness(obj.readiness),
+    'startup': toJson_ClusterSpecProbesStartup(obj.startup),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * Template to be used to define projected volumes, projected volumes will be mounted
@@ -3036,6 +3108,15 @@ export function toJson_ClusterSpecBackupVolumeSnapshot(obj: ClusterSpecBackupVol
  */
 export interface ClusterSpecBootstrapInitdb {
   /**
+   * Specifies the locale name when the builtin provider is used.
+   * This option requires `localeProvider` to be set to `builtin`.
+   * Available from PostgreSQL 17.
+   *
+   * @schema ClusterSpecBootstrapInitdb#builtinLocale
+   */
+  readonly builtinLocale?: string;
+
+  /**
    * Whether the `-k` option should be passed to initdb,
    * enabling checksums on data pages (default: `false`)
    *
@@ -3058,12 +3139,37 @@ export interface ClusterSpecBootstrapInitdb {
   readonly encoding?: string;
 
   /**
+   * Specifies the ICU locale when the ICU provider is used.
+   * This option requires `localeProvider` to be set to `icu`.
+   * Available from PostgreSQL 15.
+   *
+   * @schema ClusterSpecBootstrapInitdb#icuLocale
+   */
+  readonly icuLocale?: string;
+
+  /**
+   * Specifies additional collation rules to customize the behavior of the default collation.
+   * This option requires `localeProvider` to be set to `icu`.
+   * Available from PostgreSQL 16.
+   *
+   * @schema ClusterSpecBootstrapInitdb#icuRules
+   */
+  readonly icuRules?: string;
+
+  /**
    * Bootstraps the new cluster by importing data from an existing PostgreSQL
    * instance using logical backup (`pg_dump` and `pg_restore`)
    *
    * @schema ClusterSpecBootstrapInitdb#import
    */
   readonly import?: ClusterSpecBootstrapInitdbImport;
+
+  /**
+   * Sets the default collation order and character classification in the new database.
+   *
+   * @schema ClusterSpecBootstrapInitdb#locale
+   */
+  readonly locale?: string;
 
   /**
    * The value to be passed as option `--lc-ctype` for initdb (default:`C`)
@@ -3078,6 +3184,14 @@ export interface ClusterSpecBootstrapInitdb {
    * @schema ClusterSpecBootstrapInitdb#localeCollate
    */
   readonly localeCollate?: string;
+
+  /**
+   * This option sets the locale provider for databases created in the new cluster.
+   * Available from PostgreSQL 16.
+   *
+   * @schema ClusterSpecBootstrapInitdb#localeProvider
+   */
+  readonly localeProvider?: string;
 
   /**
    * The list of options that must be passed to initdb when creating the cluster.
@@ -3190,12 +3304,17 @@ export interface ClusterSpecBootstrapInitdb {
 export function toJson_ClusterSpecBootstrapInitdb(obj: ClusterSpecBootstrapInitdb | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'builtinLocale': obj.builtinLocale,
     'dataChecksums': obj.dataChecksums,
     'database': obj.database,
     'encoding': obj.encoding,
+    'icuLocale': obj.icuLocale,
+    'icuRules': obj.icuRules,
     'import': toJson_ClusterSpecBootstrapInitdbImport(obj.import),
+    'locale': obj.locale,
     'localeCType': obj.localeCType,
     'localeCollate': obj.localeCollate,
+    'localeProvider': obj.localeProvider,
     'options': obj.options?.map(y => y),
     'owner': obj.owner,
     'postInitApplicationSQL': obj.postInitApplicationSql?.map(y => y),
@@ -3770,6 +3889,52 @@ export function toJson_ClusterSpecExternalClustersPassword(obj: ClusterSpecExter
     'key': obj.key,
     'name': obj.name,
     'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The configuration of the plugin that is taking care
+ * of WAL archiving and backups for this external cluster
+ *
+ * @schema ClusterSpecExternalClustersPlugin
+ */
+export interface ClusterSpecExternalClustersPlugin {
+  /**
+   * Enabled is true if this plugin will be used
+   *
+   * @schema ClusterSpecExternalClustersPlugin#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
+   * Name is the plugin name
+   *
+   * @schema ClusterSpecExternalClustersPlugin#name
+   */
+  readonly name: string;
+
+  /**
+   * Parameters is the configuration of the plugin
+   *
+   * @schema ClusterSpecExternalClustersPlugin#parameters
+   */
+  readonly parameters?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'ClusterSpecExternalClustersPlugin' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterSpecExternalClustersPlugin(obj: ClusterSpecExternalClustersPlugin | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'enabled': obj.enabled,
+    'name': obj.name,
+    'parameters': ((obj.parameters) === undefined) ? undefined : (Object.entries(obj.parameters).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -4553,6 +4718,20 @@ export function toJson_ClusterSpecPostgresqlSyncReplicaElectionConstraint(obj: C
  */
 export interface ClusterSpecPostgresqlSynchronous {
   /**
+   * If set to "required", data durability is strictly enforced. Write operations
+   * with synchronous commit settings (`on`, `remote_write`, or `remote_apply`) will
+   * block if there are insufficient healthy replicas, ensuring data persistence.
+   * If set to "preferred", data durability is maintained when healthy replicas
+   * are available, but the required number of instances will adjust dynamically
+   * if replicas become unavailable. This setting relaxes strict durability enforcement
+   * to allow for operational continuity. This setting is only applicable if both
+   * `standbyNamesPre` and `standbyNamesPost` are unset (empty).
+   *
+   * @schema ClusterSpecPostgresqlSynchronous#dataDurability
+   */
+  readonly dataDurability?: ClusterSpecPostgresqlSynchronousDataDurability;
+
+  /**
    * Specifies the maximum number of local cluster pods that can be
    * automatically included in the `synchronous_standby_names` option in
    * PostgreSQL.
@@ -4605,11 +4784,276 @@ export interface ClusterSpecPostgresqlSynchronous {
 export function toJson_ClusterSpecPostgresqlSynchronous(obj: ClusterSpecPostgresqlSynchronous | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'dataDurability': obj.dataDurability,
     'maxStandbyNamesFromCluster': obj.maxStandbyNamesFromCluster,
     'method': obj.method,
     'number': obj.number,
     'standbyNamesPost': obj.standbyNamesPost?.map(y => y),
     'standbyNamesPre': obj.standbyNamesPre?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The liveness probe configuration
+ *
+ * @schema ClusterSpecProbesLiveness
+ */
+export interface ClusterSpecProbesLiveness {
+  /**
+   * Minimum consecutive failures for the probe to be considered failed after having succeeded.
+   * Defaults to 3. Minimum value is 1.
+   *
+   * @default 3. Minimum value is 1.
+   * @schema ClusterSpecProbesLiveness#failureThreshold
+   */
+  readonly failureThreshold?: number;
+
+  /**
+   * Number of seconds after the container has started before liveness probes are initiated.
+   * More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+   *
+   * @schema ClusterSpecProbesLiveness#initialDelaySeconds
+   */
+  readonly initialDelaySeconds?: number;
+
+  /**
+   * How often (in seconds) to perform the probe.
+   * Default to 10 seconds. Minimum value is 1.
+   *
+   * @default 10 seconds. Minimum value is 1.
+   * @schema ClusterSpecProbesLiveness#periodSeconds
+   */
+  readonly periodSeconds?: number;
+
+  /**
+   * Minimum consecutive successes for the probe to be considered successful after having failed.
+   * Defaults to 1. Must be 1 for liveness and startup. Minimum value is 1.
+   *
+   * @default 1. Must be 1 for liveness and startup. Minimum value is 1.
+   * @schema ClusterSpecProbesLiveness#successThreshold
+   */
+  readonly successThreshold?: number;
+
+  /**
+   * Optional duration in seconds the pod needs to terminate gracefully upon probe failure.
+   * The grace period is the duration in seconds after the processes running in the pod are sent
+   * a termination signal and the time when the processes are forcibly halted with a kill signal.
+   * Set this value longer than the expected cleanup time for your process.
+   * If this value is nil, the pod's terminationGracePeriodSeconds will be used. Otherwise, this
+   * value overrides the value provided by the pod spec.
+   * Value must be non-negative integer. The value zero indicates stop immediately via
+   * the kill signal (no opportunity to shut down).
+   * This is a beta field and requires enabling ProbeTerminationGracePeriod feature gate.
+   * Minimum value is 1. spec.terminationGracePeriodSeconds is used if unset.
+   *
+   * @schema ClusterSpecProbesLiveness#terminationGracePeriodSeconds
+   */
+  readonly terminationGracePeriodSeconds?: number;
+
+  /**
+   * Number of seconds after which the probe times out.
+   * Defaults to 1 second. Minimum value is 1.
+   * More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+   *
+   * @default 1 second. Minimum value is 1.
+   * @schema ClusterSpecProbesLiveness#timeoutSeconds
+   */
+  readonly timeoutSeconds?: number;
+
+}
+
+/**
+ * Converts an object of type 'ClusterSpecProbesLiveness' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterSpecProbesLiveness(obj: ClusterSpecProbesLiveness | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'failureThreshold': obj.failureThreshold,
+    'initialDelaySeconds': obj.initialDelaySeconds,
+    'periodSeconds': obj.periodSeconds,
+    'successThreshold': obj.successThreshold,
+    'terminationGracePeriodSeconds': obj.terminationGracePeriodSeconds,
+    'timeoutSeconds': obj.timeoutSeconds,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The readiness probe configuration
+ *
+ * @schema ClusterSpecProbesReadiness
+ */
+export interface ClusterSpecProbesReadiness {
+  /**
+   * Minimum consecutive failures for the probe to be considered failed after having succeeded.
+   * Defaults to 3. Minimum value is 1.
+   *
+   * @default 3. Minimum value is 1.
+   * @schema ClusterSpecProbesReadiness#failureThreshold
+   */
+  readonly failureThreshold?: number;
+
+  /**
+   * Number of seconds after the container has started before liveness probes are initiated.
+   * More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+   *
+   * @schema ClusterSpecProbesReadiness#initialDelaySeconds
+   */
+  readonly initialDelaySeconds?: number;
+
+  /**
+   * How often (in seconds) to perform the probe.
+   * Default to 10 seconds. Minimum value is 1.
+   *
+   * @default 10 seconds. Minimum value is 1.
+   * @schema ClusterSpecProbesReadiness#periodSeconds
+   */
+  readonly periodSeconds?: number;
+
+  /**
+   * Minimum consecutive successes for the probe to be considered successful after having failed.
+   * Defaults to 1. Must be 1 for liveness and startup. Minimum value is 1.
+   *
+   * @default 1. Must be 1 for liveness and startup. Minimum value is 1.
+   * @schema ClusterSpecProbesReadiness#successThreshold
+   */
+  readonly successThreshold?: number;
+
+  /**
+   * Optional duration in seconds the pod needs to terminate gracefully upon probe failure.
+   * The grace period is the duration in seconds after the processes running in the pod are sent
+   * a termination signal and the time when the processes are forcibly halted with a kill signal.
+   * Set this value longer than the expected cleanup time for your process.
+   * If this value is nil, the pod's terminationGracePeriodSeconds will be used. Otherwise, this
+   * value overrides the value provided by the pod spec.
+   * Value must be non-negative integer. The value zero indicates stop immediately via
+   * the kill signal (no opportunity to shut down).
+   * This is a beta field and requires enabling ProbeTerminationGracePeriod feature gate.
+   * Minimum value is 1. spec.terminationGracePeriodSeconds is used if unset.
+   *
+   * @schema ClusterSpecProbesReadiness#terminationGracePeriodSeconds
+   */
+  readonly terminationGracePeriodSeconds?: number;
+
+  /**
+   * Number of seconds after which the probe times out.
+   * Defaults to 1 second. Minimum value is 1.
+   * More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+   *
+   * @default 1 second. Minimum value is 1.
+   * @schema ClusterSpecProbesReadiness#timeoutSeconds
+   */
+  readonly timeoutSeconds?: number;
+
+}
+
+/**
+ * Converts an object of type 'ClusterSpecProbesReadiness' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterSpecProbesReadiness(obj: ClusterSpecProbesReadiness | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'failureThreshold': obj.failureThreshold,
+    'initialDelaySeconds': obj.initialDelaySeconds,
+    'periodSeconds': obj.periodSeconds,
+    'successThreshold': obj.successThreshold,
+    'terminationGracePeriodSeconds': obj.terminationGracePeriodSeconds,
+    'timeoutSeconds': obj.timeoutSeconds,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The startup probe configuration
+ *
+ * @schema ClusterSpecProbesStartup
+ */
+export interface ClusterSpecProbesStartup {
+  /**
+   * Minimum consecutive failures for the probe to be considered failed after having succeeded.
+   * Defaults to 3. Minimum value is 1.
+   *
+   * @default 3. Minimum value is 1.
+   * @schema ClusterSpecProbesStartup#failureThreshold
+   */
+  readonly failureThreshold?: number;
+
+  /**
+   * Number of seconds after the container has started before liveness probes are initiated.
+   * More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+   *
+   * @schema ClusterSpecProbesStartup#initialDelaySeconds
+   */
+  readonly initialDelaySeconds?: number;
+
+  /**
+   * How often (in seconds) to perform the probe.
+   * Default to 10 seconds. Minimum value is 1.
+   *
+   * @default 10 seconds. Minimum value is 1.
+   * @schema ClusterSpecProbesStartup#periodSeconds
+   */
+  readonly periodSeconds?: number;
+
+  /**
+   * Minimum consecutive successes for the probe to be considered successful after having failed.
+   * Defaults to 1. Must be 1 for liveness and startup. Minimum value is 1.
+   *
+   * @default 1. Must be 1 for liveness and startup. Minimum value is 1.
+   * @schema ClusterSpecProbesStartup#successThreshold
+   */
+  readonly successThreshold?: number;
+
+  /**
+   * Optional duration in seconds the pod needs to terminate gracefully upon probe failure.
+   * The grace period is the duration in seconds after the processes running in the pod are sent
+   * a termination signal and the time when the processes are forcibly halted with a kill signal.
+   * Set this value longer than the expected cleanup time for your process.
+   * If this value is nil, the pod's terminationGracePeriodSeconds will be used. Otherwise, this
+   * value overrides the value provided by the pod spec.
+   * Value must be non-negative integer. The value zero indicates stop immediately via
+   * the kill signal (no opportunity to shut down).
+   * This is a beta field and requires enabling ProbeTerminationGracePeriod feature gate.
+   * Minimum value is 1. spec.terminationGracePeriodSeconds is used if unset.
+   *
+   * @schema ClusterSpecProbesStartup#terminationGracePeriodSeconds
+   */
+  readonly terminationGracePeriodSeconds?: number;
+
+  /**
+   * Number of seconds after which the probe times out.
+   * Defaults to 1 second. Minimum value is 1.
+   * More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+   *
+   * @default 1 second. Minimum value is 1.
+   * @schema ClusterSpecProbesStartup#timeoutSeconds
+   */
+  readonly timeoutSeconds?: number;
+
+}
+
+/**
+ * Converts an object of type 'ClusterSpecProbesStartup' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterSpecProbesStartup(obj: ClusterSpecProbesStartup | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'failureThreshold': obj.failureThreshold,
+    'initialDelaySeconds': obj.initialDelaySeconds,
+    'periodSeconds': obj.periodSeconds,
+    'successThreshold': obj.successThreshold,
+    'terminationGracePeriodSeconds': obj.terminationGracePeriodSeconds,
+    'timeoutSeconds': obj.timeoutSeconds,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -6112,6 +6556,26 @@ export interface ClusterSpecBootstrapInitdbImport {
   readonly databases: string[];
 
   /**
+   * List of custom options to pass to the `pg_dump` command. IMPORTANT:
+   * Use these options with caution and at your own risk, as the operator
+   * does not validate their content. Be aware that certain options may
+   * conflict with the operator's intended functionality or design.
+   *
+   * @schema ClusterSpecBootstrapInitdbImport#pgDumpExtraOptions
+   */
+  readonly pgDumpExtraOptions?: string[];
+
+  /**
+   * List of custom options to pass to the `pg_restore` command. IMPORTANT:
+   * Use these options with caution and at your own risk, as the operator
+   * does not validate their content. Be aware that certain options may
+   * conflict with the operator's intended functionality or design.
+   *
+   * @schema ClusterSpecBootstrapInitdbImport#pgRestoreExtraOptions
+   */
+  readonly pgRestoreExtraOptions?: string[];
+
+  /**
    * List of SQL queries to be executed as a superuser in the application
    * database right after is imported - to be used with extreme care
    * (by default empty). Only available in microservice type.
@@ -6159,6 +6623,8 @@ export function toJson_ClusterSpecBootstrapInitdbImport(obj: ClusterSpecBootstra
   if (obj === undefined) { return undefined; }
   const result = {
     'databases': obj.databases?.map(y => y),
+    'pgDumpExtraOptions': obj.pgDumpExtraOptions?.map(y => y),
+    'pgRestoreExtraOptions': obj.pgRestoreExtraOptions?.map(y => y),
     'postImportApplicationSQL': obj.postImportApplicationSql?.map(y => y),
     'roles': obj.roles?.map(y => y),
     'schemaOnly': obj.schemaOnly,
@@ -7344,7 +7810,7 @@ export interface ClusterSpecManagedServicesAdditional {
    *
    * @schema ClusterSpecManagedServicesAdditional#selectorType
    */
-  readonly selectorType: string;
+  readonly selectorType: ClusterSpecManagedServicesAdditionalSelectorType;
 
   /**
    * ServiceTemplate is the template specification for the service.
@@ -7571,6 +8037,25 @@ export enum ClusterSpecPostgresqlLdapScheme {
   LDAP = "ldap",
   /** ldaps */
   LDAPS = "ldaps",
+}
+
+/**
+ * If set to "required", data durability is strictly enforced. Write operations
+ * with synchronous commit settings (`on`, `remote_write`, or `remote_apply`) will
+ * block if there are insufficient healthy replicas, ensuring data persistence.
+ * If set to "preferred", data durability is maintained when healthy replicas
+ * are available, but the required number of instances will adjust dynamically
+ * if replicas become unavailable. This setting relaxes strict durability enforcement
+ * to allow for operational continuity. This setting is only applicable if both
+ * `standbyNamesPre` and `standbyNamesPost` are unset (empty).
+ *
+ * @schema ClusterSpecPostgresqlSynchronousDataDurability
+ */
+export enum ClusterSpecPostgresqlSynchronousDataDurability {
+  /** required */
+  REQUIRED = "required",
+  /** preferred */
+  PREFERRED = "preferred",
 }
 
 /**
@@ -10400,6 +10885,21 @@ export enum ClusterSpecExternalClustersBarmanObjectStoreWalEncryption {
 }
 
 /**
+ * SelectorType specifies the type of selectors that the service will have.
+ * Valid values are "rw", "r", and "ro", representing read-write, read, and read-only services.
+ *
+ * @schema ClusterSpecManagedServicesAdditionalSelectorType
+ */
+export enum ClusterSpecManagedServicesAdditionalSelectorType {
+  /** rw */
+  RW = "rw",
+  /** r */
+  R = "r",
+  /** ro */
+  RO = "ro",
+}
+
+/**
  * ServiceTemplate is the template specification for the service.
  *
  * @schema ClusterSpecManagedServicesAdditionalServiceTemplate
@@ -12053,7 +12553,7 @@ export interface ClusterSpecManagedServicesAdditionalServiceTemplateSpec {
    * not set, the implementation will apply its default routing strategy. If set
    * to "PreferClose", implementations should prioritize endpoints that are
    * topologically close (e.g., same zone).
-   * This is an alpha field and requires enabling ServiceTrafficDistribution feature.
+   * This is a beta field and requires enabling ServiceTrafficDistribution feature.
    *
    * @schema ClusterSpecManagedServicesAdditionalServiceTemplateSpec#trafficDistribution
    */
@@ -12888,6 +13388,358 @@ export function toJson_ClusterImageCatalogSpecImages(obj: ClusterImageCatalogSpe
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
+
+
+/**
+ * Database is the Schema for the databases API
+ *
+ * @schema Database
+ */
+export class Database extends ApiObject {
+  /**
+   * Returns the apiVersion and kind for "Database"
+   */
+  public static readonly GVK: GroupVersionKind = {
+    apiVersion: 'postgresql.cnpg.io/v1',
+    kind: 'Database',
+  }
+
+  /**
+   * Renders a Kubernetes manifest for "Database".
+   *
+   * This can be used to inline resource manifests inside other objects (e.g. as templates).
+   *
+   * @param props initialization props
+   */
+  public static manifest(props: DatabaseProps): any {
+    return {
+      ...Database.GVK,
+      ...toJson_DatabaseProps(props),
+    };
+  }
+
+  /**
+   * Defines a "Database" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialization props
+   */
+  public constructor(scope: Construct, id: string, props: DatabaseProps) {
+    super(scope, id, {
+      ...Database.GVK,
+      ...props,
+    });
+  }
+
+  /**
+   * Renders the object to Kubernetes JSON.
+   */
+  public toJson(): any {
+    const resolved = super.toJson();
+
+    return {
+      ...Database.GVK,
+      ...toJson_DatabaseProps(resolved),
+    };
+  }
+}
+
+/**
+ * Database is the Schema for the databases API
+ *
+ * @schema Database
+ */
+export interface DatabaseProps {
+  /**
+   * @schema Database#metadata
+   */
+  readonly metadata: ApiObjectMetadata;
+
+  /**
+   * Specification of the desired Database.
+   * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+   *
+   * @schema Database#spec
+   */
+  readonly spec: DatabaseSpec;
+
+}
+
+/**
+ * Converts an object of type 'DatabaseProps' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_DatabaseProps(obj: DatabaseProps | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': obj.metadata,
+    'spec': toJson_DatabaseSpec(obj.spec),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Specification of the desired Database.
+ * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+ *
+ * @schema DatabaseSpec
+ */
+export interface DatabaseSpec {
+  /**
+   * Maps to the `ALLOW_CONNECTIONS` parameter of `CREATE DATABASE` and
+   * `ALTER DATABASE`. If false then no one can connect to this database.
+   *
+   * @schema DatabaseSpec#allowConnections
+   */
+  readonly allowConnections?: boolean;
+
+  /**
+   * Maps to the `BUILTIN_LOCALE` parameter of `CREATE DATABASE`. This
+   * setting cannot be changed. Specifies the locale name when the
+   * builtin provider is used. This option requires `localeProvider` to
+   * be set to `builtin`. Available from PostgreSQL 17.
+   *
+   * @schema DatabaseSpec#builtinLocale
+   */
+  readonly builtinLocale?: string;
+
+  /**
+   * The name of the PostgreSQL cluster hosting the database.
+   *
+   * @schema DatabaseSpec#cluster
+   */
+  readonly cluster: DatabaseSpecCluster;
+
+  /**
+   * Maps to the `COLLATION_VERSION` parameter of `CREATE DATABASE`. This
+   * setting cannot be changed.
+   *
+   * @schema DatabaseSpec#collationVersion
+   */
+  readonly collationVersion?: string;
+
+  /**
+   * Maps to the `CONNECTION LIMIT` clause of `CREATE DATABASE` and
+   * `ALTER DATABASE`. How many concurrent connections can be made to
+   * this database. -1 (the default) means no limit.
+   *
+   * @schema DatabaseSpec#connectionLimit
+   */
+  readonly connectionLimit?: number;
+
+  /**
+   * The policy for end-of-life maintenance of this database.
+   *
+   * @schema DatabaseSpec#databaseReclaimPolicy
+   */
+  readonly databaseReclaimPolicy?: DatabaseSpecDatabaseReclaimPolicy;
+
+  /**
+   * Maps to the `ENCODING` parameter of `CREATE DATABASE`. This setting
+   * cannot be changed. Character set encoding to use in the database.
+   *
+   * @schema DatabaseSpec#encoding
+   */
+  readonly encoding?: string;
+
+  /**
+   * Ensure the PostgreSQL database is `present` or `absent` - defaults to "present".
+   *
+   * @schema DatabaseSpec#ensure
+   */
+  readonly ensure?: DatabaseSpecEnsure;
+
+  /**
+   * Maps to the `ICU_LOCALE` parameter of `CREATE DATABASE`. This
+   * setting cannot be changed. Specifies the ICU locale when the ICU
+   * provider is used. This option requires `localeProvider` to be set to
+   * `icu`. Available from PostgreSQL 15.
+   *
+   * @schema DatabaseSpec#icuLocale
+   */
+  readonly icuLocale?: string;
+
+  /**
+   * Maps to the `ICU_RULES` parameter of `CREATE DATABASE`. This setting
+   * cannot be changed. Specifies additional collation rules to customize
+   * the behavior of the default collation. This option requires
+   * `localeProvider` to be set to `icu`. Available from PostgreSQL 16.
+   *
+   * @schema DatabaseSpec#icuRules
+   */
+  readonly icuRules?: string;
+
+  /**
+   * Maps to the `IS_TEMPLATE` parameter of `CREATE DATABASE` and `ALTER
+   * DATABASE`. If true, this database is considered a template and can
+   * be cloned by any user with `CREATEDB` privileges.
+   *
+   * @schema DatabaseSpec#isTemplate
+   */
+  readonly isTemplate?: boolean;
+
+  /**
+   * Maps to the `LOCALE` parameter of `CREATE DATABASE`. This setting
+   * cannot be changed. Sets the default collation order and character
+   * classification in the new database.
+   *
+   * @schema DatabaseSpec#locale
+   */
+  readonly locale?: string;
+
+  /**
+   * Maps to the `LC_CTYPE` parameter of `CREATE DATABASE`. This setting
+   * cannot be changed.
+   *
+   * @schema DatabaseSpec#localeCType
+   */
+  readonly localeCType?: string;
+
+  /**
+   * Maps to the `LC_COLLATE` parameter of `CREATE DATABASE`. This
+   * setting cannot be changed.
+   *
+   * @schema DatabaseSpec#localeCollate
+   */
+  readonly localeCollate?: string;
+
+  /**
+   * Maps to the `LOCALE_PROVIDER` parameter of `CREATE DATABASE`. This
+   * setting cannot be changed. This option sets the locale provider for
+   * databases created in the new cluster. Available from PostgreSQL 16.
+   *
+   * @schema DatabaseSpec#localeProvider
+   */
+  readonly localeProvider?: string;
+
+  /**
+   * The name of the database to create inside PostgreSQL. This setting cannot be changed.
+   *
+   * @schema DatabaseSpec#name
+   */
+  readonly name: string;
+
+  /**
+   * Maps to the `OWNER` parameter of `CREATE DATABASE`.
+   * Maps to the `OWNER TO` command of `ALTER DATABASE`.
+   * The role name of the user who owns the database inside PostgreSQL.
+   *
+   * @schema DatabaseSpec#owner
+   */
+  readonly owner: string;
+
+  /**
+   * Maps to the `TABLESPACE` parameter of `CREATE DATABASE`.
+   * Maps to the `SET TABLESPACE` command of `ALTER DATABASE`.
+   * The name of the tablespace (in PostgreSQL) that will be associated
+   * with the new database. This tablespace will be the default
+   * tablespace used for objects created in this database.
+   *
+   * @schema DatabaseSpec#tablespace
+   */
+  readonly tablespace?: string;
+
+  /**
+   * Maps to the `TEMPLATE` parameter of `CREATE DATABASE`. This setting
+   * cannot be changed. The name of the template from which to create
+   * this database.
+   *
+   * @schema DatabaseSpec#template
+   */
+  readonly template?: string;
+
+}
+
+/**
+ * Converts an object of type 'DatabaseSpec' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_DatabaseSpec(obj: DatabaseSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'allowConnections': obj.allowConnections,
+    'builtinLocale': obj.builtinLocale,
+    'cluster': toJson_DatabaseSpecCluster(obj.cluster),
+    'collationVersion': obj.collationVersion,
+    'connectionLimit': obj.connectionLimit,
+    'databaseReclaimPolicy': obj.databaseReclaimPolicy,
+    'encoding': obj.encoding,
+    'ensure': obj.ensure,
+    'icuLocale': obj.icuLocale,
+    'icuRules': obj.icuRules,
+    'isTemplate': obj.isTemplate,
+    'locale': obj.locale,
+    'localeCType': obj.localeCType,
+    'localeCollate': obj.localeCollate,
+    'localeProvider': obj.localeProvider,
+    'name': obj.name,
+    'owner': obj.owner,
+    'tablespace': obj.tablespace,
+    'template': obj.template,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The name of the PostgreSQL cluster hosting the database.
+ *
+ * @schema DatabaseSpecCluster
+ */
+export interface DatabaseSpecCluster {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema DatabaseSpecCluster#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'DatabaseSpecCluster' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_DatabaseSpecCluster(obj: DatabaseSpecCluster | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The policy for end-of-life maintenance of this database.
+ *
+ * @schema DatabaseSpecDatabaseReclaimPolicy
+ */
+export enum DatabaseSpecDatabaseReclaimPolicy {
+  /** delete */
+  DELETE = "delete",
+  /** retain */
+  RETAIN = "retain",
+}
+
+/**
+ * Ensure the PostgreSQL database is `present` or `absent` - defaults to "present".
+ *
+ * @schema DatabaseSpecEnsure
+ */
+export enum DatabaseSpecEnsure {
+  /** present */
+  PRESENT = "present",
+  /** absent */
+  ABSENT = "absent",
+}
 
 
 /**
@@ -14132,7 +14984,7 @@ export interface PoolerSpecServiceTemplateSpec {
    * not set, the implementation will apply its default routing strategy. If set
    * to "PreferClose", implementations should prioritize endpoints that are
    * topologically close (e.g., same zone).
-   * This is an alpha field and requires enabling ServiceTrafficDistribution feature.
+   * This is a beta field and requires enabling ServiceTrafficDistribution feature.
    *
    * @schema PoolerSpecServiceTemplateSpec#trafficDistribution
    */
@@ -14547,6 +15399,21 @@ export interface PoolerSpecTemplateSpec {
   readonly resourceClaims?: PoolerSpecTemplateSpecResourceClaims[];
 
   /**
+   * Resources is the total amount of CPU and Memory resources required by all
+   * containers in the pod. It supports specifying Requests and Limits for
+   * "cpu" and "memory" resource names only. ResourceClaims are not supported.
+   *
+   * This field enables fine-grained control over resource allocation for the
+   * entire pod, allowing resource sharing among containers in a pod.
+   *
+   * This is an alpha field and requires enabling the PodLevelResources feature
+   * gate.
+   *
+   * @schema PoolerSpecTemplateSpec#resources
+   */
+  readonly resources?: PoolerSpecTemplateSpecResources;
+
+  /**
    * Restart policy for all containers within the pod.
    * One of Always, OnFailure, Never. In some contexts, only a subset of those values may be permitted.
    * Default to Always.
@@ -14717,6 +15584,7 @@ export function toJson_PoolerSpecTemplateSpec(obj: PoolerSpecTemplateSpec | unde
     'priorityClassName': obj.priorityClassName,
     'readinessGates': obj.readinessGates?.map(y => toJson_PoolerSpecTemplateSpecReadinessGates(y)),
     'resourceClaims': obj.resourceClaims?.map(y => toJson_PoolerSpecTemplateSpecResourceClaims(y)),
+    'resources': toJson_PoolerSpecTemplateSpecResources(obj.resources),
     'restartPolicy': obj.restartPolicy,
     'runtimeClassName': obj.runtimeClassName,
     'schedulerName': obj.schedulerName,
@@ -16254,6 +17122,69 @@ export function toJson_PoolerSpecTemplateSpecResourceClaims(obj: PoolerSpecTempl
 /* eslint-enable max-len, quote-props */
 
 /**
+ * Resources is the total amount of CPU and Memory resources required by all
+ * containers in the pod. It supports specifying Requests and Limits for
+ * "cpu" and "memory" resource names only. ResourceClaims are not supported.
+ *
+ * This field enables fine-grained control over resource allocation for the
+ * entire pod, allowing resource sharing among containers in a pod.
+ *
+ * This is an alpha field and requires enabling the PodLevelResources feature
+ * gate.
+ *
+ * @schema PoolerSpecTemplateSpecResources
+ */
+export interface PoolerSpecTemplateSpecResources {
+  /**
+   * Claims lists the names of resources, defined in spec.resourceClaims,
+   * that are used by this container.
+   *
+   * This is an alpha field and requires enabling the
+   * DynamicResourceAllocation feature gate.
+   *
+   * This field is immutable. It can only be set for containers.
+   *
+   * @schema PoolerSpecTemplateSpecResources#claims
+   */
+  readonly claims?: PoolerSpecTemplateSpecResourcesClaims[];
+
+  /**
+   * Limits describes the maximum amount of compute resources allowed.
+   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   *
+   * @schema PoolerSpecTemplateSpecResources#limits
+   */
+  readonly limits?: { [key: string]: PoolerSpecTemplateSpecResourcesLimits };
+
+  /**
+   * Requests describes the minimum amount of compute resources required.
+   * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+   * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   *
+   * @schema PoolerSpecTemplateSpecResources#requests
+   */
+  readonly requests?: { [key: string]: PoolerSpecTemplateSpecResourcesRequests };
+
+}
+
+/**
+ * Converts an object of type 'PoolerSpecTemplateSpecResources' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PoolerSpecTemplateSpecResources(obj: PoolerSpecTemplateSpecResources | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'claims': obj.claims?.map(y => toJson_PoolerSpecTemplateSpecResourcesClaims(y)),
+    'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+    'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
  * PodSchedulingGate is associated to a Pod to guard its scheduling.
  *
  * @schema PoolerSpecTemplateSpecSchedulingGates
@@ -16366,6 +17297,35 @@ export interface PoolerSpecTemplateSpecSecurityContext {
   readonly runAsUser?: number;
 
   /**
+   * seLinuxChangePolicy defines how the container's SELinux label is applied to all volumes used by the Pod.
+   * It has no effect on nodes that do not support SELinux or to volumes does not support SELinux.
+   * Valid values are "MountOption" and "Recursive".
+   *
+   * "Recursive" means relabeling of all files on all Pod volumes by the container runtime.
+   * This may be slow for large volumes, but allows mixing privileged and unprivileged Pods sharing the same volume on the same node.
+   *
+   * "MountOption" mounts all eligible Pod volumes with `-o context` mount option.
+   * This requires all Pods that share the same volume to use the same SELinux label.
+   * It is not possible to share the same volume among privileged and unprivileged Pods.
+   * Eligible volumes are in-tree FibreChannel and iSCSI volumes, and all CSI volumes
+   * whose CSI driver announces SELinux support by setting spec.seLinuxMount: true in their
+   * CSIDriver instance. Other volumes are always re-labelled recursively.
+   * "MountOption" value is allowed only when SELinuxMount feature gate is enabled.
+   *
+   * If not specified and SELinuxMount feature gate is enabled, "MountOption" is used.
+   * If not specified and SELinuxMount feature gate is disabled, "MountOption" is used for ReadWriteOncePod volumes
+   * and "Recursive" for all other volumes.
+   *
+   * This field affects only Pods that have SELinux label set, either in PodSecurityContext or in SecurityContext of all containers.
+   *
+   * All Pods that use the same volume should use the same seLinuxChangePolicy, otherwise some pods can get stuck in ContainerCreating state.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema PoolerSpecTemplateSpecSecurityContext#seLinuxChangePolicy
+   */
+  readonly seLinuxChangePolicy?: string;
+
+  /**
    * The SELinux context to be applied to all containers.
    * If unspecified, the container runtime will allocate a random SELinux context for each
    * container.  May also be set in SecurityContext.  If set in
@@ -16445,6 +17405,7 @@ export function toJson_PoolerSpecTemplateSpecSecurityContext(obj: PoolerSpecTemp
     'runAsGroup': obj.runAsGroup,
     'runAsNonRoot': obj.runAsNonRoot,
     'runAsUser': obj.runAsUser,
+    'seLinuxChangePolicy': obj.seLinuxChangePolicy,
     'seLinuxOptions': toJson_PoolerSpecTemplateSpecSecurityContextSeLinuxOptions(obj.seLinuxOptions),
     'seccompProfile': toJson_PoolerSpecTemplateSpecSecurityContextSeccompProfile(obj.seccompProfile),
     'supplementalGroups': obj.supplementalGroups?.map(y => y),
@@ -16707,6 +17668,8 @@ export interface PoolerSpecTemplateSpecVolumes {
   /**
    * awsElasticBlockStore represents an AWS Disk resource that is attached to a
    * kubelet's host machine and then exposed to the pod.
+   * Deprecated: AWSElasticBlockStore is deprecated. All operations for the in-tree
+   * awsElasticBlockStore type are redirected to the ebs.csi.aws.com CSI driver.
    * More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
    *
    * @schema PoolerSpecTemplateSpecVolumes#awsElasticBlockStore
@@ -16715,6 +17678,8 @@ export interface PoolerSpecTemplateSpecVolumes {
 
   /**
    * azureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
+   * Deprecated: AzureDisk is deprecated. All operations for the in-tree azureDisk type
+   * are redirected to the disk.csi.azure.com CSI driver.
    *
    * @schema PoolerSpecTemplateSpecVolumes#azureDisk
    */
@@ -16722,13 +17687,16 @@ export interface PoolerSpecTemplateSpecVolumes {
 
   /**
    * azureFile represents an Azure File Service mount on the host and bind mount to the pod.
+   * Deprecated: AzureFile is deprecated. All operations for the in-tree azureFile type
+   * are redirected to the file.csi.azure.com CSI driver.
    *
    * @schema PoolerSpecTemplateSpecVolumes#azureFile
    */
   readonly azureFile?: PoolerSpecTemplateSpecVolumesAzureFile;
 
   /**
-   * cephFS represents a Ceph FS mount on the host that shares a pod's lifetime
+   * cephFS represents a Ceph FS mount on the host that shares a pod's lifetime.
+   * Deprecated: CephFS is deprecated and the in-tree cephfs type is no longer supported.
    *
    * @schema PoolerSpecTemplateSpecVolumes#cephfs
    */
@@ -16736,6 +17704,8 @@ export interface PoolerSpecTemplateSpecVolumes {
 
   /**
    * cinder represents a cinder volume attached and mounted on kubelets host machine.
+   * Deprecated: Cinder is deprecated. All operations for the in-tree cinder type
+   * are redirected to the cinder.csi.openstack.org CSI driver.
    * More info: https://examples.k8s.io/mysql-cinder-pd/README.md
    *
    * @schema PoolerSpecTemplateSpecVolumes#cinder
@@ -16750,7 +17720,7 @@ export interface PoolerSpecTemplateSpecVolumes {
   readonly configMap?: PoolerSpecTemplateSpecVolumesConfigMap;
 
   /**
-   * csi (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers (Beta feature).
+   * csi (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers.
    *
    * @schema PoolerSpecTemplateSpecVolumes#csi
    */
@@ -16811,13 +17781,15 @@ export interface PoolerSpecTemplateSpecVolumes {
   /**
    * flexVolume represents a generic volume resource that is
    * provisioned/attached using an exec based plugin.
+   * Deprecated: FlexVolume is deprecated. Consider using a CSIDriver instead.
    *
    * @schema PoolerSpecTemplateSpecVolumes#flexVolume
    */
   readonly flexVolume?: PoolerSpecTemplateSpecVolumesFlexVolume;
 
   /**
-   * flocker represents a Flocker volume attached to a kubelet's host machine. This depends on the Flocker control service being running
+   * flocker represents a Flocker volume attached to a kubelet's host machine. This depends on the Flocker control service being running.
+   * Deprecated: Flocker is deprecated and the in-tree flocker type is no longer supported.
    *
    * @schema PoolerSpecTemplateSpecVolumes#flocker
    */
@@ -16826,6 +17798,8 @@ export interface PoolerSpecTemplateSpecVolumes {
   /**
    * gcePersistentDisk represents a GCE Disk resource that is attached to a
    * kubelet's host machine and then exposed to the pod.
+   * Deprecated: GCEPersistentDisk is deprecated. All operations for the in-tree
+   * gcePersistentDisk type are redirected to the pd.csi.storage.gke.io CSI driver.
    * More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
    *
    * @schema PoolerSpecTemplateSpecVolumes#gcePersistentDisk
@@ -16834,7 +17808,7 @@ export interface PoolerSpecTemplateSpecVolumes {
 
   /**
    * gitRepo represents a git repository at a particular revision.
-   * DEPRECATED: GitRepo is deprecated. To provision a container with a git repo, mount an
+   * Deprecated: GitRepo is deprecated. To provision a container with a git repo, mount an
    * EmptyDir into an InitContainer that clones the repo using git, then mount the EmptyDir
    * into the Pod's container.
    *
@@ -16844,6 +17818,7 @@ export interface PoolerSpecTemplateSpecVolumes {
 
   /**
    * glusterfs represents a Glusterfs mount on the host that shares a pod's lifetime.
+   * Deprecated: Glusterfs is deprecated and the in-tree glusterfs type is no longer supported.
    * More info: https://examples.k8s.io/volumes/glusterfs/README.md
    *
    * @schema PoolerSpecTemplateSpecVolumes#glusterfs
@@ -16917,14 +17892,18 @@ export interface PoolerSpecTemplateSpecVolumes {
   readonly persistentVolumeClaim?: PoolerSpecTemplateSpecVolumesPersistentVolumeClaim;
 
   /**
-   * photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine
+   * photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine.
+   * Deprecated: PhotonPersistentDisk is deprecated and the in-tree photonPersistentDisk type is no longer supported.
    *
    * @schema PoolerSpecTemplateSpecVolumes#photonPersistentDisk
    */
   readonly photonPersistentDisk?: PoolerSpecTemplateSpecVolumesPhotonPersistentDisk;
 
   /**
-   * portworxVolume represents a portworx volume attached and mounted on kubelets host machine
+   * portworxVolume represents a portworx volume attached and mounted on kubelets host machine.
+   * Deprecated: PortworxVolume is deprecated. All operations for the in-tree portworxVolume type
+   * are redirected to the pxd.portworx.com CSI driver when the CSIMigrationPortworx feature-gate
+   * is on.
    *
    * @schema PoolerSpecTemplateSpecVolumes#portworxVolume
    */
@@ -16938,7 +17917,8 @@ export interface PoolerSpecTemplateSpecVolumes {
   readonly projected?: PoolerSpecTemplateSpecVolumesProjected;
 
   /**
-   * quobyte represents a Quobyte mount on the host that shares a pod's lifetime
+   * quobyte represents a Quobyte mount on the host that shares a pod's lifetime.
+   * Deprecated: Quobyte is deprecated and the in-tree quobyte type is no longer supported.
    *
    * @schema PoolerSpecTemplateSpecVolumes#quobyte
    */
@@ -16946,6 +17926,7 @@ export interface PoolerSpecTemplateSpecVolumes {
 
   /**
    * rbd represents a Rados Block Device mount on the host that shares a pod's lifetime.
+   * Deprecated: RBD is deprecated and the in-tree rbd type is no longer supported.
    * More info: https://examples.k8s.io/volumes/rbd/README.md
    *
    * @schema PoolerSpecTemplateSpecVolumes#rbd
@@ -16954,6 +17935,7 @@ export interface PoolerSpecTemplateSpecVolumes {
 
   /**
    * scaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
+   * Deprecated: ScaleIO is deprecated and the in-tree scaleIO type is no longer supported.
    *
    * @schema PoolerSpecTemplateSpecVolumes#scaleIO
    */
@@ -16969,13 +17951,16 @@ export interface PoolerSpecTemplateSpecVolumes {
 
   /**
    * storageOS represents a StorageOS volume attached and mounted on Kubernetes nodes.
+   * Deprecated: StorageOS is deprecated and the in-tree storageos type is no longer supported.
    *
    * @schema PoolerSpecTemplateSpecVolumes#storageos
    */
   readonly storageos?: PoolerSpecTemplateSpecVolumesStorageos;
 
   /**
-   * vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine
+   * vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine.
+   * Deprecated: VsphereVolume is deprecated. All operations for the in-tree vsphereVolume type
+   * are redirected to the csi.vsphere.vmware.com CSI driver.
    *
    * @schema PoolerSpecTemplateSpecVolumes#vsphereVolume
    */
@@ -17390,7 +18375,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecycle(obj: PoolerSpec
  */
 export interface PoolerSpecTemplateSpecContainersLivenessProbe {
   /**
-   * Exec specifies the action to take.
+   * Exec specifies a command to execute in the container.
    *
    * @schema PoolerSpecTemplateSpecContainersLivenessProbe#exec
    */
@@ -17406,14 +18391,14 @@ export interface PoolerSpecTemplateSpecContainersLivenessProbe {
   readonly failureThreshold?: number;
 
   /**
-   * GRPC specifies an action involving a GRPC port.
+   * GRPC specifies a GRPC HealthCheckRequest.
    *
    * @schema PoolerSpecTemplateSpecContainersLivenessProbe#grpc
    */
   readonly grpc?: PoolerSpecTemplateSpecContainersLivenessProbeGrpc;
 
   /**
-   * HTTPGet specifies the http request to perform.
+   * HTTPGet specifies an HTTP GET request to perform.
    *
    * @schema PoolerSpecTemplateSpecContainersLivenessProbe#httpGet
    */
@@ -17446,7 +18431,7 @@ export interface PoolerSpecTemplateSpecContainersLivenessProbe {
   readonly successThreshold?: number;
 
   /**
-   * TCPSocket specifies an action involving a TCP port.
+   * TCPSocket specifies a connection to a TCP port.
    *
    * @schema PoolerSpecTemplateSpecContainersLivenessProbe#tcpSocket
    */
@@ -17582,7 +18567,7 @@ export function toJson_PoolerSpecTemplateSpecContainersPorts(obj: PoolerSpecTemp
  */
 export interface PoolerSpecTemplateSpecContainersReadinessProbe {
   /**
-   * Exec specifies the action to take.
+   * Exec specifies a command to execute in the container.
    *
    * @schema PoolerSpecTemplateSpecContainersReadinessProbe#exec
    */
@@ -17598,14 +18583,14 @@ export interface PoolerSpecTemplateSpecContainersReadinessProbe {
   readonly failureThreshold?: number;
 
   /**
-   * GRPC specifies an action involving a GRPC port.
+   * GRPC specifies a GRPC HealthCheckRequest.
    *
    * @schema PoolerSpecTemplateSpecContainersReadinessProbe#grpc
    */
   readonly grpc?: PoolerSpecTemplateSpecContainersReadinessProbeGrpc;
 
   /**
-   * HTTPGet specifies the http request to perform.
+   * HTTPGet specifies an HTTP GET request to perform.
    *
    * @schema PoolerSpecTemplateSpecContainersReadinessProbe#httpGet
    */
@@ -17638,7 +18623,7 @@ export interface PoolerSpecTemplateSpecContainersReadinessProbe {
   readonly successThreshold?: number;
 
   /**
-   * TCPSocket specifies an action involving a TCP port.
+   * TCPSocket specifies a connection to a TCP port.
    *
    * @schema PoolerSpecTemplateSpecContainersReadinessProbe#tcpSocket
    */
@@ -17969,7 +18954,7 @@ export function toJson_PoolerSpecTemplateSpecContainersSecurityContext(obj: Pool
  */
 export interface PoolerSpecTemplateSpecContainersStartupProbe {
   /**
-   * Exec specifies the action to take.
+   * Exec specifies a command to execute in the container.
    *
    * @schema PoolerSpecTemplateSpecContainersStartupProbe#exec
    */
@@ -17985,14 +18970,14 @@ export interface PoolerSpecTemplateSpecContainersStartupProbe {
   readonly failureThreshold?: number;
 
   /**
-   * GRPC specifies an action involving a GRPC port.
+   * GRPC specifies a GRPC HealthCheckRequest.
    *
    * @schema PoolerSpecTemplateSpecContainersStartupProbe#grpc
    */
   readonly grpc?: PoolerSpecTemplateSpecContainersStartupProbeGrpc;
 
   /**
-   * HTTPGet specifies the http request to perform.
+   * HTTPGet specifies an HTTP GET request to perform.
    *
    * @schema PoolerSpecTemplateSpecContainersStartupProbe#httpGet
    */
@@ -18025,7 +19010,7 @@ export interface PoolerSpecTemplateSpecContainersStartupProbe {
   readonly successThreshold?: number;
 
   /**
-   * TCPSocket specifies an action involving a TCP port.
+   * TCPSocket specifies a connection to a TCP port.
    *
    * @schema PoolerSpecTemplateSpecContainersStartupProbe#tcpSocket
    */
@@ -18232,6 +19217,7 @@ export function toJson_PoolerSpecTemplateSpecContainersVolumeMounts(obj: PoolerS
  */
 export interface PoolerSpecTemplateSpecDnsConfigOptions {
   /**
+   * Name is this DNS resolver option's name.
    * Required.
    *
    * @schema PoolerSpecTemplateSpecDnsConfigOptions#name
@@ -18239,6 +19225,8 @@ export interface PoolerSpecTemplateSpecDnsConfigOptions {
   readonly name?: string;
 
   /**
+   * Value is this DNS resolver option's value.
+   *
    * @schema PoolerSpecTemplateSpecDnsConfigOptions#value
    */
   readonly value?: string;
@@ -18414,7 +19402,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecycle(obj: P
  */
 export interface PoolerSpecTemplateSpecEphemeralContainersLivenessProbe {
   /**
-   * Exec specifies the action to take.
+   * Exec specifies a command to execute in the container.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbe#exec
    */
@@ -18430,14 +19418,14 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLivenessProbe {
   readonly failureThreshold?: number;
 
   /**
-   * GRPC specifies an action involving a GRPC port.
+   * GRPC specifies a GRPC HealthCheckRequest.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbe#grpc
    */
   readonly grpc?: PoolerSpecTemplateSpecEphemeralContainersLivenessProbeGrpc;
 
   /**
-   * HTTPGet specifies the http request to perform.
+   * HTTPGet specifies an HTTP GET request to perform.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbe#httpGet
    */
@@ -18470,7 +19458,7 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLivenessProbe {
   readonly successThreshold?: number;
 
   /**
-   * TCPSocket specifies an action involving a TCP port.
+   * TCPSocket specifies a connection to a TCP port.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbe#tcpSocket
    */
@@ -18603,7 +19591,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersPorts(obj: Poole
  */
 export interface PoolerSpecTemplateSpecEphemeralContainersReadinessProbe {
   /**
-   * Exec specifies the action to take.
+   * Exec specifies a command to execute in the container.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbe#exec
    */
@@ -18619,14 +19607,14 @@ export interface PoolerSpecTemplateSpecEphemeralContainersReadinessProbe {
   readonly failureThreshold?: number;
 
   /**
-   * GRPC specifies an action involving a GRPC port.
+   * GRPC specifies a GRPC HealthCheckRequest.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbe#grpc
    */
   readonly grpc?: PoolerSpecTemplateSpecEphemeralContainersReadinessProbeGrpc;
 
   /**
-   * HTTPGet specifies the http request to perform.
+   * HTTPGet specifies an HTTP GET request to perform.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbe#httpGet
    */
@@ -18659,7 +19647,7 @@ export interface PoolerSpecTemplateSpecEphemeralContainersReadinessProbe {
   readonly successThreshold?: number;
 
   /**
-   * TCPSocket specifies an action involving a TCP port.
+   * TCPSocket specifies a connection to a TCP port.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbe#tcpSocket
    */
@@ -18982,7 +19970,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersSecurityContext(
  */
 export interface PoolerSpecTemplateSpecEphemeralContainersStartupProbe {
   /**
-   * Exec specifies the action to take.
+   * Exec specifies a command to execute in the container.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersStartupProbe#exec
    */
@@ -18998,14 +19986,14 @@ export interface PoolerSpecTemplateSpecEphemeralContainersStartupProbe {
   readonly failureThreshold?: number;
 
   /**
-   * GRPC specifies an action involving a GRPC port.
+   * GRPC specifies a GRPC HealthCheckRequest.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersStartupProbe#grpc
    */
   readonly grpc?: PoolerSpecTemplateSpecEphemeralContainersStartupProbeGrpc;
 
   /**
-   * HTTPGet specifies the http request to perform.
+   * HTTPGet specifies an HTTP GET request to perform.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersStartupProbe#httpGet
    */
@@ -19038,7 +20026,7 @@ export interface PoolerSpecTemplateSpecEphemeralContainersStartupProbe {
   readonly successThreshold?: number;
 
   /**
-   * TCPSocket specifies an action involving a TCP port.
+   * TCPSocket specifies a connection to a TCP port.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersStartupProbe#tcpSocket
    */
@@ -19396,7 +20384,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecycle(obj: Pooler
  */
 export interface PoolerSpecTemplateSpecInitContainersLivenessProbe {
   /**
-   * Exec specifies the action to take.
+   * Exec specifies a command to execute in the container.
    *
    * @schema PoolerSpecTemplateSpecInitContainersLivenessProbe#exec
    */
@@ -19412,14 +20400,14 @@ export interface PoolerSpecTemplateSpecInitContainersLivenessProbe {
   readonly failureThreshold?: number;
 
   /**
-   * GRPC specifies an action involving a GRPC port.
+   * GRPC specifies a GRPC HealthCheckRequest.
    *
    * @schema PoolerSpecTemplateSpecInitContainersLivenessProbe#grpc
    */
   readonly grpc?: PoolerSpecTemplateSpecInitContainersLivenessProbeGrpc;
 
   /**
-   * HTTPGet specifies the http request to perform.
+   * HTTPGet specifies an HTTP GET request to perform.
    *
    * @schema PoolerSpecTemplateSpecInitContainersLivenessProbe#httpGet
    */
@@ -19452,7 +20440,7 @@ export interface PoolerSpecTemplateSpecInitContainersLivenessProbe {
   readonly successThreshold?: number;
 
   /**
-   * TCPSocket specifies an action involving a TCP port.
+   * TCPSocket specifies a connection to a TCP port.
    *
    * @schema PoolerSpecTemplateSpecInitContainersLivenessProbe#tcpSocket
    */
@@ -19588,7 +20576,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersPorts(obj: PoolerSpec
  */
 export interface PoolerSpecTemplateSpecInitContainersReadinessProbe {
   /**
-   * Exec specifies the action to take.
+   * Exec specifies a command to execute in the container.
    *
    * @schema PoolerSpecTemplateSpecInitContainersReadinessProbe#exec
    */
@@ -19604,14 +20592,14 @@ export interface PoolerSpecTemplateSpecInitContainersReadinessProbe {
   readonly failureThreshold?: number;
 
   /**
-   * GRPC specifies an action involving a GRPC port.
+   * GRPC specifies a GRPC HealthCheckRequest.
    *
    * @schema PoolerSpecTemplateSpecInitContainersReadinessProbe#grpc
    */
   readonly grpc?: PoolerSpecTemplateSpecInitContainersReadinessProbeGrpc;
 
   /**
-   * HTTPGet specifies the http request to perform.
+   * HTTPGet specifies an HTTP GET request to perform.
    *
    * @schema PoolerSpecTemplateSpecInitContainersReadinessProbe#httpGet
    */
@@ -19644,7 +20632,7 @@ export interface PoolerSpecTemplateSpecInitContainersReadinessProbe {
   readonly successThreshold?: number;
 
   /**
-   * TCPSocket specifies an action involving a TCP port.
+   * TCPSocket specifies a connection to a TCP port.
    *
    * @schema PoolerSpecTemplateSpecInitContainersReadinessProbe#tcpSocket
    */
@@ -19975,7 +20963,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersSecurityContext(obj: 
  */
 export interface PoolerSpecTemplateSpecInitContainersStartupProbe {
   /**
-   * Exec specifies the action to take.
+   * Exec specifies a command to execute in the container.
    *
    * @schema PoolerSpecTemplateSpecInitContainersStartupProbe#exec
    */
@@ -19991,14 +20979,14 @@ export interface PoolerSpecTemplateSpecInitContainersStartupProbe {
   readonly failureThreshold?: number;
 
   /**
-   * GRPC specifies an action involving a GRPC port.
+   * GRPC specifies a GRPC HealthCheckRequest.
    *
    * @schema PoolerSpecTemplateSpecInitContainersStartupProbe#grpc
    */
   readonly grpc?: PoolerSpecTemplateSpecInitContainersStartupProbeGrpc;
 
   /**
-   * HTTPGet specifies the http request to perform.
+   * HTTPGet specifies an HTTP GET request to perform.
    *
    * @schema PoolerSpecTemplateSpecInitContainersStartupProbe#httpGet
    */
@@ -20031,7 +21019,7 @@ export interface PoolerSpecTemplateSpecInitContainersStartupProbe {
   readonly successThreshold?: number;
 
   /**
-   * TCPSocket specifies an action involving a TCP port.
+   * TCPSocket specifies a connection to a TCP port.
    *
    * @schema PoolerSpecTemplateSpecInitContainersStartupProbe#tcpSocket
    */
@@ -20230,6 +21218,75 @@ export function toJson_PoolerSpecTemplateSpecInitContainersVolumeMounts(obj: Poo
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
+
+/**
+ * ResourceClaim references one entry in PodSpec.ResourceClaims.
+ *
+ * @schema PoolerSpecTemplateSpecResourcesClaims
+ */
+export interface PoolerSpecTemplateSpecResourcesClaims {
+  /**
+   * Name must match the name of one entry in pod.spec.resourceClaims of
+   * the Pod where this field is used. It makes that resource available
+   * inside a container.
+   *
+   * @schema PoolerSpecTemplateSpecResourcesClaims#name
+   */
+  readonly name: string;
+
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema PoolerSpecTemplateSpecResourcesClaims#request
+   */
+  readonly request?: string;
+
+}
+
+/**
+ * Converts an object of type 'PoolerSpecTemplateSpecResourcesClaims' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PoolerSpecTemplateSpecResourcesClaims(obj: PoolerSpecTemplateSpecResourcesClaims | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'request': obj.request,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema PoolerSpecTemplateSpecResourcesLimits
+ */
+export class PoolerSpecTemplateSpecResourcesLimits {
+  public static fromNumber(value: number): PoolerSpecTemplateSpecResourcesLimits {
+    return new PoolerSpecTemplateSpecResourcesLimits(value);
+  }
+  public static fromString(value: string): PoolerSpecTemplateSpecResourcesLimits {
+    return new PoolerSpecTemplateSpecResourcesLimits(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * @schema PoolerSpecTemplateSpecResourcesRequests
+ */
+export class PoolerSpecTemplateSpecResourcesRequests {
+  public static fromNumber(value: number): PoolerSpecTemplateSpecResourcesRequests {
+    return new PoolerSpecTemplateSpecResourcesRequests(value);
+  }
+  public static fromString(value: string): PoolerSpecTemplateSpecResourcesRequests {
+    return new PoolerSpecTemplateSpecResourcesRequests(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
 
 /**
  * appArmorProfile is the AppArmor options to use by the containers in this pod.
@@ -20526,6 +21583,8 @@ export function toJson_PoolerSpecTemplateSpecTopologySpreadConstraintsLabelSelec
 /**
  * awsElasticBlockStore represents an AWS Disk resource that is attached to a
  * kubelet's host machine and then exposed to the pod.
+ * Deprecated: AWSElasticBlockStore is deprecated. All operations for the in-tree
+ * awsElasticBlockStore type are redirected to the ebs.csi.aws.com CSI driver.
  * More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
  *
  * @schema PoolerSpecTemplateSpecVolumesAwsElasticBlockStore
@@ -20588,6 +21647,8 @@ export function toJson_PoolerSpecTemplateSpecVolumesAwsElasticBlockStore(obj: Po
 
 /**
  * azureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
+ * Deprecated: AzureDisk is deprecated. All operations for the in-tree azureDisk type
+ * are redirected to the disk.csi.azure.com CSI driver.
  *
  * @schema PoolerSpecTemplateSpecVolumesAzureDisk
  */
@@ -20661,6 +21722,8 @@ export function toJson_PoolerSpecTemplateSpecVolumesAzureDisk(obj: PoolerSpecTem
 
 /**
  * azureFile represents an Azure File Service mount on the host and bind mount to the pod.
+ * Deprecated: AzureFile is deprecated. All operations for the in-tree azureFile type
+ * are redirected to the file.csi.azure.com CSI driver.
  *
  * @schema PoolerSpecTemplateSpecVolumesAzureFile
  */
@@ -20706,7 +21769,8 @@ export function toJson_PoolerSpecTemplateSpecVolumesAzureFile(obj: PoolerSpecTem
 /* eslint-enable max-len, quote-props */
 
 /**
- * cephFS represents a Ceph FS mount on the host that shares a pod's lifetime
+ * cephFS represents a Ceph FS mount on the host that shares a pod's lifetime.
+ * Deprecated: CephFS is deprecated and the in-tree cephfs type is no longer supported.
  *
  * @schema PoolerSpecTemplateSpecVolumesCephfs
  */
@@ -20783,6 +21847,8 @@ export function toJson_PoolerSpecTemplateSpecVolumesCephfs(obj: PoolerSpecTempla
 
 /**
  * cinder represents a cinder volume attached and mounted on kubelets host machine.
+ * Deprecated: Cinder is deprecated. All operations for the in-tree cinder type
+ * are redirected to the cinder.csi.openstack.org CSI driver.
  * More info: https://examples.k8s.io/mysql-cinder-pd/README.md
  *
  * @schema PoolerSpecTemplateSpecVolumesCinder
@@ -20913,7 +21979,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesConfigMap(obj: PoolerSpecTem
 /* eslint-enable max-len, quote-props */
 
 /**
- * csi (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers (Beta feature).
+ * csi (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers.
  *
  * @schema PoolerSpecTemplateSpecVolumesCsi
  */
@@ -21215,6 +22281,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesFc(obj: PoolerSpecTemplateSp
 /**
  * flexVolume represents a generic volume resource that is
  * provisioned/attached using an exec based plugin.
+ * Deprecated: FlexVolume is deprecated. Consider using a CSIDriver instead.
  *
  * @schema PoolerSpecTemplateSpecVolumesFlexVolume
  */
@@ -21282,7 +22349,8 @@ export function toJson_PoolerSpecTemplateSpecVolumesFlexVolume(obj: PoolerSpecTe
 /* eslint-enable max-len, quote-props */
 
 /**
- * flocker represents a Flocker volume attached to a kubelet's host machine. This depends on the Flocker control service being running
+ * flocker represents a Flocker volume attached to a kubelet's host machine. This depends on the Flocker control service being running.
+ * Deprecated: Flocker is deprecated and the in-tree flocker type is no longer supported.
  *
  * @schema PoolerSpecTemplateSpecVolumesFlocker
  */
@@ -21322,6 +22390,8 @@ export function toJson_PoolerSpecTemplateSpecVolumesFlocker(obj: PoolerSpecTempl
 /**
  * gcePersistentDisk represents a GCE Disk resource that is attached to a
  * kubelet's host machine and then exposed to the pod.
+ * Deprecated: GCEPersistentDisk is deprecated. All operations for the in-tree
+ * gcePersistentDisk type are redirected to the pd.csi.storage.gke.io CSI driver.
  * More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
  *
  * @schema PoolerSpecTemplateSpecVolumesGcePersistentDisk
@@ -21387,7 +22457,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesGcePersistentDisk(obj: Poole
 
 /**
  * gitRepo represents a git repository at a particular revision.
- * DEPRECATED: GitRepo is deprecated. To provision a container with a git repo, mount an
+ * Deprecated: GitRepo is deprecated. To provision a container with a git repo, mount an
  * EmptyDir into an InitContainer that clones the repo using git, then mount the EmptyDir
  * into the Pod's container.
  *
@@ -21438,6 +22508,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesGitRepo(obj: PoolerSpecTempl
 
 /**
  * glusterfs represents a Glusterfs mount on the host that shares a pod's lifetime.
+ * Deprecated: Glusterfs is deprecated and the in-tree glusterfs type is no longer supported.
  * More info: https://examples.k8s.io/volumes/glusterfs/README.md
  *
  * @schema PoolerSpecTemplateSpecVolumesGlusterfs
@@ -21808,7 +22879,8 @@ export function toJson_PoolerSpecTemplateSpecVolumesPersistentVolumeClaim(obj: P
 /* eslint-enable max-len, quote-props */
 
 /**
- * photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine
+ * photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine.
+ * Deprecated: PhotonPersistentDisk is deprecated and the in-tree photonPersistentDisk type is no longer supported.
  *
  * @schema PoolerSpecTemplateSpecVolumesPhotonPersistentDisk
  */
@@ -21847,7 +22919,10 @@ export function toJson_PoolerSpecTemplateSpecVolumesPhotonPersistentDisk(obj: Po
 /* eslint-enable max-len, quote-props */
 
 /**
- * portworxVolume represents a portworx volume attached and mounted on kubelets host machine
+ * portworxVolume represents a portworx volume attached and mounted on kubelets host machine.
+ * Deprecated: PortworxVolume is deprecated. All operations for the in-tree portworxVolume type
+ * are redirected to the pxd.portworx.com CSI driver when the CSIMigrationPortworx feature-gate
+ * is on.
  *
  * @schema PoolerSpecTemplateSpecVolumesPortworxVolume
  */
@@ -21938,7 +23013,8 @@ export function toJson_PoolerSpecTemplateSpecVolumesProjected(obj: PoolerSpecTem
 /* eslint-enable max-len, quote-props */
 
 /**
- * quobyte represents a Quobyte mount on the host that shares a pod's lifetime
+ * quobyte represents a Quobyte mount on the host that shares a pod's lifetime.
+ * Deprecated: Quobyte is deprecated and the in-tree quobyte type is no longer supported.
  *
  * @schema PoolerSpecTemplateSpecVolumesQuobyte
  */
@@ -22017,6 +23093,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesQuobyte(obj: PoolerSpecTempl
 
 /**
  * rbd represents a Rados Block Device mount on the host that shares a pod's lifetime.
+ * Deprecated: RBD is deprecated and the in-tree rbd type is no longer supported.
  * More info: https://examples.k8s.io/volumes/rbd/README.md
  *
  * @schema PoolerSpecTemplateSpecVolumesRbd
@@ -22124,6 +23201,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesRbd(obj: PoolerSpecTemplateS
 
 /**
  * scaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
+ * Deprecated: ScaleIO is deprecated and the in-tree scaleIO type is no longer supported.
  *
  * @schema PoolerSpecTemplateSpecVolumesScaleIo
  */
@@ -22303,6 +23381,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesSecret(obj: PoolerSpecTempla
 
 /**
  * storageOS represents a StorageOS volume attached and mounted on Kubernetes nodes.
+ * Deprecated: StorageOS is deprecated and the in-tree storageos type is no longer supported.
  *
  * @schema PoolerSpecTemplateSpecVolumesStorageos
  */
@@ -22373,7 +23452,9 @@ export function toJson_PoolerSpecTemplateSpecVolumesStorageos(obj: PoolerSpecTem
 /* eslint-enable max-len, quote-props */
 
 /**
- * vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine
+ * vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine.
+ * Deprecated: VsphereVolume is deprecated. All operations for the in-tree vsphereVolume type
+ * are redirected to the csi.vsphere.vmware.com CSI driver.
  *
  * @schema PoolerSpecTemplateSpecVolumesVsphereVolume
  */
@@ -22925,21 +24006,21 @@ export function toJson_PoolerSpecTemplateSpecContainersEnvFromSecretRef(obj: Poo
  */
 export interface PoolerSpecTemplateSpecContainersLifecyclePostStart {
   /**
-   * Exec specifies the action to take.
+   * Exec specifies a command to execute in the container.
    *
    * @schema PoolerSpecTemplateSpecContainersLifecyclePostStart#exec
    */
   readonly exec?: PoolerSpecTemplateSpecContainersLifecyclePostStartExec;
 
   /**
-   * HTTPGet specifies the http request to perform.
+   * HTTPGet specifies an HTTP GET request to perform.
    *
    * @schema PoolerSpecTemplateSpecContainersLifecyclePostStart#httpGet
    */
   readonly httpGet?: PoolerSpecTemplateSpecContainersLifecyclePostStartHttpGet;
 
   /**
-   * Sleep represents the duration that the container should sleep before being terminated.
+   * Sleep represents a duration that the container should sleep.
    *
    * @schema PoolerSpecTemplateSpecContainersLifecyclePostStart#sleep
    */
@@ -22947,8 +24028,8 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePostStart {
 
   /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
-   * for the backward compatibility. There are no validation of this field and
-   * lifecycle hooks will fail in runtime when tcp handler is specified.
+   * for backward compatibility. There is no validation of this field and
+   * lifecycle hooks will fail at runtime when it is specified.
    *
    * @schema PoolerSpecTemplateSpecContainersLifecyclePostStart#tcpSocket
    */
@@ -22988,21 +24069,21 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePostStart(obj: P
  */
 export interface PoolerSpecTemplateSpecContainersLifecyclePreStop {
   /**
-   * Exec specifies the action to take.
+   * Exec specifies a command to execute in the container.
    *
    * @schema PoolerSpecTemplateSpecContainersLifecyclePreStop#exec
    */
   readonly exec?: PoolerSpecTemplateSpecContainersLifecyclePreStopExec;
 
   /**
-   * HTTPGet specifies the http request to perform.
+   * HTTPGet specifies an HTTP GET request to perform.
    *
    * @schema PoolerSpecTemplateSpecContainersLifecyclePreStop#httpGet
    */
   readonly httpGet?: PoolerSpecTemplateSpecContainersLifecyclePreStopHttpGet;
 
   /**
-   * Sleep represents the duration that the container should sleep before being terminated.
+   * Sleep represents a duration that the container should sleep.
    *
    * @schema PoolerSpecTemplateSpecContainersLifecyclePreStop#sleep
    */
@@ -23010,8 +24091,8 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePreStop {
 
   /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
-   * for the backward compatibility. There are no validation of this field and
-   * lifecycle hooks will fail in runtime when tcp handler is specified.
+   * for backward compatibility. There is no validation of this field and
+   * lifecycle hooks will fail at runtime when it is specified.
    *
    * @schema PoolerSpecTemplateSpecContainersLifecyclePreStop#tcpSocket
    */
@@ -23037,7 +24118,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePreStop(obj: Poo
 /* eslint-enable max-len, quote-props */
 
 /**
- * Exec specifies the action to take.
+ * Exec specifies a command to execute in the container.
  *
  * @schema PoolerSpecTemplateSpecContainersLivenessProbeExec
  */
@@ -23070,7 +24151,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLivenessProbeExec(obj: Po
 /* eslint-enable max-len, quote-props */
 
 /**
- * GRPC specifies an action involving a GRPC port.
+ * GRPC specifies a GRPC HealthCheckRequest.
  *
  * @schema PoolerSpecTemplateSpecContainersLivenessProbeGrpc
  */
@@ -23110,7 +24191,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLivenessProbeGrpc(obj: Po
 /* eslint-enable max-len, quote-props */
 
 /**
- * HTTPGet specifies the http request to perform.
+ * HTTPGet specifies an HTTP GET request to perform.
  *
  * @schema PoolerSpecTemplateSpecContainersLivenessProbeHttpGet
  */
@@ -23176,7 +24257,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLivenessProbeHttpGet(obj:
 /* eslint-enable max-len, quote-props */
 
 /**
- * TCPSocket specifies an action involving a TCP port.
+ * TCPSocket specifies a connection to a TCP port.
  *
  * @schema PoolerSpecTemplateSpecContainersLivenessProbeTcpSocket
  */
@@ -23215,7 +24296,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLivenessProbeTcpSocket(ob
 /* eslint-enable max-len, quote-props */
 
 /**
- * Exec specifies the action to take.
+ * Exec specifies a command to execute in the container.
  *
  * @schema PoolerSpecTemplateSpecContainersReadinessProbeExec
  */
@@ -23248,7 +24329,7 @@ export function toJson_PoolerSpecTemplateSpecContainersReadinessProbeExec(obj: P
 /* eslint-enable max-len, quote-props */
 
 /**
- * GRPC specifies an action involving a GRPC port.
+ * GRPC specifies a GRPC HealthCheckRequest.
  *
  * @schema PoolerSpecTemplateSpecContainersReadinessProbeGrpc
  */
@@ -23288,7 +24369,7 @@ export function toJson_PoolerSpecTemplateSpecContainersReadinessProbeGrpc(obj: P
 /* eslint-enable max-len, quote-props */
 
 /**
- * HTTPGet specifies the http request to perform.
+ * HTTPGet specifies an HTTP GET request to perform.
  *
  * @schema PoolerSpecTemplateSpecContainersReadinessProbeHttpGet
  */
@@ -23354,7 +24435,7 @@ export function toJson_PoolerSpecTemplateSpecContainersReadinessProbeHttpGet(obj
 /* eslint-enable max-len, quote-props */
 
 /**
- * TCPSocket specifies an action involving a TCP port.
+ * TCPSocket specifies a connection to a TCP port.
  *
  * @schema PoolerSpecTemplateSpecContainersReadinessProbeTcpSocket
  */
@@ -23718,7 +24799,7 @@ export function toJson_PoolerSpecTemplateSpecContainersSecurityContextWindowsOpt
 /* eslint-enable max-len, quote-props */
 
 /**
- * Exec specifies the action to take.
+ * Exec specifies a command to execute in the container.
  *
  * @schema PoolerSpecTemplateSpecContainersStartupProbeExec
  */
@@ -23751,7 +24832,7 @@ export function toJson_PoolerSpecTemplateSpecContainersStartupProbeExec(obj: Poo
 /* eslint-enable max-len, quote-props */
 
 /**
- * GRPC specifies an action involving a GRPC port.
+ * GRPC specifies a GRPC HealthCheckRequest.
  *
  * @schema PoolerSpecTemplateSpecContainersStartupProbeGrpc
  */
@@ -23791,7 +24872,7 @@ export function toJson_PoolerSpecTemplateSpecContainersStartupProbeGrpc(obj: Poo
 /* eslint-enable max-len, quote-props */
 
 /**
- * HTTPGet specifies the http request to perform.
+ * HTTPGet specifies an HTTP GET request to perform.
  *
  * @schema PoolerSpecTemplateSpecContainersStartupProbeHttpGet
  */
@@ -23857,7 +24938,7 @@ export function toJson_PoolerSpecTemplateSpecContainersStartupProbeHttpGet(obj: 
 /* eslint-enable max-len, quote-props */
 
 /**
- * TCPSocket specifies an action involving a TCP port.
+ * TCPSocket specifies a connection to a TCP port.
  *
  * @schema PoolerSpecTemplateSpecContainersStartupProbeTcpSocket
  */
@@ -24042,21 +25123,21 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvFromSecretRef
  */
 export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStart {
   /**
-   * Exec specifies the action to take.
+   * Exec specifies a command to execute in the container.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStart#exec
    */
   readonly exec?: PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartExec;
 
   /**
-   * HTTPGet specifies the http request to perform.
+   * HTTPGet specifies an HTTP GET request to perform.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStart#httpGet
    */
   readonly httpGet?: PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartHttpGet;
 
   /**
-   * Sleep represents the duration that the container should sleep before being terminated.
+   * Sleep represents a duration that the container should sleep.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStart#sleep
    */
@@ -24064,8 +25145,8 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStart {
 
   /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
-   * for the backward compatibility. There are no validation of this field and
-   * lifecycle hooks will fail in runtime when tcp handler is specified.
+   * for backward compatibility. There is no validation of this field and
+   * lifecycle hooks will fail at runtime when it is specified.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStart#tcpSocket
    */
@@ -24105,21 +25186,21 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePostSta
  */
 export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop {
   /**
-   * Exec specifies the action to take.
+   * Exec specifies a command to execute in the container.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop#exec
    */
   readonly exec?: PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopExec;
 
   /**
-   * HTTPGet specifies the http request to perform.
+   * HTTPGet specifies an HTTP GET request to perform.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop#httpGet
    */
   readonly httpGet?: PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopHttpGet;
 
   /**
-   * Sleep represents the duration that the container should sleep before being terminated.
+   * Sleep represents a duration that the container should sleep.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop#sleep
    */
@@ -24127,8 +25208,8 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop {
 
   /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
-   * for the backward compatibility. There are no validation of this field and
-   * lifecycle hooks will fail in runtime when tcp handler is specified.
+   * for backward compatibility. There is no validation of this field and
+   * lifecycle hooks will fail at runtime when it is specified.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop#tcpSocket
    */
@@ -24154,7 +25235,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop
 /* eslint-enable max-len, quote-props */
 
 /**
- * Exec specifies the action to take.
+ * Exec specifies a command to execute in the container.
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbeExec
  */
@@ -24187,7 +25268,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLivenessProbeExe
 /* eslint-enable max-len, quote-props */
 
 /**
- * GRPC specifies an action involving a GRPC port.
+ * GRPC specifies a GRPC HealthCheckRequest.
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbeGrpc
  */
@@ -24227,7 +25308,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLivenessProbeGrp
 /* eslint-enable max-len, quote-props */
 
 /**
- * HTTPGet specifies the http request to perform.
+ * HTTPGet specifies an HTTP GET request to perform.
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbeHttpGet
  */
@@ -24293,7 +25374,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLivenessProbeHtt
 /* eslint-enable max-len, quote-props */
 
 /**
- * TCPSocket specifies an action involving a TCP port.
+ * TCPSocket specifies a connection to a TCP port.
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbeTcpSocket
  */
@@ -24332,7 +25413,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLivenessProbeTcp
 /* eslint-enable max-len, quote-props */
 
 /**
- * Exec specifies the action to take.
+ * Exec specifies a command to execute in the container.
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbeExec
  */
@@ -24365,7 +25446,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersReadinessProbeEx
 /* eslint-enable max-len, quote-props */
 
 /**
- * GRPC specifies an action involving a GRPC port.
+ * GRPC specifies a GRPC HealthCheckRequest.
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbeGrpc
  */
@@ -24405,7 +25486,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersReadinessProbeGr
 /* eslint-enable max-len, quote-props */
 
 /**
- * HTTPGet specifies the http request to perform.
+ * HTTPGet specifies an HTTP GET request to perform.
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbeHttpGet
  */
@@ -24471,7 +25552,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersReadinessProbeHt
 /* eslint-enable max-len, quote-props */
 
 /**
- * TCPSocket specifies an action involving a TCP port.
+ * TCPSocket specifies a connection to a TCP port.
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbeTcpSocket
  */
@@ -24835,7 +25916,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersSecurityContextW
 /* eslint-enable max-len, quote-props */
 
 /**
- * Exec specifies the action to take.
+ * Exec specifies a command to execute in the container.
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersStartupProbeExec
  */
@@ -24868,7 +25949,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersStartupProbeExec
 /* eslint-enable max-len, quote-props */
 
 /**
- * GRPC specifies an action involving a GRPC port.
+ * GRPC specifies a GRPC HealthCheckRequest.
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersStartupProbeGrpc
  */
@@ -24908,7 +25989,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersStartupProbeGrpc
 /* eslint-enable max-len, quote-props */
 
 /**
- * HTTPGet specifies the http request to perform.
+ * HTTPGet specifies an HTTP GET request to perform.
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersStartupProbeHttpGet
  */
@@ -24974,7 +26055,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersStartupProbeHttp
 /* eslint-enable max-len, quote-props */
 
 /**
- * TCPSocket specifies an action involving a TCP port.
+ * TCPSocket specifies a connection to a TCP port.
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersStartupProbeTcpSocket
  */
@@ -25159,21 +26240,21 @@ export function toJson_PoolerSpecTemplateSpecInitContainersEnvFromSecretRef(obj:
  */
 export interface PoolerSpecTemplateSpecInitContainersLifecyclePostStart {
   /**
-   * Exec specifies the action to take.
+   * Exec specifies a command to execute in the container.
    *
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePostStart#exec
    */
   readonly exec?: PoolerSpecTemplateSpecInitContainersLifecyclePostStartExec;
 
   /**
-   * HTTPGet specifies the http request to perform.
+   * HTTPGet specifies an HTTP GET request to perform.
    *
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePostStart#httpGet
    */
   readonly httpGet?: PoolerSpecTemplateSpecInitContainersLifecyclePostStartHttpGet;
 
   /**
-   * Sleep represents the duration that the container should sleep before being terminated.
+   * Sleep represents a duration that the container should sleep.
    *
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePostStart#sleep
    */
@@ -25181,8 +26262,8 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePostStart {
 
   /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
-   * for the backward compatibility. There are no validation of this field and
-   * lifecycle hooks will fail in runtime when tcp handler is specified.
+   * for backward compatibility. There is no validation of this field and
+   * lifecycle hooks will fail at runtime when it is specified.
    *
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePostStart#tcpSocket
    */
@@ -25222,21 +26303,21 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePostStart(ob
  */
 export interface PoolerSpecTemplateSpecInitContainersLifecyclePreStop {
   /**
-   * Exec specifies the action to take.
+   * Exec specifies a command to execute in the container.
    *
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePreStop#exec
    */
   readonly exec?: PoolerSpecTemplateSpecInitContainersLifecyclePreStopExec;
 
   /**
-   * HTTPGet specifies the http request to perform.
+   * HTTPGet specifies an HTTP GET request to perform.
    *
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePreStop#httpGet
    */
   readonly httpGet?: PoolerSpecTemplateSpecInitContainersLifecyclePreStopHttpGet;
 
   /**
-   * Sleep represents the duration that the container should sleep before being terminated.
+   * Sleep represents a duration that the container should sleep.
    *
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePreStop#sleep
    */
@@ -25244,8 +26325,8 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePreStop {
 
   /**
    * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
-   * for the backward compatibility. There are no validation of this field and
-   * lifecycle hooks will fail in runtime when tcp handler is specified.
+   * for backward compatibility. There is no validation of this field and
+   * lifecycle hooks will fail at runtime when it is specified.
    *
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePreStop#tcpSocket
    */
@@ -25271,7 +26352,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePreStop(obj:
 /* eslint-enable max-len, quote-props */
 
 /**
- * Exec specifies the action to take.
+ * Exec specifies a command to execute in the container.
  *
  * @schema PoolerSpecTemplateSpecInitContainersLivenessProbeExec
  */
@@ -25304,7 +26385,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLivenessProbeExec(obj
 /* eslint-enable max-len, quote-props */
 
 /**
- * GRPC specifies an action involving a GRPC port.
+ * GRPC specifies a GRPC HealthCheckRequest.
  *
  * @schema PoolerSpecTemplateSpecInitContainersLivenessProbeGrpc
  */
@@ -25344,7 +26425,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLivenessProbeGrpc(obj
 /* eslint-enable max-len, quote-props */
 
 /**
- * HTTPGet specifies the http request to perform.
+ * HTTPGet specifies an HTTP GET request to perform.
  *
  * @schema PoolerSpecTemplateSpecInitContainersLivenessProbeHttpGet
  */
@@ -25410,7 +26491,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLivenessProbeHttpGet(
 /* eslint-enable max-len, quote-props */
 
 /**
- * TCPSocket specifies an action involving a TCP port.
+ * TCPSocket specifies a connection to a TCP port.
  *
  * @schema PoolerSpecTemplateSpecInitContainersLivenessProbeTcpSocket
  */
@@ -25449,7 +26530,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLivenessProbeTcpSocke
 /* eslint-enable max-len, quote-props */
 
 /**
- * Exec specifies the action to take.
+ * Exec specifies a command to execute in the container.
  *
  * @schema PoolerSpecTemplateSpecInitContainersReadinessProbeExec
  */
@@ -25482,7 +26563,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersReadinessProbeExec(ob
 /* eslint-enable max-len, quote-props */
 
 /**
- * GRPC specifies an action involving a GRPC port.
+ * GRPC specifies a GRPC HealthCheckRequest.
  *
  * @schema PoolerSpecTemplateSpecInitContainersReadinessProbeGrpc
  */
@@ -25522,7 +26603,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersReadinessProbeGrpc(ob
 /* eslint-enable max-len, quote-props */
 
 /**
- * HTTPGet specifies the http request to perform.
+ * HTTPGet specifies an HTTP GET request to perform.
  *
  * @schema PoolerSpecTemplateSpecInitContainersReadinessProbeHttpGet
  */
@@ -25588,7 +26669,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersReadinessProbeHttpGet
 /* eslint-enable max-len, quote-props */
 
 /**
- * TCPSocket specifies an action involving a TCP port.
+ * TCPSocket specifies a connection to a TCP port.
  *
  * @schema PoolerSpecTemplateSpecInitContainersReadinessProbeTcpSocket
  */
@@ -25952,7 +27033,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersSecurityContextWindow
 /* eslint-enable max-len, quote-props */
 
 /**
- * Exec specifies the action to take.
+ * Exec specifies a command to execute in the container.
  *
  * @schema PoolerSpecTemplateSpecInitContainersStartupProbeExec
  */
@@ -25985,7 +27066,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersStartupProbeExec(obj:
 /* eslint-enable max-len, quote-props */
 
 /**
- * GRPC specifies an action involving a GRPC port.
+ * GRPC specifies a GRPC HealthCheckRequest.
  *
  * @schema PoolerSpecTemplateSpecInitContainersStartupProbeGrpc
  */
@@ -26025,7 +27106,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersStartupProbeGrpc(obj:
 /* eslint-enable max-len, quote-props */
 
 /**
- * HTTPGet specifies the http request to perform.
+ * HTTPGet specifies an HTTP GET request to perform.
  *
  * @schema PoolerSpecTemplateSpecInitContainersStartupProbeHttpGet
  */
@@ -26091,7 +27172,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersStartupProbeHttpGet(o
 /* eslint-enable max-len, quote-props */
 
 /**
- * TCPSocket specifies an action involving a TCP port.
+ * TCPSocket specifies a connection to a TCP port.
  *
  * @schema PoolerSpecTemplateSpecInitContainersStartupProbeTcpSocket
  */
@@ -27400,7 +28481,7 @@ export function toJson_PoolerSpecTemplateSpecContainersEnvValueFromSecretKeyRef(
 /* eslint-enable max-len, quote-props */
 
 /**
- * Exec specifies the action to take.
+ * Exec specifies a command to execute in the container.
  *
  * @schema PoolerSpecTemplateSpecContainersLifecyclePostStartExec
  */
@@ -27433,7 +28514,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePostStartExec(ob
 /* eslint-enable max-len, quote-props */
 
 /**
- * HTTPGet specifies the http request to perform.
+ * HTTPGet specifies an HTTP GET request to perform.
  *
  * @schema PoolerSpecTemplateSpecContainersLifecyclePostStartHttpGet
  */
@@ -27499,7 +28580,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePostStartHttpGet
 /* eslint-enable max-len, quote-props */
 
 /**
- * Sleep represents the duration that the container should sleep before being terminated.
+ * Sleep represents a duration that the container should sleep.
  *
  * @schema PoolerSpecTemplateSpecContainersLifecyclePostStartSleep
  */
@@ -27529,8 +28610,8 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePostStartSleep(o
 
 /**
  * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
- * for the backward compatibility. There are no validation of this field and
- * lifecycle hooks will fail in runtime when tcp handler is specified.
+ * for backward compatibility. There is no validation of this field and
+ * lifecycle hooks will fail at runtime when it is specified.
  *
  * @schema PoolerSpecTemplateSpecContainersLifecyclePostStartTcpSocket
  */
@@ -27569,7 +28650,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePostStartTcpSock
 /* eslint-enable max-len, quote-props */
 
 /**
- * Exec specifies the action to take.
+ * Exec specifies a command to execute in the container.
  *
  * @schema PoolerSpecTemplateSpecContainersLifecyclePreStopExec
  */
@@ -27602,7 +28683,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePreStopExec(obj:
 /* eslint-enable max-len, quote-props */
 
 /**
- * HTTPGet specifies the http request to perform.
+ * HTTPGet specifies an HTTP GET request to perform.
  *
  * @schema PoolerSpecTemplateSpecContainersLifecyclePreStopHttpGet
  */
@@ -27668,7 +28749,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePreStopHttpGet(o
 /* eslint-enable max-len, quote-props */
 
 /**
- * Sleep represents the duration that the container should sleep before being terminated.
+ * Sleep represents a duration that the container should sleep.
  *
  * @schema PoolerSpecTemplateSpecContainersLifecyclePreStopSleep
  */
@@ -27698,8 +28779,8 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePreStopSleep(obj
 
 /**
  * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
- * for the backward compatibility. There are no validation of this field and
- * lifecycle hooks will fail in runtime when tcp handler is specified.
+ * for backward compatibility. There is no validation of this field and
+ * lifecycle hooks will fail at runtime when it is specified.
  *
  * @schema PoolerSpecTemplateSpecContainersLifecyclePreStopTcpSocket
  */
@@ -28142,7 +29223,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFromSecr
 /* eslint-enable max-len, quote-props */
 
 /**
- * Exec specifies the action to take.
+ * Exec specifies a command to execute in the container.
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartExec
  */
@@ -28175,7 +29256,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePostSta
 /* eslint-enable max-len, quote-props */
 
 /**
- * HTTPGet specifies the http request to perform.
+ * HTTPGet specifies an HTTP GET request to perform.
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartHttpGet
  */
@@ -28241,7 +29322,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePostSta
 /* eslint-enable max-len, quote-props */
 
 /**
- * Sleep represents the duration that the container should sleep before being terminated.
+ * Sleep represents a duration that the container should sleep.
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartSleep
  */
@@ -28271,8 +29352,8 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePostSta
 
 /**
  * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
- * for the backward compatibility. There are no validation of this field and
- * lifecycle hooks will fail in runtime when tcp handler is specified.
+ * for backward compatibility. There is no validation of this field and
+ * lifecycle hooks will fail at runtime when it is specified.
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartTcpSocket
  */
@@ -28311,7 +29392,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePostSta
 /* eslint-enable max-len, quote-props */
 
 /**
- * Exec specifies the action to take.
+ * Exec specifies a command to execute in the container.
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopExec
  */
@@ -28344,7 +29425,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop
 /* eslint-enable max-len, quote-props */
 
 /**
- * HTTPGet specifies the http request to perform.
+ * HTTPGet specifies an HTTP GET request to perform.
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopHttpGet
  */
@@ -28410,7 +29491,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop
 /* eslint-enable max-len, quote-props */
 
 /**
- * Sleep represents the duration that the container should sleep before being terminated.
+ * Sleep represents a duration that the container should sleep.
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopSleep
  */
@@ -28440,8 +29521,8 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop
 
 /**
  * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
- * for the backward compatibility. There are no validation of this field and
- * lifecycle hooks will fail in runtime when tcp handler is specified.
+ * for backward compatibility. There is no validation of this field and
+ * lifecycle hooks will fail at runtime when it is specified.
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopTcpSocket
  */
@@ -28884,7 +29965,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersEnvValueFromSecretKey
 /* eslint-enable max-len, quote-props */
 
 /**
- * Exec specifies the action to take.
+ * Exec specifies a command to execute in the container.
  *
  * @schema PoolerSpecTemplateSpecInitContainersLifecyclePostStartExec
  */
@@ -28917,7 +29998,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePostStartExe
 /* eslint-enable max-len, quote-props */
 
 /**
- * HTTPGet specifies the http request to perform.
+ * HTTPGet specifies an HTTP GET request to perform.
  *
  * @schema PoolerSpecTemplateSpecInitContainersLifecyclePostStartHttpGet
  */
@@ -28983,7 +30064,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePostStartHtt
 /* eslint-enable max-len, quote-props */
 
 /**
- * Sleep represents the duration that the container should sleep before being terminated.
+ * Sleep represents a duration that the container should sleep.
  *
  * @schema PoolerSpecTemplateSpecInitContainersLifecyclePostStartSleep
  */
@@ -29013,8 +30094,8 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePostStartSle
 
 /**
  * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
- * for the backward compatibility. There are no validation of this field and
- * lifecycle hooks will fail in runtime when tcp handler is specified.
+ * for backward compatibility. There is no validation of this field and
+ * lifecycle hooks will fail at runtime when it is specified.
  *
  * @schema PoolerSpecTemplateSpecInitContainersLifecyclePostStartTcpSocket
  */
@@ -29053,7 +30134,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePostStartTcp
 /* eslint-enable max-len, quote-props */
 
 /**
- * Exec specifies the action to take.
+ * Exec specifies a command to execute in the container.
  *
  * @schema PoolerSpecTemplateSpecInitContainersLifecyclePreStopExec
  */
@@ -29086,7 +30167,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePreStopExec(
 /* eslint-enable max-len, quote-props */
 
 /**
- * HTTPGet specifies the http request to perform.
+ * HTTPGet specifies an HTTP GET request to perform.
  *
  * @schema PoolerSpecTemplateSpecInitContainersLifecyclePreStopHttpGet
  */
@@ -29152,7 +30233,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePreStopHttpG
 /* eslint-enable max-len, quote-props */
 
 /**
- * Sleep represents the duration that the container should sleep before being terminated.
+ * Sleep represents a duration that the container should sleep.
  *
  * @schema PoolerSpecTemplateSpecInitContainersLifecyclePreStopSleep
  */
@@ -29182,8 +30263,8 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePreStopSleep
 
 /**
  * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
- * for the backward compatibility. There are no validation of this field and
- * lifecycle hooks will fail in runtime when tcp handler is specified.
+ * for backward compatibility. There is no validation of this field and
+ * lifecycle hooks will fail at runtime when it is specified.
  *
  * @schema PoolerSpecTemplateSpecInitContainersLifecyclePreStopTcpSocket
  */
@@ -31877,6 +32958,345 @@ export class PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItemsResour
 
 
 /**
+ * Publication is the Schema for the publications API
+ *
+ * @schema Publication
+ */
+export class Publication extends ApiObject {
+  /**
+   * Returns the apiVersion and kind for "Publication"
+   */
+  public static readonly GVK: GroupVersionKind = {
+    apiVersion: 'postgresql.cnpg.io/v1',
+    kind: 'Publication',
+  }
+
+  /**
+   * Renders a Kubernetes manifest for "Publication".
+   *
+   * This can be used to inline resource manifests inside other objects (e.g. as templates).
+   *
+   * @param props initialization props
+   */
+  public static manifest(props: PublicationProps): any {
+    return {
+      ...Publication.GVK,
+      ...toJson_PublicationProps(props),
+    };
+  }
+
+  /**
+   * Defines a "Publication" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialization props
+   */
+  public constructor(scope: Construct, id: string, props: PublicationProps) {
+    super(scope, id, {
+      ...Publication.GVK,
+      ...props,
+    });
+  }
+
+  /**
+   * Renders the object to Kubernetes JSON.
+   */
+  public toJson(): any {
+    const resolved = super.toJson();
+
+    return {
+      ...Publication.GVK,
+      ...toJson_PublicationProps(resolved),
+    };
+  }
+}
+
+/**
+ * Publication is the Schema for the publications API
+ *
+ * @schema Publication
+ */
+export interface PublicationProps {
+  /**
+   * @schema Publication#metadata
+   */
+  readonly metadata: ApiObjectMetadata;
+
+  /**
+   * PublicationSpec defines the desired state of Publication
+   *
+   * @schema Publication#spec
+   */
+  readonly spec: PublicationSpec;
+
+}
+
+/**
+ * Converts an object of type 'PublicationProps' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PublicationProps(obj: PublicationProps | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': obj.metadata,
+    'spec': toJson_PublicationSpec(obj.spec),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * PublicationSpec defines the desired state of Publication
+ *
+ * @schema PublicationSpec
+ */
+export interface PublicationSpec {
+  /**
+   * The name of the PostgreSQL cluster that identifies the "publisher"
+   *
+   * @schema PublicationSpec#cluster
+   */
+  readonly cluster: PublicationSpecCluster;
+
+  /**
+   * The name of the database where the publication will be installed in
+   * the "publisher" cluster
+   *
+   * @schema PublicationSpec#dbname
+   */
+  readonly dbname: string;
+
+  /**
+   * The name of the publication inside PostgreSQL
+   *
+   * @schema PublicationSpec#name
+   */
+  readonly name: string;
+
+  /**
+   * Publication parameters part of the `WITH` clause as expected by
+   * PostgreSQL `CREATE PUBLICATION` command
+   *
+   * @schema PublicationSpec#parameters
+   */
+  readonly parameters?: { [key: string]: string };
+
+  /**
+   * The policy for end-of-life maintenance of this publication
+   *
+   * @schema PublicationSpec#publicationReclaimPolicy
+   */
+  readonly publicationReclaimPolicy?: PublicationSpecPublicationReclaimPolicy;
+
+  /**
+   * Target of the publication as expected by PostgreSQL `CREATE PUBLICATION` command
+   *
+   * @schema PublicationSpec#target
+   */
+  readonly target: PublicationSpecTarget;
+
+}
+
+/**
+ * Converts an object of type 'PublicationSpec' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PublicationSpec(obj: PublicationSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'cluster': toJson_PublicationSpecCluster(obj.cluster),
+    'dbname': obj.dbname,
+    'name': obj.name,
+    'parameters': ((obj.parameters) === undefined) ? undefined : (Object.entries(obj.parameters).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'publicationReclaimPolicy': obj.publicationReclaimPolicy,
+    'target': toJson_PublicationSpecTarget(obj.target),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The name of the PostgreSQL cluster that identifies the "publisher"
+ *
+ * @schema PublicationSpecCluster
+ */
+export interface PublicationSpecCluster {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema PublicationSpecCluster#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'PublicationSpecCluster' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PublicationSpecCluster(obj: PublicationSpecCluster | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The policy for end-of-life maintenance of this publication
+ *
+ * @schema PublicationSpecPublicationReclaimPolicy
+ */
+export enum PublicationSpecPublicationReclaimPolicy {
+  /** delete */
+  DELETE = "delete",
+  /** retain */
+  RETAIN = "retain",
+}
+
+/**
+ * Target of the publication as expected by PostgreSQL `CREATE PUBLICATION` command
+ *
+ * @schema PublicationSpecTarget
+ */
+export interface PublicationSpecTarget {
+  /**
+   * Marks the publication as one that replicates changes for all tables
+   * in the database, including tables created in the future.
+   * Corresponding to `FOR ALL TABLES` in PostgreSQL.
+   *
+   * @schema PublicationSpecTarget#allTables
+   */
+  readonly allTables?: boolean;
+
+  /**
+   * Just the following schema objects
+   *
+   * @schema PublicationSpecTarget#objects
+   */
+  readonly objects?: PublicationSpecTargetObjects[];
+
+}
+
+/**
+ * Converts an object of type 'PublicationSpecTarget' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PublicationSpecTarget(obj: PublicationSpecTarget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'allTables': obj.allTables,
+    'objects': obj.objects?.map(y => toJson_PublicationSpecTargetObjects(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * PublicationTargetObject is an object to publish
+ *
+ * @schema PublicationSpecTargetObjects
+ */
+export interface PublicationSpecTargetObjects {
+  /**
+   * Specifies a list of tables to add to the publication. Corresponding
+   * to `FOR TABLE` in PostgreSQL.
+   *
+   * @schema PublicationSpecTargetObjects#table
+   */
+  readonly table?: PublicationSpecTargetObjectsTable;
+
+  /**
+   * Marks the publication as one that replicates changes for all tables
+   * in the specified list of schemas, including tables created in the
+   * future. Corresponding to `FOR TABLES IN SCHEMA` in PostgreSQL.
+   *
+   * @schema PublicationSpecTargetObjects#tablesInSchema
+   */
+  readonly tablesInSchema?: string;
+
+}
+
+/**
+ * Converts an object of type 'PublicationSpecTargetObjects' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PublicationSpecTargetObjects(obj: PublicationSpecTargetObjects | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'table': toJson_PublicationSpecTargetObjectsTable(obj.table),
+    'tablesInSchema': obj.tablesInSchema,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Specifies a list of tables to add to the publication. Corresponding
+ * to `FOR TABLE` in PostgreSQL.
+ *
+ * @schema PublicationSpecTargetObjectsTable
+ */
+export interface PublicationSpecTargetObjectsTable {
+  /**
+   * The columns to publish
+   *
+   * @schema PublicationSpecTargetObjectsTable#columns
+   */
+  readonly columns?: string[];
+
+  /**
+   * The table name
+   *
+   * @schema PublicationSpecTargetObjectsTable#name
+   */
+  readonly name: string;
+
+  /**
+   * Whether to limit to the table only or include all its descendants
+   *
+   * @schema PublicationSpecTargetObjectsTable#only
+   */
+  readonly only?: boolean;
+
+  /**
+   * The schema name
+   *
+   * @schema PublicationSpecTargetObjectsTable#schema
+   */
+  readonly schema?: string;
+
+}
+
+/**
+ * Converts an object of type 'PublicationSpecTargetObjectsTable' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PublicationSpecTargetObjectsTable(obj: PublicationSpecTargetObjectsTable | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'columns': obj.columns?.map(y => y),
+    'name': obj.name,
+    'only': obj.only,
+    'schema': obj.schema,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+
+/**
  * ScheduledBackup is the Schema for the scheduledbackups API
  *
  * @schema ScheduledBackup
@@ -32248,5 +33668,230 @@ export enum ScheduledBackupSpecTarget {
   PRIMARY = "primary",
   /** prefer-standby */
   PREFER_HYPHEN_STANDBY = "prefer-standby",
+}
+
+
+/**
+ * Subscription is the Schema for the subscriptions API
+ *
+ * @schema Subscription
+ */
+export class Subscription extends ApiObject {
+  /**
+   * Returns the apiVersion and kind for "Subscription"
+   */
+  public static readonly GVK: GroupVersionKind = {
+    apiVersion: 'postgresql.cnpg.io/v1',
+    kind: 'Subscription',
+  }
+
+  /**
+   * Renders a Kubernetes manifest for "Subscription".
+   *
+   * This can be used to inline resource manifests inside other objects (e.g. as templates).
+   *
+   * @param props initialization props
+   */
+  public static manifest(props: SubscriptionProps): any {
+    return {
+      ...Subscription.GVK,
+      ...toJson_SubscriptionProps(props),
+    };
+  }
+
+  /**
+   * Defines a "Subscription" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialization props
+   */
+  public constructor(scope: Construct, id: string, props: SubscriptionProps) {
+    super(scope, id, {
+      ...Subscription.GVK,
+      ...props,
+    });
+  }
+
+  /**
+   * Renders the object to Kubernetes JSON.
+   */
+  public toJson(): any {
+    const resolved = super.toJson();
+
+    return {
+      ...Subscription.GVK,
+      ...toJson_SubscriptionProps(resolved),
+    };
+  }
+}
+
+/**
+ * Subscription is the Schema for the subscriptions API
+ *
+ * @schema Subscription
+ */
+export interface SubscriptionProps {
+  /**
+   * @schema Subscription#metadata
+   */
+  readonly metadata: ApiObjectMetadata;
+
+  /**
+   * SubscriptionSpec defines the desired state of Subscription
+   *
+   * @schema Subscription#spec
+   */
+  readonly spec: SubscriptionSpec;
+
+}
+
+/**
+ * Converts an object of type 'SubscriptionProps' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_SubscriptionProps(obj: SubscriptionProps | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': obj.metadata,
+    'spec': toJson_SubscriptionSpec(obj.spec),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * SubscriptionSpec defines the desired state of Subscription
+ *
+ * @schema SubscriptionSpec
+ */
+export interface SubscriptionSpec {
+  /**
+   * The name of the PostgreSQL cluster that identifies the "subscriber"
+   *
+   * @schema SubscriptionSpec#cluster
+   */
+  readonly cluster: SubscriptionSpecCluster;
+
+  /**
+   * The name of the database where the publication will be installed in
+   * the "subscriber" cluster
+   *
+   * @schema SubscriptionSpec#dbname
+   */
+  readonly dbname: string;
+
+  /**
+   * The name of the external cluster with the publication ("publisher")
+   *
+   * @schema SubscriptionSpec#externalClusterName
+   */
+  readonly externalClusterName: string;
+
+  /**
+   * The name of the subscription inside PostgreSQL
+   *
+   * @schema SubscriptionSpec#name
+   */
+  readonly name: string;
+
+  /**
+   * Subscription parameters part of the `WITH` clause as expected by
+   * PostgreSQL `CREATE SUBSCRIPTION` command
+   *
+   * @schema SubscriptionSpec#parameters
+   */
+  readonly parameters?: { [key: string]: string };
+
+  /**
+   * The name of the database containing the publication on the external
+   * cluster. Defaults to the one in the external cluster definition.
+   *
+   * @default the one in the external cluster definition.
+   * @schema SubscriptionSpec#publicationDBName
+   */
+  readonly publicationDbName?: string;
+
+  /**
+   * The name of the publication inside the PostgreSQL database in the
+   * "publisher"
+   *
+   * @schema SubscriptionSpec#publicationName
+   */
+  readonly publicationName: string;
+
+  /**
+   * The policy for end-of-life maintenance of this subscription
+   *
+   * @schema SubscriptionSpec#subscriptionReclaimPolicy
+   */
+  readonly subscriptionReclaimPolicy?: SubscriptionSpecSubscriptionReclaimPolicy;
+
+}
+
+/**
+ * Converts an object of type 'SubscriptionSpec' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_SubscriptionSpec(obj: SubscriptionSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'cluster': toJson_SubscriptionSpecCluster(obj.cluster),
+    'dbname': obj.dbname,
+    'externalClusterName': obj.externalClusterName,
+    'name': obj.name,
+    'parameters': ((obj.parameters) === undefined) ? undefined : (Object.entries(obj.parameters).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'publicationDBName': obj.publicationDbName,
+    'publicationName': obj.publicationName,
+    'subscriptionReclaimPolicy': obj.subscriptionReclaimPolicy,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The name of the PostgreSQL cluster that identifies the "subscriber"
+ *
+ * @schema SubscriptionSpecCluster
+ */
+export interface SubscriptionSpecCluster {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema SubscriptionSpecCluster#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'SubscriptionSpecCluster' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_SubscriptionSpecCluster(obj: SubscriptionSpecCluster | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The policy for end-of-life maintenance of this subscription
+ *
+ * @schema SubscriptionSpecSubscriptionReclaimPolicy
+ */
+export enum SubscriptionSpecSubscriptionReclaimPolicy {
+  /** delete */
+  DELETE = "delete",
+  /** retain */
+  RETAIN = "retain",
 }
 

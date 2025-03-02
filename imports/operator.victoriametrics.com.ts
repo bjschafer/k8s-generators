@@ -258,7 +258,7 @@ export interface VLogsSpec {
   readonly managedMetadata?: VLogsSpecManagedMetadata;
 
   /**
-   * MinReadySeconds defines a minim number os seconds to wait before starting update next pod
+   * MinReadySeconds defines a minimum number of seconds to wait before starting update next pod
    * if previous in healthy state
    * Has no effect for VLogs and VMSingle
    *
@@ -2253,7 +2253,7 @@ export interface VmAgentSpec {
   readonly maxScrapeInterval?: string;
 
   /**
-   * MinReadySeconds defines a minim number os seconds to wait before starting update next pod
+   * MinReadySeconds defines a minimum number of seconds to wait before starting update next pod
    * if previous in healthy state
    * Has no effect for VLogs and VMSingle
    *
@@ -11329,7 +11329,7 @@ export interface VmAlertSpec {
   readonly managedMetadata?: VmAlertSpecManagedMetadata;
 
   /**
-   * MinReadySeconds defines a minim number os seconds to wait before starting update next pod
+   * MinReadySeconds defines a minimum number of seconds to wait before starting update next pod
    * if previous in healthy state
    * Has no effect for VLogs and VMSingle
    *
@@ -15419,7 +15419,7 @@ export interface VmAlertmanagerSpec {
   readonly managedMetadata?: VmAlertmanagerSpecManagedMetadata;
 
   /**
-   * MinReadySeconds defines a minim number os seconds to wait before starting update next pod
+   * MinReadySeconds defines a minimum number of seconds to wait before starting update next pod
    * if previous in healthy state
    * Has no effect for VLogs and VMSingle
    *
@@ -21344,6 +21344,13 @@ export interface VmAlertmanagerConfigSpecReceiversTelegramConfigs {
   readonly message?: string;
 
   /**
+   * MessageThreadID defines ID of the message thread where to send the messages.
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversTelegramConfigs#message_thread_id
+   */
+  readonly messageThreadId?: number;
+
+  /**
    * ParseMode for telegram message,
    * supported values are MarkdownV2, Markdown, Markdown and empty string for plain text.
    *
@@ -21373,6 +21380,7 @@ export function toJson_VmAlertmanagerConfigSpecReceiversTelegramConfigs(obj: VmA
     'disable_notifications': obj.disableNotifications,
     'http_config': obj.httpConfig,
     'message': obj.message,
+    'message_thread_id': obj.messageThreadId,
     'parse_mode': obj.parseMode,
     'send_resolved': obj.sendResolved,
   };
@@ -29860,7 +29868,7 @@ export interface VmAuthSpec {
   readonly managedMetadata?: VmAuthSpecManagedMetadata;
 
   /**
-   * MinReadySeconds defines a minim number os seconds to wait before starting update next pod
+   * MinReadySeconds defines a minimum number of seconds to wait before starting update next pod
    * if previous in healthy state
    * Has no effect for VLogs and VMSingle
    *
@@ -33413,7 +33421,7 @@ export interface VmClusterSpecVminsert {
   readonly logLevel?: VmClusterSpecVminsertLogLevel;
 
   /**
-   * MinReadySeconds defines a minim number os seconds to wait before starting update next pod
+   * MinReadySeconds defines a minimum number of seconds to wait before starting update next pod
    * if previous in healthy state
    * Has no effect for VLogs and VMSingle
    *
@@ -33858,7 +33866,7 @@ export interface VmClusterSpecVmselect {
   readonly logLevel?: VmClusterSpecVmselectLogLevel;
 
   /**
-   * MinReadySeconds defines a minim number os seconds to wait before starting update next pod
+   * MinReadySeconds defines a minimum number of seconds to wait before starting update next pod
    * if previous in healthy state
    * Has no effect for VLogs and VMSingle
    *
@@ -34308,7 +34316,7 @@ export interface VmClusterSpecVmstorage {
   readonly maintenanceSelectNodeIDs?: number[];
 
   /**
-   * MinReadySeconds defines a minim number os seconds to wait before starting update next pod
+   * MinReadySeconds defines a minimum number of seconds to wait before starting update next pod
    * if previous in healthy state
    * Has no effect for VLogs and VMSingle
    *
@@ -50198,7 +50206,7 @@ export interface VmScrapeConfigSpecGceSdConfigs {
    *
    * @schema VmScrapeConfigSpecGceSdConfigs#zone
    */
-  readonly zone: string;
+  readonly zone: any;
 
 }
 
@@ -61935,7 +61943,7 @@ export interface VmSingleSpec {
   readonly managedMetadata?: VmSingleSpecManagedMetadata;
 
   /**
-   * MinReadySeconds defines a minim number os seconds to wait before starting update next pod
+   * MinReadySeconds defines a minimum number of seconds to wait before starting update next pod
    * if previous in healthy state
    * Has no effect for VLogs and VMSingle
    *
@@ -68428,6 +68436,8 @@ export enum VmUserSpecTargetRefsCrdKind {
   VM_ALERT = "VMAlert",
   /** VMSingle */
   VM_SINGLE = "VMSingle",
+  /** VLogs */
+  V_LOGS = "VLogs",
   /** VMAlertManager */
   VM_ALERT_MANAGER = "VMAlertManager",
   /** VMCluster/vmselect */

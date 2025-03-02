@@ -133,6 +133,11 @@ export interface PlanSpec {
   readonly nodeSelector?: PlanSpecNodeSelector;
 
   /**
+   * @schema PlanSpec#postCompleteDelay
+   */
+  readonly postCompleteDelay?: string;
+
+  /**
    * @schema PlanSpec#prepare
    */
   readonly prepare?: PlanSpecPrepare;
@@ -162,6 +167,11 @@ export interface PlanSpec {
    */
   readonly version?: string;
 
+  /**
+   * @schema PlanSpec#window
+   */
+  readonly window?: PlanSpecWindow;
+
 }
 
 /**
@@ -179,12 +189,14 @@ export function toJson_PlanSpec(obj: PlanSpec | undefined): Record<string, any> 
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_PlanSpecImagePullSecrets(y)),
     'jobActiveDeadlineSecs': obj.jobActiveDeadlineSecs,
     'nodeSelector': toJson_PlanSpecNodeSelector(obj.nodeSelector),
+    'postCompleteDelay': obj.postCompleteDelay,
     'prepare': toJson_PlanSpecPrepare(obj.prepare),
     'secrets': obj.secrets?.map(y => toJson_PlanSpecSecrets(y)),
     'serviceAccountName': obj.serviceAccountName,
     'tolerations': obj.tolerations?.map(y => toJson_PlanSpecTolerations(y)),
     'upgrade': toJson_PlanSpecUpgrade(obj.upgrade),
     'version': obj.version,
+    'window': toJson_PlanSpecWindow(obj.window),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -522,6 +534,49 @@ export function toJson_PlanSpecUpgrade(obj: PlanSpecUpgrade | undefined): Record
     'image': obj.image,
     'securityContext': toJson_PlanSpecUpgradeSecurityContext(obj.securityContext),
     'volumes': obj.volumes?.map(y => toJson_PlanSpecUpgradeVolumes(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * @schema PlanSpecWindow
+ */
+export interface PlanSpecWindow {
+  /**
+   * @schema PlanSpecWindow#days
+   */
+  readonly days?: string[];
+
+  /**
+   * @schema PlanSpecWindow#endTime
+   */
+  readonly endTime?: string;
+
+  /**
+   * @schema PlanSpecWindow#startTime
+   */
+  readonly startTime?: string;
+
+  /**
+   * @schema PlanSpecWindow#timeZone
+   */
+  readonly timeZone?: string;
+
+}
+
+/**
+ * Converts an object of type 'PlanSpecWindow' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_PlanSpecWindow(obj: PlanSpecWindow | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'days': obj.days?.map(y => y),
+    'endTime': obj.endTime,
+    'startTime': obj.startTime,
+    'timeZone': obj.timeZone,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});

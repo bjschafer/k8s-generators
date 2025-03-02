@@ -1475,6 +1475,13 @@ export interface ChallengeSpecSolverDns01AzureDnsManagedIdentity {
    */
   readonly resourceId?: string;
 
+  /**
+   * tenant ID of the managed identity, can not be used at the same time as resourceID
+   *
+   * @schema ChallengeSpecSolverDns01AzureDnsManagedIdentity#tenantID
+   */
+  readonly tenantId?: string;
+
 }
 
 /**
@@ -1486,6 +1493,7 @@ export function toJson_ChallengeSpecSolverDns01AzureDnsManagedIdentity(obj: Chal
   const result = {
     'clientID': obj.clientId,
     'resourceID': obj.resourceId,
+    'tenantID': obj.tenantId,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});

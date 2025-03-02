@@ -1359,6 +1359,17 @@ export interface BgpPeerV1Beta2Spec {
   readonly disableMp?: boolean;
 
   /**
+   * DynamicASN detects the AS number to use for the remote end of the session
+   * without explicitly setting it via the ASN field. Limited to:
+   * internal - if the neighbor's ASN is different than MyASN connection is denied.
+   * external - if the neighbor's ASN is the same as MyASN the connection is denied.
+   * ASN and DynamicASN are mutually exclusive and one of them must be specified.
+   *
+   * @schema BgpPeerV1Beta2Spec#dynamicASN
+   */
+  readonly dynamicAsn?: BgpPeerV1Beta2SpecDynamicAsn;
+
+  /**
    * To set if the BGPPeer is multi-hops away. Needed for FRR mode only.
    *
    * @schema BgpPeerV1Beta2Spec#ebgpMultiHop
@@ -1366,10 +1377,10 @@ export interface BgpPeerV1Beta2Spec {
   readonly ebgpMultiHop?: boolean;
 
   /**
-   * EnableGracefulRestart allows BGP peer to continue to forward data packets along
-   * known routes while the routing protocol information is being restored.
-   * This field is immutable because it requires restart of the BGP session
-   * Supported for FRR mode only.
+   * EnableGracefulRestart allows BGP peer to continue to forward data packets
+   * along known routes while the routing protocol information is being
+   * restored. This field is immutable because it requires restart of the BGP
+   * session. Supported for FRR mode only.
    *
    * @schema BgpPeerV1Beta2Spec#enableGracefulRestart
    */
@@ -1423,10 +1434,11 @@ export interface BgpPeerV1Beta2Spec {
 
   /**
    * AS number to expect from the remote end of the session.
+   * ASN and DynamicASN are mutually exclusive and one of them must be specified.
    *
    * @schema BgpPeerV1Beta2Spec#peerASN
    */
-  readonly peerAsn: number;
+  readonly peerAsn?: number;
 
   /**
    * Address to dial when establishing the session.
@@ -1476,6 +1488,7 @@ export function toJson_BgpPeerV1Beta2Spec(obj: BgpPeerV1Beta2Spec | undefined): 
     'bfdProfile': obj.bfdProfile,
     'connectTime': obj.connectTime,
     'disableMP': obj.disableMp,
+    'dynamicASN': obj.dynamicAsn,
     'ebgpMultiHop': obj.ebgpMultiHop,
     'enableGracefulRestart': obj.enableGracefulRestart,
     'holdTime': obj.holdTime,
@@ -1495,6 +1508,22 @@ export function toJson_BgpPeerV1Beta2Spec(obj: BgpPeerV1Beta2Spec | undefined): 
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
+
+/**
+ * DynamicASN detects the AS number to use for the remote end of the session
+ * without explicitly setting it via the ASN field. Limited to:
+ * internal - if the neighbor's ASN is different than MyASN connection is denied.
+ * external - if the neighbor's ASN is the same as MyASN the connection is denied.
+ * ASN and DynamicASN are mutually exclusive and one of them must be specified.
+ *
+ * @schema BgpPeerV1Beta2SpecDynamicAsn
+ */
+export enum BgpPeerV1Beta2SpecDynamicAsn {
+  /** internal */
+  INTERNAL = "internal",
+  /** external */
+  EXTERNAL = "external",
+}
 
 /**
  * A label selector is a label query over a set of resources. The result of matchLabels and
