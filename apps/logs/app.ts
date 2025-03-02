@@ -9,12 +9,15 @@ import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { Construct } from "constructs";
 import { StorageClass } from "../../lib/volume";
 import {
+  VmAlert,
   VmPodScrape,
   VmServiceScrape,
 } from "../../imports/operator.victoriametrics.com";
 import { IntOrString, KubeService } from "../../imports/k8s";
+import { LOGS_RULE } from "../../lib/monitoring/alerts";
+import { addAlerts } from "./alerts";
 
-const namespace = basename(__dirname);
+export const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
 const version = "0.9.2";
@@ -34,6 +37,8 @@ NewArgoApp(name, {
 class VMLogs extends Chart {
   constructor(scope: Construct, id: string) {
     super(scope, id);
+    const url =
+      "http://prod-victoria-logs-single-server.logs.svc.cluster.local:9428/insert/elasticsearch";
 
     new Helm(this, "vmlogs", {
       chart: "victoria-logs-single",
@@ -102,9 +107,7 @@ class VMLogs extends Chart {
           customConfig: {
             sinks: {
               vlogs: {
-                endpoints: [
-                  "http://prod-victoria-logs-single-server.logs.svc.cluster.local:9428/insert/elasticsearch",
-                ],
+                endpoints: [url],
               },
             },
           },
@@ -226,8 +229,37 @@ class VMLogs extends Chart {
         podMetricsEndpoints: [{ port: "prom-exporter" }],
       },
     });
+
+    new VmAlert(this, "alert", {
+      metadata: {
+        name: name,
+        namespace: namespace,
+      },
+      spec: {
+        datasource: {
+          url: url,
+        },
+        notifiers: [
+          {
+            url: "http://vmalertmanager-metrics.metrics.svc.cluster.local.:9093",
+          },
+        ],
+        remoteRead: {
+          url: "http://vmsingle-metrics.metrics.svc.cluster.local.:8429",
+        },
+        remoteWrite: {
+          url: "http://vmsingle-metrics.metrics.svc.cluster.local.:8429/api/v1/write",
+        },
+        ruleSelector: {
+          matchLabels: LOGS_RULE,
+        },
+        extraArgs: { "rule.defaultRuleType": "vlogs" },
+      },
+    });
   }
 }
+
+addAlerts(app, "alerts");
 
 new VMLogs(app, "vm-logs");
 app.synth();

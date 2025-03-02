@@ -1,0 +1,19 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMAlert
+metadata:
+  name: logs
+  namespace: logs
+spec:
+  datasource:
+    url: http://prod-victoria-logs-single-server.logs.svc.cluster.local:9428/insert/elasticsearch
+  extraArgs:
+    rule.defaultRuleType: vlogs
+  notifiers:
+    - url: http://vmalertmanager-metrics.metrics.svc.cluster.local.:9093
+  remoteRead:
+    url: http://vmsingle-metrics.metrics.svc.cluster.local.:8429
+  remoteWrite:
+    url: http://vmsingle-metrics.metrics.svc.cluster.local.:8429/api/v1/write
+  ruleSelector:
+    matchLabels:
+      alerts.cmdcentral.xyz/kind: logs

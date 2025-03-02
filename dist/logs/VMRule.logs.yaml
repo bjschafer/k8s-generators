@@ -1,0 +1,19 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  labels:
+    alerts.cmdcentral.xyz/kind: logs
+  name: logs
+  namespace: logs
+spec:
+  groups:
+    - name: logs
+      rules:
+        - alert: HostFilesystemReadonly
+          annotations:
+            summary: Filesystem on host {{ $labels.hostname }} is read-only, probable longhorn issue
+          expr: '"Remounting filesystem read-only"'
+          for: 0m
+          labels:
+            push_notify: "true"
+            severity: critical
