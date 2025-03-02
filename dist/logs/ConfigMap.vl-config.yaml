@@ -26,7 +26,8 @@ data:
       vlogs:
         api_version: v8
         compression: gzip
-        endpoints: ["http://prod-victoria-logs-single-server-0.prod-victoria-logs-single-server.logs.svc.cluster.local.:9428/insert/elasticsearch"]
+        endpoints:
+        - http://prod-victoria-logs-single-server.logs.svc.cluster.local:9428/insert/elasticsearch
         healthcheck:
           enabled: false
         inputs:

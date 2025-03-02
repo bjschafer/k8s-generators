@@ -99,6 +99,15 @@ class VMLogs extends Chart {
               memory: "128Mi",
             },
           },
+          customConfig: {
+            sinks: {
+              vlogs: {
+                endpoints: [
+                  "http://prod-victoria-logs-single-server.logs.svc.cluster.local:9428/insert/elasticsearch",
+                ],
+              },
+            },
+          },
           tolerations: [
             {
               effect: "NoSchedule",
