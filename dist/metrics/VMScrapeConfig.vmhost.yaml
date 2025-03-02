@@ -8,5 +8,4 @@ spec:
     - labels:
         job: vmhost
       targets:
-        - vmhost01.cmdcentral.xyz:9100
         - vmhost03.cmdcentral.xyz:9100

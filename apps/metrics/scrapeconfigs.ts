@@ -282,10 +282,7 @@ export class ScrapeConfigs extends Chart {
       spec: {
         staticConfigs: [
           {
-            targets: [
-              "vmhost01.cmdcentral.xyz:9100",
-              "vmhost03.cmdcentral.xyz:9100",
-            ],
+            targets: ["vmhost03.cmdcentral.xyz:9100"],
             labels: { job: "vmhost" },
           },
         ],
