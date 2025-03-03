@@ -248,7 +248,7 @@ class VMLogs extends Chart {
           url: "http://vmsingle-metrics.metrics.svc.cluster.local.:8429",
         },
         remoteWrite: {
-          url: "http://vmsingle-metrics.metrics.svc.cluster.local.:8429/api/v1/write",
+          url: "http://vmsingle-metrics.metrics.svc.cluster.local.:8429",
         },
         ruleSelector: {
           matchLabels: LOGS_RULE,
