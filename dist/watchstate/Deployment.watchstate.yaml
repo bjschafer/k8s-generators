@@ -64,6 +64,7 @@ spec:
         fsGroupChangePolicy: Always
         runAsNonRoot: false
       setHostnameAsFQDN: false
+      shareProcessNamespace: false
       terminationGracePeriodSeconds: 30
       volumes:
         - name: pvc-config
