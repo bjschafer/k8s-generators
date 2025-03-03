@@ -12,7 +12,7 @@ import { addAlerts } from "./alerts";
 
 export const namespace = basename(__dirname);
 export const name = namespace;
-export const version = "0.38.0";
+export const version = "0.38.3";
 export const hostname = "metrics.cmdcentral.xyz";
 
 NewArgoHelmApp(

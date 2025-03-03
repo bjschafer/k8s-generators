@@ -79,7 +79,7 @@ spec:
         vmsingle:
           enabled: false
     repoURL: https://victoriametrics.github.io/helm-charts/
-    targetRevision: 0.38.0
+    targetRevision: 0.38.3
   syncPolicy:
     automated:
       prune: true
