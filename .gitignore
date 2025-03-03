@@ -5,3 +5,5 @@ node_modules
 
 .idea/
 plaintextsecret*
+
+!imports/helm-values/*.d.ts

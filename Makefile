@@ -60,3 +60,7 @@ imports:
 	$(eval VERSION=$(shell kubectl get node | tail -n1 | awk '{ print $$NF }' | sed -e 's/\+.*$$//' -e 's/[0-9]$$/0/' -e 's/^v//'))
 	cdk8s import k8s@$(VERSION)
 	bash -c 'cdk8s import <(kubectl get crd -ojson)'
+
+.PHONY: schemas
+schemas:
+	./node_modules/.bin/json2ts -i schemas/ -o imports/helm-values/

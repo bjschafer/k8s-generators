@@ -1,4 +1,4 @@
-import { App, Chart } from "cdk8s";
+import { App, Chart, Helm, HelmProps } from "cdk8s";
 import {
   ARGO_DEFAULT_PROPS,
   ARGO_DESTINATION_SERVER,
@@ -8,7 +8,7 @@ import {
 import { Construct } from "constructs";
 import { Application } from "../imports/argoproj.io";
 
-export interface HelmAppProps {
+export interface ArgoHelmAppProps {
   readonly chart: string;
   readonly repoUrl: string;
   readonly targetRevision: string;
@@ -16,7 +16,7 @@ export interface HelmAppProps {
 
 export function NewArgoHelmApp(
   name: string,
-  props: HelmAppProps,
+  props: ArgoHelmAppProps,
   argoProps: ArgoAppProps,
   values: any,
 ): void {
@@ -55,4 +55,24 @@ export function NewArgoHelmApp(
 
   new helmChart(app, name);
   app.synth();
+}
+
+interface values {
+  [key: string]: any;
+}
+
+export interface HelmAppProps<T extends values>
+  extends Omit<HelmProps, "values"> {
+  readonly chart: string;
+  readonly repo: string;
+  readonly targetRevision: string;
+  readonly values: T;
+}
+
+export class HelmApp<T extends values> extends Chart {
+  constructor(scope: Construct, id: string, props: HelmAppProps<T>) {
+    super(scope, id);
+
+    new Helm(this, `${id}-chart`, props);
+  }
 }
