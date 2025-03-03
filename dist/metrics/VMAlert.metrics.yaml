@@ -18,4 +18,7 @@ spec:
     url: http://vmsingle-metrics.metrics.svc.cluster.local.:8429
   remoteWrite:
     url: http://vmsingle-metrics.metrics.svc.cluster.local.:8429/api/v1/write
+  ruleSelector:
+    matchLabels:
+      alerts.cmdcentral.xyz/kind: metrics
   selectAllByDefault: true

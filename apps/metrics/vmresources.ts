@@ -83,6 +83,11 @@ export class VmResources extends Chart {
           url: "http://vmsingle-metrics.metrics.svc.cluster.local.:8429/api/v1/write",
         },
         selectAllByDefault: true,
+        ruleSelector: {
+          matchLabels: {
+            "alerts.cmdcentral.xyz/kind": "metrics",
+          },
+        },
       },
     });
 
