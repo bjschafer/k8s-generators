@@ -19,11 +19,13 @@ const version = "0.14.9";
 
 NewArgoApp(name, {
   namespace: namespace,
-  ignoreDifferences: [{
-    group: "apiextensions.k8s.io",
-    kind: "CustomResourceDefinition",
-    jsonPointers: ["/spec/conversion/webhook/clientConfig/caBundle"]
-  }]
+  ignoreDifferences: [
+    {
+      group: "apiextensions.k8s.io",
+      kind: "CustomResourceDefinition",
+      jsonPointers: ["/spec/conversion/webhook/clientConfig/caBundle"],
+    },
+  ],
 });
 
 new HelmApp<Values>(app, "helm", {
