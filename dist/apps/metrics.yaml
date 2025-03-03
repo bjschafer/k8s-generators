@@ -28,6 +28,10 @@ spec:
               create: false
             kubernetesSystemScheduler:
               create: false
+          rule:
+            spec:
+              labels:
+                alerts.cmdcentral.xyz/kind: metrics
         grafana:
           enabled: false
           ingress:
