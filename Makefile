@@ -1,11 +1,10 @@
 .DEFAULT_GOAL := all
 
 APPS := $(shell find apps -maxdepth 1 -mindepth 1 -type d | sort)
-MAKETHREADS ?= 10
 
 .PHONY: all
 all:
-	@$(MAKE) -j$(MAKETHREADS) $(APPS)
+	@$(MAKE) -j$(nproc) $(APPS)
 
 node_modules:
 	bun install
