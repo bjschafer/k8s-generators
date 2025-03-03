@@ -15,7 +15,7 @@ export function NewKustomize(outdir: string) {
   // while we could use the kustomize construct, it's not really necessary
   // instead, we just write out the kustomization.yaml file and let kustomize do the rest
   const kustomization = {
-    resources: files.map((f) => basename(f)),
+    resources: files.sort().map((f) => basename(f)),
   };
 
   fs.writeFileSync(`${outdir}/kustomization.yaml`, yaml.dump(kustomization));
