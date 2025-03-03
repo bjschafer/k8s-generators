@@ -1,0 +1,12 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMPodScrape
+metadata:
+  name: speaker-monitor
+  namespace: metallb-system
+spec:
+  podMetricsEndpoints:
+    - path: /metrics
+      port: monitoring
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: speaker
