@@ -1,30 +1,23 @@
 .DEFAULT_GOAL := all
 
 APPS := $(shell find apps -maxdepth 1 -mindepth 1 -type d | sort)
+MAKETHREADS ?= 10
 
 .PHONY: all
 all:
-	@$(MAKE) -j8 $(APPS)
+	@$(MAKE) -j$(MAKETHREADS) $(APPS)
 
 node_modules:
-	npm ci
+	bun install
 
 .PHONY: upgrade
 upgrade:
-	./node_modules/.bin/ncu -u
-	npm install
-
-.PHONY: compile
-compile: node_modules clean
-	./node_modules/.bin/tsc --build
+	bun x ncu -u
+	bun install
 
 .PHONY: apps/%
-apps/%: compile
-	node apps/$(@F)/app.js
-
-.PHONY: watch
-watch: node_modules 
-	./node_modules/.bin/tsc --build -w
+apps/%: node_modules clean
+	bun run apps/$(@F)/app.ts
 
 .PHONY: clean
 clean: 
@@ -39,18 +32,18 @@ clean-full: clean
 
 .PHONY: fmt
 fmt: node_modules
-	./node_modules/.bin/prettier --check --write "**/*.ts"
+	bun x prettier --check --write "**/*.ts"
 
 .PHONY: format
 format: fmt 
 
 .PHONY: lint
 lint: node_modules
-	./node_modules/.bin/eslint --fix "**/*.ts"
+	bun x eslint --fix "**/*.ts"
 
 .PHONY: test
 test: node_modules 
-	./node_modules/.bin/jest
+	bun x jest
 
 .PHONY: check
 check: fmt lint test
@@ -63,4 +56,4 @@ imports:
 
 .PHONY: schemas
 schemas:
-	./node_modules/.bin/json2ts -i schemas/ -o imports/helm-values/
+	bun x json2ts -i schemas/ -o imports/helm-values/
