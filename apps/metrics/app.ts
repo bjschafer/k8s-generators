@@ -55,12 +55,8 @@ NewArgoHelmApp(
           create: false,
         },
       },
-      rule: {
-        spec: {
-          labels: {
-            "alerts.cmdcentral.xyz/kind": "metrics",
-          },
-        },
+      labels: {
+        "alerts.cmdcentral.xyz/kind": "metrics",
       },
     },
     vmsingle: {
