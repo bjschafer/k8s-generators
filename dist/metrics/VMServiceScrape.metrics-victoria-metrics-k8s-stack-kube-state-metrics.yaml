@@ -1,0 +1,23 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  labels:
+    app.kubernetes.io/instance: metrics
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: victoria-metrics-k8s-stack
+    app.kubernetes.io/version: v1.112.0
+    helm.sh/chart: victoria-metrics-k8s-stack-0.38.3
+  name: metrics-victoria-metrics-k8s-stack-kube-state-metrics
+  namespace: metallb-system
+spec:
+  endpoints:
+    - honorLabels: true
+      metricRelabelConfigs:
+        - action: labeldrop
+          regex: (uid|container_id|image_id)
+      port: http
+  jobLabel: app.kubernetes.io/name
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: metrics
+      app.kubernetes.io/name: kube-state-metrics

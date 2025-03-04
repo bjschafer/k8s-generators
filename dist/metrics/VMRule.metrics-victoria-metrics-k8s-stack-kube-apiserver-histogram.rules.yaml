@@ -1,0 +1,30 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  labels:
+    alerts.cmdcentral.xyz/kind: metrics
+    app: victoria-metrics-k8s-stack
+    app.kubernetes.io/instance: metrics
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: victoria-metrics-k8s-stack
+    app.kubernetes.io/version: v0.27.0
+    helm.sh/chart: victoria-metrics-k8s-stack-0.38.3
+  name: metrics-victoria-metrics-k8s-stack-kube-apiserver-histogram.rules
+  namespace: metallb-system
+spec:
+  groups:
+    - name: kube-apiserver-histogram.rules
+      params: {}
+      rules:
+        - annotations: {}
+          expr: histogram_quantile(0.99, sum by (le,resource,cluster) (rate(apiserver_request_sli_duration_seconds_bucket{job="apiserver",verb=~"LIST|GET",subresource!~"proxy|attach|log|exec|portforward"}[5m]))) > 0
+          labels:
+            quantile: "0.99"
+            verb: read
+          record: cluster_quantile:apiserver_request_sli_duration_seconds:histogram_quantile
+        - annotations: {}
+          expr: histogram_quantile(0.99, sum by (le,resource,cluster) (rate(apiserver_request_sli_duration_seconds_bucket{job="apiserver",verb=~"POST|PUT|PATCH|DELETE",subresource!~"proxy|attach|log|exec|portforward"}[5m]))) > 0
+          labels:
+            quantile: "0.99"
+            verb: write
+          record: cluster_quantile:apiserver_request_sli_duration_seconds:histogram_quantile

@@ -1,6 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  labels:
+    app.kubernetes.io/name: metrics
   name: metrics
   namespace: argocd
 spec:
@@ -9,75 +11,9 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    chart: victoria-metrics-k8s-stack
-    helm:
-      releaseName: metrics
-      valuesObject:
-        alertmanager:
-          enabled: false
-        argocdReleaseOverride: metrics
-        defaultDashboards:
-          annotations:
-            argocd.argoproj.io/sync-options: ServerSideApply=true
-          defaultTimezone: america/chicago
-        defaultRules:
-          groups:
-            kubeScheduler:
-              create: false
-            kubernetesSystemControllerManager:
-              create: false
-            kubernetesSystemScheduler:
-              create: false
-          labels:
-            alerts.cmdcentral.xyz/kind: metrics
-        grafana:
-          enabled: false
-          ingress:
-            enabled: false
-            hosts:
-              - grafana.cmdcentral.xyz
-        kubeControllerManager:
-          enabled: false
-        kubeEtcd:
-          enabled: false
-        kubeScheduler:
-          enabled: false
-        kubelet:
-          vmScrape:
-            metricRelabelConfigs:
-              - action: labeldrop
-                regex: (plan_upgrade_cattle_io.*)
-              - action: labeldrop
-                regex: (beta_kubernetes_io.*)
-        prometheus-node-exporter:
-          extraArgs:
-            - --collector.filesystem.mount-points-exclude=^/(dev|proc|sys|var/lib/docker/.+|var/lib/kubelet/.+)($|/)
-            - --collector.filesystem.fs-types-exclude=^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs)$
-            - --collector.netdev.address-info
-          fullnameOverride: node-exporter
-          resources:
-            limits:
-              cpu: 750m
-              memory: 96Mi
-            requests:
-              cpu: 60m
-              memory: 32Mi
-          tolerations:
-            - effect: NoSchedule
-              operator: Exists
-            - effect: NoExecute
-              key: k3s-controlplane
-              operator: Exists
-          vmScrape:
-            enabled: false
-        vmagent:
-          enabled: false
-        vmalert:
-          enabled: false
-        vmsingle:
-          enabled: false
-    repoURL: https://victoriametrics.github.io/helm-charts/
-    targetRevision: 0.38.3
+    path: dist/metrics
+    repoURL: git@github.com:bjschafer/k8s-generators.git
+    targetRevision: main
   syncPolicy:
     automated:
       prune: true

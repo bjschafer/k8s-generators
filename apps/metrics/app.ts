@@ -1,6 +1,6 @@
 import { basename } from "path";
-import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
-import { NewArgoHelmApp } from "../../lib/helm";
+import { NewArgoApp } from "../../lib/argo";
+import { HelmApp } from "../../lib/helm";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { App } from "cdk8s";
 import { VmResources } from "./vmresources";
@@ -15,24 +15,18 @@ export const name = namespace;
 export const version = "0.38.3";
 export const hostname = "metrics.cmdcentral.xyz";
 
-NewArgoHelmApp(
-  name,
-  {
-    chart: "victoria-metrics-k8s-stack",
-    repoUrl: "https://victoriametrics.github.io/helm-charts/",
-    targetRevision: version,
-  },
-  {
-    namespace: namespace,
-    source: ArgoAppSource.GENERATORS,
-    sync_policy: {
-      automated: {
-        prune: true,
-        selfHeal: true,
-      },
-    },
-  },
-  {
+const app = new App(DEFAULT_APP_PROPS(namespace));
+NewArgoApp(`${name}`, {
+  namespace: namespace,
+  directoryName: namespace,
+});
+
+new HelmApp(app, "stack", {
+  chart: "victoria-metrics-k8s-stack",
+  repo: "https://victoriametrics.github.io/helm-charts/",
+  releaseName: name,
+  targetRevision: version,
+  values: {
     argocdReleaseOverride: "metrics",
     defaultDashboards: {
       defaultTimezone: "america/chicago",
@@ -135,20 +129,6 @@ NewArgoHelmApp(
       },
     },
   },
-);
-
-const app = new App(DEFAULT_APP_PROPS(namespace));
-NewArgoApp(`${name}-config`, {
-  sync_policy: {
-    automated: {
-      prune: true,
-      selfHeal: true,
-    },
-  },
-  namespace: namespace,
-  directoryName: namespace,
-  source: ArgoAppSource.GENERATORS,
-  recurse: true,
 });
 
 new BlackboxExporter(app, "blackbox");
