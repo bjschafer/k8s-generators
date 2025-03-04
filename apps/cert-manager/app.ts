@@ -92,6 +92,17 @@ class CertManagerConfig extends Chart {
         },
       },
     });
+
+    // for validating/mutating webhooks that need _a_ cert
+    // but it doesn't matter if it's self-signed
+    new ClusterIssuer(this, "webhook-selfsigned", {
+      metadata: {
+        name: "webhook-selfsigned",
+      },
+      spec: {
+        selfSigned: {},
+      },
+    });
   }
 }
 

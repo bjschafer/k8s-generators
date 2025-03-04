@@ -29,6 +29,17 @@ new HelmApp(app, "stack", {
   targetRevision: version,
   values: {
     argocdReleaseOverride: "metrics",
+    "victoria-metrics-operator": {
+      admissionWebhooks: {
+        certManager: {
+          enabled: true,
+          issuer: {
+            kind: "ClusterIssuer",
+            name: "webhook-selfsigned",
+          },
+        },
+      },
+    },
     defaultDashboards: {
       defaultTimezone: "america/chicago",
       annotations: {

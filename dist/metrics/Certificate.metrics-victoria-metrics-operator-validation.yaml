@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: metrics-victoria-metrics-operator-validation
+  namespace: metrics
+spec:
+  dnsNames:
+    - metrics-victoria-metrics-operator
+    - metrics-victoria-metrics-operator.metrics
+    - metrics-victoria-metrics-operator.metrics.svc
+    - metrics-victoria-metrics-operator.metrics.svc.cluster.local.
+  duration: 45800h0m0s
+  issuerRef:
+    kind: ClusterIssuer
+    name: webhook-selfsigned
+  secretName: metrics-victoria-metrics-operator-validation
