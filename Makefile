@@ -1,10 +1,11 @@
 .DEFAULT_GOAL := all
 
 APPS := $(shell find apps -maxdepth 1 -mindepth 1 -type d | sort)
+NPROC := $$(nproc)
 
 .PHONY: all
 all:
-	@$(MAKE) -j$(nproc) $(APPS)
+	@$(MAKE) -j$(NPROC) $(APPS)
 
 node_modules:
 	bun install
