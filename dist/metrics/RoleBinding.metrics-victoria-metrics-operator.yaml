@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/version: v0.53.0
     helm.sh/chart: victoria-metrics-operator-0.42.3
   name: metrics-victoria-metrics-operator
-  namespace: metallb-system
+  namespace: metrics
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -16,4 +16,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: metrics-victoria-metrics-operator
-    namespace: metallb-system
+    namespace: metrics

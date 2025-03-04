@@ -17,4 +17,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: metrics-kube-state-metrics
-    namespace: metallb-system
+    namespace: metrics

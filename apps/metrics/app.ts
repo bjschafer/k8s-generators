@@ -25,6 +25,7 @@ new HelmApp(app, "stack", {
   chart: "victoria-metrics-k8s-stack",
   repo: "https://victoriametrics.github.io/helm-charts/",
   releaseName: name,
+  namespace: namespace,
   targetRevision: version,
   values: {
     argocdReleaseOverride: "metrics",

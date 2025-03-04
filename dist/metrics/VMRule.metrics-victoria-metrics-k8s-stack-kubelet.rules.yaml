@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/version: v0.27.0
     helm.sh/chart: victoria-metrics-k8s-stack-0.38.3
   name: metrics-victoria-metrics-k8s-stack-kubelet.rules
-  namespace: metallb-system
+  namespace: metrics
 spec:
   groups:
     - name: kubelet.rules

@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/version: 2.14.0
     helm.sh/chart: kube-state-metrics-5.29.0
   name: metrics-kube-state-metrics
-  namespace: metallb-system
+  namespace: metrics
 spec:
   replicas: 1
   revisionHistoryLimit: 10

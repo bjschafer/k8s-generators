@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/version: v1.112.0
     helm.sh/chart: victoria-metrics-k8s-stack-0.38.3
   name: metrics-victoria-metrics-k8s-stack-kubelet
-  namespace: metallb-system
+  namespace: metrics
 spec:
   bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
   honorLabels: true
