@@ -83,4 +83,5 @@ spec:
         fsGroupChangePolicy: Always
         runAsNonRoot: false
       setHostnameAsFQDN: false
+      shareProcessNamespace: false
       terminationGracePeriodSeconds: 30
