@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - donetick/donetick:latest@sha256:84a6231273aad73293a56db1a0023ce0e63ea2879ced7842438b68a440e6f023
+  - donetick/donetick:latest@sha256:63fdbfb7739656e9a7a86a275e2846a6fcc9e5aa42f70500da8b22d78a7c13aa
