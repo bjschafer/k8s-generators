@@ -9,6 +9,7 @@ import { Alert, SEND_TO_TELEGRAM } from "../../lib/monitoring/alerts";
 const namespace = "longhorn-system";
 const name = "longhorn";
 const app = new App(DEFAULT_APP_PROPS(name));
+const version = "1.8.1";
 
 NewArgoApp(name, {
   namespace: namespace,
@@ -22,7 +23,7 @@ class Longhorn extends Chart {
     new Helm(this, "longhorn", {
       chart: "longhorn",
       repo: "https://charts.longhorn.io",
-      version: "1.8.0",
+      version: version,
       releaseName: name,
       namespace: namespace,
       values: {
