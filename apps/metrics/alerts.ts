@@ -618,6 +618,19 @@ export function addAlerts(scope: Construct, id: string): void {
             "Machine(s) require being rebooted, probably due to kernel update.",
         },
       },
+      {
+        alert: "KubeletVersionSkew",
+        expr: "min(count(kube_node_info) by (kubelet_version)) < count(kube_node_info)",
+        for: "1h",
+        labels: {
+          severity: "warning",
+          push_notify: "true",
+        },
+        annotations: {
+          summary:
+            "{{ $value }} nodes are not running the same kubelet version as the others",
+        },
+      },
     ],
   });
 

@@ -247,3 +247,11 @@ spec:
           labels:
             push_notify: "true"
             severity: warning
+        - alert: KubeletVersionSkew
+          annotations:
+            summary: "{{ $value }} nodes are not running the same kubelet version as the others"
+          expr: min(count(kube_node_info) by (kubelet_version)) < count(kube_node_info)
+          for: 1h
+          labels:
+            push_notify: "true"
+            severity: warning
