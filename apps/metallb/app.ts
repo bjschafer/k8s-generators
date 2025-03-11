@@ -1,9 +1,9 @@
-import { ApiObject, App, Chart, Helm, JsonPatch } from "cdk8s";
+import { ApiObject, App, Chart, JsonPatch } from "cdk8s";
 import { NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { Values } from "../../imports/helm-values/metallb-values.schema";
-import { Construct, IConstruct, Node } from "constructs";
+import { Construct } from "constructs";
 import {
   BgpAdvertisement,
   BgpPeer,
@@ -12,11 +12,7 @@ import {
 } from "../../imports/metallb.io";
 import { VmPodScrape } from "../../imports/operator.victoriametrics.com";
 import { Certificate } from "../../imports/cert-manager.io";
-import {
-  KubeSecret,
-  KubeValidatingWebhookConfiguration,
-} from "../../imports/k8s";
-import { toJson_HelmChartSpecSecurityContextSeLinuxOptions } from "../../imports/helm.cattle.io";
+import { KubeValidatingWebhookConfiguration } from "../../imports/k8s";
 
 const namespace = "metallb-system";
 const name = "metallb";
@@ -168,7 +164,7 @@ class MetalLBConfig extends Chart {
           name: "webhook-selfsigned",
         },
         duration: "45800h0m0s",
-        secretName: "webhook-selfsigned-cert",
+        secretName: "metallb-webhook-cert",
         dnsNames: [
           "metallb-webhook-service",
           `metallb-webhook-service.${namespace}`,
