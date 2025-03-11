@@ -34,6 +34,7 @@ spec:
             - --httpListenAddr=:9428
             - --loggerFormat=json
             - --maxConcurrentInserts=32
+            - --memory.allowedPercent=80
             - --retention.maxDiskSpaceUsageBytes=75GiB
             - --retentionPeriod=3
             - --storageDataPath=/storage
@@ -68,7 +69,7 @@ spec:
               memory: 3Gi
             requests:
               cpu: 400m
-              memory: 2Gi
+              memory: 3Gi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:

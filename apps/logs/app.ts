@@ -53,6 +53,7 @@ class VMLogs extends Chart {
             "syslog.listenAddr.tcp": ":1514",
             "syslog.listenAddr.udp": ":1514",
             "syslog.timezone": "America/Chicago",
+            "memory.allowedPercent": "80", // https://docs.victoriametrics.com/vmagent/#troubleshooting
           },
           retentionPeriod: "3", // months
           retentionDiskSpaceUsage: "75GiB",
@@ -68,7 +69,7 @@ class VMLogs extends Chart {
             },
             requests: {
               cpu: "400m",
-              memory: "2Gi",
+              memory: "3Gi",
             },
           },
           ingress: {
