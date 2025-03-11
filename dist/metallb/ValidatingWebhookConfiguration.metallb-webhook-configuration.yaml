@@ -8,6 +8,8 @@ metadata:
     app.kubernetes.io/version: v0.14.9
     helm.sh/chart: metallb-0.14.9
   name: metallb-webhook-configuration
+  annotations:
+    cert-manager.io/inject-ca-from: metallb-system/webhook-cert
 webhooks:
   - admissionReviewVersions:
       - v1
