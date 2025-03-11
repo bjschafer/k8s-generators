@@ -1,9 +1,9 @@
-import { ApiObject, App, Chart, Helm, JsonPatch } from "cdk8s";
+import { App, Chart } from "cdk8s";
 import { NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { Values } from "../../imports/helm-values/metallb-values.schema";
-import { Construct, IConstruct, Node } from "constructs";
+import { Construct } from "constructs";
 import {
   BgpAdvertisement,
   BgpPeer,
@@ -11,12 +11,6 @@ import {
   L2Advertisement,
 } from "../../imports/metallb.io";
 import { VmPodScrape } from "../../imports/operator.victoriametrics.com";
-import { Certificate } from "../../imports/cert-manager.io";
-import {
-  KubeSecret,
-  KubeValidatingWebhookConfiguration,
-} from "../../imports/k8s";
-import { toJson_HelmChartSpecSecurityContextSeLinuxOptions } from "../../imports/helm.cattle.io";
 
 const namespace = "metallb-system";
 const name = "metallb";
@@ -34,7 +28,7 @@ NewArgoApp(name, {
   ],
 });
 
-const helmChart = new HelmApp<Values>(app, "helm", {
+new HelmApp<Values>(app, "helm", {
   chart: "metallb",
   repo: "https://metallb.github.io/metallb",
   targetRevision: version,
@@ -55,26 +49,6 @@ const helmChart = new HelmApp<Values>(app, "helm", {
     },
   },
 });
-
-// patch the ValidatingWebhook so as to not need to generate/store a secret
-helmChart.node.children[0].node.tryRemoveChild(
-  "metallb-webhook-cert-secret-metallb-system",
-);
-
-const webhook = helmChart.apiObjects.find(
-  (value: ApiObject): ApiObject | undefined => {
-    return value.kind === KubeValidatingWebhookConfiguration.GVK.kind
-      ? value
-      : undefined;
-  },
-);
-
-const webhookCertName = "webhook-cert";
-webhook?.addJsonPatch(
-  JsonPatch.add("/metadata/annotations", {
-    "cert-manager.io/inject-ca-from": `${namespace}/${webhookCertName}`,
-  }),
-);
 
 class MetalLBConfig extends Chart {
   constructor(scope: Construct, id: string) {
@@ -153,27 +127,6 @@ class MetalLBConfig extends Chart {
             port: "monitoring",
             path: "/metrics",
           },
-        ],
-      },
-    });
-
-    new Certificate(this, "webhook-cert", {
-      metadata: {
-        name: webhookCertName,
-        namespace: namespace,
-      },
-      spec: {
-        issuerRef: {
-          kind: "ClusterIssuer",
-          name: "webhook-selfsigned",
-        },
-        duration: "45800h0m0s",
-        secretName: "webhook-selfsigned-cert",
-        dnsNames: [
-          "metallb-webhook-service",
-          `metallb-webhook-service.${namespace}`,
-          `metallb-webhook-service.${namespace}.svc`,
-          `metallb-webhook-service.${namespace}.svc.cluster.local.`,
         ],
       },
     });

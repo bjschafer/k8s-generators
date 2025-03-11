@@ -1,4 +1,4 @@
-import { ApiObject, App, Chart, Helm, HelmProps } from "cdk8s";
+import { App, Chart, Helm, HelmProps } from "cdk8s";
 import {
   ARGO_DEFAULT_PROPS,
   ARGO_DESTINATION_SERVER,
@@ -70,15 +70,9 @@ export interface HelmAppProps<T extends values>
 }
 
 export class HelmApp<T extends values> extends Chart {
-  private chart: Helm;
-
   constructor(scope: Construct, id: string, props: HelmAppProps<T>) {
     super(scope, id);
 
-    this.chart = new Helm(this, `${id}-chart`, props);
-  }
-
-  get apiObjects(): ApiObject[] {
-    return this.chart.apiObjects;
+    new Helm(this, `${id}-chart`, props);
   }
 }
