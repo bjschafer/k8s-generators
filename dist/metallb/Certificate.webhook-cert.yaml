@@ -13,4 +13,4 @@ spec:
   issuerRef:
     kind: ClusterIssuer
     name: webhook-selfsigned
-  secretName: metallb-webhook-cert
+  secretName: webhook-selfsigned-cert
