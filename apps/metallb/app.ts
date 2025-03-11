@@ -12,7 +12,10 @@ import {
 } from "../../imports/metallb.io";
 import { VmPodScrape } from "../../imports/operator.victoriametrics.com";
 import { Certificate } from "../../imports/cert-manager.io";
-import { KubeValidatingWebhookConfiguration } from "../../imports/k8s";
+import {
+  KubeDeployment,
+  KubeValidatingWebhookConfiguration,
+} from "../../imports/k8s";
 
 const namespace = "metallb-system";
 const name = "metallb";
@@ -71,6 +74,20 @@ webhook?.addJsonPatch(
     "cert-manager.io/inject-ca-from": `${namespace}/${webhookCertName}`,
   }),
 );
+
+helmChart.apiObjects
+  .find((value: ApiObject): ApiObject | undefined => {
+    return value.name === "metallb-controller" &&
+      value.kind === KubeDeployment.GVK.kind
+      ? value
+      : undefined;
+  })
+  ?.addJsonPatch(
+    JsonPatch.add(
+      "/spec/template/spec/containers/0/args/-",
+      "--disable-cert-rotation",
+    ),
+  );
 
 class MetalLBConfig extends Chart {
   constructor(scope: Construct, id: string) {

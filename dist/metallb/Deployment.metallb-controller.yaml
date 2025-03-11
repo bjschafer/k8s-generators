@@ -30,6 +30,7 @@ spec:
             - --port=7472
             - --log-level=info
             - --tls-min-version=VersionTLS12
+            - --disable-cert-rotation
           env:
             - name: METALLB_ML_SECRET_NAME
               value: metallb-memberlist
