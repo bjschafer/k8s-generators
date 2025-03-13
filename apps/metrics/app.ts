@@ -12,7 +12,7 @@ import { addAlerts } from "./alerts";
 
 export const namespace = basename(__dirname);
 export const name = namespace;
-export const version = "0.38.3";
+export const version = "0.39.0";
 export const hostname = "metrics.cmdcentral.xyz";
 
 const app = new App(DEFAULT_APP_PROPS(namespace));
