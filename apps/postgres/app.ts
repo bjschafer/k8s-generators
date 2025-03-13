@@ -100,6 +100,7 @@ class ProdPostgres extends Chart {
           ],
           parameters: {
             max_slot_wal_keep_size: "1GB",
+            max_connections: "200",
           },
         },
 

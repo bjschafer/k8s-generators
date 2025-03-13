@@ -83,6 +83,7 @@ spec:
     enablePodMonitor: false
   postgresql:
     parameters:
+      max_connections: "200"
       max_slot_wal_keep_size: 1GB
     pg_hba:
       - host pdns pdns 10.0.10.0/24 scram-sha-256
