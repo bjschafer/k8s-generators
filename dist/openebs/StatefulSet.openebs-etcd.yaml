@@ -19,7 +19,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/token-secret: 529e57ed39e41853a4040e6ccf091c5eab0f1c47552ebf095175b0df114caa05
+        checksum/token-secret: 7048b0ce653fd757f202cf00d9417a4f4b45ebc985008d592087ffdf9dbe5f8b
       labels:
         app: etcd
         app.kubernetes.io/instance: openebs

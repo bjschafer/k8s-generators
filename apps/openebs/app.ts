@@ -35,6 +35,13 @@ class OpenEBS extends Chart {
             enabled: false,
           },
         },
+        "openebs-crds": {
+          csi: {
+            volumeSnapshots: {
+              enabled: false,
+            },
+          },
+        },
       },
     });
   }
