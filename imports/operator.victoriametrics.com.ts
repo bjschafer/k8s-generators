@@ -189,6 +189,16 @@ export interface VLogsSpec {
   readonly hostNetwork?: boolean;
 
   /**
+   * HostAliasesUnderScore provides mapping for ip and hostname,
+   * that would be propagated to pod,
+   * cannot be used with HostNetwork.
+   * Has Priority over hostAliases field
+   *
+   * @schema VLogsSpec#host_aliases
+   */
+  readonly hostAliases?: VLogsSpecHostAliases[];
+
+  /**
    * Image - docker image settings
    * if no specified operator uses default version from operator config
    *
@@ -520,6 +530,7 @@ export function toJson_VLogsSpec(obj: VLogsSpec | undefined): Record<string, any
     'futureRetention': obj.futureRetention,
     'hostAliases': obj.hostAliases?.map(y => toJson_VLogsSpecHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
+    'host_aliases': obj.hostAliases?.map(y => toJson_VLogsSpecHostAliases(y)),
     'image': toJson_VLogsSpecImage(obj.image),
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VLogsSpecImagePullSecrets(y)),
     'initContainers': obj.initContainers?.map(y => y),
@@ -2131,6 +2142,16 @@ export interface VmAgentSpec {
   readonly hostNetwork?: boolean;
 
   /**
+   * HostAliasesUnderScore provides mapping for ip and hostname,
+   * that would be propagated to pod,
+   * cannot be used with HostNetwork.
+   * Has Priority over hostAliases field
+   *
+   * @schema VmAgentSpec#host_aliases
+   */
+  readonly hostAliases?: VmAgentSpecHostAliases[];
+
+  /**
    * IgnoreNamespaceSelectors if set to true will ignore NamespaceSelector settings from
    * scrape objects, and they will only discover endpoints
    * within their current namespace.  Defaults to false.
@@ -2814,6 +2835,7 @@ export function toJson_VmAgentSpec(obj: VmAgentSpec | undefined): Record<string,
     'extraEnvs': obj.extraEnvs?.map(y => toJson_VmAgentSpecExtraEnvs(y)),
     'hostAliases': obj.hostAliases?.map(y => toJson_VmAgentSpecHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
+    'host_aliases': obj.hostAliases?.map(y => toJson_VmAgentSpecHostAliases(y)),
     'ignoreNamespaceSelectors': obj.ignoreNamespaceSelectors,
     'image': toJson_VmAgentSpecImage(obj.image),
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VmAgentSpecImagePullSecrets(y)),
@@ -3477,10 +3499,30 @@ export interface VmAgentSpecInlineRelabelConfig {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecInlineRelabelConfig#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmAgentSpecInlineRelabelConfig#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecInlineRelabelConfig#target_label
    */
   readonly targetLabel?: string;
 
@@ -3502,7 +3544,9 @@ export function toJson_VmAgentSpecInlineRelabelConfig(obj: VmAgentSpecInlineRela
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -3814,10 +3858,30 @@ export interface VmAgentSpecNodeScrapeRelabelTemplate {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecNodeScrapeRelabelTemplate#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmAgentSpecNodeScrapeRelabelTemplate#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecNodeScrapeRelabelTemplate#target_label
    */
   readonly targetLabel?: string;
 
@@ -3839,7 +3903,9 @@ export function toJson_VmAgentSpecNodeScrapeRelabelTemplate(obj: VmAgentSpecNode
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -4119,10 +4185,30 @@ export interface VmAgentSpecPodScrapeRelabelTemplate {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecPodScrapeRelabelTemplate#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmAgentSpecPodScrapeRelabelTemplate#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecPodScrapeRelabelTemplate#target_label
    */
   readonly targetLabel?: string;
 
@@ -4144,7 +4230,9 @@ export function toJson_VmAgentSpecPodScrapeRelabelTemplate(obj: VmAgentSpecPodSc
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -4316,10 +4404,30 @@ export interface VmAgentSpecProbeScrapeRelabelTemplate {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecProbeScrapeRelabelTemplate#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmAgentSpecProbeScrapeRelabelTemplate#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecProbeScrapeRelabelTemplate#target_label
    */
   readonly targetLabel?: string;
 
@@ -4341,7 +4449,9 @@ export function toJson_VmAgentSpecProbeScrapeRelabelTemplate(obj: VmAgentSpecPro
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -4914,10 +5024,30 @@ export interface VmAgentSpecScrapeConfigRelabelTemplate {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecScrapeConfigRelabelTemplate#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmAgentSpecScrapeConfigRelabelTemplate#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecScrapeConfigRelabelTemplate#target_label
    */
   readonly targetLabel?: string;
 
@@ -4939,7 +5069,9 @@ export function toJson_VmAgentSpecScrapeConfigRelabelTemplate(obj: VmAgentSpecSc
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -5108,10 +5240,30 @@ export interface VmAgentSpecServiceScrapeRelabelTemplate {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecServiceScrapeRelabelTemplate#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmAgentSpecServiceScrapeRelabelTemplate#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecServiceScrapeRelabelTemplate#target_label
    */
   readonly targetLabel?: string;
 
@@ -5133,7 +5285,9 @@ export function toJson_VmAgentSpecServiceScrapeRelabelTemplate(obj: VmAgentSpecS
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -5399,10 +5553,30 @@ export interface VmAgentSpecStaticScrapeRelabelTemplate {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecStaticScrapeRelabelTemplate#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmAgentSpecStaticScrapeRelabelTemplate#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecStaticScrapeRelabelTemplate#target_label
    */
   readonly targetLabel?: string;
 
@@ -5424,7 +5598,9 @@ export function toJson_VmAgentSpecStaticScrapeRelabelTemplate(obj: VmAgentSpecSt
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -6884,10 +7060,30 @@ export interface VmAgentSpecRemoteWriteInlineUrlRelabelConfig {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecRemoteWriteInlineUrlRelabelConfig#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmAgentSpecRemoteWriteInlineUrlRelabelConfig#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecRemoteWriteInlineUrlRelabelConfig#target_label
    */
   readonly targetLabel?: string;
 
@@ -6909,7 +7105,9 @@ export function toJson_VmAgentSpecRemoteWriteInlineUrlRelabelConfig(obj: VmAgent
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -9653,10 +9851,30 @@ export interface VmAgentSpecStreamAggrConfigRulesInputRelabelConfigs {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecStreamAggrConfigRulesInputRelabelConfigs#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmAgentSpecStreamAggrConfigRulesInputRelabelConfigs#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecStreamAggrConfigRulesInputRelabelConfigs#target_label
    */
   readonly targetLabel?: string;
 
@@ -9678,7 +9896,9 @@ export function toJson_VmAgentSpecStreamAggrConfigRulesInputRelabelConfigs(obj: 
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -9764,10 +9984,30 @@ export interface VmAgentSpecStreamAggrConfigRulesOutputRelabelConfigs {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecStreamAggrConfigRulesOutputRelabelConfigs#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmAgentSpecStreamAggrConfigRulesOutputRelabelConfigs#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecStreamAggrConfigRulesOutputRelabelConfigs#target_label
    */
   readonly targetLabel?: string;
 
@@ -9789,7 +10029,9 @@ export function toJson_VmAgentSpecStreamAggrConfigRulesOutputRelabelConfigs(obj:
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -10247,10 +10489,30 @@ export interface VmAgentSpecRemoteWriteStreamAggrConfigRulesInputRelabelConfigs 
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecRemoteWriteStreamAggrConfigRulesInputRelabelConfigs#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmAgentSpecRemoteWriteStreamAggrConfigRulesInputRelabelConfigs#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecRemoteWriteStreamAggrConfigRulesInputRelabelConfigs#target_label
    */
   readonly targetLabel?: string;
 
@@ -10272,7 +10534,9 @@ export function toJson_VmAgentSpecRemoteWriteStreamAggrConfigRulesInputRelabelCo
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -10358,10 +10622,30 @@ export interface VmAgentSpecRemoteWriteStreamAggrConfigRulesOutputRelabelConfigs
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecRemoteWriteStreamAggrConfigRulesOutputRelabelConfigs#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmAgentSpecRemoteWriteStreamAggrConfigRulesOutputRelabelConfigs#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmAgentSpecRemoteWriteStreamAggrConfigRulesOutputRelabelConfigs#target_label
    */
   readonly targetLabel?: string;
 
@@ -10383,7 +10667,9 @@ export function toJson_VmAgentSpecRemoteWriteStreamAggrConfigRulesOutputRelabelC
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -11264,6 +11550,16 @@ export interface VmAlertSpec {
   readonly hostNetwork?: boolean;
 
   /**
+   * HostAliasesUnderScore provides mapping for ip and hostname,
+   * that would be propagated to pod,
+   * cannot be used with HostNetwork.
+   * Has Priority over hostAliases field
+   *
+   * @schema VmAlertSpec#host_aliases
+   */
+  readonly hostAliases?: VmAlertSpecHostAliases[];
+
+  /**
    * Image - docker image settings
    * if no specified operator uses default version from operator config
    *
@@ -11681,6 +11977,7 @@ export function toJson_VmAlertSpec(obj: VmAlertSpec | undefined): Record<string,
     'extraEnvs': obj.extraEnvs?.map(y => toJson_VmAlertSpecExtraEnvs(y)),
     'hostAliases': obj.hostAliases?.map(y => toJson_VmAlertSpecHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
+    'host_aliases': obj.hostAliases?.map(y => toJson_VmAlertSpecHostAliases(y)),
     'image': toJson_VmAlertSpecImage(obj.image),
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VmAlertSpecImagePullSecrets(y)),
     'initContainers': obj.initContainers?.map(y => y),
@@ -15355,6 +15652,16 @@ export interface VmAlertmanagerSpec {
   readonly hostNetwork?: boolean;
 
   /**
+   * HostAliasesUnderScore provides mapping for ip and hostname,
+   * that would be propagated to pod,
+   * cannot be used with HostNetwork.
+   * Has Priority over hostAliases field
+   *
+   * @schema VmAlertmanagerSpec#host_aliases
+   */
+  readonly hostAliases?: VmAlertmanagerSpecHostAliases[];
+
+  /**
    * Image - docker image settings
    * if no specified operator uses default version from operator config
    *
@@ -15745,6 +16052,7 @@ export function toJson_VmAlertmanagerSpec(obj: VmAlertmanagerSpec | undefined): 
     'gossipConfig': toJson_VmAlertmanagerSpecGossipConfig(obj.gossipConfig),
     'hostAliases': obj.hostAliases?.map(y => toJson_VmAlertmanagerSpecHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
+    'host_aliases': obj.hostAliases?.map(y => toJson_VmAlertmanagerSpecHostAliases(y)),
     'image': toJson_VmAlertmanagerSpecImage(obj.image),
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VmAlertmanagerSpecImagePullSecrets(y)),
     'initContainers': obj.initContainers?.map(y => y),
@@ -29797,6 +30105,16 @@ export interface VmAuthSpec {
   readonly hostNetwork?: boolean;
 
   /**
+   * HostAliasesUnderScore provides mapping for ip and hostname,
+   * that would be propagated to pod,
+   * cannot be used with HostNetwork.
+   * Has Priority over hostAliases field
+   *
+   * @schema VmAuthSpec#host_aliases
+   */
+  readonly hostAliases?: VmAuthSpecHostAliases[];
+
+  /**
    * Image - docker image settings
    * if no specified operator uses default version from operator config
    *
@@ -30159,6 +30477,7 @@ export function toJson_VmAuthSpec(obj: VmAuthSpec | undefined): Record<string, a
     'extraEnvs': obj.extraEnvs?.map(y => toJson_VmAuthSpecExtraEnvs(y)),
     'hostAliases': obj.hostAliases?.map(y => toJson_VmAuthSpecHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
+    'host_aliases': obj.hostAliases?.map(y => toJson_VmAuthSpecHostAliases(y)),
     'image': toJson_VmAuthSpecImage(obj.image),
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VmAuthSpecImagePullSecrets(y)),
     'ingress': toJson_VmAuthSpecIngress(obj.ingress),
@@ -33359,6 +33678,16 @@ export interface VmClusterSpecVminsert {
   readonly hostNetwork?: boolean;
 
   /**
+   * HostAliasesUnderScore provides mapping for ip and hostname,
+   * that would be propagated to pod,
+   * cannot be used with HostNetwork.
+   * Has Priority over hostAliases field
+   *
+   * @schema VmClusterSpecVminsert#host_aliases
+   */
+  readonly hostAliases?: VmClusterSpecVminsertHostAliases[];
+
+  /**
    * HPA defines kubernetes PodAutoScaling configuration version 2.
    *
    * @schema VmClusterSpecVminsert#hpa
@@ -33658,6 +33987,7 @@ export function toJson_VmClusterSpecVminsert(obj: VmClusterSpecVminsert | undefi
     'extraEnvs': obj.extraEnvs?.map(y => toJson_VmClusterSpecVminsertExtraEnvs(y)),
     'hostAliases': obj.hostAliases?.map(y => toJson_VmClusterSpecVminsertHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
+    'host_aliases': obj.hostAliases?.map(y => toJson_VmClusterSpecVminsertHostAliases(y)),
     'hpa': obj.hpa,
     'image': toJson_VmClusterSpecVminsertImage(obj.image),
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VmClusterSpecVminsertImagePullSecrets(y)),
@@ -33808,6 +34138,16 @@ export interface VmClusterSpecVmselect {
    * @schema VmClusterSpecVmselect#hostNetwork
    */
   readonly hostNetwork?: boolean;
+
+  /**
+   * HostAliasesUnderScore provides mapping for ip and hostname,
+   * that would be propagated to pod,
+   * cannot be used with HostNetwork.
+   * Has Priority over hostAliases field
+   *
+   * @schema VmClusterSpecVmselect#host_aliases
+   */
+  readonly hostAliases?: VmClusterSpecVmselectHostAliases[];
 
   /**
    * Configures horizontal pod autoscaling.
@@ -34118,6 +34458,7 @@ export function toJson_VmClusterSpecVmselect(obj: VmClusterSpecVmselect | undefi
     'extraEnvs': obj.extraEnvs?.map(y => toJson_VmClusterSpecVmselectExtraEnvs(y)),
     'hostAliases': obj.hostAliases?.map(y => toJson_VmClusterSpecVmselectHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
+    'host_aliases': obj.hostAliases?.map(y => toJson_VmClusterSpecVmselectHostAliases(y)),
     'hpa': obj.hpa,
     'image': toJson_VmClusterSpecVmselectImage(obj.image),
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VmClusterSpecVmselectImagePullSecrets(y)),
@@ -34250,6 +34591,16 @@ export interface VmClusterSpecVmstorage {
    * @schema VmClusterSpecVmstorage#hostNetwork
    */
   readonly hostNetwork?: boolean;
+
+  /**
+   * HostAliasesUnderScore provides mapping for ip and hostname,
+   * that would be propagated to pod,
+   * cannot be used with HostNetwork.
+   * Has Priority over hostAliases field
+   *
+   * @schema VmClusterSpecVmstorage#host_aliases
+   */
+  readonly hostAliases?: VmClusterSpecVmstorageHostAliases[];
 
   /**
    * Image - docker image settings
@@ -34585,6 +34936,7 @@ export function toJson_VmClusterSpecVmstorage(obj: VmClusterSpecVmstorage | unde
     'extraEnvs': obj.extraEnvs?.map(y => toJson_VmClusterSpecVmstorageExtraEnvs(y)),
     'hostAliases': obj.hostAliases?.map(y => toJson_VmClusterSpecVmstorageHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
+    'host_aliases': obj.hostAliases?.map(y => toJson_VmClusterSpecVmstorageHostAliases(y)),
     'image': toJson_VmClusterSpecVmstorageImage(obj.image),
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VmClusterSpecVmstorageImagePullSecrets(y)),
     'initContainers': obj.initContainers?.map(y => y),
@@ -41749,10 +42101,30 @@ export interface VmNodeScrapeSpecMetricRelabelConfigs {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmNodeScrapeSpecMetricRelabelConfigs#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmNodeScrapeSpecMetricRelabelConfigs#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmNodeScrapeSpecMetricRelabelConfigs#target_label
    */
   readonly targetLabel?: string;
 
@@ -41774,7 +42146,9 @@ export function toJson_VmNodeScrapeSpecMetricRelabelConfigs(obj: VmNodeScrapeSpe
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -41929,10 +42303,30 @@ export interface VmNodeScrapeSpecRelabelConfigs {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmNodeScrapeSpecRelabelConfigs#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmNodeScrapeSpecRelabelConfigs#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmNodeScrapeSpecRelabelConfigs#target_label
    */
   readonly targetLabel?: string;
 
@@ -41954,7 +42348,9 @@ export function toJson_VmNodeScrapeSpecRelabelConfigs(obj: VmNodeScrapeSpecRelab
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -44313,10 +44709,30 @@ export interface VmPodScrapeSpecPodMetricsEndpointsMetricRelabelConfigs {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmPodScrapeSpecPodMetricsEndpointsMetricRelabelConfigs#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmPodScrapeSpecPodMetricsEndpointsMetricRelabelConfigs#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmPodScrapeSpecPodMetricsEndpointsMetricRelabelConfigs#target_label
    */
   readonly targetLabel?: string;
 
@@ -44338,7 +44754,9 @@ export function toJson_VmPodScrapeSpecPodMetricsEndpointsMetricRelabelConfigs(ob
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -44493,10 +44911,30 @@ export interface VmPodScrapeSpecPodMetricsEndpointsRelabelConfigs {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmPodScrapeSpecPodMetricsEndpointsRelabelConfigs#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmPodScrapeSpecPodMetricsEndpointsRelabelConfigs#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmPodScrapeSpecPodMetricsEndpointsRelabelConfigs#target_label
    */
   readonly targetLabel?: string;
 
@@ -44518,7 +44956,9 @@ export function toJson_VmPodScrapeSpecPodMetricsEndpointsRelabelConfigs(obj: VmP
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -46624,10 +47064,30 @@ export interface VmProbeSpecMetricRelabelConfigs {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmProbeSpecMetricRelabelConfigs#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmProbeSpecMetricRelabelConfigs#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmProbeSpecMetricRelabelConfigs#target_label
    */
   readonly targetLabel?: string;
 
@@ -46649,7 +47109,9 @@ export function toJson_VmProbeSpecMetricRelabelConfigs(obj: VmProbeSpecMetricRel
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -47723,10 +48185,30 @@ export interface VmProbeSpecTargetsIngressRelabelingConfigs {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmProbeSpecTargetsIngressRelabelingConfigs#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmProbeSpecTargetsIngressRelabelingConfigs#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmProbeSpecTargetsIngressRelabelingConfigs#target_label
    */
   readonly targetLabel?: string;
 
@@ -47748,7 +48230,9 @@ export function toJson_VmProbeSpecTargetsIngressRelabelingConfigs(obj: VmProbeSp
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -47873,10 +48357,30 @@ export interface VmProbeSpecTargetsStaticConfigRelabelingConfigs {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmProbeSpecTargetsStaticConfigRelabelingConfigs#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmProbeSpecTargetsStaticConfigRelabelingConfigs#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmProbeSpecTargetsStaticConfigRelabelingConfigs#target_label
    */
   readonly targetLabel?: string;
 
@@ -47898,7 +48402,9 @@ export function toJson_VmProbeSpecTargetsStaticConfigRelabelingConfigs(obj: VmPr
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -50501,10 +51007,30 @@ export interface VmScrapeConfigSpecMetricRelabelConfigs {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmScrapeConfigSpecMetricRelabelConfigs#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmScrapeConfigSpecMetricRelabelConfigs#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmScrapeConfigSpecMetricRelabelConfigs#target_label
    */
   readonly targetLabel?: string;
 
@@ -50526,7 +51052,9 @@ export function toJson_VmScrapeConfigSpecMetricRelabelConfigs(obj: VmScrapeConfi
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -50854,10 +51382,30 @@ export interface VmScrapeConfigSpecRelabelConfigs {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmScrapeConfigSpecRelabelConfigs#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmScrapeConfigSpecRelabelConfigs#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmScrapeConfigSpecRelabelConfigs#target_label
    */
   readonly targetLabel?: string;
 
@@ -50879,7 +51427,9 @@ export function toJson_VmScrapeConfigSpecRelabelConfigs(obj: VmScrapeConfigSpecR
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -59929,10 +60479,30 @@ export interface VmServiceScrapeSpecEndpointsMetricRelabelConfigs {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmServiceScrapeSpecEndpointsMetricRelabelConfigs#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmServiceScrapeSpecEndpointsMetricRelabelConfigs#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmServiceScrapeSpecEndpointsMetricRelabelConfigs#target_label
    */
   readonly targetLabel?: string;
 
@@ -59954,7 +60524,9 @@ export function toJson_VmServiceScrapeSpecEndpointsMetricRelabelConfigs(obj: VmS
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -60109,10 +60681,30 @@ export interface VmServiceScrapeSpecEndpointsRelabelConfigs {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmServiceScrapeSpecEndpointsRelabelConfigs#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmServiceScrapeSpecEndpointsRelabelConfigs#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmServiceScrapeSpecEndpointsRelabelConfigs#target_label
    */
   readonly targetLabel?: string;
 
@@ -60134,7 +60726,9 @@ export function toJson_VmServiceScrapeSpecEndpointsRelabelConfigs(obj: VmService
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -61872,6 +62466,16 @@ export interface VmSingleSpec {
   readonly hostNetwork?: boolean;
 
   /**
+   * HostAliasesUnderScore provides mapping for ip and hostname,
+   * that would be propagated to pod,
+   * cannot be used with HostNetwork.
+   * Has Priority over hostAliases field
+   *
+   * @schema VmSingleSpec#host_aliases
+   */
+  readonly hostAliases?: VmSingleSpecHostAliases[];
+
+  /**
    * Image - docker image settings
    * if no specified operator uses default version from operator config
    *
@@ -62223,6 +62827,7 @@ export function toJson_VmSingleSpec(obj: VmSingleSpec | undefined): Record<strin
     'extraEnvs': obj.extraEnvs?.map(y => toJson_VmSingleSpecExtraEnvs(y)),
     'hostAliases': obj.hostAliases?.map(y => toJson_VmSingleSpecHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
+    'host_aliases': obj.hostAliases?.map(y => toJson_VmSingleSpecHostAliases(y)),
     'image': toJson_VmSingleSpecImage(obj.image),
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VmSingleSpecImagePullSecrets(y)),
     'initContainers': obj.initContainers?.map(y => y),
@@ -64701,10 +65306,30 @@ export interface VmSingleSpecStreamAggrConfigRulesInputRelabelConfigs {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmSingleSpecStreamAggrConfigRulesInputRelabelConfigs#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmSingleSpecStreamAggrConfigRulesInputRelabelConfigs#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmSingleSpecStreamAggrConfigRulesInputRelabelConfigs#target_label
    */
   readonly targetLabel?: string;
 
@@ -64726,7 +65351,9 @@ export function toJson_VmSingleSpecStreamAggrConfigRulesInputRelabelConfigs(obj:
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -64812,10 +65439,30 @@ export interface VmSingleSpecStreamAggrConfigRulesOutputRelabelConfigs {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmSingleSpecStreamAggrConfigRulesOutputRelabelConfigs#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmSingleSpecStreamAggrConfigRulesOutputRelabelConfigs#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmSingleSpecStreamAggrConfigRulesOutputRelabelConfigs#target_label
    */
   readonly targetLabel?: string;
 
@@ -64837,7 +65484,9 @@ export function toJson_VmSingleSpecStreamAggrConfigRulesOutputRelabelConfigs(obj
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -65779,10 +66428,30 @@ export interface VmStaticScrapeSpecTargetEndpointsMetricRelabelConfigs {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmStaticScrapeSpecTargetEndpointsMetricRelabelConfigs#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmStaticScrapeSpecTargetEndpointsMetricRelabelConfigs#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmStaticScrapeSpecTargetEndpointsMetricRelabelConfigs#target_label
    */
   readonly targetLabel?: string;
 
@@ -65804,7 +66473,9 @@ export function toJson_VmStaticScrapeSpecTargetEndpointsMetricRelabelConfigs(obj
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -65959,10 +66630,30 @@ export interface VmStaticScrapeSpecTargetEndpointsRelabelConfigs {
   readonly sourceLabels?: string[];
 
   /**
+   * UnderScoreSourceLabels - additional form of source labels source_labels
+   * for compatibility with original relabel config.
+   * if set  both sourceLabels and source_labels, sourceLabels has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmStaticScrapeSpecTargetEndpointsRelabelConfigs#source_labels
+   */
+  readonly sourceLabels?: string[];
+
+  /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
    *
    * @schema VmStaticScrapeSpecTargetEndpointsRelabelConfigs#targetLabel
+   */
+  readonly targetLabel?: string;
+
+  /**
+   * UnderScoreTargetLabel - additional form of target label - target_label
+   * for compatibility with original relabel config.
+   * if set  both targetLabel and target_label, targetLabel has priority.
+   * for details https://github.com/VictoriaMetrics/operator/issues/131
+   *
+   * @schema VmStaticScrapeSpecTargetEndpointsRelabelConfigs#target_label
    */
   readonly targetLabel?: string;
 
@@ -65984,7 +66675,9 @@ export function toJson_VmStaticScrapeSpecTargetEndpointsRelabelConfigs(obj: VmSt
     'replacement': obj.replacement,
     'separator': obj.separator,
     'sourceLabels': obj.sourceLabels?.map(y => y),
+    'source_labels': obj.sourceLabels?.map(y => y),
     'targetLabel': obj.targetLabel,
+    'target_label': obj.targetLabel,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});

@@ -1769,6 +1769,14 @@ export interface ClusterSpecPlugins {
   readonly enabled?: boolean;
 
   /**
+   * Only one plugin can be declared as WALArchiver.
+   * Cannot be active if ".spec.backup.barmanObjectStore" configuration is present.
+   *
+   * @schema ClusterSpecPlugins#isWALArchiver
+   */
+  readonly isWalArchiver?: boolean;
+
+  /**
    * Name is the plugin name
    *
    * @schema ClusterSpecPlugins#name
@@ -1792,6 +1800,7 @@ export function toJson_ClusterSpecPlugins(obj: ClusterSpecPlugins | undefined): 
   if (obj === undefined) { return undefined; }
   const result = {
     'enabled': obj.enabled,
+    'isWALArchiver': obj.isWalArchiver,
     'name': obj.name,
     'parameters': ((obj.parameters) === undefined) ? undefined : (Object.entries(obj.parameters).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
   };
@@ -3910,6 +3919,14 @@ export interface ClusterSpecExternalClustersPlugin {
   readonly enabled?: boolean;
 
   /**
+   * Only one plugin can be declared as WALArchiver.
+   * Cannot be active if ".spec.backup.barmanObjectStore" configuration is present.
+   *
+   * @schema ClusterSpecExternalClustersPlugin#isWALArchiver
+   */
+  readonly isWalArchiver?: boolean;
+
+  /**
    * Name is the plugin name
    *
    * @schema ClusterSpecExternalClustersPlugin#name
@@ -3933,6 +3950,7 @@ export function toJson_ClusterSpecExternalClustersPlugin(obj: ClusterSpecExterna
   if (obj === undefined) { return undefined; }
   const result = {
     'enabled': obj.enabled,
+    'isWALArchiver': obj.isWalArchiver,
     'name': obj.name,
     'parameters': ((obj.parameters) === undefined) ? undefined : (Object.entries(obj.parameters).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
   };
@@ -14359,6 +14377,8 @@ export enum PoolerSpecType {
   RW = "rw",
   /** ro */
   RO = "ro",
+  /** r */
+  R = "r",
 }
 
 /**

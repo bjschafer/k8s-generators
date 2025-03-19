@@ -106,7 +106,18 @@ export interface VolumeSnapshotSpec {
   readonly source: VolumeSnapshotSpecSource;
 
   /**
-   * VolumeSnapshotClassName is the name of the VolumeSnapshotClass requested by the VolumeSnapshot. VolumeSnapshotClassName may be left nil to indicate that the default SnapshotClass should be used. A given cluster may have multiple default Volume SnapshotClasses: one default per CSI Driver. If a VolumeSnapshot does not specify a SnapshotClass, VolumeSnapshotSource will be checked to figure out what the associated CSI Driver is, and the default VolumeSnapshotClass associated with that CSI Driver will be used. If more than one VolumeSnapshotClass exist for a given CSI Driver and more than one have been marked as default, CreateSnapshot will fail and generate an event. Empty string is not allowed for this field.
+   * VolumeSnapshotClassName is the name of the VolumeSnapshotClass
+   * requested by the VolumeSnapshot. VolumeSnapshotClassName may be
+   * left nil to indicate that the default SnapshotClass should be used.
+   * A given cluster may have multiple default Volume SnapshotClasses:
+   * one default per CSI Driver. If a VolumeSnapshot does not specify
+   * a SnapshotClass, VolumeSnapshotSource will be checked to figure
+   * out what the associated CSI Driver is, and the default VolumeSnapshotClass
+   * associated with that CSI Driver will be used. If more than one VolumeSnapshotClass
+   * exist for a given CSI Driver and more than one have been marked
+   * as default, CreateSnapshot will fail and generate an event. Empty
+   * string is not allowed for this field.
+   *
    *
    * @schema VolumeSnapshotSpec#volumeSnapshotClassName
    */
@@ -233,7 +244,10 @@ export interface VolumeSnapshotV1Beta1Props {
   readonly metadata?: ApiObjectMetadata;
 
   /**
-   * spec defines the desired characteristics of a snapshot requested by a user. More info: https://kubernetes.io/docs/concepts/storage/volume-snapshots#volumesnapshots Required.
+   * spec defines the desired characteristics of a snapshot requested
+   * by a user. More info: https://kubernetes.io/docs/concepts/storage/volume-snapshots#volumesnapshots
+   * Required.
+   *
    *
    * @schema VolumeSnapshotV1Beta1#spec
    */
@@ -257,7 +271,10 @@ export function toJson_VolumeSnapshotV1Beta1Props(obj: VolumeSnapshotV1Beta1Prop
 /* eslint-enable max-len, quote-props */
 
 /**
- * spec defines the desired characteristics of a snapshot requested by a user. More info: https://kubernetes.io/docs/concepts/storage/volume-snapshots#volumesnapshots Required.
+ * spec defines the desired characteristics of a snapshot requested
+ * by a user. More info: https://kubernetes.io/docs/concepts/storage/volume-snapshots#volumesnapshots
+ * Required.
+ *
  *
  * @schema VolumeSnapshotV1Beta1Spec
  */
@@ -270,7 +287,18 @@ export interface VolumeSnapshotV1Beta1Spec {
   readonly source: VolumeSnapshotV1Beta1SpecSource;
 
   /**
-   * VolumeSnapshotClassName is the name of the VolumeSnapshotClass requested by the VolumeSnapshot. VolumeSnapshotClassName may be left nil to indicate that the default SnapshotClass should be used. A given cluster may have multiple default Volume SnapshotClasses: one default per CSI Driver. If a VolumeSnapshot does not specify a SnapshotClass, VolumeSnapshotSource will be checked to figure out what the associated CSI Driver is, and the default VolumeSnapshotClass associated with that CSI Driver will be used. If more than one VolumeSnapshotClass exist for a given CSI Driver and more than one have been marked as default, CreateSnapshot will fail and generate an event. Empty string is not allowed for this field.
+   * VolumeSnapshotClassName is the name of the VolumeSnapshotClass
+   * requested by the VolumeSnapshot. VolumeSnapshotClassName may be
+   * left nil to indicate that the default SnapshotClass should be used.
+   * A given cluster may have multiple default Volume SnapshotClasses:
+   * one default per CSI Driver. If a VolumeSnapshot does not specify
+   * a SnapshotClass, VolumeSnapshotSource will be checked to figure
+   * out what the associated CSI Driver is, and the default VolumeSnapshotClass
+   * associated with that CSI Driver will be used. If more than one VolumeSnapshotClass
+   * exist for a given CSI Driver and more than one have been marked
+   * as default, CreateSnapshot will fail and generate an event. Empty
+   * string is not allowed for this field.
+   *
    *
    * @schema VolumeSnapshotV1Beta1Spec#volumeSnapshotClassName
    */
@@ -788,7 +816,18 @@ export interface VolumeSnapshotContentSpecVolumeSnapshotRef {
   readonly apiVersion?: string;
 
   /**
-   * If referring to a piece of an object instead of an entire object, this string should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2]. For example, if the object reference is to a container within a pod, this would take on a value like: "spec.containers{name}" (where "name" refers to the name of the container that triggered the event) or if no container name is specified "spec.containers[2]" (container with index 2 in this pod). This syntax is chosen only to have some well-defined way of referencing a part of an object. TODO: this design is not final and this field is subject to change in the future.
+   * If referring to a piece of an object instead of
+   * an entire object, this string should contain a valid JSON/Go
+   * field access statement, such as desiredState.manifest.containers[2].
+   * For example, if the object reference is to a container within
+   * a pod, this would take on a value like: "spec.containers{name}"
+   * (where "name" refers to the name of the container that triggered
+   * the event) or if no container name is specified "spec.containers[2]"
+   * (container with index 2 in this pod). This syntax is chosen
+   * only to have some well-defined way of referencing a part of
+   * an object. TODO: this design is not final and this field is
+   * subject to change in the future.
+   *
    *
    * @schema VolumeSnapshotContentSpecVolumeSnapshotRef#fieldPath
    */
@@ -816,7 +855,9 @@ export interface VolumeSnapshotContentSpecVolumeSnapshotRef {
   readonly namespace?: string;
 
   /**
-   * Specific resourceVersion to which this reference is made, if any. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+   * Specific resourceVersion to which this reference
+   * is made, if any. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+   *
    *
    * @schema VolumeSnapshotContentSpecVolumeSnapshotRef#resourceVersion
    */
@@ -1065,7 +1106,18 @@ export interface VolumeSnapshotContentV1Beta1SpecVolumeSnapshotRef {
   readonly apiVersion?: string;
 
   /**
-   * If referring to a piece of an object instead of an entire object, this string should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2]. For example, if the object reference is to a container within a pod, this would take on a value like: "spec.containers{name}" (where "name" refers to the name of the container that triggered the event) or if no container name is specified "spec.containers[2]" (container with index 2 in this pod). This syntax is chosen only to have some well-defined way of referencing a part of an object. TODO: this design is not final and this field is subject to change in the future.
+   * If referring to a piece of an object instead of
+   * an entire object, this string should contain a valid JSON/Go
+   * field access statement, such as desiredState.manifest.containers[2].
+   * For example, if the object reference is to a container within
+   * a pod, this would take on a value like: "spec.containers{name}"
+   * (where "name" refers to the name of the container that triggered
+   * the event) or if no container name is specified "spec.containers[2]"
+   * (container with index 2 in this pod). This syntax is chosen
+   * only to have some well-defined way of referencing a part of
+   * an object. TODO: this design is not final and this field is
+   * subject to change in the future.
+   *
    *
    * @schema VolumeSnapshotContentV1Beta1SpecVolumeSnapshotRef#fieldPath
    */
@@ -1093,7 +1145,9 @@ export interface VolumeSnapshotContentV1Beta1SpecVolumeSnapshotRef {
   readonly namespace?: string;
 
   /**
-   * Specific resourceVersion to which this reference is made, if any. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+   * Specific resourceVersion to which this reference
+   * is made, if any. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+   *
    *
    * @schema VolumeSnapshotContentV1Beta1SpecVolumeSnapshotRef#resourceVersion
    */
