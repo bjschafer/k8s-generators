@@ -1,0 +1,46 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    chart: lvm-localpv-1.6.2
+    heritage: Helm
+    name: openebs-lvm-node
+    openebs.io/component-name: openebs-lvm-node
+    openebs.io/version: 1.6.1
+    release: openebs
+    role: openebs-lvm
+  name: openebs-lvm-driver-registrar-role
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+  - apiGroups:
+      - ""
+    resources:
+      - persistentvolumes
+      - nodes
+      - services
+    verbs:
+      - get
+      - list
+  - apiGroups:
+      - local.openebs.io
+    resources:
+      - lvmvolumes
+      - lvmsnapshots
+      - lvmnodes
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch

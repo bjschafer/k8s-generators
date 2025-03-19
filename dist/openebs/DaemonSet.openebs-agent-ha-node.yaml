@@ -1,0 +1,103 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: agent-ha-node
+    openebs.io/release: openebs
+    openebs.io/version: 2.8.0
+  name: openebs-agent-ha-node
+spec:
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      app: agent-ha-node
+      openebs.io/release: openebs
+  template:
+    metadata:
+      labels:
+        app: agent-ha-node
+        openebs.io/logging: "true"
+        openebs.io/release: openebs
+        openebs.io/version: 2.8.0
+    spec:
+      containers:
+        - args:
+            - --node-name=$(MY_NODE_NAME)
+            - --csi-socket=/csi/csi.sock
+            - --grpc-ip=$(MY_POD_IP)
+            - --grpc-port=50053
+            - --cluster-agent=https://openebs-agent-core:50052
+            - --events-url=nats://openebs-nats:4222
+            - --ansi-colors=true
+            - --fmt-style=pretty
+          env:
+            - name: RUST_LOG
+              value: info
+            - name: MY_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: MY_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: RUST_BACKTRACE
+              value: "1"
+          image: docker.io/openebs/mayastor-agent-ha-node:v2.8.0
+          imagePullPolicy: IfNotPresent
+          name: agent-ha-node
+          ports:
+            - containerPort: 50053
+              name: ha-node
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 100m
+              memory: 64Mi
+            requests:
+              cpu: 100m
+              memory: 64Mi
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - mountPath: /dev
+              name: device
+            - mountPath: /sys
+              name: sys
+            - mountPath: /run/udev
+              name: run-udev
+            - mountPath: /csi
+              name: plugin-dir
+      dnsPolicy: ClusterFirstWithHostNet
+      hostNetwork: true
+      initContainers:
+        - command:
+            - sh
+            - -c
+            - trap "exit 1" TERM; until nc -vzw 5 openebs-agent-core 50052; do date; echo "Waiting for agent-cluster-grpc services..."; sleep 1; done;
+          image: docker.io/openebs/alpine-sh:4.1.0
+          imagePullPolicy: IfNotPresent
+          name: agent-cluster-grpc-probe
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      volumes:
+        - hostPath:
+            path: /dev
+            type: Directory
+          name: device
+        - hostPath:
+            path: /sys
+            type: Directory
+          name: sys
+        - hostPath:
+            path: /run/udev
+            type: Directory
+          name: run-udev
+        - hostPath:
+            path: /var/lib/kubelet/plugins/io.openebs.mayastor/
+            type: DirectoryOrCreate
+          name: plugin-dir
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate

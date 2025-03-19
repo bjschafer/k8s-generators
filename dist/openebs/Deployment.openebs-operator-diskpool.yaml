@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: operator-diskpool
+    openebs.io/release: openebs
+    openebs.io/version: 2.8.0
+  name: openebs-operator-diskpool
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: operator-diskpool
+      openebs.io/release: openebs
+  template:
+    metadata:
+      labels:
+        app: operator-diskpool
+        openebs.io/logging: "true"
+        openebs.io/release: openebs
+        openebs.io/version: 2.8.0
+    spec:
+      containers:
+        - args:
+            - -e http://openebs-api-rest:8081
+            - -nopenebs
+            - --request-timeout=5s
+            - --interval=30s
+            - --ansi-colors=true
+            - --fmt-style=pretty
+          env:
+            - name: RUST_LOG
+              value: info
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          image: docker.io/openebs/mayastor-operator-diskpool:v2.8.0
+          imagePullPolicy: IfNotPresent
+          name: operator-diskpool
+          resources:
+            limits:
+              cpu: 100m
+              memory: 32Mi
+            requests:
+              cpu: 50m
+              memory: 16Mi
+      initContainers:
+        - command:
+            - sh
+            - -c
+            - trap "exit 1" TERM; until nc -vzw 5 openebs-agent-core 50051; do date; echo "Waiting for agent-core-grpc services..."; sleep 1; done;
+          image: docker.io/openebs/alpine-sh:4.1.0
+          imagePullPolicy: IfNotPresent
+          name: agent-core-grpc-probe
+        - command:
+            - sh
+            - -c
+            - trap "exit 1" TERM; until nc -vzw 5 openebs-etcd 2379; do date; echo "Waiting for etcd..."; sleep 1; done;
+          image: docker.io/openebs/alpine-sh:4.1.0
+          imagePullPolicy: IfNotPresent
+          name: etcd-probe
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      priorityClassName: openebs-cluster-critical
+      serviceAccountName: openebs-service-account
+      tolerations:
+        - effect: NoExecute
+          key: node.kubernetes.io/unreachable
+          operator: Exists
+          tolerationSeconds: 5
+        - effect: NoExecute
+          key: node.kubernetes.io/not-ready
+          operator: Exists
+          tolerationSeconds: 5

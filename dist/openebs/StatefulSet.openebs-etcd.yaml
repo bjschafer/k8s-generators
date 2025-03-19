@@ -1,0 +1,170 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app.kubernetes.io/instance: openebs
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: etcd
+    helm.sh/chart: etcd-8.6.0
+  name: openebs-etcd
+  namespace: openebs
+spec:
+  podManagementPolicy: Parallel
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: openebs
+      app.kubernetes.io/name: etcd
+  serviceName: openebs-etcd-headless
+  template:
+    metadata:
+      annotations:
+        checksum/token-secret: 529e57ed39e41853a4040e6ccf091c5eab0f1c47552ebf095175b0df114caa05
+      labels:
+        app: etcd
+        app.kubernetes.io/instance: openebs
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: etcd
+        helm.sh/chart: etcd-8.6.0
+        openebs.io/logging: "true"
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/instance: openebs
+                  app.kubernetes.io/name: etcd
+              topologyKey: kubernetes.io/hostname
+      containers:
+        - env:
+            - name: BITNAMI_DEBUG
+              value: "false"
+            - name: MY_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: MY_STS_NAME
+              value: openebs-etcd
+            - name: ETCDCTL_API
+              value: "3"
+            - name: ETCD_ON_K8S
+              value: "yes"
+            - name: ETCD_START_FROM_SNAPSHOT
+              value: "no"
+            - name: ETCD_DISASTER_RECOVERY
+              value: "no"
+            - name: ETCD_NAME
+              value: $(MY_POD_NAME)
+            - name: ETCD_DATA_DIR
+              value: /bitnami/etcd/data
+            - name: ETCD_LOG_LEVEL
+              value: info
+            - name: ALLOW_NONE_AUTHENTICATION
+              value: "yes"
+            - name: ETCD_AUTH_TOKEN
+              value: jwt,priv-key=/opt/bitnami/etcd/certs/token/jwt-token.pem,sign-method=RS256,ttl=10m
+            - name: ETCD_ADVERTISE_CLIENT_URLS
+              value: http://$(MY_POD_NAME).openebs-etcd-headless.openebs.svc.cluster.local:2379,http://openebs-etcd.openebs.svc.cluster.local:2379
+            - name: ETCD_LISTEN_CLIENT_URLS
+              value: http://0.0.0.0:2379
+            - name: ETCD_INITIAL_ADVERTISE_PEER_URLS
+              value: http://$(MY_POD_NAME).openebs-etcd-headless.openebs.svc.cluster.local:2380
+            - name: ETCD_LISTEN_PEER_URLS
+              value: http://0.0.0.0:2380
+            - name: ETCD_AUTO_COMPACTION_MODE
+              value: revision
+            - name: ETCD_AUTO_COMPACTION_RETENTION
+              value: "100"
+            - name: ETCD_INITIAL_CLUSTER_TOKEN
+              value: etcd-cluster-k8s
+            - name: ETCD_INITIAL_CLUSTER_STATE
+              value: new
+            - name: ETCD_INITIAL_CLUSTER
+              value: openebs-etcd-0=http://openebs-etcd-0.openebs-etcd-headless.openebs.svc.cluster.local:2380,openebs-etcd-1=http://openebs-etcd-1.openebs-etcd-headless.openebs.svc.cluster.local:2380,openebs-etcd-2=http://openebs-etcd-2.openebs-etcd-headless.openebs.svc.cluster.local:2380
+            - name: ETCD_CLUSTER_DOMAIN
+              value: openebs-etcd-headless.openebs.svc.cluster.local
+            - name: ETCD_QUOTA_BACKEND_BYTES
+              value: "8589934592"
+          image: docker.io/bitnami/etcd:3.5.6-debian-11-r10
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            exec:
+              command:
+                - /opt/bitnami/scripts/etcd/healthcheck.sh
+            failureThreshold: 5
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 5
+          name: etcd
+          ports:
+            - containerPort: 2379
+              name: client
+              protocol: TCP
+            - containerPort: 2380
+              name: peer
+              protocol: TCP
+          readinessProbe:
+            exec:
+              command:
+                - /opt/bitnami/scripts/etcd/healthcheck.sh
+            failureThreshold: 5
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          resources:
+            limits: {}
+            requests: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 1001
+          volumeMounts:
+            - mountPath: /bitnami/etcd
+              name: data
+            - mountPath: /opt/bitnami/etcd/certs/token/
+              name: etcd-jwt-token
+              readOnly: true
+      initContainers:
+        - command:
+            - /bin/bash
+            - -ec
+            - |
+              chown -R 1001:1001 /bitnami/etcd
+          image: docker.io/openebs/alpine-bash:4.1.0
+          imagePullPolicy: IfNotPresent
+          name: volume-permissions
+          resources:
+            limits: {}
+            requests: {}
+          securityContext:
+            runAsUser: 0
+          volumeMounts:
+            - mountPath: /bitnami/etcd
+              name: data
+      securityContext:
+        fsGroup: 1001
+      serviceAccountName: default
+      volumes:
+        - name: etcd-jwt-token
+          secret:
+            defaultMode: 256
+            secretName: openebs-etcd-jwt-token
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 2Gi
+        storageClassName: mayastor-etcd-localpv

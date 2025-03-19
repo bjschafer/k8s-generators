@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: api-rest
+    openebs.io/release: openebs
+    openebs.io/version: 2.8.0
+  name: openebs-api-rest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-rest
+      openebs.io/release: openebs
+  template:
+    metadata:
+      labels:
+        app: api-rest
+        openebs.io/logging: "true"
+        openebs.io/release: openebs
+        openebs.io/version: 2.8.0
+    spec:
+      containers:
+        - args:
+            - --dummy-certificates
+            - --no-auth
+            - --http=[::]:8081
+            - --request-timeout=5s
+            - --core-grpc=https://openebs-agent-core:50051
+            - --ansi-colors=true
+            - --fmt-style=pretty
+            - --core-health-freq=20s
+          env:
+            - name: RUST_LOG
+              value: info
+          image: docker.io/openebs/mayastor-api-rest:v2.8.0
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 1
+            httpGet:
+              path: /live
+              port: 8081
+            initialDelaySeconds: 0
+            periodSeconds: 30
+            timeoutSeconds: 5
+          name: api-rest
+          ports:
+            - containerPort: 8080
+            - containerPort: 8081
+          readinessProbe:
+            failureThreshold: 2
+            httpGet:
+              path: /ready
+              port: 8081
+            initialDelaySeconds: 0
+            periodSeconds: 20
+            timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: 100m
+              memory: 64Mi
+            requests:
+              cpu: 50m
+              memory: 32Mi
+      initContainers:
+        - command:
+            - sh
+            - -c
+            - trap "exit 1" TERM; until nc -vzw 5 openebs-agent-core 50051; do date; echo "Waiting for agent-core-grpc services..."; sleep 1; done;
+          image: docker.io/openebs/alpine-sh:4.1.0
+          imagePullPolicy: IfNotPresent
+          name: agent-core-grpc-probe
+        - command:
+            - sh
+            - -c
+            - trap "exit 1" TERM; until nc -vzw 5 openebs-etcd 2379; do date; echo "Waiting for etcd..."; sleep 1; done;
+          image: docker.io/openebs/alpine-sh:4.1.0
+          imagePullPolicy: IfNotPresent
+          name: etcd-probe
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      priorityClassName: openebs-cluster-critical
+      tolerations:
+        - effect: NoExecute
+          key: node.kubernetes.io/unreachable
+          operator: Exists
+          tolerationSeconds: 5
+        - effect: NoExecute
+          key: node.kubernetes.io/not-ready
+          operator: Exists
+          tolerationSeconds: 5
