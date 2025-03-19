@@ -2,6 +2,7 @@ import { App, Chart, Helm } from "cdk8s";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
 import { Construct } from "constructs";
+import { DiskPool } from "../../imports/openebs.io";
 
 const namespace = "openebs";
 const name = namespace;
@@ -43,6 +44,30 @@ class OpenEBS extends Chart {
           },
         },
       },
+    });
+
+    const nodeDisks = [
+      {
+        node: "k8s-work-01",
+        disks: ["aio:///dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi2"],
+      },
+      {
+        node: "k8s-work-02",
+        disks: ["aio:///dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi2"],
+      },
+    ];
+
+    nodeDisks.forEach((value) => {
+      new DiskPool(this, `diskpool-${value.node}`, {
+        metadata: {
+          name: `diskpool-${value.node}`,
+          namespace: namespace,
+        },
+        spec: {
+          node: value.node,
+          disks: value.disks,
+        },
+      });
     });
   }
 }

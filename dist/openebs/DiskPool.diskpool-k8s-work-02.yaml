@@ -1,0 +1,9 @@
+apiVersion: openebs.io/v1beta2
+kind: DiskPool
+metadata:
+  name: diskpool-k8s-work-02
+  namespace: openebs
+spec:
+  disks:
+    - aio:///dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi2
+  node: k8s-work-02
