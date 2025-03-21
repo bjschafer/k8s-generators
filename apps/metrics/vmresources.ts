@@ -250,7 +250,7 @@ export class VmResources extends Chart {
         replicaCount: 1, // This'll set replicas=n on deployment, so you run into PVC multi-attach errors
         retentionPeriod: "90d",
         storage: {
-          storageClassName: StorageClass.LONGHORN,
+          storageClassName: StorageClass.CEPH_RBD,
           resources: {
             requests: {
               storage: VmSingleSpecResourcesRequests.fromString("80Gi"),
