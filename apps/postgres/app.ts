@@ -336,7 +336,7 @@ class VectorPostgres extends Chart {
         name: name,
       },
       spec: {
-        instances: 2,
+        instances: 1,
         imageCatalogRef: {
           apiGroup: catalog.apiGroup,
           kind: catalog.kind,
@@ -447,7 +447,6 @@ class VectorPostgres extends Chart {
 }
 
 new ProdPostgres(app, "prod");
-new VectorPostgres(app, "immich", "immich");
 new VectorPostgres(app, "immich-pg16", "immich-pg16", {
   sourceClusterName: "immich",
   sourceClusterNamespace: "postgres",
