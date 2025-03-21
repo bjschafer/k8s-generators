@@ -4,6 +4,7 @@ import { basename } from "path";
 import { Quantity } from "../../imports/k8s";
 import {
   Cluster,
+  ClusterSpec,
   ClusterSpecBackupBarmanObjectStoreWalCompression,
   ClusterSpecBootstrapInitdbImportType,
   ImageCatalog,
@@ -264,8 +265,20 @@ class ProdPostgres extends Chart {
   }
 }
 
+export interface ImportProps {
+  sourceClusterName: string;
+  sourceClusterNamespace: string;
+  databases: string[];
+  roles: string[];
+}
+
 class VectorPostgres extends Chart {
-  constructor(scope: Construct, id: string, name: string) {
+  constructor(
+    scope: Construct,
+    id: string,
+    name: string,
+    importProps?: ImportProps,
+  ) {
     super(scope, id);
 
     const catalog = new ImageCatalog(this, "catalog", {
@@ -283,6 +296,39 @@ class VectorPostgres extends Chart {
         ],
       },
     });
+
+    const importConfig:
+      | Pick<ClusterSpec, "externalClusters" | "bootstrap">
+      | undefined = importProps
+      ? {
+          externalClusters: [
+            {
+              name: importProps.sourceClusterName,
+              connectionParameters: {
+                host: `${importProps.sourceClusterName}-r.${importProps.sourceClusterNamespace}.svc.cluster.local`,
+                user: "postgres",
+                sslmode: "require",
+              },
+              password: {
+                name: `${importProps.sourceClusterName}-superuser`,
+                key: "password",
+              },
+            },
+          ],
+          bootstrap: {
+            initdb: {
+              import: {
+                type: ClusterSpecBootstrapInitdbImportType.MONOLITH,
+                databases: importProps.databases,
+                roles: importProps.roles,
+                source: {
+                  externalCluster: importProps.sourceClusterName,
+                },
+              },
+            },
+          },
+        }
+      : {};
 
     new Cluster(this, name, {
       metadata: {
@@ -362,6 +408,7 @@ class VectorPostgres extends Chart {
             max_slot_wal_keep_size: "1GB",
           },
         },
+        ...importConfig,
       },
     });
 
@@ -401,4 +448,10 @@ class VectorPostgres extends Chart {
 
 new ProdPostgres(app, "prod");
 new VectorPostgres(app, "immich", "immich");
+new VectorPostgres(app, "immich-pg16", "immich-pg16", {
+  sourceClusterName: "immich",
+  sourceClusterNamespace: "postgres",
+  databases: ["immich"],
+  roles: ["immich"],
+});
 app.synth();
