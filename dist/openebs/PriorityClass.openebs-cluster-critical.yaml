@@ -1,7 +1,0 @@
-apiVersion: scheduling.k8s.io/v1
-kind: PriorityClass
-metadata:
-  name: openebs-cluster-critical
-description: Used for critical pods that must run in the cluster, which can be moved to another node if necessary.
-preemptionPolicy: PreemptLowerPriority
-value: 1000000000

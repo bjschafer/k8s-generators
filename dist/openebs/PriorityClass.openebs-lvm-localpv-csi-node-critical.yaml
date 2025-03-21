@@ -1,7 +1,0 @@
-apiVersion: scheduling.k8s.io/v1
-kind: PriorityClass
-metadata:
-  name: openebs-lvm-localpv-csi-node-critical
-description: This priority class should be used for the CStor CSI driver node deployment only.
-globalDefault: false
-value: 900001000
