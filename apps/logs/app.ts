@@ -59,7 +59,7 @@ class VMLogs extends Chart {
           retentionDiskSpaceUsage: "75GiB",
           persistentVolume: {
             enabled: true,
-            storageClassName: StorageClass.LONGHORN,
+            storageClassName: StorageClass.CEPH_RBD,
             size: "80Gi",
           },
           resources: {
