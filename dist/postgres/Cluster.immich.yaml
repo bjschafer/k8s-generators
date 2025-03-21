@@ -50,4 +50,4 @@ spec:
       memory: 768Mi
   storage:
     size: 5Gi
-    storageClass: longhorn
+    storageClass: ceph-rbd

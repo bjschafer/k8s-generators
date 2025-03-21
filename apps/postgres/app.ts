@@ -90,7 +90,7 @@ class ProdPostgres extends Chart {
         },
         storage: {
           size: "15Gi",
-          storageClass: StorageClass.LONGHORN,
+          storageClass: StorageClass.CEPH_RBD,
         },
         enableSuperuserAccess: true,
         postgresql: {
@@ -331,7 +331,7 @@ class VectorPostgres extends Chart {
         },
         storage: {
           size: "5Gi",
-          storageClass: StorageClass.LONGHORN,
+          storageClass: StorageClass.CEPH_RBD,
         },
         enableSuperuserAccess: true,
 
