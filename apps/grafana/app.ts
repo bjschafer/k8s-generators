@@ -61,7 +61,7 @@ class Grafana extends Chart {
           enabled: true,
           type: "pvc",
           accessModes: ["ReadWriteMany"],
-          storageClassName: "longhorn",
+          storageClassName: "cephfs",
           size: "5Gi",
         },
         env: {
