@@ -116,7 +116,7 @@ export class Navidrome extends Chart {
         },
         accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
         storage: Size.gibibytes(5),
-        storageClassName: StorageClass.LONGHORN,
+        storageClassName: StorageClass.CEPH_RBD,
         volumeMode: PersistentVolumeMode.FILE_SYSTEM,
       }),
     );
