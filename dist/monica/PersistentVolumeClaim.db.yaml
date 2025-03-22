@@ -9,5 +9,5 @@ spec:
   resources:
     requests:
       storage: 25Gi
-  storageClassName: longhorn
+  storageClassName: ceph-rbd
   volumeMode: Filesystem
