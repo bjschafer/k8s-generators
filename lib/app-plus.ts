@@ -82,7 +82,7 @@ export class AppPlus extends Chart {
             PersistentVolumeAccessMode.READ_WRITE_ONCE,
           ],
           storage: vol.props.storage ?? Size.gibibytes(5),
-          storageClassName: vol.props.storageClassName ?? StorageClass.LONGHORN,
+          storageClassName: vol.props.storageClassName ?? StorageClass.CEPH_RBD,
           volumeMode: vol.props.volumeMode ?? PersistentVolumeMode.FILE_SYSTEM,
         });
         volumes.push(
