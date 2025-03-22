@@ -78,7 +78,7 @@ export class MediaApp extends Chart {
         },
         accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
         storage: props.configVolume.size ?? Size.gibibytes(5),
-        storageClassName: StorageClass.LONGHORN,
+        storageClassName: StorageClass.CEPH_RBD,
         volumeMode: PersistentVolumeMode.FILE_SYSTEM,
       });
       configVol = Volume.fromPersistentVolumeClaim(
