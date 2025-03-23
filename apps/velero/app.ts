@@ -185,7 +185,6 @@ class Velero extends Chart {
           publicUrl:
             "https://rclone-gateway-crypt-b2-cmdcentral-k8s-backups.cmdcentral.xyz",
         },
-        default: true,
         objectStorage: {
           bucket: "velero",
         },
