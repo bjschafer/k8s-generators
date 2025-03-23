@@ -6,6 +6,7 @@ metadata:
 spec:
   staticConfigs:
     - labels:
+        cluster: ceph
         job: ceph
       targets:
         - vmhost03.cmdcentral.xyz:9283

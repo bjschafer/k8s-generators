@@ -67,7 +67,10 @@ export class ScrapeConfigs extends Chart {
         staticConfigs: [
           {
             targets: ["vmhost03.cmdcentral.xyz:9283"],
-            labels: { job: "ceph" },
+            labels: {
+              job: "ceph",
+              cluster: "ceph",
+            },
           },
         ],
       },
