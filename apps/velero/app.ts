@@ -64,7 +64,7 @@ class Velero extends Chart {
           },
           limits: {
             cpu: "250m",
-            memory: "128m",
+            memory: "128Mi",
           },
         },
         initContainers: [
