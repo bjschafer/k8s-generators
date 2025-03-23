@@ -107,7 +107,7 @@ spec:
       volumes:
         - name: cloud-credentials
           secret:
-            secretName: creds
+            secretName: cloud-credentials
         - emptyDir: {}
           name: plugins
         - emptyDir: {}

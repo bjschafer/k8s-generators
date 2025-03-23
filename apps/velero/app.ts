@@ -75,7 +75,7 @@ class Velero extends Chart {
         ],
         credentials: {
           useSecret: true,
-          existingSecret: "creds",
+          existingSecret: "cloud-credentials",
         },
         deployNodeAgent: true,
         nodeAgent: {
