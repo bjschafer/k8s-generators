@@ -1,0 +1,25 @@
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: offsite-weekly-keep-3-months
+  namespace: velero
+spec:
+  schedule: 33 2 * * 0
+  template:
+    csiSnapshotTimeout: 0s
+    includedNamespaces:
+      - argocd
+      - authentik
+      - immich
+      - mealie
+      - media
+      - monica
+      - netbox
+      - paperless
+      - rclone
+      - spoolman
+      - velero
+    snapshotMoveData: true
+    storageLocation: b2
+    ttl: 2232h0m0s
+  useOwnerReferencesInBackup: false

@@ -1,0 +1,15 @@
+apiVersion: velero.io/v1
+kind: BackupStorageLocation
+metadata:
+  name: b2
+  namespace: velero
+spec:
+  config:
+    publicUrl: https://rclone-gateway-crypt-b2-cmdcentral-k8s-backups.cmdcentral.xyz
+    region: us-east-1
+    s3ForcePathStyle: "true"
+    s3Url: http://rclone-gateway-crypt-b2-cmdcentral-k8s-backups.rclone.svc.cluster.local:8042
+  default: true
+  objectStorage:
+    bucket: velero
+  provider: aws

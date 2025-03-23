@@ -1,0 +1,15 @@
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: daily-keep-1-week
+  namespace: velero
+spec:
+  schedule: "@every 24h"
+  template:
+    csiSnapshotTimeout: 0s
+    includedNamespaces:
+      - "*"
+    snapshotMoveData: true
+    storageLocation: minio
+    ttl: 168h0m0s
+  useOwnerReferencesInBackup: false
