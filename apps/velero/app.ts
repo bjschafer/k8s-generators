@@ -67,12 +67,28 @@ class Velero extends Chart {
             memory: "128Mi",
           },
         },
+        image: {
+          repository: "gcr.io/velero-gcp/velero",
+        },
         initContainers: [
           {
             name: "velero-plugin-for-aws",
-            image: `velero/velero-plugin-for-aws:v${awsVersion}`,
+            image: `gcp.io/velero-gcp/velero-plugin-for-aws:v${awsVersion}`,
+            volumeMounts: [
+              {
+                mountPath: "/target",
+                name: "plugins",
+              },
+            ],
           },
         ],
+        configuration: {
+          features: "EnableCSI",
+          repositoryMaintenanceJob: {
+            latestJobsCount: 1,
+          },
+          defaultVolumesToFsBackup: true, // backup everything by default
+        },
         credentials: {
           useSecret: true,
           existingSecret: "cloud-credentials",

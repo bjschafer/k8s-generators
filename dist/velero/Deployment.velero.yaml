@@ -36,7 +36,9 @@ spec:
         - args:
             - server
             - --uploader-type=kopia
-            - --keep-latest-maintenance-jobs=3
+            - --default-volumes-to-fs-backup
+            - --features=EnableCSI
+            - --keep-latest-maintenance-jobs=1
           command:
             - /velero
           env:
@@ -57,7 +59,7 @@ spec:
               value: /credentials/cloud
             - name: ALIBABA_CLOUD_CREDENTIALS_FILE
               value: /credentials/cloud
-          image: velero/velero:v1.15.2
+          image: gcr.io/velero-gcp/velero:v1.15.2
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 5
@@ -99,8 +101,11 @@ spec:
               name: scratch
       dnsPolicy: ClusterFirst
       initContainers:
-        - image: velero/velero-plugin-for-aws:v1.11.1
+        - image: gcp.io/velero-gcp/velero-plugin-for-aws:v1.11.1
           name: velero-plugin-for-aws
+          volumeMounts:
+            - mountPath: /target
+              name: plugins
       restartPolicy: Always
       serviceAccountName: velero-server
       terminationGracePeriodSeconds: 3600
