@@ -73,7 +73,7 @@ class Velero extends Chart {
         initContainers: [
           {
             name: "velero-plugin-for-aws",
-            image: `gcp.io/velero-gcp/velero-plugin-for-aws:v${awsVersion}`,
+            image: `gcr.io/velero-gcp/velero-plugin-for-aws:v${awsVersion}`,
             volumeMounts: [
               {
                 mountPath: "/target",

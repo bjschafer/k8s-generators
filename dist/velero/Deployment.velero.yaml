@@ -101,7 +101,7 @@ spec:
               name: scratch
       dnsPolicy: ClusterFirst
       initContainers:
-        - image: gcp.io/velero-gcp/velero-plugin-for-aws:v1.11.1
+        - image: gcr.io/velero-gcp/velero-plugin-for-aws:v1.11.1
           name: velero-plugin-for-aws
           volumeMounts:
             - mountPath: /target
