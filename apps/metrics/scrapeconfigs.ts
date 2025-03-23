@@ -207,6 +207,9 @@ export class ScrapeConfigs extends Chart {
       metadata: {
         name: "nut-power-usage",
         namespace: namespace,
+        labels: {
+          "alerts.cmdcentral.xyz/kind": "metrics",
+        },
       },
       spec: {
         groups: [
