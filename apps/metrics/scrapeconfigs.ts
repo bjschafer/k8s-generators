@@ -58,6 +58,21 @@ export class ScrapeConfigs extends Chart {
       },
     });
 
+    new VmScrapeConfig(this, "ceph", {
+      metadata: {
+        name: "ceph",
+        namespace: namespace,
+      },
+      spec: {
+        staticConfigs: [
+          {
+            targets: ["vmhost03.cmdcentral.xyz:9283"],
+            labels: { job: "ceph" },
+          },
+        ],
+      },
+    });
+
     new VmScrapeConfig(this, "hass", {
       metadata: {
         name: "hass",
@@ -282,7 +297,11 @@ export class ScrapeConfigs extends Chart {
       spec: {
         staticConfigs: [
           {
-            targets: ["vmhost03.cmdcentral.xyz:9100"],
+            targets: [
+              "vmhost01.cmdcentral.xyz:9100",
+              "vmhost02.cmdcentral.xyz:9100",
+              "vmhost03.cmdcentral.xyz:9100",
+            ],
             labels: { job: "vmhost" },
           },
         ],

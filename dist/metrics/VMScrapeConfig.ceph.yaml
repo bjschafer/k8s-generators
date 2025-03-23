@@ -1,13 +1,11 @@
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMScrapeConfig
 metadata:
-  name: vmhost
+  name: ceph
   namespace: metrics
 spec:
   staticConfigs:
     - labels:
-        job: vmhost
+        job: ceph
       targets:
-        - vmhost01.cmdcentral.xyz:9100
-        - vmhost02.cmdcentral.xyz:9100
-        - vmhost03.cmdcentral.xyz:9100
+        - vmhost03.cmdcentral.xyz:9283
