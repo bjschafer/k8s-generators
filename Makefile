@@ -3,21 +3,23 @@
 APPS := $(shell find apps -maxdepth 1 -mindepth 1 -type d | sort)
 NPROC := $$(nproc)
 
+BUN ?= bun
+
 .PHONY: all
 all:
 	@$(MAKE) -j$(NPROC) $(APPS)
 
 node_modules:
-	bun install
+	$(BUN) install
 
 .PHONY: upgrade
 upgrade:
-	bun x ncu -u
-	bun install
+	$(BUN) x ncu -u
+	$(BUN) install
 
 .PHONY: apps/%
 apps/%: node_modules clean
-	bun run apps/$(@F)/app.ts
+	$(BUN) run apps/$(@F)/app.ts
 
 .PHONY: clean
 clean: 
@@ -32,18 +34,18 @@ clean-full: clean
 
 .PHONY: fmt
 fmt: node_modules
-	bun x prettier --check --write "**/*.ts"
+	$(BUN) x prettier --check --write "**/*.ts"
 
 .PHONY: format
 format: fmt 
 
 .PHONY: lint
 lint: node_modules
-	bun x eslint --fix "**/*.ts"
+	$(BUN) x eslint --fix "**/*.ts"
 
 .PHONY: test
 test: node_modules 
-	bun x jest
+	$(BUN) x jest
 
 .PHONY: check
 check: fmt lint test
@@ -56,4 +58,4 @@ imports:
 
 .PHONY: schemas
 schemas:
-	bun x json2ts -i schemas/ -o imports/helm-values/
+	$(BUN) x json2ts -i schemas/ -o imports/helm-values/
