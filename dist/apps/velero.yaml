@@ -9,6 +9,9 @@ spec:
   destination:
     namespace: velero
     server: https://kubernetes.default.svc
+  ignoreDifferences:
+    - group: velero.io
+      kind: Backup
   project: default
   source:
     path: dist/velero
