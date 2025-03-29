@@ -52,9 +52,6 @@ spec:
     kind: ImageCatalog
     major: 16
     name: pgvector
-  inheritedMetadata:
-    annotations:
-      backup.velero.io/backup-volumes: pgdata
   instances: 1
   monitoring:
     enablePodMonitor: false

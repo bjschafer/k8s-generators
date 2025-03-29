@@ -61,11 +61,6 @@ class ProdPostgres extends Chart {
         monitoring: {
           enablePodMonitor: false,
         },
-        inheritedMetadata: {
-          annotations: {
-            [BACKUP_ANNOTATION_NAME]: "pgdata",
-          },
-        },
         // prefer to schedule on non-pis
         affinity: {
           nodeAffinity: {
@@ -348,11 +343,6 @@ class VectorPostgres extends Chart {
           kind: catalog.kind,
           major: 16, // this is how we'd do an upgrade
           name: catalog.name,
-        },
-        inheritedMetadata: {
-          annotations: {
-            [BACKUP_ANNOTATION_NAME]: "pgdata",
-          },
         },
         monitoring: {
           enablePodMonitor: false,
