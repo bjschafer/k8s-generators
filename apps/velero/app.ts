@@ -8,6 +8,7 @@ import {
   VmServiceScrape,
 } from "../../imports/operator.victoriametrics.com";
 import {
+  Backup,
   BackupStorageLocation,
   Schedule,
   ScheduleSpecTemplate,
@@ -22,6 +23,12 @@ const awsVersion = "1.11.1";
 
 NewArgoApp(name, {
   namespace: namespace,
+  ignoreDifferences: [
+    {
+      kind: Backup.GVK.kind,
+      group: "velero.io",
+    },
+  ],
 });
 
 class Velero extends Chart {
