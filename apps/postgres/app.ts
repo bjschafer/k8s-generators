@@ -15,6 +15,7 @@ import {
 } from "../../imports/postgresql.cnpg.io";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import {
+  BACKUP_ANNOTATION_NAME,
   DEFAULT_APP_PROPS,
   EXTERNAL_DNS_ANNOTATION_KEY,
 } from "../../lib/consts";
@@ -59,6 +60,11 @@ class ProdPostgres extends Chart {
         },
         monitoring: {
           enablePodMonitor: false,
+        },
+        inheritedMetadata: {
+          annotations: {
+            [BACKUP_ANNOTATION_NAME]: "pgdata",
+          },
         },
         // prefer to schedule on non-pis
         affinity: {
@@ -342,6 +348,11 @@ class VectorPostgres extends Chart {
           kind: catalog.kind,
           major: 16, // this is how we'd do an upgrade
           name: catalog.name,
+        },
+        inheritedMetadata: {
+          annotations: {
+            [BACKUP_ANNOTATION_NAME]: "pgdata",
+          },
         },
         monitoring: {
           enablePodMonitor: false,

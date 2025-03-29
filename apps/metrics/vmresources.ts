@@ -17,6 +17,7 @@ import {
 import { StorageClass } from "../../lib/volume";
 import { hostname, namespace } from "./app";
 import { IngressRule } from "../../imports/k8s";
+import { BACKUP_ANNOTATION_NAME } from "../../lib/consts";
 
 export class VmResources extends Chart {
   constructor(scope: Construct, id: string) {
@@ -247,6 +248,11 @@ export class VmResources extends Chart {
         namespace: namespace,
       },
       spec: {
+        podMetadata: {
+          annotations: {
+            [BACKUP_ANNOTATION_NAME]: "data",
+          },
+        },
         replicaCount: 1, // This'll set replicas=n on deployment, so you run into PVC multi-attach errors
         retentionPeriod: "90d",
         storage: {

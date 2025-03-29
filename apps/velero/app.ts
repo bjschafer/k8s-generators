@@ -87,7 +87,7 @@ class Velero extends Chart {
           repositoryMaintenanceJob: {
             latestJobsCount: 1,
           },
-          defaultVolumesToFsBackup: true, // backup everything by default
+          defaultVolumesToFsBackup: false, // only backup annotated stuffs
         },
         credentials: {
           useSecret: true,

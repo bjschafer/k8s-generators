@@ -4,6 +4,9 @@ metadata:
   name: metrics
   namespace: metrics
 spec:
+  podMetadata:
+    annotations:
+      backup.velero.io/backup-volumes: data
   replicaCount: 1
   resources:
     limits:
