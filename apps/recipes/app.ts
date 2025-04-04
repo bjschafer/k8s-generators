@@ -193,8 +193,8 @@ class Tandoor extends Chart {
               limit: Cpu.millis(1000),
             },
             memory: {
-              request: Size.mebibytes(64),
-              limit: Size.mebibytes(256),
+              request: Size.mebibytes(256),
+              limit: Size.gibibytes(1),
             },
           },
           readiness: Probe.fromHttpGet("/", {
