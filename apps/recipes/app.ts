@@ -174,7 +174,7 @@ class Tandoor extends Chart {
               name: "gunicorn",
             },
           ],
-          args: [
+          command: [
             "/opt/recipes/venv/bin/gunicorn",
             "-b",
             ":8080",

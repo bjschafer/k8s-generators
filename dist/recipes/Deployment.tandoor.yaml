@@ -21,7 +21,7 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-        - args:
+        - command:
             - /opt/recipes/venv/bin/gunicorn
             - -b
             - :8080
