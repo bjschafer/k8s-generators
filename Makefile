@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := all
 
 APPS := $(shell find apps -maxdepth 1 -mindepth 1 -type d | sort)
-NPROC := $$(nproc)
+NPROC := $$(getconf _NPROCESSORS_ONLN)
 
 BUN ?= bun
 
