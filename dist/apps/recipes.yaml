@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd-image-updater.argoproj.io/git-branch: main
+    argocd-image-updater.argoproj.io/image-list: recipes=ghcr.io/tandoorrecipes/recipes:latest,nginx=public.ecr.aws/nginx/nginx:latest
+    argocd-image-updater.argoproj.io/nginx.update-strategy: newest-build
+    argocd-image-updater.argoproj.io/recipes.update-strategy: newest-build
+    argocd-image-updater.argoproj.io/write-back-method: git
+  labels:
+    app.kubernetes.io/name: recipes
+  name: recipes
+  namespace: argocd
+spec:
+  destination:
+    namespace: recipes
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: dist/recipes
+    repoURL: git@github.com:bjschafer/k8s-generators.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -1,0 +1,37 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: tandoor
+  namespace: recipes
+spec:
+  rules:
+    - host: tandoor.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: tandoor
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+          - backend:
+              service:
+                name: tandoor
+                port:
+                  number: 80
+            path: /media
+            pathType: Prefix
+          - backend:
+              service:
+                name: tandoor
+                port:
+                  number: 80
+            path: /static
+            pathType: Prefix
+  tls:
+    - hosts:
+        - tandoor.cmdcentral.xyz
+      secretName: tandoor-tls

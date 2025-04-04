@@ -1,0 +1,164 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tandoor
+  namespace: recipes
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: tandoor-deploy-c893d1df
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        backup.velero.io/backup-volumes: data
+      labels:
+        cdk8s.io/metadata.addr: tandoor-deploy-c893d1df
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - args:
+            - /opt/recipes/venv/bin/gunicorn
+            - -b
+            - :8080
+            - --access-logfile
+            - "-"
+            - --error-logfile
+            - "-"
+            - --log-level
+            - INFO
+            - recipes.wsgi
+          envFrom:
+            - configMapRef:
+                name: tandoor-config
+            - secretRef:
+                name: secrets
+          image: ghcr.io/tandoorrecipes/recipes
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8080
+              scheme: HTTP
+          name: tandoor
+          ports:
+            - containerPort: 8080
+              name: gunicorn
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8080
+              scheme: HTTP
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 256Mi
+            requests:
+              cpu: 250m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /opt/recipes/mediafiles
+              name: pvc-data
+              subPath: media
+            - mountPath: /opt/recipes/staticfiles
+              name: pvc-data
+              subPath: static
+        - image: public.ecr.aws/nginx/nginx
+          imagePullPolicy: Always
+          name: nginx
+          ports:
+            - containerPort: 80
+              name: http
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 256Mi
+            requests:
+              cpu: 250m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /etc/nginx/nginx.conf
+              name: configmap-nginx-config
+              subPath: config
+            - mountPath: /media
+              name: pvc-data
+              subPath: media
+            - mountPath: /static
+              name: pvc-data
+              subPath: static
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      initContainers:
+        - args:
+            - sh
+            - -c
+            - |
+              set -e
+              source venv/bin/activate
+              echo "Updating database"
+              python manage.py migrate
+              python manage.py collectstatic_js_reverse
+              python manage.py collectstatic --noinput
+              echo "Setting media file attributes"
+              chown -R 65534:65534 /opt/recipes/mediafiles
+              find /opt/recipes/mediafiles -type d | xargs -r chmod 755
+              find /opt/recipes/mediafiles -type f | xargs -r chmod 644
+              echo "Done"
+          envFrom:
+            - configMapRef:
+                name: tandoor-config
+            - secretRef:
+                name: secrets
+          image: ghcr.io/tandoorrecipes/recipes
+          imagePullPolicy: Always
+          name: init-chown-data
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 256Mi
+            requests:
+              cpu: 250m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /opt/recipes/mediafiles
+              name: pvc-data
+              subPath: media
+            - mountPath: /opt/recipes/staticfiles
+              name: pvc-data
+              subPath: static
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: pvc-data
+          persistentVolumeClaim:
+            claimName: data
+            readOnly: false
+        - configMap:
+            name: nginx-config
+          name: configmap-nginx-config
