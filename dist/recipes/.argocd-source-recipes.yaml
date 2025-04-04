@@ -1,4 +1,4 @@
 kustomize:
   images:
-  - ghcr.io/tandoorrecipes/recipes:feature-vue3-open-data-plugin
-  - public.ecr.aws/nginx/nginx:stable-perl-amd64
+  - ghcr.io/tandoorrecipes/recipes:latest@sha256:7d083f3af3a2a58bb8bb5fe94d59a37e2076bc405cf9bd51c2e3eaa18d6baf5a
+  - public.ecr.aws/nginx/nginx:latest@sha256:3ebc63b1ce01e9f75bf3c0e5f786f0a3683d79e57695bada3bc127c600cab3b2
