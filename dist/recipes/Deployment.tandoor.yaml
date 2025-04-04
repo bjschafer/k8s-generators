@@ -105,7 +105,7 @@ spec:
       dnsPolicy: ClusterFirst
       hostNetwork: false
       initContainers:
-        - args:
+        - command:
             - sh
             - -c
             - |

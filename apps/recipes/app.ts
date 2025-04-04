@@ -133,7 +133,7 @@ class Tandoor extends Chart {
           name: "init-chown-data",
           image: image,
           securityContext: DEFAULT_SECURITY_CONTEXT,
-          args: [
+          command: [
             "sh",
             "-c",
             heredoc`
