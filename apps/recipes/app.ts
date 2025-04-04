@@ -39,11 +39,13 @@ NewArgoApp(name, {
     images: [
       {
         image: image,
-        strategy: "newest-build",
+        versionConstraint: "latest",
+        strategy: "digest",
       },
       {
         image: "public.ecr.aws/nginx/nginx",
-        strategy: "newest-build",
+        versionConstraint: "latest",
+        strategy: "digest",
       },
     ],
   },
