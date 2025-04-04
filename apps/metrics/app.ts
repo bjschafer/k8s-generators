@@ -12,7 +12,7 @@ import { addAlerts } from "./alerts";
 
 export const namespace = basename(__dirname);
 export const name = namespace;
-export const version = "0.39.4";
+export const version = "0.41.2";
 export const hostname = "metrics.cmdcentral.xyz";
 
 const app = new App(DEFAULT_APP_PROPS(namespace));
@@ -26,7 +26,7 @@ new HelmApp(app, "stack", {
   repo: "https://victoriametrics.github.io/helm-charts/",
   releaseName: name,
   namespace: namespace,
-  targetRevision: version,
+  version: version,
   values: {
     argocdReleaseOverride: "metrics",
     "victoria-metrics-operator": {

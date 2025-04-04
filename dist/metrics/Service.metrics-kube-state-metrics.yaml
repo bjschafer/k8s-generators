@@ -9,8 +9,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kube-state-metrics
     app.kubernetes.io/part-of: kube-state-metrics
-    app.kubernetes.io/version: 2.14.0
-    helm.sh/chart: kube-state-metrics-5.29.0
+    app.kubernetes.io/version: 2.15.0
+    helm.sh/chart: kube-state-metrics-5.31.0
   name: metrics-kube-state-metrics
   namespace: metrics
 spec:

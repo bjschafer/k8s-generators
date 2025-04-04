@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.39.4
+    helm.sh/chart: victoria-metrics-k8s-stack-0.41.2
   name: metrics-victoria-metrics-k8s-stack-kubernetes-resources
   namespace: metrics
 spec:
@@ -112,7 +112,7 @@ spec:
             summary: Processes experience elevated CPU throttling.
           expr: |-
             sum(increase(container_cpu_cfs_throttled_periods_total{container!="", job="kubelet", metrics_path="/metrics/cadvisor", }[5m])) without (id, metrics_path, name, image, endpoint, job, node)
-              /
+              / on (namespace,pod,container,instance,cluster) group_left
             sum(increase(container_cpu_cfs_periods_total{job="kubelet", metrics_path="/metrics/cadvisor", }[5m])) without (id, metrics_path, name, image, endpoint, job, node)
               > ( 25 / 100 )
           for: 15m

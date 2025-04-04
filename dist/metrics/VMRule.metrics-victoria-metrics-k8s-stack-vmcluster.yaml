@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.39.4
+    helm.sh/chart: victoria-metrics-k8s-stack-0.41.2
   name: metrics-victoria-metrics-k8s-stack-vmcluster
   namespace: metrics
 spec:
@@ -20,7 +20,7 @@ spec:
       rules:
         - alert: DiskRunsOutOfSpaceIn3Days
           annotations:
-            dashboard: /d/oS7Bi_0Wz?viewPanel=113&var-instance={{ $labels.instance }}
+            dashboard: /d/oS7Bi_0Wz?viewPanel=20&var-instance={{ $labels.instance }}
             description: |-
               Taking into account current ingestion rate, free disk space will be enough only for {{ $value | humanizeDuration }} on instance {{ $labels.instance }}.
                Consider to limit the ingestion rate, decrease retention or scale the disk space up if possible.
@@ -38,7 +38,7 @@ spec:
             severity: critical
         - alert: NodeBecomesReadonlyIn3Days
           annotations:
-            dashboard: /d/oS7Bi_0Wz?viewPanel=113&var-instance={{ $labels.instance }}
+            dashboard: /d/oS7Bi_0Wz?viewPanel=20&var-instance={{ $labels.instance }}
             description: |-
               Taking into account current ingestion rate, free disk space and -storage.minFreeDiskSpaceBytes instance {{ $labels.instance }} will remain writable for {{ $value | humanizeDuration }}.
                Consider to limit the ingestion rate, decrease retention or scale the disk space up if possible.
@@ -56,7 +56,7 @@ spec:
             severity: warning
         - alert: DiskRunsOutOfSpace
           annotations:
-            dashboard: /d/oS7Bi_0Wz?viewPanel=200&var-instance={{ $labels.instance }}
+            dashboard: /d/oS7Bi_0Wz?viewPanel=20&var-instance={{ $labels.instance }}
             description: |-
               Disk utilisation on instance {{ $labels.instance }} is more than 80%.
                Having less than 20% of free disk space could cripple merges processes and overall performance. Consider to limit the ingestion rate, decrease retention or scale the disk space if possible.

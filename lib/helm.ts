@@ -65,7 +65,7 @@ export interface HelmAppProps<T extends values>
   extends Omit<HelmProps, "values"> {
   readonly chart: string;
   readonly repo: string;
-  readonly targetRevision: string;
+  readonly version: string;
   readonly values: T;
 }
 
