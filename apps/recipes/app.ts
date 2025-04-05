@@ -6,6 +6,7 @@ import {
   CLUSTER_ISSUER,
   DEFAULT_APP_PROPS,
   DEFAULT_SECURITY_CONTEXT,
+  RELOADER_ENABLED,
 } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { Construct } from "constructs";
@@ -101,6 +102,7 @@ class Tandoor extends Chart {
         POSTGRES_PORT: "5432",
         POSTGRES_USER: "tandoor",
         POSTGRES_DB: "tandoor",
+        SOCIAL_PROVIDERS: "allauth.socialaccount.providers.openid_connect",
       },
     });
 
@@ -121,6 +123,9 @@ class Tandoor extends Chart {
       metadata: {
         name: "tandoor",
         namespace: namespace,
+        annotations: {
+          ...RELOADER_ENABLED,
+        },
       },
       replicas: 1,
       strategy: DeploymentStrategy.recreate(),

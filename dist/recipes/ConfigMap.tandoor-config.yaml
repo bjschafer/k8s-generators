@@ -12,4 +12,5 @@ data:
   POSTGRES_HOST: prod.postgres.svc.cluster.local
   POSTGRES_PORT: "5432"
   POSTGRES_USER: tandoor
+  SOCIAL_PROVIDERS: allauth.socialaccount.providers.openid_connect
 immutable: false
