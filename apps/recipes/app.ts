@@ -27,6 +27,7 @@ import {
 } from "cdk8s-plus-31";
 import heredoc from "tsheredoc";
 import { StorageClass } from "../../lib/volume";
+import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -102,7 +103,11 @@ class Tandoor extends Chart {
         POSTGRES_PORT: "5432",
         POSTGRES_USER: "tandoor",
         POSTGRES_DB: "tandoor",
+        ENABLE_METRICS: "1",
+        ENABLE_SIGNUP: "0",
         SOCIAL_PROVIDERS: "allauth.socialaccount.providers.openid_connect",
+        SOCIAL_DEFAULT_ACCESS: "1",
+        SOCIAL_DEFAULT_GROUP: "user",
       },
     });
 
@@ -294,6 +299,14 @@ class Tandoor extends Chart {
         secret: Secret.fromSecretName(this, "tandoor-tls", "tandoor-tls"),
       },
     ]);
+
+    new CmdcentralServiceMonitor(app, "metrics", {
+      name: "tandoor",
+      namespace: namespace,
+      matchLabels: {
+        "app.kubernetes.io/instance": "recipes",
+      },
+    });
   }
 }
 

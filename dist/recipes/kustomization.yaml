@@ -5,3 +5,4 @@ resources:
   - Ingress.tandoor.yaml
   - PersistentVolumeClaim.data.yaml
   - Service.tandoor.yaml
+  - VMServiceScrape.tandoor.yaml

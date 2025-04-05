@@ -1,0 +1,14 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: tandoor
+  namespace: recipes
+spec:
+  endpoints:
+    - port: metrics
+  namespaceSelector:
+    matchNames:
+      - recipes
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: recipes

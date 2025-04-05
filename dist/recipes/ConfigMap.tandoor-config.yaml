@@ -7,10 +7,14 @@ data:
   ALLOWED_HOSTS: "*"
   DB_ENGINE: django.db.backends.postgresql
   DEBUG: "0"
+  ENABLE_METRICS: "1"
+  ENABLE_SIGNUP: "0"
   GUNICORN_MEDIA: "0"
   POSTGRES_DB: tandoor
   POSTGRES_HOST: prod.postgres.svc.cluster.local
   POSTGRES_PORT: "5432"
   POSTGRES_USER: tandoor
+  SOCIAL_DEFAULT_ACCESS: "1"
+  SOCIAL_DEFAULT_GROUP: user
   SOCIAL_PROVIDERS: allauth.socialaccount.providers.openid_connect
 immutable: false
