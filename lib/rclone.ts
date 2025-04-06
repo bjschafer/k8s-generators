@@ -13,7 +13,7 @@ import {
   Probe,
   Secret,
   Volume,
-} from "cdk8s-plus-31";
+} from "cdk8s-plus-32";
 import { Construct } from "constructs";
 import { Chart } from "cdk8s";
 import {

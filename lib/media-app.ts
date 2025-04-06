@@ -18,7 +18,7 @@ import {
   Secret,
   ServicePort,
   Volume,
-} from "cdk8s-plus-31";
+} from "cdk8s-plus-32";
 import { StorageClass } from "./volume";
 import {
   BACKUP_ANNOTATION_NAME,

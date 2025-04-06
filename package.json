@@ -22,7 +22,7 @@
     "@typescript-eslint/eslint-plugin": "^8.26.0",
     "@typescript-eslint/parser": "^8.26.0",
     "cdk8s": "^2.69.48",
-    "cdk8s-plus-31": "^2.1.2",
+    "cdk8s-plus-32": "^2.0.9",
     "constructs": "^10.4.2",
     "eslint": "^9.22.0",
     "js-yaml": "4.1.0",

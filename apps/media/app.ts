@@ -8,7 +8,7 @@ import {
 import { MediaApp, MediaAppProps } from "../../lib/media-app";
 import { CLUSTER_ISSUER, DEFAULT_APP_PROPS } from "../../lib/consts";
 import { basename } from "../../lib/util";
-import { Cpu, Secret } from "cdk8s-plus-31";
+import { Cpu, Secret } from "cdk8s-plus-32";
 import { NewKustomize } from "../../lib/kustomize";
 import { Construct } from "constructs";
 import { Certificate } from "../../imports/cert-manager.io";

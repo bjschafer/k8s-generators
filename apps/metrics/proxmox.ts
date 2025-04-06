@@ -13,7 +13,7 @@ import {
   Probe,
   Secret,
   Volume,
-} from "cdk8s-plus-31";
+} from "cdk8s-plus-32";
 import { VmProbe } from "../../imports/operator.victoriametrics.com";
 
 const name = "proxmox-exporter";

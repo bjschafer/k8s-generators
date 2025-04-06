@@ -24,7 +24,7 @@ import {
   Probe,
   Secret,
   Volume,
-} from "cdk8s-plus-31";
+} from "cdk8s-plus-32";
 import heredoc from "tsheredoc";
 import { StorageClass } from "../../lib/volume";
 import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";

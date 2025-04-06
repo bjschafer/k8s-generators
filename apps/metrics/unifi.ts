@@ -15,7 +15,7 @@ import {
   ResourceFieldPaths,
   Secret,
   Volume,
-} from "cdk8s-plus-31";
+} from "cdk8s-plus-32";
 import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";
 import heredoc from "tsheredoc";
 

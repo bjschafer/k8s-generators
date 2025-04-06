@@ -4,7 +4,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
 import { NewKustomize } from "../../lib/kustomize";
-import { EnvValue, PersistentVolumeAccessMode } from "cdk8s-plus-31";
+import { EnvValue, PersistentVolumeAccessMode } from "cdk8s-plus-32";
 
 const namespace = basename(__dirname);
 const name = namespace;

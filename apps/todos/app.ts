@@ -3,7 +3,7 @@ import { basename } from "../../lib/util";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
-import { ConfigMap, EnvValue, Secret } from "cdk8s-plus-31";
+import { ConfigMap, EnvValue, Secret } from "cdk8s-plus-32";
 import { NewKustomize } from "../../lib/kustomize";
 import { Construct } from "constructs";
 

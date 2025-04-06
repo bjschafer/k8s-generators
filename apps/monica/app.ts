@@ -3,7 +3,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { basename } from "../../lib/util";
 import { ArgoApp, ArgoAppSource } from "../../lib/argo";
 import { MysqlInstance } from "../../lib/mysql";
-import { Cpu, PersistentVolumeAccessMode } from "cdk8s-plus-31";
+import { Cpu, PersistentVolumeAccessMode } from "cdk8s-plus-32";
 import { AppPlus } from "../../lib/app-plus";
 import { StorageClass } from "../../lib/volume";
 

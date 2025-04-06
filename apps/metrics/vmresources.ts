@@ -1,5 +1,5 @@
 import { Chart } from "cdk8s";
-import { KubeIngress, HttpIngressPath } from "cdk8s-plus-31/lib/imports/k8s";
+import { KubeIngress, HttpIngressPath } from "cdk8s-plus-32/lib/imports/k8s";
 import { Construct } from "constructs";
 import {
   VmAgent,

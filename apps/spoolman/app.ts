@@ -2,7 +2,7 @@ import { App, Size } from "cdk8s";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { basename } from "../../lib/util";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
-import { Cpu, EnvValue, Probe, Secret } from "cdk8s-plus-31";
+import { Cpu, EnvValue, Probe, Secret } from "cdk8s-plus-32";
 import { AppPlus } from "../../lib/app-plus";
 import { NewKustomize } from "../../lib/kustomize";
 

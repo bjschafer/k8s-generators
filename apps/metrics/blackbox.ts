@@ -11,7 +11,7 @@ import {
   ImagePullPolicy,
   Probe,
   Volume,
-} from "cdk8s-plus-31";
+} from "cdk8s-plus-32";
 import {
   VmProbe,
   VmServiceScrape,

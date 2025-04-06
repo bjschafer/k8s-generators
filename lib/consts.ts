@@ -1,6 +1,6 @@
 import { EnvVar, Quantity } from "../imports/k8s";
 import { AppProps, YamlOutputType } from "cdk8s";
-import { EnvValue } from "cdk8s-plus-31";
+import { EnvValue } from "cdk8s-plus-32";
 
 export const DEFAULT_CPU_LIMIT = Quantity.fromString("250m");
 export const DEFAULT_MEM_LIMIT = Quantity.fromString("256Mi");
