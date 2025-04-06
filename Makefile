@@ -10,7 +10,7 @@ all:
 	@$(MAKE) -j$(NPROC) $(APPS)
 
 node_modules:
-	$(BUN) install
+	$(BUN) install --frozen-lockfile
 
 .PHONY: upgrade
 upgrade:
