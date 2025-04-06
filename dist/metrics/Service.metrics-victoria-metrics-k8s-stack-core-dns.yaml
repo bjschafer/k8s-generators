@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v1.114.0
-    helm.sh/chart: victoria-metrics-k8s-stack-0.41.2
+    helm.sh/chart: victoria-metrics-k8s-stack-0.41.3
     jobLabel: core-dns
   name: metrics-victoria-metrics-k8s-stack-core-dns
   namespace: kube-system
