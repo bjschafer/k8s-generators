@@ -14,10 +14,7 @@ spec:
     matchLabels:
       cdk8s.io/metadata.addr: donetick-donetick-deployment-c85bc8db
   strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
+    type: Recreate
   template:
     metadata:
       annotations:
