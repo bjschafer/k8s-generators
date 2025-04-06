@@ -4,7 +4,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
 import { NewKustomize } from "../../lib/kustomize";
-import { EnvValue } from "cdk8s-plus-31";
+import { EnvValue, PersistentVolumeAccessMode } from "cdk8s-plus-31";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -47,6 +47,7 @@ new AppPlus(app, "watchstate", {
       enableBackups: true,
       props: {
         storage: Size.gibibytes(5),
+        accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
       },
     },
   ],

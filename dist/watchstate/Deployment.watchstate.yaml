@@ -14,10 +14,7 @@ spec:
     matchLabels:
       cdk8s.io/metadata.addr: watchstate-watchstate-deployment-c8f5cd85
   strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
+    type: Recreate
   template:
     metadata:
       annotations:

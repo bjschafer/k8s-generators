@@ -142,7 +142,7 @@ export class AppPlus extends Chart {
       // to avoid multiattach errors, deployments that mount RWO volumes get set to recreate
       strategy: props.volumes?.some((vol) =>
         vol.props.accessModes?.some(
-          (am) => am == PersistentVolumeAccessMode.READ_WRITE_ONCE,
+          (am) => am === PersistentVolumeAccessMode.READ_WRITE_ONCE,
         ),
       )
         ? DeploymentStrategy.recreate()
