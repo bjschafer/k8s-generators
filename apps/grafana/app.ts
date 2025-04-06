@@ -11,7 +11,7 @@ import {
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
-const version = "8.11.0";
+const version = "8.11.3";
 
 NewArgoApp(name, {
   namespace: namespace,
