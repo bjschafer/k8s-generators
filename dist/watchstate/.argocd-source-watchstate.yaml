@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - ghcr.io/arabcoders/watchstate:latest@sha256:2eff10e6142e9b7125999c4fe1906e77c478ae4686607f6db8c1023f1479ff07
+  - ghcr.io/arabcoders/watchstate:latest@sha256:b4a27b5506fa1fed5356910e872ba01a3860c406085b1627aeddf7617eadd0be
