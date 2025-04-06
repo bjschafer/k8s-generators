@@ -330,6 +330,11 @@ export interface HelmChartSpecPodSecurityContext {
   readonly runAsUser?: number;
 
   /**
+   * @schema HelmChartSpecPodSecurityContext#seLinuxChangePolicy
+   */
+  readonly seLinuxChangePolicy?: string;
+
+  /**
    * @schema HelmChartSpecPodSecurityContext#seLinuxOptions
    */
   readonly seLinuxOptions?: HelmChartSpecPodSecurityContextSeLinuxOptions;
@@ -374,6 +379,7 @@ export function toJson_HelmChartSpecPodSecurityContext(obj: HelmChartSpecPodSecu
     'runAsGroup': obj.runAsGroup,
     'runAsNonRoot': obj.runAsNonRoot,
     'runAsUser': obj.runAsUser,
+    'seLinuxChangePolicy': obj.seLinuxChangePolicy,
     'seLinuxOptions': toJson_HelmChartSpecPodSecurityContextSeLinuxOptions(obj.seLinuxOptions),
     'seccompProfile': toJson_HelmChartSpecPodSecurityContextSeccompProfile(obj.seccompProfile),
     'supplementalGroups': obj.supplementalGroups?.map(y => y),
