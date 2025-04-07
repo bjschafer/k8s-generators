@@ -17,9 +17,11 @@ upgrade:
 	$(BUN) x ncu -u
 	$(BUN) install
 
-.PHONY: apps/%
+.PHONY: FORCE apps/%
 apps/%: node_modules clean
 	$(BUN) run apps/$(@F)/app.ts
+
+FORCE:
 
 .PHONY: clean
 clean: 
