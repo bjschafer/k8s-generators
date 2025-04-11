@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+  namespace: gotify
+data:
+  config.yml: |
+    server:
+      keepaliveperiodseconds: 0
+      listenaddr: ""
+      port: 80
+      ssl:
+        enabled: false
+        redirecttohttps: false
+        listenaddr: ""
+        port: 443
+      responseheaders: []
+      trustedproxies:
+        - 127.0.0.1/8
+        - 10.42.0.0/16
+        - 10.43.0.0/16
+      cors:
+        alloworigins: []
+        allowmethods: []
+        allowheaders: []
+      stream:
+        pingperiodseconds: 45
+        allowedorigins: []
+      database:
+        dialect: postgres
+      defaultuser:
+        name: bschafer
+      passstrength: 10
+      uploadedimagesdir: data/images
+      pluginsdir: data/plugins
+      registration: false
+immutable: false

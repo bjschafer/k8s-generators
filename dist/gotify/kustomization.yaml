@@ -1,0 +1,7 @@
+resources:
+  - ConfigMap.config.yaml
+  - Deployment.gotify.yaml
+  - ExternalSecret.secrets.yaml
+  - Ingress.gotify.yaml
+  - PersistentVolumeClaim.data.yaml
+  - Service.gotify.yaml
