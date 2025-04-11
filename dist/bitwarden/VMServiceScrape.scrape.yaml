@@ -1,0 +1,11 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: scrape
+  namespace: bitwarden
+spec:
+  endpoints:
+    - port: https
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: kube-rbac-proxy

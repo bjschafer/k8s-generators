@@ -31,7 +31,7 @@ NewArgoApp(name, {
 new HelmApp<Values>(app, "helm", {
   chart: "metallb",
   repo: "https://metallb.github.io/metallb",
-  targetRevision: version,
+  version: version,
   releaseName: name,
   namespace: namespace,
   values: {
