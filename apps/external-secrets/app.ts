@@ -182,7 +182,7 @@ class EsoConfig extends Chart {
           {
             secretKey: "test",
             remoteRef: {
-              key: "testing",
+              key: "test",
             },
           },
         ],
