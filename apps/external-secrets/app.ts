@@ -3,7 +3,7 @@ import { basename } from "path";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { EsoValuesSchema } from "../../imports/helm-values/eso-values.schema";
-import { ClusterIssuer } from "../../imports/cert-manager.io";
+import { Certificate, ClusterIssuer } from "../../imports/cert-manager.io";
 import { Construct } from "constructs";
 import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";
 import { NewArgoApp } from "../../lib/argo";
@@ -76,6 +76,29 @@ new HelmApp<EsoValuesSchema>(app, "helm", {
 class EsoConfig extends Chart {
   constructor(scope: Construct, id: string) {
     super(scope, id);
+
+    new Certificate(this, "bitwarden-tls-certs", {
+      metadata: {
+        name: "bitwarden-tls-certs",
+        namespace: namespace,
+      },
+      spec: {
+        issuerRef: {
+          kind: ClusterIssuer.GVK.kind,
+          group: ClusterIssuer.GVK.apiVersion.split("/")[0],
+          name: "webhook-selfsigned",
+        },
+        secretName: "bitwarden-tls-certs",
+        commonName: "bitwarden-sdk-server",
+        duration: "8760h",
+        dnsNames: [
+          "bitwarden-sdk-server",
+          `bitwarden-sdk-server.${namespace}`,
+          `bitwarden-sdk-server.${namespace}.svc`,
+          `bitwarden-sdk-server.${namespace}.svc.cluster.local`,
+        ],
+      },
+    });
 
     ["external-secrets", "external-secrets-webhook"].forEach(
       (selector: string) => {
