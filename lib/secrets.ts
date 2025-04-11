@@ -5,6 +5,7 @@ import {
   ExternalSecretV1Beta1SpecData,
   ExternalSecretV1Beta1SpecSecretStoreRefKind,
 } from "../imports/external-secrets.io";
+import { ISecret, Secret } from "cdk8s-plus-32";
 
 export interface BitwardenSecretProps {
   name: string;
@@ -16,8 +17,13 @@ export interface BitwardenSecretProps {
 }
 
 export class BitwardenSecret extends Chart {
+  public readonly secretName: string;
+  public readonly secret: ISecret;
+
   constructor(scope: Construct, id: string, props: BitwardenSecretProps) {
     super(scope, id);
+    this.secretName = props.name;
+    this.secret = Secret.fromSecretName(this, `${id}-isecret`, props.name);
 
     new ExternalSecretV1Beta1(this, "secret", {
       metadata: {
