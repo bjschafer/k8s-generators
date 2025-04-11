@@ -145,6 +145,7 @@ class EsoConfig extends Chart {
                 credentials: {
                   key: "token",
                   name: "bitwarden-access-token",
+                  namespace: namespace,
                 },
               },
             },
