@@ -7,6 +7,14 @@ import { Certificate, ClusterIssuer } from "../../imports/cert-manager.io";
 import { Construct } from "constructs";
 import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";
 import { NewArgoApp } from "../../lib/argo";
+import {
+  ClusterSecretStore,
+  ClusterSecretStoreV1Beta1,
+  ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaProviderType,
+  SecretStore,
+  SecretStoreV1Beta1,
+} from "../../imports/external-secrets.io";
+import { KeyObject } from "crypto";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -122,6 +130,38 @@ class EsoConfig extends Chart {
         });
       },
     );
+
+    new ClusterSecretStoreV1Beta1(this, "bw-secret-store", {
+      metadata: {
+        name: "bitwarden",
+      },
+      spec: {
+        provider: {
+          bitwardensecretsmanager: {
+            apiUrl: "https://api.bitwarden.com",
+            identityUrl: "https://identity.bitwarden.com",
+            auth: {
+              secretRef: {
+                credentials: {
+                  key: "token",
+                  name: "bitwarden-access-token",
+                },
+              },
+            },
+            bitwardenServerSdkurl:
+              "https://bitwarden-sdk-server.default.svc.cluster.local:9998",
+            organizationId: "f629d5a2-5bbe-4647-9189-b0dd017dca43",
+            projectId: "01e3e960-5d95-4bbc-b63c-b2bc00226981",
+            caProvider: {
+              type: ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaProviderType.SECRET,
+              namespace: namespace,
+              name: "bitwarden-tls-certs",
+              key: "ca.crt",
+            },
+          },
+        },
+      },
+    });
   }
 }
 
