@@ -11,6 +11,10 @@ import {
   ClusterSecretStore,
   ClusterSecretStoreV1Beta1,
   ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaProviderType,
+  ExternalSecret,
+  ExternalSecretSpecSecretStoreRefKind,
+  ExternalSecretV1Beta1,
+  ExternalSecretV1Beta1SpecSecretStoreRefKind,
   SecretStore,
   SecretStoreV1Beta1,
 } from "../../imports/external-secrets.io";
@@ -150,7 +154,7 @@ class EsoConfig extends Chart {
               },
             },
             bitwardenServerSdkurl:
-              "https://bitwarden-sdk-server.default.svc.cluster.local:9998",
+              "https://bitwarden-sdk-server.external-secrets.svc.cluster.local:9998",
             organizationId: "f629d5a2-5bbe-4647-9189-b0dd017dca43",
             projectId: "01e3e960-5d95-4bbc-b63c-b2bc00226981",
             caProvider: {
@@ -160,6 +164,30 @@ class EsoConfig extends Chart {
               key: "ca.crt",
             },
           },
+        },
+      },
+    });
+
+    new ExternalSecretV1Beta1(this, "testing", {
+      metadata: {
+        name: "testing",
+        namespace: namespace,
+      },
+      spec: {
+        secretStoreRef: {
+          kind: ExternalSecretV1Beta1SpecSecretStoreRefKind.CLUSTER_SECRET_STORE,
+          name: "bitwarden",
+        },
+        data: [
+          {
+            secretKey: "test",
+            remoteRef: {
+              key: "testing",
+            },
+          },
+        ],
+        target: {
+          name: "testing",
         },
       },
     });
