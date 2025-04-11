@@ -6,11 +6,16 @@ import { EsoValuesSchema } from "../../imports/helm-values/eso-values.schema";
 import { ClusterIssuer } from "../../imports/cert-manager.io";
 import { Construct } from "constructs";
 import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";
+import { NewArgoApp } from "../../lib/argo";
 
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
 const version = "0.15.1";
+
+NewArgoApp(name, {
+  namespace: namespace,
+});
 
 new HelmApp<EsoValuesSchema>(app, "helm", {
   chart: "external-secrets",
