@@ -18,7 +18,7 @@ NewArgoApp(name, {
 new HelmApp(app, "helm", {
   chart: "cert-manager",
   repo: "https://charts.jetstack.io",
-  targetRevision: version,
+  version: version,
   releaseName: name,
   namespace: namespace,
   values: {
