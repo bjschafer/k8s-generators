@@ -8,17 +8,9 @@ import { Construct } from "constructs";
 import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";
 import { NewArgoApp } from "../../lib/argo";
 import {
-  ClusterSecretStore,
   ClusterSecretStoreV1Beta1,
   ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaProviderType,
-  ExternalSecret,
-  ExternalSecretSpecSecretStoreRefKind,
-  ExternalSecretV1Beta1,
-  ExternalSecretV1Beta1SpecSecretStoreRefKind,
-  SecretStore,
-  SecretStoreV1Beta1,
 } from "../../imports/external-secrets.io";
-import { KeyObject } from "crypto";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -164,30 +156,6 @@ class EsoConfig extends Chart {
               key: "ca.crt",
             },
           },
-        },
-      },
-    });
-
-    new ExternalSecretV1Beta1(this, "testing", {
-      metadata: {
-        name: "testing",
-        namespace: namespace,
-      },
-      spec: {
-        secretStoreRef: {
-          kind: ExternalSecretV1Beta1SpecSecretStoreRefKind.CLUSTER_SECRET_STORE,
-          name: "bitwarden",
-        },
-        data: [
-          {
-            secretKey: "test",
-            remoteRef: {
-              key: "test",
-            },
-          },
-        ],
-        target: {
-          name: "testing",
         },
       },
     });
