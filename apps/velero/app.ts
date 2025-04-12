@@ -18,7 +18,7 @@ import {
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
-const chartVersion = "8.6.0";
+const chartVersion = "8.7.2";
 const awsVersion = "1.11.1";
 
 NewArgoApp(name, {
