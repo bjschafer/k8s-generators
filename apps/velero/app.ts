@@ -105,11 +105,11 @@ class Velero extends Chart {
           resources: {
             requests: {
               cpu: "50m",
-              memory: "128Mi",
+              memory: "256Mi",
             },
             limits: {
               cpu: "1250m",
-              memory: "1Gi",
+              memory: "2Gi",
             },
           },
         },
