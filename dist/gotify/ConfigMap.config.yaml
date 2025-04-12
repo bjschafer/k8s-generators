@@ -26,10 +26,6 @@ data:
       stream:
         pingperiodseconds: 45
         allowedorigins: []
-      database:
-        dialect: postgres
-      defaultuser:
-        name: bschafer
       passstrength: 10
       uploadedimagesdir: data/images
       pluginsdir: data/plugins

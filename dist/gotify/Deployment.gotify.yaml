@@ -1,6 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    reloader.stakater.com/auto: "true"
   labels:
     app.kubernetes.io/managed-by: generators
     app.kubernetes.io/name: gotify
@@ -33,6 +35,10 @@ spec:
                   name: secrets
             - name: GOTIFY_DATABASE_CONNECTION
               value: host=prod.postgres.svc.cluster.local port=5432 user=gotify dbname=gotify password=$(DB_PASSWORD)
+            - name: GOTIFY_DATABASE_DIALECT
+              value: postgres
+            - name: GOTIFY_DEFAULTUSER_NAME
+              value: bschafer
             - name: GOTIFY_DEFAULTUSER_PASS
               valueFrom:
                 secretKeyRef:

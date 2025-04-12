@@ -1,6 +1,6 @@
 import { App, Size, Yaml } from "cdk8s";
 import { basename } from "path";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, RELOADER_ENABLED } from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
 import { BitwardenSecret } from "../../lib/secrets";
 import { AppPlus } from "../../lib/app-plus";
@@ -75,17 +75,6 @@ new DataConfigMap(app, "config", {
           // - "otherdomain.com"
         },
 
-        database: {
-          // for database see(configure database section)
-          dialect: "postgres",
-          // connection configured via environment
-        },
-
-        defaultuser: {
-          // on database creation, gotify creates an admin user
-          name: "bschafer", // the username of the default user
-          // pass configured via environment
-        },
         passstrength: 10, // the bcrypt password strength(higher = better but also slower)
         uploadedimagesdir: "data/images", // the directory for storing uploaded images
         pluginsdir: "data/plugins", // the directory where plugin resides
@@ -109,6 +98,9 @@ new AppPlus(app, "gotify", {
       limit: Size.mebibytes(128),
     },
   },
+  annotations: {
+    ...RELOADER_ENABLED,
+  },
   ports: [port],
   livenessProbe: Probe.fromHttpGet("/", { port: port }),
   readinessProbe: Probe.fromHttpGet("/", { port: port }),
@@ -120,6 +112,8 @@ new AppPlus(app, "gotify", {
     GOTIFY_DATABASE_CONNECTION: EnvValue.fromValue(
       "host=prod.postgres.svc.cluster.local port=5432 user=gotify dbname=gotify password=$(DB_PASSWORD)",
     ),
+    GOTIFY_DATABASE_DIALECT: EnvValue.fromValue("postgres"),
+    GOTIFY_DEFAULTUSER_NAME: EnvValue.fromValue("bschafer"),
     GOTIFY_DEFAULTUSER_PASS: EnvValue.fromSecretValue({
       secret: dbCreds.secret,
       key: "GOTIFY_DEFAULTUSER_PASS",
