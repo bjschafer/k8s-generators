@@ -14,7 +14,7 @@ data:
         redirecttohttps: false
         listenaddr: ""
         port: 443
-      responseheaders: []
+      responseheaders: {}
       trustedproxies:
         - 127.0.0.1/8
         - 10.42.0.0/16

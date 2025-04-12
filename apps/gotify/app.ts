@@ -53,7 +53,7 @@ new DataConfigMap(app, "config", {
           port: 443, // the https port
         },
 
-        responseheaders: [], // response headers are added to every response(default : none)
+        responseheaders: {}, // response headers are added to every response(default : none)
         trustedproxies: ["127.0.0.1/8", "10.42.0.0/16", "10.43.0.0/16"], // IPs or IP ranges of trusted proxies.Used to obtain the remote ip via the X- Forwarded - For header. (configure 127.0.0.1 to trust sockets)
 
         cors: {
