@@ -31,7 +31,7 @@ const dbCreds = new BitwardenSecret(app, "db-creds", {
   namespace: namespace,
   data: {
     DB_PASSWORD: "c34eb868-9512-42a7-b168-b2bc00337830",
-    GOTIFY_DEFAULT_USER_PASS: "ac003e8d-8fdf-4e58-ab3b-b2bc018a3dfc",
+    GOTIFY_DEFAULTUSER_PASS: "ac003e8d-8fdf-4e58-ab3b-b2bc018a3dfc",
   },
 });
 
