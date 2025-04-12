@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - ghcr.io/gotify/server:latest@sha256:04f4c4bb7cdde8c84e5a89d1287bd1f766c02c1cd477dc01c47acae80bff3c77
