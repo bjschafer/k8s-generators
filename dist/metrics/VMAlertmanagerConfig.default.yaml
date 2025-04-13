@@ -35,7 +35,6 @@ spec:
         - url: https://gotify.cmdcentral.xyz/plugin/1/custom/PtnVn-emc8uZMUq/
     - name: blackhole
   route:
-    continue: false
     receiver: blackhole
     routes:
       - continue: true
