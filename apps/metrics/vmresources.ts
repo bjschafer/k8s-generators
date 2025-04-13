@@ -161,7 +161,6 @@ export class VmResources extends Chart {
         ],
         route: {
           receiver: "blackhole",
-          continue: false,
           routes: [
             {
               receiver: "gotify",
