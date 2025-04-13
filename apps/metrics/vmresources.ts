@@ -148,6 +148,14 @@ export class VmResources extends Chart {
             ],
           },
           {
+            name: "gotify",
+            webhookConfigs: [
+              {
+                url: "https://gotify.cmdcentral.xyz/plugin/1/custom/PtnVn-emc8uZMUq/",
+              },
+            ],
+          },
+          {
             name: "blackhole",
           },
         ],
@@ -156,14 +164,19 @@ export class VmResources extends Chart {
           continue: false,
           routes: [
             {
+              receiver: "gotify",
+              matchers: ['push_notify="true"'],
+              continue: true,
+            },
+            {
               receiver: "telegram",
               matchers: ['push_notify="true"'],
-              continue: false,
+              continue: true,
             },
             {
               receiver: "telegram",
               matchers: ['priority=~"0|1"'],
-              continue: false,
+              continue: true,
             },
             {
               receiver: "email",
