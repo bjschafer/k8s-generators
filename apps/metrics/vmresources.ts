@@ -107,6 +107,7 @@ export class VmResources extends Chart {
             memory: VmAlertmanagerSpecResourcesLimits.fromString("256Mi"),
           },
         },
+        disableRouteContinueEnforce: true,
         selectAllByDefault: true, // automatically pick up all VmAlertmanagerConfigs
       },
     });

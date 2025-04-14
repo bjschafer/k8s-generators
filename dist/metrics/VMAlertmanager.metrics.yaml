@@ -4,6 +4,7 @@ metadata:
   name: metrics
   namespace: metrics
 spec:
+  disableRouteContinueEnforce: true
   externalURL: https://alertmanager.cmdcentral.xyz
   resources:
     limits:
