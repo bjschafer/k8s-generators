@@ -11,6 +11,7 @@ export interface CmdcentralServiceMonitorProps {
   name: string;
   namespace: string;
   matchLabels: { [key: string]: string };
+  portName?: string;
   extraConfig?: Partial<VmServiceScrapeSpec>;
 }
 
@@ -31,7 +32,7 @@ export class CmdcentralServiceMonitor extends Chart {
         namespaceSelector: {
           matchNames: [props.namespace],
         },
-        endpoints: [{ port: "metrics" }],
+        endpoints: [{ port: props.portName ?? "metrics" }],
         selector: {
           matchLabels: props.matchLabels,
         },

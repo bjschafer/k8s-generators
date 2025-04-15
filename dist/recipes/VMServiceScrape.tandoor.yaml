@@ -5,7 +5,7 @@ metadata:
   namespace: recipes
 spec:
   endpoints:
-    - port: metrics
+    - port: http
   namespaceSelector:
     matchNames:
       - recipes

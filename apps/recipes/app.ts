@@ -303,6 +303,7 @@ class Tandoor extends Chart {
     new CmdcentralServiceMonitor(app, "metrics", {
       name: "tandoor",
       namespace: namespace,
+      portName: "http",
       matchLabels: {
         "app.kubernetes.io/instance": "recipes",
       },
