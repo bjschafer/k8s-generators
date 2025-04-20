@@ -1,3 +1,4 @@
+import { Yaml } from "cdk8s";
 import { execSync } from "child_process";
 import { mkdirSync, writeFileSync } from "fs";
 import { join } from "path";
@@ -5,6 +6,33 @@ import { parseAllDocuments, stringify } from "yaml";
 
 export interface Updater {
   Run(): void;
+}
+
+export class WebUpdater implements Updater {
+  private url: string;
+  outputPath: string;
+
+  constructor(url: string, outputPath: string) {
+    this.url = url;
+    this.outputPath = outputPath;
+    mkdirSync(this.outputPath, {
+      recursive: true,
+    });
+  }
+
+  Run(): void {
+    const items = Yaml.load(this.url);
+
+    for (const item of items) {
+      if (item.kind !== "CustomResourceDefinition") {
+        continue;
+      }
+      const name = item.metadata.name;
+
+      const path = join(this.outputPath, `${name}.yaml`);
+      writeFileSync(path, stringify(item));
+    }
+  }
 }
 
 abstract class CommandUpdater implements Updater {
