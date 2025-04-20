@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/instance: velero
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: velero
-    helm.sh/chart: velero-8.7.2
+    helm.sh/chart: velero-9.0.0
   name: velero-server
 roleRef:
   apiGroup: rbac.authorization.k8s.io
