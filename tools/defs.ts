@@ -7,7 +7,7 @@ export interface Updater {
   Run(): void;
 }
 
-abstract class CommandUpdater {
+abstract class CommandUpdater implements Updater {
   private outputBase = "./apps";
   private version?: string;
 
