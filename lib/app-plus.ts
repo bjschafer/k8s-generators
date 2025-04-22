@@ -26,6 +26,7 @@ import {
   DEFAULT_SECURITY_CONTEXT,
 } from "./consts";
 import { StorageClass } from "./volume";
+import { WellKnownLabels } from "./labels";
 
 export interface AppPlusVolume {
   readonly props: PersistentVolumeClaimProps;
@@ -47,6 +48,7 @@ export interface AppPlusProps {
   readonly image: string;
   readonly resources: ContainerResources;
   readonly annotations?: { [p: string]: string };
+  readonly labels?: { [p: string]: string };
   readonly replicas?: number;
   readonly ports?: number[];
   readonly volumes?: AppPlusVolume[];
@@ -77,6 +79,7 @@ export class AppPlus extends Chart {
           metadata: {
             name: `${vol.name}`,
             namespace: props.namespace,
+            labels: props.labels,
           },
           accessModes: vol.props.accessModes ?? [
             PersistentVolumeAccessMode.READ_WRITE_ONCE,
@@ -133,8 +136,9 @@ export class AppPlus extends Chart {
         name: props.name,
         namespace: props.namespace,
         labels: {
-          "app.kubernetes.io/name": props.name,
-          "app.kubernetes.io/managed-by": "generators",
+          [WellKnownLabels.Name]: props.name,
+          [WellKnownLabels.ManagedBy]: "generators",
+          ...props.labels,
         },
         annotations: props.annotations,
       },
@@ -233,6 +237,9 @@ export class AppPlus extends Chart {
       name: props.name,
       ports: svcPorts,
     });
+    for (const [key, val] of Object.entries(props.labels ?? {})) {
+      svc.metadata.addLabel(key, val);
+    }
 
     const ingress = new Ingress(this, `${props.name}-ingress`, {
       metadata: {
@@ -241,6 +248,7 @@ export class AppPlus extends Chart {
         annotations: {
           "cert-manager.io/cluster-issuer": CLUSTER_ISSUER.name,
         },
+        labels: props.labels,
       },
     });
 
