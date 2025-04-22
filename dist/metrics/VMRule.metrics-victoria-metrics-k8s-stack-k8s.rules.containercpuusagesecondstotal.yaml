@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.42.0
+    helm.sh/chart: victoria-metrics-k8s-stack-0.44.0
   name: metrics-victoria-metrics-k8s-stack-k8s.rules.containercpuusagesecondstotal
   namespace: metrics
 spec:
@@ -16,6 +16,15 @@ spec:
     - name: k8s.rules.container_cpu_usage_seconds_total
       params: {}
       rules:
+        - annotations: {}
+          expr: |-
+            sum by (namespace,pod,container,cluster) (
+              rate(container_cpu_usage_seconds_total{job="kubelet", metrics_path="/metrics/cadvisor", image!=""}[5m])
+            ) * on (namespace,pod,cluster) group_left(node) topk by (namespace,pod,cluster) (
+              1, max by (namespace,pod,node,cluster) (kube_pod_info{node!=""})
+            )
+          labels: {}
+          record: node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m
         - annotations: {}
           expr: |-
             sum by (namespace,pod,container,cluster) (
