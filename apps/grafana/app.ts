@@ -11,7 +11,7 @@ import {
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
-const version = "8.11.3";
+const version = "8.12.1";
 
 NewArgoApp(name, {
   namespace: namespace,
@@ -51,12 +51,6 @@ class Grafana extends Chart {
             memory: "384Mi",
           },
         },
-        tolerations: [
-          {
-            key: "cmdcentral.xyz/critical",
-            effect: "NoSchedule",
-          },
-        ],
         persistence: {
           enabled: true,
           type: "pvc",
@@ -116,24 +110,10 @@ class Grafana extends Chart {
           feature_toggles: {
             publicDashboards: true,
           },
-          plugins: {
-            allow_loading_unsigned_plugins:
-              "victoriametrics-datasource,victoriametrics-logs-datasource",
-          },
           server: {
             root_url: "https://grafana.cmdcentral.xyz",
           },
         },
-        hostAliases: [
-          {
-            hostnames: ["alertmanager.cmdcentral.xyz"],
-            ip: "10.0.10.101",
-          },
-          {
-            hostnames: ["postgres.cmdcentral.xyz"],
-            ip: "10.0.10.19",
-          },
-        ],
         extraSecretMounts: [
           {
             name: "auth-cmdcentral-oauth",

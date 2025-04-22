@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/name: grafana
     app.kubernetes.io/version: 11.6.0
-    helm.sh/chart: grafana-8.11.3
+    helm.sh/chart: grafana-8.12.1
   name: grafana
   namespace: grafana
 spec:
@@ -20,14 +20,14 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 50d80024012ceda8e85e8f277163911f39cc83b47d66259552d1bbffde8b1493
+        checksum/config: 3ed6380c92fd99ab458e5280cb6937fe356fbe12bca5d1b81dff608b533ca294
         checksum/sc-dashboard-provider-config: e3aca4961a8923a0814f12363c5e5e10511bb1deb6cd4e0cbe138aeee493354f
         kubectl.kubernetes.io/default-container: grafana
       labels:
         app.kubernetes.io/instance: grafana
         app.kubernetes.io/name: grafana
         app.kubernetes.io/version: 11.6.0
-        helm.sh/chart: grafana-8.11.3
+        helm.sh/chart: grafana-8.12.1
     spec:
       automountServiceAccountToken: true
       containers:
@@ -147,13 +147,6 @@ spec:
               name: auth-cmdcentral-oauth
               readOnly: true
       enableServiceLinks: true
-      hostAliases:
-        - hostnames:
-            - alertmanager.cmdcentral.xyz
-          ip: 10.0.10.101
-        - hostnames:
-            - postgres.cmdcentral.xyz
-          ip: 10.0.10.19
       initContainers:
         - command:
             - chown
@@ -181,9 +174,6 @@ spec:
         runAsUser: 472
       serviceAccountName: grafana
       shareProcessNamespace: false
-      tolerations:
-        - effect: NoSchedule
-          key: cmdcentral.xyz/critical
       volumes:
         - configMap:
             name: grafana
