@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: metrics
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-operator
-    app.kubernetes.io/version: v0.55.0
-    helm.sh/chart: victoria-metrics-operator-0.44.0
+    app.kubernetes.io/version: v0.56.0
+    helm.sh/chart: victoria-metrics-operator-0.45.0
   name: metrics-victoria-metrics-operator
   namespace: metrics
 spec:
@@ -38,7 +38,7 @@ spec:
               value: victoria-metrics-operator
             - name: VM_ENABLEDPROMETHEUSCONVERTEROWNERREFERENCES
               value: "false"
-          image: victoriametrics/operator:v0.55.0
+          image: victoriametrics/operator:v0.56.0
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3

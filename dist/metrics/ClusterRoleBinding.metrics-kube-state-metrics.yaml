@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: kube-state-metrics
     app.kubernetes.io/part-of: kube-state-metrics
     app.kubernetes.io/version: 2.15.0
-    helm.sh/chart: kube-state-metrics-5.31.0
+    helm.sh/chart: kube-state-metrics-5.31.2
   name: metrics-kube-state-metrics
 roleRef:
   apiGroup: rbac.authorization.k8s.io
