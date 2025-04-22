@@ -46,6 +46,8 @@ spec:
               value: 0.0.0.0
             - name: SPOOLMAN_PORT
               value: "8000"
+            - name: SPOOLMAN_METRICS_ENABLED
+              value: "true"
             - name: TZ
               value: America/Chicago
           image: ghcr.io/donkie/spoolman:latest

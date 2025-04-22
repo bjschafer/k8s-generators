@@ -3,6 +3,9 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: spoolman
   name: spoolman
   namespace: spoolman
 spec:

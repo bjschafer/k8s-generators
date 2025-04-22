@@ -5,6 +5,8 @@ import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { Cpu, EnvValue, Probe, Secret } from "cdk8s-plus-32";
 import { AppPlus } from "../../lib/app-plus";
 import { NewKustomize } from "../../lib/kustomize";
+import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
+import { WellKnownLabels } from "../../lib/labels";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -45,6 +47,10 @@ new AppPlus(app, `${name}-app`, {
       limit: Size.mebibytes(512),
     },
   },
+  labels: {
+    [WellKnownLabels.Name]: name,
+    [WellKnownLabels.ManagedBy]: "generators",
+  },
   ports: [8000],
   extraEnv: {
     SPOOLMAN_DB_TYPE: EnvValue.fromValue("postgres"),
@@ -58,10 +64,20 @@ new AppPlus(app, `${name}-app`, {
     }),
     SPOOLMAN_HOST: EnvValue.fromValue("0.0.0.0"),
     SPOOLMAN_PORT: EnvValue.fromValue("8000"),
+    SPOOLMAN_METRICS_ENABLED: EnvValue.fromValue("true"),
     TZ: EnvValue.fromValue("America/Chicago"),
   },
   livenessProbe: Probe.fromHttpGet("/api/v1/health", { port: 8000 }),
   readinessProbe: Probe.fromHttpGet("/api/v1/health", { port: 8000 }),
+});
+
+new CmdcentralServiceMonitor(app, "sm", {
+  name: name,
+  namespace: namespace,
+  matchLabels: {
+    [WellKnownLabels.Name]: name,
+  },
+  portName: "http",
 });
 
 app.synth();
