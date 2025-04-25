@@ -1,0 +1,5 @@
+resources:
+  - Deployment.miniflux.yaml
+  - Ingress.miniflux.yaml
+  - Service.miniflux.yaml
+  - VMServiceScrape.miniflux.yaml

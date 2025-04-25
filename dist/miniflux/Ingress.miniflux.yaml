@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: miniflux
+  namespace: miniflux
+spec:
+  rules:
+    - host: miniflux.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: miniflux
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+    - host: rss.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: miniflux
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - miniflux.cmdcentral.xyz
+        - rss.cmdcentral.xyz
+      secretName: miniflux-tls

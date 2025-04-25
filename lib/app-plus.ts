@@ -6,6 +6,7 @@ import {
   ContainerResources,
   Deployment,
   DeploymentStrategy,
+  EnvFrom,
   EnvValue,
   Ingress,
   IngressBackend,
@@ -54,6 +55,7 @@ export interface AppPlusProps {
   readonly volumes?: AppPlusVolume[];
   readonly configmapMounts?: ConfigMapVolume[];
   readonly extraEnv?: { [key: string]: EnvValue };
+  readonly envFrom?: EnvFrom[];
   readonly livenessProbe?: Probe;
   readonly readinessProbe?: Probe;
   readonly serviceAccountName?: string;
@@ -170,6 +172,7 @@ export class AppPlus extends Chart {
           image: props.image,
           ports: ports,
           resources: props.resources,
+          envFrom: props.envFrom,
           envVariables: props.extraEnv,
           readiness:
             props.readinessProbe ??

@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: miniflux
+  name: miniflux
+  namespace: miniflux
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: miniflux-app-miniflux-app-deployment-c8668c09
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: miniflux
+        cdk8s.io/metadata.addr: miniflux-app-miniflux-app-deployment-c8668c09
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: TZ
+              value: America/Chicago
+            - name: BASE_URL
+              value: https://rss.cmdcentral.xyz
+            - name: METRICS_COLLECTOR
+              value: "1"
+            - name: METRICS_ALLOWED_NETWORKS
+              value: 127.0.0.1/8,10.42.0.0/16,10.43.0.0/16
+            - name: AUTH_PROXY_HEADER
+              value: HTTP_CF_ACCESS_AUTHENTICATED_USER_EMAIL
+            - name: AUTH_PROXY_USER_CREATION
+              value: "true"
+            - name: DISABLE_LOCAL_AUTH
+              value: "true"
+            - name: OAUTH2_OIDC_PROVIDER_NAME
+              value: Cmdcentral Login
+          envFrom:
+            - secretRef:
+                name: db-creds
+            - secretRef:
+                name: oauth
+          image: ghcr.io/miniflux/miniflux:latest-distroless
+          imagePullPolicy: Always
+          livenessProbe:
+            exec:
+              command:
+                - /usr/bin/miniflux
+                - -healthcheck
+                - auto
+            failureThreshold: 3
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 1
+          name: miniflux
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthcheck
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 1
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30
