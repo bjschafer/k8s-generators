@@ -11,6 +11,7 @@ import { WellKnownLabels } from "../../lib/labels";
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
+const port = 8080;
 
 NewArgoApp(name, {
   namespace: namespace,
@@ -38,7 +39,7 @@ new AppPlus(app, `${name}-app`, {
       limit: Size.mebibytes(512),
     },
   },
-  ports: [8080],
+  ports: [port],
   livenessProbe: Probe.fromCommand(
     ["/usr/bin/miniflux", "-healthcheck", "auto"],
     {
@@ -51,6 +52,7 @@ new AppPlus(app, `${name}-app`, {
     initialDelaySeconds: Duration.seconds(20),
     periodSeconds: Duration.seconds(10),
     timeoutSeconds: Duration.seconds(1),
+    port: port,
   }),
   extraIngressHosts: ["rss.cmdcentral.xyz"],
   extraEnv: {
