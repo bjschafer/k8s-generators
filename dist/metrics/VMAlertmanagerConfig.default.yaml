@@ -32,7 +32,7 @@ spec:
           chat_id: 834388479
     - name: gotify
       webhook_configs:
-        - url: https://gotify.cmdcentral.xyz/plugin/1/custom/PtnVn-emc8uZMUq/
+        - url: http://alertmanager-bridge.gotify.svc.cluster.local:8080/gotify_webhook
     - name: blackhole
   route:
     receiver: blackhole

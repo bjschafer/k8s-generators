@@ -152,7 +152,7 @@ export class VmResources extends Chart {
             name: "gotify",
             webhookConfigs: [
               {
-                url: "https://gotify.cmdcentral.xyz/plugin/1/custom/PtnVn-emc8uZMUq/",
+                url: "http://alertmanager-bridge.gotify.svc.cluster.local:8080/gotify_webhook",
               },
             ],
           },
