@@ -2,8 +2,9 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
+    argocd-image-updater.argoproj.io/alertmanager_gotify_bridge.update-strategy: semver
     argocd-image-updater.argoproj.io/git-branch: main
-    argocd-image-updater.argoproj.io/image-list: server=ghcr.io/gotify/server:latest
+    argocd-image-updater.argoproj.io/image-list: server=ghcr.io/gotify/server:latest,alertmanager_gotify_bridge=ghcr.io/druggeri/alertmanager_gotify_bridge:2.x.x
     argocd-image-updater.argoproj.io/server.update-strategy: digest
     argocd-image-updater.argoproj.io/write-back-method: git
   labels:

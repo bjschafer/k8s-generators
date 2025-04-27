@@ -1,0 +1,14 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: am-bridge
+  namespace: gotify
+spec:
+  endpoints:
+    - port: http
+  namespaceSelector:
+    matchNames:
+      - gotify
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: alertmanager-bridge

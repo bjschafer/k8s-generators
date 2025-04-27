@@ -7,6 +7,8 @@ import { AppPlus } from "../../lib/app-plus";
 import { Cpu, EnvValue, Probe } from "cdk8s-plus-32";
 import { DataConfigMap } from "../../lib/config";
 import { NewKustomize } from "../../lib/kustomize";
+import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
+import { WellKnownLabels } from "../../lib/labels";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -21,6 +23,11 @@ NewArgoApp(name, {
       {
         image: image,
         strategy: "digest",
+      },
+      {
+        image: "ghcr.io/druggeri/alertmanager_gotify_bridge",
+        strategy: "semver",
+        versionConstraint: "2.x.x",
       },
     ],
   },
@@ -137,6 +144,49 @@ new AppPlus(app, "gotify", {
     },
   ],
   extraIngressHosts: ["notifications.cmdcentral.xyz", "notify.cmdcentral.xyz"],
+});
+
+const amToken = new BitwardenSecret(app, "am-token", {
+  name: "am-token",
+  namespace: namespace,
+  data: {
+    GOTIFY_TOKEN: "1e2958be-ffa8-4c2b-a49e-b2cc01018abd",
+  },
+});
+
+new AppPlus(app, "am-bridge", {
+  name: "alertmanager-bridge",
+  namespace: namespace,
+  image: "ghcr.io/druggeri/alertmanager_gotify_bridge",
+  resources: {
+    cpu: {
+      request: Cpu.millis(50),
+      limit: Cpu.millis(50),
+    },
+    memory: {
+      request: Size.mebibytes(64),
+      limit: Size.mebibytes(64),
+    },
+  },
+  ports: [8080],
+  extraEnv: {
+    GOTIFY_ENDPOINT: EnvValue.fromValue(
+      `http://${name}.${namespace}.svc.cluster.local:${port}/message`,
+    ),
+    GOTIFY_TOKEN: EnvValue.fromSecretValue({
+      secret: amToken.secret,
+      key: "GOTIFY_TOKEN",
+    }),
+  },
+});
+
+new CmdcentralServiceMonitor(app, "am-bridge-sm", {
+  name: "am-bridge",
+  namespace: namespace,
+  matchLabels: {
+    [WellKnownLabels.Name]: "alertmanager-bridge",
+  },
+  portName: "http",
 });
 
 app.synth();
