@@ -1,3 +1,4 @@
 kustomize:
   images:
   - ghcr.io/gotify/server:latest@sha256:dfbee7fc4701b300936a24b01d24620b4d62e405204c71fd749a63abfb9b4ec4
+  - ghcr.io/druggeri/alertmanager_gotify_bridge:2.3.2
