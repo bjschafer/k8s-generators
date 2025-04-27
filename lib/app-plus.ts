@@ -61,6 +61,7 @@ export interface AppPlusProps {
   readonly serviceAccountName?: string;
   readonly automountServiceAccount?: boolean;
   readonly extraIngressHosts?: string[];
+  readonly disableIngress?: boolean;
   readonly limitToAMD64?: boolean;
   readonly args?: string[];
   readonly monitoringConfig?: {
@@ -244,38 +245,40 @@ export class AppPlus extends Chart {
       svc.metadata.addLabel(key, val);
     }
 
-    const ingress = new Ingress(this, `${props.name}-ingress`, {
-      metadata: {
-        name: props.name,
-        namespace: props.namespace,
-        annotations: {
-          "cert-manager.io/cluster-issuer": CLUSTER_ISSUER.name,
+    if (props.disableIngress === undefined || props.disableIngress === false) {
+      const ingress = new Ingress(this, `${props.name}-ingress`, {
+        metadata: {
+          name: props.name,
+          namespace: props.namespace,
+          annotations: {
+            "cert-manager.io/cluster-issuer": CLUSTER_ISSUER.name,
+          },
+          labels: props.labels,
         },
-        labels: props.labels,
-      },
-    });
+      });
 
-    const ingressHosts = [`${props.name}.cmdcentral.xyz`];
-    if (props.extraIngressHosts) {
-      ingressHosts.push(...props.extraIngressHosts);
-    }
+      const ingressHosts = [`${props.name}.cmdcentral.xyz`];
+      if (props.extraIngressHosts) {
+        ingressHosts.push(...props.extraIngressHosts);
+      }
 
-    for (const host of ingressHosts) {
-      ingress.addHostRule(
-        host,
-        "/",
-        IngressBackend.fromService(svc, { port: props.ports?.at(0) }),
-      );
+      for (const host of ingressHosts) {
+        ingress.addHostRule(
+          host,
+          "/",
+          IngressBackend.fromService(svc, { port: props.ports?.at(0) }),
+        );
+      }
+      ingress.addTls([
+        {
+          hosts: ingressHosts,
+          secret: Secret.fromSecretName(
+            this,
+            `${props.name}-tls`,
+            `${props.name}-tls`,
+          ),
+        },
+      ]);
     }
-    ingress.addTls([
-      {
-        hosts: ingressHosts,
-        secret: Secret.fromSecretName(
-          this,
-          `${props.name}-tls`,
-          `${props.name}-tls`,
-        ),
-      },
-    ]);
   }
 }
