@@ -267,7 +267,6 @@ export class ScrapeConfigs extends Chart {
         staticConfigs: [
           {
             targets: [
-              "endertres.cmdcentral.xyz:9100",
               "pandora.cmdcentral.xyz:9100",
               "trident.cmdcentral.xyz:9100",
             ],
