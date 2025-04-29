@@ -20,6 +20,6 @@ spec:
       - spoolman
       - velero
     snapshotMoveData: true
-    storageLocation: b2
+    storageLocation: wasabi
     ttl: 2232h0m0s
   useOwnerReferencesInBackup: false

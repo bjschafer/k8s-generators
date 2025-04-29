@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/instance: rclone
     app.kubernetes.io/managed-by: generators
     app.kubernetes.io/name: rclone
-  name: rclone-crypt-b2-cmdcentral-k8s-backups
+  name: rclone-crypt-wasabi-cmdcentral-k8s-backups
   namespace: rclone
 spec:
   minReadySeconds: 0
@@ -13,7 +13,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      cdk8s.io/metadata.addr: rclo-rclone-crypt-b2-cmdcentral-k8s-backups-deployment-c8b40f75
+      cdk8s.io/metadata.addr: rclone-crypt-wasabi-cmdcentral-k8s-backups-deployment-c8d4f748
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -22,8 +22,8 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: rclone-crypt-b2-cmdcentral-k8s-backups
-        cdk8s.io/metadata.addr: rclo-rclone-crypt-b2-cmdcentral-k8s-backups-deployment-c8b40f75
+        app.kubernetes.io/name: rclone-crypt-wasabi-cmdcentral-k8s-backups
+        cdk8s.io/metadata.addr: rclone-crypt-wasabi-cmdcentral-k8s-backups-deployment-c8d4f748
     spec:
       automountServiceAccountToken: false
       containers:
@@ -33,7 +33,7 @@ spec:
             - --fast-list
             - serve
             - s3
-            - "crypt-b2-cmdcentral-k8s-backups:"
+            - "crypt-wasabi-cmdcentral-k8s-backups:"
             - --addr
             - :8042
           image: rclone/rclone
@@ -47,7 +47,7 @@ spec:
           name: rclone
           ports:
             - containerPort: 8042
-              name: crypt-b2-cmdcen
+              name: crypt-wasabi-cm
           readinessProbe:
             failureThreshold: 3
             httpGet:

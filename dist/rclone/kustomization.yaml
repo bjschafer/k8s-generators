@@ -1,9 +1,10 @@
 resources:
-  - Deployment.rclone-crypt-b2-cmdcentral-k8s-backups.yaml
-  - Ingress.rclone-crypt-b2-cmdcentral-k8s-backups.yaml
+  - Deployment.rclone-crypt-wasabi-cmdcentral-k8s-backups.yaml
+  - ExternalSecret.rclone-config.yaml
+  - Ingress.rclone-crypt-wasabi-cmdcentral-k8s-backups.yaml
   - NetworkPolicy.default-block-ingress.yaml
-  - NetworkPolicy.rclone-crypt-b2-cmdcentral-k8s-backups-allow-internal.yaml
-  - NetworkPolicy.rclone-crypt-b2-cmdcentral-k8s-backups-allow-traefik.yaml
+  - NetworkPolicy.rclone-crypt-wasabi-cmdcentral-k8s-backups-allow-internal.yaml
+  - NetworkPolicy.rclone-crypt-wasabi-cmdcentral-k8s-backups-allow-traefik.yaml
   - >-
-    NetworkPolicy.rclone-gateway-crypt-b2-cmdcentral-k8s-backups-allow-namespaces.yaml
-  - Service.rclone-gateway-crypt-b2-cmdcentral-k8s-backups.yaml
+    NetworkPolicy.rclone-gateway-crypt-wasabi-cmdcentral-k8s-backups-allow-namespaces.yaml
+  - Service.rclone-gateway-crypt-wasabi-cmdcentral-k8s-backups.yaml

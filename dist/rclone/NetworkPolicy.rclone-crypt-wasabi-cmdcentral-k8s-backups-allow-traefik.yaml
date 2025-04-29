@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: rclone-crypt-b2-cmdcentral-k8s-backups-allow-traefik
+  name: rclone-crypt-wasabi-cmdcentral-k8s-backups-allow-traefik
   namespace: rclone
 spec:
   ingress:
@@ -17,6 +17,6 @@ spec:
           protocol: TCP
   podSelector:
     matchLabels:
-      cdk8s.io/metadata.addr: rclo-rclone-crypt-b2-cmdcentral-k8s-backups-deployment-c8b40f75
+      cdk8s.io/metadata.addr: rclone-crypt-wasabi-cmdcentral-k8s-backups-deployment-c8d4f748
   policyTypes:
     - Ingress

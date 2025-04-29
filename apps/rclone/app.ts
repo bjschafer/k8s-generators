@@ -5,6 +5,7 @@ import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { Cpu } from "cdk8s-plus-32";
 import { Rclone } from "../../lib/rclone";
 import { NewKustomize } from "../../lib/kustomize";
+import { BitwardenSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -34,6 +35,14 @@ NewArgoApp(name, {
   },
 });
 
+const config = new BitwardenSecret(app, "config", {
+  name: "rclone-config",
+  namespace: namespace,
+  data: {
+    "rclone.conf": "1ef8bd38-2d01-4f85-9f52-b2ce0111ed5e",
+  },
+});
+
 new Rclone(app, "rclone", {
   name: name,
   namespace: namespace,
@@ -46,14 +55,14 @@ new Rclone(app, "rclone", {
       limit: Size.gibibytes(2), // it needs a lot of room to cache stuff
     },
   },
-  configSecretName: "rclone-config",
+  configSecretName: config.secretName,
   defaultBlockIngress: true,
   backends: [
     {
-      name: "crypt-b2-cmdcentral-k8s-backups",
+      name: "crypt-wasabi-cmdcentral-k8s-backups",
       port: port,
       ingressHost:
-        "rclone-gateway-crypt-b2-cmdcentral-k8s-backups.cmdcentral.xyz",
+        "rclone-gateway-crypt-wasabi-cmdcentral-k8s-backups.cmdcentral.xyz",
       allowIngressFromInternal: true,
       allowIngressFromNS: ["velero"],
     },

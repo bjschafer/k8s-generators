@@ -178,9 +178,9 @@ class Velero extends Chart {
       },
     });
 
-    new BackupStorageLocation(this, "b2", {
+    new BackupStorageLocation(this, "wasabi", {
       metadata: {
-        name: "b2",
+        name: "wasabi",
         namespace: namespace,
       },
       spec: {
@@ -188,9 +188,9 @@ class Velero extends Chart {
           region: "us-east-1",
           s3ForcePathStyle: "true",
           s3Url:
-            "http://rclone-gateway-crypt-b2-cmdcentral-k8s-backups.rclone.svc.cluster.local:8042",
+            "http://rclone-gateway-crypt-wasabi-cmdcentral-k8s-backups.rclone.svc.cluster.local:8042",
           publicUrl:
-            "https://rclone-gateway-crypt-b2-cmdcentral-k8s-backups.cmdcentral.xyz",
+            "https://rclone-gateway-crypt-wasabi-cmdcentral-k8s-backups.cmdcentral.xyz",
         },
         objectStorage: {
           bucket: "velero",
@@ -272,7 +272,7 @@ class Velero extends Chart {
           ...defaultScheduleSpec,
           includedNamespaces: offsiteNamespaces,
           ttl: `${24 * 31 * 3}h0m0s`,
-          storageLocation: "b2",
+          storageLocation: "wasabi",
         },
       },
     });
