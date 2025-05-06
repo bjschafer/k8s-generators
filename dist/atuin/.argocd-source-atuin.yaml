@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - ghcr.io/atuinsh/atuin:v18.5.0
+  - ghcr.io/atuinsh/atuin:v18.6.0
