@@ -4,8 +4,8 @@ metadata:
   labels:
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/name: grafana
-    app.kubernetes.io/version: 11.6.0
-    helm.sh/chart: grafana-8.12.1
+    app.kubernetes.io/version: 12.0.0
+    helm.sh/chart: grafana-9.0.0
   name: grafana
   namespace: grafana
 spec:
@@ -26,8 +26,8 @@ spec:
       labels:
         app.kubernetes.io/instance: grafana
         app.kubernetes.io/name: grafana
-        app.kubernetes.io/version: 11.6.0
-        helm.sh/chart: grafana-8.12.1
+        app.kubernetes.io/version: 12.0.0
+        helm.sh/chart: grafana-9.0.0
     spec:
       automountServiceAccountToken: true
       containers:
@@ -92,7 +92,7 @@ spec:
           envFrom:
             - secretRef:
                 name: grafana-secrets
-          image: docker.io/grafana/grafana:11.6.0
+          image: docker.io/grafana/grafana:12.0.0
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 10
@@ -160,6 +160,9 @@ spec:
             capabilities:
               add:
                 - CHOWN
+              drop:
+                - ALL
+            readOnlyRootFilesystem: false
             runAsNonRoot: false
             runAsUser: 0
             seccompProfile:
