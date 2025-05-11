@@ -111,6 +111,7 @@ class Grafana extends Chart {
             publicDashboards: true,
             provisioning: true,
             kubernetesDashboards: true,
+            kubernetesClientDashboardsFolders: true,
             grafanaAPIServerEnsureKubectlAccess: true,
             dashboardNewLayouts: true,
           },

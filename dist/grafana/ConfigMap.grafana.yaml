@@ -35,6 +35,7 @@ data:
     [feature_toggles]
     dashboardNewLayouts = true
     grafanaAPIServerEnsureKubectlAccess = true
+    kubernetesClientDashboardsFolders = true
     kubernetesDashboards = true
     provisioning = true
     publicDashboards = true
