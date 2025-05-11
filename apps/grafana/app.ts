@@ -109,6 +109,10 @@ class Grafana extends Chart {
           },
           feature_toggles: {
             publicDashboards: true,
+            provisioning: true,
+            kubernetesDashboards: true,
+            grafanaAPIServerEnsureKubectlAccess: true,
+            dashboardNewLayouts: true,
           },
           server: {
             root_url: "https://grafana.cmdcentral.xyz",
