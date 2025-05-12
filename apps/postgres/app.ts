@@ -339,7 +339,7 @@ class VectorPostgres extends Chart {
         name: name,
       },
       spec: {
-        instances: 1,
+        instances: 3,
         imageCatalogRef: {
           apiGroup: catalog.apiGroup,
           kind: catalog.kind,
