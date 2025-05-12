@@ -52,7 +52,7 @@ spec:
     kind: ImageCatalog
     major: 16
     name: pgvector
-  instances: 1
+  instances: 3
   monitoring:
     enablePodMonitor: false
   postgresql:
