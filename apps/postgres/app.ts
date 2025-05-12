@@ -291,7 +291,9 @@ class VectorPostgres extends Chart {
         images: [
           {
             // https://immich.app/docs/administration/postgres-standalone#prerequisites 0.3.0 is the latest supported pgvecto.rs
-            image: "ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.5-v0.3.0",
+            //image: "ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.5-v0.3.0",
+            image:
+              "registry.cmdcentral.xyz/docker/misc/cnpg-pgvector-16.9-1-bookworm-v0.3.0:latest",
             major: 16,
           },
         ],

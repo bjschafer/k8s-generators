@@ -5,5 +5,5 @@ metadata:
   namespace: postgres
 spec:
   images:
-    - image: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.5-v0.3.0
+    - image: registry.cmdcentral.xyz/docker/misc/cnpg-pgvector-16.9-1-bookworm-v0.3.0:latest
       major: 16
