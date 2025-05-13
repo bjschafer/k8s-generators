@@ -26,7 +26,7 @@ spec:
                 secretKeyRef:
                   key: MARIADB_ROOT_PASSWORD
                   name: db-creds
-          image: ghcr.io/mariadb/mariadb:11.6.2-noble
+          image: ghcr.io/mariadb/mariadb:11.7.2-noble
           imagePullPolicy: Always
           name: main
           ports:
