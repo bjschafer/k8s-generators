@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: pbs-s3-proxy
+  name: pbs-s3-proxy
+  namespace: pbs
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: pbs-s3-proxy-pbs-s3-proxy-deployment-c84d7023
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: pbs-s3-proxy
+        cdk8s.io/metadata.addr: pbs-s3-proxy-pbs-s3-proxy-deployment-c84d7023
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - args:
+            - -bind
+            - :8007
+            - -endpoint
+            - s3.us-central-1.wasabisys.com:443
+            - -usessl
+          image: ghcr.io/tizbac/pmoxs3backuproxy
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 8007
+          name: pbs-s3-proxy
+          ports:
+            - containerPort: 8007
+          readinessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 8007
+          resources:
+            requests:
+              cpu: 200m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30
