@@ -68,6 +68,8 @@ export interface AppPlusProps {
   readonly monitoringConfig?: {
     readonly port: number;
   };
+  // if true, configures traefik to talk tls to the backend
+  readonly backendHTTPS?: boolean;
 }
 
 export class AppPlus extends Chart {
@@ -246,6 +248,12 @@ export class AppPlus extends Chart {
     });
     for (const [key, val] of Object.entries(props.labels ?? {})) {
       svc.metadata.addLabel(key, val);
+    }
+    if (props.backendHTTPS) {
+      svc.metadata.addAnnotation(
+        "traefik.ingress.kubernetes.io/service.serversscheme",
+        "https",
+      );
     }
 
     if (props.disableIngress === undefined || props.disableIngress === false) {

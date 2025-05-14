@@ -38,6 +38,7 @@ new AppPlus(app, name, {
     },
   },
   disableProbes: true,
+  backendHTTPS: true,
   args: [
     "-bind",
     ":8007",
