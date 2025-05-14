@@ -3,7 +3,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { App, Size } from "cdk8s";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
-import { Cpu } from "cdk8s-plus-32";
+import { Cpu, Probe } from "cdk8s-plus-32";
 import { NewKustomize } from "../../lib/kustomize";
 
 const namespace = basename(__dirname);
@@ -37,6 +37,7 @@ new AppPlus(app, name, {
       request: Size.mebibytes(128),
     },
   },
+  disableProbes: true,
   args: [
     "-bind",
     ":8007",

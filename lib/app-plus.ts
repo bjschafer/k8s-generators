@@ -56,6 +56,7 @@ export interface AppPlusProps {
   readonly configmapMounts?: ConfigMapVolume[];
   readonly extraEnv?: { [key: string]: EnvValue };
   readonly envFrom?: EnvFrom[];
+  readonly disableProbes?: boolean;
   readonly livenessProbe?: Probe;
   readonly readinessProbe?: Probe;
   readonly serviceAccountName?: string;
@@ -175,12 +176,14 @@ export class AppPlus extends Chart {
           resources: props.resources,
           envFrom: props.envFrom,
           envVariables: props.extraEnv,
-          readiness:
-            props.readinessProbe ??
-            Probe.fromTcpSocket({ port: props.ports?.at(0) }),
-          liveness:
-            props.livenessProbe ??
-            Probe.fromTcpSocket({ port: props.ports?.at(0) }),
+          readiness: props.disableProbes
+            ? undefined
+            : (props.readinessProbe ??
+              Probe.fromTcpSocket({ port: props.ports?.at(0) })),
+          liveness: props.disableProbes
+            ? undefined
+            : (props.livenessProbe ??
+              Probe.fromTcpSocket({ port: props.ports?.at(0) })),
         },
       ],
     });

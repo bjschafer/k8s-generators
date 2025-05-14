@@ -34,17 +34,9 @@ spec:
             - -usessl
           image: ghcr.io/tizbac/pmoxs3backuproxy
           imagePullPolicy: Always
-          livenessProbe:
-            failureThreshold: 3
-            tcpSocket:
-              port: 8007
           name: pbs-s3-proxy
           ports:
             - containerPort: 8007
-          readinessProbe:
-            failureThreshold: 3
-            tcpSocket:
-              port: 8007
           resources:
             requests:
               cpu: 200m
