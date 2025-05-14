@@ -1,4 +1,3 @@
 resources:
   - Deployment.pbs-s3-proxy.yaml
-  - Ingress.pbs-s3-proxy.yaml
   - Service.pbs-s3-proxy.yaml

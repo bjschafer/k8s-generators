@@ -1,9 +1,12 @@
 import { basename } from "path";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import {
+  DEFAULT_APP_PROPS,
+  EXTERNAL_DNS_ANNOTATION_KEY,
+} from "../../lib/consts";
 import { App, Size } from "cdk8s";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
-import { Cpu, Probe } from "cdk8s-plus-32";
+import { Cpu, Probe, ServiceType } from "cdk8s-plus-32";
 import { NewKustomize } from "../../lib/kustomize";
 
 const namespace = basename(__dirname);
@@ -38,7 +41,7 @@ new AppPlus(app, name, {
     },
   },
   disableProbes: true,
-  backendHTTPS: true,
+  disableIngress: true,
   args: [
     "-bind",
     ":8007",
@@ -47,6 +50,12 @@ new AppPlus(app, name, {
     "-usessl",
     "-debug",
   ],
+  service: {
+    type: ServiceType.LOAD_BALANCER,
+    annotations: {
+      [EXTERNAL_DNS_ANNOTATION_KEY]: "pbs-s3-proxy.cmdcentral.xyz",
+    },
+  },
 });
 
 app.synth();

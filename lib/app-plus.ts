@@ -18,6 +18,7 @@ import {
   Secret,
   ServiceAccount,
   ServicePort,
+  ServiceType,
   Volume,
 } from "cdk8s-plus-32";
 import { Construct } from "constructs";
@@ -41,6 +42,11 @@ export interface ConfigMapVolume {
   readonly mountPath: string;
   readonly subPath?: string;
   readonly options?: ConfigMapVolumeOptions;
+}
+
+export interface ServiceProps {
+  readonly type?: ServiceType;
+  annotations?: { [p: string]: string };
 }
 
 export interface AppPlusProps {
@@ -70,6 +76,7 @@ export interface AppPlusProps {
   };
   // if true, configures traefik to talk tls to the backend
   readonly backendHTTPS?: boolean;
+  readonly service?: ServiceProps;
 }
 
 export class AppPlus extends Chart {
@@ -245,10 +252,15 @@ export class AppPlus extends Chart {
     const svc = deploy.exposeViaService({
       name: props.name,
       ports: svcPorts,
+      serviceType: props.service?.type,
     });
     for (const [key, val] of Object.entries(props.labels ?? {})) {
       svc.metadata.addLabel(key, val);
     }
+    for (const [key, val] of Object.entries(props.service?.annotations ?? {})) {
+      svc.metadata.addAnnotation(key, val);
+    }
+
     if (props.backendHTTPS) {
       svc.metadata.addAnnotation(
         "traefik.ingress.kubernetes.io/service.serversscheme",

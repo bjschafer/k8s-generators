@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    traefik.ingress.kubernetes.io/service.serversscheme: https
+    external-dns.alpha.kubernetes.io/hostname: pbs-s3-proxy.cmdcentral.xyz
   name: pbs-s3-proxy
   namespace: pbs
 spec:
@@ -13,4 +13,4 @@ spec:
       targetPort: 8007
   selector:
     cdk8s.io/metadata.addr: pbs-s3-proxy-pbs-s3-proxy-deployment-c84d7023
-  type: ClusterIP
+  type: LoadBalancer
