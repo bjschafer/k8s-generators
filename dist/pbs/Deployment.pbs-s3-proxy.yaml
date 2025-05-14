@@ -32,6 +32,7 @@ spec:
             - -endpoint
             - s3.us-central-1.wasabisys.com:443
             - -usessl
+            - -debug
           image: ghcr.io/tizbac/pmoxs3backuproxy
           imagePullPolicy: Always
           name: pbs-s3-proxy

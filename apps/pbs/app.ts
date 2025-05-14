@@ -45,6 +45,7 @@ new AppPlus(app, name, {
     "-endpoint",
     "s3.us-central-1.wasabisys.com:443",
     "-usessl",
+    "-debug",
   ],
 });
 
