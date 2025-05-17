@@ -5,7 +5,7 @@ import {
   ExternalSecretV1Beta1SpecData,
   ExternalSecretV1Beta1SpecSecretStoreRefKind,
 } from "../imports/external-secrets.io";
-import { ISecret, Secret } from "cdk8s-plus-32";
+import { EnvValue, ISecret, Secret } from "cdk8s-plus-32";
 
 export interface BitwardenSecretProps {
   name: string;
@@ -19,11 +19,13 @@ export interface BitwardenSecretProps {
 export class BitwardenSecret extends Chart {
   public readonly secretName: string;
   public readonly secret: ISecret;
+  private readonly data: Record<string, string>;
 
   constructor(scope: Construct, id: string, props: BitwardenSecretProps) {
     super(scope, id);
     this.secretName = props.name;
     this.secret = Secret.fromSecretName(this, `${id}-isecret`, props.name);
+    this.data = props.data;
 
     new ExternalSecretV1Beta1(this, "secret", {
       metadata: {
@@ -50,5 +52,16 @@ export class BitwardenSecret extends Chart {
         },
       },
     });
+  }
+
+  public toEnvValues(): { [key: string]: EnvValue } {
+    const ret: Record<string, EnvValue> = {};
+    for (const [name] of Object.entries(this.data)) {
+      ret[name] = EnvValue.fromSecretValue({
+        secret: this.secret,
+        key: name,
+      });
+    }
+    return ret;
   }
 }
