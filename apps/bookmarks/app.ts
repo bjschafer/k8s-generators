@@ -1,6 +1,7 @@
 import { App, Duration, Size } from "cdk8s";
 import {
   Cpu,
+  Env,
   EnvValue,
   PersistentVolumeAccessMode,
   Probe,
@@ -12,6 +13,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { basename } from "../../lib/util";
 import { StorageClass } from "../../lib/volume";
+import { BitwardenSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -40,6 +42,15 @@ NewArgoApp(name, {
 });
 
 const secrets = Secret.fromSecretName(app, `${name}-creds`, "secrets");
+
+const aiSecrets = new BitwardenSecret(app, "ai-secrets", {
+  name: "ai",
+  namespace: namespace,
+  data: {
+    CUSTOM_OPENAI_BASE_URL: "1c3acb68-a107-4d73-8e64-b2e001190c0e",
+    OPENAI_API_KEY: "62c67d3b-b097-4dec-8488-b2e00119148f",
+  },
+});
 
 new AppPlus(app, `${name}-app`, {
   name: name,
@@ -70,13 +81,9 @@ new AppPlus(app, `${name}-app`, {
     NEXT_PUBLIC_DISABLE_REGISTRATION: EnvValue.fromValue("true"),
     NEXT_PUBLIC_CREDENTIALS_ENABLED: EnvValue.fromValue("false"), // disable non-SSO signin
 
-    // Try local LLM categorization
-    // NEXT_PUBLIC_OLLAMA_ENDPOINT_URL=http://localhost:11434
-    // OLLAMA_MODEL=phi3:mini-4k
-    NEXT_PUBLIC_OLLAMA_ENDPOINT_URL: EnvValue.fromValue(
-      "http://swordfish.cmdcentral.xyz.:11434",
-    ),
-    OLLAMA_MODEL: EnvValue.fromValue("phi3:mini-4k"),
+    // Try LLM categorization on CF workers
+    OPENAI_MODEL: EnvValue.fromValue("@cf/google/gemma-3-12b-it"),
+    ...aiSecrets.toEnvValues(),
 
     // Authentik SSO
     NEXT_PUBLIC_AUTHENTIK_ENABLED: EnvValue.fromValue("true"),

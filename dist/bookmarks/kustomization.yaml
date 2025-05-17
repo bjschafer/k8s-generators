@@ -1,5 +1,6 @@
 resources:
   - Deployment.bookmarks.yaml
+  - ExternalSecret.ai.yaml
   - Ingress.bookmarks.yaml
   - PersistentVolumeClaim.data.yaml
   - Service.bookmarks.yaml
