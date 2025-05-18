@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: prod-runner-gitlab-runner
-    chart: gitlab-runner-0.76.0
+    chart: gitlab-runner-0.77.1
     heritage: Helm
     release: prod-runner
   name: prod-runner-gitlab-runner
@@ -16,13 +16,13 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/configmap: af3c2238e43e75dcf214473116b06f077bbefa635b2badb133c6f18e58dd3a0e
+        checksum/configmap: c1aebe39d7e137d12a54c0a35df1fb3d7b8b2331aa4ae027e0671b2e091ec49f
         checksum/secrets: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
         prometheus.io/port: "9252"
         prometheus.io/scrape: "true"
       labels:
         app: prod-runner-gitlab-runner
-        chart: gitlab-runner-0.76.0
+        chart: gitlab-runner-0.77.1
         heritage: Helm
         release: prod-runner
     spec:
@@ -42,7 +42,7 @@ spec:
             - name: RUNNER_TAG_LIST
               value: ""
             - name: SESSION_SERVER_ADDRESS
-          image: registry.gitlab.com/gitlab-org/gitlab-runner:alpine-v17.11.0
+          image: registry.gitlab.com/gitlab-org/gitlab-runner:alpine-v18.0.1
           imagePullPolicy: IfNotPresent
           lifecycle:
             preStop:
