@@ -308,11 +308,11 @@ class VectorPostgres extends Chart {
       spec: {
         images: [
           {
-            image: `${imageBase}:16.9-0.4.1`,
+            image: `${imageBase}:16.9-0.3.0`,
             major: 16,
           },
           {
-            image: `${imageBase}:17.5-0.4.1`,
+            image: `${imageBase}:17.5-0.3.0`,
             major: 17,
           },
         ],
