@@ -15,7 +15,6 @@ import {
 } from "../../imports/postgresql.cnpg.io";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import {
-  BACKUP_ANNOTATION_NAME,
   DEFAULT_APP_PROPS,
   EXTERNAL_DNS_ANNOTATION_KEY,
 } from "../../lib/consts";
@@ -282,7 +281,7 @@ class VectorPostgres extends Chart {
   ) {
     super(scope, id);
 
-    const catalog = new ImageCatalog(this, "catalog", {
+    const oldCatalog = new ImageCatalog(this, "oldcatalog", {
       metadata: {
         namespace: namespace,
         name: "pgvector",
@@ -295,6 +294,26 @@ class VectorPostgres extends Chart {
             image:
               "registry.cmdcentral.xyz/docker/misc/cnpg-pgvector-16.9-1-bookworm-v0.3.0:latest",
             major: 16,
+          },
+        ],
+      },
+    });
+
+    const imageBase = "ghcr.io/tensorchord/cloudnative-vectorchord";
+    const catalog = new ImageCatalog(this, "catalog", {
+      metadata: {
+        namespace: namespace,
+        name: "vectorchord",
+      },
+      spec: {
+        images: [
+          {
+            image: `${imageBase}:16.9-0.4.1`,
+            major: 16,
+          },
+          {
+            image: `${imageBase}:17.5-0.4.1`,
+            major: 17,
           },
         ],
       },
@@ -328,10 +347,17 @@ class VectorPostgres extends Chart {
                   externalCluster: importProps.sourceClusterName,
                 },
               },
+              postInitSql: ["CREATE EXTENSION IF NOT EXISTS vchord CASCADE;"],
             },
           },
         }
-      : {};
+      : {
+          bootstrap: {
+            initdb: {
+              postInitSql: ["CREATE EXTENSION IF NOT EXISTS vchord CASCADE;"],
+            },
+          },
+        };
 
     new Cluster(this, name, {
       metadata: {
@@ -343,30 +369,11 @@ class VectorPostgres extends Chart {
         imageCatalogRef: {
           apiGroup: catalog.apiGroup,
           kind: catalog.kind,
-          major: 16, // this is how we'd do an upgrade
+          major: 16,
           name: catalog.name,
         },
         monitoring: {
           enablePodMonitor: false,
-        },
-        // prefer to schedule on non-pis
-        affinity: {
-          nodeAffinity: {
-            preferredDuringSchedulingIgnoredDuringExecution: [
-              {
-                weight: 1,
-                preference: {
-                  matchExpressions: [
-                    {
-                      key: "kubernetes.io/arch",
-                      operator: "NotIn",
-                      values: ["arm64"],
-                    },
-                  ],
-                },
-              },
-            ],
-          },
         },
         resources: {
           requests: {
@@ -406,7 +413,7 @@ class VectorPostgres extends Chart {
         },
 
         postgresql: {
-          sharedPreloadLibraries: ["vectors.so"],
+          sharedPreloadLibraries: ["vchord.so"],
           parameters: {
             max_slot_wal_keep_size: "1GB",
           },

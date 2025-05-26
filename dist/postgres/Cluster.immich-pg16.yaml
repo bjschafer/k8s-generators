@@ -4,16 +4,6 @@ metadata:
   name: immich-pg16
   namespace: postgres
 spec:
-  affinity:
-    nodeAffinity:
-      preferredDuringSchedulingIgnoredDuringExecution:
-        - preference:
-            matchExpressions:
-              - key: kubernetes.io/arch
-                operator: NotIn
-                values:
-                  - arm64
-          weight: 1
   backup:
     barmanObjectStore:
       destinationPath: s3://postgres/k8s/immich-pg16
@@ -37,6 +27,8 @@ spec:
         source:
           externalCluster: immich
         type: monolith
+      postInitSQL:
+        - CREATE EXTENSION IF NOT EXISTS vchord CASCADE;
   enableSuperuserAccess: true
   externalClusters:
     - connectionParameters:
@@ -51,7 +43,7 @@ spec:
     apiGroup: postgresql.cnpg.io
     kind: ImageCatalog
     major: 16
-    name: pgvector
+    name: vectorchord
   instances: 3
   monitoring:
     enablePodMonitor: false
@@ -59,7 +51,7 @@ spec:
     parameters:
       max_slot_wal_keep_size: 1GB
     shared_preload_libraries:
-      - vectors.so
+      - vchord.so
   resources:
     limits:
       cpu: 600m
