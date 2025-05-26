@@ -30,7 +30,7 @@ spec:
             - vlogs,vmagent,vmalert,vmalertmanager,vmalertmanagerconfig,vmauth,vmcluster,vmrule,vmsingle,vmuser
             - --all
             - --ignore-not-found=true
-          image: bitnami/kubectl:1.32
+          image: bitnami/kubectl:1.33
           imagePullPolicy: IfNotPresent
           name: kubectl
           resources:
