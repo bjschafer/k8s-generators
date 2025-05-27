@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - ghcr.io/miniflux/miniflux:latest-distroless@sha256:d98377d6a865395953a987fffdc9d068344768eda8604aea71e670c570bae98b
+  - ghcr.io/miniflux/miniflux:latest-distroless@sha256:d385f4678376ad1e20971b8e4018153423926423128cc66b3268b71901948a7b
