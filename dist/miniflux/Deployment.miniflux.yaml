@@ -43,6 +43,8 @@ spec:
               value: "true"
             - name: OAUTH2_OIDC_PROVIDER_NAME
               value: Cmdcentral Login
+            - name: RUN_MIGRATIONS
+              value: "1"
           envFrom:
             - secretRef:
                 name: db-creds
