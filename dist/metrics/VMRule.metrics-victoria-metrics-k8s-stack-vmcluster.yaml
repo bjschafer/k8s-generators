@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.48.1
+    helm.sh/chart: victoria-metrics-k8s-stack-0.52.0
   name: metrics-victoria-metrics-k8s-stack-vmcluster
   namespace: metrics
 spec:
@@ -28,9 +28,14 @@ spec:
           expr: |-
             sum(vm_free_disk_space_bytes) without(path) /
             (
-              rate(vm_rows_added_to_storage_total[1d]) * (
+              (rate(vm_rows_added_to_storage_total[1d]) - sum(rate(vm_deduplicated_samples_total[1d])) without (type)) * (
                 sum(vm_data_size_bytes{type!~"indexdb.*"}) without(type) /
                 sum(vm_rows{type!~"indexdb.*"}) without(type)
+              )
+              +
+              rate(vm_new_timeseries_created_total[1d]) * (
+                sum(vm_data_size_bytes{type="indexdb/file"}) /
+                sum(vm_rows{type="indexdb/file"})
               )
             ) < 3 * 24 * 3600 > 0
           for: 30m
@@ -46,10 +51,15 @@ spec:
           expr: |-
             sum(vm_free_disk_space_bytes - vm_free_disk_space_limit_bytes) without(path) /
             (
-              rate(vm_rows_added_to_storage_total[1d]) * (
-                sum(vm_data_size_bytes{type!~"indexdb.*"}) without(type) /
-                sum(vm_rows{type!~"indexdb.*"}) without(type)
-              )
+                (rate(vm_rows_added_to_storage_total[1d]) - sum(rate(vm_deduplicated_samples_total[1d])) without (type)) * (
+                  sum(vm_data_size_bytes{type!~"indexdb.*"}) without(type) /
+                  sum(vm_rows{type!~"indexdb.*"}) without(type)
+                )
+                +
+                rate(vm_new_timeseries_created_total[1d]) * (
+                  sum(vm_data_size_bytes{type="indexdb/file"}) /
+                  sum(vm_rows{type="indexdb/file"})
+                )
             ) < 3 * 24 * 3600 > 0
           for: 30m
           labels:

@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.48.1
+    helm.sh/chart: victoria-metrics-k8s-stack-0.52.0
   name: metrics-victoria-metrics-k8s-stack-vm-health
   namespace: metrics
 spec:
@@ -21,14 +21,14 @@ spec:
             description: |
               Job {{ $labels.job }} (instance {{ $labels.instance }}) has restarted more than twice in the last 15 minutes. It might be crashlooping.
             summary: "{{ $labels.job }} too many restarts (instance {{ $labels.instance }})"
-          expr: changes(process_start_time_seconds{job=~".*(victoriametrics|vmselect|vminsert|vmstorage|vmagent|vmalert|vmsingle|vmalertmanager|vmauth).*"}[15m]) > 2
+          expr: changes(process_start_time_seconds{job=~".*(victoriametrics|vmselect|vminsert|vmstorage|vmagent|vmalert|vmsingle|vmalertmanager|vmauth|victorialogs|vlstorage|vlselect|vlinsert).*"}[15m]) > 2
           labels:
             severity: critical
         - alert: ServiceDown
           annotations:
             description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 2 minutes."
             summary: Service {{ $labels.job }} is down on {{ $labels.instance }}
-          expr: up{job=~".*(victoriametrics|vmselect|vminsert|vmstorage|vmagent|vmalert|vmsingle|vmalertmanager|vmauth).*"} == 0
+          expr: up{job=~".*(victoriametrics|vmselect|vminsert|vmstorage|vmagent|vmalert|vmsingle|vmalertmanager|vmauth|victorialogs|vlstorage|vlselect|vlinsert).*"} == 0
           for: 2m
           labels:
             severity: critical
@@ -124,7 +124,7 @@ spec:
             severity: warning
         - alert: TooHighQueryLoad
           annotations:
-            description: |-
+            description: |
               Instance {{ $labels.instance }} ({{ $labels.job }}) is failing to serve read queries during last 15m.
               Concurrency limit `-search.maxConcurrentRequests` was reached on this instance and extra queries were
               put into the queue for `-search.maxQueueDuration` interval. But even after waiting in the queue these queries weren't served.
@@ -133,7 +133,7 @@ spec:
               * reduce the query load;
               * increase compute resources or number of replicas;
               * adjust limits `-search.maxConcurrentRequests` and `-search.maxQueueDuration`.
-              See more at https://docs.victoriametrics.com/troubleshooting/#slow-queries.
+              See more at https://docs.victoriametrics.com/victoriametrics/troubleshooting/#slow-queries.
             summary: Read queries fail with timeout for {{ $labels.job }} on instance {{ $labels.instance }}
           expr: increase(vm_concurrent_select_limit_timeout_total[5m]) > 0
           for: 15m
