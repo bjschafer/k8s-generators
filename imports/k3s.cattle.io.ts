@@ -264,6 +264,11 @@ export interface EtcdSnapshotFileSpecS3 {
   readonly bucket?: string;
 
   /**
+   * @schema EtcdSnapshotFileSpecS3#bucketLookup
+   */
+  readonly bucketLookup?: string;
+
+  /**
    * @schema EtcdSnapshotFileSpecS3#endpoint
    */
   readonly endpoint?: string;
@@ -303,6 +308,7 @@ export function toJson_EtcdSnapshotFileSpecS3(obj: EtcdSnapshotFileSpecS3 | unde
   if (obj === undefined) { return undefined; }
   const result = {
     'bucket': obj.bucket,
+    'bucketLookup': obj.bucketLookup,
     'endpoint': obj.endpoint,
     'endpointCA': obj.endpointCa,
     'insecure': obj.insecure,

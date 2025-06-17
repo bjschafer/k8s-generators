@@ -4,7 +4,7 @@ import { Construct } from 'constructs';
 
 
 /**
- * Backup is the Schema for the backups API
+ * A Backup resource is a request for a PostgreSQL backup by the user.
  *
  * @schema Backup
  */
@@ -58,7 +58,7 @@ export class Backup extends ApiObject {
 }
 
 /**
- * Backup is the Schema for the backups API
+ * A Backup resource is a request for a PostgreSQL backup by the user.
  *
  * @schema Backup
  */
@@ -4926,6 +4926,13 @@ export interface ClusterSpecProbesReadiness {
   readonly initialDelaySeconds?: number;
 
   /**
+   * Lag limit. Used only for `streaming` strategy
+   *
+   * @schema ClusterSpecProbesReadiness#maximumLag
+   */
+  readonly maximumLag?: ClusterSpecProbesReadinessMaximumLag;
+
+  /**
    * How often (in seconds) to perform the probe.
    * Default to 10 seconds. Minimum value is 1.
    *
@@ -4969,6 +4976,13 @@ export interface ClusterSpecProbesReadiness {
    */
   readonly timeoutSeconds?: number;
 
+  /**
+   * The probe strategy
+   *
+   * @schema ClusterSpecProbesReadiness#type
+   */
+  readonly type?: ClusterSpecProbesReadinessType;
+
 }
 
 /**
@@ -4980,10 +4994,12 @@ export function toJson_ClusterSpecProbesReadiness(obj: ClusterSpecProbesReadines
   const result = {
     'failureThreshold': obj.failureThreshold,
     'initialDelaySeconds': obj.initialDelaySeconds,
+    'maximumLag': obj.maximumLag?.value,
     'periodSeconds': obj.periodSeconds,
     'successThreshold': obj.successThreshold,
     'terminationGracePeriodSeconds': obj.terminationGracePeriodSeconds,
     'timeoutSeconds': obj.timeoutSeconds,
+    'type': obj.type,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -5012,6 +5028,13 @@ export interface ClusterSpecProbesStartup {
    * @schema ClusterSpecProbesStartup#initialDelaySeconds
    */
   readonly initialDelaySeconds?: number;
+
+  /**
+   * Lag limit. Used only for `streaming` strategy
+   *
+   * @schema ClusterSpecProbesStartup#maximumLag
+   */
+  readonly maximumLag?: ClusterSpecProbesStartupMaximumLag;
 
   /**
    * How often (in seconds) to perform the probe.
@@ -5057,6 +5080,13 @@ export interface ClusterSpecProbesStartup {
    */
   readonly timeoutSeconds?: number;
 
+  /**
+   * The probe strategy
+   *
+   * @schema ClusterSpecProbesStartup#type
+   */
+  readonly type?: ClusterSpecProbesStartupType;
+
 }
 
 /**
@@ -5068,10 +5098,12 @@ export function toJson_ClusterSpecProbesStartup(obj: ClusterSpecProbesStartup | 
   const result = {
     'failureThreshold': obj.failureThreshold,
     'initialDelaySeconds': obj.initialDelaySeconds,
+    'maximumLag': obj.maximumLag?.value,
     'periodSeconds': obj.periodSeconds,
     'successThreshold': obj.successThreshold,
     'terminationGracePeriodSeconds': obj.terminationGracePeriodSeconds,
     'timeoutSeconds': obj.timeoutSeconds,
+    'type': obj.type,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -6207,7 +6239,7 @@ export interface ClusterSpecBackupBarmanObjectStoreData {
   /**
    * Compress a backup file (a tar file per tablespace) while streaming it
    * to the object store. Available options are empty string (no
-   * compression, default), `gzip`, `bzip2` or `snappy`.
+   * compression, default), `gzip`, `bzip2`, and `snappy`.
    *
    * @schema ClusterSpecBackupBarmanObjectStoreData#compression
    */
@@ -6429,7 +6461,8 @@ export interface ClusterSpecBackupBarmanObjectStoreWal {
 
   /**
    * Compress a WAL file before sending it to the object store. Available
-   * options are empty string (no compression, default), `gzip`, `bzip2` or `snappy`.
+   * options are empty string (no compression, default), `gzip`, `bzip2`,
+   * `lz4`, `snappy`, `xz`, and `zstd`.
    *
    * @schema ClusterSpecBackupBarmanObjectStoreWal#compression
    */
@@ -7484,7 +7517,7 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreData {
   /**
    * Compress a backup file (a tar file per tablespace) while streaming it
    * to the object store. Available options are empty string (no
-   * compression, default), `gzip`, `bzip2` or `snappy`.
+   * compression, default), `gzip`, `bzip2`, and `snappy`.
    *
    * @schema ClusterSpecExternalClustersBarmanObjectStoreData#compression
    */
@@ -7706,7 +7739,8 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreWal {
 
   /**
    * Compress a WAL file before sending it to the object store. Available
-   * options are empty string (no compression, default), `gzip`, `bzip2` or `snappy`.
+   * options are empty string (no compression, default), `gzip`, `bzip2`,
+   * `lz4`, `snappy`, `xz`, and `zstd`.
    *
    * @schema ClusterSpecExternalClustersBarmanObjectStoreWal#compression
    */
@@ -8088,6 +8122,66 @@ export enum ClusterSpecPostgresqlSynchronousMethod {
   ANY = "any",
   /** first */
   FIRST = "first",
+}
+
+/**
+ * Lag limit. Used only for `streaming` strategy
+ *
+ * @schema ClusterSpecProbesReadinessMaximumLag
+ */
+export class ClusterSpecProbesReadinessMaximumLag {
+  public static fromNumber(value: number): ClusterSpecProbesReadinessMaximumLag {
+    return new ClusterSpecProbesReadinessMaximumLag(value);
+  }
+  public static fromString(value: string): ClusterSpecProbesReadinessMaximumLag {
+    return new ClusterSpecProbesReadinessMaximumLag(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * The probe strategy
+ *
+ * @schema ClusterSpecProbesReadinessType
+ */
+export enum ClusterSpecProbesReadinessType {
+  /** pg_isready */
+  PG_UNDERSCORE_ISREADY = "pg_isready",
+  /** streaming */
+  STREAMING = "streaming",
+  /** query */
+  QUERY = "query",
+}
+
+/**
+ * Lag limit. Used only for `streaming` strategy
+ *
+ * @schema ClusterSpecProbesStartupMaximumLag
+ */
+export class ClusterSpecProbesStartupMaximumLag {
+  public static fromNumber(value: number): ClusterSpecProbesStartupMaximumLag {
+    return new ClusterSpecProbesStartupMaximumLag(value);
+  }
+  public static fromString(value: string): ClusterSpecProbesStartupMaximumLag {
+    return new ClusterSpecProbesStartupMaximumLag(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * The probe strategy
+ *
+ * @schema ClusterSpecProbesStartupType
+ */
+export enum ClusterSpecProbesStartupType {
+  /** pg_isready */
+  PG_UNDERSCORE_ISREADY = "pg_isready",
+  /** streaming */
+  STREAMING = "streaming",
+  /** query */
+  QUERY = "query",
 }
 
 /**
@@ -9580,15 +9674,15 @@ export function toJson_ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorage
 /**
  * Compress a backup file (a tar file per tablespace) while streaming it
  * to the object store. Available options are empty string (no
- * compression, default), `gzip`, `bzip2` or `snappy`.
+ * compression, default), `gzip`, `bzip2`, and `snappy`.
  *
  * @schema ClusterSpecBackupBarmanObjectStoreDataCompression
  */
 export enum ClusterSpecBackupBarmanObjectStoreDataCompression {
-  /** gzip */
-  GZIP = "gzip",
   /** bzip2 */
   BZIP2 = "bzip2",
+  /** gzip */
+  GZIP = "gzip",
   /** snappy */
   SNAPPY = "snappy",
 }
@@ -9795,17 +9889,24 @@ export function toJson_ClusterSpecBackupBarmanObjectStoreS3CredentialsSessionTok
 
 /**
  * Compress a WAL file before sending it to the object store. Available
- * options are empty string (no compression, default), `gzip`, `bzip2` or `snappy`.
+ * options are empty string (no compression, default), `gzip`, `bzip2`,
+ * `lz4`, `snappy`, `xz`, and `zstd`.
  *
  * @schema ClusterSpecBackupBarmanObjectStoreWalCompression
  */
 export enum ClusterSpecBackupBarmanObjectStoreWalCompression {
-  /** gzip */
-  GZIP = "gzip",
   /** bzip2 */
   BZIP2 = "bzip2",
+  /** gzip */
+  GZIP = "gzip",
+  /** lz4 */
+  LZ4 = "lz4",
   /** snappy */
   SNAPPY = "snappy",
+  /** xz */
+  XZ = "xz",
+  /** zstd */
+  ZSTD = "zstd",
 }
 
 /**
@@ -10659,15 +10760,15 @@ export function toJson_ClusterSpecExternalClustersBarmanObjectStoreAzureCredenti
 /**
  * Compress a backup file (a tar file per tablespace) while streaming it
  * to the object store. Available options are empty string (no
- * compression, default), `gzip`, `bzip2` or `snappy`.
+ * compression, default), `gzip`, `bzip2`, and `snappy`.
  *
  * @schema ClusterSpecExternalClustersBarmanObjectStoreDataCompression
  */
 export enum ClusterSpecExternalClustersBarmanObjectStoreDataCompression {
-  /** gzip */
-  GZIP = "gzip",
   /** bzip2 */
   BZIP2 = "bzip2",
+  /** gzip */
+  GZIP = "gzip",
   /** snappy */
   SNAPPY = "snappy",
 }
@@ -10874,17 +10975,24 @@ export function toJson_ClusterSpecExternalClustersBarmanObjectStoreS3Credentials
 
 /**
  * Compress a WAL file before sending it to the object store. Available
- * options are empty string (no compression, default), `gzip`, `bzip2` or `snappy`.
+ * options are empty string (no compression, default), `gzip`, `bzip2`,
+ * `lz4`, `snappy`, `xz`, and `zstd`.
  *
  * @schema ClusterSpecExternalClustersBarmanObjectStoreWalCompression
  */
 export enum ClusterSpecExternalClustersBarmanObjectStoreWalCompression {
-  /** gzip */
-  GZIP = "gzip",
   /** bzip2 */
   BZIP2 = "bzip2",
+  /** gzip */
+  GZIP = "gzip",
+  /** lz4 */
+  LZ4 = "lz4",
   /** snappy */
   SNAPPY = "snappy",
+  /** xz */
+  XZ = "xz",
+  /** zstd */
+  ZSTD = "zstd",
 }
 
 /**
@@ -13570,6 +13678,13 @@ export interface DatabaseSpec {
   readonly ensure?: DatabaseSpecEnsure;
 
   /**
+   * The list of extensions to be managed in the database
+   *
+   * @schema DatabaseSpec#extensions
+   */
+  readonly extensions?: DatabaseSpecExtensions[];
+
+  /**
    * Maps to the `ICU_LOCALE` parameter of `CREATE DATABASE`. This
    * setting cannot be changed. Specifies the ICU locale when the ICU
    * provider is used. This option requires `localeProvider` to be set to
@@ -13649,6 +13764,13 @@ export interface DatabaseSpec {
   readonly owner: string;
 
   /**
+   * The list of schemas to be managed in the database
+   *
+   * @schema DatabaseSpec#schemas
+   */
+  readonly schemas?: DatabaseSpecSchemas[];
+
+  /**
    * Maps to the `TABLESPACE` parameter of `CREATE DATABASE`.
    * Maps to the `SET TABLESPACE` command of `ALTER DATABASE`.
    * The name of the tablespace (in PostgreSQL) that will be associated
@@ -13685,6 +13807,7 @@ export function toJson_DatabaseSpec(obj: DatabaseSpec | undefined): Record<strin
     'databaseReclaimPolicy': obj.databaseReclaimPolicy,
     'encoding': obj.encoding,
     'ensure': obj.ensure,
+    'extensions': obj.extensions?.map(y => toJson_DatabaseSpecExtensions(y)),
     'icuLocale': obj.icuLocale,
     'icuRules': obj.icuRules,
     'isTemplate': obj.isTemplate,
@@ -13694,6 +13817,7 @@ export function toJson_DatabaseSpec(obj: DatabaseSpec | undefined): Record<strin
     'localeProvider': obj.localeProvider,
     'name': obj.name,
     'owner': obj.owner,
+    'schemas': obj.schemas?.map(y => toJson_DatabaseSpecSchemas(y)),
     'tablespace': obj.tablespace,
     'template': obj.template,
   };
@@ -13753,6 +13877,148 @@ export enum DatabaseSpecDatabaseReclaimPolicy {
  * @schema DatabaseSpecEnsure
  */
 export enum DatabaseSpecEnsure {
+  /** present */
+  PRESENT = "present",
+  /** absent */
+  ABSENT = "absent",
+}
+
+/**
+ * ExtensionSpec configures an extension in a database
+ *
+ * @schema DatabaseSpecExtensions
+ */
+export interface DatabaseSpecExtensions {
+  /**
+   * Specifies whether an extension/schema should be present or absent in
+   * the database. If set to `present`, the extension/schema will be
+   * created if it does not exist. If set to `absent`, the
+   * extension/schema will be removed if it exists.
+   *
+   * @schema DatabaseSpecExtensions#ensure
+   */
+  readonly ensure?: DatabaseSpecExtensionsEnsure;
+
+  /**
+   * Name of the extension/schema
+   *
+   * @schema DatabaseSpecExtensions#name
+   */
+  readonly name: string;
+
+  /**
+   * The name of the schema in which to install the extension's objects,
+   * in case the extension allows its contents to be relocated. If not
+   * specified (default), and the extension's control file does not
+   * specify a schema either, the current default object creation schema
+   * is used.
+   *
+   * @schema DatabaseSpecExtensions#schema
+   */
+  readonly schema?: string;
+
+  /**
+   * The version of the extension to install. If empty, the operator will
+   * install the default version (whatever is specified in the
+   * extension's control file)
+   *
+   * @schema DatabaseSpecExtensions#version
+   */
+  readonly version?: string;
+
+}
+
+/**
+ * Converts an object of type 'DatabaseSpecExtensions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_DatabaseSpecExtensions(obj: DatabaseSpecExtensions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'ensure': obj.ensure,
+    'name': obj.name,
+    'schema': obj.schema,
+    'version': obj.version,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * SchemaSpec configures a schema in a database
+ *
+ * @schema DatabaseSpecSchemas
+ */
+export interface DatabaseSpecSchemas {
+  /**
+   * Specifies whether an extension/schema should be present or absent in
+   * the database. If set to `present`, the extension/schema will be
+   * created if it does not exist. If set to `absent`, the
+   * extension/schema will be removed if it exists.
+   *
+   * @schema DatabaseSpecSchemas#ensure
+   */
+  readonly ensure?: DatabaseSpecSchemasEnsure;
+
+  /**
+   * Name of the extension/schema
+   *
+   * @schema DatabaseSpecSchemas#name
+   */
+  readonly name: string;
+
+  /**
+   * The role name of the user who owns the schema inside PostgreSQL.
+   * It maps to the `AUTHORIZATION` parameter of `CREATE SCHEMA` and the
+   * `OWNER TO` command of `ALTER SCHEMA`.
+   *
+   * @schema DatabaseSpecSchemas#owner
+   */
+  readonly owner?: string;
+
+}
+
+/**
+ * Converts an object of type 'DatabaseSpecSchemas' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_DatabaseSpecSchemas(obj: DatabaseSpecSchemas | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'ensure': obj.ensure,
+    'name': obj.name,
+    'owner': obj.owner,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Specifies whether an extension/schema should be present or absent in
+ * the database. If set to `present`, the extension/schema will be
+ * created if it does not exist. If set to `absent`, the
+ * extension/schema will be removed if it exists.
+ *
+ * @schema DatabaseSpecExtensionsEnsure
+ */
+export enum DatabaseSpecExtensionsEnsure {
+  /** present */
+  PRESENT = "present",
+  /** absent */
+  ABSENT = "absent",
+}
+
+/**
+ * Specifies whether an extension/schema should be present or absent in
+ * the database. If set to `present`, the extension/schema will be
+ * created if it does not exist. If set to `absent`, the
+ * extension/schema will be removed if it exists.
+ *
+ * @schema DatabaseSpecSchemasEnsure
+ */
+export enum DatabaseSpecSchemasEnsure {
   /** present */
   PRESENT = "present",
   /** absent */
