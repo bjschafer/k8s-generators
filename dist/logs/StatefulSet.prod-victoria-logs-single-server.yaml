@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: prod
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-logs-single
-    app.kubernetes.io/version: v1.21.0-victorialogs
-    helm.sh/chart: victoria-logs-single-0.9.8
+    app.kubernetes.io/version: v1.23.3-victorialogs
+    helm.sh/chart: victoria-logs-single-0.11.2
   name: prod-victoria-logs-single-server
   namespace: logs
 spec:
@@ -31,6 +31,7 @@ spec:
         - args:
             - --envflag.enable
             - --envflag.prefix=VM_
+            - --http.shutdownDelay=15s
             - --httpListenAddr=:9428
             - --loggerFormat=json
             - --maxConcurrentInserts=32
@@ -41,7 +42,7 @@ spec:
             - --syslog.listenAddr.tcp=:1514
             - --syslog.listenAddr.udp=:1514
             - --syslog.timezone=America/Chicago
-          image: victoriametrics/victoria-logs:v1.21.0-victorialogs
+          image: victoriametrics/victoria-logs:v1.23.3-victorialogs
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 10
@@ -61,7 +62,7 @@ spec:
               port: http
               scheme: HTTP
             initialDelaySeconds: 5
-            periodSeconds: 15
+            periodSeconds: 5
             timeoutSeconds: 5
           resources:
             limits:
