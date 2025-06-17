@@ -4,6 +4,5443 @@ import { Construct } from 'constructs';
 
 
 /**
+ * VLCluster is fast, cost-effective and scalable logs database.
+ *
+ * @schema VLCluster
+ */
+export class VlCluster extends ApiObject {
+  /**
+   * Returns the apiVersion and kind for "VLCluster"
+   */
+  public static readonly GVK: GroupVersionKind = {
+    apiVersion: 'operator.victoriametrics.com/v1',
+    kind: 'VLCluster',
+  }
+
+  /**
+   * Renders a Kubernetes manifest for "VLCluster".
+   *
+   * This can be used to inline resource manifests inside other objects (e.g. as templates).
+   *
+   * @param props initialization props
+   */
+  public static manifest(props: VlClusterProps = {}): any {
+    return {
+      ...VlCluster.GVK,
+      ...toJson_VlClusterProps(props),
+    };
+  }
+
+  /**
+   * Defines a "VLCluster" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialization props
+   */
+  public constructor(scope: Construct, id: string, props: VlClusterProps = {}) {
+    super(scope, id, {
+      ...VlCluster.GVK,
+      ...props,
+    });
+  }
+
+  /**
+   * Renders the object to Kubernetes JSON.
+   */
+  public toJson(): any {
+    const resolved = super.toJson();
+
+    return {
+      ...VlCluster.GVK,
+      ...toJson_VlClusterProps(resolved),
+    };
+  }
+}
+
+/**
+ * VLCluster is fast, cost-effective and scalable logs database.
+ *
+ * @schema VLCluster
+ */
+export interface VlClusterProps {
+  /**
+   * @schema VLCluster#metadata
+   */
+  readonly metadata?: ApiObjectMetadata;
+
+  /**
+   * VLClusterSpec defines the desired state of VLCluster
+   *
+   * @schema VLCluster#spec
+   */
+  readonly spec?: VlClusterSpec;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterProps' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterProps(obj: VlClusterProps | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': obj.metadata,
+    'spec': toJson_VlClusterSpec(obj.spec),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * VLClusterSpec defines the desired state of VLCluster
+ *
+ * @schema VlClusterSpec
+ */
+export interface VlClusterSpec {
+  /**
+   * ClusterDomainName defines domain name suffix for in-cluster dns addresses
+   * aka .cluster.local
+   * used by vlinsert and vlselect to build vlstorage address
+   *
+   * @schema VlClusterSpec#clusterDomainName
+   */
+  readonly clusterDomainName?: string;
+
+  /**
+   * ClusterVersion defines default images tag for all components.
+   * it can be overwritten with component specific image.tag value.
+   *
+   * @schema VlClusterSpec#clusterVersion
+   */
+  readonly clusterVersion?: string;
+
+  /**
+   * ImagePullSecrets An optional list of references to secrets in the same namespace
+   * to use for pulling images from registries
+   * see https://kubernetes.io/docs/concepts/containers/images/#referring-to-an-imagepullsecrets-on-a-pod
+   *
+   * @schema VlClusterSpec#imagePullSecrets
+   */
+  readonly imagePullSecrets?: VlClusterSpecImagePullSecrets[];
+
+  /**
+   * ManagedMetadata defines metadata that will be added to the all objects
+   * created by operator for the given CustomResource
+   *
+   * @schema VlClusterSpec#managedMetadata
+   */
+  readonly managedMetadata?: VlClusterSpecManagedMetadata;
+
+  /**
+   * Paused If set to true all actions on the underlying managed objects are not
+   * going to be performed, except for delete actions.
+   *
+   * @schema VlClusterSpec#paused
+   */
+  readonly paused?: boolean;
+
+  /**
+   * RequestsLoadBalancer configures load-balancing for vlinsert and vlselect requests.
+   * It helps to evenly spread load across pods.
+   * Usually it's not possible with Kubernetes TCP-based services.
+   *
+   * @schema VlClusterSpec#requestsLoadBalancer
+   */
+  readonly requestsLoadBalancer?: VlClusterSpecRequestsLoadBalancer;
+
+  /**
+   * ServiceAccountName is the name of the ServiceAccount to use to run the
+   * VLSelect, VLInsert and VLStorage Pods.
+   *
+   * @schema VlClusterSpec#serviceAccountName
+   */
+  readonly serviceAccountName?: string;
+
+  /**
+   * UseStrictSecurity enables strict security mode for component
+   * it restricts disk writes access
+   * uses non-root user out of the box
+   * drops not needed security permissions
+   *
+   * @schema VlClusterSpec#useStrictSecurity
+   */
+  readonly useStrictSecurity?: boolean;
+
+  /**
+   * VLInsert defines vlinsert component configuration at victoria-logs cluster
+   *
+   * @schema VlClusterSpec#vlinsert
+   */
+  readonly vlinsert?: VlClusterSpecVlinsert;
+
+  /**
+   * VLSelect defines vlselect component configuration at victoria-logs cluster
+   *
+   * @schema VlClusterSpec#vlselect
+   */
+  readonly vlselect?: VlClusterSpecVlselect;
+
+  /**
+   * VLStorage defines vlstorage component configuration at victoria-logs cluster
+   *
+   * @schema VlClusterSpec#vlstorage
+   */
+  readonly vlstorage?: VlClusterSpecVlstorage;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpec' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpec(obj: VlClusterSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'clusterDomainName': obj.clusterDomainName,
+    'clusterVersion': obj.clusterVersion,
+    'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VlClusterSpecImagePullSecrets(y)),
+    'managedMetadata': toJson_VlClusterSpecManagedMetadata(obj.managedMetadata),
+    'paused': obj.paused,
+    'requestsLoadBalancer': toJson_VlClusterSpecRequestsLoadBalancer(obj.requestsLoadBalancer),
+    'serviceAccountName': obj.serviceAccountName,
+    'useStrictSecurity': obj.useStrictSecurity,
+    'vlinsert': toJson_VlClusterSpecVlinsert(obj.vlinsert),
+    'vlselect': toJson_VlClusterSpecVlselect(obj.vlselect),
+    'vlstorage': toJson_VlClusterSpecVlstorage(obj.vlstorage),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LocalObjectReference contains enough information to let you locate the
+ * referenced object inside the same namespace.
+ *
+ * @schema VlClusterSpecImagePullSecrets
+ */
+export interface VlClusterSpecImagePullSecrets {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VlClusterSpecImagePullSecrets#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecImagePullSecrets' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecImagePullSecrets(obj: VlClusterSpecImagePullSecrets | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ManagedMetadata defines metadata that will be added to the all objects
+ * created by operator for the given CustomResource
+ *
+ * @schema VlClusterSpecManagedMetadata
+ */
+export interface VlClusterSpecManagedMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VlClusterSpecManagedMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VlClusterSpecManagedMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecManagedMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecManagedMetadata(obj: VlClusterSpecManagedMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * RequestsLoadBalancer configures load-balancing for vlinsert and vlselect requests.
+ * It helps to evenly spread load across pods.
+ * Usually it's not possible with Kubernetes TCP-based services.
+ *
+ * @schema VlClusterSpecRequestsLoadBalancer
+ */
+export interface VlClusterSpecRequestsLoadBalancer {
+  /**
+   * @schema VlClusterSpecRequestsLoadBalancer#disableInsertBalancing
+   */
+  readonly disableInsertBalancing?: boolean;
+
+  /**
+   * @schema VlClusterSpecRequestsLoadBalancer#disableSelectBalancing
+   */
+  readonly disableSelectBalancing?: boolean;
+
+  /**
+   * @schema VlClusterSpecRequestsLoadBalancer#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
+   * VMAuthLoadBalancerSpec defines configuration spec for VMAuth used as load-balancer
+   * for VMCluster component
+   *
+   * @schema VlClusterSpecRequestsLoadBalancer#spec
+   */
+  readonly spec?: any;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecRequestsLoadBalancer' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecRequestsLoadBalancer(obj: VlClusterSpecRequestsLoadBalancer | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'disableInsertBalancing': obj.disableInsertBalancing,
+    'disableSelectBalancing': obj.disableSelectBalancing,
+    'enabled': obj.enabled,
+    'spec': obj.spec,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * VLInsert defines vlinsert component configuration at victoria-logs cluster
+ *
+ * @schema VlClusterSpecVlinsert
+ */
+export interface VlClusterSpecVlinsert {
+  /**
+   * Affinity If specified, the pod's scheduling constraints.
+   *
+   * @schema VlClusterSpecVlinsert#affinity
+   */
+  readonly affinity?: any;
+
+  /**
+   * ConfigMaps is a list of ConfigMaps in the same namespace as the Application
+   * object, which shall be mounted into the Application container
+   * at /etc/vm/configs/CONFIGMAP_NAME folder
+   *
+   * @schema VlClusterSpecVlinsert#configMaps
+   */
+  readonly configMaps?: string[];
+
+  /**
+   * Containers property allows to inject additions sidecars or to patch existing containers.
+   * It can be useful for proxies, backup, etc.
+   *
+   * @schema VlClusterSpecVlinsert#containers
+   */
+  readonly containers?: any[];
+
+  /**
+   * DisableAutomountServiceAccountToken whether to disable serviceAccount auto mount by Kubernetes (available from v0.54.0).
+   * Operator will conditionally create volumes and volumeMounts for containers if it requires k8s API access.
+   * For example, vmagent and vm-config-reloader requires k8s API access.
+   * Operator creates volumes with name: "kube-api-access", which can be used as volumeMount for extraContainers if needed.
+   * And also adds VolumeMounts at /var/run/secrets/kubernetes.io/serviceaccount.
+   *
+   * @schema VlClusterSpecVlinsert#disableAutomountServiceAccountToken
+   */
+  readonly disableAutomountServiceAccountToken?: boolean;
+
+  /**
+   * DisableSelfServiceScrape controls creation of VMServiceScrape by operator
+   * for the application.
+   * Has priority over `VM_DISABLESELFSERVICESCRAPECREATION` operator env variable
+   *
+   * @schema VlClusterSpecVlinsert#disableSelfServiceScrape
+   */
+  readonly disableSelfServiceScrape?: boolean;
+
+  /**
+   * Specifies the DNS parameters of a pod.
+   * Parameters specified here will be merged to the generated DNS
+   * configuration based on DNSPolicy.
+   *
+   * @schema VlClusterSpecVlinsert#dnsConfig
+   */
+  readonly dnsConfig?: VlClusterSpecVlinsertDnsConfig;
+
+  /**
+   * DNSPolicy sets DNS policy for the pod
+   *
+   * @schema VlClusterSpecVlinsert#dnsPolicy
+   */
+  readonly dnsPolicy?: string;
+
+  /**
+   * ExtraArgs that will be passed to the application container
+   * for example remoteWrite.tmpDataPath: /tmp
+   *
+   * @schema VlClusterSpecVlinsert#extraArgs
+   */
+  readonly extraArgs?: { [key: string]: string };
+
+  /**
+   * ExtraEnvs that will be passed to the application container
+   *
+   * @schema VlClusterSpecVlinsert#extraEnvs
+   */
+  readonly extraEnvs?: VlClusterSpecVlinsertExtraEnvs[];
+
+  /**
+   * ExtraEnvsFrom defines source of env variables for the application container
+   * could either be secret or configmap
+   *
+   * @schema VlClusterSpecVlinsert#extraEnvsFrom
+   */
+  readonly extraEnvsFrom?: VlClusterSpecVlinsertExtraEnvsFrom[];
+
+  /**
+   * HostAliases provides mapping for ip and hostname,
+   * that would be propagated to pod,
+   * cannot be used with HostNetwork.
+   *
+   * @schema VlClusterSpecVlinsert#hostAliases
+   */
+  readonly hostAliases?: VlClusterSpecVlinsertHostAliases[];
+
+  /**
+   * HostNetwork controls whether the pod may use the node network namespace
+   *
+   * @schema VlClusterSpecVlinsert#hostNetwork
+   */
+  readonly hostNetwork?: boolean;
+
+  /**
+   * Configures horizontal pod autoscaling.
+   *
+   * @schema VlClusterSpecVlinsert#hpa
+   */
+  readonly hpa?: any;
+
+  /**
+   * Image - docker image settings
+   * if no specified operator uses default version from operator config
+   *
+   * @schema VlClusterSpecVlinsert#image
+   */
+  readonly image?: VlClusterSpecVlinsertImage;
+
+  /**
+   * ImagePullSecrets An optional list of references to secrets in the same namespace
+   * to use for pulling images from registries
+   * see https://kubernetes.io/docs/concepts/containers/images/#referring-to-an-imagepullsecrets-on-a-pod
+   *
+   * @schema VlClusterSpecVlinsert#imagePullSecrets
+   */
+  readonly imagePullSecrets?: VlClusterSpecVlinsertImagePullSecrets[];
+
+  /**
+   * InitContainers allows adding initContainers to the pod definition.
+   * Any errors during the execution of an initContainer will lead to a restart of the Pod.
+   * More info: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+   *
+   * @schema VlClusterSpecVlinsert#initContainers
+   */
+  readonly initContainers?: any[];
+
+  /**
+   * LivenessProbe that will be added CRD pod
+   *
+   * @schema VlClusterSpecVlinsert#livenessProbe
+   */
+  readonly livenessProbe?: any;
+
+  /**
+   * LogFormat for VLSelect to be configured with.
+   * default or json
+   *
+   * @schema VlClusterSpecVlinsert#logFormat
+   */
+  readonly logFormat?: VlClusterSpecVlinsertLogFormat;
+
+  /**
+   * LogLevel for VLSelect to be configured with.
+   *
+   * @schema VlClusterSpecVlinsert#logLevel
+   */
+  readonly logLevel?: VlClusterSpecVlinsertLogLevel;
+
+  /**
+   * MinReadySeconds defines a minimum number of seconds to wait before starting update next pod
+   * if previous in healthy state
+   * Has no effect for VLogs and VMSingle
+   *
+   * @schema VlClusterSpecVlinsert#minReadySeconds
+   */
+  readonly minReadySeconds?: number;
+
+  /**
+   * NodeSelector Define which Nodes the Pods are scheduled on.
+   *
+   * @schema VlClusterSpecVlinsert#nodeSelector
+   */
+  readonly nodeSelector?: { [key: string]: string };
+
+  /**
+   * Paused If set to true all actions on the underlying managed objects are not
+   * going to be performed, except for delete actions.
+   *
+   * @schema VlClusterSpecVlinsert#paused
+   */
+  readonly paused?: boolean;
+
+  /**
+   * PodDisruptionBudget created by operator
+   *
+   * @schema VlClusterSpecVlinsert#podDisruptionBudget
+   */
+  readonly podDisruptionBudget?: VlClusterSpecVlinsertPodDisruptionBudget;
+
+  /**
+   * PodMetadata configures Labels and Annotations which are propagated to the VLSelect pods.
+   *
+   * @schema VlClusterSpecVlinsert#podMetadata
+   */
+  readonly podMetadata?: VlClusterSpecVlinsertPodMetadata;
+
+  /**
+   * Port listen address
+   *
+   * @schema VlClusterSpecVlinsert#port
+   */
+  readonly port?: string;
+
+  /**
+   * PriorityClassName class assigned to the Pods
+   *
+   * @schema VlClusterSpecVlinsert#priorityClassName
+   */
+  readonly priorityClassName?: string;
+
+  /**
+   * ReadinessGates defines pod readiness gates
+   *
+   * @schema VlClusterSpecVlinsert#readinessGates
+   */
+  readonly readinessGates?: VlClusterSpecVlinsertReadinessGates[];
+
+  /**
+   * ReadinessProbe that will be added CRD pod
+   *
+   * @schema VlClusterSpecVlinsert#readinessProbe
+   */
+  readonly readinessProbe?: any;
+
+  /**
+   * ReplicaCount is the expected size of the Application.
+   *
+   * @schema VlClusterSpecVlinsert#replicaCount
+   */
+  readonly replicaCount?: number;
+
+  /**
+   * Resources container resource request and limits, https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   * if not defined default resources from operator config will be used
+   *
+   * @schema VlClusterSpecVlinsert#resources
+   */
+  readonly resources?: VlClusterSpecVlinsertResources;
+
+  /**
+   * The number of old ReplicaSets to retain to allow rollback in deployment or
+   * maximum number of revisions that will be maintained in the Deployment revision history.
+   * Has no effect at StatefulSets
+   * Defaults to 10.
+   *
+   * @default 10.
+   * @schema VlClusterSpecVlinsert#revisionHistoryLimitCount
+   */
+  readonly revisionHistoryLimitCount?: number;
+
+  /**
+   * RollingUpdate - overrides deployment update params.
+   *
+   * @schema VlClusterSpecVlinsert#rollingUpdate
+   */
+  readonly rollingUpdate?: VlClusterSpecVlinsertRollingUpdate;
+
+  /**
+   * RuntimeClassName - defines runtime class for kubernetes pod.
+   * https://kubernetes.io/docs/concepts/containers/runtime-class/
+   *
+   * @schema VlClusterSpecVlinsert#runtimeClassName
+   */
+  readonly runtimeClassName?: string;
+
+  /**
+   * SchedulerName - defines kubernetes scheduler name
+   *
+   * @schema VlClusterSpecVlinsert#schedulerName
+   */
+  readonly schedulerName?: string;
+
+  /**
+   * Secrets is a list of Secrets in the same namespace as the Application
+   * object, which shall be mounted into the Application container
+   * at /etc/vm/secrets/SECRET_NAME folder
+   *
+   * @schema VlClusterSpecVlinsert#secrets
+   */
+  readonly secrets?: string[];
+
+  /**
+   * SecurityContext holds pod-level security attributes and common container settings.
+   * This defaults to the default PodSecurityContext.
+   *
+   * @schema VlClusterSpecVlinsert#securityContext
+   */
+  readonly securityContext?: any;
+
+  /**
+   * ServiceScrapeSpec that will be added to vlselect VMServiceScrape spec
+   *
+   * @schema VlClusterSpecVlinsert#serviceScrapeSpec
+   */
+  readonly serviceScrapeSpec?: any;
+
+  /**
+   * ServiceSpec that will be added to vlselect service spec
+   *
+   * @schema VlClusterSpecVlinsert#serviceSpec
+   */
+  readonly serviceSpec?: VlClusterSpecVlinsertServiceSpec;
+
+  /**
+   * StartupProbe that will be added to CRD pod
+   *
+   * @schema VlClusterSpecVlinsert#startupProbe
+   */
+  readonly startupProbe?: any;
+
+  /**
+   * SyslogSpec defines syslog listener configuration
+   *
+   * @schema VlClusterSpecVlinsert#syslogSpec
+   */
+  readonly syslogSpec?: VlClusterSpecVlinsertSyslogSpec;
+
+  /**
+   * TerminationGracePeriodSeconds period for container graceful termination
+   *
+   * @schema VlClusterSpecVlinsert#terminationGracePeriodSeconds
+   */
+  readonly terminationGracePeriodSeconds?: number;
+
+  /**
+   * Tolerations If specified, the pod's tolerations.
+   *
+   * @schema VlClusterSpecVlinsert#tolerations
+   */
+  readonly tolerations?: VlClusterSpecVlinsertTolerations[];
+
+  /**
+   * TopologySpreadConstraints embedded kubernetes pod configuration option,
+   * controls how pods are spread across your cluster among failure-domains
+   * such as regions, zones, nodes, and other user-defined topology domains
+   * https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
+   *
+   * @schema VlClusterSpecVlinsert#topologySpreadConstraints
+   */
+  readonly topologySpreadConstraints?: any[];
+
+  /**
+   * UpdateStrategy - overrides default update strategy.
+   *
+   * @schema VlClusterSpecVlinsert#updateStrategy
+   */
+  readonly updateStrategy?: VlClusterSpecVlinsertUpdateStrategy;
+
+  /**
+   * UseDefaultResources controls resource settings
+   * By default, operator sets built-in resource requirements
+   *
+   * @schema VlClusterSpecVlinsert#useDefaultResources
+   */
+  readonly useDefaultResources?: boolean;
+
+  /**
+   * UseStrictSecurity enables strict security mode for component
+   * it restricts disk writes access
+   * uses non-root user out of the box
+   * drops not needed security permissions
+   *
+   * @schema VlClusterSpecVlinsert#useStrictSecurity
+   */
+  readonly useStrictSecurity?: boolean;
+
+  /**
+   * VolumeMounts allows configuration of additional VolumeMounts on the output Deployment/StatefulSet definition.
+   * VolumeMounts specified will be appended to other VolumeMounts in the Application container
+   *
+   * @schema VlClusterSpecVlinsert#volumeMounts
+   */
+  readonly volumeMounts?: VlClusterSpecVlinsertVolumeMounts[];
+
+  /**
+   * Volumes allows configuration of additional volumes on the output Deployment/StatefulSet definition.
+   * Volumes specified will be appended to other volumes that are generated.
+   * / +optional
+   *
+   * @schema VlClusterSpecVlinsert#volumes
+   */
+  readonly volumes?: any[];
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsert' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsert(obj: VlClusterSpecVlinsert | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'affinity': obj.affinity,
+    'configMaps': obj.configMaps?.map(y => y),
+    'containers': obj.containers?.map(y => y),
+    'disableAutomountServiceAccountToken': obj.disableAutomountServiceAccountToken,
+    'disableSelfServiceScrape': obj.disableSelfServiceScrape,
+    'dnsConfig': toJson_VlClusterSpecVlinsertDnsConfig(obj.dnsConfig),
+    'dnsPolicy': obj.dnsPolicy,
+    'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'extraEnvs': obj.extraEnvs?.map(y => toJson_VlClusterSpecVlinsertExtraEnvs(y)),
+    'extraEnvsFrom': obj.extraEnvsFrom?.map(y => toJson_VlClusterSpecVlinsertExtraEnvsFrom(y)),
+    'hostAliases': obj.hostAliases?.map(y => toJson_VlClusterSpecVlinsertHostAliases(y)),
+    'hostNetwork': obj.hostNetwork,
+    'hpa': obj.hpa,
+    'image': toJson_VlClusterSpecVlinsertImage(obj.image),
+    'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VlClusterSpecVlinsertImagePullSecrets(y)),
+    'initContainers': obj.initContainers?.map(y => y),
+    'livenessProbe': obj.livenessProbe,
+    'logFormat': obj.logFormat,
+    'logLevel': obj.logLevel,
+    'minReadySeconds': obj.minReadySeconds,
+    'nodeSelector': ((obj.nodeSelector) === undefined) ? undefined : (Object.entries(obj.nodeSelector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'paused': obj.paused,
+    'podDisruptionBudget': toJson_VlClusterSpecVlinsertPodDisruptionBudget(obj.podDisruptionBudget),
+    'podMetadata': toJson_VlClusterSpecVlinsertPodMetadata(obj.podMetadata),
+    'port': obj.port,
+    'priorityClassName': obj.priorityClassName,
+    'readinessGates': obj.readinessGates?.map(y => toJson_VlClusterSpecVlinsertReadinessGates(y)),
+    'readinessProbe': obj.readinessProbe,
+    'replicaCount': obj.replicaCount,
+    'resources': toJson_VlClusterSpecVlinsertResources(obj.resources),
+    'revisionHistoryLimitCount': obj.revisionHistoryLimitCount,
+    'rollingUpdate': toJson_VlClusterSpecVlinsertRollingUpdate(obj.rollingUpdate),
+    'runtimeClassName': obj.runtimeClassName,
+    'schedulerName': obj.schedulerName,
+    'secrets': obj.secrets?.map(y => y),
+    'securityContext': obj.securityContext,
+    'serviceScrapeSpec': obj.serviceScrapeSpec,
+    'serviceSpec': toJson_VlClusterSpecVlinsertServiceSpec(obj.serviceSpec),
+    'startupProbe': obj.startupProbe,
+    'syslogSpec': toJson_VlClusterSpecVlinsertSyslogSpec(obj.syslogSpec),
+    'terminationGracePeriodSeconds': obj.terminationGracePeriodSeconds,
+    'tolerations': obj.tolerations?.map(y => toJson_VlClusterSpecVlinsertTolerations(y)),
+    'topologySpreadConstraints': obj.topologySpreadConstraints?.map(y => y),
+    'updateStrategy': obj.updateStrategy,
+    'useDefaultResources': obj.useDefaultResources,
+    'useStrictSecurity': obj.useStrictSecurity,
+    'volumeMounts': obj.volumeMounts?.map(y => toJson_VlClusterSpecVlinsertVolumeMounts(y)),
+    'volumes': obj.volumes?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * VLSelect defines vlselect component configuration at victoria-logs cluster
+ *
+ * @schema VlClusterSpecVlselect
+ */
+export interface VlClusterSpecVlselect {
+  /**
+   * Affinity If specified, the pod's scheduling constraints.
+   *
+   * @schema VlClusterSpecVlselect#affinity
+   */
+  readonly affinity?: any;
+
+  /**
+   * ConfigMaps is a list of ConfigMaps in the same namespace as the Application
+   * object, which shall be mounted into the Application container
+   * at /etc/vm/configs/CONFIGMAP_NAME folder
+   *
+   * @schema VlClusterSpecVlselect#configMaps
+   */
+  readonly configMaps?: string[];
+
+  /**
+   * Containers property allows to inject additions sidecars or to patch existing containers.
+   * It can be useful for proxies, backup, etc.
+   *
+   * @schema VlClusterSpecVlselect#containers
+   */
+  readonly containers?: any[];
+
+  /**
+   * DisableAutomountServiceAccountToken whether to disable serviceAccount auto mount by Kubernetes (available from v0.54.0).
+   * Operator will conditionally create volumes and volumeMounts for containers if it requires k8s API access.
+   * For example, vmagent and vm-config-reloader requires k8s API access.
+   * Operator creates volumes with name: "kube-api-access", which can be used as volumeMount for extraContainers if needed.
+   * And also adds VolumeMounts at /var/run/secrets/kubernetes.io/serviceaccount.
+   *
+   * @schema VlClusterSpecVlselect#disableAutomountServiceAccountToken
+   */
+  readonly disableAutomountServiceAccountToken?: boolean;
+
+  /**
+   * DisableSelfServiceScrape controls creation of VMServiceScrape by operator
+   * for the application.
+   * Has priority over `VM_DISABLESELFSERVICESCRAPECREATION` operator env variable
+   *
+   * @schema VlClusterSpecVlselect#disableSelfServiceScrape
+   */
+  readonly disableSelfServiceScrape?: boolean;
+
+  /**
+   * Specifies the DNS parameters of a pod.
+   * Parameters specified here will be merged to the generated DNS
+   * configuration based on DNSPolicy.
+   *
+   * @schema VlClusterSpecVlselect#dnsConfig
+   */
+  readonly dnsConfig?: VlClusterSpecVlselectDnsConfig;
+
+  /**
+   * DNSPolicy sets DNS policy for the pod
+   *
+   * @schema VlClusterSpecVlselect#dnsPolicy
+   */
+  readonly dnsPolicy?: string;
+
+  /**
+   * ExtraArgs that will be passed to the application container
+   * for example remoteWrite.tmpDataPath: /tmp
+   *
+   * @schema VlClusterSpecVlselect#extraArgs
+   */
+  readonly extraArgs?: { [key: string]: string };
+
+  /**
+   * ExtraEnvs that will be passed to the application container
+   *
+   * @schema VlClusterSpecVlselect#extraEnvs
+   */
+  readonly extraEnvs?: VlClusterSpecVlselectExtraEnvs[];
+
+  /**
+   * ExtraEnvsFrom defines source of env variables for the application container
+   * could either be secret or configmap
+   *
+   * @schema VlClusterSpecVlselect#extraEnvsFrom
+   */
+  readonly extraEnvsFrom?: VlClusterSpecVlselectExtraEnvsFrom[];
+
+  /**
+   * HostAliases provides mapping for ip and hostname,
+   * that would be propagated to pod,
+   * cannot be used with HostNetwork.
+   *
+   * @schema VlClusterSpecVlselect#hostAliases
+   */
+  readonly hostAliases?: VlClusterSpecVlselectHostAliases[];
+
+  /**
+   * HostNetwork controls whether the pod may use the node network namespace
+   *
+   * @schema VlClusterSpecVlselect#hostNetwork
+   */
+  readonly hostNetwork?: boolean;
+
+  /**
+   * Configures horizontal pod autoscaling.
+   *
+   * @schema VlClusterSpecVlselect#hpa
+   */
+  readonly hpa?: any;
+
+  /**
+   * Image - docker image settings
+   * if no specified operator uses default version from operator config
+   *
+   * @schema VlClusterSpecVlselect#image
+   */
+  readonly image?: VlClusterSpecVlselectImage;
+
+  /**
+   * ImagePullSecrets An optional list of references to secrets in the same namespace
+   * to use for pulling images from registries
+   * see https://kubernetes.io/docs/concepts/containers/images/#referring-to-an-imagepullsecrets-on-a-pod
+   *
+   * @schema VlClusterSpecVlselect#imagePullSecrets
+   */
+  readonly imagePullSecrets?: VlClusterSpecVlselectImagePullSecrets[];
+
+  /**
+   * InitContainers allows adding initContainers to the pod definition.
+   * Any errors during the execution of an initContainer will lead to a restart of the Pod.
+   * More info: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+   *
+   * @schema VlClusterSpecVlselect#initContainers
+   */
+  readonly initContainers?: any[];
+
+  /**
+   * LivenessProbe that will be added CRD pod
+   *
+   * @schema VlClusterSpecVlselect#livenessProbe
+   */
+  readonly livenessProbe?: any;
+
+  /**
+   * LogFormat for VLSelect to be configured with.
+   * default or json
+   *
+   * @schema VlClusterSpecVlselect#logFormat
+   */
+  readonly logFormat?: VlClusterSpecVlselectLogFormat;
+
+  /**
+   * LogLevel for VLSelect to be configured with.
+   *
+   * @schema VlClusterSpecVlselect#logLevel
+   */
+  readonly logLevel?: VlClusterSpecVlselectLogLevel;
+
+  /**
+   * MinReadySeconds defines a minimum number of seconds to wait before starting update next pod
+   * if previous in healthy state
+   * Has no effect for VLogs and VMSingle
+   *
+   * @schema VlClusterSpecVlselect#minReadySeconds
+   */
+  readonly minReadySeconds?: number;
+
+  /**
+   * NodeSelector Define which Nodes the Pods are scheduled on.
+   *
+   * @schema VlClusterSpecVlselect#nodeSelector
+   */
+  readonly nodeSelector?: { [key: string]: string };
+
+  /**
+   * Paused If set to true all actions on the underlying managed objects are not
+   * going to be performed, except for delete actions.
+   *
+   * @schema VlClusterSpecVlselect#paused
+   */
+  readonly paused?: boolean;
+
+  /**
+   * PodDisruptionBudget created by operator
+   *
+   * @schema VlClusterSpecVlselect#podDisruptionBudget
+   */
+  readonly podDisruptionBudget?: VlClusterSpecVlselectPodDisruptionBudget;
+
+  /**
+   * PodMetadata configures Labels and Annotations which are propagated to the VLSelect pods.
+   *
+   * @schema VlClusterSpecVlselect#podMetadata
+   */
+  readonly podMetadata?: VlClusterSpecVlselectPodMetadata;
+
+  /**
+   * Port listen address
+   *
+   * @schema VlClusterSpecVlselect#port
+   */
+  readonly port?: string;
+
+  /**
+   * PriorityClassName class assigned to the Pods
+   *
+   * @schema VlClusterSpecVlselect#priorityClassName
+   */
+  readonly priorityClassName?: string;
+
+  /**
+   * ReadinessGates defines pod readiness gates
+   *
+   * @schema VlClusterSpecVlselect#readinessGates
+   */
+  readonly readinessGates?: VlClusterSpecVlselectReadinessGates[];
+
+  /**
+   * ReadinessProbe that will be added CRD pod
+   *
+   * @schema VlClusterSpecVlselect#readinessProbe
+   */
+  readonly readinessProbe?: any;
+
+  /**
+   * ReplicaCount is the expected size of the Application.
+   *
+   * @schema VlClusterSpecVlselect#replicaCount
+   */
+  readonly replicaCount?: number;
+
+  /**
+   * Resources container resource request and limits, https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   * if not defined default resources from operator config will be used
+   *
+   * @schema VlClusterSpecVlselect#resources
+   */
+  readonly resources?: VlClusterSpecVlselectResources;
+
+  /**
+   * The number of old ReplicaSets to retain to allow rollback in deployment or
+   * maximum number of revisions that will be maintained in the Deployment revision history.
+   * Has no effect at StatefulSets
+   * Defaults to 10.
+   *
+   * @default 10.
+   * @schema VlClusterSpecVlselect#revisionHistoryLimitCount
+   */
+  readonly revisionHistoryLimitCount?: number;
+
+  /**
+   * RollingUpdate - overrides deployment update params.
+   *
+   * @schema VlClusterSpecVlselect#rollingUpdate
+   */
+  readonly rollingUpdate?: VlClusterSpecVlselectRollingUpdate;
+
+  /**
+   * RuntimeClassName - defines runtime class for kubernetes pod.
+   * https://kubernetes.io/docs/concepts/containers/runtime-class/
+   *
+   * @schema VlClusterSpecVlselect#runtimeClassName
+   */
+  readonly runtimeClassName?: string;
+
+  /**
+   * SchedulerName - defines kubernetes scheduler name
+   *
+   * @schema VlClusterSpecVlselect#schedulerName
+   */
+  readonly schedulerName?: string;
+
+  /**
+   * Secrets is a list of Secrets in the same namespace as the Application
+   * object, which shall be mounted into the Application container
+   * at /etc/vm/secrets/SECRET_NAME folder
+   *
+   * @schema VlClusterSpecVlselect#secrets
+   */
+  readonly secrets?: string[];
+
+  /**
+   * SecurityContext holds pod-level security attributes and common container settings.
+   * This defaults to the default PodSecurityContext.
+   *
+   * @schema VlClusterSpecVlselect#securityContext
+   */
+  readonly securityContext?: any;
+
+  /**
+   * ServiceScrapeSpec that will be added to vlselect VMServiceScrape spec
+   *
+   * @schema VlClusterSpecVlselect#serviceScrapeSpec
+   */
+  readonly serviceScrapeSpec?: any;
+
+  /**
+   * ServiceSpec that will be added to vlselect service spec
+   *
+   * @schema VlClusterSpecVlselect#serviceSpec
+   */
+  readonly serviceSpec?: VlClusterSpecVlselectServiceSpec;
+
+  /**
+   * StartupProbe that will be added to CRD pod
+   *
+   * @schema VlClusterSpecVlselect#startupProbe
+   */
+  readonly startupProbe?: any;
+
+  /**
+   * TerminationGracePeriodSeconds period for container graceful termination
+   *
+   * @schema VlClusterSpecVlselect#terminationGracePeriodSeconds
+   */
+  readonly terminationGracePeriodSeconds?: number;
+
+  /**
+   * Tolerations If specified, the pod's tolerations.
+   *
+   * @schema VlClusterSpecVlselect#tolerations
+   */
+  readonly tolerations?: VlClusterSpecVlselectTolerations[];
+
+  /**
+   * TopologySpreadConstraints embedded kubernetes pod configuration option,
+   * controls how pods are spread across your cluster among failure-domains
+   * such as regions, zones, nodes, and other user-defined topology domains
+   * https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
+   *
+   * @schema VlClusterSpecVlselect#topologySpreadConstraints
+   */
+  readonly topologySpreadConstraints?: any[];
+
+  /**
+   * UpdateStrategy - overrides default update strategy.
+   *
+   * @schema VlClusterSpecVlselect#updateStrategy
+   */
+  readonly updateStrategy?: VlClusterSpecVlselectUpdateStrategy;
+
+  /**
+   * UseDefaultResources controls resource settings
+   * By default, operator sets built-in resource requirements
+   *
+   * @schema VlClusterSpecVlselect#useDefaultResources
+   */
+  readonly useDefaultResources?: boolean;
+
+  /**
+   * UseStrictSecurity enables strict security mode for component
+   * it restricts disk writes access
+   * uses non-root user out of the box
+   * drops not needed security permissions
+   *
+   * @schema VlClusterSpecVlselect#useStrictSecurity
+   */
+  readonly useStrictSecurity?: boolean;
+
+  /**
+   * VolumeMounts allows configuration of additional VolumeMounts on the output Deployment/StatefulSet definition.
+   * VolumeMounts specified will be appended to other VolumeMounts in the Application container
+   *
+   * @schema VlClusterSpecVlselect#volumeMounts
+   */
+  readonly volumeMounts?: VlClusterSpecVlselectVolumeMounts[];
+
+  /**
+   * Volumes allows configuration of additional volumes on the output Deployment/StatefulSet definition.
+   * Volumes specified will be appended to other volumes that are generated.
+   * / +optional
+   *
+   * @schema VlClusterSpecVlselect#volumes
+   */
+  readonly volumes?: any[];
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlselect' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlselect(obj: VlClusterSpecVlselect | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'affinity': obj.affinity,
+    'configMaps': obj.configMaps?.map(y => y),
+    'containers': obj.containers?.map(y => y),
+    'disableAutomountServiceAccountToken': obj.disableAutomountServiceAccountToken,
+    'disableSelfServiceScrape': obj.disableSelfServiceScrape,
+    'dnsConfig': toJson_VlClusterSpecVlselectDnsConfig(obj.dnsConfig),
+    'dnsPolicy': obj.dnsPolicy,
+    'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'extraEnvs': obj.extraEnvs?.map(y => toJson_VlClusterSpecVlselectExtraEnvs(y)),
+    'extraEnvsFrom': obj.extraEnvsFrom?.map(y => toJson_VlClusterSpecVlselectExtraEnvsFrom(y)),
+    'hostAliases': obj.hostAliases?.map(y => toJson_VlClusterSpecVlselectHostAliases(y)),
+    'hostNetwork': obj.hostNetwork,
+    'hpa': obj.hpa,
+    'image': toJson_VlClusterSpecVlselectImage(obj.image),
+    'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VlClusterSpecVlselectImagePullSecrets(y)),
+    'initContainers': obj.initContainers?.map(y => y),
+    'livenessProbe': obj.livenessProbe,
+    'logFormat': obj.logFormat,
+    'logLevel': obj.logLevel,
+    'minReadySeconds': obj.minReadySeconds,
+    'nodeSelector': ((obj.nodeSelector) === undefined) ? undefined : (Object.entries(obj.nodeSelector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'paused': obj.paused,
+    'podDisruptionBudget': toJson_VlClusterSpecVlselectPodDisruptionBudget(obj.podDisruptionBudget),
+    'podMetadata': toJson_VlClusterSpecVlselectPodMetadata(obj.podMetadata),
+    'port': obj.port,
+    'priorityClassName': obj.priorityClassName,
+    'readinessGates': obj.readinessGates?.map(y => toJson_VlClusterSpecVlselectReadinessGates(y)),
+    'readinessProbe': obj.readinessProbe,
+    'replicaCount': obj.replicaCount,
+    'resources': toJson_VlClusterSpecVlselectResources(obj.resources),
+    'revisionHistoryLimitCount': obj.revisionHistoryLimitCount,
+    'rollingUpdate': toJson_VlClusterSpecVlselectRollingUpdate(obj.rollingUpdate),
+    'runtimeClassName': obj.runtimeClassName,
+    'schedulerName': obj.schedulerName,
+    'secrets': obj.secrets?.map(y => y),
+    'securityContext': obj.securityContext,
+    'serviceScrapeSpec': obj.serviceScrapeSpec,
+    'serviceSpec': toJson_VlClusterSpecVlselectServiceSpec(obj.serviceSpec),
+    'startupProbe': obj.startupProbe,
+    'terminationGracePeriodSeconds': obj.terminationGracePeriodSeconds,
+    'tolerations': obj.tolerations?.map(y => toJson_VlClusterSpecVlselectTolerations(y)),
+    'topologySpreadConstraints': obj.topologySpreadConstraints?.map(y => y),
+    'updateStrategy': obj.updateStrategy,
+    'useDefaultResources': obj.useDefaultResources,
+    'useStrictSecurity': obj.useStrictSecurity,
+    'volumeMounts': obj.volumeMounts?.map(y => toJson_VlClusterSpecVlselectVolumeMounts(y)),
+    'volumes': obj.volumes?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * VLStorage defines vlstorage component configuration at victoria-logs cluster
+ *
+ * @schema VlClusterSpecVlstorage
+ */
+export interface VlClusterSpecVlstorage {
+  /**
+   * Affinity If specified, the pod's scheduling constraints.
+   *
+   * @schema VlClusterSpecVlstorage#affinity
+   */
+  readonly affinity?: any;
+
+  /**
+   * ClaimTemplates allows adding additional VolumeClaimTemplates for StatefulSet
+   *
+   * @schema VlClusterSpecVlstorage#claimTemplates
+   */
+  readonly claimTemplates?: any[];
+
+  /**
+   * ConfigMaps is a list of ConfigMaps in the same namespace as the Application
+   * object, which shall be mounted into the Application container
+   * at /etc/vm/configs/CONFIGMAP_NAME folder
+   *
+   * @schema VlClusterSpecVlstorage#configMaps
+   */
+  readonly configMaps?: string[];
+
+  /**
+   * Containers property allows to inject additions sidecars or to patch existing containers.
+   * It can be useful for proxies, backup, etc.
+   *
+   * @schema VlClusterSpecVlstorage#containers
+   */
+  readonly containers?: any[];
+
+  /**
+   * DisableAutomountServiceAccountToken whether to disable serviceAccount auto mount by Kubernetes (available from v0.54.0).
+   * Operator will conditionally create volumes and volumeMounts for containers if it requires k8s API access.
+   * For example, vmagent and vm-config-reloader requires k8s API access.
+   * Operator creates volumes with name: "kube-api-access", which can be used as volumeMount for extraContainers if needed.
+   * And also adds VolumeMounts at /var/run/secrets/kubernetes.io/serviceaccount.
+   *
+   * @schema VlClusterSpecVlstorage#disableAutomountServiceAccountToken
+   */
+  readonly disableAutomountServiceAccountToken?: boolean;
+
+  /**
+   * DisableSelfServiceScrape controls creation of VMServiceScrape by operator
+   * for the application.
+   * Has priority over `VM_DISABLESELFSERVICESCRAPECREATION` operator env variable
+   *
+   * @schema VlClusterSpecVlstorage#disableSelfServiceScrape
+   */
+  readonly disableSelfServiceScrape?: boolean;
+
+  /**
+   * Specifies the DNS parameters of a pod.
+   * Parameters specified here will be merged to the generated DNS
+   * configuration based on DNSPolicy.
+   *
+   * @schema VlClusterSpecVlstorage#dnsConfig
+   */
+  readonly dnsConfig?: VlClusterSpecVlstorageDnsConfig;
+
+  /**
+   * DNSPolicy sets DNS policy for the pod
+   *
+   * @schema VlClusterSpecVlstorage#dnsPolicy
+   */
+  readonly dnsPolicy?: string;
+
+  /**
+   * ExtraArgs that will be passed to the application container
+   * for example remoteWrite.tmpDataPath: /tmp
+   *
+   * @schema VlClusterSpecVlstorage#extraArgs
+   */
+  readonly extraArgs?: { [key: string]: string };
+
+  /**
+   * ExtraEnvs that will be passed to the application container
+   *
+   * @schema VlClusterSpecVlstorage#extraEnvs
+   */
+  readonly extraEnvs?: VlClusterSpecVlstorageExtraEnvs[];
+
+  /**
+   * ExtraEnvsFrom defines source of env variables for the application container
+   * could either be secret or configmap
+   *
+   * @schema VlClusterSpecVlstorage#extraEnvsFrom
+   */
+  readonly extraEnvsFrom?: VlClusterSpecVlstorageExtraEnvsFrom[];
+
+  /**
+   * FutureRetention for the stored logs
+   * Log entries with timestamps bigger than now+futureRetention are rejected during data ingestion; see https://docs.victoriametrics.com/victorialogs/#retention
+   *
+   * @schema VlClusterSpecVlstorage#futureRetention
+   */
+  readonly futureRetention?: string;
+
+  /**
+   * HostAliases provides mapping for ip and hostname,
+   * that would be propagated to pod,
+   * cannot be used with HostNetwork.
+   *
+   * @schema VlClusterSpecVlstorage#hostAliases
+   */
+  readonly hostAliases?: VlClusterSpecVlstorageHostAliases[];
+
+  /**
+   * HostNetwork controls whether the pod may use the node network namespace
+   *
+   * @schema VlClusterSpecVlstorage#hostNetwork
+   */
+  readonly hostNetwork?: boolean;
+
+  /**
+   * Image - docker image settings
+   * if no specified operator uses default version from operator config
+   *
+   * @schema VlClusterSpecVlstorage#image
+   */
+  readonly image?: VlClusterSpecVlstorageImage;
+
+  /**
+   * ImagePullSecrets An optional list of references to secrets in the same namespace
+   * to use for pulling images from registries
+   * see https://kubernetes.io/docs/concepts/containers/images/#referring-to-an-imagepullsecrets-on-a-pod
+   *
+   * @schema VlClusterSpecVlstorage#imagePullSecrets
+   */
+  readonly imagePullSecrets?: VlClusterSpecVlstorageImagePullSecrets[];
+
+  /**
+   * InitContainers allows adding initContainers to the pod definition.
+   * Any errors during the execution of an initContainer will lead to a restart of the Pod.
+   * More info: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+   *
+   * @schema VlClusterSpecVlstorage#initContainers
+   */
+  readonly initContainers?: any[];
+
+  /**
+   * LivenessProbe that will be added CRD pod
+   *
+   * @schema VlClusterSpecVlstorage#livenessProbe
+   */
+  readonly livenessProbe?: any;
+
+  /**
+   * LogFormat for VLStorage to be configured with.
+   * default or json
+   *
+   * @schema VlClusterSpecVlstorage#logFormat
+   */
+  readonly logFormat?: VlClusterSpecVlstorageLogFormat;
+
+  /**
+   * Whether to log all the ingested log entries; this can be useful for debugging of data ingestion; see https://docs.victoriametrics.com/victorialogs/data-ingestion/
+   *
+   * @schema VlClusterSpecVlstorage#logIngestedRows
+   */
+  readonly logIngestedRows?: boolean;
+
+  /**
+   * LogLevel for VLStorage to be configured with.
+   *
+   * @schema VlClusterSpecVlstorage#logLevel
+   */
+  readonly logLevel?: VlClusterSpecVlstorageLogLevel;
+
+  /**
+   * LogNewStreams Whether to log creation of new streams; this can be useful for debugging of high cardinality issues with log streams; see https://docs.victoriametrics.com/victorialogs/keyconcepts/#stream-fields
+   *
+   * @schema VlClusterSpecVlstorage#logNewStreams
+   */
+  readonly logNewStreams?: boolean;
+
+  /**
+   * MaintenanceInsertNodeIDs - excludes given node ids from insert requests routing, must contain pod suffixes - for pod-0, id will be 0 and etc.
+   * lets say, you have pod-0, pod-1, pod-2, pod-3. to exclude pod-0 and pod-3 from insert routing, define nodeIDs: [0,3].
+   * Useful at storage expanding, when you want to rebalance some data at cluster.
+   *
+   * @schema VlClusterSpecVlstorage#maintenanceInsertNodeIDs
+   */
+  readonly maintenanceInsertNodeIDs?: number[];
+
+  /**
+   * MaintenanceInsertNodeIDs - excludes given node ids from select requests routing, must contain pod suffixes - for pod-0, id will be 0 and etc.
+   *
+   * @schema VlClusterSpecVlstorage#maintenanceSelectNodeIDs
+   */
+  readonly maintenanceSelectNodeIDs?: number[];
+
+  /**
+   * MinReadySeconds defines a minimum number of seconds to wait before starting update next pod
+   * if previous in healthy state
+   * Has no effect for VLogs and VMSingle
+   *
+   * @schema VlClusterSpecVlstorage#minReadySeconds
+   */
+  readonly minReadySeconds?: number;
+
+  /**
+   * NodeSelector Define which Nodes the Pods are scheduled on.
+   *
+   * @schema VlClusterSpecVlstorage#nodeSelector
+   */
+  readonly nodeSelector?: { [key: string]: string };
+
+  /**
+   * Paused If set to true all actions on the underlying managed objects are not
+   * going to be performed, except for delete actions.
+   *
+   * @schema VlClusterSpecVlstorage#paused
+   */
+  readonly paused?: boolean;
+
+  /**
+   * PodDisruptionBudget created by operator
+   *
+   * @schema VlClusterSpecVlstorage#podDisruptionBudget
+   */
+  readonly podDisruptionBudget?: VlClusterSpecVlstoragePodDisruptionBudget;
+
+  /**
+   * PodMetadata configures Labels and Annotations which are propagated to the VLStorage pods.
+   *
+   * @schema VlClusterSpecVlstorage#podMetadata
+   */
+  readonly podMetadata?: VlClusterSpecVlstoragePodMetadata;
+
+  /**
+   * Port listen address
+   *
+   * @schema VlClusterSpecVlstorage#port
+   */
+  readonly port?: string;
+
+  /**
+   * PriorityClassName class assigned to the Pods
+   *
+   * @schema VlClusterSpecVlstorage#priorityClassName
+   */
+  readonly priorityClassName?: string;
+
+  /**
+   * ReadinessGates defines pod readiness gates
+   *
+   * @schema VlClusterSpecVlstorage#readinessGates
+   */
+  readonly readinessGates?: VlClusterSpecVlstorageReadinessGates[];
+
+  /**
+   * ReadinessProbe that will be added CRD pod
+   *
+   * @schema VlClusterSpecVlstorage#readinessProbe
+   */
+  readonly readinessProbe?: any;
+
+  /**
+   * ReplicaCount is the expected size of the Application.
+   *
+   * @schema VlClusterSpecVlstorage#replicaCount
+   */
+  readonly replicaCount?: number;
+
+  /**
+   * Resources container resource request and limits, https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   * if not defined default resources from operator config will be used
+   *
+   * @schema VlClusterSpecVlstorage#resources
+   */
+  readonly resources?: VlClusterSpecVlstorageResources;
+
+  /**
+   * RetentionMaxDiskSpaceUsageBytes for the stored logs
+   * VictoriaLogs keeps at least two last days of data in order to guarantee that the logs for the last day can be returned in queries.
+   * This means that the total disk space usage may exceed the -retention.maxDiskSpaceUsageBytes,
+   * if the size of the last two days of data exceeds the -retention.maxDiskSpaceUsageBytes.
+   * https://docs.victoriametrics.com/victorialogs/#retention-by-disk-space-usage
+   *
+   * @schema VlClusterSpecVlstorage#retentionMaxDiskSpaceUsageBytes
+   */
+  readonly retentionMaxDiskSpaceUsageBytes?: string;
+
+  /**
+   * RetentionPeriod for the stored logs
+   * https://docs.victoriametrics.com/victorialogs/#retention
+   *
+   * @schema VlClusterSpecVlstorage#retentionPeriod
+   */
+  readonly retentionPeriod?: string;
+
+  /**
+   * The number of old ReplicaSets to retain to allow rollback in deployment or
+   * maximum number of revisions that will be maintained in the Deployment revision history.
+   * Has no effect at StatefulSets
+   * Defaults to 10.
+   *
+   * @default 10.
+   * @schema VlClusterSpecVlstorage#revisionHistoryLimitCount
+   */
+  readonly revisionHistoryLimitCount?: number;
+
+  /**
+   * RollingUpdateStrategy defines strategy for application updates
+   * Default is OnDelete, in this case operator handles update process
+   * Can be changed for RollingUpdate
+   *
+   * @default OnDelete, in this case operator handles update process
+   * @schema VlClusterSpecVlstorage#rollingUpdateStrategy
+   */
+  readonly rollingUpdateStrategy?: string;
+
+  /**
+   * RuntimeClassName - defines runtime class for kubernetes pod.
+   * https://kubernetes.io/docs/concepts/containers/runtime-class/
+   *
+   * @schema VlClusterSpecVlstorage#runtimeClassName
+   */
+  readonly runtimeClassName?: string;
+
+  /**
+   * SchedulerName - defines kubernetes scheduler name
+   *
+   * @schema VlClusterSpecVlstorage#schedulerName
+   */
+  readonly schedulerName?: string;
+
+  /**
+   * Secrets is a list of Secrets in the same namespace as the Application
+   * object, which shall be mounted into the Application container
+   * at /etc/vm/secrets/SECRET_NAME folder
+   *
+   * @schema VlClusterSpecVlstorage#secrets
+   */
+  readonly secrets?: string[];
+
+  /**
+   * SecurityContext holds pod-level security attributes and common container settings.
+   * This defaults to the default PodSecurityContext.
+   *
+   * @schema VlClusterSpecVlstorage#securityContext
+   */
+  readonly securityContext?: any;
+
+  /**
+   * ServiceScrapeSpec that will be added to vlselect VMServiceScrape spec
+   *
+   * @schema VlClusterSpecVlstorage#serviceScrapeSpec
+   */
+  readonly serviceScrapeSpec?: any;
+
+  /**
+   * ServiceSpec that will be added to vlselect service spec
+   *
+   * @schema VlClusterSpecVlstorage#serviceSpec
+   */
+  readonly serviceSpec?: VlClusterSpecVlstorageServiceSpec;
+
+  /**
+   * StartupProbe that will be added to CRD pod
+   *
+   * @schema VlClusterSpecVlstorage#startupProbe
+   */
+  readonly startupProbe?: any;
+
+  /**
+   * Storage configures persistent volume for VLStorage
+   *
+   * @schema VlClusterSpecVlstorage#storage
+   */
+  readonly storage?: VlClusterSpecVlstorageStorage;
+
+  /**
+   * StorageDataPath - path to storage data
+   *
+   * @schema VlClusterSpecVlstorage#storageDataPath
+   */
+  readonly storageDataPath?: string;
+
+  /**
+   * TerminationGracePeriodSeconds period for container graceful termination
+   *
+   * @schema VlClusterSpecVlstorage#terminationGracePeriodSeconds
+   */
+  readonly terminationGracePeriodSeconds?: number;
+
+  /**
+   * Tolerations If specified, the pod's tolerations.
+   *
+   * @schema VlClusterSpecVlstorage#tolerations
+   */
+  readonly tolerations?: VlClusterSpecVlstorageTolerations[];
+
+  /**
+   * TopologySpreadConstraints embedded kubernetes pod configuration option,
+   * controls how pods are spread across your cluster among failure-domains
+   * such as regions, zones, nodes, and other user-defined topology domains
+   * https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
+   *
+   * @schema VlClusterSpecVlstorage#topologySpreadConstraints
+   */
+  readonly topologySpreadConstraints?: any[];
+
+  /**
+   * UseDefaultResources controls resource settings
+   * By default, operator sets built-in resource requirements
+   *
+   * @schema VlClusterSpecVlstorage#useDefaultResources
+   */
+  readonly useDefaultResources?: boolean;
+
+  /**
+   * UseStrictSecurity enables strict security mode for component
+   * it restricts disk writes access
+   * uses non-root user out of the box
+   * drops not needed security permissions
+   *
+   * @schema VlClusterSpecVlstorage#useStrictSecurity
+   */
+  readonly useStrictSecurity?: boolean;
+
+  /**
+   * VolumeMounts allows configuration of additional VolumeMounts on the output Deployment/StatefulSet definition.
+   * VolumeMounts specified will be appended to other VolumeMounts in the Application container
+   *
+   * @schema VlClusterSpecVlstorage#volumeMounts
+   */
+  readonly volumeMounts?: VlClusterSpecVlstorageVolumeMounts[];
+
+  /**
+   * Volumes allows configuration of additional volumes on the output Deployment/StatefulSet definition.
+   * Volumes specified will be appended to other volumes that are generated.
+   * / +optional
+   *
+   * @schema VlClusterSpecVlstorage#volumes
+   */
+  readonly volumes?: any[];
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorage' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorage(obj: VlClusterSpecVlstorage | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'affinity': obj.affinity,
+    'claimTemplates': obj.claimTemplates?.map(y => y),
+    'configMaps': obj.configMaps?.map(y => y),
+    'containers': obj.containers?.map(y => y),
+    'disableAutomountServiceAccountToken': obj.disableAutomountServiceAccountToken,
+    'disableSelfServiceScrape': obj.disableSelfServiceScrape,
+    'dnsConfig': toJson_VlClusterSpecVlstorageDnsConfig(obj.dnsConfig),
+    'dnsPolicy': obj.dnsPolicy,
+    'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'extraEnvs': obj.extraEnvs?.map(y => toJson_VlClusterSpecVlstorageExtraEnvs(y)),
+    'extraEnvsFrom': obj.extraEnvsFrom?.map(y => toJson_VlClusterSpecVlstorageExtraEnvsFrom(y)),
+    'futureRetention': obj.futureRetention,
+    'hostAliases': obj.hostAliases?.map(y => toJson_VlClusterSpecVlstorageHostAliases(y)),
+    'hostNetwork': obj.hostNetwork,
+    'image': toJson_VlClusterSpecVlstorageImage(obj.image),
+    'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VlClusterSpecVlstorageImagePullSecrets(y)),
+    'initContainers': obj.initContainers?.map(y => y),
+    'livenessProbe': obj.livenessProbe,
+    'logFormat': obj.logFormat,
+    'logIngestedRows': obj.logIngestedRows,
+    'logLevel': obj.logLevel,
+    'logNewStreams': obj.logNewStreams,
+    'maintenanceInsertNodeIDs': obj.maintenanceInsertNodeIDs?.map(y => y),
+    'maintenanceSelectNodeIDs': obj.maintenanceSelectNodeIDs?.map(y => y),
+    'minReadySeconds': obj.minReadySeconds,
+    'nodeSelector': ((obj.nodeSelector) === undefined) ? undefined : (Object.entries(obj.nodeSelector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'paused': obj.paused,
+    'podDisruptionBudget': toJson_VlClusterSpecVlstoragePodDisruptionBudget(obj.podDisruptionBudget),
+    'podMetadata': toJson_VlClusterSpecVlstoragePodMetadata(obj.podMetadata),
+    'port': obj.port,
+    'priorityClassName': obj.priorityClassName,
+    'readinessGates': obj.readinessGates?.map(y => toJson_VlClusterSpecVlstorageReadinessGates(y)),
+    'readinessProbe': obj.readinessProbe,
+    'replicaCount': obj.replicaCount,
+    'resources': toJson_VlClusterSpecVlstorageResources(obj.resources),
+    'retentionMaxDiskSpaceUsageBytes': obj.retentionMaxDiskSpaceUsageBytes,
+    'retentionPeriod': obj.retentionPeriod,
+    'revisionHistoryLimitCount': obj.revisionHistoryLimitCount,
+    'rollingUpdateStrategy': obj.rollingUpdateStrategy,
+    'runtimeClassName': obj.runtimeClassName,
+    'schedulerName': obj.schedulerName,
+    'secrets': obj.secrets?.map(y => y),
+    'securityContext': obj.securityContext,
+    'serviceScrapeSpec': obj.serviceScrapeSpec,
+    'serviceSpec': toJson_VlClusterSpecVlstorageServiceSpec(obj.serviceSpec),
+    'startupProbe': obj.startupProbe,
+    'storage': toJson_VlClusterSpecVlstorageStorage(obj.storage),
+    'storageDataPath': obj.storageDataPath,
+    'terminationGracePeriodSeconds': obj.terminationGracePeriodSeconds,
+    'tolerations': obj.tolerations?.map(y => toJson_VlClusterSpecVlstorageTolerations(y)),
+    'topologySpreadConstraints': obj.topologySpreadConstraints?.map(y => y),
+    'useDefaultResources': obj.useDefaultResources,
+    'useStrictSecurity': obj.useStrictSecurity,
+    'volumeMounts': obj.volumeMounts?.map(y => toJson_VlClusterSpecVlstorageVolumeMounts(y)),
+    'volumes': obj.volumes?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Specifies the DNS parameters of a pod.
+ * Parameters specified here will be merged to the generated DNS
+ * configuration based on DNSPolicy.
+ *
+ * @schema VlClusterSpecVlinsertDnsConfig
+ */
+export interface VlClusterSpecVlinsertDnsConfig {
+  /**
+   * A list of DNS name server IP addresses.
+   * This will be appended to the base nameservers generated from DNSPolicy.
+   * Duplicated nameservers will be removed.
+   *
+   * @schema VlClusterSpecVlinsertDnsConfig#nameservers
+   */
+  readonly nameservers?: string[];
+
+  /**
+   * A list of DNS resolver options.
+   * This will be merged with the base options generated from DNSPolicy.
+   * Duplicated entries will be removed. Resolution options given in Options
+   * will override those that appear in the base DNSPolicy.
+   *
+   * @schema VlClusterSpecVlinsertDnsConfig#options
+   */
+  readonly options?: VlClusterSpecVlinsertDnsConfigOptions[];
+
+  /**
+   * A list of DNS search domains for host-name lookup.
+   * This will be appended to the base search paths generated from DNSPolicy.
+   * Duplicated search paths will be removed.
+   *
+   * @schema VlClusterSpecVlinsertDnsConfig#searches
+   */
+  readonly searches?: string[];
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertDnsConfig' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertDnsConfig(obj: VlClusterSpecVlinsertDnsConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'nameservers': obj.nameservers?.map(y => y),
+    'options': obj.options?.map(y => toJson_VlClusterSpecVlinsertDnsConfigOptions(y)),
+    'searches': obj.searches?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvVar represents an environment variable present in a Container.
+ *
+ * @schema VlClusterSpecVlinsertExtraEnvs
+ */
+export interface VlClusterSpecVlinsertExtraEnvs {
+  /**
+   * Name of the environment variable. Must be a C_IDENTIFIER.
+   *
+   * @schema VlClusterSpecVlinsertExtraEnvs#name
+   */
+  readonly name: string;
+
+  /**
+   * Variable references $(VAR_NAME) are expanded
+   * using the previously defined environment variables in the container and
+   * any service environment variables. If a variable cannot be resolved,
+   * the reference in the input string will be unchanged. Double $$ are reduced
+   * to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e.
+   * "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)".
+   * Escaped references will never be expanded, regardless of whether the variable
+   * exists or not.
+   * Defaults to "".
+   *
+   * @default .
+   * @schema VlClusterSpecVlinsertExtraEnvs#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertExtraEnvs' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertExtraEnvs(obj: VlClusterSpecVlinsertExtraEnvs | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ *
+ * @schema VlClusterSpecVlinsertExtraEnvsFrom
+ */
+export interface VlClusterSpecVlinsertExtraEnvsFrom {
+  /**
+   * The ConfigMap to select from
+   *
+   * @schema VlClusterSpecVlinsertExtraEnvsFrom#configMapRef
+   */
+  readonly configMapRef?: VlClusterSpecVlinsertExtraEnvsFromConfigMapRef;
+
+  /**
+   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   *
+   * @schema VlClusterSpecVlinsertExtraEnvsFrom#prefix
+   */
+  readonly prefix?: string;
+
+  /**
+   * The Secret to select from
+   *
+   * @schema VlClusterSpecVlinsertExtraEnvsFrom#secretRef
+   */
+  readonly secretRef?: VlClusterSpecVlinsertExtraEnvsFromSecretRef;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertExtraEnvsFrom' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertExtraEnvsFrom(obj: VlClusterSpecVlinsertExtraEnvsFrom | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapRef': toJson_VlClusterSpecVlinsertExtraEnvsFromConfigMapRef(obj.configMapRef),
+    'prefix': obj.prefix,
+    'secretRef': toJson_VlClusterSpecVlinsertExtraEnvsFromSecretRef(obj.secretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * HostAlias holds the mapping between IP and hostnames that will be injected as an entry in the
+ * pod's hosts file.
+ *
+ * @schema VlClusterSpecVlinsertHostAliases
+ */
+export interface VlClusterSpecVlinsertHostAliases {
+  /**
+   * Hostnames for the above IP address.
+   *
+   * @schema VlClusterSpecVlinsertHostAliases#hostnames
+   */
+  readonly hostnames?: string[];
+
+  /**
+   * IP address of the host file entry.
+   *
+   * @schema VlClusterSpecVlinsertHostAliases#ip
+   */
+  readonly ip: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertHostAliases' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertHostAliases(obj: VlClusterSpecVlinsertHostAliases | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'hostnames': obj.hostnames?.map(y => y),
+    'ip': obj.ip,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Image - docker image settings
+ * if no specified operator uses default version from operator config
+ *
+ * @schema VlClusterSpecVlinsertImage
+ */
+export interface VlClusterSpecVlinsertImage {
+  /**
+   * PullPolicy describes how to pull docker image
+   *
+   * @schema VlClusterSpecVlinsertImage#pullPolicy
+   */
+  readonly pullPolicy?: string;
+
+  /**
+   * Repository contains name of docker image + it's repository if needed
+   *
+   * @schema VlClusterSpecVlinsertImage#repository
+   */
+  readonly repository?: string;
+
+  /**
+   * Tag contains desired docker image version
+   *
+   * @schema VlClusterSpecVlinsertImage#tag
+   */
+  readonly tag?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertImage' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertImage(obj: VlClusterSpecVlinsertImage | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'pullPolicy': obj.pullPolicy,
+    'repository': obj.repository,
+    'tag': obj.tag,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LocalObjectReference contains enough information to let you locate the
+ * referenced object inside the same namespace.
+ *
+ * @schema VlClusterSpecVlinsertImagePullSecrets
+ */
+export interface VlClusterSpecVlinsertImagePullSecrets {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VlClusterSpecVlinsertImagePullSecrets#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertImagePullSecrets' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertImagePullSecrets(obj: VlClusterSpecVlinsertImagePullSecrets | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LogFormat for VLSelect to be configured with.
+ * default or json
+ *
+ * @schema VlClusterSpecVlinsertLogFormat
+ */
+export enum VlClusterSpecVlinsertLogFormat {
+  /** default */
+  DEFAULT = "default",
+  /** json */
+  JSON = "json",
+}
+
+/**
+ * LogLevel for VLSelect to be configured with.
+ *
+ * @schema VlClusterSpecVlinsertLogLevel
+ */
+export enum VlClusterSpecVlinsertLogLevel {
+  /** INFO */
+  INFO = "INFO",
+  /** WARN */
+  WARN = "WARN",
+  /** ERROR */
+  ERROR = "ERROR",
+  /** FATAL */
+  FATAL = "FATAL",
+  /** PANIC */
+  PANIC = "PANIC",
+}
+
+/**
+ * PodDisruptionBudget created by operator
+ *
+ * @schema VlClusterSpecVlinsertPodDisruptionBudget
+ */
+export interface VlClusterSpecVlinsertPodDisruptionBudget {
+  /**
+   * An eviction is allowed if at most "maxUnavailable" pods selected by
+   * "selector" are unavailable after the eviction, i.e. even in absence of
+   * the evicted pod. For example, one can prevent all voluntary evictions
+   * by specifying 0. This is a mutually exclusive setting with "minAvailable".
+   *
+   * @schema VlClusterSpecVlinsertPodDisruptionBudget#maxUnavailable
+   */
+  readonly maxUnavailable?: VlClusterSpecVlinsertPodDisruptionBudgetMaxUnavailable;
+
+  /**
+   * An eviction is allowed if at least "minAvailable" pods selected by
+   * "selector" will still be available after the eviction, i.e. even in the
+   * absence of the evicted pod.  So for example you can prevent all voluntary
+   * evictions by specifying "100%".
+   *
+   * @schema VlClusterSpecVlinsertPodDisruptionBudget#minAvailable
+   */
+  readonly minAvailable?: VlClusterSpecVlinsertPodDisruptionBudgetMinAvailable;
+
+  /**
+   * replaces default labels selector generated by operator
+   * it's useful when you need to create custom budget
+   *
+   * @schema VlClusterSpecVlinsertPodDisruptionBudget#selectorLabels
+   */
+  readonly selectorLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertPodDisruptionBudget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertPodDisruptionBudget(obj: VlClusterSpecVlinsertPodDisruptionBudget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'maxUnavailable': obj.maxUnavailable?.value,
+    'minAvailable': obj.minAvailable?.value,
+    'selectorLabels': ((obj.selectorLabels) === undefined) ? undefined : (Object.entries(obj.selectorLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodMetadata configures Labels and Annotations which are propagated to the VLSelect pods.
+ *
+ * @schema VlClusterSpecVlinsertPodMetadata
+ */
+export interface VlClusterSpecVlinsertPodMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VlClusterSpecVlinsertPodMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects. May match selectors of replication controllers
+   * and services.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VlClusterSpecVlinsertPodMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+  /**
+   * Name must be unique within a namespace. Is required when creating resources, although
+   * some resources may allow a client to request the generation of an appropriate name
+   * automatically. Name is primarily intended for creation idempotence and configuration
+   * definition.
+   * Cannot be updated.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
+   *
+   * @schema VlClusterSpecVlinsertPodMetadata#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertPodMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertPodMetadata(obj: VlClusterSpecVlinsertPodMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodReadinessGate contains the reference to a pod condition
+ *
+ * @schema VlClusterSpecVlinsertReadinessGates
+ */
+export interface VlClusterSpecVlinsertReadinessGates {
+  /**
+   * ConditionType refers to a condition in the pod's condition list with matching type.
+   *
+   * @schema VlClusterSpecVlinsertReadinessGates#conditionType
+   */
+  readonly conditionType: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertReadinessGates' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertReadinessGates(obj: VlClusterSpecVlinsertReadinessGates | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'conditionType': obj.conditionType,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Resources container resource request and limits, https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+ * if not defined default resources from operator config will be used
+ *
+ * @schema VlClusterSpecVlinsertResources
+ */
+export interface VlClusterSpecVlinsertResources {
+  /**
+   * Claims lists the names of resources, defined in spec.resourceClaims,
+   * that are used by this container.
+   *
+   * This is an alpha field and requires enabling the
+   * DynamicResourceAllocation feature gate.
+   *
+   * This field is immutable. It can only be set for containers.
+   *
+   * @schema VlClusterSpecVlinsertResources#claims
+   */
+  readonly claims?: VlClusterSpecVlinsertResourcesClaims[];
+
+  /**
+   * Limits describes the maximum amount of compute resources allowed.
+   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   *
+   * @schema VlClusterSpecVlinsertResources#limits
+   */
+  readonly limits?: { [key: string]: VlClusterSpecVlinsertResourcesLimits };
+
+  /**
+   * Requests describes the minimum amount of compute resources required.
+   * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+   * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   *
+   * @schema VlClusterSpecVlinsertResources#requests
+   */
+  readonly requests?: { [key: string]: VlClusterSpecVlinsertResourcesRequests };
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertResources' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertResources(obj: VlClusterSpecVlinsertResources | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'claims': obj.claims?.map(y => toJson_VlClusterSpecVlinsertResourcesClaims(y)),
+    'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+    'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * RollingUpdate - overrides deployment update params.
+ *
+ * @schema VlClusterSpecVlinsertRollingUpdate
+ */
+export interface VlClusterSpecVlinsertRollingUpdate {
+  /**
+   * The maximum number of pods that can be scheduled above the desired number of
+   * pods.
+   * Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
+   * This can not be 0 if MaxUnavailable is 0.
+   * Absolute number is calculated from percentage by rounding up.
+   * Defaults to 25%.
+   * Example: when this is set to 30%, the new ReplicaSet can be scaled up immediately when
+   * the rolling update starts, such that the total number of old and new pods do not exceed
+   * 130% of desired pods. Once old pods have been killed,
+   * new ReplicaSet can be scaled up further, ensuring that total number of pods running
+   * at any time during the update is at most 130% of desired pods.
+   *
+   * @default 25%.
+   * @schema VlClusterSpecVlinsertRollingUpdate#maxSurge
+   */
+  readonly maxSurge?: VlClusterSpecVlinsertRollingUpdateMaxSurge;
+
+  /**
+   * The maximum number of pods that can be unavailable during the update.
+   * Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
+   * Absolute number is calculated from percentage by rounding down.
+   * This can not be 0 if MaxSurge is 0.
+   * Defaults to 25%.
+   * Example: when this is set to 30%, the old ReplicaSet can be scaled down to 70% of desired pods
+   * immediately when the rolling update starts. Once new pods are ready, old ReplicaSet
+   * can be scaled down further, followed by scaling up the new ReplicaSet, ensuring
+   * that the total number of pods available at all times during the update is at
+   * least 70% of desired pods.
+   *
+   * @default 25%.
+   * @schema VlClusterSpecVlinsertRollingUpdate#maxUnavailable
+   */
+  readonly maxUnavailable?: VlClusterSpecVlinsertRollingUpdateMaxUnavailable;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertRollingUpdate' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertRollingUpdate(obj: VlClusterSpecVlinsertRollingUpdate | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'maxSurge': obj.maxSurge?.value,
+    'maxUnavailable': obj.maxUnavailable?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ServiceSpec that will be added to vlselect service spec
+ *
+ * @schema VlClusterSpecVlinsertServiceSpec
+ */
+export interface VlClusterSpecVlinsertServiceSpec {
+  /**
+   * EmbeddedObjectMetadata defines objectMeta for additional service.
+   *
+   * @schema VlClusterSpecVlinsertServiceSpec#metadata
+   */
+  readonly metadata?: VlClusterSpecVlinsertServiceSpecMetadata;
+
+  /**
+   * ServiceSpec describes the attributes that a user creates on a service.
+   * More info: https://kubernetes.io/docs/concepts/services-networking/service/
+   *
+   * @schema VlClusterSpecVlinsertServiceSpec#spec
+   */
+  readonly spec: any;
+
+  /**
+   * UseAsDefault applies changes from given service definition to the main object Service
+   * Changing from headless service to clusterIP or loadbalancer may break cross-component communication
+   *
+   * @schema VlClusterSpecVlinsertServiceSpec#useAsDefault
+   */
+  readonly useAsDefault?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertServiceSpec' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertServiceSpec(obj: VlClusterSpecVlinsertServiceSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': toJson_VlClusterSpecVlinsertServiceSpecMetadata(obj.metadata),
+    'spec': obj.spec,
+    'useAsDefault': obj.useAsDefault,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * SyslogSpec defines syslog listener configuration
+ *
+ * @schema VlClusterSpecVlinsertSyslogSpec
+ */
+export interface VlClusterSpecVlinsertSyslogSpec {
+  /**
+   * TCPListeners defines syslog server TCP listener configuration
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpec#tcpListeners
+   */
+  readonly tcpListeners?: VlClusterSpecVlinsertSyslogSpecTcpListeners[];
+
+  /**
+   * UDPListeners defines syslog server UDP listener configuration
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpec#udpListeners
+   */
+  readonly udpListeners?: VlClusterSpecVlinsertSyslogSpecUdpListeners[];
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertSyslogSpec' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertSyslogSpec(obj: VlClusterSpecVlinsertSyslogSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'tcpListeners': obj.tcpListeners?.map(y => toJson_VlClusterSpecVlinsertSyslogSpecTcpListeners(y)),
+    'udpListeners': obj.udpListeners?.map(y => toJson_VlClusterSpecVlinsertSyslogSpecUdpListeners(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The pod this Toleration is attached to tolerates any taint that matches
+ * the triple <key,value,effect> using the matching operator <operator>.
+ *
+ * @schema VlClusterSpecVlinsertTolerations
+ */
+export interface VlClusterSpecVlinsertTolerations {
+  /**
+   * Effect indicates the taint effect to match. Empty means match all taint effects.
+   * When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+   *
+   * @schema VlClusterSpecVlinsertTolerations#effect
+   */
+  readonly effect?: string;
+
+  /**
+   * Key is the taint key that the toleration applies to. Empty means match all taint keys.
+   * If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+   *
+   * @schema VlClusterSpecVlinsertTolerations#key
+   */
+  readonly key?: string;
+
+  /**
+   * Operator represents a key's relationship to the value.
+   * Valid operators are Exists and Equal. Defaults to Equal.
+   * Exists is equivalent to wildcard for value, so that a pod can
+   * tolerate all taints of a particular category.
+   *
+   * @default Equal.
+   * @schema VlClusterSpecVlinsertTolerations#operator
+   */
+  readonly operator?: string;
+
+  /**
+   * TolerationSeconds represents the period of time the toleration (which must be
+   * of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default,
+   * it is not set, which means tolerate the taint forever (do not evict). Zero and
+   * negative values will be treated as 0 (evict immediately) by the system.
+   *
+   * @schema VlClusterSpecVlinsertTolerations#tolerationSeconds
+   */
+  readonly tolerationSeconds?: number;
+
+  /**
+   * Value is the taint value the toleration matches to.
+   * If the operator is Exists, the value should be empty, otherwise just a regular string.
+   *
+   * @schema VlClusterSpecVlinsertTolerations#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertTolerations' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertTolerations(obj: VlClusterSpecVlinsertTolerations | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'effect': obj.effect,
+    'key': obj.key,
+    'operator': obj.operator,
+    'tolerationSeconds': obj.tolerationSeconds,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * UpdateStrategy - overrides default update strategy.
+ *
+ * @schema VlClusterSpecVlinsertUpdateStrategy
+ */
+export enum VlClusterSpecVlinsertUpdateStrategy {
+  /** Recreate */
+  RECREATE = "Recreate",
+  /** RollingUpdate */
+  ROLLING_UPDATE = "RollingUpdate",
+}
+
+/**
+ * VolumeMount describes a mounting of a Volume within a container.
+ *
+ * @schema VlClusterSpecVlinsertVolumeMounts
+ */
+export interface VlClusterSpecVlinsertVolumeMounts {
+  /**
+   * Path within the container at which the volume should be mounted.  Must
+   * not contain ':'.
+   *
+   * @schema VlClusterSpecVlinsertVolumeMounts#mountPath
+   */
+  readonly mountPath: string;
+
+  /**
+   * mountPropagation determines how mounts are propagated from the host
+   * to container and the other way around.
+   * When not set, MountPropagationNone is used.
+   * This field is beta in 1.10.
+   * When RecursiveReadOnly is set to IfPossible or to Enabled, MountPropagation must be None or unspecified
+   * (which defaults to None).
+   *
+   * @schema VlClusterSpecVlinsertVolumeMounts#mountPropagation
+   */
+  readonly mountPropagation?: string;
+
+  /**
+   * This must match the Name of a Volume.
+   *
+   * @schema VlClusterSpecVlinsertVolumeMounts#name
+   */
+  readonly name: string;
+
+  /**
+   * Mounted read-only if true, read-write otherwise (false or unspecified).
+   * Defaults to false.
+   *
+   * @default false.
+   * @schema VlClusterSpecVlinsertVolumeMounts#readOnly
+   */
+  readonly readOnly?: boolean;
+
+  /**
+   * RecursiveReadOnly specifies whether read-only mounts should be handled
+   * recursively.
+   *
+   * If ReadOnly is false, this field has no meaning and must be unspecified.
+   *
+   * If ReadOnly is true, and this field is set to Disabled, the mount is not made
+   * recursively read-only.  If this field is set to IfPossible, the mount is made
+   * recursively read-only, if it is supported by the container runtime.  If this
+   * field is set to Enabled, the mount is made recursively read-only if it is
+   * supported by the container runtime, otherwise the pod will not be started and
+   * an error will be generated to indicate the reason.
+   *
+   * If this field is set to IfPossible or Enabled, MountPropagation must be set to
+   * None (or be unspecified, which defaults to None).
+   *
+   * If this field is not specified, it is treated as an equivalent of Disabled.
+   *
+   * @schema VlClusterSpecVlinsertVolumeMounts#recursiveReadOnly
+   */
+  readonly recursiveReadOnly?: string;
+
+  /**
+   * Path within the volume from which the container's volume should be mounted.
+   * Defaults to "" (volume's root).
+   *
+   * @default volume's root).
+   * @schema VlClusterSpecVlinsertVolumeMounts#subPath
+   */
+  readonly subPath?: string;
+
+  /**
+   * Expanded path within the volume from which the container's volume should be mounted.
+   * Behaves similarly to SubPath but environment variable references $(VAR_NAME) are expanded using the container's environment.
+   * Defaults to "" (volume's root).
+   * SubPathExpr and SubPath are mutually exclusive.
+   *
+   * @default volume's root).
+   * @schema VlClusterSpecVlinsertVolumeMounts#subPathExpr
+   */
+  readonly subPathExpr?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertVolumeMounts' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertVolumeMounts(obj: VlClusterSpecVlinsertVolumeMounts | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'mountPath': obj.mountPath,
+    'mountPropagation': obj.mountPropagation,
+    'name': obj.name,
+    'readOnly': obj.readOnly,
+    'recursiveReadOnly': obj.recursiveReadOnly,
+    'subPath': obj.subPath,
+    'subPathExpr': obj.subPathExpr,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Specifies the DNS parameters of a pod.
+ * Parameters specified here will be merged to the generated DNS
+ * configuration based on DNSPolicy.
+ *
+ * @schema VlClusterSpecVlselectDnsConfig
+ */
+export interface VlClusterSpecVlselectDnsConfig {
+  /**
+   * A list of DNS name server IP addresses.
+   * This will be appended to the base nameservers generated from DNSPolicy.
+   * Duplicated nameservers will be removed.
+   *
+   * @schema VlClusterSpecVlselectDnsConfig#nameservers
+   */
+  readonly nameservers?: string[];
+
+  /**
+   * A list of DNS resolver options.
+   * This will be merged with the base options generated from DNSPolicy.
+   * Duplicated entries will be removed. Resolution options given in Options
+   * will override those that appear in the base DNSPolicy.
+   *
+   * @schema VlClusterSpecVlselectDnsConfig#options
+   */
+  readonly options?: VlClusterSpecVlselectDnsConfigOptions[];
+
+  /**
+   * A list of DNS search domains for host-name lookup.
+   * This will be appended to the base search paths generated from DNSPolicy.
+   * Duplicated search paths will be removed.
+   *
+   * @schema VlClusterSpecVlselectDnsConfig#searches
+   */
+  readonly searches?: string[];
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlselectDnsConfig' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlselectDnsConfig(obj: VlClusterSpecVlselectDnsConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'nameservers': obj.nameservers?.map(y => y),
+    'options': obj.options?.map(y => toJson_VlClusterSpecVlselectDnsConfigOptions(y)),
+    'searches': obj.searches?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvVar represents an environment variable present in a Container.
+ *
+ * @schema VlClusterSpecVlselectExtraEnvs
+ */
+export interface VlClusterSpecVlselectExtraEnvs {
+  /**
+   * Name of the environment variable. Must be a C_IDENTIFIER.
+   *
+   * @schema VlClusterSpecVlselectExtraEnvs#name
+   */
+  readonly name: string;
+
+  /**
+   * Variable references $(VAR_NAME) are expanded
+   * using the previously defined environment variables in the container and
+   * any service environment variables. If a variable cannot be resolved,
+   * the reference in the input string will be unchanged. Double $$ are reduced
+   * to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e.
+   * "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)".
+   * Escaped references will never be expanded, regardless of whether the variable
+   * exists or not.
+   * Defaults to "".
+   *
+   * @default .
+   * @schema VlClusterSpecVlselectExtraEnvs#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlselectExtraEnvs' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlselectExtraEnvs(obj: VlClusterSpecVlselectExtraEnvs | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ *
+ * @schema VlClusterSpecVlselectExtraEnvsFrom
+ */
+export interface VlClusterSpecVlselectExtraEnvsFrom {
+  /**
+   * The ConfigMap to select from
+   *
+   * @schema VlClusterSpecVlselectExtraEnvsFrom#configMapRef
+   */
+  readonly configMapRef?: VlClusterSpecVlselectExtraEnvsFromConfigMapRef;
+
+  /**
+   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   *
+   * @schema VlClusterSpecVlselectExtraEnvsFrom#prefix
+   */
+  readonly prefix?: string;
+
+  /**
+   * The Secret to select from
+   *
+   * @schema VlClusterSpecVlselectExtraEnvsFrom#secretRef
+   */
+  readonly secretRef?: VlClusterSpecVlselectExtraEnvsFromSecretRef;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlselectExtraEnvsFrom' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlselectExtraEnvsFrom(obj: VlClusterSpecVlselectExtraEnvsFrom | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapRef': toJson_VlClusterSpecVlselectExtraEnvsFromConfigMapRef(obj.configMapRef),
+    'prefix': obj.prefix,
+    'secretRef': toJson_VlClusterSpecVlselectExtraEnvsFromSecretRef(obj.secretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * HostAlias holds the mapping between IP and hostnames that will be injected as an entry in the
+ * pod's hosts file.
+ *
+ * @schema VlClusterSpecVlselectHostAliases
+ */
+export interface VlClusterSpecVlselectHostAliases {
+  /**
+   * Hostnames for the above IP address.
+   *
+   * @schema VlClusterSpecVlselectHostAliases#hostnames
+   */
+  readonly hostnames?: string[];
+
+  /**
+   * IP address of the host file entry.
+   *
+   * @schema VlClusterSpecVlselectHostAliases#ip
+   */
+  readonly ip: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlselectHostAliases' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlselectHostAliases(obj: VlClusterSpecVlselectHostAliases | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'hostnames': obj.hostnames?.map(y => y),
+    'ip': obj.ip,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Image - docker image settings
+ * if no specified operator uses default version from operator config
+ *
+ * @schema VlClusterSpecVlselectImage
+ */
+export interface VlClusterSpecVlselectImage {
+  /**
+   * PullPolicy describes how to pull docker image
+   *
+   * @schema VlClusterSpecVlselectImage#pullPolicy
+   */
+  readonly pullPolicy?: string;
+
+  /**
+   * Repository contains name of docker image + it's repository if needed
+   *
+   * @schema VlClusterSpecVlselectImage#repository
+   */
+  readonly repository?: string;
+
+  /**
+   * Tag contains desired docker image version
+   *
+   * @schema VlClusterSpecVlselectImage#tag
+   */
+  readonly tag?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlselectImage' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlselectImage(obj: VlClusterSpecVlselectImage | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'pullPolicy': obj.pullPolicy,
+    'repository': obj.repository,
+    'tag': obj.tag,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LocalObjectReference contains enough information to let you locate the
+ * referenced object inside the same namespace.
+ *
+ * @schema VlClusterSpecVlselectImagePullSecrets
+ */
+export interface VlClusterSpecVlselectImagePullSecrets {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VlClusterSpecVlselectImagePullSecrets#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlselectImagePullSecrets' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlselectImagePullSecrets(obj: VlClusterSpecVlselectImagePullSecrets | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LogFormat for VLSelect to be configured with.
+ * default or json
+ *
+ * @schema VlClusterSpecVlselectLogFormat
+ */
+export enum VlClusterSpecVlselectLogFormat {
+  /** default */
+  DEFAULT = "default",
+  /** json */
+  JSON = "json",
+}
+
+/**
+ * LogLevel for VLSelect to be configured with.
+ *
+ * @schema VlClusterSpecVlselectLogLevel
+ */
+export enum VlClusterSpecVlselectLogLevel {
+  /** INFO */
+  INFO = "INFO",
+  /** WARN */
+  WARN = "WARN",
+  /** ERROR */
+  ERROR = "ERROR",
+  /** FATAL */
+  FATAL = "FATAL",
+  /** PANIC */
+  PANIC = "PANIC",
+}
+
+/**
+ * PodDisruptionBudget created by operator
+ *
+ * @schema VlClusterSpecVlselectPodDisruptionBudget
+ */
+export interface VlClusterSpecVlselectPodDisruptionBudget {
+  /**
+   * An eviction is allowed if at most "maxUnavailable" pods selected by
+   * "selector" are unavailable after the eviction, i.e. even in absence of
+   * the evicted pod. For example, one can prevent all voluntary evictions
+   * by specifying 0. This is a mutually exclusive setting with "minAvailable".
+   *
+   * @schema VlClusterSpecVlselectPodDisruptionBudget#maxUnavailable
+   */
+  readonly maxUnavailable?: VlClusterSpecVlselectPodDisruptionBudgetMaxUnavailable;
+
+  /**
+   * An eviction is allowed if at least "minAvailable" pods selected by
+   * "selector" will still be available after the eviction, i.e. even in the
+   * absence of the evicted pod.  So for example you can prevent all voluntary
+   * evictions by specifying "100%".
+   *
+   * @schema VlClusterSpecVlselectPodDisruptionBudget#minAvailable
+   */
+  readonly minAvailable?: VlClusterSpecVlselectPodDisruptionBudgetMinAvailable;
+
+  /**
+   * replaces default labels selector generated by operator
+   * it's useful when you need to create custom budget
+   *
+   * @schema VlClusterSpecVlselectPodDisruptionBudget#selectorLabels
+   */
+  readonly selectorLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlselectPodDisruptionBudget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlselectPodDisruptionBudget(obj: VlClusterSpecVlselectPodDisruptionBudget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'maxUnavailable': obj.maxUnavailable?.value,
+    'minAvailable': obj.minAvailable?.value,
+    'selectorLabels': ((obj.selectorLabels) === undefined) ? undefined : (Object.entries(obj.selectorLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodMetadata configures Labels and Annotations which are propagated to the VLSelect pods.
+ *
+ * @schema VlClusterSpecVlselectPodMetadata
+ */
+export interface VlClusterSpecVlselectPodMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VlClusterSpecVlselectPodMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects. May match selectors of replication controllers
+   * and services.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VlClusterSpecVlselectPodMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+  /**
+   * Name must be unique within a namespace. Is required when creating resources, although
+   * some resources may allow a client to request the generation of an appropriate name
+   * automatically. Name is primarily intended for creation idempotence and configuration
+   * definition.
+   * Cannot be updated.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
+   *
+   * @schema VlClusterSpecVlselectPodMetadata#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlselectPodMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlselectPodMetadata(obj: VlClusterSpecVlselectPodMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodReadinessGate contains the reference to a pod condition
+ *
+ * @schema VlClusterSpecVlselectReadinessGates
+ */
+export interface VlClusterSpecVlselectReadinessGates {
+  /**
+   * ConditionType refers to a condition in the pod's condition list with matching type.
+   *
+   * @schema VlClusterSpecVlselectReadinessGates#conditionType
+   */
+  readonly conditionType: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlselectReadinessGates' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlselectReadinessGates(obj: VlClusterSpecVlselectReadinessGates | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'conditionType': obj.conditionType,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Resources container resource request and limits, https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+ * if not defined default resources from operator config will be used
+ *
+ * @schema VlClusterSpecVlselectResources
+ */
+export interface VlClusterSpecVlselectResources {
+  /**
+   * Claims lists the names of resources, defined in spec.resourceClaims,
+   * that are used by this container.
+   *
+   * This is an alpha field and requires enabling the
+   * DynamicResourceAllocation feature gate.
+   *
+   * This field is immutable. It can only be set for containers.
+   *
+   * @schema VlClusterSpecVlselectResources#claims
+   */
+  readonly claims?: VlClusterSpecVlselectResourcesClaims[];
+
+  /**
+   * Limits describes the maximum amount of compute resources allowed.
+   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   *
+   * @schema VlClusterSpecVlselectResources#limits
+   */
+  readonly limits?: { [key: string]: VlClusterSpecVlselectResourcesLimits };
+
+  /**
+   * Requests describes the minimum amount of compute resources required.
+   * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+   * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   *
+   * @schema VlClusterSpecVlselectResources#requests
+   */
+  readonly requests?: { [key: string]: VlClusterSpecVlselectResourcesRequests };
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlselectResources' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlselectResources(obj: VlClusterSpecVlselectResources | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'claims': obj.claims?.map(y => toJson_VlClusterSpecVlselectResourcesClaims(y)),
+    'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+    'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * RollingUpdate - overrides deployment update params.
+ *
+ * @schema VlClusterSpecVlselectRollingUpdate
+ */
+export interface VlClusterSpecVlselectRollingUpdate {
+  /**
+   * The maximum number of pods that can be scheduled above the desired number of
+   * pods.
+   * Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
+   * This can not be 0 if MaxUnavailable is 0.
+   * Absolute number is calculated from percentage by rounding up.
+   * Defaults to 25%.
+   * Example: when this is set to 30%, the new ReplicaSet can be scaled up immediately when
+   * the rolling update starts, such that the total number of old and new pods do not exceed
+   * 130% of desired pods. Once old pods have been killed,
+   * new ReplicaSet can be scaled up further, ensuring that total number of pods running
+   * at any time during the update is at most 130% of desired pods.
+   *
+   * @default 25%.
+   * @schema VlClusterSpecVlselectRollingUpdate#maxSurge
+   */
+  readonly maxSurge?: VlClusterSpecVlselectRollingUpdateMaxSurge;
+
+  /**
+   * The maximum number of pods that can be unavailable during the update.
+   * Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
+   * Absolute number is calculated from percentage by rounding down.
+   * This can not be 0 if MaxSurge is 0.
+   * Defaults to 25%.
+   * Example: when this is set to 30%, the old ReplicaSet can be scaled down to 70% of desired pods
+   * immediately when the rolling update starts. Once new pods are ready, old ReplicaSet
+   * can be scaled down further, followed by scaling up the new ReplicaSet, ensuring
+   * that the total number of pods available at all times during the update is at
+   * least 70% of desired pods.
+   *
+   * @default 25%.
+   * @schema VlClusterSpecVlselectRollingUpdate#maxUnavailable
+   */
+  readonly maxUnavailable?: VlClusterSpecVlselectRollingUpdateMaxUnavailable;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlselectRollingUpdate' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlselectRollingUpdate(obj: VlClusterSpecVlselectRollingUpdate | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'maxSurge': obj.maxSurge?.value,
+    'maxUnavailable': obj.maxUnavailable?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ServiceSpec that will be added to vlselect service spec
+ *
+ * @schema VlClusterSpecVlselectServiceSpec
+ */
+export interface VlClusterSpecVlselectServiceSpec {
+  /**
+   * EmbeddedObjectMetadata defines objectMeta for additional service.
+   *
+   * @schema VlClusterSpecVlselectServiceSpec#metadata
+   */
+  readonly metadata?: VlClusterSpecVlselectServiceSpecMetadata;
+
+  /**
+   * ServiceSpec describes the attributes that a user creates on a service.
+   * More info: https://kubernetes.io/docs/concepts/services-networking/service/
+   *
+   * @schema VlClusterSpecVlselectServiceSpec#spec
+   */
+  readonly spec: any;
+
+  /**
+   * UseAsDefault applies changes from given service definition to the main object Service
+   * Changing from headless service to clusterIP or loadbalancer may break cross-component communication
+   *
+   * @schema VlClusterSpecVlselectServiceSpec#useAsDefault
+   */
+  readonly useAsDefault?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlselectServiceSpec' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlselectServiceSpec(obj: VlClusterSpecVlselectServiceSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': toJson_VlClusterSpecVlselectServiceSpecMetadata(obj.metadata),
+    'spec': obj.spec,
+    'useAsDefault': obj.useAsDefault,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The pod this Toleration is attached to tolerates any taint that matches
+ * the triple <key,value,effect> using the matching operator <operator>.
+ *
+ * @schema VlClusterSpecVlselectTolerations
+ */
+export interface VlClusterSpecVlselectTolerations {
+  /**
+   * Effect indicates the taint effect to match. Empty means match all taint effects.
+   * When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+   *
+   * @schema VlClusterSpecVlselectTolerations#effect
+   */
+  readonly effect?: string;
+
+  /**
+   * Key is the taint key that the toleration applies to. Empty means match all taint keys.
+   * If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+   *
+   * @schema VlClusterSpecVlselectTolerations#key
+   */
+  readonly key?: string;
+
+  /**
+   * Operator represents a key's relationship to the value.
+   * Valid operators are Exists and Equal. Defaults to Equal.
+   * Exists is equivalent to wildcard for value, so that a pod can
+   * tolerate all taints of a particular category.
+   *
+   * @default Equal.
+   * @schema VlClusterSpecVlselectTolerations#operator
+   */
+  readonly operator?: string;
+
+  /**
+   * TolerationSeconds represents the period of time the toleration (which must be
+   * of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default,
+   * it is not set, which means tolerate the taint forever (do not evict). Zero and
+   * negative values will be treated as 0 (evict immediately) by the system.
+   *
+   * @schema VlClusterSpecVlselectTolerations#tolerationSeconds
+   */
+  readonly tolerationSeconds?: number;
+
+  /**
+   * Value is the taint value the toleration matches to.
+   * If the operator is Exists, the value should be empty, otherwise just a regular string.
+   *
+   * @schema VlClusterSpecVlselectTolerations#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlselectTolerations' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlselectTolerations(obj: VlClusterSpecVlselectTolerations | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'effect': obj.effect,
+    'key': obj.key,
+    'operator': obj.operator,
+    'tolerationSeconds': obj.tolerationSeconds,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * UpdateStrategy - overrides default update strategy.
+ *
+ * @schema VlClusterSpecVlselectUpdateStrategy
+ */
+export enum VlClusterSpecVlselectUpdateStrategy {
+  /** Recreate */
+  RECREATE = "Recreate",
+  /** RollingUpdate */
+  ROLLING_UPDATE = "RollingUpdate",
+}
+
+/**
+ * VolumeMount describes a mounting of a Volume within a container.
+ *
+ * @schema VlClusterSpecVlselectVolumeMounts
+ */
+export interface VlClusterSpecVlselectVolumeMounts {
+  /**
+   * Path within the container at which the volume should be mounted.  Must
+   * not contain ':'.
+   *
+   * @schema VlClusterSpecVlselectVolumeMounts#mountPath
+   */
+  readonly mountPath: string;
+
+  /**
+   * mountPropagation determines how mounts are propagated from the host
+   * to container and the other way around.
+   * When not set, MountPropagationNone is used.
+   * This field is beta in 1.10.
+   * When RecursiveReadOnly is set to IfPossible or to Enabled, MountPropagation must be None or unspecified
+   * (which defaults to None).
+   *
+   * @schema VlClusterSpecVlselectVolumeMounts#mountPropagation
+   */
+  readonly mountPropagation?: string;
+
+  /**
+   * This must match the Name of a Volume.
+   *
+   * @schema VlClusterSpecVlselectVolumeMounts#name
+   */
+  readonly name: string;
+
+  /**
+   * Mounted read-only if true, read-write otherwise (false or unspecified).
+   * Defaults to false.
+   *
+   * @default false.
+   * @schema VlClusterSpecVlselectVolumeMounts#readOnly
+   */
+  readonly readOnly?: boolean;
+
+  /**
+   * RecursiveReadOnly specifies whether read-only mounts should be handled
+   * recursively.
+   *
+   * If ReadOnly is false, this field has no meaning and must be unspecified.
+   *
+   * If ReadOnly is true, and this field is set to Disabled, the mount is not made
+   * recursively read-only.  If this field is set to IfPossible, the mount is made
+   * recursively read-only, if it is supported by the container runtime.  If this
+   * field is set to Enabled, the mount is made recursively read-only if it is
+   * supported by the container runtime, otherwise the pod will not be started and
+   * an error will be generated to indicate the reason.
+   *
+   * If this field is set to IfPossible or Enabled, MountPropagation must be set to
+   * None (or be unspecified, which defaults to None).
+   *
+   * If this field is not specified, it is treated as an equivalent of Disabled.
+   *
+   * @schema VlClusterSpecVlselectVolumeMounts#recursiveReadOnly
+   */
+  readonly recursiveReadOnly?: string;
+
+  /**
+   * Path within the volume from which the container's volume should be mounted.
+   * Defaults to "" (volume's root).
+   *
+   * @default volume's root).
+   * @schema VlClusterSpecVlselectVolumeMounts#subPath
+   */
+  readonly subPath?: string;
+
+  /**
+   * Expanded path within the volume from which the container's volume should be mounted.
+   * Behaves similarly to SubPath but environment variable references $(VAR_NAME) are expanded using the container's environment.
+   * Defaults to "" (volume's root).
+   * SubPathExpr and SubPath are mutually exclusive.
+   *
+   * @default volume's root).
+   * @schema VlClusterSpecVlselectVolumeMounts#subPathExpr
+   */
+  readonly subPathExpr?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlselectVolumeMounts' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlselectVolumeMounts(obj: VlClusterSpecVlselectVolumeMounts | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'mountPath': obj.mountPath,
+    'mountPropagation': obj.mountPropagation,
+    'name': obj.name,
+    'readOnly': obj.readOnly,
+    'recursiveReadOnly': obj.recursiveReadOnly,
+    'subPath': obj.subPath,
+    'subPathExpr': obj.subPathExpr,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Specifies the DNS parameters of a pod.
+ * Parameters specified here will be merged to the generated DNS
+ * configuration based on DNSPolicy.
+ *
+ * @schema VlClusterSpecVlstorageDnsConfig
+ */
+export interface VlClusterSpecVlstorageDnsConfig {
+  /**
+   * A list of DNS name server IP addresses.
+   * This will be appended to the base nameservers generated from DNSPolicy.
+   * Duplicated nameservers will be removed.
+   *
+   * @schema VlClusterSpecVlstorageDnsConfig#nameservers
+   */
+  readonly nameservers?: string[];
+
+  /**
+   * A list of DNS resolver options.
+   * This will be merged with the base options generated from DNSPolicy.
+   * Duplicated entries will be removed. Resolution options given in Options
+   * will override those that appear in the base DNSPolicy.
+   *
+   * @schema VlClusterSpecVlstorageDnsConfig#options
+   */
+  readonly options?: VlClusterSpecVlstorageDnsConfigOptions[];
+
+  /**
+   * A list of DNS search domains for host-name lookup.
+   * This will be appended to the base search paths generated from DNSPolicy.
+   * Duplicated search paths will be removed.
+   *
+   * @schema VlClusterSpecVlstorageDnsConfig#searches
+   */
+  readonly searches?: string[];
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageDnsConfig' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageDnsConfig(obj: VlClusterSpecVlstorageDnsConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'nameservers': obj.nameservers?.map(y => y),
+    'options': obj.options?.map(y => toJson_VlClusterSpecVlstorageDnsConfigOptions(y)),
+    'searches': obj.searches?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvVar represents an environment variable present in a Container.
+ *
+ * @schema VlClusterSpecVlstorageExtraEnvs
+ */
+export interface VlClusterSpecVlstorageExtraEnvs {
+  /**
+   * Name of the environment variable. Must be a C_IDENTIFIER.
+   *
+   * @schema VlClusterSpecVlstorageExtraEnvs#name
+   */
+  readonly name: string;
+
+  /**
+   * Variable references $(VAR_NAME) are expanded
+   * using the previously defined environment variables in the container and
+   * any service environment variables. If a variable cannot be resolved,
+   * the reference in the input string will be unchanged. Double $$ are reduced
+   * to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e.
+   * "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)".
+   * Escaped references will never be expanded, regardless of whether the variable
+   * exists or not.
+   * Defaults to "".
+   *
+   * @default .
+   * @schema VlClusterSpecVlstorageExtraEnvs#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageExtraEnvs' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageExtraEnvs(obj: VlClusterSpecVlstorageExtraEnvs | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ *
+ * @schema VlClusterSpecVlstorageExtraEnvsFrom
+ */
+export interface VlClusterSpecVlstorageExtraEnvsFrom {
+  /**
+   * The ConfigMap to select from
+   *
+   * @schema VlClusterSpecVlstorageExtraEnvsFrom#configMapRef
+   */
+  readonly configMapRef?: VlClusterSpecVlstorageExtraEnvsFromConfigMapRef;
+
+  /**
+   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   *
+   * @schema VlClusterSpecVlstorageExtraEnvsFrom#prefix
+   */
+  readonly prefix?: string;
+
+  /**
+   * The Secret to select from
+   *
+   * @schema VlClusterSpecVlstorageExtraEnvsFrom#secretRef
+   */
+  readonly secretRef?: VlClusterSpecVlstorageExtraEnvsFromSecretRef;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageExtraEnvsFrom' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageExtraEnvsFrom(obj: VlClusterSpecVlstorageExtraEnvsFrom | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapRef': toJson_VlClusterSpecVlstorageExtraEnvsFromConfigMapRef(obj.configMapRef),
+    'prefix': obj.prefix,
+    'secretRef': toJson_VlClusterSpecVlstorageExtraEnvsFromSecretRef(obj.secretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * HostAlias holds the mapping between IP and hostnames that will be injected as an entry in the
+ * pod's hosts file.
+ *
+ * @schema VlClusterSpecVlstorageHostAliases
+ */
+export interface VlClusterSpecVlstorageHostAliases {
+  /**
+   * Hostnames for the above IP address.
+   *
+   * @schema VlClusterSpecVlstorageHostAliases#hostnames
+   */
+  readonly hostnames?: string[];
+
+  /**
+   * IP address of the host file entry.
+   *
+   * @schema VlClusterSpecVlstorageHostAliases#ip
+   */
+  readonly ip: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHostAliases' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHostAliases(obj: VlClusterSpecVlstorageHostAliases | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'hostnames': obj.hostnames?.map(y => y),
+    'ip': obj.ip,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Image - docker image settings
+ * if no specified operator uses default version from operator config
+ *
+ * @schema VlClusterSpecVlstorageImage
+ */
+export interface VlClusterSpecVlstorageImage {
+  /**
+   * PullPolicy describes how to pull docker image
+   *
+   * @schema VlClusterSpecVlstorageImage#pullPolicy
+   */
+  readonly pullPolicy?: string;
+
+  /**
+   * Repository contains name of docker image + it's repository if needed
+   *
+   * @schema VlClusterSpecVlstorageImage#repository
+   */
+  readonly repository?: string;
+
+  /**
+   * Tag contains desired docker image version
+   *
+   * @schema VlClusterSpecVlstorageImage#tag
+   */
+  readonly tag?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageImage' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageImage(obj: VlClusterSpecVlstorageImage | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'pullPolicy': obj.pullPolicy,
+    'repository': obj.repository,
+    'tag': obj.tag,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LocalObjectReference contains enough information to let you locate the
+ * referenced object inside the same namespace.
+ *
+ * @schema VlClusterSpecVlstorageImagePullSecrets
+ */
+export interface VlClusterSpecVlstorageImagePullSecrets {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VlClusterSpecVlstorageImagePullSecrets#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageImagePullSecrets' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageImagePullSecrets(obj: VlClusterSpecVlstorageImagePullSecrets | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LogFormat for VLStorage to be configured with.
+ * default or json
+ *
+ * @schema VlClusterSpecVlstorageLogFormat
+ */
+export enum VlClusterSpecVlstorageLogFormat {
+  /** default */
+  DEFAULT = "default",
+  /** json */
+  JSON = "json",
+}
+
+/**
+ * LogLevel for VLStorage to be configured with.
+ *
+ * @schema VlClusterSpecVlstorageLogLevel
+ */
+export enum VlClusterSpecVlstorageLogLevel {
+  /** INFO */
+  INFO = "INFO",
+  /** WARN */
+  WARN = "WARN",
+  /** ERROR */
+  ERROR = "ERROR",
+  /** FATAL */
+  FATAL = "FATAL",
+  /** PANIC */
+  PANIC = "PANIC",
+}
+
+/**
+ * PodDisruptionBudget created by operator
+ *
+ * @schema VlClusterSpecVlstoragePodDisruptionBudget
+ */
+export interface VlClusterSpecVlstoragePodDisruptionBudget {
+  /**
+   * An eviction is allowed if at most "maxUnavailable" pods selected by
+   * "selector" are unavailable after the eviction, i.e. even in absence of
+   * the evicted pod. For example, one can prevent all voluntary evictions
+   * by specifying 0. This is a mutually exclusive setting with "minAvailable".
+   *
+   * @schema VlClusterSpecVlstoragePodDisruptionBudget#maxUnavailable
+   */
+  readonly maxUnavailable?: VlClusterSpecVlstoragePodDisruptionBudgetMaxUnavailable;
+
+  /**
+   * An eviction is allowed if at least "minAvailable" pods selected by
+   * "selector" will still be available after the eviction, i.e. even in the
+   * absence of the evicted pod.  So for example you can prevent all voluntary
+   * evictions by specifying "100%".
+   *
+   * @schema VlClusterSpecVlstoragePodDisruptionBudget#minAvailable
+   */
+  readonly minAvailable?: VlClusterSpecVlstoragePodDisruptionBudgetMinAvailable;
+
+  /**
+   * replaces default labels selector generated by operator
+   * it's useful when you need to create custom budget
+   *
+   * @schema VlClusterSpecVlstoragePodDisruptionBudget#selectorLabels
+   */
+  readonly selectorLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstoragePodDisruptionBudget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstoragePodDisruptionBudget(obj: VlClusterSpecVlstoragePodDisruptionBudget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'maxUnavailable': obj.maxUnavailable?.value,
+    'minAvailable': obj.minAvailable?.value,
+    'selectorLabels': ((obj.selectorLabels) === undefined) ? undefined : (Object.entries(obj.selectorLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodMetadata configures Labels and Annotations which are propagated to the VLStorage pods.
+ *
+ * @schema VlClusterSpecVlstoragePodMetadata
+ */
+export interface VlClusterSpecVlstoragePodMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VlClusterSpecVlstoragePodMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects. May match selectors of replication controllers
+   * and services.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VlClusterSpecVlstoragePodMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+  /**
+   * Name must be unique within a namespace. Is required when creating resources, although
+   * some resources may allow a client to request the generation of an appropriate name
+   * automatically. Name is primarily intended for creation idempotence and configuration
+   * definition.
+   * Cannot be updated.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
+   *
+   * @schema VlClusterSpecVlstoragePodMetadata#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstoragePodMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstoragePodMetadata(obj: VlClusterSpecVlstoragePodMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodReadinessGate contains the reference to a pod condition
+ *
+ * @schema VlClusterSpecVlstorageReadinessGates
+ */
+export interface VlClusterSpecVlstorageReadinessGates {
+  /**
+   * ConditionType refers to a condition in the pod's condition list with matching type.
+   *
+   * @schema VlClusterSpecVlstorageReadinessGates#conditionType
+   */
+  readonly conditionType: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageReadinessGates' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageReadinessGates(obj: VlClusterSpecVlstorageReadinessGates | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'conditionType': obj.conditionType,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Resources container resource request and limits, https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+ * if not defined default resources from operator config will be used
+ *
+ * @schema VlClusterSpecVlstorageResources
+ */
+export interface VlClusterSpecVlstorageResources {
+  /**
+   * Claims lists the names of resources, defined in spec.resourceClaims,
+   * that are used by this container.
+   *
+   * This is an alpha field and requires enabling the
+   * DynamicResourceAllocation feature gate.
+   *
+   * This field is immutable. It can only be set for containers.
+   *
+   * @schema VlClusterSpecVlstorageResources#claims
+   */
+  readonly claims?: VlClusterSpecVlstorageResourcesClaims[];
+
+  /**
+   * Limits describes the maximum amount of compute resources allowed.
+   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   *
+   * @schema VlClusterSpecVlstorageResources#limits
+   */
+  readonly limits?: { [key: string]: VlClusterSpecVlstorageResourcesLimits };
+
+  /**
+   * Requests describes the minimum amount of compute resources required.
+   * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+   * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   *
+   * @schema VlClusterSpecVlstorageResources#requests
+   */
+  readonly requests?: { [key: string]: VlClusterSpecVlstorageResourcesRequests };
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageResources' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageResources(obj: VlClusterSpecVlstorageResources | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'claims': obj.claims?.map(y => toJson_VlClusterSpecVlstorageResourcesClaims(y)),
+    'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+    'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ServiceSpec that will be added to vlselect service spec
+ *
+ * @schema VlClusterSpecVlstorageServiceSpec
+ */
+export interface VlClusterSpecVlstorageServiceSpec {
+  /**
+   * EmbeddedObjectMetadata defines objectMeta for additional service.
+   *
+   * @schema VlClusterSpecVlstorageServiceSpec#metadata
+   */
+  readonly metadata?: VlClusterSpecVlstorageServiceSpecMetadata;
+
+  /**
+   * ServiceSpec describes the attributes that a user creates on a service.
+   * More info: https://kubernetes.io/docs/concepts/services-networking/service/
+   *
+   * @schema VlClusterSpecVlstorageServiceSpec#spec
+   */
+  readonly spec: any;
+
+  /**
+   * UseAsDefault applies changes from given service definition to the main object Service
+   * Changing from headless service to clusterIP or loadbalancer may break cross-component communication
+   *
+   * @schema VlClusterSpecVlstorageServiceSpec#useAsDefault
+   */
+  readonly useAsDefault?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageServiceSpec' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageServiceSpec(obj: VlClusterSpecVlstorageServiceSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': toJson_VlClusterSpecVlstorageServiceSpecMetadata(obj.metadata),
+    'spec': obj.spec,
+    'useAsDefault': obj.useAsDefault,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Storage configures persistent volume for VLStorage
+ *
+ * @schema VlClusterSpecVlstorageStorage
+ */
+export interface VlClusterSpecVlstorageStorage {
+  /**
+   * Deprecated: subPath usage will be disabled by default in a future release, this option will become unnecessary.
+   * DisableMountSubPath allows to remove any subPath usage in volume mounts.
+   *
+   * @schema VlClusterSpecVlstorageStorage#disableMountSubPath
+   */
+  readonly disableMountSubPath?: boolean;
+
+  /**
+   * EmptyDirVolumeSource to be used by the Prometheus StatefulSets. If specified, used in place of any volumeClaimTemplate. More
+   * info: https://kubernetes.io/docs/concepts/storage/volumes/#emptydir
+   *
+   * @schema VlClusterSpecVlstorageStorage#emptyDir
+   */
+  readonly emptyDir?: VlClusterSpecVlstorageStorageEmptyDir;
+
+  /**
+   * A PVC spec to be used by the VMAlertManager StatefulSets.
+   *
+   * @schema VlClusterSpecVlstorageStorage#volumeClaimTemplate
+   */
+  readonly volumeClaimTemplate?: any;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageStorage' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageStorage(obj: VlClusterSpecVlstorageStorage | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'disableMountSubPath': obj.disableMountSubPath,
+    'emptyDir': toJson_VlClusterSpecVlstorageStorageEmptyDir(obj.emptyDir),
+    'volumeClaimTemplate': obj.volumeClaimTemplate,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The pod this Toleration is attached to tolerates any taint that matches
+ * the triple <key,value,effect> using the matching operator <operator>.
+ *
+ * @schema VlClusterSpecVlstorageTolerations
+ */
+export interface VlClusterSpecVlstorageTolerations {
+  /**
+   * Effect indicates the taint effect to match. Empty means match all taint effects.
+   * When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+   *
+   * @schema VlClusterSpecVlstorageTolerations#effect
+   */
+  readonly effect?: string;
+
+  /**
+   * Key is the taint key that the toleration applies to. Empty means match all taint keys.
+   * If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+   *
+   * @schema VlClusterSpecVlstorageTolerations#key
+   */
+  readonly key?: string;
+
+  /**
+   * Operator represents a key's relationship to the value.
+   * Valid operators are Exists and Equal. Defaults to Equal.
+   * Exists is equivalent to wildcard for value, so that a pod can
+   * tolerate all taints of a particular category.
+   *
+   * @default Equal.
+   * @schema VlClusterSpecVlstorageTolerations#operator
+   */
+  readonly operator?: string;
+
+  /**
+   * TolerationSeconds represents the period of time the toleration (which must be
+   * of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default,
+   * it is not set, which means tolerate the taint forever (do not evict). Zero and
+   * negative values will be treated as 0 (evict immediately) by the system.
+   *
+   * @schema VlClusterSpecVlstorageTolerations#tolerationSeconds
+   */
+  readonly tolerationSeconds?: number;
+
+  /**
+   * Value is the taint value the toleration matches to.
+   * If the operator is Exists, the value should be empty, otherwise just a regular string.
+   *
+   * @schema VlClusterSpecVlstorageTolerations#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageTolerations' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageTolerations(obj: VlClusterSpecVlstorageTolerations | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'effect': obj.effect,
+    'key': obj.key,
+    'operator': obj.operator,
+    'tolerationSeconds': obj.tolerationSeconds,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * VolumeMount describes a mounting of a Volume within a container.
+ *
+ * @schema VlClusterSpecVlstorageVolumeMounts
+ */
+export interface VlClusterSpecVlstorageVolumeMounts {
+  /**
+   * Path within the container at which the volume should be mounted.  Must
+   * not contain ':'.
+   *
+   * @schema VlClusterSpecVlstorageVolumeMounts#mountPath
+   */
+  readonly mountPath: string;
+
+  /**
+   * mountPropagation determines how mounts are propagated from the host
+   * to container and the other way around.
+   * When not set, MountPropagationNone is used.
+   * This field is beta in 1.10.
+   * When RecursiveReadOnly is set to IfPossible or to Enabled, MountPropagation must be None or unspecified
+   * (which defaults to None).
+   *
+   * @schema VlClusterSpecVlstorageVolumeMounts#mountPropagation
+   */
+  readonly mountPropagation?: string;
+
+  /**
+   * This must match the Name of a Volume.
+   *
+   * @schema VlClusterSpecVlstorageVolumeMounts#name
+   */
+  readonly name: string;
+
+  /**
+   * Mounted read-only if true, read-write otherwise (false or unspecified).
+   * Defaults to false.
+   *
+   * @default false.
+   * @schema VlClusterSpecVlstorageVolumeMounts#readOnly
+   */
+  readonly readOnly?: boolean;
+
+  /**
+   * RecursiveReadOnly specifies whether read-only mounts should be handled
+   * recursively.
+   *
+   * If ReadOnly is false, this field has no meaning and must be unspecified.
+   *
+   * If ReadOnly is true, and this field is set to Disabled, the mount is not made
+   * recursively read-only.  If this field is set to IfPossible, the mount is made
+   * recursively read-only, if it is supported by the container runtime.  If this
+   * field is set to Enabled, the mount is made recursively read-only if it is
+   * supported by the container runtime, otherwise the pod will not be started and
+   * an error will be generated to indicate the reason.
+   *
+   * If this field is set to IfPossible or Enabled, MountPropagation must be set to
+   * None (or be unspecified, which defaults to None).
+   *
+   * If this field is not specified, it is treated as an equivalent of Disabled.
+   *
+   * @schema VlClusterSpecVlstorageVolumeMounts#recursiveReadOnly
+   */
+  readonly recursiveReadOnly?: string;
+
+  /**
+   * Path within the volume from which the container's volume should be mounted.
+   * Defaults to "" (volume's root).
+   *
+   * @default volume's root).
+   * @schema VlClusterSpecVlstorageVolumeMounts#subPath
+   */
+  readonly subPath?: string;
+
+  /**
+   * Expanded path within the volume from which the container's volume should be mounted.
+   * Behaves similarly to SubPath but environment variable references $(VAR_NAME) are expanded using the container's environment.
+   * Defaults to "" (volume's root).
+   * SubPathExpr and SubPath are mutually exclusive.
+   *
+   * @default volume's root).
+   * @schema VlClusterSpecVlstorageVolumeMounts#subPathExpr
+   */
+  readonly subPathExpr?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageVolumeMounts' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageVolumeMounts(obj: VlClusterSpecVlstorageVolumeMounts | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'mountPath': obj.mountPath,
+    'mountPropagation': obj.mountPropagation,
+    'name': obj.name,
+    'readOnly': obj.readOnly,
+    'recursiveReadOnly': obj.recursiveReadOnly,
+    'subPath': obj.subPath,
+    'subPathExpr': obj.subPathExpr,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodDNSConfigOption defines DNS resolver options of a pod.
+ *
+ * @schema VlClusterSpecVlinsertDnsConfigOptions
+ */
+export interface VlClusterSpecVlinsertDnsConfigOptions {
+  /**
+   * Name is this DNS resolver option's name.
+   * Required.
+   *
+   * @schema VlClusterSpecVlinsertDnsConfigOptions#name
+   */
+  readonly name?: string;
+
+  /**
+   * Value is this DNS resolver option's value.
+   *
+   * @schema VlClusterSpecVlinsertDnsConfigOptions#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertDnsConfigOptions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertDnsConfigOptions(obj: VlClusterSpecVlinsertDnsConfigOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The ConfigMap to select from
+ *
+ * @schema VlClusterSpecVlinsertExtraEnvsFromConfigMapRef
+ */
+export interface VlClusterSpecVlinsertExtraEnvsFromConfigMapRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VlClusterSpecVlinsertExtraEnvsFromConfigMapRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap must be defined
+   *
+   * @schema VlClusterSpecVlinsertExtraEnvsFromConfigMapRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertExtraEnvsFromConfigMapRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertExtraEnvsFromConfigMapRef(obj: VlClusterSpecVlinsertExtraEnvsFromConfigMapRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The Secret to select from
+ *
+ * @schema VlClusterSpecVlinsertExtraEnvsFromSecretRef
+ */
+export interface VlClusterSpecVlinsertExtraEnvsFromSecretRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VlClusterSpecVlinsertExtraEnvsFromSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret must be defined
+   *
+   * @schema VlClusterSpecVlinsertExtraEnvsFromSecretRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertExtraEnvsFromSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertExtraEnvsFromSecretRef(obj: VlClusterSpecVlinsertExtraEnvsFromSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * An eviction is allowed if at most "maxUnavailable" pods selected by
+ * "selector" are unavailable after the eviction, i.e. even in absence of
+ * the evicted pod. For example, one can prevent all voluntary evictions
+ * by specifying 0. This is a mutually exclusive setting with "minAvailable".
+ *
+ * @schema VlClusterSpecVlinsertPodDisruptionBudgetMaxUnavailable
+ */
+export class VlClusterSpecVlinsertPodDisruptionBudgetMaxUnavailable {
+  public static fromNumber(value: number): VlClusterSpecVlinsertPodDisruptionBudgetMaxUnavailable {
+    return new VlClusterSpecVlinsertPodDisruptionBudgetMaxUnavailable(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlinsertPodDisruptionBudgetMaxUnavailable {
+    return new VlClusterSpecVlinsertPodDisruptionBudgetMaxUnavailable(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * An eviction is allowed if at least "minAvailable" pods selected by
+ * "selector" will still be available after the eviction, i.e. even in the
+ * absence of the evicted pod.  So for example you can prevent all voluntary
+ * evictions by specifying "100%".
+ *
+ * @schema VlClusterSpecVlinsertPodDisruptionBudgetMinAvailable
+ */
+export class VlClusterSpecVlinsertPodDisruptionBudgetMinAvailable {
+  public static fromNumber(value: number): VlClusterSpecVlinsertPodDisruptionBudgetMinAvailable {
+    return new VlClusterSpecVlinsertPodDisruptionBudgetMinAvailable(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlinsertPodDisruptionBudgetMinAvailable {
+    return new VlClusterSpecVlinsertPodDisruptionBudgetMinAvailable(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * ResourceClaim references one entry in PodSpec.ResourceClaims.
+ *
+ * @schema VlClusterSpecVlinsertResourcesClaims
+ */
+export interface VlClusterSpecVlinsertResourcesClaims {
+  /**
+   * Name must match the name of one entry in pod.spec.resourceClaims of
+   * the Pod where this field is used. It makes that resource available
+   * inside a container.
+   *
+   * @schema VlClusterSpecVlinsertResourcesClaims#name
+   */
+  readonly name: string;
+
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VlClusterSpecVlinsertResourcesClaims#request
+   */
+  readonly request?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertResourcesClaims' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertResourcesClaims(obj: VlClusterSpecVlinsertResourcesClaims | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'request': obj.request,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema VlClusterSpecVlinsertResourcesLimits
+ */
+export class VlClusterSpecVlinsertResourcesLimits {
+  public static fromNumber(value: number): VlClusterSpecVlinsertResourcesLimits {
+    return new VlClusterSpecVlinsertResourcesLimits(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlinsertResourcesLimits {
+    return new VlClusterSpecVlinsertResourcesLimits(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * @schema VlClusterSpecVlinsertResourcesRequests
+ */
+export class VlClusterSpecVlinsertResourcesRequests {
+  public static fromNumber(value: number): VlClusterSpecVlinsertResourcesRequests {
+    return new VlClusterSpecVlinsertResourcesRequests(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlinsertResourcesRequests {
+    return new VlClusterSpecVlinsertResourcesRequests(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * The maximum number of pods that can be scheduled above the desired number of
+ * pods.
+ * Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
+ * This can not be 0 if MaxUnavailable is 0.
+ * Absolute number is calculated from percentage by rounding up.
+ * Defaults to 25%.
+ * Example: when this is set to 30%, the new ReplicaSet can be scaled up immediately when
+ * the rolling update starts, such that the total number of old and new pods do not exceed
+ * 130% of desired pods. Once old pods have been killed,
+ * new ReplicaSet can be scaled up further, ensuring that total number of pods running
+ * at any time during the update is at most 130% of desired pods.
+ *
+ * @default 25%.
+ * @schema VlClusterSpecVlinsertRollingUpdateMaxSurge
+ */
+export class VlClusterSpecVlinsertRollingUpdateMaxSurge {
+  public static fromNumber(value: number): VlClusterSpecVlinsertRollingUpdateMaxSurge {
+    return new VlClusterSpecVlinsertRollingUpdateMaxSurge(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlinsertRollingUpdateMaxSurge {
+    return new VlClusterSpecVlinsertRollingUpdateMaxSurge(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * The maximum number of pods that can be unavailable during the update.
+ * Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
+ * Absolute number is calculated from percentage by rounding down.
+ * This can not be 0 if MaxSurge is 0.
+ * Defaults to 25%.
+ * Example: when this is set to 30%, the old ReplicaSet can be scaled down to 70% of desired pods
+ * immediately when the rolling update starts. Once new pods are ready, old ReplicaSet
+ * can be scaled down further, followed by scaling up the new ReplicaSet, ensuring
+ * that the total number of pods available at all times during the update is at
+ * least 70% of desired pods.
+ *
+ * @default 25%.
+ * @schema VlClusterSpecVlinsertRollingUpdateMaxUnavailable
+ */
+export class VlClusterSpecVlinsertRollingUpdateMaxUnavailable {
+  public static fromNumber(value: number): VlClusterSpecVlinsertRollingUpdateMaxUnavailable {
+    return new VlClusterSpecVlinsertRollingUpdateMaxUnavailable(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlinsertRollingUpdateMaxUnavailable {
+    return new VlClusterSpecVlinsertRollingUpdateMaxUnavailable(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * EmbeddedObjectMetadata defines objectMeta for additional service.
+ *
+ * @schema VlClusterSpecVlinsertServiceSpecMetadata
+ */
+export interface VlClusterSpecVlinsertServiceSpecMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VlClusterSpecVlinsertServiceSpecMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects. May match selectors of replication controllers
+   * and services.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VlClusterSpecVlinsertServiceSpecMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+  /**
+   * Name must be unique within a namespace. Is required when creating resources, although
+   * some resources may allow a client to request the generation of an appropriate name
+   * automatically. Name is primarily intended for creation idempotence and configuration
+   * definition.
+   * Cannot be updated.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
+   *
+   * @schema VlClusterSpecVlinsertServiceSpecMetadata#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertServiceSpecMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertServiceSpecMetadata(obj: VlClusterSpecVlinsertServiceSpecMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * SyslogTCPListener defines configuration for TCP syslog server listen
+ *
+ * @schema VlClusterSpecVlinsertSyslogSpecTcpListeners
+ */
+export interface VlClusterSpecVlinsertSyslogSpecTcpListeners {
+  /**
+   * CompressMethod for syslog messages
+   * see https://docs.victoriametrics.com/victorialogs/data-ingestion/syslog/#compression
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecTcpListeners#compressMethod
+   */
+  readonly compressMethod?: string;
+
+  /**
+   * DecolorizeFields to remove ANSI color codes across logs
+   * see https://docs.victoriametrics.com/victorialogs/data-ingestion/syslog/#decolorizing-fields
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecTcpListeners#decolorizeFields
+   */
+  readonly decolorizeFields?: string;
+
+  /**
+   * IgnoreFields to ignore at logs
+   * see https://docs.victoriametrics.com/victorialogs/data-ingestion/syslog/#dropping-fields
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecTcpListeners#ignoreFields
+   */
+  readonly ignoreFields?: string;
+
+  /**
+   * ListenPort defines listen port
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecTcpListeners#listenPort
+   */
+  readonly listenPort: number;
+
+  /**
+   * StreamFields to use as log stream labels
+   * see https://docs.victoriametrics.com/victorialogs/data-ingestion/syslog/#stream-fields
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecTcpListeners#streamFields
+   */
+  readonly streamFields?: string;
+
+  /**
+   * TenantID for logs ingested in form of accountID:projectID
+   * see https://docs.victoriametrics.com/victorialogs/data-ingestion/syslog/#multiple-configs
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecTcpListeners#tenantID
+   */
+  readonly tenantId?: string;
+
+  /**
+   * TLSServerConfig defines VictoriaMetrics TLS configuration for the application's server
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecTcpListeners#tlsConfig
+   */
+  readonly tlsConfig?: VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfig;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertSyslogSpecTcpListeners' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertSyslogSpecTcpListeners(obj: VlClusterSpecVlinsertSyslogSpecTcpListeners | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'compressMethod': obj.compressMethod,
+    'decolorizeFields': obj.decolorizeFields,
+    'ignoreFields': obj.ignoreFields,
+    'listenPort': obj.listenPort,
+    'streamFields': obj.streamFields,
+    'tenantID': obj.tenantId,
+    'tlsConfig': toJson_VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfig(obj.tlsConfig),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * SyslogUDPListener defines configuration for UDP syslog server listen
+ *
+ * @schema VlClusterSpecVlinsertSyslogSpecUdpListeners
+ */
+export interface VlClusterSpecVlinsertSyslogSpecUdpListeners {
+  /**
+   * CompressMethod for syslog messages
+   * see https://docs.victoriametrics.com/victorialogs/data-ingestion/syslog/#compression
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecUdpListeners#compressMethod
+   */
+  readonly compressMethod?: string;
+
+  /**
+   * DecolorizeFields to remove ANSI color codes across logs
+   * see https://docs.victoriametrics.com/victorialogs/data-ingestion/syslog/#decolorizing-fields
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecUdpListeners#decolorizeFields
+   */
+  readonly decolorizeFields?: string;
+
+  /**
+   * IgnoreFields to ignore at logs
+   * see https://docs.victoriametrics.com/victorialogs/data-ingestion/syslog/#dropping-fields
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecUdpListeners#ignoreFields
+   */
+  readonly ignoreFields?: string;
+
+  /**
+   * ListenPort defines listen port
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecUdpListeners#listenPort
+   */
+  readonly listenPort: number;
+
+  /**
+   * StreamFields to use as log stream labels
+   * see https://docs.victoriametrics.com/victorialogs/data-ingestion/syslog/#stream-fields
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecUdpListeners#streamFields
+   */
+  readonly streamFields?: string;
+
+  /**
+   * TenantID for logs ingested in form of accountID:projectID
+   * see https://docs.victoriametrics.com/victorialogs/data-ingestion/syslog/#multiple-configs
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecUdpListeners#tenantID
+   */
+  readonly tenantId?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertSyslogSpecUdpListeners' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertSyslogSpecUdpListeners(obj: VlClusterSpecVlinsertSyslogSpecUdpListeners | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'compressMethod': obj.compressMethod,
+    'decolorizeFields': obj.decolorizeFields,
+    'ignoreFields': obj.ignoreFields,
+    'listenPort': obj.listenPort,
+    'streamFields': obj.streamFields,
+    'tenantID': obj.tenantId,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodDNSConfigOption defines DNS resolver options of a pod.
+ *
+ * @schema VlClusterSpecVlselectDnsConfigOptions
+ */
+export interface VlClusterSpecVlselectDnsConfigOptions {
+  /**
+   * Name is this DNS resolver option's name.
+   * Required.
+   *
+   * @schema VlClusterSpecVlselectDnsConfigOptions#name
+   */
+  readonly name?: string;
+
+  /**
+   * Value is this DNS resolver option's value.
+   *
+   * @schema VlClusterSpecVlselectDnsConfigOptions#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlselectDnsConfigOptions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlselectDnsConfigOptions(obj: VlClusterSpecVlselectDnsConfigOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The ConfigMap to select from
+ *
+ * @schema VlClusterSpecVlselectExtraEnvsFromConfigMapRef
+ */
+export interface VlClusterSpecVlselectExtraEnvsFromConfigMapRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VlClusterSpecVlselectExtraEnvsFromConfigMapRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap must be defined
+   *
+   * @schema VlClusterSpecVlselectExtraEnvsFromConfigMapRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlselectExtraEnvsFromConfigMapRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlselectExtraEnvsFromConfigMapRef(obj: VlClusterSpecVlselectExtraEnvsFromConfigMapRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The Secret to select from
+ *
+ * @schema VlClusterSpecVlselectExtraEnvsFromSecretRef
+ */
+export interface VlClusterSpecVlselectExtraEnvsFromSecretRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VlClusterSpecVlselectExtraEnvsFromSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret must be defined
+   *
+   * @schema VlClusterSpecVlselectExtraEnvsFromSecretRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlselectExtraEnvsFromSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlselectExtraEnvsFromSecretRef(obj: VlClusterSpecVlselectExtraEnvsFromSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * An eviction is allowed if at most "maxUnavailable" pods selected by
+ * "selector" are unavailable after the eviction, i.e. even in absence of
+ * the evicted pod. For example, one can prevent all voluntary evictions
+ * by specifying 0. This is a mutually exclusive setting with "minAvailable".
+ *
+ * @schema VlClusterSpecVlselectPodDisruptionBudgetMaxUnavailable
+ */
+export class VlClusterSpecVlselectPodDisruptionBudgetMaxUnavailable {
+  public static fromNumber(value: number): VlClusterSpecVlselectPodDisruptionBudgetMaxUnavailable {
+    return new VlClusterSpecVlselectPodDisruptionBudgetMaxUnavailable(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlselectPodDisruptionBudgetMaxUnavailable {
+    return new VlClusterSpecVlselectPodDisruptionBudgetMaxUnavailable(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * An eviction is allowed if at least "minAvailable" pods selected by
+ * "selector" will still be available after the eviction, i.e. even in the
+ * absence of the evicted pod.  So for example you can prevent all voluntary
+ * evictions by specifying "100%".
+ *
+ * @schema VlClusterSpecVlselectPodDisruptionBudgetMinAvailable
+ */
+export class VlClusterSpecVlselectPodDisruptionBudgetMinAvailable {
+  public static fromNumber(value: number): VlClusterSpecVlselectPodDisruptionBudgetMinAvailable {
+    return new VlClusterSpecVlselectPodDisruptionBudgetMinAvailable(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlselectPodDisruptionBudgetMinAvailable {
+    return new VlClusterSpecVlselectPodDisruptionBudgetMinAvailable(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * ResourceClaim references one entry in PodSpec.ResourceClaims.
+ *
+ * @schema VlClusterSpecVlselectResourcesClaims
+ */
+export interface VlClusterSpecVlselectResourcesClaims {
+  /**
+   * Name must match the name of one entry in pod.spec.resourceClaims of
+   * the Pod where this field is used. It makes that resource available
+   * inside a container.
+   *
+   * @schema VlClusterSpecVlselectResourcesClaims#name
+   */
+  readonly name: string;
+
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VlClusterSpecVlselectResourcesClaims#request
+   */
+  readonly request?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlselectResourcesClaims' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlselectResourcesClaims(obj: VlClusterSpecVlselectResourcesClaims | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'request': obj.request,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema VlClusterSpecVlselectResourcesLimits
+ */
+export class VlClusterSpecVlselectResourcesLimits {
+  public static fromNumber(value: number): VlClusterSpecVlselectResourcesLimits {
+    return new VlClusterSpecVlselectResourcesLimits(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlselectResourcesLimits {
+    return new VlClusterSpecVlselectResourcesLimits(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * @schema VlClusterSpecVlselectResourcesRequests
+ */
+export class VlClusterSpecVlselectResourcesRequests {
+  public static fromNumber(value: number): VlClusterSpecVlselectResourcesRequests {
+    return new VlClusterSpecVlselectResourcesRequests(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlselectResourcesRequests {
+    return new VlClusterSpecVlselectResourcesRequests(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * The maximum number of pods that can be scheduled above the desired number of
+ * pods.
+ * Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
+ * This can not be 0 if MaxUnavailable is 0.
+ * Absolute number is calculated from percentage by rounding up.
+ * Defaults to 25%.
+ * Example: when this is set to 30%, the new ReplicaSet can be scaled up immediately when
+ * the rolling update starts, such that the total number of old and new pods do not exceed
+ * 130% of desired pods. Once old pods have been killed,
+ * new ReplicaSet can be scaled up further, ensuring that total number of pods running
+ * at any time during the update is at most 130% of desired pods.
+ *
+ * @default 25%.
+ * @schema VlClusterSpecVlselectRollingUpdateMaxSurge
+ */
+export class VlClusterSpecVlselectRollingUpdateMaxSurge {
+  public static fromNumber(value: number): VlClusterSpecVlselectRollingUpdateMaxSurge {
+    return new VlClusterSpecVlselectRollingUpdateMaxSurge(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlselectRollingUpdateMaxSurge {
+    return new VlClusterSpecVlselectRollingUpdateMaxSurge(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * The maximum number of pods that can be unavailable during the update.
+ * Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
+ * Absolute number is calculated from percentage by rounding down.
+ * This can not be 0 if MaxSurge is 0.
+ * Defaults to 25%.
+ * Example: when this is set to 30%, the old ReplicaSet can be scaled down to 70% of desired pods
+ * immediately when the rolling update starts. Once new pods are ready, old ReplicaSet
+ * can be scaled down further, followed by scaling up the new ReplicaSet, ensuring
+ * that the total number of pods available at all times during the update is at
+ * least 70% of desired pods.
+ *
+ * @default 25%.
+ * @schema VlClusterSpecVlselectRollingUpdateMaxUnavailable
+ */
+export class VlClusterSpecVlselectRollingUpdateMaxUnavailable {
+  public static fromNumber(value: number): VlClusterSpecVlselectRollingUpdateMaxUnavailable {
+    return new VlClusterSpecVlselectRollingUpdateMaxUnavailable(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlselectRollingUpdateMaxUnavailable {
+    return new VlClusterSpecVlselectRollingUpdateMaxUnavailable(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * EmbeddedObjectMetadata defines objectMeta for additional service.
+ *
+ * @schema VlClusterSpecVlselectServiceSpecMetadata
+ */
+export interface VlClusterSpecVlselectServiceSpecMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VlClusterSpecVlselectServiceSpecMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects. May match selectors of replication controllers
+   * and services.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VlClusterSpecVlselectServiceSpecMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+  /**
+   * Name must be unique within a namespace. Is required when creating resources, although
+   * some resources may allow a client to request the generation of an appropriate name
+   * automatically. Name is primarily intended for creation idempotence and configuration
+   * definition.
+   * Cannot be updated.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
+   *
+   * @schema VlClusterSpecVlselectServiceSpecMetadata#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlselectServiceSpecMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlselectServiceSpecMetadata(obj: VlClusterSpecVlselectServiceSpecMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodDNSConfigOption defines DNS resolver options of a pod.
+ *
+ * @schema VlClusterSpecVlstorageDnsConfigOptions
+ */
+export interface VlClusterSpecVlstorageDnsConfigOptions {
+  /**
+   * Name is this DNS resolver option's name.
+   * Required.
+   *
+   * @schema VlClusterSpecVlstorageDnsConfigOptions#name
+   */
+  readonly name?: string;
+
+  /**
+   * Value is this DNS resolver option's value.
+   *
+   * @schema VlClusterSpecVlstorageDnsConfigOptions#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageDnsConfigOptions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageDnsConfigOptions(obj: VlClusterSpecVlstorageDnsConfigOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The ConfigMap to select from
+ *
+ * @schema VlClusterSpecVlstorageExtraEnvsFromConfigMapRef
+ */
+export interface VlClusterSpecVlstorageExtraEnvsFromConfigMapRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VlClusterSpecVlstorageExtraEnvsFromConfigMapRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap must be defined
+   *
+   * @schema VlClusterSpecVlstorageExtraEnvsFromConfigMapRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageExtraEnvsFromConfigMapRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageExtraEnvsFromConfigMapRef(obj: VlClusterSpecVlstorageExtraEnvsFromConfigMapRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The Secret to select from
+ *
+ * @schema VlClusterSpecVlstorageExtraEnvsFromSecretRef
+ */
+export interface VlClusterSpecVlstorageExtraEnvsFromSecretRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VlClusterSpecVlstorageExtraEnvsFromSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret must be defined
+   *
+   * @schema VlClusterSpecVlstorageExtraEnvsFromSecretRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageExtraEnvsFromSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageExtraEnvsFromSecretRef(obj: VlClusterSpecVlstorageExtraEnvsFromSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * An eviction is allowed if at most "maxUnavailable" pods selected by
+ * "selector" are unavailable after the eviction, i.e. even in absence of
+ * the evicted pod. For example, one can prevent all voluntary evictions
+ * by specifying 0. This is a mutually exclusive setting with "minAvailable".
+ *
+ * @schema VlClusterSpecVlstoragePodDisruptionBudgetMaxUnavailable
+ */
+export class VlClusterSpecVlstoragePodDisruptionBudgetMaxUnavailable {
+  public static fromNumber(value: number): VlClusterSpecVlstoragePodDisruptionBudgetMaxUnavailable {
+    return new VlClusterSpecVlstoragePodDisruptionBudgetMaxUnavailable(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlstoragePodDisruptionBudgetMaxUnavailable {
+    return new VlClusterSpecVlstoragePodDisruptionBudgetMaxUnavailable(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * An eviction is allowed if at least "minAvailable" pods selected by
+ * "selector" will still be available after the eviction, i.e. even in the
+ * absence of the evicted pod.  So for example you can prevent all voluntary
+ * evictions by specifying "100%".
+ *
+ * @schema VlClusterSpecVlstoragePodDisruptionBudgetMinAvailable
+ */
+export class VlClusterSpecVlstoragePodDisruptionBudgetMinAvailable {
+  public static fromNumber(value: number): VlClusterSpecVlstoragePodDisruptionBudgetMinAvailable {
+    return new VlClusterSpecVlstoragePodDisruptionBudgetMinAvailable(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlstoragePodDisruptionBudgetMinAvailable {
+    return new VlClusterSpecVlstoragePodDisruptionBudgetMinAvailable(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * ResourceClaim references one entry in PodSpec.ResourceClaims.
+ *
+ * @schema VlClusterSpecVlstorageResourcesClaims
+ */
+export interface VlClusterSpecVlstorageResourcesClaims {
+  /**
+   * Name must match the name of one entry in pod.spec.resourceClaims of
+   * the Pod where this field is used. It makes that resource available
+   * inside a container.
+   *
+   * @schema VlClusterSpecVlstorageResourcesClaims#name
+   */
+  readonly name: string;
+
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VlClusterSpecVlstorageResourcesClaims#request
+   */
+  readonly request?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageResourcesClaims' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageResourcesClaims(obj: VlClusterSpecVlstorageResourcesClaims | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'request': obj.request,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema VlClusterSpecVlstorageResourcesLimits
+ */
+export class VlClusterSpecVlstorageResourcesLimits {
+  public static fromNumber(value: number): VlClusterSpecVlstorageResourcesLimits {
+    return new VlClusterSpecVlstorageResourcesLimits(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlstorageResourcesLimits {
+    return new VlClusterSpecVlstorageResourcesLimits(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * @schema VlClusterSpecVlstorageResourcesRequests
+ */
+export class VlClusterSpecVlstorageResourcesRequests {
+  public static fromNumber(value: number): VlClusterSpecVlstorageResourcesRequests {
+    return new VlClusterSpecVlstorageResourcesRequests(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlstorageResourcesRequests {
+    return new VlClusterSpecVlstorageResourcesRequests(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * EmbeddedObjectMetadata defines objectMeta for additional service.
+ *
+ * @schema VlClusterSpecVlstorageServiceSpecMetadata
+ */
+export interface VlClusterSpecVlstorageServiceSpecMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VlClusterSpecVlstorageServiceSpecMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects. May match selectors of replication controllers
+   * and services.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VlClusterSpecVlstorageServiceSpecMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+  /**
+   * Name must be unique within a namespace. Is required when creating resources, although
+   * some resources may allow a client to request the generation of an appropriate name
+   * automatically. Name is primarily intended for creation idempotence and configuration
+   * definition.
+   * Cannot be updated.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
+   *
+   * @schema VlClusterSpecVlstorageServiceSpecMetadata#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageServiceSpecMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageServiceSpecMetadata(obj: VlClusterSpecVlstorageServiceSpecMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EmptyDirVolumeSource to be used by the Prometheus StatefulSets. If specified, used in place of any volumeClaimTemplate. More
+ * info: https://kubernetes.io/docs/concepts/storage/volumes/#emptydir
+ *
+ * @schema VlClusterSpecVlstorageStorageEmptyDir
+ */
+export interface VlClusterSpecVlstorageStorageEmptyDir {
+  /**
+   * medium represents what type of storage medium should back this directory.
+   * The default is "" which means to use the node's default medium.
+   * Must be an empty string (default) or Memory.
+   * More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
+   *
+   * @schema VlClusterSpecVlstorageStorageEmptyDir#medium
+   */
+  readonly medium?: string;
+
+  /**
+   * sizeLimit is the total amount of local storage required for this EmptyDir volume.
+   * The size limit is also applicable for memory medium.
+   * The maximum usage on memory medium EmptyDir would be the minimum value between
+   * the SizeLimit specified here and the sum of memory limits of all containers in a pod.
+   * The default is nil which means that the limit is undefined.
+   * More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
+   *
+   * @schema VlClusterSpecVlstorageStorageEmptyDir#sizeLimit
+   */
+  readonly sizeLimit?: VlClusterSpecVlstorageStorageEmptyDirSizeLimit;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageStorageEmptyDir' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageStorageEmptyDir(obj: VlClusterSpecVlstorageStorageEmptyDir | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'medium': obj.medium,
+    'sizeLimit': obj.sizeLimit?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * TLSServerConfig defines VictoriaMetrics TLS configuration for the application's server
+ *
+ * @schema VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfig
+ */
+export interface VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfig {
+  /**
+   * CertFile defines path to the pre-mounted file with certificate
+   * mutually exclusive with CertSecretRef
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfig#certFile
+   */
+  readonly certFile?: string;
+
+  /**
+   * CertSecretRef defines reference for secret with certificate content under given key
+   * mutually exclusive with CertFile
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfig#certSecret
+   */
+  readonly certSecret?: VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigCertSecret;
+
+  /**
+   * KeyFile defines path to the pre-mounted file with certificate key
+   * mutually exclusive with KeySecretRef
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfig#keyFile
+   */
+  readonly keyFile?: string;
+
+  /**
+   * Key defines reference for secret with certificate key content under given key
+   * mutually exclusive with KeyFile
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfig#keySecret
+   */
+  readonly keySecret?: VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigKeySecret;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfig' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfig(obj: VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'certFile': obj.certFile,
+    'certSecret': toJson_VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigCertSecret(obj.certSecret),
+    'keyFile': obj.keyFile,
+    'keySecret': toJson_VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigKeySecret(obj.keySecret),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * sizeLimit is the total amount of local storage required for this EmptyDir volume.
+ * The size limit is also applicable for memory medium.
+ * The maximum usage on memory medium EmptyDir would be the minimum value between
+ * the SizeLimit specified here and the sum of memory limits of all containers in a pod.
+ * The default is nil which means that the limit is undefined.
+ * More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
+ *
+ * @schema VlClusterSpecVlstorageStorageEmptyDirSizeLimit
+ */
+export class VlClusterSpecVlstorageStorageEmptyDirSizeLimit {
+  public static fromNumber(value: number): VlClusterSpecVlstorageStorageEmptyDirSizeLimit {
+    return new VlClusterSpecVlstorageStorageEmptyDirSizeLimit(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlstorageStorageEmptyDirSizeLimit {
+    return new VlClusterSpecVlstorageStorageEmptyDirSizeLimit(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * CertSecretRef defines reference for secret with certificate content under given key
+ * mutually exclusive with CertFile
+ *
+ * @schema VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigCertSecret
+ */
+export interface VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigCertSecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigCertSecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigCertSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigCertSecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigCertSecret' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigCertSecret(obj: VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigCertSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Key defines reference for secret with certificate key content under given key
+ * mutually exclusive with KeyFile
+ *
+ * @schema VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigKeySecret
+ */
+export interface VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigKeySecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigKeySecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigKeySecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigKeySecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigKeySecret' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigKeySecret(obj: VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigKeySecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+
+/**
  * VLogs is fast, cost-effective and scalable logs database.
 VLogs is the Schema for the vlogs API
  *
@@ -72,10 +5509,11 @@ export interface VLogsProps {
 
   /**
    * VLogsSpec defines the desired state of VLogs
+   * VLogs is deprecated, migrate to the VLSingle
    *
    * @schema VLogs#spec
    */
-  readonly spec?: VLogsSpec;
+  readonly spec?: any;
 
 }
 
@@ -87,7 +5525,99 @@ export function toJson_VLogsProps(obj: VLogsProps | undefined): Record<string, a
   if (obj === undefined) { return undefined; }
   const result = {
     'metadata': obj.metadata,
-    'spec': toJson_VLogsSpec(obj.spec),
+    'spec': obj.spec,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+
+/**
+ * VLSingle is fast, cost-effective and scalable logs database.
+VLSingle is the Schema for the API
+ *
+ * @schema VLSingle
+ */
+export class VlSingle extends ApiObject {
+  /**
+   * Returns the apiVersion and kind for "VLSingle"
+   */
+  public static readonly GVK: GroupVersionKind = {
+    apiVersion: 'operator.victoriametrics.com/v1',
+    kind: 'VLSingle',
+  }
+
+  /**
+   * Renders a Kubernetes manifest for "VLSingle".
+   *
+   * This can be used to inline resource manifests inside other objects (e.g. as templates).
+   *
+   * @param props initialization props
+   */
+  public static manifest(props: VlSingleProps = {}): any {
+    return {
+      ...VlSingle.GVK,
+      ...toJson_VlSingleProps(props),
+    };
+  }
+
+  /**
+   * Defines a "VLSingle" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialization props
+   */
+  public constructor(scope: Construct, id: string, props: VlSingleProps = {}) {
+    super(scope, id, {
+      ...VlSingle.GVK,
+      ...props,
+    });
+  }
+
+  /**
+   * Renders the object to Kubernetes JSON.
+   */
+  public toJson(): any {
+    const resolved = super.toJson();
+
+    return {
+      ...VlSingle.GVK,
+      ...toJson_VlSingleProps(resolved),
+    };
+  }
+}
+
+/**
+ * VLSingle is fast, cost-effective and scalable logs database.
+ * VLSingle is the Schema for the API
+ *
+ * @schema VLSingle
+ */
+export interface VlSingleProps {
+  /**
+   * @schema VLSingle#metadata
+   */
+  readonly metadata?: ApiObjectMetadata;
+
+  /**
+   * VLSingleSpec defines the desired state of VLSingle
+   *
+   * @schema VLSingle#spec
+   */
+  readonly spec?: VlSingleSpec;
+
+}
+
+/**
+ * Converts an object of type 'VlSingleProps' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlSingleProps(obj: VlSingleProps | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': obj.metadata,
+    'spec': toJson_VlSingleSpec(obj.spec),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -95,15 +5625,15 @@ export function toJson_VLogsProps(obj: VLogsProps | undefined): Record<string, a
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * VLogsSpec defines the desired state of VLogs
+ * VLSingleSpec defines the desired state of VLSingle
  *
- * @schema VLogsSpec
+ * @schema VlSingleSpec
  */
-export interface VLogsSpec {
+export interface VlSingleSpec {
   /**
    * Affinity If specified, the pod's scheduling constraints.
    *
-   * @schema VLogsSpec#affinity
+   * @schema VlSingleSpec#affinity
    */
   readonly affinity?: any;
 
@@ -112,7 +5642,7 @@ export interface VLogsSpec {
    * object, which shall be mounted into the Application container
    * at /etc/vm/configs/CONFIGMAP_NAME folder
    *
-   * @schema VLogsSpec#configMaps
+   * @schema VlSingleSpec#configMaps
    */
   readonly configMaps?: string[];
 
@@ -120,16 +5650,27 @@ export interface VLogsSpec {
    * Containers property allows to inject additions sidecars or to patch existing containers.
    * It can be useful for proxies, backup, etc.
    *
-   * @schema VLogsSpec#containers
+   * @schema VlSingleSpec#containers
    */
   readonly containers?: any[];
+
+  /**
+   * DisableAutomountServiceAccountToken whether to disable serviceAccount auto mount by Kubernetes (available from v0.54.0).
+   * Operator will conditionally create volumes and volumeMounts for containers if it requires k8s API access.
+   * For example, vmagent and vm-config-reloader requires k8s API access.
+   * Operator creates volumes with name: "kube-api-access", which can be used as volumeMount for extraContainers if needed.
+   * And also adds VolumeMounts at /var/run/secrets/kubernetes.io/serviceaccount.
+   *
+   * @schema VlSingleSpec#disableAutomountServiceAccountToken
+   */
+  readonly disableAutomountServiceAccountToken?: boolean;
 
   /**
    * DisableSelfServiceScrape controls creation of VMServiceScrape by operator
    * for the application.
    * Has priority over `VM_DISABLESELFSERVICESCRAPECREATION` operator env variable
    *
-   * @schema VLogsSpec#disableSelfServiceScrape
+   * @schema VlSingleSpec#disableSelfServiceScrape
    */
   readonly disableSelfServiceScrape?: boolean;
 
@@ -138,14 +5679,14 @@ export interface VLogsSpec {
    * Parameters specified here will be merged to the generated DNS
    * configuration based on DNSPolicy.
    *
-   * @schema VLogsSpec#dnsConfig
+   * @schema VlSingleSpec#dnsConfig
    */
-  readonly dnsConfig?: VLogsSpecDnsConfig;
+  readonly dnsConfig?: VlSingleSpecDnsConfig;
 
   /**
    * DNSPolicy sets DNS policy for the pod
    *
-   * @schema VLogsSpec#dnsPolicy
+   * @schema VlSingleSpec#dnsPolicy
    */
   readonly dnsPolicy?: string;
 
@@ -153,22 +5694,30 @@ export interface VLogsSpec {
    * ExtraArgs that will be passed to the application container
    * for example remoteWrite.tmpDataPath: /tmp
    *
-   * @schema VLogsSpec#extraArgs
+   * @schema VlSingleSpec#extraArgs
    */
   readonly extraArgs?: { [key: string]: string };
 
   /**
    * ExtraEnvs that will be passed to the application container
    *
-   * @schema VLogsSpec#extraEnvs
+   * @schema VlSingleSpec#extraEnvs
    */
-  readonly extraEnvs?: VLogsSpecExtraEnvs[];
+  readonly extraEnvs?: VlSingleSpecExtraEnvs[];
+
+  /**
+   * ExtraEnvsFrom defines source of env variables for the application container
+   * could either be secret or configmap
+   *
+   * @schema VlSingleSpec#extraEnvsFrom
+   */
+  readonly extraEnvsFrom?: VlSingleSpecExtraEnvsFrom[];
 
   /**
    * FutureRetention for the stored logs
    * Log entries with timestamps bigger than now+futureRetention are rejected during data ingestion; see https://docs.victoriametrics.com/victorialogs/#retention
    *
-   * @schema VLogsSpec#futureRetention
+   * @schema VlSingleSpec#futureRetention
    */
   readonly futureRetention?: string;
 
@@ -177,14 +5726,14 @@ export interface VLogsSpec {
    * that would be propagated to pod,
    * cannot be used with HostNetwork.
    *
-   * @schema VLogsSpec#hostAliases
+   * @schema VlSingleSpec#hostAliases
    */
-  readonly hostAliases?: VLogsSpecHostAliases[];
+  readonly hostAliases?: VlSingleSpecHostAliases[];
 
   /**
    * HostNetwork controls whether the pod may use the node network namespace
    *
-   * @schema VLogsSpec#hostNetwork
+   * @schema VlSingleSpec#hostNetwork
    */
   readonly hostNetwork?: boolean;
 
@@ -192,60 +5741,60 @@ export interface VLogsSpec {
    * Image - docker image settings
    * if no specified operator uses default version from operator config
    *
-   * @schema VLogsSpec#image
+   * @schema VlSingleSpec#image
    */
-  readonly image?: VLogsSpecImage;
+  readonly image?: VlSingleSpecImage;
 
   /**
    * ImagePullSecrets An optional list of references to secrets in the same namespace
    * to use for pulling images from registries
    * see https://kubernetes.io/docs/concepts/containers/images/#referring-to-an-imagepullsecrets-on-a-pod
    *
-   * @schema VLogsSpec#imagePullSecrets
+   * @schema VlSingleSpec#imagePullSecrets
    */
-  readonly imagePullSecrets?: VLogsSpecImagePullSecrets[];
+  readonly imagePullSecrets?: VlSingleSpecImagePullSecrets[];
 
   /**
    * InitContainers allows adding initContainers to the pod definition.
    * Any errors during the execution of an initContainer will lead to a restart of the Pod.
    * More info: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
    *
-   * @schema VLogsSpec#initContainers
+   * @schema VlSingleSpec#initContainers
    */
   readonly initContainers?: any[];
 
   /**
    * LivenessProbe that will be added CRD pod
    *
-   * @schema VLogsSpec#livenessProbe
+   * @schema VlSingleSpec#livenessProbe
    */
   readonly livenessProbe?: any;
 
   /**
-   * LogFormat for VLogs to be configured with.
+   * LogFormat for VLSingle to be configured with.
    *
-   * @schema VLogsSpec#logFormat
+   * @schema VlSingleSpec#logFormat
    */
-  readonly logFormat?: VLogsSpecLogFormat;
+  readonly logFormat?: VlSingleSpecLogFormat;
 
   /**
    * Whether to log all the ingested log entries; this can be useful for debugging of data ingestion; see https://docs.victoriametrics.com/victorialogs/data-ingestion/
    *
-   * @schema VLogsSpec#logIngestedRows
+   * @schema VlSingleSpec#logIngestedRows
    */
   readonly logIngestedRows?: boolean;
 
   /**
    * LogLevel for VictoriaLogs to be configured with.
    *
-   * @schema VLogsSpec#logLevel
+   * @schema VlSingleSpec#logLevel
    */
-  readonly logLevel?: VLogsSpecLogLevel;
+  readonly logLevel?: VlSingleSpecLogLevel;
 
   /**
    * LogNewStreams Whether to log creation of new streams; this can be useful for debugging of high cardinality issues with log streams; see https://docs.victoriametrics.com/victorialogs/keyconcepts/#stream-fields
    *
-   * @schema VLogsSpec#logNewStreams
+   * @schema VlSingleSpec#logNewStreams
    */
   readonly logNewStreams?: boolean;
 
@@ -253,23 +5802,23 @@ export interface VLogsSpec {
    * ManagedMetadata defines metadata that will be added to the all objects
    * created by operator for the given CustomResource
    *
-   * @schema VLogsSpec#managedMetadata
+   * @schema VlSingleSpec#managedMetadata
    */
-  readonly managedMetadata?: VLogsSpecManagedMetadata;
+  readonly managedMetadata?: VlSingleSpecManagedMetadata;
 
   /**
    * MinReadySeconds defines a minimum number of seconds to wait before starting update next pod
    * if previous in healthy state
    * Has no effect for VLogs and VMSingle
    *
-   * @schema VLogsSpec#minReadySeconds
+   * @schema VlSingleSpec#minReadySeconds
    */
   readonly minReadySeconds?: number;
 
   /**
    * NodeSelector Define which Nodes the Pods are scheduled on.
    *
-   * @schema VLogsSpec#nodeSelector
+   * @schema VlSingleSpec#nodeSelector
    */
   readonly nodeSelector?: { [key: string]: string };
 
@@ -277,58 +5826,49 @@ export interface VLogsSpec {
    * Paused If set to true all actions on the underlying managed objects are not
    * going to be performed, except for delete actions.
    *
-   * @schema VLogsSpec#paused
+   * @schema VlSingleSpec#paused
    */
   readonly paused?: boolean;
 
   /**
-   * PodMetadata configures Labels and Annotations which are propagated to the VLogs pods.
+   * PodMetadata configures Labels and Annotations which are propagated to the VLSingle pods.
    *
-   * @schema VLogsSpec#podMetadata
+   * @schema VlSingleSpec#podMetadata
    */
-  readonly podMetadata?: VLogsSpecPodMetadata;
+  readonly podMetadata?: VlSingleSpecPodMetadata;
 
   /**
    * Port listen address
    *
-   * @schema VLogsSpec#port
+   * @schema VlSingleSpec#port
    */
   readonly port?: string;
 
   /**
    * PriorityClassName class assigned to the Pods
    *
-   * @schema VLogsSpec#priorityClassName
+   * @schema VlSingleSpec#priorityClassName
    */
   readonly priorityClassName?: string;
 
   /**
    * ReadinessGates defines pod readiness gates
    *
-   * @schema VLogsSpec#readinessGates
+   * @schema VlSingleSpec#readinessGates
    */
-  readonly readinessGates?: VLogsSpecReadinessGates[];
+  readonly readinessGates?: VlSingleSpecReadinessGates[];
 
   /**
    * ReadinessProbe that will be added CRD pod
    *
-   * @schema VLogsSpec#readinessProbe
+   * @schema VlSingleSpec#readinessProbe
    */
   readonly readinessProbe?: any;
 
   /**
-   * RemovePvcAfterDelete - if true, controller adds ownership to pvc
-   * and after VLogs object deletion - pvc will be garbage collected
-   * by controller manager
-   *
-   * @schema VLogsSpec#removePvcAfterDelete
-   */
-  readonly removePvcAfterDelete?: boolean;
-
-  /**
    * ReplicaCount is the expected size of the Application.
    *
-   * @schema VLogsSpec#replicaCount
+   * @schema VlSingleSpec#replicaCount
    */
   readonly replicaCount?: number;
 
@@ -336,16 +5876,28 @@ export interface VLogsSpec {
    * Resources container resource request and limits, https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    * if not defined default resources from operator config will be used
    *
-   * @schema VLogsSpec#resources
+   * @schema VlSingleSpec#resources
    */
-  readonly resources?: VLogsSpecResources;
+  readonly resources?: VlSingleSpecResources;
+
+  /**
+   * RetentionMaxDiskSpaceUsageBytes for the stored logs
+   * VictoriaLogs keeps at least two last days of data in order to guarantee that the logs for the last day can be returned in queries.
+   * This means that the total disk space usage may exceed the -retention.maxDiskSpaceUsageBytes,
+   * if the size of the last two days of data exceeds the -retention.maxDiskSpaceUsageBytes.
+   * https://docs.victoriametrics.com/victorialogs/#retention-by-disk-space-usage
+   *
+   * @schema VlSingleSpec#retentionMaxDiskSpaceUsageBytes
+   */
+  readonly retentionMaxDiskSpaceUsageBytes?: string;
 
   /**
    * RetentionPeriod for the stored logs
+   * https://docs.victoriametrics.com/victorialogs/#retention
    *
-   * @schema VLogsSpec#retentionPeriod
+   * @schema VlSingleSpec#retentionPeriod
    */
-  readonly retentionPeriod: string;
+  readonly retentionPeriod?: string;
 
   /**
    * The number of old ReplicaSets to retain to allow rollback in deployment or
@@ -354,7 +5906,7 @@ export interface VLogsSpec {
    * Defaults to 10.
    *
    * @default 10.
-   * @schema VLogsSpec#revisionHistoryLimitCount
+   * @schema VlSingleSpec#revisionHistoryLimitCount
    */
   readonly revisionHistoryLimitCount?: number;
 
@@ -362,14 +5914,14 @@ export interface VLogsSpec {
    * RuntimeClassName - defines runtime class for kubernetes pod.
    * https://kubernetes.io/docs/concepts/containers/runtime-class/
    *
-   * @schema VLogsSpec#runtimeClassName
+   * @schema VlSingleSpec#runtimeClassName
    */
   readonly runtimeClassName?: string;
 
   /**
    * SchedulerName - defines kubernetes scheduler name
    *
-   * @schema VLogsSpec#schedulerName
+   * @schema VlSingleSpec#schedulerName
    */
   readonly schedulerName?: string;
 
@@ -378,7 +5930,7 @@ export interface VLogsSpec {
    * object, which shall be mounted into the Application container
    * at /etc/vm/secrets/SECRET_NAME folder
    *
-   * @schema VLogsSpec#secrets
+   * @schema VlSingleSpec#secrets
    */
   readonly secrets?: string[];
 
@@ -386,74 +5938,74 @@ export interface VLogsSpec {
    * SecurityContext holds pod-level security attributes and common container settings.
    * This defaults to the default PodSecurityContext.
    *
-   * @schema VLogsSpec#securityContext
+   * @schema VlSingleSpec#securityContext
    */
   readonly securityContext?: any;
 
   /**
    * ServiceAccountName is the name of the ServiceAccount to use to run the pods
    *
-   * @schema VLogsSpec#serviceAccountName
+   * @schema VlSingleSpec#serviceAccountName
    */
   readonly serviceAccountName?: string;
 
   /**
-   * ServiceScrapeSpec that will be added to vlogs VMServiceScrape spec
+   * ServiceScrapeSpec that will be added to vlsingle VMServiceScrape spec
    *
-   * @schema VLogsSpec#serviceScrapeSpec
+   * @schema VlSingleSpec#serviceScrapeSpec
    */
   readonly serviceScrapeSpec?: any;
 
   /**
-   * ServiceSpec that will be added to vlogs service spec
+   * ServiceSpec that will be added to vlsingle service spec
    *
-   * @schema VLogsSpec#serviceSpec
+   * @schema VlSingleSpec#serviceSpec
    */
-  readonly serviceSpec?: VLogsSpecServiceSpec;
+  readonly serviceSpec?: VlSingleSpecServiceSpec;
 
   /**
    * StartupProbe that will be added to CRD pod
    *
-   * @schema VLogsSpec#startupProbe
+   * @schema VlSingleSpec#startupProbe
    */
   readonly startupProbe?: any;
 
   /**
-   * Storage is the definition of how storage will be used by the VLogs
+   * Storage is the definition of how storage will be used by the VLSingle
    * by default it`s empty dir
    *
-   * @schema VLogsSpec#storage
+   * @schema VlSingleSpec#storage
    */
-  readonly storage?: VLogsSpecStorage;
+  readonly storage?: VlSingleSpecStorage;
 
   /**
    * StorageDataPath disables spec.storage option and overrides arg for victoria-logs binary --storageDataPath,
    * its users responsibility to mount proper device into given path.
    *
-   * @schema VLogsSpec#storageDataPath
+   * @schema VlSingleSpec#storageDataPath
    */
   readonly storageDataPath?: string;
 
   /**
-   * StorageMeta defines annotations and labels attached to PVC for given vlogs CR
+   * StorageMeta defines annotations and labels attached to PVC for given vlsingle CR
    *
-   * @schema VLogsSpec#storageMetadata
+   * @schema VlSingleSpec#storageMetadata
    */
-  readonly storageMetadata?: VLogsSpecStorageMetadata;
+  readonly storageMetadata?: VlSingleSpecStorageMetadata;
 
   /**
    * TerminationGracePeriodSeconds period for container graceful termination
    *
-   * @schema VLogsSpec#terminationGracePeriodSeconds
+   * @schema VlSingleSpec#terminationGracePeriodSeconds
    */
   readonly terminationGracePeriodSeconds?: number;
 
   /**
    * Tolerations If specified, the pod's tolerations.
    *
-   * @schema VLogsSpec#tolerations
+   * @schema VlSingleSpec#tolerations
    */
-  readonly tolerations?: VLogsSpecTolerations[];
+  readonly tolerations?: VlSingleSpecTolerations[];
 
   /**
    * TopologySpreadConstraints embedded kubernetes pod configuration option,
@@ -461,7 +6013,7 @@ export interface VLogsSpec {
    * such as regions, zones, nodes, and other user-defined topology domains
    * https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
    *
-   * @schema VLogsSpec#topologySpreadConstraints
+   * @schema VlSingleSpec#topologySpreadConstraints
    */
   readonly topologySpreadConstraints?: any[];
 
@@ -469,7 +6021,7 @@ export interface VLogsSpec {
    * UseDefaultResources controls resource settings
    * By default, operator sets built-in resource requirements
    *
-   * @schema VLogsSpec#useDefaultResources
+   * @schema VlSingleSpec#useDefaultResources
    */
   readonly useDefaultResources?: boolean;
 
@@ -479,7 +6031,7 @@ export interface VLogsSpec {
    * uses non-root user out of the box
    * drops not needed security permissions
    *
-   * @schema VLogsSpec#useStrictSecurity
+   * @schema VlSingleSpec#useStrictSecurity
    */
   readonly useStrictSecurity?: boolean;
 
@@ -487,59 +6039,61 @@ export interface VLogsSpec {
    * VolumeMounts allows configuration of additional VolumeMounts on the output Deployment/StatefulSet definition.
    * VolumeMounts specified will be appended to other VolumeMounts in the Application container
    *
-   * @schema VLogsSpec#volumeMounts
+   * @schema VlSingleSpec#volumeMounts
    */
-  readonly volumeMounts?: VLogsSpecVolumeMounts[];
+  readonly volumeMounts?: VlSingleSpecVolumeMounts[];
 
   /**
    * Volumes allows configuration of additional volumes on the output Deployment/StatefulSet definition.
    * Volumes specified will be appended to other volumes that are generated.
    * / +optional
    *
-   * @schema VLogsSpec#volumes
+   * @schema VlSingleSpec#volumes
    */
   readonly volumes?: any[];
 
 }
 
 /**
- * Converts an object of type 'VLogsSpec' to JSON representation.
+ * Converts an object of type 'VlSingleSpec' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpec(obj: VLogsSpec | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpec(obj: VlSingleSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'affinity': obj.affinity,
     'configMaps': obj.configMaps?.map(y => y),
     'containers': obj.containers?.map(y => y),
+    'disableAutomountServiceAccountToken': obj.disableAutomountServiceAccountToken,
     'disableSelfServiceScrape': obj.disableSelfServiceScrape,
-    'dnsConfig': toJson_VLogsSpecDnsConfig(obj.dnsConfig),
+    'dnsConfig': toJson_VlSingleSpecDnsConfig(obj.dnsConfig),
     'dnsPolicy': obj.dnsPolicy,
     'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-    'extraEnvs': obj.extraEnvs?.map(y => toJson_VLogsSpecExtraEnvs(y)),
+    'extraEnvs': obj.extraEnvs?.map(y => toJson_VlSingleSpecExtraEnvs(y)),
+    'extraEnvsFrom': obj.extraEnvsFrom?.map(y => toJson_VlSingleSpecExtraEnvsFrom(y)),
     'futureRetention': obj.futureRetention,
-    'hostAliases': obj.hostAliases?.map(y => toJson_VLogsSpecHostAliases(y)),
+    'hostAliases': obj.hostAliases?.map(y => toJson_VlSingleSpecHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
-    'image': toJson_VLogsSpecImage(obj.image),
-    'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VLogsSpecImagePullSecrets(y)),
+    'image': toJson_VlSingleSpecImage(obj.image),
+    'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VlSingleSpecImagePullSecrets(y)),
     'initContainers': obj.initContainers?.map(y => y),
     'livenessProbe': obj.livenessProbe,
     'logFormat': obj.logFormat,
     'logIngestedRows': obj.logIngestedRows,
     'logLevel': obj.logLevel,
     'logNewStreams': obj.logNewStreams,
-    'managedMetadata': toJson_VLogsSpecManagedMetadata(obj.managedMetadata),
+    'managedMetadata': toJson_VlSingleSpecManagedMetadata(obj.managedMetadata),
     'minReadySeconds': obj.minReadySeconds,
     'nodeSelector': ((obj.nodeSelector) === undefined) ? undefined : (Object.entries(obj.nodeSelector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'paused': obj.paused,
-    'podMetadata': toJson_VLogsSpecPodMetadata(obj.podMetadata),
+    'podMetadata': toJson_VlSingleSpecPodMetadata(obj.podMetadata),
     'port': obj.port,
     'priorityClassName': obj.priorityClassName,
-    'readinessGates': obj.readinessGates?.map(y => toJson_VLogsSpecReadinessGates(y)),
+    'readinessGates': obj.readinessGates?.map(y => toJson_VlSingleSpecReadinessGates(y)),
     'readinessProbe': obj.readinessProbe,
-    'removePvcAfterDelete': obj.removePvcAfterDelete,
     'replicaCount': obj.replicaCount,
-    'resources': toJson_VLogsSpecResources(obj.resources),
+    'resources': toJson_VlSingleSpecResources(obj.resources),
+    'retentionMaxDiskSpaceUsageBytes': obj.retentionMaxDiskSpaceUsageBytes,
     'retentionPeriod': obj.retentionPeriod,
     'revisionHistoryLimitCount': obj.revisionHistoryLimitCount,
     'runtimeClassName': obj.runtimeClassName,
@@ -548,17 +6102,17 @@ export function toJson_VLogsSpec(obj: VLogsSpec | undefined): Record<string, any
     'securityContext': obj.securityContext,
     'serviceAccountName': obj.serviceAccountName,
     'serviceScrapeSpec': obj.serviceScrapeSpec,
-    'serviceSpec': toJson_VLogsSpecServiceSpec(obj.serviceSpec),
+    'serviceSpec': toJson_VlSingleSpecServiceSpec(obj.serviceSpec),
     'startupProbe': obj.startupProbe,
-    'storage': toJson_VLogsSpecStorage(obj.storage),
+    'storage': toJson_VlSingleSpecStorage(obj.storage),
     'storageDataPath': obj.storageDataPath,
-    'storageMetadata': toJson_VLogsSpecStorageMetadata(obj.storageMetadata),
+    'storageMetadata': toJson_VlSingleSpecStorageMetadata(obj.storageMetadata),
     'terminationGracePeriodSeconds': obj.terminationGracePeriodSeconds,
-    'tolerations': obj.tolerations?.map(y => toJson_VLogsSpecTolerations(y)),
+    'tolerations': obj.tolerations?.map(y => toJson_VlSingleSpecTolerations(y)),
     'topologySpreadConstraints': obj.topologySpreadConstraints?.map(y => y),
     'useDefaultResources': obj.useDefaultResources,
     'useStrictSecurity': obj.useStrictSecurity,
-    'volumeMounts': obj.volumeMounts?.map(y => toJson_VLogsSpecVolumeMounts(y)),
+    'volumeMounts': obj.volumeMounts?.map(y => toJson_VlSingleSpecVolumeMounts(y)),
     'volumes': obj.volumes?.map(y => y),
   };
   // filter undefined values
@@ -571,15 +6125,15 @@ export function toJson_VLogsSpec(obj: VLogsSpec | undefined): Record<string, any
  * Parameters specified here will be merged to the generated DNS
  * configuration based on DNSPolicy.
  *
- * @schema VLogsSpecDnsConfig
+ * @schema VlSingleSpecDnsConfig
  */
-export interface VLogsSpecDnsConfig {
+export interface VlSingleSpecDnsConfig {
   /**
    * A list of DNS name server IP addresses.
    * This will be appended to the base nameservers generated from DNSPolicy.
    * Duplicated nameservers will be removed.
    *
-   * @schema VLogsSpecDnsConfig#nameservers
+   * @schema VlSingleSpecDnsConfig#nameservers
    */
   readonly nameservers?: string[];
 
@@ -589,30 +6143,30 @@ export interface VLogsSpecDnsConfig {
    * Duplicated entries will be removed. Resolution options given in Options
    * will override those that appear in the base DNSPolicy.
    *
-   * @schema VLogsSpecDnsConfig#options
+   * @schema VlSingleSpecDnsConfig#options
    */
-  readonly options?: VLogsSpecDnsConfigOptions[];
+  readonly options?: VlSingleSpecDnsConfigOptions[];
 
   /**
    * A list of DNS search domains for host-name lookup.
    * This will be appended to the base search paths generated from DNSPolicy.
    * Duplicated search paths will be removed.
    *
-   * @schema VLogsSpecDnsConfig#searches
+   * @schema VlSingleSpecDnsConfig#searches
    */
   readonly searches?: string[];
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecDnsConfig' to JSON representation.
+ * Converts an object of type 'VlSingleSpecDnsConfig' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecDnsConfig(obj: VLogsSpecDnsConfig | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecDnsConfig(obj: VlSingleSpecDnsConfig | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'nameservers': obj.nameservers?.map(y => y),
-    'options': obj.options?.map(y => toJson_VLogsSpecDnsConfigOptions(y)),
+    'options': obj.options?.map(y => toJson_VlSingleSpecDnsConfigOptions(y)),
     'searches': obj.searches?.map(y => y),
   };
   // filter undefined values
@@ -623,13 +6177,13 @@ export function toJson_VLogsSpecDnsConfig(obj: VLogsSpecDnsConfig | undefined): 
 /**
  * EnvVar represents an environment variable present in a Container.
  *
- * @schema VLogsSpecExtraEnvs
+ * @schema VlSingleSpecExtraEnvs
  */
-export interface VLogsSpecExtraEnvs {
+export interface VlSingleSpecExtraEnvs {
   /**
    * Name of the environment variable. Must be a C_IDENTIFIER.
    *
-   * @schema VLogsSpecExtraEnvs#name
+   * @schema VlSingleSpecExtraEnvs#name
    */
   readonly name: string;
 
@@ -645,17 +6199,17 @@ export interface VLogsSpecExtraEnvs {
    * Defaults to "".
    *
    * @default .
-   * @schema VLogsSpecExtraEnvs#value
+   * @schema VlSingleSpecExtraEnvs#value
    */
   readonly value?: string;
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecExtraEnvs' to JSON representation.
+ * Converts an object of type 'VlSingleSpecExtraEnvs' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecExtraEnvs(obj: VLogsSpecExtraEnvs | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecExtraEnvs(obj: VlSingleSpecExtraEnvs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
@@ -667,33 +6221,78 @@ export function toJson_VLogsSpecExtraEnvs(obj: VLogsSpecExtraEnvs | undefined): 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ *
+ * @schema VlSingleSpecExtraEnvsFrom
+ */
+export interface VlSingleSpecExtraEnvsFrom {
+  /**
+   * The ConfigMap to select from
+   *
+   * @schema VlSingleSpecExtraEnvsFrom#configMapRef
+   */
+  readonly configMapRef?: VlSingleSpecExtraEnvsFromConfigMapRef;
+
+  /**
+   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   *
+   * @schema VlSingleSpecExtraEnvsFrom#prefix
+   */
+  readonly prefix?: string;
+
+  /**
+   * The Secret to select from
+   *
+   * @schema VlSingleSpecExtraEnvsFrom#secretRef
+   */
+  readonly secretRef?: VlSingleSpecExtraEnvsFromSecretRef;
+
+}
+
+/**
+ * Converts an object of type 'VlSingleSpecExtraEnvsFrom' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlSingleSpecExtraEnvsFrom(obj: VlSingleSpecExtraEnvsFrom | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapRef': toJson_VlSingleSpecExtraEnvsFromConfigMapRef(obj.configMapRef),
+    'prefix': obj.prefix,
+    'secretRef': toJson_VlSingleSpecExtraEnvsFromSecretRef(obj.secretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * HostAlias holds the mapping between IP and hostnames that will be injected as an entry in the
  * pod's hosts file.
  *
- * @schema VLogsSpecHostAliases
+ * @schema VlSingleSpecHostAliases
  */
-export interface VLogsSpecHostAliases {
+export interface VlSingleSpecHostAliases {
   /**
    * Hostnames for the above IP address.
    *
-   * @schema VLogsSpecHostAliases#hostnames
+   * @schema VlSingleSpecHostAliases#hostnames
    */
   readonly hostnames?: string[];
 
   /**
    * IP address of the host file entry.
    *
-   * @schema VLogsSpecHostAliases#ip
+   * @schema VlSingleSpecHostAliases#ip
    */
   readonly ip: string;
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecHostAliases' to JSON representation.
+ * Converts an object of type 'VlSingleSpecHostAliases' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecHostAliases(obj: VLogsSpecHostAliases | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecHostAliases(obj: VlSingleSpecHostAliases | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'hostnames': obj.hostnames?.map(y => y),
@@ -708,37 +6307,37 @@ export function toJson_VLogsSpecHostAliases(obj: VLogsSpecHostAliases | undefine
  * Image - docker image settings
  * if no specified operator uses default version from operator config
  *
- * @schema VLogsSpecImage
+ * @schema VlSingleSpecImage
  */
-export interface VLogsSpecImage {
+export interface VlSingleSpecImage {
   /**
    * PullPolicy describes how to pull docker image
    *
-   * @schema VLogsSpecImage#pullPolicy
+   * @schema VlSingleSpecImage#pullPolicy
    */
   readonly pullPolicy?: string;
 
   /**
    * Repository contains name of docker image + it's repository if needed
    *
-   * @schema VLogsSpecImage#repository
+   * @schema VlSingleSpecImage#repository
    */
   readonly repository?: string;
 
   /**
    * Tag contains desired docker image version
    *
-   * @schema VLogsSpecImage#tag
+   * @schema VlSingleSpecImage#tag
    */
   readonly tag?: string;
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecImage' to JSON representation.
+ * Converts an object of type 'VlSingleSpecImage' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecImage(obj: VLogsSpecImage | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecImage(obj: VlSingleSpecImage | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'pullPolicy': obj.pullPolicy,
@@ -754,9 +6353,9 @@ export function toJson_VLogsSpecImage(obj: VLogsSpecImage | undefined): Record<s
  * LocalObjectReference contains enough information to let you locate the
  * referenced object inside the same namespace.
  *
- * @schema VLogsSpecImagePullSecrets
+ * @schema VlSingleSpecImagePullSecrets
  */
-export interface VLogsSpecImagePullSecrets {
+export interface VlSingleSpecImagePullSecrets {
   /**
    * Name of the referent.
    * This field is effectively required, but due to backwards compatibility is
@@ -764,17 +6363,17 @@ export interface VLogsSpecImagePullSecrets {
    * almost certainly wrong.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
    *
-   * @schema VLogsSpecImagePullSecrets#name
+   * @schema VlSingleSpecImagePullSecrets#name
    */
   readonly name?: string;
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecImagePullSecrets' to JSON representation.
+ * Converts an object of type 'VlSingleSpecImagePullSecrets' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecImagePullSecrets(obj: VLogsSpecImagePullSecrets | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecImagePullSecrets(obj: VlSingleSpecImagePullSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
@@ -785,11 +6384,11 @@ export function toJson_VLogsSpecImagePullSecrets(obj: VLogsSpecImagePullSecrets 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * LogFormat for VLogs to be configured with.
+ * LogFormat for VLSingle to be configured with.
  *
- * @schema VLogsSpecLogFormat
+ * @schema VlSingleSpecLogFormat
  */
-export enum VLogsSpecLogFormat {
+export enum VlSingleSpecLogFormat {
   /** default */
   DEFAULT = "default",
   /** json */
@@ -799,9 +6398,9 @@ export enum VLogsSpecLogFormat {
 /**
  * LogLevel for VictoriaLogs to be configured with.
  *
- * @schema VLogsSpecLogLevel
+ * @schema VlSingleSpecLogLevel
  */
-export enum VLogsSpecLogLevel {
+export enum VlSingleSpecLogLevel {
   /** INFO */
   INFO = "INFO",
   /** WARN */
@@ -818,16 +6417,16 @@ export enum VLogsSpecLogLevel {
  * ManagedMetadata defines metadata that will be added to the all objects
  * created by operator for the given CustomResource
  *
- * @schema VLogsSpecManagedMetadata
+ * @schema VlSingleSpecManagedMetadata
  */
-export interface VLogsSpecManagedMetadata {
+export interface VlSingleSpecManagedMetadata {
   /**
    * Annotations is an unstructured key value map stored with a resource that may be
    * set by external tools to store and retrieve arbitrary metadata. They are not
    * queryable and should be preserved when modifying objects.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
    *
-   * @schema VLogsSpecManagedMetadata#annotations
+   * @schema VlSingleSpecManagedMetadata#annotations
    */
   readonly annotations?: { [key: string]: string };
 
@@ -836,17 +6435,17 @@ export interface VLogsSpecManagedMetadata {
    * (scope and select) objects.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
    *
-   * @schema VLogsSpecManagedMetadata#labels
+   * @schema VlSingleSpecManagedMetadata#labels
    */
   readonly labels?: { [key: string]: string };
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecManagedMetadata' to JSON representation.
+ * Converts an object of type 'VlSingleSpecManagedMetadata' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecManagedMetadata(obj: VLogsSpecManagedMetadata | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecManagedMetadata(obj: VlSingleSpecManagedMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -858,18 +6457,18 @@ export function toJson_VLogsSpecManagedMetadata(obj: VLogsSpecManagedMetadata | 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * PodMetadata configures Labels and Annotations which are propagated to the VLogs pods.
+ * PodMetadata configures Labels and Annotations which are propagated to the VLSingle pods.
  *
- * @schema VLogsSpecPodMetadata
+ * @schema VlSingleSpecPodMetadata
  */
-export interface VLogsSpecPodMetadata {
+export interface VlSingleSpecPodMetadata {
   /**
    * Annotations is an unstructured key value map stored with a resource that may be
    * set by external tools to store and retrieve arbitrary metadata. They are not
    * queryable and should be preserved when modifying objects.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
    *
-   * @schema VLogsSpecPodMetadata#annotations
+   * @schema VlSingleSpecPodMetadata#annotations
    */
   readonly annotations?: { [key: string]: string };
 
@@ -879,7 +6478,7 @@ export interface VLogsSpecPodMetadata {
    * and services.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
    *
-   * @schema VLogsSpecPodMetadata#labels
+   * @schema VlSingleSpecPodMetadata#labels
    */
   readonly labels?: { [key: string]: string };
 
@@ -891,17 +6490,17 @@ export interface VLogsSpecPodMetadata {
    * Cannot be updated.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
    *
-   * @schema VLogsSpecPodMetadata#name
+   * @schema VlSingleSpecPodMetadata#name
    */
   readonly name?: string;
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecPodMetadata' to JSON representation.
+ * Converts an object of type 'VlSingleSpecPodMetadata' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecPodMetadata(obj: VLogsSpecPodMetadata | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecPodMetadata(obj: VlSingleSpecPodMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -916,23 +6515,23 @@ export function toJson_VLogsSpecPodMetadata(obj: VLogsSpecPodMetadata | undefine
 /**
  * PodReadinessGate contains the reference to a pod condition
  *
- * @schema VLogsSpecReadinessGates
+ * @schema VlSingleSpecReadinessGates
  */
-export interface VLogsSpecReadinessGates {
+export interface VlSingleSpecReadinessGates {
   /**
    * ConditionType refers to a condition in the pod's condition list with matching type.
    *
-   * @schema VLogsSpecReadinessGates#conditionType
+   * @schema VlSingleSpecReadinessGates#conditionType
    */
   readonly conditionType: string;
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecReadinessGates' to JSON representation.
+ * Converts an object of type 'VlSingleSpecReadinessGates' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecReadinessGates(obj: VLogsSpecReadinessGates | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecReadinessGates(obj: VlSingleSpecReadinessGates | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'conditionType': obj.conditionType,
@@ -946,9 +6545,9 @@ export function toJson_VLogsSpecReadinessGates(obj: VLogsSpecReadinessGates | un
  * Resources container resource request and limits, https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
  * if not defined default resources from operator config will be used
  *
- * @schema VLogsSpecResources
+ * @schema VlSingleSpecResources
  */
-export interface VLogsSpecResources {
+export interface VlSingleSpecResources {
   /**
    * Claims lists the names of resources, defined in spec.resourceClaims,
    * that are used by this container.
@@ -958,17 +6557,17 @@ export interface VLogsSpecResources {
    *
    * This field is immutable. It can only be set for containers.
    *
-   * @schema VLogsSpecResources#claims
+   * @schema VlSingleSpecResources#claims
    */
-  readonly claims?: VLogsSpecResourcesClaims[];
+  readonly claims?: VlSingleSpecResourcesClaims[];
 
   /**
    * Limits describes the maximum amount of compute resources allowed.
    * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    *
-   * @schema VLogsSpecResources#limits
+   * @schema VlSingleSpecResources#limits
    */
-  readonly limits?: { [key: string]: VLogsSpecResourcesLimits };
+  readonly limits?: { [key: string]: VlSingleSpecResourcesLimits };
 
   /**
    * Requests describes the minimum amount of compute resources required.
@@ -976,20 +6575,20 @@ export interface VLogsSpecResources {
    * otherwise to an implementation-defined value. Requests cannot exceed Limits.
    * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    *
-   * @schema VLogsSpecResources#requests
+   * @schema VlSingleSpecResources#requests
    */
-  readonly requests?: { [key: string]: VLogsSpecResourcesRequests };
+  readonly requests?: { [key: string]: VlSingleSpecResourcesRequests };
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecResources' to JSON representation.
+ * Converts an object of type 'VlSingleSpecResources' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecResources(obj: VLogsSpecResources | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecResources(obj: VlSingleSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'claims': obj.claims?.map(y => toJson_VLogsSpecResourcesClaims(y)),
+    'claims': obj.claims?.map(y => toJson_VlSingleSpecResourcesClaims(y)),
     'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
   };
@@ -999,23 +6598,23 @@ export function toJson_VLogsSpecResources(obj: VLogsSpecResources | undefined): 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * ServiceSpec that will be added to vlogs service spec
+ * ServiceSpec that will be added to vlsingle service spec
  *
- * @schema VLogsSpecServiceSpec
+ * @schema VlSingleSpecServiceSpec
  */
-export interface VLogsSpecServiceSpec {
+export interface VlSingleSpecServiceSpec {
   /**
    * EmbeddedObjectMetadata defines objectMeta for additional service.
    *
-   * @schema VLogsSpecServiceSpec#metadata
+   * @schema VlSingleSpecServiceSpec#metadata
    */
-  readonly metadata?: VLogsSpecServiceSpecMetadata;
+  readonly metadata?: VlSingleSpecServiceSpecMetadata;
 
   /**
    * ServiceSpec describes the attributes that a user creates on a service.
    * More info: https://kubernetes.io/docs/concepts/services-networking/service/
    *
-   * @schema VLogsSpecServiceSpec#spec
+   * @schema VlSingleSpecServiceSpec#spec
    */
   readonly spec: any;
 
@@ -1023,20 +6622,20 @@ export interface VLogsSpecServiceSpec {
    * UseAsDefault applies changes from given service definition to the main object Service
    * Changing from headless service to clusterIP or loadbalancer may break cross-component communication
    *
-   * @schema VLogsSpecServiceSpec#useAsDefault
+   * @schema VlSingleSpecServiceSpec#useAsDefault
    */
   readonly useAsDefault?: boolean;
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecServiceSpec' to JSON representation.
+ * Converts an object of type 'VlSingleSpecServiceSpec' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecServiceSpec(obj: VLogsSpecServiceSpec | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecServiceSpec(obj: VlSingleSpecServiceSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'metadata': toJson_VLogsSpecServiceSpecMetadata(obj.metadata),
+    'metadata': toJson_VlSingleSpecServiceSpecMetadata(obj.metadata),
     'spec': obj.spec,
     'useAsDefault': obj.useAsDefault,
   };
@@ -1046,17 +6645,17 @@ export function toJson_VLogsSpecServiceSpec(obj: VLogsSpecServiceSpec | undefine
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Storage is the definition of how storage will be used by the VLogs
+ * Storage is the definition of how storage will be used by the VLSingle
  * by default it`s empty dir
  *
- * @schema VLogsSpecStorage
+ * @schema VlSingleSpecStorage
  */
-export interface VLogsSpecStorage {
+export interface VlSingleSpecStorage {
   /**
    * accessModes contains the desired access modes the volume should have.
    * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1
    *
-   * @schema VLogsSpecStorage#accessModes
+   * @schema VlSingleSpecStorage#accessModes
    */
   readonly accessModes?: string[];
 
@@ -1070,9 +6669,9 @@ export interface VLogsSpecStorage {
    * and dataSourceRef contents will be copied to dataSource when dataSourceRef.namespace is not specified.
    * If the namespace is specified, then dataSourceRef will not be copied to dataSource.
    *
-   * @schema VLogsSpecStorage#dataSource
+   * @schema VlSingleSpecStorage#dataSource
    */
-  readonly dataSource?: VLogsSpecStorageDataSource;
+  readonly dataSource?: VlSingleSpecStorageDataSource;
 
   /**
    * dataSourceRef specifies the object from which to populate the volume with data, if a non-empty
@@ -1099,9 +6698,9 @@ export interface VLogsSpecStorage {
    * (Beta) Using this field requires the AnyVolumeDataSource feature gate to be enabled.
    * (Alpha) Using the namespace field of dataSourceRef requires the CrossNamespaceVolumeDataSource feature gate to be enabled.
    *
-   * @schema VLogsSpecStorage#dataSourceRef
+   * @schema VlSingleSpecStorage#dataSourceRef
    */
-  readonly dataSourceRef?: VLogsSpecStorageDataSourceRef;
+  readonly dataSourceRef?: VlSingleSpecStorageDataSourceRef;
 
   /**
    * resources represents the minimum resources the volume should have.
@@ -1110,22 +6709,22 @@ export interface VLogsSpecStorage {
    * status field of the claim.
    * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
    *
-   * @schema VLogsSpecStorage#resources
+   * @schema VlSingleSpecStorage#resources
    */
-  readonly resources?: VLogsSpecStorageResources;
+  readonly resources?: VlSingleSpecStorageResources;
 
   /**
    * selector is a label query over volumes to consider for binding.
    *
-   * @schema VLogsSpecStorage#selector
+   * @schema VlSingleSpecStorage#selector
    */
-  readonly selector?: VLogsSpecStorageSelector;
+  readonly selector?: VlSingleSpecStorageSelector;
 
   /**
    * storageClassName is the name of the StorageClass required by the claim.
    * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1
    *
-   * @schema VLogsSpecStorage#storageClassName
+   * @schema VlSingleSpecStorage#storageClassName
    */
   readonly storageClassName?: string;
 
@@ -1143,7 +6742,7 @@ export interface VLogsSpecStorage {
    * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
    * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
    *
-   * @schema VLogsSpecStorage#volumeAttributesClassName
+   * @schema VlSingleSpecStorage#volumeAttributesClassName
    */
   readonly volumeAttributesClassName?: string;
 
@@ -1151,31 +6750,31 @@ export interface VLogsSpecStorage {
    * volumeMode defines what type of volume is required by the claim.
    * Value of Filesystem is implied when not included in claim spec.
    *
-   * @schema VLogsSpecStorage#volumeMode
+   * @schema VlSingleSpecStorage#volumeMode
    */
   readonly volumeMode?: string;
 
   /**
    * volumeName is the binding reference to the PersistentVolume backing this claim.
    *
-   * @schema VLogsSpecStorage#volumeName
+   * @schema VlSingleSpecStorage#volumeName
    */
   readonly volumeName?: string;
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecStorage' to JSON representation.
+ * Converts an object of type 'VlSingleSpecStorage' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecStorage(obj: VLogsSpecStorage | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecStorage(obj: VlSingleSpecStorage | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'accessModes': obj.accessModes?.map(y => y),
-    'dataSource': toJson_VLogsSpecStorageDataSource(obj.dataSource),
-    'dataSourceRef': toJson_VLogsSpecStorageDataSourceRef(obj.dataSourceRef),
-    'resources': toJson_VLogsSpecStorageResources(obj.resources),
-    'selector': toJson_VLogsSpecStorageSelector(obj.selector),
+    'dataSource': toJson_VlSingleSpecStorageDataSource(obj.dataSource),
+    'dataSourceRef': toJson_VlSingleSpecStorageDataSourceRef(obj.dataSourceRef),
+    'resources': toJson_VlSingleSpecStorageResources(obj.resources),
+    'selector': toJson_VlSingleSpecStorageSelector(obj.selector),
     'storageClassName': obj.storageClassName,
     'volumeAttributesClassName': obj.volumeAttributesClassName,
     'volumeMode': obj.volumeMode,
@@ -1187,18 +6786,18 @@ export function toJson_VLogsSpecStorage(obj: VLogsSpecStorage | undefined): Reco
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * StorageMeta defines annotations and labels attached to PVC for given vlogs CR
+ * StorageMeta defines annotations and labels attached to PVC for given vlsingle CR
  *
- * @schema VLogsSpecStorageMetadata
+ * @schema VlSingleSpecStorageMetadata
  */
-export interface VLogsSpecStorageMetadata {
+export interface VlSingleSpecStorageMetadata {
   /**
    * Annotations is an unstructured key value map stored with a resource that may be
    * set by external tools to store and retrieve arbitrary metadata. They are not
    * queryable and should be preserved when modifying objects.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
    *
-   * @schema VLogsSpecStorageMetadata#annotations
+   * @schema VlSingleSpecStorageMetadata#annotations
    */
   readonly annotations?: { [key: string]: string };
 
@@ -1208,7 +6807,7 @@ export interface VLogsSpecStorageMetadata {
    * and services.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
    *
-   * @schema VLogsSpecStorageMetadata#labels
+   * @schema VlSingleSpecStorageMetadata#labels
    */
   readonly labels?: { [key: string]: string };
 
@@ -1220,17 +6819,17 @@ export interface VLogsSpecStorageMetadata {
    * Cannot be updated.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
    *
-   * @schema VLogsSpecStorageMetadata#name
+   * @schema VlSingleSpecStorageMetadata#name
    */
   readonly name?: string;
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecStorageMetadata' to JSON representation.
+ * Converts an object of type 'VlSingleSpecStorageMetadata' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecStorageMetadata(obj: VLogsSpecStorageMetadata | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecStorageMetadata(obj: VlSingleSpecStorageMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -1246,14 +6845,14 @@ export function toJson_VLogsSpecStorageMetadata(obj: VLogsSpecStorageMetadata | 
  * The pod this Toleration is attached to tolerates any taint that matches
  * the triple <key,value,effect> using the matching operator <operator>.
  *
- * @schema VLogsSpecTolerations
+ * @schema VlSingleSpecTolerations
  */
-export interface VLogsSpecTolerations {
+export interface VlSingleSpecTolerations {
   /**
    * Effect indicates the taint effect to match. Empty means match all taint effects.
    * When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
    *
-   * @schema VLogsSpecTolerations#effect
+   * @schema VlSingleSpecTolerations#effect
    */
   readonly effect?: string;
 
@@ -1261,7 +6860,7 @@ export interface VLogsSpecTolerations {
    * Key is the taint key that the toleration applies to. Empty means match all taint keys.
    * If the key is empty, operator must be Exists; this combination means to match all values and all keys.
    *
-   * @schema VLogsSpecTolerations#key
+   * @schema VlSingleSpecTolerations#key
    */
   readonly key?: string;
 
@@ -1272,7 +6871,7 @@ export interface VLogsSpecTolerations {
    * tolerate all taints of a particular category.
    *
    * @default Equal.
-   * @schema VLogsSpecTolerations#operator
+   * @schema VlSingleSpecTolerations#operator
    */
   readonly operator?: string;
 
@@ -1282,7 +6881,7 @@ export interface VLogsSpecTolerations {
    * it is not set, which means tolerate the taint forever (do not evict). Zero and
    * negative values will be treated as 0 (evict immediately) by the system.
    *
-   * @schema VLogsSpecTolerations#tolerationSeconds
+   * @schema VlSingleSpecTolerations#tolerationSeconds
    */
   readonly tolerationSeconds?: number;
 
@@ -1290,17 +6889,17 @@ export interface VLogsSpecTolerations {
    * Value is the taint value the toleration matches to.
    * If the operator is Exists, the value should be empty, otherwise just a regular string.
    *
-   * @schema VLogsSpecTolerations#value
+   * @schema VlSingleSpecTolerations#value
    */
   readonly value?: string;
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecTolerations' to JSON representation.
+ * Converts an object of type 'VlSingleSpecTolerations' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecTolerations(obj: VLogsSpecTolerations | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecTolerations(obj: VlSingleSpecTolerations | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'effect': obj.effect,
@@ -1317,14 +6916,14 @@ export function toJson_VLogsSpecTolerations(obj: VLogsSpecTolerations | undefine
 /**
  * VolumeMount describes a mounting of a Volume within a container.
  *
- * @schema VLogsSpecVolumeMounts
+ * @schema VlSingleSpecVolumeMounts
  */
-export interface VLogsSpecVolumeMounts {
+export interface VlSingleSpecVolumeMounts {
   /**
    * Path within the container at which the volume should be mounted.  Must
    * not contain ':'.
    *
-   * @schema VLogsSpecVolumeMounts#mountPath
+   * @schema VlSingleSpecVolumeMounts#mountPath
    */
   readonly mountPath: string;
 
@@ -1336,14 +6935,14 @@ export interface VLogsSpecVolumeMounts {
    * When RecursiveReadOnly is set to IfPossible or to Enabled, MountPropagation must be None or unspecified
    * (which defaults to None).
    *
-   * @schema VLogsSpecVolumeMounts#mountPropagation
+   * @schema VlSingleSpecVolumeMounts#mountPropagation
    */
   readonly mountPropagation?: string;
 
   /**
    * This must match the Name of a Volume.
    *
-   * @schema VLogsSpecVolumeMounts#name
+   * @schema VlSingleSpecVolumeMounts#name
    */
   readonly name: string;
 
@@ -1352,7 +6951,7 @@ export interface VLogsSpecVolumeMounts {
    * Defaults to false.
    *
    * @default false.
-   * @schema VLogsSpecVolumeMounts#readOnly
+   * @schema VlSingleSpecVolumeMounts#readOnly
    */
   readonly readOnly?: boolean;
 
@@ -1374,7 +6973,7 @@ export interface VLogsSpecVolumeMounts {
    *
    * If this field is not specified, it is treated as an equivalent of Disabled.
    *
-   * @schema VLogsSpecVolumeMounts#recursiveReadOnly
+   * @schema VlSingleSpecVolumeMounts#recursiveReadOnly
    */
   readonly recursiveReadOnly?: string;
 
@@ -1383,7 +6982,7 @@ export interface VLogsSpecVolumeMounts {
    * Defaults to "" (volume's root).
    *
    * @default volume's root).
-   * @schema VLogsSpecVolumeMounts#subPath
+   * @schema VlSingleSpecVolumeMounts#subPath
    */
   readonly subPath?: string;
 
@@ -1394,17 +6993,17 @@ export interface VLogsSpecVolumeMounts {
    * SubPathExpr and SubPath are mutually exclusive.
    *
    * @default volume's root).
-   * @schema VLogsSpecVolumeMounts#subPathExpr
+   * @schema VlSingleSpecVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecVolumeMounts' to JSON representation.
+ * Converts an object of type 'VlSingleSpecVolumeMounts' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecVolumeMounts(obj: VLogsSpecVolumeMounts | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecVolumeMounts(obj: VlSingleSpecVolumeMounts | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'mountPath': obj.mountPath,
@@ -1423,28 +7022,31 @@ export function toJson_VLogsSpecVolumeMounts(obj: VLogsSpecVolumeMounts | undefi
 /**
  * PodDNSConfigOption defines DNS resolver options of a pod.
  *
- * @schema VLogsSpecDnsConfigOptions
+ * @schema VlSingleSpecDnsConfigOptions
  */
-export interface VLogsSpecDnsConfigOptions {
+export interface VlSingleSpecDnsConfigOptions {
   /**
+   * Name is this DNS resolver option's name.
    * Required.
    *
-   * @schema VLogsSpecDnsConfigOptions#name
+   * @schema VlSingleSpecDnsConfigOptions#name
    */
   readonly name?: string;
 
   /**
-   * @schema VLogsSpecDnsConfigOptions#value
+   * Value is this DNS resolver option's value.
+   *
+   * @schema VlSingleSpecDnsConfigOptions#value
    */
   readonly value?: string;
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecDnsConfigOptions' to JSON representation.
+ * Converts an object of type 'VlSingleSpecDnsConfigOptions' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecDnsConfigOptions(obj: VLogsSpecDnsConfigOptions | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecDnsConfigOptions(obj: VlSingleSpecDnsConfigOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
@@ -1456,17 +7058,99 @@ export function toJson_VLogsSpecDnsConfigOptions(obj: VLogsSpecDnsConfigOptions 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The ConfigMap to select from
+ *
+ * @schema VlSingleSpecExtraEnvsFromConfigMapRef
+ */
+export interface VlSingleSpecExtraEnvsFromConfigMapRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VlSingleSpecExtraEnvsFromConfigMapRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap must be defined
+   *
+   * @schema VlSingleSpecExtraEnvsFromConfigMapRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VlSingleSpecExtraEnvsFromConfigMapRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlSingleSpecExtraEnvsFromConfigMapRef(obj: VlSingleSpecExtraEnvsFromConfigMapRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The Secret to select from
+ *
+ * @schema VlSingleSpecExtraEnvsFromSecretRef
+ */
+export interface VlSingleSpecExtraEnvsFromSecretRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VlSingleSpecExtraEnvsFromSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret must be defined
+   *
+   * @schema VlSingleSpecExtraEnvsFromSecretRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VlSingleSpecExtraEnvsFromSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlSingleSpecExtraEnvsFromSecretRef(obj: VlSingleSpecExtraEnvsFromSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * ResourceClaim references one entry in PodSpec.ResourceClaims.
  *
- * @schema VLogsSpecResourcesClaims
+ * @schema VlSingleSpecResourcesClaims
  */
-export interface VLogsSpecResourcesClaims {
+export interface VlSingleSpecResourcesClaims {
   /**
    * Name must match the name of one entry in pod.spec.resourceClaims of
    * the Pod where this field is used. It makes that resource available
    * inside a container.
    *
-   * @schema VLogsSpecResourcesClaims#name
+   * @schema VlSingleSpecResourcesClaims#name
    */
   readonly name: string;
 
@@ -1475,17 +7159,17 @@ export interface VLogsSpecResourcesClaims {
    * If empty, everything from the claim is made available, otherwise
    * only the result of this request.
    *
-   * @schema VLogsSpecResourcesClaims#request
+   * @schema VlSingleSpecResourcesClaims#request
    */
   readonly request?: string;
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecResourcesClaims' to JSON representation.
+ * Converts an object of type 'VlSingleSpecResourcesClaims' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecResourcesClaims(obj: VLogsSpecResourcesClaims | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecResourcesClaims(obj: VlSingleSpecResourcesClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
@@ -1497,28 +7181,28 @@ export function toJson_VLogsSpecResourcesClaims(obj: VLogsSpecResourcesClaims | 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * @schema VLogsSpecResourcesLimits
+ * @schema VlSingleSpecResourcesLimits
  */
-export class VLogsSpecResourcesLimits {
-  public static fromNumber(value: number): VLogsSpecResourcesLimits {
-    return new VLogsSpecResourcesLimits(value);
+export class VlSingleSpecResourcesLimits {
+  public static fromNumber(value: number): VlSingleSpecResourcesLimits {
+    return new VlSingleSpecResourcesLimits(value);
   }
-  public static fromString(value: string): VLogsSpecResourcesLimits {
-    return new VLogsSpecResourcesLimits(value);
+  public static fromString(value: string): VlSingleSpecResourcesLimits {
+    return new VlSingleSpecResourcesLimits(value);
   }
   private constructor(public readonly value: number | string) {
   }
 }
 
 /**
- * @schema VLogsSpecResourcesRequests
+ * @schema VlSingleSpecResourcesRequests
  */
-export class VLogsSpecResourcesRequests {
-  public static fromNumber(value: number): VLogsSpecResourcesRequests {
-    return new VLogsSpecResourcesRequests(value);
+export class VlSingleSpecResourcesRequests {
+  public static fromNumber(value: number): VlSingleSpecResourcesRequests {
+    return new VlSingleSpecResourcesRequests(value);
   }
-  public static fromString(value: string): VLogsSpecResourcesRequests {
-    return new VLogsSpecResourcesRequests(value);
+  public static fromString(value: string): VlSingleSpecResourcesRequests {
+    return new VlSingleSpecResourcesRequests(value);
   }
   private constructor(public readonly value: number | string) {
   }
@@ -1527,16 +7211,16 @@ export class VLogsSpecResourcesRequests {
 /**
  * EmbeddedObjectMetadata defines objectMeta for additional service.
  *
- * @schema VLogsSpecServiceSpecMetadata
+ * @schema VlSingleSpecServiceSpecMetadata
  */
-export interface VLogsSpecServiceSpecMetadata {
+export interface VlSingleSpecServiceSpecMetadata {
   /**
    * Annotations is an unstructured key value map stored with a resource that may be
    * set by external tools to store and retrieve arbitrary metadata. They are not
    * queryable and should be preserved when modifying objects.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
    *
-   * @schema VLogsSpecServiceSpecMetadata#annotations
+   * @schema VlSingleSpecServiceSpecMetadata#annotations
    */
   readonly annotations?: { [key: string]: string };
 
@@ -1546,7 +7230,7 @@ export interface VLogsSpecServiceSpecMetadata {
    * and services.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
    *
-   * @schema VLogsSpecServiceSpecMetadata#labels
+   * @schema VlSingleSpecServiceSpecMetadata#labels
    */
   readonly labels?: { [key: string]: string };
 
@@ -1558,17 +7242,17 @@ export interface VLogsSpecServiceSpecMetadata {
    * Cannot be updated.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
    *
-   * @schema VLogsSpecServiceSpecMetadata#name
+   * @schema VlSingleSpecServiceSpecMetadata#name
    */
   readonly name?: string;
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecServiceSpecMetadata' to JSON representation.
+ * Converts an object of type 'VlSingleSpecServiceSpecMetadata' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecServiceSpecMetadata(obj: VLogsSpecServiceSpecMetadata | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecServiceSpecMetadata(obj: VlSingleSpecServiceSpecMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -1590,39 +7274,39 @@ export function toJson_VLogsSpecServiceSpecMetadata(obj: VLogsSpecServiceSpecMet
  * and dataSourceRef contents will be copied to dataSource when dataSourceRef.namespace is not specified.
  * If the namespace is specified, then dataSourceRef will not be copied to dataSource.
  *
- * @schema VLogsSpecStorageDataSource
+ * @schema VlSingleSpecStorageDataSource
  */
-export interface VLogsSpecStorageDataSource {
+export interface VlSingleSpecStorageDataSource {
   /**
    * APIGroup is the group for the resource being referenced.
    * If APIGroup is not specified, the specified Kind must be in the core API group.
    * For any other third-party types, APIGroup is required.
    *
-   * @schema VLogsSpecStorageDataSource#apiGroup
+   * @schema VlSingleSpecStorageDataSource#apiGroup
    */
   readonly apiGroup?: string;
 
   /**
    * Kind is the type of resource being referenced
    *
-   * @schema VLogsSpecStorageDataSource#kind
+   * @schema VlSingleSpecStorageDataSource#kind
    */
   readonly kind: string;
 
   /**
    * Name is the name of resource being referenced
    *
-   * @schema VLogsSpecStorageDataSource#name
+   * @schema VlSingleSpecStorageDataSource#name
    */
   readonly name: string;
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecStorageDataSource' to JSON representation.
+ * Converts an object of type 'VlSingleSpecStorageDataSource' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecStorageDataSource(obj: VLogsSpecStorageDataSource | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecStorageDataSource(obj: VlSingleSpecStorageDataSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'apiGroup': obj.apiGroup,
@@ -1659,29 +7343,29 @@ export function toJson_VLogsSpecStorageDataSource(obj: VLogsSpecStorageDataSourc
  * (Beta) Using this field requires the AnyVolumeDataSource feature gate to be enabled.
  * (Alpha) Using the namespace field of dataSourceRef requires the CrossNamespaceVolumeDataSource feature gate to be enabled.
  *
- * @schema VLogsSpecStorageDataSourceRef
+ * @schema VlSingleSpecStorageDataSourceRef
  */
-export interface VLogsSpecStorageDataSourceRef {
+export interface VlSingleSpecStorageDataSourceRef {
   /**
    * APIGroup is the group for the resource being referenced.
    * If APIGroup is not specified, the specified Kind must be in the core API group.
    * For any other third-party types, APIGroup is required.
    *
-   * @schema VLogsSpecStorageDataSourceRef#apiGroup
+   * @schema VlSingleSpecStorageDataSourceRef#apiGroup
    */
   readonly apiGroup?: string;
 
   /**
    * Kind is the type of resource being referenced
    *
-   * @schema VLogsSpecStorageDataSourceRef#kind
+   * @schema VlSingleSpecStorageDataSourceRef#kind
    */
   readonly kind: string;
 
   /**
    * Name is the name of resource being referenced
    *
-   * @schema VLogsSpecStorageDataSourceRef#name
+   * @schema VlSingleSpecStorageDataSourceRef#name
    */
   readonly name: string;
 
@@ -1690,17 +7374,17 @@ export interface VLogsSpecStorageDataSourceRef {
    * Note that when a namespace is specified, a gateway.networking.k8s.io/ReferenceGrant object is required in the referent namespace to allow that namespace's owner to accept the reference. See the ReferenceGrant documentation for details.
    * (Alpha) This field requires the CrossNamespaceVolumeDataSource feature gate to be enabled.
    *
-   * @schema VLogsSpecStorageDataSourceRef#namespace
+   * @schema VlSingleSpecStorageDataSourceRef#namespace
    */
   readonly namespace?: string;
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecStorageDataSourceRef' to JSON representation.
+ * Converts an object of type 'VlSingleSpecStorageDataSourceRef' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecStorageDataSourceRef(obj: VLogsSpecStorageDataSourceRef | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecStorageDataSourceRef(obj: VlSingleSpecStorageDataSourceRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'apiGroup': obj.apiGroup,
@@ -1720,16 +7404,16 @@ export function toJson_VLogsSpecStorageDataSourceRef(obj: VLogsSpecStorageDataSo
  * status field of the claim.
  * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
  *
- * @schema VLogsSpecStorageResources
+ * @schema VlSingleSpecStorageResources
  */
-export interface VLogsSpecStorageResources {
+export interface VlSingleSpecStorageResources {
   /**
    * Limits describes the maximum amount of compute resources allowed.
    * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    *
-   * @schema VLogsSpecStorageResources#limits
+   * @schema VlSingleSpecStorageResources#limits
    */
-  readonly limits?: { [key: string]: VLogsSpecStorageResourcesLimits };
+  readonly limits?: { [key: string]: VlSingleSpecStorageResourcesLimits };
 
   /**
    * Requests describes the minimum amount of compute resources required.
@@ -1737,17 +7421,17 @@ export interface VLogsSpecStorageResources {
    * otherwise to an implementation-defined value. Requests cannot exceed Limits.
    * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    *
-   * @schema VLogsSpecStorageResources#requests
+   * @schema VlSingleSpecStorageResources#requests
    */
-  readonly requests?: { [key: string]: VLogsSpecStorageResourcesRequests };
+  readonly requests?: { [key: string]: VlSingleSpecStorageResourcesRequests };
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecStorageResources' to JSON representation.
+ * Converts an object of type 'VlSingleSpecStorageResources' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecStorageResources(obj: VLogsSpecStorageResources | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecStorageResources(obj: VlSingleSpecStorageResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
@@ -1761,35 +7445,35 @@ export function toJson_VLogsSpecStorageResources(obj: VLogsSpecStorageResources 
 /**
  * selector is a label query over volumes to consider for binding.
  *
- * @schema VLogsSpecStorageSelector
+ * @schema VlSingleSpecStorageSelector
  */
-export interface VLogsSpecStorageSelector {
+export interface VlSingleSpecStorageSelector {
   /**
    * matchExpressions is a list of label selector requirements. The requirements are ANDed.
    *
-   * @schema VLogsSpecStorageSelector#matchExpressions
+   * @schema VlSingleSpecStorageSelector#matchExpressions
    */
-  readonly matchExpressions?: VLogsSpecStorageSelectorMatchExpressions[];
+  readonly matchExpressions?: VlSingleSpecStorageSelectorMatchExpressions[];
 
   /**
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
    *
-   * @schema VLogsSpecStorageSelector#matchLabels
+   * @schema VlSingleSpecStorageSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecStorageSelector' to JSON representation.
+ * Converts an object of type 'VlSingleSpecStorageSelector' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecStorageSelector(obj: VLogsSpecStorageSelector | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecStorageSelector(obj: VlSingleSpecStorageSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'matchExpressions': obj.matchExpressions?.map(y => toJson_VLogsSpecStorageSelectorMatchExpressions(y)),
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_VlSingleSpecStorageSelectorMatchExpressions(y)),
     'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
   };
   // filter undefined values
@@ -1798,28 +7482,28 @@ export function toJson_VLogsSpecStorageSelector(obj: VLogsSpecStorageSelector | 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * @schema VLogsSpecStorageResourcesLimits
+ * @schema VlSingleSpecStorageResourcesLimits
  */
-export class VLogsSpecStorageResourcesLimits {
-  public static fromNumber(value: number): VLogsSpecStorageResourcesLimits {
-    return new VLogsSpecStorageResourcesLimits(value);
+export class VlSingleSpecStorageResourcesLimits {
+  public static fromNumber(value: number): VlSingleSpecStorageResourcesLimits {
+    return new VlSingleSpecStorageResourcesLimits(value);
   }
-  public static fromString(value: string): VLogsSpecStorageResourcesLimits {
-    return new VLogsSpecStorageResourcesLimits(value);
+  public static fromString(value: string): VlSingleSpecStorageResourcesLimits {
+    return new VlSingleSpecStorageResourcesLimits(value);
   }
   private constructor(public readonly value: number | string) {
   }
 }
 
 /**
- * @schema VLogsSpecStorageResourcesRequests
+ * @schema VlSingleSpecStorageResourcesRequests
  */
-export class VLogsSpecStorageResourcesRequests {
-  public static fromNumber(value: number): VLogsSpecStorageResourcesRequests {
-    return new VLogsSpecStorageResourcesRequests(value);
+export class VlSingleSpecStorageResourcesRequests {
+  public static fromNumber(value: number): VlSingleSpecStorageResourcesRequests {
+    return new VlSingleSpecStorageResourcesRequests(value);
   }
-  public static fromString(value: string): VLogsSpecStorageResourcesRequests {
-    return new VLogsSpecStorageResourcesRequests(value);
+  public static fromString(value: string): VlSingleSpecStorageResourcesRequests {
+    return new VlSingleSpecStorageResourcesRequests(value);
   }
   private constructor(public readonly value: number | string) {
   }
@@ -1829,13 +7513,13 @@ export class VLogsSpecStorageResourcesRequests {
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
- * @schema VLogsSpecStorageSelectorMatchExpressions
+ * @schema VlSingleSpecStorageSelectorMatchExpressions
  */
-export interface VLogsSpecStorageSelectorMatchExpressions {
+export interface VlSingleSpecStorageSelectorMatchExpressions {
   /**
    * key is the label key that the selector applies to.
    *
-   * @schema VLogsSpecStorageSelectorMatchExpressions#key
+   * @schema VlSingleSpecStorageSelectorMatchExpressions#key
    */
   readonly key: string;
 
@@ -1843,7 +7527,7 @@ export interface VLogsSpecStorageSelectorMatchExpressions {
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
-   * @schema VLogsSpecStorageSelectorMatchExpressions#operator
+   * @schema VlSingleSpecStorageSelectorMatchExpressions#operator
    */
   readonly operator: string;
 
@@ -1853,17 +7537,17 @@ export interface VLogsSpecStorageSelectorMatchExpressions {
    * the values array must be empty. This array is replaced during a strategic
    * merge patch.
    *
-   * @schema VLogsSpecStorageSelectorMatchExpressions#values
+   * @schema VlSingleSpecStorageSelectorMatchExpressions#values
    */
   readonly values?: string[];
 
 }
 
 /**
- * Converts an object of type 'VLogsSpecStorageSelectorMatchExpressions' to JSON representation.
+ * Converts an object of type 'VlSingleSpecStorageSelectorMatchExpressions' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VLogsSpecStorageSelectorMatchExpressions(obj: VLogsSpecStorageSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+export function toJson_VlSingleSpecStorageSelectorMatchExpressions(obj: VlSingleSpecStorageSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -1978,10 +7662,11 @@ export interface VmAgentSpec {
    * If left empty, VMAgent is assumed to run inside of the cluster
    * and will discover API servers automatically and use the pod's CA certificate
    * and bearer token file at /var/run/secrets/kubernetes.io/serviceaccount/.
+   * aPIServerConfig is deprecated use apiServerConfig instead
    *
    * @schema VmAgentSpec#aPIServerConfig
    */
-  readonly aPiServerConfig?: VmAgentSpecAPiServerConfig;
+  readonly aPiServerConfig?: any;
 
   /**
    * AdditionalScrapeConfigs As scrape configs are appended, the user is responsible to make sure it
@@ -2000,6 +7685,16 @@ export interface VmAgentSpec {
    * @schema VmAgentSpec#affinity
    */
   readonly affinity?: any;
+
+  /**
+   * APIServerConfig allows specifying a host and auth methods to access apiserver.
+   * If left empty, VMAgent is assumed to run inside of the cluster
+   * and will discover API servers automatically and use the pod's CA certificate
+   * and bearer token file at /var/run/secrets/kubernetes.io/serviceaccount/.
+   *
+   * @schema VmAgentSpec#apiServerConfig
+   */
+  readonly apiServerConfig?: VmAgentSpecApiServerConfig;
 
   /**
    * ArbitraryFSAccessThroughSMs configures whether configuration
@@ -2025,6 +7720,15 @@ export interface VmAgentSpec {
    * @schema VmAgentSpec#configMaps
    */
   readonly configMaps?: string[];
+
+  /**
+   * ConfigReloadAuthKeySecret defines optional secret reference authKey for /-/reload API requests.
+   * Given secret reference will be added to the application and vm-config-reloader as volume
+   * available since v0.57.0 version
+   *
+   * @schema VmAgentSpec#configReloadAuthKeySecret
+   */
+  readonly configReloadAuthKeySecret?: VmAgentSpecConfigReloadAuthKeySecret;
 
   /**
    * ConfigReloaderExtraArgs that will be passed to  VMAuths config-reloader container
@@ -2058,6 +7762,27 @@ export interface VmAgentSpec {
   readonly containers?: any[];
 
   /**
+   * DaemonSetMode enables DaemonSet deployment mode instead of Deployment.
+   * Supports only VMPodScrape
+   * (available from v0.55.0).
+   * Cannot be used with statefulMode
+   *
+   * @schema VmAgentSpec#daemonSetMode
+   */
+  readonly daemonSetMode?: boolean;
+
+  /**
+   * DisableAutomountServiceAccountToken whether to disable serviceAccount auto mount by Kubernetes (available from v0.54.0).
+   * Operator will conditionally create volumes and volumeMounts for containers if it requires k8s API access.
+   * For example, vmagent and vm-config-reloader requires k8s API access.
+   * Operator creates volumes with name: "kube-api-access", which can be used as volumeMount for extraContainers if needed.
+   * And also adds VolumeMounts at /var/run/secrets/kubernetes.io/serviceaccount.
+   *
+   * @schema VmAgentSpec#disableAutomountServiceAccountToken
+   */
+  readonly disableAutomountServiceAccountToken?: boolean;
+
+  /**
    * DisableSelfServiceScrape controls creation of VMServiceScrape by operator
    * for the application.
    * Has priority over `VM_DISABLESELFSERVICESCRAPECREATION` operator env variable
@@ -2081,6 +7806,16 @@ export interface VmAgentSpec {
    * @schema VmAgentSpec#dnsPolicy
    */
   readonly dnsPolicy?: string;
+
+  /**
+   * EnableKubernetesAPISelectors instructs vmagent to use CRD scrape objects spec.selectors for
+   * Kubernetes API list and watch requests.
+   * https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#list-and-watch-filtering
+   * It could be useful to reduce Kubernetes API server resource usage for serving less than 100 CRD scrape objects in total.
+   *
+   * @schema VmAgentSpec#enableKubernetesAPISelectors
+   */
+  readonly enableKubernetesApiSelectors?: boolean;
 
   /**
    * EnforcedNamespaceLabel enforces adding a namespace label of origin for each alert
@@ -2113,6 +7848,14 @@ export interface VmAgentSpec {
    * @schema VmAgentSpec#extraEnvs
    */
   readonly extraEnvs?: VmAgentSpecExtraEnvs[];
+
+  /**
+   * ExtraEnvsFrom defines source of env variables for the application container
+   * could either be secret or configmap
+   *
+   * @schema VmAgentSpec#extraEnvsFrom
+   */
+  readonly extraEnvsFrom?: VmAgentSpecExtraEnvsFrom[];
 
   /**
    * HostAliases provides mapping for ip and hostname,
@@ -2795,23 +8538,29 @@ export interface VmAgentSpec {
 export function toJson_VmAgentSpec(obj: VmAgentSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'aPIServerConfig': toJson_VmAgentSpecAPiServerConfig(obj.aPiServerConfig),
+    'aPIServerConfig': obj.aPiServerConfig,
     'additionalScrapeConfigs': toJson_VmAgentSpecAdditionalScrapeConfigs(obj.additionalScrapeConfigs),
     'affinity': obj.affinity,
+    'apiServerConfig': toJson_VmAgentSpecApiServerConfig(obj.apiServerConfig),
     'arbitraryFSAccessThroughSMs': toJson_VmAgentSpecArbitraryFsAccessThroughSMs(obj.arbitraryFsAccessThroughSMs),
     'claimTemplates': obj.claimTemplates?.map(y => toJson_VmAgentSpecClaimTemplates(y)),
     'configMaps': obj.configMaps?.map(y => y),
+    'configReloadAuthKeySecret': toJson_VmAgentSpecConfigReloadAuthKeySecret(obj.configReloadAuthKeySecret),
     'configReloaderExtraArgs': ((obj.configReloaderExtraArgs) === undefined) ? undefined : (Object.entries(obj.configReloaderExtraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'configReloaderImageTag': obj.configReloaderImageTag,
     'configReloaderResources': toJson_VmAgentSpecConfigReloaderResources(obj.configReloaderResources),
     'containers': obj.containers?.map(y => y),
+    'daemonSetMode': obj.daemonSetMode,
+    'disableAutomountServiceAccountToken': obj.disableAutomountServiceAccountToken,
     'disableSelfServiceScrape': obj.disableSelfServiceScrape,
     'dnsConfig': toJson_VmAgentSpecDnsConfig(obj.dnsConfig),
     'dnsPolicy': obj.dnsPolicy,
+    'enableKubernetesAPISelectors': obj.enableKubernetesApiSelectors,
     'enforcedNamespaceLabel': obj.enforcedNamespaceLabel,
     'externalLabels': ((obj.externalLabels) === undefined) ? undefined : (Object.entries(obj.externalLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'extraEnvs': obj.extraEnvs?.map(y => toJson_VmAgentSpecExtraEnvs(y)),
+    'extraEnvsFrom': obj.extraEnvsFrom?.map(y => toJson_VmAgentSpecExtraEnvsFrom(y)),
     'hostAliases': obj.hostAliases?.map(y => toJson_VmAgentSpecHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
     'ignoreNamespaceSelectors': obj.ignoreNamespaceSelectors,
@@ -2898,79 +8647,6 @@ export function toJson_VmAgentSpec(obj: VmAgentSpec | undefined): Record<string,
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * APIServerConfig allows specifying a host and auth methods to access apiserver.
- * If left empty, VMAgent is assumed to run inside of the cluster
- * and will discover API servers automatically and use the pod's CA certificate
- * and bearer token file at /var/run/secrets/kubernetes.io/serviceaccount/.
- *
- * @schema VmAgentSpecAPiServerConfig
- */
-export interface VmAgentSpecAPiServerConfig {
-  /**
-   * Authorization configures generic authorization params
-   *
-   * @schema VmAgentSpecAPiServerConfig#authorization
-   */
-  readonly authorization?: VmAgentSpecAPiServerConfigAuthorization;
-
-  /**
-   * BasicAuth allow an endpoint to authenticate over basic authentication
-   *
-   * @schema VmAgentSpecAPiServerConfig#basicAuth
-   */
-  readonly basicAuth?: VmAgentSpecAPiServerConfigBasicAuth;
-
-  /**
-   * Bearer token for accessing apiserver.
-   *
-   * @schema VmAgentSpecAPiServerConfig#bearerToken
-   */
-  readonly bearerToken?: string;
-
-  /**
-   * File to read bearer token for accessing apiserver.
-   *
-   * @schema VmAgentSpecAPiServerConfig#bearerTokenFile
-   */
-  readonly bearerTokenFile?: string;
-
-  /**
-   * Host of apiserver.
-   * A valid string consisting of a hostname or IP followed by an optional port number
-   *
-   * @schema VmAgentSpecAPiServerConfig#host
-   */
-  readonly host: string;
-
-  /**
-   * TLSConfig Config to use for accessing apiserver.
-   *
-   * @schema VmAgentSpecAPiServerConfig#tlsConfig
-   */
-  readonly tlsConfig?: VmAgentSpecAPiServerConfigTlsConfig;
-
-}
-
-/**
- * Converts an object of type 'VmAgentSpecAPiServerConfig' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmAgentSpecAPiServerConfig(obj: VmAgentSpecAPiServerConfig | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'authorization': toJson_VmAgentSpecAPiServerConfigAuthorization(obj.authorization),
-    'basicAuth': toJson_VmAgentSpecAPiServerConfigBasicAuth(obj.basicAuth),
-    'bearerToken': obj.bearerToken,
-    'bearerTokenFile': obj.bearerTokenFile,
-    'host': obj.host,
-    'tlsConfig': toJson_VmAgentSpecAPiServerConfigTlsConfig(obj.tlsConfig),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * AdditionalScrapeConfigs As scrape configs are appended, the user is responsible to make sure it
  * is valid. Note that using this feature may expose the possibility to
  * break upgrades of VMAgent. It is advised to review VMAgent release
@@ -3017,6 +8693,79 @@ export function toJson_VmAgentSpecAdditionalScrapeConfigs(obj: VmAgentSpecAdditi
     'key': obj.key,
     'name': obj.name,
     'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * APIServerConfig allows specifying a host and auth methods to access apiserver.
+ * If left empty, VMAgent is assumed to run inside of the cluster
+ * and will discover API servers automatically and use the pod's CA certificate
+ * and bearer token file at /var/run/secrets/kubernetes.io/serviceaccount/.
+ *
+ * @schema VmAgentSpecApiServerConfig
+ */
+export interface VmAgentSpecApiServerConfig {
+  /**
+   * Authorization configures generic authorization params
+   *
+   * @schema VmAgentSpecApiServerConfig#authorization
+   */
+  readonly authorization?: VmAgentSpecApiServerConfigAuthorization;
+
+  /**
+   * BasicAuth allow an endpoint to authenticate over basic authentication
+   *
+   * @schema VmAgentSpecApiServerConfig#basicAuth
+   */
+  readonly basicAuth?: VmAgentSpecApiServerConfigBasicAuth;
+
+  /**
+   * Bearer token for accessing apiserver.
+   *
+   * @schema VmAgentSpecApiServerConfig#bearerToken
+   */
+  readonly bearerToken?: string;
+
+  /**
+   * File to read bearer token for accessing apiserver.
+   *
+   * @schema VmAgentSpecApiServerConfig#bearerTokenFile
+   */
+  readonly bearerTokenFile?: string;
+
+  /**
+   * Host of apiserver.
+   * A valid string consisting of a hostname or IP followed by an optional port number
+   *
+   * @schema VmAgentSpecApiServerConfig#host
+   */
+  readonly host: string;
+
+  /**
+   * TLSConfig Config to use for accessing apiserver.
+   *
+   * @schema VmAgentSpecApiServerConfig#tlsConfig
+   */
+  readonly tlsConfig?: VmAgentSpecApiServerConfigTlsConfig;
+
+}
+
+/**
+ * Converts an object of type 'VmAgentSpecApiServerConfig' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAgentSpecApiServerConfig(obj: VmAgentSpecApiServerConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'authorization': toJson_VmAgentSpecApiServerConfigAuthorization(obj.authorization),
+    'basicAuth': toJson_VmAgentSpecApiServerConfigBasicAuth(obj.basicAuth),
+    'bearerToken': obj.bearerToken,
+    'bearerTokenFile': obj.bearerTokenFile,
+    'host': obj.host,
+    'tlsConfig': toJson_VmAgentSpecApiServerConfigTlsConfig(obj.tlsConfig),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -3118,6 +8867,57 @@ export function toJson_VmAgentSpecClaimTemplates(obj: VmAgentSpecClaimTemplates 
     'metadata': obj.metadata,
     'spec': toJson_VmAgentSpecClaimTemplatesSpec(obj.spec),
     'status': toJson_VmAgentSpecClaimTemplatesStatus(obj.status),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ConfigReloadAuthKeySecret defines optional secret reference authKey for /-/reload API requests.
+ * Given secret reference will be added to the application and vm-config-reloader as volume
+ * available since v0.57.0 version
+ *
+ * @schema VmAgentSpecConfigReloadAuthKeySecret
+ */
+export interface VmAgentSpecConfigReloadAuthKeySecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema VmAgentSpecConfigReloadAuthKeySecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAgentSpecConfigReloadAuthKeySecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema VmAgentSpecConfigReloadAuthKeySecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmAgentSpecConfigReloadAuthKeySecret' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAgentSpecConfigReloadAuthKeySecret(obj: VmAgentSpecConfigReloadAuthKeySecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -3274,6 +9074,51 @@ export function toJson_VmAgentSpecExtraEnvs(obj: VmAgentSpecExtraEnvs | undefine
   const result = {
     'name': obj.name,
     'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ *
+ * @schema VmAgentSpecExtraEnvsFrom
+ */
+export interface VmAgentSpecExtraEnvsFrom {
+  /**
+   * The ConfigMap to select from
+   *
+   * @schema VmAgentSpecExtraEnvsFrom#configMapRef
+   */
+  readonly configMapRef?: VmAgentSpecExtraEnvsFromConfigMapRef;
+
+  /**
+   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   *
+   * @schema VmAgentSpecExtraEnvsFrom#prefix
+   */
+  readonly prefix?: string;
+
+  /**
+   * The Secret to select from
+   *
+   * @schema VmAgentSpecExtraEnvsFrom#secretRef
+   */
+  readonly secretRef?: VmAgentSpecExtraEnvsFromSecretRef;
+
+}
+
+/**
+ * Converts an object of type 'VmAgentSpecExtraEnvsFrom' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAgentSpecExtraEnvsFrom(obj: VmAgentSpecExtraEnvsFrom | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapRef': toJson_VmAgentSpecExtraEnvsFromConfigMapRef(obj.configMapRef),
+    'prefix': obj.prefix,
+    'secretRef': toJson_VmAgentSpecExtraEnvsFromSecretRef(obj.secretRef),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -4516,11 +10361,12 @@ export interface VmAgentSpecRemoteWrite {
   readonly inlineUrlRelabelConfig?: VmAgentSpecRemoteWriteInlineUrlRelabelConfig[];
 
   /**
-   * MaxDiskUsage defines the maximum file-based buffer size in bytes for -remoteWrite.url
+   * MaxDiskUsage defines the maximum file-based buffer size in bytes for the given remoteWrite
+   * It overrides global configuration defined at remoteWriteSettings.maxDiskUsagePerURL
    *
    * @schema VmAgentSpecRemoteWrite#maxDiskUsage
    */
-  readonly maxDiskUsage?: string;
+  readonly maxDiskUsage?: any;
 
   /**
    * OAuth2 defines auth configuration
@@ -4528,6 +10374,13 @@ export interface VmAgentSpecRemoteWrite {
    * @schema VmAgentSpecRemoteWrite#oauth2
    */
   readonly oauth2?: VmAgentSpecRemoteWriteOauth2;
+
+  /**
+   * ProxyURL for -remoteWrite.url. Supported proxies: http, https, socks5. Example: socks5://proxy:1234
+   *
+   * @schema VmAgentSpecRemoteWrite#proxyURL
+   */
+  readonly proxyUrl?: string;
 
   /**
    * Timeout for sending a single block of data to -remoteWrite.url (default 1m0s)
@@ -4580,6 +10433,7 @@ export function toJson_VmAgentSpecRemoteWrite(obj: VmAgentSpecRemoteWrite | unde
     'inlineUrlRelabelConfig': obj.inlineUrlRelabelConfig?.map(y => toJson_VmAgentSpecRemoteWriteInlineUrlRelabelConfig(y)),
     'maxDiskUsage': obj.maxDiskUsage,
     'oauth2': toJson_VmAgentSpecRemoteWriteOauth2(obj.oauth2),
+    'proxyURL': obj.proxyUrl,
     'sendTimeout': obj.sendTimeout,
     'streamAggrConfig': toJson_VmAgentSpecRemoteWriteStreamAggrConfig(obj.streamAggrConfig),
     'tlsConfig': toJson_VmAgentSpecRemoteWriteTlsConfig(obj.tlsConfig),
@@ -4623,7 +10477,7 @@ export interface VmAgentSpecRemoteWriteSettings {
    *
    * @schema VmAgentSpecRemoteWriteSettings#maxDiskUsagePerURL
    */
-  readonly maxDiskUsagePerUrl?: number;
+  readonly maxDiskUsagePerUrl?: any;
 
   /**
    * The number of concurrent queues
@@ -5509,6 +11363,13 @@ export interface VmAgentSpecStreamAggrConfig {
   readonly dropInputLabels?: string[];
 
   /**
+   * EnableWindows enables aggregating data in separate windows ( available from v0.54.0).
+   *
+   * @schema VmAgentSpecStreamAggrConfig#enableWindows
+   */
+  readonly enableWindows?: boolean;
+
+  /**
    * IgnoreFirstIntervals instructs to ignore first interval
    *
    * @schema VmAgentSpecStreamAggrConfig#ignoreFirstIntervals
@@ -5549,6 +11410,7 @@ export function toJson_VmAgentSpecStreamAggrConfig(obj: VmAgentSpecStreamAggrCon
     'dedupInterval': obj.dedupInterval,
     'dropInput': obj.dropInput,
     'dropInputLabels': obj.dropInputLabels?.map(y => y),
+    'enableWindows': obj.enableWindows,
     'ignoreFirstIntervals': obj.ignoreFirstIntervals,
     'ignoreOldSamples': obj.ignoreOldSamples,
     'keepInput': obj.keepInput,
@@ -5753,40 +11615,40 @@ export function toJson_VmAgentSpecVolumeMounts(obj: VmAgentSpecVolumeMounts | un
 /**
  * Authorization configures generic authorization params
  *
- * @schema VmAgentSpecAPiServerConfigAuthorization
+ * @schema VmAgentSpecApiServerConfigAuthorization
  */
-export interface VmAgentSpecAPiServerConfigAuthorization {
+export interface VmAgentSpecApiServerConfigAuthorization {
   /**
    * Reference to the secret with value for authorization
    *
-   * @schema VmAgentSpecAPiServerConfigAuthorization#credentials
+   * @schema VmAgentSpecApiServerConfigAuthorization#credentials
    */
-  readonly credentials?: VmAgentSpecAPiServerConfigAuthorizationCredentials;
+  readonly credentials?: VmAgentSpecApiServerConfigAuthorizationCredentials;
 
   /**
    * File with value for authorization
    *
-   * @schema VmAgentSpecAPiServerConfigAuthorization#credentialsFile
+   * @schema VmAgentSpecApiServerConfigAuthorization#credentialsFile
    */
   readonly credentialsFile?: string;
 
   /**
    * Type of authorization, default to bearer
    *
-   * @schema VmAgentSpecAPiServerConfigAuthorization#type
+   * @schema VmAgentSpecApiServerConfigAuthorization#type
    */
   readonly type?: string;
 
 }
 
 /**
- * Converts an object of type 'VmAgentSpecAPiServerConfigAuthorization' to JSON representation.
+ * Converts an object of type 'VmAgentSpecApiServerConfigAuthorization' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmAgentSpecAPiServerConfigAuthorization(obj: VmAgentSpecAPiServerConfigAuthorization | undefined): Record<string, any> | undefined {
+export function toJson_VmAgentSpecApiServerConfigAuthorization(obj: VmAgentSpecApiServerConfigAuthorization | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'credentials': toJson_VmAgentSpecAPiServerConfigAuthorizationCredentials(obj.credentials),
+    'credentials': toJson_VmAgentSpecApiServerConfigAuthorizationCredentials(obj.credentials),
     'credentialsFile': obj.credentialsFile,
     'type': obj.type,
   };
@@ -5798,22 +11660,22 @@ export function toJson_VmAgentSpecAPiServerConfigAuthorization(obj: VmAgentSpecA
 /**
  * BasicAuth allow an endpoint to authenticate over basic authentication
  *
- * @schema VmAgentSpecAPiServerConfigBasicAuth
+ * @schema VmAgentSpecApiServerConfigBasicAuth
  */
-export interface VmAgentSpecAPiServerConfigBasicAuth {
+export interface VmAgentSpecApiServerConfigBasicAuth {
   /**
    * Password defines reference for secret with password value
    * The secret needs to be in the same namespace as scrape object
    *
-   * @schema VmAgentSpecAPiServerConfigBasicAuth#password
+   * @schema VmAgentSpecApiServerConfigBasicAuth#password
    */
-  readonly password?: VmAgentSpecAPiServerConfigBasicAuthPassword;
+  readonly password?: VmAgentSpecApiServerConfigBasicAuthPassword;
 
   /**
    * PasswordFile defines path to password file at disk
    * must be pre-mounted
    *
-   * @schema VmAgentSpecAPiServerConfigBasicAuth#password_file
+   * @schema VmAgentSpecApiServerConfigBasicAuth#password_file
    */
   readonly passwordFile?: string;
 
@@ -5821,22 +11683,22 @@ export interface VmAgentSpecAPiServerConfigBasicAuth {
    * Username defines reference for secret with username value
    * The secret needs to be in the same namespace as scrape object
    *
-   * @schema VmAgentSpecAPiServerConfigBasicAuth#username
+   * @schema VmAgentSpecApiServerConfigBasicAuth#username
    */
-  readonly username?: VmAgentSpecAPiServerConfigBasicAuthUsername;
+  readonly username?: VmAgentSpecApiServerConfigBasicAuthUsername;
 
 }
 
 /**
- * Converts an object of type 'VmAgentSpecAPiServerConfigBasicAuth' to JSON representation.
+ * Converts an object of type 'VmAgentSpecApiServerConfigBasicAuth' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmAgentSpecAPiServerConfigBasicAuth(obj: VmAgentSpecAPiServerConfigBasicAuth | undefined): Record<string, any> | undefined {
+export function toJson_VmAgentSpecApiServerConfigBasicAuth(obj: VmAgentSpecApiServerConfigBasicAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'password': toJson_VmAgentSpecAPiServerConfigBasicAuthPassword(obj.password),
+    'password': toJson_VmAgentSpecApiServerConfigBasicAuthPassword(obj.password),
     'password_file': obj.passwordFile,
-    'username': toJson_VmAgentSpecAPiServerConfigBasicAuthUsername(obj.username),
+    'username': toJson_VmAgentSpecApiServerConfigBasicAuthUsername(obj.username),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -5846,81 +11708,81 @@ export function toJson_VmAgentSpecAPiServerConfigBasicAuth(obj: VmAgentSpecAPiSe
 /**
  * TLSConfig Config to use for accessing apiserver.
  *
- * @schema VmAgentSpecAPiServerConfigTlsConfig
+ * @schema VmAgentSpecApiServerConfigTlsConfig
  */
-export interface VmAgentSpecAPiServerConfigTlsConfig {
+export interface VmAgentSpecApiServerConfigTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfig#ca
+   * @schema VmAgentSpecApiServerConfigTlsConfig#ca
    */
-  readonly ca?: VmAgentSpecAPiServerConfigTlsConfigCa;
+  readonly ca?: VmAgentSpecApiServerConfigTlsConfigCa;
 
   /**
    * Path to the CA cert in the container to use for the targets.
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfig#caFile
+   * @schema VmAgentSpecApiServerConfigTlsConfig#caFile
    */
   readonly caFile?: string;
 
   /**
    * Struct containing the client cert file for the targets.
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfig#cert
+   * @schema VmAgentSpecApiServerConfigTlsConfig#cert
    */
-  readonly cert?: VmAgentSpecAPiServerConfigTlsConfigCert;
+  readonly cert?: VmAgentSpecApiServerConfigTlsConfigCert;
 
   /**
    * Path to the client cert file in the container for the targets.
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfig#certFile
+   * @schema VmAgentSpecApiServerConfigTlsConfig#certFile
    */
   readonly certFile?: string;
 
   /**
    * Disable target certificate validation.
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfig#insecureSkipVerify
+   * @schema VmAgentSpecApiServerConfigTlsConfig#insecureSkipVerify
    */
   readonly insecureSkipVerify?: boolean;
 
   /**
    * Path to the client key file in the container for the targets.
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfig#keyFile
+   * @schema VmAgentSpecApiServerConfigTlsConfig#keyFile
    */
   readonly keyFile?: string;
 
   /**
    * Secret containing the client key file for the targets.
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfig#keySecret
+   * @schema VmAgentSpecApiServerConfigTlsConfig#keySecret
    */
-  readonly keySecret?: VmAgentSpecAPiServerConfigTlsConfigKeySecret;
+  readonly keySecret?: VmAgentSpecApiServerConfigTlsConfigKeySecret;
 
   /**
    * Used to verify the hostname for the targets.
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfig#serverName
+   * @schema VmAgentSpecApiServerConfigTlsConfig#serverName
    */
   readonly serverName?: string;
 
 }
 
 /**
- * Converts an object of type 'VmAgentSpecAPiServerConfigTlsConfig' to JSON representation.
+ * Converts an object of type 'VmAgentSpecApiServerConfigTlsConfig' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmAgentSpecAPiServerConfigTlsConfig(obj: VmAgentSpecAPiServerConfigTlsConfig | undefined): Record<string, any> | undefined {
+export function toJson_VmAgentSpecApiServerConfigTlsConfig(obj: VmAgentSpecApiServerConfigTlsConfig | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'ca': toJson_VmAgentSpecAPiServerConfigTlsConfigCa(obj.ca),
+    'ca': toJson_VmAgentSpecApiServerConfigTlsConfigCa(obj.ca),
     'caFile': obj.caFile,
-    'cert': toJson_VmAgentSpecAPiServerConfigTlsConfigCert(obj.cert),
+    'cert': toJson_VmAgentSpecApiServerConfigTlsConfigCert(obj.cert),
     'certFile': obj.certFile,
     'insecureSkipVerify': obj.insecureSkipVerify,
     'keyFile': obj.keyFile,
-    'keySecret': toJson_VmAgentSpecAPiServerConfigTlsConfigKeySecret(obj.keySecret),
+    'keySecret': toJson_VmAgentSpecApiServerConfigTlsConfigKeySecret(obj.keySecret),
     'serverName': obj.serverName,
   };
   // filter undefined values
@@ -6293,6 +12155,7 @@ export class VmAgentSpecConfigReloaderResourcesRequests {
  */
 export interface VmAgentSpecDnsConfigOptions {
   /**
+   * Name is this DNS resolver option's name.
    * Required.
    *
    * @schema VmAgentSpecDnsConfigOptions#name
@@ -6300,6 +12163,8 @@ export interface VmAgentSpecDnsConfigOptions {
   readonly name?: string;
 
   /**
+   * Value is this DNS resolver option's value.
+   *
    * @schema VmAgentSpecDnsConfigOptions#value
    */
   readonly value?: string;
@@ -6315,6 +12180,88 @@ export function toJson_VmAgentSpecDnsConfigOptions(obj: VmAgentSpecDnsConfigOpti
   const result = {
     'name': obj.name,
     'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The ConfigMap to select from
+ *
+ * @schema VmAgentSpecExtraEnvsFromConfigMapRef
+ */
+export interface VmAgentSpecExtraEnvsFromConfigMapRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAgentSpecExtraEnvsFromConfigMapRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap must be defined
+   *
+   * @schema VmAgentSpecExtraEnvsFromConfigMapRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmAgentSpecExtraEnvsFromConfigMapRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAgentSpecExtraEnvsFromConfigMapRef(obj: VmAgentSpecExtraEnvsFromConfigMapRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The Secret to select from
+ *
+ * @schema VmAgentSpecExtraEnvsFromSecretRef
+ */
+export interface VmAgentSpecExtraEnvsFromSecretRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAgentSpecExtraEnvsFromSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret must be defined
+   *
+   * @schema VmAgentSpecExtraEnvsFromSecretRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmAgentSpecExtraEnvsFromSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAgentSpecExtraEnvsFromSecretRef(obj: VmAgentSpecExtraEnvsFromSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -6951,11 +12898,29 @@ export interface VmAgentSpecRemoteWriteOauth2 {
   readonly endpointParams?: { [key: string]: string };
 
   /**
+   * The proxy URL for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmAgentSpecRemoteWriteOauth2#proxy_url
+   */
+  readonly proxyUrl?: string;
+
+  /**
    * OAuth2 scopes used for the token request
    *
    * @schema VmAgentSpecRemoteWriteOauth2#scopes
    */
   readonly scopes?: string[];
+
+  /**
+   * TLSConfig for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmAgentSpecRemoteWriteOauth2#tls_config
+   */
+  readonly tlsConfig?: any;
 
   /**
    * The URL to fetch the token from
@@ -6977,7 +12942,9 @@ export function toJson_VmAgentSpecRemoteWriteOauth2(obj: VmAgentSpecRemoteWriteO
     'client_secret': toJson_VmAgentSpecRemoteWriteOauth2ClientSecret(obj.clientSecret),
     'client_secret_file': obj.clientSecretFile,
     'endpoint_params': ((obj.endpointParams) === undefined) ? undefined : (Object.entries(obj.endpointParams).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'proxy_url': obj.proxyUrl,
     'scopes': obj.scopes?.map(y => y),
+    'tls_config': obj.tlsConfig,
     'token_url': obj.tokenUrl,
   };
   // filter undefined values
@@ -7020,6 +12987,13 @@ export interface VmAgentSpecRemoteWriteStreamAggrConfig {
   readonly dropInputLabels?: string[];
 
   /**
+   * EnableWindows enables aggregating data in separate windows ( available from v0.54.0).
+   *
+   * @schema VmAgentSpecRemoteWriteStreamAggrConfig#enableWindows
+   */
+  readonly enableWindows?: boolean;
+
+  /**
    * IgnoreFirstIntervals instructs to ignore first interval
    *
    * @schema VmAgentSpecRemoteWriteStreamAggrConfig#ignoreFirstIntervals
@@ -7060,6 +13034,7 @@ export function toJson_VmAgentSpecRemoteWriteStreamAggrConfig(obj: VmAgentSpecRe
     'dedupInterval': obj.dedupInterval,
     'dropInput': obj.dropInput,
     'dropInputLabels': obj.dropInputLabels?.map(y => y),
+    'enableWindows': obj.enableWindows,
     'ignoreFirstIntervals': obj.ignoreFirstIntervals,
     'ignoreOldSamples': obj.ignoreOldSamples,
     'keepInput': obj.keepInput,
@@ -7077,7 +13052,7 @@ export function toJson_VmAgentSpecRemoteWriteStreamAggrConfig(obj: VmAgentSpecRe
  */
 export interface VmAgentSpecRemoteWriteTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmAgentSpecRemoteWriteTlsConfig#ca
    */
@@ -7883,6 +13858,13 @@ export interface VmAgentSpecStreamAggrConfigRules {
   readonly dropInputLabels?: string[];
 
   /**
+   * EnableWindows enables aggregating data in separate windows
+   *
+   * @schema VmAgentSpecStreamAggrConfigRules#enable_windows
+   */
+  readonly enableWindows?: boolean;
+
+  /**
    * FlushOnShutdown defines whether to flush the aggregation state on process termination
    * or config reload. Is `false` by default.
    * It is not recommended changing this setting, unless unfinished aggregations states
@@ -8010,6 +13992,7 @@ export function toJson_VmAgentSpecStreamAggrConfigRules(obj: VmAgentSpecStreamAg
     'by': obj.by?.map(y => y),
     'dedup_interval': obj.dedupInterval,
     'drop_input_labels': obj.dropInputLabels?.map(y => y),
+    'enable_windows': obj.enableWindows,
     'flush_on_shutdown': obj.flushOnShutdown,
     'ignore_first_intervals': obj.ignoreFirstIntervals,
     'ignore_old_samples': obj.ignoreOldSamples,
@@ -8031,13 +14014,13 @@ export function toJson_VmAgentSpecStreamAggrConfigRules(obj: VmAgentSpecStreamAg
 /**
  * Reference to the secret with value for authorization
  *
- * @schema VmAgentSpecAPiServerConfigAuthorizationCredentials
+ * @schema VmAgentSpecApiServerConfigAuthorizationCredentials
  */
-export interface VmAgentSpecAPiServerConfigAuthorizationCredentials {
+export interface VmAgentSpecApiServerConfigAuthorizationCredentials {
   /**
    * The key of the secret to select from.  Must be a valid secret key.
    *
-   * @schema VmAgentSpecAPiServerConfigAuthorizationCredentials#key
+   * @schema VmAgentSpecApiServerConfigAuthorizationCredentials#key
    */
   readonly key: string;
 
@@ -8048,24 +14031,24 @@ export interface VmAgentSpecAPiServerConfigAuthorizationCredentials {
    * almost certainly wrong.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
    *
-   * @schema VmAgentSpecAPiServerConfigAuthorizationCredentials#name
+   * @schema VmAgentSpecApiServerConfigAuthorizationCredentials#name
    */
   readonly name?: string;
 
   /**
    * Specify whether the Secret or its key must be defined
    *
-   * @schema VmAgentSpecAPiServerConfigAuthorizationCredentials#optional
+   * @schema VmAgentSpecApiServerConfigAuthorizationCredentials#optional
    */
   readonly optional?: boolean;
 
 }
 
 /**
- * Converts an object of type 'VmAgentSpecAPiServerConfigAuthorizationCredentials' to JSON representation.
+ * Converts an object of type 'VmAgentSpecApiServerConfigAuthorizationCredentials' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmAgentSpecAPiServerConfigAuthorizationCredentials(obj: VmAgentSpecAPiServerConfigAuthorizationCredentials | undefined): Record<string, any> | undefined {
+export function toJson_VmAgentSpecApiServerConfigAuthorizationCredentials(obj: VmAgentSpecApiServerConfigAuthorizationCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -8081,13 +14064,13 @@ export function toJson_VmAgentSpecAPiServerConfigAuthorizationCredentials(obj: V
  * Password defines reference for secret with password value
  * The secret needs to be in the same namespace as scrape object
  *
- * @schema VmAgentSpecAPiServerConfigBasicAuthPassword
+ * @schema VmAgentSpecApiServerConfigBasicAuthPassword
  */
-export interface VmAgentSpecAPiServerConfigBasicAuthPassword {
+export interface VmAgentSpecApiServerConfigBasicAuthPassword {
   /**
    * The key of the secret to select from.  Must be a valid secret key.
    *
-   * @schema VmAgentSpecAPiServerConfigBasicAuthPassword#key
+   * @schema VmAgentSpecApiServerConfigBasicAuthPassword#key
    */
   readonly key: string;
 
@@ -8098,24 +14081,24 @@ export interface VmAgentSpecAPiServerConfigBasicAuthPassword {
    * almost certainly wrong.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
    *
-   * @schema VmAgentSpecAPiServerConfigBasicAuthPassword#name
+   * @schema VmAgentSpecApiServerConfigBasicAuthPassword#name
    */
   readonly name?: string;
 
   /**
    * Specify whether the Secret or its key must be defined
    *
-   * @schema VmAgentSpecAPiServerConfigBasicAuthPassword#optional
+   * @schema VmAgentSpecApiServerConfigBasicAuthPassword#optional
    */
   readonly optional?: boolean;
 
 }
 
 /**
- * Converts an object of type 'VmAgentSpecAPiServerConfigBasicAuthPassword' to JSON representation.
+ * Converts an object of type 'VmAgentSpecApiServerConfigBasicAuthPassword' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmAgentSpecAPiServerConfigBasicAuthPassword(obj: VmAgentSpecAPiServerConfigBasicAuthPassword | undefined): Record<string, any> | undefined {
+export function toJson_VmAgentSpecApiServerConfigBasicAuthPassword(obj: VmAgentSpecApiServerConfigBasicAuthPassword | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -8131,13 +14114,13 @@ export function toJson_VmAgentSpecAPiServerConfigBasicAuthPassword(obj: VmAgentS
  * Username defines reference for secret with username value
  * The secret needs to be in the same namespace as scrape object
  *
- * @schema VmAgentSpecAPiServerConfigBasicAuthUsername
+ * @schema VmAgentSpecApiServerConfigBasicAuthUsername
  */
-export interface VmAgentSpecAPiServerConfigBasicAuthUsername {
+export interface VmAgentSpecApiServerConfigBasicAuthUsername {
   /**
    * The key of the secret to select from.  Must be a valid secret key.
    *
-   * @schema VmAgentSpecAPiServerConfigBasicAuthUsername#key
+   * @schema VmAgentSpecApiServerConfigBasicAuthUsername#key
    */
   readonly key: string;
 
@@ -8148,24 +14131,24 @@ export interface VmAgentSpecAPiServerConfigBasicAuthUsername {
    * almost certainly wrong.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
    *
-   * @schema VmAgentSpecAPiServerConfigBasicAuthUsername#name
+   * @schema VmAgentSpecApiServerConfigBasicAuthUsername#name
    */
   readonly name?: string;
 
   /**
    * Specify whether the Secret or its key must be defined
    *
-   * @schema VmAgentSpecAPiServerConfigBasicAuthUsername#optional
+   * @schema VmAgentSpecApiServerConfigBasicAuthUsername#optional
    */
   readonly optional?: boolean;
 
 }
 
 /**
- * Converts an object of type 'VmAgentSpecAPiServerConfigBasicAuthUsername' to JSON representation.
+ * Converts an object of type 'VmAgentSpecApiServerConfigBasicAuthUsername' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmAgentSpecAPiServerConfigBasicAuthUsername(obj: VmAgentSpecAPiServerConfigBasicAuthUsername | undefined): Record<string, any> | undefined {
+export function toJson_VmAgentSpecApiServerConfigBasicAuthUsername(obj: VmAgentSpecApiServerConfigBasicAuthUsername | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -8178,36 +14161,36 @@ export function toJson_VmAgentSpecAPiServerConfigBasicAuthUsername(obj: VmAgentS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
- * @schema VmAgentSpecAPiServerConfigTlsConfigCa
+ * @schema VmAgentSpecApiServerConfigTlsConfigCa
  */
-export interface VmAgentSpecAPiServerConfigTlsConfigCa {
+export interface VmAgentSpecApiServerConfigTlsConfigCa {
   /**
    * ConfigMap containing data to use for the targets.
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfigCa#configMap
+   * @schema VmAgentSpecApiServerConfigTlsConfigCa#configMap
    */
-  readonly configMap?: VmAgentSpecAPiServerConfigTlsConfigCaConfigMap;
+  readonly configMap?: VmAgentSpecApiServerConfigTlsConfigCaConfigMap;
 
   /**
    * Secret containing data to use for the targets.
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfigCa#secret
+   * @schema VmAgentSpecApiServerConfigTlsConfigCa#secret
    */
-  readonly secret?: VmAgentSpecAPiServerConfigTlsConfigCaSecret;
+  readonly secret?: VmAgentSpecApiServerConfigTlsConfigCaSecret;
 
 }
 
 /**
- * Converts an object of type 'VmAgentSpecAPiServerConfigTlsConfigCa' to JSON representation.
+ * Converts an object of type 'VmAgentSpecApiServerConfigTlsConfigCa' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmAgentSpecAPiServerConfigTlsConfigCa(obj: VmAgentSpecAPiServerConfigTlsConfigCa | undefined): Record<string, any> | undefined {
+export function toJson_VmAgentSpecApiServerConfigTlsConfigCa(obj: VmAgentSpecApiServerConfigTlsConfigCa | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'configMap': toJson_VmAgentSpecAPiServerConfigTlsConfigCaConfigMap(obj.configMap),
-    'secret': toJson_VmAgentSpecAPiServerConfigTlsConfigCaSecret(obj.secret),
+    'configMap': toJson_VmAgentSpecApiServerConfigTlsConfigCaConfigMap(obj.configMap),
+    'secret': toJson_VmAgentSpecApiServerConfigTlsConfigCaSecret(obj.secret),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -8217,34 +14200,34 @@ export function toJson_VmAgentSpecAPiServerConfigTlsConfigCa(obj: VmAgentSpecAPi
 /**
  * Struct containing the client cert file for the targets.
  *
- * @schema VmAgentSpecAPiServerConfigTlsConfigCert
+ * @schema VmAgentSpecApiServerConfigTlsConfigCert
  */
-export interface VmAgentSpecAPiServerConfigTlsConfigCert {
+export interface VmAgentSpecApiServerConfigTlsConfigCert {
   /**
    * ConfigMap containing data to use for the targets.
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfigCert#configMap
+   * @schema VmAgentSpecApiServerConfigTlsConfigCert#configMap
    */
-  readonly configMap?: VmAgentSpecAPiServerConfigTlsConfigCertConfigMap;
+  readonly configMap?: VmAgentSpecApiServerConfigTlsConfigCertConfigMap;
 
   /**
    * Secret containing data to use for the targets.
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfigCert#secret
+   * @schema VmAgentSpecApiServerConfigTlsConfigCert#secret
    */
-  readonly secret?: VmAgentSpecAPiServerConfigTlsConfigCertSecret;
+  readonly secret?: VmAgentSpecApiServerConfigTlsConfigCertSecret;
 
 }
 
 /**
- * Converts an object of type 'VmAgentSpecAPiServerConfigTlsConfigCert' to JSON representation.
+ * Converts an object of type 'VmAgentSpecApiServerConfigTlsConfigCert' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmAgentSpecAPiServerConfigTlsConfigCert(obj: VmAgentSpecAPiServerConfigTlsConfigCert | undefined): Record<string, any> | undefined {
+export function toJson_VmAgentSpecApiServerConfigTlsConfigCert(obj: VmAgentSpecApiServerConfigTlsConfigCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'configMap': toJson_VmAgentSpecAPiServerConfigTlsConfigCertConfigMap(obj.configMap),
-    'secret': toJson_VmAgentSpecAPiServerConfigTlsConfigCertSecret(obj.secret),
+    'configMap': toJson_VmAgentSpecApiServerConfigTlsConfigCertConfigMap(obj.configMap),
+    'secret': toJson_VmAgentSpecApiServerConfigTlsConfigCertSecret(obj.secret),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -8254,13 +14237,13 @@ export function toJson_VmAgentSpecAPiServerConfigTlsConfigCert(obj: VmAgentSpecA
 /**
  * Secret containing the client key file for the targets.
  *
- * @schema VmAgentSpecAPiServerConfigTlsConfigKeySecret
+ * @schema VmAgentSpecApiServerConfigTlsConfigKeySecret
  */
-export interface VmAgentSpecAPiServerConfigTlsConfigKeySecret {
+export interface VmAgentSpecApiServerConfigTlsConfigKeySecret {
   /**
    * The key of the secret to select from.  Must be a valid secret key.
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfigKeySecret#key
+   * @schema VmAgentSpecApiServerConfigTlsConfigKeySecret#key
    */
   readonly key: string;
 
@@ -8271,24 +14254,24 @@ export interface VmAgentSpecAPiServerConfigTlsConfigKeySecret {
    * almost certainly wrong.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfigKeySecret#name
+   * @schema VmAgentSpecApiServerConfigTlsConfigKeySecret#name
    */
   readonly name?: string;
 
   /**
    * Specify whether the Secret or its key must be defined
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfigKeySecret#optional
+   * @schema VmAgentSpecApiServerConfigTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
 
 }
 
 /**
- * Converts an object of type 'VmAgentSpecAPiServerConfigTlsConfigKeySecret' to JSON representation.
+ * Converts an object of type 'VmAgentSpecApiServerConfigTlsConfigKeySecret' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmAgentSpecAPiServerConfigTlsConfigKeySecret(obj: VmAgentSpecAPiServerConfigTlsConfigKeySecret | undefined): Record<string, any> | undefined {
+export function toJson_VmAgentSpecApiServerConfigTlsConfigKeySecret(obj: VmAgentSpecApiServerConfigTlsConfigKeySecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -8582,20 +14565,17 @@ export interface VmAgentSpecClaimTemplatesStatusConditions {
   readonly reason?: string;
 
   /**
+   * Status is the status of the condition.
+   * Can be True, False, Unknown.
+   * More info: https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-claim-v1/#:~:text=state%20of%20pvc-,conditions.status,-(string)%2C%20required
+   *
    * @schema VmAgentSpecClaimTemplatesStatusConditions#status
    */
   readonly status: string;
 
   /**
-   * PersistentVolumeClaimConditionType defines the condition of PV claim.
-   * Valid values are:
-   * - "Resizing", "FileSystemResizePending"
-   *
-   * If RecoverVolumeExpansionFailure feature gate is enabled, then following additional values can be expected:
-   * - "ControllerResizeError", "NodeResizeError"
-   *
-   * If VolumeAttributesClass feature gate is enabled, then following additional values can be expected:
-   * - "ModifyVolumeError", "ModifyingVolume"
+   * Type is the type of the condition.
+   * More info: https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-claim-v1/#:~:text=set%20to%20%27ResizeStarted%27.-,PersistentVolumeClaimCondition,-contains%20details%20about
    *
    * @schema VmAgentSpecClaimTemplatesStatusConditions#type
    */
@@ -8940,6 +14920,13 @@ export interface VmAgentSpecRemoteWriteStreamAggrConfigRules {
   readonly dropInputLabels?: string[];
 
   /**
+   * EnableWindows enables aggregating data in separate windows
+   *
+   * @schema VmAgentSpecRemoteWriteStreamAggrConfigRules#enable_windows
+   */
+  readonly enableWindows?: boolean;
+
+  /**
    * FlushOnShutdown defines whether to flush the aggregation state on process termination
    * or config reload. Is `false` by default.
    * It is not recommended changing this setting, unless unfinished aggregations states
@@ -9067,6 +15054,7 @@ export function toJson_VmAgentSpecRemoteWriteStreamAggrConfigRules(obj: VmAgentS
     'by': obj.by?.map(y => y),
     'dedup_interval': obj.dedupInterval,
     'drop_input_labels': obj.dropInputLabels?.map(y => y),
+    'enable_windows': obj.enableWindows,
     'flush_on_shutdown': obj.flushOnShutdown,
     'ignore_first_intervals': obj.ignoreFirstIntervals,
     'ignore_old_samples': obj.ignoreOldSamples,
@@ -9086,7 +15074,7 @@ export function toJson_VmAgentSpecRemoteWriteStreamAggrConfigRules(obj: VmAgentS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmAgentSpecRemoteWriteTlsConfigCa
  */
@@ -9799,13 +15787,13 @@ export function toJson_VmAgentSpecStreamAggrConfigRulesOutputRelabelConfigs(obj:
 /**
  * ConfigMap containing data to use for the targets.
  *
- * @schema VmAgentSpecAPiServerConfigTlsConfigCaConfigMap
+ * @schema VmAgentSpecApiServerConfigTlsConfigCaConfigMap
  */
-export interface VmAgentSpecAPiServerConfigTlsConfigCaConfigMap {
+export interface VmAgentSpecApiServerConfigTlsConfigCaConfigMap {
   /**
    * The key to select.
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfigCaConfigMap#key
+   * @schema VmAgentSpecApiServerConfigTlsConfigCaConfigMap#key
    */
   readonly key: string;
 
@@ -9816,24 +15804,24 @@ export interface VmAgentSpecAPiServerConfigTlsConfigCaConfigMap {
    * almost certainly wrong.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfigCaConfigMap#name
+   * @schema VmAgentSpecApiServerConfigTlsConfigCaConfigMap#name
    */
   readonly name?: string;
 
   /**
    * Specify whether the ConfigMap or its key must be defined
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfigCaConfigMap#optional
+   * @schema VmAgentSpecApiServerConfigTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
 
 }
 
 /**
- * Converts an object of type 'VmAgentSpecAPiServerConfigTlsConfigCaConfigMap' to JSON representation.
+ * Converts an object of type 'VmAgentSpecApiServerConfigTlsConfigCaConfigMap' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmAgentSpecAPiServerConfigTlsConfigCaConfigMap(obj: VmAgentSpecAPiServerConfigTlsConfigCaConfigMap | undefined): Record<string, any> | undefined {
+export function toJson_VmAgentSpecApiServerConfigTlsConfigCaConfigMap(obj: VmAgentSpecApiServerConfigTlsConfigCaConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -9848,13 +15836,13 @@ export function toJson_VmAgentSpecAPiServerConfigTlsConfigCaConfigMap(obj: VmAge
 /**
  * Secret containing data to use for the targets.
  *
- * @schema VmAgentSpecAPiServerConfigTlsConfigCaSecret
+ * @schema VmAgentSpecApiServerConfigTlsConfigCaSecret
  */
-export interface VmAgentSpecAPiServerConfigTlsConfigCaSecret {
+export interface VmAgentSpecApiServerConfigTlsConfigCaSecret {
   /**
    * The key of the secret to select from.  Must be a valid secret key.
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfigCaSecret#key
+   * @schema VmAgentSpecApiServerConfigTlsConfigCaSecret#key
    */
   readonly key: string;
 
@@ -9865,24 +15853,24 @@ export interface VmAgentSpecAPiServerConfigTlsConfigCaSecret {
    * almost certainly wrong.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfigCaSecret#name
+   * @schema VmAgentSpecApiServerConfigTlsConfigCaSecret#name
    */
   readonly name?: string;
 
   /**
    * Specify whether the Secret or its key must be defined
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfigCaSecret#optional
+   * @schema VmAgentSpecApiServerConfigTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
 
 }
 
 /**
- * Converts an object of type 'VmAgentSpecAPiServerConfigTlsConfigCaSecret' to JSON representation.
+ * Converts an object of type 'VmAgentSpecApiServerConfigTlsConfigCaSecret' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmAgentSpecAPiServerConfigTlsConfigCaSecret(obj: VmAgentSpecAPiServerConfigTlsConfigCaSecret | undefined): Record<string, any> | undefined {
+export function toJson_VmAgentSpecApiServerConfigTlsConfigCaSecret(obj: VmAgentSpecApiServerConfigTlsConfigCaSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -9897,13 +15885,13 @@ export function toJson_VmAgentSpecAPiServerConfigTlsConfigCaSecret(obj: VmAgentS
 /**
  * ConfigMap containing data to use for the targets.
  *
- * @schema VmAgentSpecAPiServerConfigTlsConfigCertConfigMap
+ * @schema VmAgentSpecApiServerConfigTlsConfigCertConfigMap
  */
-export interface VmAgentSpecAPiServerConfigTlsConfigCertConfigMap {
+export interface VmAgentSpecApiServerConfigTlsConfigCertConfigMap {
   /**
    * The key to select.
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfigCertConfigMap#key
+   * @schema VmAgentSpecApiServerConfigTlsConfigCertConfigMap#key
    */
   readonly key: string;
 
@@ -9914,24 +15902,24 @@ export interface VmAgentSpecAPiServerConfigTlsConfigCertConfigMap {
    * almost certainly wrong.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfigCertConfigMap#name
+   * @schema VmAgentSpecApiServerConfigTlsConfigCertConfigMap#name
    */
   readonly name?: string;
 
   /**
    * Specify whether the ConfigMap or its key must be defined
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfigCertConfigMap#optional
+   * @schema VmAgentSpecApiServerConfigTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
 
 }
 
 /**
- * Converts an object of type 'VmAgentSpecAPiServerConfigTlsConfigCertConfigMap' to JSON representation.
+ * Converts an object of type 'VmAgentSpecApiServerConfigTlsConfigCertConfigMap' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmAgentSpecAPiServerConfigTlsConfigCertConfigMap(obj: VmAgentSpecAPiServerConfigTlsConfigCertConfigMap | undefined): Record<string, any> | undefined {
+export function toJson_VmAgentSpecApiServerConfigTlsConfigCertConfigMap(obj: VmAgentSpecApiServerConfigTlsConfigCertConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -9946,13 +15934,13 @@ export function toJson_VmAgentSpecAPiServerConfigTlsConfigCertConfigMap(obj: VmA
 /**
  * Secret containing data to use for the targets.
  *
- * @schema VmAgentSpecAPiServerConfigTlsConfigCertSecret
+ * @schema VmAgentSpecApiServerConfigTlsConfigCertSecret
  */
-export interface VmAgentSpecAPiServerConfigTlsConfigCertSecret {
+export interface VmAgentSpecApiServerConfigTlsConfigCertSecret {
   /**
    * The key of the secret to select from.  Must be a valid secret key.
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfigCertSecret#key
+   * @schema VmAgentSpecApiServerConfigTlsConfigCertSecret#key
    */
   readonly key: string;
 
@@ -9963,24 +15951,24 @@ export interface VmAgentSpecAPiServerConfigTlsConfigCertSecret {
    * almost certainly wrong.
    * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfigCertSecret#name
+   * @schema VmAgentSpecApiServerConfigTlsConfigCertSecret#name
    */
   readonly name?: string;
 
   /**
    * Specify whether the Secret or its key must be defined
    *
-   * @schema VmAgentSpecAPiServerConfigTlsConfigCertSecret#optional
+   * @schema VmAgentSpecApiServerConfigTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
 
 }
 
 /**
- * Converts an object of type 'VmAgentSpecAPiServerConfigTlsConfigCertSecret' to JSON representation.
+ * Converts an object of type 'VmAgentSpecApiServerConfigTlsConfigCertSecret' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmAgentSpecAPiServerConfigTlsConfigCertSecret(obj: VmAgentSpecAPiServerConfigTlsConfigCertSecret | undefined): Record<string, any> | undefined {
+export function toJson_VmAgentSpecApiServerConfigTlsConfigCertSecret(obj: VmAgentSpecApiServerConfigTlsConfigCertSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -10868,20 +16856,17 @@ export interface VmAgentSpecStatefulStorageVolumeClaimTemplateStatusConditions {
   readonly reason?: string;
 
   /**
+   * Status is the status of the condition.
+   * Can be True, False, Unknown.
+   * More info: https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-claim-v1/#:~:text=state%20of%20pvc-,conditions.status,-(string)%2C%20required
+   *
    * @schema VmAgentSpecStatefulStorageVolumeClaimTemplateStatusConditions#status
    */
   readonly status: string;
 
   /**
-   * PersistentVolumeClaimConditionType defines the condition of PV claim.
-   * Valid values are:
-   * - "Resizing", "FileSystemResizePending"
-   *
-   * If RecoverVolumeExpansionFailure feature gate is enabled, then following additional values can be expected:
-   * - "ControllerResizeError", "NodeResizeError"
-   *
-   * If VolumeAttributesClass feature gate is enabled, then following additional values can be expected:
-   * - "ModifyVolumeError", "ModifyingVolume"
+   * Type is the type of the condition.
+   * More info: https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-claim-v1/#:~:text=set%20to%20%27ResizeStarted%27.-,PersistentVolumeClaimCondition,-contains%20details%20about
    *
    * @schema VmAgentSpecStatefulStorageVolumeClaimTemplateStatusConditions#type
    */
@@ -11147,6 +17132,15 @@ export interface VmAlertSpec {
   readonly configMaps?: string[];
 
   /**
+   * ConfigReloadAuthKeySecret defines optional secret reference authKey for /-/reload API requests.
+   * Given secret reference will be added to the application and vm-config-reloader as volume
+   * available since v0.57.0 version
+   *
+   * @schema VmAlertSpec#configReloadAuthKeySecret
+   */
+  readonly configReloadAuthKeySecret?: VmAlertSpecConfigReloadAuthKeySecret;
+
+  /**
    * ConfigReloaderExtraArgs that will be passed to  VMAuths config-reloader container
    * for example resyncInterval: "30s"
    *
@@ -11183,6 +17177,17 @@ export interface VmAlertSpec {
    * @schema VmAlertSpec#datasource
    */
   readonly datasource: VmAlertSpecDatasource;
+
+  /**
+   * DisableAutomountServiceAccountToken whether to disable serviceAccount auto mount by Kubernetes (available from v0.54.0).
+   * Operator will conditionally create volumes and volumeMounts for containers if it requires k8s API access.
+   * For example, vmagent and vm-config-reloader requires k8s API access.
+   * Operator creates volumes with name: "kube-api-access", which can be used as volumeMount for extraContainers if needed.
+   * And also adds VolumeMounts at /var/run/secrets/kubernetes.io/serviceaccount.
+   *
+   * @schema VmAlertSpec#disableAutomountServiceAccountToken
+   */
+  readonly disableAutomountServiceAccountToken?: boolean;
 
   /**
    * DisableSelfServiceScrape controls creation of VMServiceScrape by operator
@@ -11246,6 +17251,14 @@ export interface VmAlertSpec {
    * @schema VmAlertSpec#extraEnvs
    */
   readonly extraEnvs?: VmAlertSpecExtraEnvs[];
+
+  /**
+   * ExtraEnvsFrom defines source of env variables for the application container
+   * could either be secret or configmap
+   *
+   * @schema VmAlertSpec#extraEnvsFrom
+   */
+  readonly extraEnvsFrom?: VmAlertSpecExtraEnvsFrom[];
 
   /**
    * HostAliases provides mapping for ip and hostname,
@@ -11666,11 +17679,13 @@ export function toJson_VmAlertSpec(obj: VmAlertSpec | undefined): Record<string,
   const result = {
     'affinity': obj.affinity,
     'configMaps': obj.configMaps?.map(y => y),
+    'configReloadAuthKeySecret': toJson_VmAlertSpecConfigReloadAuthKeySecret(obj.configReloadAuthKeySecret),
     'configReloaderExtraArgs': ((obj.configReloaderExtraArgs) === undefined) ? undefined : (Object.entries(obj.configReloaderExtraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'configReloaderImageTag': obj.configReloaderImageTag,
     'configReloaderResources': toJson_VmAlertSpecConfigReloaderResources(obj.configReloaderResources),
     'containers': obj.containers?.map(y => y),
     'datasource': toJson_VmAlertSpecDatasource(obj.datasource),
+    'disableAutomountServiceAccountToken': obj.disableAutomountServiceAccountToken,
     'disableSelfServiceScrape': obj.disableSelfServiceScrape,
     'dnsConfig': toJson_VmAlertSpecDnsConfig(obj.dnsConfig),
     'dnsPolicy': obj.dnsPolicy,
@@ -11679,6 +17694,7 @@ export function toJson_VmAlertSpec(obj: VmAlertSpec | undefined): Record<string,
     'externalLabels': ((obj.externalLabels) === undefined) ? undefined : (Object.entries(obj.externalLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'extraEnvs': obj.extraEnvs?.map(y => toJson_VmAlertSpecExtraEnvs(y)),
+    'extraEnvsFrom': obj.extraEnvsFrom?.map(y => toJson_VmAlertSpecExtraEnvsFrom(y)),
     'hostAliases': obj.hostAliases?.map(y => toJson_VmAlertSpecHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
     'image': toJson_VmAlertSpecImage(obj.image),
@@ -11728,6 +17744,57 @@ export function toJson_VmAlertSpec(obj: VmAlertSpec | undefined): Record<string,
     'useVMConfigReloader': obj.useVmConfigReloader,
     'volumeMounts': obj.volumeMounts?.map(y => toJson_VmAlertSpecVolumeMounts(y)),
     'volumes': obj.volumes?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ConfigReloadAuthKeySecret defines optional secret reference authKey for /-/reload API requests.
+ * Given secret reference will be added to the application and vm-config-reloader as volume
+ * available since v0.57.0 version
+ *
+ * @schema VmAlertSpecConfigReloadAuthKeySecret
+ */
+export interface VmAlertSpecConfigReloadAuthKeySecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema VmAlertSpecConfigReloadAuthKeySecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAlertSpecConfigReloadAuthKeySecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema VmAlertSpecConfigReloadAuthKeySecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmAlertSpecConfigReloadAuthKeySecret' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAlertSpecConfigReloadAuthKeySecret(obj: VmAlertSpecConfigReloadAuthKeySecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -11965,6 +18032,51 @@ export function toJson_VmAlertSpecExtraEnvs(obj: VmAlertSpecExtraEnvs | undefine
   const result = {
     'name': obj.name,
     'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ *
+ * @schema VmAlertSpecExtraEnvsFrom
+ */
+export interface VmAlertSpecExtraEnvsFrom {
+  /**
+   * The ConfigMap to select from
+   *
+   * @schema VmAlertSpecExtraEnvsFrom#configMapRef
+   */
+  readonly configMapRef?: VmAlertSpecExtraEnvsFromConfigMapRef;
+
+  /**
+   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   *
+   * @schema VmAlertSpecExtraEnvsFrom#prefix
+   */
+  readonly prefix?: string;
+
+  /**
+   * The Secret to select from
+   *
+   * @schema VmAlertSpecExtraEnvsFrom#secretRef
+   */
+  readonly secretRef?: VmAlertSpecExtraEnvsFromSecretRef;
+
+}
+
+/**
+ * Converts an object of type 'VmAlertSpecExtraEnvsFrom' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAlertSpecExtraEnvsFrom(obj: VmAlertSpecExtraEnvsFrom | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapRef': toJson_VmAlertSpecExtraEnvsFromConfigMapRef(obj.configMapRef),
+    'prefix': obj.prefix,
+    'secretRef': toJson_VmAlertSpecExtraEnvsFromSecretRef(obj.secretRef),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -13411,6 +19523,7 @@ export function toJson_VmAlertSpecDatasourceBearerTokenSecret(obj: VmAlertSpecDa
  */
 export interface VmAlertSpecDnsConfigOptions {
   /**
+   * Name is this DNS resolver option's name.
    * Required.
    *
    * @schema VmAlertSpecDnsConfigOptions#name
@@ -13418,6 +19531,8 @@ export interface VmAlertSpecDnsConfigOptions {
   readonly name?: string;
 
   /**
+   * Value is this DNS resolver option's value.
+   *
    * @schema VmAlertSpecDnsConfigOptions#value
    */
   readonly value?: string;
@@ -13433,6 +19548,88 @@ export function toJson_VmAlertSpecDnsConfigOptions(obj: VmAlertSpecDnsConfigOpti
   const result = {
     'name': obj.name,
     'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The ConfigMap to select from
+ *
+ * @schema VmAlertSpecExtraEnvsFromConfigMapRef
+ */
+export interface VmAlertSpecExtraEnvsFromConfigMapRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAlertSpecExtraEnvsFromConfigMapRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap must be defined
+   *
+   * @schema VmAlertSpecExtraEnvsFromConfigMapRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmAlertSpecExtraEnvsFromConfigMapRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAlertSpecExtraEnvsFromConfigMapRef(obj: VmAlertSpecExtraEnvsFromConfigMapRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The Secret to select from
+ *
+ * @schema VmAlertSpecExtraEnvsFromSecretRef
+ */
+export interface VmAlertSpecExtraEnvsFromSecretRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAlertSpecExtraEnvsFromSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret must be defined
+   *
+   * @schema VmAlertSpecExtraEnvsFromSecretRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmAlertSpecExtraEnvsFromSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAlertSpecExtraEnvsFromSecretRef(obj: VmAlertSpecExtraEnvsFromSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -15183,8 +21380,8 @@ export interface VmAlertmanagerSpec {
   readonly configMaps?: string[];
 
   /**
-   * ConfigNamespaceSelector defines namespace selector for VMAlertmanagerConfig.
-   * Works in combination with Selector.
+   * ConfigNamespaceSelector defines namespace selector for
+   * VMAlertmanagerConfig. Works in combination with Selector.
    * NamespaceSelector nil - only objects at VMAlertmanager namespace.
    * Selector nil - only objects at NamespaceSelector namespaces.
    * If both nil - behaviour controlled by selectAllByDefault
@@ -15201,6 +21398,15 @@ export interface VmAlertmanagerSpec {
    * @schema VmAlertmanagerSpec#configRawYaml
    */
   readonly configRawYaml?: string;
+
+  /**
+   * ConfigReloadAuthKeySecret defines optional secret reference authKey for /-/reload API requests.
+   * Given secret reference will be added to the application and vm-config-reloader as volume
+   * available since v0.57.0 version
+   *
+   * @schema VmAlertmanagerSpec#configReloadAuthKeySecret
+   */
+  readonly configReloadAuthKeySecret?: VmAlertmanagerSpecConfigReloadAuthKeySecret;
 
   /**
    * ConfigReloaderExtraArgs that will be passed to  VMAuths config-reloader container
@@ -15256,6 +21462,17 @@ export interface VmAlertmanagerSpec {
    * @schema VmAlertmanagerSpec#containers
    */
   readonly containers?: any[];
+
+  /**
+   * DisableAutomountServiceAccountToken whether to disable serviceAccount auto mount by Kubernetes (available from v0.54.0).
+   * Operator will conditionally create volumes and volumeMounts for containers if it requires k8s API access.
+   * For example, vmagent and vm-config-reloader requires k8s API access.
+   * Operator creates volumes with name: "kube-api-access", which can be used as volumeMount for extraContainers if needed.
+   * And also adds VolumeMounts at /var/run/secrets/kubernetes.io/serviceaccount.
+   *
+   * @schema VmAlertmanagerSpec#disableAutomountServiceAccountToken
+   */
+  readonly disableAutomountServiceAccountToken?: boolean;
 
   /**
    * DisableNamespaceMatcher disables top route namespace label matcher for VMAlertmanagerConfig
@@ -15330,6 +21547,14 @@ export interface VmAlertmanagerSpec {
    * @schema VmAlertmanagerSpec#extraEnvs
    */
   readonly extraEnvs?: VmAlertmanagerSpecExtraEnvs[];
+
+  /**
+   * ExtraEnvsFrom defines source of env variables for the application container
+   * could either be secret or configmap
+   *
+   * @schema VmAlertmanagerSpec#extraEnvsFrom
+   */
+  readonly extraEnvsFrom?: VmAlertmanagerSpecExtraEnvsFrom[];
 
   /**
    * GossipConfig defines gossip TLS configuration for Alertmanager cluster
@@ -15727,12 +21952,14 @@ export function toJson_VmAlertmanagerSpec(obj: VmAlertmanagerSpec | undefined): 
     'configMaps': obj.configMaps?.map(y => y),
     'configNamespaceSelector': toJson_VmAlertmanagerSpecConfigNamespaceSelector(obj.configNamespaceSelector),
     'configRawYaml': obj.configRawYaml,
+    'configReloadAuthKeySecret': toJson_VmAlertmanagerSpecConfigReloadAuthKeySecret(obj.configReloadAuthKeySecret),
     'configReloaderExtraArgs': ((obj.configReloaderExtraArgs) === undefined) ? undefined : (Object.entries(obj.configReloaderExtraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'configReloaderImageTag': obj.configReloaderImageTag,
     'configReloaderResources': toJson_VmAlertmanagerSpecConfigReloaderResources(obj.configReloaderResources),
     'configSecret': obj.configSecret,
     'configSelector': toJson_VmAlertmanagerSpecConfigSelector(obj.configSelector),
     'containers': obj.containers?.map(y => y),
+    'disableAutomountServiceAccountToken': obj.disableAutomountServiceAccountToken,
     'disableNamespaceMatcher': obj.disableNamespaceMatcher,
     'disableRouteContinueEnforce': obj.disableRouteContinueEnforce,
     'disableSelfServiceScrape': obj.disableSelfServiceScrape,
@@ -15742,6 +21969,7 @@ export function toJson_VmAlertmanagerSpec(obj: VmAlertmanagerSpec | undefined): 
     'externalURL': obj.externalUrl,
     'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'extraEnvs': obj.extraEnvs?.map(y => toJson_VmAlertmanagerSpecExtraEnvs(y)),
+    'extraEnvsFrom': obj.extraEnvsFrom?.map(y => toJson_VmAlertmanagerSpecExtraEnvsFrom(y)),
     'gossipConfig': toJson_VmAlertmanagerSpecGossipConfig(obj.gossipConfig),
     'hostAliases': obj.hostAliases?.map(y => toJson_VmAlertmanagerSpecHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
@@ -15868,8 +22096,8 @@ export function toJson_VmAlertmanagerSpecClaimTemplates(obj: VmAlertmanagerSpecC
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * ConfigNamespaceSelector defines namespace selector for VMAlertmanagerConfig.
- * Works in combination with Selector.
+ * ConfigNamespaceSelector defines namespace selector for
+ * VMAlertmanagerConfig. Works in combination with Selector.
  * NamespaceSelector nil - only objects at VMAlertmanager namespace.
  * Selector nil - only objects at NamespaceSelector namespaces.
  * If both nil - behaviour controlled by selectAllByDefault
@@ -15904,6 +22132,57 @@ export function toJson_VmAlertmanagerSpecConfigNamespaceSelector(obj: VmAlertman
   const result = {
     'matchExpressions': obj.matchExpressions?.map(y => toJson_VmAlertmanagerSpecConfigNamespaceSelectorMatchExpressions(y)),
     'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ConfigReloadAuthKeySecret defines optional secret reference authKey for /-/reload API requests.
+ * Given secret reference will be added to the application and vm-config-reloader as volume
+ * available since v0.57.0 version
+ *
+ * @schema VmAlertmanagerSpecConfigReloadAuthKeySecret
+ */
+export interface VmAlertmanagerSpecConfigReloadAuthKeySecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema VmAlertmanagerSpecConfigReloadAuthKeySecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAlertmanagerSpecConfigReloadAuthKeySecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema VmAlertmanagerSpecConfigReloadAuthKeySecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmAlertmanagerSpecConfigReloadAuthKeySecret' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAlertmanagerSpecConfigReloadAuthKeySecret(obj: VmAlertmanagerSpecConfigReloadAuthKeySecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -16103,6 +22382,51 @@ export function toJson_VmAlertmanagerSpecExtraEnvs(obj: VmAlertmanagerSpecExtraE
   const result = {
     'name': obj.name,
     'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ *
+ * @schema VmAlertmanagerSpecExtraEnvsFrom
+ */
+export interface VmAlertmanagerSpecExtraEnvsFrom {
+  /**
+   * The ConfigMap to select from
+   *
+   * @schema VmAlertmanagerSpecExtraEnvsFrom#configMapRef
+   */
+  readonly configMapRef?: VmAlertmanagerSpecExtraEnvsFromConfigMapRef;
+
+  /**
+   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   *
+   * @schema VmAlertmanagerSpecExtraEnvsFrom#prefix
+   */
+  readonly prefix?: string;
+
+  /**
+   * The Secret to select from
+   *
+   * @schema VmAlertmanagerSpecExtraEnvsFrom#secretRef
+   */
+  readonly secretRef?: VmAlertmanagerSpecExtraEnvsFromSecretRef;
+
+}
+
+/**
+ * Converts an object of type 'VmAlertmanagerSpecExtraEnvsFrom' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAlertmanagerSpecExtraEnvsFrom(obj: VmAlertmanagerSpecExtraEnvsFrom | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapRef': toJson_VmAlertmanagerSpecExtraEnvsFromConfigMapRef(obj.configMapRef),
+    'prefix': obj.prefix,
+    'secretRef': toJson_VmAlertmanagerSpecExtraEnvsFromSecretRef(obj.secretRef),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -17354,6 +23678,7 @@ export function toJson_VmAlertmanagerSpecConfigSelectorMatchExpressions(obj: VmA
  */
 export interface VmAlertmanagerSpecDnsConfigOptions {
   /**
+   * Name is this DNS resolver option's name.
    * Required.
    *
    * @schema VmAlertmanagerSpecDnsConfigOptions#name
@@ -17361,6 +23686,8 @@ export interface VmAlertmanagerSpecDnsConfigOptions {
   readonly name?: string;
 
   /**
+   * Value is this DNS resolver option's value.
+   *
    * @schema VmAlertmanagerSpecDnsConfigOptions#value
    */
   readonly value?: string;
@@ -17376,6 +23703,88 @@ export function toJson_VmAlertmanagerSpecDnsConfigOptions(obj: VmAlertmanagerSpe
   const result = {
     'name': obj.name,
     'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The ConfigMap to select from
+ *
+ * @schema VmAlertmanagerSpecExtraEnvsFromConfigMapRef
+ */
+export interface VmAlertmanagerSpecExtraEnvsFromConfigMapRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAlertmanagerSpecExtraEnvsFromConfigMapRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap must be defined
+   *
+   * @schema VmAlertmanagerSpecExtraEnvsFromConfigMapRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmAlertmanagerSpecExtraEnvsFromConfigMapRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAlertmanagerSpecExtraEnvsFromConfigMapRef(obj: VmAlertmanagerSpecExtraEnvsFromConfigMapRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The Secret to select from
+ *
+ * @schema VmAlertmanagerSpecExtraEnvsFromSecretRef
+ */
+export interface VmAlertmanagerSpecExtraEnvsFromSecretRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAlertmanagerSpecExtraEnvsFromSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret must be defined
+   *
+   * @schema VmAlertmanagerSpecExtraEnvsFromSecretRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmAlertmanagerSpecExtraEnvsFromSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAlertmanagerSpecExtraEnvsFromSecretRef(obj: VmAlertmanagerSpecExtraEnvsFromSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -18334,20 +24743,17 @@ export interface VmAlertmanagerSpecClaimTemplatesStatusConditions {
   readonly reason?: string;
 
   /**
+   * Status is the status of the condition.
+   * Can be True, False, Unknown.
+   * More info: https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-claim-v1/#:~:text=state%20of%20pvc-,conditions.status,-(string)%2C%20required
+   *
    * @schema VmAlertmanagerSpecClaimTemplatesStatusConditions#status
    */
   readonly status: string;
 
   /**
-   * PersistentVolumeClaimConditionType defines the condition of PV claim.
-   * Valid values are:
-   * - "Resizing", "FileSystemResizePending"
-   *
-   * If RecoverVolumeExpansionFailure feature gate is enabled, then following additional values can be expected:
-   * - "ControllerResizeError", "NodeResizeError"
-   *
-   * If VolumeAttributesClass feature gate is enabled, then following additional values can be expected:
-   * - "ModifyVolumeError", "ModifyingVolume"
+   * Type is the type of the condition.
+   * More info: https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-claim-v1/#:~:text=set%20to%20%27ResizeStarted%27.-,PersistentVolumeClaimCondition,-contains%20details%20about
    *
    * @schema VmAlertmanagerSpecClaimTemplatesStatusConditions#type
    */
@@ -19694,20 +26100,17 @@ export interface VmAlertmanagerSpecStorageVolumeClaimTemplateStatusConditions {
   readonly reason?: string;
 
   /**
+   * Status is the status of the condition.
+   * Can be True, False, Unknown.
+   * More info: https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-claim-v1/#:~:text=state%20of%20pvc-,conditions.status,-(string)%2C%20required
+   *
    * @schema VmAlertmanagerSpecStorageVolumeClaimTemplateStatusConditions#status
    */
   readonly status: string;
 
   /**
-   * PersistentVolumeClaimConditionType defines the condition of PV claim.
-   * Valid values are:
-   * - "Resizing", "FileSystemResizePending"
-   *
-   * If RecoverVolumeExpansionFailure feature gate is enabled, then following additional values can be expected:
-   * - "ControllerResizeError", "NodeResizeError"
-   *
-   * If VolumeAttributesClass feature gate is enabled, then following additional values can be expected:
-   * - "ModifyVolumeError", "ModifyingVolume"
+   * Type is the type of the condition.
+   * More info: https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-claim-v1/#:~:text=set%20to%20%27ResizeStarted%27.-,PersistentVolumeClaimCondition,-contains%20details%20about
    *
    * @schema VmAlertmanagerSpecStorageVolumeClaimTemplateStatusConditions#type
    */
@@ -20077,9 +26480,19 @@ export interface VmAlertmanagerConfigSpecReceivers {
   readonly emailConfigs?: VmAlertmanagerConfigSpecReceiversEmailConfigs[];
 
   /**
+   * @schema VmAlertmanagerConfigSpecReceivers#jira_configs
+   */
+  readonly jiraConfigs?: VmAlertmanagerConfigSpecReceiversJiraConfigs[];
+
+  /**
    * @schema VmAlertmanagerConfigSpecReceivers#msteams_configs
    */
   readonly msteamsConfigs?: VmAlertmanagerConfigSpecReceiversMsteamsConfigs[];
+
+  /**
+   * @schema VmAlertmanagerConfigSpecReceivers#msteamsv2_configs
+   */
+  readonly msteamsv2Configs?: VmAlertmanagerConfigSpecReceiversMsteamsv2Configs[];
 
   /**
    * Name of the receiver. Must be unique across all items from the list.
@@ -20108,6 +26521,11 @@ export interface VmAlertmanagerConfigSpecReceivers {
    * @schema VmAlertmanagerConfigSpecReceivers#pushover_configs
    */
   readonly pushoverConfigs?: VmAlertmanagerConfigSpecReceiversPushoverConfigs[];
+
+  /**
+   * @schema VmAlertmanagerConfigSpecReceivers#rocketchat_configs
+   */
+  readonly rocketchatConfigs?: VmAlertmanagerConfigSpecReceiversRocketchatConfigs[];
 
   /**
    * SlackConfigs defines slack notification configurations.
@@ -20163,11 +26581,14 @@ export function toJson_VmAlertmanagerConfigSpecReceivers(obj: VmAlertmanagerConf
   const result = {
     'discord_configs': obj.discordConfigs?.map(y => toJson_VmAlertmanagerConfigSpecReceiversDiscordConfigs(y)),
     'email_configs': obj.emailConfigs?.map(y => toJson_VmAlertmanagerConfigSpecReceiversEmailConfigs(y)),
+    'jira_configs': obj.jiraConfigs?.map(y => toJson_VmAlertmanagerConfigSpecReceiversJiraConfigs(y)),
     'msteams_configs': obj.msteamsConfigs?.map(y => toJson_VmAlertmanagerConfigSpecReceiversMsteamsConfigs(y)),
+    'msteamsv2_configs': obj.msteamsv2Configs?.map(y => toJson_VmAlertmanagerConfigSpecReceiversMsteamsv2Configs(y)),
     'name': obj.name,
     'opsgenie_configs': obj.opsgenieConfigs?.map(y => toJson_VmAlertmanagerConfigSpecReceiversOpsgenieConfigs(y)),
     'pagerduty_configs': obj.pagerdutyConfigs?.map(y => toJson_VmAlertmanagerConfigSpecReceiversPagerdutyConfigs(y)),
     'pushover_configs': obj.pushoverConfigs?.map(y => toJson_VmAlertmanagerConfigSpecReceiversPushoverConfigs(y)),
+    'rocketchat_configs': obj.rocketchatConfigs?.map(y => toJson_VmAlertmanagerConfigSpecReceiversRocketchatConfigs(y)),
     'slack_configs': obj.slackConfigs?.map(y => toJson_VmAlertmanagerConfigSpecReceiversSlackConfigs(y)),
     'sns_configs': obj.snsConfigs?.map(y => toJson_VmAlertmanagerConfigSpecReceiversSnsConfigs(y)),
     'telegram_configs': obj.telegramConfigs?.map(y => toJson_VmAlertmanagerConfigSpecReceiversTelegramConfigs(y)),
@@ -20329,6 +26750,22 @@ export function toJson_VmAlertmanagerConfigSpecTimeIntervals(obj: VmAlertmanager
  */
 export interface VmAlertmanagerConfigSpecReceiversDiscordConfigs {
   /**
+   * AvatarURL defines message avatar URL
+   * Available from operator v0.55.0 and alertmanager v0.28.0
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigs#avatar_url
+   */
+  readonly avatarUrl?: string;
+
+  /**
+   * Content defines message content template
+   * Available from operator v0.55.0 and alertmanager v0.28.0
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigs#content
+   */
+  readonly content?: string;
+
+  /**
    * HTTP client configuration.
    *
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigs#http_config
@@ -20357,6 +26794,14 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigs {
   readonly title?: string;
 
   /**
+   * Username defines message username
+   * Available from operator v0.55.0 and alertmanager v0.28.0
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigs#username
+   */
+  readonly username?: string;
+
+  /**
    * The discord webhook URL
    * one of `urlSecret` and `url` must be defined.
    *
@@ -20382,10 +26827,13 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigs {
 export function toJson_VmAlertmanagerConfigSpecReceiversDiscordConfigs(obj: VmAlertmanagerConfigSpecReceiversDiscordConfigs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'avatar_url': obj.avatarUrl,
+    'content': obj.content,
     'http_config': toJson_VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfig(obj.httpConfig),
     'message': obj.message,
     'send_resolved': obj.sendResolved,
     'title': obj.title,
+    'username': obj.username,
     'webhook_url': obj.webhookUrl,
     'webhook_url_secret': toJson_VmAlertmanagerConfigSpecReceiversDiscordConfigsWebhookUrlSecret(obj.webhookUrlSecret),
   };
@@ -20533,6 +26981,151 @@ export function toJson_VmAlertmanagerConfigSpecReceiversEmailConfigs(obj: VmAler
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * JiraConfig represent alertmanager's jira_config entry
+ * https://prometheus.io/docs/alerting/latest/configuration/#jira_config
+ * available from v0.55.0 operator version
+ * and v0.28.0 alertmanager version
+ *
+ * @schema VmAlertmanagerConfigSpecReceiversJiraConfigs
+ */
+export interface VmAlertmanagerConfigSpecReceiversJiraConfigs {
+  /**
+   * The URL to send API requests to. The full API path must be included.
+   * Example: https://company.atlassian.net/rest/api/2/
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversJiraConfigs#api_url
+   */
+  readonly apiUrl?: string;
+
+  /**
+   * Other issue and custom fields.
+   * Jira issue field can have multiple types.
+   * Depends on the field type, the values must be provided differently.
+   * See https://developer.atlassian.com/server/jira/platform/jira-rest-api-examples/#setting-custom-field-data-for-other-field-types for further examples.
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversJiraConfigs#custom_fields
+   */
+  readonly customFields?: { [key: string]: any };
+
+  /**
+   * Issue description template.
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversJiraConfigs#description
+   */
+  readonly description?: string;
+
+  /**
+   * The HTTP client's configuration. You must use this configuration to supply the personal access token (PAT) as part of the HTTP `Authorization` header.
+   * For Jira Cloud, use basic_auth with the email address as the username and the PAT as the password.
+   * For Jira Data Center, use the 'authorization' field with 'credentials: <PAT value>'.
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversJiraConfigs#http_config
+   */
+  readonly httpConfig?: any;
+
+  /**
+   * Type of the issue (e.g. Bug)
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversJiraConfigs#issue_type
+   */
+  readonly issueType: string;
+
+  /**
+   * Labels to be added to the issue
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversJiraConfigs#labels
+   */
+  readonly labels?: string[];
+
+  /**
+   * Priority of the issue
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversJiraConfigs#priority
+   */
+  readonly priority?: string;
+
+  /**
+   * The project key where issues are created
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversJiraConfigs#project
+   */
+  readonly project: string;
+
+  /**
+   * If reopen_transition is defined, reopen the issue when it is not older than this value (rounded down to the nearest minute).
+   * The resolutiondate field is used to determine the age of the issue.
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversJiraConfigs#reopen_duration
+   */
+  readonly reopenDuration?: string;
+
+  /**
+   * Name of the workflow transition to resolve an issue.
+   * The target status must have the category "done".
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversJiraConfigs#reopen_transition
+   */
+  readonly reopenTransition?: string;
+
+  /**
+   * Name of the workflow transition to reopen an issue.
+   * The target status should not have the category "done".
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversJiraConfigs#resolve_transition
+   */
+  readonly resolveTransition?: string;
+
+  /**
+   * SendResolved controls notify about resolved alerts.
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversJiraConfigs#send_resolved
+   */
+  readonly sendResolved?: boolean;
+
+  /**
+   * Issue summary template
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversJiraConfigs#summary
+   */
+  readonly summary?: string;
+
+  /**
+   * If reopen_transition is defined, ignore issues with that resolution.
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversJiraConfigs#wont_fix_resolution
+   */
+  readonly wontFixResolution?: string;
+
+}
+
+/**
+ * Converts an object of type 'VmAlertmanagerConfigSpecReceiversJiraConfigs' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAlertmanagerConfigSpecReceiversJiraConfigs(obj: VmAlertmanagerConfigSpecReceiversJiraConfigs | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'api_url': obj.apiUrl,
+    'custom_fields': ((obj.customFields) === undefined) ? undefined : (Object.entries(obj.customFields).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'description': obj.description,
+    'http_config': obj.httpConfig,
+    'issue_type': obj.issueType,
+    'labels': obj.labels?.map(y => y),
+    'priority': obj.priority,
+    'project': obj.project,
+    'reopen_duration': obj.reopenDuration,
+    'reopen_transition': obj.reopenTransition,
+    'resolve_transition': obj.resolveTransition,
+    'send_resolved': obj.sendResolved,
+    'summary': obj.summary,
+    'wont_fix_resolution': obj.wontFixResolution,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigs
  */
 export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigs {
@@ -20596,6 +27189,79 @@ export function toJson_VmAlertmanagerConfigSpecReceiversMsteamsConfigs(obj: VmAl
     'title': obj.title,
     'webhook_url': obj.webhookUrl,
     'webhook_url_secret': toJson_VmAlertmanagerConfigSpecReceiversMsteamsConfigsWebhookUrlSecret(obj.webhookUrlSecret),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * MSTeamsV2Config sends notifications using the new message format with adaptive cards as required by flows.
+ * https://support.microsoft.com/en-gb/office/create-incoming-webhooks-with-workflows-for-microsoft-teams-8ae491c7-0394-4861-ba59-055e33f75498
+ * available from v0.55.0 operator version
+ * and v0.28.0 alertmanager version
+ *
+ * @schema VmAlertmanagerConfigSpecReceiversMsteamsv2Configs
+ */
+export interface VmAlertmanagerConfigSpecReceiversMsteamsv2Configs {
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversMsteamsv2Configs#http_config
+   */
+  readonly httpConfig?: any;
+
+  /**
+   * SendResolved controls notify about resolved alerts.
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversMsteamsv2Configs#send_resolved
+   */
+  readonly sendResolved?: boolean;
+
+  /**
+   * Message body template.
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversMsteamsv2Configs#text
+   */
+  readonly text?: string;
+
+  /**
+   * Message title template.
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversMsteamsv2Configs#title
+   */
+  readonly title?: string;
+
+  /**
+   * The incoming webhook URL
+   * one of `urlSecret` and `url` must be defined.
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversMsteamsv2Configs#webhook_url
+   */
+  readonly webhookUrl?: string;
+
+  /**
+   * URLSecret defines secret name and key at the CRD namespace.
+   * It must contain the webhook URL.
+   * one of `webhook_url` or `webhook_url_secret` must be defined.
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversMsteamsv2Configs#webhook_url_secret
+   */
+  readonly webhookUrlSecret?: VmAlertmanagerConfigSpecReceiversMsteamsv2ConfigsWebhookUrlSecret;
+
+}
+
+/**
+ * Converts an object of type 'VmAlertmanagerConfigSpecReceiversMsteamsv2Configs' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAlertmanagerConfigSpecReceiversMsteamsv2Configs(obj: VmAlertmanagerConfigSpecReceiversMsteamsv2Configs | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'http_config': obj.httpConfig,
+    'send_resolved': obj.sendResolved,
+    'text': obj.text,
+    'title': obj.title,
+    'webhook_url': obj.webhookUrl,
+    'webhook_url_secret': toJson_VmAlertmanagerConfigSpecReceiversMsteamsv2ConfigsWebhookUrlSecret(obj.webhookUrlSecret),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -21018,6 +27684,147 @@ export function toJson_VmAlertmanagerConfigSpecReceiversPushoverConfigs(obj: VmA
     'url': obj.url,
     'url_title': obj.urlTitle,
     'user_key': toJson_VmAlertmanagerConfigSpecReceiversPushoverConfigsUserKey(obj.userKey),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * RocketchatConfig configures notifications via Rocketchat.
+ * https://prometheus.io/docs/alerting/latest/configuration/#rocketchat_config
+ * available from v0.55.0 operator version
+ * and v0.28.0 alertmanager version
+ *
+ * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigs
+ */
+export interface VmAlertmanagerConfigSpecReceiversRocketchatConfigs {
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigs#actions
+   */
+  readonly actions?: VmAlertmanagerConfigSpecReceiversRocketchatConfigsActions[];
+
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigs#api_url
+   */
+  readonly apiUrl?: string;
+
+  /**
+   * RocketChat channel override, (like #other-channel or @username).
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigs#channel
+   */
+  readonly channel?: string;
+
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigs#color
+   */
+  readonly color?: string;
+
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigs#emoji
+   */
+  readonly emoji?: string;
+
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigs#fields
+   */
+  readonly fields?: VmAlertmanagerConfigSpecReceiversRocketchatConfigsFields[];
+
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigs#http_config
+   */
+  readonly httpConfig?: any;
+
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigs#icon_url
+   */
+  readonly iconUrl?: string;
+
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigs#image_url
+   */
+  readonly imageUrl?: string;
+
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigs#link_names
+   */
+  readonly linkNames?: boolean;
+
+  /**
+   * SendResolved controls notify about resolved alerts.
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigs#send_resolved
+   */
+  readonly sendResolved?: boolean;
+
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigs#short_fields
+   */
+  readonly shortFields?: boolean;
+
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigs#text
+   */
+  readonly text?: string;
+
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigs#thumb_url
+   */
+  readonly thumbUrl?: string;
+
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigs#title
+   */
+  readonly title?: string;
+
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigs#title_link
+   */
+  readonly titleLink?: string;
+
+  /**
+   * SecretKeySelector selects a key of a Secret.
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigs#token
+   */
+  readonly token?: VmAlertmanagerConfigSpecReceiversRocketchatConfigsToken;
+
+  /**
+   * The sender token and token_id
+   * See https://docs.rocket.chat/use-rocket.chat/user-guides/user-panel/my-account#personal-access-tokens
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigs#token_id
+   */
+  readonly tokenId?: VmAlertmanagerConfigSpecReceiversRocketchatConfigsTokenId;
+
+}
+
+/**
+ * Converts an object of type 'VmAlertmanagerConfigSpecReceiversRocketchatConfigs' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAlertmanagerConfigSpecReceiversRocketchatConfigs(obj: VmAlertmanagerConfigSpecReceiversRocketchatConfigs | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'actions': obj.actions?.map(y => toJson_VmAlertmanagerConfigSpecReceiversRocketchatConfigsActions(y)),
+    'api_url': obj.apiUrl,
+    'channel': obj.channel,
+    'color': obj.color,
+    'emoji': obj.emoji,
+    'fields': obj.fields?.map(y => toJson_VmAlertmanagerConfigSpecReceiversRocketchatConfigsFields(y)),
+    'http_config': obj.httpConfig,
+    'icon_url': obj.iconUrl,
+    'image_url': obj.imageUrl,
+    'link_names': obj.linkNames,
+    'send_resolved': obj.sendResolved,
+    'short_fields': obj.shortFields,
+    'text': obj.text,
+    'thumb_url': obj.thumbUrl,
+    'title': obj.title,
+    'title_link': obj.titleLink,
+    'token': toJson_VmAlertmanagerConfigSpecReceiversRocketchatConfigsToken(obj.token),
+    'token_id': toJson_VmAlertmanagerConfigSpecReceiversRocketchatConfigsTokenId(obj.tokenId),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -21582,6 +28389,14 @@ export interface VmAlertmanagerConfigSpecReceiversWebhookConfigs {
   readonly sendResolved?: boolean;
 
   /**
+   * Timeout is the maximum time allowed to invoke the webhook
+   * available since v0.28.0 alertmanager version
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversWebhookConfigs#timeout
+   */
+  readonly timeout?: string;
+
+  /**
    * URL to send requests to,
    * one of `urlSecret` and `url` must be defined.
    *
@@ -21610,6 +28425,7 @@ export function toJson_VmAlertmanagerConfigSpecReceiversWebhookConfigs(obj: VmAl
     'http_config': obj.httpConfig,
     'max_alerts': obj.maxAlerts,
     'send_resolved': obj.sendResolved,
+    'timeout': obj.timeout,
     'url': obj.url,
     'url_secret': toJson_VmAlertmanagerConfigSpecReceiversWebhookConfigsUrlSecret(obj.urlSecret),
   };
@@ -22030,7 +28846,7 @@ export function toJson_VmAlertmanagerConfigSpecReceiversEmailConfigsAuthSecret(o
  */
 export interface VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfig#ca
    */
@@ -22227,6 +29043,57 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsWebhookUrlSecret
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VmAlertmanagerConfigSpecReceiversMsteamsConfigsWebhookUrlSecret(obj: VmAlertmanagerConfigSpecReceiversMsteamsConfigsWebhookUrlSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * URLSecret defines secret name and key at the CRD namespace.
+ * It must contain the webhook URL.
+ * one of `webhook_url` or `webhook_url_secret` must be defined.
+ *
+ * @schema VmAlertmanagerConfigSpecReceiversMsteamsv2ConfigsWebhookUrlSecret
+ */
+export interface VmAlertmanagerConfigSpecReceiversMsteamsv2ConfigsWebhookUrlSecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversMsteamsv2ConfigsWebhookUrlSecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversMsteamsv2ConfigsWebhookUrlSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversMsteamsv2ConfigsWebhookUrlSecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmAlertmanagerConfigSpecReceiversMsteamsv2ConfigsWebhookUrlSecret' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAlertmanagerConfigSpecReceiversMsteamsv2ConfigsWebhookUrlSecret(obj: VmAlertmanagerConfigSpecReceiversMsteamsv2ConfigsWebhookUrlSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -22611,6 +29478,191 @@ export interface VmAlertmanagerConfigSpecReceiversPushoverConfigsUserKey {
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VmAlertmanagerConfigSpecReceiversPushoverConfigsUserKey(obj: VmAlertmanagerConfigSpecReceiversPushoverConfigsUserKey | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * RocketchatAttachmentAction defines message attachments
+ * https://github.com/RocketChat/Rocket.Chat.Go.SDK/blob/master/models/message.go
+ *
+ * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsActions
+ */
+export interface VmAlertmanagerConfigSpecReceiversRocketchatConfigsActions {
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsActions#msg
+   */
+  readonly msg?: string;
+
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsActions#text
+   */
+  readonly text?: string;
+
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsActions#type
+   */
+  readonly type?: string;
+
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsActions#url
+   */
+  readonly url?: string;
+
+}
+
+/**
+ * Converts an object of type 'VmAlertmanagerConfigSpecReceiversRocketchatConfigsActions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAlertmanagerConfigSpecReceiversRocketchatConfigsActions(obj: VmAlertmanagerConfigSpecReceiversRocketchatConfigsActions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'msg': obj.msg,
+    'text': obj.text,
+    'type': obj.type,
+    'url': obj.url,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * RocketchatAttachmentField defines API fields
+ * https://developer.rocket.chat/reference/api/rest-api/endpoints/messaging/chat-endpoints/postmessage#attachment-field-objects
+ *
+ * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsFields
+ */
+export interface VmAlertmanagerConfigSpecReceiversRocketchatConfigsFields {
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsFields#short
+   */
+  readonly short?: boolean;
+
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsFields#title
+   */
+  readonly title?: string;
+
+  /**
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsFields#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VmAlertmanagerConfigSpecReceiversRocketchatConfigsFields' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAlertmanagerConfigSpecReceiversRocketchatConfigsFields(obj: VmAlertmanagerConfigSpecReceiversRocketchatConfigsFields | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'short': obj.short,
+    'title': obj.title,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * SecretKeySelector selects a key of a Secret.
+ *
+ * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsToken
+ */
+export interface VmAlertmanagerConfigSpecReceiversRocketchatConfigsToken {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsToken#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsToken#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsToken#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmAlertmanagerConfigSpecReceiversRocketchatConfigsToken' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAlertmanagerConfigSpecReceiversRocketchatConfigsToken(obj: VmAlertmanagerConfigSpecReceiversRocketchatConfigsToken | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The sender token and token_id
+ * See https://docs.rocket.chat/use-rocket.chat/user-guides/user-panel/my-account#personal-access-tokens
+ *
+ * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsTokenId
+ */
+export interface VmAlertmanagerConfigSpecReceiversRocketchatConfigsTokenId {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsTokenId#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsTokenId#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsTokenId#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmAlertmanagerConfigSpecReceiversRocketchatConfigsTokenId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAlertmanagerConfigSpecReceiversRocketchatConfigsTokenId(obj: VmAlertmanagerConfigSpecReceiversRocketchatConfigsTokenId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -23590,11 +30642,29 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigOauth2
   readonly endpointParams?: { [key: string]: string };
 
   /**
+   * The proxy URL for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigOauth2#proxy_url
+   */
+  readonly proxyUrl?: string;
+
+  /**
    * OAuth2 scopes used for the token request
    *
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigOauth2#scopes
    */
   readonly scopes?: string[];
+
+  /**
+   * TLSConfig for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigOauth2#tls_config
+   */
+  readonly tlsConfig?: any;
 
   /**
    * The URL to fetch the token from
@@ -23616,7 +30686,9 @@ export function toJson_VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfig
     'client_secret': toJson_VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigOauth2ClientSecret(obj.clientSecret),
     'client_secret_file': obj.clientSecretFile,
     'endpoint_params': ((obj.endpointParams) === undefined) ? undefined : (Object.entries(obj.endpointParams).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'proxy_url': obj.proxyUrl,
     'scopes': obj.scopes?.map(y => y),
+    'tls_config': obj.tlsConfig,
     'token_url': obj.tokenUrl,
   };
   // filter undefined values
@@ -23631,7 +30703,7 @@ export function toJson_VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfig
  */
 export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsConfig#ca
    */
@@ -23710,7 +30782,7 @@ export function toJson_VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfig
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfigCa
  */
@@ -24011,11 +31083,29 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigOauth2
   readonly endpointParams?: { [key: string]: string };
 
   /**
+   * The proxy URL for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigOauth2#proxy_url
+   */
+  readonly proxyUrl?: string;
+
+  /**
    * OAuth2 scopes used for the token request
    *
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigOauth2#scopes
    */
   readonly scopes?: string[];
+
+  /**
+   * TLSConfig for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigOauth2#tls_config
+   */
+  readonly tlsConfig?: any;
 
   /**
    * The URL to fetch the token from
@@ -24037,7 +31127,9 @@ export function toJson_VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfig
     'client_secret': toJson_VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigOauth2ClientSecret(obj.clientSecret),
     'client_secret_file': obj.clientSecretFile,
     'endpoint_params': ((obj.endpointParams) === undefined) ? undefined : (Object.entries(obj.endpointParams).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'proxy_url': obj.proxyUrl,
     'scopes': obj.scopes?.map(y => y),
+    'tls_config': obj.tlsConfig,
     'token_url': obj.tokenUrl,
   };
   // filter undefined values
@@ -24052,7 +31144,7 @@ export function toJson_VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfig
  */
 export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsConfig#ca
    */
@@ -24358,11 +31450,29 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigOauth2 {
   readonly endpointParams?: { [key: string]: string };
 
   /**
+   * The proxy URL for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigOauth2#proxy_url
+   */
+  readonly proxyUrl?: string;
+
+  /**
    * OAuth2 scopes used for the token request
    *
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigOauth2#scopes
    */
   readonly scopes?: string[];
+
+  /**
+   * TLSConfig for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigOauth2#tls_config
+   */
+  readonly tlsConfig?: any;
 
   /**
    * The URL to fetch the token from
@@ -24384,7 +31494,9 @@ export function toJson_VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigOaut
     'client_secret': toJson_VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigOauth2ClientSecret(obj.clientSecret),
     'client_secret_file': obj.clientSecretFile,
     'endpoint_params': ((obj.endpointParams) === undefined) ? undefined : (Object.entries(obj.endpointParams).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'proxy_url': obj.proxyUrl,
     'scopes': obj.scopes?.map(y => y),
+    'tls_config': obj.tlsConfig,
     'token_url': obj.tokenUrl,
   };
   // filter undefined values
@@ -24399,7 +31511,7 @@ export function toJson_VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigOaut
  */
 export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfig#ca
    */
@@ -24754,11 +31866,29 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigOaut
   readonly endpointParams?: { [key: string]: string };
 
   /**
+   * The proxy URL for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigOauth2#proxy_url
+   */
+  readonly proxyUrl?: string;
+
+  /**
    * OAuth2 scopes used for the token request
    *
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigOauth2#scopes
    */
   readonly scopes?: string[];
+
+  /**
+   * TLSConfig for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigOauth2#tls_config
+   */
+  readonly tlsConfig?: any;
 
   /**
    * The URL to fetch the token from
@@ -24780,7 +31910,9 @@ export function toJson_VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConf
     'client_secret': toJson_VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigOauth2ClientSecret(obj.clientSecret),
     'client_secret_file': obj.clientSecretFile,
     'endpoint_params': ((obj.endpointParams) === undefined) ? undefined : (Object.entries(obj.endpointParams).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'proxy_url': obj.proxyUrl,
     'scopes': obj.scopes?.map(y => y),
+    'tls_config': obj.tlsConfig,
     'token_url': obj.tokenUrl,
   };
   // filter undefined values
@@ -24795,7 +31927,7 @@ export function toJson_VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConf
  */
 export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsConfig#ca
    */
@@ -25052,11 +32184,29 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigOauth2 {
   readonly endpointParams?: { [key: string]: string };
 
   /**
+   * The proxy URL for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigOauth2#proxy_url
+   */
+  readonly proxyUrl?: string;
+
+  /**
    * OAuth2 scopes used for the token request
    *
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigOauth2#scopes
    */
   readonly scopes?: string[];
+
+  /**
+   * TLSConfig for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigOauth2#tls_config
+   */
+  readonly tlsConfig?: any;
 
   /**
    * The URL to fetch the token from
@@ -25078,7 +32228,9 @@ export function toJson_VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigOa
     'client_secret': toJson_VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigOauth2ClientSecret(obj.clientSecret),
     'client_secret_file': obj.clientSecretFile,
     'endpoint_params': ((obj.endpointParams) === undefined) ? undefined : (Object.entries(obj.endpointParams).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'proxy_url': obj.proxyUrl,
     'scopes': obj.scopes?.map(y => y),
+    'tls_config': obj.tlsConfig,
     'token_url': obj.tokenUrl,
   };
   // filter undefined values
@@ -25093,7 +32245,7 @@ export function toJson_VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigOa
  */
 export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfig#ca
    */
@@ -25350,11 +32502,29 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigOauth2 
   readonly endpointParams?: { [key: string]: string };
 
   /**
+   * The proxy URL for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigOauth2#proxy_url
+   */
+  readonly proxyUrl?: string;
+
+  /**
    * OAuth2 scopes used for the token request
    *
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigOauth2#scopes
    */
   readonly scopes?: string[];
+
+  /**
+   * TLSConfig for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigOauth2#tls_config
+   */
+  readonly tlsConfig?: any;
 
   /**
    * The URL to fetch the token from
@@ -25376,7 +32546,9 @@ export function toJson_VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigO
     'client_secret': toJson_VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigOauth2ClientSecret(obj.clientSecret),
     'client_secret_file': obj.clientSecretFile,
     'endpoint_params': ((obj.endpointParams) === undefined) ? undefined : (Object.entries(obj.endpointParams).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'proxy_url': obj.proxyUrl,
     'scopes': obj.scopes?.map(y => y),
+    'tls_config': obj.tlsConfig,
     'token_url': obj.tokenUrl,
   };
   // filter undefined values
@@ -25391,7 +32563,7 @@ export function toJson_VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigO
  */
 export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConfig#ca
    */
@@ -25705,7 +32877,7 @@ export function toJson_VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfig
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsConfigCa
  */
@@ -26259,7 +33431,7 @@ export function toJson_VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfig
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsConfigCa
  */
@@ -26617,7 +33789,7 @@ export function toJson_VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigOaut
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfigCa
  */
@@ -26975,7 +34147,7 @@ export function toJson_VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConf
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsConfigCa
  */
@@ -27333,7 +34505,7 @@ export function toJson_VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigOa
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfigCa
  */
@@ -27691,7 +34863,7 @@ export function toJson_VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigO
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConfigCa
  */
@@ -29690,6 +36862,15 @@ export interface VmAuthSpec {
   readonly configMaps?: string[];
 
   /**
+   * ConfigReloadAuthKeySecret defines optional secret reference authKey for /-/reload API requests.
+   * Given secret reference will be added to the application and vm-config-reloader as volume
+   * available since v0.57.0 version
+   *
+   * @schema VmAuthSpec#configReloadAuthKeySecret
+   */
+  readonly configReloadAuthKeySecret?: VmAuthSpecConfigReloadAuthKeySecret;
+
+  /**
    * ConfigReloaderExtraArgs that will be passed to  VMAuths config-reloader container
    * for example resyncInterval: "30s"
    *
@@ -29731,6 +36912,17 @@ export interface VmAuthSpec {
    * @schema VmAuthSpec#containers
    */
   readonly containers?: any[];
+
+  /**
+   * DisableAutomountServiceAccountToken whether to disable serviceAccount auto mount by Kubernetes (available from v0.54.0).
+   * Operator will conditionally create volumes and volumeMounts for containers if it requires k8s API access.
+   * For example, vmagent and vm-config-reloader requires k8s API access.
+   * Operator creates volumes with name: "kube-api-access", which can be used as volumeMount for extraContainers if needed.
+   * And also adds VolumeMounts at /var/run/secrets/kubernetes.io/serviceaccount.
+   *
+   * @schema VmAuthSpec#disableAutomountServiceAccountToken
+   */
+  readonly disableAutomountServiceAccountToken?: boolean;
 
   /**
    * DisableSelfServiceScrape controls creation of VMServiceScrape by operator
@@ -29781,6 +36973,14 @@ export interface VmAuthSpec {
   readonly extraEnvs?: VmAuthSpecExtraEnvs[];
 
   /**
+   * ExtraEnvsFrom defines source of env variables for the application container
+   * could either be secret or configmap
+   *
+   * @schema VmAuthSpec#extraEnvsFrom
+   */
+  readonly extraEnvsFrom?: VmAuthSpecExtraEnvsFrom[];
+
+  /**
    * HostAliases provides mapping for ip and hostname,
    * that would be propagated to pod,
    * cannot be used with HostNetwork.
@@ -29828,6 +37028,16 @@ export interface VmAuthSpec {
    * @schema VmAuthSpec#initContainers
    */
   readonly initContainers?: any[];
+
+  /**
+   * InternalListenPort instructs vmauth to serve internal routes at given port
+   * available from v0.56.0 operator
+   * and v1.111.0 vmauth version
+   * related doc https://docs.victoriametrics.com/vmauth/#security
+   *
+   * @schema VmAuthSpec#internalListenPort
+   */
+  readonly internalListenPort?: string;
 
   /**
    * License allows to configure license key to be used for enterprise features.
@@ -30079,6 +37289,14 @@ export interface VmAuthSpec {
   readonly useDefaultResources?: boolean;
 
   /**
+   * UseProxyProtocol enables proxy protocol for vmauth
+   * https://www.haproxy.org/download/2.3/doc/proxy-protocol.txt
+   *
+   * @schema VmAuthSpec#useProxyProtocol
+   */
+  readonly useProxyProtocol?: boolean;
+
+  /**
    * UseStrictSecurity enables strict security mode for component
    * it restricts disk writes access
    * uses non-root user out of the box
@@ -30146,23 +37364,27 @@ export function toJson_VmAuthSpec(obj: VmAuthSpec | undefined): Record<string, a
   const result = {
     'affinity': obj.affinity,
     'configMaps': obj.configMaps?.map(y => y),
+    'configReloadAuthKeySecret': toJson_VmAuthSpecConfigReloadAuthKeySecret(obj.configReloadAuthKeySecret),
     'configReloaderExtraArgs': ((obj.configReloaderExtraArgs) === undefined) ? undefined : (Object.entries(obj.configReloaderExtraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'configReloaderImageTag': obj.configReloaderImageTag,
     'configReloaderResources': toJson_VmAuthSpecConfigReloaderResources(obj.configReloaderResources),
     'configSecret': obj.configSecret,
     'containers': obj.containers?.map(y => y),
+    'disableAutomountServiceAccountToken': obj.disableAutomountServiceAccountToken,
     'disableSelfServiceScrape': obj.disableSelfServiceScrape,
     'dnsConfig': toJson_VmAuthSpecDnsConfig(obj.dnsConfig),
     'dnsPolicy': obj.dnsPolicy,
     'externalConfig': toJson_VmAuthSpecExternalConfig(obj.externalConfig),
     'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'extraEnvs': obj.extraEnvs?.map(y => toJson_VmAuthSpecExtraEnvs(y)),
+    'extraEnvsFrom': obj.extraEnvsFrom?.map(y => toJson_VmAuthSpecExtraEnvsFrom(y)),
     'hostAliases': obj.hostAliases?.map(y => toJson_VmAuthSpecHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
     'image': toJson_VmAuthSpecImage(obj.image),
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VmAuthSpecImagePullSecrets(y)),
     'ingress': toJson_VmAuthSpecIngress(obj.ingress),
     'initContainers': obj.initContainers?.map(y => y),
+    'internalListenPort': obj.internalListenPort,
     'license': toJson_VmAuthSpecLicense(obj.license),
     'livenessProbe': obj.livenessProbe,
     'logFormat': obj.logFormat,
@@ -30195,12 +37417,64 @@ export function toJson_VmAuthSpec(obj: VmAuthSpec | undefined): Record<string, a
     'unauthorizedAccessConfig': obj.unauthorizedAccessConfig,
     'unauthorizedUserAccessSpec': toJson_VmAuthSpecUnauthorizedUserAccessSpec(obj.unauthorizedUserAccessSpec),
     'useDefaultResources': obj.useDefaultResources,
+    'useProxyProtocol': obj.useProxyProtocol,
     'useStrictSecurity': obj.useStrictSecurity,
     'useVMConfigReloader': obj.useVmConfigReloader,
     'userNamespaceSelector': toJson_VmAuthSpecUserNamespaceSelector(obj.userNamespaceSelector),
     'userSelector': toJson_VmAuthSpecUserSelector(obj.userSelector),
     'volumeMounts': obj.volumeMounts?.map(y => toJson_VmAuthSpecVolumeMounts(y)),
     'volumes': obj.volumes?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ConfigReloadAuthKeySecret defines optional secret reference authKey for /-/reload API requests.
+ * Given secret reference will be added to the application and vm-config-reloader as volume
+ * available since v0.57.0 version
+ *
+ * @schema VmAuthSpecConfigReloadAuthKeySecret
+ */
+export interface VmAuthSpecConfigReloadAuthKeySecret {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema VmAuthSpecConfigReloadAuthKeySecret#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAuthSpecConfigReloadAuthKeySecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema VmAuthSpecConfigReloadAuthKeySecret#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmAuthSpecConfigReloadAuthKeySecret' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAuthSpecConfigReloadAuthKeySecret(obj: VmAuthSpecConfigReloadAuthKeySecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -30396,6 +37670,51 @@ export function toJson_VmAuthSpecExtraEnvs(obj: VmAuthSpecExtraEnvs | undefined)
   const result = {
     'name': obj.name,
     'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ *
+ * @schema VmAuthSpecExtraEnvsFrom
+ */
+export interface VmAuthSpecExtraEnvsFrom {
+  /**
+   * The ConfigMap to select from
+   *
+   * @schema VmAuthSpecExtraEnvsFrom#configMapRef
+   */
+  readonly configMapRef?: VmAuthSpecExtraEnvsFromConfigMapRef;
+
+  /**
+   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   *
+   * @schema VmAuthSpecExtraEnvsFrom#prefix
+   */
+  readonly prefix?: string;
+
+  /**
+   * The Secret to select from
+   *
+   * @schema VmAuthSpecExtraEnvsFrom#secretRef
+   */
+  readonly secretRef?: VmAuthSpecExtraEnvsFromSecretRef;
+
+}
+
+/**
+ * Converts an object of type 'VmAuthSpecExtraEnvsFrom' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAuthSpecExtraEnvsFrom(obj: VmAuthSpecExtraEnvsFrom | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapRef': toJson_VmAuthSpecExtraEnvsFromConfigMapRef(obj.configMapRef),
+    'prefix': obj.prefix,
+    'secretRef': toJson_VmAuthSpecExtraEnvsFromSecretRef(obj.secretRef),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -31486,6 +38805,7 @@ export class VmAuthSpecConfigReloaderResourcesRequests {
  */
 export interface VmAuthSpecDnsConfigOptions {
   /**
+   * Name is this DNS resolver option's name.
    * Required.
    *
    * @schema VmAuthSpecDnsConfigOptions#name
@@ -31493,6 +38813,8 @@ export interface VmAuthSpecDnsConfigOptions {
   readonly name?: string;
 
   /**
+   * Value is this DNS resolver option's value.
+   *
    * @schema VmAuthSpecDnsConfigOptions#value
    */
   readonly value?: string;
@@ -31555,6 +38877,88 @@ export function toJson_VmAuthSpecExternalConfigSecretRef(obj: VmAuthSpecExternal
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The ConfigMap to select from
+ *
+ * @schema VmAuthSpecExtraEnvsFromConfigMapRef
+ */
+export interface VmAuthSpecExtraEnvsFromConfigMapRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAuthSpecExtraEnvsFromConfigMapRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap must be defined
+   *
+   * @schema VmAuthSpecExtraEnvsFromConfigMapRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmAuthSpecExtraEnvsFromConfigMapRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAuthSpecExtraEnvsFromConfigMapRef(obj: VmAuthSpecExtraEnvsFromConfigMapRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The Secret to select from
+ *
+ * @schema VmAuthSpecExtraEnvsFromSecretRef
+ */
+export interface VmAuthSpecExtraEnvsFromSecretRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAuthSpecExtraEnvsFromSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret must be defined
+   *
+   * @schema VmAuthSpecExtraEnvsFromSecretRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmAuthSpecExtraEnvsFromSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAuthSpecExtraEnvsFromSecretRef(obj: VmAuthSpecExtraEnvsFromSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
     'name': obj.name,
     'optional': obj.optional,
   };
@@ -31939,7 +39343,7 @@ export enum VmAuthSpecUnauthorizedUserAccessSpecLoadBalancingPolicy {
  */
 export interface VmAuthSpecUnauthorizedUserAccessSpecTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfig#ca
    */
@@ -32275,7 +39679,7 @@ export function toJson_VmAuthSpecIngressExtraRulesHttp(obj: VmAuthSpecIngressExt
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCa
  */
@@ -33000,24 +40404,24 @@ export interface VmClusterSpec {
   readonly replicationFactor?: number;
 
   /**
-   * RequestsLoadBalancer configures load-balancing for vminsert and vmselect requests
-   * it helps to evenly spread load across pods
-   * usually it's not possible with kubernetes TCP based service
+   * RequestsLoadBalancer configures load-balancing for vminsert and vmselect requests.
+   * It helps to evenly spread load across pods.
+   * Usually it's not possible with Kubernetes TCP-based services.
+   * See more [here](https://docs.victoriametrics.com/operator/resources/vmcluster/#requests-load-balancing)
    *
    * @schema VmClusterSpec#requestsLoadBalancer
    */
   readonly requestsLoadBalancer?: VmClusterSpecRequestsLoadBalancer;
 
   /**
-   * RetentionPeriod for the stored metrics
-   * Note VictoriaMetrics has data/ and indexdb/ folders
-   * metrics from data/ removed eventually as soon as partition leaves retention period
-   * reverse index data at indexdb rotates once at the half of configured
-   * [retention period](https://docs.victoriametrics.com/Single-server-VictoriaMetrics/#retention)
+   * RetentionPeriod defines how long to retain stored metrics, specified as a duration (e.g., "1d", "1w", "1m").
+   * Data with timestamps outside the RetentionPeriod is automatically deleted. The minimum allowed value is 1d, or 24h.
+   * The default value is 1 (one month).
+   * See [retention](https://docs.victoriametrics.com/victoriametrics/single-server-victoriametrics/#retention) docs for details.
    *
    * @schema VmClusterSpec#retentionPeriod
    */
-  readonly retentionPeriod: string;
+  readonly retentionPeriod?: string;
 
   /**
    * ServiceAccountName is the name of the ServiceAccount to use to run the
@@ -33217,9 +40621,10 @@ export function toJson_VmClusterSpecManagedMetadata(obj: VmClusterSpecManagedMet
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * RequestsLoadBalancer configures load-balancing for vminsert and vmselect requests
- * it helps to evenly spread load across pods
- * usually it's not possible with kubernetes TCP based service
+ * RequestsLoadBalancer configures load-balancing for vminsert and vmselect requests.
+ * It helps to evenly spread load across pods.
+ * Usually it's not possible with Kubernetes TCP-based services.
+ * See more [here](https://docs.victoriametrics.com/operator/resources/vmcluster/#requests-load-balancing)
  *
  * @schema VmClusterSpecRequestsLoadBalancer
  */
@@ -33303,6 +40708,17 @@ export interface VmClusterSpecVminsert {
   readonly containers?: any[];
 
   /**
+   * DisableAutomountServiceAccountToken whether to disable serviceAccount auto mount by Kubernetes (available from v0.54.0).
+   * Operator will conditionally create volumes and volumeMounts for containers if it requires k8s API access.
+   * For example, vmagent and vm-config-reloader requires k8s API access.
+   * Operator creates volumes with name: "kube-api-access", which can be used as volumeMount for extraContainers if needed.
+   * And also adds VolumeMounts at /var/run/secrets/kubernetes.io/serviceaccount.
+   *
+   * @schema VmClusterSpecVminsert#disableAutomountServiceAccountToken
+   */
+  readonly disableAutomountServiceAccountToken?: boolean;
+
+  /**
    * DisableSelfServiceScrape controls creation of VMServiceScrape by operator
    * for the application.
    * Has priority over `VM_DISABLESELFSERVICESCRAPECREATION` operator env variable
@@ -33341,6 +40757,14 @@ export interface VmClusterSpecVminsert {
    * @schema VmClusterSpecVminsert#extraEnvs
    */
   readonly extraEnvs?: VmClusterSpecVminsertExtraEnvs[];
+
+  /**
+   * ExtraEnvsFrom defines source of env variables for the application container
+   * could either be secret or configmap
+   *
+   * @schema VmClusterSpecVminsert#extraEnvsFrom
+   */
+  readonly extraEnvsFrom?: VmClusterSpecVminsertExtraEnvsFrom[];
 
   /**
    * HostAliases provides mapping for ip and hostname,
@@ -33651,11 +41075,13 @@ export function toJson_VmClusterSpecVminsert(obj: VmClusterSpecVminsert | undefi
     'clusterNativeListenPort': obj.clusterNativeListenPort,
     'configMaps': obj.configMaps?.map(y => y),
     'containers': obj.containers?.map(y => y),
+    'disableAutomountServiceAccountToken': obj.disableAutomountServiceAccountToken,
     'disableSelfServiceScrape': obj.disableSelfServiceScrape,
     'dnsConfig': toJson_VmClusterSpecVminsertDnsConfig(obj.dnsConfig),
     'dnsPolicy': obj.dnsPolicy,
     'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'extraEnvs': obj.extraEnvs?.map(y => toJson_VmClusterSpecVminsertExtraEnvs(y)),
+    'extraEnvsFrom': obj.extraEnvsFrom?.map(y => toJson_VmClusterSpecVminsertExtraEnvsFrom(y)),
     'hostAliases': obj.hostAliases?.map(y => toJson_VmClusterSpecVminsertHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
     'hpa': obj.hpa,
@@ -33726,7 +41152,7 @@ export interface VmClusterSpecVmselect {
    *
    * @schema VmClusterSpecVmselect#claimTemplates
    */
-  readonly claimTemplates?: VmClusterSpecVmselectClaimTemplates[];
+  readonly claimTemplates?: any[];
 
   /**
    * ClusterNativePort for multi-level cluster setup.
@@ -33752,6 +41178,17 @@ export interface VmClusterSpecVmselect {
    * @schema VmClusterSpecVmselect#containers
    */
   readonly containers?: any[];
+
+  /**
+   * DisableAutomountServiceAccountToken whether to disable serviceAccount auto mount by Kubernetes (available from v0.54.0).
+   * Operator will conditionally create volumes and volumeMounts for containers if it requires k8s API access.
+   * For example, vmagent and vm-config-reloader requires k8s API access.
+   * Operator creates volumes with name: "kube-api-access", which can be used as volumeMount for extraContainers if needed.
+   * And also adds VolumeMounts at /var/run/secrets/kubernetes.io/serviceaccount.
+   *
+   * @schema VmClusterSpecVmselect#disableAutomountServiceAccountToken
+   */
+  readonly disableAutomountServiceAccountToken?: boolean;
 
   /**
    * DisableSelfServiceScrape controls creation of VMServiceScrape by operator
@@ -33792,6 +41229,14 @@ export interface VmClusterSpecVmselect {
    * @schema VmClusterSpecVmselect#extraEnvs
    */
   readonly extraEnvs?: VmClusterSpecVmselectExtraEnvs[];
+
+  /**
+   * ExtraEnvsFrom defines source of env variables for the application container
+   * could either be secret or configmap
+   *
+   * @schema VmClusterSpecVmselect#extraEnvsFrom
+   */
+  readonly extraEnvsFrom?: VmClusterSpecVmselectExtraEnvsFrom[];
 
   /**
    * HostAliases provides mapping for ip and hostname,
@@ -34107,15 +41552,17 @@ export function toJson_VmClusterSpecVmselect(obj: VmClusterSpecVmselect | undefi
   const result = {
     'affinity': obj.affinity,
     'cacheMountPath': obj.cacheMountPath,
-    'claimTemplates': obj.claimTemplates?.map(y => toJson_VmClusterSpecVmselectClaimTemplates(y)),
+    'claimTemplates': obj.claimTemplates?.map(y => y),
     'clusterNativeListenPort': obj.clusterNativeListenPort,
     'configMaps': obj.configMaps?.map(y => y),
     'containers': obj.containers?.map(y => y),
+    'disableAutomountServiceAccountToken': obj.disableAutomountServiceAccountToken,
     'disableSelfServiceScrape': obj.disableSelfServiceScrape,
     'dnsConfig': toJson_VmClusterSpecVmselectDnsConfig(obj.dnsConfig),
     'dnsPolicy': obj.dnsPolicy,
     'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'extraEnvs': obj.extraEnvs?.map(y => toJson_VmClusterSpecVmselectExtraEnvs(y)),
+    'extraEnvsFrom': obj.extraEnvsFrom?.map(y => toJson_VmClusterSpecVmselectExtraEnvsFrom(y)),
     'hostAliases': obj.hostAliases?.map(y => toJson_VmClusterSpecVmselectHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
     'hpa': obj.hpa,
@@ -34176,7 +41623,7 @@ export interface VmClusterSpecVmstorage {
    *
    * @schema VmClusterSpecVmstorage#claimTemplates
    */
-  readonly claimTemplates?: VmClusterSpecVmstorageClaimTemplates[];
+  readonly claimTemplates?: any[];
 
   /**
    * ConfigMaps is a list of ConfigMaps in the same namespace as the Application
@@ -34194,6 +41641,17 @@ export interface VmClusterSpecVmstorage {
    * @schema VmClusterSpecVmstorage#containers
    */
   readonly containers?: any[];
+
+  /**
+   * DisableAutomountServiceAccountToken whether to disable serviceAccount auto mount by Kubernetes (available from v0.54.0).
+   * Operator will conditionally create volumes and volumeMounts for containers if it requires k8s API access.
+   * For example, vmagent and vm-config-reloader requires k8s API access.
+   * Operator creates volumes with name: "kube-api-access", which can be used as volumeMount for extraContainers if needed.
+   * And also adds VolumeMounts at /var/run/secrets/kubernetes.io/serviceaccount.
+   *
+   * @schema VmClusterSpecVmstorage#disableAutomountServiceAccountToken
+   */
+  readonly disableAutomountServiceAccountToken?: boolean;
 
   /**
    * DisableSelfServiceScrape controls creation of VMServiceScrape by operator
@@ -34234,6 +41692,14 @@ export interface VmClusterSpecVmstorage {
    * @schema VmClusterSpecVmstorage#extraEnvs
    */
   readonly extraEnvs?: VmClusterSpecVmstorageExtraEnvs[];
+
+  /**
+   * ExtraEnvsFrom defines source of env variables for the application container
+   * could either be secret or configmap
+   *
+   * @schema VmClusterSpecVmstorage#extraEnvsFrom
+   */
+  readonly extraEnvsFrom?: VmClusterSpecVmstorageExtraEnvsFrom[];
 
   /**
    * HostAliases provides mapping for ip and hostname,
@@ -34575,14 +42041,16 @@ export function toJson_VmClusterSpecVmstorage(obj: VmClusterSpecVmstorage | unde
   if (obj === undefined) { return undefined; }
   const result = {
     'affinity': obj.affinity,
-    'claimTemplates': obj.claimTemplates?.map(y => toJson_VmClusterSpecVmstorageClaimTemplates(y)),
+    'claimTemplates': obj.claimTemplates?.map(y => y),
     'configMaps': obj.configMaps?.map(y => y),
     'containers': obj.containers?.map(y => y),
+    'disableAutomountServiceAccountToken': obj.disableAutomountServiceAccountToken,
     'disableSelfServiceScrape': obj.disableSelfServiceScrape,
     'dnsConfig': toJson_VmClusterSpecVmstorageDnsConfig(obj.dnsConfig),
     'dnsPolicy': obj.dnsPolicy,
     'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'extraEnvs': obj.extraEnvs?.map(y => toJson_VmClusterSpecVmstorageExtraEnvs(y)),
+    'extraEnvsFrom': obj.extraEnvsFrom?.map(y => toJson_VmClusterSpecVmstorageExtraEnvsFrom(y)),
     'hostAliases': obj.hostAliases?.map(y => toJson_VmClusterSpecVmstorageHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
     'image': toJson_VmClusterSpecVmstorageImage(obj.image),
@@ -34774,6 +42242,51 @@ export function toJson_VmClusterSpecVminsertExtraEnvs(obj: VmClusterSpecVminsert
   const result = {
     'name': obj.name,
     'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ *
+ * @schema VmClusterSpecVminsertExtraEnvsFrom
+ */
+export interface VmClusterSpecVminsertExtraEnvsFrom {
+  /**
+   * The ConfigMap to select from
+   *
+   * @schema VmClusterSpecVminsertExtraEnvsFrom#configMapRef
+   */
+  readonly configMapRef?: VmClusterSpecVminsertExtraEnvsFromConfigMapRef;
+
+  /**
+   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   *
+   * @schema VmClusterSpecVminsertExtraEnvsFrom#prefix
+   */
+  readonly prefix?: string;
+
+  /**
+   * The Secret to select from
+   *
+   * @schema VmClusterSpecVminsertExtraEnvsFrom#secretRef
+   */
+  readonly secretRef?: VmClusterSpecVminsertExtraEnvsFromSecretRef;
+
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVminsertExtraEnvsFrom' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVminsertExtraEnvsFrom(obj: VmClusterSpecVminsertExtraEnvsFrom | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapRef': toJson_VmClusterSpecVminsertExtraEnvsFromConfigMapRef(obj.configMapRef),
+    'prefix': obj.prefix,
+    'secretRef': toJson_VmClusterSpecVminsertExtraEnvsFromSecretRef(obj.secretRef),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -35471,78 +42984,6 @@ export function toJson_VmClusterSpecVminsertVolumeMounts(obj: VmClusterSpecVmins
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * PersistentVolumeClaim is a user's request for and claim to a persistent volume
- *
- * @schema VmClusterSpecVmselectClaimTemplates
- */
-export interface VmClusterSpecVmselectClaimTemplates {
-  /**
-   * APIVersion defines the versioned schema of this representation of an object.
-   * Servers should convert recognized schemas to the latest internal value, and
-   * may reject unrecognized values.
-   * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-   *
-   * @schema VmClusterSpecVmselectClaimTemplates#apiVersion
-   */
-  readonly apiVersion?: string;
-
-  /**
-   * Kind is a string value representing the REST resource this object represents.
-   * Servers may infer this from the endpoint the client submits requests to.
-   * Cannot be updated.
-   * In CamelCase.
-   * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-   *
-   * @schema VmClusterSpecVmselectClaimTemplates#kind
-   */
-  readonly kind?: string;
-
-  /**
-   * Standard object's metadata.
-   * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-   *
-   * @schema VmClusterSpecVmselectClaimTemplates#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * spec defines the desired characteristics of a volume requested by a pod author.
-   * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
-   *
-   * @schema VmClusterSpecVmselectClaimTemplates#spec
-   */
-  readonly spec?: VmClusterSpecVmselectClaimTemplatesSpec;
-
-  /**
-   * status represents the current information/status of a persistent volume claim.
-   * Read-only.
-   * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
-   *
-   * @schema VmClusterSpecVmselectClaimTemplates#status
-   */
-  readonly status?: VmClusterSpecVmselectClaimTemplatesStatus;
-
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmselectClaimTemplates' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmselectClaimTemplates(obj: VmClusterSpecVmselectClaimTemplates | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'apiVersion': obj.apiVersion,
-    'kind': obj.kind,
-    'metadata': obj.metadata,
-    'spec': toJson_VmClusterSpecVmselectClaimTemplatesSpec(obj.spec),
-    'status': toJson_VmClusterSpecVmselectClaimTemplatesStatus(obj.status),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * Specifies the DNS parameters of a pod.
  * Parameters specified here will be merged to the generated DNS
  * configuration based on DNSPolicy.
@@ -35636,6 +43077,51 @@ export function toJson_VmClusterSpecVmselectExtraEnvs(obj: VmClusterSpecVmselect
   const result = {
     'name': obj.name,
     'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ *
+ * @schema VmClusterSpecVmselectExtraEnvsFrom
+ */
+export interface VmClusterSpecVmselectExtraEnvsFrom {
+  /**
+   * The ConfigMap to select from
+   *
+   * @schema VmClusterSpecVmselectExtraEnvsFrom#configMapRef
+   */
+  readonly configMapRef?: VmClusterSpecVmselectExtraEnvsFromConfigMapRef;
+
+  /**
+   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   *
+   * @schema VmClusterSpecVmselectExtraEnvsFrom#prefix
+   */
+  readonly prefix?: string;
+
+  /**
+   * The Secret to select from
+   *
+   * @schema VmClusterSpecVmselectExtraEnvsFrom#secretRef
+   */
+  readonly secretRef?: VmClusterSpecVmselectExtraEnvsFromSecretRef;
+
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmselectExtraEnvsFrom' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmselectExtraEnvsFrom(obj: VmClusterSpecVmselectExtraEnvsFrom | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapRef': toJson_VmClusterSpecVmselectExtraEnvsFromConfigMapRef(obj.configMapRef),
+    'prefix': obj.prefix,
+    'secretRef': toJson_VmClusterSpecVmselectExtraEnvsFromSecretRef(obj.secretRef),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -36307,78 +43793,6 @@ export function toJson_VmClusterSpecVmselectVolumeMounts(obj: VmClusterSpecVmsel
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * PersistentVolumeClaim is a user's request for and claim to a persistent volume
- *
- * @schema VmClusterSpecVmstorageClaimTemplates
- */
-export interface VmClusterSpecVmstorageClaimTemplates {
-  /**
-   * APIVersion defines the versioned schema of this representation of an object.
-   * Servers should convert recognized schemas to the latest internal value, and
-   * may reject unrecognized values.
-   * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplates#apiVersion
-   */
-  readonly apiVersion?: string;
-
-  /**
-   * Kind is a string value representing the REST resource this object represents.
-   * Servers may infer this from the endpoint the client submits requests to.
-   * Cannot be updated.
-   * In CamelCase.
-   * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplates#kind
-   */
-  readonly kind?: string;
-
-  /**
-   * Standard object's metadata.
-   * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplates#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * spec defines the desired characteristics of a volume requested by a pod author.
-   * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplates#spec
-   */
-  readonly spec?: VmClusterSpecVmstorageClaimTemplatesSpec;
-
-  /**
-   * status represents the current information/status of a persistent volume claim.
-   * Read-only.
-   * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplates#status
-   */
-  readonly status?: VmClusterSpecVmstorageClaimTemplatesStatus;
-
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmstorageClaimTemplates' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmstorageClaimTemplates(obj: VmClusterSpecVmstorageClaimTemplates | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'apiVersion': obj.apiVersion,
-    'kind': obj.kind,
-    'metadata': obj.metadata,
-    'spec': toJson_VmClusterSpecVmstorageClaimTemplatesSpec(obj.spec),
-    'status': toJson_VmClusterSpecVmstorageClaimTemplatesStatus(obj.status),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * Specifies the DNS parameters of a pod.
  * Parameters specified here will be merged to the generated DNS
  * configuration based on DNSPolicy.
@@ -36472,6 +43886,51 @@ export function toJson_VmClusterSpecVmstorageExtraEnvs(obj: VmClusterSpecVmstora
   const result = {
     'name': obj.name,
     'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ *
+ * @schema VmClusterSpecVmstorageExtraEnvsFrom
+ */
+export interface VmClusterSpecVmstorageExtraEnvsFrom {
+  /**
+   * The ConfigMap to select from
+   *
+   * @schema VmClusterSpecVmstorageExtraEnvsFrom#configMapRef
+   */
+  readonly configMapRef?: VmClusterSpecVmstorageExtraEnvsFromConfigMapRef;
+
+  /**
+   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   *
+   * @schema VmClusterSpecVmstorageExtraEnvsFrom#prefix
+   */
+  readonly prefix?: string;
+
+  /**
+   * The Secret to select from
+   *
+   * @schema VmClusterSpecVmstorageExtraEnvsFrom#secretRef
+   */
+  readonly secretRef?: VmClusterSpecVmstorageExtraEnvsFromSecretRef;
+
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageExtraEnvsFrom' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageExtraEnvsFrom(obj: VmClusterSpecVmstorageExtraEnvsFrom | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapRef': toJson_VmClusterSpecVmstorageExtraEnvsFromConfigMapRef(obj.configMapRef),
+    'prefix': obj.prefix,
+    'secretRef': toJson_VmClusterSpecVmstorageExtraEnvsFromSecretRef(obj.secretRef),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -37081,6 +44540,14 @@ export interface VmClusterSpecVmstorageVmBackup {
   readonly extraEnvs?: VmClusterSpecVmstorageVmBackupExtraEnvs[];
 
   /**
+   * ExtraEnvsFrom defines source of env variables for the application container
+   * could either be secret or configmap
+   *
+   * @schema VmClusterSpecVmstorageVmBackup#extraEnvsFrom
+   */
+  readonly extraEnvsFrom?: VmClusterSpecVmstorageVmBackupExtraEnvsFrom[];
+
+  /**
    * Image - docker image settings for VMBackuper
    *
    * @schema VmClusterSpecVmstorageVmBackup#image
@@ -37169,6 +44636,7 @@ export function toJson_VmClusterSpecVmstorageVmBackup(obj: VmClusterSpecVmstorag
     'disableWeekly': obj.disableWeekly,
     'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'extraEnvs': obj.extraEnvs?.map(y => toJson_VmClusterSpecVmstorageVmBackupExtraEnvs(y)),
+    'extraEnvsFrom': obj.extraEnvsFrom?.map(y => toJson_VmClusterSpecVmstorageVmBackupExtraEnvsFrom(y)),
     'image': toJson_VmClusterSpecVmstorageVmBackupImage(obj.image),
     'logFormat': obj.logFormat,
     'logLevel': obj.logLevel,
@@ -37297,6 +44765,7 @@ export function toJson_VmClusterSpecVmstorageVolumeMounts(obj: VmClusterSpecVmst
  */
 export interface VmClusterSpecVminsertDnsConfigOptions {
   /**
+   * Name is this DNS resolver option's name.
    * Required.
    *
    * @schema VmClusterSpecVminsertDnsConfigOptions#name
@@ -37304,6 +44773,8 @@ export interface VmClusterSpecVminsertDnsConfigOptions {
   readonly name?: string;
 
   /**
+   * Value is this DNS resolver option's value.
+   *
    * @schema VmClusterSpecVminsertDnsConfigOptions#value
    */
   readonly value?: string;
@@ -37319,6 +44790,88 @@ export function toJson_VmClusterSpecVminsertDnsConfigOptions(obj: VmClusterSpecV
   const result = {
     'name': obj.name,
     'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The ConfigMap to select from
+ *
+ * @schema VmClusterSpecVminsertExtraEnvsFromConfigMapRef
+ */
+export interface VmClusterSpecVminsertExtraEnvsFromConfigMapRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmClusterSpecVminsertExtraEnvsFromConfigMapRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap must be defined
+   *
+   * @schema VmClusterSpecVminsertExtraEnvsFromConfigMapRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVminsertExtraEnvsFromConfigMapRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVminsertExtraEnvsFromConfigMapRef(obj: VmClusterSpecVminsertExtraEnvsFromConfigMapRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The Secret to select from
+ *
+ * @schema VmClusterSpecVminsertExtraEnvsFromSecretRef
+ */
+export interface VmClusterSpecVminsertExtraEnvsFromSecretRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmClusterSpecVminsertExtraEnvsFromSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret must be defined
+   *
+   * @schema VmClusterSpecVminsertExtraEnvsFromSecretRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVminsertExtraEnvsFromSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVminsertExtraEnvsFromSecretRef(obj: VmClusterSpecVminsertExtraEnvsFromSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -37542,301 +45095,13 @@ export function toJson_VmClusterSpecVminsertServiceSpecMetadata(obj: VmClusterSp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * spec defines the desired characteristics of a volume requested by a pod author.
- * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
- *
- * @schema VmClusterSpecVmselectClaimTemplatesSpec
- */
-export interface VmClusterSpecVmselectClaimTemplatesSpec {
-  /**
-   * accessModes contains the desired access modes the volume should have.
-   * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpec#accessModes
-   */
-  readonly accessModes?: string[];
-
-  /**
-   * dataSource field can be used to specify either:
-   * * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot)
-   * * An existing PVC (PersistentVolumeClaim)
-   * If the provisioner or an external controller can support the specified data source,
-   * it will create a new volume based on the contents of the specified data source.
-   * When the AnyVolumeDataSource feature gate is enabled, dataSource contents will be copied to dataSourceRef,
-   * and dataSourceRef contents will be copied to dataSource when dataSourceRef.namespace is not specified.
-   * If the namespace is specified, then dataSourceRef will not be copied to dataSource.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpec#dataSource
-   */
-  readonly dataSource?: VmClusterSpecVmselectClaimTemplatesSpecDataSource;
-
-  /**
-   * dataSourceRef specifies the object from which to populate the volume with data, if a non-empty
-   * volume is desired. This may be any object from a non-empty API group (non
-   * core object) or a PersistentVolumeClaim object.
-   * When this field is specified, volume binding will only succeed if the type of
-   * the specified object matches some installed volume populator or dynamic
-   * provisioner.
-   * This field will replace the functionality of the dataSource field and as such
-   * if both fields are non-empty, they must have the same value. For backwards
-   * compatibility, when namespace isn't specified in dataSourceRef,
-   * both fields (dataSource and dataSourceRef) will be set to the same
-   * value automatically if one of them is empty and the other is non-empty.
-   * When namespace is specified in dataSourceRef,
-   * dataSource isn't set to the same value and must be empty.
-   * There are three important differences between dataSource and dataSourceRef:
-   * * While dataSource only allows two specific types of objects, dataSourceRef
-   * allows any non-core object, as well as PersistentVolumeClaim objects.
-   * * While dataSource ignores disallowed values (dropping them), dataSourceRef
-   * preserves all values, and generates an error if a disallowed value is
-   * specified.
-   * * While dataSource only allows local objects, dataSourceRef allows objects
-   * in any namespaces.
-   * (Beta) Using this field requires the AnyVolumeDataSource feature gate to be enabled.
-   * (Alpha) Using the namespace field of dataSourceRef requires the CrossNamespaceVolumeDataSource feature gate to be enabled.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpec#dataSourceRef
-   */
-  readonly dataSourceRef?: VmClusterSpecVmselectClaimTemplatesSpecDataSourceRef;
-
-  /**
-   * resources represents the minimum resources the volume should have.
-   * If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements
-   * that are lower than previous value but must still be higher than capacity recorded in the
-   * status field of the claim.
-   * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpec#resources
-   */
-  readonly resources?: VmClusterSpecVmselectClaimTemplatesSpecResources;
-
-  /**
-   * selector is a label query over volumes to consider for binding.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpec#selector
-   */
-  readonly selector?: VmClusterSpecVmselectClaimTemplatesSpecSelector;
-
-  /**
-   * storageClassName is the name of the StorageClass required by the claim.
-   * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpec#storageClassName
-   */
-  readonly storageClassName?: string;
-
-  /**
-   * volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim.
-   * If specified, the CSI driver will create or update the volume with the attributes defined
-   * in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName,
-   * it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass
-   * will be applied to the claim but it's not allowed to reset this field to empty string once it is set.
-   * If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass
-   * will be set by the persistentvolume controller if it exists.
-   * If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be
-   * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
-   * exists.
-   * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpec#volumeAttributesClassName
-   */
-  readonly volumeAttributesClassName?: string;
-
-  /**
-   * volumeMode defines what type of volume is required by the claim.
-   * Value of Filesystem is implied when not included in claim spec.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpec#volumeMode
-   */
-  readonly volumeMode?: string;
-
-  /**
-   * volumeName is the binding reference to the PersistentVolume backing this claim.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpec#volumeName
-   */
-  readonly volumeName?: string;
-
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmselectClaimTemplatesSpec' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmselectClaimTemplatesSpec(obj: VmClusterSpecVmselectClaimTemplatesSpec | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'accessModes': obj.accessModes?.map(y => y),
-    'dataSource': toJson_VmClusterSpecVmselectClaimTemplatesSpecDataSource(obj.dataSource),
-    'dataSourceRef': toJson_VmClusterSpecVmselectClaimTemplatesSpecDataSourceRef(obj.dataSourceRef),
-    'resources': toJson_VmClusterSpecVmselectClaimTemplatesSpecResources(obj.resources),
-    'selector': toJson_VmClusterSpecVmselectClaimTemplatesSpecSelector(obj.selector),
-    'storageClassName': obj.storageClassName,
-    'volumeAttributesClassName': obj.volumeAttributesClassName,
-    'volumeMode': obj.volumeMode,
-    'volumeName': obj.volumeName,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * status represents the current information/status of a persistent volume claim.
- * Read-only.
- * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
- *
- * @schema VmClusterSpecVmselectClaimTemplatesStatus
- */
-export interface VmClusterSpecVmselectClaimTemplatesStatus {
-  /**
-   * accessModes contains the actual access modes the volume backing the PVC has.
-   * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesStatus#accessModes
-   */
-  readonly accessModes?: string[];
-
-  /**
-   * allocatedResourceStatuses stores status of resource being resized for the given PVC.
-   * Key names follow standard Kubernetes label syntax. Valid values are either:
-   * * Un-prefixed keys:
-   * - storage - the capacity of the volume.
-   * * Custom resources must use implementation-defined prefixed names such as "example.com/my-custom-resource"
-   * Apart from above values - keys that are unprefixed or have kubernetes.io prefix are considered
-   * reserved and hence may not be used.
-   *
-   * ClaimResourceStatus can be in any of following states:
-   * - ControllerResizeInProgress:
-   * State set when resize controller starts resizing the volume in control-plane.
-   * - ControllerResizeFailed:
-   * State set when resize has failed in resize controller with a terminal error.
-   * - NodeResizePending:
-   * State set when resize controller has finished resizing the volume but further resizing of
-   * volume is needed on the node.
-   * - NodeResizeInProgress:
-   * State set when kubelet starts resizing the volume.
-   * - NodeResizeFailed:
-   * State set when resizing has failed in kubelet with a terminal error. Transient errors don't set
-   * NodeResizeFailed.
-   * For example: if expanding a PVC for more capacity - this field can be one of the following states:
-   * - pvc.status.allocatedResourceStatus['storage'] = "ControllerResizeInProgress"
-   * - pvc.status.allocatedResourceStatus['storage'] = "ControllerResizeFailed"
-   * - pvc.status.allocatedResourceStatus['storage'] = "NodeResizePending"
-   * - pvc.status.allocatedResourceStatus['storage'] = "NodeResizeInProgress"
-   * - pvc.status.allocatedResourceStatus['storage'] = "NodeResizeFailed"
-   * When this field is not set, it means that no resize operation is in progress for the given PVC.
-   *
-   * A controller that receives PVC update with previously unknown resourceName or ClaimResourceStatus
-   * should ignore the update for the purpose it was designed. For example - a controller that
-   * only is responsible for resizing capacity of the volume, should ignore PVC updates that change other valid
-   * resources associated with PVC.
-   *
-   * This is an alpha field and requires enabling RecoverVolumeExpansionFailure feature.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesStatus#allocatedResourceStatuses
-   */
-  readonly allocatedResourceStatuses?: { [key: string]: string };
-
-  /**
-   * allocatedResources tracks the resources allocated to a PVC including its capacity.
-   * Key names follow standard Kubernetes label syntax. Valid values are either:
-   * * Un-prefixed keys:
-   * - storage - the capacity of the volume.
-   * * Custom resources must use implementation-defined prefixed names such as "example.com/my-custom-resource"
-   * Apart from above values - keys that are unprefixed or have kubernetes.io prefix are considered
-   * reserved and hence may not be used.
-   *
-   * Capacity reported here may be larger than the actual capacity when a volume expansion operation
-   * is requested.
-   * For storage quota, the larger value from allocatedResources and PVC.spec.resources is used.
-   * If allocatedResources is not set, PVC.spec.resources alone is used for quota calculation.
-   * If a volume expansion capacity request is lowered, allocatedResources is only
-   * lowered if there are no expansion operations in progress and if the actual volume capacity
-   * is equal or lower than the requested capacity.
-   *
-   * A controller that receives PVC update with previously unknown resourceName
-   * should ignore the update for the purpose it was designed. For example - a controller that
-   * only is responsible for resizing capacity of the volume, should ignore PVC updates that change other valid
-   * resources associated with PVC.
-   *
-   * This is an alpha field and requires enabling RecoverVolumeExpansionFailure feature.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesStatus#allocatedResources
-   */
-  readonly allocatedResources?: { [key: string]: VmClusterSpecVmselectClaimTemplatesStatusAllocatedResources };
-
-  /**
-   * capacity represents the actual resources of the underlying volume.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesStatus#capacity
-   */
-  readonly capacity?: { [key: string]: VmClusterSpecVmselectClaimTemplatesStatusCapacity };
-
-  /**
-   * conditions is the current Condition of persistent volume claim. If underlying persistent volume is being
-   * resized then the Condition will be set to 'Resizing'.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesStatus#conditions
-   */
-  readonly conditions?: VmClusterSpecVmselectClaimTemplatesStatusConditions[];
-
-  /**
-   * currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using.
-   * When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim
-   * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesStatus#currentVolumeAttributesClassName
-   */
-  readonly currentVolumeAttributesClassName?: string;
-
-  /**
-   * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
-   * When this is unset, there is no ModifyVolume operation being attempted.
-   * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesStatus#modifyVolumeStatus
-   */
-  readonly modifyVolumeStatus?: VmClusterSpecVmselectClaimTemplatesStatusModifyVolumeStatus;
-
-  /**
-   * phase represents the current phase of PersistentVolumeClaim.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesStatus#phase
-   */
-  readonly phase?: string;
-
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmselectClaimTemplatesStatus' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmselectClaimTemplatesStatus(obj: VmClusterSpecVmselectClaimTemplatesStatus | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'accessModes': obj.accessModes?.map(y => y),
-    'allocatedResourceStatuses': ((obj.allocatedResourceStatuses) === undefined) ? undefined : (Object.entries(obj.allocatedResourceStatuses).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-    'allocatedResources': ((obj.allocatedResources) === undefined) ? undefined : (Object.entries(obj.allocatedResources).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
-    'capacity': ((obj.capacity) === undefined) ? undefined : (Object.entries(obj.capacity).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
-    'conditions': obj.conditions?.map(y => toJson_VmClusterSpecVmselectClaimTemplatesStatusConditions(y)),
-    'currentVolumeAttributesClassName': obj.currentVolumeAttributesClassName,
-    'modifyVolumeStatus': toJson_VmClusterSpecVmselectClaimTemplatesStatusModifyVolumeStatus(obj.modifyVolumeStatus),
-    'phase': obj.phase,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * PodDNSConfigOption defines DNS resolver options of a pod.
  *
  * @schema VmClusterSpecVmselectDnsConfigOptions
  */
 export interface VmClusterSpecVmselectDnsConfigOptions {
   /**
+   * Name is this DNS resolver option's name.
    * Required.
    *
    * @schema VmClusterSpecVmselectDnsConfigOptions#name
@@ -37844,6 +45109,8 @@ export interface VmClusterSpecVmselectDnsConfigOptions {
   readonly name?: string;
 
   /**
+   * Value is this DNS resolver option's value.
+   *
    * @schema VmClusterSpecVmselectDnsConfigOptions#value
    */
   readonly value?: string;
@@ -37859,6 +45126,88 @@ export function toJson_VmClusterSpecVmselectDnsConfigOptions(obj: VmClusterSpecV
   const result = {
     'name': obj.name,
     'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The ConfigMap to select from
+ *
+ * @schema VmClusterSpecVmselectExtraEnvsFromConfigMapRef
+ */
+export interface VmClusterSpecVmselectExtraEnvsFromConfigMapRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmClusterSpecVmselectExtraEnvsFromConfigMapRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap must be defined
+   *
+   * @schema VmClusterSpecVmselectExtraEnvsFromConfigMapRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmselectExtraEnvsFromConfigMapRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmselectExtraEnvsFromConfigMapRef(obj: VmClusterSpecVmselectExtraEnvsFromConfigMapRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The Secret to select from
+ *
+ * @schema VmClusterSpecVmselectExtraEnvsFromSecretRef
+ */
+export interface VmClusterSpecVmselectExtraEnvsFromSecretRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmClusterSpecVmselectExtraEnvsFromSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret must be defined
+   *
+   * @schema VmClusterSpecVmselectExtraEnvsFromSecretRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmselectExtraEnvsFromSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmselectExtraEnvsFromSecretRef(obj: VmClusterSpecVmselectExtraEnvsFromSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -38192,301 +45541,13 @@ export function toJson_VmClusterSpecVmselectStorageVolumeClaimTemplate(obj: VmCl
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * spec defines the desired characteristics of a volume requested by a pod author.
- * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
- *
- * @schema VmClusterSpecVmstorageClaimTemplatesSpec
- */
-export interface VmClusterSpecVmstorageClaimTemplatesSpec {
-  /**
-   * accessModes contains the desired access modes the volume should have.
-   * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpec#accessModes
-   */
-  readonly accessModes?: string[];
-
-  /**
-   * dataSource field can be used to specify either:
-   * * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot)
-   * * An existing PVC (PersistentVolumeClaim)
-   * If the provisioner or an external controller can support the specified data source,
-   * it will create a new volume based on the contents of the specified data source.
-   * When the AnyVolumeDataSource feature gate is enabled, dataSource contents will be copied to dataSourceRef,
-   * and dataSourceRef contents will be copied to dataSource when dataSourceRef.namespace is not specified.
-   * If the namespace is specified, then dataSourceRef will not be copied to dataSource.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpec#dataSource
-   */
-  readonly dataSource?: VmClusterSpecVmstorageClaimTemplatesSpecDataSource;
-
-  /**
-   * dataSourceRef specifies the object from which to populate the volume with data, if a non-empty
-   * volume is desired. This may be any object from a non-empty API group (non
-   * core object) or a PersistentVolumeClaim object.
-   * When this field is specified, volume binding will only succeed if the type of
-   * the specified object matches some installed volume populator or dynamic
-   * provisioner.
-   * This field will replace the functionality of the dataSource field and as such
-   * if both fields are non-empty, they must have the same value. For backwards
-   * compatibility, when namespace isn't specified in dataSourceRef,
-   * both fields (dataSource and dataSourceRef) will be set to the same
-   * value automatically if one of them is empty and the other is non-empty.
-   * When namespace is specified in dataSourceRef,
-   * dataSource isn't set to the same value and must be empty.
-   * There are three important differences between dataSource and dataSourceRef:
-   * * While dataSource only allows two specific types of objects, dataSourceRef
-   * allows any non-core object, as well as PersistentVolumeClaim objects.
-   * * While dataSource ignores disallowed values (dropping them), dataSourceRef
-   * preserves all values, and generates an error if a disallowed value is
-   * specified.
-   * * While dataSource only allows local objects, dataSourceRef allows objects
-   * in any namespaces.
-   * (Beta) Using this field requires the AnyVolumeDataSource feature gate to be enabled.
-   * (Alpha) Using the namespace field of dataSourceRef requires the CrossNamespaceVolumeDataSource feature gate to be enabled.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpec#dataSourceRef
-   */
-  readonly dataSourceRef?: VmClusterSpecVmstorageClaimTemplatesSpecDataSourceRef;
-
-  /**
-   * resources represents the minimum resources the volume should have.
-   * If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements
-   * that are lower than previous value but must still be higher than capacity recorded in the
-   * status field of the claim.
-   * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpec#resources
-   */
-  readonly resources?: VmClusterSpecVmstorageClaimTemplatesSpecResources;
-
-  /**
-   * selector is a label query over volumes to consider for binding.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpec#selector
-   */
-  readonly selector?: VmClusterSpecVmstorageClaimTemplatesSpecSelector;
-
-  /**
-   * storageClassName is the name of the StorageClass required by the claim.
-   * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpec#storageClassName
-   */
-  readonly storageClassName?: string;
-
-  /**
-   * volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim.
-   * If specified, the CSI driver will create or update the volume with the attributes defined
-   * in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName,
-   * it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass
-   * will be applied to the claim but it's not allowed to reset this field to empty string once it is set.
-   * If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass
-   * will be set by the persistentvolume controller if it exists.
-   * If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be
-   * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
-   * exists.
-   * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpec#volumeAttributesClassName
-   */
-  readonly volumeAttributesClassName?: string;
-
-  /**
-   * volumeMode defines what type of volume is required by the claim.
-   * Value of Filesystem is implied when not included in claim spec.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpec#volumeMode
-   */
-  readonly volumeMode?: string;
-
-  /**
-   * volumeName is the binding reference to the PersistentVolume backing this claim.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpec#volumeName
-   */
-  readonly volumeName?: string;
-
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmstorageClaimTemplatesSpec' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmstorageClaimTemplatesSpec(obj: VmClusterSpecVmstorageClaimTemplatesSpec | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'accessModes': obj.accessModes?.map(y => y),
-    'dataSource': toJson_VmClusterSpecVmstorageClaimTemplatesSpecDataSource(obj.dataSource),
-    'dataSourceRef': toJson_VmClusterSpecVmstorageClaimTemplatesSpecDataSourceRef(obj.dataSourceRef),
-    'resources': toJson_VmClusterSpecVmstorageClaimTemplatesSpecResources(obj.resources),
-    'selector': toJson_VmClusterSpecVmstorageClaimTemplatesSpecSelector(obj.selector),
-    'storageClassName': obj.storageClassName,
-    'volumeAttributesClassName': obj.volumeAttributesClassName,
-    'volumeMode': obj.volumeMode,
-    'volumeName': obj.volumeName,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * status represents the current information/status of a persistent volume claim.
- * Read-only.
- * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
- *
- * @schema VmClusterSpecVmstorageClaimTemplatesStatus
- */
-export interface VmClusterSpecVmstorageClaimTemplatesStatus {
-  /**
-   * accessModes contains the actual access modes the volume backing the PVC has.
-   * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesStatus#accessModes
-   */
-  readonly accessModes?: string[];
-
-  /**
-   * allocatedResourceStatuses stores status of resource being resized for the given PVC.
-   * Key names follow standard Kubernetes label syntax. Valid values are either:
-   * * Un-prefixed keys:
-   * - storage - the capacity of the volume.
-   * * Custom resources must use implementation-defined prefixed names such as "example.com/my-custom-resource"
-   * Apart from above values - keys that are unprefixed or have kubernetes.io prefix are considered
-   * reserved and hence may not be used.
-   *
-   * ClaimResourceStatus can be in any of following states:
-   * - ControllerResizeInProgress:
-   * State set when resize controller starts resizing the volume in control-plane.
-   * - ControllerResizeFailed:
-   * State set when resize has failed in resize controller with a terminal error.
-   * - NodeResizePending:
-   * State set when resize controller has finished resizing the volume but further resizing of
-   * volume is needed on the node.
-   * - NodeResizeInProgress:
-   * State set when kubelet starts resizing the volume.
-   * - NodeResizeFailed:
-   * State set when resizing has failed in kubelet with a terminal error. Transient errors don't set
-   * NodeResizeFailed.
-   * For example: if expanding a PVC for more capacity - this field can be one of the following states:
-   * - pvc.status.allocatedResourceStatus['storage'] = "ControllerResizeInProgress"
-   * - pvc.status.allocatedResourceStatus['storage'] = "ControllerResizeFailed"
-   * - pvc.status.allocatedResourceStatus['storage'] = "NodeResizePending"
-   * - pvc.status.allocatedResourceStatus['storage'] = "NodeResizeInProgress"
-   * - pvc.status.allocatedResourceStatus['storage'] = "NodeResizeFailed"
-   * When this field is not set, it means that no resize operation is in progress for the given PVC.
-   *
-   * A controller that receives PVC update with previously unknown resourceName or ClaimResourceStatus
-   * should ignore the update for the purpose it was designed. For example - a controller that
-   * only is responsible for resizing capacity of the volume, should ignore PVC updates that change other valid
-   * resources associated with PVC.
-   *
-   * This is an alpha field and requires enabling RecoverVolumeExpansionFailure feature.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesStatus#allocatedResourceStatuses
-   */
-  readonly allocatedResourceStatuses?: { [key: string]: string };
-
-  /**
-   * allocatedResources tracks the resources allocated to a PVC including its capacity.
-   * Key names follow standard Kubernetes label syntax. Valid values are either:
-   * * Un-prefixed keys:
-   * - storage - the capacity of the volume.
-   * * Custom resources must use implementation-defined prefixed names such as "example.com/my-custom-resource"
-   * Apart from above values - keys that are unprefixed or have kubernetes.io prefix are considered
-   * reserved and hence may not be used.
-   *
-   * Capacity reported here may be larger than the actual capacity when a volume expansion operation
-   * is requested.
-   * For storage quota, the larger value from allocatedResources and PVC.spec.resources is used.
-   * If allocatedResources is not set, PVC.spec.resources alone is used for quota calculation.
-   * If a volume expansion capacity request is lowered, allocatedResources is only
-   * lowered if there are no expansion operations in progress and if the actual volume capacity
-   * is equal or lower than the requested capacity.
-   *
-   * A controller that receives PVC update with previously unknown resourceName
-   * should ignore the update for the purpose it was designed. For example - a controller that
-   * only is responsible for resizing capacity of the volume, should ignore PVC updates that change other valid
-   * resources associated with PVC.
-   *
-   * This is an alpha field and requires enabling RecoverVolumeExpansionFailure feature.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesStatus#allocatedResources
-   */
-  readonly allocatedResources?: { [key: string]: VmClusterSpecVmstorageClaimTemplatesStatusAllocatedResources };
-
-  /**
-   * capacity represents the actual resources of the underlying volume.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesStatus#capacity
-   */
-  readonly capacity?: { [key: string]: VmClusterSpecVmstorageClaimTemplatesStatusCapacity };
-
-  /**
-   * conditions is the current Condition of persistent volume claim. If underlying persistent volume is being
-   * resized then the Condition will be set to 'Resizing'.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesStatus#conditions
-   */
-  readonly conditions?: VmClusterSpecVmstorageClaimTemplatesStatusConditions[];
-
-  /**
-   * currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using.
-   * When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim
-   * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesStatus#currentVolumeAttributesClassName
-   */
-  readonly currentVolumeAttributesClassName?: string;
-
-  /**
-   * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
-   * When this is unset, there is no ModifyVolume operation being attempted.
-   * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesStatus#modifyVolumeStatus
-   */
-  readonly modifyVolumeStatus?: VmClusterSpecVmstorageClaimTemplatesStatusModifyVolumeStatus;
-
-  /**
-   * phase represents the current phase of PersistentVolumeClaim.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesStatus#phase
-   */
-  readonly phase?: string;
-
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmstorageClaimTemplatesStatus' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmstorageClaimTemplatesStatus(obj: VmClusterSpecVmstorageClaimTemplatesStatus | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'accessModes': obj.accessModes?.map(y => y),
-    'allocatedResourceStatuses': ((obj.allocatedResourceStatuses) === undefined) ? undefined : (Object.entries(obj.allocatedResourceStatuses).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-    'allocatedResources': ((obj.allocatedResources) === undefined) ? undefined : (Object.entries(obj.allocatedResources).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
-    'capacity': ((obj.capacity) === undefined) ? undefined : (Object.entries(obj.capacity).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
-    'conditions': obj.conditions?.map(y => toJson_VmClusterSpecVmstorageClaimTemplatesStatusConditions(y)),
-    'currentVolumeAttributesClassName': obj.currentVolumeAttributesClassName,
-    'modifyVolumeStatus': toJson_VmClusterSpecVmstorageClaimTemplatesStatusModifyVolumeStatus(obj.modifyVolumeStatus),
-    'phase': obj.phase,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * PodDNSConfigOption defines DNS resolver options of a pod.
  *
  * @schema VmClusterSpecVmstorageDnsConfigOptions
  */
 export interface VmClusterSpecVmstorageDnsConfigOptions {
   /**
+   * Name is this DNS resolver option's name.
    * Required.
    *
    * @schema VmClusterSpecVmstorageDnsConfigOptions#name
@@ -38494,6 +45555,8 @@ export interface VmClusterSpecVmstorageDnsConfigOptions {
   readonly name?: string;
 
   /**
+   * Value is this DNS resolver option's value.
+   *
    * @schema VmClusterSpecVmstorageDnsConfigOptions#value
    */
   readonly value?: string;
@@ -38509,6 +45572,88 @@ export function toJson_VmClusterSpecVmstorageDnsConfigOptions(obj: VmClusterSpec
   const result = {
     'name': obj.name,
     'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The ConfigMap to select from
+ *
+ * @schema VmClusterSpecVmstorageExtraEnvsFromConfigMapRef
+ */
+export interface VmClusterSpecVmstorageExtraEnvsFromConfigMapRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmClusterSpecVmstorageExtraEnvsFromConfigMapRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap must be defined
+   *
+   * @schema VmClusterSpecVmstorageExtraEnvsFromConfigMapRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageExtraEnvsFromConfigMapRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageExtraEnvsFromConfigMapRef(obj: VmClusterSpecVmstorageExtraEnvsFromConfigMapRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The Secret to select from
+ *
+ * @schema VmClusterSpecVmstorageExtraEnvsFromSecretRef
+ */
+export interface VmClusterSpecVmstorageExtraEnvsFromSecretRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmClusterSpecVmstorageExtraEnvsFromSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret must be defined
+   *
+   * @schema VmClusterSpecVmstorageExtraEnvsFromSecretRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageExtraEnvsFromSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageExtraEnvsFromSecretRef(obj: VmClusterSpecVmstorageExtraEnvsFromSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -38829,6 +45974,51 @@ export function toJson_VmClusterSpecVmstorageVmBackupExtraEnvs(obj: VmClusterSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ *
+ * @schema VmClusterSpecVmstorageVmBackupExtraEnvsFrom
+ */
+export interface VmClusterSpecVmstorageVmBackupExtraEnvsFrom {
+  /**
+   * The ConfigMap to select from
+   *
+   * @schema VmClusterSpecVmstorageVmBackupExtraEnvsFrom#configMapRef
+   */
+  readonly configMapRef?: VmClusterSpecVmstorageVmBackupExtraEnvsFromConfigMapRef;
+
+  /**
+   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   *
+   * @schema VmClusterSpecVmstorageVmBackupExtraEnvsFrom#prefix
+   */
+  readonly prefix?: string;
+
+  /**
+   * The Secret to select from
+   *
+   * @schema VmClusterSpecVmstorageVmBackupExtraEnvsFrom#secretRef
+   */
+  readonly secretRef?: VmClusterSpecVmstorageVmBackupExtraEnvsFromSecretRef;
+
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageVmBackupExtraEnvsFrom' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageVmBackupExtraEnvsFrom(obj: VmClusterSpecVmstorageVmBackupExtraEnvsFrom | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapRef': toJson_VmClusterSpecVmstorageVmBackupExtraEnvsFromConfigMapRef(obj.configMapRef),
+    'prefix': obj.prefix,
+    'secretRef': toJson_VmClusterSpecVmstorageVmBackupExtraEnvsFromSecretRef(obj.secretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * Image - docker image settings for VMBackuper
  *
  * @schema VmClusterSpecVmstorageVmBackupImage
@@ -39090,376 +46280,6 @@ export function toJson_VmClusterSpecVmstorageVmBackupVolumeMounts(obj: VmCluster
     'recursiveReadOnly': obj.recursiveReadOnly,
     'subPath': obj.subPath,
     'subPathExpr': obj.subPathExpr,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * dataSource field can be used to specify either:
- * * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot)
- * * An existing PVC (PersistentVolumeClaim)
- * If the provisioner or an external controller can support the specified data source,
- * it will create a new volume based on the contents of the specified data source.
- * When the AnyVolumeDataSource feature gate is enabled, dataSource contents will be copied to dataSourceRef,
- * and dataSourceRef contents will be copied to dataSource when dataSourceRef.namespace is not specified.
- * If the namespace is specified, then dataSourceRef will not be copied to dataSource.
- *
- * @schema VmClusterSpecVmselectClaimTemplatesSpecDataSource
- */
-export interface VmClusterSpecVmselectClaimTemplatesSpecDataSource {
-  /**
-   * APIGroup is the group for the resource being referenced.
-   * If APIGroup is not specified, the specified Kind must be in the core API group.
-   * For any other third-party types, APIGroup is required.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpecDataSource#apiGroup
-   */
-  readonly apiGroup?: string;
-
-  /**
-   * Kind is the type of resource being referenced
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpecDataSource#kind
-   */
-  readonly kind: string;
-
-  /**
-   * Name is the name of resource being referenced
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpecDataSource#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmselectClaimTemplatesSpecDataSource' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmselectClaimTemplatesSpecDataSource(obj: VmClusterSpecVmselectClaimTemplatesSpecDataSource | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'apiGroup': obj.apiGroup,
-    'kind': obj.kind,
-    'name': obj.name,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * dataSourceRef specifies the object from which to populate the volume with data, if a non-empty
- * volume is desired. This may be any object from a non-empty API group (non
- * core object) or a PersistentVolumeClaim object.
- * When this field is specified, volume binding will only succeed if the type of
- * the specified object matches some installed volume populator or dynamic
- * provisioner.
- * This field will replace the functionality of the dataSource field and as such
- * if both fields are non-empty, they must have the same value. For backwards
- * compatibility, when namespace isn't specified in dataSourceRef,
- * both fields (dataSource and dataSourceRef) will be set to the same
- * value automatically if one of them is empty and the other is non-empty.
- * When namespace is specified in dataSourceRef,
- * dataSource isn't set to the same value and must be empty.
- * There are three important differences between dataSource and dataSourceRef:
- * * While dataSource only allows two specific types of objects, dataSourceRef
- * allows any non-core object, as well as PersistentVolumeClaim objects.
- * * While dataSource ignores disallowed values (dropping them), dataSourceRef
- * preserves all values, and generates an error if a disallowed value is
- * specified.
- * * While dataSource only allows local objects, dataSourceRef allows objects
- * in any namespaces.
- * (Beta) Using this field requires the AnyVolumeDataSource feature gate to be enabled.
- * (Alpha) Using the namespace field of dataSourceRef requires the CrossNamespaceVolumeDataSource feature gate to be enabled.
- *
- * @schema VmClusterSpecVmselectClaimTemplatesSpecDataSourceRef
- */
-export interface VmClusterSpecVmselectClaimTemplatesSpecDataSourceRef {
-  /**
-   * APIGroup is the group for the resource being referenced.
-   * If APIGroup is not specified, the specified Kind must be in the core API group.
-   * For any other third-party types, APIGroup is required.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpecDataSourceRef#apiGroup
-   */
-  readonly apiGroup?: string;
-
-  /**
-   * Kind is the type of resource being referenced
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpecDataSourceRef#kind
-   */
-  readonly kind: string;
-
-  /**
-   * Name is the name of resource being referenced
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpecDataSourceRef#name
-   */
-  readonly name: string;
-
-  /**
-   * Namespace is the namespace of resource being referenced
-   * Note that when a namespace is specified, a gateway.networking.k8s.io/ReferenceGrant object is required in the referent namespace to allow that namespace's owner to accept the reference. See the ReferenceGrant documentation for details.
-   * (Alpha) This field requires the CrossNamespaceVolumeDataSource feature gate to be enabled.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpecDataSourceRef#namespace
-   */
-  readonly namespace?: string;
-
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmselectClaimTemplatesSpecDataSourceRef' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmselectClaimTemplatesSpecDataSourceRef(obj: VmClusterSpecVmselectClaimTemplatesSpecDataSourceRef | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'apiGroup': obj.apiGroup,
-    'kind': obj.kind,
-    'name': obj.name,
-    'namespace': obj.namespace,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * resources represents the minimum resources the volume should have.
- * If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements
- * that are lower than previous value but must still be higher than capacity recorded in the
- * status field of the claim.
- * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
- *
- * @schema VmClusterSpecVmselectClaimTemplatesSpecResources
- */
-export interface VmClusterSpecVmselectClaimTemplatesSpecResources {
-  /**
-   * Limits describes the maximum amount of compute resources allowed.
-   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpecResources#limits
-   */
-  readonly limits?: { [key: string]: VmClusterSpecVmselectClaimTemplatesSpecResourcesLimits };
-
-  /**
-   * Requests describes the minimum amount of compute resources required.
-   * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
-   * otherwise to an implementation-defined value. Requests cannot exceed Limits.
-   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpecResources#requests
-   */
-  readonly requests?: { [key: string]: VmClusterSpecVmselectClaimTemplatesSpecResourcesRequests };
-
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmselectClaimTemplatesSpecResources' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmselectClaimTemplatesSpecResources(obj: VmClusterSpecVmselectClaimTemplatesSpecResources | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
-    'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * selector is a label query over volumes to consider for binding.
- *
- * @schema VmClusterSpecVmselectClaimTemplatesSpecSelector
- */
-export interface VmClusterSpecVmselectClaimTemplatesSpecSelector {
-  /**
-   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpecSelector#matchExpressions
-   */
-  readonly matchExpressions?: VmClusterSpecVmselectClaimTemplatesSpecSelectorMatchExpressions[];
-
-  /**
-   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
-   * map is equivalent to an element of matchExpressions, whose key field is "key", the
-   * operator is "In", and the values array contains only "value". The requirements are ANDed.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpecSelector#matchLabels
-   */
-  readonly matchLabels?: { [key: string]: string };
-
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmselectClaimTemplatesSpecSelector' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmselectClaimTemplatesSpecSelector(obj: VmClusterSpecVmselectClaimTemplatesSpecSelector | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'matchExpressions': obj.matchExpressions?.map(y => toJson_VmClusterSpecVmselectClaimTemplatesSpecSelectorMatchExpressions(y)),
-    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * @schema VmClusterSpecVmselectClaimTemplatesStatusAllocatedResources
- */
-export class VmClusterSpecVmselectClaimTemplatesStatusAllocatedResources {
-  public static fromNumber(value: number): VmClusterSpecVmselectClaimTemplatesStatusAllocatedResources {
-    return new VmClusterSpecVmselectClaimTemplatesStatusAllocatedResources(value);
-  }
-  public static fromString(value: string): VmClusterSpecVmselectClaimTemplatesStatusAllocatedResources {
-    return new VmClusterSpecVmselectClaimTemplatesStatusAllocatedResources(value);
-  }
-  private constructor(public readonly value: number | string) {
-  }
-}
-
-/**
- * @schema VmClusterSpecVmselectClaimTemplatesStatusCapacity
- */
-export class VmClusterSpecVmselectClaimTemplatesStatusCapacity {
-  public static fromNumber(value: number): VmClusterSpecVmselectClaimTemplatesStatusCapacity {
-    return new VmClusterSpecVmselectClaimTemplatesStatusCapacity(value);
-  }
-  public static fromString(value: string): VmClusterSpecVmselectClaimTemplatesStatusCapacity {
-    return new VmClusterSpecVmselectClaimTemplatesStatusCapacity(value);
-  }
-  private constructor(public readonly value: number | string) {
-  }
-}
-
-/**
- * PersistentVolumeClaimCondition contains details about state of pvc
- *
- * @schema VmClusterSpecVmselectClaimTemplatesStatusConditions
- */
-export interface VmClusterSpecVmselectClaimTemplatesStatusConditions {
-  /**
-   * lastProbeTime is the time we probed the condition.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesStatusConditions#lastProbeTime
-   */
-  readonly lastProbeTime?: Date;
-
-  /**
-   * lastTransitionTime is the time the condition transitioned from one status to another.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesStatusConditions#lastTransitionTime
-   */
-  readonly lastTransitionTime?: Date;
-
-  /**
-   * message is the human-readable message indicating details about last transition.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesStatusConditions#message
-   */
-  readonly message?: string;
-
-  /**
-   * reason is a unique, this should be a short, machine understandable string that gives the reason
-   * for condition's last transition. If it reports "Resizing" that means the underlying
-   * persistent volume is being resized.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesStatusConditions#reason
-   */
-  readonly reason?: string;
-
-  /**
-   * @schema VmClusterSpecVmselectClaimTemplatesStatusConditions#status
-   */
-  readonly status: string;
-
-  /**
-   * PersistentVolumeClaimConditionType defines the condition of PV claim.
-   * Valid values are:
-   * - "Resizing", "FileSystemResizePending"
-   *
-   * If RecoverVolumeExpansionFailure feature gate is enabled, then following additional values can be expected:
-   * - "ControllerResizeError", "NodeResizeError"
-   *
-   * If VolumeAttributesClass feature gate is enabled, then following additional values can be expected:
-   * - "ModifyVolumeError", "ModifyingVolume"
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesStatusConditions#type
-   */
-  readonly type: string;
-
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmselectClaimTemplatesStatusConditions' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmselectClaimTemplatesStatusConditions(obj: VmClusterSpecVmselectClaimTemplatesStatusConditions | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'lastProbeTime': obj.lastProbeTime?.toISOString(),
-    'lastTransitionTime': obj.lastTransitionTime?.toISOString(),
-    'message': obj.message,
-    'reason': obj.reason,
-    'status': obj.status,
-    'type': obj.type,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
- * When this is unset, there is no ModifyVolume operation being attempted.
- * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
- *
- * @schema VmClusterSpecVmselectClaimTemplatesStatusModifyVolumeStatus
- */
-export interface VmClusterSpecVmselectClaimTemplatesStatusModifyVolumeStatus {
-  /**
-   * status is the status of the ControllerModifyVolume operation. It can be in any of following states:
-   * - Pending
-   * Pending indicates that the PersistentVolumeClaim cannot be modified due to unmet requirements, such as
-   * the specified VolumeAttributesClass not existing.
-   * - InProgress
-   * InProgress indicates that the volume is being modified.
-   * - Infeasible
-   * Infeasible indicates that the request has been rejected as invalid by the CSI driver. To
-   * resolve the error, a valid VolumeAttributesClass needs to be specified.
-   * Note: New statuses can be added in the future. Consumers should check for unknown statuses and fail appropriately.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesStatusModifyVolumeStatus#status
-   */
-  readonly status: string;
-
-  /**
-   * targetVolumeAttributesClassName is the name of the VolumeAttributesClass the PVC currently being reconciled
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesStatusModifyVolumeStatus#targetVolumeAttributesClassName
-   */
-  readonly targetVolumeAttributesClassName?: string;
-
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmselectClaimTemplatesStatusModifyVolumeStatus' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmselectClaimTemplatesStatusModifyVolumeStatus(obj: VmClusterSpecVmselectClaimTemplatesStatusModifyVolumeStatus | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'status': obj.status,
-    'targetVolumeAttributesClassName': obj.targetVolumeAttributesClassName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -39854,376 +46674,6 @@ export function toJson_VmClusterSpecVmselectStorageVolumeClaimTemplateStatus(obj
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * dataSource field can be used to specify either:
- * * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot)
- * * An existing PVC (PersistentVolumeClaim)
- * If the provisioner or an external controller can support the specified data source,
- * it will create a new volume based on the contents of the specified data source.
- * When the AnyVolumeDataSource feature gate is enabled, dataSource contents will be copied to dataSourceRef,
- * and dataSourceRef contents will be copied to dataSource when dataSourceRef.namespace is not specified.
- * If the namespace is specified, then dataSourceRef will not be copied to dataSource.
- *
- * @schema VmClusterSpecVmstorageClaimTemplatesSpecDataSource
- */
-export interface VmClusterSpecVmstorageClaimTemplatesSpecDataSource {
-  /**
-   * APIGroup is the group for the resource being referenced.
-   * If APIGroup is not specified, the specified Kind must be in the core API group.
-   * For any other third-party types, APIGroup is required.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpecDataSource#apiGroup
-   */
-  readonly apiGroup?: string;
-
-  /**
-   * Kind is the type of resource being referenced
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpecDataSource#kind
-   */
-  readonly kind: string;
-
-  /**
-   * Name is the name of resource being referenced
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpecDataSource#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmstorageClaimTemplatesSpecDataSource' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmstorageClaimTemplatesSpecDataSource(obj: VmClusterSpecVmstorageClaimTemplatesSpecDataSource | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'apiGroup': obj.apiGroup,
-    'kind': obj.kind,
-    'name': obj.name,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * dataSourceRef specifies the object from which to populate the volume with data, if a non-empty
- * volume is desired. This may be any object from a non-empty API group (non
- * core object) or a PersistentVolumeClaim object.
- * When this field is specified, volume binding will only succeed if the type of
- * the specified object matches some installed volume populator or dynamic
- * provisioner.
- * This field will replace the functionality of the dataSource field and as such
- * if both fields are non-empty, they must have the same value. For backwards
- * compatibility, when namespace isn't specified in dataSourceRef,
- * both fields (dataSource and dataSourceRef) will be set to the same
- * value automatically if one of them is empty and the other is non-empty.
- * When namespace is specified in dataSourceRef,
- * dataSource isn't set to the same value and must be empty.
- * There are three important differences between dataSource and dataSourceRef:
- * * While dataSource only allows two specific types of objects, dataSourceRef
- * allows any non-core object, as well as PersistentVolumeClaim objects.
- * * While dataSource ignores disallowed values (dropping them), dataSourceRef
- * preserves all values, and generates an error if a disallowed value is
- * specified.
- * * While dataSource only allows local objects, dataSourceRef allows objects
- * in any namespaces.
- * (Beta) Using this field requires the AnyVolumeDataSource feature gate to be enabled.
- * (Alpha) Using the namespace field of dataSourceRef requires the CrossNamespaceVolumeDataSource feature gate to be enabled.
- *
- * @schema VmClusterSpecVmstorageClaimTemplatesSpecDataSourceRef
- */
-export interface VmClusterSpecVmstorageClaimTemplatesSpecDataSourceRef {
-  /**
-   * APIGroup is the group for the resource being referenced.
-   * If APIGroup is not specified, the specified Kind must be in the core API group.
-   * For any other third-party types, APIGroup is required.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpecDataSourceRef#apiGroup
-   */
-  readonly apiGroup?: string;
-
-  /**
-   * Kind is the type of resource being referenced
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpecDataSourceRef#kind
-   */
-  readonly kind: string;
-
-  /**
-   * Name is the name of resource being referenced
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpecDataSourceRef#name
-   */
-  readonly name: string;
-
-  /**
-   * Namespace is the namespace of resource being referenced
-   * Note that when a namespace is specified, a gateway.networking.k8s.io/ReferenceGrant object is required in the referent namespace to allow that namespace's owner to accept the reference. See the ReferenceGrant documentation for details.
-   * (Alpha) This field requires the CrossNamespaceVolumeDataSource feature gate to be enabled.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpecDataSourceRef#namespace
-   */
-  readonly namespace?: string;
-
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmstorageClaimTemplatesSpecDataSourceRef' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmstorageClaimTemplatesSpecDataSourceRef(obj: VmClusterSpecVmstorageClaimTemplatesSpecDataSourceRef | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'apiGroup': obj.apiGroup,
-    'kind': obj.kind,
-    'name': obj.name,
-    'namespace': obj.namespace,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * resources represents the minimum resources the volume should have.
- * If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements
- * that are lower than previous value but must still be higher than capacity recorded in the
- * status field of the claim.
- * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
- *
- * @schema VmClusterSpecVmstorageClaimTemplatesSpecResources
- */
-export interface VmClusterSpecVmstorageClaimTemplatesSpecResources {
-  /**
-   * Limits describes the maximum amount of compute resources allowed.
-   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpecResources#limits
-   */
-  readonly limits?: { [key: string]: VmClusterSpecVmstorageClaimTemplatesSpecResourcesLimits };
-
-  /**
-   * Requests describes the minimum amount of compute resources required.
-   * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
-   * otherwise to an implementation-defined value. Requests cannot exceed Limits.
-   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpecResources#requests
-   */
-  readonly requests?: { [key: string]: VmClusterSpecVmstorageClaimTemplatesSpecResourcesRequests };
-
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmstorageClaimTemplatesSpecResources' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmstorageClaimTemplatesSpecResources(obj: VmClusterSpecVmstorageClaimTemplatesSpecResources | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
-    'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * selector is a label query over volumes to consider for binding.
- *
- * @schema VmClusterSpecVmstorageClaimTemplatesSpecSelector
- */
-export interface VmClusterSpecVmstorageClaimTemplatesSpecSelector {
-  /**
-   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpecSelector#matchExpressions
-   */
-  readonly matchExpressions?: VmClusterSpecVmstorageClaimTemplatesSpecSelectorMatchExpressions[];
-
-  /**
-   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
-   * map is equivalent to an element of matchExpressions, whose key field is "key", the
-   * operator is "In", and the values array contains only "value". The requirements are ANDed.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpecSelector#matchLabels
-   */
-  readonly matchLabels?: { [key: string]: string };
-
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmstorageClaimTemplatesSpecSelector' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmstorageClaimTemplatesSpecSelector(obj: VmClusterSpecVmstorageClaimTemplatesSpecSelector | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'matchExpressions': obj.matchExpressions?.map(y => toJson_VmClusterSpecVmstorageClaimTemplatesSpecSelectorMatchExpressions(y)),
-    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * @schema VmClusterSpecVmstorageClaimTemplatesStatusAllocatedResources
- */
-export class VmClusterSpecVmstorageClaimTemplatesStatusAllocatedResources {
-  public static fromNumber(value: number): VmClusterSpecVmstorageClaimTemplatesStatusAllocatedResources {
-    return new VmClusterSpecVmstorageClaimTemplatesStatusAllocatedResources(value);
-  }
-  public static fromString(value: string): VmClusterSpecVmstorageClaimTemplatesStatusAllocatedResources {
-    return new VmClusterSpecVmstorageClaimTemplatesStatusAllocatedResources(value);
-  }
-  private constructor(public readonly value: number | string) {
-  }
-}
-
-/**
- * @schema VmClusterSpecVmstorageClaimTemplatesStatusCapacity
- */
-export class VmClusterSpecVmstorageClaimTemplatesStatusCapacity {
-  public static fromNumber(value: number): VmClusterSpecVmstorageClaimTemplatesStatusCapacity {
-    return new VmClusterSpecVmstorageClaimTemplatesStatusCapacity(value);
-  }
-  public static fromString(value: string): VmClusterSpecVmstorageClaimTemplatesStatusCapacity {
-    return new VmClusterSpecVmstorageClaimTemplatesStatusCapacity(value);
-  }
-  private constructor(public readonly value: number | string) {
-  }
-}
-
-/**
- * PersistentVolumeClaimCondition contains details about state of pvc
- *
- * @schema VmClusterSpecVmstorageClaimTemplatesStatusConditions
- */
-export interface VmClusterSpecVmstorageClaimTemplatesStatusConditions {
-  /**
-   * lastProbeTime is the time we probed the condition.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesStatusConditions#lastProbeTime
-   */
-  readonly lastProbeTime?: Date;
-
-  /**
-   * lastTransitionTime is the time the condition transitioned from one status to another.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesStatusConditions#lastTransitionTime
-   */
-  readonly lastTransitionTime?: Date;
-
-  /**
-   * message is the human-readable message indicating details about last transition.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesStatusConditions#message
-   */
-  readonly message?: string;
-
-  /**
-   * reason is a unique, this should be a short, machine understandable string that gives the reason
-   * for condition's last transition. If it reports "Resizing" that means the underlying
-   * persistent volume is being resized.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesStatusConditions#reason
-   */
-  readonly reason?: string;
-
-  /**
-   * @schema VmClusterSpecVmstorageClaimTemplatesStatusConditions#status
-   */
-  readonly status: string;
-
-  /**
-   * PersistentVolumeClaimConditionType defines the condition of PV claim.
-   * Valid values are:
-   * - "Resizing", "FileSystemResizePending"
-   *
-   * If RecoverVolumeExpansionFailure feature gate is enabled, then following additional values can be expected:
-   * - "ControllerResizeError", "NodeResizeError"
-   *
-   * If VolumeAttributesClass feature gate is enabled, then following additional values can be expected:
-   * - "ModifyVolumeError", "ModifyingVolume"
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesStatusConditions#type
-   */
-  readonly type: string;
-
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmstorageClaimTemplatesStatusConditions' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmstorageClaimTemplatesStatusConditions(obj: VmClusterSpecVmstorageClaimTemplatesStatusConditions | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'lastProbeTime': obj.lastProbeTime?.toISOString(),
-    'lastTransitionTime': obj.lastTransitionTime?.toISOString(),
-    'message': obj.message,
-    'reason': obj.reason,
-    'status': obj.status,
-    'type': obj.type,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
- * When this is unset, there is no ModifyVolume operation being attempted.
- * This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
- *
- * @schema VmClusterSpecVmstorageClaimTemplatesStatusModifyVolumeStatus
- */
-export interface VmClusterSpecVmstorageClaimTemplatesStatusModifyVolumeStatus {
-  /**
-   * status is the status of the ControllerModifyVolume operation. It can be in any of following states:
-   * - Pending
-   * Pending indicates that the PersistentVolumeClaim cannot be modified due to unmet requirements, such as
-   * the specified VolumeAttributesClass not existing.
-   * - InProgress
-   * InProgress indicates that the volume is being modified.
-   * - Infeasible
-   * Infeasible indicates that the request has been rejected as invalid by the CSI driver. To
-   * resolve the error, a valid VolumeAttributesClass needs to be specified.
-   * Note: New statuses can be added in the future. Consumers should check for unknown statuses and fail appropriately.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesStatusModifyVolumeStatus#status
-   */
-  readonly status: string;
-
-  /**
-   * targetVolumeAttributesClassName is the name of the VolumeAttributesClass the PVC currently being reconciled
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesStatusModifyVolumeStatus#targetVolumeAttributesClassName
-   */
-  readonly targetVolumeAttributesClassName?: string;
-
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmstorageClaimTemplatesStatusModifyVolumeStatus' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmstorageClaimTemplatesStatusModifyVolumeStatus(obj: VmClusterSpecVmstorageClaimTemplatesStatusModifyVolumeStatus | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'status': obj.status,
-    'targetVolumeAttributesClassName': obj.targetVolumeAttributesClassName,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * sizeLimit is the total amount of local storage required for this EmptyDir volume.
  * The size limit is also applicable for memory medium.
  * The maximum usage on memory medium EmptyDir would be the minimum value between
@@ -40293,6 +46743,88 @@ export function toJson_VmClusterSpecVmstorageVmBackupExtraEnvsValueFrom(obj: VmC
     'fieldRef': toJson_VmClusterSpecVmstorageVmBackupExtraEnvsValueFromFieldRef(obj.fieldRef),
     'resourceFieldRef': toJson_VmClusterSpecVmstorageVmBackupExtraEnvsValueFromResourceFieldRef(obj.resourceFieldRef),
     'secretKeyRef': toJson_VmClusterSpecVmstorageVmBackupExtraEnvsValueFromSecretKeyRef(obj.secretKeyRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The ConfigMap to select from
+ *
+ * @schema VmClusterSpecVmstorageVmBackupExtraEnvsFromConfigMapRef
+ */
+export interface VmClusterSpecVmstorageVmBackupExtraEnvsFromConfigMapRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmClusterSpecVmstorageVmBackupExtraEnvsFromConfigMapRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap must be defined
+   *
+   * @schema VmClusterSpecVmstorageVmBackupExtraEnvsFromConfigMapRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageVmBackupExtraEnvsFromConfigMapRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageVmBackupExtraEnvsFromConfigMapRef(obj: VmClusterSpecVmstorageVmBackupExtraEnvsFromConfigMapRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The Secret to select from
+ *
+ * @schema VmClusterSpecVmstorageVmBackupExtraEnvsFromSecretRef
+ */
+export interface VmClusterSpecVmstorageVmBackupExtraEnvsFromSecretRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmClusterSpecVmstorageVmBackupExtraEnvsFromSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret must be defined
+   *
+   * @schema VmClusterSpecVmstorageVmBackupExtraEnvsFromSecretRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageVmBackupExtraEnvsFromSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageVmBackupExtraEnvsFromSecretRef(obj: VmClusterSpecVmstorageVmBackupExtraEnvsFromSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -40391,84 +46923,6 @@ export function toJson_VmClusterSpecVmstorageVmBackupRestoreOnStart(obj: VmClust
   if (obj === undefined) { return undefined; }
   const result = {
     'enabled': obj.enabled,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * @schema VmClusterSpecVmselectClaimTemplatesSpecResourcesLimits
- */
-export class VmClusterSpecVmselectClaimTemplatesSpecResourcesLimits {
-  public static fromNumber(value: number): VmClusterSpecVmselectClaimTemplatesSpecResourcesLimits {
-    return new VmClusterSpecVmselectClaimTemplatesSpecResourcesLimits(value);
-  }
-  public static fromString(value: string): VmClusterSpecVmselectClaimTemplatesSpecResourcesLimits {
-    return new VmClusterSpecVmselectClaimTemplatesSpecResourcesLimits(value);
-  }
-  private constructor(public readonly value: number | string) {
-  }
-}
-
-/**
- * @schema VmClusterSpecVmselectClaimTemplatesSpecResourcesRequests
- */
-export class VmClusterSpecVmselectClaimTemplatesSpecResourcesRequests {
-  public static fromNumber(value: number): VmClusterSpecVmselectClaimTemplatesSpecResourcesRequests {
-    return new VmClusterSpecVmselectClaimTemplatesSpecResourcesRequests(value);
-  }
-  public static fromString(value: string): VmClusterSpecVmselectClaimTemplatesSpecResourcesRequests {
-    return new VmClusterSpecVmselectClaimTemplatesSpecResourcesRequests(value);
-  }
-  private constructor(public readonly value: number | string) {
-  }
-}
-
-/**
- * A label selector requirement is a selector that contains values, a key, and an operator that
- * relates the key and values.
- *
- * @schema VmClusterSpecVmselectClaimTemplatesSpecSelectorMatchExpressions
- */
-export interface VmClusterSpecVmselectClaimTemplatesSpecSelectorMatchExpressions {
-  /**
-   * key is the label key that the selector applies to.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpecSelectorMatchExpressions#key
-   */
-  readonly key: string;
-
-  /**
-   * operator represents a key's relationship to a set of values.
-   * Valid operators are In, NotIn, Exists and DoesNotExist.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpecSelectorMatchExpressions#operator
-   */
-  readonly operator: string;
-
-  /**
-   * values is an array of string values. If the operator is In or NotIn,
-   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
-   * the values array must be empty. This array is replaced during a strategic
-   * merge patch.
-   *
-   * @schema VmClusterSpecVmselectClaimTemplatesSpecSelectorMatchExpressions#values
-   */
-  readonly values?: string[];
-
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmselectClaimTemplatesSpecSelectorMatchExpressions' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmselectClaimTemplatesSpecSelectorMatchExpressions(obj: VmClusterSpecVmselectClaimTemplatesSpecSelectorMatchExpressions | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'operator': obj.operator,
-    'values': obj.values?.map(y => y),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -40757,20 +47211,17 @@ export interface VmClusterSpecVmselectStorageVolumeClaimTemplateStatusConditions
   readonly reason?: string;
 
   /**
+   * Status is the status of the condition.
+   * Can be True, False, Unknown.
+   * More info: https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-claim-v1/#:~:text=state%20of%20pvc-,conditions.status,-(string)%2C%20required
+   *
    * @schema VmClusterSpecVmselectStorageVolumeClaimTemplateStatusConditions#status
    */
   readonly status: string;
 
   /**
-   * PersistentVolumeClaimConditionType defines the condition of PV claim.
-   * Valid values are:
-   * - "Resizing", "FileSystemResizePending"
-   *
-   * If RecoverVolumeExpansionFailure feature gate is enabled, then following additional values can be expected:
-   * - "ControllerResizeError", "NodeResizeError"
-   *
-   * If VolumeAttributesClass feature gate is enabled, then following additional values can be expected:
-   * - "ModifyVolumeError", "ModifyingVolume"
+   * Type is the type of the condition.
+   * More info: https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-claim-v1/#:~:text=set%20to%20%27ResizeStarted%27.-,PersistentVolumeClaimCondition,-contains%20details%20about
    *
    * @schema VmClusterSpecVmselectStorageVolumeClaimTemplateStatusConditions#type
    */
@@ -40839,84 +47290,6 @@ export function toJson_VmClusterSpecVmselectStorageVolumeClaimTemplateStatusModi
   const result = {
     'status': obj.status,
     'targetVolumeAttributesClassName': obj.targetVolumeAttributesClassName,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * @schema VmClusterSpecVmstorageClaimTemplatesSpecResourcesLimits
- */
-export class VmClusterSpecVmstorageClaimTemplatesSpecResourcesLimits {
-  public static fromNumber(value: number): VmClusterSpecVmstorageClaimTemplatesSpecResourcesLimits {
-    return new VmClusterSpecVmstorageClaimTemplatesSpecResourcesLimits(value);
-  }
-  public static fromString(value: string): VmClusterSpecVmstorageClaimTemplatesSpecResourcesLimits {
-    return new VmClusterSpecVmstorageClaimTemplatesSpecResourcesLimits(value);
-  }
-  private constructor(public readonly value: number | string) {
-  }
-}
-
-/**
- * @schema VmClusterSpecVmstorageClaimTemplatesSpecResourcesRequests
- */
-export class VmClusterSpecVmstorageClaimTemplatesSpecResourcesRequests {
-  public static fromNumber(value: number): VmClusterSpecVmstorageClaimTemplatesSpecResourcesRequests {
-    return new VmClusterSpecVmstorageClaimTemplatesSpecResourcesRequests(value);
-  }
-  public static fromString(value: string): VmClusterSpecVmstorageClaimTemplatesSpecResourcesRequests {
-    return new VmClusterSpecVmstorageClaimTemplatesSpecResourcesRequests(value);
-  }
-  private constructor(public readonly value: number | string) {
-  }
-}
-
-/**
- * A label selector requirement is a selector that contains values, a key, and an operator that
- * relates the key and values.
- *
- * @schema VmClusterSpecVmstorageClaimTemplatesSpecSelectorMatchExpressions
- */
-export interface VmClusterSpecVmstorageClaimTemplatesSpecSelectorMatchExpressions {
-  /**
-   * key is the label key that the selector applies to.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpecSelectorMatchExpressions#key
-   */
-  readonly key: string;
-
-  /**
-   * operator represents a key's relationship to a set of values.
-   * Valid operators are In, NotIn, Exists and DoesNotExist.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpecSelectorMatchExpressions#operator
-   */
-  readonly operator: string;
-
-  /**
-   * values is an array of string values. If the operator is In or NotIn,
-   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
-   * the values array must be empty. This array is replaced during a strategic
-   * merge patch.
-   *
-   * @schema VmClusterSpecVmstorageClaimTemplatesSpecSelectorMatchExpressions#values
-   */
-  readonly values?: string[];
-
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmstorageClaimTemplatesSpecSelectorMatchExpressions' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmstorageClaimTemplatesSpecSelectorMatchExpressions(obj: VmClusterSpecVmstorageClaimTemplatesSpecSelectorMatchExpressions | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'operator': obj.operator,
-    'values': obj.values?.map(y => y),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -41816,11 +48189,29 @@ export interface VmNodeScrapeSpecOauth2 {
   readonly endpointParams?: { [key: string]: string };
 
   /**
+   * The proxy URL for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmNodeScrapeSpecOauth2#proxy_url
+   */
+  readonly proxyUrl?: string;
+
+  /**
    * OAuth2 scopes used for the token request
    *
    * @schema VmNodeScrapeSpecOauth2#scopes
    */
   readonly scopes?: string[];
+
+  /**
+   * TLSConfig for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmNodeScrapeSpecOauth2#tls_config
+   */
+  readonly tlsConfig?: any;
 
   /**
    * The URL to fetch the token from
@@ -41842,7 +48233,9 @@ export function toJson_VmNodeScrapeSpecOauth2(obj: VmNodeScrapeSpecOauth2 | unde
     'client_secret': toJson_VmNodeScrapeSpecOauth2ClientSecret(obj.clientSecret),
     'client_secret_file': obj.clientSecretFile,
     'endpoint_params': ((obj.endpointParams) === undefined) ? undefined : (Object.entries(obj.endpointParams).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'proxy_url': obj.proxyUrl,
     'scopes': obj.scopes?.map(y => y),
+    'tls_config': obj.tlsConfig,
     'token_url': obj.tokenUrl,
   };
   // filter undefined values
@@ -42019,7 +48412,7 @@ export function toJson_VmNodeScrapeSpecSelector(obj: VmNodeScrapeSpecSelector | 
  */
 export interface VmNodeScrapeSpecTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmNodeScrapeSpecTlsConfig#ca
    */
@@ -42113,7 +48506,7 @@ export interface VmNodeScrapeSpecVmScrapeParams {
   /**
    * disable_keepalive allows disabling HTTP keep-alive when scraping targets.
    * By default, HTTP keep-alive is enabled, so TCP connections to scrape targets
-   * could be re-used.
+   * could be reused.
    * See https://docs.victoriametrics.com/vmagent#scrape_config-enhancements
    *
    * @schema VmNodeScrapeSpecVmScrapeParams#disable_keep_alive
@@ -42468,7 +48861,7 @@ export function toJson_VmNodeScrapeSpecSelectorMatchExpressions(obj: VmNodeScrap
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmNodeScrapeSpecTlsConfigCa
  */
@@ -42617,11 +49010,9 @@ export interface VmNodeScrapeSpecVmScrapeParamsProxyClientConfig {
   readonly bearerTokenFile?: string;
 
   /**
-   * TLSConfig specifies TLSConfig configuration parameters.
-   *
    * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfig#tls_config
    */
-  readonly tlsConfig?: VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfig;
+  readonly tlsConfig?: any;
 
 }
 
@@ -42635,7 +49026,7 @@ export function toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfig(obj: VmNo
     'basic_auth': toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfigBasicAuth(obj.basicAuth),
     'bearer_token': toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfigBearerToken(obj.bearerToken),
     'bearer_token_file': obj.bearerTokenFile,
-    'tls_config': toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfig(obj.tlsConfig),
+    'tls_config': obj.tlsConfig,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -43034,91 +49425,6 @@ export function toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfigBearerToke
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * TLSConfig specifies TLSConfig configuration parameters.
- *
- * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfig
- */
-export interface VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfig {
-  /**
-   * Stuct containing the CA cert to use for the targets.
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfig#ca
-   */
-  readonly ca?: VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCa;
-
-  /**
-   * Path to the CA cert in the container to use for the targets.
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfig#caFile
-   */
-  readonly caFile?: string;
-
-  /**
-   * Struct containing the client cert file for the targets.
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfig#cert
-   */
-  readonly cert?: VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCert;
-
-  /**
-   * Path to the client cert file in the container for the targets.
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfig#certFile
-   */
-  readonly certFile?: string;
-
-  /**
-   * Disable target certificate validation.
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfig#insecureSkipVerify
-   */
-  readonly insecureSkipVerify?: boolean;
-
-  /**
-   * Path to the client key file in the container for the targets.
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfig#keyFile
-   */
-  readonly keyFile?: string;
-
-  /**
-   * Secret containing the client key file for the targets.
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfig#keySecret
-   */
-  readonly keySecret?: VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret;
-
-  /**
-   * Used to verify the hostname for the targets.
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfig#serverName
-   */
-  readonly serverName?: string;
-
-}
-
-/**
- * Converts an object of type 'VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfig' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfig(obj: VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfig | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'ca': toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCa(obj.ca),
-    'caFile': obj.caFile,
-    'cert': toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCert(obj.cert),
-    'certFile': obj.certFile,
-    'insecureSkipVerify': obj.insecureSkipVerify,
-    'keyFile': obj.keyFile,
-    'keySecret': toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret(obj.keySecret),
-    'serverName': obj.serverName,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * Password defines reference for secret with password value
  * The secret needs to be in the same namespace as scrape object
  *
@@ -43207,325 +49513,6 @@ export interface VmNodeScrapeSpecVmScrapeParamsProxyClientConfigBasicAuthUsernam
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfigBasicAuthUsername(obj: VmNodeScrapeSpecVmScrapeParamsProxyClientConfigBasicAuthUsername | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Stuct containing the CA cert to use for the targets.
- *
- * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCa
- */
-export interface VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCa {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCa#configMap
-   */
-  readonly configMap?: VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCa#secret
-   */
-  readonly secret?: VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret;
-
-}
-
-/**
- * Converts an object of type 'VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCa' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCa(obj: VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCa | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap(obj.configMap),
-    'secret': toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Struct containing the client cert file for the targets.
- *
- * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCert
- */
-export interface VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCert {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCert#configMap
-   */
-  readonly configMap?: VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCert#secret
-   */
-  readonly secret?: VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret;
-
-}
-
-/**
- * Converts an object of type 'VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCert' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCert(obj: VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCert | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap(obj.configMap),
-    'secret': toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing the client key file for the targets.
- *
- * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret
- */
-export interface VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret(obj: VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ConfigMap containing data to use for the targets.
- *
- * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap
- */
-export interface VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap(obj: VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret
- */
-export interface VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret(obj: VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ConfigMap containing data to use for the targets.
- *
- * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap
- */
-export interface VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap(obj: VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret
- */
-export interface VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret(obj: VmNodeScrapeSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -43908,6 +49895,13 @@ export interface VmPodScrapeSpecPodMetricsEndpoints {
   readonly port?: string;
 
   /**
+   * PortNumber defines the `Pod` port number which exposes the endpoint.
+   *
+   * @schema VmPodScrapeSpecPodMetricsEndpoints#portNumber
+   */
+  readonly portNumber?: number;
+
+  /**
    * ProxyURL eg http://proxyserver:2195 Directs scrapes to proxy through this endpoint.
    *
    * @schema VmPodScrapeSpecPodMetricsEndpoints#proxyURL
@@ -43959,8 +49953,8 @@ export interface VmPodScrapeSpecPodMetricsEndpoints {
   readonly seriesLimit?: number;
 
   /**
-   * TargetPort
-   * Name or number of the pod port this endpoint refers to. Mutually exclusive with port.
+   * TargetPort defines name or number of the pod port this endpoint refers to.
+   * Mutually exclusive with Port and PortNumber.
    *
    * @schema VmPodScrapeSpecPodMetricsEndpoints#targetPort
    */
@@ -44005,6 +49999,7 @@ export function toJson_VmPodScrapeSpecPodMetricsEndpoints(obj: VmPodScrapeSpecPo
     'params': ((obj.params) === undefined) ? undefined : (Object.entries(obj.params).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.map(y => y) }), {})),
     'path': obj.path,
     'port': obj.port,
+    'portNumber': obj.portNumber,
     'proxyURL': obj.proxyUrl,
     'relabelConfigs': obj.relabelConfigs?.map(y => toJson_VmPodScrapeSpecPodMetricsEndpointsRelabelConfigs(y)),
     'sampleLimit': obj.sampleLimit,
@@ -44380,11 +50375,29 @@ export interface VmPodScrapeSpecPodMetricsEndpointsOauth2 {
   readonly endpointParams?: { [key: string]: string };
 
   /**
+   * The proxy URL for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmPodScrapeSpecPodMetricsEndpointsOauth2#proxy_url
+   */
+  readonly proxyUrl?: string;
+
+  /**
    * OAuth2 scopes used for the token request
    *
    * @schema VmPodScrapeSpecPodMetricsEndpointsOauth2#scopes
    */
   readonly scopes?: string[];
+
+  /**
+   * TLSConfig for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmPodScrapeSpecPodMetricsEndpointsOauth2#tls_config
+   */
+  readonly tlsConfig?: any;
 
   /**
    * The URL to fetch the token from
@@ -44406,7 +50419,9 @@ export function toJson_VmPodScrapeSpecPodMetricsEndpointsOauth2(obj: VmPodScrape
     'client_secret': toJson_VmPodScrapeSpecPodMetricsEndpointsOauth2ClientSecret(obj.clientSecret),
     'client_secret_file': obj.clientSecretFile,
     'endpoint_params': ((obj.endpointParams) === undefined) ? undefined : (Object.entries(obj.endpointParams).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'proxy_url': obj.proxyUrl,
     'scopes': obj.scopes?.map(y => y),
+    'tls_config': obj.tlsConfig,
     'token_url': obj.tokenUrl,
   };
   // filter undefined values
@@ -44538,8 +50553,8 @@ export enum VmPodScrapeSpecPodMetricsEndpointsScheme {
 }
 
 /**
- * TargetPort
- * Name or number of the pod port this endpoint refers to. Mutually exclusive with port.
+ * TargetPort defines name or number of the pod port this endpoint refers to.
+ * Mutually exclusive with Port and PortNumber.
  *
  * @schema VmPodScrapeSpecPodMetricsEndpointsTargetPort
  */
@@ -44561,7 +50576,7 @@ export class VmPodScrapeSpecPodMetricsEndpointsTargetPort {
  */
 export interface VmPodScrapeSpecPodMetricsEndpointsTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmPodScrapeSpecPodMetricsEndpointsTlsConfig#ca
    */
@@ -44655,7 +50670,7 @@ export interface VmPodScrapeSpecPodMetricsEndpointsVmScrapeParams {
   /**
    * disable_keepalive allows disabling HTTP keep-alive when scraping targets.
    * By default, HTTP keep-alive is enabled, so TCP connections to scrape targets
-   * could be re-used.
+   * could be reused.
    * See https://docs.victoriametrics.com/vmagent#scrape_config-enhancements
    *
    * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParams#disable_keep_alive
@@ -45010,7 +51025,7 @@ export function toJson_VmPodScrapeSpecPodMetricsEndpointsOauth2ClientSecret(obj:
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmPodScrapeSpecPodMetricsEndpointsTlsConfigCa
  */
@@ -45159,11 +51174,9 @@ export interface VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConf
   readonly bearerTokenFile?: string;
 
   /**
-   * TLSConfig specifies TLSConfig configuration parameters.
-   *
    * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfig#tls_config
    */
-  readonly tlsConfig?: VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfig;
+  readonly tlsConfig?: any;
 
 }
 
@@ -45177,7 +51190,7 @@ export function toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClie
     'basic_auth': toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigBasicAuth(obj.basicAuth),
     'bearer_token': toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigBearerToken(obj.bearerToken),
     'bearer_token_file': obj.bearerTokenFile,
-    'tls_config': toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfig(obj.tlsConfig),
+    'tls_config': obj.tlsConfig,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -45576,91 +51589,6 @@ export function toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClie
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * TLSConfig specifies TLSConfig configuration parameters.
- *
- * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfig
- */
-export interface VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfig {
-  /**
-   * Stuct containing the CA cert to use for the targets.
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfig#ca
-   */
-  readonly ca?: VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa;
-
-  /**
-   * Path to the CA cert in the container to use for the targets.
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfig#caFile
-   */
-  readonly caFile?: string;
-
-  /**
-   * Struct containing the client cert file for the targets.
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfig#cert
-   */
-  readonly cert?: VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert;
-
-  /**
-   * Path to the client cert file in the container for the targets.
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfig#certFile
-   */
-  readonly certFile?: string;
-
-  /**
-   * Disable target certificate validation.
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfig#insecureSkipVerify
-   */
-  readonly insecureSkipVerify?: boolean;
-
-  /**
-   * Path to the client key file in the container for the targets.
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfig#keyFile
-   */
-  readonly keyFile?: string;
-
-  /**
-   * Secret containing the client key file for the targets.
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfig#keySecret
-   */
-  readonly keySecret?: VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret;
-
-  /**
-   * Used to verify the hostname for the targets.
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfig#serverName
-   */
-  readonly serverName?: string;
-
-}
-
-/**
- * Converts an object of type 'VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfig' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfig(obj: VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfig | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'ca': toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa(obj.ca),
-    'caFile': obj.caFile,
-    'cert': toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert(obj.cert),
-    'certFile': obj.certFile,
-    'insecureSkipVerify': obj.insecureSkipVerify,
-    'keyFile': obj.keyFile,
-    'keySecret': toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret(obj.keySecret),
-    'serverName': obj.serverName,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * Password defines reference for secret with password value
  * The secret needs to be in the same namespace as scrape object
  *
@@ -45749,325 +51677,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConf
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigBasicAuthUsername(obj: VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigBasicAuthUsername | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Stuct containing the CA cert to use for the targets.
- *
- * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa
- */
-export interface VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa#configMap
-   */
-  readonly configMap?: VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa#secret
-   */
-  readonly secret?: VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret;
-
-}
-
-/**
- * Converts an object of type 'VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa(obj: VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap(obj.configMap),
-    'secret': toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Struct containing the client cert file for the targets.
- *
- * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert
- */
-export interface VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert#configMap
-   */
-  readonly configMap?: VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert#secret
-   */
-  readonly secret?: VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret;
-
-}
-
-/**
- * Converts an object of type 'VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert(obj: VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap(obj.configMap),
-    'secret': toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing the client key file for the targets.
- *
- * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret
- */
-export interface VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret(obj: VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ConfigMap containing data to use for the targets.
- *
- * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap
- */
-export interface VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap(obj: VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret
- */
-export interface VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret(obj: VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ConfigMap containing data to use for the targets.
- *
- * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap
- */
-export interface VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap(obj: VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret
- */
-export interface VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret(obj: VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -46691,11 +52300,29 @@ export interface VmProbeSpecOauth2 {
   readonly endpointParams?: { [key: string]: string };
 
   /**
+   * The proxy URL for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmProbeSpecOauth2#proxy_url
+   */
+  readonly proxyUrl?: string;
+
+  /**
    * OAuth2 scopes used for the token request
    *
    * @schema VmProbeSpecOauth2#scopes
    */
   readonly scopes?: string[];
+
+  /**
+   * TLSConfig for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmProbeSpecOauth2#tls_config
+   */
+  readonly tlsConfig?: any;
 
   /**
    * The URL to fetch the token from
@@ -46717,7 +52344,9 @@ export function toJson_VmProbeSpecOauth2(obj: VmProbeSpecOauth2 | undefined): Re
     'client_secret': toJson_VmProbeSpecOauth2ClientSecret(obj.clientSecret),
     'client_secret_file': obj.clientSecretFile,
     'endpoint_params': ((obj.endpointParams) === undefined) ? undefined : (Object.entries(obj.endpointParams).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'proxy_url': obj.proxyUrl,
     'scopes': obj.scopes?.map(y => y),
+    'tls_config': obj.tlsConfig,
     'token_url': obj.tokenUrl,
   };
   // filter undefined values
@@ -46781,7 +52410,7 @@ export function toJson_VmProbeSpecTargets(obj: VmProbeSpecTargets | undefined): 
  */
 export interface VmProbeSpecTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmProbeSpecTlsConfig#ca
    */
@@ -46925,7 +52554,7 @@ export interface VmProbeSpecVmScrapeParams {
   /**
    * disable_keepalive allows disabling HTTP keep-alive when scraping targets.
    * By default, HTTP keep-alive is enabled, so TCP connections to scrape targets
-   * could be re-used.
+   * could be reused.
    * See https://docs.victoriametrics.com/vmagent#scrape_config-enhancements
    *
    * @schema VmProbeSpecVmScrapeParams#disable_keep_alive
@@ -47320,7 +52949,7 @@ export function toJson_VmProbeSpecTargetsStaticConfig(obj: VmProbeSpecTargetsSta
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmProbeSpecTlsConfigCa
  */
@@ -47483,11 +53112,9 @@ export interface VmProbeSpecVmScrapeParamsProxyClientConfig {
   readonly bearerTokenFile?: string;
 
   /**
-   * TLSConfig specifies TLSConfig configuration parameters.
-   *
    * @schema VmProbeSpecVmScrapeParamsProxyClientConfig#tls_config
    */
-  readonly tlsConfig?: VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfig;
+  readonly tlsConfig?: any;
 
 }
 
@@ -47501,7 +53128,7 @@ export function toJson_VmProbeSpecVmScrapeParamsProxyClientConfig(obj: VmProbeSp
     'basic_auth': toJson_VmProbeSpecVmScrapeParamsProxyClientConfigBasicAuth(obj.basicAuth),
     'bearer_token': toJson_VmProbeSpecVmScrapeParamsProxyClientConfigBearerToken(obj.bearerToken),
     'bearer_token_file': obj.bearerTokenFile,
-    'tls_config': toJson_VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfig(obj.tlsConfig),
+    'tls_config': obj.tlsConfig,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -48199,91 +53826,6 @@ export function toJson_VmProbeSpecVmScrapeParamsProxyClientConfigBearerToken(obj
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * TLSConfig specifies TLSConfig configuration parameters.
- *
- * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfig
- */
-export interface VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfig {
-  /**
-   * Stuct containing the CA cert to use for the targets.
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfig#ca
-   */
-  readonly ca?: VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCa;
-
-  /**
-   * Path to the CA cert in the container to use for the targets.
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfig#caFile
-   */
-  readonly caFile?: string;
-
-  /**
-   * Struct containing the client cert file for the targets.
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfig#cert
-   */
-  readonly cert?: VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCert;
-
-  /**
-   * Path to the client cert file in the container for the targets.
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfig#certFile
-   */
-  readonly certFile?: string;
-
-  /**
-   * Disable target certificate validation.
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfig#insecureSkipVerify
-   */
-  readonly insecureSkipVerify?: boolean;
-
-  /**
-   * Path to the client key file in the container for the targets.
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfig#keyFile
-   */
-  readonly keyFile?: string;
-
-  /**
-   * Secret containing the client key file for the targets.
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfig#keySecret
-   */
-  readonly keySecret?: VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret;
-
-  /**
-   * Used to verify the hostname for the targets.
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfig#serverName
-   */
-  readonly serverName?: string;
-
-}
-
-/**
- * Converts an object of type 'VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfig' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfig(obj: VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfig | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'ca': toJson_VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCa(obj.ca),
-    'caFile': obj.caFile,
-    'cert': toJson_VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCert(obj.cert),
-    'certFile': obj.certFile,
-    'insecureSkipVerify': obj.insecureSkipVerify,
-    'keyFile': obj.keyFile,
-    'keySecret': toJson_VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret(obj.keySecret),
-    'serverName': obj.serverName,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -48422,325 +53964,6 @@ export interface VmProbeSpecVmScrapeParamsProxyClientConfigBasicAuthUsername {
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VmProbeSpecVmScrapeParamsProxyClientConfigBasicAuthUsername(obj: VmProbeSpecVmScrapeParamsProxyClientConfigBasicAuthUsername | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Stuct containing the CA cert to use for the targets.
- *
- * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCa
- */
-export interface VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCa {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCa#configMap
-   */
-  readonly configMap?: VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCa#secret
-   */
-  readonly secret?: VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret;
-
-}
-
-/**
- * Converts an object of type 'VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCa' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCa(obj: VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCa | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap(obj.configMap),
-    'secret': toJson_VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Struct containing the client cert file for the targets.
- *
- * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCert
- */
-export interface VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCert {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCert#configMap
-   */
-  readonly configMap?: VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCert#secret
-   */
-  readonly secret?: VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret;
-
-}
-
-/**
- * Converts an object of type 'VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCert' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCert(obj: VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCert | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap(obj.configMap),
-    'secret': toJson_VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing the client key file for the targets.
- *
- * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret
- */
-export interface VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret(obj: VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ConfigMap containing data to use for the targets.
- *
- * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap
- */
-export interface VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap(obj: VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret
- */
-export interface VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret(obj: VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ConfigMap containing data to use for the targets.
- *
- * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap
- */
-export interface VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap(obj: VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret
- */
-export interface VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret(obj: VmProbeSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -49754,7 +54977,7 @@ export function toJson_VmScrapeConfigSpecBearerTokenSecret(obj: VmScrapeConfigSp
  */
 export interface VmScrapeConfigSpecConsulSdConfigs {
   /**
-   * Allow stale Consul results (see https://developer.hashicorp.com/consul/api-docs/features/consistency). Will reduce load on Consul.
+   * Allow stale Consul results (see https://developer.hashicorp.com/consul/api-docs/features/consistency ). Will reduce load on Consul.
    * If unset, use its default value.
    *
    * @schema VmScrapeConfigSpecConsulSdConfigs#allowStale
@@ -50568,11 +55791,29 @@ export interface VmScrapeConfigSpecOauth2 {
   readonly endpointParams?: { [key: string]: string };
 
   /**
+   * The proxy URL for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmScrapeConfigSpecOauth2#proxy_url
+   */
+  readonly proxyUrl?: string;
+
+  /**
    * OAuth2 scopes used for the token request
    *
    * @schema VmScrapeConfigSpecOauth2#scopes
    */
   readonly scopes?: string[];
+
+  /**
+   * TLSConfig for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmScrapeConfigSpecOauth2#tls_config
+   */
+  readonly tlsConfig?: any;
 
   /**
    * The URL to fetch the token from
@@ -50594,7 +55835,9 @@ export function toJson_VmScrapeConfigSpecOauth2(obj: VmScrapeConfigSpecOauth2 | 
     'client_secret': toJson_VmScrapeConfigSpecOauth2ClientSecret(obj.clientSecret),
     'client_secret_file': obj.clientSecretFile,
     'endpoint_params': ((obj.endpointParams) === undefined) ? undefined : (Object.entries(obj.endpointParams).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'proxy_url': obj.proxyUrl,
     'scopes': obj.scopes?.map(y => y),
+    'tls_config': obj.tlsConfig,
     'token_url': obj.tokenUrl,
   };
   // filter undefined values
@@ -50943,7 +56186,7 @@ export function toJson_VmScrapeConfigSpecStaticConfigs(obj: VmScrapeConfigSpecSt
  */
 export interface VmScrapeConfigSpecTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmScrapeConfigSpecTlsConfig#ca
    */
@@ -51037,7 +56280,7 @@ export interface VmScrapeConfigSpecVmScrapeParams {
   /**
    * disable_keepalive allows disabling HTTP keep-alive when scraping targets.
    * By default, HTTP keep-alive is enabled, so TCP connections to scrape targets
-   * could be re-used.
+   * could be reused.
    * See https://docs.victoriametrics.com/vmagent#scrape_config-enhancements
    *
    * @schema VmScrapeConfigSpecVmScrapeParams#disable_keep_alive
@@ -51445,11 +56688,29 @@ export interface VmScrapeConfigSpecConsulSdConfigsOauth2 {
   readonly endpointParams?: { [key: string]: string };
 
   /**
+   * The proxy URL for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmScrapeConfigSpecConsulSdConfigsOauth2#proxy_url
+   */
+  readonly proxyUrl?: string;
+
+  /**
    * OAuth2 scopes used for the token request
    *
    * @schema VmScrapeConfigSpecConsulSdConfigsOauth2#scopes
    */
   readonly scopes?: string[];
+
+  /**
+   * TLSConfig for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmScrapeConfigSpecConsulSdConfigsOauth2#tls_config
+   */
+  readonly tlsConfig?: any;
 
   /**
    * The URL to fetch the token from
@@ -51471,7 +56732,9 @@ export function toJson_VmScrapeConfigSpecConsulSdConfigsOauth2(obj: VmScrapeConf
     'client_secret': toJson_VmScrapeConfigSpecConsulSdConfigsOauth2ClientSecret(obj.clientSecret),
     'client_secret_file': obj.clientSecretFile,
     'endpoint_params': ((obj.endpointParams) === undefined) ? undefined : (Object.entries(obj.endpointParams).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'proxy_url': obj.proxyUrl,
     'scopes': obj.scopes?.map(y => y),
+    'tls_config': obj.tlsConfig,
     'token_url': obj.tokenUrl,
   };
   // filter undefined values
@@ -51506,11 +56769,9 @@ export interface VmScrapeConfigSpecConsulSdConfigsProxyClientConfig {
   readonly bearerTokenFile?: string;
 
   /**
-   * TLSConfig specifies TLSConfig configuration parameters.
-   *
    * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfig#tls_config
    */
-  readonly tlsConfig?: VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfig;
+  readonly tlsConfig?: any;
 
 }
 
@@ -51524,7 +56785,7 @@ export function toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfig(obj: V
     'basic_auth': toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfigBasicAuth(obj.basicAuth),
     'bearer_token': toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfigBearerToken(obj.bearerToken),
     'bearer_token_file': obj.bearerTokenFile,
-    'tls_config': toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfig(obj.tlsConfig),
+    'tls_config': obj.tlsConfig,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -51550,7 +56811,7 @@ export enum VmScrapeConfigSpecConsulSdConfigsScheme {
  */
 export interface VmScrapeConfigSpecConsulSdConfigsTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmScrapeConfigSpecConsulSdConfigsTlsConfig#ca
    */
@@ -51757,11 +57018,29 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsOauth2 {
   readonly endpointParams?: { [key: string]: string };
 
   /**
+   * The proxy URL for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsOauth2#proxy_url
+   */
+  readonly proxyUrl?: string;
+
+  /**
    * OAuth2 scopes used for the token request
    *
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsOauth2#scopes
    */
   readonly scopes?: string[];
+
+  /**
+   * TLSConfig for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsOauth2#tls_config
+   */
+  readonly tlsConfig?: any;
 
   /**
    * The URL to fetch the token from
@@ -51783,7 +57062,9 @@ export function toJson_VmScrapeConfigSpecDigitalOceanSdConfigsOauth2(obj: VmScra
     'client_secret': toJson_VmScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientSecret(obj.clientSecret),
     'client_secret_file': obj.clientSecretFile,
     'endpoint_params': ((obj.endpointParams) === undefined) ? undefined : (Object.entries(obj.endpointParams).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'proxy_url': obj.proxyUrl,
     'scopes': obj.scopes?.map(y => y),
+    'tls_config': obj.tlsConfig,
     'token_url': obj.tokenUrl,
   };
   // filter undefined values
@@ -51818,11 +57099,9 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfig {
   readonly bearerTokenFile?: string;
 
   /**
-   * TLSConfig specifies TLSConfig configuration parameters.
-   *
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfig#tls_config
    */
-  readonly tlsConfig?: VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfig;
+  readonly tlsConfig?: any;
 
 }
 
@@ -51836,7 +57115,7 @@ export function toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfig(
     'basic_auth': toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigBasicAuth(obj.basicAuth),
     'bearer_token': toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigBearerToken(obj.bearerToken),
     'bearer_token_file': obj.bearerTokenFile,
-    'tls_config': toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfig(obj.tlsConfig),
+    'tls_config': obj.tlsConfig,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -51850,7 +57129,7 @@ export function toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfig(
  */
 export interface VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfig#ca
    */
@@ -52193,11 +57472,9 @@ export interface VmScrapeConfigSpecHttpSdConfigsProxyClientConfig {
   readonly bearerTokenFile?: string;
 
   /**
-   * TLSConfig specifies TLSConfig configuration parameters.
-   *
    * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfig#tls_config
    */
-  readonly tlsConfig?: VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfig;
+  readonly tlsConfig?: any;
 
 }
 
@@ -52211,7 +57488,7 @@ export function toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfig(obj: VmS
     'basic_auth': toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfigBasicAuth(obj.basicAuth),
     'bearer_token': toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfigBearerToken(obj.bearerToken),
     'bearer_token_file': obj.bearerTokenFile,
-    'tls_config': toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfig(obj.tlsConfig),
+    'tls_config': obj.tlsConfig,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -52225,7 +57502,7 @@ export function toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfig(obj: VmS
  */
 export interface VmScrapeConfigSpecHttpSdConfigsTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmScrapeConfigSpecHttpSdConfigsTlsConfig#ca
    */
@@ -52499,11 +57776,29 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsOauth2 {
   readonly endpointParams?: { [key: string]: string };
 
   /**
+   * The proxy URL for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmScrapeConfigSpecKubernetesSdConfigsOauth2#proxy_url
+   */
+  readonly proxyUrl?: string;
+
+  /**
    * OAuth2 scopes used for the token request
    *
    * @schema VmScrapeConfigSpecKubernetesSdConfigsOauth2#scopes
    */
   readonly scopes?: string[];
+
+  /**
+   * TLSConfig for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmScrapeConfigSpecKubernetesSdConfigsOauth2#tls_config
+   */
+  readonly tlsConfig?: any;
 
   /**
    * The URL to fetch the token from
@@ -52525,7 +57820,9 @@ export function toJson_VmScrapeConfigSpecKubernetesSdConfigsOauth2(obj: VmScrape
     'client_secret': toJson_VmScrapeConfigSpecKubernetesSdConfigsOauth2ClientSecret(obj.clientSecret),
     'client_secret_file': obj.clientSecretFile,
     'endpoint_params': ((obj.endpointParams) === undefined) ? undefined : (Object.entries(obj.endpointParams).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'proxy_url': obj.proxyUrl,
     'scopes': obj.scopes?.map(y => y),
+    'tls_config': obj.tlsConfig,
     'token_url': obj.tokenUrl,
   };
   // filter undefined values
@@ -52560,11 +57857,9 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfig {
   readonly bearerTokenFile?: string;
 
   /**
-   * TLSConfig specifies TLSConfig configuration parameters.
-   *
    * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfig#tls_config
    */
-  readonly tlsConfig?: VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfig;
+  readonly tlsConfig?: any;
 
 }
 
@@ -52578,7 +57873,7 @@ export function toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfig(ob
     'basic_auth': toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigBasicAuth(obj.basicAuth),
     'bearer_token': toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigBearerToken(obj.bearerToken),
     'bearer_token_file': obj.bearerTokenFile,
-    'tls_config': toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfig(obj.tlsConfig),
+    'tls_config': obj.tlsConfig,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -52631,7 +57926,7 @@ export function toJson_VmScrapeConfigSpecKubernetesSdConfigsSelectors(obj: VmScr
  */
 export interface VmScrapeConfigSpecKubernetesSdConfigsTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmScrapeConfigSpecKubernetesSdConfigsTlsConfig#ca
    */
@@ -52928,7 +58223,7 @@ export enum VmScrapeConfigSpecOpenstackSdConfigsRole {
  */
 export interface VmScrapeConfigSpecOpenstackSdConfigsTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmScrapeConfigSpecOpenstackSdConfigsTlsConfig#ca
    */
@@ -53007,7 +58302,7 @@ export function toJson_VmScrapeConfigSpecOpenstackSdConfigsTlsConfig(obj: VmScra
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmScrapeConfigSpecTlsConfigCa
  */
@@ -53156,11 +58451,9 @@ export interface VmScrapeConfigSpecVmScrapeParamsProxyClientConfig {
   readonly bearerTokenFile?: string;
 
   /**
-   * TLSConfig specifies TLSConfig configuration parameters.
-   *
    * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfig#tls_config
    */
-  readonly tlsConfig?: VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfig;
+  readonly tlsConfig?: any;
 
 }
 
@@ -53174,7 +58467,7 @@ export function toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfig(obj: Vm
     'basic_auth': toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfigBasicAuth(obj.basicAuth),
     'bearer_token': toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfigBearerToken(obj.bearerToken),
     'bearer_token_file': obj.bearerTokenFile,
-    'tls_config': toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfig(obj.tlsConfig),
+    'tls_config': obj.tlsConfig,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -53514,92 +58807,7 @@ export function toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfigBearerT
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * TLSConfig specifies TLSConfig configuration parameters.
- *
- * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfig
- */
-export interface VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfig {
-  /**
-   * Stuct containing the CA cert to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfig#ca
-   */
-  readonly ca?: VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCa;
-
-  /**
-   * Path to the CA cert in the container to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfig#caFile
-   */
-  readonly caFile?: string;
-
-  /**
-   * Struct containing the client cert file for the targets.
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfig#cert
-   */
-  readonly cert?: VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCert;
-
-  /**
-   * Path to the client cert file in the container for the targets.
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfig#certFile
-   */
-  readonly certFile?: string;
-
-  /**
-   * Disable target certificate validation.
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfig#insecureSkipVerify
-   */
-  readonly insecureSkipVerify?: boolean;
-
-  /**
-   * Path to the client key file in the container for the targets.
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfig#keyFile
-   */
-  readonly keyFile?: string;
-
-  /**
-   * Secret containing the client key file for the targets.
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfig#keySecret
-   */
-  readonly keySecret?: VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigKeySecret;
-
-  /**
-   * Used to verify the hostname for the targets.
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfig#serverName
-   */
-  readonly serverName?: string;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfig' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfig(obj: VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfig | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'ca': toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCa(obj.ca),
-    'caFile': obj.caFile,
-    'cert': toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCert(obj.cert),
-    'certFile': obj.certFile,
-    'insecureSkipVerify': obj.insecureSkipVerify,
-    'keyFile': obj.keyFile,
-    'keySecret': toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigKeySecret(obj.keySecret),
-    'serverName': obj.serverName,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmScrapeConfigSpecConsulSdConfigsTlsConfigCa
  */
@@ -53954,92 +59162,7 @@ export function toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigB
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * TLSConfig specifies TLSConfig configuration parameters.
- *
- * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfig
- */
-export interface VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfig {
-  /**
-   * Stuct containing the CA cert to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfig#ca
-   */
-  readonly ca?: VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCa;
-
-  /**
-   * Path to the CA cert in the container to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfig#caFile
-   */
-  readonly caFile?: string;
-
-  /**
-   * Struct containing the client cert file for the targets.
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfig#cert
-   */
-  readonly cert?: VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCert;
-
-  /**
-   * Path to the client cert file in the container for the targets.
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfig#certFile
-   */
-  readonly certFile?: string;
-
-  /**
-   * Disable target certificate validation.
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfig#insecureSkipVerify
-   */
-  readonly insecureSkipVerify?: boolean;
-
-  /**
-   * Path to the client key file in the container for the targets.
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfig#keyFile
-   */
-  readonly keyFile?: string;
-
-  /**
-   * Secret containing the client key file for the targets.
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfig#keySecret
-   */
-  readonly keySecret?: VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigKeySecret;
-
-  /**
-   * Used to verify the hostname for the targets.
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfig#serverName
-   */
-  readonly serverName?: string;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfig' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfig(obj: VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfig | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'ca': toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCa(obj.ca),
-    'caFile': obj.caFile,
-    'cert': toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCert(obj.cert),
-    'certFile': obj.certFile,
-    'insecureSkipVerify': obj.insecureSkipVerify,
-    'keyFile': obj.keyFile,
-    'keySecret': toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigKeySecret(obj.keySecret),
-    'serverName': obj.serverName,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCa
  */
@@ -54408,92 +59531,7 @@ export function toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfigBearerTok
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * TLSConfig specifies TLSConfig configuration parameters.
- *
- * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfig
- */
-export interface VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfig {
-  /**
-   * Stuct containing the CA cert to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfig#ca
-   */
-  readonly ca?: VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCa;
-
-  /**
-   * Path to the CA cert in the container to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfig#caFile
-   */
-  readonly caFile?: string;
-
-  /**
-   * Struct containing the client cert file for the targets.
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfig#cert
-   */
-  readonly cert?: VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCert;
-
-  /**
-   * Path to the client cert file in the container for the targets.
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfig#certFile
-   */
-  readonly certFile?: string;
-
-  /**
-   * Disable target certificate validation.
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfig#insecureSkipVerify
-   */
-  readonly insecureSkipVerify?: boolean;
-
-  /**
-   * Path to the client key file in the container for the targets.
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfig#keyFile
-   */
-  readonly keyFile?: string;
-
-  /**
-   * Secret containing the client key file for the targets.
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfig#keySecret
-   */
-  readonly keySecret?: VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigKeySecret;
-
-  /**
-   * Used to verify the hostname for the targets.
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfig#serverName
-   */
-  readonly serverName?: string;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfig' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfig(obj: VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfig | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'ca': toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCa(obj.ca),
-    'caFile': obj.caFile,
-    'cert': toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCert(obj.cert),
-    'certFile': obj.certFile,
-    'insecureSkipVerify': obj.insecureSkipVerify,
-    'keyFile': obj.keyFile,
-    'keySecret': toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigKeySecret(obj.keySecret),
-    'serverName': obj.serverName,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmScrapeConfigSpecHttpSdConfigsTlsConfigCa
  */
@@ -54948,92 +59986,7 @@ export function toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigBea
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * TLSConfig specifies TLSConfig configuration parameters.
- *
- * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfig
- */
-export interface VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfig {
-  /**
-   * Stuct containing the CA cert to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfig#ca
-   */
-  readonly ca?: VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCa;
-
-  /**
-   * Path to the CA cert in the container to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfig#caFile
-   */
-  readonly caFile?: string;
-
-  /**
-   * Struct containing the client cert file for the targets.
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfig#cert
-   */
-  readonly cert?: VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCert;
-
-  /**
-   * Path to the client cert file in the container for the targets.
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfig#certFile
-   */
-  readonly certFile?: string;
-
-  /**
-   * Disable target certificate validation.
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfig#insecureSkipVerify
-   */
-  readonly insecureSkipVerify?: boolean;
-
-  /**
-   * Path to the client key file in the container for the targets.
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfig#keyFile
-   */
-  readonly keyFile?: string;
-
-  /**
-   * Secret containing the client key file for the targets.
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfig#keySecret
-   */
-  readonly keySecret?: VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigKeySecret;
-
-  /**
-   * Used to verify the hostname for the targets.
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfig#serverName
-   */
-  readonly serverName?: string;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfig' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfig(obj: VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfig | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'ca': toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCa(obj.ca),
-    'caFile': obj.caFile,
-    'cert': toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCert(obj.cert),
-    'certFile': obj.certFile,
-    'insecureSkipVerify': obj.insecureSkipVerify,
-    'keyFile': obj.keyFile,
-    'keySecret': toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigKeySecret(obj.keySecret),
-    'serverName': obj.serverName,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmScrapeConfigSpecKubernetesSdConfigsTlsConfigCa
  */
@@ -55254,7 +60207,7 @@ export function toJson_VmScrapeConfigSpecOauth2ClientIdSecret(obj: VmScrapeConfi
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmScrapeConfigSpecOpenstackSdConfigsTlsConfigCa
  */
@@ -55670,91 +60623,6 @@ export function toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfigBearerTo
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * TLSConfig specifies TLSConfig configuration parameters.
- *
- * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfig
- */
-export interface VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfig {
-  /**
-   * Stuct containing the CA cert to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfig#ca
-   */
-  readonly ca?: VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCa;
-
-  /**
-   * Path to the CA cert in the container to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfig#caFile
-   */
-  readonly caFile?: string;
-
-  /**
-   * Struct containing the client cert file for the targets.
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfig#cert
-   */
-  readonly cert?: VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCert;
-
-  /**
-   * Path to the client cert file in the container for the targets.
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfig#certFile
-   */
-  readonly certFile?: string;
-
-  /**
-   * Disable target certificate validation.
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfig#insecureSkipVerify
-   */
-  readonly insecureSkipVerify?: boolean;
-
-  /**
-   * Path to the client key file in the container for the targets.
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfig#keyFile
-   */
-  readonly keyFile?: string;
-
-  /**
-   * Secret containing the client key file for the targets.
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfig#keySecret
-   */
-  readonly keySecret?: VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret;
-
-  /**
-   * Used to verify the hostname for the targets.
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfig#serverName
-   */
-  readonly serverName?: string;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfig' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfig(obj: VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfig | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'ca': toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCa(obj.ca),
-    'caFile': obj.caFile,
-    'cert': toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCert(obj.cert),
-    'certFile': obj.certFile,
-    'insecureSkipVerify': obj.insecureSkipVerify,
-    'keyFile': obj.keyFile,
-    'keySecret': toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret(obj.keySecret),
-    'serverName': obj.serverName,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * ConfigMap containing data to use for the targets.
  *
  * @schema VmScrapeConfigSpecConsulSdConfigsOauth2ClientIdConfigMap
@@ -55941,129 +60809,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsProxyClientConfigBasicAuthUser
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfigBasicAuthUsername(obj: VmScrapeConfigSpecConsulSdConfigsProxyClientConfigBasicAuthUsername | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Stuct containing the CA cert to use for the targets.
- *
- * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCa
- */
-export interface VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCa {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCa#configMap
-   */
-  readonly configMap?: VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCaConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCa#secret
-   */
-  readonly secret?: VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCaSecret;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCa' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCa(obj: VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCa | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCaConfigMap(obj.configMap),
-    'secret': toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCaSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Struct containing the client cert file for the targets.
- *
- * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCert
- */
-export interface VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCert {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCert#configMap
-   */
-  readonly configMap?: VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCertConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCert#secret
-   */
-  readonly secret?: VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCertSecret;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCert' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCert(obj: VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCert | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCertConfigMap(obj.configMap),
-    'secret': toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCertSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing the client key file for the targets.
- *
- * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigKeySecret
- */
-export interface VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigKeySecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigKeySecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigKeySecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigKeySecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigKeySecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigKeySecret(obj: VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigKeySecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -56470,129 +61215,6 @@ export function toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigB
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Stuct containing the CA cert to use for the targets.
- *
- * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCa
- */
-export interface VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCa {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCa#configMap
-   */
-  readonly configMap?: VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCaConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCa#secret
-   */
-  readonly secret?: VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCaSecret;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCa' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCa(obj: VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCa | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCaConfigMap(obj.configMap),
-    'secret': toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCaSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Struct containing the client cert file for the targets.
- *
- * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCert
- */
-export interface VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCert {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCert#configMap
-   */
-  readonly configMap?: VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCertConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCert#secret
-   */
-  readonly secret?: VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCertSecret;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCert' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCert(obj: VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCert | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCertConfigMap(obj.configMap),
-    'secret': toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCertSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing the client key file for the targets.
- *
- * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigKeySecret
- */
-export interface VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigKeySecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigKeySecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigKeySecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigKeySecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigKeySecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigKeySecret(obj: VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigKeySecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * ConfigMap containing data to use for the targets.
  *
  * @schema VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaConfigMap
@@ -56877,129 +61499,6 @@ export interface VmScrapeConfigSpecHttpSdConfigsProxyClientConfigBasicAuthUserna
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfigBasicAuthUsername(obj: VmScrapeConfigSpecHttpSdConfigsProxyClientConfigBasicAuthUsername | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Stuct containing the CA cert to use for the targets.
- *
- * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCa
- */
-export interface VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCa {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCa#configMap
-   */
-  readonly configMap?: VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCaConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCa#secret
-   */
-  readonly secret?: VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCaSecret;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCa' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCa(obj: VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCa | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCaConfigMap(obj.configMap),
-    'secret': toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCaSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Struct containing the client cert file for the targets.
- *
- * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCert
- */
-export interface VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCert {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCert#configMap
-   */
-  readonly configMap?: VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCertConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCert#secret
-   */
-  readonly secret?: VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCertSecret;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCert' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCert(obj: VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCert | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCertConfigMap(obj.configMap),
-    'secret': toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCertSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing the client key file for the targets.
- *
- * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigKeySecret
- */
-export interface VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigKeySecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigKeySecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigKeySecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigKeySecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigKeySecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigKeySecret(obj: VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigKeySecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -57394,129 +61893,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigBasicAuth
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigBasicAuthUsername(obj: VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigBasicAuthUsername | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Stuct containing the CA cert to use for the targets.
- *
- * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCa
- */
-export interface VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCa {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCa#configMap
-   */
-  readonly configMap?: VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCaConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCa#secret
-   */
-  readonly secret?: VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCaSecret;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCa' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCa(obj: VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCa | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCaConfigMap(obj.configMap),
-    'secret': toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCaSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Struct containing the client cert file for the targets.
- *
- * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCert
- */
-export interface VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCert {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCert#configMap
-   */
-  readonly configMap?: VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCertConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCert#secret
-   */
-  readonly secret?: VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCertSecret;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCert' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCert(obj: VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCert | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCertConfigMap(obj.configMap),
-    'secret': toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCertSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing the client key file for the targets.
- *
- * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigKeySecret
- */
-export interface VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigKeySecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigKeySecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigKeySecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigKeySecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigKeySecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigKeySecret(obj: VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigKeySecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -58009,1109 +62385,6 @@ export interface VmScrapeConfigSpecVmScrapeParamsProxyClientConfigBasicAuthUsern
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfigBasicAuthUsername(obj: VmScrapeConfigSpecVmScrapeParamsProxyClientConfigBasicAuthUsername | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Stuct containing the CA cert to use for the targets.
- *
- * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCa
- */
-export interface VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCa {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCa#configMap
-   */
-  readonly configMap?: VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCa#secret
-   */
-  readonly secret?: VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCa' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCa(obj: VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCa | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap(obj.configMap),
-    'secret': toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Struct containing the client cert file for the targets.
- *
- * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCert
- */
-export interface VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCert {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCert#configMap
-   */
-  readonly configMap?: VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCert#secret
-   */
-  readonly secret?: VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCert' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCert(obj: VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCert | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap(obj.configMap),
-    'secret': toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing the client key file for the targets.
- *
- * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret
- */
-export interface VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret(obj: VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigKeySecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ConfigMap containing data to use for the targets.
- *
- * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCaConfigMap
- */
-export interface VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCaConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCaConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCaConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCaConfigMap#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCaConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCaConfigMap(obj: VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCaConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCaSecret
- */
-export interface VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCaSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCaSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCaSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCaSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCaSecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCaSecret(obj: VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCaSecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ConfigMap containing data to use for the targets.
- *
- * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCertConfigMap
- */
-export interface VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCertConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCertConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCertConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCertConfigMap#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCertConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCertConfigMap(obj: VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCertConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCertSecret
- */
-export interface VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCertSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCertSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCertSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCertSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCertSecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCertSecret(obj: VmScrapeConfigSpecConsulSdConfigsProxyClientConfigTlsConfigCertSecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ConfigMap containing data to use for the targets.
- *
- * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCaConfigMap
- */
-export interface VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCaConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCaConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCaConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCaConfigMap#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCaConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCaConfigMap(obj: VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCaConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCaSecret
- */
-export interface VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCaSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCaSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCaSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCaSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCaSecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCaSecret(obj: VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCaSecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ConfigMap containing data to use for the targets.
- *
- * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCertConfigMap
- */
-export interface VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCertConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCertConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCertConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCertConfigMap#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCertConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCertConfigMap(obj: VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCertConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCertSecret
- */
-export interface VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCertSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCertSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCertSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCertSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCertSecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCertSecret(obj: VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigTlsConfigCertSecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ConfigMap containing data to use for the targets.
- *
- * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCaConfigMap
- */
-export interface VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCaConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCaConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCaConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCaConfigMap#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCaConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCaConfigMap(obj: VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCaConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCaSecret
- */
-export interface VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCaSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCaSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCaSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCaSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCaSecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCaSecret(obj: VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCaSecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ConfigMap containing data to use for the targets.
- *
- * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCertConfigMap
- */
-export interface VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCertConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCertConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCertConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCertConfigMap#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCertConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCertConfigMap(obj: VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCertConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCertSecret
- */
-export interface VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCertSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCertSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCertSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCertSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCertSecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCertSecret(obj: VmScrapeConfigSpecHttpSdConfigsProxyClientConfigTlsConfigCertSecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ConfigMap containing data to use for the targets.
- *
- * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCaConfigMap
- */
-export interface VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCaConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCaConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCaConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCaConfigMap#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCaConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCaConfigMap(obj: VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCaConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCaSecret
- */
-export interface VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCaSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCaSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCaSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCaSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCaSecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCaSecret(obj: VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCaSecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ConfigMap containing data to use for the targets.
- *
- * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCertConfigMap
- */
-export interface VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCertConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCertConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCertConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCertConfigMap#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCertConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCertConfigMap(obj: VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCertConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCertSecret
- */
-export interface VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCertSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCertSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCertSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCertSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCertSecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCertSecret(obj: VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigTlsConfigCertSecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ConfigMap containing data to use for the targets.
- *
- * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap
- */
-export interface VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap(obj: VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret
- */
-export interface VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret(obj: VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCaSecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ConfigMap containing data to use for the targets.
- *
- * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap
- */
-export interface VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap(obj: VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret
- */
-export interface VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret(obj: VmScrapeConfigSpecVmScrapeParamsProxyClientConfigTlsConfigCertSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -59996,11 +63269,29 @@ export interface VmServiceScrapeSpecEndpointsOauth2 {
   readonly endpointParams?: { [key: string]: string };
 
   /**
+   * The proxy URL for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmServiceScrapeSpecEndpointsOauth2#proxy_url
+   */
+  readonly proxyUrl?: string;
+
+  /**
    * OAuth2 scopes used for the token request
    *
    * @schema VmServiceScrapeSpecEndpointsOauth2#scopes
    */
   readonly scopes?: string[];
+
+  /**
+   * TLSConfig for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmServiceScrapeSpecEndpointsOauth2#tls_config
+   */
+  readonly tlsConfig?: any;
 
   /**
    * The URL to fetch the token from
@@ -60022,7 +63313,9 @@ export function toJson_VmServiceScrapeSpecEndpointsOauth2(obj: VmServiceScrapeSp
     'client_secret': toJson_VmServiceScrapeSpecEndpointsOauth2ClientSecret(obj.clientSecret),
     'client_secret_file': obj.clientSecretFile,
     'endpoint_params': ((obj.endpointParams) === undefined) ? undefined : (Object.entries(obj.endpointParams).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'proxy_url': obj.proxyUrl,
     'scopes': obj.scopes?.map(y => y),
+    'tls_config': obj.tlsConfig,
     'token_url': obj.tokenUrl,
   };
   // filter undefined values
@@ -60177,7 +63470,7 @@ export class VmServiceScrapeSpecEndpointsTargetPort {
  */
 export interface VmServiceScrapeSpecEndpointsTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmServiceScrapeSpecEndpointsTlsConfig#ca
    */
@@ -60271,7 +63564,7 @@ export interface VmServiceScrapeSpecEndpointsVmScrapeParams {
   /**
    * disable_keepalive allows disabling HTTP keep-alive when scraping targets.
    * By default, HTTP keep-alive is enabled, so TCP connections to scrape targets
-   * could be re-used.
+   * could be reused.
    * See https://docs.victoriametrics.com/vmagent#scrape_config-enhancements
    *
    * @schema VmServiceScrapeSpecEndpointsVmScrapeParams#disable_keep_alive
@@ -60626,7 +63919,7 @@ export function toJson_VmServiceScrapeSpecEndpointsOauth2ClientSecret(obj: VmSer
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmServiceScrapeSpecEndpointsTlsConfigCa
  */
@@ -60775,11 +64068,9 @@ export interface VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfig {
   readonly bearerTokenFile?: string;
 
   /**
-   * TLSConfig specifies TLSConfig configuration parameters.
-   *
    * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfig#tls_config
    */
-  readonly tlsConfig?: VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfig;
+  readonly tlsConfig?: any;
 
 }
 
@@ -60793,7 +64084,7 @@ export function toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConf
     'basic_auth': toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigBasicAuth(obj.basicAuth),
     'bearer_token': toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigBearerToken(obj.bearerToken),
     'bearer_token_file': obj.bearerTokenFile,
-    'tls_config': toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfig(obj.tlsConfig),
+    'tls_config': obj.tlsConfig,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -61192,91 +64483,6 @@ export function toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConf
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * TLSConfig specifies TLSConfig configuration parameters.
- *
- * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfig
- */
-export interface VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfig {
-  /**
-   * Stuct containing the CA cert to use for the targets.
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfig#ca
-   */
-  readonly ca?: VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa;
-
-  /**
-   * Path to the CA cert in the container to use for the targets.
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfig#caFile
-   */
-  readonly caFile?: string;
-
-  /**
-   * Struct containing the client cert file for the targets.
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfig#cert
-   */
-  readonly cert?: VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert;
-
-  /**
-   * Path to the client cert file in the container for the targets.
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfig#certFile
-   */
-  readonly certFile?: string;
-
-  /**
-   * Disable target certificate validation.
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfig#insecureSkipVerify
-   */
-  readonly insecureSkipVerify?: boolean;
-
-  /**
-   * Path to the client key file in the container for the targets.
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfig#keyFile
-   */
-  readonly keyFile?: string;
-
-  /**
-   * Secret containing the client key file for the targets.
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfig#keySecret
-   */
-  readonly keySecret?: VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret;
-
-  /**
-   * Used to verify the hostname for the targets.
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfig#serverName
-   */
-  readonly serverName?: string;
-
-}
-
-/**
- * Converts an object of type 'VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfig' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfig(obj: VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfig | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'ca': toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa(obj.ca),
-    'caFile': obj.caFile,
-    'cert': toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert(obj.cert),
-    'certFile': obj.certFile,
-    'insecureSkipVerify': obj.insecureSkipVerify,
-    'keyFile': obj.keyFile,
-    'keySecret': toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret(obj.keySecret),
-    'serverName': obj.serverName,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * Password defines reference for secret with password value
  * The secret needs to be in the same namespace as scrape object
  *
@@ -61365,325 +64571,6 @@ export interface VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigBasi
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigBasicAuthUsername(obj: VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigBasicAuthUsername | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Stuct containing the CA cert to use for the targets.
- *
- * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa
- */
-export interface VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa#configMap
-   */
-  readonly configMap?: VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa#secret
-   */
-  readonly secret?: VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret;
-
-}
-
-/**
- * Converts an object of type 'VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa(obj: VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap(obj.configMap),
-    'secret': toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Struct containing the client cert file for the targets.
- *
- * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert
- */
-export interface VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert#configMap
-   */
-  readonly configMap?: VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert#secret
-   */
-  readonly secret?: VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret;
-
-}
-
-/**
- * Converts an object of type 'VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert(obj: VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap(obj.configMap),
-    'secret': toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing the client key file for the targets.
- *
- * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret
- */
-export interface VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret(obj: VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ConfigMap containing data to use for the targets.
- *
- * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap
- */
-export interface VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap(obj: VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret
- */
-export interface VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret(obj: VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ConfigMap containing data to use for the targets.
- *
- * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap
- */
-export interface VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap(obj: VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret
- */
-export interface VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret(obj: VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -61816,6 +64703,17 @@ export interface VmSingleSpec {
   readonly containers?: any[];
 
   /**
+   * DisableAutomountServiceAccountToken whether to disable serviceAccount auto mount by Kubernetes (available from v0.54.0).
+   * Operator will conditionally create volumes and volumeMounts for containers if it requires k8s API access.
+   * For example, vmagent and vm-config-reloader requires k8s API access.
+   * Operator creates volumes with name: "kube-api-access", which can be used as volumeMount for extraContainers if needed.
+   * And also adds VolumeMounts at /var/run/secrets/kubernetes.io/serviceaccount.
+   *
+   * @schema VmSingleSpec#disableAutomountServiceAccountToken
+   */
+  readonly disableAutomountServiceAccountToken?: boolean;
+
+  /**
    * DisableSelfServiceScrape controls creation of VMServiceScrape by operator
    * for the application.
    * Has priority over `VM_DISABLESELFSERVICESCRAPECREATION` operator env variable
@@ -61854,6 +64752,14 @@ export interface VmSingleSpec {
    * @schema VmSingleSpec#extraEnvs
    */
   readonly extraEnvs?: VmSingleSpecExtraEnvs[];
+
+  /**
+   * ExtraEnvsFrom defines source of env variables for the application container
+   * could either be secret or configmap
+   *
+   * @schema VmSingleSpec#extraEnvsFrom
+   */
+  readonly extraEnvsFrom?: VmSingleSpecExtraEnvsFrom[];
 
   /**
    * HostAliases provides mapping for ip and hostname,
@@ -62026,14 +64932,14 @@ export interface VmSingleSpec {
   readonly resources?: VmSingleSpecResources;
 
   /**
-   * RetentionPeriod for the stored metrics
-   * Note VictoriaMetrics has data/ and indexdb/ folders
-   * metrics from data/ removed eventually as soon as partition leaves retention period
-   * reverse index data at indexdb rotates once at the half of configured [retention period](https://docs.victoriametrics.com/Single-server-VictoriaMetrics/#retention)
+   * RetentionPeriod defines how long to retain stored metrics, specified as a duration (e.g., "1d", "1w", "1m").
+   * Data with timestamps outside the RetentionPeriod is automatically deleted. The minimum allowed value is 1d, or 24h.
+   * The default value is 1 (one month).
+   * See [retention](https://docs.victoriametrics.com/victoriametrics/single-server-victoriametrics/#retention) docs for details.
    *
    * @schema VmSingleSpec#retentionPeriod
    */
-  readonly retentionPeriod: string;
+  readonly retentionPeriod?: string;
 
   /**
    * The number of old ReplicaSets to retain to allow rollback in deployment or
@@ -62216,11 +65122,13 @@ export function toJson_VmSingleSpec(obj: VmSingleSpec | undefined): Record<strin
     'affinity': obj.affinity,
     'configMaps': obj.configMaps?.map(y => y),
     'containers': obj.containers?.map(y => y),
+    'disableAutomountServiceAccountToken': obj.disableAutomountServiceAccountToken,
     'disableSelfServiceScrape': obj.disableSelfServiceScrape,
     'dnsConfig': toJson_VmSingleSpecDnsConfig(obj.dnsConfig),
     'dnsPolicy': obj.dnsPolicy,
     'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'extraEnvs': obj.extraEnvs?.map(y => toJson_VmSingleSpecExtraEnvs(y)),
+    'extraEnvsFrom': obj.extraEnvsFrom?.map(y => toJson_VmSingleSpecExtraEnvsFrom(y)),
     'hostAliases': obj.hostAliases?.map(y => toJson_VmSingleSpecHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
     'image': toJson_VmSingleSpecImage(obj.image),
@@ -62365,6 +65273,51 @@ export function toJson_VmSingleSpecExtraEnvs(obj: VmSingleSpecExtraEnvs | undefi
   const result = {
     'name': obj.name,
     'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ *
+ * @schema VmSingleSpecExtraEnvsFrom
+ */
+export interface VmSingleSpecExtraEnvsFrom {
+  /**
+   * The ConfigMap to select from
+   *
+   * @schema VmSingleSpecExtraEnvsFrom#configMapRef
+   */
+  readonly configMapRef?: VmSingleSpecExtraEnvsFromConfigMapRef;
+
+  /**
+   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   *
+   * @schema VmSingleSpecExtraEnvsFrom#prefix
+   */
+  readonly prefix?: string;
+
+  /**
+   * The Secret to select from
+   *
+   * @schema VmSingleSpecExtraEnvsFrom#secretRef
+   */
+  readonly secretRef?: VmSingleSpecExtraEnvsFromSecretRef;
+
+}
+
+/**
+ * Converts an object of type 'VmSingleSpecExtraEnvsFrom' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmSingleSpecExtraEnvsFrom(obj: VmSingleSpecExtraEnvsFrom | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapRef': toJson_VmSingleSpecExtraEnvsFromConfigMapRef(obj.configMapRef),
+    'prefix': obj.prefix,
+    'secretRef': toJson_VmSingleSpecExtraEnvsFromSecretRef(obj.secretRef),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -63092,6 +66045,13 @@ export interface VmSingleSpecStreamAggrConfig {
   readonly dropInputLabels?: string[];
 
   /**
+   * EnableWindows enables aggregating data in separate windows ( available from v0.54.0).
+   *
+   * @schema VmSingleSpecStreamAggrConfig#enableWindows
+   */
+  readonly enableWindows?: boolean;
+
+  /**
    * IgnoreFirstIntervals instructs to ignore first interval
    *
    * @schema VmSingleSpecStreamAggrConfig#ignoreFirstIntervals
@@ -63132,6 +66092,7 @@ export function toJson_VmSingleSpecStreamAggrConfig(obj: VmSingleSpecStreamAggrC
     'dedupInterval': obj.dedupInterval,
     'dropInput': obj.dropInput,
     'dropInputLabels': obj.dropInputLabels?.map(y => y),
+    'enableWindows': obj.enableWindows,
     'ignoreFirstIntervals': obj.ignoreFirstIntervals,
     'ignoreOldSamples': obj.ignoreOldSamples,
     'keepInput': obj.keepInput,
@@ -63308,6 +66269,14 @@ export interface VmSingleSpecVmBackup {
   readonly extraEnvs?: VmSingleSpecVmBackupExtraEnvs[];
 
   /**
+   * ExtraEnvsFrom defines source of env variables for the application container
+   * could either be secret or configmap
+   *
+   * @schema VmSingleSpecVmBackup#extraEnvsFrom
+   */
+  readonly extraEnvsFrom?: VmSingleSpecVmBackupExtraEnvsFrom[];
+
+  /**
    * Image - docker image settings for VMBackuper
    *
    * @schema VmSingleSpecVmBackup#image
@@ -63396,6 +66365,7 @@ export function toJson_VmSingleSpecVmBackup(obj: VmSingleSpecVmBackup | undefine
     'disableWeekly': obj.disableWeekly,
     'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'extraEnvs': obj.extraEnvs?.map(y => toJson_VmSingleSpecVmBackupExtraEnvs(y)),
+    'extraEnvsFrom': obj.extraEnvsFrom?.map(y => toJson_VmSingleSpecVmBackupExtraEnvsFrom(y)),
     'image': toJson_VmSingleSpecVmBackupImage(obj.image),
     'logFormat': obj.logFormat,
     'logLevel': obj.logLevel,
@@ -63524,6 +66494,7 @@ export function toJson_VmSingleSpecVolumeMounts(obj: VmSingleSpecVolumeMounts | 
  */
 export interface VmSingleSpecDnsConfigOptions {
   /**
+   * Name is this DNS resolver option's name.
    * Required.
    *
    * @schema VmSingleSpecDnsConfigOptions#name
@@ -63531,6 +66502,8 @@ export interface VmSingleSpecDnsConfigOptions {
   readonly name?: string;
 
   /**
+   * Value is this DNS resolver option's value.
+   *
    * @schema VmSingleSpecDnsConfigOptions#value
    */
   readonly value?: string;
@@ -63546,6 +66519,88 @@ export function toJson_VmSingleSpecDnsConfigOptions(obj: VmSingleSpecDnsConfigOp
   const result = {
     'name': obj.name,
     'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The ConfigMap to select from
+ *
+ * @schema VmSingleSpecExtraEnvsFromConfigMapRef
+ */
+export interface VmSingleSpecExtraEnvsFromConfigMapRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmSingleSpecExtraEnvsFromConfigMapRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap must be defined
+   *
+   * @schema VmSingleSpecExtraEnvsFromConfigMapRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmSingleSpecExtraEnvsFromConfigMapRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmSingleSpecExtraEnvsFromConfigMapRef(obj: VmSingleSpecExtraEnvsFromConfigMapRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The Secret to select from
+ *
+ * @schema VmSingleSpecExtraEnvsFromSecretRef
+ */
+export interface VmSingleSpecExtraEnvsFromSecretRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmSingleSpecExtraEnvsFromSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret must be defined
+   *
+   * @schema VmSingleSpecExtraEnvsFromSecretRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmSingleSpecExtraEnvsFromSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmSingleSpecExtraEnvsFromSecretRef(obj: VmSingleSpecExtraEnvsFromSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -64027,6 +67082,13 @@ export interface VmSingleSpecStreamAggrConfigRules {
   readonly dropInputLabels?: string[];
 
   /**
+   * EnableWindows enables aggregating data in separate windows
+   *
+   * @schema VmSingleSpecStreamAggrConfigRules#enable_windows
+   */
+  readonly enableWindows?: boolean;
+
+  /**
    * FlushOnShutdown defines whether to flush the aggregation state on process termination
    * or config reload. Is `false` by default.
    * It is not recommended changing this setting, unless unfinished aggregations states
@@ -64154,6 +67216,7 @@ export function toJson_VmSingleSpecStreamAggrConfigRules(obj: VmSingleSpecStream
     'by': obj.by?.map(y => y),
     'dedup_interval': obj.dedupInterval,
     'drop_input_labels': obj.dropInputLabels?.map(y => y),
+    'enable_windows': obj.enableWindows,
     'flush_on_shutdown': obj.flushOnShutdown,
     'ignore_first_intervals': obj.ignoreFirstIntervals,
     'ignore_old_samples': obj.ignoreOldSamples,
@@ -64270,6 +67333,51 @@ export function toJson_VmSingleSpecVmBackupExtraEnvs(obj: VmSingleSpecVmBackupEx
     'name': obj.name,
     'value': obj.value,
     'valueFrom': toJson_VmSingleSpecVmBackupExtraEnvsValueFrom(obj.valueFrom),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ *
+ * @schema VmSingleSpecVmBackupExtraEnvsFrom
+ */
+export interface VmSingleSpecVmBackupExtraEnvsFrom {
+  /**
+   * The ConfigMap to select from
+   *
+   * @schema VmSingleSpecVmBackupExtraEnvsFrom#configMapRef
+   */
+  readonly configMapRef?: VmSingleSpecVmBackupExtraEnvsFromConfigMapRef;
+
+  /**
+   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   *
+   * @schema VmSingleSpecVmBackupExtraEnvsFrom#prefix
+   */
+  readonly prefix?: string;
+
+  /**
+   * The Secret to select from
+   *
+   * @schema VmSingleSpecVmBackupExtraEnvsFrom#secretRef
+   */
+  readonly secretRef?: VmSingleSpecVmBackupExtraEnvsFromSecretRef;
+
+}
+
+/**
+ * Converts an object of type 'VmSingleSpecVmBackupExtraEnvsFrom' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmSingleSpecVmBackupExtraEnvsFrom(obj: VmSingleSpecVmBackupExtraEnvsFrom | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapRef': toJson_VmSingleSpecVmBackupExtraEnvsFromConfigMapRef(obj.configMapRef),
+    'prefix': obj.prefix,
+    'secretRef': toJson_VmSingleSpecVmBackupExtraEnvsFromSecretRef(obj.secretRef),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -64893,6 +68001,88 @@ export function toJson_VmSingleSpecVmBackupExtraEnvsValueFrom(obj: VmSingleSpecV
     'fieldRef': toJson_VmSingleSpecVmBackupExtraEnvsValueFromFieldRef(obj.fieldRef),
     'resourceFieldRef': toJson_VmSingleSpecVmBackupExtraEnvsValueFromResourceFieldRef(obj.resourceFieldRef),
     'secretKeyRef': toJson_VmSingleSpecVmBackupExtraEnvsValueFromSecretKeyRef(obj.secretKeyRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The ConfigMap to select from
+ *
+ * @schema VmSingleSpecVmBackupExtraEnvsFromConfigMapRef
+ */
+export interface VmSingleSpecVmBackupExtraEnvsFromConfigMapRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmSingleSpecVmBackupExtraEnvsFromConfigMapRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap must be defined
+   *
+   * @schema VmSingleSpecVmBackupExtraEnvsFromConfigMapRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmSingleSpecVmBackupExtraEnvsFromConfigMapRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmSingleSpecVmBackupExtraEnvsFromConfigMapRef(obj: VmSingleSpecVmBackupExtraEnvsFromConfigMapRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The Secret to select from
+ *
+ * @schema VmSingleSpecVmBackupExtraEnvsFromSecretRef
+ */
+export interface VmSingleSpecVmBackupExtraEnvsFromSecretRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmSingleSpecVmBackupExtraEnvsFromSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret must be defined
+   *
+   * @schema VmSingleSpecVmBackupExtraEnvsFromSecretRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VmSingleSpecVmBackupExtraEnvsFromSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmSingleSpecVmBackupExtraEnvsFromSecretRef(obj: VmSingleSpecVmBackupExtraEnvsFromSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -65846,11 +69036,29 @@ export interface VmStaticScrapeSpecTargetEndpointsOauth2 {
   readonly endpointParams?: { [key: string]: string };
 
   /**
+   * The proxy URL for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmStaticScrapeSpecTargetEndpointsOauth2#proxy_url
+   */
+  readonly proxyUrl?: string;
+
+  /**
    * OAuth2 scopes used for the token request
    *
    * @schema VmStaticScrapeSpecTargetEndpointsOauth2#scopes
    */
   readonly scopes?: string[];
+
+  /**
+   * TLSConfig for token_url connection
+   * ( available from v0.55.0).
+   * Is only supported by Scrape objects family
+   *
+   * @schema VmStaticScrapeSpecTargetEndpointsOauth2#tls_config
+   */
+  readonly tlsConfig?: any;
 
   /**
    * The URL to fetch the token from
@@ -65872,7 +69080,9 @@ export function toJson_VmStaticScrapeSpecTargetEndpointsOauth2(obj: VmStaticScra
     'client_secret': toJson_VmStaticScrapeSpecTargetEndpointsOauth2ClientSecret(obj.clientSecret),
     'client_secret_file': obj.clientSecretFile,
     'endpoint_params': ((obj.endpointParams) === undefined) ? undefined : (Object.entries(obj.endpointParams).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'proxy_url': obj.proxyUrl,
     'scopes': obj.scopes?.map(y => y),
+    'tls_config': obj.tlsConfig,
     'token_url': obj.tokenUrl,
   };
   // filter undefined values
@@ -66010,7 +69220,7 @@ export enum VmStaticScrapeSpecTargetEndpointsScheme {
  */
 export interface VmStaticScrapeSpecTargetEndpointsTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmStaticScrapeSpecTargetEndpointsTlsConfig#ca
    */
@@ -66104,7 +69314,7 @@ export interface VmStaticScrapeSpecTargetEndpointsVmScrapeParams {
   /**
    * disable_keepalive allows disabling HTTP keep-alive when scraping targets.
    * By default, HTTP keep-alive is enabled, so TCP connections to scrape targets
-   * could be re-used.
+   * could be reused.
    * See https://docs.victoriametrics.com/vmagent#scrape_config-enhancements
    *
    * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParams#disable_keep_alive
@@ -66409,7 +69619,7 @@ export function toJson_VmStaticScrapeSpecTargetEndpointsOauth2ClientSecret(obj: 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmStaticScrapeSpecTargetEndpointsTlsConfigCa
  */
@@ -66558,11 +69768,9 @@ export interface VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfi
   readonly bearerTokenFile?: string;
 
   /**
-   * TLSConfig specifies TLSConfig configuration parameters.
-   *
    * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfig#tls_config
    */
-  readonly tlsConfig?: VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfig;
+  readonly tlsConfig?: any;
 
 }
 
@@ -66576,7 +69784,7 @@ export function toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClien
     'basic_auth': toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigBasicAuth(obj.basicAuth),
     'bearer_token': toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigBearerToken(obj.bearerToken),
     'bearer_token_file': obj.bearerTokenFile,
-    'tls_config': toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfig(obj.tlsConfig),
+    'tls_config': obj.tlsConfig,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -66975,91 +70183,6 @@ export function toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClien
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * TLSConfig specifies TLSConfig configuration parameters.
- *
- * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfig
- */
-export interface VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfig {
-  /**
-   * Stuct containing the CA cert to use for the targets.
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfig#ca
-   */
-  readonly ca?: VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa;
-
-  /**
-   * Path to the CA cert in the container to use for the targets.
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfig#caFile
-   */
-  readonly caFile?: string;
-
-  /**
-   * Struct containing the client cert file for the targets.
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfig#cert
-   */
-  readonly cert?: VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert;
-
-  /**
-   * Path to the client cert file in the container for the targets.
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfig#certFile
-   */
-  readonly certFile?: string;
-
-  /**
-   * Disable target certificate validation.
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfig#insecureSkipVerify
-   */
-  readonly insecureSkipVerify?: boolean;
-
-  /**
-   * Path to the client key file in the container for the targets.
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfig#keyFile
-   */
-  readonly keyFile?: string;
-
-  /**
-   * Secret containing the client key file for the targets.
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfig#keySecret
-   */
-  readonly keySecret?: VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret;
-
-  /**
-   * Used to verify the hostname for the targets.
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfig#serverName
-   */
-  readonly serverName?: string;
-
-}
-
-/**
- * Converts an object of type 'VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfig' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfig(obj: VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfig | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'ca': toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa(obj.ca),
-    'caFile': obj.caFile,
-    'cert': toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert(obj.cert),
-    'certFile': obj.certFile,
-    'insecureSkipVerify': obj.insecureSkipVerify,
-    'keyFile': obj.keyFile,
-    'keySecret': toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret(obj.keySecret),
-    'serverName': obj.serverName,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * Password defines reference for secret with password value
  * The secret needs to be in the same namespace as scrape object
  *
@@ -67148,325 +70271,6 @@ export interface VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfi
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigBasicAuthUsername(obj: VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigBasicAuthUsername | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Stuct containing the CA cert to use for the targets.
- *
- * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa
- */
-export interface VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa#configMap
-   */
-  readonly configMap?: VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa#secret
-   */
-  readonly secret?: VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret;
-
-}
-
-/**
- * Converts an object of type 'VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa(obj: VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCa | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap(obj.configMap),
-    'secret': toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Struct containing the client cert file for the targets.
- *
- * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert
- */
-export interface VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert {
-  /**
-   * ConfigMap containing data to use for the targets.
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert#configMap
-   */
-  readonly configMap?: VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap;
-
-  /**
-   * Secret containing data to use for the targets.
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert#secret
-   */
-  readonly secret?: VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret;
-
-}
-
-/**
- * Converts an object of type 'VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert(obj: VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCert | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'configMap': toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap(obj.configMap),
-    'secret': toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret(obj.secret),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing the client key file for the targets.
- *
- * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret
- */
-export interface VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret(obj: VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigKeySecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ConfigMap containing data to use for the targets.
- *
- * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap
- */
-export interface VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap(obj: VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret
- */
-export interface VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret(obj: VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCaSecret | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * ConfigMap containing data to use for the targets.
- *
- * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap
- */
-export interface VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap {
-  /**
-   * The key to select.
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the ConfigMap or its key must be defined
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap(obj: VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertConfigMap | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'optional': obj.optional,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Secret containing data to use for the targets.
- *
- * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret
- */
-export interface VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret {
-  /**
-   * The key of the secret to select from.  Must be a valid secret key.
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the referent.
-   * This field is effectively required, but due to backwards compatibility is
-   * allowed to be empty. Instances of this type with an empty value here are
-   * almost certainly wrong.
-   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret#name
-   */
-  readonly name?: string;
-
-  /**
-   * Specify whether the Secret or its key must be defined
-   *
-   * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret#optional
-   */
-  readonly optional?: boolean;
-
-}
-
-/**
- * Converts an object of type 'VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret(obj: VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigTlsConfigCertSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -68033,7 +70837,7 @@ export function toJson_VmUserSpecTargetRefs(obj: VmUserSpecTargetRefs | undefine
  */
 export interface VmUserSpecTlsConfig {
   /**
-   * Stuct containing the CA cert to use for the targets.
+   * Struct containing the CA cert to use for the targets.
    *
    * @schema VmUserSpecTlsConfig#ca
    */
@@ -68301,7 +71105,7 @@ export function toJson_VmUserSpecTargetRefsTargetRefBasicAuth(obj: VmUserSpecTar
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Stuct containing the CA cert to use for the targets.
+ * Struct containing the CA cert to use for the targets.
  *
  * @schema VmUserSpecTlsConfigCa
  */
