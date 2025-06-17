@@ -16,6 +16,7 @@ import {
   PersistentVolumeMode,
   Probe,
   Secret,
+  Service,
   ServiceAccount,
   ServicePort,
   ServiceType,
@@ -80,6 +81,10 @@ export interface AppPlusProps {
 }
 
 export class AppPlus extends Chart {
+  public readonly Deployment: Deployment;
+  public readonly Service: Service;
+  public readonly Ingress?: Ingress;
+
   constructor(scope: Construct, id: string, props: AppPlusProps) {
     super(scope, id);
 
@@ -302,6 +307,11 @@ export class AppPlus extends Chart {
           ),
         },
       ]);
+
+      this.Ingress = ingress;
     }
+
+    this.Deployment = deploy;
+    this.Service = svc;
   }
 }
