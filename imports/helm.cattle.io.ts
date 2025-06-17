@@ -76,7 +76,7 @@ export interface HelmChartProps {
 /**
  * Converts an object of type 'HelmChartProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartProps(obj: HelmChartProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -86,7 +86,7 @@ export function toJson_HelmChartProps(obj: HelmChartProps | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema HelmChartSpec
@@ -203,6 +203,11 @@ export interface HelmChartSpec {
   readonly valuesContent?: string;
 
   /**
+   * @schema HelmChartSpec#valuesSecrets
+   */
+  readonly valuesSecrets?: HelmChartSpecValuesSecrets[];
+
+  /**
    * @schema HelmChartSpec#version
    */
   readonly version?: string;
@@ -212,7 +217,7 @@ export interface HelmChartSpec {
 /**
  * Converts an object of type 'HelmChartSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpec(obj: HelmChartSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -238,12 +243,13 @@ export function toJson_HelmChartSpec(obj: HelmChartSpec | undefined): Record<str
     'targetNamespace': obj.targetNamespace,
     'timeout': obj.timeout,
     'valuesContent': obj.valuesContent,
+    'valuesSecrets': obj.valuesSecrets?.map(y => toJson_HelmChartSpecValuesSecrets(y)),
     'version': obj.version,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema HelmChartSpecAuthSecret
@@ -259,7 +265,7 @@ export interface HelmChartSpecAuthSecret {
 /**
  * Converts an object of type 'HelmChartSpecAuthSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecAuthSecret(obj: HelmChartSpecAuthSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -268,7 +274,7 @@ export function toJson_HelmChartSpecAuthSecret(obj: HelmChartSpecAuthSecret | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema HelmChartSpecDockerRegistrySecret
@@ -284,7 +290,7 @@ export interface HelmChartSpecDockerRegistrySecret {
 /**
  * Converts an object of type 'HelmChartSpecDockerRegistrySecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecDockerRegistrySecret(obj: HelmChartSpecDockerRegistrySecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -293,7 +299,7 @@ export function toJson_HelmChartSpecDockerRegistrySecret(obj: HelmChartSpecDocke
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema HelmChartSpecPodSecurityContext
@@ -369,7 +375,7 @@ export interface HelmChartSpecPodSecurityContext {
 /**
  * Converts an object of type 'HelmChartSpecPodSecurityContext' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecPodSecurityContext(obj: HelmChartSpecPodSecurityContext | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -390,7 +396,7 @@ export function toJson_HelmChartSpecPodSecurityContext(obj: HelmChartSpecPodSecu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema HelmChartSpecRepoCaConfigMap
@@ -406,7 +412,7 @@ export interface HelmChartSpecRepoCaConfigMap {
 /**
  * Converts an object of type 'HelmChartSpecRepoCaConfigMap' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecRepoCaConfigMap(obj: HelmChartSpecRepoCaConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -415,7 +421,7 @@ export function toJson_HelmChartSpecRepoCaConfigMap(obj: HelmChartSpecRepoCaConf
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema HelmChartSpecSecurityContext
@@ -486,7 +492,7 @@ export interface HelmChartSpecSecurityContext {
 /**
  * Converts an object of type 'HelmChartSpecSecurityContext' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecSecurityContext(obj: HelmChartSpecSecurityContext | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -506,7 +512,44 @@ export function toJson_HelmChartSpecSecurityContext(obj: HelmChartSpecSecurityCo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema HelmChartSpecValuesSecrets
+ */
+export interface HelmChartSpecValuesSecrets {
+  /**
+   * @schema HelmChartSpecValuesSecrets#ignoreUpdates
+   */
+  readonly ignoreUpdates?: boolean;
+
+  /**
+   * @schema HelmChartSpecValuesSecrets#keys
+   */
+  readonly keys?: string[];
+
+  /**
+   * @schema HelmChartSpecValuesSecrets#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'HelmChartSpecValuesSecrets' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_HelmChartSpecValuesSecrets(obj: HelmChartSpecValuesSecrets | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'ignoreUpdates': obj.ignoreUpdates,
+    'keys': obj.keys?.map(y => y),
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema HelmChartSpecPodSecurityContextAppArmorProfile
@@ -527,7 +570,7 @@ export interface HelmChartSpecPodSecurityContextAppArmorProfile {
 /**
  * Converts an object of type 'HelmChartSpecPodSecurityContextAppArmorProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecPodSecurityContextAppArmorProfile(obj: HelmChartSpecPodSecurityContextAppArmorProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -537,7 +580,7 @@ export function toJson_HelmChartSpecPodSecurityContextAppArmorProfile(obj: HelmC
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema HelmChartSpecPodSecurityContextSeLinuxOptions
@@ -568,7 +611,7 @@ export interface HelmChartSpecPodSecurityContextSeLinuxOptions {
 /**
  * Converts an object of type 'HelmChartSpecPodSecurityContextSeLinuxOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecPodSecurityContextSeLinuxOptions(obj: HelmChartSpecPodSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -580,7 +623,7 @@ export function toJson_HelmChartSpecPodSecurityContextSeLinuxOptions(obj: HelmCh
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema HelmChartSpecPodSecurityContextSeccompProfile
@@ -601,7 +644,7 @@ export interface HelmChartSpecPodSecurityContextSeccompProfile {
 /**
  * Converts an object of type 'HelmChartSpecPodSecurityContextSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecPodSecurityContextSeccompProfile(obj: HelmChartSpecPodSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -611,7 +654,7 @@ export function toJson_HelmChartSpecPodSecurityContextSeccompProfile(obj: HelmCh
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema HelmChartSpecPodSecurityContextSysctls
@@ -632,7 +675,7 @@ export interface HelmChartSpecPodSecurityContextSysctls {
 /**
  * Converts an object of type 'HelmChartSpecPodSecurityContextSysctls' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecPodSecurityContextSysctls(obj: HelmChartSpecPodSecurityContextSysctls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -642,7 +685,7 @@ export function toJson_HelmChartSpecPodSecurityContextSysctls(obj: HelmChartSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema HelmChartSpecPodSecurityContextWindowsOptions
@@ -673,7 +716,7 @@ export interface HelmChartSpecPodSecurityContextWindowsOptions {
 /**
  * Converts an object of type 'HelmChartSpecPodSecurityContextWindowsOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecPodSecurityContextWindowsOptions(obj: HelmChartSpecPodSecurityContextWindowsOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -685,7 +728,7 @@ export function toJson_HelmChartSpecPodSecurityContextWindowsOptions(obj: HelmCh
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema HelmChartSpecSecurityContextAppArmorProfile
@@ -706,7 +749,7 @@ export interface HelmChartSpecSecurityContextAppArmorProfile {
 /**
  * Converts an object of type 'HelmChartSpecSecurityContextAppArmorProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecSecurityContextAppArmorProfile(obj: HelmChartSpecSecurityContextAppArmorProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -716,7 +759,7 @@ export function toJson_HelmChartSpecSecurityContextAppArmorProfile(obj: HelmChar
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema HelmChartSpecSecurityContextCapabilities
@@ -737,7 +780,7 @@ export interface HelmChartSpecSecurityContextCapabilities {
 /**
  * Converts an object of type 'HelmChartSpecSecurityContextCapabilities' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecSecurityContextCapabilities(obj: HelmChartSpecSecurityContextCapabilities | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -747,7 +790,7 @@ export function toJson_HelmChartSpecSecurityContextCapabilities(obj: HelmChartSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema HelmChartSpecSecurityContextSeLinuxOptions
@@ -778,7 +821,7 @@ export interface HelmChartSpecSecurityContextSeLinuxOptions {
 /**
  * Converts an object of type 'HelmChartSpecSecurityContextSeLinuxOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecSecurityContextSeLinuxOptions(obj: HelmChartSpecSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -790,7 +833,7 @@ export function toJson_HelmChartSpecSecurityContextSeLinuxOptions(obj: HelmChart
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema HelmChartSpecSecurityContextSeccompProfile
@@ -811,7 +854,7 @@ export interface HelmChartSpecSecurityContextSeccompProfile {
 /**
  * Converts an object of type 'HelmChartSpecSecurityContextSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecSecurityContextSeccompProfile(obj: HelmChartSpecSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -821,7 +864,7 @@ export function toJson_HelmChartSpecSecurityContextSeccompProfile(obj: HelmChart
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema HelmChartSpecSecurityContextWindowsOptions
@@ -852,7 +895,7 @@ export interface HelmChartSpecSecurityContextWindowsOptions {
 /**
  * Converts an object of type 'HelmChartSpecSecurityContextWindowsOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecSecurityContextWindowsOptions(obj: HelmChartSpecSecurityContextWindowsOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -864,7 +907,7 @@ export function toJson_HelmChartSpecSecurityContextWindowsOptions(obj: HelmChart
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -940,7 +983,7 @@ export interface HelmChartConfigProps {
 /**
  * Converts an object of type 'HelmChartConfigProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartConfigProps(obj: HelmChartConfigProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -950,7 +993,7 @@ export function toJson_HelmChartConfigProps(obj: HelmChartConfigProps | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema HelmChartConfigSpec
@@ -966,20 +1009,63 @@ export interface HelmChartConfigSpec {
    */
   readonly valuesContent?: string;
 
+  /**
+   * @schema HelmChartConfigSpec#valuesSecrets
+   */
+  readonly valuesSecrets?: HelmChartConfigSpecValuesSecrets[];
+
 }
 
 /**
  * Converts an object of type 'HelmChartConfigSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartConfigSpec(obj: HelmChartConfigSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'failurePolicy': obj.failurePolicy,
     'valuesContent': obj.valuesContent,
+    'valuesSecrets': obj.valuesSecrets?.map(y => toJson_HelmChartConfigSpecValuesSecrets(y)),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema HelmChartConfigSpecValuesSecrets
+ */
+export interface HelmChartConfigSpecValuesSecrets {
+  /**
+   * @schema HelmChartConfigSpecValuesSecrets#ignoreUpdates
+   */
+  readonly ignoreUpdates?: boolean;
+
+  /**
+   * @schema HelmChartConfigSpecValuesSecrets#keys
+   */
+  readonly keys?: string[];
+
+  /**
+   * @schema HelmChartConfigSpecValuesSecrets#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'HelmChartConfigSpecValuesSecrets' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_HelmChartConfigSpecValuesSecrets(obj: HelmChartConfigSpecValuesSecrets | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'ignoreUpdates': obj.ignoreUpdates,
+    'keys': obj.keys?.map(y => y),
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 

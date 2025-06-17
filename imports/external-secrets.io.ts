@@ -80,7 +80,7 @@ export interface ClusterExternalSecretProps {
 /**
  * Converts an object of type 'ClusterExternalSecretProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretProps(obj: ClusterExternalSecretProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -90,7 +90,7 @@ export function toJson_ClusterExternalSecretProps(obj: ClusterExternalSecretProp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ClusterExternalSecretSpec defines the desired state of ClusterExternalSecret.
@@ -156,7 +156,7 @@ export interface ClusterExternalSecretSpec {
 /**
  * Converts an object of type 'ClusterExternalSecretSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpec(obj: ClusterExternalSecretSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -171,7 +171,7 @@ export function toJson_ClusterExternalSecretSpec(obj: ClusterExternalSecretSpec 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The metadata of the external secrets to be created
@@ -194,7 +194,7 @@ export interface ClusterExternalSecretSpecExternalSecretMetadata {
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretMetadata' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretMetadata(obj: ClusterExternalSecretSpecExternalSecretMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -204,7 +204,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretMetadata(obj: Clus
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The spec for the ExternalSecrets to be created
@@ -259,7 +259,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpec {
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpec(obj: ClusterExternalSecretSpecExternalSecretSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -272,7 +272,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpec(obj: ClusterE
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The labels to select by to find the Namespaces to create the ExternalSecrets in.
@@ -302,7 +302,7 @@ export interface ClusterExternalSecretSpecNamespaceSelector {
 /**
  * Converts an object of type 'ClusterExternalSecretSpecNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecNamespaceSelector(obj: ClusterExternalSecretSpecNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -312,7 +312,7 @@ export function toJson_ClusterExternalSecretSpecNamespaceSelector(obj: ClusterEx
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector is a label query over a set of resources. The result of matchLabels and
@@ -343,7 +343,7 @@ export interface ClusterExternalSecretSpecNamespaceSelectors {
 /**
  * Converts an object of type 'ClusterExternalSecretSpecNamespaceSelectors' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecNamespaceSelectors(obj: ClusterExternalSecretSpecNamespaceSelectors | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -353,7 +353,7 @@ export function toJson_ClusterExternalSecretSpecNamespaceSelectors(obj: ClusterE
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ExternalSecretData defines the connection between the Kubernetes Secret key (spec.data.<key>) and the Provider data.
@@ -389,7 +389,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecData {
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecData' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecData(obj: ClusterExternalSecretSpecExternalSecretSpecData | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -400,7 +400,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecData(obj: Clus
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterExternalSecretSpecExternalSecretSpecDataFrom
@@ -447,7 +447,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFrom {
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecDataFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFrom(obj: ClusterExternalSecretSpecExternalSecretSpecDataFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -459,7 +459,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFrom(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretStoreRef defines which SecretStore to fetch the ExternalSecret data.
@@ -488,7 +488,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecSecretStoreRef {
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecSecretStoreRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecSecretStoreRef(obj: ClusterExternalSecretSpecExternalSecretSpecSecretStoreRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -498,7 +498,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecSecretStoreRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ExternalSecretTarget defines the Kubernetes Secret to be created
@@ -553,7 +553,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTarget {
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecTarget' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecTarget(obj: ClusterExternalSecretSpecExternalSecretSpecTarget | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -566,7 +566,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecTarget(obj: Cl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -605,7 +605,7 @@ export interface ClusterExternalSecretSpecNamespaceSelectorMatchExpressions {
 /**
  * Converts an object of type 'ClusterExternalSecretSpecNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecNamespaceSelectorMatchExpressions(obj: ClusterExternalSecretSpecNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -616,7 +616,7 @@ export function toJson_ClusterExternalSecretSpecNamespaceSelectorMatchExpression
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -655,7 +655,7 @@ export interface ClusterExternalSecretSpecNamespaceSelectorsMatchExpressions {
 /**
  * Converts an object of type 'ClusterExternalSecretSpecNamespaceSelectorsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecNamespaceSelectorsMatchExpressions(obj: ClusterExternalSecretSpecNamespaceSelectorsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -666,7 +666,7 @@ export function toJson_ClusterExternalSecretSpecNamespaceSelectorsMatchExpressio
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * RemoteRef points to the remote secret and defines
@@ -723,7 +723,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataRemoteRef {
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecDataRemoteRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataRemoteRef(obj: ClusterExternalSecretSpecExternalSecretSpecDataRemoteRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -737,7 +737,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataRemoteRef(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SourceRef allows you to override the source
@@ -768,7 +768,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataSourceRef {
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecDataSourceRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataSourceRef(obj: ClusterExternalSecretSpecExternalSecretSpecDataSourceRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -778,7 +778,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataSourceRef(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to extract multiple key/value pairs from one secret
@@ -835,7 +835,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFromExtract {
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecDataFromExtract' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFromExtract(obj: ClusterExternalSecretSpecExternalSecretSpecDataFromExtract | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -849,7 +849,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFromExtrac
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to find secrets based on tags or regular expressions
@@ -898,7 +898,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFromFind {
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecDataFromFind' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFromFind(obj: ClusterExternalSecretSpecExternalSecretSpecDataFromFind | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -911,7 +911,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFromFind(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterExternalSecretSpecExternalSecretSpecDataFromRewrite
@@ -938,7 +938,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFromRewrite {
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecDataFromRewrite' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFromRewrite(obj: ClusterExternalSecretSpecExternalSecretSpecDataFromRewrite | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -948,7 +948,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFromRewrit
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SourceRef points to a store or generator
@@ -980,7 +980,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRef {
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRef(obj: ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -990,7 +990,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFromSource
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kind of the SecretStore resource (SecretStore or ClusterSecretStore)
@@ -1087,7 +1087,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplate {
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecTargetTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplate(obj: ClusterExternalSecretSpecExternalSecretSpecTargetTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1101,7 +1101,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplate
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to define a conversion Strategy
@@ -1179,7 +1179,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataSourceRefGenerat
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecDataSourceRefGeneratorRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataSourceRefGeneratorRef(obj: ClusterExternalSecretSpecExternalSecretSpecDataSourceRefGeneratorRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1190,7 +1190,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataSourceRefG
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretStoreRef defines which SecretStore to fetch the ExternalSecret data.
@@ -1219,7 +1219,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataSourceRefStoreRe
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecDataSourceRefStoreRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataSourceRefStoreRef(obj: ClusterExternalSecretSpecExternalSecretSpecDataSourceRefStoreRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1229,7 +1229,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataSourceRefS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to define a conversion Strategy
@@ -1318,7 +1318,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFromFindName {
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecDataFromFindName' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFromFindName(obj: ClusterExternalSecretSpecExternalSecretSpecDataFromFindName | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1327,7 +1327,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFromFindNa
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to rewrite with regular expressions.
@@ -1355,7 +1355,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteRegex
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteRegexp' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteRegexp(obj: ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteRegexp | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1365,7 +1365,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFromRewrit
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to apply string transformation on the secrets.
@@ -1387,7 +1387,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteTrans
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteTransform' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteTransform(obj: ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteTransform | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1396,7 +1396,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFromRewrit
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * GeneratorRef points to a generator custom resource.
@@ -1430,7 +1430,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRefGen
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRefGeneratorRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRefGeneratorRef(obj: ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRefGeneratorRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1441,7 +1441,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFromSource
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretStoreRef defines which SecretStore to fetch the ExternalSecret data.
@@ -1470,7 +1470,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRefSto
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRefStoreRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRefStoreRef(obj: ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRefStoreRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1480,7 +1480,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFromSource
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * EngineVersion specifies the template engine version
@@ -1527,7 +1527,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplateMetada
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecTargetTemplateMetadata' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplateMetadata(obj: ClusterExternalSecretSpecExternalSecretSpecTargetTemplateMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1537,7 +1537,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplate
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFrom
@@ -1568,7 +1568,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTempla
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFrom(obj: ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1580,7 +1580,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplate
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specify the Kind of the generator resource
@@ -1701,7 +1701,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTempla
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromConfigMap' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromConfigMap(obj: ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1711,7 +1711,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplate
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromSecret
@@ -1736,7 +1736,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTempla
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromSecret(obj: ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1746,7 +1746,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplate
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromTarget
@@ -1781,7 +1781,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTempla
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromConfigMapItems' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromConfigMapItems(obj: ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromConfigMapItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1791,7 +1791,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplate
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromSecretItems
@@ -1814,7 +1814,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTempla
 /**
  * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromSecretItems' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromSecretItems(obj: ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromSecretItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1824,7 +1824,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplate
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromConfigMapItemsTemplateAs
@@ -1920,7 +1920,7 @@ export interface ClusterPushSecretProps {
 /**
  * Converts an object of type 'ClusterPushSecretProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretProps(obj: ClusterPushSecretProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1930,7 +1930,7 @@ export function toJson_ClusterPushSecretProps(obj: ClusterPushSecretProps | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterPushSecretSpec
@@ -1978,7 +1978,7 @@ export interface ClusterPushSecretSpec {
 /**
  * Converts an object of type 'ClusterPushSecretSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpec(obj: ClusterPushSecretSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1991,7 +1991,7 @@ export function toJson_ClusterPushSecretSpec(obj: ClusterPushSecretSpec | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector is a label query over a set of resources. The result of matchLabels and
@@ -2022,7 +2022,7 @@ export interface ClusterPushSecretSpecNamespaceSelectors {
 /**
  * Converts an object of type 'ClusterPushSecretSpecNamespaceSelectors' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecNamespaceSelectors(obj: ClusterPushSecretSpecNamespaceSelectors | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2032,7 +2032,7 @@ export function toJson_ClusterPushSecretSpecNamespaceSelectors(obj: ClusterPushS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The metadata of the external secrets to be created
@@ -2055,7 +2055,7 @@ export interface ClusterPushSecretSpecPushSecretMetadata {
 /**
  * Converts an object of type 'ClusterPushSecretSpecPushSecretMetadata' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecPushSecretMetadata(obj: ClusterPushSecretSpecPushSecretMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2065,7 +2065,7 @@ export function toJson_ClusterPushSecretSpecPushSecretMetadata(obj: ClusterPushS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PushSecretSpec defines what to do with the secrets.
@@ -2125,7 +2125,7 @@ export interface ClusterPushSecretSpecPushSecretSpec {
 /**
  * Converts an object of type 'ClusterPushSecretSpecPushSecretSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecPushSecretSpec(obj: ClusterPushSecretSpecPushSecretSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2140,7 +2140,7 @@ export function toJson_ClusterPushSecretSpecPushSecretSpec(obj: ClusterPushSecre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -2179,7 +2179,7 @@ export interface ClusterPushSecretSpecNamespaceSelectorsMatchExpressions {
 /**
  * Converts an object of type 'ClusterPushSecretSpecNamespaceSelectorsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecNamespaceSelectorsMatchExpressions(obj: ClusterPushSecretSpecNamespaceSelectorsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2190,7 +2190,7 @@ export function toJson_ClusterPushSecretSpecNamespaceSelectorsMatchExpressions(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterPushSecretSpecPushSecretSpecData
@@ -2223,7 +2223,7 @@ export interface ClusterPushSecretSpecPushSecretSpecData {
 /**
  * Converts an object of type 'ClusterPushSecretSpecPushSecretSpecData' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecPushSecretSpecData(obj: ClusterPushSecretSpecPushSecretSpecData | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2234,7 +2234,7 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecData(obj: ClusterPushS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Deletion Policy to handle Secrets in the provider.
@@ -2278,7 +2278,7 @@ export interface ClusterPushSecretSpecPushSecretSpecSecretStoreRefs {
 /**
  * Converts an object of type 'ClusterPushSecretSpecPushSecretSpecSecretStoreRefs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecPushSecretSpecSecretStoreRefs(obj: ClusterPushSecretSpecPushSecretSpecSecretStoreRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2289,7 +2289,7 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecSecretStoreRefs(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Secret Selector (k8s source) for the Push Secret
@@ -2316,7 +2316,7 @@ export interface ClusterPushSecretSpecPushSecretSpecSelector {
 /**
  * Converts an object of type 'ClusterPushSecretSpecPushSecretSpecSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecPushSecretSpecSelector(obj: ClusterPushSecretSpecPushSecretSpecSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2326,7 +2326,7 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecSelector(obj: ClusterP
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Template defines a blueprint for the created Secret resource.
@@ -2375,7 +2375,7 @@ export interface ClusterPushSecretSpecPushSecretSpecTemplate {
 /**
  * Converts an object of type 'ClusterPushSecretSpecPushSecretSpecTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecPushSecretSpecTemplate(obj: ClusterPushSecretSpecPushSecretSpecTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2389,7 +2389,7 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecTemplate(obj: ClusterP
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * UpdatePolicy to handle Secrets in the provider.
@@ -2440,7 +2440,7 @@ export interface ClusterPushSecretSpecPushSecretSpecDataMatch {
 /**
  * Converts an object of type 'ClusterPushSecretSpecPushSecretSpecDataMatch' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecPushSecretSpecDataMatch(obj: ClusterPushSecretSpecPushSecretSpecDataMatch | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2450,7 +2450,7 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecDataMatch(obj: Cluster
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kind of the SecretStore resource (SecretStore or ClusterSecretStore)
@@ -2491,7 +2491,7 @@ export interface ClusterPushSecretSpecPushSecretSpecSecretStoreRefsLabelSelector
 /**
  * Converts an object of type 'ClusterPushSecretSpecPushSecretSpecSecretStoreRefsLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecPushSecretSpecSecretStoreRefsLabelSelector(obj: ClusterPushSecretSpecPushSecretSpecSecretStoreRefsLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2501,7 +2501,7 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecSecretStoreRefsLabelSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Point to a generator to create a Secret.
@@ -2535,7 +2535,7 @@ export interface ClusterPushSecretSpecPushSecretSpecSelectorGeneratorRef {
 /**
  * Converts an object of type 'ClusterPushSecretSpecPushSecretSpecSelectorGeneratorRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecPushSecretSpecSelectorGeneratorRef(obj: ClusterPushSecretSpecPushSecretSpecSelectorGeneratorRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2546,7 +2546,7 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecSelectorGeneratorRef(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Select a Secret to Push.
@@ -2574,7 +2574,7 @@ export interface ClusterPushSecretSpecPushSecretSpecSelectorSecret {
 /**
  * Converts an object of type 'ClusterPushSecretSpecPushSecretSpecSelectorSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecPushSecretSpecSelectorSecret(obj: ClusterPushSecretSpecPushSecretSpecSelectorSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2584,7 +2584,7 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecSelectorSecret(obj: Cl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * EngineVersion specifies the template engine version
@@ -2631,7 +2631,7 @@ export interface ClusterPushSecretSpecPushSecretSpecTemplateMetadata {
 /**
  * Converts an object of type 'ClusterPushSecretSpecPushSecretSpecTemplateMetadata' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecPushSecretSpecTemplateMetadata(obj: ClusterPushSecretSpecPushSecretSpecTemplateMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2641,7 +2641,7 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecTemplateMetadata(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFrom
@@ -2672,7 +2672,7 @@ export interface ClusterPushSecretSpecPushSecretSpecTemplateTemplateFrom {
 /**
  * Converts an object of type 'ClusterPushSecretSpecPushSecretSpecTemplateTemplateFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecPushSecretSpecTemplateTemplateFrom(obj: ClusterPushSecretSpecPushSecretSpecTemplateTemplateFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2684,7 +2684,7 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecTemplateTemplateFrom(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Remote Refs to push to providers.
@@ -2711,7 +2711,7 @@ export interface ClusterPushSecretSpecPushSecretSpecDataMatchRemoteRef {
 /**
  * Converts an object of type 'ClusterPushSecretSpecPushSecretSpecDataMatchRemoteRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecPushSecretSpecDataMatchRemoteRef(obj: ClusterPushSecretSpecPushSecretSpecDataMatchRemoteRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2721,7 +2721,7 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecDataMatchRemoteRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -2760,7 +2760,7 @@ export interface ClusterPushSecretSpecPushSecretSpecSecretStoreRefsLabelSelector
 /**
  * Converts an object of type 'ClusterPushSecretSpecPushSecretSpecSecretStoreRefsLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecPushSecretSpecSecretStoreRefsLabelSelectorMatchExpressions(obj: ClusterPushSecretSpecPushSecretSpecSecretStoreRefsLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2771,7 +2771,7 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecSecretStoreRefsLabelSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specify the Kind of the generator resource
@@ -2834,7 +2834,7 @@ export interface ClusterPushSecretSpecPushSecretSpecSelectorSecretSelector {
 /**
  * Converts an object of type 'ClusterPushSecretSpecPushSecretSpecSelectorSecretSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecPushSecretSpecSelectorSecretSelector(obj: ClusterPushSecretSpecPushSecretSpecSelectorSecretSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2844,7 +2844,7 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecSelectorSecretSelector
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMap
@@ -2869,7 +2869,7 @@ export interface ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMa
 /**
  * Converts an object of type 'ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMap' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMap(obj: ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2879,7 +2879,7 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromCo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecret
@@ -2904,7 +2904,7 @@ export interface ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecret {
 /**
  * Converts an object of type 'ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecret(obj: ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2914,7 +2914,7 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromTarget
@@ -2965,7 +2965,7 @@ export interface ClusterPushSecretSpecPushSecretSpecSelectorSecretSelectorMatchE
 /**
  * Converts an object of type 'ClusterPushSecretSpecPushSecretSpecSelectorSecretSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecPushSecretSpecSelectorSecretSelectorMatchExpressions(obj: ClusterPushSecretSpecPushSecretSpecSelectorSecretSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2976,7 +2976,7 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecSelectorSecretSelector
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMapItems
@@ -2999,7 +2999,7 @@ export interface ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMa
 /**
  * Converts an object of type 'ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMapItems' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMapItems(obj: ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMapItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3009,7 +3009,7 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromCo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecretItems
@@ -3032,7 +3032,7 @@ export interface ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecretIt
 /**
  * Converts an object of type 'ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecretItems' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecretItems(obj: ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecretItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3042,7 +3042,7 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMapItemsTemplateAs
@@ -3142,7 +3142,7 @@ export interface ClusterSecretStoreProps {
 /**
  * Converts an object of type 'ClusterSecretStoreProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreProps(obj: ClusterSecretStoreProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3152,7 +3152,7 @@ export function toJson_ClusterSecretStoreProps(obj: ClusterSecretStoreProps | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretStoreSpec defines the desired state of SecretStore.
@@ -3187,7 +3187,7 @@ export interface ClusterSecretStoreSpec {
 /**
  * Converts an object of type 'ClusterSecretStoreSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpec(obj: ClusterSecretStoreSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3198,7 +3198,7 @@ export function toJson_ClusterSecretStoreSpec(obj: ClusterSecretStoreSpec | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to configure the provider. Only one provider may be set
@@ -3309,7 +3309,7 @@ export interface ClusterSecretStoreSpecProvider {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProvider(obj: ClusterSecretStoreSpecProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3331,7 +3331,7 @@ export function toJson_ClusterSecretStoreSpecProvider(obj: ClusterSecretStoreSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to configure http retries if failed
@@ -3354,7 +3354,7 @@ export interface ClusterSecretStoreSpecRetrySettings {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecRetrySettings' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecRetrySettings(obj: ClusterSecretStoreSpecRetrySettings | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3364,7 +3364,7 @@ export function toJson_ClusterSecretStoreSpecRetrySettings(obj: ClusterSecretSto
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Akeyless configures this store to sync secrets using Akeyless Vault provider
@@ -3407,7 +3407,7 @@ export interface ClusterSecretStoreSpecProviderAkeyless {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAkeyless' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAkeyless(obj: ClusterSecretStoreSpecProviderAkeyless | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3419,7 +3419,7 @@ export function toJson_ClusterSecretStoreSpecProviderAkeyless(obj: ClusterSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Alibaba configures this store to sync secrets using Alibaba Cloud provider
@@ -3446,7 +3446,7 @@ export interface ClusterSecretStoreSpecProviderAlibaba {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAlibaba' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAlibaba(obj: ClusterSecretStoreSpecProviderAlibaba | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3456,7 +3456,7 @@ export function toJson_ClusterSecretStoreSpecProviderAlibaba(obj: ClusterSecretS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AWS configures this store to sync secrets using AWS Secret Manager provider
@@ -3499,7 +3499,7 @@ export interface ClusterSecretStoreSpecProviderAws {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAws' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAws(obj: ClusterSecretStoreSpecProviderAws | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3511,7 +3511,7 @@ export function toJson_ClusterSecretStoreSpecProviderAws(obj: ClusterSecretStore
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AzureKV configures this store to sync secrets using Azure Key Vault provider
@@ -3570,7 +3570,7 @@ export interface ClusterSecretStoreSpecProviderAzurekv {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAzurekv' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAzurekv(obj: ClusterSecretStoreSpecProviderAzurekv | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3584,7 +3584,7 @@ export function toJson_ClusterSecretStoreSpecProviderAzurekv(obj: ClusterSecretS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Fake configures a store with static key/value pairs
@@ -3602,7 +3602,7 @@ export interface ClusterSecretStoreSpecProviderFake {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderFake' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderFake(obj: ClusterSecretStoreSpecProviderFake | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3611,7 +3611,7 @@ export function toJson_ClusterSecretStoreSpecProviderFake(obj: ClusterSecretStor
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * GCPSM configures this store to sync secrets using Google Cloud Platform Secret Manager provider
@@ -3638,7 +3638,7 @@ export interface ClusterSecretStoreSpecProviderGcpsm {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderGcpsm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderGcpsm(obj: ClusterSecretStoreSpecProviderGcpsm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3648,7 +3648,7 @@ export function toJson_ClusterSecretStoreSpecProviderGcpsm(obj: ClusterSecretSto
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * GitLab configures this store to sync secrets using GitLab Variables provider
@@ -3683,7 +3683,7 @@ export interface ClusterSecretStoreSpecProviderGitlab {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderGitlab' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderGitlab(obj: ClusterSecretStoreSpecProviderGitlab | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3694,7 +3694,7 @@ export function toJson_ClusterSecretStoreSpecProviderGitlab(obj: ClusterSecretSt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * IBM configures this store to sync secrets using IBM Cloud provider
@@ -3721,7 +3721,7 @@ export interface ClusterSecretStoreSpecProviderIbm {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderIbm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderIbm(obj: ClusterSecretStoreSpecProviderIbm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3731,7 +3731,7 @@ export function toJson_ClusterSecretStoreSpecProviderIbm(obj: ClusterSecretStore
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kubernetes configures this store to sync secrets using a Kubernetes cluster provider
@@ -3765,7 +3765,7 @@ export interface ClusterSecretStoreSpecProviderKubernetes {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderKubernetes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderKubernetes(obj: ClusterSecretStoreSpecProviderKubernetes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3776,7 +3776,7 @@ export function toJson_ClusterSecretStoreSpecProviderKubernetes(obj: ClusterSecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Oracle configures this store to sync secrets using Oracle Vault provider
@@ -3845,7 +3845,7 @@ export interface ClusterSecretStoreSpecProviderOracle {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderOracle' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderOracle(obj: ClusterSecretStoreSpecProviderOracle | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3860,7 +3860,7 @@ export function toJson_ClusterSecretStoreSpecProviderOracle(obj: ClusterSecretSt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configures a store to sync secrets with a Password Depot instance.
@@ -3894,7 +3894,7 @@ export interface ClusterSecretStoreSpecProviderPassworddepot {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderPassworddepot' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderPassworddepot(obj: ClusterSecretStoreSpecProviderPassworddepot | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3905,7 +3905,7 @@ export function toJson_ClusterSecretStoreSpecProviderPassworddepot(obj: ClusterS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Vault configures this store to sync secrets using Hashi provider
@@ -3996,7 +3996,7 @@ export interface ClusterSecretStoreSpecProviderVault {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderVault' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderVault(obj: ClusterSecretStoreSpecProviderVault | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4013,7 +4013,7 @@ export function toJson_ClusterSecretStoreSpecProviderVault(obj: ClusterSecretSto
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Webhook configures this store to sync secrets using a generic templated webhook
@@ -4093,7 +4093,7 @@ export interface ClusterSecretStoreSpecProviderWebhook {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderWebhook' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderWebhook(obj: ClusterSecretStoreSpecProviderWebhook | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4110,7 +4110,7 @@ export function toJson_ClusterSecretStoreSpecProviderWebhook(obj: ClusterSecretS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * YandexLockbox configures this store to sync secrets using Yandex Lockbox provider
@@ -4144,7 +4144,7 @@ export interface ClusterSecretStoreSpecProviderYandexlockbox {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderYandexlockbox' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderYandexlockbox(obj: ClusterSecretStoreSpecProviderYandexlockbox | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4155,7 +4155,7 @@ export function toJson_ClusterSecretStoreSpecProviderYandexlockbox(obj: ClusterS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how the operator authenticates with Akeyless.
@@ -4184,7 +4184,7 @@ export interface ClusterSecretStoreSpecProviderAkeylessAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAkeylessAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAkeylessAuthSecretRef(obj: ClusterSecretStoreSpecProviderAkeylessAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4194,7 +4194,7 @@ export function toJson_ClusterSecretStoreSpecProviderAkeylessAuthSecretRef(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The provider for the CA bundle to use to validate Akeyless Gateway certificate.
@@ -4235,7 +4235,7 @@ export interface ClusterSecretStoreSpecProviderAkeylessCaProvider {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAkeylessCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAkeylessCaProvider(obj: ClusterSecretStoreSpecProviderAkeylessCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4247,7 +4247,7 @@ export function toJson_ClusterSecretStoreSpecProviderAkeylessCaProvider(obj: Clu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AlibabaAuth contains a secretRef for credentials.
@@ -4274,7 +4274,7 @@ export interface ClusterSecretStoreSpecProviderAlibabaAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAlibabaAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAlibabaAuth(obj: ClusterSecretStoreSpecProviderAlibabaAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4284,7 +4284,7 @@ export function toJson_ClusterSecretStoreSpecProviderAlibabaAuth(obj: ClusterSec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines the information necessary to authenticate against AWS
@@ -4314,7 +4314,7 @@ export interface ClusterSecretStoreSpecProviderAwsAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAwsAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAwsAuth(obj: ClusterSecretStoreSpecProviderAwsAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4324,7 +4324,7 @@ export function toJson_ClusterSecretStoreSpecProviderAwsAuth(obj: ClusterSecretS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Service defines which service should be used to fetch the secrets
@@ -4363,7 +4363,7 @@ export interface ClusterSecretStoreSpecProviderAzurekvAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAzurekvAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAzurekvAuthSecretRef(obj: ClusterSecretStoreSpecProviderAzurekvAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4373,7 +4373,7 @@ export function toJson_ClusterSecretStoreSpecProviderAzurekvAuthSecretRef(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth type defines how to authenticate to the keyvault service.
@@ -4428,7 +4428,7 @@ export interface ClusterSecretStoreSpecProviderAzurekvServiceAccountRef {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAzurekvServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAzurekvServiceAccountRef(obj: ClusterSecretStoreSpecProviderAzurekvServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4439,7 +4439,7 @@ export function toJson_ClusterSecretStoreSpecProviderAzurekvServiceAccountRef(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSecretStoreSpecProviderFakeData
@@ -4470,7 +4470,7 @@ export interface ClusterSecretStoreSpecProviderFakeData {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderFakeData' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderFakeData(obj: ClusterSecretStoreSpecProviderFakeData | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4482,7 +4482,7 @@ export function toJson_ClusterSecretStoreSpecProviderFakeData(obj: ClusterSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines the information necessary to authenticate against GCP
@@ -4505,7 +4505,7 @@ export interface ClusterSecretStoreSpecProviderGcpsmAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderGcpsmAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderGcpsmAuth(obj: ClusterSecretStoreSpecProviderGcpsmAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4515,7 +4515,7 @@ export function toJson_ClusterSecretStoreSpecProviderGcpsmAuth(obj: ClusterSecre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with a GitLab instance.
@@ -4533,7 +4533,7 @@ export interface ClusterSecretStoreSpecProviderGitlabAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderGitlabAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderGitlabAuth(obj: ClusterSecretStoreSpecProviderGitlabAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4542,7 +4542,7 @@ export function toJson_ClusterSecretStoreSpecProviderGitlabAuth(obj: ClusterSecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with the IBM secrets manager.
@@ -4560,7 +4560,7 @@ export interface ClusterSecretStoreSpecProviderIbmAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderIbmAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderIbmAuth(obj: ClusterSecretStoreSpecProviderIbmAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4569,7 +4569,7 @@ export function toJson_ClusterSecretStoreSpecProviderIbmAuth(obj: ClusterSecretS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with a Kubernetes instance.
@@ -4603,7 +4603,7 @@ export interface ClusterSecretStoreSpecProviderKubernetesAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderKubernetesAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderKubernetesAuth(obj: ClusterSecretStoreSpecProviderKubernetesAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4614,7 +4614,7 @@ export function toJson_ClusterSecretStoreSpecProviderKubernetesAuth(obj: Cluster
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * configures the Kubernetes server Address.
@@ -4648,7 +4648,7 @@ export interface ClusterSecretStoreSpecProviderKubernetesServer {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderKubernetesServer' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderKubernetesServer(obj: ClusterSecretStoreSpecProviderKubernetesServer | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4659,7 +4659,7 @@ export function toJson_ClusterSecretStoreSpecProviderKubernetesServer(obj: Clust
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with the Oracle Vault.
@@ -4695,7 +4695,7 @@ export interface ClusterSecretStoreSpecProviderOracleAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderOracleAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderOracleAuth(obj: ClusterSecretStoreSpecProviderOracleAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4706,7 +4706,7 @@ export function toJson_ClusterSecretStoreSpecProviderOracleAuth(obj: ClusterSecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of principal to use for authentication. If left blank, the Auth struct will
@@ -4760,7 +4760,7 @@ export interface ClusterSecretStoreSpecProviderOracleServiceAccountRef {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderOracleServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderOracleServiceAccountRef(obj: ClusterSecretStoreSpecProviderOracleServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4771,7 +4771,7 @@ export function toJson_ClusterSecretStoreSpecProviderOracleServiceAccountRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with a Password Depot instance.
@@ -4789,7 +4789,7 @@ export interface ClusterSecretStoreSpecProviderPassworddepotAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderPassworddepotAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderPassworddepotAuth(obj: ClusterSecretStoreSpecProviderPassworddepotAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4798,7 +4798,7 @@ export function toJson_ClusterSecretStoreSpecProviderPassworddepotAuth(obj: Clus
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with the Vault server.
@@ -4858,7 +4858,7 @@ export interface ClusterSecretStoreSpecProviderVaultAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderVaultAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderVaultAuth(obj: ClusterSecretStoreSpecProviderVaultAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4872,7 +4872,7 @@ export function toJson_ClusterSecretStoreSpecProviderVaultAuth(obj: ClusterSecre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The provider for the CA bundle to use to validate Vault server certificate.
@@ -4913,7 +4913,7 @@ export interface ClusterSecretStoreSpecProviderVaultCaProvider {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderVaultCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderVaultCaProvider(obj: ClusterSecretStoreSpecProviderVaultCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4925,7 +4925,7 @@ export function toJson_ClusterSecretStoreSpecProviderVaultCaProvider(obj: Cluste
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Version is the Vault KV secret engine version. This can be either "v1" or
@@ -4979,7 +4979,7 @@ export interface ClusterSecretStoreSpecProviderWebhookCaProvider {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderWebhookCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderWebhookCaProvider(obj: ClusterSecretStoreSpecProviderWebhookCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4991,7 +4991,7 @@ export function toJson_ClusterSecretStoreSpecProviderWebhookCaProvider(obj: Clus
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Result formatting
@@ -5011,7 +5011,7 @@ export interface ClusterSecretStoreSpecProviderWebhookResult {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderWebhookResult' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderWebhookResult(obj: ClusterSecretStoreSpecProviderWebhookResult | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5020,7 +5020,7 @@ export function toJson_ClusterSecretStoreSpecProviderWebhookResult(obj: ClusterS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSecretStoreSpecProviderWebhookSecrets
@@ -5045,7 +5045,7 @@ export interface ClusterSecretStoreSpecProviderWebhookSecrets {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderWebhookSecrets' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderWebhookSecrets(obj: ClusterSecretStoreSpecProviderWebhookSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5055,7 +5055,7 @@ export function toJson_ClusterSecretStoreSpecProviderWebhookSecrets(obj: Cluster
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines the information necessary to authenticate against Yandex Lockbox
@@ -5075,7 +5075,7 @@ export interface ClusterSecretStoreSpecProviderYandexlockboxAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderYandexlockboxAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderYandexlockboxAuth(obj: ClusterSecretStoreSpecProviderYandexlockboxAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5084,7 +5084,7 @@ export function toJson_ClusterSecretStoreSpecProviderYandexlockboxAuth(obj: Clus
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The provider for the CA bundle to use to validate Yandex.Cloud server certificate.
@@ -5105,7 +5105,7 @@ export interface ClusterSecretStoreSpecProviderYandexlockboxCaProvider {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderYandexlockboxCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderYandexlockboxCaProvider(obj: ClusterSecretStoreSpecProviderYandexlockboxCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5114,7 +5114,7 @@ export function toJson_ClusterSecretStoreSpecProviderYandexlockboxCaProvider(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kubernetes authenticates with Akeyless by passing the ServiceAccount
@@ -5162,7 +5162,7 @@ export interface ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAu
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuth(obj: ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5174,7 +5174,7 @@ export function toJson_ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubern
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a Secret that contains the details
@@ -5211,7 +5211,7 @@ export interface ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRef(obj: ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5222,7 +5222,7 @@ export function toJson_ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -5267,7 +5267,7 @@ export interface ClusterSecretStoreSpecProviderAlibabaAuthRrsa {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAlibabaAuthRrsa' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAlibabaAuthRrsa(obj: ClusterSecretStoreSpecProviderAlibabaAuthRrsa | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5279,7 +5279,7 @@ export function toJson_ClusterSecretStoreSpecProviderAlibabaAuthRrsa(obj: Cluste
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AlibabaAuthSecretRef holds secret references for Alibaba credentials.
@@ -5306,7 +5306,7 @@ export interface ClusterSecretStoreSpecProviderAlibabaAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAlibabaAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAlibabaAuthSecretRef(obj: ClusterSecretStoreSpecProviderAlibabaAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5316,7 +5316,7 @@ export function toJson_ClusterSecretStoreSpecProviderAlibabaAuthSecretRef(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Authenticate against AWS using service account tokens.
@@ -5336,7 +5336,7 @@ export interface ClusterSecretStoreSpecProviderAwsAuthJwt {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAwsAuthJwt' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAwsAuthJwt(obj: ClusterSecretStoreSpecProviderAwsAuthJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5345,7 +5345,7 @@ export function toJson_ClusterSecretStoreSpecProviderAwsAuthJwt(obj: ClusterSecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AWSAuthSecretRef holds secret references for AWS credentials
@@ -5373,7 +5373,7 @@ export interface ClusterSecretStoreSpecProviderAwsAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAwsAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAwsAuthSecretRef(obj: ClusterSecretStoreSpecProviderAwsAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5383,7 +5383,7 @@ export function toJson_ClusterSecretStoreSpecProviderAwsAuthSecretRef(obj: Clust
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Azure clientId of the service principle used for authentication.
@@ -5419,7 +5419,7 @@ export interface ClusterSecretStoreSpecProviderAzurekvAuthSecretRefClientId {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAzurekvAuthSecretRefClientId' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAzurekvAuthSecretRefClientId(obj: ClusterSecretStoreSpecProviderAzurekvAuthSecretRefClientId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5430,7 +5430,7 @@ export function toJson_ClusterSecretStoreSpecProviderAzurekvAuthSecretRefClientI
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Azure ClientSecret of the service principle used for authentication.
@@ -5466,7 +5466,7 @@ export interface ClusterSecretStoreSpecProviderAzurekvAuthSecretRefClientSecret 
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAzurekvAuthSecretRefClientSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAzurekvAuthSecretRefClientSecret(obj: ClusterSecretStoreSpecProviderAzurekvAuthSecretRefClientSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5477,7 +5477,7 @@ export function toJson_ClusterSecretStoreSpecProviderAzurekvAuthSecretRefClientS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSecretStoreSpecProviderGcpsmAuthSecretRef
@@ -5495,7 +5495,7 @@ export interface ClusterSecretStoreSpecProviderGcpsmAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderGcpsmAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderGcpsmAuthSecretRef(obj: ClusterSecretStoreSpecProviderGcpsmAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5504,7 +5504,7 @@ export function toJson_ClusterSecretStoreSpecProviderGcpsmAuthSecretRef(obj: Clu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentity
@@ -5537,7 +5537,7 @@ export interface ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentity {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentity(obj: ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5549,7 +5549,7 @@ export function toJson_ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentity(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSecretStoreSpecProviderGitlabAuthSecretRef
@@ -5567,7 +5567,7 @@ export interface ClusterSecretStoreSpecProviderGitlabAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderGitlabAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderGitlabAuthSecretRef(obj: ClusterSecretStoreSpecProviderGitlabAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5576,7 +5576,7 @@ export function toJson_ClusterSecretStoreSpecProviderGitlabAuthSecretRef(obj: Cl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSecretStoreSpecProviderIbmAuthSecretRef
@@ -5594,7 +5594,7 @@ export interface ClusterSecretStoreSpecProviderIbmAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderIbmAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderIbmAuthSecretRef(obj: ClusterSecretStoreSpecProviderIbmAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5603,7 +5603,7 @@ export function toJson_ClusterSecretStoreSpecProviderIbmAuthSecretRef(obj: Clust
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * has both clientCert and clientKey as secretKeySelector
@@ -5632,7 +5632,7 @@ export interface ClusterSecretStoreSpecProviderKubernetesAuthCert {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderKubernetesAuthCert' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderKubernetesAuthCert(obj: ClusterSecretStoreSpecProviderKubernetesAuthCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5642,7 +5642,7 @@ export function toJson_ClusterSecretStoreSpecProviderKubernetesAuthCert(obj: Clu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * points to a service account that should be used for authentication
@@ -5662,7 +5662,7 @@ export interface ClusterSecretStoreSpecProviderKubernetesAuthServiceAccount {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderKubernetesAuthServiceAccount' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderKubernetesAuthServiceAccount(obj: ClusterSecretStoreSpecProviderKubernetesAuthServiceAccount | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5671,7 +5671,7 @@ export function toJson_ClusterSecretStoreSpecProviderKubernetesAuthServiceAccoun
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * use static token to authenticate with
@@ -5692,7 +5692,7 @@ export interface ClusterSecretStoreSpecProviderKubernetesAuthToken {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderKubernetesAuthToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderKubernetesAuthToken(obj: ClusterSecretStoreSpecProviderKubernetesAuthToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5701,7 +5701,7 @@ export function toJson_ClusterSecretStoreSpecProviderKubernetesAuthToken(obj: Cl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * see: https://external-secrets.io/v0.4.1/spec/#external-secrets.io/v1alpha1.CAProvider
@@ -5742,7 +5742,7 @@ export interface ClusterSecretStoreSpecProviderKubernetesServerCaProvider {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderKubernetesServerCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderKubernetesServerCaProvider(obj: ClusterSecretStoreSpecProviderKubernetesServerCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5754,7 +5754,7 @@ export function toJson_ClusterSecretStoreSpecProviderKubernetesServerCaProvider(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef to pass through sensitive information.
@@ -5781,7 +5781,7 @@ export interface ClusterSecretStoreSpecProviderOracleAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderOracleAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderOracleAuthSecretRef(obj: ClusterSecretStoreSpecProviderOracleAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5791,7 +5791,7 @@ export function toJson_ClusterSecretStoreSpecProviderOracleAuthSecretRef(obj: Cl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSecretStoreSpecProviderPassworddepotAuthSecretRef
@@ -5809,7 +5809,7 @@ export interface ClusterSecretStoreSpecProviderPassworddepotAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderPassworddepotAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderPassworddepotAuthSecretRef(obj: ClusterSecretStoreSpecProviderPassworddepotAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5818,7 +5818,7 @@ export function toJson_ClusterSecretStoreSpecProviderPassworddepotAuthSecretRef(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AppRole authenticates with Vault using the App Role auth mechanism,
@@ -5858,7 +5858,7 @@ export interface ClusterSecretStoreSpecProviderVaultAuthAppRole {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderVaultAuthAppRole' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderVaultAuthAppRole(obj: ClusterSecretStoreSpecProviderVaultAuthAppRole | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5869,7 +5869,7 @@ export function toJson_ClusterSecretStoreSpecProviderVaultAuthAppRole(obj: Clust
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Cert authenticates with TLS Certificates by passing client certificate, private key and ca certificate
@@ -5899,7 +5899,7 @@ export interface ClusterSecretStoreSpecProviderVaultAuthCert {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderVaultAuthCert' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderVaultAuthCert(obj: ClusterSecretStoreSpecProviderVaultAuthCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5909,7 +5909,7 @@ export function toJson_ClusterSecretStoreSpecProviderVaultAuthCert(obj: ClusterS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Jwt authenticates with Vault by passing role and JWT token using the
@@ -5955,7 +5955,7 @@ export interface ClusterSecretStoreSpecProviderVaultAuthJwt {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderVaultAuthJwt' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderVaultAuthJwt(obj: ClusterSecretStoreSpecProviderVaultAuthJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5967,7 +5967,7 @@ export function toJson_ClusterSecretStoreSpecProviderVaultAuthJwt(obj: ClusterSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kubernetes authenticates with Vault by passing the ServiceAccount
@@ -6017,7 +6017,7 @@ export interface ClusterSecretStoreSpecProviderVaultAuthKubernetes {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderVaultAuthKubernetes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderVaultAuthKubernetes(obj: ClusterSecretStoreSpecProviderVaultAuthKubernetes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6029,7 +6029,7 @@ export function toJson_ClusterSecretStoreSpecProviderVaultAuthKubernetes(obj: Cl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Ldap authenticates with Vault by passing username/password pair using
@@ -6068,7 +6068,7 @@ export interface ClusterSecretStoreSpecProviderVaultAuthLdap {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderVaultAuthLdap' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderVaultAuthLdap(obj: ClusterSecretStoreSpecProviderVaultAuthLdap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6079,7 +6079,7 @@ export function toJson_ClusterSecretStoreSpecProviderVaultAuthLdap(obj: ClusterS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TokenSecretRef authenticates with Vault by presenting a token.
@@ -6115,7 +6115,7 @@ export interface ClusterSecretStoreSpecProviderVaultAuthTokenSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderVaultAuthTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderVaultAuthTokenSecretRef(obj: ClusterSecretStoreSpecProviderVaultAuthTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6126,7 +6126,7 @@ export function toJson_ClusterSecretStoreSpecProviderVaultAuthTokenSecretRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -6186,7 +6186,7 @@ export interface ClusterSecretStoreSpecProviderWebhookSecretsSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderWebhookSecretsSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderWebhookSecretsSecretRef(obj: ClusterSecretStoreSpecProviderWebhookSecretsSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6197,7 +6197,7 @@ export function toJson_ClusterSecretStoreSpecProviderWebhookSecretsSecretRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The authorized key used for authentication
@@ -6233,7 +6233,7 @@ export interface ClusterSecretStoreSpecProviderYandexlockboxAuthAuthorizedKeySec
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderYandexlockboxAuthAuthorizedKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderYandexlockboxAuthAuthorizedKeySecretRef(obj: ClusterSecretStoreSpecProviderYandexlockboxAuthAuthorizedKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6244,7 +6244,7 @@ export function toJson_ClusterSecretStoreSpecProviderYandexlockboxAuthAuthorized
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -6281,7 +6281,7 @@ export interface ClusterSecretStoreSpecProviderYandexlockboxCaProviderCertSecret
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderYandexlockboxCaProviderCertSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderYandexlockboxCaProviderCertSecretRef(obj: ClusterSecretStoreSpecProviderYandexlockboxCaProviderCertSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6292,7 +6292,7 @@ export function toJson_ClusterSecretStoreSpecProviderYandexlockboxCaProviderCert
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional secret field containing a Kubernetes ServiceAccount JWT used
@@ -6331,7 +6331,7 @@ export interface ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAu
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthSecretRef(obj: ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6342,7 +6342,7 @@ export function toJson_ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubern
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional service account field containing the name of a kubernetes ServiceAccount.
@@ -6382,7 +6382,7 @@ export interface ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAu
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthServiceAccountRef(obj: ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6393,7 +6393,7 @@ export function toJson_ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubern
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessID is used for authentication
@@ -6429,7 +6429,7 @@ export interface ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAcc
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessId' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessId(obj: ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6440,7 +6440,7 @@ export function toJson_ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -6477,7 +6477,7 @@ export interface ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAcc
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessType' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessType(obj: ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessType | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6488,7 +6488,7 @@ export function toJson_ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -6525,7 +6525,7 @@ export interface ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAcc
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam(obj: ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6536,7 +6536,7 @@ export function toJson_ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The AccessKeyID is used for authentication
@@ -6572,7 +6572,7 @@ export interface ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSe
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef(obj: ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6583,7 +6583,7 @@ export function toJson_ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessK
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The AccessKeySecret is used for authentication
@@ -6619,7 +6619,7 @@ export interface ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecr
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef(obj: ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6630,7 +6630,7 @@ export function toJson_ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessK
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a ServiceAccount resource.
@@ -6667,7 +6667,7 @@ export interface ClusterSecretStoreSpecProviderAwsAuthJwtServiceAccountRef {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAwsAuthJwtServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAwsAuthJwtServiceAccountRef(obj: ClusterSecretStoreSpecProviderAwsAuthJwtServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6678,7 +6678,7 @@ export function toJson_ClusterSecretStoreSpecProviderAwsAuthJwtServiceAccountRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The AccessKeyID is used for authentication
@@ -6714,7 +6714,7 @@ export interface ClusterSecretStoreSpecProviderAwsAuthSecretRefAccessKeyIdSecret
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAwsAuthSecretRefAccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAwsAuthSecretRefAccessKeyIdSecretRef(obj: ClusterSecretStoreSpecProviderAwsAuthSecretRefAccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6725,7 +6725,7 @@ export function toJson_ClusterSecretStoreSpecProviderAwsAuthSecretRefAccessKeyId
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -6761,7 +6761,7 @@ export interface ClusterSecretStoreSpecProviderAwsAuthSecretRefSecretAccessKeySe
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderAwsAuthSecretRefSecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAwsAuthSecretRefSecretAccessKeySecretRef(obj: ClusterSecretStoreSpecProviderAwsAuthSecretRefSecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6772,7 +6772,7 @@ export function toJson_ClusterSecretStoreSpecProviderAwsAuthSecretRefSecretAcces
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -6808,7 +6808,7 @@ export interface ClusterSecretStoreSpecProviderGcpsmAuthSecretRefSecretAccessKey
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderGcpsmAuthSecretRefSecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderGcpsmAuthSecretRefSecretAccessKeySecretRef(obj: ClusterSecretStoreSpecProviderGcpsmAuthSecretRefSecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6819,7 +6819,7 @@ export function toJson_ClusterSecretStoreSpecProviderGcpsmAuthSecretRefSecretAcc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a ServiceAccount resource.
@@ -6856,7 +6856,7 @@ export interface ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceA
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef(obj: ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6867,7 +6867,7 @@ export function toJson_ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentitySe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AccessToken is used for authentication.
@@ -6903,7 +6903,7 @@ export interface ClusterSecretStoreSpecProviderGitlabAuthSecretRefAccessToken {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderGitlabAuthSecretRefAccessToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderGitlabAuthSecretRefAccessToken(obj: ClusterSecretStoreSpecProviderGitlabAuthSecretRefAccessToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6914,7 +6914,7 @@ export function toJson_ClusterSecretStoreSpecProviderGitlabAuthSecretRefAccessTo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -6950,7 +6950,7 @@ export interface ClusterSecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecre
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecretRef(obj: ClusterSecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6961,7 +6961,7 @@ export function toJson_ClusterSecretStoreSpecProviderIbmAuthSecretRefSecretApiKe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -6998,7 +6998,7 @@ export interface ClusterSecretStoreSpecProviderKubernetesAuthCertClientCert {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderKubernetesAuthCertClientCert' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderKubernetesAuthCertClientCert(obj: ClusterSecretStoreSpecProviderKubernetesAuthCertClientCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7009,7 +7009,7 @@ export function toJson_ClusterSecretStoreSpecProviderKubernetesAuthCertClientCer
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -7046,7 +7046,7 @@ export interface ClusterSecretStoreSpecProviderKubernetesAuthCertClientKey {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderKubernetesAuthCertClientKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderKubernetesAuthCertClientKey(obj: ClusterSecretStoreSpecProviderKubernetesAuthCertClientKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7057,7 +7057,7 @@ export function toJson_ClusterSecretStoreSpecProviderKubernetesAuthCertClientKey
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a ServiceAccount resource.
@@ -7094,7 +7094,7 @@ export interface ClusterSecretStoreSpecProviderKubernetesAuthServiceAccountServi
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderKubernetesAuthServiceAccountServiceAccount' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderKubernetesAuthServiceAccountServiceAccount(obj: ClusterSecretStoreSpecProviderKubernetesAuthServiceAccountServiceAccount | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7105,7 +7105,7 @@ export function toJson_ClusterSecretStoreSpecProviderKubernetesAuthServiceAccoun
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -7142,7 +7142,7 @@ export interface ClusterSecretStoreSpecProviderKubernetesAuthTokenBearerToken {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderKubernetesAuthTokenBearerToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderKubernetesAuthTokenBearerToken(obj: ClusterSecretStoreSpecProviderKubernetesAuthTokenBearerToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7153,7 +7153,7 @@ export function toJson_ClusterSecretStoreSpecProviderKubernetesAuthTokenBearerTo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -7201,7 +7201,7 @@ export interface ClusterSecretStoreSpecProviderOracleAuthSecretRefFingerprint {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderOracleAuthSecretRefFingerprint' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderOracleAuthSecretRefFingerprint(obj: ClusterSecretStoreSpecProviderOracleAuthSecretRefFingerprint | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7212,7 +7212,7 @@ export function toJson_ClusterSecretStoreSpecProviderOracleAuthSecretRefFingerpr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PrivateKey is the user's API Signing Key in PEM format, used for authentication.
@@ -7248,7 +7248,7 @@ export interface ClusterSecretStoreSpecProviderOracleAuthSecretRefPrivatekey {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderOracleAuthSecretRefPrivatekey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderOracleAuthSecretRefPrivatekey(obj: ClusterSecretStoreSpecProviderOracleAuthSecretRefPrivatekey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7259,7 +7259,7 @@ export function toJson_ClusterSecretStoreSpecProviderOracleAuthSecretRefPrivatek
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Username / Password is used for authentication.
@@ -7295,7 +7295,7 @@ export interface ClusterSecretStoreSpecProviderPassworddepotAuthSecretRefCredent
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderPassworddepotAuthSecretRefCredentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderPassworddepotAuthSecretRefCredentials(obj: ClusterSecretStoreSpecProviderPassworddepotAuthSecretRefCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7306,7 +7306,7 @@ export function toJson_ClusterSecretStoreSpecProviderPassworddepotAuthSecretRefC
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a key in a Secret that contains the App Role secret used
@@ -7345,7 +7345,7 @@ export interface ClusterSecretStoreSpecProviderVaultAuthAppRoleSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderVaultAuthAppRoleSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderVaultAuthAppRoleSecretRef(obj: ClusterSecretStoreSpecProviderVaultAuthAppRoleSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7356,7 +7356,7 @@ export function toJson_ClusterSecretStoreSpecProviderVaultAuthAppRoleSecretRef(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ClientCert is a certificate to authenticate using the Cert Vault
@@ -7393,7 +7393,7 @@ export interface ClusterSecretStoreSpecProviderVaultAuthCertClientCert {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderVaultAuthCertClientCert' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderVaultAuthCertClientCert(obj: ClusterSecretStoreSpecProviderVaultAuthCertClientCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7404,7 +7404,7 @@ export function toJson_ClusterSecretStoreSpecProviderVaultAuthCertClientCert(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef to a key in a Secret resource containing client private key to
@@ -7441,7 +7441,7 @@ export interface ClusterSecretStoreSpecProviderVaultAuthCertSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderVaultAuthCertSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderVaultAuthCertSecretRef(obj: ClusterSecretStoreSpecProviderVaultAuthCertSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7452,7 +7452,7 @@ export function toJson_ClusterSecretStoreSpecProviderVaultAuthCertSecretRef(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional ServiceAccountToken specifies the Kubernetes service account for which to request
@@ -7494,7 +7494,7 @@ export interface ClusterSecretStoreSpecProviderVaultAuthJwtKubernetesServiceAcco
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountToken(obj: ClusterSecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7505,7 +7505,7 @@ export function toJson_ClusterSecretStoreSpecProviderVaultAuthJwtKubernetesServi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional SecretRef that refers to a key in a Secret resource containing JWT token to
@@ -7542,7 +7542,7 @@ export interface ClusterSecretStoreSpecProviderVaultAuthJwtSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderVaultAuthJwtSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderVaultAuthJwtSecretRef(obj: ClusterSecretStoreSpecProviderVaultAuthJwtSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7553,7 +7553,7 @@ export function toJson_ClusterSecretStoreSpecProviderVaultAuthJwtSecretRef(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional secret field containing a Kubernetes ServiceAccount JWT used
@@ -7592,7 +7592,7 @@ export interface ClusterSecretStoreSpecProviderVaultAuthKubernetesSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderVaultAuthKubernetesSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderVaultAuthKubernetesSecretRef(obj: ClusterSecretStoreSpecProviderVaultAuthKubernetesSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7603,7 +7603,7 @@ export function toJson_ClusterSecretStoreSpecProviderVaultAuthKubernetesSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional service account field containing the name of a kubernetes ServiceAccount.
@@ -7643,7 +7643,7 @@ export interface ClusterSecretStoreSpecProviderVaultAuthKubernetesServiceAccount
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderVaultAuthKubernetesServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderVaultAuthKubernetesServiceAccountRef(obj: ClusterSecretStoreSpecProviderVaultAuthKubernetesServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7654,7 +7654,7 @@ export function toJson_ClusterSecretStoreSpecProviderVaultAuthKubernetesServiceA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef to a key in a Secret resource containing password for the LDAP
@@ -7692,7 +7692,7 @@ export interface ClusterSecretStoreSpecProviderVaultAuthLdapSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderVaultAuthLdapSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderVaultAuthLdapSecretRef(obj: ClusterSecretStoreSpecProviderVaultAuthLdapSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7703,7 +7703,7 @@ export function toJson_ClusterSecretStoreSpecProviderVaultAuthLdapSecretRef(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Service account field containing the name of a kubernetes ServiceAccount.
@@ -7740,7 +7740,7 @@ export interface ClusterSecretStoreSpecProviderVaultAuthJwtKubernetesServiceAcco
 /**
  * Converts an object of type 'ClusterSecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountTokenServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountTokenServiceAccountRef(obj: ClusterSecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountTokenServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7751,7 +7751,7 @@ export function toJson_ClusterSecretStoreSpecProviderVaultAuthJwtKubernetesServi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -7831,7 +7831,7 @@ export interface ClusterSecretStoreV1Beta1Props {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1Props' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1Props(obj: ClusterSecretStoreV1Beta1Props | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7841,7 +7841,7 @@ export function toJson_ClusterSecretStoreV1Beta1Props(obj: ClusterSecretStoreV1B
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretStoreSpec defines the desired state of SecretStore.
@@ -7890,7 +7890,7 @@ export interface ClusterSecretStoreV1Beta1Spec {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1Spec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1Spec(obj: ClusterSecretStoreV1Beta1Spec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7903,7 +7903,7 @@ export function toJson_ClusterSecretStoreV1Beta1Spec(obj: ClusterSecretStoreV1Be
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ClusterSecretStoreCondition describes a condition by which to choose namespaces to process ExternalSecrets in
@@ -7938,7 +7938,7 @@ export interface ClusterSecretStoreV1Beta1SpecConditions {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecConditions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecConditions(obj: ClusterSecretStoreV1Beta1SpecConditions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7949,7 +7949,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecConditions(obj: ClusterSecre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to configure the provider. Only one provider may be set
@@ -8207,7 +8207,7 @@ export interface ClusterSecretStoreV1Beta1SpecProvider {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProvider(obj: ClusterSecretStoreV1Beta1SpecProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8250,7 +8250,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProvider(obj: ClusterSecretS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to configure http retries if failed
@@ -8273,7 +8273,7 @@ export interface ClusterSecretStoreV1Beta1SpecRetrySettings {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecRetrySettings' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecRetrySettings(obj: ClusterSecretStoreV1Beta1SpecRetrySettings | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8283,7 +8283,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecRetrySettings(obj: ClusterSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Choose namespace using a labelSelector
@@ -8312,7 +8312,7 @@ export interface ClusterSecretStoreV1Beta1SpecConditionsNamespaceSelector {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecConditionsNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecConditionsNamespaceSelector(obj: ClusterSecretStoreV1Beta1SpecConditionsNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8322,7 +8322,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecConditionsNamespaceSelector(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Akeyless configures this store to sync secrets using Akeyless Vault provider
@@ -8365,7 +8365,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeyless {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAkeyless' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeyless(obj: ClusterSecretStoreV1Beta1SpecProviderAkeyless | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8377,7 +8377,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeyless(obj: Cluste
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Alibaba configures this store to sync secrets using Alibaba Cloud provider
@@ -8404,7 +8404,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAlibaba {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAlibaba' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAlibaba(obj: ClusterSecretStoreV1Beta1SpecProviderAlibaba | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8414,7 +8414,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAlibaba(obj: Cluster
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AWS configures this store to sync secrets using AWS Secret Manager provider
@@ -8499,7 +8499,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAws {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAws' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAws(obj: ClusterSecretStoreV1Beta1SpecProviderAws | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8517,7 +8517,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAws(obj: ClusterSecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AzureKV configures this store to sync secrets using Azure Key Vault provider
@@ -8586,7 +8586,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAzurekv {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAzurekv' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAzurekv(obj: ClusterSecretStoreV1Beta1SpecProviderAzurekv | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8601,7 +8601,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAzurekv(obj: Cluster
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Beyondtrust configures this store to sync secrets using Password Safe provider.
@@ -8628,7 +8628,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrust {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderBeyondtrust' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrust(obj: ClusterSecretStoreV1Beta1SpecProviderBeyondtrust | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8638,7 +8638,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrust(obj: Clu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * BitwardenSecretsManager configures this store to sync secrets using BitwardenSecretsManager provider
@@ -8703,7 +8703,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanager {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanager' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanager(obj: ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanager | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8719,7 +8719,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmana
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Chef configures this store to sync secrets with chef server
@@ -8753,7 +8753,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderChef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderChef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderChef(obj: ClusterSecretStoreV1Beta1SpecProviderChef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8764,7 +8764,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderChef(obj: ClusterSec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * CloudruSM configures this store to sync secrets using the Cloud.ru Secret Manager provider
@@ -8791,7 +8791,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderCloudrusm {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderCloudrusm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderCloudrusm(obj: ClusterSecretStoreV1Beta1SpecProviderCloudrusm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8801,7 +8801,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderCloudrusm(obj: Clust
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Conjur configures this store to sync secrets using conjur provider
@@ -8844,7 +8844,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderConjur {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderConjur' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderConjur(obj: ClusterSecretStoreV1Beta1SpecProviderConjur | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8856,7 +8856,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderConjur(obj: ClusterS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Delinea DevOps Secrets Vault
@@ -8907,7 +8907,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDelinea {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderDelinea' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderDelinea(obj: ClusterSecretStoreV1Beta1SpecProviderDelinea | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8920,7 +8920,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderDelinea(obj: Cluster
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Device42 configures this store to sync secrets using the Device42 provider
@@ -8947,7 +8947,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDevice42 {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderDevice42' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderDevice42(obj: ClusterSecretStoreV1Beta1SpecProviderDevice42 | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8957,7 +8957,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderDevice42(obj: Cluste
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Doppler configures this store to sync secrets using the Doppler provider
@@ -9005,7 +9005,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDoppler {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderDoppler' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderDoppler(obj: ClusterSecretStoreV1Beta1SpecProviderDoppler | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9018,7 +9018,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderDoppler(obj: Cluster
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Fake configures a store with static key/value pairs
@@ -9036,7 +9036,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderFake {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderFake' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderFake(obj: ClusterSecretStoreV1Beta1SpecProviderFake | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9045,7 +9045,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderFake(obj: ClusterSec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Fortanix configures this store to sync secrets using the Fortanix provider
@@ -9073,7 +9073,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderFortanix {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderFortanix' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderFortanix(obj: ClusterSecretStoreV1Beta1SpecProviderFortanix | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9083,7 +9083,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderFortanix(obj: Cluste
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * GCPSM configures this store to sync secrets using Google Cloud Platform Secret Manager provider
@@ -9117,7 +9117,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGcpsm {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderGcpsm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderGcpsm(obj: ClusterSecretStoreV1Beta1SpecProviderGcpsm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9128,7 +9128,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGcpsm(obj: ClusterSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Github configures this store to push Github Action secrets using Github API provider
@@ -9199,7 +9199,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGithub {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderGithub' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderGithub(obj: ClusterSecretStoreV1Beta1SpecProviderGithub | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9215,7 +9215,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGithub(obj: ClusterS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * GitLab configures this store to sync secrets using GitLab Variables provider
@@ -9271,7 +9271,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGitlab {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderGitlab' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderGitlab(obj: ClusterSecretStoreV1Beta1SpecProviderGitlab | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9285,7 +9285,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGitlab(obj: ClusterS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * IBM configures this store to sync secrets using IBM Cloud provider
@@ -9312,7 +9312,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderIbm {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderIbm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderIbm(obj: ClusterSecretStoreV1Beta1SpecProviderIbm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9322,7 +9322,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderIbm(obj: ClusterSecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Infisical configures this store to sync secrets using the Infisical provider
@@ -9356,7 +9356,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderInfisical {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderInfisical' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderInfisical(obj: ClusterSecretStoreV1Beta1SpecProviderInfisical | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9367,7 +9367,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderInfisical(obj: Clust
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * KeeperSecurity configures this store to sync secrets using the KeeperSecurity provider
@@ -9393,7 +9393,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKeepersecurity {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderKeepersecurity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderKeepersecurity(obj: ClusterSecretStoreV1Beta1SpecProviderKeepersecurity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9403,7 +9403,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderKeepersecurity(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kubernetes configures this store to sync secrets using a Kubernetes cluster provider
@@ -9444,7 +9444,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetes {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderKubernetes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetes(obj: ClusterSecretStoreV1Beta1SpecProviderKubernetes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9456,7 +9456,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetes(obj: Clus
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Onboardbase configures this store to sync secrets using the Onboardbase provider
@@ -9497,7 +9497,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOnboardbase {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderOnboardbase' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderOnboardbase(obj: ClusterSecretStoreV1Beta1SpecProviderOnboardbase | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9509,7 +9509,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderOnboardbase(obj: Clu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * OnePassword configures this store to sync secrets using the 1Password Cloud provider
@@ -9543,7 +9543,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOnepassword {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderOnepassword' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderOnepassword(obj: ClusterSecretStoreV1Beta1SpecProviderOnepassword | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9554,7 +9554,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderOnepassword(obj: Clu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Oracle configures this store to sync secrets using Oracle Vault provider
@@ -9622,7 +9622,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOracle {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderOracle' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderOracle(obj: ClusterSecretStoreV1Beta1SpecProviderOracle | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9637,7 +9637,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderOracle(obj: ClusterS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSecretStoreV1Beta1SpecProviderPassbolt
@@ -9662,7 +9662,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPassbolt {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderPassbolt' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderPassbolt(obj: ClusterSecretStoreV1Beta1SpecProviderPassbolt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9672,7 +9672,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderPassbolt(obj: Cluste
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configures a store to sync secrets with a Password Depot instance.
@@ -9706,7 +9706,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPassworddepot {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderPassworddepot' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderPassworddepot(obj: ClusterSecretStoreV1Beta1SpecProviderPassworddepot | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9717,7 +9717,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderPassworddepot(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Previder configures this store to sync secrets using the Previder provider
@@ -9742,7 +9742,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPrevider {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderPrevider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderPrevider(obj: ClusterSecretStoreV1Beta1SpecProviderPrevider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9752,7 +9752,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderPrevider(obj: Cluste
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Pulumi configures this store to sync secrets using the Pulumi provider
@@ -9804,7 +9804,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPulumi {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderPulumi' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderPulumi(obj: ClusterSecretStoreV1Beta1SpecProviderPulumi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9817,7 +9817,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderPulumi(obj: ClusterS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Scaleway
@@ -9866,7 +9866,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderScaleway {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderScaleway' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderScaleway(obj: ClusterSecretStoreV1Beta1SpecProviderScaleway | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9879,7 +9879,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderScaleway(obj: Cluste
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretServer configures this store to sync secrets using SecretServer provider
@@ -9915,7 +9915,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderSecretserver {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderSecretserver' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderSecretserver(obj: ClusterSecretStoreV1Beta1SpecProviderSecretserver | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9926,7 +9926,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderSecretserver(obj: Cl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Senhasegura configures this store to sync secrets using senhasegura provider
@@ -9967,7 +9967,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderSenhasegura {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderSenhasegura' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderSenhasegura(obj: ClusterSecretStoreV1Beta1SpecProviderSenhasegura | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9979,7 +9979,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderSenhasegura(obj: Clu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Vault configures this store to sync secrets using Hashi provider
@@ -10088,7 +10088,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVault {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVault' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVault(obj: ClusterSecretStoreV1Beta1SpecProviderVault | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10107,7 +10107,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVault(obj: ClusterSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Webhook configures this store to sync secrets using a generic templated webhook
@@ -10187,7 +10187,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderWebhook {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderWebhook' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderWebhook(obj: ClusterSecretStoreV1Beta1SpecProviderWebhook | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10204,7 +10204,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderWebhook(obj: Cluster
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * YandexCertificateManager configures this store to sync secrets using Yandex Certificate Manager provider
@@ -10238,7 +10238,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanager {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanager' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanager(obj: ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanager | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10249,7 +10249,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexcertificateman
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * YandexLockbox configures this store to sync secrets using Yandex Lockbox provider
@@ -10283,7 +10283,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderYandexlockbox {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderYandexlockbox' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexlockbox(obj: ClusterSecretStoreV1Beta1SpecProviderYandexlockbox | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10294,7 +10294,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexlockbox(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -10333,7 +10333,7 @@ export interface ClusterSecretStoreV1Beta1SpecConditionsNamespaceSelectorMatchEx
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecConditionsNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecConditionsNamespaceSelectorMatchExpressions(obj: ClusterSecretStoreV1Beta1SpecConditionsNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10344,7 +10344,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecConditionsNamespaceSelectorM
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how the operator authenticates with Akeyless.
@@ -10373,7 +10373,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10383,7 +10383,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The provider for the CA bundle to use to validate Akeyless Gateway certificate.
@@ -10425,7 +10425,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeylessCaProvider {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAkeylessCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessCaProvider(obj: ClusterSecretStoreV1Beta1SpecProviderAkeylessCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10437,7 +10437,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessCaProvider(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AlibabaAuth contains a secretRef for credentials.
@@ -10464,7 +10464,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAlibabaAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAlibabaAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAlibabaAuth(obj: ClusterSecretStoreV1Beta1SpecProviderAlibabaAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10474,7 +10474,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAlibabaAuth(obj: Clu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines the information necessary to authenticate against AWS
@@ -10504,7 +10504,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAwsAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAwsAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAwsAuth(obj: ClusterSecretStoreV1Beta1SpecProviderAwsAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10514,7 +10514,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAwsAuth(obj: Cluster
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretsManager defines how the provider behaves when interacting with AWS SecretsManager
@@ -10549,7 +10549,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAwsSecretsManager {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAwsSecretsManager' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAwsSecretsManager(obj: ClusterSecretStoreV1Beta1SpecProviderAwsSecretsManager | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10559,7 +10559,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAwsSecretsManager(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Service defines which service should be used to fetch the secrets
@@ -10592,7 +10592,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAwsSessionTags {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAwsSessionTags' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAwsSessionTags(obj: ClusterSecretStoreV1Beta1SpecProviderAwsSessionTags | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10602,7 +10602,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAwsSessionTags(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how the operator authenticates with Azure. Required for ServicePrincipal auth type. Optional for WorkloadIdentity.
@@ -10643,7 +10643,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10655,7 +10655,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth type defines how to authenticate to the keyvault service.
@@ -10729,7 +10729,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAzurekvServiceAccountRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAzurekvServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAzurekvServiceAccountRef(obj: ClusterSecretStoreV1Beta1SpecProviderAzurekvServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10740,7 +10740,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAzurekvServiceAccoun
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how the operator authenticates with Beyondtrust.
@@ -10788,7 +10788,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuth(obj: ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10801,7 +10801,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuth(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how API server works.
@@ -10851,7 +10851,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustServer {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderBeyondtrustServer' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustServer(obj: ClusterSecretStoreV1Beta1SpecProviderBeyondtrustServer | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10865,7 +10865,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustServer(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with a bitwarden machine account instance.
@@ -10886,7 +10886,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAut
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuth(obj: ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10895,7 +10895,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmana
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * see: https://external-secrets.io/latest/spec/#external-secrets.io/v1alpha1.CAProvider
@@ -10937,7 +10937,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaP
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaProvider(obj: ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10949,7 +10949,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmana
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines the information necessary to authenticate against chef Server
@@ -10969,7 +10969,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderChefAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderChefAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderChefAuth(obj: ClusterSecretStoreV1Beta1SpecProviderChefAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10978,7 +10978,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderChefAuth(obj: Cluste
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * CSMAuth contains a secretRef for credentials.
@@ -10998,7 +10998,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuth(obj: ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11007,7 +11007,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuth(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Defines authentication settings for connecting to Conjur.
@@ -11034,7 +11034,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderConjurAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderConjurAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderConjurAuth(obj: ClusterSecretStoreV1Beta1SpecProviderConjurAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11044,7 +11044,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderConjurAuth(obj: Clus
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to provide custom certificate authority (CA) certificates
@@ -11088,7 +11088,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderConjurCaProvider {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderConjurCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderConjurCaProvider(obj: ClusterSecretStoreV1Beta1SpecProviderConjurCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11100,7 +11100,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderConjurCaProvider(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ClientID is the non-secret part of the credential.
@@ -11127,7 +11127,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDelineaClientId {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderDelineaClientId' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderDelineaClientId(obj: ClusterSecretStoreV1Beta1SpecProviderDelineaClientId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11137,7 +11137,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderDelineaClientId(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ClientSecret is the secret part of the credential.
@@ -11164,7 +11164,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDelineaClientSecret {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderDelineaClientSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderDelineaClientSecret(obj: ClusterSecretStoreV1Beta1SpecProviderDelineaClientSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11174,7 +11174,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderDelineaClientSecret(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with a Device42 instance.
@@ -11192,7 +11192,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDevice42Auth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderDevice42Auth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderDevice42Auth(obj: ClusterSecretStoreV1Beta1SpecProviderDevice42Auth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11201,7 +11201,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderDevice42Auth(obj: Cl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how the Operator authenticates with the Doppler API
@@ -11219,7 +11219,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDopplerAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderDopplerAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderDopplerAuth(obj: ClusterSecretStoreV1Beta1SpecProviderDopplerAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11228,7 +11228,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderDopplerAuth(obj: Clu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Format enables the downloading of secrets as a file (string)
@@ -11299,7 +11299,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderFakeData {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderFakeData' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderFakeData(obj: ClusterSecretStoreV1Beta1SpecProviderFakeData | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11311,7 +11311,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderFakeData(obj: Cluste
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APIKey is the API token to access SDKMS Applications.
@@ -11331,7 +11331,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderFortanixApiKey {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderFortanixApiKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderFortanixApiKey(obj: ClusterSecretStoreV1Beta1SpecProviderFortanixApiKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11340,7 +11340,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderFortanixApiKey(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines the information necessary to authenticate against GCP
@@ -11363,7 +11363,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGcpsmAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderGcpsmAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderGcpsmAuth(obj: ClusterSecretStoreV1Beta1SpecProviderGcpsmAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11373,7 +11373,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGcpsmAuth(obj: Clust
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * auth configures how secret-manager authenticates with a Github instance.
@@ -11394,7 +11394,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGithubAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderGithubAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderGithubAuth(obj: ClusterSecretStoreV1Beta1SpecProviderGithubAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11403,7 +11403,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGithubAuth(obj: Clus
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with a GitLab instance.
@@ -11421,7 +11421,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGitlabAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderGitlabAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderGitlabAuth(obj: ClusterSecretStoreV1Beta1SpecProviderGitlabAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11430,7 +11430,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGitlabAuth(obj: Clus
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with the IBM secrets manager.
@@ -11455,7 +11455,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderIbmAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderIbmAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderIbmAuth(obj: ClusterSecretStoreV1Beta1SpecProviderIbmAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11465,7 +11465,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderIbmAuth(obj: Cluster
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how the Operator authenticates with the Infisical API
@@ -11483,7 +11483,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderInfisicalAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderInfisicalAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderInfisicalAuth(obj: ClusterSecretStoreV1Beta1SpecProviderInfisicalAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11492,7 +11492,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderInfisicalAuth(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretsScope defines the scope of the secrets within the workspace
@@ -11543,7 +11543,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderInfisicalSecretsScope {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderInfisicalSecretsScope' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderInfisicalSecretsScope(obj: ClusterSecretStoreV1Beta1SpecProviderInfisicalSecretsScope | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11556,7 +11556,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderInfisicalSecretsScop
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -11593,7 +11593,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKeepersecurityAuthRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderKeepersecurityAuthRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderKeepersecurityAuthRef(obj: ClusterSecretStoreV1Beta1SpecProviderKeepersecurityAuthRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11604,7 +11604,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderKeepersecurityAuthRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with a Kubernetes instance.
@@ -11638,7 +11638,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderKubernetesAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesAuth(obj: ClusterSecretStoreV1Beta1SpecProviderKubernetesAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11649,7 +11649,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesAuth(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a secret that contains the auth information.
@@ -11685,7 +11685,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthRef(obj: ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11696,7 +11696,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthRef(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * configures the Kubernetes server Address.
@@ -11730,7 +11730,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesServer {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderKubernetesServer' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesServer(obj: ClusterSecretStoreV1Beta1SpecProviderKubernetesServer | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11741,7 +11741,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesServer(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how the Operator authenticates with the Onboardbase API
@@ -11769,7 +11769,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuth(obj: ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11779,7 +11779,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuth(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines the information necessary to authenticate against OnePassword Connect Server
@@ -11799,7 +11799,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuth(obj: ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11808,7 +11808,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuth(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with the Oracle Vault.
@@ -11843,7 +11843,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOracleAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderOracleAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderOracleAuth(obj: ClusterSecretStoreV1Beta1SpecProviderOracleAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11854,7 +11854,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderOracleAuth(obj: Clus
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of principal to use for authentication. If left blank, the Auth struct will
@@ -11908,7 +11908,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOracleServiceAccountRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderOracleServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderOracleServiceAccountRef(obj: ClusterSecretStoreV1Beta1SpecProviderOracleServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11919,7 +11919,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderOracleServiceAccount
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines the information necessary to authenticate against Passbolt Server
@@ -11948,7 +11948,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPassboltAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderPassboltAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderPassboltAuth(obj: ClusterSecretStoreV1Beta1SpecProviderPassboltAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11958,7 +11958,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderPassboltAuth(obj: Cl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with a Password Depot instance.
@@ -11976,7 +11976,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuth(obj: ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11985,7 +11985,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuth(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PreviderAuth contains a secretRef for credentials.
@@ -12005,7 +12005,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPreviderAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderPreviderAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderPreviderAuth(obj: ClusterSecretStoreV1Beta1SpecProviderPreviderAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12014,7 +12014,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderPreviderAuth(obj: Cl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AccessToken is the access tokens to sign in to the Pulumi Cloud Console.
@@ -12034,7 +12034,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPulumiAccessToken {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderPulumiAccessToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderPulumiAccessToken(obj: ClusterSecretStoreV1Beta1SpecProviderPulumiAccessToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12043,7 +12043,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderPulumiAccessToken(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AccessKey is the non-secret part of the api key.
@@ -12070,7 +12070,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderScalewayAccessKey {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderScalewayAccessKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderScalewayAccessKey(obj: ClusterSecretStoreV1Beta1SpecProviderScalewayAccessKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12080,7 +12080,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderScalewayAccessKey(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretKey is the non-secret part of the api key.
@@ -12107,7 +12107,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderScalewaySecretKey {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderScalewaySecretKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderScalewaySecretKey(obj: ClusterSecretStoreV1Beta1SpecProviderScalewaySecretKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12117,7 +12117,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderScalewaySecretKey(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Password is the secret server account password.
@@ -12144,7 +12144,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderSecretserverPassword {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderSecretserverPassword' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderSecretserverPassword(obj: ClusterSecretStoreV1Beta1SpecProviderSecretserverPassword | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12154,7 +12154,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderSecretserverPassword
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Username is the secret server account username.
@@ -12181,7 +12181,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderSecretserverUsername {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderSecretserverUsername' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderSecretserverUsername(obj: ClusterSecretStoreV1Beta1SpecProviderSecretserverUsername | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12191,7 +12191,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderSecretserverUsername
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines parameters to authenticate in senhasegura
@@ -12217,7 +12217,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderSenhaseguraAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderSenhaseguraAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderSenhaseguraAuth(obj: ClusterSecretStoreV1Beta1SpecProviderSenhaseguraAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12227,7 +12227,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderSenhaseguraAuth(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with the Vault server.
@@ -12313,7 +12313,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuth(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12330,7 +12330,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuth(obj: Clust
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The provider for the CA bundle to use to validate Vault server certificate.
@@ -12372,7 +12372,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultCaProvider {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultCaProvider(obj: ClusterSecretStoreV1Beta1SpecProviderVaultCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12384,7 +12384,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultCaProvider(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The configuration used for client side related TLS communication, when the Vault server
@@ -12419,7 +12419,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultTls {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultTls' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultTls(obj: ClusterSecretStoreV1Beta1SpecProviderVaultTls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12429,7 +12429,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultTls(obj: Cluste
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Version is the Vault KV secret engine version. This can be either "v1" or
@@ -12483,7 +12483,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderWebhookCaProvider {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderWebhookCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderWebhookCaProvider(obj: ClusterSecretStoreV1Beta1SpecProviderWebhookCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12495,7 +12495,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderWebhookCaProvider(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Result formatting
@@ -12515,7 +12515,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderWebhookResult {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderWebhookResult' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderWebhookResult(obj: ClusterSecretStoreV1Beta1SpecProviderWebhookResult | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12524,7 +12524,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderWebhookResult(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSecretStoreV1Beta1SpecProviderWebhookSecrets
@@ -12549,7 +12549,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderWebhookSecrets {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderWebhookSecrets' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderWebhookSecrets(obj: ClusterSecretStoreV1Beta1SpecProviderWebhookSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12559,7 +12559,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderWebhookSecrets(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines the information necessary to authenticate against Yandex Certificate Manager
@@ -12579,7 +12579,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerAu
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuth(obj: ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12588,7 +12588,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexcertificateman
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The provider for the CA bundle to use to validate Yandex.Cloud server certificate.
@@ -12609,7 +12609,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerCa
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProvider(obj: ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12618,7 +12618,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexcertificateman
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines the information necessary to authenticate against Yandex Lockbox
@@ -12638,7 +12638,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderYandexlockboxAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderYandexlockboxAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexlockboxAuth(obj: ClusterSecretStoreV1Beta1SpecProviderYandexlockboxAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12647,7 +12647,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexlockboxAuth(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The provider for the CA bundle to use to validate Yandex.Cloud server certificate.
@@ -12668,7 +12668,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderYandexlockboxCaProvider {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderYandexlockboxCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexlockboxCaProvider(obj: ClusterSecretStoreV1Beta1SpecProviderYandexlockboxCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12677,7 +12677,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexlockboxCaProvi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kubernetes authenticates with Akeyless by passing the ServiceAccount
@@ -12725,7 +12725,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKuber
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuth(obj: ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12737,7 +12737,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a Secret that contains the details
@@ -12774,7 +12774,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecre
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12785,7 +12785,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -12830,7 +12830,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthRrsa {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthRrsa' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthRrsa(obj: ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthRrsa | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12842,7 +12842,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthRrsa(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AlibabaAuthSecretRef holds secret references for Alibaba credentials.
@@ -12869,7 +12869,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12879,7 +12879,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Authenticate against AWS using service account tokens.
@@ -12899,7 +12899,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAwsAuthJwt {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAwsAuthJwt' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAwsAuthJwt(obj: ClusterSecretStoreV1Beta1SpecProviderAwsAuthJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12908,7 +12908,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAwsAuthJwt(obj: Clus
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AWSAuthSecretRef holds secret references for AWS credentials
@@ -12945,7 +12945,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12956,7 +12956,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Azure ClientCertificate of the service principle used for authentication.
@@ -12992,7 +12992,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClient
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientCertificate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientCertificate(obj: ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientCertificate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13003,7 +13003,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Azure clientId of the service principle or managed identity used for authentication.
@@ -13039,7 +13039,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClient
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientId' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientId(obj: ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13050,7 +13050,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Azure ClientSecret of the service principle used for authentication.
@@ -13086,7 +13086,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClient
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientSecret(obj: ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13097,7 +13097,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Azure tenantId of the managed identity used for authentication.
@@ -13133,7 +13133,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefTenant
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefTenantId' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefTenantId(obj: ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefTenantId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13144,7 +13144,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APIKey If not provided then ClientID/ClientSecret become required.
@@ -13171,7 +13171,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKey {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKey(obj: ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13181,7 +13181,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Certificate (cert.pem) for use when authenticating with an OAuth client Id using a Client Certificate.
@@ -13208,7 +13208,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificate
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificate(obj: ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13218,7 +13218,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCerti
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Certificate private key (key.pem). For use when authenticating with an OAuth client Id
@@ -13245,7 +13245,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificate
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateKey(obj: ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13255,7 +13255,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCerti
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ClientID is the API OAuth Client ID.
@@ -13282,7 +13282,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientId {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientId' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientId(obj: ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13292,7 +13292,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClien
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ClientSecret is the API OAuth Client Secret.
@@ -13319,7 +13319,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecre
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecret(obj: ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13329,7 +13329,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClien
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * BitwardenSecretsManagerSecretRef contains the credential ref to the bitwarden instance.
@@ -13349,7 +13349,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAut
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13358,7 +13358,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmana
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -13390,7 +13390,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderChefAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderChefAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderChefAuthSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderChefAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13399,7 +13399,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderChefAuthSecretRef(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * CSMAuthSecretRef holds secret references for Cloud.ru credentials.
@@ -13426,7 +13426,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13436,7 +13436,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Authenticates with Conjur using an API key.
@@ -13472,7 +13472,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikey {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikey(obj: ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13483,7 +13483,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikey(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Jwt enables JWT authentication using Kubernetes service account tokens.
@@ -13534,7 +13534,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwt {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwt' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwt(obj: ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13547,7 +13547,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwt(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -13595,7 +13595,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDelineaClientIdSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderDelineaClientIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderDelineaClientIdSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderDelineaClientIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13606,7 +13606,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderDelineaClientIdSecre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef references a key in a secret that will be used as value.
@@ -13642,7 +13642,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDelineaClientSecretSecretR
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderDelineaClientSecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderDelineaClientSecretSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderDelineaClientSecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13653,7 +13653,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderDelineaClientSecretS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRef
@@ -13671,7 +13671,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13680,7 +13680,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSecretStoreV1Beta1SpecProviderDopplerAuthSecretRef
@@ -13700,7 +13700,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDopplerAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderDopplerAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderDopplerAuthSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderDopplerAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13709,7 +13709,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderDopplerAuthSecretRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef is a reference to a secret containing the SDKMS API Key.
@@ -13745,7 +13745,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderFortanixApiKeySecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderFortanixApiKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderFortanixApiKeySecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderFortanixApiKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13756,7 +13756,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderFortanixApiKeySecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef
@@ -13774,7 +13774,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13783,7 +13783,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity
@@ -13816,7 +13816,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity 
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity(obj: ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13828,7 +13828,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -13865,7 +13865,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGithubAuthPrivateKey {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderGithubAuthPrivateKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderGithubAuthPrivateKey(obj: ClusterSecretStoreV1Beta1SpecProviderGithubAuthPrivateKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13876,7 +13876,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGithubAuthPrivateKey
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSecretStoreV1Beta1SpecProviderGitlabAuthSecretRef
@@ -13894,7 +13894,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGitlabAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderGitlabAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderGitlabAuthSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderGitlabAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13903,7 +13903,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGitlabAuthSecretRef(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * IBM Container-based auth with IAM Trusted Profile.
@@ -13935,7 +13935,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderIbmAuthContainerAuth {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderIbmAuthContainerAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderIbmAuthContainerAuth(obj: ClusterSecretStoreV1Beta1SpecProviderIbmAuthContainerAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13946,7 +13946,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderIbmAuthContainerAuth
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRef
@@ -13964,7 +13964,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13973,7 +13973,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials
@@ -14000,7 +14000,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuth
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials(obj: ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14010,7 +14010,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUnivers
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * has both clientCert and clientKey as secretKeySelector
@@ -14039,7 +14039,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCert {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCert' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCert(obj: ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14049,7 +14049,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCert(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * points to a service account that should be used for authentication
@@ -14086,7 +14086,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthServiceAccou
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthServiceAccount' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthServiceAccount(obj: ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthServiceAccount | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14097,7 +14097,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthServic
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * use static token to authenticate with
@@ -14118,7 +14118,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthToken {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthToken(obj: ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14127,7 +14127,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthToken(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * see: https://external-secrets.io/v0.4.1/spec/#external-secrets.io/v1alpha1.CAProvider
@@ -14169,7 +14169,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesServerCaProvider
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderKubernetesServerCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesServerCaProvider(obj: ClusterSecretStoreV1Beta1SpecProviderKubernetesServerCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14181,7 +14181,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesServerCaPr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * OnboardbaseAPIKey is the APIKey generated by an admin account.
@@ -14218,7 +14218,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuthApiKeyRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuthApiKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuthApiKeyRef(obj: ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuthApiKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14229,7 +14229,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuthApiKe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * OnboardbasePasscode is the passcode attached to the API Key
@@ -14265,7 +14265,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuthPasscodeRef
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuthPasscodeRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuthPasscodeRef(obj: ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuthPasscodeRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14276,7 +14276,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuthPassc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * OnePasswordAuthSecretRef holds secret references for 1Password credentials.
@@ -14296,7 +14296,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14305,7 +14305,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuthSecre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef to pass through sensitive information.
@@ -14332,7 +14332,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14342,7 +14342,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRef(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -14379,7 +14379,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPassboltAuthPasswordSecret
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderPassboltAuthPasswordSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderPassboltAuthPasswordSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderPassboltAuthPasswordSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14390,7 +14390,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderPassboltAuthPassword
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -14427,7 +14427,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPassboltAuthPrivateKeySecr
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderPassboltAuthPrivateKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderPassboltAuthPrivateKeySecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderPassboltAuthPrivateKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14438,7 +14438,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderPassboltAuthPrivateK
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef
@@ -14456,7 +14456,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14465,7 +14465,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuthSec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PreviderAuthSecretRef holds secret references for Previder Vault credentials.
@@ -14485,7 +14485,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPreviderAuthSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderPreviderAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderPreviderAuthSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderPreviderAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14494,7 +14494,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderPreviderAuthSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef is a reference to a secret containing the Pulumi API token.
@@ -14530,7 +14530,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPulumiAccessTokenSecretRef
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderPulumiAccessTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderPulumiAccessTokenSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderPulumiAccessTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14541,7 +14541,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderPulumiAccessTokenSec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef references a key in a secret that will be used as value.
@@ -14577,7 +14577,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderScalewayAccessKeySecretRef
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderScalewayAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderScalewayAccessKeySecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderScalewayAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14588,7 +14588,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderScalewayAccessKeySec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef references a key in a secret that will be used as value.
@@ -14624,7 +14624,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderScalewaySecretKeySecretRef
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderScalewaySecretKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderScalewaySecretKeySecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderScalewaySecretKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14635,7 +14635,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderScalewaySecretKeySec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef references a key in a secret that will be used as value.
@@ -14671,7 +14671,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderSecretserverPasswordSecret
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderSecretserverPasswordSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderSecretserverPasswordSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderSecretserverPasswordSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14682,7 +14682,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderSecretserverPassword
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef references a key in a secret that will be used as value.
@@ -14718,7 +14718,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderSecretserverUsernameSecret
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderSecretserverUsernameSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderSecretserverUsernameSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderSecretserverUsernameSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14729,7 +14729,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderSecretserverUsername
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -14766,7 +14766,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderSenhaseguraAuthClientSecre
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderSenhaseguraAuthClientSecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderSenhaseguraAuthClientSecretSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderSenhaseguraAuthClientSecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14777,7 +14777,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderSenhaseguraAuthClien
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AppRole authenticates with Vault using the App Role auth mechanism,
@@ -14827,7 +14827,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRole {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRole' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRole(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRole | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14839,7 +14839,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRole(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Cert authenticates with TLS Certificates by passing client certificate, private key and ca certificate
@@ -14869,7 +14869,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthCert {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthCert' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthCert(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14879,7 +14879,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthCert(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Iam authenticates with vault by passing a special AWS request signed with AWS IAM credentials
@@ -14949,7 +14949,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthIam {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthIam' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthIam(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthIam | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14965,7 +14965,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthIam(obj: Cl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Jwt authenticates with Vault by passing role and JWT token using the
@@ -15011,7 +15011,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwt {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwt' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwt(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15023,7 +15023,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwt(obj: Cl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kubernetes authenticates with Vault by passing the ServiceAccount
@@ -15073,7 +15073,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetes {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetes(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15085,7 +15085,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetes(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Ldap authenticates with Vault by passing username/password pair using
@@ -15124,7 +15124,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthLdap {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthLdap' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthLdap(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthLdap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15135,7 +15135,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthLdap(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TokenSecretRef authenticates with Vault by presenting a token.
@@ -15171,7 +15171,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthTokenSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthTokenSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15182,7 +15182,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthTokenSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * UserPass authenticates with Vault by passing username/password pair
@@ -15220,7 +15220,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthUserPass {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthUserPass' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthUserPass(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthUserPass | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15231,7 +15231,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthUserPass(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -15281,7 +15281,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultTlsCertSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultTlsCertSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultTlsCertSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderVaultTlsCertSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15292,7 +15292,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultTlsCertSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * KeySecretRef to a key in a Secret resource containing client private key
@@ -15330,7 +15330,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultTlsKeySecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultTlsKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultTlsKeySecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderVaultTlsKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15341,7 +15341,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultTlsKeySecretRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -15389,7 +15389,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderWebhookSecretsSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderWebhookSecretsSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderWebhookSecretsSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderWebhookSecretsSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15400,7 +15400,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderWebhookSecretsSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The authorized key used for authentication
@@ -15436,7 +15436,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerAu
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuthAuthorizedKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuthAuthorizedKeySecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuthAuthorizedKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15447,7 +15447,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexcertificateman
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -15484,7 +15484,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerCa
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProviderCertSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProviderCertSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProviderCertSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15495,7 +15495,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexcertificateman
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The authorized key used for authentication
@@ -15531,7 +15531,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderYandexlockboxAuthAuthorize
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderYandexlockboxAuthAuthorizedKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexlockboxAuthAuthorizedKeySecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderYandexlockboxAuthAuthorizedKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15542,7 +15542,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexlockboxAuthAut
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -15579,7 +15579,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderYandexlockboxCaProviderCer
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderYandexlockboxCaProviderCertSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexlockboxCaProviderCertSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderYandexlockboxCaProviderCertSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15590,7 +15590,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexlockboxCaProvi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional secret field containing a Kubernetes ServiceAccount JWT used
@@ -15629,7 +15629,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKuber
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuthSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15640,7 +15640,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional service account field containing the name of a kubernetes ServiceAccount.
@@ -15680,7 +15680,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKuber
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuthServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuthServiceAccountRef(obj: ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuthServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15691,7 +15691,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessID is used for authentication
@@ -15727,7 +15727,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecre
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessId' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessId(obj: ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15738,7 +15738,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -15775,7 +15775,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecre
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessType' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessType(obj: ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessType | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15786,7 +15786,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -15823,7 +15823,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecre
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam(obj: ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15834,7 +15834,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The AccessKeyID is used for authentication
@@ -15870,7 +15870,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccess
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15881,7 +15881,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The AccessKeySecret is used for authentication
@@ -15917,7 +15917,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccess
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15928,7 +15928,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a ServiceAccount resource.
@@ -15965,7 +15965,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAwsAuthJwtServiceAccountRe
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAwsAuthJwtServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAwsAuthJwtServiceAccountRef(obj: ClusterSecretStoreV1Beta1SpecProviderAwsAuthJwtServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15976,7 +15976,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAwsAuthJwtServiceAcc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The AccessKeyID is used for authentication
@@ -16012,7 +16012,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefAccessKeyI
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefAccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefAccessKeyIdSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefAccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16023,7 +16023,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefAcce
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -16059,7 +16059,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefSecretAcce
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefSecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefSecretAccessKeySecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefSecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16070,7 +16070,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefSecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SessionToken used for authentication
@@ -16108,7 +16108,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefSessionTok
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefSessionTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefSessionTokenSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefSessionTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16119,7 +16119,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefSess
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef references a key in a secret that will be used as value.
@@ -16155,7 +16155,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKeySecre
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKeySecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16166,7 +16166,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef references a key in a secret that will be used as value.
@@ -16202,7 +16202,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificate
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16213,7 +16213,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCerti
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef references a key in a secret that will be used as value.
@@ -16249,7 +16249,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificate
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateKeySecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16260,7 +16260,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCerti
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef references a key in a secret that will be used as value.
@@ -16296,7 +16296,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientIdSec
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientIdSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16307,7 +16307,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClien
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef references a key in a secret that will be used as value.
@@ -16343,7 +16343,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecre
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecretSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16354,7 +16354,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClien
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AccessToken used for the bitwarden instance.
@@ -16390,7 +16390,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAut
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecretRefCredentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecretRefCredentials(obj: ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecretRefCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16401,7 +16401,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmana
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretKey is the Signing Key in PEM format, used for authentication.
@@ -16437,7 +16437,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderChefAuthSecretRefPrivateKe
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderChefAuthSecretRefPrivateKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderChefAuthSecretRefPrivateKeySecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderChefAuthSecretRefPrivateKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16448,7 +16448,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderChefAuthSecretRefPri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The AccessKeyID is used for authentication
@@ -16484,7 +16484,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAcce
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeyIdSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16495,7 +16495,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The AccessKeySecret is used for authentication
@@ -16531,7 +16531,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAcce
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeySecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeySecretSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeySecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16542,7 +16542,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' containing the Conjur API key
@@ -16579,7 +16579,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikeyApiKeyRef 
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikeyApiKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikeyApiKeyRef(obj: ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikeyApiKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16590,7 +16590,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikeyApiK
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' containing the Conjur username
@@ -16627,7 +16627,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikeyUserRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikeyUserRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikeyUserRef(obj: ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikeyUserRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16638,7 +16638,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikeyUser
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional SecretRef that refers to a key in a Secret resource containing JWT token to
@@ -16675,7 +16675,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwtSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwtSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwtSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwtSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16686,7 +16686,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwtSecretR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional ServiceAccountRef specifies the Kubernetes service account for which to request
@@ -16724,7 +16724,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwtServiceAccoun
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwtServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwtServiceAccountRef(obj: ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwtServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16735,7 +16735,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwtService
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Username / Password is used for authentication.
@@ -16771,7 +16771,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRefCrede
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRefCredentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRefCredentials(obj: ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRefCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16782,7 +16782,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The DopplerToken is used for authentication.
@@ -16820,7 +16820,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDopplerAuthSecretRefDopple
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderDopplerAuthSecretRefDopplerToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderDopplerAuthSecretRefDopplerToken(obj: ClusterSecretStoreV1Beta1SpecProviderDopplerAuthSecretRefDopplerToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16831,7 +16831,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderDopplerAuthSecretRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -16867,7 +16867,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRefSecretAc
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRefSecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRefSecretAccessKeySecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRefSecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16878,7 +16878,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRefSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a ServiceAccount resource.
@@ -16915,7 +16915,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentityS
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef(obj: ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16926,7 +16926,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AccessToken is used for authentication.
@@ -16962,7 +16962,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGitlabAuthSecretRefAccessT
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderGitlabAuthSecretRefAccessToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderGitlabAuthSecretRefAccessToken(obj: ClusterSecretStoreV1Beta1SpecProviderGitlabAuthSecretRefAccessToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16973,7 +16973,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGitlabAuthSecretRefA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -17009,7 +17009,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRefSecretApiK
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRefSecretApiKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRefSecretApiKeySecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRefSecretApiKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17020,7 +17020,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRefSecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -17057,7 +17057,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuth
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientId' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientId(obj: ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17068,7 +17068,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUnivers
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -17105,7 +17105,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuth
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientSecret(obj: ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17116,7 +17116,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUnivers
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -17153,7 +17153,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCertClientCe
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCertClientCert' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCertClientCert(obj: ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCertClientCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17164,7 +17164,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCertCl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -17201,7 +17201,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCertClientKe
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCertClientKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCertClientKey(obj: ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCertClientKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17212,7 +17212,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCertCl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -17249,7 +17249,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthTokenBearerT
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthTokenBearerToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthTokenBearerToken(obj: ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthTokenBearerToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17260,7 +17260,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthTokenB
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -17308,7 +17308,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRefCo
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRefConnectTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRefConnectTokenSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRefConnectTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17319,7 +17319,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuthSecre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Fingerprint is the fingerprint of the API private key.
@@ -17355,7 +17355,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRefFingerp
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRefFingerprint' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRefFingerprint(obj: ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRefFingerprint | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17366,7 +17366,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRefF
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PrivateKey is the user's API Signing Key in PEM format, used for authentication.
@@ -17402,7 +17402,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRefPrivate
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRefPrivatekey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRefPrivatekey(obj: ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRefPrivatekey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17413,7 +17413,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRefP
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Username / Password is used for authentication.
@@ -17449,7 +17449,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRefCredentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRefCredentials(obj: ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRefCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17460,7 +17460,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuthSec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The AccessToken is used for authentication
@@ -17496,7 +17496,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPreviderAuthSecretRefAcces
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderPreviderAuthSecretRefAccessToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderPreviderAuthSecretRefAccessToken(obj: ClusterSecretStoreV1Beta1SpecProviderPreviderAuthSecretRefAccessToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17507,7 +17507,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderPreviderAuthSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a key in a Secret that contains the App Role ID used
@@ -17546,7 +17546,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRoleRoleRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRoleRoleRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRoleRoleRef(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRoleRoleRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17557,7 +17557,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRoleRole
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a key in a Secret that contains the App Role secret used
@@ -17596,7 +17596,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRoleSecretRef 
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRoleSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRoleSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRoleSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17607,7 +17607,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRoleSecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ClientCert is a certificate to authenticate using the Cert Vault
@@ -17644,7 +17644,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthCertClientCert {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthCertClientCert' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthCertClientCert(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthCertClientCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17655,7 +17655,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthCertClientC
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef to a key in a Secret resource containing client private key to
@@ -17692,7 +17692,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthCertSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthCertSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthCertSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthCertSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17703,7 +17703,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthCertSecretR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specify a service account with IRSA enabled
@@ -17723,7 +17723,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamJwt {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamJwt' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamJwt(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17732,7 +17732,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamJwt(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specify credentials in a Secret object
@@ -17768,7 +17768,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17779,7 +17779,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional ServiceAccountToken specifies the Kubernetes service account for which to request
@@ -17823,7 +17823,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServ
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAccountToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAccountToken(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAccountToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17834,7 +17834,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtKubernet
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional SecretRef that refers to a key in a Secret resource containing JWT token to
@@ -17871,7 +17871,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17882,7 +17882,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional secret field containing a Kubernetes ServiceAccount JWT used
@@ -17921,7 +17921,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetesSecretR
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetesSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetesSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetesSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17932,7 +17932,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetesS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional service account field containing the name of a kubernetes ServiceAccount.
@@ -17972,7 +17972,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetesService
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetesServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetesServiceAccountRef(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetesServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17983,7 +17983,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetesS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef to a key in a Secret resource containing password for the LDAP
@@ -18021,7 +18021,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthLdapSecretRef {
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthLdapSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthLdapSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthLdapSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18032,7 +18032,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthLdapSecretR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef to a key in a Secret resource containing password for the
@@ -18070,7 +18070,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthUserPassSecretRef
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthUserPassSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthUserPassSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthUserPassSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18081,7 +18081,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthUserPassSec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a ServiceAccount resource.
@@ -18118,7 +18118,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamJwtServiceAcco
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamJwtServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamJwtServiceAccountRef(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamJwtServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18129,7 +18129,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamJwtServi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The AccessKeyID is used for authentication
@@ -18165,7 +18165,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefAcces
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefAccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefAccessKeyIdSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefAccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18176,7 +18176,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -18212,7 +18212,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSecre
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSecretAccessKeySecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18223,7 +18223,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SessionToken used for authentication
@@ -18261,7 +18261,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSessi
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSessionTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSessionTokenSecretRef(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSessionTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18272,7 +18272,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Service account field containing the name of a kubernetes ServiceAccount.
@@ -18309,7 +18309,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServ
 /**
  * Converts an object of type 'ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAccountTokenServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAccountTokenServiceAccountRef(obj: ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAccountTokenServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18320,7 +18320,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtKubernet
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -18400,7 +18400,7 @@ export interface ExternalSecretProps {
 /**
  * Converts an object of type 'ExternalSecretProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretProps(obj: ExternalSecretProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18410,7 +18410,7 @@ export function toJson_ExternalSecretProps(obj: ExternalSecretProps | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ExternalSecretSpec defines the desired state of ExternalSecret.
@@ -18463,7 +18463,7 @@ export interface ExternalSecretSpec {
 /**
  * Converts an object of type 'ExternalSecretSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretSpec(obj: ExternalSecretSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18476,7 +18476,7 @@ export function toJson_ExternalSecretSpec(obj: ExternalSecretSpec | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ExternalSecretData defines the connection between the Kubernetes Secret key (spec.data.<key>) and the Provider data.
@@ -18503,7 +18503,7 @@ export interface ExternalSecretSpecData {
 /**
  * Converts an object of type 'ExternalSecretSpecData' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretSpecData(obj: ExternalSecretSpecData | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18513,7 +18513,7 @@ export function toJson_ExternalSecretSpecData(obj: ExternalSecretSpecData | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ExternalSecretDataRemoteRef defines Provider data location.
@@ -18554,7 +18554,7 @@ export interface ExternalSecretSpecDataFrom {
 /**
  * Converts an object of type 'ExternalSecretSpecDataFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretSpecDataFrom(obj: ExternalSecretSpecDataFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18566,7 +18566,7 @@ export function toJson_ExternalSecretSpecDataFrom(obj: ExternalSecretSpecDataFro
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretStoreRef defines which SecretStore to fetch the ExternalSecret data.
@@ -18595,7 +18595,7 @@ export interface ExternalSecretSpecSecretStoreRef {
 /**
  * Converts an object of type 'ExternalSecretSpecSecretStoreRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretSpecSecretStoreRef(obj: ExternalSecretSpecSecretStoreRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18605,7 +18605,7 @@ export function toJson_ExternalSecretSpecSecretStoreRef(obj: ExternalSecretSpecS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ExternalSecretTarget defines the Kubernetes Secret to be created
@@ -18651,7 +18651,7 @@ export interface ExternalSecretSpecTarget {
 /**
  * Converts an object of type 'ExternalSecretSpecTarget' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretSpecTarget(obj: ExternalSecretSpecTarget | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18663,7 +18663,7 @@ export function toJson_ExternalSecretSpecTarget(obj: ExternalSecretSpecTarget | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ExternalSecretDataRemoteRef defines Provider data location.
@@ -18704,7 +18704,7 @@ export interface ExternalSecretSpecDataRemoteRef {
 /**
  * Converts an object of type 'ExternalSecretSpecDataRemoteRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretSpecDataRemoteRef(obj: ExternalSecretSpecDataRemoteRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18716,7 +18716,7 @@ export function toJson_ExternalSecretSpecDataRemoteRef(obj: ExternalSecretSpecDa
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to define a conversion Strategy
@@ -18802,7 +18802,7 @@ export interface ExternalSecretSpecTargetTemplate {
 /**
  * Converts an object of type 'ExternalSecretSpecTargetTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretSpecTargetTemplate(obj: ExternalSecretSpecTargetTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18815,7 +18815,7 @@ export function toJson_ExternalSecretSpecTargetTemplate(obj: ExternalSecretSpecT
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to define a conversion Strategy
@@ -18864,7 +18864,7 @@ export interface ExternalSecretSpecTargetTemplateMetadata {
 /**
  * Converts an object of type 'ExternalSecretSpecTargetTemplateMetadata' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretSpecTargetTemplateMetadata(obj: ExternalSecretSpecTargetTemplateMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18874,7 +18874,7 @@ export function toJson_ExternalSecretSpecTargetTemplateMetadata(obj: ExternalSec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ExternalSecretSpecTargetTemplateTemplateFrom
@@ -18895,7 +18895,7 @@ export interface ExternalSecretSpecTargetTemplateTemplateFrom {
 /**
  * Converts an object of type 'ExternalSecretSpecTargetTemplateTemplateFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretSpecTargetTemplateTemplateFrom(obj: ExternalSecretSpecTargetTemplateTemplateFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18905,7 +18905,7 @@ export function toJson_ExternalSecretSpecTargetTemplateTemplateFrom(obj: Externa
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ExternalSecretSpecTargetTemplateTemplateFromConfigMap
@@ -18930,7 +18930,7 @@ export interface ExternalSecretSpecTargetTemplateTemplateFromConfigMap {
 /**
  * Converts an object of type 'ExternalSecretSpecTargetTemplateTemplateFromConfigMap' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretSpecTargetTemplateTemplateFromConfigMap(obj: ExternalSecretSpecTargetTemplateTemplateFromConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18940,7 +18940,7 @@ export function toJson_ExternalSecretSpecTargetTemplateTemplateFromConfigMap(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ExternalSecretSpecTargetTemplateTemplateFromSecret
@@ -18965,7 +18965,7 @@ export interface ExternalSecretSpecTargetTemplateTemplateFromSecret {
 /**
  * Converts an object of type 'ExternalSecretSpecTargetTemplateTemplateFromSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretSpecTargetTemplateTemplateFromSecret(obj: ExternalSecretSpecTargetTemplateTemplateFromSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18975,7 +18975,7 @@ export function toJson_ExternalSecretSpecTargetTemplateTemplateFromSecret(obj: E
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ExternalSecretSpecTargetTemplateTemplateFromConfigMapItems
@@ -18993,7 +18993,7 @@ export interface ExternalSecretSpecTargetTemplateTemplateFromConfigMapItems {
 /**
  * Converts an object of type 'ExternalSecretSpecTargetTemplateTemplateFromConfigMapItems' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretSpecTargetTemplateTemplateFromConfigMapItems(obj: ExternalSecretSpecTargetTemplateTemplateFromConfigMapItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19002,7 +19002,7 @@ export function toJson_ExternalSecretSpecTargetTemplateTemplateFromConfigMapItem
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ExternalSecretSpecTargetTemplateTemplateFromSecretItems
@@ -19020,7 +19020,7 @@ export interface ExternalSecretSpecTargetTemplateTemplateFromSecretItems {
 /**
  * Converts an object of type 'ExternalSecretSpecTargetTemplateTemplateFromSecretItems' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretSpecTargetTemplateTemplateFromSecretItems(obj: ExternalSecretSpecTargetTemplateTemplateFromSecretItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19029,7 +19029,7 @@ export function toJson_ExternalSecretSpecTargetTemplateTemplateFromSecretItems(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -19109,7 +19109,7 @@ export interface ExternalSecretV1Beta1Props {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1Props' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1Props(obj: ExternalSecretV1Beta1Props | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19119,7 +19119,7 @@ export function toJson_ExternalSecretV1Beta1Props(obj: ExternalSecretV1Beta1Prop
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ExternalSecretSpec defines the desired state of ExternalSecret.
@@ -19174,7 +19174,7 @@ export interface ExternalSecretV1Beta1Spec {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1Spec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1Spec(obj: ExternalSecretV1Beta1Spec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19187,7 +19187,7 @@ export function toJson_ExternalSecretV1Beta1Spec(obj: ExternalSecretV1Beta1Spec 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ExternalSecretData defines the connection between the Kubernetes Secret key (spec.data.<key>) and the Provider data.
@@ -19223,7 +19223,7 @@ export interface ExternalSecretV1Beta1SpecData {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecData' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecData(obj: ExternalSecretV1Beta1SpecData | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19234,7 +19234,7 @@ export function toJson_ExternalSecretV1Beta1SpecData(obj: ExternalSecretV1Beta1S
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ExternalSecretV1Beta1SpecDataFrom
@@ -19281,7 +19281,7 @@ export interface ExternalSecretV1Beta1SpecDataFrom {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecDataFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecDataFrom(obj: ExternalSecretV1Beta1SpecDataFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19293,7 +19293,7 @@ export function toJson_ExternalSecretV1Beta1SpecDataFrom(obj: ExternalSecretV1Be
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretStoreRef defines which SecretStore to fetch the ExternalSecret data.
@@ -19322,7 +19322,7 @@ export interface ExternalSecretV1Beta1SpecSecretStoreRef {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecSecretStoreRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecSecretStoreRef(obj: ExternalSecretV1Beta1SpecSecretStoreRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19332,7 +19332,7 @@ export function toJson_ExternalSecretV1Beta1SpecSecretStoreRef(obj: ExternalSecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ExternalSecretTarget defines the Kubernetes Secret to be created
@@ -19387,7 +19387,7 @@ export interface ExternalSecretV1Beta1SpecTarget {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecTarget' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecTarget(obj: ExternalSecretV1Beta1SpecTarget | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19400,7 +19400,7 @@ export function toJson_ExternalSecretV1Beta1SpecTarget(obj: ExternalSecretV1Beta
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * RemoteRef points to the remote secret and defines
@@ -19457,7 +19457,7 @@ export interface ExternalSecretV1Beta1SpecDataRemoteRef {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecDataRemoteRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecDataRemoteRef(obj: ExternalSecretV1Beta1SpecDataRemoteRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19471,7 +19471,7 @@ export function toJson_ExternalSecretV1Beta1SpecDataRemoteRef(obj: ExternalSecre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SourceRef allows you to override the source
@@ -19502,7 +19502,7 @@ export interface ExternalSecretV1Beta1SpecDataSourceRef {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecDataSourceRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecDataSourceRef(obj: ExternalSecretV1Beta1SpecDataSourceRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19512,7 +19512,7 @@ export function toJson_ExternalSecretV1Beta1SpecDataSourceRef(obj: ExternalSecre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to extract multiple key/value pairs from one secret
@@ -19569,7 +19569,7 @@ export interface ExternalSecretV1Beta1SpecDataFromExtract {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecDataFromExtract' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecDataFromExtract(obj: ExternalSecretV1Beta1SpecDataFromExtract | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19583,7 +19583,7 @@ export function toJson_ExternalSecretV1Beta1SpecDataFromExtract(obj: ExternalSec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to find secrets based on tags or regular expressions
@@ -19632,7 +19632,7 @@ export interface ExternalSecretV1Beta1SpecDataFromFind {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecDataFromFind' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecDataFromFind(obj: ExternalSecretV1Beta1SpecDataFromFind | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19645,7 +19645,7 @@ export function toJson_ExternalSecretV1Beta1SpecDataFromFind(obj: ExternalSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ExternalSecretV1Beta1SpecDataFromRewrite
@@ -19672,7 +19672,7 @@ export interface ExternalSecretV1Beta1SpecDataFromRewrite {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecDataFromRewrite' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecDataFromRewrite(obj: ExternalSecretV1Beta1SpecDataFromRewrite | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19682,7 +19682,7 @@ export function toJson_ExternalSecretV1Beta1SpecDataFromRewrite(obj: ExternalSec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SourceRef points to a store or generator
@@ -19714,7 +19714,7 @@ export interface ExternalSecretV1Beta1SpecDataFromSourceRef {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecDataFromSourceRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecDataFromSourceRef(obj: ExternalSecretV1Beta1SpecDataFromSourceRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19724,7 +19724,7 @@ export function toJson_ExternalSecretV1Beta1SpecDataFromSourceRef(obj: ExternalS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kind of the SecretStore resource (SecretStore or ClusterSecretStore)
@@ -19821,7 +19821,7 @@ export interface ExternalSecretV1Beta1SpecTargetTemplate {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecTargetTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecTargetTemplate(obj: ExternalSecretV1Beta1SpecTargetTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19835,7 +19835,7 @@ export function toJson_ExternalSecretV1Beta1SpecTargetTemplate(obj: ExternalSecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to define a conversion Strategy
@@ -19913,7 +19913,7 @@ export interface ExternalSecretV1Beta1SpecDataSourceRefGeneratorRef {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecDataSourceRefGeneratorRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecDataSourceRefGeneratorRef(obj: ExternalSecretV1Beta1SpecDataSourceRefGeneratorRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19924,7 +19924,7 @@ export function toJson_ExternalSecretV1Beta1SpecDataSourceRefGeneratorRef(obj: E
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretStoreRef defines which SecretStore to fetch the ExternalSecret data.
@@ -19953,7 +19953,7 @@ export interface ExternalSecretV1Beta1SpecDataSourceRefStoreRef {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecDataSourceRefStoreRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecDataSourceRefStoreRef(obj: ExternalSecretV1Beta1SpecDataSourceRefStoreRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19963,7 +19963,7 @@ export function toJson_ExternalSecretV1Beta1SpecDataSourceRefStoreRef(obj: Exter
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to define a conversion Strategy
@@ -20052,7 +20052,7 @@ export interface ExternalSecretV1Beta1SpecDataFromFindName {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecDataFromFindName' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecDataFromFindName(obj: ExternalSecretV1Beta1SpecDataFromFindName | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20061,7 +20061,7 @@ export function toJson_ExternalSecretV1Beta1SpecDataFromFindName(obj: ExternalSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to rewrite with regular expressions.
@@ -20089,7 +20089,7 @@ export interface ExternalSecretV1Beta1SpecDataFromRewriteRegexp {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecDataFromRewriteRegexp' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecDataFromRewriteRegexp(obj: ExternalSecretV1Beta1SpecDataFromRewriteRegexp | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20099,7 +20099,7 @@ export function toJson_ExternalSecretV1Beta1SpecDataFromRewriteRegexp(obj: Exter
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to apply string transformation on the secrets.
@@ -20121,7 +20121,7 @@ export interface ExternalSecretV1Beta1SpecDataFromRewriteTransform {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecDataFromRewriteTransform' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecDataFromRewriteTransform(obj: ExternalSecretV1Beta1SpecDataFromRewriteTransform | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20130,7 +20130,7 @@ export function toJson_ExternalSecretV1Beta1SpecDataFromRewriteTransform(obj: Ex
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * GeneratorRef points to a generator custom resource.
@@ -20164,7 +20164,7 @@ export interface ExternalSecretV1Beta1SpecDataFromSourceRefGeneratorRef {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecDataFromSourceRefGeneratorRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecDataFromSourceRefGeneratorRef(obj: ExternalSecretV1Beta1SpecDataFromSourceRefGeneratorRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20175,7 +20175,7 @@ export function toJson_ExternalSecretV1Beta1SpecDataFromSourceRefGeneratorRef(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretStoreRef defines which SecretStore to fetch the ExternalSecret data.
@@ -20204,7 +20204,7 @@ export interface ExternalSecretV1Beta1SpecDataFromSourceRefStoreRef {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecDataFromSourceRefStoreRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecDataFromSourceRefStoreRef(obj: ExternalSecretV1Beta1SpecDataFromSourceRefStoreRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20214,7 +20214,7 @@ export function toJson_ExternalSecretV1Beta1SpecDataFromSourceRefStoreRef(obj: E
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * EngineVersion specifies the template engine version
@@ -20261,7 +20261,7 @@ export interface ExternalSecretV1Beta1SpecTargetTemplateMetadata {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecTargetTemplateMetadata' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecTargetTemplateMetadata(obj: ExternalSecretV1Beta1SpecTargetTemplateMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20271,7 +20271,7 @@ export function toJson_ExternalSecretV1Beta1SpecTargetTemplateMetadata(obj: Exte
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFrom
@@ -20302,7 +20302,7 @@ export interface ExternalSecretV1Beta1SpecTargetTemplateTemplateFrom {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecTargetTemplateTemplateFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecTargetTemplateTemplateFrom(obj: ExternalSecretV1Beta1SpecTargetTemplateTemplateFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20314,7 +20314,7 @@ export function toJson_ExternalSecretV1Beta1SpecTargetTemplateTemplateFrom(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specify the Kind of the generator resource
@@ -20435,7 +20435,7 @@ export interface ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMap {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMap' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMap(obj: ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20445,7 +20445,7 @@ export function toJson_ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfig
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecret
@@ -20470,7 +20470,7 @@ export interface ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecret {
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecret(obj: ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20480,7 +20480,7 @@ export function toJson_ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFromTarget
@@ -20515,7 +20515,7 @@ export interface ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMapIte
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMapItems' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMapItems(obj: ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMapItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20525,7 +20525,7 @@ export function toJson_ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfig
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecretItems
@@ -20548,7 +20548,7 @@ export interface ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecretItems 
 /**
  * Converts an object of type 'ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecretItems' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecretItems(obj: ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecretItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20558,7 +20558,7 @@ export function toJson_ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMapItemsTemplateAs
@@ -20656,7 +20656,7 @@ export interface PushSecretProps {
 /**
  * Converts an object of type 'PushSecretProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PushSecretProps(obj: PushSecretProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20666,7 +20666,7 @@ export function toJson_PushSecretProps(obj: PushSecretProps | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PushSecretSpec configures the behavior of the PushSecret.
@@ -20726,7 +20726,7 @@ export interface PushSecretSpec {
 /**
  * Converts an object of type 'PushSecretSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PushSecretSpec(obj: PushSecretSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20741,7 +20741,7 @@ export function toJson_PushSecretSpec(obj: PushSecretSpec | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema PushSecretSpecData
@@ -20774,7 +20774,7 @@ export interface PushSecretSpecData {
 /**
  * Converts an object of type 'PushSecretSpecData' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PushSecretSpecData(obj: PushSecretSpecData | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20785,7 +20785,7 @@ export function toJson_PushSecretSpecData(obj: PushSecretSpecData | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Deletion Policy to handle Secrets in the provider.
@@ -20829,7 +20829,7 @@ export interface PushSecretSpecSecretStoreRefs {
 /**
  * Converts an object of type 'PushSecretSpecSecretStoreRefs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PushSecretSpecSecretStoreRefs(obj: PushSecretSpecSecretStoreRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20840,7 +20840,7 @@ export function toJson_PushSecretSpecSecretStoreRefs(obj: PushSecretSpecSecretSt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Secret Selector (k8s source) for the Push Secret
@@ -20867,7 +20867,7 @@ export interface PushSecretSpecSelector {
 /**
  * Converts an object of type 'PushSecretSpecSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PushSecretSpecSelector(obj: PushSecretSpecSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20877,7 +20877,7 @@ export function toJson_PushSecretSpecSelector(obj: PushSecretSpecSelector | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Template defines a blueprint for the created Secret resource.
@@ -20926,7 +20926,7 @@ export interface PushSecretSpecTemplate {
 /**
  * Converts an object of type 'PushSecretSpecTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PushSecretSpecTemplate(obj: PushSecretSpecTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20940,7 +20940,7 @@ export function toJson_PushSecretSpecTemplate(obj: PushSecretSpecTemplate | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * UpdatePolicy to handle Secrets in the provider.
@@ -20991,7 +20991,7 @@ export interface PushSecretSpecDataMatch {
 /**
  * Converts an object of type 'PushSecretSpecDataMatch' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PushSecretSpecDataMatch(obj: PushSecretSpecDataMatch | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21001,7 +21001,7 @@ export function toJson_PushSecretSpecDataMatch(obj: PushSecretSpecDataMatch | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kind of the SecretStore resource (SecretStore or ClusterSecretStore)
@@ -21042,7 +21042,7 @@ export interface PushSecretSpecSecretStoreRefsLabelSelector {
 /**
  * Converts an object of type 'PushSecretSpecSecretStoreRefsLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PushSecretSpecSecretStoreRefsLabelSelector(obj: PushSecretSpecSecretStoreRefsLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21052,7 +21052,7 @@ export function toJson_PushSecretSpecSecretStoreRefsLabelSelector(obj: PushSecre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Point to a generator to create a Secret.
@@ -21086,7 +21086,7 @@ export interface PushSecretSpecSelectorGeneratorRef {
 /**
  * Converts an object of type 'PushSecretSpecSelectorGeneratorRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PushSecretSpecSelectorGeneratorRef(obj: PushSecretSpecSelectorGeneratorRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21097,7 +21097,7 @@ export function toJson_PushSecretSpecSelectorGeneratorRef(obj: PushSecretSpecSel
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Select a Secret to Push.
@@ -21125,7 +21125,7 @@ export interface PushSecretSpecSelectorSecret {
 /**
  * Converts an object of type 'PushSecretSpecSelectorSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PushSecretSpecSelectorSecret(obj: PushSecretSpecSelectorSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21135,7 +21135,7 @@ export function toJson_PushSecretSpecSelectorSecret(obj: PushSecretSpecSelectorS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * EngineVersion specifies the template engine version
@@ -21182,7 +21182,7 @@ export interface PushSecretSpecTemplateMetadata {
 /**
  * Converts an object of type 'PushSecretSpecTemplateMetadata' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PushSecretSpecTemplateMetadata(obj: PushSecretSpecTemplateMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21192,7 +21192,7 @@ export function toJson_PushSecretSpecTemplateMetadata(obj: PushSecretSpecTemplat
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema PushSecretSpecTemplateTemplateFrom
@@ -21223,7 +21223,7 @@ export interface PushSecretSpecTemplateTemplateFrom {
 /**
  * Converts an object of type 'PushSecretSpecTemplateTemplateFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PushSecretSpecTemplateTemplateFrom(obj: PushSecretSpecTemplateTemplateFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21235,7 +21235,7 @@ export function toJson_PushSecretSpecTemplateTemplateFrom(obj: PushSecretSpecTem
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Remote Refs to push to providers.
@@ -21262,7 +21262,7 @@ export interface PushSecretSpecDataMatchRemoteRef {
 /**
  * Converts an object of type 'PushSecretSpecDataMatchRemoteRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PushSecretSpecDataMatchRemoteRef(obj: PushSecretSpecDataMatchRemoteRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21272,7 +21272,7 @@ export function toJson_PushSecretSpecDataMatchRemoteRef(obj: PushSecretSpecDataM
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -21311,7 +21311,7 @@ export interface PushSecretSpecSecretStoreRefsLabelSelectorMatchExpressions {
 /**
  * Converts an object of type 'PushSecretSpecSecretStoreRefsLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PushSecretSpecSecretStoreRefsLabelSelectorMatchExpressions(obj: PushSecretSpecSecretStoreRefsLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21322,7 +21322,7 @@ export function toJson_PushSecretSpecSecretStoreRefsLabelSelectorMatchExpression
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specify the Kind of the generator resource
@@ -21385,7 +21385,7 @@ export interface PushSecretSpecSelectorSecretSelector {
 /**
  * Converts an object of type 'PushSecretSpecSelectorSecretSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PushSecretSpecSelectorSecretSelector(obj: PushSecretSpecSelectorSecretSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21395,7 +21395,7 @@ export function toJson_PushSecretSpecSelectorSecretSelector(obj: PushSecretSpecS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema PushSecretSpecTemplateTemplateFromConfigMap
@@ -21420,7 +21420,7 @@ export interface PushSecretSpecTemplateTemplateFromConfigMap {
 /**
  * Converts an object of type 'PushSecretSpecTemplateTemplateFromConfigMap' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PushSecretSpecTemplateTemplateFromConfigMap(obj: PushSecretSpecTemplateTemplateFromConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21430,7 +21430,7 @@ export function toJson_PushSecretSpecTemplateTemplateFromConfigMap(obj: PushSecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema PushSecretSpecTemplateTemplateFromSecret
@@ -21455,7 +21455,7 @@ export interface PushSecretSpecTemplateTemplateFromSecret {
 /**
  * Converts an object of type 'PushSecretSpecTemplateTemplateFromSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PushSecretSpecTemplateTemplateFromSecret(obj: PushSecretSpecTemplateTemplateFromSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21465,7 +21465,7 @@ export function toJson_PushSecretSpecTemplateTemplateFromSecret(obj: PushSecretS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema PushSecretSpecTemplateTemplateFromTarget
@@ -21516,7 +21516,7 @@ export interface PushSecretSpecSelectorSecretSelectorMatchExpressions {
 /**
  * Converts an object of type 'PushSecretSpecSelectorSecretSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PushSecretSpecSelectorSecretSelectorMatchExpressions(obj: PushSecretSpecSelectorSecretSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21527,7 +21527,7 @@ export function toJson_PushSecretSpecSelectorSecretSelectorMatchExpressions(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema PushSecretSpecTemplateTemplateFromConfigMapItems
@@ -21550,7 +21550,7 @@ export interface PushSecretSpecTemplateTemplateFromConfigMapItems {
 /**
  * Converts an object of type 'PushSecretSpecTemplateTemplateFromConfigMapItems' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PushSecretSpecTemplateTemplateFromConfigMapItems(obj: PushSecretSpecTemplateTemplateFromConfigMapItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21560,7 +21560,7 @@ export function toJson_PushSecretSpecTemplateTemplateFromConfigMapItems(obj: Pus
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema PushSecretSpecTemplateTemplateFromSecretItems
@@ -21583,7 +21583,7 @@ export interface PushSecretSpecTemplateTemplateFromSecretItems {
 /**
  * Converts an object of type 'PushSecretSpecTemplateTemplateFromSecretItems' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PushSecretSpecTemplateTemplateFromSecretItems(obj: PushSecretSpecTemplateTemplateFromSecretItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21593,7 +21593,7 @@ export function toJson_PushSecretSpecTemplateTemplateFromSecretItems(obj: PushSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema PushSecretSpecTemplateTemplateFromConfigMapItemsTemplateAs
@@ -21693,7 +21693,7 @@ export interface SecretStoreProps {
 /**
  * Converts an object of type 'SecretStoreProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreProps(obj: SecretStoreProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21703,7 +21703,7 @@ export function toJson_SecretStoreProps(obj: SecretStoreProps | undefined): Reco
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretStoreSpec defines the desired state of SecretStore.
@@ -21738,7 +21738,7 @@ export interface SecretStoreSpec {
 /**
  * Converts an object of type 'SecretStoreSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpec(obj: SecretStoreSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21749,7 +21749,7 @@ export function toJson_SecretStoreSpec(obj: SecretStoreSpec | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to configure the provider. Only one provider may be set
@@ -21860,7 +21860,7 @@ export interface SecretStoreSpecProvider {
 /**
  * Converts an object of type 'SecretStoreSpecProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProvider(obj: SecretStoreSpecProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21882,7 +21882,7 @@ export function toJson_SecretStoreSpecProvider(obj: SecretStoreSpecProvider | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to configure http retries if failed
@@ -21905,7 +21905,7 @@ export interface SecretStoreSpecRetrySettings {
 /**
  * Converts an object of type 'SecretStoreSpecRetrySettings' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecRetrySettings(obj: SecretStoreSpecRetrySettings | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21915,7 +21915,7 @@ export function toJson_SecretStoreSpecRetrySettings(obj: SecretStoreSpecRetrySet
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Akeyless configures this store to sync secrets using Akeyless Vault provider
@@ -21958,7 +21958,7 @@ export interface SecretStoreSpecProviderAkeyless {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAkeyless' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAkeyless(obj: SecretStoreSpecProviderAkeyless | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21970,7 +21970,7 @@ export function toJson_SecretStoreSpecProviderAkeyless(obj: SecretStoreSpecProvi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Alibaba configures this store to sync secrets using Alibaba Cloud provider
@@ -21997,7 +21997,7 @@ export interface SecretStoreSpecProviderAlibaba {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAlibaba' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAlibaba(obj: SecretStoreSpecProviderAlibaba | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22007,7 +22007,7 @@ export function toJson_SecretStoreSpecProviderAlibaba(obj: SecretStoreSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AWS configures this store to sync secrets using AWS Secret Manager provider
@@ -22050,7 +22050,7 @@ export interface SecretStoreSpecProviderAws {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAws' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAws(obj: SecretStoreSpecProviderAws | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22062,7 +22062,7 @@ export function toJson_SecretStoreSpecProviderAws(obj: SecretStoreSpecProviderAw
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AzureKV configures this store to sync secrets using Azure Key Vault provider
@@ -22121,7 +22121,7 @@ export interface SecretStoreSpecProviderAzurekv {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAzurekv' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAzurekv(obj: SecretStoreSpecProviderAzurekv | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22135,7 +22135,7 @@ export function toJson_SecretStoreSpecProviderAzurekv(obj: SecretStoreSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Fake configures a store with static key/value pairs
@@ -22153,7 +22153,7 @@ export interface SecretStoreSpecProviderFake {
 /**
  * Converts an object of type 'SecretStoreSpecProviderFake' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderFake(obj: SecretStoreSpecProviderFake | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22162,7 +22162,7 @@ export function toJson_SecretStoreSpecProviderFake(obj: SecretStoreSpecProviderF
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * GCPSM configures this store to sync secrets using Google Cloud Platform Secret Manager provider
@@ -22189,7 +22189,7 @@ export interface SecretStoreSpecProviderGcpsm {
 /**
  * Converts an object of type 'SecretStoreSpecProviderGcpsm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderGcpsm(obj: SecretStoreSpecProviderGcpsm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22199,7 +22199,7 @@ export function toJson_SecretStoreSpecProviderGcpsm(obj: SecretStoreSpecProvider
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * GitLab configures this store to sync secrets using GitLab Variables provider
@@ -22234,7 +22234,7 @@ export interface SecretStoreSpecProviderGitlab {
 /**
  * Converts an object of type 'SecretStoreSpecProviderGitlab' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderGitlab(obj: SecretStoreSpecProviderGitlab | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22245,7 +22245,7 @@ export function toJson_SecretStoreSpecProviderGitlab(obj: SecretStoreSpecProvide
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * IBM configures this store to sync secrets using IBM Cloud provider
@@ -22272,7 +22272,7 @@ export interface SecretStoreSpecProviderIbm {
 /**
  * Converts an object of type 'SecretStoreSpecProviderIbm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderIbm(obj: SecretStoreSpecProviderIbm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22282,7 +22282,7 @@ export function toJson_SecretStoreSpecProviderIbm(obj: SecretStoreSpecProviderIb
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kubernetes configures this store to sync secrets using a Kubernetes cluster provider
@@ -22316,7 +22316,7 @@ export interface SecretStoreSpecProviderKubernetes {
 /**
  * Converts an object of type 'SecretStoreSpecProviderKubernetes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderKubernetes(obj: SecretStoreSpecProviderKubernetes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22327,7 +22327,7 @@ export function toJson_SecretStoreSpecProviderKubernetes(obj: SecretStoreSpecPro
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Oracle configures this store to sync secrets using Oracle Vault provider
@@ -22396,7 +22396,7 @@ export interface SecretStoreSpecProviderOracle {
 /**
  * Converts an object of type 'SecretStoreSpecProviderOracle' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderOracle(obj: SecretStoreSpecProviderOracle | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22411,7 +22411,7 @@ export function toJson_SecretStoreSpecProviderOracle(obj: SecretStoreSpecProvide
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configures a store to sync secrets with a Password Depot instance.
@@ -22445,7 +22445,7 @@ export interface SecretStoreSpecProviderPassworddepot {
 /**
  * Converts an object of type 'SecretStoreSpecProviderPassworddepot' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderPassworddepot(obj: SecretStoreSpecProviderPassworddepot | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22456,7 +22456,7 @@ export function toJson_SecretStoreSpecProviderPassworddepot(obj: SecretStoreSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Vault configures this store to sync secrets using Hashi provider
@@ -22547,7 +22547,7 @@ export interface SecretStoreSpecProviderVault {
 /**
  * Converts an object of type 'SecretStoreSpecProviderVault' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderVault(obj: SecretStoreSpecProviderVault | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22564,7 +22564,7 @@ export function toJson_SecretStoreSpecProviderVault(obj: SecretStoreSpecProvider
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Webhook configures this store to sync secrets using a generic templated webhook
@@ -22644,7 +22644,7 @@ export interface SecretStoreSpecProviderWebhook {
 /**
  * Converts an object of type 'SecretStoreSpecProviderWebhook' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderWebhook(obj: SecretStoreSpecProviderWebhook | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22661,7 +22661,7 @@ export function toJson_SecretStoreSpecProviderWebhook(obj: SecretStoreSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * YandexLockbox configures this store to sync secrets using Yandex Lockbox provider
@@ -22695,7 +22695,7 @@ export interface SecretStoreSpecProviderYandexlockbox {
 /**
  * Converts an object of type 'SecretStoreSpecProviderYandexlockbox' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderYandexlockbox(obj: SecretStoreSpecProviderYandexlockbox | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22706,7 +22706,7 @@ export function toJson_SecretStoreSpecProviderYandexlockbox(obj: SecretStoreSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how the operator authenticates with Akeyless.
@@ -22735,7 +22735,7 @@ export interface SecretStoreSpecProviderAkeylessAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAkeylessAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAkeylessAuthSecretRef(obj: SecretStoreSpecProviderAkeylessAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22745,7 +22745,7 @@ export function toJson_SecretStoreSpecProviderAkeylessAuthSecretRef(obj: SecretS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The provider for the CA bundle to use to validate Akeyless Gateway certificate.
@@ -22786,7 +22786,7 @@ export interface SecretStoreSpecProviderAkeylessCaProvider {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAkeylessCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAkeylessCaProvider(obj: SecretStoreSpecProviderAkeylessCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22798,7 +22798,7 @@ export function toJson_SecretStoreSpecProviderAkeylessCaProvider(obj: SecretStor
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AlibabaAuth contains a secretRef for credentials.
@@ -22825,7 +22825,7 @@ export interface SecretStoreSpecProviderAlibabaAuth {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAlibabaAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAlibabaAuth(obj: SecretStoreSpecProviderAlibabaAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22835,7 +22835,7 @@ export function toJson_SecretStoreSpecProviderAlibabaAuth(obj: SecretStoreSpecPr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines the information necessary to authenticate against AWS
@@ -22865,7 +22865,7 @@ export interface SecretStoreSpecProviderAwsAuth {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAwsAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAwsAuth(obj: SecretStoreSpecProviderAwsAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22875,7 +22875,7 @@ export function toJson_SecretStoreSpecProviderAwsAuth(obj: SecretStoreSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Service defines which service should be used to fetch the secrets
@@ -22914,7 +22914,7 @@ export interface SecretStoreSpecProviderAzurekvAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAzurekvAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAzurekvAuthSecretRef(obj: SecretStoreSpecProviderAzurekvAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22924,7 +22924,7 @@ export function toJson_SecretStoreSpecProviderAzurekvAuthSecretRef(obj: SecretSt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth type defines how to authenticate to the keyvault service.
@@ -22979,7 +22979,7 @@ export interface SecretStoreSpecProviderAzurekvServiceAccountRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAzurekvServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAzurekvServiceAccountRef(obj: SecretStoreSpecProviderAzurekvServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22990,7 +22990,7 @@ export function toJson_SecretStoreSpecProviderAzurekvServiceAccountRef(obj: Secr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema SecretStoreSpecProviderFakeData
@@ -23021,7 +23021,7 @@ export interface SecretStoreSpecProviderFakeData {
 /**
  * Converts an object of type 'SecretStoreSpecProviderFakeData' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderFakeData(obj: SecretStoreSpecProviderFakeData | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23033,7 +23033,7 @@ export function toJson_SecretStoreSpecProviderFakeData(obj: SecretStoreSpecProvi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines the information necessary to authenticate against GCP
@@ -23056,7 +23056,7 @@ export interface SecretStoreSpecProviderGcpsmAuth {
 /**
  * Converts an object of type 'SecretStoreSpecProviderGcpsmAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderGcpsmAuth(obj: SecretStoreSpecProviderGcpsmAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23066,7 +23066,7 @@ export function toJson_SecretStoreSpecProviderGcpsmAuth(obj: SecretStoreSpecProv
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with a GitLab instance.
@@ -23084,7 +23084,7 @@ export interface SecretStoreSpecProviderGitlabAuth {
 /**
  * Converts an object of type 'SecretStoreSpecProviderGitlabAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderGitlabAuth(obj: SecretStoreSpecProviderGitlabAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23093,7 +23093,7 @@ export function toJson_SecretStoreSpecProviderGitlabAuth(obj: SecretStoreSpecPro
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with the IBM secrets manager.
@@ -23111,7 +23111,7 @@ export interface SecretStoreSpecProviderIbmAuth {
 /**
  * Converts an object of type 'SecretStoreSpecProviderIbmAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderIbmAuth(obj: SecretStoreSpecProviderIbmAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23120,7 +23120,7 @@ export function toJson_SecretStoreSpecProviderIbmAuth(obj: SecretStoreSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with a Kubernetes instance.
@@ -23154,7 +23154,7 @@ export interface SecretStoreSpecProviderKubernetesAuth {
 /**
  * Converts an object of type 'SecretStoreSpecProviderKubernetesAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderKubernetesAuth(obj: SecretStoreSpecProviderKubernetesAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23165,7 +23165,7 @@ export function toJson_SecretStoreSpecProviderKubernetesAuth(obj: SecretStoreSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * configures the Kubernetes server Address.
@@ -23199,7 +23199,7 @@ export interface SecretStoreSpecProviderKubernetesServer {
 /**
  * Converts an object of type 'SecretStoreSpecProviderKubernetesServer' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderKubernetesServer(obj: SecretStoreSpecProviderKubernetesServer | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23210,7 +23210,7 @@ export function toJson_SecretStoreSpecProviderKubernetesServer(obj: SecretStoreS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with the Oracle Vault.
@@ -23246,7 +23246,7 @@ export interface SecretStoreSpecProviderOracleAuth {
 /**
  * Converts an object of type 'SecretStoreSpecProviderOracleAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderOracleAuth(obj: SecretStoreSpecProviderOracleAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23257,7 +23257,7 @@ export function toJson_SecretStoreSpecProviderOracleAuth(obj: SecretStoreSpecPro
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of principal to use for authentication. If left blank, the Auth struct will
@@ -23311,7 +23311,7 @@ export interface SecretStoreSpecProviderOracleServiceAccountRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderOracleServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderOracleServiceAccountRef(obj: SecretStoreSpecProviderOracleServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23322,7 +23322,7 @@ export function toJson_SecretStoreSpecProviderOracleServiceAccountRef(obj: Secre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with a Password Depot instance.
@@ -23340,7 +23340,7 @@ export interface SecretStoreSpecProviderPassworddepotAuth {
 /**
  * Converts an object of type 'SecretStoreSpecProviderPassworddepotAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderPassworddepotAuth(obj: SecretStoreSpecProviderPassworddepotAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23349,7 +23349,7 @@ export function toJson_SecretStoreSpecProviderPassworddepotAuth(obj: SecretStore
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with the Vault server.
@@ -23409,7 +23409,7 @@ export interface SecretStoreSpecProviderVaultAuth {
 /**
  * Converts an object of type 'SecretStoreSpecProviderVaultAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderVaultAuth(obj: SecretStoreSpecProviderVaultAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23423,7 +23423,7 @@ export function toJson_SecretStoreSpecProviderVaultAuth(obj: SecretStoreSpecProv
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The provider for the CA bundle to use to validate Vault server certificate.
@@ -23464,7 +23464,7 @@ export interface SecretStoreSpecProviderVaultCaProvider {
 /**
  * Converts an object of type 'SecretStoreSpecProviderVaultCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderVaultCaProvider(obj: SecretStoreSpecProviderVaultCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23476,7 +23476,7 @@ export function toJson_SecretStoreSpecProviderVaultCaProvider(obj: SecretStoreSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Version is the Vault KV secret engine version. This can be either "v1" or
@@ -23530,7 +23530,7 @@ export interface SecretStoreSpecProviderWebhookCaProvider {
 /**
  * Converts an object of type 'SecretStoreSpecProviderWebhookCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderWebhookCaProvider(obj: SecretStoreSpecProviderWebhookCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23542,7 +23542,7 @@ export function toJson_SecretStoreSpecProviderWebhookCaProvider(obj: SecretStore
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Result formatting
@@ -23562,7 +23562,7 @@ export interface SecretStoreSpecProviderWebhookResult {
 /**
  * Converts an object of type 'SecretStoreSpecProviderWebhookResult' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderWebhookResult(obj: SecretStoreSpecProviderWebhookResult | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23571,7 +23571,7 @@ export function toJson_SecretStoreSpecProviderWebhookResult(obj: SecretStoreSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema SecretStoreSpecProviderWebhookSecrets
@@ -23596,7 +23596,7 @@ export interface SecretStoreSpecProviderWebhookSecrets {
 /**
  * Converts an object of type 'SecretStoreSpecProviderWebhookSecrets' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderWebhookSecrets(obj: SecretStoreSpecProviderWebhookSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23606,7 +23606,7 @@ export function toJson_SecretStoreSpecProviderWebhookSecrets(obj: SecretStoreSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines the information necessary to authenticate against Yandex Lockbox
@@ -23626,7 +23626,7 @@ export interface SecretStoreSpecProviderYandexlockboxAuth {
 /**
  * Converts an object of type 'SecretStoreSpecProviderYandexlockboxAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderYandexlockboxAuth(obj: SecretStoreSpecProviderYandexlockboxAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23635,7 +23635,7 @@ export function toJson_SecretStoreSpecProviderYandexlockboxAuth(obj: SecretStore
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The provider for the CA bundle to use to validate Yandex.Cloud server certificate.
@@ -23656,7 +23656,7 @@ export interface SecretStoreSpecProviderYandexlockboxCaProvider {
 /**
  * Converts an object of type 'SecretStoreSpecProviderYandexlockboxCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderYandexlockboxCaProvider(obj: SecretStoreSpecProviderYandexlockboxCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23665,7 +23665,7 @@ export function toJson_SecretStoreSpecProviderYandexlockboxCaProvider(obj: Secre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kubernetes authenticates with Akeyless by passing the ServiceAccount
@@ -23713,7 +23713,7 @@ export interface SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuth {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuth(obj: SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23725,7 +23725,7 @@ export function toJson_SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAut
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a Secret that contains the details
@@ -23762,7 +23762,7 @@ export interface SecretStoreSpecProviderAkeylessAuthSecretRefSecretRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAkeylessAuthSecretRefSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAkeylessAuthSecretRefSecretRef(obj: SecretStoreSpecProviderAkeylessAuthSecretRefSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23773,7 +23773,7 @@ export function toJson_SecretStoreSpecProviderAkeylessAuthSecretRefSecretRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -23818,7 +23818,7 @@ export interface SecretStoreSpecProviderAlibabaAuthRrsa {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAlibabaAuthRrsa' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAlibabaAuthRrsa(obj: SecretStoreSpecProviderAlibabaAuthRrsa | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23830,7 +23830,7 @@ export function toJson_SecretStoreSpecProviderAlibabaAuthRrsa(obj: SecretStoreSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AlibabaAuthSecretRef holds secret references for Alibaba credentials.
@@ -23857,7 +23857,7 @@ export interface SecretStoreSpecProviderAlibabaAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAlibabaAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAlibabaAuthSecretRef(obj: SecretStoreSpecProviderAlibabaAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23867,7 +23867,7 @@ export function toJson_SecretStoreSpecProviderAlibabaAuthSecretRef(obj: SecretSt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Authenticate against AWS using service account tokens.
@@ -23887,7 +23887,7 @@ export interface SecretStoreSpecProviderAwsAuthJwt {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAwsAuthJwt' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAwsAuthJwt(obj: SecretStoreSpecProviderAwsAuthJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23896,7 +23896,7 @@ export function toJson_SecretStoreSpecProviderAwsAuthJwt(obj: SecretStoreSpecPro
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AWSAuthSecretRef holds secret references for AWS credentials
@@ -23924,7 +23924,7 @@ export interface SecretStoreSpecProviderAwsAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAwsAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAwsAuthSecretRef(obj: SecretStoreSpecProviderAwsAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23934,7 +23934,7 @@ export function toJson_SecretStoreSpecProviderAwsAuthSecretRef(obj: SecretStoreS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Azure clientId of the service principle used for authentication.
@@ -23970,7 +23970,7 @@ export interface SecretStoreSpecProviderAzurekvAuthSecretRefClientId {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAzurekvAuthSecretRefClientId' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAzurekvAuthSecretRefClientId(obj: SecretStoreSpecProviderAzurekvAuthSecretRefClientId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23981,7 +23981,7 @@ export function toJson_SecretStoreSpecProviderAzurekvAuthSecretRefClientId(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Azure ClientSecret of the service principle used for authentication.
@@ -24017,7 +24017,7 @@ export interface SecretStoreSpecProviderAzurekvAuthSecretRefClientSecret {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAzurekvAuthSecretRefClientSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAzurekvAuthSecretRefClientSecret(obj: SecretStoreSpecProviderAzurekvAuthSecretRefClientSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24028,7 +24028,7 @@ export function toJson_SecretStoreSpecProviderAzurekvAuthSecretRefClientSecret(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema SecretStoreSpecProviderGcpsmAuthSecretRef
@@ -24046,7 +24046,7 @@ export interface SecretStoreSpecProviderGcpsmAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderGcpsmAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderGcpsmAuthSecretRef(obj: SecretStoreSpecProviderGcpsmAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24055,7 +24055,7 @@ export function toJson_SecretStoreSpecProviderGcpsmAuthSecretRef(obj: SecretStor
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentity
@@ -24088,7 +24088,7 @@ export interface SecretStoreSpecProviderGcpsmAuthWorkloadIdentity {
 /**
  * Converts an object of type 'SecretStoreSpecProviderGcpsmAuthWorkloadIdentity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderGcpsmAuthWorkloadIdentity(obj: SecretStoreSpecProviderGcpsmAuthWorkloadIdentity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24100,7 +24100,7 @@ export function toJson_SecretStoreSpecProviderGcpsmAuthWorkloadIdentity(obj: Sec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema SecretStoreSpecProviderGitlabAuthSecretRef
@@ -24118,7 +24118,7 @@ export interface SecretStoreSpecProviderGitlabAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderGitlabAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderGitlabAuthSecretRef(obj: SecretStoreSpecProviderGitlabAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24127,7 +24127,7 @@ export function toJson_SecretStoreSpecProviderGitlabAuthSecretRef(obj: SecretSto
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema SecretStoreSpecProviderIbmAuthSecretRef
@@ -24145,7 +24145,7 @@ export interface SecretStoreSpecProviderIbmAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderIbmAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderIbmAuthSecretRef(obj: SecretStoreSpecProviderIbmAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24154,7 +24154,7 @@ export function toJson_SecretStoreSpecProviderIbmAuthSecretRef(obj: SecretStoreS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * has both clientCert and clientKey as secretKeySelector
@@ -24183,7 +24183,7 @@ export interface SecretStoreSpecProviderKubernetesAuthCert {
 /**
  * Converts an object of type 'SecretStoreSpecProviderKubernetesAuthCert' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderKubernetesAuthCert(obj: SecretStoreSpecProviderKubernetesAuthCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24193,7 +24193,7 @@ export function toJson_SecretStoreSpecProviderKubernetesAuthCert(obj: SecretStor
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * points to a service account that should be used for authentication
@@ -24213,7 +24213,7 @@ export interface SecretStoreSpecProviderKubernetesAuthServiceAccount {
 /**
  * Converts an object of type 'SecretStoreSpecProviderKubernetesAuthServiceAccount' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderKubernetesAuthServiceAccount(obj: SecretStoreSpecProviderKubernetesAuthServiceAccount | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24222,7 +24222,7 @@ export function toJson_SecretStoreSpecProviderKubernetesAuthServiceAccount(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * use static token to authenticate with
@@ -24243,7 +24243,7 @@ export interface SecretStoreSpecProviderKubernetesAuthToken {
 /**
  * Converts an object of type 'SecretStoreSpecProviderKubernetesAuthToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderKubernetesAuthToken(obj: SecretStoreSpecProviderKubernetesAuthToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24252,7 +24252,7 @@ export function toJson_SecretStoreSpecProviderKubernetesAuthToken(obj: SecretSto
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * see: https://external-secrets.io/v0.4.1/spec/#external-secrets.io/v1alpha1.CAProvider
@@ -24293,7 +24293,7 @@ export interface SecretStoreSpecProviderKubernetesServerCaProvider {
 /**
  * Converts an object of type 'SecretStoreSpecProviderKubernetesServerCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderKubernetesServerCaProvider(obj: SecretStoreSpecProviderKubernetesServerCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24305,7 +24305,7 @@ export function toJson_SecretStoreSpecProviderKubernetesServerCaProvider(obj: Se
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef to pass through sensitive information.
@@ -24332,7 +24332,7 @@ export interface SecretStoreSpecProviderOracleAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderOracleAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderOracleAuthSecretRef(obj: SecretStoreSpecProviderOracleAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24342,7 +24342,7 @@ export function toJson_SecretStoreSpecProviderOracleAuthSecretRef(obj: SecretSto
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema SecretStoreSpecProviderPassworddepotAuthSecretRef
@@ -24360,7 +24360,7 @@ export interface SecretStoreSpecProviderPassworddepotAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderPassworddepotAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderPassworddepotAuthSecretRef(obj: SecretStoreSpecProviderPassworddepotAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24369,7 +24369,7 @@ export function toJson_SecretStoreSpecProviderPassworddepotAuthSecretRef(obj: Se
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AppRole authenticates with Vault using the App Role auth mechanism,
@@ -24409,7 +24409,7 @@ export interface SecretStoreSpecProviderVaultAuthAppRole {
 /**
  * Converts an object of type 'SecretStoreSpecProviderVaultAuthAppRole' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderVaultAuthAppRole(obj: SecretStoreSpecProviderVaultAuthAppRole | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24420,7 +24420,7 @@ export function toJson_SecretStoreSpecProviderVaultAuthAppRole(obj: SecretStoreS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Cert authenticates with TLS Certificates by passing client certificate, private key and ca certificate
@@ -24450,7 +24450,7 @@ export interface SecretStoreSpecProviderVaultAuthCert {
 /**
  * Converts an object of type 'SecretStoreSpecProviderVaultAuthCert' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderVaultAuthCert(obj: SecretStoreSpecProviderVaultAuthCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24460,7 +24460,7 @@ export function toJson_SecretStoreSpecProviderVaultAuthCert(obj: SecretStoreSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Jwt authenticates with Vault by passing role and JWT token using the
@@ -24506,7 +24506,7 @@ export interface SecretStoreSpecProviderVaultAuthJwt {
 /**
  * Converts an object of type 'SecretStoreSpecProviderVaultAuthJwt' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderVaultAuthJwt(obj: SecretStoreSpecProviderVaultAuthJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24518,7 +24518,7 @@ export function toJson_SecretStoreSpecProviderVaultAuthJwt(obj: SecretStoreSpecP
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kubernetes authenticates with Vault by passing the ServiceAccount
@@ -24568,7 +24568,7 @@ export interface SecretStoreSpecProviderVaultAuthKubernetes {
 /**
  * Converts an object of type 'SecretStoreSpecProviderVaultAuthKubernetes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderVaultAuthKubernetes(obj: SecretStoreSpecProviderVaultAuthKubernetes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24580,7 +24580,7 @@ export function toJson_SecretStoreSpecProviderVaultAuthKubernetes(obj: SecretSto
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Ldap authenticates with Vault by passing username/password pair using
@@ -24619,7 +24619,7 @@ export interface SecretStoreSpecProviderVaultAuthLdap {
 /**
  * Converts an object of type 'SecretStoreSpecProviderVaultAuthLdap' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderVaultAuthLdap(obj: SecretStoreSpecProviderVaultAuthLdap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24630,7 +24630,7 @@ export function toJson_SecretStoreSpecProviderVaultAuthLdap(obj: SecretStoreSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TokenSecretRef authenticates with Vault by presenting a token.
@@ -24666,7 +24666,7 @@ export interface SecretStoreSpecProviderVaultAuthTokenSecretRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderVaultAuthTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderVaultAuthTokenSecretRef(obj: SecretStoreSpecProviderVaultAuthTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24677,7 +24677,7 @@ export function toJson_SecretStoreSpecProviderVaultAuthTokenSecretRef(obj: Secre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -24737,7 +24737,7 @@ export interface SecretStoreSpecProviderWebhookSecretsSecretRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderWebhookSecretsSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderWebhookSecretsSecretRef(obj: SecretStoreSpecProviderWebhookSecretsSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24748,7 +24748,7 @@ export function toJson_SecretStoreSpecProviderWebhookSecretsSecretRef(obj: Secre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The authorized key used for authentication
@@ -24784,7 +24784,7 @@ export interface SecretStoreSpecProviderYandexlockboxAuthAuthorizedKeySecretRef 
 /**
  * Converts an object of type 'SecretStoreSpecProviderYandexlockboxAuthAuthorizedKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderYandexlockboxAuthAuthorizedKeySecretRef(obj: SecretStoreSpecProviderYandexlockboxAuthAuthorizedKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24795,7 +24795,7 @@ export function toJson_SecretStoreSpecProviderYandexlockboxAuthAuthorizedKeySecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -24832,7 +24832,7 @@ export interface SecretStoreSpecProviderYandexlockboxCaProviderCertSecretRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderYandexlockboxCaProviderCertSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderYandexlockboxCaProviderCertSecretRef(obj: SecretStoreSpecProviderYandexlockboxCaProviderCertSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24843,7 +24843,7 @@ export function toJson_SecretStoreSpecProviderYandexlockboxCaProviderCertSecretR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional secret field containing a Kubernetes ServiceAccount JWT used
@@ -24882,7 +24882,7 @@ export interface SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthSecre
 /**
  * Converts an object of type 'SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthSecretRef(obj: SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24893,7 +24893,7 @@ export function toJson_SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAut
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional service account field containing the name of a kubernetes ServiceAccount.
@@ -24933,7 +24933,7 @@ export interface SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthServi
 /**
  * Converts an object of type 'SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthServiceAccountRef(obj: SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24944,7 +24944,7 @@ export function toJson_SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAut
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessID is used for authentication
@@ -24980,7 +24980,7 @@ export interface SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessId {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessId' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessId(obj: SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24991,7 +24991,7 @@ export function toJson_SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAcce
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -25028,7 +25028,7 @@ export interface SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessType
 /**
  * Converts an object of type 'SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessType' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessType(obj: SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessType | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25039,7 +25039,7 @@ export function toJson_SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAcce
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -25076,7 +25076,7 @@ export interface SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessType
 /**
  * Converts an object of type 'SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam(obj: SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25087,7 +25087,7 @@ export function toJson_SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAcce
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The AccessKeyID is used for authentication
@@ -25123,7 +25123,7 @@ export interface SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef
 /**
  * Converts an object of type 'SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef(obj: SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25134,7 +25134,7 @@ export function toJson_SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The AccessKeySecret is used for authentication
@@ -25170,7 +25170,7 @@ export interface SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecre
 /**
  * Converts an object of type 'SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef(obj: SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25181,7 +25181,7 @@ export function toJson_SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a ServiceAccount resource.
@@ -25218,7 +25218,7 @@ export interface SecretStoreSpecProviderAwsAuthJwtServiceAccountRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAwsAuthJwtServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAwsAuthJwtServiceAccountRef(obj: SecretStoreSpecProviderAwsAuthJwtServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25229,7 +25229,7 @@ export function toJson_SecretStoreSpecProviderAwsAuthJwtServiceAccountRef(obj: S
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The AccessKeyID is used for authentication
@@ -25265,7 +25265,7 @@ export interface SecretStoreSpecProviderAwsAuthSecretRefAccessKeyIdSecretRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderAwsAuthSecretRefAccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAwsAuthSecretRefAccessKeyIdSecretRef(obj: SecretStoreSpecProviderAwsAuthSecretRefAccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25276,7 +25276,7 @@ export function toJson_SecretStoreSpecProviderAwsAuthSecretRefAccessKeyIdSecretR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -25312,7 +25312,7 @@ export interface SecretStoreSpecProviderAwsAuthSecretRefSecretAccessKeySecretRef
 /**
  * Converts an object of type 'SecretStoreSpecProviderAwsAuthSecretRefSecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAwsAuthSecretRefSecretAccessKeySecretRef(obj: SecretStoreSpecProviderAwsAuthSecretRefSecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25323,7 +25323,7 @@ export function toJson_SecretStoreSpecProviderAwsAuthSecretRefSecretAccessKeySec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -25359,7 +25359,7 @@ export interface SecretStoreSpecProviderGcpsmAuthSecretRefSecretAccessKeySecretR
 /**
  * Converts an object of type 'SecretStoreSpecProviderGcpsmAuthSecretRefSecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderGcpsmAuthSecretRefSecretAccessKeySecretRef(obj: SecretStoreSpecProviderGcpsmAuthSecretRefSecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25370,7 +25370,7 @@ export function toJson_SecretStoreSpecProviderGcpsmAuthSecretRefSecretAccessKeyS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a ServiceAccount resource.
@@ -25407,7 +25407,7 @@ export interface SecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountR
 /**
  * Converts an object of type 'SecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef(obj: SecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25418,7 +25418,7 @@ export function toJson_SecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AccessToken is used for authentication.
@@ -25454,7 +25454,7 @@ export interface SecretStoreSpecProviderGitlabAuthSecretRefAccessToken {
 /**
  * Converts an object of type 'SecretStoreSpecProviderGitlabAuthSecretRefAccessToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderGitlabAuthSecretRefAccessToken(obj: SecretStoreSpecProviderGitlabAuthSecretRefAccessToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25465,7 +25465,7 @@ export function toJson_SecretStoreSpecProviderGitlabAuthSecretRefAccessToken(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -25501,7 +25501,7 @@ export interface SecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecretRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecretRef(obj: SecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25512,7 +25512,7 @@ export function toJson_SecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -25549,7 +25549,7 @@ export interface SecretStoreSpecProviderKubernetesAuthCertClientCert {
 /**
  * Converts an object of type 'SecretStoreSpecProviderKubernetesAuthCertClientCert' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderKubernetesAuthCertClientCert(obj: SecretStoreSpecProviderKubernetesAuthCertClientCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25560,7 +25560,7 @@ export function toJson_SecretStoreSpecProviderKubernetesAuthCertClientCert(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -25597,7 +25597,7 @@ export interface SecretStoreSpecProviderKubernetesAuthCertClientKey {
 /**
  * Converts an object of type 'SecretStoreSpecProviderKubernetesAuthCertClientKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderKubernetesAuthCertClientKey(obj: SecretStoreSpecProviderKubernetesAuthCertClientKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25608,7 +25608,7 @@ export function toJson_SecretStoreSpecProviderKubernetesAuthCertClientKey(obj: S
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a ServiceAccount resource.
@@ -25645,7 +25645,7 @@ export interface SecretStoreSpecProviderKubernetesAuthServiceAccountServiceAccou
 /**
  * Converts an object of type 'SecretStoreSpecProviderKubernetesAuthServiceAccountServiceAccount' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderKubernetesAuthServiceAccountServiceAccount(obj: SecretStoreSpecProviderKubernetesAuthServiceAccountServiceAccount | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25656,7 +25656,7 @@ export function toJson_SecretStoreSpecProviderKubernetesAuthServiceAccountServic
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -25693,7 +25693,7 @@ export interface SecretStoreSpecProviderKubernetesAuthTokenBearerToken {
 /**
  * Converts an object of type 'SecretStoreSpecProviderKubernetesAuthTokenBearerToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderKubernetesAuthTokenBearerToken(obj: SecretStoreSpecProviderKubernetesAuthTokenBearerToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25704,7 +25704,7 @@ export function toJson_SecretStoreSpecProviderKubernetesAuthTokenBearerToken(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -25752,7 +25752,7 @@ export interface SecretStoreSpecProviderOracleAuthSecretRefFingerprint {
 /**
  * Converts an object of type 'SecretStoreSpecProviderOracleAuthSecretRefFingerprint' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderOracleAuthSecretRefFingerprint(obj: SecretStoreSpecProviderOracleAuthSecretRefFingerprint | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25763,7 +25763,7 @@ export function toJson_SecretStoreSpecProviderOracleAuthSecretRefFingerprint(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PrivateKey is the user's API Signing Key in PEM format, used for authentication.
@@ -25799,7 +25799,7 @@ export interface SecretStoreSpecProviderOracleAuthSecretRefPrivatekey {
 /**
  * Converts an object of type 'SecretStoreSpecProviderOracleAuthSecretRefPrivatekey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderOracleAuthSecretRefPrivatekey(obj: SecretStoreSpecProviderOracleAuthSecretRefPrivatekey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25810,7 +25810,7 @@ export function toJson_SecretStoreSpecProviderOracleAuthSecretRefPrivatekey(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Username / Password is used for authentication.
@@ -25846,7 +25846,7 @@ export interface SecretStoreSpecProviderPassworddepotAuthSecretRefCredentials {
 /**
  * Converts an object of type 'SecretStoreSpecProviderPassworddepotAuthSecretRefCredentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderPassworddepotAuthSecretRefCredentials(obj: SecretStoreSpecProviderPassworddepotAuthSecretRefCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25857,7 +25857,7 @@ export function toJson_SecretStoreSpecProviderPassworddepotAuthSecretRefCredenti
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a key in a Secret that contains the App Role secret used
@@ -25896,7 +25896,7 @@ export interface SecretStoreSpecProviderVaultAuthAppRoleSecretRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderVaultAuthAppRoleSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderVaultAuthAppRoleSecretRef(obj: SecretStoreSpecProviderVaultAuthAppRoleSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25907,7 +25907,7 @@ export function toJson_SecretStoreSpecProviderVaultAuthAppRoleSecretRef(obj: Sec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ClientCert is a certificate to authenticate using the Cert Vault
@@ -25944,7 +25944,7 @@ export interface SecretStoreSpecProviderVaultAuthCertClientCert {
 /**
  * Converts an object of type 'SecretStoreSpecProviderVaultAuthCertClientCert' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderVaultAuthCertClientCert(obj: SecretStoreSpecProviderVaultAuthCertClientCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25955,7 +25955,7 @@ export function toJson_SecretStoreSpecProviderVaultAuthCertClientCert(obj: Secre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef to a key in a Secret resource containing client private key to
@@ -25992,7 +25992,7 @@ export interface SecretStoreSpecProviderVaultAuthCertSecretRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderVaultAuthCertSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderVaultAuthCertSecretRef(obj: SecretStoreSpecProviderVaultAuthCertSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26003,7 +26003,7 @@ export function toJson_SecretStoreSpecProviderVaultAuthCertSecretRef(obj: Secret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional ServiceAccountToken specifies the Kubernetes service account for which to request
@@ -26045,7 +26045,7 @@ export interface SecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountToke
 /**
  * Converts an object of type 'SecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountToken(obj: SecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26056,7 +26056,7 @@ export function toJson_SecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional SecretRef that refers to a key in a Secret resource containing JWT token to
@@ -26093,7 +26093,7 @@ export interface SecretStoreSpecProviderVaultAuthJwtSecretRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderVaultAuthJwtSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderVaultAuthJwtSecretRef(obj: SecretStoreSpecProviderVaultAuthJwtSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26104,7 +26104,7 @@ export function toJson_SecretStoreSpecProviderVaultAuthJwtSecretRef(obj: SecretS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional secret field containing a Kubernetes ServiceAccount JWT used
@@ -26143,7 +26143,7 @@ export interface SecretStoreSpecProviderVaultAuthKubernetesSecretRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderVaultAuthKubernetesSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderVaultAuthKubernetesSecretRef(obj: SecretStoreSpecProviderVaultAuthKubernetesSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26154,7 +26154,7 @@ export function toJson_SecretStoreSpecProviderVaultAuthKubernetesSecretRef(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional service account field containing the name of a kubernetes ServiceAccount.
@@ -26194,7 +26194,7 @@ export interface SecretStoreSpecProviderVaultAuthKubernetesServiceAccountRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderVaultAuthKubernetesServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderVaultAuthKubernetesServiceAccountRef(obj: SecretStoreSpecProviderVaultAuthKubernetesServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26205,7 +26205,7 @@ export function toJson_SecretStoreSpecProviderVaultAuthKubernetesServiceAccountR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef to a key in a Secret resource containing password for the LDAP
@@ -26243,7 +26243,7 @@ export interface SecretStoreSpecProviderVaultAuthLdapSecretRef {
 /**
  * Converts an object of type 'SecretStoreSpecProviderVaultAuthLdapSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderVaultAuthLdapSecretRef(obj: SecretStoreSpecProviderVaultAuthLdapSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26254,7 +26254,7 @@ export function toJson_SecretStoreSpecProviderVaultAuthLdapSecretRef(obj: Secret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Service account field containing the name of a kubernetes ServiceAccount.
@@ -26291,7 +26291,7 @@ export interface SecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountToke
 /**
  * Converts an object of type 'SecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountTokenServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountTokenServiceAccountRef(obj: SecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountTokenServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26302,7 +26302,7 @@ export function toJson_SecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -26382,7 +26382,7 @@ export interface SecretStoreV1Beta1Props {
 /**
  * Converts an object of type 'SecretStoreV1Beta1Props' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1Props(obj: SecretStoreV1Beta1Props | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26392,7 +26392,7 @@ export function toJson_SecretStoreV1Beta1Props(obj: SecretStoreV1Beta1Props | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretStoreSpec defines the desired state of SecretStore.
@@ -26441,7 +26441,7 @@ export interface SecretStoreV1Beta1Spec {
 /**
  * Converts an object of type 'SecretStoreV1Beta1Spec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1Spec(obj: SecretStoreV1Beta1Spec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26454,7 +26454,7 @@ export function toJson_SecretStoreV1Beta1Spec(obj: SecretStoreV1Beta1Spec | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ClusterSecretStoreCondition describes a condition by which to choose namespaces to process ExternalSecrets in
@@ -26489,7 +26489,7 @@ export interface SecretStoreV1Beta1SpecConditions {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecConditions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecConditions(obj: SecretStoreV1Beta1SpecConditions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26500,7 +26500,7 @@ export function toJson_SecretStoreV1Beta1SpecConditions(obj: SecretStoreV1Beta1S
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to configure the provider. Only one provider may be set
@@ -26758,7 +26758,7 @@ export interface SecretStoreV1Beta1SpecProvider {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProvider(obj: SecretStoreV1Beta1SpecProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26801,7 +26801,7 @@ export function toJson_SecretStoreV1Beta1SpecProvider(obj: SecretStoreV1Beta1Spe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to configure http retries if failed
@@ -26824,7 +26824,7 @@ export interface SecretStoreV1Beta1SpecRetrySettings {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecRetrySettings' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecRetrySettings(obj: SecretStoreV1Beta1SpecRetrySettings | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26834,7 +26834,7 @@ export function toJson_SecretStoreV1Beta1SpecRetrySettings(obj: SecretStoreV1Bet
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Choose namespace using a labelSelector
@@ -26863,7 +26863,7 @@ export interface SecretStoreV1Beta1SpecConditionsNamespaceSelector {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecConditionsNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecConditionsNamespaceSelector(obj: SecretStoreV1Beta1SpecConditionsNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26873,7 +26873,7 @@ export function toJson_SecretStoreV1Beta1SpecConditionsNamespaceSelector(obj: Se
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Akeyless configures this store to sync secrets using Akeyless Vault provider
@@ -26916,7 +26916,7 @@ export interface SecretStoreV1Beta1SpecProviderAkeyless {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAkeyless' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAkeyless(obj: SecretStoreV1Beta1SpecProviderAkeyless | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26928,7 +26928,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAkeyless(obj: SecretStoreV1
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Alibaba configures this store to sync secrets using Alibaba Cloud provider
@@ -26955,7 +26955,7 @@ export interface SecretStoreV1Beta1SpecProviderAlibaba {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAlibaba' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAlibaba(obj: SecretStoreV1Beta1SpecProviderAlibaba | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26965,7 +26965,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAlibaba(obj: SecretStoreV1B
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AWS configures this store to sync secrets using AWS Secret Manager provider
@@ -27050,7 +27050,7 @@ export interface SecretStoreV1Beta1SpecProviderAws {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAws' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAws(obj: SecretStoreV1Beta1SpecProviderAws | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27068,7 +27068,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAws(obj: SecretStoreV1Beta1
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AzureKV configures this store to sync secrets using Azure Key Vault provider
@@ -27137,7 +27137,7 @@ export interface SecretStoreV1Beta1SpecProviderAzurekv {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAzurekv' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAzurekv(obj: SecretStoreV1Beta1SpecProviderAzurekv | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27152,7 +27152,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAzurekv(obj: SecretStoreV1B
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Beyondtrust configures this store to sync secrets using Password Safe provider.
@@ -27179,7 +27179,7 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrust {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderBeyondtrust' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrust(obj: SecretStoreV1Beta1SpecProviderBeyondtrust | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27189,7 +27189,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrust(obj: SecretStor
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * BitwardenSecretsManager configures this store to sync secrets using BitwardenSecretsManager provider
@@ -27254,7 +27254,7 @@ export interface SecretStoreV1Beta1SpecProviderBitwardensecretsmanager {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderBitwardensecretsmanager' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderBitwardensecretsmanager(obj: SecretStoreV1Beta1SpecProviderBitwardensecretsmanager | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27270,7 +27270,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderBitwardensecretsmanager(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Chef configures this store to sync secrets with chef server
@@ -27304,7 +27304,7 @@ export interface SecretStoreV1Beta1SpecProviderChef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderChef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderChef(obj: SecretStoreV1Beta1SpecProviderChef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27315,7 +27315,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderChef(obj: SecretStoreV1Beta
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * CloudruSM configures this store to sync secrets using the Cloud.ru Secret Manager provider
@@ -27342,7 +27342,7 @@ export interface SecretStoreV1Beta1SpecProviderCloudrusm {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderCloudrusm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderCloudrusm(obj: SecretStoreV1Beta1SpecProviderCloudrusm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27352,7 +27352,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderCloudrusm(obj: SecretStoreV
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Conjur configures this store to sync secrets using conjur provider
@@ -27395,7 +27395,7 @@ export interface SecretStoreV1Beta1SpecProviderConjur {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderConjur' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderConjur(obj: SecretStoreV1Beta1SpecProviderConjur | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27407,7 +27407,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderConjur(obj: SecretStoreV1Be
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Delinea DevOps Secrets Vault
@@ -27458,7 +27458,7 @@ export interface SecretStoreV1Beta1SpecProviderDelinea {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderDelinea' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderDelinea(obj: SecretStoreV1Beta1SpecProviderDelinea | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27471,7 +27471,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderDelinea(obj: SecretStoreV1B
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Device42 configures this store to sync secrets using the Device42 provider
@@ -27498,7 +27498,7 @@ export interface SecretStoreV1Beta1SpecProviderDevice42 {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderDevice42' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderDevice42(obj: SecretStoreV1Beta1SpecProviderDevice42 | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27508,7 +27508,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderDevice42(obj: SecretStoreV1
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Doppler configures this store to sync secrets using the Doppler provider
@@ -27556,7 +27556,7 @@ export interface SecretStoreV1Beta1SpecProviderDoppler {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderDoppler' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderDoppler(obj: SecretStoreV1Beta1SpecProviderDoppler | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27569,7 +27569,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderDoppler(obj: SecretStoreV1B
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Fake configures a store with static key/value pairs
@@ -27587,7 +27587,7 @@ export interface SecretStoreV1Beta1SpecProviderFake {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderFake' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderFake(obj: SecretStoreV1Beta1SpecProviderFake | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27596,7 +27596,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderFake(obj: SecretStoreV1Beta
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Fortanix configures this store to sync secrets using the Fortanix provider
@@ -27624,7 +27624,7 @@ export interface SecretStoreV1Beta1SpecProviderFortanix {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderFortanix' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderFortanix(obj: SecretStoreV1Beta1SpecProviderFortanix | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27634,7 +27634,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderFortanix(obj: SecretStoreV1
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * GCPSM configures this store to sync secrets using Google Cloud Platform Secret Manager provider
@@ -27668,7 +27668,7 @@ export interface SecretStoreV1Beta1SpecProviderGcpsm {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderGcpsm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderGcpsm(obj: SecretStoreV1Beta1SpecProviderGcpsm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27679,7 +27679,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderGcpsm(obj: SecretStoreV1Bet
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Github configures this store to push Github Action secrets using Github API provider
@@ -27750,7 +27750,7 @@ export interface SecretStoreV1Beta1SpecProviderGithub {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderGithub' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderGithub(obj: SecretStoreV1Beta1SpecProviderGithub | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27766,7 +27766,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderGithub(obj: SecretStoreV1Be
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * GitLab configures this store to sync secrets using GitLab Variables provider
@@ -27822,7 +27822,7 @@ export interface SecretStoreV1Beta1SpecProviderGitlab {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderGitlab' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderGitlab(obj: SecretStoreV1Beta1SpecProviderGitlab | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27836,7 +27836,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderGitlab(obj: SecretStoreV1Be
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * IBM configures this store to sync secrets using IBM Cloud provider
@@ -27863,7 +27863,7 @@ export interface SecretStoreV1Beta1SpecProviderIbm {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderIbm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderIbm(obj: SecretStoreV1Beta1SpecProviderIbm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27873,7 +27873,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderIbm(obj: SecretStoreV1Beta1
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Infisical configures this store to sync secrets using the Infisical provider
@@ -27907,7 +27907,7 @@ export interface SecretStoreV1Beta1SpecProviderInfisical {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderInfisical' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderInfisical(obj: SecretStoreV1Beta1SpecProviderInfisical | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27918,7 +27918,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderInfisical(obj: SecretStoreV
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * KeeperSecurity configures this store to sync secrets using the KeeperSecurity provider
@@ -27944,7 +27944,7 @@ export interface SecretStoreV1Beta1SpecProviderKeepersecurity {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderKeepersecurity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderKeepersecurity(obj: SecretStoreV1Beta1SpecProviderKeepersecurity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27954,7 +27954,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderKeepersecurity(obj: SecretS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kubernetes configures this store to sync secrets using a Kubernetes cluster provider
@@ -27995,7 +27995,7 @@ export interface SecretStoreV1Beta1SpecProviderKubernetes {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderKubernetes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderKubernetes(obj: SecretStoreV1Beta1SpecProviderKubernetes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28007,7 +28007,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderKubernetes(obj: SecretStore
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Onboardbase configures this store to sync secrets using the Onboardbase provider
@@ -28048,7 +28048,7 @@ export interface SecretStoreV1Beta1SpecProviderOnboardbase {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderOnboardbase' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderOnboardbase(obj: SecretStoreV1Beta1SpecProviderOnboardbase | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28060,7 +28060,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderOnboardbase(obj: SecretStor
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * OnePassword configures this store to sync secrets using the 1Password Cloud provider
@@ -28094,7 +28094,7 @@ export interface SecretStoreV1Beta1SpecProviderOnepassword {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderOnepassword' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderOnepassword(obj: SecretStoreV1Beta1SpecProviderOnepassword | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28105,7 +28105,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderOnepassword(obj: SecretStor
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Oracle configures this store to sync secrets using Oracle Vault provider
@@ -28173,7 +28173,7 @@ export interface SecretStoreV1Beta1SpecProviderOracle {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderOracle' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderOracle(obj: SecretStoreV1Beta1SpecProviderOracle | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28188,7 +28188,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderOracle(obj: SecretStoreV1Be
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema SecretStoreV1Beta1SpecProviderPassbolt
@@ -28213,7 +28213,7 @@ export interface SecretStoreV1Beta1SpecProviderPassbolt {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderPassbolt' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderPassbolt(obj: SecretStoreV1Beta1SpecProviderPassbolt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28223,7 +28223,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderPassbolt(obj: SecretStoreV1
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configures a store to sync secrets with a Password Depot instance.
@@ -28257,7 +28257,7 @@ export interface SecretStoreV1Beta1SpecProviderPassworddepot {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderPassworddepot' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderPassworddepot(obj: SecretStoreV1Beta1SpecProviderPassworddepot | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28268,7 +28268,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderPassworddepot(obj: SecretSt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Previder configures this store to sync secrets using the Previder provider
@@ -28293,7 +28293,7 @@ export interface SecretStoreV1Beta1SpecProviderPrevider {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderPrevider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderPrevider(obj: SecretStoreV1Beta1SpecProviderPrevider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28303,7 +28303,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderPrevider(obj: SecretStoreV1
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Pulumi configures this store to sync secrets using the Pulumi provider
@@ -28355,7 +28355,7 @@ export interface SecretStoreV1Beta1SpecProviderPulumi {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderPulumi' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderPulumi(obj: SecretStoreV1Beta1SpecProviderPulumi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28368,7 +28368,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderPulumi(obj: SecretStoreV1Be
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Scaleway
@@ -28417,7 +28417,7 @@ export interface SecretStoreV1Beta1SpecProviderScaleway {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderScaleway' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderScaleway(obj: SecretStoreV1Beta1SpecProviderScaleway | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28430,7 +28430,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderScaleway(obj: SecretStoreV1
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretServer configures this store to sync secrets using SecretServer provider
@@ -28466,7 +28466,7 @@ export interface SecretStoreV1Beta1SpecProviderSecretserver {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderSecretserver' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderSecretserver(obj: SecretStoreV1Beta1SpecProviderSecretserver | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28477,7 +28477,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderSecretserver(obj: SecretSto
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Senhasegura configures this store to sync secrets using senhasegura provider
@@ -28518,7 +28518,7 @@ export interface SecretStoreV1Beta1SpecProviderSenhasegura {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderSenhasegura' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderSenhasegura(obj: SecretStoreV1Beta1SpecProviderSenhasegura | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28530,7 +28530,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderSenhasegura(obj: SecretStor
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Vault configures this store to sync secrets using Hashi provider
@@ -28639,7 +28639,7 @@ export interface SecretStoreV1Beta1SpecProviderVault {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVault' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVault(obj: SecretStoreV1Beta1SpecProviderVault | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28658,7 +28658,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVault(obj: SecretStoreV1Bet
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Webhook configures this store to sync secrets using a generic templated webhook
@@ -28738,7 +28738,7 @@ export interface SecretStoreV1Beta1SpecProviderWebhook {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderWebhook' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderWebhook(obj: SecretStoreV1Beta1SpecProviderWebhook | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28755,7 +28755,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderWebhook(obj: SecretStoreV1B
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * YandexCertificateManager configures this store to sync secrets using Yandex Certificate Manager provider
@@ -28789,7 +28789,7 @@ export interface SecretStoreV1Beta1SpecProviderYandexcertificatemanager {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderYandexcertificatemanager' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderYandexcertificatemanager(obj: SecretStoreV1Beta1SpecProviderYandexcertificatemanager | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28800,7 +28800,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderYandexcertificatemanager(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * YandexLockbox configures this store to sync secrets using Yandex Lockbox provider
@@ -28834,7 +28834,7 @@ export interface SecretStoreV1Beta1SpecProviderYandexlockbox {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderYandexlockbox' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderYandexlockbox(obj: SecretStoreV1Beta1SpecProviderYandexlockbox | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28845,7 +28845,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderYandexlockbox(obj: SecretSt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -28884,7 +28884,7 @@ export interface SecretStoreV1Beta1SpecConditionsNamespaceSelectorMatchExpressio
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecConditionsNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecConditionsNamespaceSelectorMatchExpressions(obj: SecretStoreV1Beta1SpecConditionsNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28895,7 +28895,7 @@ export function toJson_SecretStoreV1Beta1SpecConditionsNamespaceSelectorMatchExp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how the operator authenticates with Akeyless.
@@ -28924,7 +28924,7 @@ export interface SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRef(obj: SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28934,7 +28934,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRef(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The provider for the CA bundle to use to validate Akeyless Gateway certificate.
@@ -28976,7 +28976,7 @@ export interface SecretStoreV1Beta1SpecProviderAkeylessCaProvider {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAkeylessCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAkeylessCaProvider(obj: SecretStoreV1Beta1SpecProviderAkeylessCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28988,7 +28988,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAkeylessCaProvider(obj: Sec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AlibabaAuth contains a secretRef for credentials.
@@ -29015,7 +29015,7 @@ export interface SecretStoreV1Beta1SpecProviderAlibabaAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAlibabaAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAlibabaAuth(obj: SecretStoreV1Beta1SpecProviderAlibabaAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29025,7 +29025,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAlibabaAuth(obj: SecretStor
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines the information necessary to authenticate against AWS
@@ -29055,7 +29055,7 @@ export interface SecretStoreV1Beta1SpecProviderAwsAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAwsAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAwsAuth(obj: SecretStoreV1Beta1SpecProviderAwsAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29065,7 +29065,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAwsAuth(obj: SecretStoreV1B
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretsManager defines how the provider behaves when interacting with AWS SecretsManager
@@ -29100,7 +29100,7 @@ export interface SecretStoreV1Beta1SpecProviderAwsSecretsManager {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAwsSecretsManager' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAwsSecretsManager(obj: SecretStoreV1Beta1SpecProviderAwsSecretsManager | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29110,7 +29110,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAwsSecretsManager(obj: Secr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Service defines which service should be used to fetch the secrets
@@ -29143,7 +29143,7 @@ export interface SecretStoreV1Beta1SpecProviderAwsSessionTags {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAwsSessionTags' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAwsSessionTags(obj: SecretStoreV1Beta1SpecProviderAwsSessionTags | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29153,7 +29153,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAwsSessionTags(obj: SecretS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how the operator authenticates with Azure. Required for ServicePrincipal auth type. Optional for WorkloadIdentity.
@@ -29194,7 +29194,7 @@ export interface SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRef(obj: SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29206,7 +29206,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRef(obj: S
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth type defines how to authenticate to the keyvault service.
@@ -29280,7 +29280,7 @@ export interface SecretStoreV1Beta1SpecProviderAzurekvServiceAccountRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAzurekvServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAzurekvServiceAccountRef(obj: SecretStoreV1Beta1SpecProviderAzurekvServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29291,7 +29291,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAzurekvServiceAccountRef(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how the operator authenticates with Beyondtrust.
@@ -29339,7 +29339,7 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderBeyondtrustAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuth(obj: SecretStoreV1Beta1SpecProviderBeyondtrustAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29352,7 +29352,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuth(obj: Secret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how API server works.
@@ -29402,7 +29402,7 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustServer {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderBeyondtrustServer' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustServer(obj: SecretStoreV1Beta1SpecProviderBeyondtrustServer | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29416,7 +29416,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustServer(obj: Secr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with a bitwarden machine account instance.
@@ -29437,7 +29437,7 @@ export interface SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuth(obj: SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29446,7 +29446,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuth
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * see: https://external-secrets.io/latest/spec/#external-secrets.io/v1alpha1.CAProvider
@@ -29488,7 +29488,7 @@ export interface SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaProvider
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaProvider(obj: SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29500,7 +29500,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaPr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines the information necessary to authenticate against chef Server
@@ -29520,7 +29520,7 @@ export interface SecretStoreV1Beta1SpecProviderChefAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderChefAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderChefAuth(obj: SecretStoreV1Beta1SpecProviderChefAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29529,7 +29529,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderChefAuth(obj: SecretStoreV1
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * CSMAuth contains a secretRef for credentials.
@@ -29549,7 +29549,7 @@ export interface SecretStoreV1Beta1SpecProviderCloudrusmAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderCloudrusmAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderCloudrusmAuth(obj: SecretStoreV1Beta1SpecProviderCloudrusmAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29558,7 +29558,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderCloudrusmAuth(obj: SecretSt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Defines authentication settings for connecting to Conjur.
@@ -29585,7 +29585,7 @@ export interface SecretStoreV1Beta1SpecProviderConjurAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderConjurAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderConjurAuth(obj: SecretStoreV1Beta1SpecProviderConjurAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29595,7 +29595,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderConjurAuth(obj: SecretStore
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Used to provide custom certificate authority (CA) certificates
@@ -29639,7 +29639,7 @@ export interface SecretStoreV1Beta1SpecProviderConjurCaProvider {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderConjurCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderConjurCaProvider(obj: SecretStoreV1Beta1SpecProviderConjurCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29651,7 +29651,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderConjurCaProvider(obj: Secre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ClientID is the non-secret part of the credential.
@@ -29678,7 +29678,7 @@ export interface SecretStoreV1Beta1SpecProviderDelineaClientId {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderDelineaClientId' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderDelineaClientId(obj: SecretStoreV1Beta1SpecProviderDelineaClientId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29688,7 +29688,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderDelineaClientId(obj: Secret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ClientSecret is the secret part of the credential.
@@ -29715,7 +29715,7 @@ export interface SecretStoreV1Beta1SpecProviderDelineaClientSecret {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderDelineaClientSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderDelineaClientSecret(obj: SecretStoreV1Beta1SpecProviderDelineaClientSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29725,7 +29725,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderDelineaClientSecret(obj: Se
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with a Device42 instance.
@@ -29743,7 +29743,7 @@ export interface SecretStoreV1Beta1SpecProviderDevice42Auth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderDevice42Auth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderDevice42Auth(obj: SecretStoreV1Beta1SpecProviderDevice42Auth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29752,7 +29752,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderDevice42Auth(obj: SecretSto
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how the Operator authenticates with the Doppler API
@@ -29770,7 +29770,7 @@ export interface SecretStoreV1Beta1SpecProviderDopplerAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderDopplerAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderDopplerAuth(obj: SecretStoreV1Beta1SpecProviderDopplerAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29779,7 +29779,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderDopplerAuth(obj: SecretStor
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Format enables the downloading of secrets as a file (string)
@@ -29850,7 +29850,7 @@ export interface SecretStoreV1Beta1SpecProviderFakeData {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderFakeData' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderFakeData(obj: SecretStoreV1Beta1SpecProviderFakeData | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29862,7 +29862,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderFakeData(obj: SecretStoreV1
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APIKey is the API token to access SDKMS Applications.
@@ -29882,7 +29882,7 @@ export interface SecretStoreV1Beta1SpecProviderFortanixApiKey {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderFortanixApiKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderFortanixApiKey(obj: SecretStoreV1Beta1SpecProviderFortanixApiKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29891,7 +29891,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderFortanixApiKey(obj: SecretS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines the information necessary to authenticate against GCP
@@ -29914,7 +29914,7 @@ export interface SecretStoreV1Beta1SpecProviderGcpsmAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderGcpsmAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderGcpsmAuth(obj: SecretStoreV1Beta1SpecProviderGcpsmAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29924,7 +29924,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderGcpsmAuth(obj: SecretStoreV
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * auth configures how secret-manager authenticates with a Github instance.
@@ -29945,7 +29945,7 @@ export interface SecretStoreV1Beta1SpecProviderGithubAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderGithubAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderGithubAuth(obj: SecretStoreV1Beta1SpecProviderGithubAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29954,7 +29954,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderGithubAuth(obj: SecretStore
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with a GitLab instance.
@@ -29972,7 +29972,7 @@ export interface SecretStoreV1Beta1SpecProviderGitlabAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderGitlabAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderGitlabAuth(obj: SecretStoreV1Beta1SpecProviderGitlabAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29981,7 +29981,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderGitlabAuth(obj: SecretStore
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with the IBM secrets manager.
@@ -30006,7 +30006,7 @@ export interface SecretStoreV1Beta1SpecProviderIbmAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderIbmAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderIbmAuth(obj: SecretStoreV1Beta1SpecProviderIbmAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30016,7 +30016,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderIbmAuth(obj: SecretStoreV1B
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how the Operator authenticates with the Infisical API
@@ -30034,7 +30034,7 @@ export interface SecretStoreV1Beta1SpecProviderInfisicalAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderInfisicalAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderInfisicalAuth(obj: SecretStoreV1Beta1SpecProviderInfisicalAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30043,7 +30043,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderInfisicalAuth(obj: SecretSt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretsScope defines the scope of the secrets within the workspace
@@ -30094,7 +30094,7 @@ export interface SecretStoreV1Beta1SpecProviderInfisicalSecretsScope {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderInfisicalSecretsScope' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderInfisicalSecretsScope(obj: SecretStoreV1Beta1SpecProviderInfisicalSecretsScope | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30107,7 +30107,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderInfisicalSecretsScope(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -30144,7 +30144,7 @@ export interface SecretStoreV1Beta1SpecProviderKeepersecurityAuthRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderKeepersecurityAuthRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderKeepersecurityAuthRef(obj: SecretStoreV1Beta1SpecProviderKeepersecurityAuthRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30155,7 +30155,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderKeepersecurityAuthRef(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with a Kubernetes instance.
@@ -30189,7 +30189,7 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderKubernetesAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderKubernetesAuth(obj: SecretStoreV1Beta1SpecProviderKubernetesAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30200,7 +30200,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderKubernetesAuth(obj: SecretS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a secret that contains the auth information.
@@ -30236,7 +30236,7 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesAuthRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderKubernetesAuthRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderKubernetesAuthRef(obj: SecretStoreV1Beta1SpecProviderKubernetesAuthRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30247,7 +30247,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderKubernetesAuthRef(obj: Secr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * configures the Kubernetes server Address.
@@ -30281,7 +30281,7 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesServer {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderKubernetesServer' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderKubernetesServer(obj: SecretStoreV1Beta1SpecProviderKubernetesServer | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30292,7 +30292,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderKubernetesServer(obj: Secre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how the Operator authenticates with the Onboardbase API
@@ -30320,7 +30320,7 @@ export interface SecretStoreV1Beta1SpecProviderOnboardbaseAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderOnboardbaseAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderOnboardbaseAuth(obj: SecretStoreV1Beta1SpecProviderOnboardbaseAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30330,7 +30330,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderOnboardbaseAuth(obj: Secret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines the information necessary to authenticate against OnePassword Connect Server
@@ -30350,7 +30350,7 @@ export interface SecretStoreV1Beta1SpecProviderOnepasswordAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderOnepasswordAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderOnepasswordAuth(obj: SecretStoreV1Beta1SpecProviderOnepasswordAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30359,7 +30359,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderOnepasswordAuth(obj: Secret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with the Oracle Vault.
@@ -30394,7 +30394,7 @@ export interface SecretStoreV1Beta1SpecProviderOracleAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderOracleAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderOracleAuth(obj: SecretStoreV1Beta1SpecProviderOracleAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30405,7 +30405,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderOracleAuth(obj: SecretStore
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of principal to use for authentication. If left blank, the Auth struct will
@@ -30459,7 +30459,7 @@ export interface SecretStoreV1Beta1SpecProviderOracleServiceAccountRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderOracleServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderOracleServiceAccountRef(obj: SecretStoreV1Beta1SpecProviderOracleServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30470,7 +30470,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderOracleServiceAccountRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines the information necessary to authenticate against Passbolt Server
@@ -30499,7 +30499,7 @@ export interface SecretStoreV1Beta1SpecProviderPassboltAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderPassboltAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderPassboltAuth(obj: SecretStoreV1Beta1SpecProviderPassboltAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30509,7 +30509,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderPassboltAuth(obj: SecretSto
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with a Password Depot instance.
@@ -30527,7 +30527,7 @@ export interface SecretStoreV1Beta1SpecProviderPassworddepotAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderPassworddepotAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderPassworddepotAuth(obj: SecretStoreV1Beta1SpecProviderPassworddepotAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30536,7 +30536,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderPassworddepotAuth(obj: Secr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PreviderAuth contains a secretRef for credentials.
@@ -30556,7 +30556,7 @@ export interface SecretStoreV1Beta1SpecProviderPreviderAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderPreviderAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderPreviderAuth(obj: SecretStoreV1Beta1SpecProviderPreviderAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30565,7 +30565,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderPreviderAuth(obj: SecretSto
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AccessToken is the access tokens to sign in to the Pulumi Cloud Console.
@@ -30585,7 +30585,7 @@ export interface SecretStoreV1Beta1SpecProviderPulumiAccessToken {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderPulumiAccessToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderPulumiAccessToken(obj: SecretStoreV1Beta1SpecProviderPulumiAccessToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30594,7 +30594,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderPulumiAccessToken(obj: Secr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AccessKey is the non-secret part of the api key.
@@ -30621,7 +30621,7 @@ export interface SecretStoreV1Beta1SpecProviderScalewayAccessKey {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderScalewayAccessKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderScalewayAccessKey(obj: SecretStoreV1Beta1SpecProviderScalewayAccessKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30631,7 +30631,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderScalewayAccessKey(obj: Secr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretKey is the non-secret part of the api key.
@@ -30658,7 +30658,7 @@ export interface SecretStoreV1Beta1SpecProviderScalewaySecretKey {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderScalewaySecretKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderScalewaySecretKey(obj: SecretStoreV1Beta1SpecProviderScalewaySecretKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30668,7 +30668,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderScalewaySecretKey(obj: Secr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Password is the secret server account password.
@@ -30695,7 +30695,7 @@ export interface SecretStoreV1Beta1SpecProviderSecretserverPassword {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderSecretserverPassword' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderSecretserverPassword(obj: SecretStoreV1Beta1SpecProviderSecretserverPassword | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30705,7 +30705,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderSecretserverPassword(obj: S
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Username is the secret server account username.
@@ -30732,7 +30732,7 @@ export interface SecretStoreV1Beta1SpecProviderSecretserverUsername {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderSecretserverUsername' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderSecretserverUsername(obj: SecretStoreV1Beta1SpecProviderSecretserverUsername | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30742,7 +30742,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderSecretserverUsername(obj: S
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines parameters to authenticate in senhasegura
@@ -30768,7 +30768,7 @@ export interface SecretStoreV1Beta1SpecProviderSenhaseguraAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderSenhaseguraAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderSenhaseguraAuth(obj: SecretStoreV1Beta1SpecProviderSenhaseguraAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30778,7 +30778,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderSenhaseguraAuth(obj: Secret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with the Vault server.
@@ -30864,7 +30864,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuth(obj: SecretStoreV1Beta1SpecProviderVaultAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30881,7 +30881,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuth(obj: SecretStoreV
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The provider for the CA bundle to use to validate Vault server certificate.
@@ -30923,7 +30923,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultCaProvider {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultCaProvider(obj: SecretStoreV1Beta1SpecProviderVaultCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30935,7 +30935,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultCaProvider(obj: Secret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The configuration used for client side related TLS communication, when the Vault server
@@ -30970,7 +30970,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultTls {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultTls' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultTls(obj: SecretStoreV1Beta1SpecProviderVaultTls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30980,7 +30980,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultTls(obj: SecretStoreV1
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Version is the Vault KV secret engine version. This can be either "v1" or
@@ -31034,7 +31034,7 @@ export interface SecretStoreV1Beta1SpecProviderWebhookCaProvider {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderWebhookCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderWebhookCaProvider(obj: SecretStoreV1Beta1SpecProviderWebhookCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31046,7 +31046,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderWebhookCaProvider(obj: Secr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Result formatting
@@ -31066,7 +31066,7 @@ export interface SecretStoreV1Beta1SpecProviderWebhookResult {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderWebhookResult' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderWebhookResult(obj: SecretStoreV1Beta1SpecProviderWebhookResult | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31075,7 +31075,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderWebhookResult(obj: SecretSt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema SecretStoreV1Beta1SpecProviderWebhookSecrets
@@ -31100,7 +31100,7 @@ export interface SecretStoreV1Beta1SpecProviderWebhookSecrets {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderWebhookSecrets' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderWebhookSecrets(obj: SecretStoreV1Beta1SpecProviderWebhookSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31110,7 +31110,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderWebhookSecrets(obj: SecretS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines the information necessary to authenticate against Yandex Certificate Manager
@@ -31130,7 +31130,7 @@ export interface SecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuth(obj: SecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31139,7 +31139,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderYandexcertificatemanagerAut
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The provider for the CA bundle to use to validate Yandex.Cloud server certificate.
@@ -31160,7 +31160,7 @@ export interface SecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProvide
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProvider(obj: SecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31169,7 +31169,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaP
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth defines the information necessary to authenticate against Yandex Lockbox
@@ -31189,7 +31189,7 @@ export interface SecretStoreV1Beta1SpecProviderYandexlockboxAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderYandexlockboxAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderYandexlockboxAuth(obj: SecretStoreV1Beta1SpecProviderYandexlockboxAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31198,7 +31198,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderYandexlockboxAuth(obj: Secr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The provider for the CA bundle to use to validate Yandex.Cloud server certificate.
@@ -31219,7 +31219,7 @@ export interface SecretStoreV1Beta1SpecProviderYandexlockboxCaProvider {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderYandexlockboxCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderYandexlockboxCaProvider(obj: SecretStoreV1Beta1SpecProviderYandexlockboxCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31228,7 +31228,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderYandexlockboxCaProvider(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kubernetes authenticates with Akeyless by passing the ServiceAccount
@@ -31276,7 +31276,7 @@ export interface SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAu
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuth(obj: SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31288,7 +31288,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubern
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a Secret that contains the details
@@ -31325,7 +31325,7 @@ export interface SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRef(obj: SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31336,7 +31336,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -31381,7 +31381,7 @@ export interface SecretStoreV1Beta1SpecProviderAlibabaAuthRrsa {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAlibabaAuthRrsa' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAlibabaAuthRrsa(obj: SecretStoreV1Beta1SpecProviderAlibabaAuthRrsa | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31393,7 +31393,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAlibabaAuthRrsa(obj: Secret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AlibabaAuthSecretRef holds secret references for Alibaba credentials.
@@ -31420,7 +31420,7 @@ export interface SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef(obj: SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31430,7 +31430,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef(obj: S
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Authenticate against AWS using service account tokens.
@@ -31450,7 +31450,7 @@ export interface SecretStoreV1Beta1SpecProviderAwsAuthJwt {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAwsAuthJwt' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAwsAuthJwt(obj: SecretStoreV1Beta1SpecProviderAwsAuthJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31459,7 +31459,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAwsAuthJwt(obj: SecretStore
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AWSAuthSecretRef holds secret references for AWS credentials
@@ -31496,7 +31496,7 @@ export interface SecretStoreV1Beta1SpecProviderAwsAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAwsAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAwsAuthSecretRef(obj: SecretStoreV1Beta1SpecProviderAwsAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31507,7 +31507,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAwsAuthSecretRef(obj: Secre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Azure ClientCertificate of the service principle used for authentication.
@@ -31543,7 +31543,7 @@ export interface SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientCertifi
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientCertificate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientCertificate(obj: SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientCertificate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31554,7 +31554,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientC
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Azure clientId of the service principle or managed identity used for authentication.
@@ -31590,7 +31590,7 @@ export interface SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientId {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientId' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientId(obj: SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31601,7 +31601,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientI
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Azure ClientSecret of the service principle used for authentication.
@@ -31637,7 +31637,7 @@ export interface SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientSecret 
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientSecret(obj: SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31648,7 +31648,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Azure tenantId of the managed identity used for authentication.
@@ -31684,7 +31684,7 @@ export interface SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefTenantId {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefTenantId' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefTenantId(obj: SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefTenantId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31695,7 +31695,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefTenantI
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APIKey If not provided then ClientID/ClientSecret become required.
@@ -31722,7 +31722,7 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKey {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKey(obj: SecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31732,7 +31732,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKey(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Certificate (cert.pem) for use when authenticating with an OAuth client Id using a Client Certificate.
@@ -31759,7 +31759,7 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificate {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificate(obj: SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31769,7 +31769,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificate(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Certificate private key (key.pem). For use when authenticating with an OAuth client Id
@@ -31796,7 +31796,7 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateKey {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateKey(obj: SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31806,7 +31806,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateK
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ClientID is the API OAuth Client ID.
@@ -31833,7 +31833,7 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientId {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientId' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientId(obj: SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31843,7 +31843,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientId(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ClientSecret is the API OAuth Client Secret.
@@ -31870,7 +31870,7 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecret {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecret(obj: SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31880,7 +31880,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * BitwardenSecretsManagerSecretRef contains the credential ref to the bitwarden instance.
@@ -31900,7 +31900,7 @@ export interface SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecret
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecretRef(obj: SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31909,7 +31909,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuth
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -31941,7 +31941,7 @@ export interface SecretStoreV1Beta1SpecProviderChefAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderChefAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderChefAuthSecretRef(obj: SecretStoreV1Beta1SpecProviderChefAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31950,7 +31950,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderChefAuthSecretRef(obj: Secr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * CSMAuthSecretRef holds secret references for Cloud.ru credentials.
@@ -31977,7 +31977,7 @@ export interface SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRef(obj: SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31987,7 +31987,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRef(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Authenticates with Conjur using an API key.
@@ -32023,7 +32023,7 @@ export interface SecretStoreV1Beta1SpecProviderConjurAuthApikey {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderConjurAuthApikey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderConjurAuthApikey(obj: SecretStoreV1Beta1SpecProviderConjurAuthApikey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32034,7 +32034,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderConjurAuthApikey(obj: Secre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Jwt enables JWT authentication using Kubernetes service account tokens.
@@ -32085,7 +32085,7 @@ export interface SecretStoreV1Beta1SpecProviderConjurAuthJwt {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderConjurAuthJwt' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderConjurAuthJwt(obj: SecretStoreV1Beta1SpecProviderConjurAuthJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32098,7 +32098,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderConjurAuthJwt(obj: SecretSt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -32146,7 +32146,7 @@ export interface SecretStoreV1Beta1SpecProviderDelineaClientIdSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderDelineaClientIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderDelineaClientIdSecretRef(obj: SecretStoreV1Beta1SpecProviderDelineaClientIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32157,7 +32157,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderDelineaClientIdSecretRef(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef references a key in a secret that will be used as value.
@@ -32193,7 +32193,7 @@ export interface SecretStoreV1Beta1SpecProviderDelineaClientSecretSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderDelineaClientSecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderDelineaClientSecretSecretRef(obj: SecretStoreV1Beta1SpecProviderDelineaClientSecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32204,7 +32204,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderDelineaClientSecretSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema SecretStoreV1Beta1SpecProviderDevice42AuthSecretRef
@@ -32222,7 +32222,7 @@ export interface SecretStoreV1Beta1SpecProviderDevice42AuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderDevice42AuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderDevice42AuthSecretRef(obj: SecretStoreV1Beta1SpecProviderDevice42AuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32231,7 +32231,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderDevice42AuthSecretRef(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema SecretStoreV1Beta1SpecProviderDopplerAuthSecretRef
@@ -32251,7 +32251,7 @@ export interface SecretStoreV1Beta1SpecProviderDopplerAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderDopplerAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderDopplerAuthSecretRef(obj: SecretStoreV1Beta1SpecProviderDopplerAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32260,7 +32260,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderDopplerAuthSecretRef(obj: S
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef is a reference to a secret containing the SDKMS API Key.
@@ -32296,7 +32296,7 @@ export interface SecretStoreV1Beta1SpecProviderFortanixApiKeySecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderFortanixApiKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderFortanixApiKeySecretRef(obj: SecretStoreV1Beta1SpecProviderFortanixApiKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32307,7 +32307,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderFortanixApiKeySecretRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef
@@ -32325,7 +32325,7 @@ export interface SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef(obj: SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32334,7 +32334,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef(obj: Sec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity
@@ -32367,7 +32367,7 @@ export interface SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity(obj: SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32379,7 +32379,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -32416,7 +32416,7 @@ export interface SecretStoreV1Beta1SpecProviderGithubAuthPrivateKey {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderGithubAuthPrivateKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderGithubAuthPrivateKey(obj: SecretStoreV1Beta1SpecProviderGithubAuthPrivateKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32427,7 +32427,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderGithubAuthPrivateKey(obj: S
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema SecretStoreV1Beta1SpecProviderGitlabAuthSecretRef
@@ -32445,7 +32445,7 @@ export interface SecretStoreV1Beta1SpecProviderGitlabAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderGitlabAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderGitlabAuthSecretRef(obj: SecretStoreV1Beta1SpecProviderGitlabAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32454,7 +32454,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderGitlabAuthSecretRef(obj: Se
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * IBM Container-based auth with IAM Trusted Profile.
@@ -32486,7 +32486,7 @@ export interface SecretStoreV1Beta1SpecProviderIbmAuthContainerAuth {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderIbmAuthContainerAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderIbmAuthContainerAuth(obj: SecretStoreV1Beta1SpecProviderIbmAuthContainerAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32497,7 +32497,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderIbmAuthContainerAuth(obj: S
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema SecretStoreV1Beta1SpecProviderIbmAuthSecretRef
@@ -32515,7 +32515,7 @@ export interface SecretStoreV1Beta1SpecProviderIbmAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderIbmAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderIbmAuthSecretRef(obj: SecretStoreV1Beta1SpecProviderIbmAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32524,7 +32524,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderIbmAuthSecretRef(obj: Secre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials
@@ -32551,7 +32551,7 @@ export interface SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredent
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials(obj: SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32561,7 +32561,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthC
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * has both clientCert and clientKey as secretKeySelector
@@ -32590,7 +32590,7 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesAuthCert {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderKubernetesAuthCert' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderKubernetesAuthCert(obj: SecretStoreV1Beta1SpecProviderKubernetesAuthCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32600,7 +32600,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderKubernetesAuthCert(obj: Sec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * points to a service account that should be used for authentication
@@ -32637,7 +32637,7 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesAuthServiceAccount {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderKubernetesAuthServiceAccount' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderKubernetesAuthServiceAccount(obj: SecretStoreV1Beta1SpecProviderKubernetesAuthServiceAccount | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32648,7 +32648,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderKubernetesAuthServiceAccoun
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * use static token to authenticate with
@@ -32669,7 +32669,7 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesAuthToken {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderKubernetesAuthToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderKubernetesAuthToken(obj: SecretStoreV1Beta1SpecProviderKubernetesAuthToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32678,7 +32678,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderKubernetesAuthToken(obj: Se
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * see: https://external-secrets.io/v0.4.1/spec/#external-secrets.io/v1alpha1.CAProvider
@@ -32720,7 +32720,7 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesServerCaProvider {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderKubernetesServerCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderKubernetesServerCaProvider(obj: SecretStoreV1Beta1SpecProviderKubernetesServerCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32732,7 +32732,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderKubernetesServerCaProvider(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * OnboardbaseAPIKey is the APIKey generated by an admin account.
@@ -32769,7 +32769,7 @@ export interface SecretStoreV1Beta1SpecProviderOnboardbaseAuthApiKeyRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderOnboardbaseAuthApiKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderOnboardbaseAuthApiKeyRef(obj: SecretStoreV1Beta1SpecProviderOnboardbaseAuthApiKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32780,7 +32780,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderOnboardbaseAuthApiKeyRef(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * OnboardbasePasscode is the passcode attached to the API Key
@@ -32816,7 +32816,7 @@ export interface SecretStoreV1Beta1SpecProviderOnboardbaseAuthPasscodeRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderOnboardbaseAuthPasscodeRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderOnboardbaseAuthPasscodeRef(obj: SecretStoreV1Beta1SpecProviderOnboardbaseAuthPasscodeRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32827,7 +32827,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderOnboardbaseAuthPasscodeRef(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * OnePasswordAuthSecretRef holds secret references for 1Password credentials.
@@ -32847,7 +32847,7 @@ export interface SecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRef(obj: SecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32856,7 +32856,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRef(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef to pass through sensitive information.
@@ -32883,7 +32883,7 @@ export interface SecretStoreV1Beta1SpecProviderOracleAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderOracleAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderOracleAuthSecretRef(obj: SecretStoreV1Beta1SpecProviderOracleAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32893,7 +32893,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderOracleAuthSecretRef(obj: Se
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -32930,7 +32930,7 @@ export interface SecretStoreV1Beta1SpecProviderPassboltAuthPasswordSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderPassboltAuthPasswordSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderPassboltAuthPasswordSecretRef(obj: SecretStoreV1Beta1SpecProviderPassboltAuthPasswordSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32941,7 +32941,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderPassboltAuthPasswordSecretR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -32978,7 +32978,7 @@ export interface SecretStoreV1Beta1SpecProviderPassboltAuthPrivateKeySecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderPassboltAuthPrivateKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderPassboltAuthPrivateKeySecretRef(obj: SecretStoreV1Beta1SpecProviderPassboltAuthPrivateKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32989,7 +32989,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderPassboltAuthPrivateKeySecre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema SecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef
@@ -33007,7 +33007,7 @@ export interface SecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef(obj: SecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33016,7 +33016,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PreviderAuthSecretRef holds secret references for Previder Vault credentials.
@@ -33036,7 +33036,7 @@ export interface SecretStoreV1Beta1SpecProviderPreviderAuthSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderPreviderAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderPreviderAuthSecretRef(obj: SecretStoreV1Beta1SpecProviderPreviderAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33045,7 +33045,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderPreviderAuthSecretRef(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef is a reference to a secret containing the Pulumi API token.
@@ -33081,7 +33081,7 @@ export interface SecretStoreV1Beta1SpecProviderPulumiAccessTokenSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderPulumiAccessTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderPulumiAccessTokenSecretRef(obj: SecretStoreV1Beta1SpecProviderPulumiAccessTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33092,7 +33092,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderPulumiAccessTokenSecretRef(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef references a key in a secret that will be used as value.
@@ -33128,7 +33128,7 @@ export interface SecretStoreV1Beta1SpecProviderScalewayAccessKeySecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderScalewayAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderScalewayAccessKeySecretRef(obj: SecretStoreV1Beta1SpecProviderScalewayAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33139,7 +33139,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderScalewayAccessKeySecretRef(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef references a key in a secret that will be used as value.
@@ -33175,7 +33175,7 @@ export interface SecretStoreV1Beta1SpecProviderScalewaySecretKeySecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderScalewaySecretKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderScalewaySecretKeySecretRef(obj: SecretStoreV1Beta1SpecProviderScalewaySecretKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33186,7 +33186,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderScalewaySecretKeySecretRef(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef references a key in a secret that will be used as value.
@@ -33222,7 +33222,7 @@ export interface SecretStoreV1Beta1SpecProviderSecretserverPasswordSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderSecretserverPasswordSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderSecretserverPasswordSecretRef(obj: SecretStoreV1Beta1SpecProviderSecretserverPasswordSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33233,7 +33233,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderSecretserverPasswordSecretR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef references a key in a secret that will be used as value.
@@ -33269,7 +33269,7 @@ export interface SecretStoreV1Beta1SpecProviderSecretserverUsernameSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderSecretserverUsernameSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderSecretserverUsernameSecretRef(obj: SecretStoreV1Beta1SpecProviderSecretserverUsernameSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33280,7 +33280,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderSecretserverUsernameSecretR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -33317,7 +33317,7 @@ export interface SecretStoreV1Beta1SpecProviderSenhaseguraAuthClientSecretSecret
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderSenhaseguraAuthClientSecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderSenhaseguraAuthClientSecretSecretRef(obj: SecretStoreV1Beta1SpecProviderSenhaseguraAuthClientSecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33328,7 +33328,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderSenhaseguraAuthClientSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AppRole authenticates with Vault using the App Role auth mechanism,
@@ -33378,7 +33378,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthAppRole {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthAppRole' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthAppRole(obj: SecretStoreV1Beta1SpecProviderVaultAuthAppRole | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33390,7 +33390,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthAppRole(obj: Secre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Cert authenticates with TLS Certificates by passing client certificate, private key and ca certificate
@@ -33420,7 +33420,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthCert {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthCert' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthCert(obj: SecretStoreV1Beta1SpecProviderVaultAuthCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33430,7 +33430,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthCert(obj: SecretSt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Iam authenticates with vault by passing a special AWS request signed with AWS IAM credentials
@@ -33500,7 +33500,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthIam {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthIam' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthIam(obj: SecretStoreV1Beta1SpecProviderVaultAuthIam | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33516,7 +33516,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthIam(obj: SecretSto
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Jwt authenticates with Vault by passing role and JWT token using the
@@ -33562,7 +33562,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthJwt {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthJwt' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthJwt(obj: SecretStoreV1Beta1SpecProviderVaultAuthJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33574,7 +33574,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthJwt(obj: SecretSto
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kubernetes authenticates with Vault by passing the ServiceAccount
@@ -33624,7 +33624,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthKubernetes {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthKubernetes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthKubernetes(obj: SecretStoreV1Beta1SpecProviderVaultAuthKubernetes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33636,7 +33636,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthKubernetes(obj: Se
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Ldap authenticates with Vault by passing username/password pair using
@@ -33675,7 +33675,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthLdap {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthLdap' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthLdap(obj: SecretStoreV1Beta1SpecProviderVaultAuthLdap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33686,7 +33686,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthLdap(obj: SecretSt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TokenSecretRef authenticates with Vault by presenting a token.
@@ -33722,7 +33722,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthTokenSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthTokenSecretRef(obj: SecretStoreV1Beta1SpecProviderVaultAuthTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33733,7 +33733,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthTokenSecretRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * UserPass authenticates with Vault by passing username/password pair
@@ -33771,7 +33771,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthUserPass {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthUserPass' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthUserPass(obj: SecretStoreV1Beta1SpecProviderVaultAuthUserPass | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33782,7 +33782,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthUserPass(obj: Secr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -33832,7 +33832,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultTlsCertSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultTlsCertSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultTlsCertSecretRef(obj: SecretStoreV1Beta1SpecProviderVaultTlsCertSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33843,7 +33843,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultTlsCertSecretRef(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * KeySecretRef to a key in a Secret resource containing client private key
@@ -33881,7 +33881,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultTlsKeySecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultTlsKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultTlsKeySecretRef(obj: SecretStoreV1Beta1SpecProviderVaultTlsKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33892,7 +33892,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultTlsKeySecretRef(obj: S
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -33940,7 +33940,7 @@ export interface SecretStoreV1Beta1SpecProviderWebhookSecretsSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderWebhookSecretsSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderWebhookSecretsSecretRef(obj: SecretStoreV1Beta1SpecProviderWebhookSecretsSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33951,7 +33951,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderWebhookSecretsSecretRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The authorized key used for authentication
@@ -33987,7 +33987,7 @@ export interface SecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuthAutho
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuthAuthorizedKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuthAuthorizedKeySecretRef(obj: SecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuthAuthorizedKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33998,7 +33998,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderYandexcertificatemanagerAut
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -34035,7 +34035,7 @@ export interface SecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProvide
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProviderCertSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProviderCertSecretRef(obj: SecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProviderCertSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34046,7 +34046,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaP
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The authorized key used for authentication
@@ -34082,7 +34082,7 @@ export interface SecretStoreV1Beta1SpecProviderYandexlockboxAuthAuthorizedKeySec
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderYandexlockboxAuthAuthorizedKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderYandexlockboxAuthAuthorizedKeySecretRef(obj: SecretStoreV1Beta1SpecProviderYandexlockboxAuthAuthorizedKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34093,7 +34093,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderYandexlockboxAuthAuthorized
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -34130,7 +34130,7 @@ export interface SecretStoreV1Beta1SpecProviderYandexlockboxCaProviderCertSecret
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderYandexlockboxCaProviderCertSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderYandexlockboxCaProviderCertSecretRef(obj: SecretStoreV1Beta1SpecProviderYandexlockboxCaProviderCertSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34141,7 +34141,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderYandexlockboxCaProviderCert
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional secret field containing a Kubernetes ServiceAccount JWT used
@@ -34180,7 +34180,7 @@ export interface SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAu
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuthSecretRef(obj: SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34191,7 +34191,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubern
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional service account field containing the name of a kubernetes ServiceAccount.
@@ -34231,7 +34231,7 @@ export interface SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAu
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuthServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuthServiceAccountRef(obj: SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuthServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34242,7 +34242,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubern
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessID is used for authentication
@@ -34278,7 +34278,7 @@ export interface SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAcc
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessId' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessId(obj: SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34289,7 +34289,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -34326,7 +34326,7 @@ export interface SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAcc
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessType' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessType(obj: SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessType | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34337,7 +34337,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -34374,7 +34374,7 @@ export interface SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAcc
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam(obj: SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34385,7 +34385,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The AccessKeyID is used for authentication
@@ -34421,7 +34421,7 @@ export interface SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeyIdSe
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef(obj: SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34432,7 +34432,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessK
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The AccessKeySecret is used for authentication
@@ -34468,7 +34468,7 @@ export interface SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeySecr
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef(obj: SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34479,7 +34479,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessK
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a ServiceAccount resource.
@@ -34516,7 +34516,7 @@ export interface SecretStoreV1Beta1SpecProviderAwsAuthJwtServiceAccountRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAwsAuthJwtServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAwsAuthJwtServiceAccountRef(obj: SecretStoreV1Beta1SpecProviderAwsAuthJwtServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34527,7 +34527,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAwsAuthJwtServiceAccountRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The AccessKeyID is used for authentication
@@ -34563,7 +34563,7 @@ export interface SecretStoreV1Beta1SpecProviderAwsAuthSecretRefAccessKeyIdSecret
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAwsAuthSecretRefAccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAwsAuthSecretRefAccessKeyIdSecretRef(obj: SecretStoreV1Beta1SpecProviderAwsAuthSecretRefAccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34574,7 +34574,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAwsAuthSecretRefAccessKeyId
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -34610,7 +34610,7 @@ export interface SecretStoreV1Beta1SpecProviderAwsAuthSecretRefSecretAccessKeySe
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAwsAuthSecretRefSecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAwsAuthSecretRefSecretAccessKeySecretRef(obj: SecretStoreV1Beta1SpecProviderAwsAuthSecretRefSecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34621,7 +34621,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAwsAuthSecretRefSecretAcces
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SessionToken used for authentication
@@ -34659,7 +34659,7 @@ export interface SecretStoreV1Beta1SpecProviderAwsAuthSecretRefSessionTokenSecre
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderAwsAuthSecretRefSessionTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderAwsAuthSecretRefSessionTokenSecretRef(obj: SecretStoreV1Beta1SpecProviderAwsAuthSecretRefSessionTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34670,7 +34670,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAwsAuthSecretRefSessionToke
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef references a key in a secret that will be used as value.
@@ -34706,7 +34706,7 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKeySecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKeySecretRef(obj: SecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34717,7 +34717,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKeySecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef references a key in a secret that will be used as value.
@@ -34753,7 +34753,7 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateSecretR
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateSecretRef(obj: SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34764,7 +34764,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef references a key in a secret that will be used as value.
@@ -34800,7 +34800,7 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateKeySecr
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateKeySecretRef(obj: SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34811,7 +34811,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateK
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef references a key in a secret that will be used as value.
@@ -34847,7 +34847,7 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientIdSecretRef 
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientIdSecretRef(obj: SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34858,7 +34858,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientIdSecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef references a key in a secret that will be used as value.
@@ -34894,7 +34894,7 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecretSecret
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecretSecretRef(obj: SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34905,7 +34905,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AccessToken used for the bitwarden instance.
@@ -34941,7 +34941,7 @@ export interface SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecret
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecretRefCredentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecretRefCredentials(obj: SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecretRefCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34952,7 +34952,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuth
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretKey is the Signing Key in PEM format, used for authentication.
@@ -34988,7 +34988,7 @@ export interface SecretStoreV1Beta1SpecProviderChefAuthSecretRefPrivateKeySecret
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderChefAuthSecretRefPrivateKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderChefAuthSecretRefPrivateKeySecretRef(obj: SecretStoreV1Beta1SpecProviderChefAuthSecretRefPrivateKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34999,7 +34999,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderChefAuthSecretRefPrivateKey
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The AccessKeyID is used for authentication
@@ -35035,7 +35035,7 @@ export interface SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeyId
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeyIdSecretRef(obj: SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35046,7 +35046,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAcces
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The AccessKeySecret is used for authentication
@@ -35082,7 +35082,7 @@ export interface SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeySe
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeySecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeySecretSecretRef(obj: SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeySecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35093,7 +35093,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAcces
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' containing the Conjur API key
@@ -35130,7 +35130,7 @@ export interface SecretStoreV1Beta1SpecProviderConjurAuthApikeyApiKeyRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderConjurAuthApikeyApiKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderConjurAuthApikeyApiKeyRef(obj: SecretStoreV1Beta1SpecProviderConjurAuthApikeyApiKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35141,7 +35141,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderConjurAuthApikeyApiKeyRef(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' containing the Conjur username
@@ -35178,7 +35178,7 @@ export interface SecretStoreV1Beta1SpecProviderConjurAuthApikeyUserRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderConjurAuthApikeyUserRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderConjurAuthApikeyUserRef(obj: SecretStoreV1Beta1SpecProviderConjurAuthApikeyUserRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35189,7 +35189,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderConjurAuthApikeyUserRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional SecretRef that refers to a key in a Secret resource containing JWT token to
@@ -35226,7 +35226,7 @@ export interface SecretStoreV1Beta1SpecProviderConjurAuthJwtSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderConjurAuthJwtSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderConjurAuthJwtSecretRef(obj: SecretStoreV1Beta1SpecProviderConjurAuthJwtSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35237,7 +35237,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderConjurAuthJwtSecretRef(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional ServiceAccountRef specifies the Kubernetes service account for which to request
@@ -35275,7 +35275,7 @@ export interface SecretStoreV1Beta1SpecProviderConjurAuthJwtServiceAccountRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderConjurAuthJwtServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderConjurAuthJwtServiceAccountRef(obj: SecretStoreV1Beta1SpecProviderConjurAuthJwtServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35286,7 +35286,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderConjurAuthJwtServiceAccount
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Username / Password is used for authentication.
@@ -35322,7 +35322,7 @@ export interface SecretStoreV1Beta1SpecProviderDevice42AuthSecretRefCredentials 
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderDevice42AuthSecretRefCredentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderDevice42AuthSecretRefCredentials(obj: SecretStoreV1Beta1SpecProviderDevice42AuthSecretRefCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35333,7 +35333,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderDevice42AuthSecretRefCreden
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The DopplerToken is used for authentication.
@@ -35371,7 +35371,7 @@ export interface SecretStoreV1Beta1SpecProviderDopplerAuthSecretRefDopplerToken 
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderDopplerAuthSecretRefDopplerToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderDopplerAuthSecretRefDopplerToken(obj: SecretStoreV1Beta1SpecProviderDopplerAuthSecretRefDopplerToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35382,7 +35382,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderDopplerAuthSecretRefDoppler
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -35418,7 +35418,7 @@ export interface SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRefSecretAccessKey
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRefSecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRefSecretAccessKeySecretRef(obj: SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRefSecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35429,7 +35429,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRefSecretAcc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a ServiceAccount resource.
@@ -35466,7 +35466,7 @@ export interface SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentityServiceA
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef(obj: SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35477,7 +35477,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentitySe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AccessToken is used for authentication.
@@ -35513,7 +35513,7 @@ export interface SecretStoreV1Beta1SpecProviderGitlabAuthSecretRefAccessToken {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderGitlabAuthSecretRefAccessToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderGitlabAuthSecretRefAccessToken(obj: SecretStoreV1Beta1SpecProviderGitlabAuthSecretRefAccessToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35524,7 +35524,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderGitlabAuthSecretRefAccessTo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -35560,7 +35560,7 @@ export interface SecretStoreV1Beta1SpecProviderIbmAuthSecretRefSecretApiKeySecre
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderIbmAuthSecretRefSecretApiKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderIbmAuthSecretRefSecretApiKeySecretRef(obj: SecretStoreV1Beta1SpecProviderIbmAuthSecretRefSecretApiKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35571,7 +35571,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderIbmAuthSecretRefSecretApiKe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -35608,7 +35608,7 @@ export interface SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredent
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientId' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientId(obj: SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35619,7 +35619,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthC
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -35656,7 +35656,7 @@ export interface SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredent
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientSecret(obj: SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35667,7 +35667,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthC
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -35704,7 +35704,7 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesAuthCertClientCert {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderKubernetesAuthCertClientCert' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderKubernetesAuthCertClientCert(obj: SecretStoreV1Beta1SpecProviderKubernetesAuthCertClientCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35715,7 +35715,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderKubernetesAuthCertClientCer
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -35752,7 +35752,7 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesAuthCertClientKey {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderKubernetesAuthCertClientKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderKubernetesAuthCertClientKey(obj: SecretStoreV1Beta1SpecProviderKubernetesAuthCertClientKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35763,7 +35763,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderKubernetesAuthCertClientKey
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -35800,7 +35800,7 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesAuthTokenBearerToken {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderKubernetesAuthTokenBearerToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderKubernetesAuthTokenBearerToken(obj: SecretStoreV1Beta1SpecProviderKubernetesAuthTokenBearerToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35811,7 +35811,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderKubernetesAuthTokenBearerTo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -35859,7 +35859,7 @@ export interface SecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRefConnectTo
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRefConnectTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRefConnectTokenSecretRef(obj: SecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRefConnectTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35870,7 +35870,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRefCon
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Fingerprint is the fingerprint of the API private key.
@@ -35906,7 +35906,7 @@ export interface SecretStoreV1Beta1SpecProviderOracleAuthSecretRefFingerprint {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderOracleAuthSecretRefFingerprint' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderOracleAuthSecretRefFingerprint(obj: SecretStoreV1Beta1SpecProviderOracleAuthSecretRefFingerprint | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35917,7 +35917,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderOracleAuthSecretRefFingerpr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PrivateKey is the user's API Signing Key in PEM format, used for authentication.
@@ -35953,7 +35953,7 @@ export interface SecretStoreV1Beta1SpecProviderOracleAuthSecretRefPrivatekey {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderOracleAuthSecretRefPrivatekey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderOracleAuthSecretRefPrivatekey(obj: SecretStoreV1Beta1SpecProviderOracleAuthSecretRefPrivatekey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35964,7 +35964,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderOracleAuthSecretRefPrivatek
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Username / Password is used for authentication.
@@ -36000,7 +36000,7 @@ export interface SecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRefCredent
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRefCredentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRefCredentials(obj: SecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRefCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -36011,7 +36011,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRefC
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The AccessToken is used for authentication
@@ -36047,7 +36047,7 @@ export interface SecretStoreV1Beta1SpecProviderPreviderAuthSecretRefAccessToken 
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderPreviderAuthSecretRefAccessToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderPreviderAuthSecretRefAccessToken(obj: SecretStoreV1Beta1SpecProviderPreviderAuthSecretRefAccessToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -36058,7 +36058,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderPreviderAuthSecretRefAccess
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a key in a Secret that contains the App Role ID used
@@ -36097,7 +36097,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthAppRoleRoleRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthAppRoleRoleRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthAppRoleRoleRef(obj: SecretStoreV1Beta1SpecProviderVaultAuthAppRoleRoleRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -36108,7 +36108,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthAppRoleRoleRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a key in a Secret that contains the App Role secret used
@@ -36147,7 +36147,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthAppRoleSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthAppRoleSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthAppRoleSecretRef(obj: SecretStoreV1Beta1SpecProviderVaultAuthAppRoleSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -36158,7 +36158,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthAppRoleSecretRef(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ClientCert is a certificate to authenticate using the Cert Vault
@@ -36195,7 +36195,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthCertClientCert {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthCertClientCert' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthCertClientCert(obj: SecretStoreV1Beta1SpecProviderVaultAuthCertClientCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -36206,7 +36206,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthCertClientCert(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef to a key in a Secret resource containing client private key to
@@ -36243,7 +36243,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthCertSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthCertSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthCertSecretRef(obj: SecretStoreV1Beta1SpecProviderVaultAuthCertSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -36254,7 +36254,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthCertSecretRef(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specify a service account with IRSA enabled
@@ -36274,7 +36274,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthIamJwt {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthIamJwt' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthIamJwt(obj: SecretStoreV1Beta1SpecProviderVaultAuthIamJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -36283,7 +36283,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthIamJwt(obj: Secret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specify credentials in a Secret object
@@ -36319,7 +36319,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRef(obj: SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -36330,7 +36330,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRef(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional ServiceAccountToken specifies the Kubernetes service account for which to request
@@ -36374,7 +36374,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAcco
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAccountToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAccountToken(obj: SecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAccountToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -36385,7 +36385,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional SecretRef that refers to a key in a Secret resource containing JWT token to
@@ -36422,7 +36422,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthJwtSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthJwtSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthJwtSecretRef(obj: SecretStoreV1Beta1SpecProviderVaultAuthJwtSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -36433,7 +36433,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthJwtSecretRef(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional secret field containing a Kubernetes ServiceAccount JWT used
@@ -36472,7 +36472,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthKubernetesSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthKubernetesSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthKubernetesSecretRef(obj: SecretStoreV1Beta1SpecProviderVaultAuthKubernetesSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -36483,7 +36483,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthKubernetesSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional service account field containing the name of a kubernetes ServiceAccount.
@@ -36523,7 +36523,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthKubernetesServiceAccount
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthKubernetesServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthKubernetesServiceAccountRef(obj: SecretStoreV1Beta1SpecProviderVaultAuthKubernetesServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -36534,7 +36534,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthKubernetesServiceA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef to a key in a Secret resource containing password for the LDAP
@@ -36572,7 +36572,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthLdapSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthLdapSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthLdapSecretRef(obj: SecretStoreV1Beta1SpecProviderVaultAuthLdapSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -36583,7 +36583,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthLdapSecretRef(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretRef to a key in a Secret resource containing password for the
@@ -36621,7 +36621,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthUserPassSecretRef {
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthUserPassSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthUserPassSecretRef(obj: SecretStoreV1Beta1SpecProviderVaultAuthUserPassSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -36632,7 +36632,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthUserPassSecretRef(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a ServiceAccount resource.
@@ -36669,7 +36669,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthIamJwtServiceAccountRef 
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthIamJwtServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthIamJwtServiceAccountRef(obj: SecretStoreV1Beta1SpecProviderVaultAuthIamJwtServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -36680,7 +36680,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthIamJwtServiceAccou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The AccessKeyID is used for authentication
@@ -36716,7 +36716,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefAccessKeyIdS
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefAccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefAccessKeyIdSecretRef(obj: SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefAccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -36727,7 +36727,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefAccess
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -36763,7 +36763,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSecretAccess
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSecretAccessKeySecretRef(obj: SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -36774,7 +36774,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SessionToken used for authentication
@@ -36812,7 +36812,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSessionToken
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSessionTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSessionTokenSecretRef(obj: SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSessionTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -36823,7 +36823,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSessio
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Service account field containing the name of a kubernetes ServiceAccount.
@@ -36860,7 +36860,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAcco
 /**
  * Converts an object of type 'SecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAccountTokenServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAccountTokenServiceAccountRef(obj: SecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAccountTokenServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -36871,5 +36871,5 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
