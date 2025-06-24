@@ -281,7 +281,7 @@ class VectorPostgres extends Chart {
   ) {
     super(scope, id);
 
-    const oldCatalog = new ImageCatalog(this, "oldcatalog", {
+    new ImageCatalog(this, "oldcatalog", {
       metadata: {
         namespace: namespace,
         name: "pgvector",

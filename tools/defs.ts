@@ -82,7 +82,9 @@ abstract class CommandUpdater implements Updater {
     }
 
     // now run the command to grab all the manifests
-    const manifests = execSync(`${this.command} ${this.args}`).toString();
+    const manifests = execSync(`${this.command} ${this.args}`, {
+      maxBuffer: 50 * 1024 * 1024, // default 1024 * 1024
+    }).toString();
     const docs = parseAllDocuments(manifests);
 
     // some things spit out a k8s list
@@ -100,6 +102,17 @@ abstract class CommandUpdater implements Updater {
     for (const doc of docs) {
       this.writeItem(doc.toJS());
     }
+  }
+}
+
+export class VMUpdater extends CommandUpdater {
+  command = "helm";
+  args =
+    "show crds oci://ghcr.io/victoriametrics/helm-charts/victoria-metrics-k8s-stack";
+  outputDir = "metrics/crds";
+
+  versionDetector(): string {
+    return ""; // TODO better
   }
 }
 

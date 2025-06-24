@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/name: velero
     app.kubernetes.io/version: 1.16.0
     component: velero
-    helm.sh/chart: velero-9.0.0
+    helm.sh/chart: velero-10.0.2
   name: velero
   namespace: velero
 spec:
@@ -29,9 +29,10 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: velero
         app.kubernetes.io/version: 1.16.0
-        helm.sh/chart: velero-9.0.0
+        helm.sh/chart: velero-10.0.2
         name: velero
     spec:
+      automountServiceAccountToken: true
       containers:
         - args:
             - server
@@ -100,7 +101,7 @@ spec:
               name: scratch
       dnsPolicy: ClusterFirst
       initContainers:
-        - image: gcr.io/velero-gcp/velero-plugin-for-aws:v1.12.0
+        - image: velero/velero-plugin-for-aws:v1.12.1
           name: velero-plugin-for-aws
           volumeMounts:
             - mountPath: /target

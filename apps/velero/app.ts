@@ -18,8 +18,8 @@ import {
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
-const chartVersion = "9.0.0";
-const awsVersion = "1.12.0";
+const chartVersion = "10.0.2";
+const awsVersion = "1.12.1";
 
 NewArgoApp(name, {
   namespace: namespace,
@@ -80,7 +80,7 @@ class Velero extends Chart {
         initContainers: [
           {
             name: "velero-plugin-for-aws",
-            image: `gcr.io/velero-gcp/velero-plugin-for-aws:v${awsVersion}`,
+            image: `velero/velero-plugin-for-aws:v${awsVersion}`,
             volumeMounts: [
               {
                 mountPath: "/target",

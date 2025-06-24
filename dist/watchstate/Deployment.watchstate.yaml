@@ -43,9 +43,9 @@ spec:
               port: 8080
           resources:
             limits:
-              memory: 768Mi
+              memory: 1536Mi
             requests:
-              memory: 128Mi
+              memory: 512Mi
           securityContext:
             allowPrivilegeEscalation: false
             privileged: false

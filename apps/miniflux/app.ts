@@ -68,6 +68,7 @@ new AppPlus(app, `${name}-app`, {
     AUTH_PROXY_USER_CREATION: EnvValue.fromValue("true"),
     DISABLE_LOCAL_AUTH: EnvValue.fromValue("true"),
     OAUTH2_OIDC_PROVIDER_NAME: EnvValue.fromValue("Cmdcentral Login"),
+    RUN_MIGRATIONS: EnvValue.fromValue("1"),
   },
   envFrom: [
     new EnvFrom(

@@ -30,8 +30,8 @@ new AppPlus(app, "watchstate", {
   image,
   resources: {
     memory: {
-      request: Size.mebibytes(128),
-      limit: Size.mebibytes(768),
+      request: Size.mebibytes(512),
+      limit: Size.gibibytes(1.5),
     },
   },
   ports: [port],

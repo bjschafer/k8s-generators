@@ -76,7 +76,7 @@ export interface AddonProps {
 /**
  * Converts an object of type 'AddonProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AddonProps(obj: AddonProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -86,7 +86,7 @@ export function toJson_AddonProps(obj: AddonProps | undefined): Record<string, a
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema AddonSpec
@@ -107,7 +107,7 @@ export interface AddonSpec {
 /**
  * Converts an object of type 'AddonSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AddonSpec(obj: AddonSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -117,7 +117,7 @@ export function toJson_AddonSpec(obj: AddonSpec | undefined): Record<string, any
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -193,7 +193,7 @@ export interface EtcdSnapshotFileProps {
 /**
  * Converts an object of type 'EtcdSnapshotFileProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_EtcdSnapshotFileProps(obj: EtcdSnapshotFileProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -203,7 +203,7 @@ export function toJson_EtcdSnapshotFileProps(obj: EtcdSnapshotFileProps | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema EtcdSnapshotFileSpec
@@ -239,7 +239,7 @@ export interface EtcdSnapshotFileSpec {
 /**
  * Converts an object of type 'EtcdSnapshotFileSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_EtcdSnapshotFileSpec(obj: EtcdSnapshotFileSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -252,7 +252,7 @@ export function toJson_EtcdSnapshotFileSpec(obj: EtcdSnapshotFileSpec | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema EtcdSnapshotFileSpecS3
@@ -262,6 +262,11 @@ export interface EtcdSnapshotFileSpecS3 {
    * @schema EtcdSnapshotFileSpecS3#bucket
    */
   readonly bucket?: string;
+
+  /**
+   * @schema EtcdSnapshotFileSpecS3#bucketLookup
+   */
+  readonly bucketLookup?: string;
 
   /**
    * @schema EtcdSnapshotFileSpecS3#endpoint
@@ -298,11 +303,12 @@ export interface EtcdSnapshotFileSpecS3 {
 /**
  * Converts an object of type 'EtcdSnapshotFileSpecS3' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_EtcdSnapshotFileSpecS3(obj: EtcdSnapshotFileSpecS3 | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'bucket': obj.bucket,
+    'bucketLookup': obj.bucketLookup,
     'endpoint': obj.endpoint,
     'endpointCA': obj.endpointCa,
     'insecure': obj.insecure,
@@ -313,5 +319,5 @@ export function toJson_EtcdSnapshotFileSpecS3(obj: EtcdSnapshotFileSpecS3 | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 

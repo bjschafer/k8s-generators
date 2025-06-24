@@ -1,12 +1,12 @@
 kustomize:
   images:
-  - ghcr.io/navidrome/navidrome:latest@sha256:3a66e262b7ea836faa06c08ad5b32076c49e9e63e2fa4de10080c8e9be9f0846
-  - ghcr.io/linuxserver/sonarr:develop@sha256:586a6c045ae2591dccb789d7c05a29c77a44384d8276042e3a7d23467e2135b7
-  - ghcr.io/linuxserver/radarr:nightly@sha256:1577b30c8de3ea8f632bc63272065ebe35182637996618b733c3c9467249075e
-  - ghcr.io/linuxserver/lidarr:develop@sha256:be6aef77cf9da105164b42aa6c381c6822d2f2f8bb75398107bf996c9628d38e
-  - lscr.io/linuxserver/readarr:develop@sha256:f2f9280f1db32b6f6782d31a8c38995d604ae2f2008e7eed333bb713dd32b9af
-  - ghcr.io/linuxserver/sabnzbd:latest@sha256:15d7fb05cb46efdb0572ffb2b3b1f6962d8b5f1cf3bb8304f39493ea81fcf066
-  - ghcr.io/linuxserver/prowlarr:latest@sha256:1a6cdd0cc2350f8527dab39bc8467c9a2553bbbcf75a2c66f882fc53d73d5deb
+  - ghcr.io/navidrome/navidrome:latest@sha256:d8dcacba4cf48b4caa81f231f20ebba719e642b0f86a46b1b5c24bb4f27edddc
+  - ghcr.io/linuxserver/sonarr:develop@sha256:6217f042e589973283a4c9b3eb42d0ca955c2f7269276700c149cecb62f40a90
+  - ghcr.io/linuxserver/radarr:nightly@sha256:d1d81d5c0068becbc20fe2b8e7b8d60e4be3002a76118e224d0860ad532aa9e4
+  - ghcr.io/linuxserver/lidarr:develop@sha256:4f628c69de51e8306f194a0320cc2b926285bb8f5dc3df3e79f66203760681b4
+  - lscr.io/linuxserver/readarr:develop@sha256:b6a7420770adeea5cac1f3ee5da606183d014e3f96fb473f3abd88ed11d9f344
+  - ghcr.io/linuxserver/sabnzbd:latest@sha256:f9c06e2556a6f10b65373b9d0f2da8cdcf4cac15e7f30ea02fb2e52beffa2696
+  - ghcr.io/linuxserver/prowlarr:latest@sha256:b058be8a4e083e0cba238f03759994617a559abe0c89e5ed66454b44395da6a9
   - ghcr.io/linuxserver/sonarr@sha256:4d887a6c919926335294a8b9dbd0abebe2ef2875acf86043538f2095e862a2cf
   - ghcr.io/linuxserver/lidarr@sha256:58d753fd4de240d42f72057726ceeedf774bcc84c0b6953e13b8a7b47ea90222
   - lscr.io/linuxserver/readarr@sha256:ff09ade143b4c083e78a4c7e27f802454a4c0ab61ff706c996c99ac27c600e4e
