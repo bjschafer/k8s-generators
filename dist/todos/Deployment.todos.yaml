@@ -76,6 +76,11 @@ spec:
                 secretKeyRef:
                   key: DT_TELEGRAM_TOKEN
                   name: secrets
+            - name: DT_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: DT_JWT_SECRET
+                  name: jwt
           image: donetick/donetick
           imagePullPolicy: Always
           livenessProbe:

@@ -26,6 +26,7 @@ NewArgoApp(name, {
 });
 
 const secrets = Secret.fromSecretName(app, `${name}-creds`, "secrets");
+const jwt = Secret.fromSecretName(app, `${name}-jwt`, "jwt");
 
 // Viper only knows about config fields in the config file. The built-in config file does not have some fields we need (such as for database).
 // Meaning, we need a config file that has the format/structure of all the values, but it can be filled with dummy values and overridden by environment variables.
@@ -88,6 +89,9 @@ class Config extends Chart {
           redirect_url: "",
           name: "",
           scopes: ["openid", "profile", "email"],
+        },
+        jwt: {
+          secret: "",
         },
       }),
     );
@@ -158,6 +162,10 @@ new AppPlus(app, "donetick", {
     DT_TELEGRAM_TOKEN: EnvValue.fromSecretValue({
       secret: secrets,
       key: "DT_TELEGRAM_TOKEN",
+    }),
+    DT_JWT_SECRET: EnvValue.fromSecretValue({
+      secret: jwt,
+      key: "DT_JWT_SECRET",
     }),
   },
 

@@ -47,4 +47,6 @@ data:
         - openid
         - profile
         - email
+    jwt:
+      secret: ""
 immutable: false
