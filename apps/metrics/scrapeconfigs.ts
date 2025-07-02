@@ -217,21 +217,13 @@ export class ScrapeConfigs extends Chart {
             name: "nut_power_usage_watts",
             rules: [
               {
-                record: "ups:power_usage_watts:rackmount",
-                expr: 'nut_load{ups="rackmount"} * nut_power_nominal_watts{ups="rackmount"}',
-              },
-              {
-                record: "ups:power_usage_watts:network",
-                expr: 'nut_load{ups="network"} * nut_power_nominal_watts{ups="network"}',
-              },
-              {
                 record: "ups:power_usage_watts:a_side",
                 expr: 'nut_load{ups="a-side"} * nut_power_nominal_watts{ups="a-side"}',
               },
-              //              {
-              //                record: "ups:power_usage_watts:b_side",
-              //                expr: 'nut_load{ups="b-side"} * 1350',
-              //              },
+              {
+                record: "ups:power_usage_watts:b_side",
+                expr: 'nut_load{ups="b-side"} * nut_power_nominal_watts{ups="b-side"}',
+              },
             ],
           },
         ],
