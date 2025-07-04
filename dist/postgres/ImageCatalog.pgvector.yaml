@@ -1,9 +1,0 @@
-apiVersion: postgresql.cnpg.io/v1
-kind: ImageCatalog
-metadata:
-  name: pgvector
-  namespace: postgres
-spec:
-  images:
-    - image: registry.cmdcentral.xyz/docker/misc/cnpg-pgvector-16.9-1-bookworm-v0.3.0:latest
-      major: 16

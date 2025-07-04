@@ -281,24 +281,6 @@ class VectorPostgres extends Chart {
   ) {
     super(scope, id);
 
-    new ImageCatalog(this, "oldcatalog", {
-      metadata: {
-        namespace: namespace,
-        name: "pgvector",
-      },
-      spec: {
-        images: [
-          {
-            // https://immich.app/docs/administration/postgres-standalone#prerequisites 0.3.0 is the latest supported pgvecto.rs
-            //image: "ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.5-v0.3.0",
-            image:
-              "registry.cmdcentral.xyz/docker/misc/cnpg-pgvector-16.9-1-bookworm-v0.3.0:latest",
-            major: 16,
-          },
-        ],
-      },
-    });
-
     const imageBase = "ghcr.io/tensorchord/cloudnative-vectorchord";
     const catalog = new ImageCatalog(this, "catalog", {
       metadata: {
@@ -308,11 +290,11 @@ class VectorPostgres extends Chart {
       spec: {
         images: [
           {
-            image: `${imageBase}:16.9-0.3.0`,
+            image: `${imageBase}:16.9-0.4.2`,
             major: 16,
           },
           {
-            image: `${imageBase}:17.5-0.3.0`,
+            image: `${imageBase}:17.5-0.4.2`,
             major: 17,
           },
         ],
