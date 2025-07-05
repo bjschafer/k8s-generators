@@ -33,11 +33,6 @@ data:
     header_name = cf-access-authenticated-user-email
     header_property = email
     [feature_toggles]
-    dashboardNewLayouts = true
-    grafanaAPIServerEnsureKubectlAccess = false
-    kubernetesClientDashboardsFolders = false
-    kubernetesDashboards = true
-    provisioning = true
     publicDashboards = true
     [grafana_net]
     url = https://grafana.net
