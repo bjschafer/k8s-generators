@@ -1,9 +1,9 @@
 import { Chart } from "cdk8s";
 import { Construct } from "constructs";
 import {
-  ExternalSecretV1Beta1,
-  ExternalSecretV1Beta1SpecData,
-  ExternalSecretV1Beta1SpecSecretStoreRefKind,
+  ExternalSecret,
+  ExternalSecretSpecData,
+  ExternalSecretSpecSecretStoreRefKind,
 } from "../imports/external-secrets.io";
 import { EnvValue, ISecret, Secret } from "cdk8s-plus-32";
 
@@ -27,18 +27,18 @@ export class BitwardenSecret extends Chart {
     this.secret = Secret.fromSecretName(this, `${id}-isecret`, props.name);
     this.data = props.data;
 
-    new ExternalSecretV1Beta1(this, "secret", {
+    new ExternalSecret(this, "secret", {
       metadata: {
         name: props.name,
         namespace: props.namespace,
       },
       spec: {
         secretStoreRef: {
-          kind: ExternalSecretV1Beta1SpecSecretStoreRefKind.CLUSTER_SECRET_STORE,
+          kind: ExternalSecretSpecSecretStoreRefKind.CLUSTER_SECRET_STORE,
           name: "bitwarden",
         },
         data: Object.entries(props.data).map(
-          (value: [string, string]): ExternalSecretV1Beta1SpecData => {
+          (value: [string, string]): ExternalSecretSpecData => {
             return {
               secretKey: value[0],
               remoteRef: {
