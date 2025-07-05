@@ -2,8 +2,8 @@ kustomize:
   images:
   - ghcr.io/navidrome/navidrome:latest@sha256:d753f3f0ba65d838d288e58c2cb1254a519f439b88fa0fa8378178f5e8b17587
   - ghcr.io/linuxserver/sonarr:develop@sha256:cd203d07c733ff8e807e0b7d0e9706887afa9fca3e540cdde56983deb0fe1a08
-  - ghcr.io/linuxserver/radarr:nightly@sha256:70e29ac81d8917e2c9a9fba2461d3c72f9f739ca1b64ad20def38fddcb5a6ab9
-  - ghcr.io/linuxserver/lidarr:develop@sha256:4f628c69de51e8306f194a0320cc2b926285bb8f5dc3df3e79f66203760681b4
+  - ghcr.io/linuxserver/radarr:nightly@sha256:6e5660cf3e56bd9ba875234ab19f8808c0286a6e53ea2a295df0e3bd4ed6f618
+  - ghcr.io/linuxserver/lidarr:develop@sha256:c6f0ac84180f3ee731e208ee50cb2d6842263dcee40d14a218c0e30bb5452bd0
   - lscr.io/linuxserver/readarr@sha256:ff09ade143b4c083e78a4c7e27f802454a4c0ab61ff706c996c99ac27c600e4e
   - ghcr.io/linuxserver/sabnzbd:latest@sha256:8d4575787eedeb36d7857cffb441dffc8c0e0e2d32be6fc08ec6a9749ec94322
   - ghcr.io/linuxserver/prowlarr:latest@sha256:b058be8a4e083e0cba238f03759994617a559abe0c89e5ed66454b44395da6a9
