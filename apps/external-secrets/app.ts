@@ -8,8 +8,8 @@ import { Construct } from "constructs";
 import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";
 import { NewArgoApp } from "../../lib/argo";
 import {
-  ClusterSecretStoreV1Beta1,
-  ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaProviderType,
+  ClusterSecretStore,
+  ClusterSecretStoreSpecProviderBitwardensecretsmanagerCaProviderType,
 } from "../../imports/external-secrets.io";
 
 const namespace = basename(__dirname);
@@ -127,7 +127,7 @@ class EsoConfig extends Chart {
       },
     );
 
-    new ClusterSecretStoreV1Beta1(this, "bw-secret-store", {
+    new ClusterSecretStore(this, "bw-secret-store", {
       metadata: {
         name: "bitwarden",
       },
@@ -150,7 +150,7 @@ class EsoConfig extends Chart {
             organizationId: "f629d5a2-5bbe-4647-9189-b0dd017dca43",
             projectId: "01e3e960-5d95-4bbc-b63c-b2bc00226981",
             caProvider: {
-              type: ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaProviderType.SECRET,
+              type: ClusterSecretStoreSpecProviderBitwardensecretsmanagerCaProviderType.SECRET,
               namespace: namespace,
               name: "bitwarden-tls-certs",
               key: "ca.crt",
