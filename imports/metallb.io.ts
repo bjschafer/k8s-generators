@@ -80,7 +80,7 @@ export interface AddressPoolProps {
 /**
  * Converts an object of type 'AddressPoolProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_AddressPoolProps(obj: AddressPoolProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -90,7 +90,7 @@ export function toJson_AddressPoolProps(obj: AddressPoolProps | undefined): Reco
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * AddressPoolSpec defines the desired state of AddressPool.
@@ -131,7 +131,7 @@ export interface AddressPoolSpec {
 /**
  * Converts an object of type 'AddressPoolSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_AddressPoolSpec(obj: AddressPoolSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -143,7 +143,7 @@ export function toJson_AddressPoolSpec(obj: AddressPoolSpec | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema AddressPoolSpecBgpAdvertisements
@@ -182,7 +182,7 @@ export interface AddressPoolSpecBgpAdvertisements {
 /**
  * Converts an object of type 'AddressPoolSpecBgpAdvertisements' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_AddressPoolSpecBgpAdvertisements(obj: AddressPoolSpecBgpAdvertisements | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -194,7 +194,7 @@ export function toJson_AddressPoolSpecBgpAdvertisements(obj: AddressPoolSpecBgpA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Protocol can be used to select how the announcement is done.
@@ -286,7 +286,7 @@ export interface AddressPoolV1Beta1Props {
 /**
  * Converts an object of type 'AddressPoolV1Beta1Props' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_AddressPoolV1Beta1Props(obj: AddressPoolV1Beta1Props | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -296,7 +296,7 @@ export function toJson_AddressPoolV1Beta1Props(obj: AddressPoolV1Beta1Props | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * AddressPoolSpec defines the desired state of AddressPool.
@@ -337,7 +337,7 @@ export interface AddressPoolV1Beta1Spec {
 /**
  * Converts an object of type 'AddressPoolV1Beta1Spec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_AddressPoolV1Beta1Spec(obj: AddressPoolV1Beta1Spec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -349,7 +349,7 @@ export function toJson_AddressPoolV1Beta1Spec(obj: AddressPoolV1Beta1Spec | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema AddressPoolV1Beta1SpecBgpAdvertisements
@@ -388,7 +388,7 @@ export interface AddressPoolV1Beta1SpecBgpAdvertisements {
 /**
  * Converts an object of type 'AddressPoolV1Beta1SpecBgpAdvertisements' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_AddressPoolV1Beta1SpecBgpAdvertisements(obj: AddressPoolV1Beta1SpecBgpAdvertisements | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -400,7 +400,7 @@ export function toJson_AddressPoolV1Beta1SpecBgpAdvertisements(obj: AddressPoolV
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Protocol can be used to select how the announcement is done.
@@ -494,7 +494,7 @@ export interface BfdProfileProps {
 /**
  * Converts an object of type 'BfdProfileProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BfdProfileProps(obj: BfdProfileProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -504,7 +504,7 @@ export function toJson_BfdProfileProps(obj: BfdProfileProps | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * BFDProfileSpec defines the desired state of BFDProfile.
@@ -582,7 +582,7 @@ export interface BfdProfileSpec {
 /**
  * Converts an object of type 'BfdProfileSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BfdProfileSpec(obj: BfdProfileSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -597,7 +597,7 @@ export function toJson_BfdProfileSpec(obj: BfdProfileSpec | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -681,7 +681,7 @@ export interface BgpAdvertisementProps {
 /**
  * Converts an object of type 'BgpAdvertisementProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BgpAdvertisementProps(obj: BgpAdvertisementProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -691,7 +691,7 @@ export function toJson_BgpAdvertisementProps(obj: BgpAdvertisementProps | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * BGPAdvertisementSpec defines the desired state of BGPAdvertisement.
@@ -767,7 +767,7 @@ export interface BgpAdvertisementSpec {
 /**
  * Converts an object of type 'BgpAdvertisementSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BgpAdvertisementSpec(obj: BgpAdvertisementSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -783,7 +783,7 @@ export function toJson_BgpAdvertisementSpec(obj: BgpAdvertisementSpec | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector is a label query over a set of resources. The result of matchLabels and
@@ -814,7 +814,7 @@ export interface BgpAdvertisementSpecIpAddressPoolSelectors {
 /**
  * Converts an object of type 'BgpAdvertisementSpecIpAddressPoolSelectors' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BgpAdvertisementSpecIpAddressPoolSelectors(obj: BgpAdvertisementSpecIpAddressPoolSelectors | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -824,7 +824,7 @@ export function toJson_BgpAdvertisementSpecIpAddressPoolSelectors(obj: BgpAdvert
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector is a label query over a set of resources. The result of matchLabels and
@@ -855,7 +855,7 @@ export interface BgpAdvertisementSpecNodeSelectors {
 /**
  * Converts an object of type 'BgpAdvertisementSpecNodeSelectors' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BgpAdvertisementSpecNodeSelectors(obj: BgpAdvertisementSpecNodeSelectors | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -865,7 +865,7 @@ export function toJson_BgpAdvertisementSpecNodeSelectors(obj: BgpAdvertisementSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -904,7 +904,7 @@ export interface BgpAdvertisementSpecIpAddressPoolSelectorsMatchExpressions {
 /**
  * Converts an object of type 'BgpAdvertisementSpecIpAddressPoolSelectorsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BgpAdvertisementSpecIpAddressPoolSelectorsMatchExpressions(obj: BgpAdvertisementSpecIpAddressPoolSelectorsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -915,7 +915,7 @@ export function toJson_BgpAdvertisementSpecIpAddressPoolSelectorsMatchExpression
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -954,7 +954,7 @@ export interface BgpAdvertisementSpecNodeSelectorsMatchExpressions {
 /**
  * Converts an object of type 'BgpAdvertisementSpecNodeSelectorsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BgpAdvertisementSpecNodeSelectorsMatchExpressions(obj: BgpAdvertisementSpecNodeSelectorsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -965,7 +965,7 @@ export function toJson_BgpAdvertisementSpecNodeSelectorsMatchExpressions(obj: Bg
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -1045,7 +1045,7 @@ export interface BgpPeerProps {
 /**
  * Converts an object of type 'BgpPeerProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BgpPeerProps(obj: BgpPeerProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1055,7 +1055,7 @@ export function toJson_BgpPeerProps(obj: BgpPeerProps | undefined): Record<strin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * BGPPeerSpec defines the desired state of Peer.
@@ -1151,7 +1151,7 @@ export interface BgpPeerSpec {
 /**
  * Converts an object of type 'BgpPeerSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BgpPeerSpec(obj: BgpPeerSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1171,7 +1171,7 @@ export function toJson_BgpPeerSpec(obj: BgpPeerSpec | undefined): Record<string,
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema BgpPeerSpecNodeSelectors
@@ -1192,7 +1192,7 @@ export interface BgpPeerSpecNodeSelectors {
 /**
  * Converts an object of type 'BgpPeerSpecNodeSelectors' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BgpPeerSpecNodeSelectors(obj: BgpPeerSpecNodeSelectors | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1202,7 +1202,7 @@ export function toJson_BgpPeerSpecNodeSelectors(obj: BgpPeerSpecNodeSelectors | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema BgpPeerSpecNodeSelectorsMatchExpressions
@@ -1228,7 +1228,7 @@ export interface BgpPeerSpecNodeSelectorsMatchExpressions {
 /**
  * Converts an object of type 'BgpPeerSpecNodeSelectorsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BgpPeerSpecNodeSelectorsMatchExpressions(obj: BgpPeerSpecNodeSelectorsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1239,7 +1239,7 @@ export function toJson_BgpPeerSpecNodeSelectorsMatchExpressions(obj: BgpPeerSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -1319,7 +1319,7 @@ export interface BgpPeerV1Beta2Props {
 /**
  * Converts an object of type 'BgpPeerV1Beta2Props' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BgpPeerV1Beta2Props(obj: BgpPeerV1Beta2Props | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1329,7 +1329,7 @@ export function toJson_BgpPeerV1Beta2Props(obj: BgpPeerV1Beta2Props | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * BGPPeerSpec defines the desired state of Peer.
@@ -1481,7 +1481,7 @@ export interface BgpPeerV1Beta2Spec {
 /**
  * Converts an object of type 'BgpPeerV1Beta2Spec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BgpPeerV1Beta2Spec(obj: BgpPeerV1Beta2Spec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1507,7 +1507,7 @@ export function toJson_BgpPeerV1Beta2Spec(obj: BgpPeerV1Beta2Spec | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DynamicASN detects the AS number to use for the remote end of the session
@@ -1554,7 +1554,7 @@ export interface BgpPeerV1Beta2SpecNodeSelectors {
 /**
  * Converts an object of type 'BgpPeerV1Beta2SpecNodeSelectors' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BgpPeerV1Beta2SpecNodeSelectors(obj: BgpPeerV1Beta2SpecNodeSelectors | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1564,7 +1564,7 @@ export function toJson_BgpPeerV1Beta2SpecNodeSelectors(obj: BgpPeerV1Beta2SpecNo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * passwordSecret is name of the authentication secret for BGP Peer.
@@ -1594,7 +1594,7 @@ export interface BgpPeerV1Beta2SpecPasswordSecret {
 /**
  * Converts an object of type 'BgpPeerV1Beta2SpecPasswordSecret' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BgpPeerV1Beta2SpecPasswordSecret(obj: BgpPeerV1Beta2SpecPasswordSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1604,7 +1604,7 @@ export function toJson_BgpPeerV1Beta2SpecPasswordSecret(obj: BgpPeerV1Beta2SpecP
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -1643,7 +1643,7 @@ export interface BgpPeerV1Beta2SpecNodeSelectorsMatchExpressions {
 /**
  * Converts an object of type 'BgpPeerV1Beta2SpecNodeSelectorsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BgpPeerV1Beta2SpecNodeSelectorsMatchExpressions(obj: BgpPeerV1Beta2SpecNodeSelectorsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1654,7 +1654,7 @@ export function toJson_BgpPeerV1Beta2SpecNodeSelectorsMatchExpressions(obj: BgpP
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -1736,7 +1736,7 @@ export interface CommunityProps {
 /**
  * Converts an object of type 'CommunityProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_CommunityProps(obj: CommunityProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1746,7 +1746,7 @@ export function toJson_CommunityProps(obj: CommunityProps | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * CommunitySpec defines the desired state of Community.
@@ -1764,7 +1764,7 @@ export interface CommunitySpec {
 /**
  * Converts an object of type 'CommunitySpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_CommunitySpec(obj: CommunitySpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1773,7 +1773,7 @@ export function toJson_CommunitySpec(obj: CommunitySpec | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema CommunitySpecCommunities
@@ -1799,7 +1799,7 @@ export interface CommunitySpecCommunities {
 /**
  * Converts an object of type 'CommunitySpecCommunities' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_CommunitySpecCommunities(obj: CommunitySpecCommunities | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1809,7 +1809,7 @@ export function toJson_CommunitySpecCommunities(obj: CommunitySpecCommunities | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -1891,7 +1891,7 @@ export interface IpAddressPoolProps {
 /**
  * Converts an object of type 'IpAddressPoolProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IpAddressPoolProps(obj: IpAddressPoolProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1901,7 +1901,7 @@ export function toJson_IpAddressPoolProps(obj: IpAddressPoolProps | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * IPAddressPoolSpec defines the desired state of IPAddressPool.
@@ -1953,7 +1953,7 @@ export interface IpAddressPoolSpec {
 /**
  * Converts an object of type 'IpAddressPoolSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IpAddressPoolSpec(obj: IpAddressPoolSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1965,7 +1965,7 @@ export function toJson_IpAddressPoolSpec(obj: IpAddressPoolSpec | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * AllocateTo makes ip pool allocation to specific namespace and/or service.
@@ -2014,7 +2014,7 @@ export interface IpAddressPoolSpecServiceAllocation {
 /**
  * Converts an object of type 'IpAddressPoolSpecServiceAllocation' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IpAddressPoolSpecServiceAllocation(obj: IpAddressPoolSpecServiceAllocation | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2026,7 +2026,7 @@ export function toJson_IpAddressPoolSpecServiceAllocation(obj: IpAddressPoolSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector is a label query over a set of resources. The result of matchLabels and
@@ -2057,7 +2057,7 @@ export interface IpAddressPoolSpecServiceAllocationNamespaceSelectors {
 /**
  * Converts an object of type 'IpAddressPoolSpecServiceAllocationNamespaceSelectors' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IpAddressPoolSpecServiceAllocationNamespaceSelectors(obj: IpAddressPoolSpecServiceAllocationNamespaceSelectors | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2067,7 +2067,7 @@ export function toJson_IpAddressPoolSpecServiceAllocationNamespaceSelectors(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector is a label query over a set of resources. The result of matchLabels and
@@ -2098,7 +2098,7 @@ export interface IpAddressPoolSpecServiceAllocationServiceSelectors {
 /**
  * Converts an object of type 'IpAddressPoolSpecServiceAllocationServiceSelectors' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IpAddressPoolSpecServiceAllocationServiceSelectors(obj: IpAddressPoolSpecServiceAllocationServiceSelectors | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2108,7 +2108,7 @@ export function toJson_IpAddressPoolSpecServiceAllocationServiceSelectors(obj: I
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -2147,7 +2147,7 @@ export interface IpAddressPoolSpecServiceAllocationNamespaceSelectorsMatchExpres
 /**
  * Converts an object of type 'IpAddressPoolSpecServiceAllocationNamespaceSelectorsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IpAddressPoolSpecServiceAllocationNamespaceSelectorsMatchExpressions(obj: IpAddressPoolSpecServiceAllocationNamespaceSelectorsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2158,7 +2158,7 @@ export function toJson_IpAddressPoolSpecServiceAllocationNamespaceSelectorsMatch
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -2197,7 +2197,7 @@ export interface IpAddressPoolSpecServiceAllocationServiceSelectorsMatchExpressi
 /**
  * Converts an object of type 'IpAddressPoolSpecServiceAllocationServiceSelectorsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IpAddressPoolSpecServiceAllocationServiceSelectorsMatchExpressions(obj: IpAddressPoolSpecServiceAllocationServiceSelectorsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2208,7 +2208,7 @@ export function toJson_IpAddressPoolSpecServiceAllocationServiceSelectorsMatchEx
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -2290,7 +2290,7 @@ export interface L2AdvertisementProps {
 /**
  * Converts an object of type 'L2AdvertisementProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_L2AdvertisementProps(obj: L2AdvertisementProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2300,7 +2300,7 @@ export function toJson_L2AdvertisementProps(obj: L2AdvertisementProps | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * L2AdvertisementSpec defines the desired state of L2Advertisement.
@@ -2343,7 +2343,7 @@ export interface L2AdvertisementSpec {
 /**
  * Converts an object of type 'L2AdvertisementSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_L2AdvertisementSpec(obj: L2AdvertisementSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2355,7 +2355,7 @@ export function toJson_L2AdvertisementSpec(obj: L2AdvertisementSpec | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector is a label query over a set of resources. The result of matchLabels and
@@ -2386,7 +2386,7 @@ export interface L2AdvertisementSpecIpAddressPoolSelectors {
 /**
  * Converts an object of type 'L2AdvertisementSpecIpAddressPoolSelectors' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_L2AdvertisementSpecIpAddressPoolSelectors(obj: L2AdvertisementSpecIpAddressPoolSelectors | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2396,7 +2396,7 @@ export function toJson_L2AdvertisementSpecIpAddressPoolSelectors(obj: L2Advertis
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector is a label query over a set of resources. The result of matchLabels and
@@ -2427,7 +2427,7 @@ export interface L2AdvertisementSpecNodeSelectors {
 /**
  * Converts an object of type 'L2AdvertisementSpecNodeSelectors' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_L2AdvertisementSpecNodeSelectors(obj: L2AdvertisementSpecNodeSelectors | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2437,7 +2437,7 @@ export function toJson_L2AdvertisementSpecNodeSelectors(obj: L2AdvertisementSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -2476,7 +2476,7 @@ export interface L2AdvertisementSpecIpAddressPoolSelectorsMatchExpressions {
 /**
  * Converts an object of type 'L2AdvertisementSpecIpAddressPoolSelectorsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_L2AdvertisementSpecIpAddressPoolSelectorsMatchExpressions(obj: L2AdvertisementSpecIpAddressPoolSelectorsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2487,7 +2487,7 @@ export function toJson_L2AdvertisementSpecIpAddressPoolSelectorsMatchExpressions
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -2526,7 +2526,7 @@ export interface L2AdvertisementSpecNodeSelectorsMatchExpressions {
 /**
  * Converts an object of type 'L2AdvertisementSpecNodeSelectorsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_L2AdvertisementSpecNodeSelectorsMatchExpressions(obj: L2AdvertisementSpecNodeSelectorsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2537,7 +2537,7 @@ export function toJson_L2AdvertisementSpecNodeSelectorsMatchExpressions(obj: L2A
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -2617,7 +2617,7 @@ export interface ServiceL2StatusProps {
 /**
  * Converts an object of type 'ServiceL2StatusProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ServiceL2StatusProps(obj: ServiceL2StatusProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2627,5 +2627,5 @@ export function toJson_ServiceL2StatusProps(obj: ServiceL2StatusProps | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 

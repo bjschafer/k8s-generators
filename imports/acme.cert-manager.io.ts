@@ -78,7 +78,7 @@ export interface ChallengeProps {
 /**
  * Converts an object of type 'ChallengeProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeProps(obj: ChallengeProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -88,7 +88,7 @@ export function toJson_ChallengeProps(obj: ChallengeProps | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema ChallengeSpec
@@ -180,7 +180,7 @@ export interface ChallengeSpec {
 /**
  * Converts an object of type 'ChallengeSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpec(obj: ChallengeSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -197,7 +197,7 @@ export function toJson_ChallengeSpec(obj: ChallengeSpec | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * References a properly configured ACME-type Issuer which should
@@ -235,7 +235,7 @@ export interface ChallengeSpecIssuerRef {
 /**
  * Converts an object of type 'ChallengeSpecIssuerRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecIssuerRef(obj: ChallengeSpecIssuerRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -246,7 +246,7 @@ export function toJson_ChallengeSpecIssuerRef(obj: ChallengeSpecIssuerRef | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Contains the domain solving configuration that should be used to
@@ -289,7 +289,7 @@ export interface ChallengeSpecSolver {
 /**
  * Converts an object of type 'ChallengeSpecSolver' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolver(obj: ChallengeSpecSolver | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -300,7 +300,7 @@ export function toJson_ChallengeSpecSolver(obj: ChallengeSpecSolver | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The type of ACME challenge this resource represents.
@@ -401,7 +401,7 @@ export interface ChallengeSpecSolverDns01 {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01(obj: ChallengeSpecSolverDns01 | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -419,7 +419,7 @@ export function toJson_ChallengeSpecSolverDns01(obj: ChallengeSpecSolverDns01 | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Configures cert-manager to attempt to complete authorizations by
@@ -455,7 +455,7 @@ export interface ChallengeSpecSolverHttp01 {
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01(obj: ChallengeSpecSolverHttp01 | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -465,7 +465,7 @@ export function toJson_ChallengeSpecSolverHttp01(obj: ChallengeSpecSolverHttp01 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Selector selects a set of DNSNames on the Certificate resource that
@@ -518,7 +518,7 @@ export interface ChallengeSpecSolverSelector {
 /**
  * Converts an object of type 'ChallengeSpecSolverSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverSelector(obj: ChallengeSpecSolverSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -529,7 +529,7 @@ export function toJson_ChallengeSpecSolverSelector(obj: ChallengeSpecSolverSelec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Use the 'ACME DNS' (https://github.com/joohoi/acme-dns) API to manage
@@ -556,7 +556,7 @@ export interface ChallengeSpecSolverDns01AcmeDns {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01AcmeDns' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01AcmeDns(obj: ChallengeSpecSolverDns01AcmeDns | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -566,7 +566,7 @@ export function toJson_ChallengeSpecSolverDns01AcmeDns(obj: ChallengeSpecSolverD
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Use the Akamai DNS zone management API to manage DNS01 challenge records.
@@ -608,7 +608,7 @@ export interface ChallengeSpecSolverDns01Akamai {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01Akamai' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01Akamai(obj: ChallengeSpecSolverDns01Akamai | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -620,7 +620,7 @@ export function toJson_ChallengeSpecSolverDns01Akamai(obj: ChallengeSpecSolverDn
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Use the Microsoft Azure DNS API to manage DNS01 challenge records.
@@ -697,7 +697,7 @@ export interface ChallengeSpecSolverDns01AzureDns {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01AzureDns' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01AzureDns(obj: ChallengeSpecSolverDns01AzureDns | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -713,7 +713,7 @@ export function toJson_ChallengeSpecSolverDns01AzureDns(obj: ChallengeSpecSolver
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Use the Google Cloud DNS API to manage DNS01 challenge records.
@@ -748,7 +748,7 @@ export interface ChallengeSpecSolverDns01CloudDns {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01CloudDns' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01CloudDns(obj: ChallengeSpecSolverDns01CloudDns | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -759,7 +759,7 @@ export function toJson_ChallengeSpecSolverDns01CloudDns(obj: ChallengeSpecSolver
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Use the Cloudflare API to manage DNS01 challenge records.
@@ -795,7 +795,7 @@ export interface ChallengeSpecSolverDns01Cloudflare {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01Cloudflare' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01Cloudflare(obj: ChallengeSpecSolverDns01Cloudflare | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -806,7 +806,7 @@ export function toJson_ChallengeSpecSolverDns01Cloudflare(obj: ChallengeSpecSolv
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * CNAMEStrategy configures how the DNS01 provider should handle CNAME
@@ -840,7 +840,7 @@ export interface ChallengeSpecSolverDns01Digitalocean {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01Digitalocean' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01Digitalocean(obj: ChallengeSpecSolverDns01Digitalocean | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -849,7 +849,7 @@ export function toJson_ChallengeSpecSolverDns01Digitalocean(obj: ChallengeSpecSo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Use RFC2136 ("Dynamic Updates in the Domain Name System") (https://datatracker.ietf.org/doc/rfc2136/)
@@ -899,7 +899,7 @@ export interface ChallengeSpecSolverDns01Rfc2136 {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01Rfc2136' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01Rfc2136(obj: ChallengeSpecSolverDns01Rfc2136 | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -911,7 +911,7 @@ export function toJson_ChallengeSpecSolverDns01Rfc2136(obj: ChallengeSpecSolverD
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Use the AWS Route53 API to manage DNS01 challenge records.
@@ -1007,7 +1007,7 @@ export interface ChallengeSpecSolverDns01Route53 {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01Route53' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01Route53(obj: ChallengeSpecSolverDns01Route53 | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1022,7 +1022,7 @@ export function toJson_ChallengeSpecSolverDns01Route53(obj: ChallengeSpecSolverD
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Configure an external webhook based DNS01 challenge solver to manage
@@ -1069,7 +1069,7 @@ export interface ChallengeSpecSolverDns01Webhook {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01Webhook' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01Webhook(obj: ChallengeSpecSolverDns01Webhook | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1080,7 +1080,7 @@ export function toJson_ChallengeSpecSolverDns01Webhook(obj: ChallengeSpecSolverD
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The Gateway API is a sig-network community API that models service networking
@@ -1130,7 +1130,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoute {
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoute' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoute(obj: ChallengeSpecSolverHttp01GatewayHttpRoute | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1142,7 +1142,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoute(obj: ChallengeS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The ingress based HTTP01 challenge solver will solve challenges by
@@ -1214,7 +1214,7 @@ export interface ChallengeSpecSolverHttp01Ingress {
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01Ingress' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01Ingress(obj: ChallengeSpecSolverHttp01Ingress | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1228,7 +1228,7 @@ export function toJson_ChallengeSpecSolverHttp01Ingress(obj: ChallengeSpecSolver
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -1259,7 +1259,7 @@ export interface ChallengeSpecSolverDns01AcmeDnsAccountSecretRef {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01AcmeDnsAccountSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01AcmeDnsAccountSecretRef(obj: ChallengeSpecSolverDns01AcmeDnsAccountSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1269,7 +1269,7 @@ export function toJson_ChallengeSpecSolverDns01AcmeDnsAccountSecretRef(obj: Chal
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -1300,7 +1300,7 @@ export interface ChallengeSpecSolverDns01AkamaiAccessTokenSecretRef {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01AkamaiAccessTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01AkamaiAccessTokenSecretRef(obj: ChallengeSpecSolverDns01AkamaiAccessTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1310,7 +1310,7 @@ export function toJson_ChallengeSpecSolverDns01AkamaiAccessTokenSecretRef(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -1341,7 +1341,7 @@ export interface ChallengeSpecSolverDns01AkamaiClientSecretSecretRef {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01AkamaiClientSecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01AkamaiClientSecretSecretRef(obj: ChallengeSpecSolverDns01AkamaiClientSecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1351,7 +1351,7 @@ export function toJson_ChallengeSpecSolverDns01AkamaiClientSecretSecretRef(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -1382,7 +1382,7 @@ export interface ChallengeSpecSolverDns01AkamaiClientTokenSecretRef {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01AkamaiClientTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01AkamaiClientTokenSecretRef(obj: ChallengeSpecSolverDns01AkamaiClientTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1392,7 +1392,7 @@ export function toJson_ChallengeSpecSolverDns01AkamaiClientTokenSecretRef(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Auth: Azure Service Principal:
@@ -1424,7 +1424,7 @@ export interface ChallengeSpecSolverDns01AzureDnsClientSecretSecretRef {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01AzureDnsClientSecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01AzureDnsClientSecretSecretRef(obj: ChallengeSpecSolverDns01AzureDnsClientSecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1434,7 +1434,7 @@ export function toJson_ChallengeSpecSolverDns01AzureDnsClientSecretSecretRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * name of the Azure environment (default AzurePublicCloud)
@@ -1487,7 +1487,7 @@ export interface ChallengeSpecSolverDns01AzureDnsManagedIdentity {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01AzureDnsManagedIdentity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01AzureDnsManagedIdentity(obj: ChallengeSpecSolverDns01AzureDnsManagedIdentity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1498,7 +1498,7 @@ export function toJson_ChallengeSpecSolverDns01AzureDnsManagedIdentity(obj: Chal
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -1529,7 +1529,7 @@ export interface ChallengeSpecSolverDns01CloudDnsServiceAccountSecretRef {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01CloudDnsServiceAccountSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01CloudDnsServiceAccountSecretRef(obj: ChallengeSpecSolverDns01CloudDnsServiceAccountSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1539,7 +1539,7 @@ export function toJson_ChallengeSpecSolverDns01CloudDnsServiceAccountSecretRef(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * API key to use to authenticate with Cloudflare.
@@ -1571,7 +1571,7 @@ export interface ChallengeSpecSolverDns01CloudflareApiKeySecretRef {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01CloudflareApiKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01CloudflareApiKeySecretRef(obj: ChallengeSpecSolverDns01CloudflareApiKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1581,7 +1581,7 @@ export function toJson_ChallengeSpecSolverDns01CloudflareApiKeySecretRef(obj: Ch
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * API token used to authenticate with Cloudflare.
@@ -1611,7 +1611,7 @@ export interface ChallengeSpecSolverDns01CloudflareApiTokenSecretRef {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01CloudflareApiTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01CloudflareApiTokenSecretRef(obj: ChallengeSpecSolverDns01CloudflareApiTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1621,7 +1621,7 @@ export function toJson_ChallengeSpecSolverDns01CloudflareApiTokenSecretRef(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -1652,7 +1652,7 @@ export interface ChallengeSpecSolverDns01DigitaloceanTokenSecretRef {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01DigitaloceanTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01DigitaloceanTokenSecretRef(obj: ChallengeSpecSolverDns01DigitaloceanTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1662,7 +1662,7 @@ export function toJson_ChallengeSpecSolverDns01DigitaloceanTokenSecretRef(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The name of the secret containing the TSIG value.
@@ -1693,7 +1693,7 @@ export interface ChallengeSpecSolverDns01Rfc2136TsigSecretSecretRef {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01Rfc2136TsigSecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01Rfc2136TsigSecretSecretRef(obj: ChallengeSpecSolverDns01Rfc2136TsigSecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1703,7 +1703,7 @@ export function toJson_ChallengeSpecSolverDns01Rfc2136TsigSecretSecretRef(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SecretAccessKey is used for authentication. If set, pull the AWS
@@ -1738,7 +1738,7 @@ export interface ChallengeSpecSolverDns01Route53AccessKeyIdSecretRef {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01Route53AccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01Route53AccessKeyIdSecretRef(obj: ChallengeSpecSolverDns01Route53AccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1748,7 +1748,7 @@ export function toJson_ChallengeSpecSolverDns01Route53AccessKeyIdSecretRef(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Auth configures how cert-manager authenticates.
@@ -1769,7 +1769,7 @@ export interface ChallengeSpecSolverDns01Route53Auth {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01Route53Auth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01Route53Auth(obj: ChallengeSpecSolverDns01Route53Auth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1778,7 +1778,7 @@ export function toJson_ChallengeSpecSolverDns01Route53Auth(obj: ChallengeSpecSol
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SecretAccessKey is used for authentication.
@@ -1811,7 +1811,7 @@ export interface ChallengeSpecSolverDns01Route53SecretAccessKeySecretRef {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01Route53SecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01Route53SecretAccessKeySecretRef(obj: ChallengeSpecSolverDns01Route53SecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1821,7 +1821,7 @@ export function toJson_ChallengeSpecSolverDns01Route53SecretAccessKeySecretRef(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ParentReference identifies an API object (usually a Gateway) that can be considered
@@ -1974,7 +1974,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRouteParentRefs {
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRouteParentRefs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRouteParentRefs(obj: ChallengeSpecSolverHttp01GatewayHttpRouteParentRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1988,7 +1988,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRouteParentRefs(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Optional pod template used to configure the ACME challenge solver pods
@@ -2021,7 +2021,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplate {
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplate' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplate(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2031,7 +2031,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplate(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Optional ingress template used to configure the ACME challenge solver
@@ -2055,7 +2055,7 @@ export interface ChallengeSpecSolverHttp01IngressIngressTemplate {
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressIngressTemplate' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressIngressTemplate(obj: ChallengeSpecSolverHttp01IngressIngressTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2064,7 +2064,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressIngressTemplate(obj: Chal
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Optional pod template used to configure the ACME challenge solver pods
@@ -2097,7 +2097,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplate {
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplate' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplate(obj: ChallengeSpecSolverHttp01IngressPodTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2107,7 +2107,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplate(obj: Challeng
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Kubernetes authenticates with Route53 using AssumeRoleWithWebIdentity
@@ -2130,7 +2130,7 @@ export interface ChallengeSpecSolverDns01Route53AuthKubernetes {
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01Route53AuthKubernetes' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01Route53AuthKubernetes(obj: ChallengeSpecSolverDns01Route53AuthKubernetes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2139,7 +2139,7 @@ export function toJson_ChallengeSpecSolverDns01Route53AuthKubernetes(obj: Challe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ObjectMeta overrides for the pod used to solve HTTP01 challenges.
@@ -2169,7 +2169,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateMetadata {
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateMetadata' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateMetadata(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2179,7 +2179,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateMetad
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * PodSpec defines overrides for the HTTP01 challenge solver pod.
@@ -2245,7 +2245,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpec {
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpec(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2260,7 +2260,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpec(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ObjectMeta overrides for the ingress used to solve HTTP01 challenges.
@@ -2290,7 +2290,7 @@ export interface ChallengeSpecSolverHttp01IngressIngressTemplateMetadata {
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressIngressTemplateMetadata' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressIngressTemplateMetadata(obj: ChallengeSpecSolverHttp01IngressIngressTemplateMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2300,7 +2300,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressIngressTemplateMetadata(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ObjectMeta overrides for the pod used to solve HTTP01 challenges.
@@ -2330,7 +2330,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateMetadata {
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateMetadata' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateMetadata(obj: ChallengeSpecSolverHttp01IngressPodTemplateMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2340,7 +2340,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateMetadata(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * PodSpec defines overrides for the HTTP01 challenge solver pod.
@@ -2406,7 +2406,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpec {
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpec(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2421,7 +2421,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpec(obj: Chal
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A reference to a service account that will be used to request a bound
@@ -2453,7 +2453,7 @@ export interface ChallengeSpecSolverDns01Route53AuthKubernetesServiceAccountRef 
 /**
  * Converts an object of type 'ChallengeSpecSolverDns01Route53AuthKubernetesServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverDns01Route53AuthKubernetesServiceAccountRef(obj: ChallengeSpecSolverDns01Route53AuthKubernetesServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2463,7 +2463,7 @@ export function toJson_ChallengeSpecSolverDns01Route53AuthKubernetesServiceAccou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * If specified, the pod's scheduling constraints
@@ -2497,7 +2497,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinity(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2508,7 +2508,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * LocalObjectReference contains enough information to let you locate the
@@ -2533,7 +2533,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecImagePu
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2542,7 +2542,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecI
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * If specified, the pod's security context
@@ -2663,7 +2663,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurityContext' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurityContext(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurityContext | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2680,7 +2680,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The pod this Toleration is attached to tolerates any taint that matches
@@ -2739,7 +2739,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecTolerat
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecTolerations' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecTolerations(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecTolerations | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2752,7 +2752,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecT
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * If specified, the pod's scheduling constraints
@@ -2786,7 +2786,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinity {
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinity(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2797,7 +2797,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinity(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * LocalObjectReference contains enough information to let you locate the
@@ -2822,7 +2822,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecImagePullSecrets
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecImagePullSecrets' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecImagePullSecrets(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecImagePullSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2831,7 +2831,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecImagePullS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * If specified, the pod's security context
@@ -2952,7 +2952,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContext 
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContext' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContext(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContext | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2969,7 +2969,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityCo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The pod this Toleration is attached to tolerates any taint that matches
@@ -3028,7 +3028,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecTolerations {
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecTolerations' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecTolerations(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecTolerations | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3041,7 +3041,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecToleration
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Describes node affinity scheduling rules for the pod.
@@ -3080,7 +3080,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3090,7 +3090,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Describes pod affinity scheduling rules (e.g. co-locate this pod in the same node, zone, etc. as some other pod(s)).
@@ -3131,7 +3131,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3141,7 +3141,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Describes pod anti-affinity scheduling rules (e.g. avoid putting this pod in the same node, zone, etc. as some other pod(s)).
@@ -3182,7 +3182,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3192,7 +3192,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SELinux context to be applied to all containers.
@@ -3238,7 +3238,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3250,7 +3250,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The seccomp options to use by the containers in this pod.
@@ -3286,7 +3286,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3296,7 +3296,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Sysctl defines a kernel parameter to be set
@@ -3323,7 +3323,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3333,7 +3333,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Describes node affinity scheduling rules for the pod.
@@ -3372,7 +3372,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinity(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3382,7 +3382,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Describes pod affinity scheduling rules (e.g. co-locate this pod in the same node, zone, etc. as some other pod(s)).
@@ -3423,7 +3423,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinity(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3433,7 +3433,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Describes pod anti-affinity scheduling rules (e.g. avoid putting this pod in the same node, zone, etc. as some other pod(s)).
@@ -3474,7 +3474,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinity(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3484,7 +3484,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SELinux context to be applied to all containers.
@@ -3530,7 +3530,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContextS
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3542,7 +3542,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityCo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The seccomp options to use by the containers in this pod.
@@ -3578,7 +3578,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContextS
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContextSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContextSeccompProfile(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3588,7 +3588,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityCo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Sysctl defines a kernel parameter to be set
@@ -3615,7 +3615,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContextS
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContextSysctls' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContextSysctls(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContextSysctls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3625,7 +3625,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityCo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * An empty preferred scheduling term matches all objects with implicit weight 0
@@ -3653,7 +3653,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3663,7 +3663,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * If the affinity requirements specified by this field are not met at
@@ -3687,7 +3687,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3696,7 +3696,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -3724,7 +3724,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3734,7 +3734,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -3822,7 +3822,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3836,7 +3836,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -3864,7 +3864,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3874,7 +3874,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -3962,7 +3962,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3976,7 +3976,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * An empty preferred scheduling term matches all objects with implicit weight 0
@@ -4004,7 +4004,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4014,7 +4014,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * If the affinity requirements specified by this field are not met at
@@ -4038,7 +4038,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4047,7 +4047,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -4075,7 +4075,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4085,7 +4085,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -4173,7 +4173,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4187,7 +4187,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -4215,7 +4215,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4225,7 +4225,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -4313,7 +4313,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4327,7 +4327,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector term, associated with the corresponding weight.
@@ -4354,7 +4354,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4364,7 +4364,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A null or empty node selector term matches no objects. The requirements of
@@ -4393,7 +4393,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4403,7 +4403,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -4486,7 +4486,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4500,7 +4500,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -4530,7 +4530,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4540,7 +4540,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -4573,7 +4573,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4583,7 +4583,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -4666,7 +4666,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4680,7 +4680,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -4710,7 +4710,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4720,7 +4720,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -4753,7 +4753,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4763,7 +4763,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector term, associated with the corresponding weight.
@@ -4790,7 +4790,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4800,7 +4800,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A null or empty node selector term matches no objects. The requirements of
@@ -4829,7 +4829,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4839,7 +4839,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -4922,7 +4922,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4936,7 +4936,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -4966,7 +4966,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4976,7 +4976,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -5009,7 +5009,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5019,7 +5019,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -5102,7 +5102,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5116,7 +5116,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -5146,7 +5146,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5156,7 +5156,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -5189,7 +5189,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5199,7 +5199,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -5239,7 +5239,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5250,7 +5250,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -5290,7 +5290,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5301,7 +5301,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -5341,7 +5341,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5352,7 +5352,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -5392,7 +5392,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5403,7 +5403,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -5433,7 +5433,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5443,7 +5443,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -5476,7 +5476,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5486,7 +5486,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -5525,7 +5525,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5536,7 +5536,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -5575,7 +5575,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5586,7 +5586,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -5616,7 +5616,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5626,7 +5626,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -5659,7 +5659,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5669,7 +5669,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -5708,7 +5708,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5719,7 +5719,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -5758,7 +5758,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5769,7 +5769,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -5809,7 +5809,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5820,7 +5820,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -5860,7 +5860,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5871,7 +5871,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -5911,7 +5911,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5922,7 +5922,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -5962,7 +5962,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5973,7 +5973,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -6003,7 +6003,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6013,7 +6013,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -6046,7 +6046,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6056,7 +6056,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -6095,7 +6095,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6106,7 +6106,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -6145,7 +6145,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6156,7 +6156,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -6186,7 +6186,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6196,7 +6196,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -6229,7 +6229,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6239,7 +6239,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -6278,7 +6278,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6289,7 +6289,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -6328,7 +6328,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6339,7 +6339,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -6378,7 +6378,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6389,7 +6389,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -6428,7 +6428,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6439,7 +6439,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -6478,7 +6478,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6489,7 +6489,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -6528,7 +6528,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6539,7 +6539,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -6578,7 +6578,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6589,7 +6589,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -6628,7 +6628,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6639,7 +6639,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -6678,7 +6678,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6689,7 +6689,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -6728,7 +6728,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
 /**
  * Converts an object of type 'ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6739,7 +6739,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -6817,7 +6817,7 @@ export interface OrderProps {
 /**
  * Converts an object of type 'OrderProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OrderProps(obj: OrderProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6827,7 +6827,7 @@ export function toJson_OrderProps(obj: OrderProps | undefined): Record<string, a
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema OrderSpec
@@ -6893,7 +6893,7 @@ export interface OrderSpec {
 /**
  * Converts an object of type 'OrderSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OrderSpec(obj: OrderSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6907,7 +6907,7 @@ export function toJson_OrderSpec(obj: OrderSpec | undefined): Record<string, any
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * IssuerRef references a properly configured ACME-type Issuer which should
@@ -6945,7 +6945,7 @@ export interface OrderSpecIssuerRef {
 /**
  * Converts an object of type 'OrderSpecIssuerRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OrderSpecIssuerRef(obj: OrderSpecIssuerRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6956,5 +6956,5 @@ export function toJson_OrderSpecIssuerRef(obj: OrderSpecIssuerRef | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 

@@ -82,7 +82,7 @@ export interface GatewayProps {
 /**
  * Converts an object of type 'GatewayProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewayProps(obj: GatewayProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -92,7 +92,7 @@ export function toJson_GatewayProps(obj: GatewayProps | undefined): Record<strin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Spec defines the desired state of Gateway.
@@ -273,7 +273,7 @@ export interface GatewaySpec {
 /**
  * Converts an object of type 'GatewaySpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewaySpec(obj: GatewaySpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -285,7 +285,7 @@ export function toJson_GatewaySpec(obj: GatewaySpec | undefined): Record<string,
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GatewayAddress describes an address that can be bound to a Gateway.
@@ -315,7 +315,7 @@ export interface GatewaySpecAddresses {
 /**
  * Converts an object of type 'GatewaySpecAddresses' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewaySpecAddresses(obj: GatewaySpecAddresses | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -325,7 +325,7 @@ export function toJson_GatewaySpecAddresses(obj: GatewaySpecAddresses | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Infrastructure defines infrastructure level attributes about this Gateway instance.
@@ -388,7 +388,7 @@ export interface GatewaySpecInfrastructure {
 /**
  * Converts an object of type 'GatewaySpecInfrastructure' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewaySpecInfrastructure(obj: GatewaySpecInfrastructure | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -399,7 +399,7 @@ export function toJson_GatewaySpecInfrastructure(obj: GatewaySpecInfrastructure 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Listener embodies the concept of a logical endpoint where a Gateway accepts
@@ -521,7 +521,7 @@ export interface GatewaySpecListeners {
 /**
  * Converts an object of type 'GatewaySpecListeners' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewaySpecListeners(obj: GatewaySpecListeners | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -535,7 +535,7 @@ export function toJson_GatewaySpecListeners(obj: GatewaySpecListeners | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ParametersRef is a reference to a resource that contains the configuration
@@ -579,7 +579,7 @@ export interface GatewaySpecInfrastructureParametersRef {
 /**
  * Converts an object of type 'GatewaySpecInfrastructureParametersRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewaySpecInfrastructureParametersRef(obj: GatewaySpecInfrastructureParametersRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -590,7 +590,7 @@ export function toJson_GatewaySpecInfrastructureParametersRef(obj: GatewaySpecIn
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * AllowedRoutes defines the types of routes that MAY be attached to a
@@ -653,7 +653,7 @@ export interface GatewaySpecListenersAllowedRoutes {
 /**
  * Converts an object of type 'GatewaySpecListenersAllowedRoutes' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewaySpecListenersAllowedRoutes(obj: GatewaySpecListenersAllowedRoutes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -663,7 +663,7 @@ export function toJson_GatewaySpecListenersAllowedRoutes(obj: GatewaySpecListene
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * TLS is the TLS configuration for the Listener. This field is required if
@@ -751,7 +751,7 @@ export interface GatewaySpecListenersTls {
 /**
  * Converts an object of type 'GatewaySpecListenersTls' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewaySpecListenersTls(obj: GatewaySpecListenersTls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -762,7 +762,7 @@ export function toJson_GatewaySpecListenersTls(obj: GatewaySpecListenersTls | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RouteGroupKind indicates the group and kind of a Route resource.
@@ -789,7 +789,7 @@ export interface GatewaySpecListenersAllowedRoutesKinds {
 /**
  * Converts an object of type 'GatewaySpecListenersAllowedRoutesKinds' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewaySpecListenersAllowedRoutesKinds(obj: GatewaySpecListenersAllowedRoutesKinds | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -799,7 +799,7 @@ export function toJson_GatewaySpecListenersAllowedRoutesKinds(obj: GatewaySpecLi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Namespaces indicates namespaces from which Routes may be attached to this
@@ -841,7 +841,7 @@ export interface GatewaySpecListenersAllowedRoutesNamespaces {
 /**
  * Converts an object of type 'GatewaySpecListenersAllowedRoutesNamespaces' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewaySpecListenersAllowedRoutesNamespaces(obj: GatewaySpecListenersAllowedRoutesNamespaces | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -851,7 +851,7 @@ export function toJson_GatewaySpecListenersAllowedRoutesNamespaces(obj: GatewayS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SecretObjectReference identifies an API object including its namespace,
@@ -909,7 +909,7 @@ export interface GatewaySpecListenersTlsCertificateRefs {
 /**
  * Converts an object of type 'GatewaySpecListenersTlsCertificateRefs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewaySpecListenersTlsCertificateRefs(obj: GatewaySpecListenersTlsCertificateRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -921,7 +921,7 @@ export function toJson_GatewaySpecListenersTlsCertificateRefs(obj: GatewaySpecLi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Mode defines the TLS behavior for the TLS session initiated by the client.
@@ -1000,7 +1000,7 @@ export interface GatewaySpecListenersAllowedRoutesNamespacesSelector {
 /**
  * Converts an object of type 'GatewaySpecListenersAllowedRoutesNamespacesSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewaySpecListenersAllowedRoutesNamespacesSelector(obj: GatewaySpecListenersAllowedRoutesNamespacesSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1010,7 +1010,7 @@ export function toJson_GatewaySpecListenersAllowedRoutesNamespacesSelector(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -1049,7 +1049,7 @@ export interface GatewaySpecListenersAllowedRoutesNamespacesSelectorMatchExpress
 /**
  * Converts an object of type 'GatewaySpecListenersAllowedRoutesNamespacesSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewaySpecListenersAllowedRoutesNamespacesSelectorMatchExpressions(obj: GatewaySpecListenersAllowedRoutesNamespacesSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1060,7 +1060,7 @@ export function toJson_GatewaySpecListenersAllowedRoutesNamespacesSelectorMatchE
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -1142,7 +1142,7 @@ export interface GatewayV1Beta1Props {
 /**
  * Converts an object of type 'GatewayV1Beta1Props' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewayV1Beta1Props(obj: GatewayV1Beta1Props | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1152,7 +1152,7 @@ export function toJson_GatewayV1Beta1Props(obj: GatewayV1Beta1Props | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Spec defines the desired state of Gateway.
@@ -1333,7 +1333,7 @@ export interface GatewayV1Beta1Spec {
 /**
  * Converts an object of type 'GatewayV1Beta1Spec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewayV1Beta1Spec(obj: GatewayV1Beta1Spec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1345,7 +1345,7 @@ export function toJson_GatewayV1Beta1Spec(obj: GatewayV1Beta1Spec | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GatewayAddress describes an address that can be bound to a Gateway.
@@ -1375,7 +1375,7 @@ export interface GatewayV1Beta1SpecAddresses {
 /**
  * Converts an object of type 'GatewayV1Beta1SpecAddresses' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewayV1Beta1SpecAddresses(obj: GatewayV1Beta1SpecAddresses | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1385,7 +1385,7 @@ export function toJson_GatewayV1Beta1SpecAddresses(obj: GatewayV1Beta1SpecAddres
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Infrastructure defines infrastructure level attributes about this Gateway instance.
@@ -1448,7 +1448,7 @@ export interface GatewayV1Beta1SpecInfrastructure {
 /**
  * Converts an object of type 'GatewayV1Beta1SpecInfrastructure' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewayV1Beta1SpecInfrastructure(obj: GatewayV1Beta1SpecInfrastructure | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1459,7 +1459,7 @@ export function toJson_GatewayV1Beta1SpecInfrastructure(obj: GatewayV1Beta1SpecI
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Listener embodies the concept of a logical endpoint where a Gateway accepts
@@ -1581,7 +1581,7 @@ export interface GatewayV1Beta1SpecListeners {
 /**
  * Converts an object of type 'GatewayV1Beta1SpecListeners' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewayV1Beta1SpecListeners(obj: GatewayV1Beta1SpecListeners | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1595,7 +1595,7 @@ export function toJson_GatewayV1Beta1SpecListeners(obj: GatewayV1Beta1SpecListen
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ParametersRef is a reference to a resource that contains the configuration
@@ -1639,7 +1639,7 @@ export interface GatewayV1Beta1SpecInfrastructureParametersRef {
 /**
  * Converts an object of type 'GatewayV1Beta1SpecInfrastructureParametersRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewayV1Beta1SpecInfrastructureParametersRef(obj: GatewayV1Beta1SpecInfrastructureParametersRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1650,7 +1650,7 @@ export function toJson_GatewayV1Beta1SpecInfrastructureParametersRef(obj: Gatewa
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * AllowedRoutes defines the types of routes that MAY be attached to a
@@ -1713,7 +1713,7 @@ export interface GatewayV1Beta1SpecListenersAllowedRoutes {
 /**
  * Converts an object of type 'GatewayV1Beta1SpecListenersAllowedRoutes' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewayV1Beta1SpecListenersAllowedRoutes(obj: GatewayV1Beta1SpecListenersAllowedRoutes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1723,7 +1723,7 @@ export function toJson_GatewayV1Beta1SpecListenersAllowedRoutes(obj: GatewayV1Be
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * TLS is the TLS configuration for the Listener. This field is required if
@@ -1811,7 +1811,7 @@ export interface GatewayV1Beta1SpecListenersTls {
 /**
  * Converts an object of type 'GatewayV1Beta1SpecListenersTls' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewayV1Beta1SpecListenersTls(obj: GatewayV1Beta1SpecListenersTls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1822,7 +1822,7 @@ export function toJson_GatewayV1Beta1SpecListenersTls(obj: GatewayV1Beta1SpecLis
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RouteGroupKind indicates the group and kind of a Route resource.
@@ -1849,7 +1849,7 @@ export interface GatewayV1Beta1SpecListenersAllowedRoutesKinds {
 /**
  * Converts an object of type 'GatewayV1Beta1SpecListenersAllowedRoutesKinds' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewayV1Beta1SpecListenersAllowedRoutesKinds(obj: GatewayV1Beta1SpecListenersAllowedRoutesKinds | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1859,7 +1859,7 @@ export function toJson_GatewayV1Beta1SpecListenersAllowedRoutesKinds(obj: Gatewa
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Namespaces indicates namespaces from which Routes may be attached to this
@@ -1901,7 +1901,7 @@ export interface GatewayV1Beta1SpecListenersAllowedRoutesNamespaces {
 /**
  * Converts an object of type 'GatewayV1Beta1SpecListenersAllowedRoutesNamespaces' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewayV1Beta1SpecListenersAllowedRoutesNamespaces(obj: GatewayV1Beta1SpecListenersAllowedRoutesNamespaces | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1911,7 +1911,7 @@ export function toJson_GatewayV1Beta1SpecListenersAllowedRoutesNamespaces(obj: G
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SecretObjectReference identifies an API object including its namespace,
@@ -1969,7 +1969,7 @@ export interface GatewayV1Beta1SpecListenersTlsCertificateRefs {
 /**
  * Converts an object of type 'GatewayV1Beta1SpecListenersTlsCertificateRefs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewayV1Beta1SpecListenersTlsCertificateRefs(obj: GatewayV1Beta1SpecListenersTlsCertificateRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1981,7 +1981,7 @@ export function toJson_GatewayV1Beta1SpecListenersTlsCertificateRefs(obj: Gatewa
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Mode defines the TLS behavior for the TLS session initiated by the client.
@@ -2060,7 +2060,7 @@ export interface GatewayV1Beta1SpecListenersAllowedRoutesNamespacesSelector {
 /**
  * Converts an object of type 'GatewayV1Beta1SpecListenersAllowedRoutesNamespacesSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewayV1Beta1SpecListenersAllowedRoutesNamespacesSelector(obj: GatewayV1Beta1SpecListenersAllowedRoutesNamespacesSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2070,7 +2070,7 @@ export function toJson_GatewayV1Beta1SpecListenersAllowedRoutesNamespacesSelecto
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -2109,7 +2109,7 @@ export interface GatewayV1Beta1SpecListenersAllowedRoutesNamespacesSelectorMatch
 /**
  * Converts an object of type 'GatewayV1Beta1SpecListenersAllowedRoutesNamespacesSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewayV1Beta1SpecListenersAllowedRoutesNamespacesSelectorMatchExpressions(obj: GatewayV1Beta1SpecListenersAllowedRoutesNamespacesSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2120,7 +2120,7 @@ export function toJson_GatewayV1Beta1SpecListenersAllowedRoutesNamespacesSelecto
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -2232,7 +2232,7 @@ export interface GatewayClassProps {
 /**
  * Converts an object of type 'GatewayClassProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewayClassProps(obj: GatewayClassProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2242,7 +2242,7 @@ export function toJson_GatewayClassProps(obj: GatewayClassProps | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Spec defines the desired state of GatewayClass.
@@ -2300,7 +2300,7 @@ export interface GatewayClassSpec {
 /**
  * Converts an object of type 'GatewayClassSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewayClassSpec(obj: GatewayClassSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2311,7 +2311,7 @@ export function toJson_GatewayClassSpec(obj: GatewayClassSpec | undefined): Reco
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ParametersRef is a reference to a resource that contains the configuration
@@ -2371,7 +2371,7 @@ export interface GatewayClassSpecParametersRef {
 /**
  * Converts an object of type 'GatewayClassSpecParametersRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewayClassSpecParametersRef(obj: GatewayClassSpecParametersRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2383,7 +2383,7 @@ export function toJson_GatewayClassSpecParametersRef(obj: GatewayClassSpecParame
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -2495,7 +2495,7 @@ export interface GatewayClassV1Beta1Props {
 /**
  * Converts an object of type 'GatewayClassV1Beta1Props' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewayClassV1Beta1Props(obj: GatewayClassV1Beta1Props | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2505,7 +2505,7 @@ export function toJson_GatewayClassV1Beta1Props(obj: GatewayClassV1Beta1Props | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Spec defines the desired state of GatewayClass.
@@ -2563,7 +2563,7 @@ export interface GatewayClassV1Beta1Spec {
 /**
  * Converts an object of type 'GatewayClassV1Beta1Spec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewayClassV1Beta1Spec(obj: GatewayClassV1Beta1Spec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2574,7 +2574,7 @@ export function toJson_GatewayClassV1Beta1Spec(obj: GatewayClassV1Beta1Spec | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ParametersRef is a reference to a resource that contains the configuration
@@ -2634,7 +2634,7 @@ export interface GatewayClassV1Beta1SpecParametersRef {
 /**
  * Converts an object of type 'GatewayClassV1Beta1SpecParametersRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GatewayClassV1Beta1SpecParametersRef(obj: GatewayClassV1Beta1SpecParametersRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2646,7 +2646,7 @@ export function toJson_GatewayClassV1Beta1SpecParametersRef(obj: GatewayClassV1B
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -2778,7 +2778,7 @@ export interface GrpcRouteProps {
 /**
  * Converts an object of type 'GrpcRouteProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteProps(obj: GrpcRouteProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2788,7 +2788,7 @@ export function toJson_GrpcRouteProps(obj: GrpcRouteProps | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Spec defines the desired state of GRPCRoute.
@@ -2929,7 +2929,7 @@ export interface GrpcRouteSpec {
 /**
  * Converts an object of type 'GrpcRouteSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpec(obj: GrpcRouteSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2940,7 +2940,7 @@ export function toJson_GrpcRouteSpec(obj: GrpcRouteSpec | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ParentReference identifies an API object (usually a Gateway) that can be considered
@@ -3079,7 +3079,7 @@ export interface GrpcRouteSpecParentRefs {
 /**
  * Converts an object of type 'GrpcRouteSpecParentRefs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecParentRefs(obj: GrpcRouteSpecParentRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3093,7 +3093,7 @@ export function toJson_GrpcRouteSpecParentRefs(obj: GrpcRouteSpecParentRefs | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GRPCRouteRule defines the semantics for matching a gRPC request based on
@@ -3227,7 +3227,7 @@ export interface GrpcRouteSpecRules {
 /**
  * Converts an object of type 'GrpcRouteSpecRules' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRules(obj: GrpcRouteSpecRules | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3238,7 +3238,7 @@ export function toJson_GrpcRouteSpecRules(obj: GrpcRouteSpecRules | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GRPCBackendRef defines how a GRPCRoute forwards a gRPC request.
@@ -3366,7 +3366,7 @@ export interface GrpcRouteSpecRulesBackendRefs {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesBackendRefs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesBackendRefs(obj: GrpcRouteSpecRulesBackendRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3381,7 +3381,7 @@ export function toJson_GrpcRouteSpecRulesBackendRefs(obj: GrpcRouteSpecRulesBack
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GRPCRouteFilter defines processing steps that must be completed during the
@@ -3482,7 +3482,7 @@ export interface GrpcRouteSpecRulesFilters {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesFilters' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesFilters(obj: GrpcRouteSpecRulesFilters | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3495,7 +3495,7 @@ export function toJson_GrpcRouteSpecRulesFilters(obj: GrpcRouteSpecRulesFilters 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GRPCRouteMatch defines the predicate used to match requests to a given
@@ -3541,7 +3541,7 @@ export interface GrpcRouteSpecRulesMatches {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesMatches' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesMatches(obj: GrpcRouteSpecRulesMatches | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3551,7 +3551,7 @@ export function toJson_GrpcRouteSpecRulesMatches(obj: GrpcRouteSpecRulesMatches 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GRPCRouteFilter defines processing steps that must be completed during the
@@ -3652,7 +3652,7 @@ export interface GrpcRouteSpecRulesBackendRefsFilters {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesBackendRefsFilters' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesBackendRefsFilters(obj: GrpcRouteSpecRulesBackendRefsFilters | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3665,7 +3665,7 @@ export function toJson_GrpcRouteSpecRulesBackendRefsFilters(obj: GrpcRouteSpecRu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ExtensionRef is an optional, implementation-specific extension to the
@@ -3707,7 +3707,7 @@ export interface GrpcRouteSpecRulesFiltersExtensionRef {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesFiltersExtensionRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesFiltersExtensionRef(obj: GrpcRouteSpecRulesFiltersExtensionRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3718,7 +3718,7 @@ export function toJson_GrpcRouteSpecRulesFiltersExtensionRef(obj: GrpcRouteSpecR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RequestHeaderModifier defines a schema for a filter that modifies request
@@ -3800,7 +3800,7 @@ export interface GrpcRouteSpecRulesFiltersRequestHeaderModifier {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesFiltersRequestHeaderModifier' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesFiltersRequestHeaderModifier(obj: GrpcRouteSpecRulesFiltersRequestHeaderModifier | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3811,7 +3811,7 @@ export function toJson_GrpcRouteSpecRulesFiltersRequestHeaderModifier(obj: GrpcR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RequestMirror defines a schema for a filter that mirrors requests.
@@ -3863,7 +3863,7 @@ export interface GrpcRouteSpecRulesFiltersRequestMirror {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesFiltersRequestMirror' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesFiltersRequestMirror(obj: GrpcRouteSpecRulesFiltersRequestMirror | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3872,7 +3872,7 @@ export function toJson_GrpcRouteSpecRulesFiltersRequestMirror(obj: GrpcRouteSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResponseHeaderModifier defines a schema for a filter that modifies response
@@ -3954,7 +3954,7 @@ export interface GrpcRouteSpecRulesFiltersResponseHeaderModifier {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesFiltersResponseHeaderModifier' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesFiltersResponseHeaderModifier(obj: GrpcRouteSpecRulesFiltersResponseHeaderModifier | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3965,7 +3965,7 @@ export function toJson_GrpcRouteSpecRulesFiltersResponseHeaderModifier(obj: Grpc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Type identifies the type of filter to apply. As with other API fields,
@@ -4047,7 +4047,7 @@ export interface GrpcRouteSpecRulesMatchesHeaders {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesMatchesHeaders' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesMatchesHeaders(obj: GrpcRouteSpecRulesMatchesHeaders | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4058,7 +4058,7 @@ export function toJson_GrpcRouteSpecRulesMatchesHeaders(obj: GrpcRouteSpecRulesM
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Method specifies a gRPC request service/method matcher. If this field is
@@ -4104,7 +4104,7 @@ export interface GrpcRouteSpecRulesMatchesMethod {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesMatchesMethod' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesMatchesMethod(obj: GrpcRouteSpecRulesMatchesMethod | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4115,7 +4115,7 @@ export function toJson_GrpcRouteSpecRulesMatchesMethod(obj: GrpcRouteSpecRulesMa
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ExtensionRef is an optional, implementation-specific extension to the
@@ -4157,7 +4157,7 @@ export interface GrpcRouteSpecRulesBackendRefsFiltersExtensionRef {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesBackendRefsFiltersExtensionRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesBackendRefsFiltersExtensionRef(obj: GrpcRouteSpecRulesBackendRefsFiltersExtensionRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4168,7 +4168,7 @@ export function toJson_GrpcRouteSpecRulesBackendRefsFiltersExtensionRef(obj: Grp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RequestHeaderModifier defines a schema for a filter that modifies request
@@ -4250,7 +4250,7 @@ export interface GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifier {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifier' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifier(obj: GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifier | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4261,7 +4261,7 @@ export function toJson_GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifier
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RequestMirror defines a schema for a filter that mirrors requests.
@@ -4313,7 +4313,7 @@ export interface GrpcRouteSpecRulesBackendRefsFiltersRequestMirror {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesBackendRefsFiltersRequestMirror' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesBackendRefsFiltersRequestMirror(obj: GrpcRouteSpecRulesBackendRefsFiltersRequestMirror | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4322,7 +4322,7 @@ export function toJson_GrpcRouteSpecRulesBackendRefsFiltersRequestMirror(obj: Gr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResponseHeaderModifier defines a schema for a filter that modifies response
@@ -4404,7 +4404,7 @@ export interface GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifier {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifier' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifier(obj: GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifier | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4415,7 +4415,7 @@ export function toJson_GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifie
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Type identifies the type of filter to apply. As with other API fields,
@@ -4490,7 +4490,7 @@ export interface GrpcRouteSpecRulesFiltersRequestHeaderModifierAdd {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesFiltersRequestHeaderModifierAdd' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesFiltersRequestHeaderModifierAdd(obj: GrpcRouteSpecRulesFiltersRequestHeaderModifierAdd | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4500,7 +4500,7 @@ export function toJson_GrpcRouteSpecRulesFiltersRequestHeaderModifierAdd(obj: Gr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPHeader represents an HTTP Header name and value as defined by RFC 7230.
@@ -4534,7 +4534,7 @@ export interface GrpcRouteSpecRulesFiltersRequestHeaderModifierSet {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesFiltersRequestHeaderModifierSet' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesFiltersRequestHeaderModifierSet(obj: GrpcRouteSpecRulesFiltersRequestHeaderModifierSet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4544,7 +4544,7 @@ export function toJson_GrpcRouteSpecRulesFiltersRequestHeaderModifierSet(obj: Gr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * BackendRef references a resource where mirrored requests are sent.
@@ -4641,7 +4641,7 @@ export interface GrpcRouteSpecRulesFiltersRequestMirrorBackendRef {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesFiltersRequestMirrorBackendRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesFiltersRequestMirrorBackendRef(obj: GrpcRouteSpecRulesFiltersRequestMirrorBackendRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4654,7 +4654,7 @@ export function toJson_GrpcRouteSpecRulesFiltersRequestMirrorBackendRef(obj: Grp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPHeader represents an HTTP Header name and value as defined by RFC 7230.
@@ -4688,7 +4688,7 @@ export interface GrpcRouteSpecRulesFiltersResponseHeaderModifierAdd {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesFiltersResponseHeaderModifierAdd' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesFiltersResponseHeaderModifierAdd(obj: GrpcRouteSpecRulesFiltersResponseHeaderModifierAdd | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4698,7 +4698,7 @@ export function toJson_GrpcRouteSpecRulesFiltersResponseHeaderModifierAdd(obj: G
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPHeader represents an HTTP Header name and value as defined by RFC 7230.
@@ -4732,7 +4732,7 @@ export interface GrpcRouteSpecRulesFiltersResponseHeaderModifierSet {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesFiltersResponseHeaderModifierSet' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesFiltersResponseHeaderModifierSet(obj: GrpcRouteSpecRulesFiltersResponseHeaderModifierSet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4742,7 +4742,7 @@ export function toJson_GrpcRouteSpecRulesFiltersResponseHeaderModifierSet(obj: G
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Type specifies how to match against the value of the header.
@@ -4805,7 +4805,7 @@ export interface GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifierAdd {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifierAdd' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifierAdd(obj: GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifierAdd | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4815,7 +4815,7 @@ export function toJson_GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifier
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPHeader represents an HTTP Header name and value as defined by RFC 7230.
@@ -4849,7 +4849,7 @@ export interface GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifierSet {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifierSet' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifierSet(obj: GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifierSet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4859,7 +4859,7 @@ export function toJson_GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifier
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * BackendRef references a resource where mirrored requests are sent.
@@ -4956,7 +4956,7 @@ export interface GrpcRouteSpecRulesBackendRefsFiltersRequestMirrorBackendRef {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesBackendRefsFiltersRequestMirrorBackendRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesBackendRefsFiltersRequestMirrorBackendRef(obj: GrpcRouteSpecRulesBackendRefsFiltersRequestMirrorBackendRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4969,7 +4969,7 @@ export function toJson_GrpcRouteSpecRulesBackendRefsFiltersRequestMirrorBackendR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPHeader represents an HTTP Header name and value as defined by RFC 7230.
@@ -5003,7 +5003,7 @@ export interface GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifierAdd {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifierAdd' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifierAdd(obj: GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifierAdd | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5013,7 +5013,7 @@ export function toJson_GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifie
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPHeader represents an HTTP Header name and value as defined by RFC 7230.
@@ -5047,7 +5047,7 @@ export interface GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifierSet {
 /**
  * Converts an object of type 'GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifierSet' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifierSet(obj: GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifierSet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5057,7 +5057,7 @@ export function toJson_GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifie
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -5143,7 +5143,7 @@ export interface HttpRouteProps {
 /**
  * Converts an object of type 'HttpRouteProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteProps(obj: HttpRouteProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5153,7 +5153,7 @@ export function toJson_HttpRouteProps(obj: HttpRouteProps | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Spec defines the desired state of HTTPRoute.
@@ -5297,7 +5297,7 @@ export interface HttpRouteSpec {
 /**
  * Converts an object of type 'HttpRouteSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpec(obj: HttpRouteSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5308,7 +5308,7 @@ export function toJson_HttpRouteSpec(obj: HttpRouteSpec | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ParentReference identifies an API object (usually a Gateway) that can be considered
@@ -5447,7 +5447,7 @@ export interface HttpRouteSpecParentRefs {
 /**
  * Converts an object of type 'HttpRouteSpecParentRefs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecParentRefs(obj: HttpRouteSpecParentRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5461,7 +5461,7 @@ export function toJson_HttpRouteSpecParentRefs(obj: HttpRouteSpecParentRefs | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPRouteRule defines semantics for matching an HTTP request based on
@@ -5630,7 +5630,7 @@ export interface HttpRouteSpecRules {
 /**
  * Converts an object of type 'HttpRouteSpecRules' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRules(obj: HttpRouteSpecRules | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5642,7 +5642,7 @@ export function toJson_HttpRouteSpecRules(obj: HttpRouteSpecRules | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPBackendRef defines how a HTTPRoute forwards a HTTP request.
@@ -5770,7 +5770,7 @@ export interface HttpRouteSpecRulesBackendRefs {
 /**
  * Converts an object of type 'HttpRouteSpecRulesBackendRefs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesBackendRefs(obj: HttpRouteSpecRulesBackendRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5785,7 +5785,7 @@ export function toJson_HttpRouteSpecRulesBackendRefs(obj: HttpRouteSpecRulesBack
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPRouteFilter defines processing steps that must be completed during the
@@ -5911,7 +5911,7 @@ export interface HttpRouteSpecRulesFilters {
 /**
  * Converts an object of type 'HttpRouteSpecRulesFilters' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesFilters(obj: HttpRouteSpecRulesFilters | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5926,7 +5926,7 @@ export function toJson_HttpRouteSpecRulesFilters(obj: HttpRouteSpecRulesFilters 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPRouteMatch defines the predicate used to match requests to a given
@@ -5994,7 +5994,7 @@ export interface HttpRouteSpecRulesMatches {
 /**
  * Converts an object of type 'HttpRouteSpecRulesMatches' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesMatches(obj: HttpRouteSpecRulesMatches | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6006,7 +6006,7 @@ export function toJson_HttpRouteSpecRulesMatches(obj: HttpRouteSpecRulesMatches 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Timeouts defines the timeouts that can be configured for an HTTP request.
@@ -6074,7 +6074,7 @@ export interface HttpRouteSpecRulesTimeouts {
 /**
  * Converts an object of type 'HttpRouteSpecRulesTimeouts' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesTimeouts(obj: HttpRouteSpecRulesTimeouts | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6084,7 +6084,7 @@ export function toJson_HttpRouteSpecRulesTimeouts(obj: HttpRouteSpecRulesTimeout
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPRouteFilter defines processing steps that must be completed during the
@@ -6210,7 +6210,7 @@ export interface HttpRouteSpecRulesBackendRefsFilters {
 /**
  * Converts an object of type 'HttpRouteSpecRulesBackendRefsFilters' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesBackendRefsFilters(obj: HttpRouteSpecRulesBackendRefsFilters | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6225,7 +6225,7 @@ export function toJson_HttpRouteSpecRulesBackendRefsFilters(obj: HttpRouteSpecRu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ExtensionRef is an optional, implementation-specific extension to the
@@ -6267,7 +6267,7 @@ export interface HttpRouteSpecRulesFiltersExtensionRef {
 /**
  * Converts an object of type 'HttpRouteSpecRulesFiltersExtensionRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesFiltersExtensionRef(obj: HttpRouteSpecRulesFiltersExtensionRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6278,7 +6278,7 @@ export function toJson_HttpRouteSpecRulesFiltersExtensionRef(obj: HttpRouteSpecR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RequestHeaderModifier defines a schema for a filter that modifies request
@@ -6360,7 +6360,7 @@ export interface HttpRouteSpecRulesFiltersRequestHeaderModifier {
 /**
  * Converts an object of type 'HttpRouteSpecRulesFiltersRequestHeaderModifier' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesFiltersRequestHeaderModifier(obj: HttpRouteSpecRulesFiltersRequestHeaderModifier | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6371,7 +6371,7 @@ export function toJson_HttpRouteSpecRulesFiltersRequestHeaderModifier(obj: HttpR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RequestMirror defines a schema for a filter that mirrors requests.
@@ -6423,7 +6423,7 @@ export interface HttpRouteSpecRulesFiltersRequestMirror {
 /**
  * Converts an object of type 'HttpRouteSpecRulesFiltersRequestMirror' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesFiltersRequestMirror(obj: HttpRouteSpecRulesFiltersRequestMirror | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6432,7 +6432,7 @@ export function toJson_HttpRouteSpecRulesFiltersRequestMirror(obj: HttpRouteSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RequestRedirect defines a schema for a filter that responds to the
@@ -6534,7 +6534,7 @@ export interface HttpRouteSpecRulesFiltersRequestRedirect {
 /**
  * Converts an object of type 'HttpRouteSpecRulesFiltersRequestRedirect' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesFiltersRequestRedirect(obj: HttpRouteSpecRulesFiltersRequestRedirect | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6547,7 +6547,7 @@ export function toJson_HttpRouteSpecRulesFiltersRequestRedirect(obj: HttpRouteSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResponseHeaderModifier defines a schema for a filter that modifies response
@@ -6629,7 +6629,7 @@ export interface HttpRouteSpecRulesFiltersResponseHeaderModifier {
 /**
  * Converts an object of type 'HttpRouteSpecRulesFiltersResponseHeaderModifier' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesFiltersResponseHeaderModifier(obj: HttpRouteSpecRulesFiltersResponseHeaderModifier | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6640,7 +6640,7 @@ export function toJson_HttpRouteSpecRulesFiltersResponseHeaderModifier(obj: Http
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Type identifies the type of filter to apply. As with other API fields,
@@ -6725,7 +6725,7 @@ export interface HttpRouteSpecRulesFiltersUrlRewrite {
 /**
  * Converts an object of type 'HttpRouteSpecRulesFiltersUrlRewrite' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesFiltersUrlRewrite(obj: HttpRouteSpecRulesFiltersUrlRewrite | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6735,7 +6735,7 @@ export function toJson_HttpRouteSpecRulesFiltersUrlRewrite(obj: HttpRouteSpecRul
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPHeaderMatch describes how to select a HTTP route by matching HTTP request
@@ -6792,7 +6792,7 @@ export interface HttpRouteSpecRulesMatchesHeaders {
 /**
  * Converts an object of type 'HttpRouteSpecRulesMatchesHeaders' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesMatchesHeaders(obj: HttpRouteSpecRulesMatchesHeaders | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6803,7 +6803,7 @@ export function toJson_HttpRouteSpecRulesMatchesHeaders(obj: HttpRouteSpecRulesM
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Method specifies HTTP method matcher.
@@ -6865,7 +6865,7 @@ export interface HttpRouteSpecRulesMatchesPath {
 /**
  * Converts an object of type 'HttpRouteSpecRulesMatchesPath' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesMatchesPath(obj: HttpRouteSpecRulesMatchesPath | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6875,7 +6875,7 @@ export function toJson_HttpRouteSpecRulesMatchesPath(obj: HttpRouteSpecRulesMatc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPQueryParamMatch describes how to select a HTTP route by matching HTTP
@@ -6935,7 +6935,7 @@ export interface HttpRouteSpecRulesMatchesQueryParams {
 /**
  * Converts an object of type 'HttpRouteSpecRulesMatchesQueryParams' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesMatchesQueryParams(obj: HttpRouteSpecRulesMatchesQueryParams | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6946,7 +6946,7 @@ export function toJson_HttpRouteSpecRulesMatchesQueryParams(obj: HttpRouteSpecRu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ExtensionRef is an optional, implementation-specific extension to the
@@ -6988,7 +6988,7 @@ export interface HttpRouteSpecRulesBackendRefsFiltersExtensionRef {
 /**
  * Converts an object of type 'HttpRouteSpecRulesBackendRefsFiltersExtensionRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesBackendRefsFiltersExtensionRef(obj: HttpRouteSpecRulesBackendRefsFiltersExtensionRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6999,7 +6999,7 @@ export function toJson_HttpRouteSpecRulesBackendRefsFiltersExtensionRef(obj: Htt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RequestHeaderModifier defines a schema for a filter that modifies request
@@ -7081,7 +7081,7 @@ export interface HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifier {
 /**
  * Converts an object of type 'HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifier' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifier(obj: HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifier | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7092,7 +7092,7 @@ export function toJson_HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifier
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RequestMirror defines a schema for a filter that mirrors requests.
@@ -7144,7 +7144,7 @@ export interface HttpRouteSpecRulesBackendRefsFiltersRequestMirror {
 /**
  * Converts an object of type 'HttpRouteSpecRulesBackendRefsFiltersRequestMirror' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesBackendRefsFiltersRequestMirror(obj: HttpRouteSpecRulesBackendRefsFiltersRequestMirror | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7153,7 +7153,7 @@ export function toJson_HttpRouteSpecRulesBackendRefsFiltersRequestMirror(obj: Ht
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RequestRedirect defines a schema for a filter that responds to the
@@ -7255,7 +7255,7 @@ export interface HttpRouteSpecRulesBackendRefsFiltersRequestRedirect {
 /**
  * Converts an object of type 'HttpRouteSpecRulesBackendRefsFiltersRequestRedirect' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesBackendRefsFiltersRequestRedirect(obj: HttpRouteSpecRulesBackendRefsFiltersRequestRedirect | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7268,7 +7268,7 @@ export function toJson_HttpRouteSpecRulesBackendRefsFiltersRequestRedirect(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResponseHeaderModifier defines a schema for a filter that modifies response
@@ -7350,7 +7350,7 @@ export interface HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifier {
 /**
  * Converts an object of type 'HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifier' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifier(obj: HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifier | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7361,7 +7361,7 @@ export function toJson_HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifie
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Type identifies the type of filter to apply. As with other API fields,
@@ -7446,7 +7446,7 @@ export interface HttpRouteSpecRulesBackendRefsFiltersUrlRewrite {
 /**
  * Converts an object of type 'HttpRouteSpecRulesBackendRefsFiltersUrlRewrite' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesBackendRefsFiltersUrlRewrite(obj: HttpRouteSpecRulesBackendRefsFiltersUrlRewrite | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7456,7 +7456,7 @@ export function toJson_HttpRouteSpecRulesBackendRefsFiltersUrlRewrite(obj: HttpR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPHeader represents an HTTP Header name and value as defined by RFC 7230.
@@ -7490,7 +7490,7 @@ export interface HttpRouteSpecRulesFiltersRequestHeaderModifierAdd {
 /**
  * Converts an object of type 'HttpRouteSpecRulesFiltersRequestHeaderModifierAdd' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesFiltersRequestHeaderModifierAdd(obj: HttpRouteSpecRulesFiltersRequestHeaderModifierAdd | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7500,7 +7500,7 @@ export function toJson_HttpRouteSpecRulesFiltersRequestHeaderModifierAdd(obj: Ht
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPHeader represents an HTTP Header name and value as defined by RFC 7230.
@@ -7534,7 +7534,7 @@ export interface HttpRouteSpecRulesFiltersRequestHeaderModifierSet {
 /**
  * Converts an object of type 'HttpRouteSpecRulesFiltersRequestHeaderModifierSet' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesFiltersRequestHeaderModifierSet(obj: HttpRouteSpecRulesFiltersRequestHeaderModifierSet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7544,7 +7544,7 @@ export function toJson_HttpRouteSpecRulesFiltersRequestHeaderModifierSet(obj: Ht
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * BackendRef references a resource where mirrored requests are sent.
@@ -7641,7 +7641,7 @@ export interface HttpRouteSpecRulesFiltersRequestMirrorBackendRef {
 /**
  * Converts an object of type 'HttpRouteSpecRulesFiltersRequestMirrorBackendRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesFiltersRequestMirrorBackendRef(obj: HttpRouteSpecRulesFiltersRequestMirrorBackendRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7654,7 +7654,7 @@ export function toJson_HttpRouteSpecRulesFiltersRequestMirrorBackendRef(obj: Htt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Path defines parameters used to modify the path of the incoming request.
@@ -7716,7 +7716,7 @@ export interface HttpRouteSpecRulesFiltersRequestRedirectPath {
 /**
  * Converts an object of type 'HttpRouteSpecRulesFiltersRequestRedirectPath' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesFiltersRequestRedirectPath(obj: HttpRouteSpecRulesFiltersRequestRedirectPath | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7727,7 +7727,7 @@ export function toJson_HttpRouteSpecRulesFiltersRequestRedirectPath(obj: HttpRou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Scheme is the scheme to be used in the value of the `Location` header in
@@ -7807,7 +7807,7 @@ export interface HttpRouteSpecRulesFiltersResponseHeaderModifierAdd {
 /**
  * Converts an object of type 'HttpRouteSpecRulesFiltersResponseHeaderModifierAdd' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesFiltersResponseHeaderModifierAdd(obj: HttpRouteSpecRulesFiltersResponseHeaderModifierAdd | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7817,7 +7817,7 @@ export function toJson_HttpRouteSpecRulesFiltersResponseHeaderModifierAdd(obj: H
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPHeader represents an HTTP Header name and value as defined by RFC 7230.
@@ -7851,7 +7851,7 @@ export interface HttpRouteSpecRulesFiltersResponseHeaderModifierSet {
 /**
  * Converts an object of type 'HttpRouteSpecRulesFiltersResponseHeaderModifierSet' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesFiltersResponseHeaderModifierSet(obj: HttpRouteSpecRulesFiltersResponseHeaderModifierSet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7861,7 +7861,7 @@ export function toJson_HttpRouteSpecRulesFiltersResponseHeaderModifierSet(obj: H
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Path defines a path rewrite.
@@ -7921,7 +7921,7 @@ export interface HttpRouteSpecRulesFiltersUrlRewritePath {
 /**
  * Converts an object of type 'HttpRouteSpecRulesFiltersUrlRewritePath' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesFiltersUrlRewritePath(obj: HttpRouteSpecRulesFiltersUrlRewritePath | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7932,7 +7932,7 @@ export function toJson_HttpRouteSpecRulesFiltersUrlRewritePath(obj: HttpRouteSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Type specifies how to match against the value of the header.
@@ -8026,7 +8026,7 @@ export interface HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifierAdd {
 /**
  * Converts an object of type 'HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifierAdd' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifierAdd(obj: HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifierAdd | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8036,7 +8036,7 @@ export function toJson_HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifier
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPHeader represents an HTTP Header name and value as defined by RFC 7230.
@@ -8070,7 +8070,7 @@ export interface HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifierSet {
 /**
  * Converts an object of type 'HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifierSet' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifierSet(obj: HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifierSet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8080,7 +8080,7 @@ export function toJson_HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifier
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * BackendRef references a resource where mirrored requests are sent.
@@ -8177,7 +8177,7 @@ export interface HttpRouteSpecRulesBackendRefsFiltersRequestMirrorBackendRef {
 /**
  * Converts an object of type 'HttpRouteSpecRulesBackendRefsFiltersRequestMirrorBackendRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesBackendRefsFiltersRequestMirrorBackendRef(obj: HttpRouteSpecRulesBackendRefsFiltersRequestMirrorBackendRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8190,7 +8190,7 @@ export function toJson_HttpRouteSpecRulesBackendRefsFiltersRequestMirrorBackendR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Path defines parameters used to modify the path of the incoming request.
@@ -8252,7 +8252,7 @@ export interface HttpRouteSpecRulesBackendRefsFiltersRequestRedirectPath {
 /**
  * Converts an object of type 'HttpRouteSpecRulesBackendRefsFiltersRequestRedirectPath' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesBackendRefsFiltersRequestRedirectPath(obj: HttpRouteSpecRulesBackendRefsFiltersRequestRedirectPath | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8263,7 +8263,7 @@ export function toJson_HttpRouteSpecRulesBackendRefsFiltersRequestRedirectPath(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Scheme is the scheme to be used in the value of the `Location` header in
@@ -8343,7 +8343,7 @@ export interface HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifierAdd {
 /**
  * Converts an object of type 'HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifierAdd' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifierAdd(obj: HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifierAdd | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8353,7 +8353,7 @@ export function toJson_HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifie
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPHeader represents an HTTP Header name and value as defined by RFC 7230.
@@ -8387,7 +8387,7 @@ export interface HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifierSet {
 /**
  * Converts an object of type 'HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifierSet' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifierSet(obj: HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifierSet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8397,7 +8397,7 @@ export function toJson_HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifie
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Path defines a path rewrite.
@@ -8457,7 +8457,7 @@ export interface HttpRouteSpecRulesBackendRefsFiltersUrlRewritePath {
 /**
  * Converts an object of type 'HttpRouteSpecRulesBackendRefsFiltersUrlRewritePath' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteSpecRulesBackendRefsFiltersUrlRewritePath(obj: HttpRouteSpecRulesBackendRefsFiltersUrlRewritePath | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8468,7 +8468,7 @@ export function toJson_HttpRouteSpecRulesBackendRefsFiltersUrlRewritePath(obj: H
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Type defines the type of path modifier. Additional types may be
@@ -8634,7 +8634,7 @@ export interface HttpRouteV1Beta1Props {
 /**
  * Converts an object of type 'HttpRouteV1Beta1Props' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1Props(obj: HttpRouteV1Beta1Props | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8644,7 +8644,7 @@ export function toJson_HttpRouteV1Beta1Props(obj: HttpRouteV1Beta1Props | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Spec defines the desired state of HTTPRoute.
@@ -8788,7 +8788,7 @@ export interface HttpRouteV1Beta1Spec {
 /**
  * Converts an object of type 'HttpRouteV1Beta1Spec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1Spec(obj: HttpRouteV1Beta1Spec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8799,7 +8799,7 @@ export function toJson_HttpRouteV1Beta1Spec(obj: HttpRouteV1Beta1Spec | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ParentReference identifies an API object (usually a Gateway) that can be considered
@@ -8938,7 +8938,7 @@ export interface HttpRouteV1Beta1SpecParentRefs {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecParentRefs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecParentRefs(obj: HttpRouteV1Beta1SpecParentRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8952,7 +8952,7 @@ export function toJson_HttpRouteV1Beta1SpecParentRefs(obj: HttpRouteV1Beta1SpecP
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPRouteRule defines semantics for matching an HTTP request based on
@@ -9121,7 +9121,7 @@ export interface HttpRouteV1Beta1SpecRules {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRules' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRules(obj: HttpRouteV1Beta1SpecRules | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9133,7 +9133,7 @@ export function toJson_HttpRouteV1Beta1SpecRules(obj: HttpRouteV1Beta1SpecRules 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPBackendRef defines how a HTTPRoute forwards a HTTP request.
@@ -9261,7 +9261,7 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefs {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesBackendRefs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesBackendRefs(obj: HttpRouteV1Beta1SpecRulesBackendRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9276,7 +9276,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesBackendRefs(obj: HttpRouteV1Beta
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPRouteFilter defines processing steps that must be completed during the
@@ -9402,7 +9402,7 @@ export interface HttpRouteV1Beta1SpecRulesFilters {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesFilters' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesFilters(obj: HttpRouteV1Beta1SpecRulesFilters | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9417,7 +9417,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesFilters(obj: HttpRouteV1Beta1Spe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPRouteMatch defines the predicate used to match requests to a given
@@ -9485,7 +9485,7 @@ export interface HttpRouteV1Beta1SpecRulesMatches {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesMatches' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesMatches(obj: HttpRouteV1Beta1SpecRulesMatches | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9497,7 +9497,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesMatches(obj: HttpRouteV1Beta1Spe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Timeouts defines the timeouts that can be configured for an HTTP request.
@@ -9565,7 +9565,7 @@ export interface HttpRouteV1Beta1SpecRulesTimeouts {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesTimeouts' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesTimeouts(obj: HttpRouteV1Beta1SpecRulesTimeouts | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9575,7 +9575,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesTimeouts(obj: HttpRouteV1Beta1Sp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPRouteFilter defines processing steps that must be completed during the
@@ -9701,7 +9701,7 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFilters {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesBackendRefsFilters' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFilters(obj: HttpRouteV1Beta1SpecRulesBackendRefsFilters | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9716,7 +9716,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFilters(obj: HttpRout
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ExtensionRef is an optional, implementation-specific extension to the
@@ -9758,7 +9758,7 @@ export interface HttpRouteV1Beta1SpecRulesFiltersExtensionRef {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesFiltersExtensionRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesFiltersExtensionRef(obj: HttpRouteV1Beta1SpecRulesFiltersExtensionRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9769,7 +9769,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesFiltersExtensionRef(obj: HttpRou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RequestHeaderModifier defines a schema for a filter that modifies request
@@ -9851,7 +9851,7 @@ export interface HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifier {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifier' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifier(obj: HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifier | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9862,7 +9862,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifier(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RequestMirror defines a schema for a filter that mirrors requests.
@@ -9914,7 +9914,7 @@ export interface HttpRouteV1Beta1SpecRulesFiltersRequestMirror {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesFiltersRequestMirror' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesFiltersRequestMirror(obj: HttpRouteV1Beta1SpecRulesFiltersRequestMirror | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9923,7 +9923,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesFiltersRequestMirror(obj: HttpRo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RequestRedirect defines a schema for a filter that responds to the
@@ -10025,7 +10025,7 @@ export interface HttpRouteV1Beta1SpecRulesFiltersRequestRedirect {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesFiltersRequestRedirect' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesFiltersRequestRedirect(obj: HttpRouteV1Beta1SpecRulesFiltersRequestRedirect | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10038,7 +10038,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesFiltersRequestRedirect(obj: Http
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResponseHeaderModifier defines a schema for a filter that modifies response
@@ -10120,7 +10120,7 @@ export interface HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifier {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifier' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifier(obj: HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifier | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10131,7 +10131,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifier(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Type identifies the type of filter to apply. As with other API fields,
@@ -10216,7 +10216,7 @@ export interface HttpRouteV1Beta1SpecRulesFiltersUrlRewrite {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesFiltersUrlRewrite' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesFiltersUrlRewrite(obj: HttpRouteV1Beta1SpecRulesFiltersUrlRewrite | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10226,7 +10226,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesFiltersUrlRewrite(obj: HttpRoute
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPHeaderMatch describes how to select a HTTP route by matching HTTP request
@@ -10283,7 +10283,7 @@ export interface HttpRouteV1Beta1SpecRulesMatchesHeaders {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesMatchesHeaders' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesMatchesHeaders(obj: HttpRouteV1Beta1SpecRulesMatchesHeaders | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10294,7 +10294,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesMatchesHeaders(obj: HttpRouteV1B
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Method specifies HTTP method matcher.
@@ -10356,7 +10356,7 @@ export interface HttpRouteV1Beta1SpecRulesMatchesPath {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesMatchesPath' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesMatchesPath(obj: HttpRouteV1Beta1SpecRulesMatchesPath | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10366,7 +10366,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesMatchesPath(obj: HttpRouteV1Beta
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPQueryParamMatch describes how to select a HTTP route by matching HTTP
@@ -10426,7 +10426,7 @@ export interface HttpRouteV1Beta1SpecRulesMatchesQueryParams {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesMatchesQueryParams' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesMatchesQueryParams(obj: HttpRouteV1Beta1SpecRulesMatchesQueryParams | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10437,7 +10437,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesMatchesQueryParams(obj: HttpRout
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ExtensionRef is an optional, implementation-specific extension to the
@@ -10479,7 +10479,7 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersExtensionRef {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesBackendRefsFiltersExtensionRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersExtensionRef(obj: HttpRouteV1Beta1SpecRulesBackendRefsFiltersExtensionRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10490,7 +10490,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersExtensionRef(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RequestHeaderModifier defines a schema for a filter that modifies request
@@ -10572,7 +10572,7 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderModifie
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderModifier' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderModifier(obj: HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderModifier | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10583,7 +10583,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderM
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RequestMirror defines a schema for a filter that mirrors requests.
@@ -10635,7 +10635,7 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestMirror {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestMirror' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestMirror(obj: HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestMirror | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10644,7 +10644,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestMirror(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RequestRedirect defines a schema for a filter that responds to the
@@ -10746,7 +10746,7 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestRedirect {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestRedirect' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestRedirect(obj: HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestRedirect | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10759,7 +10759,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestRedirec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResponseHeaderModifier defines a schema for a filter that modifies response
@@ -10841,7 +10841,7 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeaderModifi
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeaderModifier' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeaderModifier(obj: HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeaderModifier | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10852,7 +10852,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeader
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Type identifies the type of filter to apply. As with other API fields,
@@ -10937,7 +10937,7 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersUrlRewrite {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesBackendRefsFiltersUrlRewrite' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersUrlRewrite(obj: HttpRouteV1Beta1SpecRulesBackendRefsFiltersUrlRewrite | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10947,7 +10947,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersUrlRewrite(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPHeader represents an HTTP Header name and value as defined by RFC 7230.
@@ -10981,7 +10981,7 @@ export interface HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifierAdd {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifierAdd' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifierAdd(obj: HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifierAdd | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10991,7 +10991,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifierAdd(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPHeader represents an HTTP Header name and value as defined by RFC 7230.
@@ -11025,7 +11025,7 @@ export interface HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifierSet {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifierSet' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifierSet(obj: HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifierSet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11035,7 +11035,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifierSet(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * BackendRef references a resource where mirrored requests are sent.
@@ -11132,7 +11132,7 @@ export interface HttpRouteV1Beta1SpecRulesFiltersRequestMirrorBackendRef {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesFiltersRequestMirrorBackendRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesFiltersRequestMirrorBackendRef(obj: HttpRouteV1Beta1SpecRulesFiltersRequestMirrorBackendRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11145,7 +11145,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesFiltersRequestMirrorBackendRef(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Path defines parameters used to modify the path of the incoming request.
@@ -11207,7 +11207,7 @@ export interface HttpRouteV1Beta1SpecRulesFiltersRequestRedirectPath {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesFiltersRequestRedirectPath' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesFiltersRequestRedirectPath(obj: HttpRouteV1Beta1SpecRulesFiltersRequestRedirectPath | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11218,7 +11218,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesFiltersRequestRedirectPath(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Scheme is the scheme to be used in the value of the `Location` header in
@@ -11298,7 +11298,7 @@ export interface HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifierAdd {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifierAdd' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifierAdd(obj: HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifierAdd | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11308,7 +11308,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifierAdd
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPHeader represents an HTTP Header name and value as defined by RFC 7230.
@@ -11342,7 +11342,7 @@ export interface HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifierSet {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifierSet' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifierSet(obj: HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifierSet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11352,7 +11352,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifierSet
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Path defines a path rewrite.
@@ -11412,7 +11412,7 @@ export interface HttpRouteV1Beta1SpecRulesFiltersUrlRewritePath {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesFiltersUrlRewritePath' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesFiltersUrlRewritePath(obj: HttpRouteV1Beta1SpecRulesFiltersUrlRewritePath | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11423,7 +11423,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesFiltersUrlRewritePath(obj: HttpR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Type specifies how to match against the value of the header.
@@ -11517,7 +11517,7 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderModifie
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderModifierAdd' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderModifierAdd(obj: HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderModifierAdd | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11527,7 +11527,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderM
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPHeader represents an HTTP Header name and value as defined by RFC 7230.
@@ -11561,7 +11561,7 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderModifie
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderModifierSet' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderModifierSet(obj: HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderModifierSet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11571,7 +11571,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderM
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * BackendRef references a resource where mirrored requests are sent.
@@ -11668,7 +11668,7 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestMirrorBackend
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestMirrorBackendRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestMirrorBackendRef(obj: HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestMirrorBackendRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11681,7 +11681,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestMirrorB
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Path defines parameters used to modify the path of the incoming request.
@@ -11743,7 +11743,7 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestRedirectPath 
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestRedirectPath' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestRedirectPath(obj: HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestRedirectPath | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11754,7 +11754,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestRedirec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Scheme is the scheme to be used in the value of the `Location` header in
@@ -11834,7 +11834,7 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeaderModifi
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeaderModifierAdd' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeaderModifierAdd(obj: HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeaderModifierAdd | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11844,7 +11844,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeader
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HTTPHeader represents an HTTP Header name and value as defined by RFC 7230.
@@ -11878,7 +11878,7 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeaderModifi
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeaderModifierSet' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeaderModifierSet(obj: HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeaderModifierSet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11888,7 +11888,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeader
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Path defines a path rewrite.
@@ -11948,7 +11948,7 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersUrlRewritePath {
 /**
  * Converts an object of type 'HttpRouteV1Beta1SpecRulesBackendRefsFiltersUrlRewritePath' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersUrlRewritePath(obj: HttpRouteV1Beta1SpecRulesBackendRefsFiltersUrlRewritePath | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11959,7 +11959,7 @@ export function toJson_HttpRouteV1Beta1SpecRulesBackendRefsFiltersUrlRewritePath
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Type defines the type of path modifier. Additional types may be
@@ -12149,7 +12149,7 @@ export interface ReferenceGrantProps {
 /**
  * Converts an object of type 'ReferenceGrantProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ReferenceGrantProps(obj: ReferenceGrantProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12159,7 +12159,7 @@ export function toJson_ReferenceGrantProps(obj: ReferenceGrantProps | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Spec defines the desired state of ReferenceGrant.
@@ -12196,7 +12196,7 @@ export interface ReferenceGrantSpec {
 /**
  * Converts an object of type 'ReferenceGrantSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ReferenceGrantSpec(obj: ReferenceGrantSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12206,7 +12206,7 @@ export function toJson_ReferenceGrantSpec(obj: ReferenceGrantSpec | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ReferenceGrantFrom describes trusted namespaces and kinds.
@@ -12259,7 +12259,7 @@ export interface ReferenceGrantSpecFrom {
 /**
  * Converts an object of type 'ReferenceGrantSpecFrom' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ReferenceGrantSpecFrom(obj: ReferenceGrantSpecFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12270,7 +12270,7 @@ export function toJson_ReferenceGrantSpecFrom(obj: ReferenceGrantSpecFrom | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ReferenceGrantTo describes what Kinds are allowed as targets of the
@@ -12315,7 +12315,7 @@ export interface ReferenceGrantSpecTo {
 /**
  * Converts an object of type 'ReferenceGrantSpecTo' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ReferenceGrantSpecTo(obj: ReferenceGrantSpecTo | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12326,5 +12326,5 @@ export function toJson_ReferenceGrantSpecTo(obj: ReferenceGrantSpecTo | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
