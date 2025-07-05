@@ -9,8 +9,8 @@ metadata:
     app.kubernetes.io/instance: metrics
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-operator
-    app.kubernetes.io/version: v0.59.2
-    helm.sh/chart: victoria-metrics-operator-0.49.2
+    app.kubernetes.io/version: v0.60.2
+    helm.sh/chart: victoria-metrics-operator-0.50.3
   name: metrics-victoria-metrics-operator-cleanup-hook
   namespace: metrics
 spec:
@@ -20,14 +20,14 @@ spec:
         app.kubernetes.io/instance: metrics
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: victoria-metrics-operator
-        app.kubernetes.io/version: v0.59.2
-        helm.sh/chart: victoria-metrics-operator-0.49.2
+        app.kubernetes.io/version: v0.60.2
+        helm.sh/chart: victoria-metrics-operator-0.50.3
       name: metrics-victoria-metrics-operator
     spec:
       containers:
         - args:
             - delete
-            - vlcluster,vlogs,vlsingle,vmagent,vmalert,vmalertmanager,vmalertmanagerconfig,vmauth,vmcluster,vmnodescrape,vmpodscrape,vmprobe,vmrule,vmservicescrape,vmsingle,vmstaticscrape,vmuser
+            - vlcluster,vlogs,vlsingle,vmagent,vmalert,vmalertmanager,vmalertmanagerconfig,vmanomaly,vmauth,vmcluster,vmnodescrape,vmpodscrape,vmprobe,vmrule,vmservicescrape,vmsingle,vmstaticscrape,vmuser
             - --all
             - --ignore-not-found=true
           image: bitnami/kubectl:1.33

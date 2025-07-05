@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: kube-state-metrics
     app.kubernetes.io/part-of: kube-state-metrics
     app.kubernetes.io/version: 2.15.0
-    helm.sh/chart: kube-state-metrics-5.31.2
+    helm.sh/chart: kube-state-metrics-6.0.0
   name: metrics-kube-state-metrics
 rules:
   - apiGroups:
@@ -33,7 +33,6 @@ rules:
       - list
       - watch
   - apiGroups:
-      - extensions
       - apps
     resources:
       - daemonsets
@@ -41,7 +40,6 @@ rules:
       - list
       - watch
   - apiGroups:
-      - extensions
       - apps
     resources:
       - deployments
@@ -63,7 +61,6 @@ rules:
       - list
       - watch
   - apiGroups:
-      - extensions
       - networking.k8s.io
     resources:
       - ingresses
@@ -148,7 +145,6 @@ rules:
       - list
       - watch
   - apiGroups:
-      - extensions
       - apps
     resources:
       - replicasets
