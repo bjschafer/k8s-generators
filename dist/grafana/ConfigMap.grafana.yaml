@@ -34,8 +34,8 @@ data:
     header_property = email
     [feature_toggles]
     dashboardNewLayouts = true
-    grafanaAPIServerEnsureKubectlAccess = true
-    kubernetesClientDashboardsFolders = true
+    grafanaAPIServerEnsureKubectlAccess = false
+    kubernetesClientDashboardsFolders = false
     kubernetesDashboards = true
     provisioning = true
     publicDashboards = true
