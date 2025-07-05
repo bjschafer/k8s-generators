@@ -11,6 +11,7 @@ export interface EsoValuesSchema {
   };
   "bitwarden-sdk-server"?: {
     enabled?: boolean;
+    namespaceOverride?: string;
     [k: string]: unknown;
   };
   certController?: {
@@ -66,7 +67,7 @@ export interface EsoValuesSchema {
     };
     podDisruptionBudget?: {
       enabled?: boolean;
-      minAvailable?: number;
+      minAvailable?: number | string;
       [k: string]: unknown;
     };
     podLabels?: {
@@ -180,6 +181,15 @@ export interface EsoValuesSchema {
     topologySpreadConstraints?: unknown[];
     [k: string]: unknown;
   };
+  grafanaDashboard?: {
+    annotations?: {
+      [k: string]: unknown;
+    };
+    enabled?: boolean;
+    sidecarLabel?: string;
+    sidecarLabelValue?: string;
+    [k: string]: unknown;
+  };
   hostNetwork?: boolean;
   image?: {
     flavour?: string;
@@ -222,7 +232,7 @@ export interface EsoValuesSchema {
   };
   podDisruptionBudget?: {
     enabled?: boolean;
-    minAvailable?: number;
+    minAvailable?: number | string;
     [k: string]: unknown;
   };
   podLabels?: {
@@ -241,6 +251,8 @@ export interface EsoValuesSchema {
   processClusterStore?: boolean;
   processPushSecret?: boolean;
   rbac?: {
+    aggregateToEdit?: boolean;
+    aggregateToView?: boolean;
     create?: boolean;
     servicebindings?: {
       create?: boolean;
@@ -305,6 +317,9 @@ export interface EsoValuesSchema {
   topologySpreadConstraints?: unknown[];
   webhook?: {
     affinity?: {
+      [k: string]: unknown;
+    };
+    annotations?: {
       [k: string]: unknown;
     };
     certCheckInterval?: string;
@@ -381,7 +396,7 @@ export interface EsoValuesSchema {
     };
     podDisruptionBudget?: {
       enabled?: boolean;
-      minAvailable?: number;
+      minAvailable?: number | string;
       [k: string]: unknown;
     };
     podLabels?: {

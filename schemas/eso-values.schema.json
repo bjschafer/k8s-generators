@@ -9,6 +9,9 @@
             "properties": {
                 "enabled": {
                     "type": "boolean"
+                },
+                "namespaceOverride": {
+                    "type": "string"
                 }
             },
             "type": "object"
@@ -121,7 +124,10 @@
                             "type": "boolean"
                         },
                         "minAvailable": {
-                            "type": "integer"
+                            "type": [
+                                "integer",
+                                "string"
+                            ]
                         }
                     },
                     "type": "object"
@@ -356,6 +362,24 @@
             },
             "type": "object"
         },
+        "grafanaDashboard": {
+            "properties": {
+                "annotations": {
+                    "properties": {},
+                    "type": "object"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "sidecarLabel": {
+                    "type": "string"
+                },
+                "sidecarLabelValue": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "hostNetwork": {
             "type": "boolean"
         },
@@ -447,7 +471,10 @@
                     "type": "boolean"
                 },
                 "minAvailable": {
-                    "type": "integer"
+                    "type": [
+                        "integer",
+                        "string"
+                    ]
                 }
             },
             "type": "object"
@@ -485,6 +512,12 @@
         },
         "rbac": {
             "properties": {
+                "aggregateToEdit": {
+                    "type": "boolean"
+                },
+                "aggregateToView": {
+                    "type": "boolean"
+                },
                 "create": {
                     "type": "boolean"
                 },
@@ -626,6 +659,10 @@
         "webhook": {
             "properties": {
                 "affinity": {
+                    "properties": {},
+                    "type": "object"
+                },
+                "annotations": {
                     "properties": {},
                     "type": "object"
                 },
@@ -789,7 +826,10 @@
                             "type": "boolean"
                         },
                         "minAvailable": {
-                            "type": "integer"
+                            "type": [
+                                "integer",
+                                "string"
+                            ]
                         }
                     },
                     "type": "object"
