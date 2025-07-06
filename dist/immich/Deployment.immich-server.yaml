@@ -59,6 +59,7 @@ spec:
               path: /server-info/ping
               port: 2283
               scheme: HTTP
+            initialDelaySeconds: 30
           name: immich-server
           ports:
             - containerPort: 2283
@@ -70,6 +71,7 @@ spec:
               path: /server-info/ping
               port: 2283
               scheme: HTTP
+            initialDelaySeconds: 30
           resources:
             limits:
               memory: 4096Mi

@@ -1,4 +1,4 @@
-import { App, Size } from "cdk8s";
+import { App, Duration, Size } from "cdk8s";
 import { basename } from "path";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NFSVolumeContainer } from "../../lib/nfs";
@@ -88,9 +88,11 @@ const server = new AppPlus(app, "immich-server", {
   ports: [2283],
   livenessProbe: Probe.fromHttpGet("/server-info/ping", {
     port: 2283,
+    initialDelaySeconds: Duration.seconds(30),
   }),
   readinessProbe: Probe.fromHttpGet("/server-info/ping", {
     port: 2283,
+    initialDelaySeconds: Duration.seconds(30),
   }),
   monitoringConfig: {
     port: 8081,
