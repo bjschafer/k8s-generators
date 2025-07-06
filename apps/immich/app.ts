@@ -64,6 +64,7 @@ const commonEnv: Record<string, EnvValue> = {
     "http://immich-machine-learning:3003",
   ),
   REDIS_HOSTNAME: EnvValue.fromValue(redis.Service.name),
+  REDIS_PORT: EnvValue.fromValue("6379"),
   DB_DATABASE_NAME: EnvValue.fromValue("immich"),
   DB_HOSTNAME: EnvValue.fromValue("immich-pg16-rw.postgres.svc.cluster.local"),
   DB_PORT: EnvValue.fromValue("5432"),

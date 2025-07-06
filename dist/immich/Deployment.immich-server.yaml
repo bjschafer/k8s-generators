@@ -36,6 +36,8 @@ spec:
               value: http://immich-machine-learning:3003
             - name: REDIS_HOSTNAME
               value: redis
+            - name: REDIS_PORT
+              value: "6379"
             - name: DB_DATABASE_NAME
               value: immich
             - name: DB_HOSTNAME
