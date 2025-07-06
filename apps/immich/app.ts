@@ -138,8 +138,12 @@ new AppPlus(app, "immich-machine-learning", {
     TRANSFORMERS_CACHE: EnvValue.fromValue("/cache"),
   },
   ports: [3003],
-  livenessProbe: Probe.fromHttpGet("/ping"),
-  readinessProbe: Probe.fromHttpGet("/ping"),
+  livenessProbe: Probe.fromHttpGet("/ping", {
+    port: 3003,
+  }),
+  readinessProbe: Probe.fromHttpGet("/ping", {
+    port: 3003,
+  }),
   disableIngress: true,
   volumes: [
     {
@@ -176,10 +180,10 @@ const microservices = new AppPlus(app, "immich-microservices", {
   monitoringConfig: {
     port: 8082,
   },
-  livenessProbe: Probe.fromHttpGet("/", {
+  livenessProbe: Probe.fromTcpSocket({
     port: 8082,
   }),
-  readinessProbe: Probe.fromHttpGet("/", {
+  readinessProbe: Probe.fromTcpSocket({
     port: 8082,
   }),
   extraEnv: {

@@ -55,10 +55,8 @@ spec:
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
-            httpGet:
-              path: /
+            tcpSocket:
               port: 8082
-              scheme: HTTP
           name: immich-microservices
           ports:
             - containerPort: 3001
@@ -66,10 +64,8 @@ spec:
               name: metrics
           readinessProbe:
             failureThreshold: 3
-            httpGet:
-              path: /
+            tcpSocket:
               port: 8082
-              scheme: HTTP
           resources:
             limits:
               memory: 6144Mi
