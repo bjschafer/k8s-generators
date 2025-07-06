@@ -139,8 +139,7 @@ export class Redis extends Chart {
                     command: [
                       "sh",
                       "-c",
-                      "/health/ping_liveness_local.sh",
-                      "5",
+                      "/health/ping_liveness_local.sh 5",
                     ],
                   },
                 },
@@ -149,8 +148,7 @@ export class Redis extends Chart {
                     command: [
                       "sh",
                       "-c",
-                      "/health/ping_readiness_local.sh",
-                      "5",
+                      "/health/ping_readiness_local.sh 5",
                     ],
                   },
                 },
