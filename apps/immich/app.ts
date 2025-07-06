@@ -43,33 +43,33 @@ const dbCreds = new BitwardenSecret(app, "dbcreds", {
   },
 });
 
+const redis = new Redis(app, "redis", {
+  name: "redis",
+  namespace: namespace,
+  version: "7.4",
+  resources: {
+    cpu: {
+      request: Cpu.millis(100),
+      limit: Cpu.millis(100),
+    },
+    memory: {
+      request: Size.mebibytes(64),
+      limit: Size.mebibytes(64),
+    },
+  },
+});
+
 const commonEnv: Record<string, EnvValue> = {
   IMMICH_MACHINE_LEARNING_URL: EnvValue.fromValue(
     "http://immich-machine-learning:3003",
   ),
-  REDIS_HOSTNAME: EnvValue.fromValue("redis"),
+  REDIS_HOSTNAME: EnvValue.fromValue(redis.Service.name),
   DB_DATABASE_NAME: EnvValue.fromValue("immich"),
   DB_HOSTNAME: EnvValue.fromValue("immich-pg16-rw.postgres.svc.cluster.local"),
   DB_PORT: EnvValue.fromValue("5432"),
   DB_USERNAME: EnvValue.fromValue("immich"),
   ...dbCreds.toEnvValues(),
 };
-
-new Redis(app, "redis", {
-  name: "redis",
-  namespace: namespace,
-  version: "7.4",
-  resources: {
-    requests: {
-      cpu: Quantity.fromString("100m"),
-      memory: Quantity.fromString("64Mi"),
-    },
-    limits: {
-      cpu: Quantity.fromString("100m"),
-      memory: Quantity.fromString("64Mi"),
-    },
-  },
-});
 
 const server = new AppPlus(app, "immich-server", {
   name: "immich-server",

@@ -6,18 +6,23 @@ metadata:
   name: redis
   namespace: immich
 spec:
+  minReadySeconds: 0
+  podManagementPolicy: OrderedReady
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: redis
-  serviceName: redis
+      cdk8s.io/metadata.addr: redis-redis-sts-c8cbaa00
+  serviceName: redis-redis-sts-service-c8344872
   template:
     metadata:
       labels:
         app.kubernetes.io/name: redis
+        cdk8s.io/metadata.addr: redis-redis-sts-c8cbaa00
     spec:
+      automountServiceAccountToken: false
       containers:
         - image: public.ecr.aws/bitnami/redis:7.4
+          imagePullPolicy: Always
           livenessProbe:
             exec:
               command:
@@ -25,6 +30,7 @@ spec:
                 - -c
                 - /health/ping_liveness_local.sh
                 - "5"
+            failureThreshold: 3
           name: redis
           ports:
             - containerPort: 6379
@@ -35,7 +41,8 @@ spec:
                 - sh
                 - -c
                 - /health/ping_readiness_local.sh
-                - "1"
+                - "5"
+            failureThreshold: 3
           resources:
             limits:
               cpu: 100m
@@ -43,3 +50,28 @@ spec:
             requests:
               cpu: 100m
               memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+          volumeMounts:
+            - mountPath: /health
+              name: configmap-redis-health
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: true
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - configMap:
+            name: redis-health
+          name: configmap-redis-health
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate
