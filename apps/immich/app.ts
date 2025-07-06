@@ -176,12 +176,6 @@ const microservices = new AppPlus(app, "immich-microservices", {
   monitoringConfig: {
     port: 8082,
   },
-  livenessProbe: Probe.fromHttpGet("/server-info/ping", {
-    port: 3001,
-  }),
-  readinessProbe: Probe.fromHttpGet("/server-info/ping", {
-    port: 3001,
-  }),
   extraEnv: {
     ...commonEnv,
     IMMICH_WORKERS_EXCLUDE: EnvValue.fromValue("api"),
