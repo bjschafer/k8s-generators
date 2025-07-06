@@ -6,20 +6,16 @@ metadata:
   name: redis
   namespace: immich
 spec:
-  minReadySeconds: 0
-  podManagementPolicy: OrderedReady
   replicas: 1
   selector:
     matchLabels:
-      cdk8s.io/metadata.addr: redis-redis-sts-c8cbaa00
-  serviceName: redis-redis-sts-service-c8344872
+      app.kubernetes.io/name: redis
+  serviceName: redis
   template:
     metadata:
       labels:
         app.kubernetes.io/name: redis
-        cdk8s.io/metadata.addr: redis-redis-sts-c8cbaa00
     spec:
-      automountServiceAccountToken: false
       containers:
         - args:
             - -c
@@ -38,7 +34,6 @@ spec:
             - name: REDIS_PORT
               value: "6379"
           image: public.ecr.aws/bitnami/redis:7.4
-          imagePullPolicy: Always
           livenessProbe:
             exec:
               command:
@@ -46,7 +41,6 @@ spec:
                 - -c
                 - /health/ping_liveness_local.sh
                 - "5"
-            failureThreshold: 3
           name: redis
           ports:
             - containerPort: 6379
@@ -58,7 +52,6 @@ spec:
                 - -c
                 - /health/ping_readiness_local.sh
                 - "5"
-            failureThreshold: 3
           resources:
             limits:
               cpu: 100m
@@ -66,48 +59,43 @@ spec:
             requests:
               cpu: 100m
               memory: 64Mi
-          securityContext:
-            allowPrivilegeEscalation: false
-            privileged: false
-            readOnlyRootFilesystem: true
-            runAsNonRoot: true
           volumeMounts:
             - mountPath: /health
-              name: configmap-redis-health
+              name: health
             - mountPath: /opt/bitnami/scripts/start-scripts
-              name: configmap-redis-scripts
+              name: scripts
             - mountPath: /opt/bitnami/redis/mounted-etc
-              name: configmap-redis-config
+              name: config
             - mountPath: /opt/bitnami/redis/etc/
               name: redis-tmp-conf
             - mountPath: /tmp
               name: tmp
-      dnsPolicy: ClusterFirst
-      hostNetwork: false
-      restartPolicy: Always
-      securityContext:
-        fsGroupChangePolicy: Always
-        runAsNonRoot: true
-      setHostnameAsFQDN: false
-      shareProcessNamespace: false
-      terminationGracePeriodSeconds: 30
+            - mountPath: /data
+              name: redis-data
       volumes:
         - configMap:
             defaultMode: 493
             name: redis-health
-          name: configmap-redis-health
+          name: health
         - configMap:
             defaultMode: 493
             name: redis-scripts
-          name: configmap-redis-scripts
+          name: scripts
         - configMap:
             name: redis-config
-          name: configmap-redis-config
+          name: config
         - emptyDir: {}
           name: redis-tmp-conf
         - emptyDir: {}
           name: tmp
-  updateStrategy:
-    rollingUpdate:
-      partition: 0
-    type: RollingUpdate
+  volumeClaimTemplates:
+    - metadata:
+        labels:
+          app.kubernetes.io/name: redis
+        name: redis-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi

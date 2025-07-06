@@ -13,6 +13,6 @@ resources:
   - Service.immich-machine-learning.yaml
   - Service.immich-microservices.yaml
   - Service.immich-server.yaml
-  - Service.redis-redis-sts-service-c8344872.yaml
+  - Service.redis.yaml
   - StatefulSet.redis.yaml
   - VMServiceScrape.immich-server.yaml

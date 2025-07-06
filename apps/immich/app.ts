@@ -48,13 +48,13 @@ const redis = new Redis(app, "redis", {
   namespace: namespace,
   version: "7.4",
   resources: {
-    cpu: {
-      request: Cpu.millis(100),
-      limit: Cpu.millis(100),
+    requests: {
+      cpu: Quantity.fromString("100m"),
+      memory: Quantity.fromString("64Mi"),
     },
-    memory: {
-      request: Size.mebibytes(64),
-      limit: Size.mebibytes(64),
+    limits: {
+      cpu: Quantity.fromString("100m"),
+      memory: Quantity.fromString("64Mi"),
     },
   },
 });

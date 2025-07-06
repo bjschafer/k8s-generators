@@ -1,14 +1,8 @@
 import { Chart } from "cdk8s";
 import { Construct } from "constructs";
-import {
-  ConfigMap,
-  ContainerResources,
-  EnvValue,
-  Probe,
-  Service,
-  StatefulSet,
-  Volume,
-} from "cdk8s-plus-32";
+import { ConfigMap } from "cdk8s-plus-32";
+import { IntOrString, KubeService, KubeStatefulSet } from "../imports/k8s";
+import { Quantity, ResourceRequirements } from "cdk8s-plus-32/lib/imports/k8s";
 
 export type RedisVersion = "7.4";
 
@@ -17,11 +11,13 @@ export interface RedisProps {
   namespace: string;
   version: RedisVersion;
   extraLabels?: { [key: string]: string };
-  resources?: ContainerResources;
+  resources?: ResourceRequirements;
+  storageSize?: Quantity;
+  storageClass?: string;
 }
 
 export class Redis extends Chart {
-  public readonly Service: Service;
+  public readonly Service: KubeService;
 
   constructor(scope: Construct, id: string, props: RedisProps) {
     super(scope, id);
@@ -80,100 +76,180 @@ export class Redis extends Chart {
       },
     });
 
-    const ss = new StatefulSet(this, `${id}-sts`, {
+    new KubeStatefulSet(this, `${id}-sts`, {
       metadata: {
         name: props.name,
         namespace: props.namespace,
         labels: labels,
       },
-      replicas: 1,
-      podMetadata: {
+      spec: {
+        replicas: 1,
+        selector: {
+          matchLabels: labels,
+        },
+        serviceName: props.name,
+        template: {
+          metadata: {
+            labels: labels,
+          },
+          spec: {
+            containers: [
+              {
+                image: `public.ecr.aws/bitnami/redis:${props.version}`,
+                name: "redis",
+                args: [
+                  "-c",
+                  "/opt/bitnami/scripts/start-scripts/start-master.sh",
+                ],
+                command: ["/bin/bash"],
+                ports: [
+                  {
+                    name: "redis",
+                    containerPort: 6379,
+                  },
+                ],
+                env: [
+                  {
+                    name: "BITNAMI_DEBUG",
+                    value: "false",
+                  },
+                  {
+                    name: "REDIS_REPLICATION_MODE",
+                    value: "master",
+                  },
+                  {
+                    name: "ALLOW_EMPTY_PASSWORD",
+                    value: "yes",
+                  },
+                  {
+                    name: "REDIS_TLS_ENABLED",
+                    value: "no",
+                  },
+                  {
+                    name: "REDIS_PORT",
+                    value: "6379",
+                  },
+                ],
+                resources: props.resources && {
+                  limits: props.resources.limits,
+                  requests: props.resources.requests,
+                },
+                livenessProbe: {
+                  exec: {
+                    command: [
+                      "sh",
+                      "-c",
+                      "/health/ping_liveness_local.sh",
+                      "5",
+                    ],
+                  },
+                },
+                readinessProbe: {
+                  exec: {
+                    command: [
+                      "sh",
+                      "-c",
+                      "/health/ping_readiness_local.sh",
+                      "5",
+                    ],
+                  },
+                },
+                volumeMounts: [
+                  {
+                    name: "health",
+                    mountPath: "/health",
+                  },
+                  {
+                    name: "scripts",
+                    mountPath: "/opt/bitnami/scripts/start-scripts",
+                  },
+                  {
+                    name: "config",
+                    mountPath: "/opt/bitnami/redis/mounted-etc",
+                  },
+                  {
+                    name: "redis-tmp-conf",
+                    mountPath: "/opt/bitnami/redis/etc/",
+                  },
+                  {
+                    name: "tmp",
+                    mountPath: "/tmp",
+                  },
+                  {
+                    name: "redis-data",
+                    mountPath: "/data",
+                  },
+                ],
+              },
+            ],
+            volumes: [
+              {
+                name: "health",
+                configMap: {
+                  name: health.name,
+                  defaultMode: 0o755,
+                },
+              },
+              {
+                name: "scripts",
+                configMap: {
+                  name: scripts.name,
+                  defaultMode: 0o755,
+                },
+              },
+              {
+                name: "config",
+                configMap: {
+                  name: config.name,
+                },
+              },
+              {
+                name: "redis-tmp-conf",
+                emptyDir: {},
+              },
+              {
+                name: "tmp",
+                emptyDir: {},
+              },
+            ],
+          },
+        },
+        volumeClaimTemplates: [
+          {
+            metadata: {
+              name: "redis-data",
+              labels: labels,
+            },
+            spec: {
+              accessModes: ["ReadWriteOnce"],
+              resources: {
+                requests: {
+                  storage: props.storageSize || Quantity.fromString("1Gi"),
+                },
+              },
+              storageClassName: props.storageClass,
+            },
+          },
+        ],
+      },
+    });
+
+    this.Service = new KubeService(this, `${id}-svc`, {
+      metadata: {
+        name: props.name,
+        namespace: props.namespace,
         labels: labels,
       },
-      containers: [
-        {
-          image: `public.ecr.aws/bitnami/redis:${props.version}`,
-          name: "redis",
-          args: ["-c", "/opt/bitnami/scripts/start-scripts/start-master.sh"],
-          command: ["/bin/bash"],
-          ports: [
-            {
-              name: "redis",
-              number: 6379,
-            },
-          ],
-          envVariables: {
-            BITNAMI_DEBUG: EnvValue.fromValue("false"),
-            REDIS_REPLICATION_MODE: EnvValue.fromValue("master"),
-            ALLOW_EMPTY_PASSWORD: EnvValue.fromValue("yes"),
-            REDIS_TLS_ENABLED: EnvValue.fromValue("no"),
-            REDIS_PORT: EnvValue.fromValue("6379"),
+      spec: {
+        selector: labels,
+        ports: [
+          {
+            name: "redis",
+            port: 6379,
+            targetPort: IntOrString.fromNumber(6379),
           },
-          resources: props.resources,
-          liveness: Probe.fromCommand([
-            "sh",
-            "-c",
-            "/health/ping_liveness_local.sh",
-            "5",
-          ]),
-          readiness: Probe.fromCommand([
-            "sh",
-            "-c",
-            "/health/ping_readiness_local.sh",
-            "5",
-          ]),
-        },
-      ],
-    });
-    this.Service = ss.service;
-
-    const healthVol = Volume.fromConfigMap(this, `${id}-health-vol`, health, {
-      defaultMode: 0o755,
-    });
-    const scriptsVol = Volume.fromConfigMap(
-      this,
-      `${id}-scripts-vol`,
-      scripts,
-      {
-        defaultMode: 0o755,
+        ],
       },
-    );
-    const configVol = Volume.fromConfigMap(this, `${id}-config-vol`, config);
-    const redisTmpConf = Volume.fromEmptyDir(
-      this,
-      `${id}-tmp-conf`,
-      "redis-tmp-conf",
-    );
-    const tmp = Volume.fromEmptyDir(this, `${id}-tmp`, "tmp");
-    ss.addVolume(healthVol);
-    ss.addVolume(scriptsVol);
-    ss.addVolume(configVol);
-    ss.addVolume(redisTmpConf);
-    ss.addVolume(tmp);
-
-    ss.containers[0].mount("/health", healthVol);
-    ss.containers[0].mount("/opt/bitnami/scripts/start-scripts", scriptsVol);
-    ss.containers[0].mount("/opt/bitnami/redis/mounted-etc", configVol);
-    ss.containers[0].mount("/opt/bitnami/redis/etc/", redisTmpConf);
-    ss.containers[0].mount("/tmp", tmp);
-
-    // new KubeService(this, `${id}-svc`, {
-    //   metadata: {
-    //     name: props.name,
-    //     namespace: props.namespace,
-    //     labels: labels,
-    //   },
-    //   spec: {
-    //     selector: labels,
-    //     type: "ClusterIP",
-    //     ports: [
-    //       {
-    //         name: "redis",
-    //         port: 6379,
-    //         targetPort: IntOrString.fromString("redis"),
-    //       },
-    //     ],
-    //   },
-    // });
+    });
   }
 }
