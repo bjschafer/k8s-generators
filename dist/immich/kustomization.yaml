@@ -1,5 +1,7 @@
 resources:
+  - ConfigMap.redis-config.yaml
   - ConfigMap.redis-health.yaml
+  - ConfigMap.redis-scripts.yaml
   - Deployment.immich-machine-learning.yaml
   - Deployment.immich-microservices.yaml
   - Deployment.immich-server.yaml

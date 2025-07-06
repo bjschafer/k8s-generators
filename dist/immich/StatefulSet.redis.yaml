@@ -21,7 +21,23 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-        - image: public.ecr.aws/bitnami/redis:7.4
+        - args:
+            - -c
+            - /opt/bitnami/scripts/start-scripts/start-master.sh
+          command:
+            - /bin/bash
+          env:
+            - name: BITNAMI_DEBUG
+              value: "false"
+            - name: REDIS_REPLICATION_MODE
+              value: master
+            - name: ALLOW_EMPTY_PASSWORD
+              value: "yes"
+            - name: REDIS_TLS_ENABLED
+              value: "no"
+            - name: REDIS_PORT
+              value: "6379"
+          image: public.ecr.aws/bitnami/redis:7.4
           imagePullPolicy: Always
           livenessProbe:
             exec:
@@ -58,6 +74,14 @@ spec:
           volumeMounts:
             - mountPath: /health
               name: configmap-redis-health
+            - mountPath: /opt/bitnami/scripts/start-scripts
+              name: configmap-redis-scripts
+            - mountPath: /opt/bitnami/redis/mounted-etc
+              name: configmap-redis-config
+            - mountPath: /opt/bitnami/redis/etc/
+              name: redis-tmp-conf
+            - mountPath: /tmp
+              name: tmp
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
@@ -72,6 +96,17 @@ spec:
             defaultMode: 493
             name: redis-health
           name: configmap-redis-health
+        - configMap:
+            defaultMode: 493
+            name: redis-scripts
+          name: configmap-redis-scripts
+        - configMap:
+            name: redis-config
+          name: configmap-redis-config
+        - emptyDir: {}
+          name: redis-tmp-conf
+        - emptyDir: {}
+          name: tmp
   updateStrategy:
     rollingUpdate:
       partition: 0

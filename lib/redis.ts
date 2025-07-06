@@ -3,6 +3,7 @@ import { Construct } from "constructs";
 import {
   ConfigMap,
   ContainerResources,
+  EnvValue,
   Probe,
   Service,
   StatefulSet,
@@ -51,6 +52,34 @@ export class Redis extends Chart {
       },
     });
 
+    const config = new ConfigMap(this, `${id}-config`, {
+      metadata: {
+        name: `${props.name}-config`,
+        namespace: props.namespace,
+        labels: labels,
+      },
+      data: {
+        "master.conf":
+          'dir /data\n# User-supplied master configuration:\nrename-command FLUSHDB ""\nrename-command FLUSHALL ""\n# End of master configuration',
+        "redis.conf":
+          '# User-supplied common configuration:\n# Enable AOF https://redis.io/topics/persistence#append-only-file\nappendonly yes\n# Disable RDB persistence, AOF persistence already enabled.\nsave ""\n# End of common configuration',
+        "replica.conf":
+          'dir /data\nslave-read-only yes\n# User-supplied replica configuration:\nrename-command FLUSHDB ""\nrename-command FLUSHALL ""\n# End of replica configuration',
+      },
+    });
+
+    const scripts = new ConfigMap(this, `${id}-scripts`, {
+      metadata: {
+        name: `${props.name}-scripts`,
+        namespace: props.namespace,
+        labels: labels,
+      },
+      data: {
+        "start-master.sh":
+          '#!/bin/bash\n\n[[ -f $REDIS_PASSWORD_FILE ]] && export REDIS_PASSWORD="$(< "${REDIS_PASSWORD_FILE}")"\nif [[ ! -f /opt/bitnami/redis/etc/master.conf ]];then\n    cp /opt/bitnami/redis/mounted-etc/master.conf /opt/bitnami/redis/etc/master.conf\nfi\nif [[ ! -f /opt/bitnami/redis/etc/redis.conf ]];then\n    cp /opt/bitnami/redis/mounted-etc/redis.conf /opt/bitnami/redis/etc/redis.conf\nfi\nARGS=("--port" "${REDIS_PORT}")\nARGS+=("--protected-mode" "no")\nARGS+=("--include" "/opt/bitnami/redis/etc/redis.conf")\nARGS+=("--include" "/opt/bitnami/redis/etc/master.conf")\nexec redis-server "${ARGS[@]}"\n',
+      },
+    });
+
     const ss = new StatefulSet(this, `${id}-sts`, {
       metadata: {
         name: props.name,
@@ -65,12 +94,21 @@ export class Redis extends Chart {
         {
           image: `public.ecr.aws/bitnami/redis:${props.version}`,
           name: "redis",
+          args: ["-c", "/opt/bitnami/scripts/start-scripts/start-master.sh"],
+          command: ["/bin/bash"],
           ports: [
             {
               name: "redis",
               number: 6379,
             },
           ],
+          envVariables: {
+            BITNAMI_DEBUG: EnvValue.fromValue("false"),
+            REDIS_REPLICATION_MODE: EnvValue.fromValue("master"),
+            ALLOW_EMPTY_PASSWORD: EnvValue.fromValue("yes"),
+            REDIS_TLS_ENABLED: EnvValue.fromValue("no"),
+            REDIS_PORT: EnvValue.fromValue("6379"),
+          },
           resources: props.resources,
           liveness: Probe.fromCommand([
             "sh",
@@ -92,8 +130,32 @@ export class Redis extends Chart {
     const healthVol = Volume.fromConfigMap(this, `${id}-health-vol`, health, {
       defaultMode: 0o755,
     });
+    const scriptsVol = Volume.fromConfigMap(
+      this,
+      `${id}-scripts-vol`,
+      scripts,
+      {
+        defaultMode: 0o755,
+      },
+    );
+    const configVol = Volume.fromConfigMap(this, `${id}-config-vol`, config);
+    const redisTmpConf = Volume.fromEmptyDir(
+      this,
+      `${id}-tmp-conf`,
+      "redis-tmp-conf",
+    );
+    const tmp = Volume.fromEmptyDir(this, `${id}-tmp`, "tmp");
     ss.addVolume(healthVol);
+    ss.addVolume(scriptsVol);
+    ss.addVolume(configVol);
+    ss.addVolume(redisTmpConf);
+    ss.addVolume(tmp);
+
     ss.containers[0].mount("/health", healthVol);
+    ss.containers[0].mount("/opt/bitnami/scripts/start-scripts", scriptsVol);
+    ss.containers[0].mount("/opt/bitnami/redis/mounted-etc", configVol);
+    ss.containers[0].mount("/opt/bitnami/redis/etc/", redisTmpConf);
+    ss.containers[0].mount("/tmp", tmp);
 
     // new KubeService(this, `${id}-svc`, {
     //   metadata: {
