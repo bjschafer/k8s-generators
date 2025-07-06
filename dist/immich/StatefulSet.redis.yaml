@@ -69,6 +69,7 @@ spec:
       terminationGracePeriodSeconds: 30
       volumes:
         - configMap:
+            defaultMode: 493
             name: redis-health
           name: configmap-redis-health
   updateStrategy:

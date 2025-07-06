@@ -89,7 +89,9 @@ export class Redis extends Chart {
     });
     this.Service = ss.service;
 
-    const healthVol = Volume.fromConfigMap(this, `${id}-health-vol`, health);
+    const healthVol = Volume.fromConfigMap(this, `${id}-health-vol`, health, {
+      defaultMode: 0o755,
+    });
     ss.addVolume(healthVol);
     ss.containers[0].mount("/health", healthVol);
 
