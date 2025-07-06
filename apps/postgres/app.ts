@@ -368,7 +368,7 @@ class VectorPostgres extends Chart {
           },
         },
         storage: {
-          size: "5Gi",
+          size: "15Gi",
           storageClass: StorageClass.CEPH_RBD,
         },
         enableSuperuserAccess: true,
