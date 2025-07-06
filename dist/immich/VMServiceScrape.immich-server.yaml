@@ -1,0 +1,15 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: immich-server
+  namespace: immich
+spec:
+  endpoints:
+    - port: metrics
+  namespaceSelector:
+    matchNames:
+      - immich
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: microservices
+      app.kubernetes.io/name: immich

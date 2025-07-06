@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: server
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: immich
+  name: immich-server
+  namespace: immich
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: immich-server-immich-server-deployment-c83cd3c1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: immich-server
+        cdk8s.io/metadata.addr: immich-server-immich-server-deployment-c83cd3c1
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: IMMICH_WORKERS_INCLUDE
+              value: api
+            - name: IMMICH_TELEMETRY_INCLUDE
+              value: all
+            - name: IMMICH_MACHINE_LEARNING_URL
+              value: http://immich-machine-learning:3003
+            - name: REDIS_HOSTNAME
+              value: redis
+            - name: DB_DATABASE_NAME
+              value: immich
+            - name: DB_HOSTNAME
+              value: immich-pg16-rw.postgres.svc.cluster.local
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_USERNAME
+              value: immich
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: DB_PASSWORD
+                  name: db-creds
+          image: ghcr.io/immich-app/immich-server:v1.135.3
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /server-info/ping
+              port: 2283
+              scheme: HTTP
+          name: immich-server
+          ports:
+            - containerPort: 2283
+            - containerPort: 8081
+              name: metrics
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /server-info/ping
+              port: 2283
+              scheme: HTTP
+          resources:
+            limits:
+              memory: 4096Mi
+            requests:
+              cpu: 2000m
+              memory: 1536Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /opt/pictures
+              name: pvc-nfs-media-pictures
+            - mountPath: /usr/src/app/upload
+              name: pvc-nfs-media-pictures
+              subPath: immich
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: pvc-nfs-media-pictures
+          persistentVolumeClaim:
+            claimName: nfs-media-pictures
+            readOnly: false

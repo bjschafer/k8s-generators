@@ -1,0 +1,37 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  labels:
+    app.kubernetes.io/component: server
+    app.kubernetes.io/name: immich
+  name: immich-server
+  namespace: immich
+spec:
+  rules:
+    - host: immich-server.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: immich-server
+                port:
+                  number: 2283
+            path: /
+            pathType: Prefix
+    - host: photos.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: immich-server
+                port:
+                  number: 2283
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - immich-server.cmdcentral.xyz
+        - photos.cmdcentral.xyz
+      secretName: immich-server-tls

@@ -1,0 +1,15 @@
+resources:
+  - Deployment.immich-machine-learning.yaml
+  - Deployment.immich-microservices.yaml
+  - Deployment.immich-server.yaml
+  - ExternalSecret.db-creds.yaml
+  - Ingress.immich-server.yaml
+  - PersistentVolume.nfs-media-pictures.yaml
+  - PersistentVolumeClaim.cache.yaml
+  - PersistentVolumeClaim.nfs-media-pictures.yaml
+  - Service.immich-machine-learning.yaml
+  - Service.immich-microservices.yaml
+  - Service.immich-server.yaml
+  - Service.redis.yaml
+  - StatefulSet.redis.yaml
+  - VMServiceScrape.immich-server.yaml
