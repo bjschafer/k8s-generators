@@ -59,6 +59,8 @@ spec:
             requests:
               cpu: 100m
               memory: 64Mi
+          securityContext:
+            runAsUser: 1001
           volumeMounts:
             - mountPath: /health
               name: health
@@ -72,6 +74,8 @@ spec:
               name: tmp
             - mountPath: /data
               name: redis-data
+      securityContext:
+        fsGroup: 1001
       volumes:
         - configMap:
             defaultMode: 493

@@ -154,6 +154,9 @@ export class Redis extends Chart {
                     ],
                   },
                 },
+                securityContext: {
+                  runAsUser: 1001,
+                },
                 volumeMounts: [
                   {
                     name: "health",
@@ -182,6 +185,9 @@ export class Redis extends Chart {
                 ],
               },
             ],
+            securityContext: {
+              fsGroup: 1001,
+            },
             volumes: [
               {
                 name: "health",
