@@ -68,7 +68,7 @@ const mediaApps: Omit<
   {
     name: "sonarr",
     port: 8989,
-    image: "ghcr.io/linuxserver/sonarr:develop",
+    image: "ghcr.io/linuxserver/sonarr:latest",
     nfsMounts: [
       {
         mountPoint: "/downloads",
@@ -88,7 +88,7 @@ const mediaApps: Omit<
   {
     name: "radarr",
     port: 7878,
-    image: "ghcr.io/linuxserver/radarr:nightly",
+    image: "ghcr.io/linuxserver/radarr:latest",
     nfsMounts: [
       {
         mountPoint: "/downloads",
@@ -108,7 +108,7 @@ const mediaApps: Omit<
   {
     name: "lidarr",
     port: 8686,
-    image: "ghcr.io/linuxserver/lidarr:develop",
+    image: "ghcr.io/linuxserver/lidarr:latest",
     nfsMounts: [
       {
         mountPoint: "/downloads",
@@ -128,7 +128,7 @@ const mediaApps: Omit<
   {
     name: "readarr",
     port: 8787,
-    image: "lscr.io/linuxserver/readarr:develop",
+    image: "lscr.io/linuxserver/readarr:latest",
     nfsMounts: [
       {
         mountPoint: "/downloads",

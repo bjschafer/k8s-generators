@@ -30,7 +30,7 @@ spec:
               value: "8675309"
             - name: PGID
               value: "8675309"
-          image: ghcr.io/linuxserver/lidarr:develop
+          image: ghcr.io/linuxserver/lidarr:latest
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3

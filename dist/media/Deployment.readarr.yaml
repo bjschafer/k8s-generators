@@ -30,7 +30,7 @@ spec:
               value: "8675309"
             - name: PGID
               value: "8675309"
-          image: lscr.io/linuxserver/readarr:develop
+          image: lscr.io/linuxserver/readarr:latest
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
