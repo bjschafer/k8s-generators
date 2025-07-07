@@ -12,7 +12,6 @@ spec:
     - sonarr.cmdcentral.xyz
     - radarr.cmdcentral.xyz
     - lidarr.cmdcentral.xyz
-    - readarr.cmdcentral.xyz
     - sabnzbd.cmdcentral.xyz
     - prowlarr.cmdcentral.xyz
   issuerRef:

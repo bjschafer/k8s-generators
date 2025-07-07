@@ -126,26 +126,6 @@ const mediaApps: Omit<
     },
   },
   {
-    name: "readarr",
-    port: 8787,
-    image: "lscr.io/linuxserver/readarr:latest",
-    nfsMounts: [
-      {
-        mountPoint: "/downloads",
-        nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
-      },
-      {
-        mountPoint: "/books",
-        nfsConcreteVolume: nfsVols.Get("nfs-media-ebooks"),
-      },
-    ],
-    monitoringConfig: {
-      enableExportarr: true,
-      enableServiceMonitor: true,
-      existingApiSecretName: "readarr-api",
-    },
-  },
-  {
     name: "sabnzbd",
     port: 8080,
     image: "ghcr.io/linuxserver/sabnzbd:latest",

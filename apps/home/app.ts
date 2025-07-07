@@ -187,12 +187,6 @@ new HomeConfig(app, `${name}-config`, {
           description: "Download movies",
         },
         {
-          name: "Readarr",
-          uri: "https://readarr.cmdcentral.xyz",
-          icon: "readarr",
-          description: "Download ebooks",
-        },
-        {
           name: "Sonarr",
           uri: "https://sonarr.cmdcentral.xyz",
           icon: "sonarr",
