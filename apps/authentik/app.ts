@@ -6,14 +6,12 @@ import { NewArgoApp } from "../../lib/argo";
 import { Valkey } from "../../lib/valkey";
 import { Quantity } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";
+import { Cpu, EnvValue, Probe, Secret, ServiceAccount } from "cdk8s-plus-32";
 import {
-  Cpu,
-  EnvValue,
-  Probe,
-  Secret,
-  ServiceAccount,
-} from "cdk8s-plus-32";
-import { KubeService, KubeClusterRole, KubeClusterRoleBinding } from "../../imports/k8s";
+  KubeService,
+  KubeClusterRole,
+  KubeClusterRoleBinding,
+} from "../../imports/k8s";
 import { BitwardenSecret } from "../../lib/secrets";
 import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
 import { WellKnownLabels } from "../../lib/labels";
@@ -103,9 +101,9 @@ const creds = new BitwardenSecret(app, "creds", {
   name: "creds",
   namespace: namespace,
   data: {
-    AUTHENTIK_SECRET_KEY: "e6ce7a7e-df4a-46b0-ba6a-b31201364b8c",
-    AUTHENTIK_POSTGRESQL__PASSWORD: "1997c120-dc1b-4de6-8a69-b3120136b812",
-    AUTHENTIK_EMAIL__PASSWORD: "7bfc2c6e-6aec-4fb9-bb40-b31201366f31",
+    AUTHENTIK_SECRET_KEY: "8f697c41-0a3a-44e9-904e-b329003066c0",
+    AUTHENTIK_POSTGRESQL__PASSWORD: "63b39599-c406-4fa1-b6e3-b32900304db5",
+    AUTHENTIK_EMAIL__PASSWORD: "78228577-9953-4482-be25-b32900303578",
   },
 });
 
@@ -138,10 +136,16 @@ const commonEnv: Record<string, EnvValue> = {
   AUTHENTIK_ERROR_REPORTING__ENABLED: EnvValue.fromValue("false"),
   AUTHENTIK_ERROR_REPORTING__ENVIRONMENT: EnvValue.fromValue("k8s"),
   AUTHENTIK_ERROR_REPORTING__SEND_PII: EnvValue.fromValue("false"),
-  AUTHENTIK_EVENTS__CONTEXT_PROCESSORS__GEOIP: EnvValue.fromValue("/geoip/GeoLite2-City.mmdb"),
+  AUTHENTIK_EVENTS__CONTEXT_PROCESSORS__GEOIP: EnvValue.fromValue(
+    "/geoip/GeoLite2-City.mmdb",
+  ),
   AUTHENTIK_LOG_LEVEL: EnvValue.fromValue("info"),
-  AUTHENTIK_OUTPOSTS__CONTAINER_IMAGE_BASE: EnvValue.fromValue("ghcr.io/goauthentik/%(type)s:%(version)s"),
-  AUTHENTIK_POSTGRESQL__HOST: EnvValue.fromValue("prod.postgres.svc.cluster.local"),
+  AUTHENTIK_OUTPOSTS__CONTAINER_IMAGE_BASE: EnvValue.fromValue(
+    "ghcr.io/goauthentik/%(type)s:%(version)s",
+  ),
+  AUTHENTIK_POSTGRESQL__HOST: EnvValue.fromValue(
+    "prod.postgres.svc.cluster.local",
+  ),
   AUTHENTIK_POSTGRESQL__NAME: EnvValue.fromValue("authentik"),
   AUTHENTIK_POSTGRESQL__PORT: EnvValue.fromValue("5432"),
   AUTHENTIK_POSTGRESQL__USER: EnvValue.fromValue("authentik"),
@@ -198,7 +202,10 @@ const server = new AppPlus(app, "authentik-server", {
 });
 
 // Update service ports to match the original configuration
-server.Service.metadata.addAnnotation("service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol", "true");
+server.Service.metadata.addAnnotation(
+  "service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol",
+  "true",
+);
 
 // Authentik Worker
 new AppPlus(app, "authentik-worker", {
@@ -325,14 +332,15 @@ class AuthentikMonitoring extends Chart {
             rules: [
               {
                 alert: "AuthentikOutpostDown",
-                expr: "up{job=\"authentik-outpost\"} == 0",
+                expr: 'up{job="authentik-outpost"} == 0',
                 for: "5m",
                 labels: {
                   severity: "warning",
                 },
                 annotations: {
                   summary: "Authentik outpost is down",
-                  description: "Authentik outpost {{ $labels.instance }} has been down for more than 5 minutes.",
+                  description:
+                    "Authentik outpost {{ $labels.instance }} has been down for more than 5 minutes.",
                 },
               },
             ],
@@ -347,3 +355,4 @@ new AuthentikMonitoring(app, "authentik-monitoring");
 
 app.synth();
 NewKustomize(app.outdir);
+
