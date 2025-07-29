@@ -68,6 +68,6 @@ Each app in `apps/` follows the pattern:
 
 1. Create new app directory under `apps/`
 2. Implement `app.ts` using library components
-3. Run `make apps/[app-name]` to test build
+3. Run `make` to test build
 4. Run `make` to verify full build and linting
 5. Generated YAML appears in `dist/` for ArgoCD deployment

@@ -34,6 +34,11 @@ spec:
               value: immich-valkey-master
             - name: REDIS_PORT
               value: "6379"
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: valkey-password
+                  name: immich-valkey
             - name: DB_DATABASE_NAME
               value: immich
             - name: DB_HOSTNAME

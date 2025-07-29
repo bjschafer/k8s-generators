@@ -14,6 +14,7 @@ import {
   EnvValue,
   PersistentVolumeAccessMode,
   Probe,
+  Secret,
   Volume,
 } from "cdk8s-plus-32";
 import { StorageClass } from "../../lib/volume";
@@ -65,6 +66,10 @@ const commonEnv: Record<string, EnvValue> = {
   ),
   REDIS_HOSTNAME: EnvValue.fromValue(valkey.Service.name),
   REDIS_PORT: EnvValue.fromValue("6379"),
+  REDIS_PASSWORD: EnvValue.fromSecretValue({
+    secret: Secret.fromSecretName(app, "valkey-secret", "immich-valkey"),
+    key: "valkey-password",
+  }),
   DB_DATABASE_NAME: EnvValue.fromValue("immich"),
   DB_HOSTNAME: EnvValue.fromValue("immich-pg16-rw.postgres.svc.cluster.local"),
   DB_PORT: EnvValue.fromValue("5432"),
