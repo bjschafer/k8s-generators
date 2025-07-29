@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
+  labels:
+    app.kubernetes.io/component: server
+    app.kubernetes.io/name: authentik
+  name: authentik-server
+  namespace: authentik
+spec:
+  externalIPs: []
+  ports:
+    - name: http
+      port: 9000
+      targetPort: 9000
+    - name: http-1
+      port: 9443
+      targetPort: 9443
+    - name: metrics
+      port: 9300
+      targetPort: 9300
+  selector:
+    cdk8s.io/metadata.addr: authentik-server-authentik-server-deployment-c8cc40e6
+  type: ClusterIP

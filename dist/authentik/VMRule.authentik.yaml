@@ -1,0 +1,17 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  name: authentik
+  namespace: authentik
+spec:
+  groups:
+    - name: authentik
+      rules:
+        - alert: AuthentikOutpostDown
+          annotations:
+            description: Authentik outpost {{ $labels.instance }} has been down for more than 5 minutes.
+            summary: Authentik outpost is down
+          expr: up{job="authentik-outpost"} == 0
+          for: 5m
+          labels:
+            severity: warning

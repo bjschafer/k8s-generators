@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/component: worker
+    app.kubernetes.io/name: authentik
+  name: authentik-worker
+  namespace: authentik
+spec:
+  externalIPs: []
+  ports:
+    - name: http
+      port: 8000
+      targetPort: 8000
+  selector:
+    cdk8s.io/metadata.addr: authentik-worker-authentik-worker-deployment-c845a6ad
+  type: ClusterIP
