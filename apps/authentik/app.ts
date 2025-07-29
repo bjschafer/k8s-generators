@@ -26,6 +26,8 @@ import { Construct } from "constructs";
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
+const version = "2025.6.4";
+
 NewArgoApp(namespace, {
   namespace: namespace,
 });
@@ -160,7 +162,7 @@ const commonEnv: Record<string, EnvValue> = {
 const server = new AppPlus(app, "authentik-server", {
   name: "authentik-server",
   namespace: namespace,
-  image: "ghcr.io/goauthentik/server:2025.6.3",
+  image: `ghcr.io/goauthentik/server:${version}`,
   resources: {
     cpu: {
       request: Cpu.millis(50),
@@ -211,7 +213,7 @@ server.Service.metadata.addAnnotation(
 new AppPlus(app, "authentik-worker", {
   name: "authentik-worker",
   namespace: namespace,
-  image: "ghcr.io/goauthentik/server:2025.6.3",
+  image: `ghcr.io/goauthentik/server:${version}`,
   resources: {
     cpu: {
       request: Cpu.millis(50),
@@ -355,4 +357,3 @@ new AuthentikMonitoring(app, "authentik-monitoring");
 
 app.synth();
 NewKustomize(app.outdir);
-
