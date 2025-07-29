@@ -1,7 +1,4 @@
 resources:
-  - ConfigMap.redis-config.yaml
-  - ConfigMap.redis-health.yaml
-  - ConfigMap.redis-scripts.yaml
   - Deployment.immich-machine-learning.yaml
   - Deployment.immich-microservices.yaml
   - Deployment.immich-server.yaml
@@ -10,9 +7,10 @@ resources:
   - PersistentVolume.nfs-media-pictures.yaml
   - PersistentVolumeClaim.cache.yaml
   - PersistentVolumeClaim.nfs-media-pictures.yaml
+  - Secret.immich-valkey.yaml
   - Service.immich-machine-learning.yaml
   - Service.immich-microservices.yaml
   - Service.immich-server.yaml
-  - Service.redis.yaml
-  - StatefulSet.redis.yaml
+  - Service.immich-valkey-master.yaml
+  - StatefulSet.immich-valkey-master.yaml
   - VMServiceScrape.immich-server.yaml

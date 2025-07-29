@@ -4,7 +4,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NFSVolumeContainer } from "../../lib/nfs";
 import { NewKustomize } from "../../lib/kustomize";
 import { NewArgoApp } from "../../lib/argo";
-import { Redis } from "../../lib/redis";
+import { Valkey } from "../../lib/valkey";
 import { Quantity } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";
 import {
@@ -43,10 +43,10 @@ const dbCreds = new BitwardenSecret(app, "dbcreds", {
   },
 });
 
-const redis = new Redis(app, "redis", {
-  name: "redis",
+const valkey = new Valkey(app, "valkey", {
+  name: "immich",
   namespace: namespace,
-  version: "7.4",
+  version: "7-alpine",
   resources: {
     requests: {
       cpu: Quantity.fromString("100m"),
@@ -63,7 +63,7 @@ const commonEnv: Record<string, EnvValue> = {
   IMMICH_MACHINE_LEARNING_URL: EnvValue.fromValue(
     "http://immich-machine-learning:3003",
   ),
-  REDIS_HOSTNAME: EnvValue.fromValue(redis.Service.name),
+  REDIS_HOSTNAME: EnvValue.fromValue(valkey.Service.name),
   REDIS_PORT: EnvValue.fromValue("6379"),
   DB_DATABASE_NAME: EnvValue.fromValue("immich"),
   DB_HOSTNAME: EnvValue.fromValue("immich-pg16-rw.postgres.svc.cluster.local"),

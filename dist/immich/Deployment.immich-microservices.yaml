@@ -31,7 +31,7 @@ spec:
             - name: IMMICH_MACHINE_LEARNING_URL
               value: http://immich-machine-learning:3003
             - name: REDIS_HOSTNAME
-              value: redis
+              value: immich-valkey-master
             - name: REDIS_PORT
               value: "6379"
             - name: DB_DATABASE_NAME
