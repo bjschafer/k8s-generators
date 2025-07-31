@@ -4,7 +4,7 @@ import { Construct } from 'constructs';
 
 
 /**
- *
+ * HelmChart represents configuration and state for the deployment of a Helm chart.
  *
  * @schema HelmChart
  */
@@ -58,6 +58,8 @@ export class HelmChart extends ApiObject {
 }
 
 /**
+ * HelmChart represents configuration and state for the deployment of a Helm chart.
+ *
  * @schema HelmChart
  */
 export interface HelmChartProps {
@@ -67,6 +69,8 @@ export interface HelmChartProps {
   readonly metadata?: ApiObjectMetadata;
 
   /**
+   * HelmChartSpec represents the user-configurable details for installation and upgrade of a Helm chart release.
+   *
    * @schema HelmChart#spec
    */
   readonly spec?: HelmChartSpec;
@@ -76,7 +80,7 @@ export interface HelmChartProps {
 /**
  * Converts an object of type 'HelmChartProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartProps(obj: HelmChartProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -86,128 +90,195 @@ export function toJson_HelmChartProps(obj: HelmChartProps | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * HelmChartSpec represents the user-configurable details for installation and upgrade of a Helm chart release.
+ *
  * @schema HelmChartSpec
  */
 export interface HelmChartSpec {
   /**
+   * Pass Basic auth credentials to all domains.
+   * Helm CLI positional argument/flag: `--pass-credentials`
+   *
    * @schema HelmChartSpec#authPassCredentials
    */
   readonly authPassCredentials?: boolean;
 
   /**
+   * Reference to Secret of type kubernetes.io/basic-auth holding Basic auth credentials for the Chart repo.
+   *
    * @schema HelmChartSpec#authSecret
    */
   readonly authSecret?: HelmChartSpecAuthSecret;
 
   /**
+   * Specify the number of retries before considering the helm job failed.
+   *
    * @schema HelmChartSpec#backOffLimit
    */
   readonly backOffLimit?: number;
 
   /**
+   * Set to True if this chart is needed to bootstrap the cluster (Cloud Controller Manager, CNI, etc)
+   *
    * @schema HelmChartSpec#bootstrap
    */
   readonly bootstrap?: boolean;
 
   /**
+   * Helm Chart name in repository, or complete HTTPS URL to chart archive (.tgz)
+   * Helm CLI positional argument/flag: `CHART`
+   *
    * @schema HelmChartSpec#chart
    */
   readonly chart?: string;
 
   /**
+   * Base64-encoded chart archive .tgz; overides `.spec.chart` and `.spec.version`
+   * Helm CLI positional argument/flag: `CHART`
+   *
    * @schema HelmChartSpec#chartContent
    */
   readonly chartContent?: string;
 
   /**
+   * Create target namespace if not present.
+   * Helm CLI positional argument/flag: `--create-namespace`
+   *
    * @schema HelmChartSpec#createNamespace
    */
   readonly createNamespace?: boolean;
 
   /**
+   * Reference to Secret of type kubernetes.io/dockerconfigjson holding Docker auth credentials for the OCI-based registry acting as the Chart repo.
+   *
    * @schema HelmChartSpec#dockerRegistrySecret
    */
   readonly dockerRegistrySecret?: HelmChartSpecDockerRegistrySecret;
 
   /**
+   * Configures handling of failed chart installation or upgrades.
+   * - `reinstall` will perform a clean uninstall and reinstall of the chart.
+   * - `abort` will take no action and leave the chart in a failed state so that the administrator can manually resolve the error.
+   *
    * @schema HelmChartSpec#failurePolicy
    */
-  readonly failurePolicy?: string;
+  readonly failurePolicy?: HelmChartSpecFailurePolicy;
 
   /**
+   * DEPRECATED. Helm version to use. Only v3 is currently supported.
+   *
    * @schema HelmChartSpec#helmVersion
    */
   readonly helmVersion?: string;
 
   /**
+   * Skip TLS certificate checks for the chart download.
+   * Helm CLI positional argument/flag: `--insecure-skip-tls-verify`
+   *
    * @schema HelmChartSpec#insecureSkipTLSVerify
    */
   readonly insecureSkipTlsVerify?: boolean;
 
   /**
+   * Specify the image to use for tht helm job pod when installing or upgrading the helm chart.
+   *
    * @schema HelmChartSpec#jobImage
    */
   readonly jobImage?: string;
 
   /**
+   * Use insecure HTTP connections for the chart download.
+   * Helm CLI positional argument/flag: `--plain-http`
+   *
    * @schema HelmChartSpec#plainHTTP
    */
   readonly plainHttp?: boolean;
 
   /**
+   * Custom PodSecurityContext for the helm job pod.
+   *
    * @schema HelmChartSpec#podSecurityContext
    */
   readonly podSecurityContext?: HelmChartSpecPodSecurityContext;
 
   /**
+   * Helm Chart repository URL.
+   * Helm CLI positional argument/flag: `--repo`
+   *
    * @schema HelmChartSpec#repo
    */
   readonly repo?: string;
 
   /**
+   * Verify certificates of HTTPS-enabled servers using this CA bundle. Should be a string containing one or more PEM-encoded CA Certificates.
+   * Helm CLI positional argument/flag: `--ca-file`
+   *
    * @schema HelmChartSpec#repoCA
    */
   readonly repoCa?: string;
 
   /**
+   * Reference to a ConfigMap containing CA Certificates to be be trusted by Helm. Can be used along with or instead of `.spec.repoCA`
+   * Helm CLI positional argument/flag: `--ca-file`
+   *
    * @schema HelmChartSpec#repoCAConfigMap
    */
   readonly repoCaConfigMap?: HelmChartSpecRepoCaConfigMap;
 
   /**
+   * custom SecurityContext for the helm job pod.
+   *
    * @schema HelmChartSpec#securityContext
    */
   readonly securityContext?: HelmChartSpecSecurityContext;
 
   /**
+   * Override simple Chart values. These take precedence over options set via valuesContent.
+   * Helm CLI positional argument/flag: `--set`, `--set-string`
+   *
    * @schema HelmChartSpec#set
    */
-  readonly set?: { [key: string]: any };
+  readonly set?: { [key: string]: HelmChartSpecSet };
 
   /**
+   * Helm Chart target namespace.
+   * Helm CLI positional argument/flag: `--namespace`
+   *
    * @schema HelmChartSpec#targetNamespace
    */
   readonly targetNamespace?: string;
 
   /**
+   * Timeout for Helm operations.
+   * Helm CLI positional argument/flag: `--timeout`
+   *
    * @schema HelmChartSpec#timeout
    */
   readonly timeout?: string;
 
   /**
+   * Override complex Chart values via inline YAML content.
+   * Helm CLI positional argument/flag: `--values`
+   *
    * @schema HelmChartSpec#valuesContent
    */
   readonly valuesContent?: string;
 
   /**
+   * Override complex Chart values via references to external Secrets.
+   * Helm CLI positional argument/flag: `--values`
+   *
    * @schema HelmChartSpec#valuesSecrets
    */
   readonly valuesSecrets?: HelmChartSpecValuesSecrets[];
 
   /**
+   * Helm Chart version. Only used when installing from repository; ignored when .spec.chart or .spec.chartContent is used to install a specific chart archive.
+   * Helm CLI positional argument/flag: `--version`
+   *
    * @schema HelmChartSpec#version
    */
   readonly version?: string;
@@ -217,7 +288,7 @@ export interface HelmChartSpec {
 /**
  * Converts an object of type 'HelmChartSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpec(obj: HelmChartSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -239,7 +310,7 @@ export function toJson_HelmChartSpec(obj: HelmChartSpec | undefined): Record<str
     'repoCA': obj.repoCa,
     'repoCAConfigMap': toJson_HelmChartSpecRepoCaConfigMap(obj.repoCaConfigMap),
     'securityContext': toJson_HelmChartSpecSecurityContext(obj.securityContext),
-    'set': ((obj.set) === undefined) ? undefined : (Object.entries(obj.set).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'set': ((obj.set) === undefined) ? undefined : (Object.entries(obj.set).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'targetNamespace': obj.targetNamespace,
     'timeout': obj.timeout,
     'valuesContent': obj.valuesContent,
@@ -249,13 +320,21 @@ export function toJson_HelmChartSpec(obj: HelmChartSpec | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Reference to Secret of type kubernetes.io/basic-auth holding Basic auth credentials for the Chart repo.
+ *
  * @schema HelmChartSpecAuthSecret
  */
 export interface HelmChartSpecAuthSecret {
   /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
    * @schema HelmChartSpecAuthSecret#name
    */
   readonly name?: string;
@@ -265,7 +344,7 @@ export interface HelmChartSpecAuthSecret {
 /**
  * Converts an object of type 'HelmChartSpecAuthSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecAuthSecret(obj: HelmChartSpecAuthSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -274,13 +353,21 @@ export function toJson_HelmChartSpecAuthSecret(obj: HelmChartSpecAuthSecret | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Reference to Secret of type kubernetes.io/dockerconfigjson holding Docker auth credentials for the OCI-based registry acting as the Chart repo.
+ *
  * @schema HelmChartSpecDockerRegistrySecret
  */
 export interface HelmChartSpecDockerRegistrySecret {
   /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
    * @schema HelmChartSpecDockerRegistrySecret#name
    */
   readonly name?: string;
@@ -290,7 +377,7 @@ export interface HelmChartSpecDockerRegistrySecret {
 /**
  * Converts an object of type 'HelmChartSpecDockerRegistrySecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecDockerRegistrySecret(obj: HelmChartSpecDockerRegistrySecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -299,73 +386,192 @@ export function toJson_HelmChartSpecDockerRegistrySecret(obj: HelmChartSpecDocke
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Configures handling of failed chart installation or upgrades.
+ * - `reinstall` will perform a clean uninstall and reinstall of the chart.
+ * - `abort` will take no action and leave the chart in a failed state so that the administrator can manually resolve the error.
+ *
+ * @schema HelmChartSpecFailurePolicy
+ */
+export enum HelmChartSpecFailurePolicy {
+  /** abort */
+  ABORT = "abort",
+  /** reinstall */
+  REINSTALL = "reinstall",
+}
+
+/**
+ * Custom PodSecurityContext for the helm job pod.
+ *
  * @schema HelmChartSpecPodSecurityContext
  */
 export interface HelmChartSpecPodSecurityContext {
   /**
+   * appArmorProfile is the AppArmor options to use by the containers in this pod.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema HelmChartSpecPodSecurityContext#appArmorProfile
    */
   readonly appArmorProfile?: HelmChartSpecPodSecurityContextAppArmorProfile;
 
   /**
+   * A special supplemental group that applies to all containers in a pod.
+   * Some volume types allow the Kubelet to change the ownership of that volume
+   * to be owned by the pod:
+   *
+   * 1. The owning GID will be the FSGroup
+   * 2. The setgid bit is set (new files created in the volume will be owned by FSGroup)
+   * 3. The permission bits are OR'd with rw-rw----
+   *
+   * If unset, the Kubelet will not modify the ownership and permissions of any volume.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema HelmChartSpecPodSecurityContext#fsGroup
    */
   readonly fsGroup?: number;
 
   /**
+   * fsGroupChangePolicy defines behavior of changing ownership and permission of the volume
+   * before being exposed inside Pod. This field will only apply to
+   * volume types which support fsGroup based ownership(and permissions).
+   * It will have no effect on ephemeral volume types such as: secret, configmaps
+   * and emptydir.
+   * Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema HelmChartSpecPodSecurityContext#fsGroupChangePolicy
    */
   readonly fsGroupChangePolicy?: string;
 
   /**
+   * The GID to run the entrypoint of the container process.
+   * Uses runtime default if unset.
+   * May also be set in SecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence
+   * for that container.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema HelmChartSpecPodSecurityContext#runAsGroup
    */
   readonly runAsGroup?: number;
 
   /**
+   * Indicates that the container must run as a non-root user.
+   * If true, the Kubelet will validate the image at runtime to ensure that it
+   * does not run as UID 0 (root) and fail to start the container if it does.
+   * If unset or false, no such validation will be performed.
+   * May also be set in SecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   *
    * @schema HelmChartSpecPodSecurityContext#runAsNonRoot
    */
   readonly runAsNonRoot?: boolean;
 
   /**
+   * The UID to run the entrypoint of the container process.
+   * Defaults to user specified in image metadata if unspecified.
+   * May also be set in SecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence
+   * for that container.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default user specified in image metadata if unspecified.
    * @schema HelmChartSpecPodSecurityContext#runAsUser
    */
   readonly runAsUser?: number;
 
   /**
+   * seLinuxChangePolicy defines how the container's SELinux label is applied to all volumes used by the Pod.
+   * It has no effect on nodes that do not support SELinux or to volumes does not support SELinux.
+   * Valid values are "MountOption" and "Recursive".
+   *
+   * "Recursive" means relabeling of all files on all Pod volumes by the container runtime.
+   * This may be slow for large volumes, but allows mixing privileged and unprivileged Pods sharing the same volume on the same node.
+   *
+   * "MountOption" mounts all eligible Pod volumes with `-o context` mount option.
+   * This requires all Pods that share the same volume to use the same SELinux label.
+   * It is not possible to share the same volume among privileged and unprivileged Pods.
+   * Eligible volumes are in-tree FibreChannel and iSCSI volumes, and all CSI volumes
+   * whose CSI driver announces SELinux support by setting spec.seLinuxMount: true in their
+   * CSIDriver instance. Other volumes are always re-labelled recursively.
+   * "MountOption" value is allowed only when SELinuxMount feature gate is enabled.
+   *
+   * If not specified and SELinuxMount feature gate is enabled, "MountOption" is used.
+   * If not specified and SELinuxMount feature gate is disabled, "MountOption" is used for ReadWriteOncePod volumes
+   * and "Recursive" for all other volumes.
+   *
+   * This field affects only Pods that have SELinux label set, either in PodSecurityContext or in SecurityContext of all containers.
+   *
+   * All Pods that use the same volume should use the same seLinuxChangePolicy, otherwise some pods can get stuck in ContainerCreating state.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema HelmChartSpecPodSecurityContext#seLinuxChangePolicy
    */
   readonly seLinuxChangePolicy?: string;
 
   /**
+   * The SELinux context to be applied to all containers.
+   * If unspecified, the container runtime will allocate a random SELinux context for each
+   * container.  May also be set in SecurityContext.  If set in
+   * both SecurityContext and PodSecurityContext, the value specified in SecurityContext
+   * takes precedence for that container.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema HelmChartSpecPodSecurityContext#seLinuxOptions
    */
   readonly seLinuxOptions?: HelmChartSpecPodSecurityContextSeLinuxOptions;
 
   /**
+   * The seccomp options to use by the containers in this pod.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema HelmChartSpecPodSecurityContext#seccompProfile
    */
   readonly seccompProfile?: HelmChartSpecPodSecurityContextSeccompProfile;
 
   /**
+   * A list of groups applied to the first process run in each container, in
+   * addition to the container's primary GID and fsGroup (if specified).  If
+   * the SupplementalGroupsPolicy feature is enabled, the
+   * supplementalGroupsPolicy field determines whether these are in addition
+   * to or instead of any group memberships defined in the container image.
+   * If unspecified, no additional groups are added, though group memberships
+   * defined in the container image may still be used, depending on the
+   * supplementalGroupsPolicy field.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema HelmChartSpecPodSecurityContext#supplementalGroups
    */
   readonly supplementalGroups?: number[];
 
   /**
+   * Defines how supplemental groups of the first container processes are calculated.
+   * Valid values are "Merge" and "Strict". If not specified, "Merge" is used.
+   * (Alpha) Using the field requires the SupplementalGroupsPolicy feature gate to be enabled
+   * and the container runtime must implement support for this feature.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema HelmChartSpecPodSecurityContext#supplementalGroupsPolicy
    */
   readonly supplementalGroupsPolicy?: string;
 
   /**
+   * Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported
+   * sysctls (by the container runtime) might fail to launch.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema HelmChartSpecPodSecurityContext#sysctls
    */
   readonly sysctls?: HelmChartSpecPodSecurityContextSysctls[];
 
   /**
+   * The Windows specific settings applied to all containers.
+   * If unspecified, the options within a container's SecurityContext will be used.
+   * If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
+   * Note that this field cannot be set when spec.os.name is linux.
+   *
    * @schema HelmChartSpecPodSecurityContext#windowsOptions
    */
   readonly windowsOptions?: HelmChartSpecPodSecurityContextWindowsOptions;
@@ -375,7 +581,7 @@ export interface HelmChartSpecPodSecurityContext {
 /**
  * Converts an object of type 'HelmChartSpecPodSecurityContext' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecPodSecurityContext(obj: HelmChartSpecPodSecurityContext | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -396,13 +602,22 @@ export function toJson_HelmChartSpecPodSecurityContext(obj: HelmChartSpecPodSecu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Reference to a ConfigMap containing CA Certificates to be be trusted by Helm. Can be used along with or instead of `.spec.repoCA`
+ * Helm CLI positional argument/flag: `--ca-file`
+ *
  * @schema HelmChartSpecRepoCaConfigMap
  */
 export interface HelmChartSpecRepoCaConfigMap {
   /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
    * @schema HelmChartSpecRepoCaConfigMap#name
    */
   readonly name?: string;
@@ -412,7 +627,7 @@ export interface HelmChartSpecRepoCaConfigMap {
 /**
  * Converts an object of type 'HelmChartSpecRepoCaConfigMap' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecRepoCaConfigMap(obj: HelmChartSpecRepoCaConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -421,68 +636,140 @@ export function toJson_HelmChartSpecRepoCaConfigMap(obj: HelmChartSpecRepoCaConf
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * custom SecurityContext for the helm job pod.
+ *
  * @schema HelmChartSpecSecurityContext
  */
 export interface HelmChartSpecSecurityContext {
   /**
+   * AllowPrivilegeEscalation controls whether a process can gain more
+   * privileges than its parent process. This bool directly controls if
+   * the no_new_privs flag will be set on the container process.
+   * AllowPrivilegeEscalation is true always when the container is:
+   * 1) run as Privileged
+   * 2) has CAP_SYS_ADMIN
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema HelmChartSpecSecurityContext#allowPrivilegeEscalation
    */
   readonly allowPrivilegeEscalation?: boolean;
 
   /**
+   * appArmorProfile is the AppArmor options to use by this container. If set, this profile
+   * overrides the pod's appArmorProfile.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema HelmChartSpecSecurityContext#appArmorProfile
    */
   readonly appArmorProfile?: HelmChartSpecSecurityContextAppArmorProfile;
 
   /**
+   * The capabilities to add/drop when running containers.
+   * Defaults to the default set of capabilities granted by the container runtime.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default the default set of capabilities granted by the container runtime.
    * @schema HelmChartSpecSecurityContext#capabilities
    */
   readonly capabilities?: HelmChartSpecSecurityContextCapabilities;
 
   /**
+   * Run container in privileged mode.
+   * Processes in privileged containers are essentially equivalent to root on the host.
+   * Defaults to false.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default false.
    * @schema HelmChartSpecSecurityContext#privileged
    */
   readonly privileged?: boolean;
 
   /**
+   * procMount denotes the type of proc mount to use for the containers.
+   * The default value is Default which uses the container runtime defaults for
+   * readonly paths and masked paths.
+   * This requires the ProcMountType feature flag to be enabled.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema HelmChartSpecSecurityContext#procMount
    */
   readonly procMount?: string;
 
   /**
+   * Whether this container has a read-only root filesystem.
+   * Default is false.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default false.
    * @schema HelmChartSpecSecurityContext#readOnlyRootFilesystem
    */
   readonly readOnlyRootFilesystem?: boolean;
 
   /**
+   * The GID to run the entrypoint of the container process.
+   * Uses runtime default if unset.
+   * May also be set in PodSecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema HelmChartSpecSecurityContext#runAsGroup
    */
   readonly runAsGroup?: number;
 
   /**
+   * Indicates that the container must run as a non-root user.
+   * If true, the Kubelet will validate the image at runtime to ensure that it
+   * does not run as UID 0 (root) and fail to start the container if it does.
+   * If unset or false, no such validation will be performed.
+   * May also be set in PodSecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   *
    * @schema HelmChartSpecSecurityContext#runAsNonRoot
    */
   readonly runAsNonRoot?: boolean;
 
   /**
+   * The UID to run the entrypoint of the container process.
+   * Defaults to user specified in image metadata if unspecified.
+   * May also be set in PodSecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default user specified in image metadata if unspecified.
    * @schema HelmChartSpecSecurityContext#runAsUser
    */
   readonly runAsUser?: number;
 
   /**
+   * The SELinux context to be applied to the container.
+   * If unspecified, the container runtime will allocate a random SELinux context for each
+   * container.  May also be set in PodSecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema HelmChartSpecSecurityContext#seLinuxOptions
    */
   readonly seLinuxOptions?: HelmChartSpecSecurityContextSeLinuxOptions;
 
   /**
+   * The seccomp options to use by this container. If seccomp options are
+   * provided at both the pod & container level, the container options
+   * override the pod options.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema HelmChartSpecSecurityContext#seccompProfile
    */
   readonly seccompProfile?: HelmChartSpecSecurityContextSeccompProfile;
 
   /**
+   * The Windows specific settings applied to all containers.
+   * If unspecified, the options from the PodSecurityContext will be used.
+   * If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
+   * Note that this field cannot be set when spec.os.name is linux.
+   *
    * @schema HelmChartSpecSecurityContext#windowsOptions
    */
   readonly windowsOptions?: HelmChartSpecSecurityContextWindowsOptions;
@@ -492,7 +779,7 @@ export interface HelmChartSpecSecurityContext {
 /**
  * Converts an object of type 'HelmChartSpecSecurityContext' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecSecurityContext(obj: HelmChartSpecSecurityContext | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -512,23 +799,47 @@ export function toJson_HelmChartSpecSecurityContext(obj: HelmChartSpecSecurityCo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * @schema HelmChartSpecSet
+ */
+export class HelmChartSpecSet {
+  public static fromNumber(value: number): HelmChartSpecSet {
+    return new HelmChartSpecSet(value);
+  }
+  public static fromString(value: string): HelmChartSpecSet {
+    return new HelmChartSpecSet(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * SecretSpec describes a key in a secret to load chart values from.
+ *
  * @schema HelmChartSpecValuesSecrets
  */
 export interface HelmChartSpecValuesSecrets {
   /**
+   * Ignore changes to the secret, and mark the secret as optional.
+   * By default, the secret must exist, and changes to the secret will trigger an upgrade of the chart to apply the updated values.
+   * If `ignoreUpdates` is true, the secret is optional, and changes to the secret will not trigger an upgrade of the chart.
+   *
    * @schema HelmChartSpecValuesSecrets#ignoreUpdates
    */
   readonly ignoreUpdates?: boolean;
 
   /**
+   * Keys to read values content from. If no keys are specified, the secret is not used.
+   *
    * @schema HelmChartSpecValuesSecrets#keys
    */
   readonly keys?: string[];
 
   /**
+   * Name of the secret. Must be in the same namespace as the HelmChart resource.
+   *
    * @schema HelmChartSpecValuesSecrets#name
    */
   readonly name?: string;
@@ -538,7 +849,7 @@ export interface HelmChartSpecValuesSecrets {
 /**
  * Converts an object of type 'HelmChartSpecValuesSecrets' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecValuesSecrets(obj: HelmChartSpecValuesSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -549,28 +860,42 @@ export function toJson_HelmChartSpecValuesSecrets(obj: HelmChartSpecValuesSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * appArmorProfile is the AppArmor options to use by the containers in this pod.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
  * @schema HelmChartSpecPodSecurityContextAppArmorProfile
  */
 export interface HelmChartSpecPodSecurityContextAppArmorProfile {
   /**
+   * localhostProfile indicates a profile loaded on the node that should be used.
+   * The profile must be preconfigured on the node to work.
+   * Must match the loaded name of the profile.
+   * Must be set if and only if type is "Localhost".
+   *
    * @schema HelmChartSpecPodSecurityContextAppArmorProfile#localhostProfile
    */
   readonly localhostProfile?: string;
 
   /**
+   * type indicates which kind of AppArmor profile will be applied.
+   * Valid options are:
+   * Localhost - a profile pre-loaded on the node.
+   * RuntimeDefault - the container runtime's default profile.
+   * Unconfined - no AppArmor enforcement.
+   *
    * @schema HelmChartSpecPodSecurityContextAppArmorProfile#type
    */
-  readonly type?: string;
+  readonly type: string;
 
 }
 
 /**
  * Converts an object of type 'HelmChartSpecPodSecurityContextAppArmorProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecPodSecurityContextAppArmorProfile(obj: HelmChartSpecPodSecurityContextAppArmorProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -580,28 +905,43 @@ export function toJson_HelmChartSpecPodSecurityContextAppArmorProfile(obj: HelmC
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The SELinux context to be applied to all containers.
+ * If unspecified, the container runtime will allocate a random SELinux context for each
+ * container.  May also be set in SecurityContext.  If set in
+ * both SecurityContext and PodSecurityContext, the value specified in SecurityContext
+ * takes precedence for that container.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
  * @schema HelmChartSpecPodSecurityContextSeLinuxOptions
  */
 export interface HelmChartSpecPodSecurityContextSeLinuxOptions {
   /**
+   * Level is SELinux level label that applies to the container.
+   *
    * @schema HelmChartSpecPodSecurityContextSeLinuxOptions#level
    */
   readonly level?: string;
 
   /**
+   * Role is a SELinux role label that applies to the container.
+   *
    * @schema HelmChartSpecPodSecurityContextSeLinuxOptions#role
    */
   readonly role?: string;
 
   /**
+   * Type is a SELinux type label that applies to the container.
+   *
    * @schema HelmChartSpecPodSecurityContextSeLinuxOptions#type
    */
   readonly type?: string;
 
   /**
+   * User is a SELinux user label that applies to the container.
+   *
    * @schema HelmChartSpecPodSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
@@ -611,7 +951,7 @@ export interface HelmChartSpecPodSecurityContextSeLinuxOptions {
 /**
  * Converts an object of type 'HelmChartSpecPodSecurityContextSeLinuxOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecPodSecurityContextSeLinuxOptions(obj: HelmChartSpecPodSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -623,28 +963,43 @@ export function toJson_HelmChartSpecPodSecurityContextSeLinuxOptions(obj: HelmCh
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The seccomp options to use by the containers in this pod.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
  * @schema HelmChartSpecPodSecurityContextSeccompProfile
  */
 export interface HelmChartSpecPodSecurityContextSeccompProfile {
   /**
+   * localhostProfile indicates a profile defined in a file on the node should be used.
+   * The profile must be preconfigured on the node to work.
+   * Must be a descending path, relative to the kubelet's configured seccomp profile location.
+   * Must be set if type is "Localhost". Must NOT be set for any other type.
+   *
    * @schema HelmChartSpecPodSecurityContextSeccompProfile#localhostProfile
    */
   readonly localhostProfile?: string;
 
   /**
+   * type indicates which kind of seccomp profile will be applied.
+   * Valid options are:
+   *
+   * Localhost - a profile defined in a file on the node should be used.
+   * RuntimeDefault - the container runtime default profile should be used.
+   * Unconfined - no profile should be applied.
+   *
    * @schema HelmChartSpecPodSecurityContextSeccompProfile#type
    */
-  readonly type?: string;
+  readonly type: string;
 
 }
 
 /**
  * Converts an object of type 'HelmChartSpecPodSecurityContextSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecPodSecurityContextSeccompProfile(obj: HelmChartSpecPodSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -654,28 +1009,34 @@ export function toJson_HelmChartSpecPodSecurityContextSeccompProfile(obj: HelmCh
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Sysctl defines a kernel parameter to be set
+ *
  * @schema HelmChartSpecPodSecurityContextSysctls
  */
 export interface HelmChartSpecPodSecurityContextSysctls {
   /**
+   * Name of a property to set
+   *
    * @schema HelmChartSpecPodSecurityContextSysctls#name
    */
-  readonly name?: string;
+  readonly name: string;
 
   /**
+   * Value of a property to set
+   *
    * @schema HelmChartSpecPodSecurityContextSysctls#value
    */
-  readonly value?: string;
+  readonly value: string;
 
 }
 
 /**
  * Converts an object of type 'HelmChartSpecPodSecurityContextSysctls' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecPodSecurityContextSysctls(obj: HelmChartSpecPodSecurityContextSysctls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -685,28 +1046,50 @@ export function toJson_HelmChartSpecPodSecurityContextSysctls(obj: HelmChartSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The Windows specific settings applied to all containers.
+ * If unspecified, the options within a container's SecurityContext will be used.
+ * If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
+ * Note that this field cannot be set when spec.os.name is linux.
+ *
  * @schema HelmChartSpecPodSecurityContextWindowsOptions
  */
 export interface HelmChartSpecPodSecurityContextWindowsOptions {
   /**
+   * GMSACredentialSpec is where the GMSA admission webhook
+   * (https://github.com/kubernetes-sigs/windows-gmsa) inlines the contents of the
+   * GMSA credential spec named by the GMSACredentialSpecName field.
+   *
    * @schema HelmChartSpecPodSecurityContextWindowsOptions#gmsaCredentialSpec
    */
   readonly gmsaCredentialSpec?: string;
 
   /**
+   * GMSACredentialSpecName is the name of the GMSA credential spec to use.
+   *
    * @schema HelmChartSpecPodSecurityContextWindowsOptions#gmsaCredentialSpecName
    */
   readonly gmsaCredentialSpecName?: string;
 
   /**
+   * HostProcess determines if a container should be run as a 'Host Process' container.
+   * All of a Pod's containers must have the same effective HostProcess value
+   * (it is not allowed to have a mix of HostProcess containers and non-HostProcess containers).
+   * In addition, if HostProcess is true then HostNetwork must also be set to true.
+   *
    * @schema HelmChartSpecPodSecurityContextWindowsOptions#hostProcess
    */
   readonly hostProcess?: boolean;
 
   /**
+   * The UserName in Windows to run the entrypoint of the container process.
+   * Defaults to the user specified in image metadata if unspecified.
+   * May also be set in PodSecurityContext. If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   *
+   * @default the user specified in image metadata if unspecified.
    * @schema HelmChartSpecPodSecurityContextWindowsOptions#runAsUserName
    */
   readonly runAsUserName?: string;
@@ -716,7 +1099,7 @@ export interface HelmChartSpecPodSecurityContextWindowsOptions {
 /**
  * Converts an object of type 'HelmChartSpecPodSecurityContextWindowsOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecPodSecurityContextWindowsOptions(obj: HelmChartSpecPodSecurityContextWindowsOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -728,28 +1111,43 @@ export function toJson_HelmChartSpecPodSecurityContextWindowsOptions(obj: HelmCh
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * appArmorProfile is the AppArmor options to use by this container. If set, this profile
+ * overrides the pod's appArmorProfile.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
  * @schema HelmChartSpecSecurityContextAppArmorProfile
  */
 export interface HelmChartSpecSecurityContextAppArmorProfile {
   /**
+   * localhostProfile indicates a profile loaded on the node that should be used.
+   * The profile must be preconfigured on the node to work.
+   * Must match the loaded name of the profile.
+   * Must be set if and only if type is "Localhost".
+   *
    * @schema HelmChartSpecSecurityContextAppArmorProfile#localhostProfile
    */
   readonly localhostProfile?: string;
 
   /**
+   * type indicates which kind of AppArmor profile will be applied.
+   * Valid options are:
+   * Localhost - a profile pre-loaded on the node.
+   * RuntimeDefault - the container runtime's default profile.
+   * Unconfined - no AppArmor enforcement.
+   *
    * @schema HelmChartSpecSecurityContextAppArmorProfile#type
    */
-  readonly type?: string;
+  readonly type: string;
 
 }
 
 /**
  * Converts an object of type 'HelmChartSpecSecurityContextAppArmorProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecSecurityContextAppArmorProfile(obj: HelmChartSpecSecurityContextAppArmorProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -759,18 +1157,27 @@ export function toJson_HelmChartSpecSecurityContextAppArmorProfile(obj: HelmChar
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The capabilities to add/drop when running containers.
+ * Defaults to the default set of capabilities granted by the container runtime.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
+ * @default the default set of capabilities granted by the container runtime.
  * @schema HelmChartSpecSecurityContextCapabilities
  */
 export interface HelmChartSpecSecurityContextCapabilities {
   /**
+   * Added capabilities
+   *
    * @schema HelmChartSpecSecurityContextCapabilities#add
    */
   readonly add?: string[];
 
   /**
+   * Removed capabilities
+   *
    * @schema HelmChartSpecSecurityContextCapabilities#drop
    */
   readonly drop?: string[];
@@ -780,7 +1187,7 @@ export interface HelmChartSpecSecurityContextCapabilities {
 /**
  * Converts an object of type 'HelmChartSpecSecurityContextCapabilities' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecSecurityContextCapabilities(obj: HelmChartSpecSecurityContextCapabilities | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -790,28 +1197,42 @@ export function toJson_HelmChartSpecSecurityContextCapabilities(obj: HelmChartSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The SELinux context to be applied to the container.
+ * If unspecified, the container runtime will allocate a random SELinux context for each
+ * container.  May also be set in PodSecurityContext.  If set in both SecurityContext and
+ * PodSecurityContext, the value specified in SecurityContext takes precedence.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
  * @schema HelmChartSpecSecurityContextSeLinuxOptions
  */
 export interface HelmChartSpecSecurityContextSeLinuxOptions {
   /**
+   * Level is SELinux level label that applies to the container.
+   *
    * @schema HelmChartSpecSecurityContextSeLinuxOptions#level
    */
   readonly level?: string;
 
   /**
+   * Role is a SELinux role label that applies to the container.
+   *
    * @schema HelmChartSpecSecurityContextSeLinuxOptions#role
    */
   readonly role?: string;
 
   /**
+   * Type is a SELinux type label that applies to the container.
+   *
    * @schema HelmChartSpecSecurityContextSeLinuxOptions#type
    */
   readonly type?: string;
 
   /**
+   * User is a SELinux user label that applies to the container.
+   *
    * @schema HelmChartSpecSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
@@ -821,7 +1242,7 @@ export interface HelmChartSpecSecurityContextSeLinuxOptions {
 /**
  * Converts an object of type 'HelmChartSpecSecurityContextSeLinuxOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecSecurityContextSeLinuxOptions(obj: HelmChartSpecSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -833,28 +1254,45 @@ export function toJson_HelmChartSpecSecurityContextSeLinuxOptions(obj: HelmChart
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The seccomp options to use by this container. If seccomp options are
+ * provided at both the pod & container level, the container options
+ * override the pod options.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
  * @schema HelmChartSpecSecurityContextSeccompProfile
  */
 export interface HelmChartSpecSecurityContextSeccompProfile {
   /**
+   * localhostProfile indicates a profile defined in a file on the node should be used.
+   * The profile must be preconfigured on the node to work.
+   * Must be a descending path, relative to the kubelet's configured seccomp profile location.
+   * Must be set if type is "Localhost". Must NOT be set for any other type.
+   *
    * @schema HelmChartSpecSecurityContextSeccompProfile#localhostProfile
    */
   readonly localhostProfile?: string;
 
   /**
+   * type indicates which kind of seccomp profile will be applied.
+   * Valid options are:
+   *
+   * Localhost - a profile defined in a file on the node should be used.
+   * RuntimeDefault - the container runtime default profile should be used.
+   * Unconfined - no profile should be applied.
+   *
    * @schema HelmChartSpecSecurityContextSeccompProfile#type
    */
-  readonly type?: string;
+  readonly type: string;
 
 }
 
 /**
  * Converts an object of type 'HelmChartSpecSecurityContextSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecSecurityContextSeccompProfile(obj: HelmChartSpecSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -864,28 +1302,50 @@ export function toJson_HelmChartSpecSecurityContextSeccompProfile(obj: HelmChart
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The Windows specific settings applied to all containers.
+ * If unspecified, the options from the PodSecurityContext will be used.
+ * If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
+ * Note that this field cannot be set when spec.os.name is linux.
+ *
  * @schema HelmChartSpecSecurityContextWindowsOptions
  */
 export interface HelmChartSpecSecurityContextWindowsOptions {
   /**
+   * GMSACredentialSpec is where the GMSA admission webhook
+   * (https://github.com/kubernetes-sigs/windows-gmsa) inlines the contents of the
+   * GMSA credential spec named by the GMSACredentialSpecName field.
+   *
    * @schema HelmChartSpecSecurityContextWindowsOptions#gmsaCredentialSpec
    */
   readonly gmsaCredentialSpec?: string;
 
   /**
+   * GMSACredentialSpecName is the name of the GMSA credential spec to use.
+   *
    * @schema HelmChartSpecSecurityContextWindowsOptions#gmsaCredentialSpecName
    */
   readonly gmsaCredentialSpecName?: string;
 
   /**
+   * HostProcess determines if a container should be run as a 'Host Process' container.
+   * All of a Pod's containers must have the same effective HostProcess value
+   * (it is not allowed to have a mix of HostProcess containers and non-HostProcess containers).
+   * In addition, if HostProcess is true then HostNetwork must also be set to true.
+   *
    * @schema HelmChartSpecSecurityContextWindowsOptions#hostProcess
    */
   readonly hostProcess?: boolean;
 
   /**
+   * The UserName in Windows to run the entrypoint of the container process.
+   * Defaults to the user specified in image metadata if unspecified.
+   * May also be set in PodSecurityContext. If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   *
+   * @default the user specified in image metadata if unspecified.
    * @schema HelmChartSpecSecurityContextWindowsOptions#runAsUserName
    */
   readonly runAsUserName?: string;
@@ -895,7 +1355,7 @@ export interface HelmChartSpecSecurityContextWindowsOptions {
 /**
  * Converts an object of type 'HelmChartSpecSecurityContextWindowsOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecSecurityContextWindowsOptions(obj: HelmChartSpecSecurityContextWindowsOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -907,11 +1367,13 @@ export function toJson_HelmChartSpecSecurityContextWindowsOptions(obj: HelmChart
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
- *
+ * HelmChartConfig represents additional configuration for the installation of Helm chart release.
+This resource is intended for use when additional configuration needs to be passed to a HelmChart
+that is managed by an external system.
  *
  * @schema HelmChartConfig
  */
@@ -965,6 +1427,10 @@ export class HelmChartConfig extends ApiObject {
 }
 
 /**
+ * HelmChartConfig represents additional configuration for the installation of Helm chart release.
+ * This resource is intended for use when additional configuration needs to be passed to a HelmChart
+ * that is managed by an external system.
+ *
  * @schema HelmChartConfig
  */
 export interface HelmChartConfigProps {
@@ -974,6 +1440,9 @@ export interface HelmChartConfigProps {
   readonly metadata?: ApiObjectMetadata;
 
   /**
+   * HelmChartConfigSpec represents additional user-configurable details of an installed and configured Helm chart release.
+   * These fields are merged with or override the corresponding fields on the related HelmChart resource.
+   *
    * @schema HelmChartConfig#spec
    */
   readonly spec?: HelmChartConfigSpec;
@@ -983,7 +1452,7 @@ export interface HelmChartConfigProps {
 /**
  * Converts an object of type 'HelmChartConfigProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartConfigProps(obj: HelmChartConfigProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -993,23 +1462,36 @@ export function toJson_HelmChartConfigProps(obj: HelmChartConfigProps | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * HelmChartConfigSpec represents additional user-configurable details of an installed and configured Helm chart release.
+ * These fields are merged with or override the corresponding fields on the related HelmChart resource.
+ *
  * @schema HelmChartConfigSpec
  */
 export interface HelmChartConfigSpec {
   /**
+   * Configures handling of failed chart installation or upgrades.
+   * - `reinstall` will perform a clean uninstall and reinstall of the chart.
+   * - `abort` will take no action and leave the chart in a failed state so that the administrator can manually resolve the error.
+   *
    * @schema HelmChartConfigSpec#failurePolicy
    */
-  readonly failurePolicy?: string;
+  readonly failurePolicy?: HelmChartConfigSpecFailurePolicy;
 
   /**
+   * Override complex Chart values via inline YAML content.
+   * Helm CLI positional argument/flag: `--values`
+   *
    * @schema HelmChartConfigSpec#valuesContent
    */
   readonly valuesContent?: string;
 
   /**
+   * Override complex Chart values via references to external Secrets.
+   * Helm CLI positional argument/flag: `--values`
+   *
    * @schema HelmChartConfigSpec#valuesSecrets
    */
   readonly valuesSecrets?: HelmChartConfigSpecValuesSecrets[];
@@ -1019,7 +1501,7 @@ export interface HelmChartConfigSpec {
 /**
  * Converts an object of type 'HelmChartConfigSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartConfigSpec(obj: HelmChartConfigSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1030,23 +1512,47 @@ export function toJson_HelmChartConfigSpec(obj: HelmChartConfigSpec | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Configures handling of failed chart installation or upgrades.
+ * - `reinstall` will perform a clean uninstall and reinstall of the chart.
+ * - `abort` will take no action and leave the chart in a failed state so that the administrator can manually resolve the error.
+ *
+ * @schema HelmChartConfigSpecFailurePolicy
+ */
+export enum HelmChartConfigSpecFailurePolicy {
+  /** abort */
+  ABORT = "abort",
+  /** reinstall */
+  REINSTALL = "reinstall",
+}
+
+/**
+ * SecretSpec describes a key in a secret to load chart values from.
+ *
  * @schema HelmChartConfigSpecValuesSecrets
  */
 export interface HelmChartConfigSpecValuesSecrets {
   /**
+   * Ignore changes to the secret, and mark the secret as optional.
+   * By default, the secret must exist, and changes to the secret will trigger an upgrade of the chart to apply the updated values.
+   * If `ignoreUpdates` is true, the secret is optional, and changes to the secret will not trigger an upgrade of the chart.
+   *
    * @schema HelmChartConfigSpecValuesSecrets#ignoreUpdates
    */
   readonly ignoreUpdates?: boolean;
 
   /**
+   * Keys to read values content from. If no keys are specified, the secret is not used.
+   *
    * @schema HelmChartConfigSpecValuesSecrets#keys
    */
   readonly keys?: string[];
 
   /**
+   * Name of the secret. Must be in the same namespace as the HelmChart resource.
+   *
    * @schema HelmChartConfigSpecValuesSecrets#name
    */
   readonly name?: string;
@@ -1056,7 +1562,7 @@ export interface HelmChartConfigSpecValuesSecrets {
 /**
  * Converts an object of type 'HelmChartConfigSpecValuesSecrets' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartConfigSpecValuesSecrets(obj: HelmChartConfigSpecValuesSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1067,5 +1573,5 @@ export function toJson_HelmChartConfigSpecValuesSecrets(obj: HelmChartConfigSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 

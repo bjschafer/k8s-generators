@@ -4,7 +4,9 @@ import { Construct } from 'constructs';
 
 
 /**
- *
+ * Addon is used to track application of a manifest file on disk. It mostly exists so that the wrangler DesiredSet
+Apply controller has an object to track as the owner, and ensure that all created resources are tracked when the
+manifest is modified or removed.
  *
  * @schema Addon
  */
@@ -58,6 +60,10 @@ export class Addon extends ApiObject {
 }
 
 /**
+ * Addon is used to track application of a manifest file on disk. It mostly exists so that the wrangler DesiredSet
+ * Apply controller has an object to track as the owner, and ensure that all created resources are tracked when the
+ * manifest is modified or removed.
+ *
  * @schema Addon
  */
 export interface AddonProps {
@@ -67,6 +73,8 @@ export interface AddonProps {
   readonly metadata?: ApiObjectMetadata;
 
   /**
+   * Spec provides information about the on-disk manifest backing this resource.
+   *
    * @schema Addon#spec
    */
   readonly spec?: AddonSpec;
@@ -76,7 +84,7 @@ export interface AddonProps {
 /**
  * Converts an object of type 'AddonProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AddonProps(obj: AddonProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -86,18 +94,24 @@ export function toJson_AddonProps(obj: AddonProps | undefined): Record<string, a
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Spec provides information about the on-disk manifest backing this resource.
+ *
  * @schema AddonSpec
  */
 export interface AddonSpec {
   /**
+   * Checksum is the SHA256 checksum of the most recently successfully applied manifest file.
+   *
    * @schema AddonSpec#checksum
    */
   readonly checksum?: string;
 
   /**
+   * Source is the Path on disk to the manifest file that this Addon tracks.
+   *
    * @schema AddonSpec#source
    */
   readonly source?: string;
@@ -107,7 +121,7 @@ export interface AddonSpec {
 /**
  * Converts an object of type 'AddonSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AddonSpec(obj: AddonSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -117,11 +131,11 @@ export function toJson_AddonSpec(obj: AddonSpec | undefined): Record<string, any
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
- *
+ * ETCDSnapshot tracks a point-in-time snapshot of the etcd datastore.
  *
  * @schema ETCDSnapshotFile
  */
@@ -175,6 +189,8 @@ export class EtcdSnapshotFile extends ApiObject {
 }
 
 /**
+ * ETCDSnapshot tracks a point-in-time snapshot of the etcd datastore.
+ *
  * @schema ETCDSnapshotFile
  */
 export interface EtcdSnapshotFileProps {
@@ -184,6 +200,8 @@ export interface EtcdSnapshotFileProps {
   readonly metadata?: ApiObjectMetadata;
 
   /**
+   * Spec defines properties of an etcd snapshot file
+   *
    * @schema ETCDSnapshotFile#spec
    */
   readonly spec?: EtcdSnapshotFileSpec;
@@ -193,7 +211,7 @@ export interface EtcdSnapshotFileProps {
 /**
  * Converts an object of type 'EtcdSnapshotFileProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_EtcdSnapshotFileProps(obj: EtcdSnapshotFileProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -203,43 +221,63 @@ export function toJson_EtcdSnapshotFileProps(obj: EtcdSnapshotFileProps | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Spec defines properties of an etcd snapshot file
+ *
  * @schema EtcdSnapshotFileSpec
  */
 export interface EtcdSnapshotFileSpec {
   /**
+   * Location is the absolute file:// or s3:// URI address of the snapshot.
+   *
    * @schema EtcdSnapshotFileSpec#location
    */
-  readonly location?: string;
+  readonly location: string;
 
   /**
+   * Metadata contains point-in-time snapshot of the contents of the
+   * k3s-etcd-snapshot-extra-metadata ConfigMap's data field, at the time the
+   * snapshot was taken. This is intended to contain data about cluster state
+   * that may be important for an external system to have available when restoring
+   * the snapshot.
+   *
    * @schema EtcdSnapshotFileSpec#metadata
    */
   readonly metadata?: { [key: string]: string };
 
   /**
+   * NodeName contains the name of the node that took the snapshot.
+   *
    * @schema EtcdSnapshotFileSpec#nodeName
    */
-  readonly nodeName?: string;
+  readonly nodeName: string;
 
   /**
+   * S3 contains extra metadata about the S3 storage system holding the
+   * snapshot. This is guaranteed to be set for all snapshots uploaded to S3.
+   * If not specified, the snapshot was not uploaded to S3.
+   *
    * @schema EtcdSnapshotFileSpec#s3
    */
   readonly s3?: EtcdSnapshotFileSpecS3;
 
   /**
+   * SnapshotName contains the base name of the snapshot file. CLI actions that act
+   * on snapshots stored locally or within a pre-configured S3 bucket and
+   * prefix usually take the snapshot name as their argument.
+   *
    * @schema EtcdSnapshotFileSpec#snapshotName
    */
-  readonly snapshotName?: string;
+  readonly snapshotName: string;
 
 }
 
 /**
  * Converts an object of type 'EtcdSnapshotFileSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_EtcdSnapshotFileSpec(obj: EtcdSnapshotFileSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -252,48 +290,68 @@ export function toJson_EtcdSnapshotFileSpec(obj: EtcdSnapshotFileSpec | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * S3 contains extra metadata about the S3 storage system holding the
+ * snapshot. This is guaranteed to be set for all snapshots uploaded to S3.
+ * If not specified, the snapshot was not uploaded to S3.
+ *
  * @schema EtcdSnapshotFileSpecS3
  */
 export interface EtcdSnapshotFileSpecS3 {
   /**
+   * Bucket is the bucket holding the snapshot
+   *
    * @schema EtcdSnapshotFileSpecS3#bucket
    */
   readonly bucket?: string;
 
   /**
+   * BucketLookup is the bucket lookup type, one of 'auto', 'dns', 'path'. Default if empty is 'auto'.
+   *
    * @schema EtcdSnapshotFileSpecS3#bucketLookup
    */
   readonly bucketLookup?: string;
 
   /**
+   * Endpoint is the host or host:port of the S3 service
+   *
    * @schema EtcdSnapshotFileSpecS3#endpoint
    */
   readonly endpoint?: string;
 
   /**
+   * EndpointCA is the path on disk to the S3 service's trusted CA list. Leave empty to use the OS CA bundle.
+   *
    * @schema EtcdSnapshotFileSpecS3#endpointCA
    */
   readonly endpointCa?: string;
 
   /**
+   * Insecure is true if the S3 service uses HTTP instead of HTTPS
+   *
    * @schema EtcdSnapshotFileSpecS3#insecure
    */
   readonly insecure?: boolean;
 
   /**
+   * Prefix is the prefix in which the snapshot file is stored.
+   *
    * @schema EtcdSnapshotFileSpecS3#prefix
    */
   readonly prefix?: string;
 
   /**
+   * Region is the region of the S3 service
+   *
    * @schema EtcdSnapshotFileSpecS3#region
    */
   readonly region?: string;
 
   /**
+   * SkipSSLVerify is true if TLS certificate verification is disabled
+   *
    * @schema EtcdSnapshotFileSpecS3#skipSSLVerify
    */
   readonly skipSslVerify?: boolean;
@@ -303,7 +361,7 @@ export interface EtcdSnapshotFileSpecS3 {
 /**
  * Converts an object of type 'EtcdSnapshotFileSpecS3' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_EtcdSnapshotFileSpecS3(obj: EtcdSnapshotFileSpecS3 | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -319,5 +377,5 @@ export function toJson_EtcdSnapshotFileSpecS3(obj: EtcdSnapshotFileSpecS3 | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 

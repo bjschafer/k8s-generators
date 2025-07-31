@@ -4,7 +4,7 @@ import { Construct } from 'constructs';
 
 
 /**
- *
+ * Plan represents a set of Jobs to apply an upgrade (or other operation) to set of Nodes.
  *
  * @schema Plan
  */
@@ -58,6 +58,8 @@ export class Plan extends ApiObject {
 }
 
 /**
+ * Plan represents a set of Jobs to apply an upgrade (or other operation) to set of Nodes.
+ *
  * @schema Plan
  */
 export interface PlanProps {
@@ -67,6 +69,8 @@ export interface PlanProps {
   readonly metadata?: ApiObjectMetadata;
 
   /**
+   * PlanSpec represents the user-configurable details of a Plan.
+   *
    * @schema Plan#spec
    */
   readonly spec?: PlanSpec;
@@ -76,7 +80,7 @@ export interface PlanProps {
 /**
  * Converts an object of type 'PlanProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanProps(obj: PlanProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -86,88 +90,129 @@ export function toJson_PlanProps(obj: PlanProps | undefined): Record<string, any
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * PlanSpec represents the user-configurable details of a Plan.
+ *
  * @schema PlanSpec
  */
 export interface PlanSpec {
   /**
+   * A URL that returns HTTP 302 with the last path element of the value returned in the Location header assumed to be an image tag (after munging "+" to "-").
+   *
    * @schema PlanSpec#channel
    */
   readonly channel?: string;
 
   /**
+   * The maximum number of concurrent nodes to apply this update on.
+   *
    * @schema PlanSpec#concurrency
    */
   readonly concurrency?: number;
 
   /**
+   * If Cordon is true, the node is cordoned before the upgrade container is run.
+   * If drain is specified, the value for cordon is ignored, and the node is cordoned.
+   * If neither drain nor cordon are specified and the node is marked as schedulable=false it will not be marked as schedulable=true when the Job completes.
+   *
    * @schema PlanSpec#cordon
    */
   readonly cordon?: boolean;
 
   /**
+   * Configuration for draining nodes prior to upgrade. If left unspecified, no drain will be performed.
+   *
    * @schema PlanSpec#drain
    */
   readonly drain?: PlanSpecDrain;
 
   /**
+   * Jobs for exclusive plans cannot be run alongside any other exclusive plan.
+   *
    * @schema PlanSpec#exclusive
    */
   readonly exclusive?: boolean;
 
   /**
+   * Image Pull Secrets, used to pull images for the Job.
+   *
    * @schema PlanSpec#imagePullSecrets
    */
   readonly imagePullSecrets?: PlanSpecImagePullSecrets[];
 
   /**
+   * Sets ActiveDeadlineSeconds on Jobs generated to apply this Plan.
+   * If the Job does not complete within this time, the Plan will stop processing until it is updated to trigger a redeploy.
+   * If set to 0, Jobs have no deadline. If not set, the controller default value is used.
+   *
    * @schema PlanSpec#jobActiveDeadlineSecs
    */
   readonly jobActiveDeadlineSecs?: number;
 
   /**
+   * Select which nodes this plan can be applied to.
+   *
    * @schema PlanSpec#nodeSelector
    */
   readonly nodeSelector?: PlanSpecNodeSelector;
 
   /**
+   * Time after a Job for one Node is complete before a new Job will be created for the next Node.
+   *
    * @schema PlanSpec#postCompleteDelay
    */
   readonly postCompleteDelay?: string;
 
   /**
+   * The prepare init container, if specified, is run before cordon/drain which is run before the upgrade container.
+   *
    * @schema PlanSpec#prepare
    */
   readonly prepare?: PlanSpecPrepare;
 
   /**
+   * Secrets to be mounted into the Job Pod.
+   *
    * @schema PlanSpec#secrets
    */
   readonly secrets?: PlanSpecSecrets[];
 
   /**
+   * The service account for the pod to use. As with normal pods, if not specified the default service account from the namespace will be assigned.
+   *
    * @schema PlanSpec#serviceAccountName
    */
   readonly serviceAccountName?: string;
 
   /**
+   * Specify which node taints should be tolerated by pods applying the upgrade.
+   * Anything specified here is appended to the default of:
+   * - `{key: node.kubernetes.io/unschedulable, effect: NoSchedule, operator: Exists}`
+   *
    * @schema PlanSpec#tolerations
    */
   readonly tolerations?: PlanSpecTolerations[];
 
   /**
+   * The upgrade container; must be specified.
+   *
    * @schema PlanSpec#upgrade
    */
   readonly upgrade: PlanSpecUpgrade;
 
   /**
+   * Providing a value for version will prevent polling/resolution of the channel if specified.
+   *
    * @schema PlanSpec#version
    */
   readonly version?: string;
 
   /**
+   * A time window in which to execute Jobs for this Plan.
+   * Jobs will not be generated outside this time window, but may continue executing into the window once started.
+   *
    * @schema PlanSpec#window
    */
   readonly window?: PlanSpecWindow;
@@ -177,7 +222,7 @@ export interface PlanSpec {
 /**
  * Converts an object of type 'PlanSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpec(obj: PlanSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -201,9 +246,11 @@ export function toJson_PlanSpec(obj: PlanSpec | undefined): Record<string, any> 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Configuration for draining nodes prior to upgrade. If left unspecified, no drain will be performed.
+ *
  * @schema PlanSpecDrain
  */
 export interface PlanSpecDrain {
@@ -238,6 +285,10 @@ export interface PlanSpecDrain {
   readonly ignoreDaemonSets?: boolean;
 
   /**
+   * A label selector is a label query over a set of resources. The result of matchLabels and
+   * matchExpressions are ANDed. An empty label selector matches all objects. A null
+   * label selector matches no objects.
+   *
    * @schema PlanSpecDrain#podSelector
    */
   readonly podSelector?: PlanSpecDrainPodSelector;
@@ -248,6 +299,10 @@ export interface PlanSpecDrain {
   readonly skipWaitForDeleteTimeout?: number;
 
   /**
+   * A Duration represents the elapsed time between two instants
+   * as an int64 nanosecond count. The representation limits the
+   * largest representable duration to approximately 290 years.
+   *
    * @schema PlanSpecDrain#timeout
    */
   readonly timeout?: number;
@@ -257,7 +312,7 @@ export interface PlanSpecDrain {
 /**
  * Converts an object of type 'PlanSpecDrain' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecDrain(obj: PlanSpecDrain | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -274,13 +329,22 @@ export function toJson_PlanSpecDrain(obj: PlanSpecDrain | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * LocalObjectReference contains enough information to let you locate the
+ * referenced object inside the same namespace.
+ *
  * @schema PlanSpecImagePullSecrets
  */
 export interface PlanSpecImagePullSecrets {
   /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
    * @schema PlanSpecImagePullSecrets#name
    */
   readonly name?: string;
@@ -290,7 +354,7 @@ export interface PlanSpecImagePullSecrets {
 /**
  * Converts an object of type 'PlanSpecImagePullSecrets' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecImagePullSecrets(obj: PlanSpecImagePullSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -299,18 +363,26 @@ export function toJson_PlanSpecImagePullSecrets(obj: PlanSpecImagePullSecrets | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Select which nodes this plan can be applied to.
+ *
  * @schema PlanSpecNodeSelector
  */
 export interface PlanSpecNodeSelector {
   /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
    * @schema PlanSpecNodeSelector#matchExpressions
    */
   readonly matchExpressions?: PlanSpecNodeSelectorMatchExpressions[];
 
   /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
    * @schema PlanSpecNodeSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
@@ -320,7 +392,7 @@ export interface PlanSpecNodeSelector {
 /**
  * Converts an object of type 'PlanSpecNodeSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecNodeSelector(obj: PlanSpecNodeSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -330,9 +402,11 @@ export function toJson_PlanSpecNodeSelector(obj: PlanSpecNodeSelector | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The prepare init container, if specified, is run before cordon/drain which is run before the upgrade container.
+ *
  * @schema PlanSpecPrepare
  */
 export interface PlanSpecPrepare {
@@ -357,11 +431,17 @@ export interface PlanSpecPrepare {
   readonly envs?: PlanSpecPrepareEnvs[];
 
   /**
+   * Image name. If the tag is omitted, the value from .status.latestVersion will be used.
+   *
    * @schema PlanSpecPrepare#image
    */
-  readonly image?: string;
+  readonly image: string;
 
   /**
+   * SecurityContext holds security configuration that will be applied to a container.
+   * Some fields are present in both SecurityContext and PodSecurityContext.  When both
+   * are set, the values in SecurityContext take precedence.
+   *
    * @schema PlanSpecPrepare#securityContext
    */
   readonly securityContext?: PlanSpecPrepareSecurityContext;
@@ -376,7 +456,7 @@ export interface PlanSpecPrepare {
 /**
  * Converts an object of type 'PlanSpecPrepare' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecPrepare(obj: PlanSpecPrepare | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -391,33 +471,41 @@ export function toJson_PlanSpecPrepare(obj: PlanSpecPrepare | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * SecretSpec describes a Secret to be mounted for prepare/upgrade containers.
+ *
  * @schema PlanSpecSecrets
  */
 export interface PlanSpecSecrets {
   /**
+   * If set to true, the Secret contents will not be hashed, and changes to the Secret will not trigger new application of the Plan.
+   *
    * @schema PlanSpecSecrets#ignoreUpdates
    */
   readonly ignoreUpdates?: boolean;
 
   /**
+   * Secret name
+   *
    * @schema PlanSpecSecrets#name
    */
-  readonly name?: string;
+  readonly name: string;
 
   /**
+   * Path to mount the Secret volume within the Pod.
+   *
    * @schema PlanSpecSecrets#path
    */
-  readonly path?: string;
+  readonly path: string;
 
 }
 
 /**
  * Converts an object of type 'PlanSpecSecrets' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecSecrets(obj: PlanSpecSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -428,33 +516,56 @@ export function toJson_PlanSpecSecrets(obj: PlanSpecSecrets | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The pod this Toleration is attached to tolerates any taint that matches
+ * the triple <key,value,effect> using the matching operator <operator>.
+ *
  * @schema PlanSpecTolerations
  */
 export interface PlanSpecTolerations {
   /**
+   * Effect indicates the taint effect to match. Empty means match all taint effects.
+   * When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+   *
    * @schema PlanSpecTolerations#effect
    */
   readonly effect?: string;
 
   /**
+   * Key is the taint key that the toleration applies to. Empty means match all taint keys.
+   * If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+   *
    * @schema PlanSpecTolerations#key
    */
   readonly key?: string;
 
   /**
+   * Operator represents a key's relationship to the value.
+   * Valid operators are Exists and Equal. Defaults to Equal.
+   * Exists is equivalent to wildcard for value, so that a pod can
+   * tolerate all taints of a particular category.
+   *
+   * @default Equal.
    * @schema PlanSpecTolerations#operator
    */
   readonly operator?: string;
 
   /**
+   * TolerationSeconds represents the period of time the toleration (which must be
+   * of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default,
+   * it is not set, which means tolerate the taint forever (do not evict). Zero and
+   * negative values will be treated as 0 (evict immediately) by the system.
+   *
    * @schema PlanSpecTolerations#tolerationSeconds
    */
   readonly tolerationSeconds?: number;
 
   /**
+   * Value is the taint value the toleration matches to.
+   * If the operator is Exists, the value should be empty, otherwise just a regular string.
+   *
    * @schema PlanSpecTolerations#value
    */
   readonly value?: string;
@@ -464,7 +575,7 @@ export interface PlanSpecTolerations {
 /**
  * Converts an object of type 'PlanSpecTolerations' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecTolerations(obj: PlanSpecTolerations | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -477,9 +588,11 @@ export function toJson_PlanSpecTolerations(obj: PlanSpecTolerations | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The upgrade container; must be specified.
+ *
  * @schema PlanSpecUpgrade
  */
 export interface PlanSpecUpgrade {
@@ -504,11 +617,17 @@ export interface PlanSpecUpgrade {
   readonly envs?: PlanSpecUpgradeEnvs[];
 
   /**
+   * Image name. If the tag is omitted, the value from .status.latestVersion will be used.
+   *
    * @schema PlanSpecUpgrade#image
    */
-  readonly image?: string;
+  readonly image: string;
 
   /**
+   * SecurityContext holds security configuration that will be applied to a container.
+   * Some fields are present in both SecurityContext and PodSecurityContext.  When both
+   * are set, the values in SecurityContext take precedence.
+   *
    * @schema PlanSpecUpgrade#securityContext
    */
   readonly securityContext?: PlanSpecUpgradeSecurityContext;
@@ -523,7 +642,7 @@ export interface PlanSpecUpgrade {
 /**
  * Converts an object of type 'PlanSpecUpgrade' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecUpgrade(obj: PlanSpecUpgrade | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -538,28 +657,39 @@ export function toJson_PlanSpecUpgrade(obj: PlanSpecUpgrade | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * A time window in which to execute Jobs for this Plan.
+ * Jobs will not be generated outside this time window, but may continue executing into the window once started.
+ *
  * @schema PlanSpecWindow
  */
 export interface PlanSpecWindow {
   /**
+   * Days that this time window is valid for
+   *
    * @schema PlanSpecWindow#days
    */
-  readonly days?: string[];
+  readonly days?: PlanSpecWindowDays[];
 
   /**
+   * End of the time window.
+   *
    * @schema PlanSpecWindow#endTime
    */
   readonly endTime?: string;
 
   /**
+   * Start of the time window.
+   *
    * @schema PlanSpecWindow#startTime
    */
   readonly startTime?: string;
 
   /**
+   * Time zone for the time window; if not specified UTC will be used.
+   *
    * @schema PlanSpecWindow#timeZone
    */
   readonly timeZone?: string;
@@ -569,7 +699,7 @@ export interface PlanSpecWindow {
 /**
  * Converts an object of type 'PlanSpecWindow' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecWindow(obj: PlanSpecWindow | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -581,18 +711,28 @@ export function toJson_PlanSpecWindow(obj: PlanSpecWindow | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * A label selector is a label query over a set of resources. The result of matchLabels and
+ * matchExpressions are ANDed. An empty label selector matches all objects. A null
+ * label selector matches no objects.
+ *
  * @schema PlanSpecDrainPodSelector
  */
 export interface PlanSpecDrainPodSelector {
   /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
    * @schema PlanSpecDrainPodSelector#matchExpressions
    */
   readonly matchExpressions?: PlanSpecDrainPodSelectorMatchExpressions[];
 
   /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
    * @schema PlanSpecDrainPodSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
@@ -602,7 +742,7 @@ export interface PlanSpecDrainPodSelector {
 /**
  * Converts an object of type 'PlanSpecDrainPodSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecDrainPodSelector(obj: PlanSpecDrainPodSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -612,23 +752,36 @@ export function toJson_PlanSpecDrainPodSelector(obj: PlanSpecDrainPodSelector | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
  * @schema PlanSpecNodeSelectorMatchExpressions
  */
 export interface PlanSpecNodeSelectorMatchExpressions {
   /**
+   * key is the label key that the selector applies to.
+   *
    * @schema PlanSpecNodeSelectorMatchExpressions#key
    */
-  readonly key?: string;
+  readonly key: string;
 
   /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
    * @schema PlanSpecNodeSelectorMatchExpressions#operator
    */
-  readonly operator?: string;
+  readonly operator: string;
 
   /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
    * @schema PlanSpecNodeSelectorMatchExpressions#values
    */
   readonly values?: string[];
@@ -638,7 +791,7 @@ export interface PlanSpecNodeSelectorMatchExpressions {
 /**
  * Converts an object of type 'PlanSpecNodeSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecNodeSelectorMatchExpressions(obj: PlanSpecNodeSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -649,23 +802,31 @@ export function toJson_PlanSpecNodeSelectorMatchExpressions(obj: PlanSpecNodeSel
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ *
  * @schema PlanSpecPrepareEnvFrom
  */
 export interface PlanSpecPrepareEnvFrom {
   /**
+   * The ConfigMap to select from
+   *
    * @schema PlanSpecPrepareEnvFrom#configMapRef
    */
   readonly configMapRef?: PlanSpecPrepareEnvFromConfigMapRef;
 
   /**
+   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   *
    * @schema PlanSpecPrepareEnvFrom#prefix
    */
   readonly prefix?: string;
 
   /**
+   * The Secret to select from
+   *
    * @schema PlanSpecPrepareEnvFrom#secretRef
    */
   readonly secretRef?: PlanSpecPrepareEnvFromSecretRef;
@@ -675,7 +836,7 @@ export interface PlanSpecPrepareEnvFrom {
 /**
  * Converts an object of type 'PlanSpecPrepareEnvFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecPrepareEnvFrom(obj: PlanSpecPrepareEnvFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -686,23 +847,40 @@ export function toJson_PlanSpecPrepareEnvFrom(obj: PlanSpecPrepareEnvFrom | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * EnvVar represents an environment variable present in a Container.
+ *
  * @schema PlanSpecPrepareEnvs
  */
 export interface PlanSpecPrepareEnvs {
   /**
+   * Name of the environment variable. Must be a C_IDENTIFIER.
+   *
    * @schema PlanSpecPrepareEnvs#name
    */
-  readonly name?: string;
+  readonly name: string;
 
   /**
+   * Variable references $(VAR_NAME) are expanded
+   * using the previously defined environment variables in the container and
+   * any service environment variables. If a variable cannot be resolved,
+   * the reference in the input string will be unchanged. Double $$ are reduced
+   * to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e.
+   * "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)".
+   * Escaped references will never be expanded, regardless of whether the variable
+   * exists or not.
+   * Defaults to "".
+   *
+   * @default .
    * @schema PlanSpecPrepareEnvs#value
    */
   readonly value?: string;
 
   /**
+   * Source for the environment variable's value. Cannot be used if value is not empty.
+   *
    * @schema PlanSpecPrepareEnvs#valueFrom
    */
   readonly valueFrom?: PlanSpecPrepareEnvsValueFrom;
@@ -712,7 +890,7 @@ export interface PlanSpecPrepareEnvs {
 /**
  * Converts an object of type 'PlanSpecPrepareEnvs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecPrepareEnvs(obj: PlanSpecPrepareEnvs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -723,68 +901,142 @@ export function toJson_PlanSpecPrepareEnvs(obj: PlanSpecPrepareEnvs | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * SecurityContext holds security configuration that will be applied to a container.
+ * Some fields are present in both SecurityContext and PodSecurityContext.  When both
+ * are set, the values in SecurityContext take precedence.
+ *
  * @schema PlanSpecPrepareSecurityContext
  */
 export interface PlanSpecPrepareSecurityContext {
   /**
+   * AllowPrivilegeEscalation controls whether a process can gain more
+   * privileges than its parent process. This bool directly controls if
+   * the no_new_privs flag will be set on the container process.
+   * AllowPrivilegeEscalation is true always when the container is:
+   * 1) run as Privileged
+   * 2) has CAP_SYS_ADMIN
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema PlanSpecPrepareSecurityContext#allowPrivilegeEscalation
    */
   readonly allowPrivilegeEscalation?: boolean;
 
   /**
+   * appArmorProfile is the AppArmor options to use by this container. If set, this profile
+   * overrides the pod's appArmorProfile.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema PlanSpecPrepareSecurityContext#appArmorProfile
    */
   readonly appArmorProfile?: PlanSpecPrepareSecurityContextAppArmorProfile;
 
   /**
+   * The capabilities to add/drop when running containers.
+   * Defaults to the default set of capabilities granted by the container runtime.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default the default set of capabilities granted by the container runtime.
    * @schema PlanSpecPrepareSecurityContext#capabilities
    */
   readonly capabilities?: PlanSpecPrepareSecurityContextCapabilities;
 
   /**
+   * Run container in privileged mode.
+   * Processes in privileged containers are essentially equivalent to root on the host.
+   * Defaults to false.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default false.
    * @schema PlanSpecPrepareSecurityContext#privileged
    */
   readonly privileged?: boolean;
 
   /**
+   * procMount denotes the type of proc mount to use for the containers.
+   * The default value is Default which uses the container runtime defaults for
+   * readonly paths and masked paths.
+   * This requires the ProcMountType feature flag to be enabled.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema PlanSpecPrepareSecurityContext#procMount
    */
   readonly procMount?: string;
 
   /**
+   * Whether this container has a read-only root filesystem.
+   * Default is false.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default false.
    * @schema PlanSpecPrepareSecurityContext#readOnlyRootFilesystem
    */
   readonly readOnlyRootFilesystem?: boolean;
 
   /**
+   * The GID to run the entrypoint of the container process.
+   * Uses runtime default if unset.
+   * May also be set in PodSecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema PlanSpecPrepareSecurityContext#runAsGroup
    */
   readonly runAsGroup?: number;
 
   /**
+   * Indicates that the container must run as a non-root user.
+   * If true, the Kubelet will validate the image at runtime to ensure that it
+   * does not run as UID 0 (root) and fail to start the container if it does.
+   * If unset or false, no such validation will be performed.
+   * May also be set in PodSecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   *
    * @schema PlanSpecPrepareSecurityContext#runAsNonRoot
    */
   readonly runAsNonRoot?: boolean;
 
   /**
+   * The UID to run the entrypoint of the container process.
+   * Defaults to user specified in image metadata if unspecified.
+   * May also be set in PodSecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default user specified in image metadata if unspecified.
    * @schema PlanSpecPrepareSecurityContext#runAsUser
    */
   readonly runAsUser?: number;
 
   /**
+   * The SELinux context to be applied to the container.
+   * If unspecified, the container runtime will allocate a random SELinux context for each
+   * container.  May also be set in PodSecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema PlanSpecPrepareSecurityContext#seLinuxOptions
    */
   readonly seLinuxOptions?: PlanSpecPrepareSecurityContextSeLinuxOptions;
 
   /**
+   * The seccomp options to use by this container. If seccomp options are
+   * provided at both the pod & container level, the container options
+   * override the pod options.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema PlanSpecPrepareSecurityContext#seccompProfile
    */
   readonly seccompProfile?: PlanSpecPrepareSecurityContextSeccompProfile;
 
   /**
+   * The Windows specific settings applied to all containers.
+   * If unspecified, the options from the PodSecurityContext will be used.
+   * If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
+   * Note that this field cannot be set when spec.os.name is linux.
+   *
    * @schema PlanSpecPrepareSecurityContext#windowsOptions
    */
   readonly windowsOptions?: PlanSpecPrepareSecurityContextWindowsOptions;
@@ -794,7 +1046,7 @@ export interface PlanSpecPrepareSecurityContext {
 /**
  * Converts an object of type 'PlanSpecPrepareSecurityContext' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecPrepareSecurityContext(obj: PlanSpecPrepareSecurityContext | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -814,33 +1066,41 @@ export function toJson_PlanSpecPrepareSecurityContext(obj: PlanSpecPrepareSecuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * HostPath volume to mount into the pod
+ *
  * @schema PlanSpecPrepareVolumes
  */
 export interface PlanSpecPrepareVolumes {
   /**
+   * Path to mount the Volume at within the Pod.
+   *
    * @schema PlanSpecPrepareVolumes#destination
    */
-  readonly destination?: string;
+  readonly destination: string;
 
   /**
+   * Name of the Volume as it will appear within the Pod spec.
+   *
    * @schema PlanSpecPrepareVolumes#name
    */
-  readonly name?: string;
+  readonly name: string;
 
   /**
+   * Path on the host to mount.
+   *
    * @schema PlanSpecPrepareVolumes#source
    */
-  readonly source?: string;
+  readonly source: string;
 
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareVolumes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecPrepareVolumes(obj: PlanSpecPrepareVolumes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -851,23 +1111,31 @@ export function toJson_PlanSpecPrepareVolumes(obj: PlanSpecPrepareVolumes | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ *
  * @schema PlanSpecUpgradeEnvFrom
  */
 export interface PlanSpecUpgradeEnvFrom {
   /**
+   * The ConfigMap to select from
+   *
    * @schema PlanSpecUpgradeEnvFrom#configMapRef
    */
   readonly configMapRef?: PlanSpecUpgradeEnvFromConfigMapRef;
 
   /**
+   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   *
    * @schema PlanSpecUpgradeEnvFrom#prefix
    */
   readonly prefix?: string;
 
   /**
+   * The Secret to select from
+   *
    * @schema PlanSpecUpgradeEnvFrom#secretRef
    */
   readonly secretRef?: PlanSpecUpgradeEnvFromSecretRef;
@@ -877,7 +1145,7 @@ export interface PlanSpecUpgradeEnvFrom {
 /**
  * Converts an object of type 'PlanSpecUpgradeEnvFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecUpgradeEnvFrom(obj: PlanSpecUpgradeEnvFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -888,23 +1156,40 @@ export function toJson_PlanSpecUpgradeEnvFrom(obj: PlanSpecUpgradeEnvFrom | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * EnvVar represents an environment variable present in a Container.
+ *
  * @schema PlanSpecUpgradeEnvs
  */
 export interface PlanSpecUpgradeEnvs {
   /**
+   * Name of the environment variable. Must be a C_IDENTIFIER.
+   *
    * @schema PlanSpecUpgradeEnvs#name
    */
-  readonly name?: string;
+  readonly name: string;
 
   /**
+   * Variable references $(VAR_NAME) are expanded
+   * using the previously defined environment variables in the container and
+   * any service environment variables. If a variable cannot be resolved,
+   * the reference in the input string will be unchanged. Double $$ are reduced
+   * to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e.
+   * "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)".
+   * Escaped references will never be expanded, regardless of whether the variable
+   * exists or not.
+   * Defaults to "".
+   *
+   * @default .
    * @schema PlanSpecUpgradeEnvs#value
    */
   readonly value?: string;
 
   /**
+   * Source for the environment variable's value. Cannot be used if value is not empty.
+   *
    * @schema PlanSpecUpgradeEnvs#valueFrom
    */
   readonly valueFrom?: PlanSpecUpgradeEnvsValueFrom;
@@ -914,7 +1199,7 @@ export interface PlanSpecUpgradeEnvs {
 /**
  * Converts an object of type 'PlanSpecUpgradeEnvs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecUpgradeEnvs(obj: PlanSpecUpgradeEnvs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -925,68 +1210,142 @@ export function toJson_PlanSpecUpgradeEnvs(obj: PlanSpecUpgradeEnvs | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * SecurityContext holds security configuration that will be applied to a container.
+ * Some fields are present in both SecurityContext and PodSecurityContext.  When both
+ * are set, the values in SecurityContext take precedence.
+ *
  * @schema PlanSpecUpgradeSecurityContext
  */
 export interface PlanSpecUpgradeSecurityContext {
   /**
+   * AllowPrivilegeEscalation controls whether a process can gain more
+   * privileges than its parent process. This bool directly controls if
+   * the no_new_privs flag will be set on the container process.
+   * AllowPrivilegeEscalation is true always when the container is:
+   * 1) run as Privileged
+   * 2) has CAP_SYS_ADMIN
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema PlanSpecUpgradeSecurityContext#allowPrivilegeEscalation
    */
   readonly allowPrivilegeEscalation?: boolean;
 
   /**
+   * appArmorProfile is the AppArmor options to use by this container. If set, this profile
+   * overrides the pod's appArmorProfile.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema PlanSpecUpgradeSecurityContext#appArmorProfile
    */
   readonly appArmorProfile?: PlanSpecUpgradeSecurityContextAppArmorProfile;
 
   /**
+   * The capabilities to add/drop when running containers.
+   * Defaults to the default set of capabilities granted by the container runtime.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default the default set of capabilities granted by the container runtime.
    * @schema PlanSpecUpgradeSecurityContext#capabilities
    */
   readonly capabilities?: PlanSpecUpgradeSecurityContextCapabilities;
 
   /**
+   * Run container in privileged mode.
+   * Processes in privileged containers are essentially equivalent to root on the host.
+   * Defaults to false.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default false.
    * @schema PlanSpecUpgradeSecurityContext#privileged
    */
   readonly privileged?: boolean;
 
   /**
+   * procMount denotes the type of proc mount to use for the containers.
+   * The default value is Default which uses the container runtime defaults for
+   * readonly paths and masked paths.
+   * This requires the ProcMountType feature flag to be enabled.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema PlanSpecUpgradeSecurityContext#procMount
    */
   readonly procMount?: string;
 
   /**
+   * Whether this container has a read-only root filesystem.
+   * Default is false.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default false.
    * @schema PlanSpecUpgradeSecurityContext#readOnlyRootFilesystem
    */
   readonly readOnlyRootFilesystem?: boolean;
 
   /**
+   * The GID to run the entrypoint of the container process.
+   * Uses runtime default if unset.
+   * May also be set in PodSecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema PlanSpecUpgradeSecurityContext#runAsGroup
    */
   readonly runAsGroup?: number;
 
   /**
+   * Indicates that the container must run as a non-root user.
+   * If true, the Kubelet will validate the image at runtime to ensure that it
+   * does not run as UID 0 (root) and fail to start the container if it does.
+   * If unset or false, no such validation will be performed.
+   * May also be set in PodSecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   *
    * @schema PlanSpecUpgradeSecurityContext#runAsNonRoot
    */
   readonly runAsNonRoot?: boolean;
 
   /**
+   * The UID to run the entrypoint of the container process.
+   * Defaults to user specified in image metadata if unspecified.
+   * May also be set in PodSecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default user specified in image metadata if unspecified.
    * @schema PlanSpecUpgradeSecurityContext#runAsUser
    */
   readonly runAsUser?: number;
 
   /**
+   * The SELinux context to be applied to the container.
+   * If unspecified, the container runtime will allocate a random SELinux context for each
+   * container.  May also be set in PodSecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema PlanSpecUpgradeSecurityContext#seLinuxOptions
    */
   readonly seLinuxOptions?: PlanSpecUpgradeSecurityContextSeLinuxOptions;
 
   /**
+   * The seccomp options to use by this container. If seccomp options are
+   * provided at both the pod & container level, the container options
+   * override the pod options.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
    * @schema PlanSpecUpgradeSecurityContext#seccompProfile
    */
   readonly seccompProfile?: PlanSpecUpgradeSecurityContextSeccompProfile;
 
   /**
+   * The Windows specific settings applied to all containers.
+   * If unspecified, the options from the PodSecurityContext will be used.
+   * If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
+   * Note that this field cannot be set when spec.os.name is linux.
+   *
    * @schema PlanSpecUpgradeSecurityContext#windowsOptions
    */
   readonly windowsOptions?: PlanSpecUpgradeSecurityContextWindowsOptions;
@@ -996,7 +1355,7 @@ export interface PlanSpecUpgradeSecurityContext {
 /**
  * Converts an object of type 'PlanSpecUpgradeSecurityContext' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecUpgradeSecurityContext(obj: PlanSpecUpgradeSecurityContext | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1016,33 +1375,41 @@ export function toJson_PlanSpecUpgradeSecurityContext(obj: PlanSpecUpgradeSecuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * HostPath volume to mount into the pod
+ *
  * @schema PlanSpecUpgradeVolumes
  */
 export interface PlanSpecUpgradeVolumes {
   /**
+   * Path to mount the Volume at within the Pod.
+   *
    * @schema PlanSpecUpgradeVolumes#destination
    */
-  readonly destination?: string;
+  readonly destination: string;
 
   /**
+   * Name of the Volume as it will appear within the Pod spec.
+   *
    * @schema PlanSpecUpgradeVolumes#name
    */
-  readonly name?: string;
+  readonly name: string;
 
   /**
+   * Path on the host to mount.
+   *
    * @schema PlanSpecUpgradeVolumes#source
    */
-  readonly source?: string;
+  readonly source: string;
 
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeVolumes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecUpgradeVolumes(obj: PlanSpecUpgradeVolumes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1053,23 +1420,98 @@ export function toJson_PlanSpecUpgradeVolumes(obj: PlanSpecUpgradeVolumes | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * @schema PlanSpecWindowDays
+ */
+export enum PlanSpecWindowDays {
+  /** 0 */
+  VALUE_0 = "0",
+  /** su */
+  SU = "su",
+  /** sun */
+  SUN = "sun",
+  /** sunday */
+  SUNDAY = "sunday",
+  /** 1 */
+  VALUE_1 = "1",
+  /** mo */
+  MO = "mo",
+  /** mon */
+  MON = "mon",
+  /** monday */
+  MONDAY = "monday",
+  /** 2 */
+  VALUE_2 = "2",
+  /** tu */
+  TU = "tu",
+  /** tue */
+  TUE = "tue",
+  /** tuesday */
+  TUESDAY = "tuesday",
+  /** 3 */
+  VALUE_3 = "3",
+  /** we */
+  WE = "we",
+  /** wed */
+  WED = "wed",
+  /** wednesday */
+  WEDNESDAY = "wednesday",
+  /** 4 */
+  VALUE_4 = "4",
+  /** th */
+  TH = "th",
+  /** thu */
+  THU = "thu",
+  /** thursday */
+  THURSDAY = "thursday",
+  /** 5 */
+  VALUE_5 = "5",
+  /** fr */
+  FR = "fr",
+  /** fri */
+  FRI = "fri",
+  /** friday */
+  FRIDAY = "friday",
+  /** 6 */
+  VALUE_6 = "6",
+  /** sa */
+  SA = "sa",
+  /** sat */
+  SAT = "sat",
+  /** saturday */
+  SATURDAY = "saturday",
+}
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
  * @schema PlanSpecDrainPodSelectorMatchExpressions
  */
 export interface PlanSpecDrainPodSelectorMatchExpressions {
   /**
+   * key is the label key that the selector applies to.
+   *
    * @schema PlanSpecDrainPodSelectorMatchExpressions#key
    */
-  readonly key?: string;
+  readonly key: string;
 
   /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
    * @schema PlanSpecDrainPodSelectorMatchExpressions#operator
    */
-  readonly operator?: string;
+  readonly operator: string;
 
   /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
    * @schema PlanSpecDrainPodSelectorMatchExpressions#values
    */
   readonly values?: string[];
@@ -1079,7 +1521,7 @@ export interface PlanSpecDrainPodSelectorMatchExpressions {
 /**
  * Converts an object of type 'PlanSpecDrainPodSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecDrainPodSelectorMatchExpressions(obj: PlanSpecDrainPodSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1090,18 +1532,28 @@ export function toJson_PlanSpecDrainPodSelectorMatchExpressions(obj: PlanSpecDra
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The ConfigMap to select from
+ *
  * @schema PlanSpecPrepareEnvFromConfigMapRef
  */
 export interface PlanSpecPrepareEnvFromConfigMapRef {
   /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
    * @schema PlanSpecPrepareEnvFromConfigMapRef#name
    */
   readonly name?: string;
 
   /**
+   * Specify whether the ConfigMap must be defined
+   *
    * @schema PlanSpecPrepareEnvFromConfigMapRef#optional
    */
   readonly optional?: boolean;
@@ -1111,7 +1563,7 @@ export interface PlanSpecPrepareEnvFromConfigMapRef {
 /**
  * Converts an object of type 'PlanSpecPrepareEnvFromConfigMapRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecPrepareEnvFromConfigMapRef(obj: PlanSpecPrepareEnvFromConfigMapRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1121,18 +1573,28 @@ export function toJson_PlanSpecPrepareEnvFromConfigMapRef(obj: PlanSpecPrepareEn
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The Secret to select from
+ *
  * @schema PlanSpecPrepareEnvFromSecretRef
  */
 export interface PlanSpecPrepareEnvFromSecretRef {
   /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
    * @schema PlanSpecPrepareEnvFromSecretRef#name
    */
   readonly name?: string;
 
   /**
+   * Specify whether the Secret must be defined
+   *
    * @schema PlanSpecPrepareEnvFromSecretRef#optional
    */
   readonly optional?: boolean;
@@ -1142,7 +1604,7 @@ export interface PlanSpecPrepareEnvFromSecretRef {
 /**
  * Converts an object of type 'PlanSpecPrepareEnvFromSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecPrepareEnvFromSecretRef(obj: PlanSpecPrepareEnvFromSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1152,28 +1614,40 @@ export function toJson_PlanSpecPrepareEnvFromSecretRef(obj: PlanSpecPrepareEnvFr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Source for the environment variable's value. Cannot be used if value is not empty.
+ *
  * @schema PlanSpecPrepareEnvsValueFrom
  */
 export interface PlanSpecPrepareEnvsValueFrom {
   /**
+   * Selects a key of a ConfigMap.
+   *
    * @schema PlanSpecPrepareEnvsValueFrom#configMapKeyRef
    */
   readonly configMapKeyRef?: PlanSpecPrepareEnvsValueFromConfigMapKeyRef;
 
   /**
+   * Selects a field of the pod: supports metadata.name, metadata.namespace, `metadata.labels['<KEY>']`, `metadata.annotations['<KEY>']`,
+   * spec.nodeName, spec.serviceAccountName, status.hostIP, status.podIP, status.podIPs.
+   *
    * @schema PlanSpecPrepareEnvsValueFrom#fieldRef
    */
   readonly fieldRef?: PlanSpecPrepareEnvsValueFromFieldRef;
 
   /**
+   * Selects a resource of the container: only resources limits and requests
+   * (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu, requests.memory and requests.ephemeral-storage) are currently supported.
+   *
    * @schema PlanSpecPrepareEnvsValueFrom#resourceFieldRef
    */
   readonly resourceFieldRef?: PlanSpecPrepareEnvsValueFromResourceFieldRef;
 
   /**
+   * Selects a key of a secret in the pod's namespace
+   *
    * @schema PlanSpecPrepareEnvsValueFrom#secretKeyRef
    */
   readonly secretKeyRef?: PlanSpecPrepareEnvsValueFromSecretKeyRef;
@@ -1183,7 +1657,7 @@ export interface PlanSpecPrepareEnvsValueFrom {
 /**
  * Converts an object of type 'PlanSpecPrepareEnvsValueFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecPrepareEnvsValueFrom(obj: PlanSpecPrepareEnvsValueFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1195,28 +1669,43 @@ export function toJson_PlanSpecPrepareEnvsValueFrom(obj: PlanSpecPrepareEnvsValu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * appArmorProfile is the AppArmor options to use by this container. If set, this profile
+ * overrides the pod's appArmorProfile.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
  * @schema PlanSpecPrepareSecurityContextAppArmorProfile
  */
 export interface PlanSpecPrepareSecurityContextAppArmorProfile {
   /**
+   * localhostProfile indicates a profile loaded on the node that should be used.
+   * The profile must be preconfigured on the node to work.
+   * Must match the loaded name of the profile.
+   * Must be set if and only if type is "Localhost".
+   *
    * @schema PlanSpecPrepareSecurityContextAppArmorProfile#localhostProfile
    */
   readonly localhostProfile?: string;
 
   /**
+   * type indicates which kind of AppArmor profile will be applied.
+   * Valid options are:
+   * Localhost - a profile pre-loaded on the node.
+   * RuntimeDefault - the container runtime's default profile.
+   * Unconfined - no AppArmor enforcement.
+   *
    * @schema PlanSpecPrepareSecurityContextAppArmorProfile#type
    */
-  readonly type?: string;
+  readonly type: string;
 
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareSecurityContextAppArmorProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecPrepareSecurityContextAppArmorProfile(obj: PlanSpecPrepareSecurityContextAppArmorProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1226,18 +1715,27 @@ export function toJson_PlanSpecPrepareSecurityContextAppArmorProfile(obj: PlanSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The capabilities to add/drop when running containers.
+ * Defaults to the default set of capabilities granted by the container runtime.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
+ * @default the default set of capabilities granted by the container runtime.
  * @schema PlanSpecPrepareSecurityContextCapabilities
  */
 export interface PlanSpecPrepareSecurityContextCapabilities {
   /**
+   * Added capabilities
+   *
    * @schema PlanSpecPrepareSecurityContextCapabilities#add
    */
   readonly add?: string[];
 
   /**
+   * Removed capabilities
+   *
    * @schema PlanSpecPrepareSecurityContextCapabilities#drop
    */
   readonly drop?: string[];
@@ -1247,7 +1745,7 @@ export interface PlanSpecPrepareSecurityContextCapabilities {
 /**
  * Converts an object of type 'PlanSpecPrepareSecurityContextCapabilities' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecPrepareSecurityContextCapabilities(obj: PlanSpecPrepareSecurityContextCapabilities | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1257,28 +1755,42 @@ export function toJson_PlanSpecPrepareSecurityContextCapabilities(obj: PlanSpecP
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The SELinux context to be applied to the container.
+ * If unspecified, the container runtime will allocate a random SELinux context for each
+ * container.  May also be set in PodSecurityContext.  If set in both SecurityContext and
+ * PodSecurityContext, the value specified in SecurityContext takes precedence.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
  * @schema PlanSpecPrepareSecurityContextSeLinuxOptions
  */
 export interface PlanSpecPrepareSecurityContextSeLinuxOptions {
   /**
+   * Level is SELinux level label that applies to the container.
+   *
    * @schema PlanSpecPrepareSecurityContextSeLinuxOptions#level
    */
   readonly level?: string;
 
   /**
+   * Role is a SELinux role label that applies to the container.
+   *
    * @schema PlanSpecPrepareSecurityContextSeLinuxOptions#role
    */
   readonly role?: string;
 
   /**
+   * Type is a SELinux type label that applies to the container.
+   *
    * @schema PlanSpecPrepareSecurityContextSeLinuxOptions#type
    */
   readonly type?: string;
 
   /**
+   * User is a SELinux user label that applies to the container.
+   *
    * @schema PlanSpecPrepareSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
@@ -1288,7 +1800,7 @@ export interface PlanSpecPrepareSecurityContextSeLinuxOptions {
 /**
  * Converts an object of type 'PlanSpecPrepareSecurityContextSeLinuxOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecPrepareSecurityContextSeLinuxOptions(obj: PlanSpecPrepareSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1300,28 +1812,45 @@ export function toJson_PlanSpecPrepareSecurityContextSeLinuxOptions(obj: PlanSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The seccomp options to use by this container. If seccomp options are
+ * provided at both the pod & container level, the container options
+ * override the pod options.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
  * @schema PlanSpecPrepareSecurityContextSeccompProfile
  */
 export interface PlanSpecPrepareSecurityContextSeccompProfile {
   /**
+   * localhostProfile indicates a profile defined in a file on the node should be used.
+   * The profile must be preconfigured on the node to work.
+   * Must be a descending path, relative to the kubelet's configured seccomp profile location.
+   * Must be set if type is "Localhost". Must NOT be set for any other type.
+   *
    * @schema PlanSpecPrepareSecurityContextSeccompProfile#localhostProfile
    */
   readonly localhostProfile?: string;
 
   /**
+   * type indicates which kind of seccomp profile will be applied.
+   * Valid options are:
+   *
+   * Localhost - a profile defined in a file on the node should be used.
+   * RuntimeDefault - the container runtime default profile should be used.
+   * Unconfined - no profile should be applied.
+   *
    * @schema PlanSpecPrepareSecurityContextSeccompProfile#type
    */
-  readonly type?: string;
+  readonly type: string;
 
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareSecurityContextSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecPrepareSecurityContextSeccompProfile(obj: PlanSpecPrepareSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1331,28 +1860,50 @@ export function toJson_PlanSpecPrepareSecurityContextSeccompProfile(obj: PlanSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The Windows specific settings applied to all containers.
+ * If unspecified, the options from the PodSecurityContext will be used.
+ * If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
+ * Note that this field cannot be set when spec.os.name is linux.
+ *
  * @schema PlanSpecPrepareSecurityContextWindowsOptions
  */
 export interface PlanSpecPrepareSecurityContextWindowsOptions {
   /**
+   * GMSACredentialSpec is where the GMSA admission webhook
+   * (https://github.com/kubernetes-sigs/windows-gmsa) inlines the contents of the
+   * GMSA credential spec named by the GMSACredentialSpecName field.
+   *
    * @schema PlanSpecPrepareSecurityContextWindowsOptions#gmsaCredentialSpec
    */
   readonly gmsaCredentialSpec?: string;
 
   /**
+   * GMSACredentialSpecName is the name of the GMSA credential spec to use.
+   *
    * @schema PlanSpecPrepareSecurityContextWindowsOptions#gmsaCredentialSpecName
    */
   readonly gmsaCredentialSpecName?: string;
 
   /**
+   * HostProcess determines if a container should be run as a 'Host Process' container.
+   * All of a Pod's containers must have the same effective HostProcess value
+   * (it is not allowed to have a mix of HostProcess containers and non-HostProcess containers).
+   * In addition, if HostProcess is true then HostNetwork must also be set to true.
+   *
    * @schema PlanSpecPrepareSecurityContextWindowsOptions#hostProcess
    */
   readonly hostProcess?: boolean;
 
   /**
+   * The UserName in Windows to run the entrypoint of the container process.
+   * Defaults to the user specified in image metadata if unspecified.
+   * May also be set in PodSecurityContext. If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   *
+   * @default the user specified in image metadata if unspecified.
    * @schema PlanSpecPrepareSecurityContextWindowsOptions#runAsUserName
    */
   readonly runAsUserName?: string;
@@ -1362,7 +1913,7 @@ export interface PlanSpecPrepareSecurityContextWindowsOptions {
 /**
  * Converts an object of type 'PlanSpecPrepareSecurityContextWindowsOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecPrepareSecurityContextWindowsOptions(obj: PlanSpecPrepareSecurityContextWindowsOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1374,18 +1925,28 @@ export function toJson_PlanSpecPrepareSecurityContextWindowsOptions(obj: PlanSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The ConfigMap to select from
+ *
  * @schema PlanSpecUpgradeEnvFromConfigMapRef
  */
 export interface PlanSpecUpgradeEnvFromConfigMapRef {
   /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
    * @schema PlanSpecUpgradeEnvFromConfigMapRef#name
    */
   readonly name?: string;
 
   /**
+   * Specify whether the ConfigMap must be defined
+   *
    * @schema PlanSpecUpgradeEnvFromConfigMapRef#optional
    */
   readonly optional?: boolean;
@@ -1395,7 +1956,7 @@ export interface PlanSpecUpgradeEnvFromConfigMapRef {
 /**
  * Converts an object of type 'PlanSpecUpgradeEnvFromConfigMapRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecUpgradeEnvFromConfigMapRef(obj: PlanSpecUpgradeEnvFromConfigMapRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1405,18 +1966,28 @@ export function toJson_PlanSpecUpgradeEnvFromConfigMapRef(obj: PlanSpecUpgradeEn
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The Secret to select from
+ *
  * @schema PlanSpecUpgradeEnvFromSecretRef
  */
 export interface PlanSpecUpgradeEnvFromSecretRef {
   /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
    * @schema PlanSpecUpgradeEnvFromSecretRef#name
    */
   readonly name?: string;
 
   /**
+   * Specify whether the Secret must be defined
+   *
    * @schema PlanSpecUpgradeEnvFromSecretRef#optional
    */
   readonly optional?: boolean;
@@ -1426,7 +1997,7 @@ export interface PlanSpecUpgradeEnvFromSecretRef {
 /**
  * Converts an object of type 'PlanSpecUpgradeEnvFromSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecUpgradeEnvFromSecretRef(obj: PlanSpecUpgradeEnvFromSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1436,28 +2007,40 @@ export function toJson_PlanSpecUpgradeEnvFromSecretRef(obj: PlanSpecUpgradeEnvFr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Source for the environment variable's value. Cannot be used if value is not empty.
+ *
  * @schema PlanSpecUpgradeEnvsValueFrom
  */
 export interface PlanSpecUpgradeEnvsValueFrom {
   /**
+   * Selects a key of a ConfigMap.
+   *
    * @schema PlanSpecUpgradeEnvsValueFrom#configMapKeyRef
    */
   readonly configMapKeyRef?: PlanSpecUpgradeEnvsValueFromConfigMapKeyRef;
 
   /**
+   * Selects a field of the pod: supports metadata.name, metadata.namespace, `metadata.labels['<KEY>']`, `metadata.annotations['<KEY>']`,
+   * spec.nodeName, spec.serviceAccountName, status.hostIP, status.podIP, status.podIPs.
+   *
    * @schema PlanSpecUpgradeEnvsValueFrom#fieldRef
    */
   readonly fieldRef?: PlanSpecUpgradeEnvsValueFromFieldRef;
 
   /**
+   * Selects a resource of the container: only resources limits and requests
+   * (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu, requests.memory and requests.ephemeral-storage) are currently supported.
+   *
    * @schema PlanSpecUpgradeEnvsValueFrom#resourceFieldRef
    */
   readonly resourceFieldRef?: PlanSpecUpgradeEnvsValueFromResourceFieldRef;
 
   /**
+   * Selects a key of a secret in the pod's namespace
+   *
    * @schema PlanSpecUpgradeEnvsValueFrom#secretKeyRef
    */
   readonly secretKeyRef?: PlanSpecUpgradeEnvsValueFromSecretKeyRef;
@@ -1467,7 +2050,7 @@ export interface PlanSpecUpgradeEnvsValueFrom {
 /**
  * Converts an object of type 'PlanSpecUpgradeEnvsValueFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecUpgradeEnvsValueFrom(obj: PlanSpecUpgradeEnvsValueFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1479,28 +2062,43 @@ export function toJson_PlanSpecUpgradeEnvsValueFrom(obj: PlanSpecUpgradeEnvsValu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * appArmorProfile is the AppArmor options to use by this container. If set, this profile
+ * overrides the pod's appArmorProfile.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
  * @schema PlanSpecUpgradeSecurityContextAppArmorProfile
  */
 export interface PlanSpecUpgradeSecurityContextAppArmorProfile {
   /**
+   * localhostProfile indicates a profile loaded on the node that should be used.
+   * The profile must be preconfigured on the node to work.
+   * Must match the loaded name of the profile.
+   * Must be set if and only if type is "Localhost".
+   *
    * @schema PlanSpecUpgradeSecurityContextAppArmorProfile#localhostProfile
    */
   readonly localhostProfile?: string;
 
   /**
+   * type indicates which kind of AppArmor profile will be applied.
+   * Valid options are:
+   * Localhost - a profile pre-loaded on the node.
+   * RuntimeDefault - the container runtime's default profile.
+   * Unconfined - no AppArmor enforcement.
+   *
    * @schema PlanSpecUpgradeSecurityContextAppArmorProfile#type
    */
-  readonly type?: string;
+  readonly type: string;
 
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeSecurityContextAppArmorProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecUpgradeSecurityContextAppArmorProfile(obj: PlanSpecUpgradeSecurityContextAppArmorProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1510,18 +2108,27 @@ export function toJson_PlanSpecUpgradeSecurityContextAppArmorProfile(obj: PlanSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The capabilities to add/drop when running containers.
+ * Defaults to the default set of capabilities granted by the container runtime.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
+ * @default the default set of capabilities granted by the container runtime.
  * @schema PlanSpecUpgradeSecurityContextCapabilities
  */
 export interface PlanSpecUpgradeSecurityContextCapabilities {
   /**
+   * Added capabilities
+   *
    * @schema PlanSpecUpgradeSecurityContextCapabilities#add
    */
   readonly add?: string[];
 
   /**
+   * Removed capabilities
+   *
    * @schema PlanSpecUpgradeSecurityContextCapabilities#drop
    */
   readonly drop?: string[];
@@ -1531,7 +2138,7 @@ export interface PlanSpecUpgradeSecurityContextCapabilities {
 /**
  * Converts an object of type 'PlanSpecUpgradeSecurityContextCapabilities' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecUpgradeSecurityContextCapabilities(obj: PlanSpecUpgradeSecurityContextCapabilities | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1541,28 +2148,42 @@ export function toJson_PlanSpecUpgradeSecurityContextCapabilities(obj: PlanSpecU
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The SELinux context to be applied to the container.
+ * If unspecified, the container runtime will allocate a random SELinux context for each
+ * container.  May also be set in PodSecurityContext.  If set in both SecurityContext and
+ * PodSecurityContext, the value specified in SecurityContext takes precedence.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
  * @schema PlanSpecUpgradeSecurityContextSeLinuxOptions
  */
 export interface PlanSpecUpgradeSecurityContextSeLinuxOptions {
   /**
+   * Level is SELinux level label that applies to the container.
+   *
    * @schema PlanSpecUpgradeSecurityContextSeLinuxOptions#level
    */
   readonly level?: string;
 
   /**
+   * Role is a SELinux role label that applies to the container.
+   *
    * @schema PlanSpecUpgradeSecurityContextSeLinuxOptions#role
    */
   readonly role?: string;
 
   /**
+   * Type is a SELinux type label that applies to the container.
+   *
    * @schema PlanSpecUpgradeSecurityContextSeLinuxOptions#type
    */
   readonly type?: string;
 
   /**
+   * User is a SELinux user label that applies to the container.
+   *
    * @schema PlanSpecUpgradeSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
@@ -1572,7 +2193,7 @@ export interface PlanSpecUpgradeSecurityContextSeLinuxOptions {
 /**
  * Converts an object of type 'PlanSpecUpgradeSecurityContextSeLinuxOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecUpgradeSecurityContextSeLinuxOptions(obj: PlanSpecUpgradeSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1584,28 +2205,45 @@ export function toJson_PlanSpecUpgradeSecurityContextSeLinuxOptions(obj: PlanSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The seccomp options to use by this container. If seccomp options are
+ * provided at both the pod & container level, the container options
+ * override the pod options.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
  * @schema PlanSpecUpgradeSecurityContextSeccompProfile
  */
 export interface PlanSpecUpgradeSecurityContextSeccompProfile {
   /**
+   * localhostProfile indicates a profile defined in a file on the node should be used.
+   * The profile must be preconfigured on the node to work.
+   * Must be a descending path, relative to the kubelet's configured seccomp profile location.
+   * Must be set if type is "Localhost". Must NOT be set for any other type.
+   *
    * @schema PlanSpecUpgradeSecurityContextSeccompProfile#localhostProfile
    */
   readonly localhostProfile?: string;
 
   /**
+   * type indicates which kind of seccomp profile will be applied.
+   * Valid options are:
+   *
+   * Localhost - a profile defined in a file on the node should be used.
+   * RuntimeDefault - the container runtime default profile should be used.
+   * Unconfined - no profile should be applied.
+   *
    * @schema PlanSpecUpgradeSecurityContextSeccompProfile#type
    */
-  readonly type?: string;
+  readonly type: string;
 
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeSecurityContextSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecUpgradeSecurityContextSeccompProfile(obj: PlanSpecUpgradeSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1615,28 +2253,50 @@ export function toJson_PlanSpecUpgradeSecurityContextSeccompProfile(obj: PlanSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The Windows specific settings applied to all containers.
+ * If unspecified, the options from the PodSecurityContext will be used.
+ * If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
+ * Note that this field cannot be set when spec.os.name is linux.
+ *
  * @schema PlanSpecUpgradeSecurityContextWindowsOptions
  */
 export interface PlanSpecUpgradeSecurityContextWindowsOptions {
   /**
+   * GMSACredentialSpec is where the GMSA admission webhook
+   * (https://github.com/kubernetes-sigs/windows-gmsa) inlines the contents of the
+   * GMSA credential spec named by the GMSACredentialSpecName field.
+   *
    * @schema PlanSpecUpgradeSecurityContextWindowsOptions#gmsaCredentialSpec
    */
   readonly gmsaCredentialSpec?: string;
 
   /**
+   * GMSACredentialSpecName is the name of the GMSA credential spec to use.
+   *
    * @schema PlanSpecUpgradeSecurityContextWindowsOptions#gmsaCredentialSpecName
    */
   readonly gmsaCredentialSpecName?: string;
 
   /**
+   * HostProcess determines if a container should be run as a 'Host Process' container.
+   * All of a Pod's containers must have the same effective HostProcess value
+   * (it is not allowed to have a mix of HostProcess containers and non-HostProcess containers).
+   * In addition, if HostProcess is true then HostNetwork must also be set to true.
+   *
    * @schema PlanSpecUpgradeSecurityContextWindowsOptions#hostProcess
    */
   readonly hostProcess?: boolean;
 
   /**
+   * The UserName in Windows to run the entrypoint of the container process.
+   * Defaults to the user specified in image metadata if unspecified.
+   * May also be set in PodSecurityContext. If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   *
+   * @default the user specified in image metadata if unspecified.
    * @schema PlanSpecUpgradeSecurityContextWindowsOptions#runAsUserName
    */
   readonly runAsUserName?: string;
@@ -1646,7 +2306,7 @@ export interface PlanSpecUpgradeSecurityContextWindowsOptions {
 /**
  * Converts an object of type 'PlanSpecUpgradeSecurityContextWindowsOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecUpgradeSecurityContextWindowsOptions(obj: PlanSpecUpgradeSecurityContextWindowsOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1658,23 +2318,35 @@ export function toJson_PlanSpecUpgradeSecurityContextWindowsOptions(obj: PlanSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Selects a key of a ConfigMap.
+ *
  * @schema PlanSpecPrepareEnvsValueFromConfigMapKeyRef
  */
 export interface PlanSpecPrepareEnvsValueFromConfigMapKeyRef {
   /**
+   * The key to select.
+   *
    * @schema PlanSpecPrepareEnvsValueFromConfigMapKeyRef#key
    */
-  readonly key?: string;
+  readonly key: string;
 
   /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
    * @schema PlanSpecPrepareEnvsValueFromConfigMapKeyRef#name
    */
   readonly name?: string;
 
   /**
+   * Specify whether the ConfigMap or its key must be defined
+   *
    * @schema PlanSpecPrepareEnvsValueFromConfigMapKeyRef#optional
    */
   readonly optional?: boolean;
@@ -1684,7 +2356,7 @@ export interface PlanSpecPrepareEnvsValueFromConfigMapKeyRef {
 /**
  * Converts an object of type 'PlanSpecPrepareEnvsValueFromConfigMapKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecPrepareEnvsValueFromConfigMapKeyRef(obj: PlanSpecPrepareEnvsValueFromConfigMapKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1695,28 +2367,35 @@ export function toJson_PlanSpecPrepareEnvsValueFromConfigMapKeyRef(obj: PlanSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Selects a field of the pod: supports metadata.name, metadata.namespace, `metadata.labels['<KEY>']`, `metadata.annotations['<KEY>']`,
+ * spec.nodeName, spec.serviceAccountName, status.hostIP, status.podIP, status.podIPs.
+ *
  * @schema PlanSpecPrepareEnvsValueFromFieldRef
  */
 export interface PlanSpecPrepareEnvsValueFromFieldRef {
   /**
+   * Version of the schema the FieldPath is written in terms of, defaults to "v1".
+   *
    * @schema PlanSpecPrepareEnvsValueFromFieldRef#apiVersion
    */
   readonly apiVersion?: string;
 
   /**
+   * Path of the field to select in the specified API version.
+   *
    * @schema PlanSpecPrepareEnvsValueFromFieldRef#fieldPath
    */
-  readonly fieldPath?: string;
+  readonly fieldPath: string;
 
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareEnvsValueFromFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecPrepareEnvsValueFromFieldRef(obj: PlanSpecPrepareEnvsValueFromFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1726,60 +2405,81 @@ export function toJson_PlanSpecPrepareEnvsValueFromFieldRef(obj: PlanSpecPrepare
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Selects a resource of the container: only resources limits and requests
+ * (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu, requests.memory and requests.ephemeral-storage) are currently supported.
+ *
  * @schema PlanSpecPrepareEnvsValueFromResourceFieldRef
  */
 export interface PlanSpecPrepareEnvsValueFromResourceFieldRef {
   /**
+   * Container name: required for volumes, optional for env vars
+   *
    * @schema PlanSpecPrepareEnvsValueFromResourceFieldRef#containerName
    */
   readonly containerName?: string;
 
   /**
+   * Specifies the output format of the exposed resources, defaults to "1"
+   *
    * @schema PlanSpecPrepareEnvsValueFromResourceFieldRef#divisor
    */
-  readonly divisor?: string;
+  readonly divisor?: PlanSpecPrepareEnvsValueFromResourceFieldRefDivisor;
 
   /**
+   * Required: resource to select
+   *
    * @schema PlanSpecPrepareEnvsValueFromResourceFieldRef#resource
    */
-  readonly resource?: string;
+  readonly resource: string;
 
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareEnvsValueFromResourceFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecPrepareEnvsValueFromResourceFieldRef(obj: PlanSpecPrepareEnvsValueFromResourceFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'containerName': obj.containerName,
-    'divisor': obj.divisor,
+    'divisor': obj.divisor?.value,
     'resource': obj.resource,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Selects a key of a secret in the pod's namespace
+ *
  * @schema PlanSpecPrepareEnvsValueFromSecretKeyRef
  */
 export interface PlanSpecPrepareEnvsValueFromSecretKeyRef {
   /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
    * @schema PlanSpecPrepareEnvsValueFromSecretKeyRef#key
    */
-  readonly key?: string;
+  readonly key: string;
 
   /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
    * @schema PlanSpecPrepareEnvsValueFromSecretKeyRef#name
    */
   readonly name?: string;
 
   /**
+   * Specify whether the Secret or its key must be defined
+   *
    * @schema PlanSpecPrepareEnvsValueFromSecretKeyRef#optional
    */
   readonly optional?: boolean;
@@ -1789,7 +2489,7 @@ export interface PlanSpecPrepareEnvsValueFromSecretKeyRef {
 /**
  * Converts an object of type 'PlanSpecPrepareEnvsValueFromSecretKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecPrepareEnvsValueFromSecretKeyRef(obj: PlanSpecPrepareEnvsValueFromSecretKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1800,23 +2500,35 @@ export function toJson_PlanSpecPrepareEnvsValueFromSecretKeyRef(obj: PlanSpecPre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Selects a key of a ConfigMap.
+ *
  * @schema PlanSpecUpgradeEnvsValueFromConfigMapKeyRef
  */
 export interface PlanSpecUpgradeEnvsValueFromConfigMapKeyRef {
   /**
+   * The key to select.
+   *
    * @schema PlanSpecUpgradeEnvsValueFromConfigMapKeyRef#key
    */
-  readonly key?: string;
+  readonly key: string;
 
   /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
    * @schema PlanSpecUpgradeEnvsValueFromConfigMapKeyRef#name
    */
   readonly name?: string;
 
   /**
+   * Specify whether the ConfigMap or its key must be defined
+   *
    * @schema PlanSpecUpgradeEnvsValueFromConfigMapKeyRef#optional
    */
   readonly optional?: boolean;
@@ -1826,7 +2538,7 @@ export interface PlanSpecUpgradeEnvsValueFromConfigMapKeyRef {
 /**
  * Converts an object of type 'PlanSpecUpgradeEnvsValueFromConfigMapKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecUpgradeEnvsValueFromConfigMapKeyRef(obj: PlanSpecUpgradeEnvsValueFromConfigMapKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1837,28 +2549,35 @@ export function toJson_PlanSpecUpgradeEnvsValueFromConfigMapKeyRef(obj: PlanSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Selects a field of the pod: supports metadata.name, metadata.namespace, `metadata.labels['<KEY>']`, `metadata.annotations['<KEY>']`,
+ * spec.nodeName, spec.serviceAccountName, status.hostIP, status.podIP, status.podIPs.
+ *
  * @schema PlanSpecUpgradeEnvsValueFromFieldRef
  */
 export interface PlanSpecUpgradeEnvsValueFromFieldRef {
   /**
+   * Version of the schema the FieldPath is written in terms of, defaults to "v1".
+   *
    * @schema PlanSpecUpgradeEnvsValueFromFieldRef#apiVersion
    */
   readonly apiVersion?: string;
 
   /**
+   * Path of the field to select in the specified API version.
+   *
    * @schema PlanSpecUpgradeEnvsValueFromFieldRef#fieldPath
    */
-  readonly fieldPath?: string;
+  readonly fieldPath: string;
 
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeEnvsValueFromFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecUpgradeEnvsValueFromFieldRef(obj: PlanSpecUpgradeEnvsValueFromFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1868,60 +2587,81 @@ export function toJson_PlanSpecUpgradeEnvsValueFromFieldRef(obj: PlanSpecUpgrade
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Selects a resource of the container: only resources limits and requests
+ * (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu, requests.memory and requests.ephemeral-storage) are currently supported.
+ *
  * @schema PlanSpecUpgradeEnvsValueFromResourceFieldRef
  */
 export interface PlanSpecUpgradeEnvsValueFromResourceFieldRef {
   /**
+   * Container name: required for volumes, optional for env vars
+   *
    * @schema PlanSpecUpgradeEnvsValueFromResourceFieldRef#containerName
    */
   readonly containerName?: string;
 
   /**
+   * Specifies the output format of the exposed resources, defaults to "1"
+   *
    * @schema PlanSpecUpgradeEnvsValueFromResourceFieldRef#divisor
    */
-  readonly divisor?: string;
+  readonly divisor?: PlanSpecUpgradeEnvsValueFromResourceFieldRefDivisor;
 
   /**
+   * Required: resource to select
+   *
    * @schema PlanSpecUpgradeEnvsValueFromResourceFieldRef#resource
    */
-  readonly resource?: string;
+  readonly resource: string;
 
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeEnvsValueFromResourceFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecUpgradeEnvsValueFromResourceFieldRef(obj: PlanSpecUpgradeEnvsValueFromResourceFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'containerName': obj.containerName,
-    'divisor': obj.divisor,
+    'divisor': obj.divisor?.value,
     'resource': obj.resource,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Selects a key of a secret in the pod's namespace
+ *
  * @schema PlanSpecUpgradeEnvsValueFromSecretKeyRef
  */
 export interface PlanSpecUpgradeEnvsValueFromSecretKeyRef {
   /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
    * @schema PlanSpecUpgradeEnvsValueFromSecretKeyRef#key
    */
-  readonly key?: string;
+  readonly key: string;
 
   /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
    * @schema PlanSpecUpgradeEnvsValueFromSecretKeyRef#name
    */
   readonly name?: string;
 
   /**
+   * Specify whether the Secret or its key must be defined
+   *
    * @schema PlanSpecUpgradeEnvsValueFromSecretKeyRef#optional
    */
   readonly optional?: boolean;
@@ -1931,7 +2671,7 @@ export interface PlanSpecUpgradeEnvsValueFromSecretKeyRef {
 /**
  * Converts an object of type 'PlanSpecUpgradeEnvsValueFromSecretKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PlanSpecUpgradeEnvsValueFromSecretKeyRef(obj: PlanSpecUpgradeEnvsValueFromSecretKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1942,5 +2682,37 @@ export function toJson_PlanSpecUpgradeEnvsValueFromSecretKeyRef(obj: PlanSpecUpg
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Specifies the output format of the exposed resources, defaults to "1"
+ *
+ * @schema PlanSpecPrepareEnvsValueFromResourceFieldRefDivisor
+ */
+export class PlanSpecPrepareEnvsValueFromResourceFieldRefDivisor {
+  public static fromNumber(value: number): PlanSpecPrepareEnvsValueFromResourceFieldRefDivisor {
+    return new PlanSpecPrepareEnvsValueFromResourceFieldRefDivisor(value);
+  }
+  public static fromString(value: string): PlanSpecPrepareEnvsValueFromResourceFieldRefDivisor {
+    return new PlanSpecPrepareEnvsValueFromResourceFieldRefDivisor(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * Specifies the output format of the exposed resources, defaults to "1"
+ *
+ * @schema PlanSpecUpgradeEnvsValueFromResourceFieldRefDivisor
+ */
+export class PlanSpecUpgradeEnvsValueFromResourceFieldRefDivisor {
+  public static fromNumber(value: number): PlanSpecUpgradeEnvsValueFromResourceFieldRefDivisor {
+    return new PlanSpecUpgradeEnvsValueFromResourceFieldRefDivisor(value);
+  }
+  public static fromString(value: string): PlanSpecUpgradeEnvsValueFromResourceFieldRefDivisor {
+    return new PlanSpecUpgradeEnvsValueFromResourceFieldRefDivisor(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
 

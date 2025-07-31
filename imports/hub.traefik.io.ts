@@ -80,7 +80,7 @@ export interface AccessControlPolicyProps {
 /**
  * Converts an object of type 'AccessControlPolicyProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AccessControlPolicyProps(obj: AccessControlPolicyProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -90,7 +90,7 @@ export function toJson_AccessControlPolicyProps(obj: AccessControlPolicyProps | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AccessControlPolicySpec configures an access control policy.
@@ -145,7 +145,7 @@ export interface AccessControlPolicySpec {
 /**
  * Converts an object of type 'AccessControlPolicySpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AccessControlPolicySpec(obj: AccessControlPolicySpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -159,7 +159,7 @@ export function toJson_AccessControlPolicySpec(obj: AccessControlPolicySpec | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AccessControlPolicyAPIKey configure an APIKey control policy.
@@ -193,7 +193,7 @@ export interface AccessControlPolicySpecApiKey {
 /**
  * Converts an object of type 'AccessControlPolicySpecApiKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AccessControlPolicySpecApiKey(obj: AccessControlPolicySpecApiKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -204,7 +204,7 @@ export function toJson_AccessControlPolicySpecApiKey(obj: AccessControlPolicySpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AccessControlPolicyBasicAuth holds the HTTP basic authentication configuration.
@@ -237,7 +237,7 @@ export interface AccessControlPolicySpecBasicAuth {
 /**
  * Converts an object of type 'AccessControlPolicySpecBasicAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AccessControlPolicySpecBasicAuth(obj: AccessControlPolicySpecBasicAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -249,7 +249,7 @@ export function toJson_AccessControlPolicySpecBasicAuth(obj: AccessControlPolicy
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AccessControlPolicyJWT configures a JWT access control policy.
@@ -307,7 +307,7 @@ export interface AccessControlPolicySpecJwt {
 /**
  * Converts an object of type 'AccessControlPolicySpecJwt' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AccessControlPolicySpecJwt(obj: AccessControlPolicySpecJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -324,7 +324,7 @@ export function toJson_AccessControlPolicySpecJwt(obj: AccessControlPolicySpecJw
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AccessControlOAuthIntro configures an OAuth 2.0 Token Introspection access control policy.
@@ -362,7 +362,7 @@ export interface AccessControlPolicySpecOAuthIntro {
 /**
  * Converts an object of type 'AccessControlPolicySpecOAuthIntro' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AccessControlPolicySpecOAuthIntro(obj: AccessControlPolicySpecOAuthIntro | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -374,7 +374,7 @@ export function toJson_AccessControlPolicySpecOAuthIntro(obj: AccessControlPolic
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AccessControlPolicyOIDC holds the OIDC authentication configuration.
@@ -454,7 +454,7 @@ export interface AccessControlPolicySpecOidc {
 /**
  * Converts an object of type 'AccessControlPolicySpecOidc' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AccessControlPolicySpecOidc(obj: AccessControlPolicySpecOidc | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -474,7 +474,7 @@ export function toJson_AccessControlPolicySpecOidc(obj: AccessControlPolicySpecO
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AccessControlPolicyOIDCGoogle holds the Google OIDC authentication configuration.
@@ -541,7 +541,7 @@ export interface AccessControlPolicySpecOidcGoogle {
 /**
  * Converts an object of type 'AccessControlPolicySpecOidcGoogle' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AccessControlPolicySpecOidcGoogle(obj: AccessControlPolicySpecOidcGoogle | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -558,7 +558,7 @@ export function toJson_AccessControlPolicySpecOidcGoogle(obj: AccessControlPolic
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * KeySource defines how to extract API keys from requests.
@@ -600,7 +600,7 @@ export interface AccessControlPolicySpecApiKeyKeySource {
 /**
  * Converts an object of type 'AccessControlPolicySpecApiKeyKeySource' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AccessControlPolicySpecApiKeyKeySource(obj: AccessControlPolicySpecApiKeyKeySource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -612,7 +612,7 @@ export function toJson_AccessControlPolicySpecApiKeyKeySource(obj: AccessControl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AccessControlPolicyAPIKeyKey defines an API key.
@@ -646,7 +646,7 @@ export interface AccessControlPolicySpecApiKeyKeys {
 /**
  * Converts an object of type 'AccessControlPolicySpecApiKeyKeys' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AccessControlPolicySpecApiKeyKeys(obj: AccessControlPolicySpecApiKeyKeys | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -657,7 +657,7 @@ export function toJson_AccessControlPolicySpecApiKeyKeys(obj: AccessControlPolic
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AccessControlOAuthIntroClientConfig configures the OAuth 2.0 client for issuing token introspection requests.
@@ -713,7 +713,7 @@ export interface AccessControlPolicySpecOAuthIntroClientConfig {
 /**
  * Converts an object of type 'AccessControlPolicySpecOAuthIntroClientConfig' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AccessControlPolicySpecOAuthIntroClientConfig(obj: AccessControlPolicySpecOAuthIntroClientConfig | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -727,7 +727,7 @@ export function toJson_AccessControlPolicySpecOAuthIntroClientConfig(obj: Access
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TokenSource describes how to extract tokens from HTTP requests.
@@ -770,7 +770,7 @@ export interface AccessControlPolicySpecOAuthIntroTokenSource {
 /**
  * Converts an object of type 'AccessControlPolicySpecOAuthIntroTokenSource' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AccessControlPolicySpecOAuthIntroTokenSource(obj: AccessControlPolicySpecOAuthIntroTokenSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -782,7 +782,7 @@ export function toJson_AccessControlPolicySpecOAuthIntroTokenSource(obj: AccessC
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretReference represents a Secret Reference. It has enough information to retrieve secret
@@ -810,7 +810,7 @@ export interface AccessControlPolicySpecOidcSecret {
 /**
  * Converts an object of type 'AccessControlPolicySpecOidcSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AccessControlPolicySpecOidcSecret(obj: AccessControlPolicySpecOidcSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -820,7 +820,7 @@ export function toJson_AccessControlPolicySpecOidcSecret(obj: AccessControlPolic
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Session holds session configuration.
@@ -858,7 +858,7 @@ export interface AccessControlPolicySpecOidcSession {
 /**
  * Converts an object of type 'AccessControlPolicySpecOidcSession' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AccessControlPolicySpecOidcSession(obj: AccessControlPolicySpecOidcSession | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -871,7 +871,7 @@ export function toJson_AccessControlPolicySpecOidcSession(obj: AccessControlPoli
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * StateCookie holds state cookie configuration.
@@ -904,7 +904,7 @@ export interface AccessControlPolicySpecOidcStateCookie {
 /**
  * Converts an object of type 'AccessControlPolicySpecOidcStateCookie' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AccessControlPolicySpecOidcStateCookie(obj: AccessControlPolicySpecOidcStateCookie | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -916,7 +916,7 @@ export function toJson_AccessControlPolicySpecOidcStateCookie(obj: AccessControl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretReference represents a Secret Reference. It has enough information to retrieve secret
@@ -944,7 +944,7 @@ export interface AccessControlPolicySpecOidcGoogleSecret {
 /**
  * Converts an object of type 'AccessControlPolicySpecOidcGoogleSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AccessControlPolicySpecOidcGoogleSecret(obj: AccessControlPolicySpecOidcGoogleSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -954,7 +954,7 @@ export function toJson_AccessControlPolicySpecOidcGoogleSecret(obj: AccessContro
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Session holds session configuration.
@@ -992,7 +992,7 @@ export interface AccessControlPolicySpecOidcGoogleSession {
 /**
  * Converts an object of type 'AccessControlPolicySpecOidcGoogleSession' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AccessControlPolicySpecOidcGoogleSession(obj: AccessControlPolicySpecOidcGoogleSession | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1005,7 +1005,7 @@ export function toJson_AccessControlPolicySpecOidcGoogleSession(obj: AccessContr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * StateCookie holds state cookie configuration.
@@ -1038,7 +1038,7 @@ export interface AccessControlPolicySpecOidcGoogleStateCookie {
 /**
  * Converts an object of type 'AccessControlPolicySpecOidcGoogleStateCookie' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AccessControlPolicySpecOidcGoogleStateCookie(obj: AccessControlPolicySpecOidcGoogleStateCookie | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1050,7 +1050,7 @@ export function toJson_AccessControlPolicySpecOidcGoogleStateCookie(obj: AccessC
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TLS configures TLS communication with the Authorization Server.
@@ -1078,7 +1078,7 @@ export interface AccessControlPolicySpecOAuthIntroClientConfigTls {
 /**
  * Converts an object of type 'AccessControlPolicySpecOAuthIntroClientConfigTls' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AccessControlPolicySpecOAuthIntroClientConfigTls(obj: AccessControlPolicySpecOAuthIntroClientConfigTls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1088,7 +1088,7 @@ export function toJson_AccessControlPolicySpecOAuthIntroClientConfigTls(obj: Acc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -1168,7 +1168,7 @@ export interface AiServiceProps {
 /**
  * Converts an object of type 'AiServiceProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AiServiceProps(obj: AiServiceProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1178,7 +1178,7 @@ export function toJson_AiServiceProps(obj: AiServiceProps | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The desired behavior of this AIService.
@@ -1247,7 +1247,7 @@ export interface AiServiceSpec {
 /**
  * Converts an object of type 'AiServiceSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AiServiceSpec(obj: AiServiceSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1263,7 +1263,7 @@ export function toJson_AiServiceSpec(obj: AiServiceSpec | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Anthropic configures Anthropic backend.
@@ -1293,7 +1293,7 @@ export interface AiServiceSpecAnthropic {
 /**
  * Converts an object of type 'AiServiceSpecAnthropic' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AiServiceSpecAnthropic(obj: AiServiceSpecAnthropic | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1304,7 +1304,7 @@ export function toJson_AiServiceSpecAnthropic(obj: AiServiceSpecAnthropic | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AzureOpenAI configures AzureOpenAI.
@@ -1344,7 +1344,7 @@ export interface AiServiceSpecAzureOpenai {
 /**
  * Converts an object of type 'AiServiceSpecAzureOpenai' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AiServiceSpecAzureOpenai(obj: AiServiceSpecAzureOpenai | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1357,7 +1357,7 @@ export function toJson_AiServiceSpecAzureOpenai(obj: AiServiceSpecAzureOpenai | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Bedrock configures Bedrock backend.
@@ -1392,7 +1392,7 @@ export interface AiServiceSpecBedrock {
 /**
  * Converts an object of type 'AiServiceSpecBedrock' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AiServiceSpecBedrock(obj: AiServiceSpecBedrock | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1404,7 +1404,7 @@ export function toJson_AiServiceSpecBedrock(obj: AiServiceSpecBedrock | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Cohere configures Cohere backend.
@@ -1434,7 +1434,7 @@ export interface AiServiceSpecCohere {
 /**
  * Converts an object of type 'AiServiceSpecCohere' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AiServiceSpecCohere(obj: AiServiceSpecCohere | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1445,7 +1445,7 @@ export function toJson_AiServiceSpecCohere(obj: AiServiceSpecCohere | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Gemini configures Gemini backend.
@@ -1475,7 +1475,7 @@ export interface AiServiceSpecGemini {
 /**
  * Converts an object of type 'AiServiceSpecGemini' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AiServiceSpecGemini(obj: AiServiceSpecGemini | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1486,7 +1486,7 @@ export function toJson_AiServiceSpecGemini(obj: AiServiceSpecGemini | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Mistral configures Mistral AI backend.
@@ -1516,7 +1516,7 @@ export interface AiServiceSpecMistral {
 /**
  * Converts an object of type 'AiServiceSpecMistral' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AiServiceSpecMistral(obj: AiServiceSpecMistral | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1527,7 +1527,7 @@ export function toJson_AiServiceSpecMistral(obj: AiServiceSpecMistral | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Ollama configures Ollama backend.
@@ -1557,7 +1557,7 @@ export interface AiServiceSpecOllama {
 /**
  * Converts an object of type 'AiServiceSpecOllama' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AiServiceSpecOllama(obj: AiServiceSpecOllama | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1568,7 +1568,7 @@ export function toJson_AiServiceSpecOllama(obj: AiServiceSpecOllama | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * OpenAI configures OpenAI.
@@ -1598,7 +1598,7 @@ export interface AiServiceSpecOpenai {
 /**
  * Converts an object of type 'AiServiceSpecOpenai' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AiServiceSpecOpenai(obj: AiServiceSpecOpenai | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1609,7 +1609,7 @@ export function toJson_AiServiceSpecOpenai(obj: AiServiceSpecOpenai | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Params holds the LLM hyperparameters.
@@ -1647,7 +1647,7 @@ export interface AiServiceSpecAnthropicParams {
 /**
  * Converts an object of type 'AiServiceSpecAnthropicParams' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AiServiceSpecAnthropicParams(obj: AiServiceSpecAnthropicParams | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1660,7 +1660,7 @@ export function toJson_AiServiceSpecAnthropicParams(obj: AiServiceSpecAnthropicP
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Params holds the LLM hyperparameters.
@@ -1698,7 +1698,7 @@ export interface AiServiceSpecAzureOpenaiParams {
 /**
  * Converts an object of type 'AiServiceSpecAzureOpenaiParams' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AiServiceSpecAzureOpenaiParams(obj: AiServiceSpecAzureOpenaiParams | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1711,7 +1711,7 @@ export function toJson_AiServiceSpecAzureOpenaiParams(obj: AiServiceSpecAzureOpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Params holds the LLM hyperparameters.
@@ -1749,7 +1749,7 @@ export interface AiServiceSpecBedrockParams {
 /**
  * Converts an object of type 'AiServiceSpecBedrockParams' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AiServiceSpecBedrockParams(obj: AiServiceSpecBedrockParams | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1762,7 +1762,7 @@ export function toJson_AiServiceSpecBedrockParams(obj: AiServiceSpecBedrockParam
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Params holds the LLM hyperparameters.
@@ -1800,7 +1800,7 @@ export interface AiServiceSpecCohereParams {
 /**
  * Converts an object of type 'AiServiceSpecCohereParams' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AiServiceSpecCohereParams(obj: AiServiceSpecCohereParams | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1813,7 +1813,7 @@ export function toJson_AiServiceSpecCohereParams(obj: AiServiceSpecCohereParams 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Params holds the LLM hyperparameters.
@@ -1851,7 +1851,7 @@ export interface AiServiceSpecGeminiParams {
 /**
  * Converts an object of type 'AiServiceSpecGeminiParams' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AiServiceSpecGeminiParams(obj: AiServiceSpecGeminiParams | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1864,7 +1864,7 @@ export function toJson_AiServiceSpecGeminiParams(obj: AiServiceSpecGeminiParams 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Params holds the LLM hyperparameters.
@@ -1902,7 +1902,7 @@ export interface AiServiceSpecMistralParams {
 /**
  * Converts an object of type 'AiServiceSpecMistralParams' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AiServiceSpecMistralParams(obj: AiServiceSpecMistralParams | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1915,7 +1915,7 @@ export function toJson_AiServiceSpecMistralParams(obj: AiServiceSpecMistralParam
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Params holds the LLM hyperparameters.
@@ -1953,7 +1953,7 @@ export interface AiServiceSpecOllamaParams {
 /**
  * Converts an object of type 'AiServiceSpecOllamaParams' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AiServiceSpecOllamaParams(obj: AiServiceSpecOllamaParams | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1966,7 +1966,7 @@ export function toJson_AiServiceSpecOllamaParams(obj: AiServiceSpecOllamaParams 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Params holds the LLM hyperparameters.
@@ -2004,7 +2004,7 @@ export interface AiServiceSpecOpenaiParams {
 /**
  * Converts an object of type 'AiServiceSpecOpenaiParams' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_AiServiceSpecOpenaiParams(obj: AiServiceSpecOpenaiParams | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2017,7 +2017,7 @@ export function toJson_AiServiceSpecOpenaiParams(obj: AiServiceSpecOpenaiParams 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -2101,7 +2101,7 @@ export interface ApiProps {
 /**
  * Converts an object of type 'ApiProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiProps(obj: ApiProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2111,7 +2111,7 @@ export function toJson_ApiProps(obj: ApiProps | undefined): Record<string, any> 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APISpec describes the API.
@@ -2138,7 +2138,7 @@ export interface ApiSpec {
 /**
  * Converts an object of type 'ApiSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiSpec(obj: ApiSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2148,7 +2148,7 @@ export function toJson_ApiSpec(obj: ApiSpec | undefined): Record<string, any> | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * OpenAPISpec defines the API contract as an OpenAPI specification.
@@ -2201,7 +2201,7 @@ export interface ApiSpecOpenApiSpec {
 /**
  * Converts an object of type 'ApiSpecOpenApiSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiSpecOpenApiSpec(obj: ApiSpecOpenApiSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2214,7 +2214,7 @@ export function toJson_ApiSpecOpenApiSpec(obj: ApiSpecOpenApiSpec | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APIVersionRef references an APIVersion.
@@ -2234,7 +2234,7 @@ export interface ApiSpecVersions {
 /**
  * Converts an object of type 'ApiSpecVersions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiSpecVersions(obj: ApiSpecVersions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2243,7 +2243,7 @@ export function toJson_ApiSpecVersions(obj: ApiSpecVersions | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * OperationSet gives a name to a set of matching OpenAPI operations.
@@ -2271,7 +2271,7 @@ export interface ApiSpecOpenApiSpecOperationSets {
 /**
  * Converts an object of type 'ApiSpecOpenApiSpecOperationSets' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiSpecOpenApiSpecOperationSets(obj: ApiSpecOpenApiSpecOperationSets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2281,7 +2281,7 @@ export function toJson_ApiSpecOpenApiSpecOperationSets(obj: ApiSpecOpenApiSpecOp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Override holds data used to override OpenAPI specification.
@@ -2299,7 +2299,7 @@ export interface ApiSpecOpenApiSpecOverride {
 /**
  * Converts an object of type 'ApiSpecOpenApiSpecOverride' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiSpecOpenApiSpecOverride(obj: ApiSpecOpenApiSpecOverride | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2308,7 +2308,7 @@ export function toJson_ApiSpecOpenApiSpecOverride(obj: ApiSpecOpenApiSpecOverrid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * OperationMatcher defines criteria for matching an OpenAPI operation.
@@ -2349,7 +2349,7 @@ export interface ApiSpecOpenApiSpecOperationSetsMatchers {
 /**
  * Converts an object of type 'ApiSpecOpenApiSpecOperationSetsMatchers' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiSpecOpenApiSpecOperationSetsMatchers(obj: ApiSpecOpenApiSpecOperationSetsMatchers | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2361,7 +2361,7 @@ export function toJson_ApiSpecOpenApiSpecOperationSetsMatchers(obj: ApiSpecOpenA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ApiSpecOpenApiSpecOverrideServers
@@ -2377,7 +2377,7 @@ export interface ApiSpecOpenApiSpecOverrideServers {
 /**
  * Converts an object of type 'ApiSpecOpenApiSpecOverrideServers' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiSpecOpenApiSpecOverrideServers(obj: ApiSpecOpenApiSpecOverrideServers | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2386,7 +2386,7 @@ export function toJson_ApiSpecOpenApiSpecOverrideServers(obj: ApiSpecOpenApiSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -2466,7 +2466,7 @@ export interface ApiAccessProps {
 /**
  * Converts an object of type 'ApiAccessProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiAccessProps(obj: ApiAccessProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2476,7 +2476,7 @@ export function toJson_ApiAccessProps(obj: ApiAccessProps | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The desired behavior of this APIAccess.
@@ -2553,7 +2553,7 @@ export interface ApiAccessSpec {
 /**
  * Converts an object of type 'ApiAccessSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiAccessSpec(obj: ApiAccessSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2569,7 +2569,7 @@ export function toJson_ApiAccessSpec(obj: ApiAccessSpec | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APIBundleReference references an APIBundle.
@@ -2589,7 +2589,7 @@ export interface ApiAccessSpecApiBundles {
 /**
  * Converts an object of type 'ApiAccessSpecApiBundles' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiAccessSpecApiBundles(obj: ApiAccessSpecApiBundles | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2598,7 +2598,7 @@ export function toJson_ApiAccessSpecApiBundles(obj: ApiAccessSpecApiBundles | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APIPlan defines which APIPlan will be used.
@@ -2618,7 +2618,7 @@ export interface ApiAccessSpecApiPlan {
 /**
  * Converts an object of type 'ApiAccessSpecApiPlan' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiAccessSpecApiPlan(obj: ApiAccessSpecApiPlan | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2627,7 +2627,7 @@ export function toJson_ApiAccessSpecApiPlan(obj: ApiAccessSpecApiPlan | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APISelector selects the APIs that will be accessible to the configured audience.
@@ -2659,7 +2659,7 @@ export interface ApiAccessSpecApiSelector {
 /**
  * Converts an object of type 'ApiAccessSpecApiSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiAccessSpecApiSelector(obj: ApiAccessSpecApiSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2669,7 +2669,7 @@ export function toJson_ApiAccessSpecApiSelector(obj: ApiAccessSpecApiSelector | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APIReference references an API.
@@ -2689,7 +2689,7 @@ export interface ApiAccessSpecApis {
 /**
  * Converts an object of type 'ApiAccessSpecApis' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiAccessSpecApis(obj: ApiAccessSpecApis | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2698,7 +2698,7 @@ export function toJson_ApiAccessSpecApis(obj: ApiAccessSpecApis | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * OperationFilter specifies the allowed operations on APIs and APIVersions.
@@ -2720,7 +2720,7 @@ export interface ApiAccessSpecOperationFilter {
 /**
  * Converts an object of type 'ApiAccessSpecOperationFilter' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiAccessSpecOperationFilter(obj: ApiAccessSpecOperationFilter | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2729,7 +2729,7 @@ export function toJson_ApiAccessSpecOperationFilter(obj: ApiAccessSpecOperationF
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -2768,7 +2768,7 @@ export interface ApiAccessSpecApiSelectorMatchExpressions {
 /**
  * Converts an object of type 'ApiAccessSpecApiSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiAccessSpecApiSelectorMatchExpressions(obj: ApiAccessSpecApiSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2779,7 +2779,7 @@ export function toJson_ApiAccessSpecApiSelectorMatchExpressions(obj: ApiAccessSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -2859,7 +2859,7 @@ export interface ApiBundleProps {
 /**
  * Converts an object of type 'ApiBundleProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiBundleProps(obj: ApiBundleProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2869,7 +2869,7 @@ export function toJson_ApiBundleProps(obj: ApiBundleProps | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The desired behavior of this APIBundle.
@@ -2901,7 +2901,7 @@ export interface ApiBundleSpec {
 /**
  * Converts an object of type 'ApiBundleSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiBundleSpec(obj: ApiBundleSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2911,7 +2911,7 @@ export function toJson_ApiBundleSpec(obj: ApiBundleSpec | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APISelector selects the APIs that will be accessible to the configured audience.
@@ -2943,7 +2943,7 @@ export interface ApiBundleSpecApiSelector {
 /**
  * Converts an object of type 'ApiBundleSpecApiSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiBundleSpecApiSelector(obj: ApiBundleSpecApiSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2953,7 +2953,7 @@ export function toJson_ApiBundleSpecApiSelector(obj: ApiBundleSpecApiSelector | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APIReference references an API.
@@ -2973,7 +2973,7 @@ export interface ApiBundleSpecApis {
 /**
  * Converts an object of type 'ApiBundleSpecApis' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiBundleSpecApis(obj: ApiBundleSpecApis | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2982,7 +2982,7 @@ export function toJson_ApiBundleSpecApis(obj: ApiBundleSpecApis | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -3021,7 +3021,7 @@ export interface ApiBundleSpecApiSelectorMatchExpressions {
 /**
  * Converts an object of type 'ApiBundleSpecApiSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiBundleSpecApiSelectorMatchExpressions(obj: ApiBundleSpecApiSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3032,7 +3032,7 @@ export function toJson_ApiBundleSpecApiSelectorMatchExpressions(obj: ApiBundleSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -3112,7 +3112,7 @@ export interface ApiCatalogItemProps {
 /**
  * Converts an object of type 'ApiCatalogItemProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiCatalogItemProps(obj: ApiCatalogItemProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3122,7 +3122,7 @@ export function toJson_ApiCatalogItemProps(obj: ApiCatalogItemProps | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The desired behavior of this APICatalogItem.
@@ -3194,7 +3194,7 @@ export interface ApiCatalogItemSpec {
 /**
  * Converts an object of type 'ApiCatalogItemSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiCatalogItemSpec(obj: ApiCatalogItemSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3209,7 +3209,7 @@ export function toJson_ApiCatalogItemSpec(obj: ApiCatalogItemSpec | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APIBundleReference references an APIBundle.
@@ -3229,7 +3229,7 @@ export interface ApiCatalogItemSpecApiBundles {
 /**
  * Converts an object of type 'ApiCatalogItemSpecApiBundles' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiCatalogItemSpecApiBundles(obj: ApiCatalogItemSpecApiBundles | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3238,7 +3238,7 @@ export function toJson_ApiCatalogItemSpecApiBundles(obj: ApiCatalogItemSpecApiBu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APIPlan defines which APIPlan will be available.
@@ -3260,7 +3260,7 @@ export interface ApiCatalogItemSpecApiPlan {
 /**
  * Converts an object of type 'ApiCatalogItemSpecApiPlan' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiCatalogItemSpecApiPlan(obj: ApiCatalogItemSpecApiPlan | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3269,7 +3269,7 @@ export function toJson_ApiCatalogItemSpecApiPlan(obj: ApiCatalogItemSpecApiPlan 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APISelector selects the APIs that will be visible to the configured audience.
@@ -3301,7 +3301,7 @@ export interface ApiCatalogItemSpecApiSelector {
 /**
  * Converts an object of type 'ApiCatalogItemSpecApiSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiCatalogItemSpecApiSelector(obj: ApiCatalogItemSpecApiSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3311,7 +3311,7 @@ export function toJson_ApiCatalogItemSpecApiSelector(obj: ApiCatalogItemSpecApiS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APIReference references an API.
@@ -3331,7 +3331,7 @@ export interface ApiCatalogItemSpecApis {
 /**
  * Converts an object of type 'ApiCatalogItemSpecApis' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiCatalogItemSpecApis(obj: ApiCatalogItemSpecApis | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3340,7 +3340,7 @@ export function toJson_ApiCatalogItemSpecApis(obj: ApiCatalogItemSpecApis | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * OperationFilter specifies the visible operations on APIs and APIVersions.
@@ -3362,7 +3362,7 @@ export interface ApiCatalogItemSpecOperationFilter {
 /**
  * Converts an object of type 'ApiCatalogItemSpecOperationFilter' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiCatalogItemSpecOperationFilter(obj: ApiCatalogItemSpecOperationFilter | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3371,7 +3371,7 @@ export function toJson_ApiCatalogItemSpecOperationFilter(obj: ApiCatalogItemSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -3410,7 +3410,7 @@ export interface ApiCatalogItemSpecApiSelectorMatchExpressions {
 /**
  * Converts an object of type 'ApiCatalogItemSpecApiSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiCatalogItemSpecApiSelectorMatchExpressions(obj: ApiCatalogItemSpecApiSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3421,7 +3421,7 @@ export function toJson_ApiCatalogItemSpecApiSelectorMatchExpressions(obj: ApiCat
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -3501,7 +3501,7 @@ export interface ApiPlanProps {
 /**
  * Converts an object of type 'ApiPlanProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiPlanProps(obj: ApiPlanProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3511,7 +3511,7 @@ export function toJson_ApiPlanProps(obj: ApiPlanProps | undefined): Record<strin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The desired behavior of this APIPlan.
@@ -3552,7 +3552,7 @@ export interface ApiPlanSpec {
 /**
  * Converts an object of type 'ApiPlanSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiPlanSpec(obj: ApiPlanSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3564,7 +3564,7 @@ export function toJson_ApiPlanSpec(obj: ApiPlanSpec | undefined): Record<string,
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Quota defines the quota policy.
@@ -3591,7 +3591,7 @@ export interface ApiPlanSpecQuota {
 /**
  * Converts an object of type 'ApiPlanSpecQuota' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiPlanSpecQuota(obj: ApiPlanSpecQuota | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3601,7 +3601,7 @@ export function toJson_ApiPlanSpecQuota(obj: ApiPlanSpecQuota | undefined): Reco
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * RateLimit defines the rate limit policy.
@@ -3628,7 +3628,7 @@ export interface ApiPlanSpecRateLimit {
 /**
  * Converts an object of type 'ApiPlanSpecRateLimit' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiPlanSpecRateLimit(obj: ApiPlanSpecRateLimit | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3638,7 +3638,7 @@ export function toJson_ApiPlanSpecRateLimit(obj: ApiPlanSpecRateLimit | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -3718,7 +3718,7 @@ export interface ApiPortalProps {
 /**
  * Converts an object of type 'ApiPortalProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiPortalProps(obj: ApiPortalProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3728,7 +3728,7 @@ export function toJson_ApiPortalProps(obj: ApiPortalProps | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The desired behavior of this APIPortal.
@@ -3769,7 +3769,7 @@ export interface ApiPortalSpec {
 /**
  * Converts an object of type 'ApiPortalSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiPortalSpec(obj: ApiPortalSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3781,7 +3781,7 @@ export function toJson_ApiPortalSpec(obj: ApiPortalSpec | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * UI holds the UI customization options.
@@ -3801,7 +3801,7 @@ export interface ApiPortalSpecUi {
 /**
  * Converts an object of type 'ApiPortalSpecUi' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiPortalSpecUi(obj: ApiPortalSpecUi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3810,7 +3810,7 @@ export function toJson_ApiPortalSpecUi(obj: ApiPortalSpecUi | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -3890,7 +3890,7 @@ export interface ApiRateLimitProps {
 /**
  * Converts an object of type 'ApiRateLimitProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiRateLimitProps(obj: ApiRateLimitProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3900,7 +3900,7 @@ export function toJson_ApiRateLimitProps(obj: ApiRateLimitProps | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The desired behavior of this APIRateLimit.
@@ -3971,7 +3971,7 @@ export interface ApiRateLimitSpec {
 /**
  * Converts an object of type 'ApiRateLimitSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiRateLimitSpec(obj: ApiRateLimitSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3986,7 +3986,7 @@ export function toJson_ApiRateLimitSpec(obj: ApiRateLimitSpec | undefined): Reco
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APISelector selects the APIs that will be rate limited.
@@ -4018,7 +4018,7 @@ export interface ApiRateLimitSpecApiSelector {
 /**
  * Converts an object of type 'ApiRateLimitSpecApiSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiRateLimitSpecApiSelector(obj: ApiRateLimitSpecApiSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4028,7 +4028,7 @@ export function toJson_ApiRateLimitSpecApiSelector(obj: ApiRateLimitSpecApiSelec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APIReference references an API.
@@ -4048,7 +4048,7 @@ export interface ApiRateLimitSpecApis {
 /**
  * Converts an object of type 'ApiRateLimitSpecApis' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiRateLimitSpecApis(obj: ApiRateLimitSpecApis | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4057,7 +4057,7 @@ export function toJson_ApiRateLimitSpecApis(obj: ApiRateLimitSpecApis | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Strategy defines how the bucket state will be synchronized between the different Traefik Hub instances.
@@ -4109,7 +4109,7 @@ export interface ApiRateLimitSpecApiSelectorMatchExpressions {
 /**
  * Converts an object of type 'ApiRateLimitSpecApiSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiRateLimitSpecApiSelectorMatchExpressions(obj: ApiRateLimitSpecApiSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4120,7 +4120,7 @@ export function toJson_ApiRateLimitSpecApiSelectorMatchExpressions(obj: ApiRateL
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -4200,7 +4200,7 @@ export interface ApiVersionProps {
 /**
  * Converts an object of type 'ApiVersionProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiVersionProps(obj: ApiVersionProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4210,7 +4210,7 @@ export function toJson_ApiVersionProps(obj: ApiVersionProps | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The desired behavior of this APIVersion.
@@ -4245,7 +4245,7 @@ export interface ApiVersionSpec {
 /**
  * Converts an object of type 'ApiVersionSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiVersionSpec(obj: ApiVersionSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4256,7 +4256,7 @@ export function toJson_ApiVersionSpec(obj: ApiVersionSpec | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * OpenAPISpec defines the API contract as an OpenAPI specification.
@@ -4309,7 +4309,7 @@ export interface ApiVersionSpecOpenApiSpec {
 /**
  * Converts an object of type 'ApiVersionSpecOpenApiSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiVersionSpecOpenApiSpec(obj: ApiVersionSpecOpenApiSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4322,7 +4322,7 @@ export function toJson_ApiVersionSpecOpenApiSpec(obj: ApiVersionSpecOpenApiSpec 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * OperationSet gives a name to a set of matching OpenAPI operations.
@@ -4350,7 +4350,7 @@ export interface ApiVersionSpecOpenApiSpecOperationSets {
 /**
  * Converts an object of type 'ApiVersionSpecOpenApiSpecOperationSets' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiVersionSpecOpenApiSpecOperationSets(obj: ApiVersionSpecOpenApiSpecOperationSets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4360,7 +4360,7 @@ export function toJson_ApiVersionSpecOpenApiSpecOperationSets(obj: ApiVersionSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Override holds data used to override OpenAPI specification.
@@ -4378,7 +4378,7 @@ export interface ApiVersionSpecOpenApiSpecOverride {
 /**
  * Converts an object of type 'ApiVersionSpecOpenApiSpecOverride' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiVersionSpecOpenApiSpecOverride(obj: ApiVersionSpecOpenApiSpecOverride | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4387,7 +4387,7 @@ export function toJson_ApiVersionSpecOpenApiSpecOverride(obj: ApiVersionSpecOpen
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * OperationMatcher defines criteria for matching an OpenAPI operation.
@@ -4428,7 +4428,7 @@ export interface ApiVersionSpecOpenApiSpecOperationSetsMatchers {
 /**
  * Converts an object of type 'ApiVersionSpecOpenApiSpecOperationSetsMatchers' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiVersionSpecOpenApiSpecOperationSetsMatchers(obj: ApiVersionSpecOpenApiSpecOperationSetsMatchers | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4440,7 +4440,7 @@ export function toJson_ApiVersionSpecOpenApiSpecOperationSetsMatchers(obj: ApiVe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ApiVersionSpecOpenApiSpecOverrideServers
@@ -4456,7 +4456,7 @@ export interface ApiVersionSpecOpenApiSpecOverrideServers {
 /**
  * Converts an object of type 'ApiVersionSpecOpenApiSpecOverrideServers' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ApiVersionSpecOpenApiSpecOverrideServers(obj: ApiVersionSpecOpenApiSpecOverrideServers | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4465,7 +4465,7 @@ export function toJson_ApiVersionSpecOpenApiSpecOverrideServers(obj: ApiVersionS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -4547,7 +4547,7 @@ export interface ManagedSubscriptionProps {
 /**
  * Converts an object of type 'ManagedSubscriptionProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ManagedSubscriptionProps(obj: ManagedSubscriptionProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4557,7 +4557,7 @@ export function toJson_ManagedSubscriptionProps(obj: ManagedSubscriptionProps | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The desired behavior of this ManagedSubscription.
@@ -4637,7 +4637,7 @@ export interface ManagedSubscriptionSpec {
 /**
  * Converts an object of type 'ManagedSubscriptionSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ManagedSubscriptionSpec(obj: ManagedSubscriptionSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4653,7 +4653,7 @@ export function toJson_ManagedSubscriptionSpec(obj: ManagedSubscriptionSpec | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APIBundleReference references an APIBundle.
@@ -4673,7 +4673,7 @@ export interface ManagedSubscriptionSpecApiBundles {
 /**
  * Converts an object of type 'ManagedSubscriptionSpecApiBundles' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ManagedSubscriptionSpecApiBundles(obj: ManagedSubscriptionSpecApiBundles | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4682,7 +4682,7 @@ export function toJson_ManagedSubscriptionSpecApiBundles(obj: ManagedSubscriptio
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APIPlan defines which APIPlan will be used.
@@ -4702,7 +4702,7 @@ export interface ManagedSubscriptionSpecApiPlan {
 /**
  * Converts an object of type 'ManagedSubscriptionSpecApiPlan' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ManagedSubscriptionSpecApiPlan(obj: ManagedSubscriptionSpecApiPlan | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4711,7 +4711,7 @@ export function toJson_ManagedSubscriptionSpecApiPlan(obj: ManagedSubscriptionSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APISelector selects the APIs that will be accessible.
@@ -4743,7 +4743,7 @@ export interface ManagedSubscriptionSpecApiSelector {
 /**
  * Converts an object of type 'ManagedSubscriptionSpecApiSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ManagedSubscriptionSpecApiSelector(obj: ManagedSubscriptionSpecApiSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4753,7 +4753,7 @@ export function toJson_ManagedSubscriptionSpecApiSelector(obj: ManagedSubscripti
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APIReference references an API.
@@ -4773,7 +4773,7 @@ export interface ManagedSubscriptionSpecApis {
 /**
  * Converts an object of type 'ManagedSubscriptionSpecApis' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ManagedSubscriptionSpecApis(obj: ManagedSubscriptionSpecApis | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4782,7 +4782,7 @@ export function toJson_ManagedSubscriptionSpecApis(obj: ManagedSubscriptionSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ApplicationReference references an Application.
@@ -4803,7 +4803,7 @@ export interface ManagedSubscriptionSpecApplications {
 /**
  * Converts an object of type 'ManagedSubscriptionSpecApplications' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ManagedSubscriptionSpecApplications(obj: ManagedSubscriptionSpecApplications | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4812,7 +4812,7 @@ export function toJson_ManagedSubscriptionSpecApplications(obj: ManagedSubscript
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * OperationFilter specifies the allowed operations on APIs and APIVersions.
@@ -4834,7 +4834,7 @@ export interface ManagedSubscriptionSpecOperationFilter {
 /**
  * Converts an object of type 'ManagedSubscriptionSpecOperationFilter' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ManagedSubscriptionSpecOperationFilter(obj: ManagedSubscriptionSpecOperationFilter | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4843,7 +4843,7 @@ export function toJson_ManagedSubscriptionSpecOperationFilter(obj: ManagedSubscr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -4882,7 +4882,7 @@ export interface ManagedSubscriptionSpecApiSelectorMatchExpressions {
 /**
  * Converts an object of type 'ManagedSubscriptionSpecApiSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ManagedSubscriptionSpecApiSelectorMatchExpressions(obj: ManagedSubscriptionSpecApiSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4893,5 +4893,5 @@ export function toJson_ManagedSubscriptionSpecApiSelectorMatchExpressions(obj: M
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
