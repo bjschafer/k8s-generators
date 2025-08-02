@@ -8,10 +8,37 @@ metadata:
     app.kubernetes.io/instance: metrics
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-operator
-    app.kubernetes.io/version: v0.60.2
-    helm.sh/chart: victoria-metrics-operator-0.50.3
+    app.kubernetes.io/version: v0.61.2
+    helm.sh/chart: victoria-metrics-operator-0.51.4
   name: metrics-victoria-metrics-operator-admission
 webhooks:
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      service:
+        name: metrics-victoria-metrics-operator
+        namespace: metrics
+        path: /validate-operator-victoriametrics-com-v1-vlagent
+        port: 9443
+    failurePolicy: Fail
+    name: vlagents.operator.victoriametrics.com
+    objectSelector:
+      matchExpressions:
+        - key: app.kubernetes.io/name
+          operator: NotIn
+          values:
+            - victoria-metrics-operator
+    rules:
+      - apiGroups:
+          - operator.victoriametrics.com
+        apiVersions:
+          - v1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - vlagents
+    sideEffects: None
   - admissionReviewVersions:
       - v1
     clientConfig:
