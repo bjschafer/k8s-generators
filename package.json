@@ -21,7 +21,7 @@
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^8.38.0",
     "@typescript-eslint/parser": "^8.38.0",
-    "cdk8s": "^2.70.3",
+    "cdk8s": "^2.70.4",
     "cdk8s-plus-32": "^2.1.7",
     "constructs": "^10.4.2",
     "eslint": "^9.32.0",
@@ -34,12 +34,12 @@
     "@types/jest": "^30.0.0",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^24.1.0",
-    "cdk8s-cli": "^2.200.143",
+    "cdk8s-cli": "^2.200.146",
     "jest": "^30.0.5",
     "json-schema-to-typescript": "^15.0.4",
     "npm-check-updates": "^18.0.2",
     "ts-jest": "^29.4.0",
-    "typescript": "^5.8.3",
+    "typescript": "^5.9.2",
     "yarn": "^1.22.22"
   }
 }
