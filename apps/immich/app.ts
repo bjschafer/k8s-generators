@@ -158,7 +158,7 @@ new AppPlus(app, "immich-machine-learning", {
       props: {
         storageClassName: StorageClass.CEPHFS,
         accessModes: [PersistentVolumeAccessMode.READ_WRITE_MANY],
-        storage: Size.gibibytes(5),
+        storage: Size.gibibytes(10),
       },
     },
   ],
