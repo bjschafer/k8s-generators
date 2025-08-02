@@ -388,21 +388,17 @@ spec:
                       type: string
                   type: object
                 license:
-                  description: >-
-                    License allows to configure license key to be used for
-                    enterprise features.
-
-                    Using license key is supported starting from VictoriaMetrics
-                    v1.94.0.
-
-                    See [here](https://docs.victoriametrics.com/enterprise)
+                  description: |-
+                    License allows to configure license key to be used for enterprise features.
+                    Using license key is supported starting from VictoriaMetrics v1.94.0.
+                    See [here](https://docs.victoriametrics.com/victoriametrics/enterprise/)
                   properties:
                     forceOffline:
                       description: Enforce offline verification of the license key.
                       type: boolean
                     key:
                       description: |-
-                        Enterprise license key. This flag is available only in [VictoriaMetrics enterprise](https://docs.victoriametrics.com/enterprise).
+                        Enterprise license key. This flag is available only in [VictoriaMetrics enterprise](https://docs.victoriametrics.com/victoriametrics/enterprise/).
                         To request a trial license, [go to](https://victoriametrics.com/products/enterprise/trial)
                       type: string
                     keyRef:
@@ -1202,12 +1198,9 @@ spec:
 
                               before aggregation.
                             items:
-                              description: >-
-                                RelabelConfig allows dynamic rewriting of the
-                                label set
-
-                                More info:
-                                https://docs.victoriametrics.com/#relabeling
+                              description: |-
+                                RelabelConfig allows dynamic rewriting of the label set
+                                More info: https://docs.victoriametrics.com/victoriametrics/#relabeling
                               properties:
                                 action:
                                   description: Action to perform based on regex matching. Default is 'replace'
@@ -1232,7 +1225,7 @@ spec:
                                   description: |-
                                     Regular expression against which the extracted value is matched. Default is '(.*)'
                                     victoriaMetrics supports multiline regex joined with |
-                                    https://docs.victoriametrics.com/vmagent/#relabeling-enhancements
+                                    https://docs.victoriametrics.com/victoriametrics/vmagent/#relabeling-enhancements
                                   x-kubernetes-preserve-unknown-fields: true
                                 replacement:
                                   description: >-
@@ -1317,12 +1310,9 @@ spec:
                               on the aggregated output before being sent to
                               remote storage.
                             items:
-                              description: >-
-                                RelabelConfig allows dynamic rewriting of the
-                                label set
-
-                                More info:
-                                https://docs.victoriametrics.com/#relabeling
+                              description: |-
+                                RelabelConfig allows dynamic rewriting of the label set
+                                More info: https://docs.victoriametrics.com/victoriametrics/#relabeling
                               properties:
                                 action:
                                   description: Action to perform based on regex matching. Default is 'replace'
@@ -1347,7 +1337,7 @@ spec:
                                   description: |-
                                     Regular expression against which the extracted value is matched. Default is '(.*)'
                                     victoriaMetrics supports multiline regex joined with |
-                                    https://docs.victoriametrics.com/vmagent/#relabeling-enhancements
+                                    https://docs.victoriametrics.com/victoriametrics/vmagent/#relabeling-enhancements
                                   x-kubernetes-preserve-unknown-fields: true
                                 replacement:
                                   description: >-
@@ -1587,6 +1577,8 @@ spec:
                         single/cluster version.
 
                         https://victoriametrics.com/legal/esa/
+
+                        Deprecated: use license.key or license.keyRef instead
                       type: boolean
                     concurrency:
                       description: Defines number of concurrent workers. Higher concurrency may reduce
@@ -1950,7 +1942,7 @@ spec:
                     restore:
                       description: |-
                         Restore Allows to enable restore options for pod
-                        Read [more](https://docs.victoriametrics.com/vmbackupmanager#restore-commands)
+                        Read [more](https://docs.victoriametrics.com/victoriametrics/vmbackupmanager/#restore-commands)
                       properties:
                         onStart:
                           description: OnStart defines configuration for restore on pod start
