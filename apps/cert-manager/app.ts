@@ -9,7 +9,7 @@ import { ClusterIssuer } from "../../imports/cert-manager.io";
 export const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
-const version = "1.17.1";
+const version = "1.18.2";
 
 NewArgoApp(name, {
   namespace: namespace,

@@ -225,7 +225,7 @@ spec:
                         items:
                           description: |-
                             RelabelConfig allows dynamic rewriting of the label set
-                            More info: https://docs.victoriametrics.com/#relabeling
+                            More info: https://docs.victoriametrics.com/victoriametrics/#relabeling
                           properties:
                             action:
                               description: Action to perform based on regex matching. Default is 'replace'
@@ -249,7 +249,7 @@ spec:
                               description: |-
                                 Regular expression against which the extracted value is matched. Default is '(.*)'
                                 victoriaMetrics supports multiline regex joined with |
-                                https://docs.victoriametrics.com/vmagent/#relabeling-enhancements
+                                https://docs.victoriametrics.com/victoriametrics/vmagent/#relabeling-enhancements
                               x-kubernetes-preserve-unknown-fields: true
                             replacement:
                               description: |-
@@ -417,7 +417,7 @@ spec:
                         items:
                           description: |-
                             RelabelConfig allows dynamic rewriting of the label set
-                            More info: https://docs.victoriametrics.com/#relabeling
+                            More info: https://docs.victoriametrics.com/victoriametrics/#relabeling
                           properties:
                             action:
                               description: Action to perform based on regex matching. Default is 'replace'
@@ -441,7 +441,7 @@ spec:
                               description: |-
                                 Regular expression against which the extracted value is matched. Default is '(.*)'
                                 victoriaMetrics supports multiline regex joined with |
-                                https://docs.victoriametrics.com/vmagent/#relabeling-enhancements
+                                https://docs.victoriametrics.com/victoriametrics/vmagent/#relabeling-enhancements
                               x-kubernetes-preserve-unknown-fields: true
                             replacement:
                               description: |-
@@ -664,7 +664,7 @@ spec:
                               disable_keepalive allows disabling HTTP keep-alive when scraping targets.
                               By default, HTTP keep-alive is enabled, so TCP connections to scrape targets
                               could be reused.
-                              See https://docs.victoriametrics.com/vmagent#scrape_config-enhancements
+                              See https://docs.victoriametrics.com/victoriametrics/vmagent#scrape_config-enhancements
                             type: boolean
                           headers:
                             description: |-
@@ -681,7 +681,7 @@ spec:
                           proxy_client_config:
                             description: |-
                               ProxyClientConfig configures proxy auth settings for scraping
-                              See feature description https://docs.victoriametrics.com/vmagent#scraping-targets-via-a-proxy
+                              See feature description https://docs.victoriametrics.com/victoriametrics/vmagent#scraping-targets-via-a-proxy
                             properties:
                               basic_auth:
                                 description: BasicAuth allow an endpoint to authenticate over basic authentication

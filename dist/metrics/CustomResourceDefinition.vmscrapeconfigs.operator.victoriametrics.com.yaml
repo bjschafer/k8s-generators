@@ -85,7 +85,7 @@ spec:
                   items:
                     description: |-
                       AzureSDConfig allow retrieving scrape targets from Azure VMs.
-                      See [here](https://docs.victoriametrics.com/sd_configs#azure_sd_configs)
+                      See [here](https://docs.victoriametrics.com/victoriametrics/sd_configs/#azure_sd_configs)
                     properties:
                       authenticationMethod:
                         description: |-
@@ -233,7 +233,7 @@ spec:
                   items:
                     description: |-
                       ConsulSDConfig defines a Consul service discovery configuration.
-                      See [here](https://docs.victoriametrics.com/sd_configs/#consul_sd_configs)
+                      See [here](https://docs.victoriametrics.com/victoriametrics/sd_configs/#consul_sd_configs)
                     properties:
                       allowStale:
                         description: |-
@@ -466,7 +466,7 @@ spec:
                       proxy_client_config:
                         description: |-
                           ProxyClientConfig configures proxy auth settings for scraping
-                          See [feature description](https://docs.victoriametrics.com/vmagent#scraping-targets-via-a-proxy)
+                          See [feature description](https://docs.victoriametrics.com/victoriametrics/vmagent/#scraping-targets-via-a-proxy)
                         properties:
                           basic_auth:
                             description: BasicAuth allow an endpoint to authenticate over basic authentication
@@ -748,7 +748,7 @@ spec:
                     description: |-
                       DigitalOceanSDConfig allow retrieving scrape targets from DigitalOcean's Droplets API.
                       This service discovery uses the public IPv4 address by default, by that can be changed with relabeling.
-                      See [here](https://docs.victoriametrics.com/sd_configs#digitalocean_sd_configs)
+                      See [here](https://docs.victoriametrics.com/victoriametrics/sd_configs/#digitalocean_sd_configs)
                     properties:
                       authorization:
                         description: Authorization header to use on every scrape request.
@@ -900,7 +900,7 @@ spec:
                       proxy_client_config:
                         description: |-
                           ProxyClientConfig configures proxy auth settings for scraping
-                          See [feature description](https://docs.victoriametrics.com/vmagent#scraping-targets-via-a-proxy)
+                          See [feature description](https://docs.victoriametrics.com/victoriametrics/vmagent/#scraping-targets-via-a-proxy)
                         properties:
                           basic_auth:
                             description: BasicAuth allow an endpoint to authenticate over basic authentication
@@ -1131,7 +1131,7 @@ spec:
                     description: |-
                       DNSSDConfig allows specifying a set of DNS domain names which are periodically queried to discover a list of targets.
                       The DNS servers to be contacted are read from /etc/resolv.conf.
-                      See [here](https://docs.victoriametrics.com/sd_configs#dns_sd_configs)
+                      See [here](https://docs.victoriametrics.com/victoriametrics/sd_configs/#dns_sd_configs)
                     properties:
                       names:
                         description: A list of DNS domain names to be queried.
@@ -1162,7 +1162,7 @@ spec:
                       EC2SDConfig allow retrieving scrape targets from AWS EC2 instances.
                       The private IP address is used by default, but may be changed to the public IP address with relabeling.
                       The IAM credentials used must have the ec2:DescribeInstances permission to discover scrape targets.
-                      See [here](https://docs.victoriametrics.com/sd_configs#ec2_sd_configs)
+                      See [here](https://docs.victoriametrics.com/victoriametrics/sd_configs/#ec2_sd_configs)
                     properties:
                       accessKey:
                         description: AccessKey is the AWS API key.
@@ -1246,7 +1246,7 @@ spec:
                   items:
                     description: |-
                       FileSDConfig defines a file service discovery configuration.
-                      See [here](https://docs.victoriametrics.com/sd_configs#file_sd_configs)
+                      See [here](https://docs.victoriametrics.com/victoriametrics/sd_configs/#file_sd_configs)
                     properties:
                       files:
                         description: List of files to be used for file discovery.
@@ -1268,7 +1268,7 @@ spec:
                       GCESDConfig configures scrape targets from GCP GCE instances.
                       The private IP address is used by default, but may be changed to
                       the public IP address with relabeling.
-                      See [here](https://docs.victoriametrics.com/sd_configs#gce_sd_configs)
+                      See [here](https://docs.victoriametrics.com/victoriametrics/sd_configs/#gce_sd_configs)
 
                       The GCE service discovery will load the Google Cloud credentials
                       from the file specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable.
@@ -1311,7 +1311,7 @@ spec:
                   items:
                     description: |-
                       HTTPSDConfig defines a HTTP service discovery configuration.
-                      See [here](https://docs.victoriametrics.com/sd_configs#http_sd_configs)
+                      See [here](https://docs.victoriametrics.com/victoriametrics/sd_configs/#http_sd_configs)
                     properties:
                       authorization:
                         description: Authorization header to use on every scrape request.
@@ -1408,7 +1408,7 @@ spec:
                       proxy_client_config:
                         description: |-
                           ProxyClientConfig configures proxy auth settings for scraping
-                          See [feature description](https://docs.victoriametrics.com/vmagent#scraping-targets-via-a-proxy)
+                          See [feature description](https://docs.victoriametrics.com/victoriametrics/vmagent/#scraping-targets-via-a-proxy)
                         properties:
                           basic_auth:
                             description: BasicAuth allow an endpoint to authenticate over basic authentication
@@ -1648,7 +1648,7 @@ spec:
                   items:
                     description: |-
                       KubernetesSDConfig allows retrieving scrape targets from Kubernetes' REST API.
-                      See [here](https://docs.victoriametrics.com/sd_configs#kubernetes_sd_configs)
+                      See [here](https://docs.victoriametrics.com/victoriametrics/sd_configs/#kubernetes_sd_configs)
                     properties:
                       apiServer:
                         description: |-
@@ -1885,7 +1885,7 @@ spec:
                       proxy_client_config:
                         description: |-
                           ProxyClientConfig configures proxy auth settings for scraping
-                          See [feature description](https://docs.victoriametrics.com/vmagent#scraping-targets-via-a-proxy)
+                          See [feature description](https://docs.victoriametrics.com/victoriametrics/vmagent/#scraping-targets-via-a-proxy)
                         properties:
                           basic_auth:
                             description: BasicAuth allow an endpoint to authenticate over basic authentication
@@ -2141,7 +2141,7 @@ spec:
                   items:
                     description: |-
                       RelabelConfig allows dynamic rewriting of the label set
-                      More info: https://docs.victoriametrics.com/#relabeling
+                      More info: https://docs.victoriametrics.com/victoriametrics/#relabeling
                     properties:
                       action:
                         description: Action to perform based on regex matching. Default is 'replace'
@@ -2165,7 +2165,7 @@ spec:
                         description: |-
                           Regular expression against which the extracted value is matched. Default is '(.*)'
                           victoriaMetrics supports multiline regex joined with |
-                          https://docs.victoriametrics.com/vmagent/#relabeling-enhancements
+                          https://docs.victoriametrics.com/victoriametrics/vmagent/#relabeling-enhancements
                         x-kubernetes-preserve-unknown-fields: true
                       replacement:
                         description: |-
@@ -2317,7 +2317,7 @@ spec:
                   items:
                     description: |-
                       OpenStackSDConfig allow retrieving scrape targets from OpenStack Nova instances.
-                      See [here](https://docs.victoriametrics.com/sd_configs#openstack_sd_configs)
+                      See [here](https://docs.victoriametrics.com/victoriametrics/sd_configs/#openstack_sd_configs)
                     properties:
                       allTenants:
                         description: |-
@@ -2602,7 +2602,7 @@ spec:
                   items:
                     description: |-
                       RelabelConfig allows dynamic rewriting of the label set
-                      More info: https://docs.victoriametrics.com/#relabeling
+                      More info: https://docs.victoriametrics.com/victoriametrics/#relabeling
                     properties:
                       action:
                         description: Action to perform based on regex matching. Default is 'replace'
@@ -2626,7 +2626,7 @@ spec:
                         description: |-
                           Regular expression against which the extracted value is matched. Default is '(.*)'
                           victoriaMetrics supports multiline regex joined with |
-                          https://docs.victoriametrics.com/vmagent/#relabeling-enhancements
+                          https://docs.victoriametrics.com/victoriametrics/vmagent/#relabeling-enhancements
                         x-kubernetes-preserve-unknown-fields: true
                       replacement:
                         description: |-
@@ -2698,7 +2698,7 @@ spec:
                   items:
                     description: |-
                       StaticConfig defines a static configuration.
-                      See [here](https://docs.victoriametrics.com/sd_configs#static_configs)
+                      See [here](https://docs.victoriametrics.com/victoriametrics/sd_configs/#static_configs)
                     properties:
                       labels:
                         additionalProperties:
@@ -2861,7 +2861,7 @@ spec:
                         disable_keepalive allows disabling HTTP keep-alive when scraping targets.
                         By default, HTTP keep-alive is enabled, so TCP connections to scrape targets
                         could be reused.
-                        See https://docs.victoriametrics.com/vmagent#scrape_config-enhancements
+                        See https://docs.victoriametrics.com/victoriametrics/vmagent#scrape_config-enhancements
                       type: boolean
                     headers:
                       description: |-
@@ -2878,7 +2878,7 @@ spec:
                     proxy_client_config:
                       description: |-
                         ProxyClientConfig configures proxy auth settings for scraping
-                        See feature description https://docs.victoriametrics.com/vmagent#scraping-targets-via-a-proxy
+                        See feature description https://docs.victoriametrics.com/victoriametrics/vmagent#scraping-targets-via-a-proxy
                       properties:
                         basic_auth:
                           description: BasicAuth allow an endpoint to authenticate over basic authentication
