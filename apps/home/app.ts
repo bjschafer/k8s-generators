@@ -43,7 +43,7 @@ new AppPlus(app, `${name}-app`, {
   resources: {
     memory: {
       request: Size.mebibytes(128),
-      limit: Size.mebibytes(512),
+      limit: Size.mebibytes(2048),
     },
   },
   replicas: 1, // TODO: replicas 2 breaks css :/
