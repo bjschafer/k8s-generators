@@ -90,13 +90,6 @@ new HomeConfig(app, `${name}-config`, {
           iconBubble: false,
         },
         {
-          name: "Forgejo",
-          uri: "https://git.cmdcentral.xyz",
-          icon: "forgejo",
-          description: "Local code repository",
-          iconBubble: false,
-        },
-        {
           name: "GitLab",
           uri: "https://gitlab.cmdcentral.xyz",
           icon: "gitlab",
@@ -152,15 +145,20 @@ new HomeConfig(app, `${name}-config`, {
           iconBubble: false,
         },
         {
+          name: "Jellyfin",
+          uri: "https://jellyfin.cmdcentral.xyz",
+          icon: "jellyfin",
+        },
+        {
           name: "Library",
           uri: "https://library.cmdcentral.xyz",
           icon: "mdi-library",
           description: "Books n shiet",
         },
         {
-          name: "Jellyfin",
-          uri: "https://jellyfin.cmdcentral.xyz",
-          icon: "jellyfin",
+          name: "Plex",
+          uri: "https://plex.tv/web",
+          icon: "plex",
         },
       ],
     },
@@ -241,12 +239,6 @@ new HomeConfig(app, `${name}-config`, {
           description: "VT350",
         },
         {
-          name: "Ender Tres",
-          uri: "https://endertres.cmdcentral.xyz",
-          icon: "mdi-blender",
-          description: "Ender 3",
-        },
-        {
           name: "Veronica",
           uri: "http://veronica.cmdcentral.xyz",
           icon: "voron",
@@ -260,12 +252,12 @@ new HomeConfig(app, `${name}-config`, {
           description: "V2.4",
           iconBubble: false,
         },
-        {
-          name: "Replicator",
-          uri: "http://replicator.cmdcentral.xyz:8000",
-          icon: "mdi-bolt",
-          description: "CNC machine",
-        },
+        //        {
+        //          name: "Replicator",
+        //          uri: "http://replicator.cmdcentral.xyz:8000",
+        //          icon: "mdi-bolt",
+        //          description: "CNC machine",
+        //        },
       ],
     },
     {
