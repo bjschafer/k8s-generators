@@ -339,7 +339,8 @@ export class VmResources extends Chart {
                 ...[
                   "/targets",
                   "/service-discovery",
-                  "/api/v1/targets",
+                  "/api/v1",
+                  "/api/v2",
                   "/config",
                   "/target-relabel-debug",
                   "/metric-relabel-debug",
