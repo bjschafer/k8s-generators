@@ -30,7 +30,7 @@ spec:
             - vlagent,vlcluster,vlogs,vlsingle,vmagent,vmalert,vmalertmanager,vmalertmanagerconfig,vmanomaly,vmauth,vmcluster,vmnodescrape,vmpodscrape,vmprobe,vmrule,vmservicescrape,vmsingle,vmstaticscrape,vmuser
             - --all
             - --ignore-not-found=true
-          image: bitnami/kubectl:1.33
+          image: rancher/kubectl:1.33
           imagePullPolicy: IfNotPresent
           name: kubectl
           resources:
