@@ -26,7 +26,7 @@ import { Construct } from "constructs";
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
-const version = "2025.6.4";
+const version = "2025.8.0";
 
 NewArgoApp(namespace, {
   namespace: namespace,
@@ -294,6 +294,14 @@ class AuthentikMonitoring extends Chart {
       matchLabels: {
         [WellKnownLabels.Name]: "authentik",
         [WellKnownLabels.Component]: "server",
+      },
+    });
+    new CmdcentralServiceMonitor(this, "worker-monitoring", {
+      name: "authentik-worker",
+      namespace: namespace,
+      matchLabels: {
+        [WellKnownLabels.Name]: "authentik",
+        [WellKnownLabels.Component]: "worker",
       },
     });
 
