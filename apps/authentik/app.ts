@@ -26,7 +26,7 @@ import { Construct } from "constructs";
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
-const version = "2025.8.0";
+const version = "2025.8.1";
 
 NewArgoApp(namespace, {
   namespace: namespace,
