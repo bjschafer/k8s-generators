@@ -50,7 +50,7 @@ export class Certificate extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -109,10 +109,6 @@ export interface CertificateSpec {
   /**
    * Defines extra output formats of the private key and signed certificate chain
    * to be written to this Certificate's target Secret.
-   *
-   * This is a Beta Feature enabled by default. It can be disabled with the
-   * `--feature-gates=AdditionalCertificateOutputFormats=false` option set on both
-   * the controller and webhook components.
    *
    * @schema CertificateSpec#additionalOutputFormats
    */
@@ -301,8 +297,7 @@ export interface CertificateSpec {
    * revisions exceeds this number.
    *
    * If set, revisionHistoryLimit must be a value of `1` or greater.
-   * If unset (`nil`), revisions will not be garbage collected.
-   * Default value is `nil`.
+   * Default value is `1`.
    *
    * @schema CertificateSpec#revisionHistoryLimit
    */
@@ -328,6 +323,16 @@ export interface CertificateSpec {
    * @schema CertificateSpec#secretTemplate
    */
   readonly secretTemplate?: CertificateSpecSecretTemplate;
+
+  /**
+   * Signature algorithm to use.
+   * Allowed values for RSA keys: SHA256WithRSA, SHA384WithRSA, SHA512WithRSA.
+   * Allowed values for ECDSA keys: ECDSAWithSHA256, ECDSAWithSHA384, ECDSAWithSHA512.
+   * Allowed values for Ed25519 keys: PureEd25519.
+   *
+   * @schema CertificateSpec#signatureAlgorithm
+   */
+  readonly signatureAlgorithm?: CertificateSpecSignatureAlgorithm;
 
   /**
    * Requested set of X509 certificate subject attributes.
@@ -387,6 +392,7 @@ export function toJson_CertificateSpec(obj: CertificateSpec | undefined): Record
     'revisionHistoryLimit': obj.revisionHistoryLimit,
     'secretName': obj.secretName,
     'secretTemplate': toJson_CertificateSpecSecretTemplate(obj.secretTemplate),
+    'signatureAlgorithm': obj.signatureAlgorithm,
     'subject': toJson_CertificateSpecSubject(obj.subject),
     'uris': obj.uris?.map(y => y),
     'usages': obj.usages?.map(y => y),
@@ -651,9 +657,13 @@ export interface CertificateSpecPrivateKey {
    * to await user intervention.
    * If set to `Always`, a private key matching the specified requirements
    * will be generated whenever a re-issuance occurs.
-   * Default is `Never` for backward compatibility.
+   * Default is `Always`.
+   * The default was changed from `Never` to `Always` in cert-manager >=v1.18.0.
+   * The new default can be disabled by setting the
+   * `--feature-gates=DefaultPrivateKeyRotationPolicyAlways=false` option on
+   * the controller component.
    *
-   * @default Never` for backward compatibility.
+   * @default Always`.
    * @schema CertificateSpecPrivateKey#rotationPolicy
    */
   readonly rotationPolicy?: CertificateSpecPrivateKeyRotationPolicy;
@@ -731,6 +741,31 @@ export function toJson_CertificateSpecSecretTemplate(obj: CertificateSpecSecretT
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Signature algorithm to use.
+ * Allowed values for RSA keys: SHA256WithRSA, SHA384WithRSA, SHA512WithRSA.
+ * Allowed values for ECDSA keys: ECDSAWithSHA256, ECDSAWithSHA384, ECDSAWithSHA512.
+ * Allowed values for Ed25519 keys: PureEd25519.
+ *
+ * @schema CertificateSpecSignatureAlgorithm
+ */
+export enum CertificateSpecSignatureAlgorithm {
+  /** SHA256WithRSA */
+  SHA256_WITH_RSA = "SHA256WithRSA",
+  /** SHA384WithRSA */
+  SHA384_WITH_RSA = "SHA384WithRSA",
+  /** SHA512WithRSA */
+  SHA512_WITH_RSA = "SHA512WithRSA",
+  /** ECDSAWithSHA256 */
+  ECDSA_WITH_SHA256 = "ECDSAWithSHA256",
+  /** ECDSAWithSHA384 */
+  ECDSA_WITH_SHA384 = "ECDSAWithSHA384",
+  /** ECDSAWithSHA512 */
+  ECDSA_WITH_SHA512 = "ECDSAWithSHA512",
+  /** PureEd25519 */
+  PURE_ED25519 = "PureEd25519",
+}
 
 /**
  * Requested set of X509 certificate subject attributes.
@@ -1033,7 +1068,7 @@ export interface CertificateSpecKeystoresPkcs12 {
    * `LegacyRC2`: Deprecated. Not supported by default in OpenSSL 3 or Java 20.
    * `LegacyDES`: Less secure algorithm. Use this option for maximal compatibility.
    * `Modern2023`: Secure algorithm. Use this option in case you have to always use secure algorithms
-   * (eg. because of company policy). Please note that the security of the algorithm is not that important
+   * (e.g., because of company policy). Please note that the security of the algorithm is not that important
    * in reality, because the unencrypted certificate and private key are also stored in the Secret.
    *
    * @schema CertificateSpecKeystoresPkcs12#profile
@@ -1218,9 +1253,13 @@ export enum CertificateSpecPrivateKeyEncoding {
  * to await user intervention.
  * If set to `Always`, a private key matching the specified requirements
  * will be generated whenever a re-issuance occurs.
- * Default is `Never` for backward compatibility.
+ * Default is `Always`.
+ * The default was changed from `Never` to `Always` in cert-manager >=v1.18.0.
+ * The new default can be disabled by setting the
+ * `--feature-gates=DefaultPrivateKeyRotationPolicyAlways=false` option on
+ * the controller component.
  *
- * @default Never` for backward compatibility.
+ * @default Always`.
  * @schema CertificateSpecPrivateKeyRotationPolicy
  */
 export enum CertificateSpecPrivateKeyRotationPolicy {
@@ -1324,7 +1363,7 @@ export function toJson_CertificateSpecKeystoresPkcs12PasswordSecretRef(obj: Cert
  * `LegacyRC2`: Deprecated. Not supported by default in OpenSSL 3 or Java 20.
  * `LegacyDES`: Less secure algorithm. Use this option for maximal compatibility.
  * `Modern2023`: Secure algorithm. Use this option in case you have to always use secure algorithms
- * (eg. because of company policy). Please note that the security of the algorithm is not that important
+ * (e.g., because of company policy). Please note that the security of the algorithm is not that important
  * in reality, because the unencrypted certificate and private key are also stored in the Secret.
  *
  * @schema CertificateSpecKeystoresPkcs12Profile
@@ -1391,7 +1430,7 @@ export class CertificateRequest extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -1753,7 +1792,7 @@ export class ClusterIssuer extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -1938,7 +1977,7 @@ export interface ClusterIssuerSpecAcme {
    * PreferredChain is the chain to use if the ACME server outputs multiple.
    * PreferredChain is no guarantee that this one gets delivered by the ACME
    * endpoint.
-   * For example, for Let's Encrypt's DST crosssign you would use:
+   * For example, for Let's Encrypt's DST cross-sign you would use:
    * "DST Root CA X3" or "ISRG Root X1" for the newer Let's Encrypt root CA.
    * This value picks the first certificate bundle in the combined set of
    * ACME default and alternative chains that has a root-most certificate with
@@ -1958,6 +1997,14 @@ export interface ClusterIssuerSpecAcme {
    * @schema ClusterIssuerSpecAcme#privateKeySecretRef
    */
   readonly privateKeySecretRef: ClusterIssuerSpecAcmePrivateKeySecretRef;
+
+  /**
+   * Profile allows requesting a certificate profile from the ACME server.
+   * Supported profiles are listed by the server's ACME directory URL.
+   *
+   * @schema ClusterIssuerSpecAcme#profile
+   */
+  readonly profile?: string;
 
   /**
    * Server is the URL used to access the ACME server's 'directory' endpoint.
@@ -2012,6 +2059,7 @@ export function toJson_ClusterIssuerSpecAcme(obj: ClusterIssuerSpecAcme | undefi
     'externalAccountBinding': toJson_ClusterIssuerSpecAcmeExternalAccountBinding(obj.externalAccountBinding),
     'preferredChain': obj.preferredChain,
     'privateKeySecretRef': toJson_ClusterIssuerSpecAcmePrivateKeySecretRef(obj.privateKeySecretRef),
+    'profile': obj.profile,
     'server': obj.server,
     'skipTLSVerify': obj.skipTlsVerify,
     'solvers': obj.solvers?.map(y => toJson_ClusterIssuerSpecAcmeSolvers(y)),
@@ -2194,6 +2242,14 @@ export interface ClusterIssuerSpecVault {
    */
   readonly server: string;
 
+  /**
+   * ServerName is used to verify the hostname on the returned certificates
+   * by the Vault server.
+   *
+   * @schema ClusterIssuerSpecVault#serverName
+   */
+  readonly serverName?: string;
+
 }
 
 /**
@@ -2211,6 +2267,7 @@ export function toJson_ClusterIssuerSpecVault(obj: ClusterIssuerSpecVault | unde
     'namespace': obj.namespace,
     'path': obj.path,
     'server': obj.server,
+    'serverName': obj.serverName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -2388,7 +2445,7 @@ export interface ClusterIssuerSpecAcmeSolvers {
    * Configures cert-manager to attempt to complete authorizations by
    * performing the HTTP01 challenge flow.
    * It is not possible to obtain certificates for wildcard domain names
-   * (e.g. `*.example.com`) using the HTTP01 challenge mechanism.
+   * (e.g., `*.example.com`) using the HTTP01 challenge mechanism.
    *
    * @schema ClusterIssuerSpecAcmeSolvers#http01
    */
@@ -2623,9 +2680,9 @@ export interface ClusterIssuerSpecVenafiCloud {
 
   /**
    * URL is the base URL for Venafi Cloud.
-   * Defaults to "https://api.venafi.cloud/v1".
+   * Defaults to "https://api.venafi.cloud/".
    *
-   * @default https://api.venafi.cloud/v1".
+   * @default https://api.venafi.cloud/".
    * @schema ClusterIssuerSpecVenafiCloud#url
    */
   readonly url?: string;
@@ -2883,7 +2940,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01(obj: ClusterIssuerSpecA
  * Configures cert-manager to attempt to complete authorizations by
  * performing the HTTP01 challenge flow.
  * It is not possible to obtain certificates for wildcard domain names
- * (e.g. `*.example.com`) using the HTTP01 challenge mechanism.
+ * (e.g., `*.example.com`) using the HTTP01 challenge mechanism.
  *
  * @schema ClusterIssuerSpecAcmeSolversHttp01
  */
@@ -3818,7 +3875,7 @@ export interface ClusterIssuerSpecAcmeSolversDns01Webhook {
    * when challenges are processed.
    * This can contain arbitrary JSON data.
    * Secret values should not be specified in this stanza.
-   * If secret values are needed (e.g. credentials for a DNS service), you
+   * If secret values are needed (e.g., credentials for a DNS service), you
    * should use a SecretKeySelector to reference a Secret resource.
    * For details on the schema of this field, consult the webhook provider
    * implementation's documentation.
@@ -3840,7 +3897,7 @@ export interface ClusterIssuerSpecAcmeSolversDns01Webhook {
   /**
    * The name of the solver to use, as defined in the webhook provider
    * implementation.
-   * This will typically be the name of the provider, e.g. 'cloudflare'.
+   * This will typically be the name of the provider, e.g., 'cloudflare'.
    *
    * @schema ClusterIssuerSpecAcmeSolversDns01Webhook#solverName
    */
@@ -4370,14 +4427,14 @@ export enum ClusterIssuerSpecAcmeSolversDns01AzureDnsEnvironment {
  */
 export interface ClusterIssuerSpecAcmeSolversDns01AzureDnsManagedIdentity {
   /**
-   * client ID of the managed identity, can not be used at the same time as resourceID
+   * client ID of the managed identity, cannot be used at the same time as resourceID
    *
    * @schema ClusterIssuerSpecAcmeSolversDns01AzureDnsManagedIdentity#clientID
    */
   readonly clientId?: string;
 
   /**
-   * resource ID of the managed identity, can not be used at the same time as clientID
+   * resource ID of the managed identity, cannot be used at the same time as clientID
    * Cannot be used for Azure Managed Service Identity
    *
    * @schema ClusterIssuerSpecAcmeSolversDns01AzureDnsManagedIdentity#resourceID
@@ -4385,7 +4442,7 @@ export interface ClusterIssuerSpecAcmeSolversDns01AzureDnsManagedIdentity {
   readonly resourceId?: string;
 
   /**
-   * tenant ID of the managed identity, can not be used at the same time as resourceID
+   * tenant ID of the managed identity, cannot be used at the same time as resourceID
    *
    * @schema ClusterIssuerSpecAcmeSolversDns01AzureDnsManagedIdentity#tenantID
    */
@@ -9698,7 +9755,7 @@ export class Issuer extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -9882,7 +9939,7 @@ export interface IssuerSpecAcme {
    * PreferredChain is the chain to use if the ACME server outputs multiple.
    * PreferredChain is no guarantee that this one gets delivered by the ACME
    * endpoint.
-   * For example, for Let's Encrypt's DST crosssign you would use:
+   * For example, for Let's Encrypt's DST cross-sign you would use:
    * "DST Root CA X3" or "ISRG Root X1" for the newer Let's Encrypt root CA.
    * This value picks the first certificate bundle in the combined set of
    * ACME default and alternative chains that has a root-most certificate with
@@ -9902,6 +9959,14 @@ export interface IssuerSpecAcme {
    * @schema IssuerSpecAcme#privateKeySecretRef
    */
   readonly privateKeySecretRef: IssuerSpecAcmePrivateKeySecretRef;
+
+  /**
+   * Profile allows requesting a certificate profile from the ACME server.
+   * Supported profiles are listed by the server's ACME directory URL.
+   *
+   * @schema IssuerSpecAcme#profile
+   */
+  readonly profile?: string;
 
   /**
    * Server is the URL used to access the ACME server's 'directory' endpoint.
@@ -9956,6 +10021,7 @@ export function toJson_IssuerSpecAcme(obj: IssuerSpecAcme | undefined): Record<s
     'externalAccountBinding': toJson_IssuerSpecAcmeExternalAccountBinding(obj.externalAccountBinding),
     'preferredChain': obj.preferredChain,
     'privateKeySecretRef': toJson_IssuerSpecAcmePrivateKeySecretRef(obj.privateKeySecretRef),
+    'profile': obj.profile,
     'server': obj.server,
     'skipTLSVerify': obj.skipTlsVerify,
     'solvers': obj.solvers?.map(y => toJson_IssuerSpecAcmeSolvers(y)),
@@ -10138,6 +10204,14 @@ export interface IssuerSpecVault {
    */
   readonly server: string;
 
+  /**
+   * ServerName is used to verify the hostname on the returned certificates
+   * by the Vault server.
+   *
+   * @schema IssuerSpecVault#serverName
+   */
+  readonly serverName?: string;
+
 }
 
 /**
@@ -10155,6 +10229,7 @@ export function toJson_IssuerSpecVault(obj: IssuerSpecVault | undefined): Record
     'namespace': obj.namespace,
     'path': obj.path,
     'server': obj.server,
+    'serverName': obj.serverName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -10332,7 +10407,7 @@ export interface IssuerSpecAcmeSolvers {
    * Configures cert-manager to attempt to complete authorizations by
    * performing the HTTP01 challenge flow.
    * It is not possible to obtain certificates for wildcard domain names
-   * (e.g. `*.example.com`) using the HTTP01 challenge mechanism.
+   * (e.g., `*.example.com`) using the HTTP01 challenge mechanism.
    *
    * @schema IssuerSpecAcmeSolvers#http01
    */
@@ -10567,9 +10642,9 @@ export interface IssuerSpecVenafiCloud {
 
   /**
    * URL is the base URL for Venafi Cloud.
-   * Defaults to "https://api.venafi.cloud/v1".
+   * Defaults to "https://api.venafi.cloud/".
    *
-   * @default https://api.venafi.cloud/v1".
+   * @default https://api.venafi.cloud/".
    * @schema IssuerSpecVenafiCloud#url
    */
   readonly url?: string;
@@ -10827,7 +10902,7 @@ export function toJson_IssuerSpecAcmeSolversDns01(obj: IssuerSpecAcmeSolversDns0
  * Configures cert-manager to attempt to complete authorizations by
  * performing the HTTP01 challenge flow.
  * It is not possible to obtain certificates for wildcard domain names
- * (e.g. `*.example.com`) using the HTTP01 challenge mechanism.
+ * (e.g., `*.example.com`) using the HTTP01 challenge mechanism.
  *
  * @schema IssuerSpecAcmeSolversHttp01
  */
@@ -11762,7 +11837,7 @@ export interface IssuerSpecAcmeSolversDns01Webhook {
    * when challenges are processed.
    * This can contain arbitrary JSON data.
    * Secret values should not be specified in this stanza.
-   * If secret values are needed (e.g. credentials for a DNS service), you
+   * If secret values are needed (e.g., credentials for a DNS service), you
    * should use a SecretKeySelector to reference a Secret resource.
    * For details on the schema of this field, consult the webhook provider
    * implementation's documentation.
@@ -11784,7 +11859,7 @@ export interface IssuerSpecAcmeSolversDns01Webhook {
   /**
    * The name of the solver to use, as defined in the webhook provider
    * implementation.
-   * This will typically be the name of the provider, e.g. 'cloudflare'.
+   * This will typically be the name of the provider, e.g., 'cloudflare'.
    *
    * @schema IssuerSpecAcmeSolversDns01Webhook#solverName
    */
@@ -12314,14 +12389,14 @@ export enum IssuerSpecAcmeSolversDns01AzureDnsEnvironment {
  */
 export interface IssuerSpecAcmeSolversDns01AzureDnsManagedIdentity {
   /**
-   * client ID of the managed identity, can not be used at the same time as resourceID
+   * client ID of the managed identity, cannot be used at the same time as resourceID
    *
    * @schema IssuerSpecAcmeSolversDns01AzureDnsManagedIdentity#clientID
    */
   readonly clientId?: string;
 
   /**
-   * resource ID of the managed identity, can not be used at the same time as clientID
+   * resource ID of the managed identity, cannot be used at the same time as clientID
    * Cannot be used for Azure Managed Service Identity
    *
    * @schema IssuerSpecAcmeSolversDns01AzureDnsManagedIdentity#resourceID
@@ -12329,7 +12404,7 @@ export interface IssuerSpecAcmeSolversDns01AzureDnsManagedIdentity {
   readonly resourceId?: string;
 
   /**
-   * tenant ID of the managed identity, can not be used at the same time as resourceID
+   * tenant ID of the managed identity, cannot be used at the same time as resourceID
    *
    * @schema IssuerSpecAcmeSolversDns01AzureDnsManagedIdentity#tenantID
    */

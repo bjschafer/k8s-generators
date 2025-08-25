@@ -47,7 +47,7 @@ export class Application extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -2187,6 +2187,13 @@ export interface ApplicationSpecSyncPolicyAutomated {
   readonly allowEmpty?: boolean;
 
   /**
+   * Enable allows apps to explicitly control automated sync
+   *
+   * @schema ApplicationSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * Prune specifies whether to delete resources from the cluster that are not found in the sources anymore as part of automated sync (default: false)
    *
    * @schema ApplicationSpecSyncPolicyAutomated#prune
@@ -2210,6 +2217,7 @@ export function toJson_ApplicationSpecSyncPolicyAutomated(obj: ApplicationSpecSy
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -5040,7 +5048,7 @@ export class ApplicationSet extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -6241,6 +6249,11 @@ export function toJson_ApplicationSetSpecGeneratorsGitDirectories(obj: Applicati
  */
 export interface ApplicationSetSpecGeneratorsGitFiles {
   /**
+   * @schema ApplicationSetSpecGeneratorsGitFiles#exclude
+   */
+  readonly exclude?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsGitFiles#path
    */
   readonly path: string;
@@ -6254,6 +6267,7 @@ export interface ApplicationSetSpecGeneratorsGitFiles {
 export function toJson_ApplicationSetSpecGeneratorsGitFiles(obj: ApplicationSetSpecGeneratorsGitFiles | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'exclude': obj.exclude,
     'path': obj.path,
   };
   // filter undefined values
@@ -6835,6 +6849,11 @@ export interface ApplicationSetSpecGeneratorsPullRequestGitea {
   readonly insecure?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestGitea#labels
+   */
+  readonly labels?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsPullRequestGitea#owner
    */
   readonly owner: string;
@@ -6860,6 +6879,7 @@ export function toJson_ApplicationSetSpecGeneratorsPullRequestGitea(obj: Applica
   const result = {
     'api': obj.api,
     'insecure': obj.insecure,
+    'labels': obj.labels?.map(y => y),
     'owner': obj.owner,
     'repo': obj.repo,
     'tokenRef': toJson_ApplicationSetSpecGeneratorsPullRequestGiteaTokenRef(obj.tokenRef),
@@ -11362,6 +11382,11 @@ export interface ApplicationSetSpecTemplateSpecSyncPolicyAutomated {
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -11381,6 +11406,7 @@ export function toJson_ApplicationSetSpecTemplateSpecSyncPolicyAutomated(obj: Ap
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -13079,6 +13105,11 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsGitDirectorie
  */
 export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitFiles {
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitFiles#exclude
+   */
+  readonly exclude?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitFiles#path
    */
   readonly path: string;
@@ -13092,6 +13123,7 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitFiles {
 export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsGitFiles(obj: ApplicationSetSpecGeneratorsMatrixGeneratorsGitFiles | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'exclude': obj.exclude,
     'path': obj.path,
   };
   // filter undefined values
@@ -13453,6 +13485,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitea {
   readonly insecure?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitea#labels
+   */
+  readonly labels?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitea#owner
    */
   readonly owner: string;
@@ -13478,6 +13515,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGi
   const result = {
     'api': obj.api,
     'insecure': obj.insecure,
+    'labels': obj.labels?.map(y => y),
     'owner': obj.owner,
     'repo': obj.repo,
     'tokenRef': toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGiteaTokenRef(obj.tokenRef),
@@ -14645,6 +14683,11 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsGitDirectories
  */
 export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitFiles {
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitFiles#exclude
+   */
+  readonly exclude?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitFiles#path
    */
   readonly path: string;
@@ -14658,6 +14701,7 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitFiles {
 export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsGitFiles(obj: ApplicationSetSpecGeneratorsMergeGeneratorsGitFiles | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'exclude': obj.exclude,
     'path': obj.path,
   };
   // filter undefined values
@@ -15019,6 +15063,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitea {
   readonly insecure?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitea#labels
+   */
+  readonly labels?: string[];
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitea#owner
    */
   readonly owner: string;
@@ -15044,6 +15093,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGit
   const result = {
     'api': obj.api,
     'insecure': obj.insecure,
+    'labels': obj.labels?.map(y => y),
     'owner': obj.owner,
     'repo': obj.repo,
     'tokenRef': toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGiteaTokenRef(obj.tokenRef),
@@ -18616,6 +18666,11 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -18635,6 +18690,7 @@ export function toJson_ApplicationSetSpecGeneratorsClusterDecisionResourceTempla
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -19440,6 +19496,11 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSyncPolicyAutom
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -19459,6 +19520,7 @@ export function toJson_ApplicationSetSpecGeneratorsClustersTemplateSpecSyncPolic
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -20264,6 +20326,11 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSyncPolicyAutomated 
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -20283,6 +20350,7 @@ export function toJson_ApplicationSetSpecGeneratorsGitTemplateSpecSyncPolicyAuto
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -21088,6 +21156,11 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSyncPolicyAutomated
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsListTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -21107,6 +21180,7 @@ export function toJson_ApplicationSetSpecGeneratorsListTemplateSpecSyncPolicyAut
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -23442,6 +23516,11 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSyncPolicyAutomat
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -23461,6 +23540,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixTemplateSpecSyncPolicyA
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -25796,6 +25876,11 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSyncPolicyAutomate
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -25815,6 +25900,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeTemplateSpecSyncPolicyAu
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -26620,6 +26706,11 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSyncPolicyAutomat
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -26639,6 +26730,7 @@ export function toJson_ApplicationSetSpecGeneratorsPluginTemplateSpecSyncPolicyA
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -27444,6 +27536,11 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSyncPolicyAu
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -27463,6 +27560,7 @@ export function toJson_ApplicationSetSpecGeneratorsPullRequestTemplateSpecSyncPo
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -28268,6 +28366,11 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSyncPolicyAu
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -28287,6 +28390,7 @@ export function toJson_ApplicationSetSpecGeneratorsScmProviderTemplateSpecSyncPo
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -40979,6 +41083,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -40998,6 +41107,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisi
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -41803,6 +41913,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -41822,6 +41937,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTempl
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -42627,6 +42743,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSync
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -42646,6 +42767,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSp
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -43451,6 +43573,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSyn
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -43470,6 +43597,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateS
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -44275,6 +44403,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -44294,6 +44427,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplat
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -45099,6 +45233,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -45118,6 +45257,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTe
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -45923,6 +46063,11 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -45942,6 +46087,7 @@ export function toJson_ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTe
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -47045,6 +47191,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -47064,6 +47215,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisio
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -47869,6 +48021,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -47888,6 +48045,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsClustersTempla
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -48693,6 +48851,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSyncP
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -48712,6 +48875,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpe
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -49517,6 +49681,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSync
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -49536,6 +49705,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSp
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -50341,6 +50511,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSy
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -50360,6 +50535,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplate
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -51165,6 +51341,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -51184,6 +51365,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTem
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -51989,6 +52171,11 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
   readonly allowEmpty?: boolean;
 
   /**
+   * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSyncPolicyAutomated#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSyncPolicyAutomated#prune
    */
   readonly prune?: boolean;
@@ -52008,6 +52195,7 @@ export function toJson_ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTem
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmpty': obj.allowEmpty,
+    'enabled': obj.enabled,
     'prune': obj.prune,
     'selfHeal': obj.selfHeal,
   };
@@ -65094,7 +65282,7 @@ export class AppProject extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -65659,6 +65847,13 @@ export interface AppProjectSpecSyncWindows {
   readonly clusters?: string[];
 
   /**
+   * Description of the sync that will be applied to the schedule, can be used to add any information such as a ticket number for example
+   *
+   * @schema AppProjectSpecSyncWindows#description
+   */
+  readonly description?: string;
+
+  /**
    * Duration is the amount of time the sync window will be open
    *
    * @schema AppProjectSpecSyncWindows#duration
@@ -65712,6 +65907,7 @@ export function toJson_AppProjectSpecSyncWindows(obj: AppProjectSpecSyncWindows 
     'andOperator': obj.andOperator,
     'applications': obj.applications?.map(y => y),
     'clusters': obj.clusters?.map(y => y),
+    'description': obj.description,
     'duration': obj.duration,
     'kind': obj.kind,
     'manualSync': obj.manualSync,

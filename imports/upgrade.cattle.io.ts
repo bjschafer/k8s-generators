@@ -47,7 +47,7 @@ export class Plan extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -805,7 +805,7 @@ export function toJson_PlanSpecNodeSelectorMatchExpressions(obj: PlanSpecNodeSel
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * EnvFromSource represents the source of a set of ConfigMaps
+ * EnvFromSource represents the source of a set of ConfigMaps or Secrets
  *
  * @schema PlanSpecPrepareEnvFrom
  */
@@ -818,7 +818,7 @@ export interface PlanSpecPrepareEnvFrom {
   readonly configMapRef?: PlanSpecPrepareEnvFromConfigMapRef;
 
   /**
-   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   * Optional text to prepend to the name of each environment variable. Must be a C_IDENTIFIER.
    *
    * @schema PlanSpecPrepareEnvFrom#prefix
    */
@@ -1114,7 +1114,7 @@ export function toJson_PlanSpecPrepareVolumes(obj: PlanSpecPrepareVolumes | unde
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * EnvFromSource represents the source of a set of ConfigMaps
+ * EnvFromSource represents the source of a set of ConfigMaps or Secrets
  *
  * @schema PlanSpecUpgradeEnvFrom
  */
@@ -1127,7 +1127,7 @@ export interface PlanSpecUpgradeEnvFrom {
   readonly configMapRef?: PlanSpecUpgradeEnvFromConfigMapRef;
 
   /**
-   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   * Optional text to prepend to the name of each environment variable. Must be a C_IDENTIFIER.
    *
    * @schema PlanSpecUpgradeEnvFrom#prefix
    */

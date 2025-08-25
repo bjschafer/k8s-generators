@@ -47,7 +47,7 @@ export class Challenge extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -103,9 +103,9 @@ export interface ChallengeSpec {
   readonly authorizationUrl: string;
 
   /**
-   * dnsName is the identifier that this challenge is for, e.g. example.com.
+   * dnsName is the identifier that this challenge is for, e.g., example.com.
    * If the requested DNSName is a 'wildcard', this field MUST be set to the
-   * non-wildcard domain, e.g. for `*.example.com`, it must be `example.com`.
+   * non-wildcard domain, e.g., for `*.example.com`, it must be `example.com`.
    *
    * @schema ChallengeSpec#dnsName
    */
@@ -267,7 +267,7 @@ export interface ChallengeSpecSolver {
    * Configures cert-manager to attempt to complete authorizations by
    * performing the HTTP01 challenge flow.
    * It is not possible to obtain certificates for wildcard domain names
-   * (e.g. `*.example.com`) using the HTTP01 challenge mechanism.
+   * (e.g., `*.example.com`) using the HTTP01 challenge mechanism.
    *
    * @schema ChallengeSpecSolver#http01
    */
@@ -425,7 +425,7 @@ export function toJson_ChallengeSpecSolverDns01(obj: ChallengeSpecSolverDns01 | 
  * Configures cert-manager to attempt to complete authorizations by
  * performing the HTTP01 challenge flow.
  * It is not possible to obtain certificates for wildcard domain names
- * (e.g. `*.example.com`) using the HTTP01 challenge mechanism.
+ * (e.g., `*.example.com`) using the HTTP01 challenge mechanism.
  *
  * @schema ChallengeSpecSolverHttp01
  */
@@ -1036,7 +1036,7 @@ export interface ChallengeSpecSolverDns01Webhook {
    * when challenges are processed.
    * This can contain arbitrary JSON data.
    * Secret values should not be specified in this stanza.
-   * If secret values are needed (e.g. credentials for a DNS service), you
+   * If secret values are needed (e.g., credentials for a DNS service), you
    * should use a SecretKeySelector to reference a Secret resource.
    * For details on the schema of this field, consult the webhook provider
    * implementation's documentation.
@@ -1058,7 +1058,7 @@ export interface ChallengeSpecSolverDns01Webhook {
   /**
    * The name of the solver to use, as defined in the webhook provider
    * implementation.
-   * This will typically be the name of the provider, e.g. 'cloudflare'.
+   * This will typically be the name of the provider, e.g., 'cloudflare'.
    *
    * @schema ChallengeSpecSolverDns01Webhook#solverName
    */
@@ -1461,14 +1461,14 @@ export enum ChallengeSpecSolverDns01AzureDnsEnvironment {
  */
 export interface ChallengeSpecSolverDns01AzureDnsManagedIdentity {
   /**
-   * client ID of the managed identity, can not be used at the same time as resourceID
+   * client ID of the managed identity, cannot be used at the same time as resourceID
    *
    * @schema ChallengeSpecSolverDns01AzureDnsManagedIdentity#clientID
    */
   readonly clientId?: string;
 
   /**
-   * resource ID of the managed identity, can not be used at the same time as clientID
+   * resource ID of the managed identity, cannot be used at the same time as clientID
    * Cannot be used for Azure Managed Service Identity
    *
    * @schema ChallengeSpecSolverDns01AzureDnsManagedIdentity#resourceID
@@ -1476,7 +1476,7 @@ export interface ChallengeSpecSolverDns01AzureDnsManagedIdentity {
   readonly resourceId?: string;
 
   /**
-   * tenant ID of the managed identity, can not be used at the same time as resourceID
+   * tenant ID of the managed identity, cannot be used at the same time as resourceID
    *
    * @schema ChallengeSpecSolverDns01AzureDnsManagedIdentity#tenantID
    */
@@ -6786,7 +6786,7 @@ export class Order extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -6880,6 +6880,14 @@ export interface OrderSpec {
   readonly issuerRef: OrderSpecIssuerRef;
 
   /**
+   * Profile allows requesting a certificate profile from the ACME server.
+   * Supported profiles are listed by the server's ACME directory URL.
+   *
+   * @schema OrderSpec#profile
+   */
+  readonly profile?: string;
+
+  /**
    * Certificate signing request bytes in DER encoding.
    * This will be used when finalizing the order.
    * This field must be set on the order.
@@ -6902,6 +6910,7 @@ export function toJson_OrderSpec(obj: OrderSpec | undefined): Record<string, any
     'duration': obj.duration,
     'ipAddresses': obj.ipAddresses?.map(y => y),
     'issuerRef': toJson_OrderSpecIssuerRef(obj.issuerRef),
+    'profile': obj.profile,
     'request': obj.request,
   };
   // filter undefined values

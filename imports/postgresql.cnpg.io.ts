@@ -47,7 +47,7 @@ export class Backup extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -368,7 +368,7 @@ export class Cluster extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -1236,7 +1236,7 @@ export function toJson_ClusterSpecEnv(obj: ClusterSpecEnv | undefined): Record<s
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * EnvFromSource represents the source of a set of ConfigMaps
+ * EnvFromSource represents the source of a set of ConfigMaps or Secrets
  *
  * @schema ClusterSpecEnvFrom
  */
@@ -1249,7 +1249,7 @@ export interface ClusterSpecEnvFrom {
   readonly configMapRef?: ClusterSpecEnvFromConfigMapRef;
 
   /**
-   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   * Optional text to prepend to the name of each environment variable. Must be a C_IDENTIFIER.
    *
    * @schema ClusterSpecEnvFrom#prefix
    */
@@ -2519,7 +2519,6 @@ export interface ClusterSpecTopologySpreadConstraints {
    * - Ignore: nodeAffinity/nodeSelector are ignored. All nodes are included in the calculations.
    *
    * If this value is nil, the behavior is equivalent to the Honor policy.
-   * This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.
    *
    * @schema ClusterSpecTopologySpreadConstraints#nodeAffinityPolicy
    */
@@ -2533,7 +2532,6 @@ export interface ClusterSpecTopologySpreadConstraints {
    * - Ignore: node taints are ignored. All nodes are included.
    *
    * If this value is nil, the behavior is equivalent to the Ignore policy.
-   * This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.
    *
    * @schema ClusterSpecTopologySpreadConstraints#nodeTaintsPolicy
    */
@@ -5859,7 +5857,6 @@ export interface ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulin
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
    */
@@ -5874,7 +5871,6 @@ export interface ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulin
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
    */
@@ -5999,7 +5995,6 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSched
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
    */
@@ -6014,7 +6009,6 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSched
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
    */
@@ -9108,7 +9102,6 @@ export interface ClusterSpecAffinityAdditionalPodAffinityPreferredDuringScheduli
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
    */
@@ -9123,7 +9116,6 @@ export interface ClusterSpecAffinityAdditionalPodAffinityPreferredDuringScheduli
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
    */
@@ -9288,7 +9280,6 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSche
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
    */
@@ -9303,7 +9294,6 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSche
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
    */
@@ -12673,13 +12663,12 @@ export interface ClusterSpecManagedServicesAdditionalServiceTemplateSpec {
   readonly sessionAffinityConfig?: ClusterSpecManagedServicesAdditionalServiceTemplateSpecSessionAffinityConfig;
 
   /**
-   * TrafficDistribution offers a way to express preferences for how traffic is
-   * distributed to Service endpoints. Implementations can use this field as a
-   * hint, but are not required to guarantee strict adherence. If the field is
-   * not set, the implementation will apply its default routing strategy. If set
-   * to "PreferClose", implementations should prioritize endpoints that are
-   * topologically close (e.g., same zone).
-   * This is a beta field and requires enabling ServiceTrafficDistribution feature.
+   * TrafficDistribution offers a way to express preferences for how traffic
+   * is distributed to Service endpoints. Implementations can use this field
+   * as a hint, but are not required to guarantee strict adherence. If the
+   * field is not set, the implementation will apply its default routing
+   * strategy. If set to "PreferClose", implementations should prioritize
+   * endpoints that are in the same zone.
    *
    * @schema ClusterSpecManagedServicesAdditionalServiceTemplateSpec#trafficDistribution
    */
@@ -13402,7 +13391,7 @@ export class ClusterImageCatalog extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -13560,7 +13549,7 @@ export class Database extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -14070,7 +14059,7 @@ export class ImageCatalog extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -14228,7 +14217,7 @@ export class Pooler extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -15264,13 +15253,12 @@ export interface PoolerSpecServiceTemplateSpec {
   readonly sessionAffinityConfig?: PoolerSpecServiceTemplateSpecSessionAffinityConfig;
 
   /**
-   * TrafficDistribution offers a way to express preferences for how traffic is
-   * distributed to Service endpoints. Implementations can use this field as a
-   * hint, but are not required to guarantee strict adherence. If the field is
-   * not set, the implementation will apply its default routing strategy. If set
-   * to "PreferClose", implementations should prioritize endpoints that are
-   * topologically close (e.g., same zone).
-   * This is a beta field and requires enabling ServiceTrafficDistribution feature.
+   * TrafficDistribution offers a way to express preferences for how traffic
+   * is distributed to Service endpoints. Implementations can use this field
+   * as a hint, but are not required to guarantee strict adherence. If the
+   * field is not set, the implementation will apply its default routing
+   * strategy. If set to "PreferClose", implementations should prioritize
+   * endpoints that are in the same zone.
    *
    * @schema PoolerSpecServiceTemplateSpec#trafficDistribution
    */
@@ -15546,7 +15534,7 @@ export interface PoolerSpecTemplateSpec {
    * Init containers may not have Lifecycle actions, Readiness probes, Liveness probes, or Startup probes.
    * The resourceRequirements of an init container are taken into account during scheduling
    * by finding the highest request/limit for each resource type, and then using the max of
-   * of that value or the sum of the normal containers. Limits are applied to init containers
+   * that value or the sum of the normal containers. Limits are applied to init containers
    * in a similar fashion.
    * Init containers cannot currently be added or removed.
    * Cannot be updated.
@@ -17862,7 +17850,6 @@ export interface PoolerSpecTemplateSpecTopologySpreadConstraints {
    * - Ignore: nodeAffinity/nodeSelector are ignored. All nodes are included in the calculations.
    *
    * If this value is nil, the behavior is equivalent to the Honor policy.
-   * This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.
    *
    * @schema PoolerSpecTemplateSpecTopologySpreadConstraints#nodeAffinityPolicy
    */
@@ -17876,7 +17863,6 @@ export interface PoolerSpecTemplateSpecTopologySpreadConstraints {
    * - Ignore: node taints are ignored. All nodes are included.
    *
    * If this value is nil, the behavior is equivalent to the Ignore policy.
-   * This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.
    *
    * @schema PoolerSpecTemplateSpecTopologySpreadConstraints#nodeTaintsPolicy
    */
@@ -18135,7 +18121,7 @@ export interface PoolerSpecTemplateSpecVolumes {
    * The types of objects that may be mounted by this volume are defined by the container runtime implementation on a host machine and at minimum must include all valid types supported by the container image field.
    * The OCI object gets mounted in a single directory (spec.containers[*].volumeMounts.mountPath) by merging the manifest layers in the same way as for container images.
    * The volume will be mounted read-only (ro) and non-executable files (noexec).
-   * Sub path mounts for containers are not supported (spec.containers[*].volumeMounts.subpath).
+   * Sub path mounts for containers are not supported (spec.containers[*].volumeMounts.subpath) before 1.33.
    * The field spec.securityContext.fsGroupChangePolicy has no effect on this volume type.
    *
    * @schema PoolerSpecTemplateSpecVolumes#image
@@ -18558,7 +18544,7 @@ export function toJson_PoolerSpecTemplateSpecContainersEnv(obj: PoolerSpecTempla
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * EnvFromSource represents the source of a set of ConfigMaps
+ * EnvFromSource represents the source of a set of ConfigMaps or Secrets
  *
  * @schema PoolerSpecTemplateSpecContainersEnvFrom
  */
@@ -18571,7 +18557,7 @@ export interface PoolerSpecTemplateSpecContainersEnvFrom {
   readonly configMapRef?: PoolerSpecTemplateSpecContainersEnvFromConfigMapRef;
 
   /**
-   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   * Optional text to prepend to the name of each environment variable. Must be a C_IDENTIFIER.
    *
    * @schema PoolerSpecTemplateSpecContainersEnvFrom#prefix
    */
@@ -18634,6 +18620,15 @@ export interface PoolerSpecTemplateSpecContainersLifecycle {
    */
   readonly preStop?: PoolerSpecTemplateSpecContainersLifecyclePreStop;
 
+  /**
+   * StopSignal defines which signal will be sent to a container when it is being stopped.
+   * If not specified, the default is defined by the container runtime in use.
+   * StopSignal can only be set for Pods with a non-empty .spec.os.name
+   *
+   * @schema PoolerSpecTemplateSpecContainersLifecycle#stopSignal
+   */
+  readonly stopSignal?: string;
+
 }
 
 /**
@@ -18645,6 +18640,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecycle(obj: PoolerSpec
   const result = {
     'postStart': toJson_PoolerSpecTemplateSpecContainersLifecyclePostStart(obj.postStart),
     'preStop': toJson_PoolerSpecTemplateSpecContainersLifecyclePreStop(obj.preStop),
+    'stopSignal': obj.stopSignal,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -19589,7 +19585,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnv(obj: PoolerS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * EnvFromSource represents the source of a set of ConfigMaps
+ * EnvFromSource represents the source of a set of ConfigMaps or Secrets
  *
  * @schema PoolerSpecTemplateSpecEphemeralContainersEnvFrom
  */
@@ -19602,7 +19598,7 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvFrom {
   readonly configMapRef?: PoolerSpecTemplateSpecEphemeralContainersEnvFromConfigMapRef;
 
   /**
-   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   * Optional text to prepend to the name of each environment variable. Must be a C_IDENTIFIER.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvFrom#prefix
    */
@@ -19664,6 +19660,15 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecycle {
    */
   readonly preStop?: PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop;
 
+  /**
+   * StopSignal defines which signal will be sent to a container when it is being stopped.
+   * If not specified, the default is defined by the container runtime in use.
+   * StopSignal can only be set for Pods with a non-empty .spec.os.name
+   *
+   * @schema PoolerSpecTemplateSpecEphemeralContainersLifecycle#stopSignal
+   */
+  readonly stopSignal?: string;
+
 }
 
 /**
@@ -19675,6 +19680,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecycle(obj: P
   const result = {
     'postStart': toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStart(obj.postStart),
     'preStop': toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop(obj.preStop),
+    'stopSignal': obj.stopSignal,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -20567,7 +20573,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersEnv(obj: PoolerSpecTe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * EnvFromSource represents the source of a set of ConfigMaps
+ * EnvFromSource represents the source of a set of ConfigMaps or Secrets
  *
  * @schema PoolerSpecTemplateSpecInitContainersEnvFrom
  */
@@ -20580,7 +20586,7 @@ export interface PoolerSpecTemplateSpecInitContainersEnvFrom {
   readonly configMapRef?: PoolerSpecTemplateSpecInitContainersEnvFromConfigMapRef;
 
   /**
-   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   * Optional text to prepend to the name of each environment variable. Must be a C_IDENTIFIER.
    *
    * @schema PoolerSpecTemplateSpecInitContainersEnvFrom#prefix
    */
@@ -20643,6 +20649,15 @@ export interface PoolerSpecTemplateSpecInitContainersLifecycle {
    */
   readonly preStop?: PoolerSpecTemplateSpecInitContainersLifecyclePreStop;
 
+  /**
+   * StopSignal defines which signal will be sent to a container when it is being stopped.
+   * If not specified, the default is defined by the container runtime in use.
+   * StopSignal can only be set for Pods with a non-empty .spec.os.name
+   *
+   * @schema PoolerSpecTemplateSpecInitContainersLifecycle#stopSignal
+   */
+  readonly stopSignal?: string;
+
 }
 
 /**
@@ -20654,6 +20669,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecycle(obj: Pooler
   const result = {
     'postStart': toJson_PoolerSpecTemplateSpecInitContainersLifecyclePostStart(obj.postStart),
     'preStop': toJson_PoolerSpecTemplateSpecInitContainersLifecyclePreStop(obj.preStop),
+    'stopSignal': obj.stopSignal,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -22903,7 +22919,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesHostPath(obj: PoolerSpecTemp
  * The types of objects that may be mounted by this volume are defined by the container runtime implementation on a host machine and at minimum must include all valid types supported by the container image field.
  * The OCI object gets mounted in a single directory (spec.containers[*].volumeMounts.mountPath) by merging the manifest layers in the same way as for container images.
  * The volume will be mounted read-only (ro) and non-executable files (noexec).
- * Sub path mounts for containers are not supported (spec.containers[*].volumeMounts.subpath).
+ * Sub path mounts for containers are not supported (spec.containers[*].volumeMounts.subpath) before 1.33.
  * The field spec.securityContext.fsGroupChangePolicy has no effect on this volume type.
  *
  * @schema PoolerSpecTemplateSpecVolumesImage
@@ -23931,7 +23947,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringScheduli
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
    */
@@ -23946,7 +23961,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringScheduli
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
    */
@@ -24071,7 +24085,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSche
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#matchLabelKeys
    */
@@ -24086,7 +24099,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSche
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#mismatchLabelKeys
    */
@@ -28247,7 +28259,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedul
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
    */
@@ -28262,7 +28273,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedul
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
    */
@@ -28427,7 +28437,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSch
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both matchLabelKeys and labelSelector.
    * Also, matchLabelKeys cannot be set when labelSelector isn't set.
-   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#matchLabelKeys
    */
@@ -28442,7 +28451,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSch
    * pod labels will be ignored. The default value is empty.
    * The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
    * Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-   * This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
    *
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#mismatchLabelKeys
    */
@@ -33287,7 +33295,7 @@ export class Publication extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -33626,7 +33634,7 @@ export class ScheduledBackup extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -34001,7 +34009,7 @@ export class Subscription extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -34082,8 +34090,11 @@ export interface SubscriptionSpec {
   readonly name: string;
 
   /**
-   * Subscription parameters part of the `WITH` clause as expected by
-   * PostgreSQL `CREATE SUBSCRIPTION` command
+   * Subscription parameters included in the `WITH` clause of the PostgreSQL
+   * `CREATE SUBSCRIPTION` command. Most parameters cannot be changed
+   * after the subscription is created and will be ignored if modified
+   * later, except for a limited set documented at:
+   * https://www.postgresql.org/docs/current/sql-altersubscription.html#SQL-ALTERSUBSCRIPTION-PARAMS-SET
    *
    * @schema SubscriptionSpec#parameters
    */
