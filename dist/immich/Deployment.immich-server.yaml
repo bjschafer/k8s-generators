@@ -11,6 +11,7 @@ spec:
   minReadySeconds: 0
   progressDeadlineSeconds: 600
   replicas: 1
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
       cdk8s.io/metadata.addr: immich-server-immich-server-deployment-c83cd3c1

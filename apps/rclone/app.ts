@@ -2,7 +2,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { basename } from "../../lib/util";
 import { App, Size } from "cdk8s";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
-import { Cpu } from "cdk8s-plus-32";
+import { Cpu } from "cdk8s-plus-33";
 import { Rclone } from "../../lib/rclone";
 import { NewKustomize } from "../../lib/kustomize";
 import { BitwardenSecret } from "../../lib/secrets";

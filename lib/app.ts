@@ -14,7 +14,7 @@ import {
   Volume,
   VolumeMount,
 } from "../imports/k8s";
-import { ImagePullPolicy } from "cdk8s-plus-32";
+import { ImagePullPolicy } from "cdk8s-plus-33";
 import {
   DEFAULT_CPU_LIMIT,
   DEFAULT_MEM_LIMIT,

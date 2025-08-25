@@ -15,7 +15,7 @@ import {
   Protocol,
   Secret,
   Volume,
-} from "cdk8s-plus-32";
+} from "cdk8s-plus-33";
 import {
   BACKUP_ANNOTATION_NAME,
   DEFAULT_SECURITY_CONTEXT,

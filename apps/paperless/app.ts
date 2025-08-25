@@ -6,7 +6,7 @@ import { IntOrString, Quantity } from "../../imports/k8s";
 import { basename } from "../../lib/util";
 import { BasicApp } from "../../lib/app";
 import { StorageClass } from "../../lib/volume";
-import { PersistentVolumeAccessMode } from "cdk8s-plus-32";
+import { PersistentVolumeAccessMode } from "cdk8s-plus-33";
 
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));

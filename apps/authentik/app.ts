@@ -6,7 +6,7 @@ import { NewArgoApp } from "../../lib/argo";
 import { Valkey } from "../../lib/valkey";
 import { Quantity } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";
-import { Cpu, EnvValue, Probe, Secret, ServiceAccount } from "cdk8s-plus-32";
+import { Cpu, EnvValue, Probe, Secret, ServiceAccount } from "cdk8s-plus-33";
 import {
   KubeService,
   KubeClusterRole,

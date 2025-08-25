@@ -3,7 +3,7 @@ import { DEFAULT_APP_PROPS, TZ } from "../../lib/consts";
 import { App, Duration, Size } from "cdk8s";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
-import { Cpu, EnvFrom, EnvValue, Probe, Secret } from "cdk8s-plus-32";
+import { Cpu, EnvFrom, EnvValue, Probe, Secret } from "cdk8s-plus-33";
 import { NewKustomize } from "../../lib/kustomize";
 import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
 import { WellKnownLabels } from "../../lib/labels";

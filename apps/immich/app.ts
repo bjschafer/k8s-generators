@@ -16,7 +16,7 @@ import {
   Probe,
   Secret,
   Volume,
-} from "cdk8s-plus-32";
+} from "cdk8s-plus-33";
 import { StorageClass } from "../../lib/volume";
 import { BitwardenSecret } from "../../lib/secrets";
 import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";

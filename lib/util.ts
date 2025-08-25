@@ -1,4 +1,4 @@
-import { IApiEndpoint, IApiResource } from "cdk8s-plus-32";
+import { IApiEndpoint, IApiResource } from "cdk8s-plus-33";
 import * as crypto from "crypto";
 
 export function basename(path: string): string {

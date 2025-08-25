@@ -1,7 +1,7 @@
 import { Chart } from "cdk8s";
 import { Construct } from "constructs";
 import { IntOrString, KubeService, KubeStatefulSet, KubeSecret } from "../imports/k8s";
-import { Quantity, ResourceRequirements } from "cdk8s-plus-32/lib/imports/k8s";
+import { Quantity, ResourceRequirements } from "cdk8s-plus-33/lib/imports/k8s";
 
 export type ValkeyVersion = "7" | "7-alpine";
 

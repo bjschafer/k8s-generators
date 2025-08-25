@@ -1,5 +1,5 @@
 import { App, Duration, Size } from "cdk8s";
-import { EnvValue, Probe } from "cdk8s-plus-32";
+import { EnvValue, Probe } from "cdk8s-plus-33";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";

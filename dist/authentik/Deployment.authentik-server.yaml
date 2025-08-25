@@ -11,6 +11,7 @@ spec:
   minReadySeconds: 0
   progressDeadlineSeconds: 600
   replicas: 2
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
       cdk8s.io/metadata.addr: authentik-server-authentik-server-deployment-c8cc40e6

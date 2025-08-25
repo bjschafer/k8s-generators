@@ -1,8 +1,8 @@
 import { Chart } from "cdk8s";
 import { Construct } from "constructs";
-import { ConfigMap } from "cdk8s-plus-32";
+import { ConfigMap } from "cdk8s-plus-33";
 import { IntOrString, KubeService, KubeStatefulSet } from "../imports/k8s";
-import { Quantity, ResourceRequirements } from "cdk8s-plus-32/lib/imports/k8s";
+import { Quantity, ResourceRequirements } from "cdk8s-plus-33/lib/imports/k8s";
 
 export type RedisVersion = "7.4";
 

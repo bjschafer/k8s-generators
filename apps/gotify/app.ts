@@ -4,7 +4,7 @@ import { DEFAULT_APP_PROPS, RELOADER_ENABLED } from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
 import { BitwardenSecret } from "../../lib/secrets";
 import { AppPlus } from "../../lib/app-plus";
-import { Cpu, EnvValue, Probe } from "cdk8s-plus-32";
+import { Cpu, EnvValue, Probe } from "cdk8s-plus-33";
 import { DataConfigMap } from "../../lib/config";
 import { NewKustomize } from "../../lib/kustomize";
 import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";

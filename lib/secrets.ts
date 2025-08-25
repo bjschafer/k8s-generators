@@ -5,7 +5,7 @@ import {
   ExternalSecretSpecData,
   ExternalSecretSpecSecretStoreRefKind,
 } from "../imports/external-secrets.io";
-import { EnvValue, ISecret, Secret } from "cdk8s-plus-32";
+import { EnvValue, ISecret, Secret } from "cdk8s-plus-33";
 
 export interface BitwardenSecretProps {
   name: string;

@@ -1,5 +1,5 @@
 import { App, Size } from "cdk8s";
-import { Cpu, EnvValue, Secret } from "cdk8s-plus-32";
+import { Cpu, EnvValue, Secret } from "cdk8s-plus-33";
 import { AppPlus } from "../../lib/app-plus";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";

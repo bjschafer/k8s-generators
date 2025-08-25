@@ -1,5 +1,5 @@
 import { Chart } from "cdk8s";
-import { ConfigMap } from "cdk8s-plus-32";
+import { ConfigMap } from "cdk8s-plus-33";
 import { Construct } from "constructs";
 
 export interface DataConfigMapProps {

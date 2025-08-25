@@ -20,7 +20,7 @@ import {
 } from "../../lib/consts";
 import { StorageClass } from "../../lib/volume";
 import { VmPodScrape } from "../../imports/operator.victoriametrics.com";
-import { IntOrString, KubeService } from "cdk8s-plus-32/lib/imports/k8s";
+import { IntOrString, KubeService } from "cdk8s-plus-33/lib/imports/k8s";
 
 const namespace = basename(__dirname);
 
