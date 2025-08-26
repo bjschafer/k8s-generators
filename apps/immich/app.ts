@@ -8,9 +8,7 @@ import { Valkey } from "../../lib/valkey";
 import { Quantity } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";
 import {
-  ConfigMap,
   Cpu,
-  Env,
   EnvValue,
   PersistentVolumeAccessMode,
   Probe,
@@ -25,7 +23,7 @@ import { WellKnownLabels } from "../../lib/labels";
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
-const version = "v1.137.3";
+const version = "v1.139.4";
 
 NewArgoApp(namespace, {
   namespace: namespace,
