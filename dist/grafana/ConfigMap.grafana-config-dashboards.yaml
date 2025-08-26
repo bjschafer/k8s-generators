@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/name: grafana
     app.kubernetes.io/version: 12.1.0
-    helm.sh/chart: grafana-9.3.1
+    helm.sh/chart: grafana-9.3.5
   name: grafana-config-dashboards
   namespace: grafana
 data:
