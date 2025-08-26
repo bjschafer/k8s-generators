@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.58.3
+    helm.sh/chart: victoria-metrics-k8s-stack-0.59.3
   name: metrics-victoria-metrics-k8s-stack-k8s.rules.podowner
   namespace: metrics
 spec:
@@ -127,7 +127,7 @@ spec:
                   )
                 , "workload", "", "owner_name")
               , "workload_type", "", "owner_kind")
-              
+
               OR
 
               label_replace(
@@ -137,7 +137,7 @@ spec:
                     , "replicaset", "$1", "owner_name", "(.+)"
                   )
                   * on (namespace,replicaset,cluster) group_left(owner_kind, owner_name)
-                  group by (cluster, namespace, replicaset, owner_kind, owner_name) (
+                  group by (namespace,replicaset,owner_kind,owner_name,cluster) (
                     kube_replicaset_owner{job="kube-state-metrics", owner_kind!="Deployment", owner_kind!=""}
                   )
                 , "workload", "$1", "owner_name", "(.+)")

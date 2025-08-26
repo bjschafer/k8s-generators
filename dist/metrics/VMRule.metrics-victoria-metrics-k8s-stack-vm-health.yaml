@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.58.3
+    helm.sh/chart: victoria-metrics-k8s-stack-0.59.3
   name: metrics-victoria-metrics-k8s-stack-vm-health
   namespace: metrics
 spec:
@@ -21,14 +21,14 @@ spec:
             description: |
               Job {{ $labels.job }} (instance {{ $labels.instance }}) has restarted more than twice in the last 15 minutes. It might be crashlooping.
             summary: "{{ $labels.job }} too many restarts (instance {{ $labels.instance }})"
-          expr: changes(process_start_time_seconds{job=~".*(victoriametrics|vmselect|vminsert|vmstorage|vmagent|vmalert|vmsingle|vmalertmanager|vmauth|victorialogs|vlstorage|vlselect|vlinsert).*"}[15m]) > 2
+          expr: changes(process_start_time_seconds{job=~".*(victoriametrics|vmselect|vminsert|vmstorage|vmagent|vmalert|vmsingle|vmalertmanager|vmauth).*"}[15m]) > 2
           labels:
             severity: critical
         - alert: ServiceDown
           annotations:
             description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 2 minutes."
             summary: Service {{ $labels.job }} is down on {{ $labels.instance }}
-          expr: up{job=~".*(victoriametrics|vmselect|vminsert|vmstorage|vmagent|vmalert|vmsingle|vmalertmanager|vmauth|victorialogs|vlstorage|vlselect|vlinsert).*"} == 0
+          expr: up{job=~".*(victoriametrics|vmselect|vminsert|vmstorage|vmagent|vmalert|vmsingle|vmalertmanager|vmauth).*"} == 0
           for: 2m
           labels:
             severity: critical
@@ -66,7 +66,7 @@ spec:
             description: |
               Go runtime is unable to schedule goroutines execution in acceptable time. This is usually a sign of insufficient CPU resources or CPU throttling. Verify that service has enough CPU resources. Otherwise, the service could work unreliably with delays in processing.
             summary: '"{{ $labels.job }}"("{{ $labels.instance }}") has insufficient CPU resources for >15m'
-          expr: histogram_quantile(0.99, sum(rate(go_sched_latencies_seconds_bucket[5m])) by (le,job,instance,cluster)) > 0.1
+          expr: histogram_quantile(0.99, sum(rate(go_sched_latencies_seconds_bucket{job=~".*(victoriametrics|vmselect|vminsert|vmstorage|vmagent|vmalert|vmsingle|vmalertmanager|vmauth).*"}[5m])) by (le,job,instance,cluster)) > 0.1
           for: 15m
           labels:
             severity: critical

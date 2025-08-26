@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.58.3
+    helm.sh/chart: victoria-metrics-k8s-stack-0.59.3
   name: metrics-victoria-metrics-k8s-stack-kubernetes-system-kubelet
   namespace: metrics
 spec:
@@ -112,7 +112,19 @@ spec:
             description: Kubelet Pod startup 99th percentile latency is {{ $value }} seconds on node {{ $labels.node }} on cluster {{ $labels.cluster }}.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletpodstartuplatencyhigh
             summary: Kubelet Pod startup latency is too high.
-          expr: histogram_quantile(0.99, sum(rate(kubelet_pod_worker_duration_seconds_bucket{job="kubelet", metrics_path="/metrics"}[5m])) by (instance,le,cluster)) * on (instance,cluster) group_left(node) kubelet_node_name{job="kubelet", metrics_path="/metrics"} > 60
+          expr: |-
+            histogram_quantile(0.99,
+              sum by (instance,le,cluster) (
+                topk by (instance,le,operation_type,cluster) (1,
+                  rate(kubelet_pod_worker_duration_seconds_bucket{job="kubelet", metrics_path="/metrics"}[5m])
+                )
+              )
+            )
+            * on (instance,cluster) group_left(node)
+            topk by (instance,node,cluster) (1,
+              kubelet_node_name{job="kubelet", metrics_path="/metrics"}
+            )
+            > 60
           for: 15m
           labels:
             severity: warning
