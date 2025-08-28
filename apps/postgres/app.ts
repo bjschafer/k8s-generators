@@ -1,4 +1,5 @@
 import { App, Chart } from "cdk8s";
+import { BitwardenSecret } from "../../lib/secrets";
 import { Construct } from "constructs";
 import { basename } from "path";
 import { Quantity } from "../../imports/k8s";
@@ -36,6 +37,15 @@ NewArgoApp(namespace, {
   namespace: namespace,
   source: ArgoAppSource.GENERATORS,
   recurse: true,
+});
+
+const s3Creds = new BitwardenSecret(app, "s3-creds", {
+  name: "s3-creds",
+  namespace: namespace,
+  data: {
+    ACCESS_KEY_ID: "a7b27d51-1545-477a-bc21-b34700071d0c",
+    SECRET_ACCESS_KEY: "8210d5a6-1ab4-4c89-a58b-b34700071d12",
+  },
 });
 
 class ProdPostgres extends Chart {
@@ -107,15 +117,15 @@ class ProdPostgres extends Chart {
 
         backup: {
           barmanObjectStore: {
-            endpointUrl: "https://minio.cmdcentral.xyz",
+            endpointUrl: "https://s3.cmdcentral.xyz",
             destinationPath: "s3://postgres/k8s/prod-pg17",
             s3Credentials: {
               accessKeyId: {
-                name: "backups",
+                name: s3Creds.secretName,
                 key: "ACCESS_KEY_ID",
               },
               secretAccessKey: {
-                name: "backups",
+                name: s3Creds.secretName,
                 key: "SECRET_ACCESS_KEY",
               },
             },

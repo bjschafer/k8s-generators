@@ -17,14 +17,14 @@ spec:
   backup:
     barmanObjectStore:
       destinationPath: s3://postgres/k8s/prod-pg17
-      endpointURL: https://minio.cmdcentral.xyz
+      endpointURL: https://s3.cmdcentral.xyz
       s3Credentials:
         accessKeyId:
           key: ACCESS_KEY_ID
-          name: backups
+          name: s3-creds
         secretAccessKey:
           key: SECRET_ACCESS_KEY
-          name: backups
+          name: s3-creds
       wal:
         compression: gzip
   bootstrap:

@@ -136,20 +136,12 @@ export class Redis extends Chart {
                 },
                 livenessProbe: {
                   exec: {
-                    command: [
-                      "sh",
-                      "-c",
-                      "/health/ping_liveness_local.sh 5",
-                    ],
+                    command: ["sh", "-c", "/health/ping_liveness_local.sh 5"],
                   },
                 },
                 readinessProbe: {
                   exec: {
-                    command: [
-                      "sh",
-                      "-c",
-                      "/health/ping_readiness_local.sh 5",
-                    ],
+                    command: ["sh", "-c", "/health/ping_readiness_local.sh 5"],
                   },
                 },
                 securityContext: {

@@ -1,6 +1,11 @@
 import { Chart } from "cdk8s";
 import { Construct } from "constructs";
-import { IntOrString, KubeService, KubeStatefulSet, KubeSecret } from "../imports/k8s";
+import {
+  IntOrString,
+  KubeService,
+  KubeStatefulSet,
+  KubeSecret,
+} from "../imports/k8s";
 import { Quantity, ResourceRequirements } from "cdk8s-plus-33/lib/imports/k8s";
 
 export type ValkeyVersion = "7" | "7-alpine";
@@ -38,36 +43,42 @@ export class Valkey extends Chart {
       },
       type: "Opaque",
       data: {
-        "valkey-password": Buffer.from(props.password || "changeme").toString("base64"),
+        "valkey-password": Buffer.from(props.password || "changeme").toString(
+          "base64",
+        ),
       },
     });
 
-    const volumeConfig = props.storageSize ? {} : {
-      volumes: [
-        {
-          name: "valkey-data",
-          emptyDir: {},
-        },
-      ],
-    };
+    const volumeConfig = props.storageSize
+      ? {}
+      : {
+          volumes: [
+            {
+              name: "valkey-data",
+              emptyDir: {},
+            },
+          ],
+        };
 
-    const volumeClaimTemplates = props.storageSize ? [
-      {
-        metadata: {
-          name: "valkey-data",
-          labels: labels,
-        },
-        spec: {
-          accessModes: ["ReadWriteOnce"],
-          resources: {
-            requests: {
-              storage: props.storageSize,
+    const volumeClaimTemplates = props.storageSize
+      ? [
+          {
+            metadata: {
+              name: "valkey-data",
+              labels: labels,
+            },
+            spec: {
+              accessModes: ["ReadWriteOnce"],
+              resources: {
+                requests: {
+                  storage: props.storageSize,
+                },
+              },
+              storageClassName: props.storageClass,
             },
           },
-          storageClassName: props.storageClass,
-        },
-      },
-    ] : [];
+        ]
+      : [];
 
     new KubeStatefulSet(this, `${id}-sts`, {
       metadata: {
