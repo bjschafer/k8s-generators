@@ -1,14 +1,17 @@
 apiVersion: velero.io/v1
 kind: BackupStorageLocation
 metadata:
-  name: minio
+  name: s3
   namespace: velero
 spec:
   config:
     region: us-east-1
     s3ForcePathStyle: "true"
-    s3Url: https://minio.cmdcentral.xyz
-  default: false
+    s3Url: https://s3.cmdcentral.xyz
+  credential:
+    key: config
+    name: s3-creds
+  default: true
   objectStorage:
     bucket: velero
   provider: aws

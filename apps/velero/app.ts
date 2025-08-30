@@ -14,6 +14,7 @@ import {
   ScheduleSpecTemplate,
   VolumeSnapshotLocation,
 } from "../../imports/velero.io";
+import { BitwardenSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -159,6 +160,37 @@ class Velero extends Chart {
       },
     });
 
+    const creds = new BitwardenSecret(this, "s3-secret", {
+      name: "s3-creds",
+      namespace: namespace,
+      data: {
+        config: "4700b15e-20b5-4977-97f0-b3490125e477",
+      },
+    });
+
+    new BackupStorageLocation(this, "s3", {
+      metadata: {
+        name: "s3",
+        namespace: namespace,
+      },
+      spec: {
+        config: {
+          region: "us-east-1",
+          s3ForcePathStyle: "true",
+          s3Url: "https://s3.cmdcentral.xyz",
+        },
+        default: true,
+        objectStorage: {
+          bucket: "velero",
+        },
+        provider: "aws",
+        credential: {
+          name: creds.secretName,
+          key: "config",
+        },
+      },
+    });
+
     new BackupStorageLocation(this, "minio", {
       metadata: {
         name: "minio",
@@ -170,7 +202,7 @@ class Velero extends Chart {
           s3ForcePathStyle: "true",
           s3Url: "https://minio.cmdcentral.xyz",
         },
-        default: true,
+        default: false,
         objectStorage: {
           bucket: "velero",
         },
