@@ -4,41 +4,11 @@ metadata:
   name: immich-pg16
   namespace: postgres
 spec:
-  backup:
-    barmanObjectStore:
-      destinationPath: s3://postgres/k8s/immich-pg16
-      endpointURL: https://minio.cmdcentral.xyz
-      s3Credentials:
-        accessKeyId:
-          key: ACCESS_KEY_ID
-          name: backups
-        secretAccessKey:
-          key: SECRET_ACCESS_KEY
-          name: backups
-      wal:
-        compression: gzip
   bootstrap:
     initdb:
-      import:
-        databases:
-          - immich
-        roles:
-          - immich
-        source:
-          externalCluster: immich
-        type: monolith
       postInitSQL:
         - CREATE EXTENSION IF NOT EXISTS vchord CASCADE;
   enableSuperuserAccess: true
-  externalClusters:
-    - connectionParameters:
-        host: immich-r.postgres.svc.cluster.local
-        sslmode: require
-        user: postgres
-      name: immich
-      password:
-        key: password
-        name: immich-superuser
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
     kind: ImageCatalog
@@ -47,6 +17,11 @@ spec:
   instances: 3
   monitoring:
     enablePodMonitor: false
+  plugins:
+    - isWALArchiver: true
+      name: barman-cloud.cloudnative-pg.io
+      parameters:
+        barmanObjectName: prod
   postgresql:
     parameters:
       max_slot_wal_keep_size: 1GB

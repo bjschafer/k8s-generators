@@ -14,65 +14,7 @@ spec:
                 values:
                   - arm64
           weight: 1
-  backup:
-    barmanObjectStore:
-      destinationPath: s3://postgres/k8s/prod-pg17
-      endpointURL: https://s3.cmdcentral.xyz
-      s3Credentials:
-        accessKeyId:
-          key: ACCESS_KEY_ID
-          name: s3-creds
-        secretAccessKey:
-          key: SECRET_ACCESS_KEY
-          name: s3-creds
-      wal:
-        compression: gzip
-  bootstrap:
-    initdb:
-      import:
-        databases:
-          - atuin
-          - authentik
-          - gitea
-          - grafana
-          - hass
-          - linkwarden
-          - mealie
-          - miniflux
-          - netbox
-          - paperless
-          - pathfinder
-          - pathfinder_manual
-          - pdns
-          - spoolman
-        roles:
-          - atuin
-          - authentik
-          - gitea
-          - grafana
-          - grafanareader
-          - hass
-          - linkwarden
-          - mealie
-          - miniflux
-          - netbox
-          - paperless
-          - pathfinder
-          - pdns
-          - spoolman
-        source:
-          externalCluster: prod-pg16
-        type: monolith
   enableSuperuserAccess: true
-  externalClusters:
-    - connectionParameters:
-        host: prod-r.postgres.svc.cluster.local
-        sslmode: require
-        user: postgres
-      name: prod-pg16
-      password:
-        key: password
-        name: prod-superuser
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
     kind: ClusterImageCatalog
@@ -81,6 +23,11 @@ spec:
   instances: 3
   monitoring:
     enablePodMonitor: false
+  plugins:
+    - isWALArchiver: true
+      name: barman-cloud.cloudnative-pg.io
+      parameters:
+        barmanObjectName: prod
   postgresql:
     parameters:
       max_connections: "200"

@@ -4,6 +4,10 @@ metadata:
   name: nightly
   namespace: postgres
 spec:
+  backupOwnerReference: self
   cluster:
     name: prod-pg17
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io
   schedule: 0 33 3 * * *

@@ -4,6 +4,10 @@ metadata:
   name: immich-pg16-nightly
   namespace: postgres
 spec:
+  backupOwnerReference: self
   cluster:
     name: immich-pg16
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io
   schedule: 0 33 4 * * *

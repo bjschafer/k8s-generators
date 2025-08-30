@@ -13,6 +13,8 @@ import {
   PoolerSpecPgbouncerPoolMode,
   PoolerSpecType,
   ScheduledBackup,
+  ScheduledBackupSpecBackupOwnerReference,
+  ScheduledBackupSpecMethod,
 } from "../../imports/postgresql.cnpg.io";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import {
@@ -22,6 +24,7 @@ import {
 import { StorageClass } from "../../lib/volume";
 import { VmPodScrape } from "../../imports/operator.victoriametrics.com";
 import { IntOrString, KubeService } from "cdk8s-plus-33/lib/imports/k8s";
+import { ObjectStore } from "../../imports/barmancloud.cnpg.io";
 
 const namespace = basename(__dirname);
 
@@ -47,6 +50,8 @@ const s3Creds = new BitwardenSecret(app, "s3-creds", {
     SECRET_ACCESS_KEY: "8210d5a6-1ab4-4c89-a58b-b34700071d12",
   },
 });
+
+const barmanPluginName = "barman-cloud.cloudnative-pg.io";
 
 class ProdPostgres extends Chart {
   constructor(scope: Construct, id: string) {
@@ -114,84 +119,15 @@ class ProdPostgres extends Chart {
             max_connections: "200",
           },
         },
-
-        backup: {
-          barmanObjectStore: {
-            endpointUrl: "https://s3.cmdcentral.xyz",
-            destinationPath: "s3://postgres/k8s/prod-pg17",
-            s3Credentials: {
-              accessKeyId: {
-                name: s3Creds.secretName,
-                key: "ACCESS_KEY_ID",
-              },
-              secretAccessKey: {
-                name: s3Creds.secretName,
-                key: "SECRET_ACCESS_KEY",
-              },
-            },
-            wal: {
-              compression:
-                ClusterSpecBackupBarmanObjectStoreWalCompression.GZIP,
-            },
-          },
-        },
-        // import stuff
-        externalClusters: [
+        plugins: [
           {
-            name: "prod-pg16",
-            connectionParameters: {
-              host: "prod-r.postgres.svc.cluster.local",
-              user: "postgres",
-              sslmode: "require",
-            },
-            password: {
-              name: "prod-superuser",
-              key: "password",
+            name: barmanPluginName,
+            isWalArchiver: true,
+            parameters: {
+              barmanObjectName: "prod",
             },
           },
         ],
-        bootstrap: {
-          initdb: {
-            import: {
-              type: ClusterSpecBootstrapInitdbImportType.MONOLITH,
-              databases: [
-                "atuin",
-                "authentik",
-                "gitea",
-                "grafana",
-                "hass",
-                "linkwarden",
-                "mealie",
-                "miniflux",
-                "netbox",
-                "paperless",
-                "pathfinder",
-                "pathfinder_manual",
-                "pdns",
-                "spoolman",
-              ],
-              roles: [
-                "atuin",
-                "authentik",
-                "gitea",
-                "grafana",
-                "grafanareader",
-                "hass",
-                "linkwarden",
-                "mealie",
-                "miniflux",
-                "netbox",
-                "paperless",
-                "pathfinder",
-                "pdns",
-                "spoolman",
-              ],
-              source: {
-                externalCluster: "prod-pg16",
-              },
-            },
-          },
-        },
       },
     });
 
@@ -241,6 +177,29 @@ class ProdPostgres extends Chart {
       },
     });
 
+    new ObjectStore(this, "object-store", {
+      metadata: {
+        name: "prod",
+        namespace: namespace,
+      },
+      spec: {
+        configuration: {
+          endpointUrl: "https://s3.cmdcentral.xyz",
+          destinationPath: "s3://postgres/k8s/prod-pg17",
+          s3Credentials: {
+            accessKeyId: {
+              name: s3Creds.secretName,
+              key: "ACCESS_KEY_ID",
+            },
+            secretAccessKey: {
+              name: s3Creds.secretName,
+              key: "SECRET_ACCESS_KEY",
+            },
+          },
+        },
+      },
+    });
+
     new ScheduledBackup(this, "nightly", {
       metadata: {
         name: "nightly",
@@ -251,6 +210,11 @@ class ProdPostgres extends Chart {
           name: name,
         },
         schedule: "0 33 3 * * *",
+        backupOwnerReference: ScheduledBackupSpecBackupOwnerReference.SELF,
+        method: ScheduledBackupSpecMethod.PLUGIN,
+        pluginConfiguration: {
+          name: barmanPluginName,
+        },
       },
     });
 
@@ -383,34 +347,45 @@ class VectorPostgres extends Chart {
         },
         enableSuperuserAccess: true,
 
-        backup: {
-          barmanObjectStore: {
-            endpointUrl: "https://minio.cmdcentral.xyz",
-            destinationPath: `s3://postgres/k8s/${name}`,
-            s3Credentials: {
-              accessKeyId: {
-                name: "backups",
-                key: "ACCESS_KEY_ID",
-              },
-              secretAccessKey: {
-                name: "backups",
-                key: "SECRET_ACCESS_KEY",
-              },
-            },
-            wal: {
-              compression:
-                ClusterSpecBackupBarmanObjectStoreWalCompression.GZIP,
-            },
-          },
-        },
-
         postgresql: {
           sharedPreloadLibraries: ["vchord.so"],
           parameters: {
             max_slot_wal_keep_size: "1GB",
           },
         },
+        plugins: [
+          {
+            name: barmanPluginName,
+            isWalArchiver: true,
+            parameters: {
+              barmanObjectName: "prod",
+            },
+          },
+        ],
         ...importConfig,
+      },
+    });
+
+    new ObjectStore(this, "object-store", {
+      metadata: {
+        name: name,
+        namespace: namespace,
+      },
+      spec: {
+        configuration: {
+          endpointUrl: "https://s3.cmdcentral.xyz",
+          destinationPath: `s3://postgres/k8s/${name}`,
+          s3Credentials: {
+            accessKeyId: {
+              name: s3Creds.secretName,
+              key: "ACCESS_KEY_ID",
+            },
+            secretAccessKey: {
+              name: s3Creds.secretName,
+              key: "SECRET_ACCESS_KEY",
+            },
+          },
+        },
       },
     });
 
@@ -424,6 +399,11 @@ class VectorPostgres extends Chart {
           name: name,
         },
         schedule: "0 33 4 * * *",
+        backupOwnerReference: ScheduledBackupSpecBackupOwnerReference.SELF,
+        method: ScheduledBackupSpecMethod.PLUGIN,
+        pluginConfiguration: {
+          name: barmanPluginName,
+        },
       },
     });
 
@@ -449,10 +429,5 @@ class VectorPostgres extends Chart {
 }
 
 new ProdPostgres(app, "prod");
-new VectorPostgres(app, "immich-pg16", "immich-pg16", {
-  sourceClusterName: "immich",
-  sourceClusterNamespace: "postgres",
-  databases: ["immich"],
-  roles: ["immich"],
-});
+new VectorPostgres(app, "immich-pg16", "immich-pg16");
 app.synth();
