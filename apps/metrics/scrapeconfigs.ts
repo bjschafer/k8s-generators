@@ -76,6 +76,22 @@ export class ScrapeConfigs extends Chart {
       },
     });
 
+    new VmScrapeConfig(this, "garage", {
+      metadata: {
+        name: "garage",
+        namespace: namespace,
+      },
+      spec: {
+        staticConfigs: [
+          {
+            targets: ["s3.cmdcentral.xyz:3903"],
+            labels: { job: "garage" },
+          },
+        ],
+        scheme: VmScrapeConfigSpecScheme.HTTP,
+      },
+    });
+
     new VmScrapeConfig(this, "hass", {
       metadata: {
         name: "hass",
