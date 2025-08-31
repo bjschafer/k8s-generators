@@ -128,11 +128,11 @@ new HelmApp(app, "stack", {
       ],
       resources: {
         requests: {
-          cpu: "60m",
+          cpu: "250m",
           memory: "32Mi",
         },
         limits: {
-          cpu: "750m",
+          cpu: "1",
           memory: "96Mi",
         },
       },

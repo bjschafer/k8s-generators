@@ -86,10 +86,10 @@ spec:
             timeoutSeconds: 1
           resources:
             limits:
-              cpu: 750m
+              cpu: "1"
               memory: 96Mi
             requests:
-              cpu: 60m
+              cpu: 250m
               memory: 32Mi
           securityContext:
             readOnlyRootFilesystem: true
