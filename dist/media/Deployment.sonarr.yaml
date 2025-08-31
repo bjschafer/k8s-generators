@@ -81,7 +81,7 @@ spec:
                 secretKeyRef:
                   key: APIKEY
                   name: sonarr-api
-          image: ghcr.io/onedr0p/exportarr:v2.0.1
+          image: ghcr.io/onedr0p/exportarr:v2.3.0
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
@@ -100,7 +100,7 @@ spec:
               scheme: HTTP
           resources:
             limits:
-              cpu: 200m
+              cpu: 400m
               memory: 384Mi
             requests:
               cpu: 100m

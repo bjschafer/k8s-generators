@@ -29,7 +29,7 @@ import {
 import { NFSConcreteVolume } from "./nfs";
 import { VmServiceScrape } from "../imports/operator.victoriametrics.com";
 
-const exportarrVersion = "v2.0.1";
+const exportarrVersion = "v2.3.0";
 const exportarrPort = 9707;
 const mediaLabel = { "app.kubernetes.io/instance": "media" };
 
@@ -199,7 +199,7 @@ export class MediaApp extends Chart {
         resources: {
           cpu: {
             request: Cpu.millis(100),
-            limit: Cpu.millis(200),
+            limit: Cpu.millis(400),
           },
           memory: {
             request: Size.mebibytes(128),
