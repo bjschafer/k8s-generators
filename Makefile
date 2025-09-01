@@ -14,8 +14,7 @@ node_modules:
 
 .PHONY: upgrade
 upgrade:
-	$(BUN) x ncu -u
-	$(BUN) install
+	$(BUN) update
 
 .PHONY: FORCE apps/%
 apps/%: node_modules clean
