@@ -30,17 +30,10 @@ spec:
             key: telegram_bot_token
             name: alertmanager-secrets
           chat_id: 834388479
-    - name: gotify
-      webhook_configs:
-        - url: http://alertmanager-bridge.gotify.svc.cluster.local:8080/gotify_webhook
     - name: blackhole
   route:
     receiver: blackhole
     routes:
-      - continue: true
-        matchers:
-          - push_notify="true"
-        receiver: gotify
       - continue: true
         matchers:
           - push_notify="true"

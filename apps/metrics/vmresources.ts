@@ -1,25 +1,25 @@
 import { Chart, Include } from "cdk8s";
-import { KubeIngress, HttpIngressPath } from "cdk8s-plus-33/lib/imports/k8s";
+import { HttpIngressPath, KubeIngress } from "cdk8s-plus-33/lib/imports/k8s";
 import { Construct } from "constructs";
+import { readdirSync } from "fs";
+import { join } from "path";
+import { IngressRule } from "../../imports/k8s";
 import {
   VmAgent,
   VmAgentSpecResourcesLimits,
   VmAgentSpecResourcesRequests,
   VmAlert,
   VmAlertmanager,
-  VmAlertmanagerSpecResourcesRequests,
-  VmAlertmanagerSpecResourcesLimits,
   VmAlertmanagerConfig,
+  VmAlertmanagerSpecResourcesLimits,
+  VmAlertmanagerSpecResourcesRequests,
   VmSingle,
-  VmSingleSpecResourcesRequests,
   VmSingleSpecResourcesLimits,
+  VmSingleSpecResourcesRequests,
 } from "../../imports/operator.victoriametrics.com";
+import { BACKUP_ANNOTATION_NAME } from "../../lib/consts";
 import { StorageClass } from "../../lib/volume";
 import { hostname, namespace } from "./app";
-import { IngressRule } from "../../imports/k8s";
-import { BACKUP_ANNOTATION_NAME } from "../../lib/consts";
-import { readdirSync } from "fs";
-import { join } from "path";
 
 export class VmResources extends Chart {
   constructor(scope: Construct, id: string) {
@@ -158,25 +158,12 @@ export class VmResources extends Chart {
             ],
           },
           {
-            name: "gotify",
-            webhookConfigs: [
-              {
-                url: "http://alertmanager-bridge.gotify.svc.cluster.local:8080/gotify_webhook",
-              },
-            ],
-          },
-          {
             name: "blackhole",
           },
         ],
         route: {
           receiver: "blackhole",
           routes: [
-            {
-              receiver: "gotify",
-              matchers: ['push_notify="true"'],
-              continue: true,
-            },
             {
               receiver: "telegram",
               matchers: ['push_notify="true"'],
