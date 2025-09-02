@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
+  labels:
+    app.kubernetes.io/instance: atuin
   name: atuin
   namespace: atuin
 spec:

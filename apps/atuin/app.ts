@@ -6,6 +6,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { basename } from "../../lib/util";
 import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
+import { WellKnownLabels } from "../../lib/labels";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -38,6 +39,9 @@ new AppPlus(app, "atuin", {
   name,
   namespace,
   image: image,
+  labels: {
+    [WellKnownLabels.Instance]: name,
+  },
   args: ["server", "start"],
   resources: {
     cpu: {
@@ -68,7 +72,7 @@ new AppPlus(app, "atuin", {
 new CmdcentralServiceMonitor(app, "metrics", {
   name: name,
   namespace: namespace,
-  matchLabels: { "app.kubernetes.io/instance": name },
+  matchLabels: { [WellKnownLabels.Instance]: name },
 });
 
 app.synth();
