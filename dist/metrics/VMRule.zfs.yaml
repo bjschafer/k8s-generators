@@ -19,4 +19,4 @@ spec:
           expr: node_zfs_arc_hits / (node_zfs_arc_misses + node_zfs_arc_hits) * 100 < 90
           for: 5m
           labels:
-            severity: warning
+            priority: "-1"

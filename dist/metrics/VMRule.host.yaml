@@ -26,8 +26,8 @@ spec:
             node_memory_MemTotal_bytes * 100 < 10
           for: 2m
           labels:
+            priority: "0"
             push_notify: "true"
-            severity: warning
         - alert: HostMemoryUnderMemoryPressure
           annotations:
             description: '"The node is under heavy memory pressure. High rate of major page faults\n VALUE = {{ $value }}\n LABELS = {{ $labels }}"'
@@ -35,7 +35,7 @@ spec:
           expr: rate(node_vmstat_pgmajfault[1m]) > 1000
           for: 2m
           labels:
-            severity: warning
+            priority: "0"
         - alert: HostOutOfDiskSpace
           annotations:
             description: |-
@@ -48,8 +48,7 @@ spec:
           expr: (node_filesystem_avail_bytes{mountpoint!="/boot/firmware"} * 100) / node_filesystem_size_bytes < 10 and ON (instance, device, mountpoint) node_filesystem_readonly == 0
           for: 2m
           labels:
-            push_notify: "true"
-            severity: warning
+            priority: "0"
         - alert: HostOutOfInodes
           annotations:
             description: |-
@@ -62,8 +61,7 @@ spec:
           expr: node_filesystem_files_free{} / node_filesystem_files{} * 100 < 10 and ON (instance, device, mountpoint) node_filesystem_readonly{} == 0
           for: 2m
           labels:
-            push_notify: "true"
-            severity: warning
+            priority: "0"
         - alert: HostInodesWillFillIn24Hours
           annotations:
             description: |-
@@ -74,7 +72,7 @@ spec:
           expr: node_filesystem_files_free{} / node_filesystem_files{} * 100 < 10 and predict_linear(node_filesystem_files_free{}[1h], 24 * 3600) < 0 and ON (instance, device, mountpoint) node_filesystem_readonly{} == 0
           for: 2m
           labels:
-            severity: warning
+            priority: "-1"
         - alert: HostDiskWillFillIn24Hours
           annotations:
             description: '"Filesystem is predicted to run out of space within the next 24 hours at current write rate\n VALUE = {{ $value }}\n LABELS = {{ $labels }}"'
@@ -85,7 +83,7 @@ spec:
             and ON (instance, device, mountpoint) node_filesystem_readonly == 0
           for: 2m
           labels:
-            severity: warning
+            priority: "-1"
         - alert: HostUnusualDiskReadLatency
           annotations:
             description: '"Disk latency is growing (read operations > 100ms)\n VALUE = {{ $value }}\n LABELS = {{ $labels }}"'
@@ -93,7 +91,7 @@ spec:
           expr: rate(node_disk_read_time_seconds_total[1m]) / rate(node_disk_reads_completed_total[1m]) > 0.1 and rate(node_disk_reads_completed_total[1m]) > 0
           for: 20m
           labels:
-            severity: warning
+            priority: "-1"
         - alert: HostUnusualDiskWriteLatency
           annotations:
             description: '"Disk latency is growing (write operations > 100ms)\n VALUE = {{ $value }}\n LABELS = {{ $labels }}"'
@@ -101,7 +99,7 @@ spec:
           expr: rate(node_disk_write_time_seconds_total[1m]) / rate(node_disk_writes_completed_total[1m]) > 0.1 and rate(node_disk_writes_completed_total[1m]) > 0
           for: 20m
           labels:
-            severity: warning
+            priority: "-1"
         - alert: HostHighIOPS
           annotations:
             description: '"Host has more than 5k combined IOPS\n VALUE = {{ $value }}\n LABELS = {{ $labels }}"'
@@ -109,8 +107,7 @@ spec:
           expr: sum by (instance) (irate(node_disk_writes_completed_total{device=~"[a-z]+|nvme[0-9]+n[0-9]+"}[5m])) + sum by (instance) (irate(node_disk_reads_completed_total{device=~"[a-z]+|nvme[0-9]+n[0-9]+"}[5m])) > 5000
           for: 15m
           labels:
-            push_notify: "true"
-            severity: warning
+            priority: "0"
         - alert: HostHighCpuLoad
           annotations:
             description: |-
@@ -120,8 +117,7 @@ spec:
             summary: Host high CPU load (instance {{ $labels.instance }})
           expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[2m])) * 100) > 80
           labels:
-            push_notify: "true"
-            severity: warning
+            priority: "0"
         - alert: HostCpuStealNoisyNeighbor
           annotations:
             description: |-
@@ -131,7 +127,7 @@ spec:
             summary: Host CPU steal noisy neighbor (instance {{ $labels.instance }})
           expr: avg by(instance) (rate(node_cpu_seconds_total{mode="steal"}[5m])) * 100 > 10
           labels:
-            severity: warning
+            priority: "-1"
         - alert: HostContextSwitching
           annotations:
             description: |-
@@ -146,7 +142,7 @@ spec:
             ) > 1200
           for: 15m
           labels:
-            severity: warning
+            priority: "-1"
         - alert: HostSwapIsFillingUp
           annotations:
             description: |-
@@ -157,7 +153,7 @@ spec:
           expr: (1 - (node_memory_SwapFree_bytes / node_memory_SwapTotal_bytes)) * 100 > 90
           for: 20m
           labels:
-            severity: warning
+            priority: "-1"
         - alert: HostSystemdServiceCrashed
           annotations:
             description: |-
@@ -175,7 +171,7 @@ spec:
             } == 1
           for: 1h
           labels:
-            severity: warning
+            priority: "-1"
         - alert: HostOomKillDetected
           annotations:
             description: |-
@@ -185,8 +181,8 @@ spec:
             summary: Host {{ $labels.instance }} OOM kill detected
           expr: increase(node_vmstat_oom_kill[1m]) > 0
           labels:
+            priority: "0"
             push_notify: "true"
-            severity: warning
         - alert: HostNetworkInterfaceSaturated
           annotations:
             description: |-
@@ -208,8 +204,8 @@ spec:
             ) / node_network_speed_bytes{device!~"tap.*",job!="vmhost"} > 0.8 < 10000
           for: 1m
           labels:
+            priority: "-1"
             push_notify: "true"
-            severity: warning
         - alert: HostRequiresReboot
           annotations:
             description: |-
@@ -220,4 +216,4 @@ spec:
           expr: kured_reboot_required > 0
           for: 4h
           labels:
-            severity: info
+            priority: "-1"

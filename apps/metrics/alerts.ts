@@ -1,7 +1,7 @@
 import { Construct } from "constructs";
-import { Alert, SEND_TO_TELEGRAM } from "../../lib/monitoring/alerts";
-import { namespace } from "./app";
 import heredoc from "tsheredoc";
+import { Alert, PRIORITY, SEND_TO_PUSHOVER } from "../../lib/monitoring/alerts";
+import { namespace } from "./app";
 
 export function addAlerts(scope: Construct, id: string): void {
   new Alert(scope, `${id}-argo`, {
@@ -25,8 +25,8 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: `increase(argocd_image_updater_images_errors_total[5m]) > 0`,
         for: "15m",
         labels: {
-          severity: "warning",
-          ...SEND_TO_TELEGRAM,
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
         },
         annotations: {
           summary: "Argo app {{ $labels.application }} failing to autoupdate",
@@ -44,8 +44,8 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: `ceph_health_state != 0`,
         for: "0m",
         labels: {
-          severity: "critical",
-          ...SEND_TO_TELEGRAM,
+          priority: PRIORITY.HIGH,
+          ...SEND_TO_PUSHOVER,
         },
         annotations: {
           summary: "Ceph unhealthy (instance {{ $labels.instance }})",
@@ -62,7 +62,7 @@ export function addAlerts(scope: Construct, id: string): void {
         for: "0m",
         labels: {
           severity: "critical",
-          ...SEND_TO_TELEGRAM,
+          ...SEND_TO_PUSHOVER,
         },
         annotations: {
           summary: "Ceph OSD Down (instance {{ $labels.instance }})",
@@ -95,7 +95,7 @@ export function addAlerts(scope: Construct, id: string): void {
         for: "60m",
         labels: {
           severity: "critical",
-          ...SEND_TO_TELEGRAM,
+          ...SEND_TO_PUSHOVER,
         },
         annotations: {
           summary: "Ceph OSD norebalance flag set for 60m",
@@ -130,8 +130,8 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: `max(max by(persistentvolumeclaim) (1 - kubelet_volume_stats_available_bytes{namespace="postgres"} / kubelet_volume_stats_capacity_bytes{namespace="postgres"})) > 0.85`,
         for: "15m",
         labels: {
-          push_notify: "true",
-          severity: "warning",
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
         },
         annotations: {
           summary:
@@ -143,8 +143,8 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: `100 * sum by (pod) (cnpg_backends_total{namespace=~"postgres"}) / sum by (pod) (cnpg_pg_settings_setting{name="max_connections", namespace=~"postgres"}) > 90`,
         for: "5m",
         labels: {
-          push_notify: "true",
-          severity: "warning",
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
         },
         annotations: {
           summary: "CNPG pod {{ $labels.pod }}'s connections are > 90% used",
@@ -170,8 +170,8 @@ export function addAlerts(scope: Construct, id: string): void {
           `,
         for: "2m",
         labels: {
-          severity: "warning",
-          push_notify: "true",
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
         },
         annotations: {
           summary: "Host {{ $labels.instance }} out of memory",
@@ -187,7 +187,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "rate(node_vmstat_pgmajfault[1m]) > 1000",
         for: "2m",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.NORMAL,
         },
         annotations: {
           summary:
@@ -201,8 +201,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: '(node_filesystem_avail_bytes{mountpoint!="/boot/firmware"} * 100) / node_filesystem_size_bytes < 10 and ON (instance, device, mountpoint) node_filesystem_readonly == 0',
         for: "2m",
         labels: {
-          severity: "warning",
-          push_notify: "true",
+          priority: PRIORITY.NORMAL,
         },
         annotations: {
           summary: "Host {{ $labels.instance }} out of disk space",
@@ -215,8 +214,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "node_filesystem_files_free{} / node_filesystem_files{} * 100 < 10 and ON (instance, device, mountpoint) node_filesystem_readonly{} == 0",
         for: "2m",
         labels: {
-          severity: "warning",
-          push_notify: "true",
+          priority: PRIORITY.NORMAL,
         },
         annotations: {
           summary: "Host {{ $labels.instance }} out of inodes",
@@ -229,7 +227,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "node_filesystem_files_free{} / node_filesystem_files{} * 100 < 10 and predict_linear(node_filesystem_files_free{}[1h], 24 * 3600) < 0 and ON (instance, device, mountpoint) node_filesystem_readonly{} == 0",
         for: "2m",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.LOW,
         },
         annotations: {
           summary:
@@ -243,7 +241,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: '(node_filesystem_avail_bytes * 100) / node_filesystem_size_bytes < 10 and ON (instance, device, mountpoint) predict_linear(node_filesystem_avail_bytes{\n    fstype!="tmpfs"}[1h], 24 * 3600) < 0\nand ON (instance, device, mountpoint) node_filesystem_readonly == 0',
         for: "2m",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.LOW,
         },
         annotations: {
           summary:
@@ -257,7 +255,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "rate(node_disk_read_time_seconds_total[1m]) / rate(node_disk_reads_completed_total[1m]) > 0.1 and rate(node_disk_reads_completed_total[1m]) > 0",
         for: "20m",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.LOW,
         },
         annotations: {
           summary:
@@ -271,7 +269,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "rate(node_disk_write_time_seconds_total[1m]) / rate(node_disk_writes_completed_total[1m]) > 0.1 and rate(node_disk_writes_completed_total[1m]) > 0",
         for: "20m",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.LOW,
         },
         annotations: {
           summary:
@@ -285,8 +283,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: 'sum by (instance) (irate(node_disk_writes_completed_total{device=~"[a-z]+|nvme[0-9]+n[0-9]+"}[5m])) + sum by (instance) (irate(node_disk_reads_completed_total{device=~"[a-z]+|nvme[0-9]+n[0-9]+"}[5m])) > 5000',
         for: "15m",
         labels: {
-          severity: "warning",
-          push_notify: "true",
+          priority: PRIORITY.NORMAL,
         },
         annotations: {
           summary: '"Host {{ $labels.instance }} high total IOPS (>5000)',
@@ -298,8 +295,7 @@ export function addAlerts(scope: Construct, id: string): void {
         alert: "HostHighCpuLoad",
         expr: '100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[2m])) * 100) > 80',
         labels: {
-          severity: "warning",
-          push_notify: "true",
+          priority: PRIORITY.NORMAL,
         },
         annotations: {
           summary: "Host high CPU load (instance {{ $labels.instance }})",
@@ -311,7 +307,7 @@ export function addAlerts(scope: Construct, id: string): void {
         alert: "HostCpuStealNoisyNeighbor",
         expr: 'avg by(instance) (rate(node_cpu_seconds_total{mode="steal"}[5m])) * 100 > 10',
         labels: {
-          severity: "warning",
+          priority: PRIORITY.LOW,
         },
         annotations: {
           summary:
@@ -325,7 +321,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: '(rate(node_context_switches_total{job!="node-exporter",job!="vmhost"}[5m])) / (\n    count by(instance, job)\n    (node_cpu_seconds_total{mode="idle"})\n) > 1200',
         for: "15m",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.LOW,
         },
         annotations: {
           summary: "Host context switching (instance {{ $labels.instance }})",
@@ -338,7 +334,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "(1 - (node_memory_SwapFree_bytes / node_memory_SwapTotal_bytes)) * 100 > 90",
         for: "20m",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.LOW,
         },
         annotations: {
           summary: "Host swap is filling up (instance {{ $labels.instance }})",
@@ -351,7 +347,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: 'node_systemd_unit_state{\n    state="failed",\n    name!="motd-news.service",\n    name!~"sssd.*socket",\n    name!~"fwupd.*service",\n    name!="rpc-svcgssd.service"\n} == 1',
         for: "1h",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.LOW,
         },
         annotations: {
           summary:
@@ -364,8 +360,8 @@ export function addAlerts(scope: Construct, id: string): void {
         alert: "HostOomKillDetected",
         expr: "increase(node_vmstat_oom_kill[1m]) > 0",
         labels: {
-          severity: "warning",
-          push_notify: "true",
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
         },
         annotations: {
           summary: "Host {{ $labels.instance }} OOM kill detected",
@@ -378,8 +374,8 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: '(\n    rate(\n        node_network_receive_bytes_total{device!~"tap.*",job!="vmhost"}[1m]\n    )\n    +\n    rate(\n        node_network_transmit_bytes_total{device!~"tap.*",job!="vmhost"}[1m]\n    )\n) / node_network_speed_bytes{device!~"tap.*",job!="vmhost"} > 0.8 < 10000',
         for: "1m",
         labels: {
-          severity: "warning",
-          push_notify: "true",
+          priority: PRIORITY.LOW,
+          ...SEND_TO_PUSHOVER,
         },
         annotations: {
           summary: "Host {{ $labels.instance }} Network interface saturated",
@@ -392,7 +388,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "kured_reboot_required > 0",
         for: "4h",
         labels: {
-          severity: "info",
+          priority: PRIORITY.LOW,
         },
         annotations: {
           summary: "Host requires reboot (instance {{ $labels.instance }})",
@@ -412,8 +408,8 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: 'kube_node_status_condition{condition="Ready",status="true"} == 0',
         for: "10m",
         labels: {
-          severity: "critical",
-          push_notify: "true",
+          priority: PRIORITY.HIGH,
+          ...SEND_TO_PUSHOVER,
         },
         annotations: {
           summary: "Kubernetes Node ready (instance {{ $labels.instance }})",
@@ -426,7 +422,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: 'kube_node_status_condition{condition="MemoryPressure",status="true"} == 1',
         for: "2m",
         labels: {
-          severity: "critical",
+          priority: PRIORITY.HIGH,
         },
         annotations: {
           summary:
@@ -440,7 +436,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: 'kube_node_status_condition{condition="DiskPressure",status="true"} == 1',
         for: "2m",
         labels: {
-          severity: "critical",
+          priority: PRIORITY.HIGH,
         },
         annotations: {
           summary: "Kubernetes disk pressure (instance {{ $labels.instance }})",
@@ -453,8 +449,8 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: 'sum by(namespace, pod) (kube_pod_container_status_last_terminated_reason{reason="OOMKilled"}) > 0',
         for: "0m",
         labels: {
-          severity: "warning",
-          push_notify: "true",
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
         },
         annotations: {
           summary:
@@ -468,7 +464,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: 'kube_persistentvolumeclaim_status_phase{phase="Pending"} == 1',
         for: "2m",
         labels: {
-          severity: "warning",
+        priority: PRIORITY.LOW,
         },
         annotations: {
           summary:
@@ -482,7 +478,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "kubelet_volume_stats_available_bytes / kubelet_volume_stats_capacity_bytes * 100 < 10",
         for: "2m",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.NORMAL,
         },
         annotations: {
           summary:
@@ -496,7 +492,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: 'kube_persistentvolume_status_phase{phase=~"Failed|Pending", job="kube-state-metrics"} > 0',
         for: "0m",
         labels: {
-          severity: "critical",
+          priority: PRIORITY.HIGH,
         },
         annotations: {
           summary:
@@ -510,7 +506,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "(kube_statefulset_status_replicas_ready / kube_statefulset_status_replicas_current) != 1",
         for: "1m",
         labels: {
-          severity: "critical",
+          priority: PRIORITY.HIGH,
         },
         annotations: {
           summary:
@@ -524,7 +520,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "kube_horizontalpodautoscaler_status_desired_replicas >= kube_horizontalpodautoscaler_spec_max_replicas",
         for: "2m",
         labels: {
-          severity: "info",
+          priority: PRIORITY.LOW,
         },
         annotations: {
           summary:
@@ -538,7 +534,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: 'sum by (namespace, pod) (kube_pod_status_phase{phase=~"Pending|Unknown|Failed",pod!~".*maintain-job.*"}) > 0',
         for: "5m",
         labels: {
-          severity: "critical",
+          priority: PRIORITY.HIGH,
           push_notify: "true",
         },
         annotations: {
@@ -553,7 +549,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "increase(kube_pod_container_status_restarts_total[1m]) > 3",
         for: "15m",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.NORMAL,
           push_notify: "true",
         },
         annotations: {
@@ -568,7 +564,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "kube_deployment_status_observed_generation != kube_deployment_metadata_generation",
         for: "10m",
         labels: {
-          severity: "critical",
+          priority: PRIORITY.HIGH,
         },
         annotations: {
           summary:
@@ -582,7 +578,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "kube_statefulset_status_observed_generation != kube_statefulset_metadata_generation",
         for: "10m",
         labels: {
-          severity: "critical",
+          priority: PRIORITY.HIGH,
         },
         annotations: {
           summary:
@@ -596,7 +592,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "max without (revision) (kube_statefulset_status_current_revision unless kube_statefulset_status_update_revision) * (kube_statefulset_replicas != kube_statefulset_status_replicas_updated)",
         for: "10m",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.NORMAL,
         },
         annotations: {
           summary:
@@ -610,7 +606,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "kube_daemonset_status_number_ready / kube_daemonset_status_desired_number_scheduled * 100 < 100 or kube_daemonset_status_desired_number_scheduled - kube_daemonset_status_current_number_scheduled > 0",
         for: "10m",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.NORMAL,
           push_notify: "true",
         },
         annotations: {
@@ -625,7 +621,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "kube_daemonset_status_number_misscheduled > 0",
         for: "1m",
         labels: {
-          severity: "critical",
+          priority: PRIORITY.HIGH,
         },
         annotations: {
           summary:
@@ -639,7 +635,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: 'sum(rate(apiserver_request_total{job="apiserver",code=~"(?:5..)"}[1m])) / sum(rate(apiserver_request_total{job="apiserver"}[1m])) * 100 > 3',
         for: "2m",
         labels: {
-          severity: "critical",
+          priority: PRIORITY.HIGH,
         },
         annotations: {
           summary: "Kubernetes API server errors",
@@ -652,7 +648,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: '(sum(rate(rest_client_requests_total{code=~"(4|5)..",job!="metrics-victoria-metrics-operator"}[1m])) by (instance, job) / sum(rate(rest_client_requests_total[1m])) by (instance, job)) * 100 > 1',
         for: "2m",
         labels: {
-          severity: "critical",
+          priority: PRIORITY.HIGH,
         },
         annotations: {
           summary:
@@ -666,7 +662,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: 'sum by (job) (apiserver_client_certificate_expiration_seconds_count{job="apiserver"}) > 0 and histogram_quantile(0.01, sum by (job, le) (rate(apiserver_client_certificate_expiration_seconds_bucket{job="apiserver"}[5m]))) < 7*24*60*60',
         for: "0m",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.NORMAL,
         },
         annotations: {
           summary: "Kubernetes client certificate expires next week",
@@ -679,7 +675,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: 'histogram_quantile(0.99, sum(rate(apiserver_request_latencies_bucket{subresource!="log",verb!~"(?:CONNECT|WATCHLIST|WATCH|PROXY)"} [10m])) WITHOUT (instance, resource)) / 1e+06 > 1',
         for: "2m",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.NORMAL,
         },
         annotations: {
           summary: "Kubernetes API server latency",
@@ -692,7 +688,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "max(kured_reboot_required) by (node) != 0",
         for: "4h",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.NORMAL,
           push_notify: "true",
         },
         annotations: {
@@ -709,43 +705,12 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "min(count(kube_node_info) by (kubelet_version)) < count(kube_node_info)",
         for: "1h",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.NORMAL,
           push_notify: "true",
         },
         annotations: {
           summary:
             "{{ $value }} nodes are not running the same kubelet version as the others",
-        },
-      },
-    ],
-  });
-
-  new Alert(scope, `${id}-minio`, {
-    name: "minio",
-    namespace: namespace,
-    rules: [
-      {
-        alert: "MinioDiskSpaceUsage",
-        expr: "minio_cluster_capacity_raw_free_bytes / minio_cluster_capacity_raw_total_bytes * 100 < 10",
-        labels: {
-          severity: "warning",
-        },
-        annotations: {
-          summary: "Minio disk space usage (instance {{ $labels.instance }})",
-          description:
-            "Minio available free space is low (< 10%)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
-        },
-      },
-      {
-        alert: "MinioDiskOffline",
-        expr: "minio_node_drive_offline_total > 0",
-        labels: {
-          severity: "critical",
-        },
-        annotations: {
-          summary: "Minio disk offline (instance {{ $labels.instance }})",
-          description:
-            "Minio disk is offline\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
       },
     ],
@@ -760,7 +725,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: 'min(probe_success{job!="blackbox-ping-lakelair",job=~"blackbox-ping.*"}) < 0.9',
         for: "10m",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.LOW  ,
         },
         annotations: {
           summary: "Ping loss from at least one source > 10%",
@@ -773,7 +738,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: 'avg(probe_success{job!="blackbox-ping-lakelair",job=~"blackbox-ping.*"}) < 0.9',
         for: "10m",
         labels: {
-          severity: "critical",
+          priority: PRIORITY.HIGH,
           push_notify: "true",
         },
         annotations: {
@@ -794,7 +759,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "delta(hass_sensor_pm25_u0xb5g_per_mu0xb3[30m]) > 2.5",
         for: "5m",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.LOW,
           push_notify: "true",
         },
         annotations: {
@@ -807,7 +772,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "max_over_time(hass_sensor_pm25_u0xb5g_per_mu0xb3[1h]) > 20",
         for: "60m",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.LOW,
           push_notify: "true",
         },
         annotations: {
@@ -827,7 +792,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "nut_load * 100 > 75",
         for: "5m",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.NORMAL,
         },
         annotations: {
           summary: "UPS load over 75% on UPS {{ $labels.ups }}",
@@ -851,7 +816,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: 'sum by (schedule) (increase(velero_backup_partial_failure_total{schedule!=""}[1h])) > 0',
         for: "0m",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.NORMAL,
           push_notify: "true",
         },
       },
@@ -863,7 +828,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: 'sum by (schedule) (increase(velero_backup_failure_total{schedule!=""}[1h])) > 0',
         for: "0m",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.NORMAL,
           push_notify: "true",
         },
       },
@@ -879,7 +844,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: "node_zfs_arc_hits / (node_zfs_arc_misses + node_zfs_arc_hits) * 100 < 90",
         for: "5m",
         labels: {
-          severity: "warning",
+          priority: PRIORITY.LOW,
         },
         annotations: {
           summary:

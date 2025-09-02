@@ -15,13 +15,13 @@ spec:
           expr: max(max by(persistentvolumeclaim) (1 - kubelet_volume_stats_available_bytes{namespace="postgres"} / kubelet_volume_stats_capacity_bytes{namespace="postgres"})) > 0.85
           for: 15m
           labels:
+            priority: "0"
             push_notify: "true"
-            severity: warning
         - alert: CNPGMaxConnectionsReached
           annotations:
             summary: CNPG pod {{ $labels.pod }}'s connections are > 90% used
           expr: 100 * sum by (pod) (cnpg_backends_total{namespace=~"postgres"}) / sum by (pod) (cnpg_pg_settings_setting{name="max_connections", namespace=~"postgres"}) > 90
           for: 5m
           labels:
+            priority: "0"
             push_notify: "true"
-            severity: warning

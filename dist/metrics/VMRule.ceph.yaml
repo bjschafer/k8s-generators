@@ -19,8 +19,8 @@ spec:
           expr: ceph_health_state != 0
           for: 0m
           labels:
+            priority: "1"
             push_notify: "true"
-            severity: critical
         - alert: CephOsdDown
           annotations:
             description: |

@@ -1,22 +1,22 @@
 import { Chart, Size, Yaml } from "cdk8s";
-import { Construct } from "constructs";
-import { namespace } from "./app";
-import { DEFAULT_SECURITY_CONTEXT, RELOADER_ENABLED } from "../../lib/consts";
 import {
-  ConfigMap,
-  Cpu,
-  Deployment,
-  DeploymentStrategy,
-  DnsPolicy,
-  ImagePullPolicy,
-  Probe,
-  Volume,
+    ConfigMap,
+    Cpu,
+    Deployment,
+    DeploymentStrategy,
+    DnsPolicy,
+    ImagePullPolicy,
+    Probe,
+    Volume,
 } from "cdk8s-plus-33";
+import { Construct } from "constructs";
 import {
-  VmProbe,
-  VmServiceScrape,
+    VmProbe,
+    VmServiceScrape,
 } from "../../imports/operator.victoriametrics.com";
-import { Alert, SEND_TO_TELEGRAM } from "../../lib/monitoring/alerts";
+import { DEFAULT_SECURITY_CONTEXT, RELOADER_ENABLED } from "../../lib/consts";
+import { Alert, SEND_TO_PUSHOVER } from "../../lib/monitoring/alerts";
+import { namespace } from "./app";
 
 const name = "blackbox-exporter";
 const labels = {
@@ -221,7 +221,7 @@ export class BlackboxExporter extends Chart {
           for: "15m",
           labels: {
             severity: "warning",
-            ...SEND_TO_TELEGRAM,
+            ...SEND_TO_PUSHOVER,
           },
           annotations: {
             summary:
@@ -234,7 +234,7 @@ export class BlackboxExporter extends Chart {
           for: "15m",
           labels: {
             severity: "warning",
-            ...SEND_TO_TELEGRAM,
+            ...SEND_TO_PUSHOVER,
           },
           annotations: {
             summary:

@@ -18,7 +18,7 @@ spec:
           expr: min(probe_success{job!="blackbox-ping-lakelair",job=~"blackbox-ping.*"}) < 0.9
           for: 10m
           labels:
-            severity: warning
+            priority: "-1"
         - alert: HighPingLossAvg
           annotations:
             description: |-
@@ -28,5 +28,5 @@ spec:
           expr: avg(probe_success{job!="blackbox-ping-lakelair",job=~"blackbox-ping.*"}) < 0.9
           for: 10m
           labels:
+            priority: "1"
             push_notify: "true"
-            severity: critical

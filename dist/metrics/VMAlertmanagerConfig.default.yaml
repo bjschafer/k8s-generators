@@ -30,33 +30,22 @@ spec:
             key: telegram_bot_token
             name: alertmanager-secrets
           chat_id: 834388479
+    - name: pushover
+      pushover_configs:
+        - priority: "{{if .CommonLabels.priority }}{{$CommonLabels.priority}}{{else}}0{{end}}"
+          token:
+            key: pushover_token
+            name: alertmanager-secrets
+          user_key:
+            key: pushover_user_key
+            name: alertmanager-secrets
     - name: blackhole
   route:
     receiver: blackhole
     routes:
-      - continue: true
-        matchers:
+      - matchers:
           - push_notify="true"
-        receiver: telegram
-      - continue: true
-        matchers:
+        receiver: pushover
+      - matchers:
           - priority=~"0|1"
-        receiver: telegram
-      - continue: false
-        matchers:
-          - priority="2"
-        receiver: email
-      - continue: true
-        group_by:
-          - alertname
-          - cluster
-        matchers:
-          - namespace="metrics"
-        receiver: blackhole
-        routes:
-          - continue: false
-            matchers:
-              - push_notify="true"
-            receiver: telegram
-          - continue: false
-            receiver: email
+        receiver: pushover

@@ -15,13 +15,13 @@ spec:
           expr: sum by (schedule) (increase(velero_backup_partial_failure_total{schedule!=""}[1h])) > 0
           for: 0m
           labels:
+            priority: "0"
             push_notify: "true"
-            severity: warning
         - alert: VeleroBackupFailures
           annotations:
             message: Velero backup {{ $labels.schedule }} has failed backups.
           expr: sum by (schedule) (increase(velero_backup_failure_total{schedule!=""}[1h])) > 0
           for: 0m
           labels:
+            priority: "0"
             push_notify: "true"
-            severity: warning

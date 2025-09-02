@@ -158,43 +158,37 @@ export class VmResources extends Chart {
             ],
           },
           {
+            name: "pushover",
+            pushoverConfigs: [
+              {
+                token: {
+                  key: "pushover_token",
+                  name: "alertmanager-secrets",
+                },
+                userKey: {
+                  key: "pushover_user_key",
+                  name: "alertmanager-secrets",
+                },
+                // -2 to 2
+                priority: `{{if .CommonLabels.priority }}{{$CommonLabels.priority}}{{else}}0{{end}}`,
+              },
+            ],
+          },
+          {
             name: "blackhole",
           },
         ],
         route: {
           receiver: "blackhole",
           routes: [
+            // either explicitly requesting push notifications, or setting PRIORITY.HIGH or PRIORITY.NORMAL will get pushover notifications
             {
-              receiver: "telegram",
+              receiver: "pushover",
               matchers: ['push_notify="true"'],
-              continue: true,
             },
             {
-              receiver: "telegram",
+              receiver: "pushover",
               matchers: ['priority=~"0|1"'],
-              continue: true,
-            },
-            {
-              receiver: "email",
-              matchers: ['priority="2"'],
-              continue: false,
-            },
-            {
-              receiver: "blackhole",
-              group_by: ["alertname", "cluster"],
-              matchers: ['namespace="metrics"'],
-              continue: true,
-              routes: [
-                {
-                  receiver: "telegram",
-                  matchers: ['push_notify="true"'],
-                  continue: false,
-                },
-                {
-                  receiver: "email",
-                  continue: false,
-                },
-              ],
             },
           ],
         },

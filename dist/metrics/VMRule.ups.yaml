@@ -19,4 +19,4 @@ spec:
           expr: nut_load * 100 > 75
           for: 5m
           labels:
-            severity: warning
+            priority: "0"

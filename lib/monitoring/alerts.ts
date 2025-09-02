@@ -5,9 +5,18 @@ import {
   VmRuleSpecGroupsRules,
 } from "../../imports/operator.victoriametrics.com";
 
-export const SEND_TO_TELEGRAM = {
+export const SEND_TO_PUSHOVER = {
   push_notify: "true",
 };
+
+export enum PRIORITY {
+  /** Bypass quiet hours */
+  HIGH = "1",
+  /** Normal priority */
+  NORMAL = "0",
+  /** No sound */
+  LOW = "-1",
+}
 
 export const LOGS_RULE = {
   "alerts.cmdcentral.xyz/kind": "logs",

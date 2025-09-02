@@ -1,5 +1,5 @@
 import { Construct } from "constructs";
-import { Alert, SEND_TO_TELEGRAM } from "../../lib/monitoring/alerts";
+import { Alert, SEND_TO_PUSHOVER } from "../../lib/monitoring/alerts";
 import { namespace } from "./app";
 
 export function addAlerts(scope: Construct, id: string): void {
@@ -15,7 +15,7 @@ export function addAlerts(scope: Construct, id: string): void {
         labels: {
           priority: "0",
           severity: "critical",
-          ...SEND_TO_TELEGRAM,
+          ...SEND_TO_PUSHOVER,
         },
         annotations: {
           summary:
