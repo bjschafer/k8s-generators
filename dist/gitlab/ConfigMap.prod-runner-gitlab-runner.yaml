@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   labels:
     app: prod-runner-gitlab-runner
-    chart: gitlab-runner-0.79.1
+    chart: gitlab-runner-0.80.1
     heritage: Helm
     release: prod-runner
   name: prod-runner-gitlab-runner

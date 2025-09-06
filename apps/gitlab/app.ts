@@ -10,7 +10,7 @@ import heredoc from "tsheredoc";
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
-const version = "0.79.1";
+const version = "0.80.1";
 
 NewArgoApp(name, {
   sync_policy: {
