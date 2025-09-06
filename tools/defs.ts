@@ -1,6 +1,6 @@
 import { Yaml } from "cdk8s";
 import { execSync } from "child_process";
-import { mkdirSync, writeFileSync } from "fs";
+import { mkdirSync, readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 import { parseAllDocuments, stringify } from "yaml";
 
@@ -33,6 +33,20 @@ export class WebUpdater implements Updater {
       writeFileSync(path, stringify(item));
     }
   }
+}
+
+export function parseConstStringFromAppTs(
+  appName: string,
+  constName: string,
+): string {
+  const appTsPath = join(__dirname, "..", "apps", appName, "app.ts");
+  const src = readFileSync(appTsPath, "utf8");
+  const re = new RegExp(`\\bconst\\s+${constName}\\s*=\\s*[\"'\`](.*?)[\"'\`]`);
+  const m = re.exec(src);
+  if (!m) {
+    throw new Error(`Could not find const ${constName} in ${appTsPath}`);
+  }
+  return m[1];
 }
 
 abstract class CommandUpdater implements Updater {
