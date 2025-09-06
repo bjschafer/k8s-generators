@@ -245,7 +245,7 @@ class Velero extends Chart {
       csiSnapshotTimeout: "0s",
       includedNamespaces: ["*"],
       snapshotMoveData: true,
-      storageLocation: "minio",
+      storageLocation: "s3",
     };
 
     const offsiteNamespaces = [

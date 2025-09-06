@@ -10,6 +10,6 @@ spec:
     includedNamespaces:
       - "*"
     snapshotMoveData: true
-    storageLocation: minio
+    storageLocation: s3
     ttl: 168h0m0s
   useOwnerReferencesInBackup: false
