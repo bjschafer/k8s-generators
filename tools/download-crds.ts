@@ -5,6 +5,14 @@ import { Updater, VeleroUpdater, VMUpdater, WebUpdater } from "./defs";
 let updater: Updater;
 
 switch (argv[2]) {
+  case "cert-manager": {
+    const version = argv[3];
+    updater = new WebUpdater(
+      `https://github.com/cert-manager/cert-manager/releases/download/v${version}/cert-manager.crds.yaml`,
+      "apps/cert-manager/crds",
+    );
+    break;
+  }
   case "cnpg": {
     const version = argv[3];
     const release = version.split(".", 2).join(".");

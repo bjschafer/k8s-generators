@@ -7,10 +7,8 @@ metadata:
     app: cert-manager
     app.kubernetes.io/component: crds
     app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/version: v1.18.2
-    helm.sh/chart: cert-manager-v1.18.2
   name: issuers.cert-manager.io
 spec:
   group: cert-manager.io
@@ -949,6 +947,7 @@ spec:
                                                               description: A list of node selector requirements by node's labels.
                                                               items:
                                                                 description: |-
+                                                                  
                                                                   A node selector requirement is a selector that contains values, a key, and an operator
                                                                   that relates the key and values.
                                                                 properties:
@@ -957,11 +956,13 @@ spec:
                                                                     type: string
                                                                   operator:
                                                                     description: |-
+                                                                      
                                                                       Represents a key's relationship to a set of values.
                                                                       Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
                                                                     type: string
                                                                   values:
                                                                     description: |-
+                                                                      
                                                                       An array of string values. If the operator is In or NotIn,
                                                                       the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                       the values array must be empty. If the operator is Gt or Lt, the values
@@ -981,6 +982,7 @@ spec:
                                                               description: A list of node selector requirements by node's fields.
                                                               items:
                                                                 description: |-
+                                                                  
                                                                   A node selector requirement is a selector that contains values, a key, and an operator
                                                                   that relates the key and values.
                                                                 properties:
@@ -989,11 +991,13 @@ spec:
                                                                     type: string
                                                                   operator:
                                                                     description: |-
+                                                                      
                                                                       Represents a key's relationship to a set of values.
                                                                       Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
                                                                     type: string
                                                                   values:
                                                                     description: |-
+                                                                      
                                                                       An array of string values. If the operator is In or NotIn,
                                                                       the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                       the values array must be empty. If the operator is Gt or Lt, the values
@@ -1041,6 +1045,7 @@ spec:
                                                               description: A list of node selector requirements by node's labels.
                                                               items:
                                                                 description: |-
+                                                                  
                                                                   A node selector requirement is a selector that contains values, a key, and an operator
                                                                   that relates the key and values.
                                                                 properties:
@@ -1049,11 +1054,13 @@ spec:
                                                                     type: string
                                                                   operator:
                                                                     description: |-
+                                                                      
                                                                       Represents a key's relationship to a set of values.
                                                                       Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
                                                                     type: string
                                                                   values:
                                                                     description: |-
+                                                                      
                                                                       An array of string values. If the operator is In or NotIn,
                                                                       the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                       the values array must be empty. If the operator is Gt or Lt, the values
@@ -1073,6 +1080,7 @@ spec:
                                                               description: A list of node selector requirements by node's fields.
                                                               items:
                                                                 description: |-
+                                                                  
                                                                   A node selector requirement is a selector that contains values, a key, and an operator
                                                                   that relates the key and values.
                                                                 properties:
@@ -1081,11 +1089,13 @@ spec:
                                                                     type: string
                                                                   operator:
                                                                     description: |-
+                                                                      
                                                                       Represents a key's relationship to a set of values.
                                                                       Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
                                                                     type: string
                                                                   values:
                                                                     description: |-
+                                                                      
                                                                       An array of string values. If the operator is In or NotIn,
                                                                       the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                       the values array must be empty. If the operator is Gt or Lt, the values
@@ -1132,6 +1142,7 @@ spec:
                                                           properties:
                                                             labelSelector:
                                                               description: |-
+                                                                
                                                                 A label query over a set of resources, in this case pods.
                                                                 If it's null, this PodAffinityTerm matches with no Pods.
                                                               properties:
@@ -1139,6 +1150,7 @@ spec:
                                                                   description: matchExpressions is a list of label selector requirements. The requirements are ANDed.
                                                                   items:
                                                                     description: |-
+                                                                      
                                                                       A label selector requirement is a selector that contains values, a key, and an operator that
                                                                       relates the key and values.
                                                                     properties:
@@ -1152,6 +1164,7 @@ spec:
                                                                         type: string
                                                                       values:
                                                                         description: |-
+                                                                          
                                                                           values is an array of string values. If the operator is In or NotIn,
                                                                           the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                           the values array must be empty. This array is replaced during a strategic
@@ -1170,6 +1183,7 @@ spec:
                                                                   additionalProperties:
                                                                     type: string
                                                                   description: |-
+                                                                    
                                                                     matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
                                                                     map is equivalent to an element of matchExpressions, whose key field is "key", the
                                                                     operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -1208,6 +1222,7 @@ spec:
                                                               x-kubernetes-list-type: atomic
                                                             namespaceSelector:
                                                               description: |-
+                                                                
                                                                 A label query over the set of namespaces that the term applies to.
                                                                 The term is applied to the union of the namespaces selected by this field
                                                                 and the ones listed in the namespaces field.
@@ -1218,6 +1233,7 @@ spec:
                                                                   description: matchExpressions is a list of label selector requirements. The requirements are ANDed.
                                                                   items:
                                                                     description: |-
+                                                                      
                                                                       A label selector requirement is a selector that contains values, a key, and an operator that
                                                                       relates the key and values.
                                                                     properties:
@@ -1231,6 +1247,7 @@ spec:
                                                                         type: string
                                                                       values:
                                                                         description: |-
+                                                                          
                                                                           values is an array of string values. If the operator is In or NotIn,
                                                                           the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                           the values array must be empty. This array is replaced during a strategic
@@ -1249,6 +1266,7 @@ spec:
                                                                   additionalProperties:
                                                                     type: string
                                                                   description: |-
+                                                                    
                                                                     matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
                                                                     map is equivalent to an element of matchExpressions, whose key field is "key", the
                                                                     operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -1257,6 +1275,7 @@ spec:
                                                               x-kubernetes-map-type: atomic
                                                             namespaces:
                                                               description: |-
+                                                                
                                                                 namespaces specifies a static list of namespace names that the term applies to.
                                                                 The term is applied to the union of the namespaces listed in this field
                                                                 and the ones selected by namespaceSelector.
@@ -1267,6 +1286,7 @@ spec:
                                                               x-kubernetes-list-type: atomic
                                                             topologyKey:
                                                               description: |-
+                                                                
                                                                 This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
                                                                 the labelSelector in the specified namespaces, where co-located is defined as running on a node
                                                                 whose value of the label with key topologyKey matches that of any node on which any of the
@@ -1315,6 +1335,7 @@ spec:
                                                               description: matchExpressions is a list of label selector requirements. The requirements are ANDed.
                                                               items:
                                                                 description: |-
+                                                                  
                                                                   A label selector requirement is a selector that contains values, a key, and an operator that
                                                                   relates the key and values.
                                                                 properties:
@@ -1323,11 +1344,13 @@ spec:
                                                                     type: string
                                                                   operator:
                                                                     description: |-
+                                                                      
                                                                       operator represents a key's relationship to a set of values.
                                                                       Valid operators are In, NotIn, Exists and DoesNotExist.
                                                                     type: string
                                                                   values:
                                                                     description: |-
+                                                                      
                                                                       values is an array of string values. If the operator is In or NotIn,
                                                                       the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                       the values array must be empty. This array is replaced during a strategic
@@ -1346,6 +1369,7 @@ spec:
                                                               additionalProperties:
                                                                 type: string
                                                               description: |-
+                                                                
                                                                 matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
                                                                 map is equivalent to an element of matchExpressions, whose key field is "key", the
                                                                 operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -1394,6 +1418,7 @@ spec:
                                                               description: matchExpressions is a list of label selector requirements. The requirements are ANDed.
                                                               items:
                                                                 description: |-
+                                                                  
                                                                   A label selector requirement is a selector that contains values, a key, and an operator that
                                                                   relates the key and values.
                                                                 properties:
@@ -1402,11 +1427,13 @@ spec:
                                                                     type: string
                                                                   operator:
                                                                     description: |-
+                                                                      
                                                                       operator represents a key's relationship to a set of values.
                                                                       Valid operators are In, NotIn, Exists and DoesNotExist.
                                                                     type: string
                                                                   values:
                                                                     description: |-
+                                                                      
                                                                       values is an array of string values. If the operator is In or NotIn,
                                                                       the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                       the values array must be empty. This array is replaced during a strategic
@@ -1425,6 +1452,7 @@ spec:
                                                               additionalProperties:
                                                                 type: string
                                                               description: |-
+                                                                
                                                                 matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
                                                                 map is equivalent to an element of matchExpressions, whose key field is "key", the
                                                                 operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -1477,6 +1505,7 @@ spec:
                                                           properties:
                                                             labelSelector:
                                                               description: |-
+                                                                
                                                                 A label query over a set of resources, in this case pods.
                                                                 If it's null, this PodAffinityTerm matches with no Pods.
                                                               properties:
@@ -1484,6 +1513,7 @@ spec:
                                                                   description: matchExpressions is a list of label selector requirements. The requirements are ANDed.
                                                                   items:
                                                                     description: |-
+                                                                      
                                                                       A label selector requirement is a selector that contains values, a key, and an operator that
                                                                       relates the key and values.
                                                                     properties:
@@ -1497,6 +1527,7 @@ spec:
                                                                         type: string
                                                                       values:
                                                                         description: |-
+                                                                          
                                                                           values is an array of string values. If the operator is In or NotIn,
                                                                           the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                           the values array must be empty. This array is replaced during a strategic
@@ -1515,6 +1546,7 @@ spec:
                                                                   additionalProperties:
                                                                     type: string
                                                                   description: |-
+                                                                    
                                                                     matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
                                                                     map is equivalent to an element of matchExpressions, whose key field is "key", the
                                                                     operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -1553,6 +1585,7 @@ spec:
                                                               x-kubernetes-list-type: atomic
                                                             namespaceSelector:
                                                               description: |-
+                                                                
                                                                 A label query over the set of namespaces that the term applies to.
                                                                 The term is applied to the union of the namespaces selected by this field
                                                                 and the ones listed in the namespaces field.
@@ -1563,6 +1596,7 @@ spec:
                                                                   description: matchExpressions is a list of label selector requirements. The requirements are ANDed.
                                                                   items:
                                                                     description: |-
+                                                                      
                                                                       A label selector requirement is a selector that contains values, a key, and an operator that
                                                                       relates the key and values.
                                                                     properties:
@@ -1576,6 +1610,7 @@ spec:
                                                                         type: string
                                                                       values:
                                                                         description: |-
+                                                                          
                                                                           values is an array of string values. If the operator is In or NotIn,
                                                                           the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                           the values array must be empty. This array is replaced during a strategic
@@ -1594,6 +1629,7 @@ spec:
                                                                   additionalProperties:
                                                                     type: string
                                                                   description: |-
+                                                                    
                                                                     matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
                                                                     map is equivalent to an element of matchExpressions, whose key field is "key", the
                                                                     operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -1602,6 +1638,7 @@ spec:
                                                               x-kubernetes-map-type: atomic
                                                             namespaces:
                                                               description: |-
+                                                                
                                                                 namespaces specifies a static list of namespace names that the term applies to.
                                                                 The term is applied to the union of the namespaces listed in this field
                                                                 and the ones selected by namespaceSelector.
@@ -1612,6 +1649,7 @@ spec:
                                                               x-kubernetes-list-type: atomic
                                                             topologyKey:
                                                               description: |-
+                                                                
                                                                 This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
                                                                 the labelSelector in the specified namespaces, where co-located is defined as running on a node
                                                                 whose value of the label with key topologyKey matches that of any node on which any of the
@@ -1660,6 +1698,7 @@ spec:
                                                               description: matchExpressions is a list of label selector requirements. The requirements are ANDed.
                                                               items:
                                                                 description: |-
+                                                                  
                                                                   A label selector requirement is a selector that contains values, a key, and an operator that
                                                                   relates the key and values.
                                                                 properties:
@@ -1668,11 +1707,13 @@ spec:
                                                                     type: string
                                                                   operator:
                                                                     description: |-
+                                                                      
                                                                       operator represents a key's relationship to a set of values.
                                                                       Valid operators are In, NotIn, Exists and DoesNotExist.
                                                                     type: string
                                                                   values:
                                                                     description: |-
+                                                                      
                                                                       values is an array of string values. If the operator is In or NotIn,
                                                                       the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                       the values array must be empty. This array is replaced during a strategic
@@ -1691,6 +1732,7 @@ spec:
                                                               additionalProperties:
                                                                 type: string
                                                               description: |-
+                                                                
                                                                 matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
                                                                 map is equivalent to an element of matchExpressions, whose key field is "key", the
                                                                 operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -1739,6 +1781,7 @@ spec:
                                                               description: matchExpressions is a list of label selector requirements. The requirements are ANDed.
                                                               items:
                                                                 description: |-
+                                                                  
                                                                   A label selector requirement is a selector that contains values, a key, and an operator that
                                                                   relates the key and values.
                                                                 properties:
@@ -1747,11 +1790,13 @@ spec:
                                                                     type: string
                                                                   operator:
                                                                     description: |-
+                                                                      
                                                                       operator represents a key's relationship to a set of values.
                                                                       Valid operators are In, NotIn, Exists and DoesNotExist.
                                                                     type: string
                                                                   values:
                                                                     description: |-
+                                                                      
                                                                       values is an array of string values. If the operator is In or NotIn,
                                                                       the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                       the values array must be empty. This array is replaced during a strategic
@@ -1770,6 +1815,7 @@ spec:
                                                               additionalProperties:
                                                                 type: string
                                                               description: |-
+                                                                
                                                                 matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
                                                                 map is equivalent to an element of matchExpressions, whose key field is "key", the
                                                                 operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -2128,6 +2174,7 @@ spec:
                                                               description: A list of node selector requirements by node's labels.
                                                               items:
                                                                 description: |-
+                                                                  
                                                                   A node selector requirement is a selector that contains values, a key, and an operator
                                                                   that relates the key and values.
                                                                 properties:
@@ -2136,11 +2183,13 @@ spec:
                                                                     type: string
                                                                   operator:
                                                                     description: |-
+                                                                      
                                                                       Represents a key's relationship to a set of values.
                                                                       Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
                                                                     type: string
                                                                   values:
                                                                     description: |-
+                                                                      
                                                                       An array of string values. If the operator is In or NotIn,
                                                                       the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                       the values array must be empty. If the operator is Gt or Lt, the values
@@ -2160,6 +2209,7 @@ spec:
                                                               description: A list of node selector requirements by node's fields.
                                                               items:
                                                                 description: |-
+                                                                  
                                                                   A node selector requirement is a selector that contains values, a key, and an operator
                                                                   that relates the key and values.
                                                                 properties:
@@ -2168,11 +2218,13 @@ spec:
                                                                     type: string
                                                                   operator:
                                                                     description: |-
+                                                                      
                                                                       Represents a key's relationship to a set of values.
                                                                       Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
                                                                     type: string
                                                                   values:
                                                                     description: |-
+                                                                      
                                                                       An array of string values. If the operator is In or NotIn,
                                                                       the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                       the values array must be empty. If the operator is Gt or Lt, the values
@@ -2220,6 +2272,7 @@ spec:
                                                               description: A list of node selector requirements by node's labels.
                                                               items:
                                                                 description: |-
+                                                                  
                                                                   A node selector requirement is a selector that contains values, a key, and an operator
                                                                   that relates the key and values.
                                                                 properties:
@@ -2228,11 +2281,13 @@ spec:
                                                                     type: string
                                                                   operator:
                                                                     description: |-
+                                                                      
                                                                       Represents a key's relationship to a set of values.
                                                                       Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
                                                                     type: string
                                                                   values:
                                                                     description: |-
+                                                                      
                                                                       An array of string values. If the operator is In or NotIn,
                                                                       the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                       the values array must be empty. If the operator is Gt or Lt, the values
@@ -2252,6 +2307,7 @@ spec:
                                                               description: A list of node selector requirements by node's fields.
                                                               items:
                                                                 description: |-
+                                                                  
                                                                   A node selector requirement is a selector that contains values, a key, and an operator
                                                                   that relates the key and values.
                                                                 properties:
@@ -2260,11 +2316,13 @@ spec:
                                                                     type: string
                                                                   operator:
                                                                     description: |-
+                                                                      
                                                                       Represents a key's relationship to a set of values.
                                                                       Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
                                                                     type: string
                                                                   values:
                                                                     description: |-
+                                                                      
                                                                       An array of string values. If the operator is In or NotIn,
                                                                       the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                       the values array must be empty. If the operator is Gt or Lt, the values
@@ -2311,6 +2369,7 @@ spec:
                                                           properties:
                                                             labelSelector:
                                                               description: |-
+                                                                
                                                                 A label query over a set of resources, in this case pods.
                                                                 If it's null, this PodAffinityTerm matches with no Pods.
                                                               properties:
@@ -2318,6 +2377,7 @@ spec:
                                                                   description: matchExpressions is a list of label selector requirements. The requirements are ANDed.
                                                                   items:
                                                                     description: |-
+                                                                      
                                                                       A label selector requirement is a selector that contains values, a key, and an operator that
                                                                       relates the key and values.
                                                                     properties:
@@ -2331,6 +2391,7 @@ spec:
                                                                         type: string
                                                                       values:
                                                                         description: |-
+                                                                          
                                                                           values is an array of string values. If the operator is In or NotIn,
                                                                           the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                           the values array must be empty. This array is replaced during a strategic
@@ -2349,6 +2410,7 @@ spec:
                                                                   additionalProperties:
                                                                     type: string
                                                                   description: |-
+                                                                    
                                                                     matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
                                                                     map is equivalent to an element of matchExpressions, whose key field is "key", the
                                                                     operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -2387,6 +2449,7 @@ spec:
                                                               x-kubernetes-list-type: atomic
                                                             namespaceSelector:
                                                               description: |-
+                                                                
                                                                 A label query over the set of namespaces that the term applies to.
                                                                 The term is applied to the union of the namespaces selected by this field
                                                                 and the ones listed in the namespaces field.
@@ -2397,6 +2460,7 @@ spec:
                                                                   description: matchExpressions is a list of label selector requirements. The requirements are ANDed.
                                                                   items:
                                                                     description: |-
+                                                                      
                                                                       A label selector requirement is a selector that contains values, a key, and an operator that
                                                                       relates the key and values.
                                                                     properties:
@@ -2410,6 +2474,7 @@ spec:
                                                                         type: string
                                                                       values:
                                                                         description: |-
+                                                                          
                                                                           values is an array of string values. If the operator is In or NotIn,
                                                                           the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                           the values array must be empty. This array is replaced during a strategic
@@ -2428,6 +2493,7 @@ spec:
                                                                   additionalProperties:
                                                                     type: string
                                                                   description: |-
+                                                                    
                                                                     matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
                                                                     map is equivalent to an element of matchExpressions, whose key field is "key", the
                                                                     operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -2436,6 +2502,7 @@ spec:
                                                               x-kubernetes-map-type: atomic
                                                             namespaces:
                                                               description: |-
+                                                                
                                                                 namespaces specifies a static list of namespace names that the term applies to.
                                                                 The term is applied to the union of the namespaces listed in this field
                                                                 and the ones selected by namespaceSelector.
@@ -2446,6 +2513,7 @@ spec:
                                                               x-kubernetes-list-type: atomic
                                                             topologyKey:
                                                               description: |-
+                                                                
                                                                 This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
                                                                 the labelSelector in the specified namespaces, where co-located is defined as running on a node
                                                                 whose value of the label with key topologyKey matches that of any node on which any of the
@@ -2494,6 +2562,7 @@ spec:
                                                               description: matchExpressions is a list of label selector requirements. The requirements are ANDed.
                                                               items:
                                                                 description: |-
+                                                                  
                                                                   A label selector requirement is a selector that contains values, a key, and an operator that
                                                                   relates the key and values.
                                                                 properties:
@@ -2502,11 +2571,13 @@ spec:
                                                                     type: string
                                                                   operator:
                                                                     description: |-
+                                                                      
                                                                       operator represents a key's relationship to a set of values.
                                                                       Valid operators are In, NotIn, Exists and DoesNotExist.
                                                                     type: string
                                                                   values:
                                                                     description: |-
+                                                                      
                                                                       values is an array of string values. If the operator is In or NotIn,
                                                                       the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                       the values array must be empty. This array is replaced during a strategic
@@ -2525,6 +2596,7 @@ spec:
                                                               additionalProperties:
                                                                 type: string
                                                               description: |-
+                                                                
                                                                 matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
                                                                 map is equivalent to an element of matchExpressions, whose key field is "key", the
                                                                 operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -2573,6 +2645,7 @@ spec:
                                                               description: matchExpressions is a list of label selector requirements. The requirements are ANDed.
                                                               items:
                                                                 description: |-
+                                                                  
                                                                   A label selector requirement is a selector that contains values, a key, and an operator that
                                                                   relates the key and values.
                                                                 properties:
@@ -2581,11 +2654,13 @@ spec:
                                                                     type: string
                                                                   operator:
                                                                     description: |-
+                                                                      
                                                                       operator represents a key's relationship to a set of values.
                                                                       Valid operators are In, NotIn, Exists and DoesNotExist.
                                                                     type: string
                                                                   values:
                                                                     description: |-
+                                                                      
                                                                       values is an array of string values. If the operator is In or NotIn,
                                                                       the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                       the values array must be empty. This array is replaced during a strategic
@@ -2604,6 +2679,7 @@ spec:
                                                               additionalProperties:
                                                                 type: string
                                                               description: |-
+                                                                
                                                                 matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
                                                                 map is equivalent to an element of matchExpressions, whose key field is "key", the
                                                                 operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -2656,6 +2732,7 @@ spec:
                                                           properties:
                                                             labelSelector:
                                                               description: |-
+                                                                
                                                                 A label query over a set of resources, in this case pods.
                                                                 If it's null, this PodAffinityTerm matches with no Pods.
                                                               properties:
@@ -2663,6 +2740,7 @@ spec:
                                                                   description: matchExpressions is a list of label selector requirements. The requirements are ANDed.
                                                                   items:
                                                                     description: |-
+                                                                      
                                                                       A label selector requirement is a selector that contains values, a key, and an operator that
                                                                       relates the key and values.
                                                                     properties:
@@ -2676,6 +2754,7 @@ spec:
                                                                         type: string
                                                                       values:
                                                                         description: |-
+                                                                          
                                                                           values is an array of string values. If the operator is In or NotIn,
                                                                           the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                           the values array must be empty. This array is replaced during a strategic
@@ -2694,6 +2773,7 @@ spec:
                                                                   additionalProperties:
                                                                     type: string
                                                                   description: |-
+                                                                    
                                                                     matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
                                                                     map is equivalent to an element of matchExpressions, whose key field is "key", the
                                                                     operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -2732,6 +2812,7 @@ spec:
                                                               x-kubernetes-list-type: atomic
                                                             namespaceSelector:
                                                               description: |-
+                                                                
                                                                 A label query over the set of namespaces that the term applies to.
                                                                 The term is applied to the union of the namespaces selected by this field
                                                                 and the ones listed in the namespaces field.
@@ -2742,6 +2823,7 @@ spec:
                                                                   description: matchExpressions is a list of label selector requirements. The requirements are ANDed.
                                                                   items:
                                                                     description: |-
+                                                                      
                                                                       A label selector requirement is a selector that contains values, a key, and an operator that
                                                                       relates the key and values.
                                                                     properties:
@@ -2755,6 +2837,7 @@ spec:
                                                                         type: string
                                                                       values:
                                                                         description: |-
+                                                                          
                                                                           values is an array of string values. If the operator is In or NotIn,
                                                                           the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                           the values array must be empty. This array is replaced during a strategic
@@ -2773,6 +2856,7 @@ spec:
                                                                   additionalProperties:
                                                                     type: string
                                                                   description: |-
+                                                                    
                                                                     matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
                                                                     map is equivalent to an element of matchExpressions, whose key field is "key", the
                                                                     operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -2781,6 +2865,7 @@ spec:
                                                               x-kubernetes-map-type: atomic
                                                             namespaces:
                                                               description: |-
+                                                                
                                                                 namespaces specifies a static list of namespace names that the term applies to.
                                                                 The term is applied to the union of the namespaces listed in this field
                                                                 and the ones selected by namespaceSelector.
@@ -2791,6 +2876,7 @@ spec:
                                                               x-kubernetes-list-type: atomic
                                                             topologyKey:
                                                               description: |-
+                                                                
                                                                 This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
                                                                 the labelSelector in the specified namespaces, where co-located is defined as running on a node
                                                                 whose value of the label with key topologyKey matches that of any node on which any of the
@@ -2839,6 +2925,7 @@ spec:
                                                               description: matchExpressions is a list of label selector requirements. The requirements are ANDed.
                                                               items:
                                                                 description: |-
+                                                                  
                                                                   A label selector requirement is a selector that contains values, a key, and an operator that
                                                                   relates the key and values.
                                                                 properties:
@@ -2847,11 +2934,13 @@ spec:
                                                                     type: string
                                                                   operator:
                                                                     description: |-
+                                                                      
                                                                       operator represents a key's relationship to a set of values.
                                                                       Valid operators are In, NotIn, Exists and DoesNotExist.
                                                                     type: string
                                                                   values:
                                                                     description: |-
+                                                                      
                                                                       values is an array of string values. If the operator is In or NotIn,
                                                                       the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                       the values array must be empty. This array is replaced during a strategic
@@ -2870,6 +2959,7 @@ spec:
                                                               additionalProperties:
                                                                 type: string
                                                               description: |-
+                                                                
                                                                 matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
                                                                 map is equivalent to an element of matchExpressions, whose key field is "key", the
                                                                 operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -2918,6 +3008,7 @@ spec:
                                                               description: matchExpressions is a list of label selector requirements. The requirements are ANDed.
                                                               items:
                                                                 description: |-
+                                                                  
                                                                   A label selector requirement is a selector that contains values, a key, and an operator that
                                                                   relates the key and values.
                                                                 properties:
@@ -2926,11 +3017,13 @@ spec:
                                                                     type: string
                                                                   operator:
                                                                     description: |-
+                                                                      
                                                                       operator represents a key's relationship to a set of values.
                                                                       Valid operators are In, NotIn, Exists and DoesNotExist.
                                                                     type: string
                                                                   values:
                                                                     description: |-
+                                                                      
                                                                       values is an array of string values. If the operator is In or NotIn,
                                                                       the values array must be non-empty. If the operator is Exists or DoesNotExist,
                                                                       the values array must be empty. This array is replaced during a strategic
@@ -2949,6 +3042,7 @@ spec:
                                                               additionalProperties:
                                                                 type: string
                                                               description: |-
+                                                                
                                                                 matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
                                                                 map is equivalent to an element of matchExpressions, whose key field is "key", the
                                                                 operator is "In", and the values array contains only "value". The requirements are ANDed.

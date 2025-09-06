@@ -1,10 +1,11 @@
 import { App, Chart } from "cdk8s";
-import { basename } from "path";
+import { basename, join } from "path";
 import { NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { Construct } from "constructs";
 import { ClusterIssuer } from "../../imports/cert-manager.io";
+import { AddCRDs } from "../../lib/util";
 
 export const namespace = basename(__dirname);
 const name = namespace;
@@ -36,6 +37,8 @@ class CertManagerConfig extends Chart {
 
     const certManagerEmail = "certs@cmdcentral.xyz";
     const cfEmail = "braxton@cmdcentral.xyz";
+
+    AddCRDs(this, join(__dirname, "crds"));
 
     new ClusterIssuer(this, "letsencrypt-staging", {
       metadata: {

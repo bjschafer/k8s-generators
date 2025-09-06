@@ -464,7 +464,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: 'kube_persistentvolumeclaim_status_phase{phase="Pending"} == 1',
         for: "2m",
         labels: {
-        priority: PRIORITY.LOW,
+          priority: PRIORITY.LOW,
         },
         annotations: {
           summary:
@@ -725,7 +725,7 @@ export function addAlerts(scope: Construct, id: string): void {
         expr: 'min(probe_success{job!="blackbox-ping-lakelair",job=~"blackbox-ping.*"}) < 0.9',
         for: "10m",
         labels: {
-          priority: PRIORITY.LOW  ,
+          priority: PRIORITY.LOW,
         },
         annotations: {
           summary: "Ping loss from at least one source > 10%",

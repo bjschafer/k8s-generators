@@ -1,7 +1,7 @@
 import { basename, join } from "path";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
-import { App, Chart, Helm, Include } from "cdk8s";
+import { App, Chart, Helm } from "cdk8s";
 import { Construct } from "constructs";
 import {
   VmPodScrape,
@@ -15,6 +15,7 @@ import {
   VolumeSnapshotLocation,
 } from "../../imports/velero.io";
 import { BitwardenSecret } from "../../lib/secrets";
+import { AddCRDs } from "../../lib/util";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -36,27 +37,7 @@ class Velero extends Chart {
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
-    const crds = [
-      "backuprepositories.velero.io",
-      "backups.velero.io",
-      "backupstoragelocations.velero.io",
-      "datadownloads.velero.io",
-      "datauploads.velero.io",
-      "deletebackuprequests.velero.io",
-      "downloadrequests.velero.io",
-      "podvolumebackups.velero.io",
-      "podvolumerestores.velero.io",
-      "restores.velero.io",
-      "schedules.velero.io",
-      "serverstatusrequests.velero.io",
-      "volumesnapshotlocations.velero.io",
-    ];
-
-    for (const crd of crds) {
-      new Include(this, `crd-${crd}`, {
-        url: join(__dirname, "crds", `${crd}.yaml`),
-      });
-    }
+    AddCRDs(this, join(__dirname, "crds"));
 
     new Helm(this, "chart", {
       repo: "https://vmware-tanzu.github.io/helm-charts/",

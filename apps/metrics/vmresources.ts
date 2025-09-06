@@ -1,9 +1,9 @@
-import { Chart, Include } from "cdk8s";
+import { Chart } from "cdk8s";
 import { HttpIngressPath, KubeIngress } from "cdk8s-plus-33/lib/imports/k8s";
 import { Construct } from "constructs";
-import { readdirSync } from "fs";
 import { join } from "path";
 import { IngressRule } from "../../imports/k8s";
+import { AddCRDs } from "../../lib/util";
 import {
   VmAgent,
   VmAgentSpecResourcesLimits,
@@ -25,12 +25,7 @@ export class VmResources extends Chart {
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
-    const crdDir = join(__dirname, "crds");
-    readdirSync(crdDir).forEach((file) => {
-      new Include(this, `crd-${file}`, {
-        url: join(crdDir, file),
-      });
-    });
+    AddCRDs(this, join(__dirname, "crds"));
 
     const vmagentPort = 8429;
     new VmAgent(this, "vmagent", {
