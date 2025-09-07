@@ -28,6 +28,7 @@ import {
 import heredoc from "tsheredoc";
 import { StorageClass } from "../../lib/volume";
 import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
+import { WellKnownLabels } from "../../lib/labels";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -262,6 +263,7 @@ class Tandoor extends Chart {
     const svc = deploy.exposeViaService({
       name: "tandoor",
     });
+    svc.metadata.addLabel(WellKnownLabels.Name, name);
 
     const hostnames = ["tandoor.cmdcentral.xyz"];
 
@@ -305,7 +307,7 @@ class Tandoor extends Chart {
       namespace: namespace,
       portName: "http",
       matchLabels: {
-        "app.kubernetes.io/instance": "recipes",
+        [WellKnownLabels.Name]: name,
       },
     });
   }

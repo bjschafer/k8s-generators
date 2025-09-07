@@ -11,4 +11,4 @@ spec:
       - recipes
   selector:
     matchLabels:
-      app.kubernetes.io/instance: recipes
+      app.kubernetes.io/name: recipes

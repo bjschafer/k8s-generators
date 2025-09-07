@@ -30,6 +30,9 @@ new AppPlus(app, `${name}-app`, {
   name: name,
   namespace: namespace,
   image: "ghcr.io/miniflux/miniflux:latest-distroless",
+  labels: {
+    [WellKnownLabels.Name]: name,
+  },
   resources: {
     cpu: {
       request: Cpu.millis(50),

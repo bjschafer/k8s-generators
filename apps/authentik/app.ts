@@ -303,6 +303,7 @@ class AuthentikMonitoring extends Chart {
         [WellKnownLabels.Name]: "authentik",
         [WellKnownLabels.Component]: "worker",
       },
+      portName: "http",
     });
 
     // VictoriaMetrics Service Scrape
