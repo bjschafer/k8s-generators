@@ -215,6 +215,12 @@ new HomeConfig(app, `${name}-config`, {
           icon: "calibre",
           description: "Ebook collection",
         },
+        {
+          name: "Calibre Admin",
+          uri: "https://calibre-admin.cmdcentral.xyz",
+          icon: "calibre",
+          description: "Ebook collection - VNC admin interface",
+        },
       ],
     },
     {
@@ -252,12 +258,6 @@ new HomeConfig(app, `${name}-config`, {
           description: "V2.4",
           iconBubble: false,
         },
-        //        {
-        //          name: "Replicator",
-        //          uri: "http://replicator.cmdcentral.xyz:8000",
-        //          icon: "mdi-bolt",
-        //          description: "CNC machine",
-        //        },
       ],
     },
     {
