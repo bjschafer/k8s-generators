@@ -199,7 +199,7 @@ export class MediaApp extends Chart {
         resources: {
           cpu: {
             request: Cpu.millis(100),
-            limit: Cpu.millis(400),
+            limit: Cpu.millis(600),
           },
           memory: {
             request: Size.mebibytes(128),

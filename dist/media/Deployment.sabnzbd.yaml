@@ -98,7 +98,7 @@ spec:
               scheme: HTTP
           resources:
             limits:
-              cpu: 400m
+              cpu: 600m
               memory: 384Mi
             requests:
               cpu: 100m
