@@ -20,8 +20,8 @@ import { AddCRDs } from "../../lib/util";
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
-const chartVersion = "10.0.2";
-const awsVersion = "1.12.1";
+const chartVersion = "10.1.3";
+const awsVersion = "1.13.0";
 
 NewArgoApp(name, {
   namespace: namespace,

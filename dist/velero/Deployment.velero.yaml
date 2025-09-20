@@ -5,9 +5,9 @@ metadata:
     app.kubernetes.io/instance: velero
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: velero
-    app.kubernetes.io/version: 1.16.0
+    app.kubernetes.io/version: 1.16.2
     component: velero
-    helm.sh/chart: velero-10.0.2
+    helm.sh/chart: velero-10.1.3
   name: velero
   namespace: velero
 spec:
@@ -28,8 +28,8 @@ spec:
         app.kubernetes.io/instance: velero
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: velero
-        app.kubernetes.io/version: 1.16.0
-        helm.sh/chart: velero-10.0.2
+        app.kubernetes.io/version: 1.16.2
+        helm.sh/chart: velero-10.1.3
         name: velero
     spec:
       automountServiceAccountToken: true
@@ -59,7 +59,7 @@ spec:
               value: /credentials/cloud
             - name: ALIBABA_CLOUD_CREDENTIALS_FILE
               value: /credentials/cloud
-          image: gcr.io/velero-gcp/velero:v1.16.0
+          image: gcr.io/velero-gcp/velero:v1.16.2
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 5
@@ -101,7 +101,7 @@ spec:
               name: scratch
       dnsPolicy: ClusterFirst
       initContainers:
-        - image: velero/velero-plugin-for-aws:v1.12.1
+        - image: velero/velero-plugin-for-aws:v1.13.0
           name: velero-plugin-for-aws
           volumeMounts:
             - mountPath: /target
