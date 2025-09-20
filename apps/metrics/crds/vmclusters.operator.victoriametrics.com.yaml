@@ -1669,13 +1669,13 @@ spec:
                               x-kubernetes-int-or-string: true
                           type: object
                         volumeClaimTemplate:
-                          description: A PVC spec to be used by the VMAlertManager StatefulSets.
+                          description: A PVC spec to be used by the StatefulSets/Deployments.
                           type: object
                           x-kubernetes-preserve-unknown-fields: true
                       type: object
                     persistentVolumeClaimRetentionPolicy:
                       description: PersistentVolumeClaimRetentionPolicy allows configuration of PVC
-                        rentention policy
+                        retention policy
                       properties:
                         whenDeleted:
                           description: >-
@@ -2066,7 +2066,7 @@ spec:
                               x-kubernetes-int-or-string: true
                           type: object
                         volumeClaimTemplate:
-                          description: A PVC spec to be used by the VMAlertManager StatefulSets.
+                          description: A PVC spec to be used by the StatefulSets/Deployments.
                           properties:
                             apiVersion:
                               description: |-
@@ -3332,7 +3332,7 @@ spec:
                       type: boolean
                     persistentVolumeClaimRetentionPolicy:
                       description: PersistentVolumeClaimRetentionPolicy allows configuration of PVC
-                        rentention policy
+                        retention policy
                       properties:
                         whenDeleted:
                           description: >-
@@ -3721,7 +3721,7 @@ spec:
                               x-kubernetes-int-or-string: true
                           type: object
                         volumeClaimTemplate:
-                          description: A PVC spec to be used by the VMAlertManager StatefulSets.
+                          description: A PVC spec to be used by the StatefulSets/Deployments.
                           type: object
                           x-kubernetes-preserve-unknown-fields: true
                       type: object

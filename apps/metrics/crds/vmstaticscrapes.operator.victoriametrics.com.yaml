@@ -692,7 +692,7 @@ spec:
                               disable_keepalive allows disabling HTTP keep-alive when scraping targets.
                               By default, HTTP keep-alive is enabled, so TCP connections to scrape targets
                               could be reused.
-                              See https://docs.victoriametrics.com/victoriametrics/vmagent#scrape_config-enhancements
+                              See https://docs.victoriametrics.com/victoriametrics/vmagent/#scrape_config-enhancements
                             type: boolean
                           headers:
                             description: >-
@@ -715,7 +715,7 @@ spec:
                           proxy_client_config:
                             description: |-
                               ProxyClientConfig configures proxy auth settings for scraping
-                              See feature description https://docs.victoriametrics.com/victoriametrics/vmagent#scraping-targets-via-a-proxy
+                              See feature description https://docs.victoriametrics.com/victoriametrics/vmagent/#scraping-targets-via-a-proxy
                             properties:
                               basic_auth:
                                 description: BasicAuth allow an endpoint to authenticate over basic
