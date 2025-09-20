@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: metrics
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-operator
-    app.kubernetes.io/version: v0.62.0
-    helm.sh/chart: victoria-metrics-operator-0.52.1
+    app.kubernetes.io/version: v0.63.0
+    helm.sh/chart: victoria-metrics-operator-0.53.0
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
   name: metrics-victoria-metrics-operator-victoriametrics-admin
 rules:
@@ -73,5 +73,11 @@ rules:
       - vmusers
       - vmusers/finalizers
       - vmusers/status
+      - vtclusters
+      - vtclusters/finalizers
+      - vtclusters/status
+      - vtsingles
+      - vtsingles/finalizers
+      - vtsingles/status
     verbs:
       - "*"
