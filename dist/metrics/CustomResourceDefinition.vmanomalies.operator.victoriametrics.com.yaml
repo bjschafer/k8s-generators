@@ -752,7 +752,7 @@ spec:
                   description: |-
                     License allows to configure license key to be used for enterprise features.
                     Using license key is supported starting from VictoriaMetrics v1.94.0.
-                    See [here](https://docs.victoriametrics.com/enterprise)
+                    See [here](https://docs.victoriametrics.com/victoriametrics/enterprise/)
                   properties:
                     forceOffline:
                       description: Enforce offline verification of the license key.
@@ -859,7 +859,7 @@ spec:
                         VMAnomaly uses prometheus text exposition format
                       properties:
                         basicAuth:
-                          description: Basic auth defines basic autorization configuration
+                          description: Basic auth defines basic authorization configuration
                           properties:
                             password:
                               description: |-
@@ -953,7 +953,7 @@ spec:
                           description: HealthPath defines absolute or relative URL address where to check availability of the remote webserver
                           type: string
                         pushFrequency:
-                          description: PushFrequency defines push internval
+                          description: PushFrequency defines push interval
                           type: string
                         tenantID:
                           description: TenantID defines for VictoriaMetrics Cluster version only, tenants are identified by accountID, accountID:projectID or multitenant.
@@ -1116,7 +1116,7 @@ spec:
                     going to be performed, except for delete actions.
                   type: boolean
                 persistentVolumeClaimRetentionPolicy:
-                  description: PersistentVolumeClaimRetentionPolicy allows configuration of PVC rentention policy
+                  description: PersistentVolumeClaimRetentionPolicy allows configuration of PVC retention policy
                   properties:
                     whenDeleted:
                       description: |-
@@ -1208,7 +1208,7 @@ spec:
                     See https://docs.victoriametrics.com/anomaly-detection/components/reader/
                   properties:
                     basicAuth:
-                      description: Basic auth defines basic autorization configuration
+                      description: Basic auth defines basic authorization configuration
                       properties:
                         password:
                           description: |-
@@ -1301,7 +1301,7 @@ spec:
                     datasourceURL:
                       description: |-
                         DatasourceURL address
-                        datatasource must serve /api/v1/query and /api/v1/query_range APIs
+                        datasource must serve /api/v1/query and /api/v1/query_range APIs
                       type: string
                     extraFilters:
                       description: List of strings with series selector.
@@ -1646,7 +1646,7 @@ spec:
                           x-kubernetes-int-or-string: true
                       type: object
                     volumeClaimTemplate:
-                      description: A PVC spec to be used by the VMAlertManager StatefulSets.
+                      description: A PVC spec to be used by the StatefulSets/Deployments.
                       properties:
                         apiVersion:
                           description: |-
@@ -2221,7 +2221,7 @@ spec:
                     See https://docs.victoriametrics.com/anomaly-detection/components/writer/
                   properties:
                     basicAuth:
-                      description: Basic auth defines basic autorization configuration
+                      description: Basic auth defines basic authorization configuration
                       properties:
                         password:
                           description: |-

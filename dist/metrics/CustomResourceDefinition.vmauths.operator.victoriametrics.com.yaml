@@ -1146,7 +1146,7 @@ spec:
                       description: |-
                         LoadBalancingPolicy defines load balancing policy to use for backend urls.
                         Supported policies: least_loaded, first_available.
-                        See [here](https://docs.victoriametrics.com/victoriametrics/vmauth#load-balancing) for more details (default "least_loaded")
+                        See [here](https://docs.victoriametrics.com/victoriametrics/vmauth/#load-balancing) for more details (default "least_loaded")
                       enum:
                         - least_loaded
                         - first_available

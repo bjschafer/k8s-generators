@@ -1392,7 +1392,7 @@ spec:
                   description: |-
                     License allows to configure license key to be used for enterprise features.
                     Using license key is supported starting from VictoriaMetrics v1.94.0.
-                    See [here](https://docs.victoriametrics.com/victoriametrics/enterprise)
+                    See [here](https://docs.victoriametrics.com/victoriametrics/enterprise/)
                   properties:
                     forceOffline:
                       description: Enforce offline verification of the license key.
@@ -1678,7 +1678,7 @@ spec:
                     going to be performed, except for delete actions.
                   type: boolean
                 persistentVolumeClaimRetentionPolicy:
-                  description: PersistentVolumeClaimRetentionPolicy allows configuration of PVC rentention policy
+                  description: PersistentVolumeClaimRetentionPolicy allows configuration of PVC retention policy
                   properties:
                     whenDeleted:
                       description: |-
@@ -2147,7 +2147,7 @@ spec:
                 remoteWrite:
                   description: |-
                     RemoteWrite list of victoria metrics /some other remote write system
-                    for vm it must looks like: http://victoria-metrics-single:8429/api/v1/write
+                    for vm it must looks like: http://victoria-metrics-single:8428/api/v1/write
                     or for cluster different url
                     https://docs.victoriametrics.com/victoriametrics/vmagent/#splitting-data-streams-among-multiple-systems
                   items:
@@ -2497,6 +2497,9 @@ spec:
                           ignoreFirstIntervals:
                             description: IgnoreFirstIntervals instructs to ignore first interval
                             type: integer
+                          ignoreFirstSampleInterval:
+                            description: IgnoreFirstSampleInterval sets interval for total and prometheus_total during which first samples will be ignored
+                            type: string
                           ignoreOldSamples:
                             description: IgnoreOldSamples instructs to ignore samples with old timestamps outside the current aggregation interval.
                             type: boolean
@@ -2540,6 +2543,9 @@ spec:
                                     It is not recommended changing this setting, unless unfinished aggregations states
                                     are preferred to missing data points.
                                   type: boolean
+                                ignoreFirstSampleInterval:
+                                  description: IgnoreFirstSampleInterval sets interval for total and prometheus_total during which first samples will be ignored
+                                  type: string
                                 ignore_first_intervals:
                                   type: integer
                                 ignore_old_samples:
@@ -3553,7 +3559,7 @@ spec:
                           x-kubernetes-int-or-string: true
                       type: object
                     volumeClaimTemplate:
-                      description: A PVC spec to be used by the VMAlertManager StatefulSets.
+                      description: A PVC spec to be used by the StatefulSets/Deployments.
                       properties:
                         apiVersion:
                           description: |-
@@ -4187,6 +4193,9 @@ spec:
                     ignoreFirstIntervals:
                       description: IgnoreFirstIntervals instructs to ignore first interval
                       type: integer
+                    ignoreFirstSampleInterval:
+                      description: IgnoreFirstSampleInterval sets interval for total and prometheus_total during which first samples will be ignored
+                      type: string
                     ignoreOldSamples:
                       description: IgnoreOldSamples instructs to ignore samples with old timestamps outside the current aggregation interval.
                       type: boolean
@@ -4230,6 +4239,9 @@ spec:
                               It is not recommended changing this setting, unless unfinished aggregations states
                               are preferred to missing data points.
                             type: boolean
+                          ignoreFirstSampleInterval:
+                            description: IgnoreFirstSampleInterval sets interval for total and prometheus_total during which first samples will be ignored
+                            type: string
                           ignore_first_intervals:
                             type: integer
                           ignore_old_samples:

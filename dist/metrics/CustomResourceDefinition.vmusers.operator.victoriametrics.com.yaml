@@ -110,7 +110,7 @@ spec:
                   description: |-
                     LoadBalancingPolicy defines load balancing policy to use for backend urls.
                     Supported policies: least_loaded, first_available.
-                    See [here](https://docs.victoriametrics.com/victoriametrics/vmauth#load-balancing) for more details (default "least_loaded")
+                    See [here](https://docs.victoriametrics.com/victoriametrics/vmauth/#load-balancing) for more details (default "least_loaded")
                   enum:
                     - least_loaded
                     - first_available
@@ -187,7 +187,7 @@ spec:
                           kind:
                             description: |-
                               Kind one of:
-                              VMAgent,VMAlert, VMSingle, VMCluster/vmselect, VMCluster/vmstorage,VMCluster/vminsert  or VMAlertManager
+                              VMAgent,VMAlert, VMSingle, VMCluster/vmselect, VMCluster/vmstorage,VMCluster/vminsert,VMAlertManager, VLSingle, VLCluster/vlinsert, VLCluster/vlselect, VLCluster/vlstorage, VTSingle, VTCluster/vtinsert, VTCluster/vtselect, VTCluster/vtstorage and VLAgent
                             enum:
                               - VMAgent
                               - VMAlert
@@ -198,6 +198,15 @@ spec:
                               - VMCluster/vmselect
                               - VMCluster/vmstorage
                               - VMCluster/vminsert
+                              - VLSingle
+                              - VLCluster/vlinsert
+                              - VLCluster/vlselect
+                              - VLCluster/vlstorage
+                              - VLAgent
+                              - VTCluster/vtinsert
+                              - VTCluster/vtselect
+                              - VTCluster/vtstorage
+                              - VTSingle
                             type: string
                           name:
                             description: Name target CRD object name
@@ -277,7 +286,7 @@ spec:
                       static:
                         description: |-
                           Static - user defined url for traffic forward,
-                          for instance http://vmsingle:8429
+                          for instance http://vmsingle:8428
                         properties:
                           url:
                             description: URL http url for given staticRef.
