@@ -56,9 +56,6 @@ class Velero extends Chart {
             memory: "1Gi",
           },
         },
-        image: {
-          repository: "gcr.io/velero-gcp/velero",
-        },
         initContainers: [
           {
             name: "velero-plugin-for-aws",
