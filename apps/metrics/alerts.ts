@@ -713,6 +713,19 @@ export function addAlerts(scope: Construct, id: string): void {
             "{{ $value }} nodes are not running the same kubelet version as the others",
         },
       },
+      {
+        alert: "KubernetesPodCpuThrottling",
+        expr: `increase(container_cpu_cfs_throttled_periods_total{}[$__rate_interval]) / increase(container_cpu_cfs_periods_total{}[$__rate_interval]) * 100 > 25`,
+        for: "30m",
+        labels: {
+          priority: PRIORITY.NORMAL,
+          push_notify: "true",
+        },
+        annotations: {
+          summary:
+            "Pod {{ $labels.pod }} in {{ $labels.namespace }} seeing 25% of CFS periods throttled.",
+        },
+      },
     ],
   });
 

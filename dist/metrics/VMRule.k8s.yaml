@@ -255,3 +255,11 @@ spec:
           labels:
             priority: "0"
             push_notify: "true"
+        - alert: KubernetesPodCpuThrottling
+          annotations:
+            summary: Pod {{ $labels.pod }} in {{ $labels.namespace }} seeing 25% of CFS periods throttled.
+          expr: increase(container_cpu_cfs_throttled_periods_total{}[$__rate_interval]) / increase(container_cpu_cfs_periods_total{}[$__rate_interval]) * 100 > 25
+          for: 30m
+          labels:
+            priority: "0"
+            push_notify: "true"
