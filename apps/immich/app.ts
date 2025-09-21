@@ -23,7 +23,7 @@ import { WellKnownLabels } from "../../lib/labels";
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
-const version = "v1.140.0";
+const version = "v1.142.1";
 
 NewArgoApp(namespace, {
   namespace: namespace,

@@ -57,7 +57,7 @@ spec:
                 secretKeyRef:
                   key: DB_PASSWORD
                   name: db-creds
-          image: ghcr.io/immich-app/immich-server:v1.140.0
+          image: ghcr.io/immich-app/immich-server:v1.142.1
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
