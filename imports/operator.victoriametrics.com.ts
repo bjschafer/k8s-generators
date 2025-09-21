@@ -285,7 +285,7 @@ export interface VlAgentSpec {
   readonly paused?: boolean;
 
   /**
-   * PersistentVolumeClaimRetentionPolicy allows configuration of PVC rentention policy
+   * PersistentVolumeClaimRetentionPolicy allows configuration of PVC retention policy
    *
    * @schema VlAgentSpec#persistentVolumeClaimRetentionPolicy
    */
@@ -995,7 +995,7 @@ export function toJson_VlAgentSpecManagedMetadata(obj: VlAgentSpecManagedMetadat
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * PersistentVolumeClaimRetentionPolicy allows configuration of PVC rentention policy
+ * PersistentVolumeClaimRetentionPolicy allows configuration of PVC retention policy
  *
  * @schema VlAgentSpecPersistentVolumeClaimRetentionPolicy
  */
@@ -1468,7 +1468,7 @@ export interface VlAgentSpecStorage {
   readonly emptyDir?: VlAgentSpecStorageEmptyDir;
 
   /**
-   * A PVC spec to be used by the VMAlertManager StatefulSets.
+   * A PVC spec to be used by the StatefulSets/Deployments.
    *
    * @schema VlAgentSpecStorage#volumeClaimTemplate
    */
@@ -2540,7 +2540,7 @@ export function toJson_VlAgentSpecStorageEmptyDir(obj: VlAgentSpecStorageEmptyDi
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A PVC spec to be used by the VMAlertManager StatefulSets.
+ * A PVC spec to be used by the StatefulSets/Deployments.
  *
  * @schema VlAgentSpecStorageVolumeClaimTemplate
  */
@@ -5875,7 +5875,7 @@ export interface VlClusterSpecVlstorage {
   readonly paused?: boolean;
 
   /**
-   * PersistentVolumeClaimRetentionPolicy allows configuration of PVC rentention policy
+   * PersistentVolumeClaimRetentionPolicy allows configuration of PVC retention policy
    *
    * @schema VlClusterSpecVlstorage#persistentVolumeClaimRetentionPolicy
    */
@@ -8080,7 +8080,7 @@ export enum VlClusterSpecVlstorageLogLevel {
 }
 
 /**
- * PersistentVolumeClaimRetentionPolicy allows configuration of PVC rentention policy
+ * PersistentVolumeClaimRetentionPolicy allows configuration of PVC retention policy
  *
  * @schema VlClusterSpecVlstoragePersistentVolumeClaimRetentionPolicy
  */
@@ -8418,7 +8418,7 @@ export interface VlClusterSpecVlstorageStorage {
   readonly emptyDir?: VlClusterSpecVlstorageStorageEmptyDir;
 
   /**
-   * A PVC spec to be used by the VMAlertManager StatefulSets.
+   * A PVC spec to be used by the StatefulSets/Deployments.
    *
    * @schema VlClusterSpecVlstorageStorage#volumeClaimTemplate
    */
@@ -12857,7 +12857,7 @@ export interface VmAgentSpec {
   /**
    * License allows to configure license key to be used for enterprise features.
    * Using license key is supported starting from VictoriaMetrics v1.94.0.
-   * See [here](https://docs.victoriametrics.com/victoriametrics/enterprise)
+   * See [here](https://docs.victoriametrics.com/victoriametrics/enterprise/)
    *
    * @schema VmAgentSpec#license
    */
@@ -12979,7 +12979,7 @@ export interface VmAgentSpec {
   readonly paused?: boolean;
 
   /**
-   * PersistentVolumeClaimRetentionPolicy allows configuration of PVC rentention policy
+   * PersistentVolumeClaimRetentionPolicy allows configuration of PVC retention policy
    *
    * @schema VmAgentSpec#persistentVolumeClaimRetentionPolicy
    */
@@ -13097,7 +13097,7 @@ export interface VmAgentSpec {
 
   /**
    * RemoteWrite list of victoria metrics /some other remote write system
-   * for vm it must looks like: http://victoria-metrics-single:8429/api/v1/write
+   * for vm it must looks like: http://victoria-metrics-single:8428/api/v1/write
    * or for cluster different url
    * https://docs.victoriametrics.com/victoriametrics/vmagent/#splitting-data-streams-among-multiple-systems
    *
@@ -14548,7 +14548,7 @@ export function toJson_VmAgentSpecInsertPorts(obj: VmAgentSpecInsertPorts | unde
 /**
  * License allows to configure license key to be used for enterprise features.
  * Using license key is supported starting from VictoriaMetrics v1.94.0.
- * See [here](https://docs.victoriametrics.com/victoriametrics/enterprise)
+ * See [here](https://docs.victoriametrics.com/victoriametrics/enterprise/)
  *
  * @schema VmAgentSpecLicense
  */
@@ -14873,7 +14873,7 @@ export function toJson_VmAgentSpecNodeScrapeSelector(obj: VmAgentSpecNodeScrapeS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * PersistentVolumeClaimRetentionPolicy allows configuration of PVC rentention policy
+ * PersistentVolumeClaimRetentionPolicy allows configuration of PVC retention policy
  *
  * @schema VmAgentSpecPersistentVolumeClaimRetentionPolicy
  */
@@ -16297,7 +16297,7 @@ export interface VmAgentSpecStatefulStorage {
   readonly emptyDir?: VmAgentSpecStatefulStorageEmptyDir;
 
   /**
-   * A PVC spec to be used by the VMAlertManager StatefulSets.
+   * A PVC spec to be used by the StatefulSets/Deployments.
    *
    * @schema VmAgentSpecStatefulStorage#volumeClaimTemplate
    */
@@ -16567,6 +16567,13 @@ export interface VmAgentSpecStreamAggrConfig {
   readonly ignoreFirstIntervals?: number;
 
   /**
+   * IgnoreFirstSampleInterval sets interval for total and prometheus_total during which first samples will be ignored
+   *
+   * @schema VmAgentSpecStreamAggrConfig#ignoreFirstSampleInterval
+   */
+  readonly ignoreFirstSampleInterval?: string;
+
+  /**
    * IgnoreOldSamples instructs to ignore samples with old timestamps outside the current aggregation interval.
    *
    * @schema VmAgentSpecStreamAggrConfig#ignoreOldSamples
@@ -16602,6 +16609,7 @@ export function toJson_VmAgentSpecStreamAggrConfig(obj: VmAgentSpecStreamAggrCon
     'dropInputLabels': obj.dropInputLabels?.map(y => y),
     'enableWindows': obj.enableWindows,
     'ignoreFirstIntervals': obj.ignoreFirstIntervals,
+    'ignoreFirstSampleInterval': obj.ignoreFirstSampleInterval,
     'ignoreOldSamples': obj.ignoreOldSamples,
     'keepInput': obj.keepInput,
     'rules': obj.rules?.map(y => toJson_VmAgentSpecStreamAggrConfigRules(y)),
@@ -18260,6 +18268,13 @@ export interface VmAgentSpecRemoteWriteStreamAggrConfig {
   readonly ignoreFirstIntervals?: number;
 
   /**
+   * IgnoreFirstSampleInterval sets interval for total and prometheus_total during which first samples will be ignored
+   *
+   * @schema VmAgentSpecRemoteWriteStreamAggrConfig#ignoreFirstSampleInterval
+   */
+  readonly ignoreFirstSampleInterval?: string;
+
+  /**
    * IgnoreOldSamples instructs to ignore samples with old timestamps outside the current aggregation interval.
    *
    * @schema VmAgentSpecRemoteWriteStreamAggrConfig#ignoreOldSamples
@@ -18295,6 +18310,7 @@ export function toJson_VmAgentSpecRemoteWriteStreamAggrConfig(obj: VmAgentSpecRe
     'dropInputLabels': obj.dropInputLabels?.map(y => y),
     'enableWindows': obj.enableWindows,
     'ignoreFirstIntervals': obj.ignoreFirstIntervals,
+    'ignoreFirstSampleInterval': obj.ignoreFirstSampleInterval,
     'ignoreOldSamples': obj.ignoreOldSamples,
     'keepInput': obj.keepInput,
     'rules': obj.rules?.map(y => toJson_VmAgentSpecRemoteWriteStreamAggrConfigRules(y)),
@@ -18863,7 +18879,7 @@ export function toJson_VmAgentSpecStatefulStorageEmptyDir(obj: VmAgentSpecStatef
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A PVC spec to be used by the VMAlertManager StatefulSets.
+ * A PVC spec to be used by the StatefulSets/Deployments.
  *
  * @schema VmAgentSpecStatefulStorageVolumeClaimTemplate
  */
@@ -19134,6 +19150,13 @@ export interface VmAgentSpecStreamAggrConfigRules {
   readonly flushOnShutdown?: boolean;
 
   /**
+   * IgnoreFirstSampleInterval sets interval for total and prometheus_total during which first samples will be ignored
+   *
+   * @schema VmAgentSpecStreamAggrConfigRules#ignoreFirstSampleInterval
+   */
+  readonly ignoreFirstSampleInterval?: string;
+
+  /**
    * @schema VmAgentSpecStreamAggrConfigRules#ignore_first_intervals
    */
   readonly ignoreFirstIntervals?: number;
@@ -19253,6 +19276,7 @@ export function toJson_VmAgentSpecStreamAggrConfigRules(obj: VmAgentSpecStreamAg
     'drop_input_labels': obj.dropInputLabels?.map(y => y),
     'enable_windows': obj.enableWindows,
     'flush_on_shutdown': obj.flushOnShutdown,
+    'ignoreFirstSampleInterval': obj.ignoreFirstSampleInterval,
     'ignore_first_intervals': obj.ignoreFirstIntervals,
     'ignore_old_samples': obj.ignoreOldSamples,
     'input_relabel_configs': obj.inputRelabelConfigs?.map(y => toJson_VmAgentSpecStreamAggrConfigRulesInputRelabelConfigs(y)),
@@ -20196,6 +20220,13 @@ export interface VmAgentSpecRemoteWriteStreamAggrConfigRules {
   readonly flushOnShutdown?: boolean;
 
   /**
+   * IgnoreFirstSampleInterval sets interval for total and prometheus_total during which first samples will be ignored
+   *
+   * @schema VmAgentSpecRemoteWriteStreamAggrConfigRules#ignoreFirstSampleInterval
+   */
+  readonly ignoreFirstSampleInterval?: string;
+
+  /**
    * @schema VmAgentSpecRemoteWriteStreamAggrConfigRules#ignore_first_intervals
    */
   readonly ignoreFirstIntervals?: number;
@@ -20315,6 +20346,7 @@ export function toJson_VmAgentSpecRemoteWriteStreamAggrConfigRules(obj: VmAgentS
     'drop_input_labels': obj.dropInputLabels?.map(y => y),
     'enable_windows': obj.enableWindows,
     'flush_on_shutdown': obj.flushOnShutdown,
+    'ignoreFirstSampleInterval': obj.ignoreFirstSampleInterval,
     'ignore_first_intervals': obj.ignoreFirstIntervals,
     'ignore_old_samples': obj.ignoreOldSamples,
     'input_relabel_configs': obj.inputRelabelConfigs?.map(y => toJson_VmAgentSpecRemoteWriteStreamAggrConfigRulesInputRelabelConfigs(y)),
@@ -26734,7 +26766,7 @@ export interface VmAlertmanagerSpec {
   readonly disableAutomountServiceAccountToken?: boolean;
 
   /**
-   * DisableNamespaceMatcher disables top route namespace label matcher for VMAlertmanagerConfig
+   * DisableNamespaceMatcher disables adding top route label matcher "namespace = <VMAlertmanagerConfig.namespace>" for VMAlertmanagerConfig
    * It may be useful if alert doesn't have namespace label for some reason
    *
    * @schema VmAlertmanagerSpec#disableNamespaceMatcher
@@ -26772,6 +26804,15 @@ export interface VmAlertmanagerSpec {
    * @schema VmAlertmanagerSpec#dnsPolicy
    */
   readonly dnsPolicy?: string;
+
+  /**
+   * EnforcedNamespaceLabel defines the namespace label key for top route matcher for VMAlertmanagerConfig
+   * Default is "namespace"
+   *
+   * @default namespace"
+   * @schema VmAlertmanagerSpec#enforcedNamespaceLabel
+   */
+  readonly enforcedNamespaceLabel?: string;
 
   /**
    * EnforcedTopRouteMatchers defines label matchers to be added for the top route
@@ -26927,7 +26968,7 @@ export interface VmAlertmanagerSpec {
   readonly paused?: boolean;
 
   /**
-   * PersistentVolumeClaimRetentionPolicy allows configuration of PVC rentention policy
+   * PersistentVolumeClaimRetentionPolicy allows configuration of PVC retention policy
    *
    * @schema VmAlertmanagerSpec#persistentVolumeClaimRetentionPolicy
    */
@@ -27231,6 +27272,7 @@ export function toJson_VmAlertmanagerSpec(obj: VmAlertmanagerSpec | undefined): 
     'disableSelfServiceScrape': obj.disableSelfServiceScrape,
     'dnsConfig': toJson_VmAlertmanagerSpecDnsConfig(obj.dnsConfig),
     'dnsPolicy': obj.dnsPolicy,
+    'enforcedNamespaceLabel': obj.enforcedNamespaceLabel,
     'enforcedTopRouteMatchers': obj.enforcedTopRouteMatchers?.map(y => y),
     'externalURL': obj.externalUrl,
     'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
@@ -27927,7 +27969,7 @@ export function toJson_VmAlertmanagerSpecManagedMetadata(obj: VmAlertmanagerSpec
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * PersistentVolumeClaimRetentionPolicy allows configuration of PVC rentention policy
+ * PersistentVolumeClaimRetentionPolicy allows configuration of PVC retention policy
  *
  * @schema VmAlertmanagerSpecPersistentVolumeClaimRetentionPolicy
  */
@@ -28234,7 +28276,7 @@ export interface VmAlertmanagerSpecStorage {
   readonly emptyDir?: VmAlertmanagerSpecStorageEmptyDir;
 
   /**
-   * A PVC spec to be used by the VMAlertManager StatefulSets.
+   * A PVC spec to be used by the StatefulSets/Deployments.
    *
    * @schema VmAlertmanagerSpecStorage#volumeClaimTemplate
    */
@@ -29534,7 +29576,7 @@ export function toJson_VmAlertmanagerSpecStorageEmptyDir(obj: VmAlertmanagerSpec
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A PVC spec to be used by the VMAlertManager StatefulSets.
+ * A PVC spec to be used by the StatefulSets/Deployments.
  *
  * @schema VmAlertmanagerSpecStorageVolumeClaimTemplate
  */
@@ -42313,7 +42355,7 @@ export interface VmAnomalySpec {
   /**
    * License allows to configure license key to be used for enterprise features.
    * Using license key is supported starting from VictoriaMetrics v1.94.0.
-   * See [here](https://docs.victoriametrics.com/enterprise)
+   * See [here](https://docs.victoriametrics.com/victoriametrics/enterprise/)
    *
    * @schema VmAnomalySpec#license
    */
@@ -42375,7 +42417,7 @@ export interface VmAnomalySpec {
   readonly paused?: boolean;
 
   /**
-   * PersistentVolumeClaimRetentionPolicy allows configuration of PVC rentention policy
+   * PersistentVolumeClaimRetentionPolicy allows configuration of PVC retention policy
    *
    * @schema VmAnomalySpec#persistentVolumeClaimRetentionPolicy
    */
@@ -43064,7 +43106,7 @@ export function toJson_VmAnomalySpecImagePullSecrets(obj: VmAnomalySpecImagePull
 /**
  * License allows to configure license key to be used for enterprise features.
  * Using license key is supported starting from VictoriaMetrics v1.94.0.
- * See [here](https://docs.victoriametrics.com/enterprise)
+ * See [here](https://docs.victoriametrics.com/victoriametrics/enterprise/)
  *
  * @schema VmAnomalySpecLicense
  */
@@ -43221,7 +43263,7 @@ export function toJson_VmAnomalySpecMonitoring(obj: VmAnomalySpecMonitoring | un
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * PersistentVolumeClaimRetentionPolicy allows configuration of PVC rentention policy
+ * PersistentVolumeClaimRetentionPolicy allows configuration of PVC retention policy
  *
  * @schema VmAnomalySpecPersistentVolumeClaimRetentionPolicy
  */
@@ -43380,7 +43422,7 @@ export function toJson_VmAnomalySpecPodMetadata(obj: VmAnomalySpecPodMetadata | 
  */
 export interface VmAnomalySpecReader {
   /**
-   * Basic auth defines basic autorization configuration
+   * Basic auth defines basic authorization configuration
    *
    * @schema VmAnomalySpecReader#basicAuth
    */
@@ -43402,7 +43444,7 @@ export interface VmAnomalySpecReader {
 
   /**
    * DatasourceURL address
-   * datatasource must serve /api/v1/query and /api/v1/query_range APIs
+   * datasource must serve /api/v1/query and /api/v1/query_range APIs
    *
    * @schema VmAnomalySpecReader#datasourceURL
    */
@@ -43623,7 +43665,7 @@ export interface VmAnomalySpecStorage {
   readonly emptyDir?: VmAnomalySpecStorageEmptyDir;
 
   /**
-   * A PVC spec to be used by the VMAlertManager StatefulSets.
+   * A PVC spec to be used by the StatefulSets/Deployments.
    *
    * @schema VmAnomalySpecStorage#volumeClaimTemplate
    */
@@ -43833,7 +43875,7 @@ export function toJson_VmAnomalySpecVolumeMounts(obj: VmAnomalySpecVolumeMounts 
  */
 export interface VmAnomalySpecWriter {
   /**
-   * Basic auth defines basic autorization configuration
+   * Basic auth defines basic authorization configuration
    *
    * @schema VmAnomalySpecWriter#basicAuth
    */
@@ -44418,7 +44460,7 @@ export function toJson_VmAnomalySpecMonitoringPull(obj: VmAnomalySpecMonitoringP
  */
 export interface VmAnomalySpecMonitoringPush {
   /**
-   * Basic auth defines basic autorization configuration
+   * Basic auth defines basic authorization configuration
    *
    * @schema VmAnomalySpecMonitoringPush#basicAuth
    */
@@ -44446,7 +44488,7 @@ export interface VmAnomalySpecMonitoringPush {
   readonly healthPath?: string;
 
   /**
-   * PushFrequency defines push internval
+   * PushFrequency defines push interval
    *
    * @schema VmAnomalySpecMonitoringPush#pushFrequency
    */
@@ -44543,7 +44585,7 @@ export class VmAnomalySpecPodDisruptionBudgetMinAvailable {
 }
 
 /**
- * Basic auth defines basic autorization configuration
+ * Basic auth defines basic authorization configuration
  *
  * @schema VmAnomalySpecReaderBasicAuth
  */
@@ -44828,7 +44870,7 @@ export function toJson_VmAnomalySpecStorageEmptyDir(obj: VmAnomalySpecStorageEmp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A PVC spec to be used by the VMAlertManager StatefulSets.
+ * A PVC spec to be used by the StatefulSets/Deployments.
  *
  * @schema VmAnomalySpecStorageVolumeClaimTemplate
  */
@@ -44899,7 +44941,7 @@ export function toJson_VmAnomalySpecStorageVolumeClaimTemplate(obj: VmAnomalySpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Basic auth defines basic autorization configuration
+ * Basic auth defines basic authorization configuration
  *
  * @schema VmAnomalySpecWriterBasicAuth
  */
@@ -45482,7 +45524,7 @@ export function toJson_VmAnomalySpecClaimTemplatesStatusModifyVolumeStatus(obj: 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Basic auth defines basic autorization configuration
+ * Basic auth defines basic authorization configuration
  *
  * @schema VmAnomalySpecMonitoringPushBasicAuth
  */
@@ -49645,7 +49687,7 @@ export interface VmAuthSpecUnauthorizedUserAccessSpec {
   /**
    * LoadBalancingPolicy defines load balancing policy to use for backend urls.
    * Supported policies: least_loaded, first_available.
-   * See [here](https://docs.victoriametrics.com/victoriametrics/vmauth#load-balancing) for more details (default "least_loaded")
+   * See [here](https://docs.victoriametrics.com/victoriametrics/vmauth/#load-balancing) for more details (default "least_loaded")
    *
    * @schema VmAuthSpecUnauthorizedUserAccessSpec#load_balancing_policy
    */
@@ -50520,7 +50562,7 @@ export function toJson_VmAuthSpecUnauthorizedUserAccessSpecIpFilters(obj: VmAuth
 /**
  * LoadBalancingPolicy defines load balancing policy to use for backend urls.
  * Supported policies: least_loaded, first_available.
- * See [here](https://docs.victoriametrics.com/victoriametrics/vmauth#load-balancing) for more details (default "least_loaded")
+ * See [here](https://docs.victoriametrics.com/victoriametrics/vmauth/#load-balancing) for more details (default "least_loaded")
  *
  * @schema VmAuthSpecUnauthorizedUserAccessSpecLoadBalancingPolicy
  */
@@ -52539,7 +52581,7 @@ export interface VmClusterSpecVmselect {
   readonly persistentVolume?: VmClusterSpecVmselectPersistentVolume;
 
   /**
-   * PersistentVolumeClaimRetentionPolicy allows configuration of PVC rentention policy
+   * PersistentVolumeClaimRetentionPolicy allows configuration of PVC retention policy
    *
    * @schema VmClusterSpecVmselect#persistentVolumeClaimRetentionPolicy
    */
@@ -53018,7 +53060,7 @@ export interface VmClusterSpecVmstorage {
   readonly paused?: boolean;
 
   /**
-   * PersistentVolumeClaimRetentionPolicy allows configuration of PVC rentention policy
+   * PersistentVolumeClaimRetentionPolicy allows configuration of PVC retention policy
    *
    * @schema VmClusterSpecVmstorage#persistentVolumeClaimRetentionPolicy
    */
@@ -54531,7 +54573,7 @@ export interface VmClusterSpecVmselectPersistentVolume {
   readonly emptyDir?: VmClusterSpecVmselectPersistentVolumeEmptyDir;
 
   /**
-   * A PVC spec to be used by the VMAlertManager StatefulSets.
+   * A PVC spec to be used by the StatefulSets/Deployments.
    *
    * @schema VmClusterSpecVmselectPersistentVolume#volumeClaimTemplate
    */
@@ -54556,7 +54598,7 @@ export function toJson_VmClusterSpecVmselectPersistentVolume(obj: VmClusterSpecV
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * PersistentVolumeClaimRetentionPolicy allows configuration of PVC rentention policy
+ * PersistentVolumeClaimRetentionPolicy allows configuration of PVC retention policy
  *
  * @schema VmClusterSpecVmselectPersistentVolumeClaimRetentionPolicy
  */
@@ -54895,7 +54937,7 @@ export interface VmClusterSpecVmselectStorage {
   readonly emptyDir?: VmClusterSpecVmselectStorageEmptyDir;
 
   /**
-   * A PVC spec to be used by the VMAlertManager StatefulSets.
+   * A PVC spec to be used by the StatefulSets/Deployments.
    *
    * @schema VmClusterSpecVmselectStorage#volumeClaimTemplate
    */
@@ -55392,7 +55434,7 @@ export enum VmClusterSpecVmstorageLogLevel {
 }
 
 /**
- * PersistentVolumeClaimRetentionPolicy allows configuration of PVC rentention policy
+ * PersistentVolumeClaimRetentionPolicy allows configuration of PVC retention policy
  *
  * @schema VmClusterSpecVmstoragePersistentVolumeClaimRetentionPolicy
  */
@@ -55731,7 +55773,7 @@ export interface VmClusterSpecVmstorageStorage {
   readonly emptyDir?: VmClusterSpecVmstorageStorageEmptyDir;
 
   /**
-   * A PVC spec to be used by the VMAlertManager StatefulSets.
+   * A PVC spec to be used by the StatefulSets/Deployments.
    *
    * @schema VmClusterSpecVmstorageStorage#volumeClaimTemplate
    */
@@ -56870,7 +56912,7 @@ export function toJson_VmClusterSpecVmselectStorageEmptyDir(obj: VmClusterSpecVm
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A PVC spec to be used by the VMAlertManager StatefulSets.
+ * A PVC spec to be used by the StatefulSets/Deployments.
  *
  * @schema VmClusterSpecVmselectStorageVolumeClaimTemplate
  */
@@ -59925,7 +59967,7 @@ export interface VmNodeScrapeSpecVmScrapeParams {
    * disable_keepalive allows disabling HTTP keep-alive when scraping targets.
    * By default, HTTP keep-alive is enabled, so TCP connections to scrape targets
    * could be reused.
-   * See https://docs.victoriametrics.com/victoriametrics/vmagent#scrape_config-enhancements
+   * See https://docs.victoriametrics.com/victoriametrics/vmagent/#scrape_config-enhancements
    *
    * @schema VmNodeScrapeSpecVmScrapeParams#disable_keep_alive
    */
@@ -59949,7 +59991,7 @@ export interface VmNodeScrapeSpecVmScrapeParams {
 
   /**
    * ProxyClientConfig configures proxy auth settings for scraping
-   * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent#scraping-targets-via-a-proxy
+   * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent/#scraping-targets-via-a-proxy
    *
    * @schema VmNodeScrapeSpecVmScrapeParams#proxy_client_config
    */
@@ -60403,7 +60445,7 @@ export function toJson_VmNodeScrapeSpecTlsConfigKeySecret(obj: VmNodeScrapeSpecT
 
 /**
  * ProxyClientConfig configures proxy auth settings for scraping
- * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent#scraping-targets-via-a-proxy
+ * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent/#scraping-targets-via-a-proxy
  *
  * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfig
  */
@@ -62089,7 +62131,7 @@ export interface VmPodScrapeSpecPodMetricsEndpointsVmScrapeParams {
    * disable_keepalive allows disabling HTTP keep-alive when scraping targets.
    * By default, HTTP keep-alive is enabled, so TCP connections to scrape targets
    * could be reused.
-   * See https://docs.victoriametrics.com/victoriametrics/vmagent#scrape_config-enhancements
+   * See https://docs.victoriametrics.com/victoriametrics/vmagent/#scrape_config-enhancements
    *
    * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParams#disable_keep_alive
    */
@@ -62113,7 +62155,7 @@ export interface VmPodScrapeSpecPodMetricsEndpointsVmScrapeParams {
 
   /**
    * ProxyClientConfig configures proxy auth settings for scraping
-   * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent#scraping-targets-via-a-proxy
+   * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent/#scraping-targets-via-a-proxy
    *
    * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParams#proxy_client_config
    */
@@ -62567,7 +62609,7 @@ export function toJson_VmPodScrapeSpecPodMetricsEndpointsTlsConfigKeySecret(obj:
 
 /**
  * ProxyClientConfig configures proxy auth settings for scraping
- * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent#scraping-targets-via-a-proxy
+ * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent/#scraping-targets-via-a-proxy
  *
  * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfig
  */
@@ -63973,7 +64015,7 @@ export interface VmProbeSpecVmScrapeParams {
    * disable_keepalive allows disabling HTTP keep-alive when scraping targets.
    * By default, HTTP keep-alive is enabled, so TCP connections to scrape targets
    * could be reused.
-   * See https://docs.victoriametrics.com/victoriametrics/vmagent#scrape_config-enhancements
+   * See https://docs.victoriametrics.com/victoriametrics/vmagent/#scrape_config-enhancements
    *
    * @schema VmProbeSpecVmScrapeParams#disable_keep_alive
    */
@@ -63997,7 +64039,7 @@ export interface VmProbeSpecVmScrapeParams {
 
   /**
    * ProxyClientConfig configures proxy auth settings for scraping
-   * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent#scraping-targets-via-a-proxy
+   * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent/#scraping-targets-via-a-proxy
    *
    * @schema VmProbeSpecVmScrapeParams#proxy_client_config
    */
@@ -64505,7 +64547,7 @@ export enum VmProbeSpecVmProberSpecScheme {
 
 /**
  * ProxyClientConfig configures proxy auth settings for scraping
- * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent#scraping-targets-via-a-proxy
+ * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent/#scraping-targets-via-a-proxy
  *
  * @schema VmProbeSpecVmScrapeParamsProxyClientConfig
  */
@@ -65634,7 +65676,7 @@ export interface VmRuleSpecGroups {
 
   /**
    * Tenant id for group, can be used only with enterprise version of vmalert.
-   * See more details [here](https://docs.victoriametrics.com/victoriametrics/vmalert#multitenancy).
+   * See more details [here](https://docs.victoriametrics.com/victoriametrics/vmalert/#multitenancy).
    *
    * @schema VmRuleSpecGroups#tenant
    */
@@ -67699,7 +67741,7 @@ export interface VmScrapeConfigSpecVmScrapeParams {
    * disable_keepalive allows disabling HTTP keep-alive when scraping targets.
    * By default, HTTP keep-alive is enabled, so TCP connections to scrape targets
    * could be reused.
-   * See https://docs.victoriametrics.com/victoriametrics/vmagent#scrape_config-enhancements
+   * See https://docs.victoriametrics.com/victoriametrics/vmagent/#scrape_config-enhancements
    *
    * @schema VmScrapeConfigSpecVmScrapeParams#disable_keep_alive
    */
@@ -67723,7 +67765,7 @@ export interface VmScrapeConfigSpecVmScrapeParams {
 
   /**
    * ProxyClientConfig configures proxy auth settings for scraping
-   * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent#scraping-targets-via-a-proxy
+   * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent/#scraping-targets-via-a-proxy
    *
    * @schema VmScrapeConfigSpecVmScrapeParams#proxy_client_config
    */
@@ -69844,7 +69886,7 @@ export function toJson_VmScrapeConfigSpecTlsConfigKeySecret(obj: VmScrapeConfigS
 
 /**
  * ProxyClientConfig configures proxy auth settings for scraping
- * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent#scraping-targets-via-a-proxy
+ * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent/#scraping-targets-via-a-proxy
  *
  * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfig
  */
@@ -74983,7 +75025,7 @@ export interface VmServiceScrapeSpecEndpointsVmScrapeParams {
    * disable_keepalive allows disabling HTTP keep-alive when scraping targets.
    * By default, HTTP keep-alive is enabled, so TCP connections to scrape targets
    * could be reused.
-   * See https://docs.victoriametrics.com/victoriametrics/vmagent#scrape_config-enhancements
+   * See https://docs.victoriametrics.com/victoriametrics/vmagent/#scrape_config-enhancements
    *
    * @schema VmServiceScrapeSpecEndpointsVmScrapeParams#disable_keep_alive
    */
@@ -75007,7 +75049,7 @@ export interface VmServiceScrapeSpecEndpointsVmScrapeParams {
 
   /**
    * ProxyClientConfig configures proxy auth settings for scraping
-   * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent#scraping-targets-via-a-proxy
+   * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent/#scraping-targets-via-a-proxy
    *
    * @schema VmServiceScrapeSpecEndpointsVmScrapeParams#proxy_client_config
    */
@@ -75461,7 +75503,7 @@ export function toJson_VmServiceScrapeSpecEndpointsTlsConfigKeySecret(obj: VmSer
 
 /**
  * ProxyClientConfig configures proxy auth settings for scraping
- * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent#scraping-targets-via-a-proxy
+ * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent/#scraping-targets-via-a-proxy
  *
  * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfig
  */
@@ -77477,6 +77519,13 @@ export interface VmSingleSpecStreamAggrConfig {
   readonly ignoreFirstIntervals?: number;
 
   /**
+   * IgnoreFirstSampleInterval sets interval for total and prometheus_total during which first samples will be ignored
+   *
+   * @schema VmSingleSpecStreamAggrConfig#ignoreFirstSampleInterval
+   */
+  readonly ignoreFirstSampleInterval?: string;
+
+  /**
    * IgnoreOldSamples instructs to ignore samples with old timestamps outside the current aggregation interval.
    *
    * @schema VmSingleSpecStreamAggrConfig#ignoreOldSamples
@@ -77512,6 +77561,7 @@ export function toJson_VmSingleSpecStreamAggrConfig(obj: VmSingleSpecStreamAggrC
     'dropInputLabels': obj.dropInputLabels?.map(y => y),
     'enableWindows': obj.enableWindows,
     'ignoreFirstIntervals': obj.ignoreFirstIntervals,
+    'ignoreFirstSampleInterval': obj.ignoreFirstSampleInterval,
     'ignoreOldSamples': obj.ignoreOldSamples,
     'keepInput': obj.keepInput,
     'rules': obj.rules?.map(y => toJson_VmSingleSpecStreamAggrConfigRules(y)),
@@ -78518,6 +78568,13 @@ export interface VmSingleSpecStreamAggrConfigRules {
   readonly flushOnShutdown?: boolean;
 
   /**
+   * IgnoreFirstSampleInterval sets interval for total and prometheus_total during which first samples will be ignored
+   *
+   * @schema VmSingleSpecStreamAggrConfigRules#ignoreFirstSampleInterval
+   */
+  readonly ignoreFirstSampleInterval?: string;
+
+  /**
    * @schema VmSingleSpecStreamAggrConfigRules#ignore_first_intervals
    */
   readonly ignoreFirstIntervals?: number;
@@ -78637,6 +78694,7 @@ export function toJson_VmSingleSpecStreamAggrConfigRules(obj: VmSingleSpecStream
     'drop_input_labels': obj.dropInputLabels?.map(y => y),
     'enable_windows': obj.enableWindows,
     'flush_on_shutdown': obj.flushOnShutdown,
+    'ignoreFirstSampleInterval': obj.ignoreFirstSampleInterval,
     'ignore_first_intervals': obj.ignoreFirstIntervals,
     'ignore_old_samples': obj.ignoreOldSamples,
     'input_relabel_configs': obj.inputRelabelConfigs?.map(y => toJson_VmSingleSpecStreamAggrConfigRulesInputRelabelConfigs(y)),
@@ -80734,7 +80792,7 @@ export interface VmStaticScrapeSpecTargetEndpointsVmScrapeParams {
    * disable_keepalive allows disabling HTTP keep-alive when scraping targets.
    * By default, HTTP keep-alive is enabled, so TCP connections to scrape targets
    * could be reused.
-   * See https://docs.victoriametrics.com/victoriametrics/vmagent#scrape_config-enhancements
+   * See https://docs.victoriametrics.com/victoriametrics/vmagent/#scrape_config-enhancements
    *
    * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParams#disable_keep_alive
    */
@@ -80758,7 +80816,7 @@ export interface VmStaticScrapeSpecTargetEndpointsVmScrapeParams {
 
   /**
    * ProxyClientConfig configures proxy auth settings for scraping
-   * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent#scraping-targets-via-a-proxy
+   * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent/#scraping-targets-via-a-proxy
    *
    * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParams#proxy_client_config
    */
@@ -81162,7 +81220,7 @@ export function toJson_VmStaticScrapeSpecTargetEndpointsTlsConfigKeySecret(obj: 
 
 /**
  * ProxyClientConfig configures proxy auth settings for scraping
- * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent#scraping-targets-via-a-proxy
+ * See feature description https://docs.victoriametrics.com/victoriametrics/vmagent/#scraping-targets-via-a-proxy
  *
  * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfig
  */
@@ -81875,7 +81933,7 @@ export interface VmUserSpec {
   /**
    * LoadBalancingPolicy defines load balancing policy to use for backend urls.
    * Supported policies: least_loaded, first_available.
-   * See [here](https://docs.victoriametrics.com/victoriametrics/vmauth#load-balancing) for more details (default "least_loaded")
+   * See [here](https://docs.victoriametrics.com/victoriametrics/vmauth/#load-balancing) for more details (default "least_loaded")
    *
    * @schema VmUserSpec#load_balancing_policy
    */
@@ -82038,7 +82096,7 @@ export function toJson_VmUserSpecIpFilters(obj: VmUserSpecIpFilters | undefined)
 /**
  * LoadBalancingPolicy defines load balancing policy to use for backend urls.
  * Supported policies: least_loaded, first_available.
- * See [here](https://docs.victoriametrics.com/victoriametrics/vmauth#load-balancing) for more details (default "least_loaded")
+ * See [here](https://docs.victoriametrics.com/victoriametrics/vmauth/#load-balancing) for more details (default "least_loaded")
  *
  * @schema VmUserSpecLoadBalancingPolicy
  */
@@ -82198,7 +82256,7 @@ export interface VmUserSpecTargetRefs {
 
   /**
    * Static - user defined url for traffic forward,
-   * for instance http://vmsingle:8429
+   * for instance http://vmsingle:8428
    *
    * @schema VmUserSpecTargetRefs#static
    */
@@ -82392,7 +82450,7 @@ export function toJson_VmUserSpecTokenRef(obj: VmUserSpecTokenRef | undefined): 
 export interface VmUserSpecTargetRefsCrd {
   /**
    * Kind one of:
-   * VMAgent,VMAlert, VMSingle, VMCluster/vmselect, VMCluster/vmstorage,VMCluster/vminsert  or VMAlertManager
+   * VMAgent,VMAlert, VMSingle, VMCluster/vmselect, VMCluster/vmstorage,VMCluster/vminsert,VMAlertManager, VLSingle, VLCluster/vlinsert, VLCluster/vlselect, VLCluster/vlstorage, VTSingle, VTCluster/vtinsert, VTCluster/vtselect, VTCluster/vtstorage and VLAgent
    *
    * @schema VmUserSpecTargetRefsCrd#kind
    */
@@ -82446,7 +82504,7 @@ export enum VmUserSpecTargetRefsLoadBalancingPolicy {
 
 /**
  * Static - user defined url for traffic forward,
- * for instance http://vmsingle:8429
+ * for instance http://vmsingle:8428
  *
  * @schema VmUserSpecTargetRefsStatic
  */
@@ -82648,7 +82706,7 @@ export function toJson_VmUserSpecTlsConfigKeySecret(obj: VmUserSpecTlsConfigKeyS
 
 /**
  * Kind one of:
- * VMAgent,VMAlert, VMSingle, VMCluster/vmselect, VMCluster/vmstorage,VMCluster/vminsert  or VMAlertManager
+ * VMAgent,VMAlert, VMSingle, VMCluster/vmselect, VMCluster/vmstorage,VMCluster/vminsert,VMAlertManager, VLSingle, VLCluster/vlinsert, VLCluster/vlselect, VLCluster/vlstorage, VTSingle, VTCluster/vtinsert, VTCluster/vtselect, VTCluster/vtstorage and VLAgent
  *
  * @schema VmUserSpecTargetRefsCrdKind
  */
@@ -82669,6 +82727,24 @@ export enum VmUserSpecTargetRefsCrdKind {
   VM_CLUSTER_FORWARD_SLASH_VMSTORAGE = "VMCluster/vmstorage",
   /** VMCluster/vminsert */
   VM_CLUSTER_FORWARD_SLASH_VMINSERT = "VMCluster/vminsert",
+  /** VLSingle */
+  VL_SINGLE = "VLSingle",
+  /** VLCluster/vlinsert */
+  VL_CLUSTER_FORWARD_SLASH_VLINSERT = "VLCluster/vlinsert",
+  /** VLCluster/vlselect */
+  VL_CLUSTER_FORWARD_SLASH_VLSELECT = "VLCluster/vlselect",
+  /** VLCluster/vlstorage */
+  VL_CLUSTER_FORWARD_SLASH_VLSTORAGE = "VLCluster/vlstorage",
+  /** VLAgent */
+  VL_AGENT = "VLAgent",
+  /** VTCluster/vtinsert */
+  VT_CLUSTER_FORWARD_SLASH_VTINSERT = "VTCluster/vtinsert",
+  /** VTCluster/vtselect */
+  VT_CLUSTER_FORWARD_SLASH_VTSELECT = "VTCluster/vtselect",
+  /** VTCluster/vtstorage */
+  VT_CLUSTER_FORWARD_SLASH_VTSTORAGE = "VTCluster/vtstorage",
+  /** VTSingle */
+  VT_SINGLE = "VTSingle",
 }
 
 /**
@@ -82963,6 +83039,7229 @@ export function toJson_VmUserSpecTlsConfigCertSecret(obj: VmUserSpecTlsConfigCer
     'key': obj.key,
     'name': obj.name,
     'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+
+/**
+ * VTCluster is fast, cost-effective and scalable traces database.
+ *
+ * @schema VTCluster
+ */
+export class VtCluster extends ApiObject {
+  /**
+   * Returns the apiVersion and kind for "VTCluster"
+   */
+  public static readonly GVK: GroupVersionKind = {
+    apiVersion: 'operator.victoriametrics.com/v1',
+    kind: 'VTCluster',
+  }
+
+  /**
+   * Renders a Kubernetes manifest for "VTCluster".
+   *
+   * This can be used to inline resource manifests inside other objects (e.g. as templates).
+   *
+   * @param props initialization props
+   */
+  public static manifest(props: VtClusterProps = {}): any {
+    return {
+      ...VtCluster.GVK,
+      ...toJson_VtClusterProps(props),
+    };
+  }
+
+  /**
+   * Defines a "VTCluster" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialization props
+   */
+  public constructor(scope: Construct, id: string, props: VtClusterProps = {}) {
+    super(scope, id, {
+      ...VtCluster.GVK,
+      ...props,
+    });
+  }
+
+  /**
+   * Renders the object to Kubernetes JSON.
+   */
+  public override toJson(): any {
+    const resolved = super.toJson();
+
+    return {
+      ...VtCluster.GVK,
+      ...toJson_VtClusterProps(resolved),
+    };
+  }
+}
+
+/**
+ * VTCluster is fast, cost-effective and scalable traces database.
+ *
+ * @schema VTCluster
+ */
+export interface VtClusterProps {
+  /**
+   * @schema VTCluster#metadata
+   */
+  readonly metadata?: ApiObjectMetadata;
+
+  /**
+   * VTClusterSpec defines the desired state of VTCluster
+   *
+   * @schema VTCluster#spec
+   */
+  readonly spec?: VtClusterSpec;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterProps' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterProps(obj: VtClusterProps | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': obj.metadata,
+    'spec': toJson_VtClusterSpec(obj.spec),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * VTClusterSpec defines the desired state of VTCluster
+ *
+ * @schema VtClusterSpec
+ */
+export interface VtClusterSpec {
+  /**
+   * ClusterDomainName defines domain name suffix for in-cluster dns addresses
+   * aka .cluster.local
+   * used by vtinsert and vtselect to build vtstorage address
+   *
+   * @schema VtClusterSpec#clusterDomainName
+   */
+  readonly clusterDomainName?: string;
+
+  /**
+   * ClusterVersion defines default images tag for all components.
+   * it can be overwritten with component specific image.tag value.
+   *
+   * @schema VtClusterSpec#clusterVersion
+   */
+  readonly clusterVersion?: string;
+
+  /**
+   * ImagePullSecrets An optional list of references to secrets in the same namespace
+   * to use for pulling images from registries
+   * see https://kubernetes.io/docs/concepts/containers/images/#referring-to-an-imagepullsecrets-on-a-pod
+   *
+   * @schema VtClusterSpec#imagePullSecrets
+   */
+  readonly imagePullSecrets?: VtClusterSpecImagePullSecrets[];
+
+  /**
+   * VTInsert defines vtinsert component configuration at victoria-traces cluster
+   *
+   * @schema VtClusterSpec#insert
+   */
+  readonly insert?: VtClusterSpecInsert;
+
+  /**
+   * ManagedMetadata defines metadata that will be added to the all objects
+   * created by operator for the given CustomResource
+   *
+   * @schema VtClusterSpec#managedMetadata
+   */
+  readonly managedMetadata?: VtClusterSpecManagedMetadata;
+
+  /**
+   * Paused If set to true all actions on the underlying managed objects are not
+   * going to be performed, except for delete actions.
+   *
+   * @schema VtClusterSpec#paused
+   */
+  readonly paused?: boolean;
+
+  /**
+   * RequestsLoadBalancer configures load-balancing for vtinsert and vtselect requests.
+   * It helps to evenly spread load across pods.
+   * Usually it's not possible with Kubernetes TCP-based services.
+   *
+   * @schema VtClusterSpec#requestsLoadBalancer
+   */
+  readonly requestsLoadBalancer?: VtClusterSpecRequestsLoadBalancer;
+
+  /**
+   * VTSelect defines vtselect component configuration at victoria-traces cluster
+   *
+   * @schema VtClusterSpec#select
+   */
+  readonly select?: VtClusterSpecSelect;
+
+  /**
+   * ServiceAccountName is the name of the ServiceAccount to use to run the
+   * VTSelect, VTInsert and VTStorage Pods.
+   *
+   * @schema VtClusterSpec#serviceAccountName
+   */
+  readonly serviceAccountName?: string;
+
+  /**
+   * VTStorage defines vtstorage component configuration at victoria-traces cluster
+   *
+   * @schema VtClusterSpec#storage
+   */
+  readonly storage?: VtClusterSpecStorage;
+
+  /**
+   * UseStrictSecurity enables strict security mode for component
+   * it restricts disk writes access
+   * uses non-root user out of the box
+   * drops not needed security permissions
+   *
+   * @schema VtClusterSpec#useStrictSecurity
+   */
+  readonly useStrictSecurity?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpec' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpec(obj: VtClusterSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'clusterDomainName': obj.clusterDomainName,
+    'clusterVersion': obj.clusterVersion,
+    'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VtClusterSpecImagePullSecrets(y)),
+    'insert': toJson_VtClusterSpecInsert(obj.insert),
+    'managedMetadata': toJson_VtClusterSpecManagedMetadata(obj.managedMetadata),
+    'paused': obj.paused,
+    'requestsLoadBalancer': toJson_VtClusterSpecRequestsLoadBalancer(obj.requestsLoadBalancer),
+    'select': toJson_VtClusterSpecSelect(obj.select),
+    'serviceAccountName': obj.serviceAccountName,
+    'storage': toJson_VtClusterSpecStorage(obj.storage),
+    'useStrictSecurity': obj.useStrictSecurity,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LocalObjectReference contains enough information to let you locate the
+ * referenced object inside the same namespace.
+ *
+ * @schema VtClusterSpecImagePullSecrets
+ */
+export interface VtClusterSpecImagePullSecrets {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VtClusterSpecImagePullSecrets#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecImagePullSecrets' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecImagePullSecrets(obj: VtClusterSpecImagePullSecrets | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * VTInsert defines vtinsert component configuration at victoria-traces cluster
+ *
+ * @schema VtClusterSpecInsert
+ */
+export interface VtClusterSpecInsert {
+  /**
+   * Affinity If specified, the pod's scheduling constraints.
+   *
+   * @schema VtClusterSpecInsert#affinity
+   */
+  readonly affinity?: any;
+
+  /**
+   * ConfigMaps is a list of ConfigMaps in the same namespace as the Application
+   * object, which shall be mounted into the Application container
+   * at /etc/vm/configs/CONFIGMAP_NAME folder
+   *
+   * @schema VtClusterSpecInsert#configMaps
+   */
+  readonly configMaps?: string[];
+
+  /**
+   * Containers property allows to inject additions sidecars or to patch existing containers.
+   * It can be useful for proxies, backup, etc.
+   *
+   * @schema VtClusterSpecInsert#containers
+   */
+  readonly containers?: any[];
+
+  /**
+   * DisableAutomountServiceAccountToken whether to disable serviceAccount auto mount by Kubernetes (available from v0.54.0).
+   * Operator will conditionally create volumes and volumeMounts for containers if it requires k8s API access.
+   * For example, vmagent and vm-config-reloader requires k8s API access.
+   * Operator creates volumes with name: "kube-api-access", which can be used as volumeMount for extraContainers if needed.
+   * And also adds VolumeMounts at /var/run/secrets/kubernetes.io/serviceaccount.
+   *
+   * @schema VtClusterSpecInsert#disableAutomountServiceAccountToken
+   */
+  readonly disableAutomountServiceAccountToken?: boolean;
+
+  /**
+   * DisableSelfServiceScrape controls creation of VMServiceScrape by operator
+   * for the application.
+   * Has priority over `VM_DISABLESELFSERVICESCRAPECREATION` operator env variable
+   *
+   * @schema VtClusterSpecInsert#disableSelfServiceScrape
+   */
+  readonly disableSelfServiceScrape?: boolean;
+
+  /**
+   * Specifies the DNS parameters of a pod.
+   * Parameters specified here will be merged to the generated DNS
+   * configuration based on DNSPolicy.
+   *
+   * @schema VtClusterSpecInsert#dnsConfig
+   */
+  readonly dnsConfig?: VtClusterSpecInsertDnsConfig;
+
+  /**
+   * DNSPolicy sets DNS policy for the pod
+   *
+   * @schema VtClusterSpecInsert#dnsPolicy
+   */
+  readonly dnsPolicy?: string;
+
+  /**
+   * ExtraArgs that will be passed to the application container
+   * for example remoteWrite.tmpDataPath: /tmp
+   *
+   * @schema VtClusterSpecInsert#extraArgs
+   */
+  readonly extraArgs?: { [key: string]: string };
+
+  /**
+   * ExtraEnvs that will be passed to the application container
+   *
+   * @schema VtClusterSpecInsert#extraEnvs
+   */
+  readonly extraEnvs?: VtClusterSpecInsertExtraEnvs[];
+
+  /**
+   * ExtraEnvsFrom defines source of env variables for the application container
+   * could either be secret or configmap
+   *
+   * @schema VtClusterSpecInsert#extraEnvsFrom
+   */
+  readonly extraEnvsFrom?: VtClusterSpecInsertExtraEnvsFrom[];
+
+  /**
+   * HostAliases provides mapping for ip and hostname,
+   * that would be propagated to pod,
+   * cannot be used with HostNetwork.
+   *
+   * @schema VtClusterSpecInsert#hostAliases
+   */
+  readonly hostAliases?: VtClusterSpecInsertHostAliases[];
+
+  /**
+   * HostNetwork controls whether the pod may use the node network namespace
+   *
+   * @schema VtClusterSpecInsert#hostNetwork
+   */
+  readonly hostNetwork?: boolean;
+
+  /**
+   * Configures horizontal pod autoscaling.
+   *
+   * @schema VtClusterSpecInsert#hpa
+   */
+  readonly hpa?: any;
+
+  /**
+   * Image - docker image settings
+   * if no specified operator uses default version from operator config
+   *
+   * @schema VtClusterSpecInsert#image
+   */
+  readonly image?: VtClusterSpecInsertImage;
+
+  /**
+   * ImagePullSecrets An optional list of references to secrets in the same namespace
+   * to use for pulling images from registries
+   * see https://kubernetes.io/docs/concepts/containers/images/#referring-to-an-imagepullsecrets-on-a-pod
+   *
+   * @schema VtClusterSpecInsert#imagePullSecrets
+   */
+  readonly imagePullSecrets?: VtClusterSpecInsertImagePullSecrets[];
+
+  /**
+   * InitContainers allows adding initContainers to the pod definition.
+   * Any errors during the execution of an initContainer will lead to a restart of the Pod.
+   * More info: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+   *
+   * @schema VtClusterSpecInsert#initContainers
+   */
+  readonly initContainers?: any[];
+
+  /**
+   * LivenessProbe that will be added CRD pod
+   *
+   * @schema VtClusterSpecInsert#livenessProbe
+   */
+  readonly livenessProbe?: any;
+
+  /**
+   * LogFormat for VTSelect to be configured with.
+   * default or json
+   *
+   * @schema VtClusterSpecInsert#logFormat
+   */
+  readonly logFormat?: VtClusterSpecInsertLogFormat;
+
+  /**
+   * LogLevel for VTSelect to be configured with.
+   *
+   * @schema VtClusterSpecInsert#logLevel
+   */
+  readonly logLevel?: VtClusterSpecInsertLogLevel;
+
+  /**
+   * MinReadySeconds defines a minimum number of seconds to wait before starting update next pod
+   * if previous in healthy state
+   * Has no effect for VLogs and VMSingle
+   *
+   * @schema VtClusterSpecInsert#minReadySeconds
+   */
+  readonly minReadySeconds?: number;
+
+  /**
+   * NodeSelector Define which Nodes the Pods are scheduled on.
+   *
+   * @schema VtClusterSpecInsert#nodeSelector
+   */
+  readonly nodeSelector?: { [key: string]: string };
+
+  /**
+   * Paused If set to true all actions on the underlying managed objects are not
+   * going to be performed, except for delete actions.
+   *
+   * @schema VtClusterSpecInsert#paused
+   */
+  readonly paused?: boolean;
+
+  /**
+   * PodDisruptionBudget created by operator
+   *
+   * @schema VtClusterSpecInsert#podDisruptionBudget
+   */
+  readonly podDisruptionBudget?: VtClusterSpecInsertPodDisruptionBudget;
+
+  /**
+   * PodMetadata configures Labels and Annotations which are propagated to the VTSelect pods.
+   *
+   * @schema VtClusterSpecInsert#podMetadata
+   */
+  readonly podMetadata?: VtClusterSpecInsertPodMetadata;
+
+  /**
+   * Port listen address
+   *
+   * @schema VtClusterSpecInsert#port
+   */
+  readonly port?: string;
+
+  /**
+   * PriorityClassName class assigned to the Pods
+   *
+   * @schema VtClusterSpecInsert#priorityClassName
+   */
+  readonly priorityClassName?: string;
+
+  /**
+   * ReadinessGates defines pod readiness gates
+   *
+   * @schema VtClusterSpecInsert#readinessGates
+   */
+  readonly readinessGates?: VtClusterSpecInsertReadinessGates[];
+
+  /**
+   * ReadinessProbe that will be added CRD pod
+   *
+   * @schema VtClusterSpecInsert#readinessProbe
+   */
+  readonly readinessProbe?: any;
+
+  /**
+   * ReplicaCount is the expected size of the Application.
+   *
+   * @schema VtClusterSpecInsert#replicaCount
+   */
+  readonly replicaCount?: number;
+
+  /**
+   * Resources container resource request and limits, https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   * if not defined default resources from operator config will be used
+   *
+   * @schema VtClusterSpecInsert#resources
+   */
+  readonly resources?: VtClusterSpecInsertResources;
+
+  /**
+   * The number of old ReplicaSets to retain to allow rollback in deployment or
+   * maximum number of revisions that will be maintained in the Deployment revision history.
+   * Has no effect at StatefulSets
+   * Defaults to 10.
+   *
+   * @default 10.
+   * @schema VtClusterSpecInsert#revisionHistoryLimitCount
+   */
+  readonly revisionHistoryLimitCount?: number;
+
+  /**
+   * RollingUpdate - overrides deployment update params.
+   *
+   * @schema VtClusterSpecInsert#rollingUpdate
+   */
+  readonly rollingUpdate?: VtClusterSpecInsertRollingUpdate;
+
+  /**
+   * RuntimeClassName - defines runtime class for kubernetes pod.
+   * https://kubernetes.io/docs/concepts/containers/runtime-class/
+   *
+   * @schema VtClusterSpecInsert#runtimeClassName
+   */
+  readonly runtimeClassName?: string;
+
+  /**
+   * SchedulerName - defines kubernetes scheduler name
+   *
+   * @schema VtClusterSpecInsert#schedulerName
+   */
+  readonly schedulerName?: string;
+
+  /**
+   * Secrets is a list of Secrets in the same namespace as the Application
+   * object, which shall be mounted into the Application container
+   * at /etc/vm/secrets/SECRET_NAME folder
+   *
+   * @schema VtClusterSpecInsert#secrets
+   */
+  readonly secrets?: string[];
+
+  /**
+   * SecurityContext holds pod-level security attributes and common container settings.
+   * This defaults to the default PodSecurityContext.
+   *
+   * @schema VtClusterSpecInsert#securityContext
+   */
+  readonly securityContext?: any;
+
+  /**
+   * ServiceScrapeSpec that will be added to vtselect VMServiceScrape spec
+   *
+   * @schema VtClusterSpecInsert#serviceScrapeSpec
+   */
+  readonly serviceScrapeSpec?: any;
+
+  /**
+   * ServiceSpec that will be added to vtselect service spec
+   *
+   * @schema VtClusterSpecInsert#serviceSpec
+   */
+  readonly serviceSpec?: VtClusterSpecInsertServiceSpec;
+
+  /**
+   * StartupProbe that will be added to CRD pod
+   *
+   * @schema VtClusterSpecInsert#startupProbe
+   */
+  readonly startupProbe?: any;
+
+  /**
+   * TerminationGracePeriodSeconds period for container graceful termination
+   *
+   * @schema VtClusterSpecInsert#terminationGracePeriodSeconds
+   */
+  readonly terminationGracePeriodSeconds?: number;
+
+  /**
+   * Tolerations If specified, the pod's tolerations.
+   *
+   * @schema VtClusterSpecInsert#tolerations
+   */
+  readonly tolerations?: VtClusterSpecInsertTolerations[];
+
+  /**
+   * TopologySpreadConstraints embedded kubernetes pod configuration option,
+   * controls how pods are spread across your cluster among failure-domains
+   * such as regions, zones, nodes, and other user-defined topology domains
+   * https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
+   *
+   * @schema VtClusterSpecInsert#topologySpreadConstraints
+   */
+  readonly topologySpreadConstraints?: any[];
+
+  /**
+   * UpdateStrategy - overrides default update strategy.
+   *
+   * @schema VtClusterSpecInsert#updateStrategy
+   */
+  readonly updateStrategy?: VtClusterSpecInsertUpdateStrategy;
+
+  /**
+   * UseDefaultResources controls resource settings
+   * By default, operator sets built-in resource requirements
+   *
+   * @schema VtClusterSpecInsert#useDefaultResources
+   */
+  readonly useDefaultResources?: boolean;
+
+  /**
+   * UseStrictSecurity enables strict security mode for component
+   * it restricts disk writes access
+   * uses non-root user out of the box
+   * drops not needed security permissions
+   *
+   * @schema VtClusterSpecInsert#useStrictSecurity
+   */
+  readonly useStrictSecurity?: boolean;
+
+  /**
+   * VolumeMounts allows configuration of additional VolumeMounts on the output Deployment/StatefulSet definition.
+   * VolumeMounts specified will be appended to other VolumeMounts in the Application container
+   *
+   * @schema VtClusterSpecInsert#volumeMounts
+   */
+  readonly volumeMounts?: VtClusterSpecInsertVolumeMounts[];
+
+  /**
+   * Volumes allows configuration of additional volumes on the output Deployment/StatefulSet definition.
+   * Volumes specified will be appended to other volumes that are generated.
+   * / +optional
+   *
+   * @schema VtClusterSpecInsert#volumes
+   */
+  readonly volumes?: any[];
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecInsert' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecInsert(obj: VtClusterSpecInsert | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'affinity': obj.affinity,
+    'configMaps': obj.configMaps?.map(y => y),
+    'containers': obj.containers?.map(y => y),
+    'disableAutomountServiceAccountToken': obj.disableAutomountServiceAccountToken,
+    'disableSelfServiceScrape': obj.disableSelfServiceScrape,
+    'dnsConfig': toJson_VtClusterSpecInsertDnsConfig(obj.dnsConfig),
+    'dnsPolicy': obj.dnsPolicy,
+    'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'extraEnvs': obj.extraEnvs?.map(y => toJson_VtClusterSpecInsertExtraEnvs(y)),
+    'extraEnvsFrom': obj.extraEnvsFrom?.map(y => toJson_VtClusterSpecInsertExtraEnvsFrom(y)),
+    'hostAliases': obj.hostAliases?.map(y => toJson_VtClusterSpecInsertHostAliases(y)),
+    'hostNetwork': obj.hostNetwork,
+    'hpa': obj.hpa,
+    'image': toJson_VtClusterSpecInsertImage(obj.image),
+    'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VtClusterSpecInsertImagePullSecrets(y)),
+    'initContainers': obj.initContainers?.map(y => y),
+    'livenessProbe': obj.livenessProbe,
+    'logFormat': obj.logFormat,
+    'logLevel': obj.logLevel,
+    'minReadySeconds': obj.minReadySeconds,
+    'nodeSelector': ((obj.nodeSelector) === undefined) ? undefined : (Object.entries(obj.nodeSelector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'paused': obj.paused,
+    'podDisruptionBudget': toJson_VtClusterSpecInsertPodDisruptionBudget(obj.podDisruptionBudget),
+    'podMetadata': toJson_VtClusterSpecInsertPodMetadata(obj.podMetadata),
+    'port': obj.port,
+    'priorityClassName': obj.priorityClassName,
+    'readinessGates': obj.readinessGates?.map(y => toJson_VtClusterSpecInsertReadinessGates(y)),
+    'readinessProbe': obj.readinessProbe,
+    'replicaCount': obj.replicaCount,
+    'resources': toJson_VtClusterSpecInsertResources(obj.resources),
+    'revisionHistoryLimitCount': obj.revisionHistoryLimitCount,
+    'rollingUpdate': toJson_VtClusterSpecInsertRollingUpdate(obj.rollingUpdate),
+    'runtimeClassName': obj.runtimeClassName,
+    'schedulerName': obj.schedulerName,
+    'secrets': obj.secrets?.map(y => y),
+    'securityContext': obj.securityContext,
+    'serviceScrapeSpec': obj.serviceScrapeSpec,
+    'serviceSpec': toJson_VtClusterSpecInsertServiceSpec(obj.serviceSpec),
+    'startupProbe': obj.startupProbe,
+    'terminationGracePeriodSeconds': obj.terminationGracePeriodSeconds,
+    'tolerations': obj.tolerations?.map(y => toJson_VtClusterSpecInsertTolerations(y)),
+    'topologySpreadConstraints': obj.topologySpreadConstraints?.map(y => y),
+    'updateStrategy': obj.updateStrategy,
+    'useDefaultResources': obj.useDefaultResources,
+    'useStrictSecurity': obj.useStrictSecurity,
+    'volumeMounts': obj.volumeMounts?.map(y => toJson_VtClusterSpecInsertVolumeMounts(y)),
+    'volumes': obj.volumes?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ManagedMetadata defines metadata that will be added to the all objects
+ * created by operator for the given CustomResource
+ *
+ * @schema VtClusterSpecManagedMetadata
+ */
+export interface VtClusterSpecManagedMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VtClusterSpecManagedMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VtClusterSpecManagedMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecManagedMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecManagedMetadata(obj: VtClusterSpecManagedMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * RequestsLoadBalancer configures load-balancing for vtinsert and vtselect requests.
+ * It helps to evenly spread load across pods.
+ * Usually it's not possible with Kubernetes TCP-based services.
+ *
+ * @schema VtClusterSpecRequestsLoadBalancer
+ */
+export interface VtClusterSpecRequestsLoadBalancer {
+  /**
+   * @schema VtClusterSpecRequestsLoadBalancer#disableInsertBalancing
+   */
+  readonly disableInsertBalancing?: boolean;
+
+  /**
+   * @schema VtClusterSpecRequestsLoadBalancer#disableSelectBalancing
+   */
+  readonly disableSelectBalancing?: boolean;
+
+  /**
+   * @schema VtClusterSpecRequestsLoadBalancer#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
+   * VMAuthLoadBalancerSpec defines configuration spec for VMAuth used as load-balancer
+   * for VMCluster component
+   *
+   * @schema VtClusterSpecRequestsLoadBalancer#spec
+   */
+  readonly spec?: any;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecRequestsLoadBalancer' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecRequestsLoadBalancer(obj: VtClusterSpecRequestsLoadBalancer | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'disableInsertBalancing': obj.disableInsertBalancing,
+    'disableSelectBalancing': obj.disableSelectBalancing,
+    'enabled': obj.enabled,
+    'spec': obj.spec,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * VTSelect defines vtselect component configuration at victoria-traces cluster
+ *
+ * @schema VtClusterSpecSelect
+ */
+export interface VtClusterSpecSelect {
+  /**
+   * Affinity If specified, the pod's scheduling constraints.
+   *
+   * @schema VtClusterSpecSelect#affinity
+   */
+  readonly affinity?: any;
+
+  /**
+   * ConfigMaps is a list of ConfigMaps in the same namespace as the Application
+   * object, which shall be mounted into the Application container
+   * at /etc/vm/configs/CONFIGMAP_NAME folder
+   *
+   * @schema VtClusterSpecSelect#configMaps
+   */
+  readonly configMaps?: string[];
+
+  /**
+   * Containers property allows to inject additions sidecars or to patch existing containers.
+   * It can be useful for proxies, backup, etc.
+   *
+   * @schema VtClusterSpecSelect#containers
+   */
+  readonly containers?: any[];
+
+  /**
+   * DisableAutomountServiceAccountToken whether to disable serviceAccount auto mount by Kubernetes (available from v0.54.0).
+   * Operator will conditionally create volumes and volumeMounts for containers if it requires k8s API access.
+   * For example, vmagent and vm-config-reloader requires k8s API access.
+   * Operator creates volumes with name: "kube-api-access", which can be used as volumeMount for extraContainers if needed.
+   * And also adds VolumeMounts at /var/run/secrets/kubernetes.io/serviceaccount.
+   *
+   * @schema VtClusterSpecSelect#disableAutomountServiceAccountToken
+   */
+  readonly disableAutomountServiceAccountToken?: boolean;
+
+  /**
+   * DisableSelfServiceScrape controls creation of VMServiceScrape by operator
+   * for the application.
+   * Has priority over `VM_DISABLESELFSERVICESCRAPECREATION` operator env variable
+   *
+   * @schema VtClusterSpecSelect#disableSelfServiceScrape
+   */
+  readonly disableSelfServiceScrape?: boolean;
+
+  /**
+   * Specifies the DNS parameters of a pod.
+   * Parameters specified here will be merged to the generated DNS
+   * configuration based on DNSPolicy.
+   *
+   * @schema VtClusterSpecSelect#dnsConfig
+   */
+  readonly dnsConfig?: VtClusterSpecSelectDnsConfig;
+
+  /**
+   * DNSPolicy sets DNS policy for the pod
+   *
+   * @schema VtClusterSpecSelect#dnsPolicy
+   */
+  readonly dnsPolicy?: string;
+
+  /**
+   * ExtraArgs that will be passed to the application container
+   * for example remoteWrite.tmpDataPath: /tmp
+   *
+   * @schema VtClusterSpecSelect#extraArgs
+   */
+  readonly extraArgs?: { [key: string]: string };
+
+  /**
+   * ExtraEnvs that will be passed to the application container
+   *
+   * @schema VtClusterSpecSelect#extraEnvs
+   */
+  readonly extraEnvs?: VtClusterSpecSelectExtraEnvs[];
+
+  /**
+   * ExtraEnvsFrom defines source of env variables for the application container
+   * could either be secret or configmap
+   *
+   * @schema VtClusterSpecSelect#extraEnvsFrom
+   */
+  readonly extraEnvsFrom?: VtClusterSpecSelectExtraEnvsFrom[];
+
+  /**
+   * HostAliases provides mapping for ip and hostname,
+   * that would be propagated to pod,
+   * cannot be used with HostNetwork.
+   *
+   * @schema VtClusterSpecSelect#hostAliases
+   */
+  readonly hostAliases?: VtClusterSpecSelectHostAliases[];
+
+  /**
+   * HostNetwork controls whether the pod may use the node network namespace
+   *
+   * @schema VtClusterSpecSelect#hostNetwork
+   */
+  readonly hostNetwork?: boolean;
+
+  /**
+   * Configures horizontal pod autoscaling.
+   *
+   * @schema VtClusterSpecSelect#hpa
+   */
+  readonly hpa?: any;
+
+  /**
+   * Image - docker image settings
+   * if no specified operator uses default version from operator config
+   *
+   * @schema VtClusterSpecSelect#image
+   */
+  readonly image?: VtClusterSpecSelectImage;
+
+  /**
+   * ImagePullSecrets An optional list of references to secrets in the same namespace
+   * to use for pulling images from registries
+   * see https://kubernetes.io/docs/concepts/containers/images/#referring-to-an-imagepullsecrets-on-a-pod
+   *
+   * @schema VtClusterSpecSelect#imagePullSecrets
+   */
+  readonly imagePullSecrets?: VtClusterSpecSelectImagePullSecrets[];
+
+  /**
+   * InitContainers allows adding initContainers to the pod definition.
+   * Any errors during the execution of an initContainer will lead to a restart of the Pod.
+   * More info: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+   *
+   * @schema VtClusterSpecSelect#initContainers
+   */
+  readonly initContainers?: any[];
+
+  /**
+   * LivenessProbe that will be added CRD pod
+   *
+   * @schema VtClusterSpecSelect#livenessProbe
+   */
+  readonly livenessProbe?: any;
+
+  /**
+   * LogFormat for VTSelect to be configured with.
+   * default or json
+   *
+   * @schema VtClusterSpecSelect#logFormat
+   */
+  readonly logFormat?: VtClusterSpecSelectLogFormat;
+
+  /**
+   * LogLevel for VTSelect to be configured with.
+   *
+   * @schema VtClusterSpecSelect#logLevel
+   */
+  readonly logLevel?: VtClusterSpecSelectLogLevel;
+
+  /**
+   * MinReadySeconds defines a minimum number of seconds to wait before starting update next pod
+   * if previous in healthy state
+   * Has no effect for VLogs and VMSingle
+   *
+   * @schema VtClusterSpecSelect#minReadySeconds
+   */
+  readonly minReadySeconds?: number;
+
+  /**
+   * NodeSelector Define which Nodes the Pods are scheduled on.
+   *
+   * @schema VtClusterSpecSelect#nodeSelector
+   */
+  readonly nodeSelector?: { [key: string]: string };
+
+  /**
+   * Paused If set to true all actions on the underlying managed objects are not
+   * going to be performed, except for delete actions.
+   *
+   * @schema VtClusterSpecSelect#paused
+   */
+  readonly paused?: boolean;
+
+  /**
+   * PodDisruptionBudget created by operator
+   *
+   * @schema VtClusterSpecSelect#podDisruptionBudget
+   */
+  readonly podDisruptionBudget?: VtClusterSpecSelectPodDisruptionBudget;
+
+  /**
+   * PodMetadata configures Labels and Annotations which are propagated to the VTSelect pods.
+   *
+   * @schema VtClusterSpecSelect#podMetadata
+   */
+  readonly podMetadata?: VtClusterSpecSelectPodMetadata;
+
+  /**
+   * Port listen address
+   *
+   * @schema VtClusterSpecSelect#port
+   */
+  readonly port?: string;
+
+  /**
+   * PriorityClassName class assigned to the Pods
+   *
+   * @schema VtClusterSpecSelect#priorityClassName
+   */
+  readonly priorityClassName?: string;
+
+  /**
+   * ReadinessGates defines pod readiness gates
+   *
+   * @schema VtClusterSpecSelect#readinessGates
+   */
+  readonly readinessGates?: VtClusterSpecSelectReadinessGates[];
+
+  /**
+   * ReadinessProbe that will be added CRD pod
+   *
+   * @schema VtClusterSpecSelect#readinessProbe
+   */
+  readonly readinessProbe?: any;
+
+  /**
+   * ReplicaCount is the expected size of the Application.
+   *
+   * @schema VtClusterSpecSelect#replicaCount
+   */
+  readonly replicaCount?: number;
+
+  /**
+   * Resources container resource request and limits, https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   * if not defined default resources from operator config will be used
+   *
+   * @schema VtClusterSpecSelect#resources
+   */
+  readonly resources?: VtClusterSpecSelectResources;
+
+  /**
+   * The number of old ReplicaSets to retain to allow rollback in deployment or
+   * maximum number of revisions that will be maintained in the Deployment revision history.
+   * Has no effect at StatefulSets
+   * Defaults to 10.
+   *
+   * @default 10.
+   * @schema VtClusterSpecSelect#revisionHistoryLimitCount
+   */
+  readonly revisionHistoryLimitCount?: number;
+
+  /**
+   * RollingUpdate - overrides deployment update params.
+   *
+   * @schema VtClusterSpecSelect#rollingUpdate
+   */
+  readonly rollingUpdate?: VtClusterSpecSelectRollingUpdate;
+
+  /**
+   * RuntimeClassName - defines runtime class for kubernetes pod.
+   * https://kubernetes.io/docs/concepts/containers/runtime-class/
+   *
+   * @schema VtClusterSpecSelect#runtimeClassName
+   */
+  readonly runtimeClassName?: string;
+
+  /**
+   * SchedulerName - defines kubernetes scheduler name
+   *
+   * @schema VtClusterSpecSelect#schedulerName
+   */
+  readonly schedulerName?: string;
+
+  /**
+   * Secrets is a list of Secrets in the same namespace as the Application
+   * object, which shall be mounted into the Application container
+   * at /etc/vm/secrets/SECRET_NAME folder
+   *
+   * @schema VtClusterSpecSelect#secrets
+   */
+  readonly secrets?: string[];
+
+  /**
+   * SecurityContext holds pod-level security attributes and common container settings.
+   * This defaults to the default PodSecurityContext.
+   *
+   * @schema VtClusterSpecSelect#securityContext
+   */
+  readonly securityContext?: any;
+
+  /**
+   * ServiceScrapeSpec that will be added to vtselect VMServiceScrape spec
+   *
+   * @schema VtClusterSpecSelect#serviceScrapeSpec
+   */
+  readonly serviceScrapeSpec?: any;
+
+  /**
+   * ServiceSpec that will be added to vtselect service spec
+   *
+   * @schema VtClusterSpecSelect#serviceSpec
+   */
+  readonly serviceSpec?: VtClusterSpecSelectServiceSpec;
+
+  /**
+   * StartupProbe that will be added to CRD pod
+   *
+   * @schema VtClusterSpecSelect#startupProbe
+   */
+  readonly startupProbe?: any;
+
+  /**
+   * TerminationGracePeriodSeconds period for container graceful termination
+   *
+   * @schema VtClusterSpecSelect#terminationGracePeriodSeconds
+   */
+  readonly terminationGracePeriodSeconds?: number;
+
+  /**
+   * Tolerations If specified, the pod's tolerations.
+   *
+   * @schema VtClusterSpecSelect#tolerations
+   */
+  readonly tolerations?: VtClusterSpecSelectTolerations[];
+
+  /**
+   * TopologySpreadConstraints embedded kubernetes pod configuration option,
+   * controls how pods are spread across your cluster among failure-domains
+   * such as regions, zones, nodes, and other user-defined topology domains
+   * https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
+   *
+   * @schema VtClusterSpecSelect#topologySpreadConstraints
+   */
+  readonly topologySpreadConstraints?: any[];
+
+  /**
+   * UpdateStrategy - overrides default update strategy.
+   *
+   * @schema VtClusterSpecSelect#updateStrategy
+   */
+  readonly updateStrategy?: VtClusterSpecSelectUpdateStrategy;
+
+  /**
+   * UseDefaultResources controls resource settings
+   * By default, operator sets built-in resource requirements
+   *
+   * @schema VtClusterSpecSelect#useDefaultResources
+   */
+  readonly useDefaultResources?: boolean;
+
+  /**
+   * UseStrictSecurity enables strict security mode for component
+   * it restricts disk writes access
+   * uses non-root user out of the box
+   * drops not needed security permissions
+   *
+   * @schema VtClusterSpecSelect#useStrictSecurity
+   */
+  readonly useStrictSecurity?: boolean;
+
+  /**
+   * VolumeMounts allows configuration of additional VolumeMounts on the output Deployment/StatefulSet definition.
+   * VolumeMounts specified will be appended to other VolumeMounts in the Application container
+   *
+   * @schema VtClusterSpecSelect#volumeMounts
+   */
+  readonly volumeMounts?: VtClusterSpecSelectVolumeMounts[];
+
+  /**
+   * Volumes allows configuration of additional volumes on the output Deployment/StatefulSet definition.
+   * Volumes specified will be appended to other volumes that are generated.
+   * / +optional
+   *
+   * @schema VtClusterSpecSelect#volumes
+   */
+  readonly volumes?: any[];
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecSelect' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecSelect(obj: VtClusterSpecSelect | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'affinity': obj.affinity,
+    'configMaps': obj.configMaps?.map(y => y),
+    'containers': obj.containers?.map(y => y),
+    'disableAutomountServiceAccountToken': obj.disableAutomountServiceAccountToken,
+    'disableSelfServiceScrape': obj.disableSelfServiceScrape,
+    'dnsConfig': toJson_VtClusterSpecSelectDnsConfig(obj.dnsConfig),
+    'dnsPolicy': obj.dnsPolicy,
+    'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'extraEnvs': obj.extraEnvs?.map(y => toJson_VtClusterSpecSelectExtraEnvs(y)),
+    'extraEnvsFrom': obj.extraEnvsFrom?.map(y => toJson_VtClusterSpecSelectExtraEnvsFrom(y)),
+    'hostAliases': obj.hostAliases?.map(y => toJson_VtClusterSpecSelectHostAliases(y)),
+    'hostNetwork': obj.hostNetwork,
+    'hpa': obj.hpa,
+    'image': toJson_VtClusterSpecSelectImage(obj.image),
+    'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VtClusterSpecSelectImagePullSecrets(y)),
+    'initContainers': obj.initContainers?.map(y => y),
+    'livenessProbe': obj.livenessProbe,
+    'logFormat': obj.logFormat,
+    'logLevel': obj.logLevel,
+    'minReadySeconds': obj.minReadySeconds,
+    'nodeSelector': ((obj.nodeSelector) === undefined) ? undefined : (Object.entries(obj.nodeSelector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'paused': obj.paused,
+    'podDisruptionBudget': toJson_VtClusterSpecSelectPodDisruptionBudget(obj.podDisruptionBudget),
+    'podMetadata': toJson_VtClusterSpecSelectPodMetadata(obj.podMetadata),
+    'port': obj.port,
+    'priorityClassName': obj.priorityClassName,
+    'readinessGates': obj.readinessGates?.map(y => toJson_VtClusterSpecSelectReadinessGates(y)),
+    'readinessProbe': obj.readinessProbe,
+    'replicaCount': obj.replicaCount,
+    'resources': toJson_VtClusterSpecSelectResources(obj.resources),
+    'revisionHistoryLimitCount': obj.revisionHistoryLimitCount,
+    'rollingUpdate': toJson_VtClusterSpecSelectRollingUpdate(obj.rollingUpdate),
+    'runtimeClassName': obj.runtimeClassName,
+    'schedulerName': obj.schedulerName,
+    'secrets': obj.secrets?.map(y => y),
+    'securityContext': obj.securityContext,
+    'serviceScrapeSpec': obj.serviceScrapeSpec,
+    'serviceSpec': toJson_VtClusterSpecSelectServiceSpec(obj.serviceSpec),
+    'startupProbe': obj.startupProbe,
+    'terminationGracePeriodSeconds': obj.terminationGracePeriodSeconds,
+    'tolerations': obj.tolerations?.map(y => toJson_VtClusterSpecSelectTolerations(y)),
+    'topologySpreadConstraints': obj.topologySpreadConstraints?.map(y => y),
+    'updateStrategy': obj.updateStrategy,
+    'useDefaultResources': obj.useDefaultResources,
+    'useStrictSecurity': obj.useStrictSecurity,
+    'volumeMounts': obj.volumeMounts?.map(y => toJson_VtClusterSpecSelectVolumeMounts(y)),
+    'volumes': obj.volumes?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * VTStorage defines vtstorage component configuration at victoria-traces cluster
+ *
+ * @schema VtClusterSpecStorage
+ */
+export interface VtClusterSpecStorage {
+  /**
+   * Affinity If specified, the pod's scheduling constraints.
+   *
+   * @schema VtClusterSpecStorage#affinity
+   */
+  readonly affinity?: any;
+
+  /**
+   * ClaimTemplates allows adding additional VolumeClaimTemplates for StatefulSet
+   *
+   * @schema VtClusterSpecStorage#claimTemplates
+   */
+  readonly claimTemplates?: any[];
+
+  /**
+   * ConfigMaps is a list of ConfigMaps in the same namespace as the Application
+   * object, which shall be mounted into the Application container
+   * at /etc/vm/configs/CONFIGMAP_NAME folder
+   *
+   * @schema VtClusterSpecStorage#configMaps
+   */
+  readonly configMaps?: string[];
+
+  /**
+   * Containers property allows to inject additions sidecars or to patch existing containers.
+   * It can be useful for proxies, backup, etc.
+   *
+   * @schema VtClusterSpecStorage#containers
+   */
+  readonly containers?: any[];
+
+  /**
+   * DisableAutomountServiceAccountToken whether to disable serviceAccount auto mount by Kubernetes (available from v0.54.0).
+   * Operator will conditionally create volumes and volumeMounts for containers if it requires k8s API access.
+   * For example, vmagent and vm-config-reloader requires k8s API access.
+   * Operator creates volumes with name: "kube-api-access", which can be used as volumeMount for extraContainers if needed.
+   * And also adds VolumeMounts at /var/run/secrets/kubernetes.io/serviceaccount.
+   *
+   * @schema VtClusterSpecStorage#disableAutomountServiceAccountToken
+   */
+  readonly disableAutomountServiceAccountToken?: boolean;
+
+  /**
+   * DisableSelfServiceScrape controls creation of VMServiceScrape by operator
+   * for the application.
+   * Has priority over `VM_DISABLESELFSERVICESCRAPECREATION` operator env variable
+   *
+   * @schema VtClusterSpecStorage#disableSelfServiceScrape
+   */
+  readonly disableSelfServiceScrape?: boolean;
+
+  /**
+   * Specifies the DNS parameters of a pod.
+   * Parameters specified here will be merged to the generated DNS
+   * configuration based on DNSPolicy.
+   *
+   * @schema VtClusterSpecStorage#dnsConfig
+   */
+  readonly dnsConfig?: VtClusterSpecStorageDnsConfig;
+
+  /**
+   * DNSPolicy sets DNS policy for the pod
+   *
+   * @schema VtClusterSpecStorage#dnsPolicy
+   */
+  readonly dnsPolicy?: string;
+
+  /**
+   * ExtraArgs that will be passed to the application container
+   * for example remoteWrite.tmpDataPath: /tmp
+   *
+   * @schema VtClusterSpecStorage#extraArgs
+   */
+  readonly extraArgs?: { [key: string]: string };
+
+  /**
+   * ExtraEnvs that will be passed to the application container
+   *
+   * @schema VtClusterSpecStorage#extraEnvs
+   */
+  readonly extraEnvs?: VtClusterSpecStorageExtraEnvs[];
+
+  /**
+   * ExtraEnvsFrom defines source of env variables for the application container
+   * could either be secret or configmap
+   *
+   * @schema VtClusterSpecStorage#extraEnvsFrom
+   */
+  readonly extraEnvsFrom?: VtClusterSpecStorageExtraEnvsFrom[];
+
+  /**
+   * FutureRetention for the stored traces
+   * Log entries with timestamps bigger than now+futureRetention are rejected during data ingestion
+   * see https://docs.victoriametrics.com/victoriatraces/#configure-and-run-victoriatraces
+   *
+   * @schema VtClusterSpecStorage#futureRetention
+   */
+  readonly futureRetention?: string;
+
+  /**
+   * HostAliases provides mapping for ip and hostname,
+   * that would be propagated to pod,
+   * cannot be used with HostNetwork.
+   *
+   * @schema VtClusterSpecStorage#hostAliases
+   */
+  readonly hostAliases?: VtClusterSpecStorageHostAliases[];
+
+  /**
+   * HostNetwork controls whether the pod may use the node network namespace
+   *
+   * @schema VtClusterSpecStorage#hostNetwork
+   */
+  readonly hostNetwork?: boolean;
+
+  /**
+   * Image - docker image settings
+   * if no specified operator uses default version from operator config
+   *
+   * @schema VtClusterSpecStorage#image
+   */
+  readonly image?: VtClusterSpecStorageImage;
+
+  /**
+   * ImagePullSecrets An optional list of references to secrets in the same namespace
+   * to use for pulling images from registries
+   * see https://kubernetes.io/docs/concepts/containers/images/#referring-to-an-imagepullsecrets-on-a-pod
+   *
+   * @schema VtClusterSpecStorage#imagePullSecrets
+   */
+  readonly imagePullSecrets?: VtClusterSpecStorageImagePullSecrets[];
+
+  /**
+   * InitContainers allows adding initContainers to the pod definition.
+   * Any errors during the execution of an initContainer will lead to a restart of the Pod.
+   * More info: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+   *
+   * @schema VtClusterSpecStorage#initContainers
+   */
+  readonly initContainers?: any[];
+
+  /**
+   * LivenessProbe that will be added CRD pod
+   *
+   * @schema VtClusterSpecStorage#livenessProbe
+   */
+  readonly livenessProbe?: any;
+
+  /**
+   * LogFormat for VTStorage to be configured with.
+   * default or json
+   *
+   * @schema VtClusterSpecStorage#logFormat
+   */
+  readonly logFormat?: VtClusterSpecStorageLogFormat;
+
+  /**
+   * Whether to log all the ingested log entries; this can be useful for debugging of data ingestion
+   * see https://docs.victoriametrics.com/victoriatraces/#configure-and-run-victoriatraces
+   *
+   * @schema VtClusterSpecStorage#logIngestedRows
+   */
+  readonly logIngestedRows?: boolean;
+
+  /**
+   * LogLevel for VTStorage to be configured with.
+   *
+   * @schema VtClusterSpecStorage#logLevel
+   */
+  readonly logLevel?: VtClusterSpecStorageLogLevel;
+
+  /**
+   * LogNewStreams Whether to log creation of new streams; this can be useful for debugging of high cardinality issues with log streams
+   * see https://docs.victoriametrics.com/victoriatraces/#configure-and-run-victoriatraces
+   *
+   * @schema VtClusterSpecStorage#logNewStreams
+   */
+  readonly logNewStreams?: boolean;
+
+  /**
+   * MaintenanceInsertNodeIDs - excludes given node ids from insert requests routing, must contain pod suffixes - for pod-0, id will be 0 and etc.
+   * lets say, you have pod-0, pod-1, pod-2, pod-3. to exclude pod-0 and pod-3 from insert routing, define nodeIDs: [0,3].
+   * Useful at storage expanding, when you want to rebalance some data at cluster.
+   *
+   * @schema VtClusterSpecStorage#maintenanceInsertNodeIDs
+   */
+  readonly maintenanceInsertNodeIDs?: number[];
+
+  /**
+   * MaintenanceInsertNodeIDs - excludes given node ids from select requests routing, must contain pod suffixes - for pod-0, id will be 0 and etc.
+   *
+   * @schema VtClusterSpecStorage#maintenanceSelectNodeIDs
+   */
+  readonly maintenanceSelectNodeIDs?: number[];
+
+  /**
+   * MinReadySeconds defines a minimum number of seconds to wait before starting update next pod
+   * if previous in healthy state
+   * Has no effect for VLogs and VMSingle
+   *
+   * @schema VtClusterSpecStorage#minReadySeconds
+   */
+  readonly minReadySeconds?: number;
+
+  /**
+   * NodeSelector Define which Nodes the Pods are scheduled on.
+   *
+   * @schema VtClusterSpecStorage#nodeSelector
+   */
+  readonly nodeSelector?: { [key: string]: string };
+
+  /**
+   * Paused If set to true all actions on the underlying managed objects are not
+   * going to be performed, except for delete actions.
+   *
+   * @schema VtClusterSpecStorage#paused
+   */
+  readonly paused?: boolean;
+
+  /**
+   * PersistentVolumeClaimRetentionPolicy allows configuration of PVC retention policy
+   *
+   * @schema VtClusterSpecStorage#persistentVolumeClaimRetentionPolicy
+   */
+  readonly persistentVolumeClaimRetentionPolicy?: VtClusterSpecStoragePersistentVolumeClaimRetentionPolicy;
+
+  /**
+   * PodDisruptionBudget created by operator
+   *
+   * @schema VtClusterSpecStorage#podDisruptionBudget
+   */
+  readonly podDisruptionBudget?: VtClusterSpecStoragePodDisruptionBudget;
+
+  /**
+   * PodMetadata configures Labels and Annotations which are propagated to the VTStorage pods.
+   *
+   * @schema VtClusterSpecStorage#podMetadata
+   */
+  readonly podMetadata?: VtClusterSpecStoragePodMetadata;
+
+  /**
+   * Port listen address
+   *
+   * @schema VtClusterSpecStorage#port
+   */
+  readonly port?: string;
+
+  /**
+   * PriorityClassName class assigned to the Pods
+   *
+   * @schema VtClusterSpecStorage#priorityClassName
+   */
+  readonly priorityClassName?: string;
+
+  /**
+   * ReadinessGates defines pod readiness gates
+   *
+   * @schema VtClusterSpecStorage#readinessGates
+   */
+  readonly readinessGates?: VtClusterSpecStorageReadinessGates[];
+
+  /**
+   * ReadinessProbe that will be added CRD pod
+   *
+   * @schema VtClusterSpecStorage#readinessProbe
+   */
+  readonly readinessProbe?: any;
+
+  /**
+   * ReplicaCount is the expected size of the Application.
+   *
+   * @schema VtClusterSpecStorage#replicaCount
+   */
+  readonly replicaCount?: number;
+
+  /**
+   * Resources container resource request and limits, https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   * if not defined default resources from operator config will be used
+   *
+   * @schema VtClusterSpecStorage#resources
+   */
+  readonly resources?: VtClusterSpecStorageResources;
+
+  /**
+   * RetentionMaxDiskSpaceUsageBytes for the stored traces
+   * VictoriaTraces keeps at least two last days of data in order to guarantee that the traces for the last day can be returned in queries.
+   * This means that the total disk space usage may exceed the -retention.maxDiskSpaceUsageBytes,
+   * if the size of the last two days of data exceeds the -retention.maxDiskSpaceUsageBytes.
+   * https://docs.victoriametrics.com/victoriatraces/#configure-and-run-victoriatraces
+   *
+   * @schema VtClusterSpecStorage#retentionMaxDiskSpaceUsageBytes
+   */
+  readonly retentionMaxDiskSpaceUsageBytes?: string;
+
+  /**
+   * RetentionPeriod for the stored traces
+   * https://docs.victoriametrics.com/victoriatraces/#configure-and-run-victoriatraces
+   *
+   * @schema VtClusterSpecStorage#retentionPeriod
+   */
+  readonly retentionPeriod?: string;
+
+  /**
+   * The number of old ReplicaSets to retain to allow rollback in deployment or
+   * maximum number of revisions that will be maintained in the Deployment revision history.
+   * Has no effect at StatefulSets
+   * Defaults to 10.
+   *
+   * @default 10.
+   * @schema VtClusterSpecStorage#revisionHistoryLimitCount
+   */
+  readonly revisionHistoryLimitCount?: number;
+
+  /**
+   * RollingUpdateStrategy defines strategy for application updates
+   * Default is OnDelete, in this case operator handles update process
+   * Can be changed for RollingUpdate
+   *
+   * @default OnDelete, in this case operator handles update process
+   * @schema VtClusterSpecStorage#rollingUpdateStrategy
+   */
+  readonly rollingUpdateStrategy?: string;
+
+  /**
+   * RollingUpdateStrategyBehavior defines customized behavior for rolling updates.
+   * It applies if the RollingUpdateStrategy is set to OnDelete, which is the default.
+   *
+   * @schema VtClusterSpecStorage#rollingUpdateStrategyBehavior
+   */
+  readonly rollingUpdateStrategyBehavior?: VtClusterSpecStorageRollingUpdateStrategyBehavior;
+
+  /**
+   * RuntimeClassName - defines runtime class for kubernetes pod.
+   * https://kubernetes.io/docs/concepts/containers/runtime-class/
+   *
+   * @schema VtClusterSpecStorage#runtimeClassName
+   */
+  readonly runtimeClassName?: string;
+
+  /**
+   * SchedulerName - defines kubernetes scheduler name
+   *
+   * @schema VtClusterSpecStorage#schedulerName
+   */
+  readonly schedulerName?: string;
+
+  /**
+   * Secrets is a list of Secrets in the same namespace as the Application
+   * object, which shall be mounted into the Application container
+   * at /etc/vm/secrets/SECRET_NAME folder
+   *
+   * @schema VtClusterSpecStorage#secrets
+   */
+  readonly secrets?: string[];
+
+  /**
+   * SecurityContext holds pod-level security attributes and common container settings.
+   * This defaults to the default PodSecurityContext.
+   *
+   * @schema VtClusterSpecStorage#securityContext
+   */
+  readonly securityContext?: any;
+
+  /**
+   * ServiceScrapeSpec that will be added to vtselect VMServiceScrape spec
+   *
+   * @schema VtClusterSpecStorage#serviceScrapeSpec
+   */
+  readonly serviceScrapeSpec?: any;
+
+  /**
+   * ServiceSpec that will be added to vtselect service spec
+   *
+   * @schema VtClusterSpecStorage#serviceSpec
+   */
+  readonly serviceSpec?: VtClusterSpecStorageServiceSpec;
+
+  /**
+   * StartupProbe that will be added to CRD pod
+   *
+   * @schema VtClusterSpecStorage#startupProbe
+   */
+  readonly startupProbe?: any;
+
+  /**
+   * Storage configures persistent volume for VTStorage
+   *
+   * @schema VtClusterSpecStorage#storage
+   */
+  readonly storage?: VtClusterSpecStorageStorage;
+
+  /**
+   * StorageDataPath - path to storage data
+   *
+   * @schema VtClusterSpecStorage#storageDataPath
+   */
+  readonly storageDataPath?: string;
+
+  /**
+   * TerminationGracePeriodSeconds period for container graceful termination
+   *
+   * @schema VtClusterSpecStorage#terminationGracePeriodSeconds
+   */
+  readonly terminationGracePeriodSeconds?: number;
+
+  /**
+   * Tolerations If specified, the pod's tolerations.
+   *
+   * @schema VtClusterSpecStorage#tolerations
+   */
+  readonly tolerations?: VtClusterSpecStorageTolerations[];
+
+  /**
+   * TopologySpreadConstraints embedded kubernetes pod configuration option,
+   * controls how pods are spread across your cluster among failure-domains
+   * such as regions, zones, nodes, and other user-defined topology domains
+   * https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
+   *
+   * @schema VtClusterSpecStorage#topologySpreadConstraints
+   */
+  readonly topologySpreadConstraints?: any[];
+
+  /**
+   * UseDefaultResources controls resource settings
+   * By default, operator sets built-in resource requirements
+   *
+   * @schema VtClusterSpecStorage#useDefaultResources
+   */
+  readonly useDefaultResources?: boolean;
+
+  /**
+   * UseStrictSecurity enables strict security mode for component
+   * it restricts disk writes access
+   * uses non-root user out of the box
+   * drops not needed security permissions
+   *
+   * @schema VtClusterSpecStorage#useStrictSecurity
+   */
+  readonly useStrictSecurity?: boolean;
+
+  /**
+   * VolumeMounts allows configuration of additional VolumeMounts on the output Deployment/StatefulSet definition.
+   * VolumeMounts specified will be appended to other VolumeMounts in the Application container
+   *
+   * @schema VtClusterSpecStorage#volumeMounts
+   */
+  readonly volumeMounts?: VtClusterSpecStorageVolumeMounts[];
+
+  /**
+   * Volumes allows configuration of additional volumes on the output Deployment/StatefulSet definition.
+   * Volumes specified will be appended to other volumes that are generated.
+   * / +optional
+   *
+   * @schema VtClusterSpecStorage#volumes
+   */
+  readonly volumes?: any[];
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorage' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorage(obj: VtClusterSpecStorage | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'affinity': obj.affinity,
+    'claimTemplates': obj.claimTemplates?.map(y => y),
+    'configMaps': obj.configMaps?.map(y => y),
+    'containers': obj.containers?.map(y => y),
+    'disableAutomountServiceAccountToken': obj.disableAutomountServiceAccountToken,
+    'disableSelfServiceScrape': obj.disableSelfServiceScrape,
+    'dnsConfig': toJson_VtClusterSpecStorageDnsConfig(obj.dnsConfig),
+    'dnsPolicy': obj.dnsPolicy,
+    'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'extraEnvs': obj.extraEnvs?.map(y => toJson_VtClusterSpecStorageExtraEnvs(y)),
+    'extraEnvsFrom': obj.extraEnvsFrom?.map(y => toJson_VtClusterSpecStorageExtraEnvsFrom(y)),
+    'futureRetention': obj.futureRetention,
+    'hostAliases': obj.hostAliases?.map(y => toJson_VtClusterSpecStorageHostAliases(y)),
+    'hostNetwork': obj.hostNetwork,
+    'image': toJson_VtClusterSpecStorageImage(obj.image),
+    'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VtClusterSpecStorageImagePullSecrets(y)),
+    'initContainers': obj.initContainers?.map(y => y),
+    'livenessProbe': obj.livenessProbe,
+    'logFormat': obj.logFormat,
+    'logIngestedRows': obj.logIngestedRows,
+    'logLevel': obj.logLevel,
+    'logNewStreams': obj.logNewStreams,
+    'maintenanceInsertNodeIDs': obj.maintenanceInsertNodeIDs?.map(y => y),
+    'maintenanceSelectNodeIDs': obj.maintenanceSelectNodeIDs?.map(y => y),
+    'minReadySeconds': obj.minReadySeconds,
+    'nodeSelector': ((obj.nodeSelector) === undefined) ? undefined : (Object.entries(obj.nodeSelector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'paused': obj.paused,
+    'persistentVolumeClaimRetentionPolicy': toJson_VtClusterSpecStoragePersistentVolumeClaimRetentionPolicy(obj.persistentVolumeClaimRetentionPolicy),
+    'podDisruptionBudget': toJson_VtClusterSpecStoragePodDisruptionBudget(obj.podDisruptionBudget),
+    'podMetadata': toJson_VtClusterSpecStoragePodMetadata(obj.podMetadata),
+    'port': obj.port,
+    'priorityClassName': obj.priorityClassName,
+    'readinessGates': obj.readinessGates?.map(y => toJson_VtClusterSpecStorageReadinessGates(y)),
+    'readinessProbe': obj.readinessProbe,
+    'replicaCount': obj.replicaCount,
+    'resources': toJson_VtClusterSpecStorageResources(obj.resources),
+    'retentionMaxDiskSpaceUsageBytes': obj.retentionMaxDiskSpaceUsageBytes,
+    'retentionPeriod': obj.retentionPeriod,
+    'revisionHistoryLimitCount': obj.revisionHistoryLimitCount,
+    'rollingUpdateStrategy': obj.rollingUpdateStrategy,
+    'rollingUpdateStrategyBehavior': toJson_VtClusterSpecStorageRollingUpdateStrategyBehavior(obj.rollingUpdateStrategyBehavior),
+    'runtimeClassName': obj.runtimeClassName,
+    'schedulerName': obj.schedulerName,
+    'secrets': obj.secrets?.map(y => y),
+    'securityContext': obj.securityContext,
+    'serviceScrapeSpec': obj.serviceScrapeSpec,
+    'serviceSpec': toJson_VtClusterSpecStorageServiceSpec(obj.serviceSpec),
+    'startupProbe': obj.startupProbe,
+    'storage': toJson_VtClusterSpecStorageStorage(obj.storage),
+    'storageDataPath': obj.storageDataPath,
+    'terminationGracePeriodSeconds': obj.terminationGracePeriodSeconds,
+    'tolerations': obj.tolerations?.map(y => toJson_VtClusterSpecStorageTolerations(y)),
+    'topologySpreadConstraints': obj.topologySpreadConstraints?.map(y => y),
+    'useDefaultResources': obj.useDefaultResources,
+    'useStrictSecurity': obj.useStrictSecurity,
+    'volumeMounts': obj.volumeMounts?.map(y => toJson_VtClusterSpecStorageVolumeMounts(y)),
+    'volumes': obj.volumes?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Specifies the DNS parameters of a pod.
+ * Parameters specified here will be merged to the generated DNS
+ * configuration based on DNSPolicy.
+ *
+ * @schema VtClusterSpecInsertDnsConfig
+ */
+export interface VtClusterSpecInsertDnsConfig {
+  /**
+   * A list of DNS name server IP addresses.
+   * This will be appended to the base nameservers generated from DNSPolicy.
+   * Duplicated nameservers will be removed.
+   *
+   * @schema VtClusterSpecInsertDnsConfig#nameservers
+   */
+  readonly nameservers?: string[];
+
+  /**
+   * A list of DNS resolver options.
+   * This will be merged with the base options generated from DNSPolicy.
+   * Duplicated entries will be removed. Resolution options given in Options
+   * will override those that appear in the base DNSPolicy.
+   *
+   * @schema VtClusterSpecInsertDnsConfig#options
+   */
+  readonly options?: VtClusterSpecInsertDnsConfigOptions[];
+
+  /**
+   * A list of DNS search domains for host-name lookup.
+   * This will be appended to the base search paths generated from DNSPolicy.
+   * Duplicated search paths will be removed.
+   *
+   * @schema VtClusterSpecInsertDnsConfig#searches
+   */
+  readonly searches?: string[];
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecInsertDnsConfig' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecInsertDnsConfig(obj: VtClusterSpecInsertDnsConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'nameservers': obj.nameservers?.map(y => y),
+    'options': obj.options?.map(y => toJson_VtClusterSpecInsertDnsConfigOptions(y)),
+    'searches': obj.searches?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvVar represents an environment variable present in a Container.
+ *
+ * @schema VtClusterSpecInsertExtraEnvs
+ */
+export interface VtClusterSpecInsertExtraEnvs {
+  /**
+   * Name of the environment variable. Must be a C_IDENTIFIER.
+   *
+   * @schema VtClusterSpecInsertExtraEnvs#name
+   */
+  readonly name: string;
+
+  /**
+   * Variable references $(VAR_NAME) are expanded
+   * using the previously defined environment variables in the container and
+   * any service environment variables. If a variable cannot be resolved,
+   * the reference in the input string will be unchanged. Double $$ are reduced
+   * to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e.
+   * "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)".
+   * Escaped references will never be expanded, regardless of whether the variable
+   * exists or not.
+   * Defaults to "".
+   *
+   * @default .
+   * @schema VtClusterSpecInsertExtraEnvs#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecInsertExtraEnvs' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecInsertExtraEnvs(obj: VtClusterSpecInsertExtraEnvs | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ *
+ * @schema VtClusterSpecInsertExtraEnvsFrom
+ */
+export interface VtClusterSpecInsertExtraEnvsFrom {
+  /**
+   * The ConfigMap to select from
+   *
+   * @schema VtClusterSpecInsertExtraEnvsFrom#configMapRef
+   */
+  readonly configMapRef?: VtClusterSpecInsertExtraEnvsFromConfigMapRef;
+
+  /**
+   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   *
+   * @schema VtClusterSpecInsertExtraEnvsFrom#prefix
+   */
+  readonly prefix?: string;
+
+  /**
+   * The Secret to select from
+   *
+   * @schema VtClusterSpecInsertExtraEnvsFrom#secretRef
+   */
+  readonly secretRef?: VtClusterSpecInsertExtraEnvsFromSecretRef;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecInsertExtraEnvsFrom' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecInsertExtraEnvsFrom(obj: VtClusterSpecInsertExtraEnvsFrom | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapRef': toJson_VtClusterSpecInsertExtraEnvsFromConfigMapRef(obj.configMapRef),
+    'prefix': obj.prefix,
+    'secretRef': toJson_VtClusterSpecInsertExtraEnvsFromSecretRef(obj.secretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * HostAlias holds the mapping between IP and hostnames that will be injected as an entry in the
+ * pod's hosts file.
+ *
+ * @schema VtClusterSpecInsertHostAliases
+ */
+export interface VtClusterSpecInsertHostAliases {
+  /**
+   * Hostnames for the above IP address.
+   *
+   * @schema VtClusterSpecInsertHostAliases#hostnames
+   */
+  readonly hostnames?: string[];
+
+  /**
+   * IP address of the host file entry.
+   *
+   * @schema VtClusterSpecInsertHostAliases#ip
+   */
+  readonly ip: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecInsertHostAliases' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecInsertHostAliases(obj: VtClusterSpecInsertHostAliases | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'hostnames': obj.hostnames?.map(y => y),
+    'ip': obj.ip,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Image - docker image settings
+ * if no specified operator uses default version from operator config
+ *
+ * @schema VtClusterSpecInsertImage
+ */
+export interface VtClusterSpecInsertImage {
+  /**
+   * PullPolicy describes how to pull docker image
+   *
+   * @schema VtClusterSpecInsertImage#pullPolicy
+   */
+  readonly pullPolicy?: string;
+
+  /**
+   * Repository contains name of docker image + it's repository if needed
+   *
+   * @schema VtClusterSpecInsertImage#repository
+   */
+  readonly repository?: string;
+
+  /**
+   * Tag contains desired docker image version
+   *
+   * @schema VtClusterSpecInsertImage#tag
+   */
+  readonly tag?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecInsertImage' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecInsertImage(obj: VtClusterSpecInsertImage | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'pullPolicy': obj.pullPolicy,
+    'repository': obj.repository,
+    'tag': obj.tag,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LocalObjectReference contains enough information to let you locate the
+ * referenced object inside the same namespace.
+ *
+ * @schema VtClusterSpecInsertImagePullSecrets
+ */
+export interface VtClusterSpecInsertImagePullSecrets {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VtClusterSpecInsertImagePullSecrets#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecInsertImagePullSecrets' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecInsertImagePullSecrets(obj: VtClusterSpecInsertImagePullSecrets | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LogFormat for VTSelect to be configured with.
+ * default or json
+ *
+ * @schema VtClusterSpecInsertLogFormat
+ */
+export enum VtClusterSpecInsertLogFormat {
+  /** default */
+  DEFAULT = "default",
+  /** json */
+  JSON = "json",
+}
+
+/**
+ * LogLevel for VTSelect to be configured with.
+ *
+ * @schema VtClusterSpecInsertLogLevel
+ */
+export enum VtClusterSpecInsertLogLevel {
+  /** INFO */
+  INFO = "INFO",
+  /** WARN */
+  WARN = "WARN",
+  /** ERROR */
+  ERROR = "ERROR",
+  /** FATAL */
+  FATAL = "FATAL",
+  /** PANIC */
+  PANIC = "PANIC",
+}
+
+/**
+ * PodDisruptionBudget created by operator
+ *
+ * @schema VtClusterSpecInsertPodDisruptionBudget
+ */
+export interface VtClusterSpecInsertPodDisruptionBudget {
+  /**
+   * An eviction is allowed if at most "maxUnavailable" pods selected by
+   * "selector" are unavailable after the eviction, i.e. even in absence of
+   * the evicted pod. For example, one can prevent all voluntary evictions
+   * by specifying 0. This is a mutually exclusive setting with "minAvailable".
+   *
+   * @schema VtClusterSpecInsertPodDisruptionBudget#maxUnavailable
+   */
+  readonly maxUnavailable?: VtClusterSpecInsertPodDisruptionBudgetMaxUnavailable;
+
+  /**
+   * An eviction is allowed if at least "minAvailable" pods selected by
+   * "selector" will still be available after the eviction, i.e. even in the
+   * absence of the evicted pod.  So for example you can prevent all voluntary
+   * evictions by specifying "100%".
+   *
+   * @schema VtClusterSpecInsertPodDisruptionBudget#minAvailable
+   */
+  readonly minAvailable?: VtClusterSpecInsertPodDisruptionBudgetMinAvailable;
+
+  /**
+   * replaces default labels selector generated by operator
+   * it's useful when you need to create custom budget
+   *
+   * @schema VtClusterSpecInsertPodDisruptionBudget#selectorLabels
+   */
+  readonly selectorLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecInsertPodDisruptionBudget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecInsertPodDisruptionBudget(obj: VtClusterSpecInsertPodDisruptionBudget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'maxUnavailable': obj.maxUnavailable?.value,
+    'minAvailable': obj.minAvailable?.value,
+    'selectorLabels': ((obj.selectorLabels) === undefined) ? undefined : (Object.entries(obj.selectorLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodMetadata configures Labels and Annotations which are propagated to the VTSelect pods.
+ *
+ * @schema VtClusterSpecInsertPodMetadata
+ */
+export interface VtClusterSpecInsertPodMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VtClusterSpecInsertPodMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects. May match selectors of replication controllers
+   * and services.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VtClusterSpecInsertPodMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+  /**
+   * Name must be unique within a namespace. Is required when creating resources, although
+   * some resources may allow a client to request the generation of an appropriate name
+   * automatically. Name is primarily intended for creation idempotence and configuration
+   * definition.
+   * Cannot be updated.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
+   *
+   * @schema VtClusterSpecInsertPodMetadata#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecInsertPodMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecInsertPodMetadata(obj: VtClusterSpecInsertPodMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodReadinessGate contains the reference to a pod condition
+ *
+ * @schema VtClusterSpecInsertReadinessGates
+ */
+export interface VtClusterSpecInsertReadinessGates {
+  /**
+   * ConditionType refers to a condition in the pod's condition list with matching type.
+   *
+   * @schema VtClusterSpecInsertReadinessGates#conditionType
+   */
+  readonly conditionType: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecInsertReadinessGates' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecInsertReadinessGates(obj: VtClusterSpecInsertReadinessGates | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'conditionType': obj.conditionType,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Resources container resource request and limits, https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+ * if not defined default resources from operator config will be used
+ *
+ * @schema VtClusterSpecInsertResources
+ */
+export interface VtClusterSpecInsertResources {
+  /**
+   * Claims lists the names of resources, defined in spec.resourceClaims,
+   * that are used by this container.
+   *
+   * This is an alpha field and requires enabling the
+   * DynamicResourceAllocation feature gate.
+   *
+   * This field is immutable. It can only be set for containers.
+   *
+   * @schema VtClusterSpecInsertResources#claims
+   */
+  readonly claims?: VtClusterSpecInsertResourcesClaims[];
+
+  /**
+   * Limits describes the maximum amount of compute resources allowed.
+   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   *
+   * @schema VtClusterSpecInsertResources#limits
+   */
+  readonly limits?: { [key: string]: VtClusterSpecInsertResourcesLimits };
+
+  /**
+   * Requests describes the minimum amount of compute resources required.
+   * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+   * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   *
+   * @schema VtClusterSpecInsertResources#requests
+   */
+  readonly requests?: { [key: string]: VtClusterSpecInsertResourcesRequests };
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecInsertResources' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecInsertResources(obj: VtClusterSpecInsertResources | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'claims': obj.claims?.map(y => toJson_VtClusterSpecInsertResourcesClaims(y)),
+    'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+    'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * RollingUpdate - overrides deployment update params.
+ *
+ * @schema VtClusterSpecInsertRollingUpdate
+ */
+export interface VtClusterSpecInsertRollingUpdate {
+  /**
+   * The maximum number of pods that can be scheduled above the desired number of
+   * pods.
+   * Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
+   * This can not be 0 if MaxUnavailable is 0.
+   * Absolute number is calculated from percentage by rounding up.
+   * Defaults to 25%.
+   * Example: when this is set to 30%, the new ReplicaSet can be scaled up immediately when
+   * the rolling update starts, such that the total number of old and new pods do not exceed
+   * 130% of desired pods. Once old pods have been killed,
+   * new ReplicaSet can be scaled up further, ensuring that total number of pods running
+   * at any time during the update is at most 130% of desired pods.
+   *
+   * @default 25%.
+   * @schema VtClusterSpecInsertRollingUpdate#maxSurge
+   */
+  readonly maxSurge?: VtClusterSpecInsertRollingUpdateMaxSurge;
+
+  /**
+   * The maximum number of pods that can be unavailable during the update.
+   * Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
+   * Absolute number is calculated from percentage by rounding down.
+   * This can not be 0 if MaxSurge is 0.
+   * Defaults to 25%.
+   * Example: when this is set to 30%, the old ReplicaSet can be scaled down to 70% of desired pods
+   * immediately when the rolling update starts. Once new pods are ready, old ReplicaSet
+   * can be scaled down further, followed by scaling up the new ReplicaSet, ensuring
+   * that the total number of pods available at all times during the update is at
+   * least 70% of desired pods.
+   *
+   * @default 25%.
+   * @schema VtClusterSpecInsertRollingUpdate#maxUnavailable
+   */
+  readonly maxUnavailable?: VtClusterSpecInsertRollingUpdateMaxUnavailable;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecInsertRollingUpdate' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecInsertRollingUpdate(obj: VtClusterSpecInsertRollingUpdate | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'maxSurge': obj.maxSurge?.value,
+    'maxUnavailable': obj.maxUnavailable?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ServiceSpec that will be added to vtselect service spec
+ *
+ * @schema VtClusterSpecInsertServiceSpec
+ */
+export interface VtClusterSpecInsertServiceSpec {
+  /**
+   * EmbeddedObjectMetadata defines objectMeta for additional service.
+   *
+   * @schema VtClusterSpecInsertServiceSpec#metadata
+   */
+  readonly metadata?: VtClusterSpecInsertServiceSpecMetadata;
+
+  /**
+   * ServiceSpec describes the attributes that a user creates on a service.
+   * More info: https://kubernetes.io/docs/concepts/services-networking/service/
+   *
+   * @schema VtClusterSpecInsertServiceSpec#spec
+   */
+  readonly spec: any;
+
+  /**
+   * UseAsDefault applies changes from given service definition to the main object Service
+   * Changing from headless service to clusterIP or loadbalancer may break cross-component communication
+   *
+   * @schema VtClusterSpecInsertServiceSpec#useAsDefault
+   */
+  readonly useAsDefault?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecInsertServiceSpec' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecInsertServiceSpec(obj: VtClusterSpecInsertServiceSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': toJson_VtClusterSpecInsertServiceSpecMetadata(obj.metadata),
+    'spec': obj.spec,
+    'useAsDefault': obj.useAsDefault,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The pod this Toleration is attached to tolerates any taint that matches
+ * the triple <key,value,effect> using the matching operator <operator>.
+ *
+ * @schema VtClusterSpecInsertTolerations
+ */
+export interface VtClusterSpecInsertTolerations {
+  /**
+   * Effect indicates the taint effect to match. Empty means match all taint effects.
+   * When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+   *
+   * @schema VtClusterSpecInsertTolerations#effect
+   */
+  readonly effect?: string;
+
+  /**
+   * Key is the taint key that the toleration applies to. Empty means match all taint keys.
+   * If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+   *
+   * @schema VtClusterSpecInsertTolerations#key
+   */
+  readonly key?: string;
+
+  /**
+   * Operator represents a key's relationship to the value.
+   * Valid operators are Exists and Equal. Defaults to Equal.
+   * Exists is equivalent to wildcard for value, so that a pod can
+   * tolerate all taints of a particular category.
+   *
+   * @default Equal.
+   * @schema VtClusterSpecInsertTolerations#operator
+   */
+  readonly operator?: string;
+
+  /**
+   * TolerationSeconds represents the period of time the toleration (which must be
+   * of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default,
+   * it is not set, which means tolerate the taint forever (do not evict). Zero and
+   * negative values will be treated as 0 (evict immediately) by the system.
+   *
+   * @schema VtClusterSpecInsertTolerations#tolerationSeconds
+   */
+  readonly tolerationSeconds?: number;
+
+  /**
+   * Value is the taint value the toleration matches to.
+   * If the operator is Exists, the value should be empty, otherwise just a regular string.
+   *
+   * @schema VtClusterSpecInsertTolerations#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecInsertTolerations' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecInsertTolerations(obj: VtClusterSpecInsertTolerations | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'effect': obj.effect,
+    'key': obj.key,
+    'operator': obj.operator,
+    'tolerationSeconds': obj.tolerationSeconds,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * UpdateStrategy - overrides default update strategy.
+ *
+ * @schema VtClusterSpecInsertUpdateStrategy
+ */
+export enum VtClusterSpecInsertUpdateStrategy {
+  /** Recreate */
+  RECREATE = "Recreate",
+  /** RollingUpdate */
+  ROLLING_UPDATE = "RollingUpdate",
+}
+
+/**
+ * VolumeMount describes a mounting of a Volume within a container.
+ *
+ * @schema VtClusterSpecInsertVolumeMounts
+ */
+export interface VtClusterSpecInsertVolumeMounts {
+  /**
+   * Path within the container at which the volume should be mounted.  Must
+   * not contain ':'.
+   *
+   * @schema VtClusterSpecInsertVolumeMounts#mountPath
+   */
+  readonly mountPath: string;
+
+  /**
+   * mountPropagation determines how mounts are propagated from the host
+   * to container and the other way around.
+   * When not set, MountPropagationNone is used.
+   * This field is beta in 1.10.
+   * When RecursiveReadOnly is set to IfPossible or to Enabled, MountPropagation must be None or unspecified
+   * (which defaults to None).
+   *
+   * @schema VtClusterSpecInsertVolumeMounts#mountPropagation
+   */
+  readonly mountPropagation?: string;
+
+  /**
+   * This must match the Name of a Volume.
+   *
+   * @schema VtClusterSpecInsertVolumeMounts#name
+   */
+  readonly name: string;
+
+  /**
+   * Mounted read-only if true, read-write otherwise (false or unspecified).
+   * Defaults to false.
+   *
+   * @default false.
+   * @schema VtClusterSpecInsertVolumeMounts#readOnly
+   */
+  readonly readOnly?: boolean;
+
+  /**
+   * RecursiveReadOnly specifies whether read-only mounts should be handled
+   * recursively.
+   *
+   * If ReadOnly is false, this field has no meaning and must be unspecified.
+   *
+   * If ReadOnly is true, and this field is set to Disabled, the mount is not made
+   * recursively read-only.  If this field is set to IfPossible, the mount is made
+   * recursively read-only, if it is supported by the container runtime.  If this
+   * field is set to Enabled, the mount is made recursively read-only if it is
+   * supported by the container runtime, otherwise the pod will not be started and
+   * an error will be generated to indicate the reason.
+   *
+   * If this field is set to IfPossible or Enabled, MountPropagation must be set to
+   * None (or be unspecified, which defaults to None).
+   *
+   * If this field is not specified, it is treated as an equivalent of Disabled.
+   *
+   * @schema VtClusterSpecInsertVolumeMounts#recursiveReadOnly
+   */
+  readonly recursiveReadOnly?: string;
+
+  /**
+   * Path within the volume from which the container's volume should be mounted.
+   * Defaults to "" (volume's root).
+   *
+   * @default volume's root).
+   * @schema VtClusterSpecInsertVolumeMounts#subPath
+   */
+  readonly subPath?: string;
+
+  /**
+   * Expanded path within the volume from which the container's volume should be mounted.
+   * Behaves similarly to SubPath but environment variable references $(VAR_NAME) are expanded using the container's environment.
+   * Defaults to "" (volume's root).
+   * SubPathExpr and SubPath are mutually exclusive.
+   *
+   * @default volume's root).
+   * @schema VtClusterSpecInsertVolumeMounts#subPathExpr
+   */
+  readonly subPathExpr?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecInsertVolumeMounts' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecInsertVolumeMounts(obj: VtClusterSpecInsertVolumeMounts | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'mountPath': obj.mountPath,
+    'mountPropagation': obj.mountPropagation,
+    'name': obj.name,
+    'readOnly': obj.readOnly,
+    'recursiveReadOnly': obj.recursiveReadOnly,
+    'subPath': obj.subPath,
+    'subPathExpr': obj.subPathExpr,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Specifies the DNS parameters of a pod.
+ * Parameters specified here will be merged to the generated DNS
+ * configuration based on DNSPolicy.
+ *
+ * @schema VtClusterSpecSelectDnsConfig
+ */
+export interface VtClusterSpecSelectDnsConfig {
+  /**
+   * A list of DNS name server IP addresses.
+   * This will be appended to the base nameservers generated from DNSPolicy.
+   * Duplicated nameservers will be removed.
+   *
+   * @schema VtClusterSpecSelectDnsConfig#nameservers
+   */
+  readonly nameservers?: string[];
+
+  /**
+   * A list of DNS resolver options.
+   * This will be merged with the base options generated from DNSPolicy.
+   * Duplicated entries will be removed. Resolution options given in Options
+   * will override those that appear in the base DNSPolicy.
+   *
+   * @schema VtClusterSpecSelectDnsConfig#options
+   */
+  readonly options?: VtClusterSpecSelectDnsConfigOptions[];
+
+  /**
+   * A list of DNS search domains for host-name lookup.
+   * This will be appended to the base search paths generated from DNSPolicy.
+   * Duplicated search paths will be removed.
+   *
+   * @schema VtClusterSpecSelectDnsConfig#searches
+   */
+  readonly searches?: string[];
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecSelectDnsConfig' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecSelectDnsConfig(obj: VtClusterSpecSelectDnsConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'nameservers': obj.nameservers?.map(y => y),
+    'options': obj.options?.map(y => toJson_VtClusterSpecSelectDnsConfigOptions(y)),
+    'searches': obj.searches?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvVar represents an environment variable present in a Container.
+ *
+ * @schema VtClusterSpecSelectExtraEnvs
+ */
+export interface VtClusterSpecSelectExtraEnvs {
+  /**
+   * Name of the environment variable. Must be a C_IDENTIFIER.
+   *
+   * @schema VtClusterSpecSelectExtraEnvs#name
+   */
+  readonly name: string;
+
+  /**
+   * Variable references $(VAR_NAME) are expanded
+   * using the previously defined environment variables in the container and
+   * any service environment variables. If a variable cannot be resolved,
+   * the reference in the input string will be unchanged. Double $$ are reduced
+   * to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e.
+   * "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)".
+   * Escaped references will never be expanded, regardless of whether the variable
+   * exists or not.
+   * Defaults to "".
+   *
+   * @default .
+   * @schema VtClusterSpecSelectExtraEnvs#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecSelectExtraEnvs' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecSelectExtraEnvs(obj: VtClusterSpecSelectExtraEnvs | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ *
+ * @schema VtClusterSpecSelectExtraEnvsFrom
+ */
+export interface VtClusterSpecSelectExtraEnvsFrom {
+  /**
+   * The ConfigMap to select from
+   *
+   * @schema VtClusterSpecSelectExtraEnvsFrom#configMapRef
+   */
+  readonly configMapRef?: VtClusterSpecSelectExtraEnvsFromConfigMapRef;
+
+  /**
+   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   *
+   * @schema VtClusterSpecSelectExtraEnvsFrom#prefix
+   */
+  readonly prefix?: string;
+
+  /**
+   * The Secret to select from
+   *
+   * @schema VtClusterSpecSelectExtraEnvsFrom#secretRef
+   */
+  readonly secretRef?: VtClusterSpecSelectExtraEnvsFromSecretRef;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecSelectExtraEnvsFrom' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecSelectExtraEnvsFrom(obj: VtClusterSpecSelectExtraEnvsFrom | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapRef': toJson_VtClusterSpecSelectExtraEnvsFromConfigMapRef(obj.configMapRef),
+    'prefix': obj.prefix,
+    'secretRef': toJson_VtClusterSpecSelectExtraEnvsFromSecretRef(obj.secretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * HostAlias holds the mapping between IP and hostnames that will be injected as an entry in the
+ * pod's hosts file.
+ *
+ * @schema VtClusterSpecSelectHostAliases
+ */
+export interface VtClusterSpecSelectHostAliases {
+  /**
+   * Hostnames for the above IP address.
+   *
+   * @schema VtClusterSpecSelectHostAliases#hostnames
+   */
+  readonly hostnames?: string[];
+
+  /**
+   * IP address of the host file entry.
+   *
+   * @schema VtClusterSpecSelectHostAliases#ip
+   */
+  readonly ip: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecSelectHostAliases' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecSelectHostAliases(obj: VtClusterSpecSelectHostAliases | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'hostnames': obj.hostnames?.map(y => y),
+    'ip': obj.ip,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Image - docker image settings
+ * if no specified operator uses default version from operator config
+ *
+ * @schema VtClusterSpecSelectImage
+ */
+export interface VtClusterSpecSelectImage {
+  /**
+   * PullPolicy describes how to pull docker image
+   *
+   * @schema VtClusterSpecSelectImage#pullPolicy
+   */
+  readonly pullPolicy?: string;
+
+  /**
+   * Repository contains name of docker image + it's repository if needed
+   *
+   * @schema VtClusterSpecSelectImage#repository
+   */
+  readonly repository?: string;
+
+  /**
+   * Tag contains desired docker image version
+   *
+   * @schema VtClusterSpecSelectImage#tag
+   */
+  readonly tag?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecSelectImage' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecSelectImage(obj: VtClusterSpecSelectImage | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'pullPolicy': obj.pullPolicy,
+    'repository': obj.repository,
+    'tag': obj.tag,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LocalObjectReference contains enough information to let you locate the
+ * referenced object inside the same namespace.
+ *
+ * @schema VtClusterSpecSelectImagePullSecrets
+ */
+export interface VtClusterSpecSelectImagePullSecrets {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VtClusterSpecSelectImagePullSecrets#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecSelectImagePullSecrets' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecSelectImagePullSecrets(obj: VtClusterSpecSelectImagePullSecrets | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LogFormat for VTSelect to be configured with.
+ * default or json
+ *
+ * @schema VtClusterSpecSelectLogFormat
+ */
+export enum VtClusterSpecSelectLogFormat {
+  /** default */
+  DEFAULT = "default",
+  /** json */
+  JSON = "json",
+}
+
+/**
+ * LogLevel for VTSelect to be configured with.
+ *
+ * @schema VtClusterSpecSelectLogLevel
+ */
+export enum VtClusterSpecSelectLogLevel {
+  /** INFO */
+  INFO = "INFO",
+  /** WARN */
+  WARN = "WARN",
+  /** ERROR */
+  ERROR = "ERROR",
+  /** FATAL */
+  FATAL = "FATAL",
+  /** PANIC */
+  PANIC = "PANIC",
+}
+
+/**
+ * PodDisruptionBudget created by operator
+ *
+ * @schema VtClusterSpecSelectPodDisruptionBudget
+ */
+export interface VtClusterSpecSelectPodDisruptionBudget {
+  /**
+   * An eviction is allowed if at most "maxUnavailable" pods selected by
+   * "selector" are unavailable after the eviction, i.e. even in absence of
+   * the evicted pod. For example, one can prevent all voluntary evictions
+   * by specifying 0. This is a mutually exclusive setting with "minAvailable".
+   *
+   * @schema VtClusterSpecSelectPodDisruptionBudget#maxUnavailable
+   */
+  readonly maxUnavailable?: VtClusterSpecSelectPodDisruptionBudgetMaxUnavailable;
+
+  /**
+   * An eviction is allowed if at least "minAvailable" pods selected by
+   * "selector" will still be available after the eviction, i.e. even in the
+   * absence of the evicted pod.  So for example you can prevent all voluntary
+   * evictions by specifying "100%".
+   *
+   * @schema VtClusterSpecSelectPodDisruptionBudget#minAvailable
+   */
+  readonly minAvailable?: VtClusterSpecSelectPodDisruptionBudgetMinAvailable;
+
+  /**
+   * replaces default labels selector generated by operator
+   * it's useful when you need to create custom budget
+   *
+   * @schema VtClusterSpecSelectPodDisruptionBudget#selectorLabels
+   */
+  readonly selectorLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecSelectPodDisruptionBudget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecSelectPodDisruptionBudget(obj: VtClusterSpecSelectPodDisruptionBudget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'maxUnavailable': obj.maxUnavailable?.value,
+    'minAvailable': obj.minAvailable?.value,
+    'selectorLabels': ((obj.selectorLabels) === undefined) ? undefined : (Object.entries(obj.selectorLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodMetadata configures Labels and Annotations which are propagated to the VTSelect pods.
+ *
+ * @schema VtClusterSpecSelectPodMetadata
+ */
+export interface VtClusterSpecSelectPodMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VtClusterSpecSelectPodMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects. May match selectors of replication controllers
+   * and services.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VtClusterSpecSelectPodMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+  /**
+   * Name must be unique within a namespace. Is required when creating resources, although
+   * some resources may allow a client to request the generation of an appropriate name
+   * automatically. Name is primarily intended for creation idempotence and configuration
+   * definition.
+   * Cannot be updated.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
+   *
+   * @schema VtClusterSpecSelectPodMetadata#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecSelectPodMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecSelectPodMetadata(obj: VtClusterSpecSelectPodMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodReadinessGate contains the reference to a pod condition
+ *
+ * @schema VtClusterSpecSelectReadinessGates
+ */
+export interface VtClusterSpecSelectReadinessGates {
+  /**
+   * ConditionType refers to a condition in the pod's condition list with matching type.
+   *
+   * @schema VtClusterSpecSelectReadinessGates#conditionType
+   */
+  readonly conditionType: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecSelectReadinessGates' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecSelectReadinessGates(obj: VtClusterSpecSelectReadinessGates | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'conditionType': obj.conditionType,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Resources container resource request and limits, https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+ * if not defined default resources from operator config will be used
+ *
+ * @schema VtClusterSpecSelectResources
+ */
+export interface VtClusterSpecSelectResources {
+  /**
+   * Claims lists the names of resources, defined in spec.resourceClaims,
+   * that are used by this container.
+   *
+   * This is an alpha field and requires enabling the
+   * DynamicResourceAllocation feature gate.
+   *
+   * This field is immutable. It can only be set for containers.
+   *
+   * @schema VtClusterSpecSelectResources#claims
+   */
+  readonly claims?: VtClusterSpecSelectResourcesClaims[];
+
+  /**
+   * Limits describes the maximum amount of compute resources allowed.
+   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   *
+   * @schema VtClusterSpecSelectResources#limits
+   */
+  readonly limits?: { [key: string]: VtClusterSpecSelectResourcesLimits };
+
+  /**
+   * Requests describes the minimum amount of compute resources required.
+   * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+   * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   *
+   * @schema VtClusterSpecSelectResources#requests
+   */
+  readonly requests?: { [key: string]: VtClusterSpecSelectResourcesRequests };
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecSelectResources' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecSelectResources(obj: VtClusterSpecSelectResources | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'claims': obj.claims?.map(y => toJson_VtClusterSpecSelectResourcesClaims(y)),
+    'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+    'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * RollingUpdate - overrides deployment update params.
+ *
+ * @schema VtClusterSpecSelectRollingUpdate
+ */
+export interface VtClusterSpecSelectRollingUpdate {
+  /**
+   * The maximum number of pods that can be scheduled above the desired number of
+   * pods.
+   * Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
+   * This can not be 0 if MaxUnavailable is 0.
+   * Absolute number is calculated from percentage by rounding up.
+   * Defaults to 25%.
+   * Example: when this is set to 30%, the new ReplicaSet can be scaled up immediately when
+   * the rolling update starts, such that the total number of old and new pods do not exceed
+   * 130% of desired pods. Once old pods have been killed,
+   * new ReplicaSet can be scaled up further, ensuring that total number of pods running
+   * at any time during the update is at most 130% of desired pods.
+   *
+   * @default 25%.
+   * @schema VtClusterSpecSelectRollingUpdate#maxSurge
+   */
+  readonly maxSurge?: VtClusterSpecSelectRollingUpdateMaxSurge;
+
+  /**
+   * The maximum number of pods that can be unavailable during the update.
+   * Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
+   * Absolute number is calculated from percentage by rounding down.
+   * This can not be 0 if MaxSurge is 0.
+   * Defaults to 25%.
+   * Example: when this is set to 30%, the old ReplicaSet can be scaled down to 70% of desired pods
+   * immediately when the rolling update starts. Once new pods are ready, old ReplicaSet
+   * can be scaled down further, followed by scaling up the new ReplicaSet, ensuring
+   * that the total number of pods available at all times during the update is at
+   * least 70% of desired pods.
+   *
+   * @default 25%.
+   * @schema VtClusterSpecSelectRollingUpdate#maxUnavailable
+   */
+  readonly maxUnavailable?: VtClusterSpecSelectRollingUpdateMaxUnavailable;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecSelectRollingUpdate' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecSelectRollingUpdate(obj: VtClusterSpecSelectRollingUpdate | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'maxSurge': obj.maxSurge?.value,
+    'maxUnavailable': obj.maxUnavailable?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ServiceSpec that will be added to vtselect service spec
+ *
+ * @schema VtClusterSpecSelectServiceSpec
+ */
+export interface VtClusterSpecSelectServiceSpec {
+  /**
+   * EmbeddedObjectMetadata defines objectMeta for additional service.
+   *
+   * @schema VtClusterSpecSelectServiceSpec#metadata
+   */
+  readonly metadata?: VtClusterSpecSelectServiceSpecMetadata;
+
+  /**
+   * ServiceSpec describes the attributes that a user creates on a service.
+   * More info: https://kubernetes.io/docs/concepts/services-networking/service/
+   *
+   * @schema VtClusterSpecSelectServiceSpec#spec
+   */
+  readonly spec: any;
+
+  /**
+   * UseAsDefault applies changes from given service definition to the main object Service
+   * Changing from headless service to clusterIP or loadbalancer may break cross-component communication
+   *
+   * @schema VtClusterSpecSelectServiceSpec#useAsDefault
+   */
+  readonly useAsDefault?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecSelectServiceSpec' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecSelectServiceSpec(obj: VtClusterSpecSelectServiceSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': toJson_VtClusterSpecSelectServiceSpecMetadata(obj.metadata),
+    'spec': obj.spec,
+    'useAsDefault': obj.useAsDefault,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The pod this Toleration is attached to tolerates any taint that matches
+ * the triple <key,value,effect> using the matching operator <operator>.
+ *
+ * @schema VtClusterSpecSelectTolerations
+ */
+export interface VtClusterSpecSelectTolerations {
+  /**
+   * Effect indicates the taint effect to match. Empty means match all taint effects.
+   * When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+   *
+   * @schema VtClusterSpecSelectTolerations#effect
+   */
+  readonly effect?: string;
+
+  /**
+   * Key is the taint key that the toleration applies to. Empty means match all taint keys.
+   * If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+   *
+   * @schema VtClusterSpecSelectTolerations#key
+   */
+  readonly key?: string;
+
+  /**
+   * Operator represents a key's relationship to the value.
+   * Valid operators are Exists and Equal. Defaults to Equal.
+   * Exists is equivalent to wildcard for value, so that a pod can
+   * tolerate all taints of a particular category.
+   *
+   * @default Equal.
+   * @schema VtClusterSpecSelectTolerations#operator
+   */
+  readonly operator?: string;
+
+  /**
+   * TolerationSeconds represents the period of time the toleration (which must be
+   * of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default,
+   * it is not set, which means tolerate the taint forever (do not evict). Zero and
+   * negative values will be treated as 0 (evict immediately) by the system.
+   *
+   * @schema VtClusterSpecSelectTolerations#tolerationSeconds
+   */
+  readonly tolerationSeconds?: number;
+
+  /**
+   * Value is the taint value the toleration matches to.
+   * If the operator is Exists, the value should be empty, otherwise just a regular string.
+   *
+   * @schema VtClusterSpecSelectTolerations#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecSelectTolerations' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecSelectTolerations(obj: VtClusterSpecSelectTolerations | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'effect': obj.effect,
+    'key': obj.key,
+    'operator': obj.operator,
+    'tolerationSeconds': obj.tolerationSeconds,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * UpdateStrategy - overrides default update strategy.
+ *
+ * @schema VtClusterSpecSelectUpdateStrategy
+ */
+export enum VtClusterSpecSelectUpdateStrategy {
+  /** Recreate */
+  RECREATE = "Recreate",
+  /** RollingUpdate */
+  ROLLING_UPDATE = "RollingUpdate",
+}
+
+/**
+ * VolumeMount describes a mounting of a Volume within a container.
+ *
+ * @schema VtClusterSpecSelectVolumeMounts
+ */
+export interface VtClusterSpecSelectVolumeMounts {
+  /**
+   * Path within the container at which the volume should be mounted.  Must
+   * not contain ':'.
+   *
+   * @schema VtClusterSpecSelectVolumeMounts#mountPath
+   */
+  readonly mountPath: string;
+
+  /**
+   * mountPropagation determines how mounts are propagated from the host
+   * to container and the other way around.
+   * When not set, MountPropagationNone is used.
+   * This field is beta in 1.10.
+   * When RecursiveReadOnly is set to IfPossible or to Enabled, MountPropagation must be None or unspecified
+   * (which defaults to None).
+   *
+   * @schema VtClusterSpecSelectVolumeMounts#mountPropagation
+   */
+  readonly mountPropagation?: string;
+
+  /**
+   * This must match the Name of a Volume.
+   *
+   * @schema VtClusterSpecSelectVolumeMounts#name
+   */
+  readonly name: string;
+
+  /**
+   * Mounted read-only if true, read-write otherwise (false or unspecified).
+   * Defaults to false.
+   *
+   * @default false.
+   * @schema VtClusterSpecSelectVolumeMounts#readOnly
+   */
+  readonly readOnly?: boolean;
+
+  /**
+   * RecursiveReadOnly specifies whether read-only mounts should be handled
+   * recursively.
+   *
+   * If ReadOnly is false, this field has no meaning and must be unspecified.
+   *
+   * If ReadOnly is true, and this field is set to Disabled, the mount is not made
+   * recursively read-only.  If this field is set to IfPossible, the mount is made
+   * recursively read-only, if it is supported by the container runtime.  If this
+   * field is set to Enabled, the mount is made recursively read-only if it is
+   * supported by the container runtime, otherwise the pod will not be started and
+   * an error will be generated to indicate the reason.
+   *
+   * If this field is set to IfPossible or Enabled, MountPropagation must be set to
+   * None (or be unspecified, which defaults to None).
+   *
+   * If this field is not specified, it is treated as an equivalent of Disabled.
+   *
+   * @schema VtClusterSpecSelectVolumeMounts#recursiveReadOnly
+   */
+  readonly recursiveReadOnly?: string;
+
+  /**
+   * Path within the volume from which the container's volume should be mounted.
+   * Defaults to "" (volume's root).
+   *
+   * @default volume's root).
+   * @schema VtClusterSpecSelectVolumeMounts#subPath
+   */
+  readonly subPath?: string;
+
+  /**
+   * Expanded path within the volume from which the container's volume should be mounted.
+   * Behaves similarly to SubPath but environment variable references $(VAR_NAME) are expanded using the container's environment.
+   * Defaults to "" (volume's root).
+   * SubPathExpr and SubPath are mutually exclusive.
+   *
+   * @default volume's root).
+   * @schema VtClusterSpecSelectVolumeMounts#subPathExpr
+   */
+  readonly subPathExpr?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecSelectVolumeMounts' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecSelectVolumeMounts(obj: VtClusterSpecSelectVolumeMounts | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'mountPath': obj.mountPath,
+    'mountPropagation': obj.mountPropagation,
+    'name': obj.name,
+    'readOnly': obj.readOnly,
+    'recursiveReadOnly': obj.recursiveReadOnly,
+    'subPath': obj.subPath,
+    'subPathExpr': obj.subPathExpr,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Specifies the DNS parameters of a pod.
+ * Parameters specified here will be merged to the generated DNS
+ * configuration based on DNSPolicy.
+ *
+ * @schema VtClusterSpecStorageDnsConfig
+ */
+export interface VtClusterSpecStorageDnsConfig {
+  /**
+   * A list of DNS name server IP addresses.
+   * This will be appended to the base nameservers generated from DNSPolicy.
+   * Duplicated nameservers will be removed.
+   *
+   * @schema VtClusterSpecStorageDnsConfig#nameservers
+   */
+  readonly nameservers?: string[];
+
+  /**
+   * A list of DNS resolver options.
+   * This will be merged with the base options generated from DNSPolicy.
+   * Duplicated entries will be removed. Resolution options given in Options
+   * will override those that appear in the base DNSPolicy.
+   *
+   * @schema VtClusterSpecStorageDnsConfig#options
+   */
+  readonly options?: VtClusterSpecStorageDnsConfigOptions[];
+
+  /**
+   * A list of DNS search domains for host-name lookup.
+   * This will be appended to the base search paths generated from DNSPolicy.
+   * Duplicated search paths will be removed.
+   *
+   * @schema VtClusterSpecStorageDnsConfig#searches
+   */
+  readonly searches?: string[];
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageDnsConfig' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageDnsConfig(obj: VtClusterSpecStorageDnsConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'nameservers': obj.nameservers?.map(y => y),
+    'options': obj.options?.map(y => toJson_VtClusterSpecStorageDnsConfigOptions(y)),
+    'searches': obj.searches?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvVar represents an environment variable present in a Container.
+ *
+ * @schema VtClusterSpecStorageExtraEnvs
+ */
+export interface VtClusterSpecStorageExtraEnvs {
+  /**
+   * Name of the environment variable. Must be a C_IDENTIFIER.
+   *
+   * @schema VtClusterSpecStorageExtraEnvs#name
+   */
+  readonly name: string;
+
+  /**
+   * Variable references $(VAR_NAME) are expanded
+   * using the previously defined environment variables in the container and
+   * any service environment variables. If a variable cannot be resolved,
+   * the reference in the input string will be unchanged. Double $$ are reduced
+   * to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e.
+   * "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)".
+   * Escaped references will never be expanded, regardless of whether the variable
+   * exists or not.
+   * Defaults to "".
+   *
+   * @default .
+   * @schema VtClusterSpecStorageExtraEnvs#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageExtraEnvs' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageExtraEnvs(obj: VtClusterSpecStorageExtraEnvs | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ *
+ * @schema VtClusterSpecStorageExtraEnvsFrom
+ */
+export interface VtClusterSpecStorageExtraEnvsFrom {
+  /**
+   * The ConfigMap to select from
+   *
+   * @schema VtClusterSpecStorageExtraEnvsFrom#configMapRef
+   */
+  readonly configMapRef?: VtClusterSpecStorageExtraEnvsFromConfigMapRef;
+
+  /**
+   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   *
+   * @schema VtClusterSpecStorageExtraEnvsFrom#prefix
+   */
+  readonly prefix?: string;
+
+  /**
+   * The Secret to select from
+   *
+   * @schema VtClusterSpecStorageExtraEnvsFrom#secretRef
+   */
+  readonly secretRef?: VtClusterSpecStorageExtraEnvsFromSecretRef;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageExtraEnvsFrom' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageExtraEnvsFrom(obj: VtClusterSpecStorageExtraEnvsFrom | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapRef': toJson_VtClusterSpecStorageExtraEnvsFromConfigMapRef(obj.configMapRef),
+    'prefix': obj.prefix,
+    'secretRef': toJson_VtClusterSpecStorageExtraEnvsFromSecretRef(obj.secretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * HostAlias holds the mapping between IP and hostnames that will be injected as an entry in the
+ * pod's hosts file.
+ *
+ * @schema VtClusterSpecStorageHostAliases
+ */
+export interface VtClusterSpecStorageHostAliases {
+  /**
+   * Hostnames for the above IP address.
+   *
+   * @schema VtClusterSpecStorageHostAliases#hostnames
+   */
+  readonly hostnames?: string[];
+
+  /**
+   * IP address of the host file entry.
+   *
+   * @schema VtClusterSpecStorageHostAliases#ip
+   */
+  readonly ip: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHostAliases' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHostAliases(obj: VtClusterSpecStorageHostAliases | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'hostnames': obj.hostnames?.map(y => y),
+    'ip': obj.ip,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Image - docker image settings
+ * if no specified operator uses default version from operator config
+ *
+ * @schema VtClusterSpecStorageImage
+ */
+export interface VtClusterSpecStorageImage {
+  /**
+   * PullPolicy describes how to pull docker image
+   *
+   * @schema VtClusterSpecStorageImage#pullPolicy
+   */
+  readonly pullPolicy?: string;
+
+  /**
+   * Repository contains name of docker image + it's repository if needed
+   *
+   * @schema VtClusterSpecStorageImage#repository
+   */
+  readonly repository?: string;
+
+  /**
+   * Tag contains desired docker image version
+   *
+   * @schema VtClusterSpecStorageImage#tag
+   */
+  readonly tag?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageImage' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageImage(obj: VtClusterSpecStorageImage | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'pullPolicy': obj.pullPolicy,
+    'repository': obj.repository,
+    'tag': obj.tag,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LocalObjectReference contains enough information to let you locate the
+ * referenced object inside the same namespace.
+ *
+ * @schema VtClusterSpecStorageImagePullSecrets
+ */
+export interface VtClusterSpecStorageImagePullSecrets {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VtClusterSpecStorageImagePullSecrets#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageImagePullSecrets' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageImagePullSecrets(obj: VtClusterSpecStorageImagePullSecrets | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LogFormat for VTStorage to be configured with.
+ * default or json
+ *
+ * @schema VtClusterSpecStorageLogFormat
+ */
+export enum VtClusterSpecStorageLogFormat {
+  /** default */
+  DEFAULT = "default",
+  /** json */
+  JSON = "json",
+}
+
+/**
+ * LogLevel for VTStorage to be configured with.
+ *
+ * @schema VtClusterSpecStorageLogLevel
+ */
+export enum VtClusterSpecStorageLogLevel {
+  /** INFO */
+  INFO = "INFO",
+  /** WARN */
+  WARN = "WARN",
+  /** ERROR */
+  ERROR = "ERROR",
+  /** FATAL */
+  FATAL = "FATAL",
+  /** PANIC */
+  PANIC = "PANIC",
+}
+
+/**
+ * PersistentVolumeClaimRetentionPolicy allows configuration of PVC retention policy
+ *
+ * @schema VtClusterSpecStoragePersistentVolumeClaimRetentionPolicy
+ */
+export interface VtClusterSpecStoragePersistentVolumeClaimRetentionPolicy {
+  /**
+   * WhenDeleted specifies what happens to PVCs created from StatefulSet
+   * VolumeClaimTemplates when the StatefulSet is deleted. The default policy
+   * of `Retain` causes PVCs to not be affected by StatefulSet deletion. The
+   * `Delete` policy causes those PVCs to be deleted.
+   *
+   * @schema VtClusterSpecStoragePersistentVolumeClaimRetentionPolicy#whenDeleted
+   */
+  readonly whenDeleted?: string;
+
+  /**
+   * WhenScaled specifies what happens to PVCs created from StatefulSet
+   * VolumeClaimTemplates when the StatefulSet is scaled down. The default
+   * policy of `Retain` causes PVCs to not be affected by a scaledown. The
+   * `Delete` policy causes the associated PVCs for any excess pods above
+   * the replica count to be deleted.
+   *
+   * @schema VtClusterSpecStoragePersistentVolumeClaimRetentionPolicy#whenScaled
+   */
+  readonly whenScaled?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStoragePersistentVolumeClaimRetentionPolicy' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStoragePersistentVolumeClaimRetentionPolicy(obj: VtClusterSpecStoragePersistentVolumeClaimRetentionPolicy | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'whenDeleted': obj.whenDeleted,
+    'whenScaled': obj.whenScaled,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodDisruptionBudget created by operator
+ *
+ * @schema VtClusterSpecStoragePodDisruptionBudget
+ */
+export interface VtClusterSpecStoragePodDisruptionBudget {
+  /**
+   * An eviction is allowed if at most "maxUnavailable" pods selected by
+   * "selector" are unavailable after the eviction, i.e. even in absence of
+   * the evicted pod. For example, one can prevent all voluntary evictions
+   * by specifying 0. This is a mutually exclusive setting with "minAvailable".
+   *
+   * @schema VtClusterSpecStoragePodDisruptionBudget#maxUnavailable
+   */
+  readonly maxUnavailable?: VtClusterSpecStoragePodDisruptionBudgetMaxUnavailable;
+
+  /**
+   * An eviction is allowed if at least "minAvailable" pods selected by
+   * "selector" will still be available after the eviction, i.e. even in the
+   * absence of the evicted pod.  So for example you can prevent all voluntary
+   * evictions by specifying "100%".
+   *
+   * @schema VtClusterSpecStoragePodDisruptionBudget#minAvailable
+   */
+  readonly minAvailable?: VtClusterSpecStoragePodDisruptionBudgetMinAvailable;
+
+  /**
+   * replaces default labels selector generated by operator
+   * it's useful when you need to create custom budget
+   *
+   * @schema VtClusterSpecStoragePodDisruptionBudget#selectorLabels
+   */
+  readonly selectorLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStoragePodDisruptionBudget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStoragePodDisruptionBudget(obj: VtClusterSpecStoragePodDisruptionBudget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'maxUnavailable': obj.maxUnavailable?.value,
+    'minAvailable': obj.minAvailable?.value,
+    'selectorLabels': ((obj.selectorLabels) === undefined) ? undefined : (Object.entries(obj.selectorLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodMetadata configures Labels and Annotations which are propagated to the VTStorage pods.
+ *
+ * @schema VtClusterSpecStoragePodMetadata
+ */
+export interface VtClusterSpecStoragePodMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VtClusterSpecStoragePodMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects. May match selectors of replication controllers
+   * and services.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VtClusterSpecStoragePodMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+  /**
+   * Name must be unique within a namespace. Is required when creating resources, although
+   * some resources may allow a client to request the generation of an appropriate name
+   * automatically. Name is primarily intended for creation idempotence and configuration
+   * definition.
+   * Cannot be updated.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
+   *
+   * @schema VtClusterSpecStoragePodMetadata#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStoragePodMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStoragePodMetadata(obj: VtClusterSpecStoragePodMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodReadinessGate contains the reference to a pod condition
+ *
+ * @schema VtClusterSpecStorageReadinessGates
+ */
+export interface VtClusterSpecStorageReadinessGates {
+  /**
+   * ConditionType refers to a condition in the pod's condition list with matching type.
+   *
+   * @schema VtClusterSpecStorageReadinessGates#conditionType
+   */
+  readonly conditionType: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageReadinessGates' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageReadinessGates(obj: VtClusterSpecStorageReadinessGates | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'conditionType': obj.conditionType,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Resources container resource request and limits, https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+ * if not defined default resources from operator config will be used
+ *
+ * @schema VtClusterSpecStorageResources
+ */
+export interface VtClusterSpecStorageResources {
+  /**
+   * Claims lists the names of resources, defined in spec.resourceClaims,
+   * that are used by this container.
+   *
+   * This is an alpha field and requires enabling the
+   * DynamicResourceAllocation feature gate.
+   *
+   * This field is immutable. It can only be set for containers.
+   *
+   * @schema VtClusterSpecStorageResources#claims
+   */
+  readonly claims?: VtClusterSpecStorageResourcesClaims[];
+
+  /**
+   * Limits describes the maximum amount of compute resources allowed.
+   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   *
+   * @schema VtClusterSpecStorageResources#limits
+   */
+  readonly limits?: { [key: string]: VtClusterSpecStorageResourcesLimits };
+
+  /**
+   * Requests describes the minimum amount of compute resources required.
+   * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+   * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   *
+   * @schema VtClusterSpecStorageResources#requests
+   */
+  readonly requests?: { [key: string]: VtClusterSpecStorageResourcesRequests };
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageResources' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageResources(obj: VtClusterSpecStorageResources | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'claims': obj.claims?.map(y => toJson_VtClusterSpecStorageResourcesClaims(y)),
+    'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+    'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * RollingUpdateStrategyBehavior defines customized behavior for rolling updates.
+ * It applies if the RollingUpdateStrategy is set to OnDelete, which is the default.
+ *
+ * @schema VtClusterSpecStorageRollingUpdateStrategyBehavior
+ */
+export interface VtClusterSpecStorageRollingUpdateStrategyBehavior {
+  /**
+   * MaxUnavailable defines the maximum number of pods that can be unavailable during the update.
+   * It can be specified as an absolute number (e.g. 2) or a percentage of the total pods (e.g. "50%").
+   * For example, if set to 100%, all pods will be upgraded at once, minimizing downtime when needed.
+   *
+   * @schema VtClusterSpecStorageRollingUpdateStrategyBehavior#maxUnavailable
+   */
+  readonly maxUnavailable?: VtClusterSpecStorageRollingUpdateStrategyBehaviorMaxUnavailable;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageRollingUpdateStrategyBehavior' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageRollingUpdateStrategyBehavior(obj: VtClusterSpecStorageRollingUpdateStrategyBehavior | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'maxUnavailable': obj.maxUnavailable?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ServiceSpec that will be added to vtselect service spec
+ *
+ * @schema VtClusterSpecStorageServiceSpec
+ */
+export interface VtClusterSpecStorageServiceSpec {
+  /**
+   * EmbeddedObjectMetadata defines objectMeta for additional service.
+   *
+   * @schema VtClusterSpecStorageServiceSpec#metadata
+   */
+  readonly metadata?: VtClusterSpecStorageServiceSpecMetadata;
+
+  /**
+   * ServiceSpec describes the attributes that a user creates on a service.
+   * More info: https://kubernetes.io/docs/concepts/services-networking/service/
+   *
+   * @schema VtClusterSpecStorageServiceSpec#spec
+   */
+  readonly spec: any;
+
+  /**
+   * UseAsDefault applies changes from given service definition to the main object Service
+   * Changing from headless service to clusterIP or loadbalancer may break cross-component communication
+   *
+   * @schema VtClusterSpecStorageServiceSpec#useAsDefault
+   */
+  readonly useAsDefault?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageServiceSpec' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageServiceSpec(obj: VtClusterSpecStorageServiceSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': toJson_VtClusterSpecStorageServiceSpecMetadata(obj.metadata),
+    'spec': obj.spec,
+    'useAsDefault': obj.useAsDefault,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Storage configures persistent volume for VTStorage
+ *
+ * @schema VtClusterSpecStorageStorage
+ */
+export interface VtClusterSpecStorageStorage {
+  /**
+   * Deprecated: subPath usage will be disabled by default in a future release, this option will become unnecessary.
+   * DisableMountSubPath allows to remove any subPath usage in volume mounts.
+   *
+   * @schema VtClusterSpecStorageStorage#disableMountSubPath
+   */
+  readonly disableMountSubPath?: boolean;
+
+  /**
+   * EmptyDirVolumeSource to be used by the Prometheus StatefulSets. If specified, used in place of any volumeClaimTemplate. More
+   * info: https://kubernetes.io/docs/concepts/storage/volumes/#emptydir
+   *
+   * @schema VtClusterSpecStorageStorage#emptyDir
+   */
+  readonly emptyDir?: VtClusterSpecStorageStorageEmptyDir;
+
+  /**
+   * A PVC spec to be used by the StatefulSets/Deployments.
+   *
+   * @schema VtClusterSpecStorageStorage#volumeClaimTemplate
+   */
+  readonly volumeClaimTemplate?: any;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageStorage' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageStorage(obj: VtClusterSpecStorageStorage | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'disableMountSubPath': obj.disableMountSubPath,
+    'emptyDir': toJson_VtClusterSpecStorageStorageEmptyDir(obj.emptyDir),
+    'volumeClaimTemplate': obj.volumeClaimTemplate,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The pod this Toleration is attached to tolerates any taint that matches
+ * the triple <key,value,effect> using the matching operator <operator>.
+ *
+ * @schema VtClusterSpecStorageTolerations
+ */
+export interface VtClusterSpecStorageTolerations {
+  /**
+   * Effect indicates the taint effect to match. Empty means match all taint effects.
+   * When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+   *
+   * @schema VtClusterSpecStorageTolerations#effect
+   */
+  readonly effect?: string;
+
+  /**
+   * Key is the taint key that the toleration applies to. Empty means match all taint keys.
+   * If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+   *
+   * @schema VtClusterSpecStorageTolerations#key
+   */
+  readonly key?: string;
+
+  /**
+   * Operator represents a key's relationship to the value.
+   * Valid operators are Exists and Equal. Defaults to Equal.
+   * Exists is equivalent to wildcard for value, so that a pod can
+   * tolerate all taints of a particular category.
+   *
+   * @default Equal.
+   * @schema VtClusterSpecStorageTolerations#operator
+   */
+  readonly operator?: string;
+
+  /**
+   * TolerationSeconds represents the period of time the toleration (which must be
+   * of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default,
+   * it is not set, which means tolerate the taint forever (do not evict). Zero and
+   * negative values will be treated as 0 (evict immediately) by the system.
+   *
+   * @schema VtClusterSpecStorageTolerations#tolerationSeconds
+   */
+  readonly tolerationSeconds?: number;
+
+  /**
+   * Value is the taint value the toleration matches to.
+   * If the operator is Exists, the value should be empty, otherwise just a regular string.
+   *
+   * @schema VtClusterSpecStorageTolerations#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageTolerations' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageTolerations(obj: VtClusterSpecStorageTolerations | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'effect': obj.effect,
+    'key': obj.key,
+    'operator': obj.operator,
+    'tolerationSeconds': obj.tolerationSeconds,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * VolumeMount describes a mounting of a Volume within a container.
+ *
+ * @schema VtClusterSpecStorageVolumeMounts
+ */
+export interface VtClusterSpecStorageVolumeMounts {
+  /**
+   * Path within the container at which the volume should be mounted.  Must
+   * not contain ':'.
+   *
+   * @schema VtClusterSpecStorageVolumeMounts#mountPath
+   */
+  readonly mountPath: string;
+
+  /**
+   * mountPropagation determines how mounts are propagated from the host
+   * to container and the other way around.
+   * When not set, MountPropagationNone is used.
+   * This field is beta in 1.10.
+   * When RecursiveReadOnly is set to IfPossible or to Enabled, MountPropagation must be None or unspecified
+   * (which defaults to None).
+   *
+   * @schema VtClusterSpecStorageVolumeMounts#mountPropagation
+   */
+  readonly mountPropagation?: string;
+
+  /**
+   * This must match the Name of a Volume.
+   *
+   * @schema VtClusterSpecStorageVolumeMounts#name
+   */
+  readonly name: string;
+
+  /**
+   * Mounted read-only if true, read-write otherwise (false or unspecified).
+   * Defaults to false.
+   *
+   * @default false.
+   * @schema VtClusterSpecStorageVolumeMounts#readOnly
+   */
+  readonly readOnly?: boolean;
+
+  /**
+   * RecursiveReadOnly specifies whether read-only mounts should be handled
+   * recursively.
+   *
+   * If ReadOnly is false, this field has no meaning and must be unspecified.
+   *
+   * If ReadOnly is true, and this field is set to Disabled, the mount is not made
+   * recursively read-only.  If this field is set to IfPossible, the mount is made
+   * recursively read-only, if it is supported by the container runtime.  If this
+   * field is set to Enabled, the mount is made recursively read-only if it is
+   * supported by the container runtime, otherwise the pod will not be started and
+   * an error will be generated to indicate the reason.
+   *
+   * If this field is set to IfPossible or Enabled, MountPropagation must be set to
+   * None (or be unspecified, which defaults to None).
+   *
+   * If this field is not specified, it is treated as an equivalent of Disabled.
+   *
+   * @schema VtClusterSpecStorageVolumeMounts#recursiveReadOnly
+   */
+  readonly recursiveReadOnly?: string;
+
+  /**
+   * Path within the volume from which the container's volume should be mounted.
+   * Defaults to "" (volume's root).
+   *
+   * @default volume's root).
+   * @schema VtClusterSpecStorageVolumeMounts#subPath
+   */
+  readonly subPath?: string;
+
+  /**
+   * Expanded path within the volume from which the container's volume should be mounted.
+   * Behaves similarly to SubPath but environment variable references $(VAR_NAME) are expanded using the container's environment.
+   * Defaults to "" (volume's root).
+   * SubPathExpr and SubPath are mutually exclusive.
+   *
+   * @default volume's root).
+   * @schema VtClusterSpecStorageVolumeMounts#subPathExpr
+   */
+  readonly subPathExpr?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageVolumeMounts' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageVolumeMounts(obj: VtClusterSpecStorageVolumeMounts | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'mountPath': obj.mountPath,
+    'mountPropagation': obj.mountPropagation,
+    'name': obj.name,
+    'readOnly': obj.readOnly,
+    'recursiveReadOnly': obj.recursiveReadOnly,
+    'subPath': obj.subPath,
+    'subPathExpr': obj.subPathExpr,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodDNSConfigOption defines DNS resolver options of a pod.
+ *
+ * @schema VtClusterSpecInsertDnsConfigOptions
+ */
+export interface VtClusterSpecInsertDnsConfigOptions {
+  /**
+   * Name is this DNS resolver option's name.
+   * Required.
+   *
+   * @schema VtClusterSpecInsertDnsConfigOptions#name
+   */
+  readonly name?: string;
+
+  /**
+   * Value is this DNS resolver option's value.
+   *
+   * @schema VtClusterSpecInsertDnsConfigOptions#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecInsertDnsConfigOptions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecInsertDnsConfigOptions(obj: VtClusterSpecInsertDnsConfigOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The ConfigMap to select from
+ *
+ * @schema VtClusterSpecInsertExtraEnvsFromConfigMapRef
+ */
+export interface VtClusterSpecInsertExtraEnvsFromConfigMapRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VtClusterSpecInsertExtraEnvsFromConfigMapRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap must be defined
+   *
+   * @schema VtClusterSpecInsertExtraEnvsFromConfigMapRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecInsertExtraEnvsFromConfigMapRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecInsertExtraEnvsFromConfigMapRef(obj: VtClusterSpecInsertExtraEnvsFromConfigMapRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The Secret to select from
+ *
+ * @schema VtClusterSpecInsertExtraEnvsFromSecretRef
+ */
+export interface VtClusterSpecInsertExtraEnvsFromSecretRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VtClusterSpecInsertExtraEnvsFromSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret must be defined
+   *
+   * @schema VtClusterSpecInsertExtraEnvsFromSecretRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecInsertExtraEnvsFromSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecInsertExtraEnvsFromSecretRef(obj: VtClusterSpecInsertExtraEnvsFromSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * An eviction is allowed if at most "maxUnavailable" pods selected by
+ * "selector" are unavailable after the eviction, i.e. even in absence of
+ * the evicted pod. For example, one can prevent all voluntary evictions
+ * by specifying 0. This is a mutually exclusive setting with "minAvailable".
+ *
+ * @schema VtClusterSpecInsertPodDisruptionBudgetMaxUnavailable
+ */
+export class VtClusterSpecInsertPodDisruptionBudgetMaxUnavailable {
+  public static fromNumber(value: number): VtClusterSpecInsertPodDisruptionBudgetMaxUnavailable {
+    return new VtClusterSpecInsertPodDisruptionBudgetMaxUnavailable(value);
+  }
+  public static fromString(value: string): VtClusterSpecInsertPodDisruptionBudgetMaxUnavailable {
+    return new VtClusterSpecInsertPodDisruptionBudgetMaxUnavailable(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * An eviction is allowed if at least "minAvailable" pods selected by
+ * "selector" will still be available after the eviction, i.e. even in the
+ * absence of the evicted pod.  So for example you can prevent all voluntary
+ * evictions by specifying "100%".
+ *
+ * @schema VtClusterSpecInsertPodDisruptionBudgetMinAvailable
+ */
+export class VtClusterSpecInsertPodDisruptionBudgetMinAvailable {
+  public static fromNumber(value: number): VtClusterSpecInsertPodDisruptionBudgetMinAvailable {
+    return new VtClusterSpecInsertPodDisruptionBudgetMinAvailable(value);
+  }
+  public static fromString(value: string): VtClusterSpecInsertPodDisruptionBudgetMinAvailable {
+    return new VtClusterSpecInsertPodDisruptionBudgetMinAvailable(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * ResourceClaim references one entry in PodSpec.ResourceClaims.
+ *
+ * @schema VtClusterSpecInsertResourcesClaims
+ */
+export interface VtClusterSpecInsertResourcesClaims {
+  /**
+   * Name must match the name of one entry in pod.spec.resourceClaims of
+   * the Pod where this field is used. It makes that resource available
+   * inside a container.
+   *
+   * @schema VtClusterSpecInsertResourcesClaims#name
+   */
+  readonly name: string;
+
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VtClusterSpecInsertResourcesClaims#request
+   */
+  readonly request?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecInsertResourcesClaims' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecInsertResourcesClaims(obj: VtClusterSpecInsertResourcesClaims | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'request': obj.request,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema VtClusterSpecInsertResourcesLimits
+ */
+export class VtClusterSpecInsertResourcesLimits {
+  public static fromNumber(value: number): VtClusterSpecInsertResourcesLimits {
+    return new VtClusterSpecInsertResourcesLimits(value);
+  }
+  public static fromString(value: string): VtClusterSpecInsertResourcesLimits {
+    return new VtClusterSpecInsertResourcesLimits(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * @schema VtClusterSpecInsertResourcesRequests
+ */
+export class VtClusterSpecInsertResourcesRequests {
+  public static fromNumber(value: number): VtClusterSpecInsertResourcesRequests {
+    return new VtClusterSpecInsertResourcesRequests(value);
+  }
+  public static fromString(value: string): VtClusterSpecInsertResourcesRequests {
+    return new VtClusterSpecInsertResourcesRequests(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * The maximum number of pods that can be scheduled above the desired number of
+ * pods.
+ * Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
+ * This can not be 0 if MaxUnavailable is 0.
+ * Absolute number is calculated from percentage by rounding up.
+ * Defaults to 25%.
+ * Example: when this is set to 30%, the new ReplicaSet can be scaled up immediately when
+ * the rolling update starts, such that the total number of old and new pods do not exceed
+ * 130% of desired pods. Once old pods have been killed,
+ * new ReplicaSet can be scaled up further, ensuring that total number of pods running
+ * at any time during the update is at most 130% of desired pods.
+ *
+ * @default 25%.
+ * @schema VtClusterSpecInsertRollingUpdateMaxSurge
+ */
+export class VtClusterSpecInsertRollingUpdateMaxSurge {
+  public static fromNumber(value: number): VtClusterSpecInsertRollingUpdateMaxSurge {
+    return new VtClusterSpecInsertRollingUpdateMaxSurge(value);
+  }
+  public static fromString(value: string): VtClusterSpecInsertRollingUpdateMaxSurge {
+    return new VtClusterSpecInsertRollingUpdateMaxSurge(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * The maximum number of pods that can be unavailable during the update.
+ * Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
+ * Absolute number is calculated from percentage by rounding down.
+ * This can not be 0 if MaxSurge is 0.
+ * Defaults to 25%.
+ * Example: when this is set to 30%, the old ReplicaSet can be scaled down to 70% of desired pods
+ * immediately when the rolling update starts. Once new pods are ready, old ReplicaSet
+ * can be scaled down further, followed by scaling up the new ReplicaSet, ensuring
+ * that the total number of pods available at all times during the update is at
+ * least 70% of desired pods.
+ *
+ * @default 25%.
+ * @schema VtClusterSpecInsertRollingUpdateMaxUnavailable
+ */
+export class VtClusterSpecInsertRollingUpdateMaxUnavailable {
+  public static fromNumber(value: number): VtClusterSpecInsertRollingUpdateMaxUnavailable {
+    return new VtClusterSpecInsertRollingUpdateMaxUnavailable(value);
+  }
+  public static fromString(value: string): VtClusterSpecInsertRollingUpdateMaxUnavailable {
+    return new VtClusterSpecInsertRollingUpdateMaxUnavailable(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * EmbeddedObjectMetadata defines objectMeta for additional service.
+ *
+ * @schema VtClusterSpecInsertServiceSpecMetadata
+ */
+export interface VtClusterSpecInsertServiceSpecMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VtClusterSpecInsertServiceSpecMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects. May match selectors of replication controllers
+   * and services.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VtClusterSpecInsertServiceSpecMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+  /**
+   * Name must be unique within a namespace. Is required when creating resources, although
+   * some resources may allow a client to request the generation of an appropriate name
+   * automatically. Name is primarily intended for creation idempotence and configuration
+   * definition.
+   * Cannot be updated.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
+   *
+   * @schema VtClusterSpecInsertServiceSpecMetadata#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecInsertServiceSpecMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecInsertServiceSpecMetadata(obj: VtClusterSpecInsertServiceSpecMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodDNSConfigOption defines DNS resolver options of a pod.
+ *
+ * @schema VtClusterSpecSelectDnsConfigOptions
+ */
+export interface VtClusterSpecSelectDnsConfigOptions {
+  /**
+   * Name is this DNS resolver option's name.
+   * Required.
+   *
+   * @schema VtClusterSpecSelectDnsConfigOptions#name
+   */
+  readonly name?: string;
+
+  /**
+   * Value is this DNS resolver option's value.
+   *
+   * @schema VtClusterSpecSelectDnsConfigOptions#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecSelectDnsConfigOptions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecSelectDnsConfigOptions(obj: VtClusterSpecSelectDnsConfigOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The ConfigMap to select from
+ *
+ * @schema VtClusterSpecSelectExtraEnvsFromConfigMapRef
+ */
+export interface VtClusterSpecSelectExtraEnvsFromConfigMapRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VtClusterSpecSelectExtraEnvsFromConfigMapRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap must be defined
+   *
+   * @schema VtClusterSpecSelectExtraEnvsFromConfigMapRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecSelectExtraEnvsFromConfigMapRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecSelectExtraEnvsFromConfigMapRef(obj: VtClusterSpecSelectExtraEnvsFromConfigMapRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The Secret to select from
+ *
+ * @schema VtClusterSpecSelectExtraEnvsFromSecretRef
+ */
+export interface VtClusterSpecSelectExtraEnvsFromSecretRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VtClusterSpecSelectExtraEnvsFromSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret must be defined
+   *
+   * @schema VtClusterSpecSelectExtraEnvsFromSecretRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecSelectExtraEnvsFromSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecSelectExtraEnvsFromSecretRef(obj: VtClusterSpecSelectExtraEnvsFromSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * An eviction is allowed if at most "maxUnavailable" pods selected by
+ * "selector" are unavailable after the eviction, i.e. even in absence of
+ * the evicted pod. For example, one can prevent all voluntary evictions
+ * by specifying 0. This is a mutually exclusive setting with "minAvailable".
+ *
+ * @schema VtClusterSpecSelectPodDisruptionBudgetMaxUnavailable
+ */
+export class VtClusterSpecSelectPodDisruptionBudgetMaxUnavailable {
+  public static fromNumber(value: number): VtClusterSpecSelectPodDisruptionBudgetMaxUnavailable {
+    return new VtClusterSpecSelectPodDisruptionBudgetMaxUnavailable(value);
+  }
+  public static fromString(value: string): VtClusterSpecSelectPodDisruptionBudgetMaxUnavailable {
+    return new VtClusterSpecSelectPodDisruptionBudgetMaxUnavailable(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * An eviction is allowed if at least "minAvailable" pods selected by
+ * "selector" will still be available after the eviction, i.e. even in the
+ * absence of the evicted pod.  So for example you can prevent all voluntary
+ * evictions by specifying "100%".
+ *
+ * @schema VtClusterSpecSelectPodDisruptionBudgetMinAvailable
+ */
+export class VtClusterSpecSelectPodDisruptionBudgetMinAvailable {
+  public static fromNumber(value: number): VtClusterSpecSelectPodDisruptionBudgetMinAvailable {
+    return new VtClusterSpecSelectPodDisruptionBudgetMinAvailable(value);
+  }
+  public static fromString(value: string): VtClusterSpecSelectPodDisruptionBudgetMinAvailable {
+    return new VtClusterSpecSelectPodDisruptionBudgetMinAvailable(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * ResourceClaim references one entry in PodSpec.ResourceClaims.
+ *
+ * @schema VtClusterSpecSelectResourcesClaims
+ */
+export interface VtClusterSpecSelectResourcesClaims {
+  /**
+   * Name must match the name of one entry in pod.spec.resourceClaims of
+   * the Pod where this field is used. It makes that resource available
+   * inside a container.
+   *
+   * @schema VtClusterSpecSelectResourcesClaims#name
+   */
+  readonly name: string;
+
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VtClusterSpecSelectResourcesClaims#request
+   */
+  readonly request?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecSelectResourcesClaims' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecSelectResourcesClaims(obj: VtClusterSpecSelectResourcesClaims | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'request': obj.request,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema VtClusterSpecSelectResourcesLimits
+ */
+export class VtClusterSpecSelectResourcesLimits {
+  public static fromNumber(value: number): VtClusterSpecSelectResourcesLimits {
+    return new VtClusterSpecSelectResourcesLimits(value);
+  }
+  public static fromString(value: string): VtClusterSpecSelectResourcesLimits {
+    return new VtClusterSpecSelectResourcesLimits(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * @schema VtClusterSpecSelectResourcesRequests
+ */
+export class VtClusterSpecSelectResourcesRequests {
+  public static fromNumber(value: number): VtClusterSpecSelectResourcesRequests {
+    return new VtClusterSpecSelectResourcesRequests(value);
+  }
+  public static fromString(value: string): VtClusterSpecSelectResourcesRequests {
+    return new VtClusterSpecSelectResourcesRequests(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * The maximum number of pods that can be scheduled above the desired number of
+ * pods.
+ * Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
+ * This can not be 0 if MaxUnavailable is 0.
+ * Absolute number is calculated from percentage by rounding up.
+ * Defaults to 25%.
+ * Example: when this is set to 30%, the new ReplicaSet can be scaled up immediately when
+ * the rolling update starts, such that the total number of old and new pods do not exceed
+ * 130% of desired pods. Once old pods have been killed,
+ * new ReplicaSet can be scaled up further, ensuring that total number of pods running
+ * at any time during the update is at most 130% of desired pods.
+ *
+ * @default 25%.
+ * @schema VtClusterSpecSelectRollingUpdateMaxSurge
+ */
+export class VtClusterSpecSelectRollingUpdateMaxSurge {
+  public static fromNumber(value: number): VtClusterSpecSelectRollingUpdateMaxSurge {
+    return new VtClusterSpecSelectRollingUpdateMaxSurge(value);
+  }
+  public static fromString(value: string): VtClusterSpecSelectRollingUpdateMaxSurge {
+    return new VtClusterSpecSelectRollingUpdateMaxSurge(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * The maximum number of pods that can be unavailable during the update.
+ * Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
+ * Absolute number is calculated from percentage by rounding down.
+ * This can not be 0 if MaxSurge is 0.
+ * Defaults to 25%.
+ * Example: when this is set to 30%, the old ReplicaSet can be scaled down to 70% of desired pods
+ * immediately when the rolling update starts. Once new pods are ready, old ReplicaSet
+ * can be scaled down further, followed by scaling up the new ReplicaSet, ensuring
+ * that the total number of pods available at all times during the update is at
+ * least 70% of desired pods.
+ *
+ * @default 25%.
+ * @schema VtClusterSpecSelectRollingUpdateMaxUnavailable
+ */
+export class VtClusterSpecSelectRollingUpdateMaxUnavailable {
+  public static fromNumber(value: number): VtClusterSpecSelectRollingUpdateMaxUnavailable {
+    return new VtClusterSpecSelectRollingUpdateMaxUnavailable(value);
+  }
+  public static fromString(value: string): VtClusterSpecSelectRollingUpdateMaxUnavailable {
+    return new VtClusterSpecSelectRollingUpdateMaxUnavailable(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * EmbeddedObjectMetadata defines objectMeta for additional service.
+ *
+ * @schema VtClusterSpecSelectServiceSpecMetadata
+ */
+export interface VtClusterSpecSelectServiceSpecMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VtClusterSpecSelectServiceSpecMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects. May match selectors of replication controllers
+   * and services.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VtClusterSpecSelectServiceSpecMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+  /**
+   * Name must be unique within a namespace. Is required when creating resources, although
+   * some resources may allow a client to request the generation of an appropriate name
+   * automatically. Name is primarily intended for creation idempotence and configuration
+   * definition.
+   * Cannot be updated.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
+   *
+   * @schema VtClusterSpecSelectServiceSpecMetadata#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecSelectServiceSpecMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecSelectServiceSpecMetadata(obj: VtClusterSpecSelectServiceSpecMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodDNSConfigOption defines DNS resolver options of a pod.
+ *
+ * @schema VtClusterSpecStorageDnsConfigOptions
+ */
+export interface VtClusterSpecStorageDnsConfigOptions {
+  /**
+   * Name is this DNS resolver option's name.
+   * Required.
+   *
+   * @schema VtClusterSpecStorageDnsConfigOptions#name
+   */
+  readonly name?: string;
+
+  /**
+   * Value is this DNS resolver option's value.
+   *
+   * @schema VtClusterSpecStorageDnsConfigOptions#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageDnsConfigOptions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageDnsConfigOptions(obj: VtClusterSpecStorageDnsConfigOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The ConfigMap to select from
+ *
+ * @schema VtClusterSpecStorageExtraEnvsFromConfigMapRef
+ */
+export interface VtClusterSpecStorageExtraEnvsFromConfigMapRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VtClusterSpecStorageExtraEnvsFromConfigMapRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap must be defined
+   *
+   * @schema VtClusterSpecStorageExtraEnvsFromConfigMapRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageExtraEnvsFromConfigMapRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageExtraEnvsFromConfigMapRef(obj: VtClusterSpecStorageExtraEnvsFromConfigMapRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The Secret to select from
+ *
+ * @schema VtClusterSpecStorageExtraEnvsFromSecretRef
+ */
+export interface VtClusterSpecStorageExtraEnvsFromSecretRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VtClusterSpecStorageExtraEnvsFromSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret must be defined
+   *
+   * @schema VtClusterSpecStorageExtraEnvsFromSecretRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageExtraEnvsFromSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageExtraEnvsFromSecretRef(obj: VtClusterSpecStorageExtraEnvsFromSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * An eviction is allowed if at most "maxUnavailable" pods selected by
+ * "selector" are unavailable after the eviction, i.e. even in absence of
+ * the evicted pod. For example, one can prevent all voluntary evictions
+ * by specifying 0. This is a mutually exclusive setting with "minAvailable".
+ *
+ * @schema VtClusterSpecStoragePodDisruptionBudgetMaxUnavailable
+ */
+export class VtClusterSpecStoragePodDisruptionBudgetMaxUnavailable {
+  public static fromNumber(value: number): VtClusterSpecStoragePodDisruptionBudgetMaxUnavailable {
+    return new VtClusterSpecStoragePodDisruptionBudgetMaxUnavailable(value);
+  }
+  public static fromString(value: string): VtClusterSpecStoragePodDisruptionBudgetMaxUnavailable {
+    return new VtClusterSpecStoragePodDisruptionBudgetMaxUnavailable(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * An eviction is allowed if at least "minAvailable" pods selected by
+ * "selector" will still be available after the eviction, i.e. even in the
+ * absence of the evicted pod.  So for example you can prevent all voluntary
+ * evictions by specifying "100%".
+ *
+ * @schema VtClusterSpecStoragePodDisruptionBudgetMinAvailable
+ */
+export class VtClusterSpecStoragePodDisruptionBudgetMinAvailable {
+  public static fromNumber(value: number): VtClusterSpecStoragePodDisruptionBudgetMinAvailable {
+    return new VtClusterSpecStoragePodDisruptionBudgetMinAvailable(value);
+  }
+  public static fromString(value: string): VtClusterSpecStoragePodDisruptionBudgetMinAvailable {
+    return new VtClusterSpecStoragePodDisruptionBudgetMinAvailable(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * ResourceClaim references one entry in PodSpec.ResourceClaims.
+ *
+ * @schema VtClusterSpecStorageResourcesClaims
+ */
+export interface VtClusterSpecStorageResourcesClaims {
+  /**
+   * Name must match the name of one entry in pod.spec.resourceClaims of
+   * the Pod where this field is used. It makes that resource available
+   * inside a container.
+   *
+   * @schema VtClusterSpecStorageResourcesClaims#name
+   */
+  readonly name: string;
+
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VtClusterSpecStorageResourcesClaims#request
+   */
+  readonly request?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageResourcesClaims' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageResourcesClaims(obj: VtClusterSpecStorageResourcesClaims | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'request': obj.request,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema VtClusterSpecStorageResourcesLimits
+ */
+export class VtClusterSpecStorageResourcesLimits {
+  public static fromNumber(value: number): VtClusterSpecStorageResourcesLimits {
+    return new VtClusterSpecStorageResourcesLimits(value);
+  }
+  public static fromString(value: string): VtClusterSpecStorageResourcesLimits {
+    return new VtClusterSpecStorageResourcesLimits(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * @schema VtClusterSpecStorageResourcesRequests
+ */
+export class VtClusterSpecStorageResourcesRequests {
+  public static fromNumber(value: number): VtClusterSpecStorageResourcesRequests {
+    return new VtClusterSpecStorageResourcesRequests(value);
+  }
+  public static fromString(value: string): VtClusterSpecStorageResourcesRequests {
+    return new VtClusterSpecStorageResourcesRequests(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * MaxUnavailable defines the maximum number of pods that can be unavailable during the update.
+ * It can be specified as an absolute number (e.g. 2) or a percentage of the total pods (e.g. "50%").
+ * For example, if set to 100%, all pods will be upgraded at once, minimizing downtime when needed.
+ *
+ * @schema VtClusterSpecStorageRollingUpdateStrategyBehaviorMaxUnavailable
+ */
+export class VtClusterSpecStorageRollingUpdateStrategyBehaviorMaxUnavailable {
+  public static fromNumber(value: number): VtClusterSpecStorageRollingUpdateStrategyBehaviorMaxUnavailable {
+    return new VtClusterSpecStorageRollingUpdateStrategyBehaviorMaxUnavailable(value);
+  }
+  public static fromString(value: string): VtClusterSpecStorageRollingUpdateStrategyBehaviorMaxUnavailable {
+    return new VtClusterSpecStorageRollingUpdateStrategyBehaviorMaxUnavailable(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * EmbeddedObjectMetadata defines objectMeta for additional service.
+ *
+ * @schema VtClusterSpecStorageServiceSpecMetadata
+ */
+export interface VtClusterSpecStorageServiceSpecMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VtClusterSpecStorageServiceSpecMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects. May match selectors of replication controllers
+   * and services.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VtClusterSpecStorageServiceSpecMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+  /**
+   * Name must be unique within a namespace. Is required when creating resources, although
+   * some resources may allow a client to request the generation of an appropriate name
+   * automatically. Name is primarily intended for creation idempotence and configuration
+   * definition.
+   * Cannot be updated.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
+   *
+   * @schema VtClusterSpecStorageServiceSpecMetadata#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageServiceSpecMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageServiceSpecMetadata(obj: VtClusterSpecStorageServiceSpecMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EmptyDirVolumeSource to be used by the Prometheus StatefulSets. If specified, used in place of any volumeClaimTemplate. More
+ * info: https://kubernetes.io/docs/concepts/storage/volumes/#emptydir
+ *
+ * @schema VtClusterSpecStorageStorageEmptyDir
+ */
+export interface VtClusterSpecStorageStorageEmptyDir {
+  /**
+   * medium represents what type of storage medium should back this directory.
+   * The default is "" which means to use the node's default medium.
+   * Must be an empty string (default) or Memory.
+   * More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
+   *
+   * @schema VtClusterSpecStorageStorageEmptyDir#medium
+   */
+  readonly medium?: string;
+
+  /**
+   * sizeLimit is the total amount of local storage required for this EmptyDir volume.
+   * The size limit is also applicable for memory medium.
+   * The maximum usage on memory medium EmptyDir would be the minimum value between
+   * the SizeLimit specified here and the sum of memory limits of all containers in a pod.
+   * The default is nil which means that the limit is undefined.
+   * More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
+   *
+   * @schema VtClusterSpecStorageStorageEmptyDir#sizeLimit
+   */
+  readonly sizeLimit?: VtClusterSpecStorageStorageEmptyDirSizeLimit;
+
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageStorageEmptyDir' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageStorageEmptyDir(obj: VtClusterSpecStorageStorageEmptyDir | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'medium': obj.medium,
+    'sizeLimit': obj.sizeLimit?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * sizeLimit is the total amount of local storage required for this EmptyDir volume.
+ * The size limit is also applicable for memory medium.
+ * The maximum usage on memory medium EmptyDir would be the minimum value between
+ * the SizeLimit specified here and the sum of memory limits of all containers in a pod.
+ * The default is nil which means that the limit is undefined.
+ * More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
+ *
+ * @schema VtClusterSpecStorageStorageEmptyDirSizeLimit
+ */
+export class VtClusterSpecStorageStorageEmptyDirSizeLimit {
+  public static fromNumber(value: number): VtClusterSpecStorageStorageEmptyDirSizeLimit {
+    return new VtClusterSpecStorageStorageEmptyDirSizeLimit(value);
+  }
+  public static fromString(value: string): VtClusterSpecStorageStorageEmptyDirSizeLimit {
+    return new VtClusterSpecStorageStorageEmptyDirSizeLimit(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+
+/**
+ * VTSingle is fast, cost-effective and scalable traces database.
+VTSingle is the Schema for the API
+ *
+ * @schema VTSingle
+ */
+export class VtSingle extends ApiObject {
+  /**
+   * Returns the apiVersion and kind for "VTSingle"
+   */
+  public static readonly GVK: GroupVersionKind = {
+    apiVersion: 'operator.victoriametrics.com/v1',
+    kind: 'VTSingle',
+  }
+
+  /**
+   * Renders a Kubernetes manifest for "VTSingle".
+   *
+   * This can be used to inline resource manifests inside other objects (e.g. as templates).
+   *
+   * @param props initialization props
+   */
+  public static manifest(props: VtSingleProps = {}): any {
+    return {
+      ...VtSingle.GVK,
+      ...toJson_VtSingleProps(props),
+    };
+  }
+
+  /**
+   * Defines a "VTSingle" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialization props
+   */
+  public constructor(scope: Construct, id: string, props: VtSingleProps = {}) {
+    super(scope, id, {
+      ...VtSingle.GVK,
+      ...props,
+    });
+  }
+
+  /**
+   * Renders the object to Kubernetes JSON.
+   */
+  public override toJson(): any {
+    const resolved = super.toJson();
+
+    return {
+      ...VtSingle.GVK,
+      ...toJson_VtSingleProps(resolved),
+    };
+  }
+}
+
+/**
+ * VTSingle is fast, cost-effective and scalable traces database.
+ * VTSingle is the Schema for the API
+ *
+ * @schema VTSingle
+ */
+export interface VtSingleProps {
+  /**
+   * @schema VTSingle#metadata
+   */
+  readonly metadata?: ApiObjectMetadata;
+
+  /**
+   * VTSingleSpec defines the desired state of VTSingle
+   *
+   * @schema VTSingle#spec
+   */
+  readonly spec?: VtSingleSpec;
+
+}
+
+/**
+ * Converts an object of type 'VtSingleProps' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleProps(obj: VtSingleProps | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': obj.metadata,
+    'spec': toJson_VtSingleSpec(obj.spec),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * VTSingleSpec defines the desired state of VTSingle
+ *
+ * @schema VtSingleSpec
+ */
+export interface VtSingleSpec {
+  /**
+   * Affinity If specified, the pod's scheduling constraints.
+   *
+   * @schema VtSingleSpec#affinity
+   */
+  readonly affinity?: any;
+
+  /**
+   * ConfigMaps is a list of ConfigMaps in the same namespace as the Application
+   * object, which shall be mounted into the Application container
+   * at /etc/vm/configs/CONFIGMAP_NAME folder
+   *
+   * @schema VtSingleSpec#configMaps
+   */
+  readonly configMaps?: string[];
+
+  /**
+   * Containers property allows to inject additions sidecars or to patch existing containers.
+   * It can be useful for proxies, backup, etc.
+   *
+   * @schema VtSingleSpec#containers
+   */
+  readonly containers?: any[];
+
+  /**
+   * DisableAutomountServiceAccountToken whether to disable serviceAccount auto mount by Kubernetes (available from v0.54.0).
+   * Operator will conditionally create volumes and volumeMounts for containers if it requires k8s API access.
+   * For example, vmagent and vm-config-reloader requires k8s API access.
+   * Operator creates volumes with name: "kube-api-access", which can be used as volumeMount for extraContainers if needed.
+   * And also adds VolumeMounts at /var/run/secrets/kubernetes.io/serviceaccount.
+   *
+   * @schema VtSingleSpec#disableAutomountServiceAccountToken
+   */
+  readonly disableAutomountServiceAccountToken?: boolean;
+
+  /**
+   * DisableSelfServiceScrape controls creation of VMServiceScrape by operator
+   * for the application.
+   * Has priority over `VM_DISABLESELFSERVICESCRAPECREATION` operator env variable
+   *
+   * @schema VtSingleSpec#disableSelfServiceScrape
+   */
+  readonly disableSelfServiceScrape?: boolean;
+
+  /**
+   * Specifies the DNS parameters of a pod.
+   * Parameters specified here will be merged to the generated DNS
+   * configuration based on DNSPolicy.
+   *
+   * @schema VtSingleSpec#dnsConfig
+   */
+  readonly dnsConfig?: VtSingleSpecDnsConfig;
+
+  /**
+   * DNSPolicy sets DNS policy for the pod
+   *
+   * @schema VtSingleSpec#dnsPolicy
+   */
+  readonly dnsPolicy?: string;
+
+  /**
+   * ExtraArgs that will be passed to the application container
+   * for example remoteWrite.tmpDataPath: /tmp
+   *
+   * @schema VtSingleSpec#extraArgs
+   */
+  readonly extraArgs?: { [key: string]: string };
+
+  /**
+   * ExtraEnvs that will be passed to the application container
+   *
+   * @schema VtSingleSpec#extraEnvs
+   */
+  readonly extraEnvs?: VtSingleSpecExtraEnvs[];
+
+  /**
+   * ExtraEnvsFrom defines source of env variables for the application container
+   * could either be secret or configmap
+   *
+   * @schema VtSingleSpec#extraEnvsFrom
+   */
+  readonly extraEnvsFrom?: VtSingleSpecExtraEnvsFrom[];
+
+  /**
+   * FutureRetention for the stored traces
+   * Log entries with timestamps bigger than now+futureRetention are rejected during data ingestion;
+   * see https://docs.victoriametrics.com/victoriatraces/#configure-and-run-victoriatraces
+   *
+   * @schema VtSingleSpec#futureRetention
+   */
+  readonly futureRetention?: string;
+
+  /**
+   * HostAliases provides mapping for ip and hostname,
+   * that would be propagated to pod,
+   * cannot be used with HostNetwork.
+   *
+   * @schema VtSingleSpec#hostAliases
+   */
+  readonly hostAliases?: VtSingleSpecHostAliases[];
+
+  /**
+   * HostNetwork controls whether the pod may use the node network namespace
+   *
+   * @schema VtSingleSpec#hostNetwork
+   */
+  readonly hostNetwork?: boolean;
+
+  /**
+   * Image - docker image settings
+   * if no specified operator uses default version from operator config
+   *
+   * @schema VtSingleSpec#image
+   */
+  readonly image?: VtSingleSpecImage;
+
+  /**
+   * ImagePullSecrets An optional list of references to secrets in the same namespace
+   * to use for pulling images from registries
+   * see https://kubernetes.io/docs/concepts/containers/images/#referring-to-an-imagepullsecrets-on-a-pod
+   *
+   * @schema VtSingleSpec#imagePullSecrets
+   */
+  readonly imagePullSecrets?: VtSingleSpecImagePullSecrets[];
+
+  /**
+   * InitContainers allows adding initContainers to the pod definition.
+   * Any errors during the execution of an initContainer will lead to a restart of the Pod.
+   * More info: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+   *
+   * @schema VtSingleSpec#initContainers
+   */
+  readonly initContainers?: any[];
+
+  /**
+   * LivenessProbe that will be added CRD pod
+   *
+   * @schema VtSingleSpec#livenessProbe
+   */
+  readonly livenessProbe?: any;
+
+  /**
+   * LogFormat for VTSingle to be configured with.
+   *
+   * @schema VtSingleSpec#logFormat
+   */
+  readonly logFormat?: VtSingleSpecLogFormat;
+
+  /**
+   * Whether to log all the ingested log entries; this can be useful for debugging of data ingestion;
+   * see https://docs.victoriametrics.com/victoriatraces/#configure-and-run-victoriatraces
+   *
+   * @schema VtSingleSpec#logIngestedRows
+   */
+  readonly logIngestedRows?: boolean;
+
+  /**
+   * LogLevel for VictoriaTraces to be configured with.
+   *
+   * @schema VtSingleSpec#logLevel
+   */
+  readonly logLevel?: VtSingleSpecLogLevel;
+
+  /**
+   * LogNewStreams Whether to log creation of new streams; this can be useful for debugging of high cardinality issues with log streams;
+   * see https://docs.victoriametrics.com/victoriatraces/#configure-and-run-victoriatraces
+   *
+   * @schema VtSingleSpec#logNewStreams
+   */
+  readonly logNewStreams?: boolean;
+
+  /**
+   * ManagedMetadata defines metadata that will be added to the all objects
+   * created by operator for the given CustomResource
+   *
+   * @schema VtSingleSpec#managedMetadata
+   */
+  readonly managedMetadata?: VtSingleSpecManagedMetadata;
+
+  /**
+   * MinReadySeconds defines a minimum number of seconds to wait before starting update next pod
+   * if previous in healthy state
+   * Has no effect for VLogs and VMSingle
+   *
+   * @schema VtSingleSpec#minReadySeconds
+   */
+  readonly minReadySeconds?: number;
+
+  /**
+   * NodeSelector Define which Nodes the Pods are scheduled on.
+   *
+   * @schema VtSingleSpec#nodeSelector
+   */
+  readonly nodeSelector?: { [key: string]: string };
+
+  /**
+   * Paused If set to true all actions on the underlying managed objects are not
+   * going to be performed, except for delete actions.
+   *
+   * @schema VtSingleSpec#paused
+   */
+  readonly paused?: boolean;
+
+  /**
+   * PodMetadata configures Labels and Annotations which are propagated to the VTSingle pods.
+   *
+   * @schema VtSingleSpec#podMetadata
+   */
+  readonly podMetadata?: VtSingleSpecPodMetadata;
+
+  /**
+   * Port listen address
+   *
+   * @schema VtSingleSpec#port
+   */
+  readonly port?: string;
+
+  /**
+   * PriorityClassName class assigned to the Pods
+   *
+   * @schema VtSingleSpec#priorityClassName
+   */
+  readonly priorityClassName?: string;
+
+  /**
+   * ReadinessGates defines pod readiness gates
+   *
+   * @schema VtSingleSpec#readinessGates
+   */
+  readonly readinessGates?: VtSingleSpecReadinessGates[];
+
+  /**
+   * ReadinessProbe that will be added CRD pod
+   *
+   * @schema VtSingleSpec#readinessProbe
+   */
+  readonly readinessProbe?: any;
+
+  /**
+   * ReplicaCount is the expected size of the Application.
+   *
+   * @schema VtSingleSpec#replicaCount
+   */
+  readonly replicaCount?: number;
+
+  /**
+   * Resources container resource request and limits, https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   * if not defined default resources from operator config will be used
+   *
+   * @schema VtSingleSpec#resources
+   */
+  readonly resources?: VtSingleSpecResources;
+
+  /**
+   * RetentionMaxDiskSpaceUsageBytes for the stored traces
+   * VictoriaTraces keeps at least two last days of data in order to guarantee that the traces for the last day can be returned in queries.
+   * This means that the total disk space usage may exceed the -retention.maxDiskSpaceUsageBytes,
+   * if the size of the last two days of data exceeds the -retention.maxDiskSpaceUsageBytes.
+   * https://docs.victoriametrics.com/victoriatraces/#configure-and-run-victoriatraces
+   *
+   * @schema VtSingleSpec#retentionMaxDiskSpaceUsageBytes
+   */
+  readonly retentionMaxDiskSpaceUsageBytes?: string;
+
+  /**
+   * RetentionPeriod for the stored traces
+   * https://docs.victoriametrics.com/victoriatraces/#configure-and-run-victoriatraces
+   *
+   * @schema VtSingleSpec#retentionPeriod
+   */
+  readonly retentionPeriod?: string;
+
+  /**
+   * The number of old ReplicaSets to retain to allow rollback in deployment or
+   * maximum number of revisions that will be maintained in the Deployment revision history.
+   * Has no effect at StatefulSets
+   * Defaults to 10.
+   *
+   * @default 10.
+   * @schema VtSingleSpec#revisionHistoryLimitCount
+   */
+  readonly revisionHistoryLimitCount?: number;
+
+  /**
+   * RuntimeClassName - defines runtime class for kubernetes pod.
+   * https://kubernetes.io/docs/concepts/containers/runtime-class/
+   *
+   * @schema VtSingleSpec#runtimeClassName
+   */
+  readonly runtimeClassName?: string;
+
+  /**
+   * SchedulerName - defines kubernetes scheduler name
+   *
+   * @schema VtSingleSpec#schedulerName
+   */
+  readonly schedulerName?: string;
+
+  /**
+   * Secrets is a list of Secrets in the same namespace as the Application
+   * object, which shall be mounted into the Application container
+   * at /etc/vm/secrets/SECRET_NAME folder
+   *
+   * @schema VtSingleSpec#secrets
+   */
+  readonly secrets?: string[];
+
+  /**
+   * SecurityContext holds pod-level security attributes and common container settings.
+   * This defaults to the default PodSecurityContext.
+   *
+   * @schema VtSingleSpec#securityContext
+   */
+  readonly securityContext?: any;
+
+  /**
+   * ServiceAccountName is the name of the ServiceAccount to use to run the pods
+   *
+   * @schema VtSingleSpec#serviceAccountName
+   */
+  readonly serviceAccountName?: string;
+
+  /**
+   * ServiceScrapeSpec that will be added to vtsingle VMServiceScrape spec
+   *
+   * @schema VtSingleSpec#serviceScrapeSpec
+   */
+  readonly serviceScrapeSpec?: any;
+
+  /**
+   * ServiceSpec that will be added to vtsingle service spec
+   *
+   * @schema VtSingleSpec#serviceSpec
+   */
+  readonly serviceSpec?: VtSingleSpecServiceSpec;
+
+  /**
+   * StartupProbe that will be added to CRD pod
+   *
+   * @schema VtSingleSpec#startupProbe
+   */
+  readonly startupProbe?: any;
+
+  /**
+   * Storage is the definition of how storage will be used by the VTSingle
+   * by default it`s empty dir
+   *
+   * @schema VtSingleSpec#storage
+   */
+  readonly storage?: VtSingleSpecStorage;
+
+  /**
+   * StorageDataPath disables spec.storage option and overrides arg for victoria-traces binary --storageDataPath,
+   * its users responsibility to mount proper device into given path.
+   *
+   * @schema VtSingleSpec#storageDataPath
+   */
+  readonly storageDataPath?: string;
+
+  /**
+   * StorageMeta defines annotations and labels attached to PVC for given vtsingle CR
+   *
+   * @schema VtSingleSpec#storageMetadata
+   */
+  readonly storageMetadata?: VtSingleSpecStorageMetadata;
+
+  /**
+   * TerminationGracePeriodSeconds period for container graceful termination
+   *
+   * @schema VtSingleSpec#terminationGracePeriodSeconds
+   */
+  readonly terminationGracePeriodSeconds?: number;
+
+  /**
+   * Tolerations If specified, the pod's tolerations.
+   *
+   * @schema VtSingleSpec#tolerations
+   */
+  readonly tolerations?: VtSingleSpecTolerations[];
+
+  /**
+   * TopologySpreadConstraints embedded kubernetes pod configuration option,
+   * controls how pods are spread across your cluster among failure-domains
+   * such as regions, zones, nodes, and other user-defined topology domains
+   * https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
+   *
+   * @schema VtSingleSpec#topologySpreadConstraints
+   */
+  readonly topologySpreadConstraints?: any[];
+
+  /**
+   * UseDefaultResources controls resource settings
+   * By default, operator sets built-in resource requirements
+   *
+   * @schema VtSingleSpec#useDefaultResources
+   */
+  readonly useDefaultResources?: boolean;
+
+  /**
+   * UseStrictSecurity enables strict security mode for component
+   * it restricts disk writes access
+   * uses non-root user out of the box
+   * drops not needed security permissions
+   *
+   * @schema VtSingleSpec#useStrictSecurity
+   */
+  readonly useStrictSecurity?: boolean;
+
+  /**
+   * VolumeMounts allows configuration of additional VolumeMounts on the output Deployment/StatefulSet definition.
+   * VolumeMounts specified will be appended to other VolumeMounts in the Application container
+   *
+   * @schema VtSingleSpec#volumeMounts
+   */
+  readonly volumeMounts?: VtSingleSpecVolumeMounts[];
+
+  /**
+   * Volumes allows configuration of additional volumes on the output Deployment/StatefulSet definition.
+   * Volumes specified will be appended to other volumes that are generated.
+   * / +optional
+   *
+   * @schema VtSingleSpec#volumes
+   */
+  readonly volumes?: any[];
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpec' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpec(obj: VtSingleSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'affinity': obj.affinity,
+    'configMaps': obj.configMaps?.map(y => y),
+    'containers': obj.containers?.map(y => y),
+    'disableAutomountServiceAccountToken': obj.disableAutomountServiceAccountToken,
+    'disableSelfServiceScrape': obj.disableSelfServiceScrape,
+    'dnsConfig': toJson_VtSingleSpecDnsConfig(obj.dnsConfig),
+    'dnsPolicy': obj.dnsPolicy,
+    'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'extraEnvs': obj.extraEnvs?.map(y => toJson_VtSingleSpecExtraEnvs(y)),
+    'extraEnvsFrom': obj.extraEnvsFrom?.map(y => toJson_VtSingleSpecExtraEnvsFrom(y)),
+    'futureRetention': obj.futureRetention,
+    'hostAliases': obj.hostAliases?.map(y => toJson_VtSingleSpecHostAliases(y)),
+    'hostNetwork': obj.hostNetwork,
+    'image': toJson_VtSingleSpecImage(obj.image),
+    'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VtSingleSpecImagePullSecrets(y)),
+    'initContainers': obj.initContainers?.map(y => y),
+    'livenessProbe': obj.livenessProbe,
+    'logFormat': obj.logFormat,
+    'logIngestedRows': obj.logIngestedRows,
+    'logLevel': obj.logLevel,
+    'logNewStreams': obj.logNewStreams,
+    'managedMetadata': toJson_VtSingleSpecManagedMetadata(obj.managedMetadata),
+    'minReadySeconds': obj.minReadySeconds,
+    'nodeSelector': ((obj.nodeSelector) === undefined) ? undefined : (Object.entries(obj.nodeSelector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'paused': obj.paused,
+    'podMetadata': toJson_VtSingleSpecPodMetadata(obj.podMetadata),
+    'port': obj.port,
+    'priorityClassName': obj.priorityClassName,
+    'readinessGates': obj.readinessGates?.map(y => toJson_VtSingleSpecReadinessGates(y)),
+    'readinessProbe': obj.readinessProbe,
+    'replicaCount': obj.replicaCount,
+    'resources': toJson_VtSingleSpecResources(obj.resources),
+    'retentionMaxDiskSpaceUsageBytes': obj.retentionMaxDiskSpaceUsageBytes,
+    'retentionPeriod': obj.retentionPeriod,
+    'revisionHistoryLimitCount': obj.revisionHistoryLimitCount,
+    'runtimeClassName': obj.runtimeClassName,
+    'schedulerName': obj.schedulerName,
+    'secrets': obj.secrets?.map(y => y),
+    'securityContext': obj.securityContext,
+    'serviceAccountName': obj.serviceAccountName,
+    'serviceScrapeSpec': obj.serviceScrapeSpec,
+    'serviceSpec': toJson_VtSingleSpecServiceSpec(obj.serviceSpec),
+    'startupProbe': obj.startupProbe,
+    'storage': toJson_VtSingleSpecStorage(obj.storage),
+    'storageDataPath': obj.storageDataPath,
+    'storageMetadata': toJson_VtSingleSpecStorageMetadata(obj.storageMetadata),
+    'terminationGracePeriodSeconds': obj.terminationGracePeriodSeconds,
+    'tolerations': obj.tolerations?.map(y => toJson_VtSingleSpecTolerations(y)),
+    'topologySpreadConstraints': obj.topologySpreadConstraints?.map(y => y),
+    'useDefaultResources': obj.useDefaultResources,
+    'useStrictSecurity': obj.useStrictSecurity,
+    'volumeMounts': obj.volumeMounts?.map(y => toJson_VtSingleSpecVolumeMounts(y)),
+    'volumes': obj.volumes?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Specifies the DNS parameters of a pod.
+ * Parameters specified here will be merged to the generated DNS
+ * configuration based on DNSPolicy.
+ *
+ * @schema VtSingleSpecDnsConfig
+ */
+export interface VtSingleSpecDnsConfig {
+  /**
+   * A list of DNS name server IP addresses.
+   * This will be appended to the base nameservers generated from DNSPolicy.
+   * Duplicated nameservers will be removed.
+   *
+   * @schema VtSingleSpecDnsConfig#nameservers
+   */
+  readonly nameservers?: string[];
+
+  /**
+   * A list of DNS resolver options.
+   * This will be merged with the base options generated from DNSPolicy.
+   * Duplicated entries will be removed. Resolution options given in Options
+   * will override those that appear in the base DNSPolicy.
+   *
+   * @schema VtSingleSpecDnsConfig#options
+   */
+  readonly options?: VtSingleSpecDnsConfigOptions[];
+
+  /**
+   * A list of DNS search domains for host-name lookup.
+   * This will be appended to the base search paths generated from DNSPolicy.
+   * Duplicated search paths will be removed.
+   *
+   * @schema VtSingleSpecDnsConfig#searches
+   */
+  readonly searches?: string[];
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecDnsConfig' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecDnsConfig(obj: VtSingleSpecDnsConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'nameservers': obj.nameservers?.map(y => y),
+    'options': obj.options?.map(y => toJson_VtSingleSpecDnsConfigOptions(y)),
+    'searches': obj.searches?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvVar represents an environment variable present in a Container.
+ *
+ * @schema VtSingleSpecExtraEnvs
+ */
+export interface VtSingleSpecExtraEnvs {
+  /**
+   * Name of the environment variable. Must be a C_IDENTIFIER.
+   *
+   * @schema VtSingleSpecExtraEnvs#name
+   */
+  readonly name: string;
+
+  /**
+   * Variable references $(VAR_NAME) are expanded
+   * using the previously defined environment variables in the container and
+   * any service environment variables. If a variable cannot be resolved,
+   * the reference in the input string will be unchanged. Double $$ are reduced
+   * to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e.
+   * "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)".
+   * Escaped references will never be expanded, regardless of whether the variable
+   * exists or not.
+   * Defaults to "".
+   *
+   * @default .
+   * @schema VtSingleSpecExtraEnvs#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecExtraEnvs' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecExtraEnvs(obj: VtSingleSpecExtraEnvs | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvFromSource represents the source of a set of ConfigMaps
+ *
+ * @schema VtSingleSpecExtraEnvsFrom
+ */
+export interface VtSingleSpecExtraEnvsFrom {
+  /**
+   * The ConfigMap to select from
+   *
+   * @schema VtSingleSpecExtraEnvsFrom#configMapRef
+   */
+  readonly configMapRef?: VtSingleSpecExtraEnvsFromConfigMapRef;
+
+  /**
+   * An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+   *
+   * @schema VtSingleSpecExtraEnvsFrom#prefix
+   */
+  readonly prefix?: string;
+
+  /**
+   * The Secret to select from
+   *
+   * @schema VtSingleSpecExtraEnvsFrom#secretRef
+   */
+  readonly secretRef?: VtSingleSpecExtraEnvsFromSecretRef;
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecExtraEnvsFrom' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecExtraEnvsFrom(obj: VtSingleSpecExtraEnvsFrom | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'configMapRef': toJson_VtSingleSpecExtraEnvsFromConfigMapRef(obj.configMapRef),
+    'prefix': obj.prefix,
+    'secretRef': toJson_VtSingleSpecExtraEnvsFromSecretRef(obj.secretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * HostAlias holds the mapping between IP and hostnames that will be injected as an entry in the
+ * pod's hosts file.
+ *
+ * @schema VtSingleSpecHostAliases
+ */
+export interface VtSingleSpecHostAliases {
+  /**
+   * Hostnames for the above IP address.
+   *
+   * @schema VtSingleSpecHostAliases#hostnames
+   */
+  readonly hostnames?: string[];
+
+  /**
+   * IP address of the host file entry.
+   *
+   * @schema VtSingleSpecHostAliases#ip
+   */
+  readonly ip: string;
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecHostAliases' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecHostAliases(obj: VtSingleSpecHostAliases | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'hostnames': obj.hostnames?.map(y => y),
+    'ip': obj.ip,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Image - docker image settings
+ * if no specified operator uses default version from operator config
+ *
+ * @schema VtSingleSpecImage
+ */
+export interface VtSingleSpecImage {
+  /**
+   * PullPolicy describes how to pull docker image
+   *
+   * @schema VtSingleSpecImage#pullPolicy
+   */
+  readonly pullPolicy?: string;
+
+  /**
+   * Repository contains name of docker image + it's repository if needed
+   *
+   * @schema VtSingleSpecImage#repository
+   */
+  readonly repository?: string;
+
+  /**
+   * Tag contains desired docker image version
+   *
+   * @schema VtSingleSpecImage#tag
+   */
+  readonly tag?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecImage' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecImage(obj: VtSingleSpecImage | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'pullPolicy': obj.pullPolicy,
+    'repository': obj.repository,
+    'tag': obj.tag,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LocalObjectReference contains enough information to let you locate the
+ * referenced object inside the same namespace.
+ *
+ * @schema VtSingleSpecImagePullSecrets
+ */
+export interface VtSingleSpecImagePullSecrets {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VtSingleSpecImagePullSecrets#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecImagePullSecrets' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecImagePullSecrets(obj: VtSingleSpecImagePullSecrets | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LogFormat for VTSingle to be configured with.
+ *
+ * @schema VtSingleSpecLogFormat
+ */
+export enum VtSingleSpecLogFormat {
+  /** default */
+  DEFAULT = "default",
+  /** json */
+  JSON = "json",
+}
+
+/**
+ * LogLevel for VictoriaTraces to be configured with.
+ *
+ * @schema VtSingleSpecLogLevel
+ */
+export enum VtSingleSpecLogLevel {
+  /** INFO */
+  INFO = "INFO",
+  /** WARN */
+  WARN = "WARN",
+  /** ERROR */
+  ERROR = "ERROR",
+  /** FATAL */
+  FATAL = "FATAL",
+  /** PANIC */
+  PANIC = "PANIC",
+}
+
+/**
+ * ManagedMetadata defines metadata that will be added to the all objects
+ * created by operator for the given CustomResource
+ *
+ * @schema VtSingleSpecManagedMetadata
+ */
+export interface VtSingleSpecManagedMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VtSingleSpecManagedMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VtSingleSpecManagedMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecManagedMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecManagedMetadata(obj: VtSingleSpecManagedMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodMetadata configures Labels and Annotations which are propagated to the VTSingle pods.
+ *
+ * @schema VtSingleSpecPodMetadata
+ */
+export interface VtSingleSpecPodMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VtSingleSpecPodMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects. May match selectors of replication controllers
+   * and services.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VtSingleSpecPodMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+  /**
+   * Name must be unique within a namespace. Is required when creating resources, although
+   * some resources may allow a client to request the generation of an appropriate name
+   * automatically. Name is primarily intended for creation idempotence and configuration
+   * definition.
+   * Cannot be updated.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
+   *
+   * @schema VtSingleSpecPodMetadata#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecPodMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecPodMetadata(obj: VtSingleSpecPodMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodReadinessGate contains the reference to a pod condition
+ *
+ * @schema VtSingleSpecReadinessGates
+ */
+export interface VtSingleSpecReadinessGates {
+  /**
+   * ConditionType refers to a condition in the pod's condition list with matching type.
+   *
+   * @schema VtSingleSpecReadinessGates#conditionType
+   */
+  readonly conditionType: string;
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecReadinessGates' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecReadinessGates(obj: VtSingleSpecReadinessGates | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'conditionType': obj.conditionType,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Resources container resource request and limits, https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+ * if not defined default resources from operator config will be used
+ *
+ * @schema VtSingleSpecResources
+ */
+export interface VtSingleSpecResources {
+  /**
+   * Claims lists the names of resources, defined in spec.resourceClaims,
+   * that are used by this container.
+   *
+   * This is an alpha field and requires enabling the
+   * DynamicResourceAllocation feature gate.
+   *
+   * This field is immutable. It can only be set for containers.
+   *
+   * @schema VtSingleSpecResources#claims
+   */
+  readonly claims?: VtSingleSpecResourcesClaims[];
+
+  /**
+   * Limits describes the maximum amount of compute resources allowed.
+   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   *
+   * @schema VtSingleSpecResources#limits
+   */
+  readonly limits?: { [key: string]: VtSingleSpecResourcesLimits };
+
+  /**
+   * Requests describes the minimum amount of compute resources required.
+   * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+   * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   *
+   * @schema VtSingleSpecResources#requests
+   */
+  readonly requests?: { [key: string]: VtSingleSpecResourcesRequests };
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecResources' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecResources(obj: VtSingleSpecResources | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'claims': obj.claims?.map(y => toJson_VtSingleSpecResourcesClaims(y)),
+    'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+    'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ServiceSpec that will be added to vtsingle service spec
+ *
+ * @schema VtSingleSpecServiceSpec
+ */
+export interface VtSingleSpecServiceSpec {
+  /**
+   * EmbeddedObjectMetadata defines objectMeta for additional service.
+   *
+   * @schema VtSingleSpecServiceSpec#metadata
+   */
+  readonly metadata?: VtSingleSpecServiceSpecMetadata;
+
+  /**
+   * ServiceSpec describes the attributes that a user creates on a service.
+   * More info: https://kubernetes.io/docs/concepts/services-networking/service/
+   *
+   * @schema VtSingleSpecServiceSpec#spec
+   */
+  readonly spec: any;
+
+  /**
+   * UseAsDefault applies changes from given service definition to the main object Service
+   * Changing from headless service to clusterIP or loadbalancer may break cross-component communication
+   *
+   * @schema VtSingleSpecServiceSpec#useAsDefault
+   */
+  readonly useAsDefault?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecServiceSpec' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecServiceSpec(obj: VtSingleSpecServiceSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': toJson_VtSingleSpecServiceSpecMetadata(obj.metadata),
+    'spec': obj.spec,
+    'useAsDefault': obj.useAsDefault,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Storage is the definition of how storage will be used by the VTSingle
+ * by default it`s empty dir
+ *
+ * @schema VtSingleSpecStorage
+ */
+export interface VtSingleSpecStorage {
+  /**
+   * accessModes contains the desired access modes the volume should have.
+   * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1
+   *
+   * @schema VtSingleSpecStorage#accessModes
+   */
+  readonly accessModes?: string[];
+
+  /**
+   * dataSource field can be used to specify either:
+   * * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot)
+   * * An existing PVC (PersistentVolumeClaim)
+   * If the provisioner or an external controller can support the specified data source,
+   * it will create a new volume based on the contents of the specified data source.
+   * When the AnyVolumeDataSource feature gate is enabled, dataSource contents will be copied to dataSourceRef,
+   * and dataSourceRef contents will be copied to dataSource when dataSourceRef.namespace is not specified.
+   * If the namespace is specified, then dataSourceRef will not be copied to dataSource.
+   *
+   * @schema VtSingleSpecStorage#dataSource
+   */
+  readonly dataSource?: VtSingleSpecStorageDataSource;
+
+  /**
+   * dataSourceRef specifies the object from which to populate the volume with data, if a non-empty
+   * volume is desired. This may be any object from a non-empty API group (non
+   * core object) or a PersistentVolumeClaim object.
+   * When this field is specified, volume binding will only succeed if the type of
+   * the specified object matches some installed volume populator or dynamic
+   * provisioner.
+   * This field will replace the functionality of the dataSource field and as such
+   * if both fields are non-empty, they must have the same value. For backwards
+   * compatibility, when namespace isn't specified in dataSourceRef,
+   * both fields (dataSource and dataSourceRef) will be set to the same
+   * value automatically if one of them is empty and the other is non-empty.
+   * When namespace is specified in dataSourceRef,
+   * dataSource isn't set to the same value and must be empty.
+   * There are three important differences between dataSource and dataSourceRef:
+   * * While dataSource only allows two specific types of objects, dataSourceRef
+   * allows any non-core object, as well as PersistentVolumeClaim objects.
+   * * While dataSource ignores disallowed values (dropping them), dataSourceRef
+   * preserves all values, and generates an error if a disallowed value is
+   * specified.
+   * * While dataSource only allows local objects, dataSourceRef allows objects
+   * in any namespaces.
+   * (Beta) Using this field requires the AnyVolumeDataSource feature gate to be enabled.
+   * (Alpha) Using the namespace field of dataSourceRef requires the CrossNamespaceVolumeDataSource feature gate to be enabled.
+   *
+   * @schema VtSingleSpecStorage#dataSourceRef
+   */
+  readonly dataSourceRef?: VtSingleSpecStorageDataSourceRef;
+
+  /**
+   * resources represents the minimum resources the volume should have.
+   * If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements
+   * that are lower than previous value but must still be higher than capacity recorded in the
+   * status field of the claim.
+   * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
+   *
+   * @schema VtSingleSpecStorage#resources
+   */
+  readonly resources?: VtSingleSpecStorageResources;
+
+  /**
+   * selector is a label query over volumes to consider for binding.
+   *
+   * @schema VtSingleSpecStorage#selector
+   */
+  readonly selector?: VtSingleSpecStorageSelector;
+
+  /**
+   * storageClassName is the name of the StorageClass required by the claim.
+   * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1
+   *
+   * @schema VtSingleSpecStorage#storageClassName
+   */
+  readonly storageClassName?: string;
+
+  /**
+   * volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim.
+   * If specified, the CSI driver will create or update the volume with the attributes defined
+   * in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName,
+   * it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass
+   * will be applied to the claim but it's not allowed to reset this field to empty string once it is set.
+   * If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass
+   * will be set by the persistentvolume controller if it exists.
+   * If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be
+   * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
+   * exists.
+   * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
+   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
+   *
+   * @schema VtSingleSpecStorage#volumeAttributesClassName
+   */
+  readonly volumeAttributesClassName?: string;
+
+  /**
+   * volumeMode defines what type of volume is required by the claim.
+   * Value of Filesystem is implied when not included in claim spec.
+   *
+   * @schema VtSingleSpecStorage#volumeMode
+   */
+  readonly volumeMode?: string;
+
+  /**
+   * volumeName is the binding reference to the PersistentVolume backing this claim.
+   *
+   * @schema VtSingleSpecStorage#volumeName
+   */
+  readonly volumeName?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecStorage' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecStorage(obj: VtSingleSpecStorage | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'accessModes': obj.accessModes?.map(y => y),
+    'dataSource': toJson_VtSingleSpecStorageDataSource(obj.dataSource),
+    'dataSourceRef': toJson_VtSingleSpecStorageDataSourceRef(obj.dataSourceRef),
+    'resources': toJson_VtSingleSpecStorageResources(obj.resources),
+    'selector': toJson_VtSingleSpecStorageSelector(obj.selector),
+    'storageClassName': obj.storageClassName,
+    'volumeAttributesClassName': obj.volumeAttributesClassName,
+    'volumeMode': obj.volumeMode,
+    'volumeName': obj.volumeName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * StorageMeta defines annotations and labels attached to PVC for given vtsingle CR
+ *
+ * @schema VtSingleSpecStorageMetadata
+ */
+export interface VtSingleSpecStorageMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VtSingleSpecStorageMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects. May match selectors of replication controllers
+   * and services.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VtSingleSpecStorageMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+  /**
+   * Name must be unique within a namespace. Is required when creating resources, although
+   * some resources may allow a client to request the generation of an appropriate name
+   * automatically. Name is primarily intended for creation idempotence and configuration
+   * definition.
+   * Cannot be updated.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
+   *
+   * @schema VtSingleSpecStorageMetadata#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecStorageMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecStorageMetadata(obj: VtSingleSpecStorageMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The pod this Toleration is attached to tolerates any taint that matches
+ * the triple <key,value,effect> using the matching operator <operator>.
+ *
+ * @schema VtSingleSpecTolerations
+ */
+export interface VtSingleSpecTolerations {
+  /**
+   * Effect indicates the taint effect to match. Empty means match all taint effects.
+   * When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+   *
+   * @schema VtSingleSpecTolerations#effect
+   */
+  readonly effect?: string;
+
+  /**
+   * Key is the taint key that the toleration applies to. Empty means match all taint keys.
+   * If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+   *
+   * @schema VtSingleSpecTolerations#key
+   */
+  readonly key?: string;
+
+  /**
+   * Operator represents a key's relationship to the value.
+   * Valid operators are Exists and Equal. Defaults to Equal.
+   * Exists is equivalent to wildcard for value, so that a pod can
+   * tolerate all taints of a particular category.
+   *
+   * @default Equal.
+   * @schema VtSingleSpecTolerations#operator
+   */
+  readonly operator?: string;
+
+  /**
+   * TolerationSeconds represents the period of time the toleration (which must be
+   * of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default,
+   * it is not set, which means tolerate the taint forever (do not evict). Zero and
+   * negative values will be treated as 0 (evict immediately) by the system.
+   *
+   * @schema VtSingleSpecTolerations#tolerationSeconds
+   */
+  readonly tolerationSeconds?: number;
+
+  /**
+   * Value is the taint value the toleration matches to.
+   * If the operator is Exists, the value should be empty, otherwise just a regular string.
+   *
+   * @schema VtSingleSpecTolerations#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecTolerations' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecTolerations(obj: VtSingleSpecTolerations | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'effect': obj.effect,
+    'key': obj.key,
+    'operator': obj.operator,
+    'tolerationSeconds': obj.tolerationSeconds,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * VolumeMount describes a mounting of a Volume within a container.
+ *
+ * @schema VtSingleSpecVolumeMounts
+ */
+export interface VtSingleSpecVolumeMounts {
+  /**
+   * Path within the container at which the volume should be mounted.  Must
+   * not contain ':'.
+   *
+   * @schema VtSingleSpecVolumeMounts#mountPath
+   */
+  readonly mountPath: string;
+
+  /**
+   * mountPropagation determines how mounts are propagated from the host
+   * to container and the other way around.
+   * When not set, MountPropagationNone is used.
+   * This field is beta in 1.10.
+   * When RecursiveReadOnly is set to IfPossible or to Enabled, MountPropagation must be None or unspecified
+   * (which defaults to None).
+   *
+   * @schema VtSingleSpecVolumeMounts#mountPropagation
+   */
+  readonly mountPropagation?: string;
+
+  /**
+   * This must match the Name of a Volume.
+   *
+   * @schema VtSingleSpecVolumeMounts#name
+   */
+  readonly name: string;
+
+  /**
+   * Mounted read-only if true, read-write otherwise (false or unspecified).
+   * Defaults to false.
+   *
+   * @default false.
+   * @schema VtSingleSpecVolumeMounts#readOnly
+   */
+  readonly readOnly?: boolean;
+
+  /**
+   * RecursiveReadOnly specifies whether read-only mounts should be handled
+   * recursively.
+   *
+   * If ReadOnly is false, this field has no meaning and must be unspecified.
+   *
+   * If ReadOnly is true, and this field is set to Disabled, the mount is not made
+   * recursively read-only.  If this field is set to IfPossible, the mount is made
+   * recursively read-only, if it is supported by the container runtime.  If this
+   * field is set to Enabled, the mount is made recursively read-only if it is
+   * supported by the container runtime, otherwise the pod will not be started and
+   * an error will be generated to indicate the reason.
+   *
+   * If this field is set to IfPossible or Enabled, MountPropagation must be set to
+   * None (or be unspecified, which defaults to None).
+   *
+   * If this field is not specified, it is treated as an equivalent of Disabled.
+   *
+   * @schema VtSingleSpecVolumeMounts#recursiveReadOnly
+   */
+  readonly recursiveReadOnly?: string;
+
+  /**
+   * Path within the volume from which the container's volume should be mounted.
+   * Defaults to "" (volume's root).
+   *
+   * @default volume's root).
+   * @schema VtSingleSpecVolumeMounts#subPath
+   */
+  readonly subPath?: string;
+
+  /**
+   * Expanded path within the volume from which the container's volume should be mounted.
+   * Behaves similarly to SubPath but environment variable references $(VAR_NAME) are expanded using the container's environment.
+   * Defaults to "" (volume's root).
+   * SubPathExpr and SubPath are mutually exclusive.
+   *
+   * @default volume's root).
+   * @schema VtSingleSpecVolumeMounts#subPathExpr
+   */
+  readonly subPathExpr?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecVolumeMounts' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecVolumeMounts(obj: VtSingleSpecVolumeMounts | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'mountPath': obj.mountPath,
+    'mountPropagation': obj.mountPropagation,
+    'name': obj.name,
+    'readOnly': obj.readOnly,
+    'recursiveReadOnly': obj.recursiveReadOnly,
+    'subPath': obj.subPath,
+    'subPathExpr': obj.subPathExpr,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * PodDNSConfigOption defines DNS resolver options of a pod.
+ *
+ * @schema VtSingleSpecDnsConfigOptions
+ */
+export interface VtSingleSpecDnsConfigOptions {
+  /**
+   * Name is this DNS resolver option's name.
+   * Required.
+   *
+   * @schema VtSingleSpecDnsConfigOptions#name
+   */
+  readonly name?: string;
+
+  /**
+   * Value is this DNS resolver option's value.
+   *
+   * @schema VtSingleSpecDnsConfigOptions#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecDnsConfigOptions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecDnsConfigOptions(obj: VtSingleSpecDnsConfigOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The ConfigMap to select from
+ *
+ * @schema VtSingleSpecExtraEnvsFromConfigMapRef
+ */
+export interface VtSingleSpecExtraEnvsFromConfigMapRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VtSingleSpecExtraEnvsFromConfigMapRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the ConfigMap must be defined
+   *
+   * @schema VtSingleSpecExtraEnvsFromConfigMapRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecExtraEnvsFromConfigMapRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecExtraEnvsFromConfigMapRef(obj: VtSingleSpecExtraEnvsFromConfigMapRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The Secret to select from
+ *
+ * @schema VtSingleSpecExtraEnvsFromSecretRef
+ */
+export interface VtSingleSpecExtraEnvsFromSecretRef {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VtSingleSpecExtraEnvsFromSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret must be defined
+   *
+   * @schema VtSingleSpecExtraEnvsFromSecretRef#optional
+   */
+  readonly optional?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecExtraEnvsFromSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecExtraEnvsFromSecretRef(obj: VtSingleSpecExtraEnvsFromSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ResourceClaim references one entry in PodSpec.ResourceClaims.
+ *
+ * @schema VtSingleSpecResourcesClaims
+ */
+export interface VtSingleSpecResourcesClaims {
+  /**
+   * Name must match the name of one entry in pod.spec.resourceClaims of
+   * the Pod where this field is used. It makes that resource available
+   * inside a container.
+   *
+   * @schema VtSingleSpecResourcesClaims#name
+   */
+  readonly name: string;
+
+  /**
+   * Request is the name chosen for a request in the referenced claim.
+   * If empty, everything from the claim is made available, otherwise
+   * only the result of this request.
+   *
+   * @schema VtSingleSpecResourcesClaims#request
+   */
+  readonly request?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecResourcesClaims' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecResourcesClaims(obj: VtSingleSpecResourcesClaims | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'request': obj.request,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema VtSingleSpecResourcesLimits
+ */
+export class VtSingleSpecResourcesLimits {
+  public static fromNumber(value: number): VtSingleSpecResourcesLimits {
+    return new VtSingleSpecResourcesLimits(value);
+  }
+  public static fromString(value: string): VtSingleSpecResourcesLimits {
+    return new VtSingleSpecResourcesLimits(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * @schema VtSingleSpecResourcesRequests
+ */
+export class VtSingleSpecResourcesRequests {
+  public static fromNumber(value: number): VtSingleSpecResourcesRequests {
+    return new VtSingleSpecResourcesRequests(value);
+  }
+  public static fromString(value: string): VtSingleSpecResourcesRequests {
+    return new VtSingleSpecResourcesRequests(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * EmbeddedObjectMetadata defines objectMeta for additional service.
+ *
+ * @schema VtSingleSpecServiceSpecMetadata
+ */
+export interface VtSingleSpecServiceSpecMetadata {
+  /**
+   * Annotations is an unstructured key value map stored with a resource that may be
+   * set by external tools to store and retrieve arbitrary metadata. They are not
+   * queryable and should be preserved when modifying objects.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+   *
+   * @schema VtSingleSpecServiceSpecMetadata#annotations
+   */
+  readonly annotations?: { [key: string]: string };
+
+  /**
+   * Labels Map of string keys and values that can be used to organize and categorize
+   * (scope and select) objects. May match selectors of replication controllers
+   * and services.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+   *
+   * @schema VtSingleSpecServiceSpecMetadata#labels
+   */
+  readonly labels?: { [key: string]: string };
+
+  /**
+   * Name must be unique within a namespace. Is required when creating resources, although
+   * some resources may allow a client to request the generation of an appropriate name
+   * automatically. Name is primarily intended for creation idempotence and configuration
+   * definition.
+   * Cannot be updated.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
+   *
+   * @schema VtSingleSpecServiceSpecMetadata#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecServiceSpecMetadata' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecServiceSpecMetadata(obj: VtSingleSpecServiceSpecMetadata | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * dataSource field can be used to specify either:
+ * * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot)
+ * * An existing PVC (PersistentVolumeClaim)
+ * If the provisioner or an external controller can support the specified data source,
+ * it will create a new volume based on the contents of the specified data source.
+ * When the AnyVolumeDataSource feature gate is enabled, dataSource contents will be copied to dataSourceRef,
+ * and dataSourceRef contents will be copied to dataSource when dataSourceRef.namespace is not specified.
+ * If the namespace is specified, then dataSourceRef will not be copied to dataSource.
+ *
+ * @schema VtSingleSpecStorageDataSource
+ */
+export interface VtSingleSpecStorageDataSource {
+  /**
+   * APIGroup is the group for the resource being referenced.
+   * If APIGroup is not specified, the specified Kind must be in the core API group.
+   * For any other third-party types, APIGroup is required.
+   *
+   * @schema VtSingleSpecStorageDataSource#apiGroup
+   */
+  readonly apiGroup?: string;
+
+  /**
+   * Kind is the type of resource being referenced
+   *
+   * @schema VtSingleSpecStorageDataSource#kind
+   */
+  readonly kind: string;
+
+  /**
+   * Name is the name of resource being referenced
+   *
+   * @schema VtSingleSpecStorageDataSource#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecStorageDataSource' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecStorageDataSource(obj: VtSingleSpecStorageDataSource | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apiGroup': obj.apiGroup,
+    'kind': obj.kind,
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * dataSourceRef specifies the object from which to populate the volume with data, if a non-empty
+ * volume is desired. This may be any object from a non-empty API group (non
+ * core object) or a PersistentVolumeClaim object.
+ * When this field is specified, volume binding will only succeed if the type of
+ * the specified object matches some installed volume populator or dynamic
+ * provisioner.
+ * This field will replace the functionality of the dataSource field and as such
+ * if both fields are non-empty, they must have the same value. For backwards
+ * compatibility, when namespace isn't specified in dataSourceRef,
+ * both fields (dataSource and dataSourceRef) will be set to the same
+ * value automatically if one of them is empty and the other is non-empty.
+ * When namespace is specified in dataSourceRef,
+ * dataSource isn't set to the same value and must be empty.
+ * There are three important differences between dataSource and dataSourceRef:
+ * * While dataSource only allows two specific types of objects, dataSourceRef
+ * allows any non-core object, as well as PersistentVolumeClaim objects.
+ * * While dataSource ignores disallowed values (dropping them), dataSourceRef
+ * preserves all values, and generates an error if a disallowed value is
+ * specified.
+ * * While dataSource only allows local objects, dataSourceRef allows objects
+ * in any namespaces.
+ * (Beta) Using this field requires the AnyVolumeDataSource feature gate to be enabled.
+ * (Alpha) Using the namespace field of dataSourceRef requires the CrossNamespaceVolumeDataSource feature gate to be enabled.
+ *
+ * @schema VtSingleSpecStorageDataSourceRef
+ */
+export interface VtSingleSpecStorageDataSourceRef {
+  /**
+   * APIGroup is the group for the resource being referenced.
+   * If APIGroup is not specified, the specified Kind must be in the core API group.
+   * For any other third-party types, APIGroup is required.
+   *
+   * @schema VtSingleSpecStorageDataSourceRef#apiGroup
+   */
+  readonly apiGroup?: string;
+
+  /**
+   * Kind is the type of resource being referenced
+   *
+   * @schema VtSingleSpecStorageDataSourceRef#kind
+   */
+  readonly kind: string;
+
+  /**
+   * Name is the name of resource being referenced
+   *
+   * @schema VtSingleSpecStorageDataSourceRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace is the namespace of resource being referenced
+   * Note that when a namespace is specified, a gateway.networking.k8s.io/ReferenceGrant object is required in the referent namespace to allow that namespace's owner to accept the reference. See the ReferenceGrant documentation for details.
+   * (Alpha) This field requires the CrossNamespaceVolumeDataSource feature gate to be enabled.
+   *
+   * @schema VtSingleSpecStorageDataSourceRef#namespace
+   */
+  readonly namespace?: string;
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecStorageDataSourceRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecStorageDataSourceRef(obj: VtSingleSpecStorageDataSourceRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apiGroup': obj.apiGroup,
+    'kind': obj.kind,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * resources represents the minimum resources the volume should have.
+ * If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements
+ * that are lower than previous value but must still be higher than capacity recorded in the
+ * status field of the claim.
+ * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
+ *
+ * @schema VtSingleSpecStorageResources
+ */
+export interface VtSingleSpecStorageResources {
+  /**
+   * Limits describes the maximum amount of compute resources allowed.
+   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   *
+   * @schema VtSingleSpecStorageResources#limits
+   */
+  readonly limits?: { [key: string]: VtSingleSpecStorageResourcesLimits };
+
+  /**
+   * Requests describes the minimum amount of compute resources required.
+   * If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+   * otherwise to an implementation-defined value. Requests cannot exceed Limits.
+   * More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+   *
+   * @schema VtSingleSpecStorageResources#requests
+   */
+  readonly requests?: { [key: string]: VtSingleSpecStorageResourcesRequests };
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecStorageResources' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecStorageResources(obj: VtSingleSpecStorageResources | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+    'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * selector is a label query over volumes to consider for binding.
+ *
+ * @schema VtSingleSpecStorageSelector
+ */
+export interface VtSingleSpecStorageSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema VtSingleSpecStorageSelector#matchExpressions
+   */
+  readonly matchExpressions?: VtSingleSpecStorageSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema VtSingleSpecStorageSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecStorageSelector' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecStorageSelector(obj: VtSingleSpecStorageSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_VtSingleSpecStorageSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema VtSingleSpecStorageResourcesLimits
+ */
+export class VtSingleSpecStorageResourcesLimits {
+  public static fromNumber(value: number): VtSingleSpecStorageResourcesLimits {
+    return new VtSingleSpecStorageResourcesLimits(value);
+  }
+  public static fromString(value: string): VtSingleSpecStorageResourcesLimits {
+    return new VtSingleSpecStorageResourcesLimits(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * @schema VtSingleSpecStorageResourcesRequests
+ */
+export class VtSingleSpecStorageResourcesRequests {
+  public static fromNumber(value: number): VtSingleSpecStorageResourcesRequests {
+    return new VtSingleSpecStorageResourcesRequests(value);
+  }
+  public static fromString(value: string): VtSingleSpecStorageResourcesRequests {
+    return new VtSingleSpecStorageResourcesRequests(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema VtSingleSpecStorageSelectorMatchExpressions
+ */
+export interface VtSingleSpecStorageSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema VtSingleSpecStorageSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema VtSingleSpecStorageSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema VtSingleSpecStorageSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'VtSingleSpecStorageSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtSingleSpecStorageSelectorMatchExpressions(obj: VtSingleSpecStorageSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});

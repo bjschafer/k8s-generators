@@ -5216,6 +5216,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -5224,6 +5225,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -5267,6 +5269,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -5275,6 +5278,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -5318,6 +5322,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -5326,6 +5331,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -5369,6 +5375,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -5377,6 +5384,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -5420,6 +5428,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly matchExpressions?: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -5463,6 +5472,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly matchExpressions?: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -5503,6 +5513,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -5511,6 +5522,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -5553,6 +5565,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -5561,6 +5574,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -5603,6 +5617,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly matchExpressions?: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -5646,6 +5661,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly matchExpressions?: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -5686,6 +5702,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -5694,6 +5711,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -5736,6 +5754,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -5744,6 +5763,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -5786,6 +5806,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -5794,6 +5815,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -5837,6 +5859,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -5845,6 +5868,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -5888,6 +5912,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -5896,6 +5921,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -5939,6 +5965,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -5947,6 +5974,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -5990,6 +6018,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
   readonly matchExpressions?: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -6033,6 +6062,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
   readonly matchExpressions?: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -6073,6 +6103,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -6081,6 +6112,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -6123,6 +6155,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -6131,6 +6164,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -6173,6 +6207,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
   readonly matchExpressions?: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -6216,6 +6251,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
   readonly matchExpressions?: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -6256,6 +6292,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -6264,6 +6301,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -6306,6 +6344,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -6314,6 +6353,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -6342,6 +6382,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -6356,6 +6397,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -6364,6 +6406,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -6392,6 +6435,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -6406,6 +6450,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -6414,6 +6459,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -6442,6 +6488,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -6456,6 +6503,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -6464,6 +6512,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -6492,6 +6541,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -6506,6 +6556,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -6514,6 +6565,7 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -6542,6 +6594,7 @@ export function toJson_ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -6556,6 +6609,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -6564,6 +6618,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -6592,6 +6647,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -6606,6 +6662,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -6614,6 +6671,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -6642,6 +6700,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -6656,6 +6715,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -6664,6 +6724,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -6692,6 +6753,7 @@ export function toJson_ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPo
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -6706,6 +6768,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -6714,6 +6777,7 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic

@@ -7378,6 +7378,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
  */
 export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm {
   /**
+   *
    * A label query over a set of resources, in this case pods.
    * If it's null, this PodAffinityTerm matches with no Pods.
    *
@@ -7416,6 +7417,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly mismatchLabelKeys?: string[];
 
   /**
+   *
    * A label query over the set of namespaces that the term applies to.
    * The term is applied to the union of the namespaces selected by this field
    * and the ones listed in the namespaces field.
@@ -7427,6 +7429,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly namespaceSelector?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector;
 
   /**
+   *
    * namespaces specifies a static list of namespace names that the term applies to.
    * The term is applied to the union of the namespaces listed in this field
    * and the ones selected by namespaceSelector.
@@ -7437,6 +7440,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly namespaces?: string[];
 
   /**
+   *
    * This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
    * the labelSelector in the specified namespaces, where co-located is defined as running on a node
    * whose value of the label with key topologyKey matches that of any node on which any of the
@@ -7483,6 +7487,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -7526,6 +7531,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -7558,6 +7564,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
  */
 export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm {
   /**
+   *
    * A label query over a set of resources, in this case pods.
    * If it's null, this PodAffinityTerm matches with no Pods.
    *
@@ -7596,6 +7603,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly mismatchLabelKeys?: string[];
 
   /**
+   *
    * A label query over the set of namespaces that the term applies to.
    * The term is applied to the union of the namespaces selected by this field
    * and the ones listed in the namespaces field.
@@ -7607,6 +7615,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly namespaceSelector?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector;
 
   /**
+   *
    * namespaces specifies a static list of namespace names that the term applies to.
    * The term is applied to the union of the namespaces listed in this field
    * and the ones selected by namespaceSelector.
@@ -7617,6 +7626,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly namespaces?: string[];
 
   /**
+   *
    * This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
    * the labelSelector in the specified namespaces, where co-located is defined as running on a node
    * whose value of the label with key topologyKey matches that of any node on which any of the
@@ -7663,6 +7673,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -7706,6 +7717,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -7814,6 +7826,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
  */
 export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm {
   /**
+   *
    * A label query over a set of resources, in this case pods.
    * If it's null, this PodAffinityTerm matches with no Pods.
    *
@@ -7852,6 +7865,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly mismatchLabelKeys?: string[];
 
   /**
+   *
    * A label query over the set of namespaces that the term applies to.
    * The term is applied to the union of the namespaces selected by this field
    * and the ones listed in the namespaces field.
@@ -7863,6 +7877,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly namespaceSelector?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector;
 
   /**
+   *
    * namespaces specifies a static list of namespace names that the term applies to.
    * The term is applied to the union of the namespaces listed in this field
    * and the ones selected by namespaceSelector.
@@ -7873,6 +7888,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly namespaces?: string[];
 
   /**
+   *
    * This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
    * the labelSelector in the specified namespaces, where co-located is defined as running on a node
    * whose value of the label with key topologyKey matches that of any node on which any of the
@@ -7919,6 +7935,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -7962,6 +7979,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -7994,6 +8012,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
  */
 export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm {
   /**
+   *
    * A label query over a set of resources, in this case pods.
    * If it's null, this PodAffinityTerm matches with no Pods.
    *
@@ -8032,6 +8051,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly mismatchLabelKeys?: string[];
 
   /**
+   *
    * A label query over the set of namespaces that the term applies to.
    * The term is applied to the union of the namespaces selected by this field
    * and the ones listed in the namespaces field.
@@ -8043,6 +8063,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly namespaceSelector?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector;
 
   /**
+   *
    * namespaces specifies a static list of namespace names that the term applies to.
    * The term is applied to the union of the namespaces listed in this field
    * and the ones selected by namespaceSelector.
@@ -8053,6 +8074,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly namespaces?: string[];
 
   /**
+   *
    * This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
    * the labelSelector in the specified namespaces, where co-located is defined as running on a node
    * whose value of the label with key topologyKey matches that of any node on which any of the
@@ -8099,6 +8121,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -8142,6 +8165,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -8168,6 +8192,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A node selector requirement is a selector that contains values, a key, and an operator
  * that relates the key and values.
  *
@@ -8182,6 +8207,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -8190,6 +8216,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -8219,6 +8246,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A node selector requirement is a selector that contains values, a key, and an operator
  * that relates the key and values.
  *
@@ -8233,6 +8261,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -8241,6 +8270,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -8270,6 +8300,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A node selector requirement is a selector that contains values, a key, and an operator
  * that relates the key and values.
  *
@@ -8284,6 +8315,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -8292,6 +8324,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -8321,6 +8354,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A node selector requirement is a selector that contains values, a key, and an operator
  * that relates the key and values.
  *
@@ -8335,6 +8369,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -8343,6 +8378,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -8372,6 +8408,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label query over a set of resources, in this case pods.
  * If it's null, this PodAffinityTerm matches with no Pods.
  *
@@ -8386,6 +8423,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -8412,6 +8450,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label query over the set of namespaces that the term applies to.
  * The term is applied to the union of the namespaces selected by this field
  * and the ones listed in the namespaces field.
@@ -8429,6 +8468,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -8455,6 +8495,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -8469,6 +8510,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -8477,6 +8519,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -8505,6 +8548,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -8519,6 +8563,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -8527,6 +8572,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -8555,6 +8601,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label query over a set of resources, in this case pods.
  * If it's null, this PodAffinityTerm matches with no Pods.
  *
@@ -8569,6 +8616,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -8595,6 +8643,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label query over the set of namespaces that the term applies to.
  * The term is applied to the union of the namespaces selected by this field
  * and the ones listed in the namespaces field.
@@ -8612,6 +8661,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -8638,6 +8688,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -8652,6 +8703,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -8660,6 +8712,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -8688,6 +8741,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -8702,6 +8756,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -8710,6 +8765,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -8738,6 +8794,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A node selector requirement is a selector that contains values, a key, and an operator
  * that relates the key and values.
  *
@@ -8752,6 +8809,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -8760,6 +8818,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -8789,6 +8848,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A node selector requirement is a selector that contains values, a key, and an operator
  * that relates the key and values.
  *
@@ -8803,6 +8863,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -8811,6 +8872,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -8840,6 +8902,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A node selector requirement is a selector that contains values, a key, and an operator
  * that relates the key and values.
  *
@@ -8854,6 +8917,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -8862,6 +8926,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -8891,6 +8956,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A node selector requirement is a selector that contains values, a key, and an operator
  * that relates the key and values.
  *
@@ -8905,6 +8971,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -8913,6 +8980,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -8942,6 +9010,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label query over a set of resources, in this case pods.
  * If it's null, this PodAffinityTerm matches with no Pods.
  *
@@ -8956,6 +9025,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -8982,6 +9052,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label query over the set of namespaces that the term applies to.
  * The term is applied to the union of the namespaces selected by this field
  * and the ones listed in the namespaces field.
@@ -8999,6 +9070,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -9025,6 +9097,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -9039,6 +9112,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -9047,6 +9121,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -9075,6 +9150,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -9089,6 +9165,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -9097,6 +9174,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -9125,6 +9203,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label query over a set of resources, in this case pods.
  * If it's null, this PodAffinityTerm matches with no Pods.
  *
@@ -9139,6 +9218,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -9165,6 +9245,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label query over the set of namespaces that the term applies to.
  * The term is applied to the union of the namespaces selected by this field
  * and the ones listed in the namespaces field.
@@ -9182,6 +9263,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly matchExpressions?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -9208,6 +9290,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -9222,6 +9305,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -9230,6 +9314,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -9258,6 +9343,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -9272,6 +9358,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -9280,6 +9367,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -9308,6 +9396,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -9330,6 +9419,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -9358,6 +9448,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -9380,6 +9471,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -9408,6 +9500,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -9430,6 +9523,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -9458,6 +9552,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -9480,6 +9575,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -9508,6 +9604,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -9530,6 +9627,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -9558,6 +9656,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -9580,6 +9679,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -9608,6 +9708,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -9630,6 +9731,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -9658,6 +9760,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -9680,6 +9783,7 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -15340,6 +15444,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
  */
 export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm {
   /**
+   *
    * A label query over a set of resources, in this case pods.
    * If it's null, this PodAffinityTerm matches with no Pods.
    *
@@ -15378,6 +15483,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly mismatchLabelKeys?: string[];
 
   /**
+   *
    * A label query over the set of namespaces that the term applies to.
    * The term is applied to the union of the namespaces selected by this field
    * and the ones listed in the namespaces field.
@@ -15389,6 +15495,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly namespaceSelector?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector;
 
   /**
+   *
    * namespaces specifies a static list of namespace names that the term applies to.
    * The term is applied to the union of the namespaces listed in this field
    * and the ones selected by namespaceSelector.
@@ -15399,6 +15506,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly namespaces?: string[];
 
   /**
+   *
    * This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
    * the labelSelector in the specified namespaces, where co-located is defined as running on a node
    * whose value of the label with key topologyKey matches that of any node on which any of the
@@ -15445,6 +15553,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly matchExpressions?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -15488,6 +15597,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly matchExpressions?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -15520,6 +15630,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
  */
 export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm {
   /**
+   *
    * A label query over a set of resources, in this case pods.
    * If it's null, this PodAffinityTerm matches with no Pods.
    *
@@ -15558,6 +15669,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly mismatchLabelKeys?: string[];
 
   /**
+   *
    * A label query over the set of namespaces that the term applies to.
    * The term is applied to the union of the namespaces selected by this field
    * and the ones listed in the namespaces field.
@@ -15569,6 +15681,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly namespaceSelector?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector;
 
   /**
+   *
    * namespaces specifies a static list of namespace names that the term applies to.
    * The term is applied to the union of the namespaces listed in this field
    * and the ones selected by namespaceSelector.
@@ -15579,6 +15692,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly namespaces?: string[];
 
   /**
+   *
    * This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
    * the labelSelector in the specified namespaces, where co-located is defined as running on a node
    * whose value of the label with key topologyKey matches that of any node on which any of the
@@ -15625,6 +15739,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly matchExpressions?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -15668,6 +15783,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly matchExpressions?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -15776,6 +15892,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
  */
 export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm {
   /**
+   *
    * A label query over a set of resources, in this case pods.
    * If it's null, this PodAffinityTerm matches with no Pods.
    *
@@ -15814,6 +15931,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
   readonly mismatchLabelKeys?: string[];
 
   /**
+   *
    * A label query over the set of namespaces that the term applies to.
    * The term is applied to the union of the namespaces selected by this field
    * and the ones listed in the namespaces field.
@@ -15825,6 +15943,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
   readonly namespaceSelector?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector;
 
   /**
+   *
    * namespaces specifies a static list of namespace names that the term applies to.
    * The term is applied to the union of the namespaces listed in this field
    * and the ones selected by namespaceSelector.
@@ -15835,6 +15954,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
   readonly namespaces?: string[];
 
   /**
+   *
    * This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
    * the labelSelector in the specified namespaces, where co-located is defined as running on a node
    * whose value of the label with key topologyKey matches that of any node on which any of the
@@ -15881,6 +16001,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
   readonly matchExpressions?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -15924,6 +16045,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
   readonly matchExpressions?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -15956,6 +16078,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
  */
 export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm {
   /**
+   *
    * A label query over a set of resources, in this case pods.
    * If it's null, this PodAffinityTerm matches with no Pods.
    *
@@ -15994,6 +16117,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
   readonly mismatchLabelKeys?: string[];
 
   /**
+   *
    * A label query over the set of namespaces that the term applies to.
    * The term is applied to the union of the namespaces selected by this field
    * and the ones listed in the namespaces field.
@@ -16005,6 +16129,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
   readonly namespaceSelector?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector;
 
   /**
+   *
    * namespaces specifies a static list of namespace names that the term applies to.
    * The term is applied to the union of the namespaces listed in this field
    * and the ones selected by namespaceSelector.
@@ -16015,6 +16140,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
   readonly namespaces?: string[];
 
   /**
+   *
    * This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
    * the labelSelector in the specified namespaces, where co-located is defined as running on a node
    * whose value of the label with key topologyKey matches that of any node on which any of the
@@ -16061,6 +16187,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
   readonly matchExpressions?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -16104,6 +16231,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
   readonly matchExpressions?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -16130,6 +16258,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A node selector requirement is a selector that contains values, a key, and an operator
  * that relates the key and values.
  *
@@ -16144,6 +16273,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -16152,6 +16282,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -16181,6 +16312,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A node selector requirement is a selector that contains values, a key, and an operator
  * that relates the key and values.
  *
@@ -16195,6 +16327,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -16203,6 +16336,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -16232,6 +16366,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A node selector requirement is a selector that contains values, a key, and an operator
  * that relates the key and values.
  *
@@ -16246,6 +16381,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -16254,6 +16390,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -16283,6 +16420,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A node selector requirement is a selector that contains values, a key, and an operator
  * that relates the key and values.
  *
@@ -16297,6 +16435,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -16305,6 +16444,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -16334,6 +16474,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label query over a set of resources, in this case pods.
  * If it's null, this PodAffinityTerm matches with no Pods.
  *
@@ -16348,6 +16489,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly matchExpressions?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -16374,6 +16516,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label query over the set of namespaces that the term applies to.
  * The term is applied to the union of the namespaces selected by this field
  * and the ones listed in the namespaces field.
@@ -16391,6 +16534,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly matchExpressions?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -16417,6 +16561,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -16431,6 +16576,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -16439,6 +16585,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -16467,6 +16614,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -16481,6 +16629,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -16489,6 +16638,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -16517,6 +16667,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label query over a set of resources, in this case pods.
  * If it's null, this PodAffinityTerm matches with no Pods.
  *
@@ -16531,6 +16682,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly matchExpressions?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -16557,6 +16709,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label query over the set of namespaces that the term applies to.
  * The term is applied to the union of the namespaces selected by this field
  * and the ones listed in the namespaces field.
@@ -16574,6 +16727,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly matchExpressions?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -16600,6 +16754,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -16614,6 +16769,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -16622,6 +16778,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -16650,6 +16807,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -16664,6 +16822,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -16672,6 +16831,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -16700,6 +16860,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A node selector requirement is a selector that contains values, a key, and an operator
  * that relates the key and values.
  *
@@ -16714,6 +16875,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -16722,6 +16884,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -16751,6 +16914,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A node selector requirement is a selector that contains values, a key, and an operator
  * that relates the key and values.
  *
@@ -16765,6 +16929,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -16773,6 +16938,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -16802,6 +16968,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A node selector requirement is a selector that contains values, a key, and an operator
  * that relates the key and values.
  *
@@ -16816,6 +16983,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -16824,6 +16992,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -16853,6 +17022,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A node selector requirement is a selector that contains values, a key, and an operator
  * that relates the key and values.
  *
@@ -16867,6 +17037,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
   readonly key: string;
 
   /**
+   *
    * Represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
    *
@@ -16875,6 +17046,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
   readonly operator: string;
 
   /**
+   *
    * An array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. If the operator is Gt or Lt, the values
@@ -16904,6 +17076,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label query over a set of resources, in this case pods.
  * If it's null, this PodAffinityTerm matches with no Pods.
  *
@@ -16918,6 +17091,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
   readonly matchExpressions?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -16944,6 +17118,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label query over the set of namespaces that the term applies to.
  * The term is applied to the union of the namespaces selected by this field
  * and the ones listed in the namespaces field.
@@ -16961,6 +17136,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
   readonly matchExpressions?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -16987,6 +17163,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -17001,6 +17178,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -17009,6 +17187,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -17037,6 +17216,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -17051,6 +17231,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -17059,6 +17240,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -17087,6 +17269,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label query over a set of resources, in this case pods.
  * If it's null, this PodAffinityTerm matches with no Pods.
  *
@@ -17101,6 +17284,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
   readonly matchExpressions?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -17127,6 +17311,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label query over the set of namespaces that the term applies to.
  * The term is applied to the union of the namespaces selected by this field
  * and the ones listed in the namespaces field.
@@ -17144,6 +17329,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
   readonly matchExpressions?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions[];
 
   /**
+   *
    * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
    * map is equivalent to an element of matchExpressions, whose key field is "key", the
    * operator is "In", and the values array contains only "value". The requirements are ANDed.
@@ -17170,6 +17356,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -17184,6 +17371,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -17192,6 +17380,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -17220,6 +17409,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -17234,6 +17424,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
   readonly key: string;
 
   /**
+   *
    * operator represents a key's relationship to a set of values.
    * Valid operators are In, NotIn, Exists and DoesNotExist.
    *
@@ -17242,6 +17433,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -17270,6 +17462,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -17292,6 +17485,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -17320,6 +17514,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -17342,6 +17537,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -17370,6 +17566,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -17392,6 +17589,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -17420,6 +17618,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -17442,6 +17641,7 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -17470,6 +17670,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -17492,6 +17693,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -17520,6 +17722,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -17542,6 +17745,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -17570,6 +17774,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -17592,6 +17797,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
@@ -17620,6 +17826,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ *
  * A label selector requirement is a selector that contains values, a key, and an operator that
  * relates the key and values.
  *
@@ -17642,6 +17849,7 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
   readonly operator: string;
 
   /**
+   *
    * values is an array of string values. If the operator is In or NotIn,
    * the values array must be non-empty. If the operator is Exists or DoesNotExist,
    * the values array must be empty. This array is replaced during a strategic
