@@ -63,6 +63,9 @@ new HelmApp(app, "stack", {
         kubeStateMetrics: {
           create: false,
         },
+        kubernetesApps: {
+          create: false,
+        }
       },
       labels: {
         "alerts.cmdcentral.xyz/kind": "metrics",
