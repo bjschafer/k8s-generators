@@ -3,7 +3,6 @@ import { HttpIngressPath, KubeIngress } from "cdk8s-plus-33/lib/imports/k8s";
 import { Construct } from "constructs";
 import { join } from "path";
 import { IngressRule } from "../../imports/k8s";
-import { AddCRDs } from "../../lib/util";
 import {
   VmAgent,
   VmAgentSpecResourcesLimits,
@@ -18,6 +17,7 @@ import {
   VmSingleSpecResourcesRequests,
 } from "../../imports/operator.victoriametrics.com";
 import { BACKUP_ANNOTATION_NAME } from "../../lib/consts";
+import { AddCRDs } from "../../lib/util";
 import { StorageClass } from "../../lib/volume";
 import { hostname, namespace } from "./app";
 
@@ -288,18 +288,24 @@ export class VmResources extends Chart {
             host: hostname,
             http: {
               paths: [
-                {
-                  path: "/",
-                  pathType: "Prefix",
-                  backend: {
-                    service: {
-                      name: "vmsingle-metrics",
-                      port: {
-                        name: "http",
+                ...[
+                  "/",
+                  "/api/v1",
+                  "/api/v2",
+                ].map((path: string): HttpIngressPath => {
+                  return {
+                    path: path,
+                    pathType: "Prefix",
+                    backend: {
+                      service: {
+                        name: "vmsingle-metrics",
+                        port: {
+                          name: "http",
+                        },
                       },
                     },
-                  },
-                },
+                  };
+                }),
                 {
                   path: "/vmalert",
                   pathType: "Prefix",
@@ -315,8 +321,6 @@ export class VmResources extends Chart {
                 ...[
                   "/targets",
                   "/service-discovery",
-                  "/api/v1",
-                  "/api/v2",
                   "/config",
                   "/target-relabel-debug",
                   "/metric-relabel-debug",

@@ -19,6 +19,20 @@ spec:
             pathType: Prefix
           - backend:
               service:
+                name: vmsingle-metrics
+                port:
+                  name: http
+            path: /api/v1
+            pathType: Prefix
+          - backend:
+              service:
+                name: vmsingle-metrics
+                port:
+                  name: http
+            path: /api/v2
+            pathType: Prefix
+          - backend:
+              service:
                 name: vmalert-metrics
                 port:
                   name: http
@@ -37,20 +51,6 @@ spec:
                 port:
                   name: http
             path: /service-discovery
-            pathType: Prefix
-          - backend:
-              service:
-                name: vmagent-metrics
-                port:
-                  name: http
-            path: /api/v1
-            pathType: Prefix
-          - backend:
-              service:
-                name: vmagent-metrics
-                port:
-                  name: http
-            path: /api/v2
             pathType: Prefix
           - backend:
               service:
