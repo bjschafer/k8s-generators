@@ -1,15 +1,4 @@
 import { App, Chart, Size } from "cdk8s";
-import { basename } from "path";
-import { NewArgoApp } from "../../lib/argo";
-import {
-  BACKUP_ANNOTATION_NAME,
-  CLUSTER_ISSUER,
-  DEFAULT_APP_PROPS,
-  DEFAULT_SECURITY_CONTEXT,
-  RELOADER_ENABLED,
-} from "../../lib/consts";
-import { NewKustomize } from "../../lib/kustomize";
-import { Construct } from "constructs";
 import {
   ConfigMap,
   Cpu,
@@ -25,10 +14,21 @@ import {
   Secret,
   Volume,
 } from "cdk8s-plus-33";
+import { Construct } from "constructs";
+import { basename } from "path";
 import heredoc from "tsheredoc";
-import { StorageClass } from "../../lib/volume";
-import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
+import { NewArgoApp } from "../../lib/argo";
+import {
+  BACKUP_ANNOTATION_NAME,
+  CLUSTER_ISSUER,
+  DEFAULT_APP_PROPS,
+  DEFAULT_SECURITY_CONTEXT,
+  RELOADER_ENABLED,
+} from "../../lib/consts";
+import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
+import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
+import { StorageClass } from "../../lib/volume";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -262,6 +262,17 @@ class Tandoor extends Chart {
 
     const svc = deploy.exposeViaService({
       name: "tandoor",
+      ports: [{
+        name: "http",
+        port: 80,
+        targetPort: 80,
+      },
+      {
+        name: "metrics",
+        port: port,
+        targetPort: port,
+      },
+    ],
     });
     svc.metadata.addLabel(WellKnownLabels.Name, name);
 
@@ -305,7 +316,7 @@ class Tandoor extends Chart {
     new CmdcentralServiceMonitor(app, "metrics", {
       name: "tandoor",
       namespace: namespace,
-      portName: "http",
+      portName: "metrics",
       matchLabels: {
         [WellKnownLabels.Name]: name,
       },

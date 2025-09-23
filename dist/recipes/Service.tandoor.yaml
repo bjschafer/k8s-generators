@@ -8,12 +8,12 @@ metadata:
 spec:
   externalIPs: []
   ports:
-    - name: gunicorn
-      port: 8080
-      targetPort: 8080
     - name: http
       port: 80
       targetPort: 80
+    - name: metrics
+      port: 8080
+      targetPort: 8080
   selector:
     cdk8s.io/metadata.addr: tandoor-deploy-c893d1df
   type: ClusterIP
