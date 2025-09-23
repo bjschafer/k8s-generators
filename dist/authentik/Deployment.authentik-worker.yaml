@@ -93,7 +93,9 @@ spec:
           imagePullPolicy: Always
           name: authentik-worker
           ports:
-            - containerPort: 8000
+            - containerPort: 9000
+            - containerPort: 9300
+              name: metrics
           resources:
             limits:
               memory: 768Mi

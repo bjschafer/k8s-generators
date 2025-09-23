@@ -10,8 +10,11 @@ spec:
   externalIPs: []
   ports:
     - name: http
-      port: 8000
-      targetPort: 8000
+      port: 9000
+      targetPort: 9000
+    - name: metrics
+      port: 9300
+      targetPort: 9300
   selector:
     cdk8s.io/metadata.addr: authentik-worker-authentik-worker-deployment-c845a6ad
   type: ClusterIP

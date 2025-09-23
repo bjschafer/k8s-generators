@@ -1,27 +1,25 @@
-import { App, Size, Chart } from "cdk8s";
-import { basename } from "path";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
-import { NewKustomize } from "../../lib/kustomize";
-import { NewArgoApp } from "../../lib/argo";
-import { Valkey } from "../../lib/valkey";
-import { Quantity } from "../../imports/k8s";
-import { AppPlus } from "../../lib/app-plus";
+import { App, Chart, Duration, Size } from "cdk8s";
 import { Cpu, EnvValue, Probe, Secret, ServiceAccount } from "cdk8s-plus-33";
+import { Construct } from "constructs";
+import { basename } from "path";
 import {
-  KubeService,
+  IntOrString,
   KubeClusterRole,
-  KubeClusterRoleBinding,
+  KubeClusterRoleBinding, KubeService, Quantity
 } from "../../imports/k8s";
-import { BitwardenSecret } from "../../lib/secrets";
-import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
-import { WellKnownLabels } from "../../lib/labels";
 import {
+  VmRule,
   VmServiceScrape,
   VmServiceScrapeSpecEndpointsScheme,
-  VmRule,
 } from "../../imports/operator.victoriametrics.com";
-import { Duration } from "cdk8s";
-import { Construct } from "constructs";
+import { AppPlus } from "../../lib/app-plus";
+import { NewArgoApp } from "../../lib/argo";
+import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { NewKustomize } from "../../lib/kustomize";
+import { WellKnownLabels } from "../../lib/labels";
+import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
+import { BitwardenSecret } from "../../lib/secrets";
+import { Valkey } from "../../lib/valkey";
 
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
@@ -224,7 +222,20 @@ new AppPlus(app, "authentik-worker", {
     },
   },
   replicas: 2,
-  ports: [8000], // Worker port
+  ports: [9000],
+  monitoringConfig: {
+    port: 9300,
+  },
+  livenessProbe: Probe.fromHttpGet("/-/health/live/", {
+    port: 9000,
+    initialDelaySeconds: Duration.seconds(30),
+    periodSeconds: Duration.seconds(10),
+  }),
+  readinessProbe: Probe.fromHttpGet("/-/health/ready/", {
+    port: 9000,
+    initialDelaySeconds: Duration.seconds(30),
+    periodSeconds: Duration.seconds(10),
+  }),
   args: ["worker"],
   serviceAccountName: rbac.serviceAccount.name,
   automountServiceAccount: true,
@@ -274,13 +285,13 @@ class AuthentikMonitoring extends Chart {
           {
             name: "ldap",
             port: 389,
-            targetPort: 3389,
+            targetPort: IntOrString.fromNumber(3389),
             protocol: "TCP",
           },
           {
             name: "ldaps",
             port: 636,
-            targetPort: 6636,
+            targetPort: IntOrString.fromNumber(6636),
             protocol: "TCP",
           },
         ],
@@ -303,7 +314,7 @@ class AuthentikMonitoring extends Chart {
         [WellKnownLabels.Name]: "authentik",
         [WellKnownLabels.Component]: "worker",
       },
-      portName: "http",
+      portName: "metrics",
     });
 
     // VictoriaMetrics Service Scrape

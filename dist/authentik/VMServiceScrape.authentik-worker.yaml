@@ -5,7 +5,7 @@ metadata:
   namespace: authentik
 spec:
   endpoints:
-    - port: http
+    - port: metrics
   namespaceSelector:
     matchNames:
       - authentik
