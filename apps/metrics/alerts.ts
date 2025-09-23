@@ -503,7 +503,7 @@ export function addAlerts(scope: Construct, id: string): void {
       },
       {
         alert: "KubernetesStatefulsetDown",
-        expr: "(kube_statefulset_status_replicas_ready / kube_statefulset_status_replicas_current) != 1",
+        expr: "(kube_statefulset_status_replicas_ready / kube_statefulset_status_replicas) != 1",
         for: "1m",
         labels: {
           priority: PRIORITY.HIGH,

@@ -1,14 +1,14 @@
+import { App } from "cdk8s";
 import { basename } from "path";
 import { NewArgoApp } from "../../lib/argo";
-import { HelmApp } from "../../lib/helm";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
-import { App } from "cdk8s";
-import { VmResources } from "./vmresources";
-import { ScrapeConfigs } from "./scrapeconfigs";
+import { HelmApp } from "../../lib/helm";
+import { addAlerts } from "./alerts";
 import { BlackboxExporter } from "./blackbox";
 import { ProxmoxExporter } from "./proxmox";
+import { ScrapeConfigs } from "./scrapeconfigs";
 import { UnifiExporter } from "./unifi";
-import { addAlerts } from "./alerts";
+import { VmResources } from "./vmresources";
 
 export const namespace = basename(__dirname);
 export const name = namespace;
@@ -58,6 +58,9 @@ new HelmApp(app, "stack", {
         },
         // k3s doesn't run controller-manager
         kubernetesSystemControllerManager: {
+          create: false,
+        },
+        kubeStateMetrics: {
           create: false,
         },
       },

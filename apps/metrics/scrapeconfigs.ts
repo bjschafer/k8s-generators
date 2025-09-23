@@ -1,11 +1,11 @@
 import { Chart } from "cdk8s";
 import { Construct } from "constructs";
 import {
-  VmScrapeConfig,
-  VmScrapeConfigSpecScheme,
-  VmRule,
   VmPodScrape,
   VmPodScrapeSpecPodMetricsEndpointsTargetPort,
+  VmRule,
+  VmScrapeConfig,
+  VmScrapeConfigSpecScheme,
   VmServiceScrape,
 } from "../../imports/operator.victoriametrics.com";
 import { namespace } from "./app";
@@ -118,20 +118,20 @@ export class ScrapeConfigs extends Chart {
       },
     });
 
-    new VmScrapeConfig(this, "lakelair-gateway", {
-      metadata: {
-        name: "lakelair-gateway",
-        namespace: namespace,
-      },
-      spec: {
-        staticConfigs: [
-          {
-            labels: { job: "lakelair-gateway" },
-            targets: ["gateway.lakelair.net:9100"],
-          },
-        ],
-      },
-    });
+    // new VmScrapeConfig(this, "lakelair-gateway", {
+    //   metadata: {
+    //     name: "lakelair-gateway",
+    //     namespace: namespace,
+    //   },
+    //   spec: {
+    //     staticConfigs: [
+    //       {
+    //         labels: { job: "lakelair-gateway" },
+    //         targets: ["gateway.lakelair.net:9100"],
+    //       },
+    //     ],
+    //   },
+    // });
 
     new VmScrapeConfig(this, "mgt", {
       metadata: {

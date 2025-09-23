@@ -95,7 +95,7 @@ spec:
                 VALUE = {{ $value }}
                 LABELS = {{ $labels }}
             summary: Kubernetes StatefulSet down (instance {{ $labels.instance }})
-          expr: (kube_statefulset_status_replicas_ready / kube_statefulset_status_replicas_current) != 1
+          expr: (kube_statefulset_status_replicas_ready / kube_statefulset_status_replicas) != 1
           for: 1m
           labels:
             priority: "1"
