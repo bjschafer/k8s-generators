@@ -57,7 +57,7 @@ spec:
               value: api
             - name: IMMICH_TELEMETRY_INCLUDE
               value: all
-          image: ghcr.io/immich-app/immich-server:v1.142.1
+          image: ghcr.io/immich-app/immich-server:v1.143.1
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
