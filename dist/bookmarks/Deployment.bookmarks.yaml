@@ -44,7 +44,7 @@ spec:
             - name: NEXT_PUBLIC_CREDENTIALS_ENABLED
               value: "false"
             - name: OPENAI_MODEL
-              value: "@cf/google/gemma-3-12b-it"
+              value: "@cf/openai/gpt-oss-20b"
             - name: CUSTOM_OPENAI_BASE_URL
               valueFrom:
                 secretKeyRef:
