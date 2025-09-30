@@ -89,7 +89,7 @@ spec:
                 secretKeyRef:
                   key: AUTHENTIK_EMAIL__PASSWORD
                   name: creds
-          image: ghcr.io/goauthentik/server:2025.8.3
+          image: ghcr.io/goauthentik/server:2025.8.4
           imagePullPolicy: Always
           name: authentik-worker
           ports:

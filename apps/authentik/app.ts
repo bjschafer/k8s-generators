@@ -5,7 +5,9 @@ import { basename } from "path";
 import {
   IntOrString,
   KubeClusterRole,
-  KubeClusterRoleBinding, KubeService, Quantity
+  KubeClusterRoleBinding,
+  KubeService,
+  Quantity,
 } from "../../imports/k8s";
 import {
   VmRule,
@@ -24,7 +26,7 @@ import { Valkey } from "../../lib/valkey";
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
-const version = "2025.8.3";
+const version = "2025.8.4";
 
 NewArgoApp(namespace, {
   namespace: namespace,
