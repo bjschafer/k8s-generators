@@ -1,12 +1,4 @@
 import { App, Duration, Size } from "cdk8s";
-import { basename } from "path";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
-import { NFSVolumeContainer } from "../../lib/nfs";
-import { NewKustomize } from "../../lib/kustomize";
-import { NewArgoApp } from "../../lib/argo";
-import { Valkey } from "../../lib/valkey";
-import { Quantity } from "../../imports/k8s";
-import { AppPlus } from "../../lib/app-plus";
 import {
   Cpu,
   EnvValue,
@@ -15,18 +7,40 @@ import {
   Secret,
   Volume,
 } from "cdk8s-plus-33";
-import { StorageClass } from "../../lib/volume";
-import { BitwardenSecret } from "../../lib/secrets";
-import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
+import { basename } from "path";
+import { Quantity } from "../../imports/k8s";
+import { AppPlus } from "../../lib/app-plus";
+import { NewArgoApp } from "../../lib/argo";
+import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
+import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
+import { NFSVolumeContainer } from "../../lib/nfs";
+import { BitwardenSecret } from "../../lib/secrets";
+import { Valkey } from "../../lib/valkey";
+import { StorageClass } from "../../lib/volume";
 
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
-const version = "v2.0.1";
+const version = "v2.x.x";
+
+const images = {
+  MACHINE_LEARNING: "ghcr.io/immich-app/immich-machine-learning",
+  SERVER: "ghcr.io/immich-app/immich-server",
+};
 
 NewArgoApp(namespace, {
   namespace: namespace,
+  autoUpdate: {
+    images: Object.values(images).map((image: string) => {
+        return {
+            image: image,
+            strategy: "semver",
+            versionConstraint: version,
+        }
+    }),
+  },
 });
 
 const nfsVol = new NFSVolumeContainer(app, "nfs-volume-container");
@@ -78,7 +92,7 @@ const commonEnv: Record<string, EnvValue> = {
 const server = new AppPlus(app, "immich-server", {
   name: "immich-server",
   namespace: namespace,
-  image: `ghcr.io/immich-app/immich-server:${version}`,
+  image: images.SERVER,
   resources: {
     cpu: {
       request: Cpu.millis(2000),
@@ -126,7 +140,7 @@ server.Deployment.containers[0].mount("/usr/src/app/upload", nfsMount, {
 new AppPlus(app, "immich-machine-learning", {
   name: "immich-machine-learning",
   namespace: namespace,
-  image: `ghcr.io/immich-app/immich-machine-learning:${version}`,
+  image: images.MACHINE_LEARNING,
   resources: {
     cpu: {
       request: Cpu.millis(1500),
@@ -169,7 +183,7 @@ new AppPlus(app, "immich-machine-learning", {
 const microservices = new AppPlus(app, "immich-microservices", {
   name: "immich-microservices",
   namespace: namespace,
-  image: `ghcr.io/immich-app/immich-server:${version}`,
+  image: images.SERVER,
   resources: {
     cpu: {
       request: Cpu.millis(2000),
