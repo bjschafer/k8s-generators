@@ -1,5 +1,5 @@
 kustomize:
   images:
-  - ghcr.io/tandoorrecipes/recipes:latest@sha256:94a048d2ca34209654ecb984e29de1f621625b632925b28243735f1de4187d58
+  - ghcr.io/tandoorrecipes/recipes:latest@sha256:37dda040f6261c0312db27487c9e8f698b77ac0d4e5e7a4f4aebd8c4cbdd578b
   - public.ecr.aws/nginx/nginx:latest@sha256:011e6807337c14c51bd2154407462e5788e27c615cabea168b265b27c2d370a1
   - ghcr.io/tandoorrecipes/recipes@sha256:7d083f3af3a2a58bb8bb5fe94d59a37e2076bc405cf9bd51c2e3eaa18d6baf5a
