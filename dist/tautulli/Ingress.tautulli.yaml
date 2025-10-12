@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: tautulli
+  namespace: tautulli
+spec:
+  rules:
+    - host: tautulli.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: tautulli
+                port:
+                  number: 8181
+            path: /
+            pathType: Prefix
+    - host: plex-dash.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: tautulli
+                port:
+                  number: 8181
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - tautulli.cmdcentral.xyz
+        - plex-dash.cmdcentral.xyz
+      secretName: tautulli-tls

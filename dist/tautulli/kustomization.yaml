@@ -1,0 +1,5 @@
+resources:
+  - Deployment.tautulli.yaml
+  - Ingress.tautulli.yaml
+  - PersistentVolumeClaim.config.yaml
+  - Service.tautulli.yaml

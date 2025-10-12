@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd-image-updater.argoproj.io/git-branch: main
+    argocd-image-updater.argoproj.io/image-list: tautulli=ghcr.io/tautulli/tautulli:latest
+    argocd-image-updater.argoproj.io/tautulli.update-strategy: digest
+    argocd-image-updater.argoproj.io/write-back-method: git
+  labels:
+    app.kubernetes.io/name: tautulli
+  name: tautulli
+  namespace: argocd
+spec:
+  destination:
+    namespace: tautulli
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: dist/tautulli
+    repoURL: git@github.com:bjschafer/k8s-generators.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
