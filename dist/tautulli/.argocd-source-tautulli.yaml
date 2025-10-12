@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - ghcr.io/tautulli/tautulli:latest@sha256:5fc33cf56fce13db1a73f91f7b1214950f9b96f72b69ae704e492e88b049c717
