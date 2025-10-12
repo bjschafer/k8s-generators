@@ -219,8 +219,8 @@ new AppPlus(app, "authentik-worker", {
       request: Cpu.millis(50),
     },
     memory: {
-      request: Size.mebibytes(512),
-      limit: Size.mebibytes(768),
+      request: Size.mebibytes(768),
+      limit: Size.mebibytes(1024),
     },
   },
   replicas: 2,
