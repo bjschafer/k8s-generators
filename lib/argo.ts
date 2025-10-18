@@ -16,7 +16,7 @@ export const ARGO_DEFAULT_PROPS: AppProps = {
   yamlOutputType: YamlOutputType.FILE_PER_CHART,
 };
 export const ENABLE_SERVERSIDE_APPLY = {
-  syncPolicy: {
+  sync_policy: {
     syncOptions: ["ServerSideApply=true"],
   },
 };
@@ -68,6 +68,19 @@ export class ArgoApp extends Chart {
 
     const source = props.source ?? ArgoAppSource.GENERATORS;
 
+    const defaultSyncOptions = ["CreateNamespace=true"];
+    const providedSyncOptions = props.sync_policy?.syncOptions ?? [];
+    const syncOptions = [
+      ...defaultSyncOptions,
+      ...providedSyncOptions.filter((option) => !defaultSyncOptions.includes(option)),
+    ];
+
+    const syncPolicy: ApplicationSpecSyncPolicy = {
+      automated: { prune: true, selfHeal: true },
+      ...props.sync_policy,
+      syncOptions,
+    };
+
     const app = new Application(this, `${name}-application`, {
       metadata: {
         name: name,
@@ -87,12 +100,7 @@ export class ArgoApp extends Chart {
           repoUrl: sources[source].url,
           targetRevision: "main",
         },
-        syncPolicy: {
-          syncOptions: ["CreateNamespace=true"],
-          ...(props.sync_policy ?? {
-            automated: { prune: true, selfHeal: true },
-          }),
-        },
+        syncPolicy,
         ignoreDifferences: props.ignoreDifferences,
       },
     });
