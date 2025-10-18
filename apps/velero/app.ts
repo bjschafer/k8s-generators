@@ -16,6 +16,8 @@ import {
 } from "../../imports/velero.io";
 import { BitwardenSecret } from "../../lib/secrets";
 import { AddCRDs } from "../../lib/util";
+import { HelmApp } from "../../lib/helm";
+import { SchemaForVeleroHelmChart } from "../../imports/helm-values/velero-values.schema";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -39,13 +41,14 @@ class Velero extends Chart {
 
     AddCRDs(this, join(__dirname, "crds"));
 
-    new Helm(this, "chart", {
-      repo: "https://vmware-tanzu.github.io/helm-charts/",
+    new HelmApp<Partial<SchemaForVeleroHelmChart>>(this, "chart", {
       chart: "velero",
+      repo: "https://vmware-tanzu.github.io/helm-charts/",
       version: chartVersion,
       releaseName: name,
       namespace: namespace,
       values: {
+        dnsPolicy: "ClusterFirst",
         resources: {
           requests: {
             cpu: "25m",
@@ -86,6 +89,8 @@ class Velero extends Chart {
         },
         deployNodeAgent: true,
         nodeAgent: {
+          podVolumePath: "/var/lib/kubelet/pods",
+          dnsPolicy: "ClusterFirst",
           resources: {
             requests: {
               cpu: "50m",
