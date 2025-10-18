@@ -34,11 +34,11 @@ NewArgoApp(namespace, {
   namespace: namespace,
   autoUpdate: {
     images: Object.values(images).map((image: string) => {
-        return {
-            image: image,
-            strategy: "semver",
-            versionConstraint: version,
-        }
+      return {
+        image: image,
+        strategy: "semver",
+        versionConstraint: version,
+      };
     }),
   },
 });

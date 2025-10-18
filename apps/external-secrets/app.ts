@@ -6,7 +6,7 @@ import { EsoValuesSchema } from "../../imports/helm-values/eso-values.schema";
 import { Certificate, ClusterIssuer } from "../../imports/cert-manager.io";
 import { Construct } from "constructs";
 import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";
-import { NewArgoApp } from "../../lib/argo";
+import { ENABLE_SERVERSIDE_APPLY, NewArgoApp } from "../../lib/argo";
 import {
   ClusterSecretStore,
   ClusterSecretStoreSpecProviderBitwardensecretsmanagerCaProviderType,
@@ -19,6 +19,7 @@ const version = "0.20.3";
 
 NewArgoApp(name, {
   namespace: namespace,
+  ...ENABLE_SERVERSIDE_APPLY,
 });
 
 new HelmApp<EsoValuesSchema>(app, "helm", {

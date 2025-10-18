@@ -262,17 +262,18 @@ class Tandoor extends Chart {
 
     const svc = deploy.exposeViaService({
       name: "tandoor",
-      ports: [{
-        name: "http",
-        port: 80,
-        targetPort: 80,
-      },
-      {
-        name: "metrics",
-        port: port,
-        targetPort: port,
-      },
-    ],
+      ports: [
+        {
+          name: "http",
+          port: 80,
+          targetPort: 80,
+        },
+        {
+          name: "metrics",
+          port: port,
+          targetPort: port,
+        },
+      ],
     });
     svc.metadata.addLabel(WellKnownLabels.Name, name);
 

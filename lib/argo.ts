@@ -15,6 +15,11 @@ export const ARGO_DEFAULT_PROPS: AppProps = {
   outputFileExtension: ".yaml",
   yamlOutputType: YamlOutputType.FILE_PER_CHART,
 };
+export const ENABLE_SERVERSIDE_APPLY = {
+  syncPolicy: {
+    syncOptions: ["ServerSideApply=true"],
+  },
+};
 
 export function NewArgoApp(name: string, props: ArgoAppProps) {
   const app = new App(ARGO_DEFAULT_PROPS);

@@ -288,24 +288,22 @@ export class VmResources extends Chart {
             host: hostname,
             http: {
               paths: [
-                ...[
-                  "/",
-                  "/api/v1",
-                  "/api/v2",
-                ].map((path: string): HttpIngressPath => {
-                  return {
-                    path: path,
-                    pathType: "Prefix",
-                    backend: {
-                      service: {
-                        name: "vmsingle-metrics",
-                        port: {
-                          name: "http",
+                ...["/", "/api/v1", "/api/v2"].map(
+                  (path: string): HttpIngressPath => {
+                    return {
+                      path: path,
+                      pathType: "Prefix",
+                      backend: {
+                        service: {
+                          name: "vmsingle-metrics",
+                          port: {
+                            name: "http",
+                          },
                         },
                       },
-                    },
-                  };
-                }),
+                    };
+                  },
+                ),
                 {
                   path: "/vmalert",
                   pathType: "Prefix",
