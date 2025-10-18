@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.60.1
+    helm.sh/chart: victoria-metrics-k8s-stack-0.61.8
   name: metrics-victoria-metrics-k8s-stack-vm-health
   namespace: metrics
 spec:
@@ -57,7 +57,7 @@ spec:
             description: |
               Too high CPU usage may be a sign of insufficient resources and make process unstable. Consider to either increase available CPU resources or decrease the load on the process.
             summary: More than 90% of CPU is used by "{{ $labels.job }}"("{{ $labels.instance }}") during the last 5m
-          expr: rate(process_cpu_seconds_total[5m]) / process_cpu_cores_available > 0.9
+          expr: (rate(process_cpu_seconds_total[5m]) / process_cpu_cores_available) > 0.9
           for: 5m
           labels:
             severity: critical
@@ -66,7 +66,7 @@ spec:
             description: |
               Go runtime is unable to schedule goroutines execution in acceptable time. This is usually a sign of insufficient CPU resources or CPU throttling. Verify that service has enough CPU resources. Otherwise, the service could work unreliably with delays in processing.
             summary: '"{{ $labels.job }}"("{{ $labels.instance }}") has insufficient CPU resources for >15m'
-          expr: histogram_quantile(0.99, sum(rate(go_sched_latencies_seconds_bucket{job=~".*(victoriametrics|vmselect|vminsert|vmstorage|vmagent|vmalert|vmsingle|vmalertmanager|vmauth).*"}[5m])) by (le,job,instance,cluster)) > 0.1
+          expr: histogram_quantile(0.99, sum(rate(go_sched_latencies_seconds_bucket{job=~".*(victoriametrics|vmselect|vminsert|vmstorage|vmagent|vmalert|vmsingle|vmalertmanager|vmauth).*"}[5m])) by(le,job,instance,cluster)) > 0.1
           for: 15m
           labels:
             severity: critical
@@ -75,7 +75,7 @@ spec:
             description: |
               Logging rate for job \"{{ $labels.job }}\" ({{ $labels.instance }}) is {{ $value }} for last 15m. Worth to check logs for specific error messages.
             summary: Too many logs printed for job "{{ $labels.job }}" ({{ $labels.instance }})
-          expr: sum(increase(vm_log_messages_total{level="error"}[5m])) without (app_version, location) > 0
+          expr: sum(increase(vm_log_messages_total{level="error"}[5m])) without(app_version,location) > 0
           for: 15m
           labels:
             severity: warning

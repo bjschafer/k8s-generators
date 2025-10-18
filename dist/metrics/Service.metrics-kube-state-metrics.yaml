@@ -9,8 +9,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kube-state-metrics
     app.kubernetes.io/part-of: kube-state-metrics
-    app.kubernetes.io/version: 2.15.0
-    helm.sh/chart: kube-state-metrics-6.0.0
+    app.kubernetes.io/version: 2.17.0
+    helm.sh/chart: kube-state-metrics-6.3.0
   name: metrics-kube-state-metrics
   namespace: metrics
 spec:
@@ -18,7 +18,7 @@ spec:
     - name: http
       port: 8080
       protocol: TCP
-      targetPort: 8080
+      targetPort: http
   selector:
     app.kubernetes.io/instance: metrics
     app.kubernetes.io/name: kube-state-metrics

@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.60.1
+    helm.sh/chart: victoria-metrics-k8s-stack-0.61.8
   name: metrics-victoria-metrics-k8s-stack-kubernetes-system-kubelet
   namespace: metrics
 spec:
@@ -21,10 +21,7 @@ spec:
             description: "{{ $labels.node }} has been unready for more than 15 minutes on cluster {{ $labels.cluster }}."
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubenodenotready
             summary: Node is not ready.
-          expr: |-
-            kube_node_status_condition{job="kube-state-metrics",condition="Ready",status="true"} == 0
-            and on (node,cluster)
-            kube_node_spec_unschedulable{job="kube-state-metrics"} == 0
+          expr: (kube_node_status_condition{job="kube-state-metrics",condition="Ready",status="true"} == 0) and on(cluster,node) (kube_node_spec_unschedulable{job="kube-state-metrics"} == 0)
           for: 15m
           labels:
             severity: warning
@@ -33,10 +30,7 @@ spec:
             description: "{{ $labels.node }} on cluster {{ $labels.cluster }} has active Condition {{ $labels.condition }}. This is caused by resource usage exceeding eviction thresholds."
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubenodepressure
             summary: Node has as active Condition.
-          expr: |-
-            kube_node_status_condition{job="kube-state-metrics",condition=~"(MemoryPressure|DiskPressure|PIDPressure)",status="true"} == 1
-            and on (node,cluster)
-            kube_node_spec_unschedulable{job="kube-state-metrics"} == 0
+          expr: (kube_node_status_condition{job="kube-state-metrics",condition=~"(MemoryPressure|DiskPressure|PIDPressure)",status="true"} == 1) and on(cluster,node) (kube_node_spec_unschedulable{job="kube-state-metrics"} == 0)
           for: 10m
           labels:
             severity: info
@@ -54,20 +48,7 @@ spec:
             description: Kubelet '{{ $labels.node }}' is running at {{ $value | humanizePercentage }} of its Pod capacity on cluster {{ $labels.cluster }}.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubelettoomanypods
             summary: Kubelet is running at capacity.
-          expr: |-
-            (
-              max by (instance,cluster) (
-                kubelet_running_pods{job="kubelet", metrics_path="/metrics"} > 1
-              )
-              * on (instance,cluster) group_left(node)
-              max by (instance,node,cluster) (
-                kubelet_node_name{job="kubelet", metrics_path="/metrics"}
-              )
-            )
-            / on (node,cluster) group_left()
-            max by (node,cluster) (
-              kube_node_status_capacity{job="kube-state-metrics", resource="pods"} != 1
-            ) > 0.95
+          expr: ((max(kubelet_running_pods{job="kubelet",metrics_path="/metrics"} > 1) by(cluster,instance) * on(cluster,instance) group_left(node) max(kubelet_node_name{job="kubelet",metrics_path="/metrics"}) by(cluster,instance,node)) / on(cluster,node) group_left() max(kube_node_status_capacity{job="kube-state-metrics",resource="pods"} != 1) by(cluster,node)) > 0.95
           for: 15m
           labels:
             severity: info
@@ -76,10 +57,7 @@ spec:
             description: The readiness status of node {{ $labels.node }} has changed {{ $value }} times in the last 15 minutes on cluster {{ $labels.cluster }}.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubenodereadinessflapping
             summary: Node readiness status is flapping.
-          expr: |-
-            sum(changes(kube_node_status_condition{job="kube-state-metrics",status="true",condition="Ready"}[15m])) by (node,cluster) > 2
-            and on (node,cluster)
-            kube_node_spec_unschedulable{job="kube-state-metrics"} == 0
+          expr: (sum(changes(kube_node_status_condition{job="kube-state-metrics",status="true",condition="Ready"}[15m])) by(cluster,node) > 2) and on(cluster,node) (kube_node_spec_unschedulable{job="kube-state-metrics"} == 0)
           for: 15m
           labels:
             severity: warning
@@ -88,13 +66,7 @@ spec:
             description: Node {{ $labels.node }} on {{ $labels.cluster }} is evicting Pods due to {{ $labels.eviction_signal }}.  Eviction occurs when eviction thresholds are crossed, typically caused by Pods exceeding RAM/ephemeral-storage limits.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubenodeeviction
             summary: Node is evicting pods.
-          expr: |-
-            sum(rate(kubelet_evictions{job="kubelet", metrics_path="/metrics"}[15m])) by (eviction_signal,instance,cluster)
-            * on (instance,cluster) group_left(node)
-            max by (instance,node,cluster) (
-              kubelet_node_name{job="kubelet", metrics_path="/metrics"}
-            )
-            > 0
+          expr: (sum(rate(kubelet_evictions{job="kubelet",metrics_path="/metrics"}[15m])) by(cluster,eviction_signal,instance) * on(cluster,instance) group_left(node) max(kubelet_node_name{job="kubelet",metrics_path="/metrics"}) by(cluster,instance,node)) > 0
           for: 0s
           labels:
             severity: info
@@ -112,19 +84,7 @@ spec:
             description: Kubelet Pod startup 99th percentile latency is {{ $value }} seconds on node {{ $labels.node }} on cluster {{ $labels.cluster }}.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletpodstartuplatencyhigh
             summary: Kubelet Pod startup latency is too high.
-          expr: |-
-            histogram_quantile(0.99,
-              sum by (instance,le,cluster) (
-                topk by (instance,le,operation_type,cluster) (1,
-                  rate(kubelet_pod_worker_duration_seconds_bucket{job="kubelet", metrics_path="/metrics"}[5m])
-                )
-              )
-            )
-            * on (instance,cluster) group_left(node)
-            topk by (instance,node,cluster) (1,
-              kubelet_node_name{job="kubelet", metrics_path="/metrics"}
-            )
-            > 60
+          expr: (histogram_quantile(0.99, sum(topk(1, rate(kubelet_pod_worker_duration_seconds_bucket{job="kubelet",metrics_path="/metrics"}[5m])) by(cluster,instance,le,operation_type)) by(cluster,instance,le)) * on(cluster,instance) group_left(node) topk(1, kubelet_node_name{job="kubelet",metrics_path="/metrics"}) by(cluster,instance,node)) > 60
           for: 15m
           labels:
             severity: warning
@@ -183,7 +143,7 @@ spec:
             description: Kubelet has disappeared from Prometheus target discovery.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletdown
             summary: Target disappeared from Prometheus target discovery.
-          expr: absent(up{job="kubelet", metrics_path="/metrics"} == 1)
+          expr: absent(up{job="kubelet",metrics_path="/metrics"} == 1)
           for: 15m
           labels:
             severity: critical

@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.60.1
+    helm.sh/chart: victoria-metrics-k8s-stack-0.61.8
   name: metrics-victoria-metrics-k8s-stack-kubernetes-system-apiserver
   namespace: metrics
 spec:
@@ -21,10 +21,7 @@ spec:
             description: A client certificate used to authenticate to kubernetes apiserver is expiring in less than 7.0 days on cluster {{ $labels.cluster }}.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeclientcertificateexpiration
             summary: Client certificate is about to expire.
-          expr: |-
-            histogram_quantile(0.01, sum without (namespace, service, endpoint) (rate(apiserver_client_certificate_expiration_seconds_bucket{job="apiserver"}[5m]))) < 604800
-            and
-            on (job,instance,cluster) apiserver_client_certificate_expiration_seconds_count{job="apiserver"} > 0
+          expr: (histogram_quantile(0.01, sum(rate(apiserver_client_certificate_expiration_seconds_bucket{job="apiserver"}[5m])) without(namespace,service,endpoint)) < 604800) and on(job,cluster,instance) (apiserver_client_certificate_expiration_seconds_count{job="apiserver"} > 0)
           for: 5m
           labels:
             severity: warning
@@ -33,10 +30,7 @@ spec:
             description: A client certificate used to authenticate to kubernetes apiserver is expiring in less than 24.0 hours on cluster {{ $labels.cluster }}.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeclientcertificateexpiration
             summary: Client certificate is about to expire.
-          expr: |-
-            histogram_quantile(0.01, sum without (namespace, service, endpoint) (rate(apiserver_client_certificate_expiration_seconds_bucket{job="apiserver"}[5m]))) < 86400
-            and
-            on (job,instance,cluster) apiserver_client_certificate_expiration_seconds_count{job="apiserver"} > 0
+          expr: (histogram_quantile(0.01, sum(rate(apiserver_client_certificate_expiration_seconds_bucket{job="apiserver"}[5m])) without(namespace,service,endpoint)) < 86400) and on(job,cluster,instance) (apiserver_client_certificate_expiration_seconds_count{job="apiserver"} > 0)
           for: 5m
           labels:
             severity: critical
@@ -45,7 +39,7 @@ spec:
             description: Kubernetes aggregated API {{ $labels.instance }}/{{ $labels.name }} has reported {{ $labels.reason }} errors on cluster {{ $labels.cluster }}.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeaggregatedapierrors
             summary: Kubernetes aggregated API has reported errors.
-          expr: sum by (instance,name,reason,cluster)(increase(aggregator_unavailable_apiservice_total{job="apiserver"}[1m])) > 0
+          expr: sum(increase(aggregator_unavailable_apiservice_total{job="apiserver"}[1m])) by(cluster,instance,name,reason) > 0
           for: 10m
           labels:
             severity: warning
@@ -54,7 +48,7 @@ spec:
             description: Kubernetes aggregated API {{ $labels.name }}/{{ $labels.namespace }} has been only {{ $value | humanize }}% available over the last 10m on cluster {{ $labels.cluster }}.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeaggregatedapidown
             summary: Kubernetes aggregated API is down.
-          expr: (1 - max by (name,namespace,cluster)(avg_over_time(aggregator_unavailable_apiservice{job="apiserver"}[10m]))) * 100 < 85
+          expr: ((1 - max(avg_over_time(aggregator_unavailable_apiservice{job="apiserver"}[10m])) by(name,namespace,cluster)) * 100) < 85
           for: 5m
           labels:
             severity: warning
@@ -72,7 +66,7 @@ spec:
             description: The kubernetes apiserver has terminated {{ $value | humanizePercentage }} of its incoming requests on cluster {{ $labels.cluster }}.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeapiterminatedrequests
             summary: The kubernetes apiserver has terminated {{ $value | humanizePercentage }} of its incoming requests.
-          expr: sum by (cluster) (rate(apiserver_request_terminations_total{job="apiserver"}[10m])) / ( sum by (cluster) (rate(apiserver_request_total{job="apiserver"}[10m])) + sum by (cluster) (rate(apiserver_request_terminations_total{job="apiserver"}[10m])) ) > 0.20
+          expr: (sum(rate(apiserver_request_terminations_total{job="apiserver"}[10m])) by(cluster) / (sum(rate(apiserver_request_total{job="apiserver"}[10m])) by(cluster) + sum(rate(apiserver_request_terminations_total{job="apiserver"}[10m])) by(cluster))) > 0.20
           for: 5m
           labels:
             severity: warning

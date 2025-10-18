@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.60.1
+    helm.sh/chart: victoria-metrics-k8s-stack-0.61.8
   name: metrics-victoria-metrics-k8s-stack-k8s.rules.containermemoryswap
   namespace: metrics
 spec:
@@ -17,10 +17,6 @@ spec:
       params: {}
       rules:
         - annotations: {}
-          expr: |-
-            container_memory_swap{job="kubelet", metrics_path="/metrics/cadvisor", image!=""}
-            * on (namespace,pod,cluster) group_left(node) topk by (namespace,pod,cluster) (1,
-              max by (namespace,pod,node,cluster) (kube_pod_info{node!=""})
-            )
+          expr: container_memory_swap{job="kubelet",metrics_path="/metrics/cadvisor",image!=""} * on(cluster,namespace,pod) group_left(node) topk(1, max(kube_pod_info{node!=""}) by(cluster,namespace,pod,node)) by(cluster,namespace,pod)
           labels: {}
           record: node_namespace_pod_container:container_memory_swap

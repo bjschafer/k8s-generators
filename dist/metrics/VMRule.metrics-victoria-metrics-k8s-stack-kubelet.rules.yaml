@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.60.1
+    helm.sh/chart: victoria-metrics-k8s-stack-0.61.8
   name: metrics-victoria-metrics-k8s-stack-kubelet.rules
   namespace: metrics
 spec:
@@ -17,35 +17,17 @@ spec:
       params: {}
       rules:
         - annotations: {}
-          expr: |-
-            histogram_quantile(
-              0.99,
-              sum(rate(kubelet_pleg_relist_duration_seconds_bucket{job="kubelet", metrics_path="/metrics"}[5m])) by (instance,le,cluster)
-              * on (instance,cluster) group_left (node)
-              max by (instance,node,cluster) (kubelet_node_name{job="kubelet", metrics_path="/metrics"})
-            )
+          expr: histogram_quantile(0.99, sum(rate(kubelet_pleg_relist_duration_seconds_bucket{job="kubelet",metrics_path="/metrics"}[5m])) by(cluster,instance,le) * on(cluster,instance) group_left(node) max(kubelet_node_name{job="kubelet",metrics_path="/metrics"}) by(cluster,instance,node))
           labels:
             quantile: "0.99"
           record: node_quantile:kubelet_pleg_relist_duration_seconds:histogram_quantile
         - annotations: {}
-          expr: |-
-            histogram_quantile(
-              0.9,
-              sum(rate(kubelet_pleg_relist_duration_seconds_bucket{job="kubelet", metrics_path="/metrics"}[5m])) by (instance,le,cluster)
-              * on (instance,cluster) group_left (node)
-              max by (instance,node,cluster) (kubelet_node_name{job="kubelet", metrics_path="/metrics"})
-            )
+          expr: histogram_quantile(0.9, sum(rate(kubelet_pleg_relist_duration_seconds_bucket{job="kubelet",metrics_path="/metrics"}[5m])) by(cluster,instance,le) * on(cluster,instance) group_left(node) max(kubelet_node_name{job="kubelet",metrics_path="/metrics"}) by(cluster,instance,node))
           labels:
             quantile: "0.9"
           record: node_quantile:kubelet_pleg_relist_duration_seconds:histogram_quantile
         - annotations: {}
-          expr: |-
-            histogram_quantile(
-              0.5,
-              sum(rate(kubelet_pleg_relist_duration_seconds_bucket{job="kubelet", metrics_path="/metrics"}[5m])) by (instance,le,cluster)
-              * on (instance,cluster) group_left (node)
-              max by (instance,node,cluster) (kubelet_node_name{job="kubelet", metrics_path="/metrics"})
-            )
+          expr: histogram_quantile(0.5, sum(rate(kubelet_pleg_relist_duration_seconds_bucket{job="kubelet",metrics_path="/metrics"}[5m])) by(cluster,instance,le) * on(cluster,instance) group_left(node) max(kubelet_node_name{job="kubelet",metrics_path="/metrics"}) by(cluster,instance,node))
           labels:
             quantile: "0.5"
           record: node_quantile:kubelet_pleg_relist_duration_seconds:histogram_quantile

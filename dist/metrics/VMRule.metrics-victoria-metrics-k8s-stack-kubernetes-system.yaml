@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.60.1
+    helm.sh/chart: victoria-metrics-k8s-stack-0.61.8
   name: metrics-victoria-metrics-k8s-stack-kubernetes-system
   namespace: metrics
 spec:
@@ -21,7 +21,7 @@ spec:
             description: There are {{ $value }} different semantic versions of Kubernetes components running on cluster {{ $labels.cluster }}.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeversionmismatch
             summary: Different semantic versions of Kubernetes components running.
-          expr: count by (cluster) (count by (git_version,cluster) (label_replace(kubernetes_build_info{job!~"kube-dns|coredns"},"git_version","$1","git_version","(v[0-9]*.[0-9]*).*"))) > 1
+          expr: count(count(label_replace(kubernetes_build_info{job!~"kube-dns|coredns"}, "git_version", "$1", "git_version", "(v[0-9]*.[0-9]*).*")) by(git_version,cluster)) by(cluster) > 1
           for: 15m
           labels:
             severity: warning
@@ -30,11 +30,7 @@ spec:
             description: Kubernetes API server client '{{ $labels.job }}/{{ $labels.instance }}' is experiencing {{ $value | humanizePercentage }} errors on cluster {{ $labels.cluster }}.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeclienterrors
             summary: Kubernetes API server client is experiencing errors.
-          expr: |-
-            (sum(rate(rest_client_requests_total{job="apiserver",code=~"5.."}[5m])) by (instance,job,namespace,cluster)
-              /
-            sum(rate(rest_client_requests_total{job="apiserver"}[5m])) by (instance,job,namespace,cluster))
-            > 0.01
+          expr: (sum(rate(rest_client_requests_total{job="apiserver",code=~"5.."}[5m])) by(cluster,instance,job,namespace) / sum(rate(rest_client_requests_total{job="apiserver"}[5m])) by(cluster,instance,job,namespace)) > 0.01
           for: 15m
           labels:
             severity: warning

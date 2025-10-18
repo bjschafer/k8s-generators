@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-operator
     app.kubernetes.io/version: v0.63.0
-    helm.sh/chart: victoria-metrics-operator-0.53.0
+    helm.sh/chart: victoria-metrics-operator-0.54.0
   name: metrics-victoria-metrics-operator-cleanup-hook
   namespace: metrics
 spec:
@@ -21,13 +21,13 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: victoria-metrics-operator
         app.kubernetes.io/version: v0.63.0
-        helm.sh/chart: victoria-metrics-operator-0.53.0
+        helm.sh/chart: victoria-metrics-operator-0.54.0
       name: metrics-victoria-metrics-operator
     spec:
       containers:
         - args:
             - delete
-            - vlagent,vlcluster,vlogs,vlsingle,vmagent,vmalert,vmalertmanager,vmalertmanagerconfig,vmanomaly,vmauth,vmcluster,vmnodescrape,vmpodscrape,vmprobe,vmrule,vmservicescrape,vmsingle,vmstaticscrape,vmuser
+            - vlagent,vlcluster,vlogs,vlsingle,vmagent,vmalert,vmalertmanager,vmalertmanagerconfig,vmanomaly,vmauth,vmcluster,vmnodescrape,vmpodscrape,vmprobe,vmrule,vmscrapeconfig,vmservicescrape,vmsingle,vmstaticscrape,vmuser,vtcluster,vtsingle
             - --all
             - --ignore-not-found=true
           image: rancher/kubectl:v1.34.0
@@ -40,5 +40,11 @@ spec:
             requests:
               cpu: 100m
               memory: 56Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
       restartPolicy: OnFailure
       serviceAccountName: metrics-victoria-metrics-operator-cleanup-hook

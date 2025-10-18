@@ -12,7 +12,7 @@ import { VmResources } from "./vmresources";
 
 export const namespace = basename(__dirname);
 export const name = namespace;
-export const version = "0.60.1";
+export const version = "0.61.8";
 export const hostname = "metrics.cmdcentral.xyz";
 
 const app = new App(DEFAULT_APP_PROPS(namespace));
@@ -65,7 +65,7 @@ new HelmApp(app, "stack", {
         },
         kubernetesApps: {
           create: false,
-        }
+        },
       },
       labels: {
         "alerts.cmdcentral.xyz/kind": "metrics",
