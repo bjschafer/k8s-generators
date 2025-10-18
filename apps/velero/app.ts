@@ -20,7 +20,7 @@ import { AddCRDs } from "../../lib/util";
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
-const chartVersion = "10.1.3";
+const chartVersion = "11.1.1";
 const awsVersion = "1.13.0";
 
 NewArgoApp(name, {
@@ -71,7 +71,12 @@ class Velero extends Chart {
         configuration: {
           features: "EnableCSI",
           repositoryMaintenanceJob: {
-            latestJobsCount: 1,
+            repositoryConfigData: {
+              global: {
+                latestJobsCount: 1,
+                keepLatestMaintenanceJobs: 1,
+              },
+            },
           },
           defaultVolumesToFsBackup: false, // only backup annotated stuffs
         },
