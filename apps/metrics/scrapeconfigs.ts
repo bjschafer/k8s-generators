@@ -305,6 +305,25 @@ export class ScrapeConfigs extends Chart {
       },
     });
 
+    new VmScrapeConfig(this, "vmhost-caddy", {
+      metadata: {
+        name: "vmhost-caddy",
+        namespace: namespace,
+      },
+      spec: {
+        staticConfigs: [
+          {
+            targets: [
+              "vmhost01.cmdcentral.xyz:2025",
+              "vmhost02.cmdcentral.xyz:2025",
+              "vmhost03.cmdcentral.xyz:2025",
+            ],
+            labels: { job: "vmhost-caddy" },
+          },
+        ],
+      },
+    });
+
     // --- pods
     new VmPodScrape(this, "argocd-image-updater", {
       metadata: {

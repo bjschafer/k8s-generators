@@ -1,0 +1,13 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: vmhost-caddy
+  namespace: metrics
+spec:
+  staticConfigs:
+    - labels:
+        job: vmhost-caddy
+      targets:
+        - vmhost01.cmdcentral.xyz:2025
+        - vmhost02.cmdcentral.xyz:2025
+        - vmhost03.cmdcentral.xyz:2025
