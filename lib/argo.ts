@@ -72,7 +72,9 @@ export class ArgoApp extends Chart {
     const providedSyncOptions = props.sync_policy?.syncOptions ?? [];
     const syncOptions = [
       ...defaultSyncOptions,
-      ...providedSyncOptions.filter((option) => !defaultSyncOptions.includes(option)),
+      ...providedSyncOptions.filter(
+        (option) => !defaultSyncOptions.includes(option),
+      ),
     ];
 
     const syncPolicy: ApplicationSpecSyncPolicy = {
