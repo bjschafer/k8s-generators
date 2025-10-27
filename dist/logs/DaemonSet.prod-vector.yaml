@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: prod
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: vector
-    app.kubernetes.io/version: 0.44.0-distroless-libc
-    helm.sh/chart: vector-0.40.0
+    app.kubernetes.io/version: 0.50.0-distroless-libc
+    helm.sh/chart: vector-0.46.0
   name: prod-vector
   namespace: logs
 spec:
@@ -49,7 +49,7 @@ spec:
               value: /host/proc
             - name: SYSFS_ROOT
               value: /host/sys
-          image: timberio/vector:0.44.0-distroless-libc
+          image: timberio/vector:0.50.0-distroless-libc
           imagePullPolicy: IfNotPresent
           name: vector
           ports:
@@ -117,7 +117,7 @@ spec:
           projected:
             sources:
               - configMap:
-                  name: vl-config
+                  name: vector-vl-config
         - hostPath:
             path: /var/lib/vector
           name: data
