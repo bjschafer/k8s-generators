@@ -6,7 +6,6 @@ import { Quantity } from "../../imports/k8s";
 import {
   Cluster,
   ClusterSpec,
-  ClusterSpecBackupBarmanObjectStoreWalCompression,
   ClusterSpecBootstrapInitdbImportType,
   ImageCatalog,
   Pooler,

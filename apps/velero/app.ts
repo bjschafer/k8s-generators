@@ -1,7 +1,7 @@
 import { basename, join } from "path";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
-import { App, Chart, Helm } from "cdk8s";
+import { App, Chart } from "cdk8s";
 import { Construct } from "constructs";
 import {
   VmPodScrape,

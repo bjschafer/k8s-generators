@@ -6,7 +6,7 @@ import {
 import { App, Size } from "cdk8s";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
-import { Cpu, Probe, ServiceType } from "cdk8s-plus-33";
+import { Cpu, ServiceType } from "cdk8s-plus-33";
 import { NewKustomize } from "../../lib/kustomize";
 
 const namespace = basename(__dirname);

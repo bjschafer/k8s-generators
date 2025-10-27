@@ -1,7 +1,6 @@
 import { App, Duration, Size } from "cdk8s";
 import {
   Cpu,
-  Env,
   EnvValue,
   PersistentVolumeAccessMode,
   Probe,
