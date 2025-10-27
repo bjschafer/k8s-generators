@@ -55,11 +55,6 @@ spec:
       setHostnameAsFQDN: false
       shareProcessNamespace: false
       terminationGracePeriodSeconds: 30
-      volumes:
-        - name: pvc-db
-          persistentVolumeClaim:
-            claimName: db
-            readOnly: false
   updateStrategy:
     rollingUpdate:
       partition: 0
