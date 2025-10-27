@@ -14,7 +14,7 @@ spec:
   template:
     metadata:
       annotations:
-        backup.velero.io/backup-volumes: pvc-db
+        backup.velero.io/backup-volumes: db
       labels:
         cdk8s.io/metadata.addr: db-db-sts-c843c760
     spec:
@@ -45,7 +45,7 @@ spec:
             runAsNonRoot: false
           volumeMounts:
             - mountPath: /var/lib/mysql
-              name: pvc-db
+              name: db
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
@@ -59,3 +59,13 @@ spec:
     rollingUpdate:
       partition: 0
     type: RollingUpdate
+  volumeClaimTemplates:
+    - metadata:
+        name: db
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 20Gi
+        storageClassName: ceph-rbd

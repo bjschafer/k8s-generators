@@ -73,21 +73,25 @@ export class MysqlInstance extends Chart {
       `${name}-creds`,
       `${name}-creds`,
     );
-    const pvc = new PersistentVolumeClaim(this, `${name}-pvc`, {
-      storageClassName: StorageClass.CEPH_RBD,
+
+    sts.addVolumeClaimTemplate({
+      name: name,
       storage: props.pvcSize,
-      metadata: {
-        name: name,
-        namespace: props.namespace,
-      },
       accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
+      storageClassName: StorageClass.CEPH_RBD,
     });
 
+    const pvc = PersistentVolumeClaim.fromClaimName(this, `${name}-pvc`, name);
     const volume = Volume.fromPersistentVolumeClaim(
       this,
       `${name}-volume`,
       pvc,
+      {
+        name: name,
+      },
     );
+
+    sts.addVolume(volume);
 
     sts.containers[0].mount("/var/lib/mysql", volume);
 
