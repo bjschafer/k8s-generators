@@ -1,5 +1,5 @@
 import { App, Chart, Duration, Size } from "cdk8s";
-import { Cpu, EnvValue, Probe, Secret, ServiceAccount } from "cdk8s-plus-33";
+import { Cpu, EnvValue, Probe, ServiceAccount } from "cdk8s-plus-33";
 import { Construct } from "constructs";
 import { basename } from "path";
 import {
@@ -7,7 +7,6 @@ import {
   KubeClusterRole,
   KubeClusterRoleBinding,
   KubeService,
-  Quantity,
 } from "../../imports/k8s";
 import {
   VmRule,
@@ -21,12 +20,11 @@ import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
 import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
 import { BitwardenSecret } from "../../lib/secrets";
-import { Valkey } from "../../lib/valkey";
 
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
-const version = "2025.8.4";
+const version = "2025.10.0";
 
 NewArgoApp(namespace, {
   namespace: namespace,
@@ -109,22 +107,6 @@ const creds = new BitwardenSecret(app, "creds", {
   },
 });
 
-// Valkey (Redis replacement)
-const valkey = new Valkey(app, "valkey", {
-  name: "authentik",
-  namespace: namespace,
-  version: "7-alpine",
-  resources: {
-    requests: {
-      cpu: Quantity.fromString("50m"),
-      memory: Quantity.fromString("64Mi"),
-    },
-    limits: {
-      memory: Quantity.fromString("128Mi"),
-    },
-  },
-});
-
 // Common environment variables
 const commonEnv: Record<string, EnvValue> = {
   AUTHENTIK_AVATARS: EnvValue.fromValue("gravatar"),
@@ -151,11 +133,6 @@ const commonEnv: Record<string, EnvValue> = {
   AUTHENTIK_POSTGRESQL__NAME: EnvValue.fromValue("authentik"),
   AUTHENTIK_POSTGRESQL__PORT: EnvValue.fromValue("5432"),
   AUTHENTIK_POSTGRESQL__USER: EnvValue.fromValue("authentik"),
-  AUTHENTIK_REDIS__HOST: EnvValue.fromValue(valkey.Service.name),
-  AUTHENTIK_REDIS__PASSWORD: EnvValue.fromSecretValue({
-    secret: Secret.fromSecretName(app, "valkey-secret", "authentik-valkey"),
-    key: "valkey-password",
-  }),
 };
 
 // Authentik Server

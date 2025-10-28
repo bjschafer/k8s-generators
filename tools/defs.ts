@@ -41,7 +41,9 @@ export function parseConstStringFromAppTs(
 ): string {
   const appTsPath = join(__dirname, "..", "apps", appName, "app.ts");
   const src = readFileSync(appTsPath, "utf8");
-  const re = new RegExp("\\bconst\\s+" + constName + "\\s*=\\s*[\"'`](.*?)[\"'\\`]");
+  const re = new RegExp(
+    "\\bconst\\s+" + constName + "\\s*=\\s*[\"'`](.*?)[\"'\\`]",
+  );
   const m = re.exec(src);
   if (!m) {
     throw new Error(`Could not find const ${constName} in ${appTsPath}`);

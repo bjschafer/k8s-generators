@@ -67,13 +67,6 @@ spec:
               value: "5432"
             - name: AUTHENTIK_POSTGRESQL__USER
               value: authentik
-            - name: AUTHENTIK_REDIS__HOST
-              value: authentik-valkey-master
-            - name: AUTHENTIK_REDIS__PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: valkey-password
-                  name: authentik-valkey
             - name: AUTHENTIK_SECRET_KEY
               valueFrom:
                 secretKeyRef:
@@ -89,7 +82,7 @@ spec:
                 secretKeyRef:
                   key: AUTHENTIK_EMAIL__PASSWORD
                   name: creds
-          image: ghcr.io/goauthentik/server:2025.8.4
+          image: ghcr.io/goauthentik/server:2025.10.0
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
