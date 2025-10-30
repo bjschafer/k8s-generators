@@ -6,7 +6,7 @@ metadata:
 spec:
   configuration:
     destinationPath: s3://postgres/k8s/prod-pg17
-    endpointURL: https://s3.cmdcentral.xyz
+    endpointURL: https://garage.cmdcentral.xyz
     s3Credentials:
       accessKeyId:
         key: ACCESS_KEY_ID

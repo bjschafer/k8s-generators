@@ -1,8 +1,10 @@
 import { App, Chart } from "cdk8s";
-import { BitwardenSecret } from "../../lib/secrets";
+import { IntOrString, KubeService } from "cdk8s-plus-33/lib/imports/k8s";
 import { Construct } from "constructs";
 import { basename } from "path";
+import { ObjectStore } from "../../imports/barmancloud.cnpg.io";
 import { Quantity } from "../../imports/k8s";
+import { VmPodScrape } from "../../imports/operator.victoriametrics.com";
 import {
   Cluster,
   ClusterSpec,
@@ -20,10 +22,8 @@ import {
   DEFAULT_APP_PROPS,
   EXTERNAL_DNS_ANNOTATION_KEY,
 } from "../../lib/consts";
+import { BitwardenSecret } from "../../lib/secrets";
 import { StorageClass } from "../../lib/volume";
-import { VmPodScrape } from "../../imports/operator.victoriametrics.com";
-import { IntOrString, KubeService } from "cdk8s-plus-33/lib/imports/k8s";
-import { ObjectStore } from "../../imports/barmancloud.cnpg.io";
 
 const namespace = basename(__dirname);
 
@@ -183,7 +183,7 @@ class ProdPostgres extends Chart {
       },
       spec: {
         configuration: {
-          endpointUrl: "https://s3.cmdcentral.xyz",
+          endpointUrl: "https://garage.cmdcentral.xyz",
           destinationPath: "s3://postgres/k8s/prod-pg17",
           s3Credentials: {
             accessKeyId: {
@@ -372,7 +372,7 @@ class VectorPostgres extends Chart {
       },
       spec: {
         configuration: {
-          endpointUrl: "https://s3.cmdcentral.xyz",
+          endpointUrl: "https://garage.cmdcentral.xyz",
           destinationPath: `s3://postgres/k8s/${name}`,
           s3Credentials: {
             accessKeyId: {
