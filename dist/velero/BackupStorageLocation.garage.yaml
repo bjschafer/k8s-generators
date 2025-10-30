@@ -1,13 +1,13 @@
 apiVersion: velero.io/v1
 kind: BackupStorageLocation
 metadata:
-  name: s3
+  name: garage
   namespace: velero
 spec:
   config:
     region: us-east-1
     s3ForcePathStyle: "true"
-    s3Url: https://s3.cmdcentral.xyz
+    s3Url: https://garage.cmdcentral.xyz
   credential:
     key: config
     name: s3-creds

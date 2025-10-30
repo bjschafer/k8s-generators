@@ -10,6 +10,6 @@ spec:
     includedNamespaces:
       - "*"
     snapshotMoveData: true
-    storageLocation: s3
+    storageLocation: garage
     ttl: 2232h0m0s
   useOwnerReferencesInBackup: false

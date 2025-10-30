@@ -1,8 +1,7 @@
-import { basename, join } from "path";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
-import { NewArgoApp } from "../../lib/argo";
 import { App, Chart } from "cdk8s";
 import { Construct } from "constructs";
+import { basename, join } from "path";
+import { SchemaForVeleroHelmChart } from "../../imports/helm-values/velero-values.schema";
 import {
   VmPodScrape,
   VmServiceScrape,
@@ -14,10 +13,11 @@ import {
   ScheduleSpecTemplate,
   VolumeSnapshotLocation,
 } from "../../imports/velero.io";
+import { NewArgoApp } from "../../lib/argo";
+import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { HelmApp } from "../../lib/helm";
 import { BitwardenSecret } from "../../lib/secrets";
 import { AddCRDs } from "../../lib/util";
-import { HelmApp } from "../../lib/helm";
-import { SchemaForVeleroHelmChart } from "../../imports/helm-values/velero-values.schema";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -156,16 +156,16 @@ class Velero extends Chart {
       },
     });
 
-    new BackupStorageLocation(this, "s3", {
+    new BackupStorageLocation(this, "garage", {
       metadata: {
-        name: "s3",
+        name: "garage",
         namespace: namespace,
       },
       spec: {
         config: {
           region: "us-east-1",
           s3ForcePathStyle: "true",
-          s3Url: "https://s3.cmdcentral.xyz",
+          s3Url: "https://garage.cmdcentral.xyz",
         },
         default: true,
         objectStorage: {
@@ -233,7 +233,7 @@ class Velero extends Chart {
       csiSnapshotTimeout: "0s",
       includedNamespaces: ["*"],
       snapshotMoveData: true,
-      storageLocation: "s3",
+      storageLocation: "garage",
     };
 
     const offsiteNamespaces = [
