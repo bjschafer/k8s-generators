@@ -88,6 +88,7 @@ export class ScrapeConfigs extends Chart {
             labels: { job: "garage" },
           },
         ],
+        scheme: VmScrapeConfigSpecScheme.HTTPS,
       },
     });
 

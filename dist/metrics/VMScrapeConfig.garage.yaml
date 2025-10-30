@@ -4,6 +4,7 @@ metadata:
   name: garage
   namespace: metrics
 spec:
+  scheme: https
   staticConfigs:
     - labels:
         job: garage
