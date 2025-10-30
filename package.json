@@ -31,15 +31,10 @@
     "yaml": "^2.8.1"
   },
   "devDependencies": {
-    "@types/jest": "^30.0.0",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^24.9.2",
     "cdk8s-cli": "^2.202.8",
-    "jest": "^30.2.0",
     "json-schema-to-typescript": "^15.0.4",
-    "npm-check-updates": "^18.3.1",
-    "ts-jest": "^29.4.5",
     "typescript": "^5.9.3",
-    "yarn": "^1.22.22"
   }
 }
