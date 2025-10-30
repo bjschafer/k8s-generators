@@ -74,7 +74,6 @@ export interface HelmChartProps {
    * @schema HelmChart#spec
    */
   readonly spec?: HelmChartSpec;
-
 }
 
 /**
@@ -282,7 +281,6 @@ export interface HelmChartSpec {
    * @schema HelmChartSpec#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -338,7 +336,6 @@ export interface HelmChartSpecAuthSecret {
    * @schema HelmChartSpecAuthSecret#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -371,7 +368,6 @@ export interface HelmChartSpecDockerRegistrySecret {
    * @schema HelmChartSpecDockerRegistrySecret#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -575,7 +571,6 @@ export interface HelmChartSpecPodSecurityContext {
    * @schema HelmChartSpecPodSecurityContext#windowsOptions
    */
   readonly windowsOptions?: HelmChartSpecPodSecurityContextWindowsOptions;
-
 }
 
 /**
@@ -621,7 +616,6 @@ export interface HelmChartSpecRepoCaConfigMap {
    * @schema HelmChartSpecRepoCaConfigMap#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -773,7 +767,6 @@ export interface HelmChartSpecSecurityContext {
    * @schema HelmChartSpecSecurityContext#windowsOptions
    */
   readonly windowsOptions?: HelmChartSpecSecurityContextWindowsOptions;
-
 }
 
 /**
@@ -843,7 +836,6 @@ export interface HelmChartSpecValuesSecrets {
    * @schema HelmChartSpecValuesSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -889,7 +881,6 @@ export interface HelmChartSpecPodSecurityContextAppArmorProfile {
    * @schema HelmChartSpecPodSecurityContextAppArmorProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -945,7 +936,6 @@ export interface HelmChartSpecPodSecurityContextSeLinuxOptions {
    * @schema HelmChartSpecPodSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -993,7 +983,6 @@ export interface HelmChartSpecPodSecurityContextSeccompProfile {
    * @schema HelmChartSpecPodSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -1030,7 +1019,6 @@ export interface HelmChartSpecPodSecurityContextSysctls {
    * @schema HelmChartSpecPodSecurityContextSysctls#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -1093,7 +1081,6 @@ export interface HelmChartSpecPodSecurityContextWindowsOptions {
    * @schema HelmChartSpecPodSecurityContextWindowsOptions#runAsUserName
    */
   readonly runAsUserName?: string;
-
 }
 
 /**
@@ -1141,7 +1128,6 @@ export interface HelmChartSpecSecurityContextAppArmorProfile {
    * @schema HelmChartSpecSecurityContextAppArmorProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -1181,7 +1167,6 @@ export interface HelmChartSpecSecurityContextCapabilities {
    * @schema HelmChartSpecSecurityContextCapabilities#drop
    */
   readonly drop?: string[];
-
 }
 
 /**
@@ -1236,7 +1221,6 @@ export interface HelmChartSpecSecurityContextSeLinuxOptions {
    * @schema HelmChartSpecSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -1286,7 +1270,6 @@ export interface HelmChartSpecSecurityContextSeccompProfile {
    * @schema HelmChartSpecSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -1349,7 +1332,6 @@ export interface HelmChartSpecSecurityContextWindowsOptions {
    * @schema HelmChartSpecSecurityContextWindowsOptions#runAsUserName
    */
   readonly runAsUserName?: string;
-
 }
 
 /**
@@ -1446,7 +1428,6 @@ export interface HelmChartConfigProps {
    * @schema HelmChartConfig#spec
    */
   readonly spec?: HelmChartConfigSpec;
-
 }
 
 /**
@@ -1495,7 +1476,6 @@ export interface HelmChartConfigSpec {
    * @schema HelmChartConfigSpec#valuesSecrets
    */
   readonly valuesSecrets?: HelmChartConfigSpecValuesSecrets[];
-
 }
 
 /**
@@ -1556,7 +1536,6 @@ export interface HelmChartConfigSpecValuesSecrets {
    * @schema HelmChartConfigSpecValuesSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**

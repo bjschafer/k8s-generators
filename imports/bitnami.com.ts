@@ -78,7 +78,6 @@ export interface SealedSecretProps {
    * @schema SealedSecret#spec
    */
   readonly spec: SealedSecretSpec;
-
 }
 
 /**
@@ -121,7 +120,6 @@ export interface SealedSecretSpec {
    * @schema SealedSecretSpec#template
    */
   readonly template?: SealedSecretSpecTemplate;
-
 }
 
 /**
@@ -178,7 +176,6 @@ export interface SealedSecretSpecTemplate {
    * @schema SealedSecretSpecTemplate#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -229,7 +226,6 @@ export interface SealedSecretSpecTemplateMetadata {
    * @schema SealedSecretSpecTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**

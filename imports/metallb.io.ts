@@ -74,7 +74,6 @@ export interface AddressPoolProps {
    * @schema AddressPool#spec
    */
   readonly spec: AddressPoolSpec;
-
 }
 
 /**
@@ -125,7 +124,6 @@ export interface AddressPoolSpec {
    * @schema AddressPoolSpec#protocol
    */
   readonly protocol: AddressPoolSpecProtocol;
-
 }
 
 /**
@@ -176,7 +174,6 @@ export interface AddressPoolSpecBgpAdvertisements {
    * @schema AddressPoolSpecBgpAdvertisements#localPref
    */
   readonly localPref?: number;
-
 }
 
 /**
@@ -280,7 +277,6 @@ export interface AddressPoolV1Beta1Props {
    * @schema AddressPoolV1Beta1#spec
    */
   readonly spec: AddressPoolV1Beta1Spec;
-
 }
 
 /**
@@ -331,7 +327,6 @@ export interface AddressPoolV1Beta1Spec {
    * @schema AddressPoolV1Beta1Spec#protocol
    */
   readonly protocol: AddressPoolV1Beta1SpecProtocol;
-
 }
 
 /**
@@ -382,7 +377,6 @@ export interface AddressPoolV1Beta1SpecBgpAdvertisements {
    * @schema AddressPoolV1Beta1SpecBgpAdvertisements#localPref
    */
   readonly localPref?: number;
-
 }
 
 /**
@@ -488,7 +482,6 @@ export interface BfdProfileProps {
    * @schema BFDProfile#spec
    */
   readonly spec?: BfdProfileSpec;
-
 }
 
 /**
@@ -576,7 +569,6 @@ export interface BfdProfileSpec {
    * @schema BfdProfileSpec#transmitInterval
    */
   readonly transmitInterval?: number;
-
 }
 
 /**
@@ -675,7 +667,6 @@ export interface BgpAdvertisementProps {
    * @schema BGPAdvertisement#spec
    */
   readonly spec?: BgpAdvertisementSpec;
-
 }
 
 /**
@@ -761,7 +752,6 @@ export interface BgpAdvertisementSpec {
    * @schema BgpAdvertisementSpec#peers
    */
   readonly peers?: string[];
-
 }
 
 /**
@@ -808,7 +798,6 @@ export interface BgpAdvertisementSpecIpAddressPoolSelectors {
    * @schema BgpAdvertisementSpecIpAddressPoolSelectors#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -849,7 +838,6 @@ export interface BgpAdvertisementSpecNodeSelectors {
    * @schema BgpAdvertisementSpecNodeSelectors#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -898,7 +886,6 @@ export interface BgpAdvertisementSpecIpAddressPoolSelectorsMatchExpressions {
    * @schema BgpAdvertisementSpecIpAddressPoolSelectorsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -948,7 +935,6 @@ export interface BgpAdvertisementSpecNodeSelectorsMatchExpressions {
    * @schema BgpAdvertisementSpecNodeSelectorsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -1039,7 +1025,6 @@ export interface BgpPeerProps {
    * @schema BGPPeer#spec
    */
   readonly spec?: BgpPeerSpec;
-
 }
 
 /**
@@ -1145,7 +1130,6 @@ export interface BgpPeerSpec {
    * @schema BgpPeerSpec#sourceAddress
    */
   readonly sourceAddress?: string;
-
 }
 
 /**
@@ -1186,7 +1170,6 @@ export interface BgpPeerSpecNodeSelectors {
    * @schema BgpPeerSpecNodeSelectors#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -1222,7 +1205,6 @@ export interface BgpPeerSpecNodeSelectorsMatchExpressions {
    * @schema BgpPeerSpecNodeSelectorsMatchExpressions#values
    */
   readonly values: string[];
-
 }
 
 /**
@@ -1313,7 +1295,6 @@ export interface BgpPeerV1Beta2Props {
    * @schema BGPPeerV1Beta2#spec
    */
   readonly spec?: BgpPeerV1Beta2Spec;
-
 }
 
 /**
@@ -1475,7 +1456,6 @@ export interface BgpPeerV1Beta2Spec {
    * @schema BgpPeerV1Beta2Spec#vrf
    */
   readonly vrf?: string;
-
 }
 
 /**
@@ -1548,7 +1528,6 @@ export interface BgpPeerV1Beta2SpecNodeSelectors {
    * @schema BgpPeerV1Beta2SpecNodeSelectors#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -1588,7 +1567,6 @@ export interface BgpPeerV1Beta2SpecPasswordSecret {
    * @schema BgpPeerV1Beta2SpecPasswordSecret#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -1637,7 +1615,6 @@ export interface BgpPeerV1Beta2SpecNodeSelectorsMatchExpressions {
    * @schema BgpPeerV1Beta2SpecNodeSelectorsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -1730,7 +1707,6 @@ export interface CommunityProps {
    * @schema Community#spec
    */
   readonly spec?: CommunitySpec;
-
 }
 
 /**
@@ -1758,7 +1734,6 @@ export interface CommunitySpec {
    * @schema CommunitySpec#communities
    */
   readonly communities?: CommunitySpecCommunities[];
-
 }
 
 /**
@@ -1793,7 +1768,6 @@ export interface CommunitySpecCommunities {
    * @schema CommunitySpecCommunities#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -1885,7 +1859,6 @@ export interface IpAddressPoolProps {
    * @schema IPAddressPool#spec
    */
   readonly spec: IpAddressPoolSpec;
-
 }
 
 /**
@@ -1947,7 +1920,6 @@ export interface IpAddressPoolSpec {
    * @schema IpAddressPoolSpec#serviceAllocation
    */
   readonly serviceAllocation?: IpAddressPoolSpecServiceAllocation;
-
 }
 
 /**
@@ -2008,7 +1980,6 @@ export interface IpAddressPoolSpecServiceAllocation {
    * @schema IpAddressPoolSpecServiceAllocation#serviceSelectors
    */
   readonly serviceSelectors?: IpAddressPoolSpecServiceAllocationServiceSelectors[];
-
 }
 
 /**
@@ -2051,7 +2022,6 @@ export interface IpAddressPoolSpecServiceAllocationNamespaceSelectors {
    * @schema IpAddressPoolSpecServiceAllocationNamespaceSelectors#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -2092,7 +2062,6 @@ export interface IpAddressPoolSpecServiceAllocationServiceSelectors {
    * @schema IpAddressPoolSpecServiceAllocationServiceSelectors#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -2141,7 +2110,6 @@ export interface IpAddressPoolSpecServiceAllocationNamespaceSelectorsMatchExpres
    * @schema IpAddressPoolSpecServiceAllocationNamespaceSelectorsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -2191,7 +2159,6 @@ export interface IpAddressPoolSpecServiceAllocationServiceSelectorsMatchExpressi
    * @schema IpAddressPoolSpecServiceAllocationServiceSelectorsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -2284,7 +2251,6 @@ export interface L2AdvertisementProps {
    * @schema L2Advertisement#spec
    */
   readonly spec?: L2AdvertisementSpec;
-
 }
 
 /**
@@ -2337,7 +2303,6 @@ export interface L2AdvertisementSpec {
    * @schema L2AdvertisementSpec#nodeSelectors
    */
   readonly nodeSelectors?: L2AdvertisementSpecNodeSelectors[];
-
 }
 
 /**
@@ -2380,7 +2345,6 @@ export interface L2AdvertisementSpecIpAddressPoolSelectors {
    * @schema L2AdvertisementSpecIpAddressPoolSelectors#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -2421,7 +2385,6 @@ export interface L2AdvertisementSpecNodeSelectors {
    * @schema L2AdvertisementSpecNodeSelectors#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -2470,7 +2433,6 @@ export interface L2AdvertisementSpecIpAddressPoolSelectorsMatchExpressions {
    * @schema L2AdvertisementSpecIpAddressPoolSelectorsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -2520,7 +2482,6 @@ export interface L2AdvertisementSpecNodeSelectorsMatchExpressions {
    * @schema L2AdvertisementSpecNodeSelectorsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -2611,7 +2572,6 @@ export interface ServiceL2StatusProps {
    * @schema ServiceL2Status#spec
    */
   readonly spec?: any;
-
 }
 
 /**

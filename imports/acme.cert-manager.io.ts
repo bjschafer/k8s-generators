@@ -72,7 +72,6 @@ export interface ChallengeProps {
    * @schema Challenge#spec
    */
   readonly spec: ChallengeSpec;
-
 }
 
 /**
@@ -174,7 +173,6 @@ export interface ChallengeSpec {
    * @schema ChallengeSpec#wildcard
    */
   readonly wildcard?: boolean;
-
 }
 
 /**
@@ -229,7 +227,6 @@ export interface ChallengeSpecIssuerRef {
    * @schema ChallengeSpecIssuerRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -283,7 +280,6 @@ export interface ChallengeSpecSolver {
    * @schema ChallengeSpecSolver#selector
    */
   readonly selector?: ChallengeSpecSolverSelector;
-
 }
 
 /**
@@ -395,7 +391,6 @@ export interface ChallengeSpecSolverDns01 {
    * @schema ChallengeSpecSolverDns01#webhook
    */
   readonly webhook?: ChallengeSpecSolverDns01Webhook;
-
 }
 
 /**
@@ -449,7 +444,6 @@ export interface ChallengeSpecSolverHttp01 {
    * @schema ChallengeSpecSolverHttp01#ingress
    */
   readonly ingress?: ChallengeSpecSolverHttp01Ingress;
-
 }
 
 /**
@@ -512,7 +506,6 @@ export interface ChallengeSpecSolverSelector {
    * @schema ChallengeSpecSolverSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -550,7 +543,6 @@ export interface ChallengeSpecSolverDns01AcmeDns {
    * @schema ChallengeSpecSolverDns01AcmeDns#host
    */
   readonly host: string;
-
 }
 
 /**
@@ -602,7 +594,6 @@ export interface ChallengeSpecSolverDns01Akamai {
    * @schema ChallengeSpecSolverDns01Akamai#serviceConsumerDomain
    */
   readonly serviceConsumerDomain: string;
-
 }
 
 /**
@@ -691,7 +682,6 @@ export interface ChallengeSpecSolverDns01AzureDns {
    * @schema ChallengeSpecSolverDns01AzureDns#tenantID
    */
   readonly tenantId?: string;
-
 }
 
 /**
@@ -742,7 +732,6 @@ export interface ChallengeSpecSolverDns01CloudDns {
    * @schema ChallengeSpecSolverDns01CloudDns#serviceAccountSecretRef
    */
   readonly serviceAccountSecretRef?: ChallengeSpecSolverDns01CloudDnsServiceAccountSecretRef;
-
 }
 
 /**
@@ -789,7 +778,6 @@ export interface ChallengeSpecSolverDns01Cloudflare {
    * @schema ChallengeSpecSolverDns01Cloudflare#email
    */
   readonly email?: string;
-
 }
 
 /**
@@ -834,7 +822,6 @@ export interface ChallengeSpecSolverDns01Digitalocean {
    * @schema ChallengeSpecSolverDns01Digitalocean#tokenSecretRef
    */
   readonly tokenSecretRef: ChallengeSpecSolverDns01DigitaloceanTokenSecretRef;
-
 }
 
 /**
@@ -893,7 +880,6 @@ export interface ChallengeSpecSolverDns01Rfc2136 {
    * @schema ChallengeSpecSolverDns01Rfc2136#tsigSecretSecretRef
    */
   readonly tsigSecretSecretRef?: ChallengeSpecSolverDns01Rfc2136TsigSecretSecretRef;
-
 }
 
 /**
@@ -1001,7 +987,6 @@ export interface ChallengeSpecSolverDns01Route53 {
    * @schema ChallengeSpecSolverDns01Route53#secretAccessKeySecretRef
    */
   readonly secretAccessKeySecretRef?: ChallengeSpecSolverDns01Route53SecretAccessKeySecretRef;
-
 }
 
 /**
@@ -1063,7 +1048,6 @@ export interface ChallengeSpecSolverDns01Webhook {
    * @schema ChallengeSpecSolverDns01Webhook#solverName
    */
   readonly solverName: string;
-
 }
 
 /**
@@ -1124,7 +1108,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoute {
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoute#serviceType
    */
   readonly serviceType?: string;
-
 }
 
 /**
@@ -1208,7 +1191,6 @@ export interface ChallengeSpecSolverHttp01Ingress {
    * @schema ChallengeSpecSolverHttp01Ingress#serviceType
    */
   readonly serviceType?: string;
-
 }
 
 /**
@@ -1253,7 +1235,6 @@ export interface ChallengeSpecSolverDns01AcmeDnsAccountSecretRef {
    * @schema ChallengeSpecSolverDns01AcmeDnsAccountSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1294,7 +1275,6 @@ export interface ChallengeSpecSolverDns01AkamaiAccessTokenSecretRef {
    * @schema ChallengeSpecSolverDns01AkamaiAccessTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1335,7 +1315,6 @@ export interface ChallengeSpecSolverDns01AkamaiClientSecretSecretRef {
    * @schema ChallengeSpecSolverDns01AkamaiClientSecretSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1376,7 +1355,6 @@ export interface ChallengeSpecSolverDns01AkamaiClientTokenSecretRef {
    * @schema ChallengeSpecSolverDns01AkamaiClientTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1418,7 +1396,6 @@ export interface ChallengeSpecSolverDns01AzureDnsClientSecretSecretRef {
    * @schema ChallengeSpecSolverDns01AzureDnsClientSecretSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1481,7 +1458,6 @@ export interface ChallengeSpecSolverDns01AzureDnsManagedIdentity {
    * @schema ChallengeSpecSolverDns01AzureDnsManagedIdentity#tenantID
    */
   readonly tenantId?: string;
-
 }
 
 /**
@@ -1523,7 +1499,6 @@ export interface ChallengeSpecSolverDns01CloudDnsServiceAccountSecretRef {
    * @schema ChallengeSpecSolverDns01CloudDnsServiceAccountSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1565,7 +1540,6 @@ export interface ChallengeSpecSolverDns01CloudflareApiKeySecretRef {
    * @schema ChallengeSpecSolverDns01CloudflareApiKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1605,7 +1579,6 @@ export interface ChallengeSpecSolverDns01CloudflareApiTokenSecretRef {
    * @schema ChallengeSpecSolverDns01CloudflareApiTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1646,7 +1619,6 @@ export interface ChallengeSpecSolverDns01DigitaloceanTokenSecretRef {
    * @schema ChallengeSpecSolverDns01DigitaloceanTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1687,7 +1659,6 @@ export interface ChallengeSpecSolverDns01Rfc2136TsigSecretSecretRef {
    * @schema ChallengeSpecSolverDns01Rfc2136TsigSecretSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1732,7 +1703,6 @@ export interface ChallengeSpecSolverDns01Route53AccessKeyIdSecretRef {
    * @schema ChallengeSpecSolverDns01Route53AccessKeyIdSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1763,7 +1733,6 @@ export interface ChallengeSpecSolverDns01Route53Auth {
    * @schema ChallengeSpecSolverDns01Route53Auth#kubernetes
    */
   readonly kubernetes: ChallengeSpecSolverDns01Route53AuthKubernetes;
-
 }
 
 /**
@@ -1805,7 +1774,6 @@ export interface ChallengeSpecSolverDns01Route53SecretAccessKeySecretRef {
    * @schema ChallengeSpecSolverDns01Route53SecretAccessKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1968,7 +1936,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRouteParentRefs {
    * @schema ChallengeSpecSolverHttp01GatewayHttpRouteParentRefs#sectionName
    */
   readonly sectionName?: string;
-
 }
 
 /**
@@ -2015,7 +1982,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplate {
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplate#spec
    */
   readonly spec?: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpec;
-
 }
 
 /**
@@ -2049,7 +2015,6 @@ export interface ChallengeSpecSolverHttp01IngressIngressTemplate {
    * @schema ChallengeSpecSolverHttp01IngressIngressTemplate#metadata
    */
   readonly metadata?: ChallengeSpecSolverHttp01IngressIngressTemplateMetadata;
-
 }
 
 /**
@@ -2091,7 +2056,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplate {
    * @schema ChallengeSpecSolverHttp01IngressPodTemplate#spec
    */
   readonly spec?: ChallengeSpecSolverHttp01IngressPodTemplateSpec;
-
 }
 
 /**
@@ -2124,7 +2088,6 @@ export interface ChallengeSpecSolverDns01Route53AuthKubernetes {
    * @schema ChallengeSpecSolverDns01Route53AuthKubernetes#serviceAccountRef
    */
   readonly serviceAccountRef: ChallengeSpecSolverDns01Route53AuthKubernetesServiceAccountRef;
-
 }
 
 /**
@@ -2163,7 +2126,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateMetadata {
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -2239,7 +2201,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpec {
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpec#tolerations
    */
   readonly tolerations?: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecTolerations[];
-
 }
 
 /**
@@ -2284,7 +2245,6 @@ export interface ChallengeSpecSolverHttp01IngressIngressTemplateMetadata {
    * @schema ChallengeSpecSolverHttp01IngressIngressTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -2324,7 +2284,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateMetadata {
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -2400,7 +2359,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpec {
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpec#tolerations
    */
   readonly tolerations?: ChallengeSpecSolverHttp01IngressPodTemplateSpecTolerations[];
-
 }
 
 /**
@@ -2447,7 +2405,6 @@ export interface ChallengeSpecSolverDns01Route53AuthKubernetesServiceAccountRef 
    * @schema ChallengeSpecSolverDns01Route53AuthKubernetesServiceAccountRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -2491,7 +2448,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinity#podAntiAffinity
    */
   readonly podAntiAffinity?: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity;
-
 }
 
 /**
@@ -2527,7 +2483,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecImagePu
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -2657,7 +2612,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#sysctls
    */
   readonly sysctls?: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls[];
-
 }
 
 /**
@@ -2733,7 +2687,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecTolerat
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -2780,7 +2733,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinity {
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinity#podAntiAffinity
    */
   readonly podAntiAffinity?: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinity;
-
 }
 
 /**
@@ -2816,7 +2768,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecImagePullSecrets
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -2946,7 +2897,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContext 
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContext#sysctls
    */
   readonly sysctls?: ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContextSysctls[];
-
 }
 
 /**
@@ -3022,7 +2972,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecTolerations {
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -3074,7 +3023,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution;
-
 }
 
 /**
@@ -3125,7 +3073,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
@@ -3176,7 +3123,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
@@ -3232,7 +3178,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -3280,7 +3225,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -3317,7 +3261,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -3366,7 +3309,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution;
-
 }
 
 /**
@@ -3417,7 +3359,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
@@ -3468,7 +3409,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
@@ -3524,7 +3464,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContextS
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -3572,7 +3511,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContextS
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -3609,7 +3547,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContextS
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecSecurityContextSysctls#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -3647,7 +3584,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -3681,7 +3617,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution#nodeSelectorTerms
    */
   readonly nodeSelectorTerms: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms[];
-
 }
 
 /**
@@ -3718,7 +3653,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -3816,7 +3750,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -3858,7 +3791,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -3956,7 +3888,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -3998,7 +3929,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -4032,7 +3962,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution#nodeSelectorTerms
    */
   readonly nodeSelectorTerms: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms[];
-
 }
 
 /**
@@ -4069,7 +3998,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -4167,7 +4095,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -4209,7 +4136,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -4307,7 +4233,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -4348,7 +4273,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchFields
    */
   readonly matchFields?: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields[];
-
 }
 
 /**
@@ -4387,7 +4311,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchFields
    */
   readonly matchFields?: ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields[];
-
 }
 
 /**
@@ -4480,7 +4403,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -4524,7 +4446,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -4567,7 +4488,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -4660,7 +4580,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -4704,7 +4623,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -4747,7 +4665,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -4784,7 +4701,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchFields
    */
   readonly matchFields?: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields[];
-
 }
 
 /**
@@ -4823,7 +4739,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchFields
    */
   readonly matchFields?: ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields[];
-
 }
 
 /**
@@ -4916,7 +4831,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -4960,7 +4874,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -5003,7 +4916,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -5096,7 +5008,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -5140,7 +5051,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -5183,7 +5093,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -5235,7 +5144,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -5288,7 +5196,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -5341,7 +5248,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -5394,7 +5300,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -5436,7 +5341,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -5480,7 +5384,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -5531,7 +5434,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -5583,7 +5485,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -5625,7 +5526,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -5669,7 +5569,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -5720,7 +5619,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -5772,7 +5670,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -5825,7 +5722,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -5878,7 +5774,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -5931,7 +5826,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -5984,7 +5878,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffi
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -6026,7 +5919,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -6070,7 +5962,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -6121,7 +6012,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -6173,7 +6063,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -6215,7 +6104,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -6259,7 +6147,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -6310,7 +6197,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -6362,7 +6248,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -6415,7 +6300,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -6468,7 +6352,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -6521,7 +6404,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -6574,7 +6456,6 @@ export interface ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinit
    * @schema ChallengeSpecSolverHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -6627,7 +6508,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -6680,7 +6560,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffin
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -6733,7 +6612,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -6786,7 +6664,6 @@ export interface ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiA
    * @schema ChallengeSpecSolverHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -6875,7 +6752,6 @@ export interface OrderProps {
    * @schema Order#spec
    */
   readonly spec: OrderSpec;
-
 }
 
 /**
@@ -6959,7 +6835,6 @@ export interface OrderSpec {
    * @schema OrderSpec#request
    */
   readonly request: string;
-
 }
 
 /**
@@ -7012,7 +6887,6 @@ export interface OrderSpecIssuerRef {
    * @schema OrderSpecIssuerRef#name
    */
   readonly name: string;
-
 }
 
 /**

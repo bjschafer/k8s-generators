@@ -76,7 +76,6 @@ export interface BackupProps {
    * @schema Backup#spec
    */
   readonly spec?: BackupSpec;
-
 }
 
 /**
@@ -310,12 +309,18 @@ export interface BackupSpec {
   readonly uploaderConfig?: BackupSpecUploaderConfig;
 
   /**
+   * VolumeGroupSnapshotLabelKey specifies the label key to group PVCs under a VGS.
+   *
+   * @schema BackupSpec#volumeGroupSnapshotLabelKey
+   */
+  readonly volumeGroupSnapshotLabelKey?: string;
+
+  /**
    * VolumeSnapshotLocations is a list containing names of VolumeSnapshotLocations associated with this backup.
    *
    * @schema BackupSpec#volumeSnapshotLocations
    */
   readonly volumeSnapshotLocations?: string[];
-
 }
 
 /**
@@ -350,6 +355,7 @@ export function toJson_BackupSpec(obj: BackupSpec | undefined): Record<string, a
     'storageLocation': obj.storageLocation,
     'ttl': obj.ttl,
     'uploaderConfig': toJson_BackupSpecUploaderConfig(obj.uploaderConfig),
+    'volumeGroupSnapshotLabelKey': obj.volumeGroupSnapshotLabelKey,
     'volumeSnapshotLocations': obj.volumeSnapshotLocations?.map(y => y),
   };
   // filter undefined values
@@ -369,7 +375,6 @@ export interface BackupSpecHooks {
    * @schema BackupSpecHooks#resources
    */
   readonly resources?: BackupSpecHooksResources[];
-
 }
 
 /**
@@ -409,7 +414,6 @@ export interface BackupSpecLabelSelector {
    * @schema BackupSpecLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -435,7 +439,6 @@ export interface BackupSpecMetadata {
    * @schema BackupSpecMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -475,7 +478,6 @@ export interface BackupSpecOrLabelSelectors {
    * @schema BackupSpecOrLabelSelectors#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -521,7 +523,6 @@ export interface BackupSpecResourcePolicy {
    * @schema BackupSpecResourcePolicy#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -552,7 +553,6 @@ export interface BackupSpecUploaderConfig {
    * @schema BackupSpecUploaderConfig#parallelFilesUpload
    */
   readonly parallelFilesUpload?: number;
-
 }
 
 /**
@@ -635,7 +635,6 @@ export interface BackupSpecHooksResources {
    * @schema BackupSpecHooksResources#pre
    */
   readonly pre?: BackupSpecHooksResourcesPre[];
-
 }
 
 /**
@@ -690,7 +689,6 @@ export interface BackupSpecLabelSelectorMatchExpressions {
    * @schema BackupSpecLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -740,7 +738,6 @@ export interface BackupSpecOrLabelSelectorsMatchExpressions {
    * @schema BackupSpecOrLabelSelectorsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -780,7 +777,6 @@ export interface BackupSpecHooksResourcesLabelSelector {
    * @schema BackupSpecHooksResourcesLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -810,7 +806,6 @@ export interface BackupSpecHooksResourcesPost {
    * @schema BackupSpecHooksResourcesPost#exec
    */
   readonly exec: BackupSpecHooksResourcesPostExec;
-
 }
 
 /**
@@ -839,7 +834,6 @@ export interface BackupSpecHooksResourcesPre {
    * @schema BackupSpecHooksResourcesPre#exec
    */
   readonly exec: BackupSpecHooksResourcesPreExec;
-
 }
 
 /**
@@ -887,7 +881,6 @@ export interface BackupSpecHooksResourcesLabelSelectorMatchExpressions {
    * @schema BackupSpecHooksResourcesLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -941,7 +934,6 @@ export interface BackupSpecHooksResourcesPostExec {
    * @schema BackupSpecHooksResourcesPostExec#timeout
    */
   readonly timeout?: string;
-
 }
 
 /**
@@ -996,7 +988,6 @@ export interface BackupSpecHooksResourcesPreExec {
    * @schema BackupSpecHooksResourcesPreExec#timeout
    */
   readonly timeout?: string;
-
 }
 
 /**
@@ -1110,7 +1101,6 @@ export interface BackupRepositoryProps {
    * @schema BackupRepository#spec
    */
   readonly spec?: BackupRepositorySpec;
-
 }
 
 /**
@@ -1165,11 +1155,11 @@ export interface BackupRepositorySpec {
 
   /**
    * ResticIdentifier is the full restic-compatible string for identifying
-   * this repository.
+   * this repository. This field is only used when RepositoryType is "restic".
    *
    * @schema BackupRepositorySpec#resticIdentifier
    */
-  readonly resticIdentifier: string;
+  readonly resticIdentifier?: string;
 
   /**
    * VolumeNamespace is the namespace this backup repository contains
@@ -1178,7 +1168,6 @@ export interface BackupRepositorySpec {
    * @schema BackupRepositorySpec#volumeNamespace
    */
   readonly volumeNamespace: string;
-
 }
 
 /**
@@ -1284,7 +1273,6 @@ export interface BackupStorageLocationProps {
    * @schema BackupStorageLocation#spec
    */
   readonly spec?: BackupStorageLocationSpec;
-
 }
 
 /**
@@ -1363,7 +1351,6 @@ export interface BackupStorageLocationSpec {
    * @schema BackupStorageLocationSpec#validationFrequency
    */
   readonly validationFrequency?: string;
-
 }
 
 /**
@@ -1429,7 +1416,6 @@ export interface BackupStorageLocationSpecCredential {
    * @schema BackupStorageLocationSpecCredential#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -1474,7 +1460,6 @@ export interface BackupStorageLocationSpecObjectStorage {
    * @schema BackupStorageLocationSpecObjectStorage#prefix
    */
   readonly prefix?: string;
-
 }
 
 /**
@@ -1565,7 +1550,6 @@ export interface DataDownloadProps {
    * @schema DataDownload#spec
    */
   readonly spec?: DataDownloadSpec;
-
 }
 
 /**
@@ -1656,7 +1640,6 @@ export interface DataDownloadSpec {
    * @schema DataDownloadSpec#targetVolume
    */
   readonly targetVolume: DataDownloadSpecTargetVolume;
-
 }
 
 /**
@@ -1721,7 +1704,6 @@ export interface DataDownloadSpecTargetVolume {
    * @schema DataDownloadSpecTargetVolume#pvc
    */
   readonly pvc: string;
-
 }
 
 /**
@@ -1812,7 +1794,6 @@ export interface DataUploadProps {
    * @schema DataUpload#spec
    */
   readonly spec?: DataUploadSpec;
-
 }
 
 /**
@@ -1903,7 +1884,6 @@ export interface DataUploadSpec {
    * @schema DataUploadSpec#sourcePVC
    */
   readonly sourcePvc: string;
-
 }
 
 /**
@@ -1935,6 +1915,13 @@ export function toJson_DataUploadSpec(obj: DataUploadSpec | undefined): Record<s
  */
 export interface DataUploadSpecCsiSnapshot {
   /**
+   * Driver is the driver used by the VolumeSnapshotContent
+   *
+   * @schema DataUploadSpecCsiSnapshot#driver
+   */
+  readonly driver?: string;
+
+  /**
    * SnapshotClass is the name of the snapshot class that the volume snapshot is created with
    *
    * @schema DataUploadSpecCsiSnapshot#snapshotClass
@@ -1954,7 +1941,6 @@ export interface DataUploadSpecCsiSnapshot {
    * @schema DataUploadSpecCsiSnapshot#volumeSnapshot
    */
   readonly volumeSnapshot: string;
-
 }
 
 /**
@@ -1964,6 +1950,7 @@ export interface DataUploadSpecCsiSnapshot {
 export function toJson_DataUploadSpecCsiSnapshot(obj: DataUploadSpecCsiSnapshot | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'driver': obj.driver,
     'snapshotClass': obj.snapshotClass,
     'storageClass': obj.storageClass,
     'volumeSnapshot': obj.volumeSnapshot,
@@ -2045,7 +2032,6 @@ export interface DeleteBackupRequestProps {
    * @schema DeleteBackupRequest#spec
    */
   readonly spec?: DeleteBackupRequestSpec;
-
 }
 
 /**
@@ -2073,7 +2059,6 @@ export interface DeleteBackupRequestSpec {
    * @schema DeleteBackupRequestSpec#backupName
    */
   readonly backupName: string;
-
 }
 
 /**
@@ -2164,7 +2149,6 @@ export interface DownloadRequestProps {
    * @schema DownloadRequest#spec
    */
   readonly spec?: DownloadRequestSpec;
-
 }
 
 /**
@@ -2194,7 +2178,6 @@ export interface DownloadRequestSpec {
    * @schema DownloadRequestSpec#target
    */
   readonly target: DownloadRequestSpecTarget;
-
 }
 
 /**
@@ -2230,7 +2213,6 @@ export interface DownloadRequestSpecTarget {
    * @schema DownloadRequestSpecTarget#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -2354,7 +2336,6 @@ export interface PodVolumeBackupProps {
    * @schema PodVolumeBackup#spec
    */
   readonly spec?: PodVolumeBackupSpec;
-
 }
 
 /**
@@ -2385,6 +2366,14 @@ export interface PodVolumeBackupSpec {
    * @schema PodVolumeBackupSpec#backupStorageLocation
    */
   readonly backupStorageLocation: string;
+
+  /**
+   * Cancel indicates request to cancel the ongoing PodVolumeBackup. It can be set
+   * when the PodVolumeBackup is in InProgress phase
+   *
+   * @schema PodVolumeBackupSpec#cancel
+   */
+  readonly cancel?: boolean;
 
   /**
    * Node is the name of the node that the Pod is running on.
@@ -2437,7 +2426,6 @@ export interface PodVolumeBackupSpec {
    * @schema PodVolumeBackupSpec#volume
    */
   readonly volume: string;
-
 }
 
 /**
@@ -2448,6 +2436,7 @@ export function toJson_PodVolumeBackupSpec(obj: PodVolumeBackupSpec | undefined)
   if (obj === undefined) { return undefined; }
   const result = {
     'backupStorageLocation': obj.backupStorageLocation,
+    'cancel': obj.cancel,
     'node': obj.node,
     'pod': toJson_PodVolumeBackupSpecPod(obj.pod),
     'repoIdentifier': obj.repoIdentifier,
@@ -2526,7 +2515,6 @@ export interface PodVolumeBackupSpecPod {
    * @schema PodVolumeBackupSpecPod#uid
    */
   readonly uid?: string;
-
 }
 
 /**
@@ -2631,7 +2619,6 @@ export interface PodVolumeRestoreProps {
    * @schema PodVolumeRestore#spec
    */
   readonly spec?: PodVolumeRestoreSpec;
-
 }
 
 /**
@@ -2662,6 +2649,14 @@ export interface PodVolumeRestoreSpec {
    * @schema PodVolumeRestoreSpec#backupStorageLocation
    */
   readonly backupStorageLocation: string;
+
+  /**
+   * Cancel indicates request to cancel the ongoing PodVolumeRestore. It can be set
+   * when the PodVolumeRestore is in InProgress phase
+   *
+   * @schema PodVolumeRestoreSpec#cancel
+   */
+  readonly cancel?: boolean;
 
   /**
    * Pod is a reference to the pod containing the volume to be restored.
@@ -2712,7 +2707,6 @@ export interface PodVolumeRestoreSpec {
    * @schema PodVolumeRestoreSpec#volume
    */
   readonly volume: string;
-
 }
 
 /**
@@ -2723,6 +2717,7 @@ export function toJson_PodVolumeRestoreSpec(obj: PodVolumeRestoreSpec | undefine
   if (obj === undefined) { return undefined; }
   const result = {
     'backupStorageLocation': obj.backupStorageLocation,
+    'cancel': obj.cancel,
     'pod': toJson_PodVolumeRestoreSpecPod(obj.pod),
     'repoIdentifier': obj.repoIdentifier,
     'snapshotID': obj.snapshotId,
@@ -2801,7 +2796,6 @@ export interface PodVolumeRestoreSpecPod {
    * @schema PodVolumeRestoreSpecPod#uid
    */
   readonly uid?: string;
-
 }
 
 /**
@@ -2910,7 +2904,6 @@ export interface RestoreProps {
    * @schema Restore#spec
    */
   readonly spec?: RestoreSpec;
-
 }
 
 /**
@@ -3080,7 +3073,6 @@ export interface RestoreSpec {
    * @schema RestoreSpec#uploaderConfig
    */
   readonly uploaderConfig?: RestoreSpecUploaderConfig;
-
 }
 
 /**
@@ -3124,7 +3116,6 @@ export interface RestoreSpecHooks {
    * @schema RestoreSpecHooks#resources
    */
   readonly resources?: RestoreSpecHooksResources[];
-
 }
 
 /**
@@ -3164,7 +3155,6 @@ export interface RestoreSpecLabelSelector {
    * @schema RestoreSpecLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -3205,7 +3195,6 @@ export interface RestoreSpecOrLabelSelectors {
    * @schema RestoreSpecOrLabelSelectors#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -3251,7 +3240,6 @@ export interface RestoreSpecResourceModifier {
    * @schema RestoreSpecResourceModifier#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -3291,7 +3279,6 @@ export interface RestoreSpecRestoreStatus {
    * @schema RestoreSpecRestoreStatus#includedResources
    */
   readonly includedResources?: string[];
-
 }
 
 /**
@@ -3328,7 +3315,6 @@ export interface RestoreSpecUploaderConfig {
    * @schema RestoreSpecUploaderConfig#writeSparseFiles
    */
   readonly writeSparseFiles?: boolean;
-
 }
 
 /**
@@ -3403,7 +3389,6 @@ export interface RestoreSpecHooksResources {
    * @schema RestoreSpecHooksResources#postHooks
    */
   readonly postHooks?: RestoreSpecHooksResourcesPostHooks[];
-
 }
 
 /**
@@ -3457,7 +3442,6 @@ export interface RestoreSpecLabelSelectorMatchExpressions {
    * @schema RestoreSpecLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -3507,7 +3491,6 @@ export interface RestoreSpecOrLabelSelectorsMatchExpressions {
    * @schema RestoreSpecOrLabelSelectorsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -3547,7 +3530,6 @@ export interface RestoreSpecHooksResourcesLabelSelector {
    * @schema RestoreSpecHooksResourcesLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -3584,7 +3566,6 @@ export interface RestoreSpecHooksResourcesPostHooks {
    * @schema RestoreSpecHooksResourcesPostHooks#init
    */
   readonly init?: RestoreSpecHooksResourcesPostHooksInit;
-
 }
 
 /**
@@ -3633,7 +3614,6 @@ export interface RestoreSpecHooksResourcesLabelSelectorMatchExpressions {
    * @schema RestoreSpecHooksResourcesLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -3702,7 +3682,6 @@ export interface RestoreSpecHooksResourcesPostHooksExec {
    * @schema RestoreSpecHooksResourcesPostHooksExec#waitTimeout
    */
   readonly waitTimeout?: string;
-
 }
 
 /**
@@ -3743,7 +3722,6 @@ export interface RestoreSpecHooksResourcesPostHooksInit {
    * @schema RestoreSpecHooksResourcesPostHooksInit#timeout
    */
   readonly timeout?: string;
-
 }
 
 /**
@@ -3847,7 +3825,6 @@ export interface ScheduleProps {
    * @schema Schedule#spec
    */
   readonly spec?: ScheduleSpec;
-
 }
 
 /**
@@ -3911,7 +3888,6 @@ export interface ScheduleSpec {
    * @schema ScheduleSpec#useOwnerReferencesInBackup
    */
   readonly useOwnerReferencesInBackup?: boolean;
-
 }
 
 /**
@@ -4149,12 +4125,18 @@ export interface ScheduleSpecTemplate {
   readonly uploaderConfig?: ScheduleSpecTemplateUploaderConfig;
 
   /**
+   * VolumeGroupSnapshotLabelKey specifies the label key to group PVCs under a VGS.
+   *
+   * @schema ScheduleSpecTemplate#volumeGroupSnapshotLabelKey
+   */
+  readonly volumeGroupSnapshotLabelKey?: string;
+
+  /**
    * VolumeSnapshotLocations is a list containing names of VolumeSnapshotLocations associated with this backup.
    *
    * @schema ScheduleSpecTemplate#volumeSnapshotLocations
    */
   readonly volumeSnapshotLocations?: string[];
-
 }
 
 /**
@@ -4189,6 +4171,7 @@ export function toJson_ScheduleSpecTemplate(obj: ScheduleSpecTemplate | undefine
     'storageLocation': obj.storageLocation,
     'ttl': obj.ttl,
     'uploaderConfig': toJson_ScheduleSpecTemplateUploaderConfig(obj.uploaderConfig),
+    'volumeGroupSnapshotLabelKey': obj.volumeGroupSnapshotLabelKey,
     'volumeSnapshotLocations': obj.volumeSnapshotLocations?.map(y => y),
   };
   // filter undefined values
@@ -4208,7 +4191,6 @@ export interface ScheduleSpecTemplateHooks {
    * @schema ScheduleSpecTemplateHooks#resources
    */
   readonly resources?: ScheduleSpecTemplateHooksResources[];
-
 }
 
 /**
@@ -4248,7 +4230,6 @@ export interface ScheduleSpecTemplateLabelSelector {
    * @schema ScheduleSpecTemplateLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -4274,7 +4255,6 @@ export interface ScheduleSpecTemplateMetadata {
    * @schema ScheduleSpecTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -4314,7 +4294,6 @@ export interface ScheduleSpecTemplateOrLabelSelectors {
    * @schema ScheduleSpecTemplateOrLabelSelectors#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -4360,7 +4339,6 @@ export interface ScheduleSpecTemplateResourcePolicy {
    * @schema ScheduleSpecTemplateResourcePolicy#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4391,7 +4369,6 @@ export interface ScheduleSpecTemplateUploaderConfig {
    * @schema ScheduleSpecTemplateUploaderConfig#parallelFilesUpload
    */
   readonly parallelFilesUpload?: number;
-
 }
 
 /**
@@ -4474,7 +4451,6 @@ export interface ScheduleSpecTemplateHooksResources {
    * @schema ScheduleSpecTemplateHooksResources#pre
    */
   readonly pre?: ScheduleSpecTemplateHooksResourcesPre[];
-
 }
 
 /**
@@ -4529,7 +4505,6 @@ export interface ScheduleSpecTemplateLabelSelectorMatchExpressions {
    * @schema ScheduleSpecTemplateLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -4579,7 +4554,6 @@ export interface ScheduleSpecTemplateOrLabelSelectorsMatchExpressions {
    * @schema ScheduleSpecTemplateOrLabelSelectorsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -4619,7 +4593,6 @@ export interface ScheduleSpecTemplateHooksResourcesLabelSelector {
    * @schema ScheduleSpecTemplateHooksResourcesLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -4649,7 +4622,6 @@ export interface ScheduleSpecTemplateHooksResourcesPost {
    * @schema ScheduleSpecTemplateHooksResourcesPost#exec
    */
   readonly exec: ScheduleSpecTemplateHooksResourcesPostExec;
-
 }
 
 /**
@@ -4678,7 +4650,6 @@ export interface ScheduleSpecTemplateHooksResourcesPre {
    * @schema ScheduleSpecTemplateHooksResourcesPre#exec
    */
   readonly exec: ScheduleSpecTemplateHooksResourcesPreExec;
-
 }
 
 /**
@@ -4726,7 +4697,6 @@ export interface ScheduleSpecTemplateHooksResourcesLabelSelectorMatchExpressions
    * @schema ScheduleSpecTemplateHooksResourcesLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -4780,7 +4750,6 @@ export interface ScheduleSpecTemplateHooksResourcesPostExec {
    * @schema ScheduleSpecTemplateHooksResourcesPostExec#timeout
    */
   readonly timeout?: string;
-
 }
 
 /**
@@ -4835,7 +4804,6 @@ export interface ScheduleSpecTemplateHooksResourcesPreExec {
    * @schema ScheduleSpecTemplateHooksResourcesPreExec#timeout
    */
   readonly timeout?: string;
-
 }
 
 /**
@@ -4953,7 +4921,6 @@ export interface ServerStatusRequestProps {
    * @schema ServerStatusRequest#spec
    */
   readonly spec?: any;
-
 }
 
 /**
@@ -5043,7 +5010,6 @@ export interface VolumeSnapshotLocationProps {
    * @schema VolumeSnapshotLocation#spec
    */
   readonly spec?: VolumeSnapshotLocationSpec;
-
 }
 
 /**
@@ -5087,7 +5053,6 @@ export interface VolumeSnapshotLocationSpec {
    * @schema VolumeSnapshotLocationSpec#provider
    */
   readonly provider: string;
-
 }
 
 /**
@@ -5136,7 +5101,6 @@ export interface VolumeSnapshotLocationSpecCredential {
    * @schema VolumeSnapshotLocationSpecCredential#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**

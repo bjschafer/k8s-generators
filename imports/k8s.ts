@@ -9361,7 +9361,6 @@ export interface KubeMutatingWebhookConfigurationProps {
    * @schema io.k8s.api.admissionregistration.v1.MutatingWebhookConfiguration#webhooks
    */
   readonly webhooks?: MutatingWebhook[];
-
 }
 
 /**
@@ -9398,7 +9397,6 @@ export interface KubeMutatingWebhookConfigurationListProps {
    * @schema io.k8s.api.admissionregistration.v1.MutatingWebhookConfigurationList#items
    */
   readonly items: KubeMutatingWebhookConfigurationProps[];
-
 }
 
 /**
@@ -9435,7 +9433,6 @@ export interface KubeValidatingAdmissionPolicyProps {
    * @schema io.k8s.api.admissionregistration.v1.ValidatingAdmissionPolicy#spec
    */
   readonly spec?: ValidatingAdmissionPolicySpec;
-
 }
 
 /**
@@ -9476,7 +9473,6 @@ export interface KubeValidatingAdmissionPolicyBindingProps {
    * @schema io.k8s.api.admissionregistration.v1.ValidatingAdmissionPolicyBinding#spec
    */
   readonly spec?: ValidatingAdmissionPolicyBindingSpec;
-
 }
 
 /**
@@ -9513,7 +9509,6 @@ export interface KubeValidatingAdmissionPolicyBindingListProps {
    * @schema io.k8s.api.admissionregistration.v1.ValidatingAdmissionPolicyBindingList#items
    */
   readonly items: KubeValidatingAdmissionPolicyBindingProps[];
-
 }
 
 /**
@@ -9550,7 +9545,6 @@ export interface KubeValidatingAdmissionPolicyListProps {
    * @schema io.k8s.api.admissionregistration.v1.ValidatingAdmissionPolicyList#items
    */
   readonly items: KubeValidatingAdmissionPolicyProps[];
-
 }
 
 /**
@@ -9587,7 +9581,6 @@ export interface KubeValidatingWebhookConfigurationProps {
    * @schema io.k8s.api.admissionregistration.v1.ValidatingWebhookConfiguration#webhooks
    */
   readonly webhooks?: ValidatingWebhook[];
-
 }
 
 /**
@@ -9624,7 +9617,6 @@ export interface KubeValidatingWebhookConfigurationListProps {
    * @schema io.k8s.api.admissionregistration.v1.ValidatingWebhookConfigurationList#items
    */
   readonly items: KubeValidatingWebhookConfigurationProps[];
-
 }
 
 /**
@@ -9661,7 +9653,6 @@ export interface KubeMutatingAdmissionPolicyV1Alpha1Props {
    * @schema io.k8s.api.admissionregistration.v1alpha1.MutatingAdmissionPolicy#spec
    */
   readonly spec?: MutatingAdmissionPolicySpecV1Alpha1;
-
 }
 
 /**
@@ -9702,7 +9693,6 @@ export interface KubeMutatingAdmissionPolicyBindingV1Alpha1Props {
    * @schema io.k8s.api.admissionregistration.v1alpha1.MutatingAdmissionPolicyBinding#spec
    */
   readonly spec?: MutatingAdmissionPolicyBindingSpecV1Alpha1;
-
 }
 
 /**
@@ -9739,7 +9729,6 @@ export interface KubeMutatingAdmissionPolicyBindingListV1Alpha1Props {
    * @schema io.k8s.api.admissionregistration.v1alpha1.MutatingAdmissionPolicyBindingList#items
    */
   readonly items: KubeMutatingAdmissionPolicyBindingV1Alpha1Props[];
-
 }
 
 /**
@@ -9776,7 +9765,6 @@ export interface KubeMutatingAdmissionPolicyListV1Alpha1Props {
    * @schema io.k8s.api.admissionregistration.v1alpha1.MutatingAdmissionPolicyList#items
    */
   readonly items: KubeMutatingAdmissionPolicyV1Alpha1Props[];
-
 }
 
 /**
@@ -9813,7 +9801,6 @@ export interface KubeValidatingAdmissionPolicyV1Beta1Props {
    * @schema io.k8s.api.admissionregistration.v1beta1.ValidatingAdmissionPolicy#spec
    */
   readonly spec?: ValidatingAdmissionPolicySpecV1Beta1;
-
 }
 
 /**
@@ -9854,7 +9841,6 @@ export interface KubeValidatingAdmissionPolicyBindingV1Beta1Props {
    * @schema io.k8s.api.admissionregistration.v1beta1.ValidatingAdmissionPolicyBinding#spec
    */
   readonly spec?: ValidatingAdmissionPolicyBindingSpecV1Beta1;
-
 }
 
 /**
@@ -9891,7 +9877,6 @@ export interface KubeValidatingAdmissionPolicyBindingListV1Beta1Props {
    * @schema io.k8s.api.admissionregistration.v1beta1.ValidatingAdmissionPolicyBindingList#items
    */
   readonly items: KubeValidatingAdmissionPolicyBindingV1Beta1Props[];
-
 }
 
 /**
@@ -9928,7 +9913,6 @@ export interface KubeValidatingAdmissionPolicyListV1Beta1Props {
    * @schema io.k8s.api.admissionregistration.v1beta1.ValidatingAdmissionPolicyList#items
    */
   readonly items: KubeValidatingAdmissionPolicyV1Beta1Props[];
-
 }
 
 /**
@@ -9965,7 +9949,6 @@ export interface KubeStorageVersionV1Alpha1Props {
    * @schema io.k8s.api.apiserverinternal.v1alpha1.StorageVersion#spec
    */
   readonly spec: any;
-
 }
 
 /**
@@ -10002,7 +9985,6 @@ export interface KubeStorageVersionListV1Alpha1Props {
    * @schema io.k8s.api.apiserverinternal.v1alpha1.StorageVersionList#items
    */
   readonly items: KubeStorageVersionV1Alpha1Props[];
-
 }
 
 /**
@@ -10046,7 +10028,6 @@ export interface KubeControllerRevisionProps {
    * @schema io.k8s.api.apps.v1.ControllerRevision#revision
    */
   readonly revision: number;
-
 }
 
 /**
@@ -10084,7 +10065,6 @@ export interface KubeControllerRevisionListProps {
    * @schema io.k8s.api.apps.v1.ControllerRevisionList#items
    */
   readonly items: KubeControllerRevisionProps[];
-
 }
 
 /**
@@ -10121,7 +10101,6 @@ export interface KubeDaemonSetProps {
    * @schema io.k8s.api.apps.v1.DaemonSet#spec
    */
   readonly spec?: DaemonSetSpec;
-
 }
 
 /**
@@ -10158,7 +10137,6 @@ export interface KubeDaemonSetListProps {
    * @schema io.k8s.api.apps.v1.DaemonSetList#items
    */
   readonly items: KubeDaemonSetProps[];
-
 }
 
 /**
@@ -10195,7 +10173,6 @@ export interface KubeDeploymentProps {
    * @schema io.k8s.api.apps.v1.Deployment#spec
    */
   readonly spec?: DeploymentSpec;
-
 }
 
 /**
@@ -10232,7 +10209,6 @@ export interface KubeDeploymentListProps {
    * @schema io.k8s.api.apps.v1.DeploymentList#items
    */
   readonly items: KubeDeploymentProps[];
-
 }
 
 /**
@@ -10269,7 +10245,6 @@ export interface KubeReplicaSetProps {
    * @schema io.k8s.api.apps.v1.ReplicaSet#spec
    */
   readonly spec?: ReplicaSetSpec;
-
 }
 
 /**
@@ -10306,7 +10281,6 @@ export interface KubeReplicaSetListProps {
    * @schema io.k8s.api.apps.v1.ReplicaSetList#items
    */
   readonly items: KubeReplicaSetProps[];
-
 }
 
 /**
@@ -10347,7 +10321,6 @@ export interface KubeStatefulSetProps {
    * @schema io.k8s.api.apps.v1.StatefulSet#spec
    */
   readonly spec?: StatefulSetSpec;
-
 }
 
 /**
@@ -10384,7 +10357,6 @@ export interface KubeStatefulSetListProps {
    * @schema io.k8s.api.apps.v1.StatefulSetList#items
    */
   readonly items: KubeStatefulSetProps[];
-
 }
 
 /**
@@ -10414,7 +10386,6 @@ export interface KubeSelfSubjectReviewProps {
    * @schema io.k8s.api.authentication.v1.SelfSubjectReview#metadata
    */
   readonly metadata?: ObjectMeta;
-
 }
 
 /**
@@ -10450,7 +10421,6 @@ export interface KubeTokenRequestProps {
    * @schema io.k8s.api.authentication.v1.TokenRequest#spec
    */
   readonly spec: TokenRequestSpec;
-
 }
 
 /**
@@ -10487,7 +10457,6 @@ export interface KubeTokenReviewProps {
    * @schema io.k8s.api.authentication.v1.TokenReview#spec
    */
   readonly spec: TokenReviewSpec;
-
 }
 
 /**
@@ -10524,7 +10493,6 @@ export interface KubeLocalSubjectAccessReviewProps {
    * @schema io.k8s.api.authorization.v1.LocalSubjectAccessReview#spec
    */
   readonly spec: SubjectAccessReviewSpec;
-
 }
 
 /**
@@ -10561,7 +10529,6 @@ export interface KubeSelfSubjectAccessReviewProps {
    * @schema io.k8s.api.authorization.v1.SelfSubjectAccessReview#spec
    */
   readonly spec: SelfSubjectAccessReviewSpec;
-
 }
 
 /**
@@ -10598,7 +10565,6 @@ export interface KubeSelfSubjectRulesReviewProps {
    * @schema io.k8s.api.authorization.v1.SelfSubjectRulesReview#spec
    */
   readonly spec: SelfSubjectRulesReviewSpec;
-
 }
 
 /**
@@ -10635,7 +10601,6 @@ export interface KubeSubjectAccessReviewProps {
    * @schema io.k8s.api.authorization.v1.SubjectAccessReview#spec
    */
   readonly spec: SubjectAccessReviewSpec;
-
 }
 
 /**
@@ -10672,7 +10637,6 @@ export interface KubeHorizontalPodAutoscalerProps {
    * @schema io.k8s.api.autoscaling.v1.HorizontalPodAutoscaler#spec
    */
   readonly spec?: HorizontalPodAutoscalerSpec;
-
 }
 
 /**
@@ -10709,7 +10673,6 @@ export interface KubeHorizontalPodAutoscalerListProps {
    * @schema io.k8s.api.autoscaling.v1.HorizontalPodAutoscalerList#items
    */
   readonly items: KubeHorizontalPodAutoscalerProps[];
-
 }
 
 /**
@@ -10746,7 +10709,6 @@ export interface KubeScaleProps {
    * @schema io.k8s.api.autoscaling.v1.Scale#spec
    */
   readonly spec?: ScaleSpec;
-
 }
 
 /**
@@ -10783,7 +10745,6 @@ export interface KubeHorizontalPodAutoscalerV2Props {
    * @schema io.k8s.api.autoscaling.v2.HorizontalPodAutoscaler#spec
    */
   readonly spec?: HorizontalPodAutoscalerSpecV2;
-
 }
 
 /**
@@ -10820,7 +10781,6 @@ export interface KubeHorizontalPodAutoscalerListV2Props {
    * @schema io.k8s.api.autoscaling.v2.HorizontalPodAutoscalerList#items
    */
   readonly items: KubeHorizontalPodAutoscalerV2Props[];
-
 }
 
 /**
@@ -10857,7 +10817,6 @@ export interface KubeCronJobProps {
    * @schema io.k8s.api.batch.v1.CronJob#spec
    */
   readonly spec?: CronJobSpec;
-
 }
 
 /**
@@ -10894,7 +10853,6 @@ export interface KubeCronJobListProps {
    * @schema io.k8s.api.batch.v1.CronJobList#items
    */
   readonly items: KubeCronJobProps[];
-
 }
 
 /**
@@ -10931,7 +10889,6 @@ export interface KubeJobProps {
    * @schema io.k8s.api.batch.v1.Job#spec
    */
   readonly spec?: JobSpec;
-
 }
 
 /**
@@ -10968,7 +10925,6 @@ export interface KubeJobListProps {
    * @schema io.k8s.api.batch.v1.JobList#items
    */
   readonly items: KubeJobProps[];
-
 }
 
 /**
@@ -11009,7 +10965,6 @@ export interface KubeCertificateSigningRequestProps {
    * @schema io.k8s.api.certificates.v1.CertificateSigningRequest#spec
    */
   readonly spec: CertificateSigningRequestSpec;
-
 }
 
 /**
@@ -11044,7 +10999,6 @@ export interface KubeCertificateSigningRequestListProps {
    * @schema io.k8s.api.certificates.v1.CertificateSigningRequestList#items
    */
   readonly items: KubeCertificateSigningRequestProps[];
-
 }
 
 /**
@@ -11085,7 +11039,6 @@ export interface KubeClusterTrustBundleV1Alpha1Props {
    * @schema io.k8s.api.certificates.v1alpha1.ClusterTrustBundle#spec
    */
   readonly spec: ClusterTrustBundleSpecV1Alpha1;
-
 }
 
 /**
@@ -11122,7 +11075,6 @@ export interface KubeClusterTrustBundleListV1Alpha1Props {
    * @schema io.k8s.api.certificates.v1alpha1.ClusterTrustBundleList#items
    */
   readonly items: KubeClusterTrustBundleV1Alpha1Props[];
-
 }
 
 /**
@@ -11163,7 +11115,6 @@ export interface KubeClusterTrustBundleV1Beta1Props {
    * @schema io.k8s.api.certificates.v1beta1.ClusterTrustBundle#spec
    */
   readonly spec: ClusterTrustBundleSpecV1Beta1;
-
 }
 
 /**
@@ -11200,7 +11151,6 @@ export interface KubeClusterTrustBundleListV1Beta1Props {
    * @schema io.k8s.api.certificates.v1beta1.ClusterTrustBundleList#items
    */
   readonly items: KubeClusterTrustBundleV1Beta1Props[];
-
 }
 
 /**
@@ -11237,7 +11187,6 @@ export interface KubeLeaseProps {
    * @schema io.k8s.api.coordination.v1.Lease#spec
    */
   readonly spec?: LeaseSpec;
-
 }
 
 /**
@@ -11274,7 +11223,6 @@ export interface KubeLeaseListProps {
    * @schema io.k8s.api.coordination.v1.LeaseList#items
    */
   readonly items: KubeLeaseProps[];
-
 }
 
 /**
@@ -11311,7 +11259,6 @@ export interface KubeLeaseCandidateV1Alpha2Props {
    * @schema io.k8s.api.coordination.v1alpha2.LeaseCandidate#spec
    */
   readonly spec?: LeaseCandidateSpecV1Alpha2;
-
 }
 
 /**
@@ -11348,7 +11295,6 @@ export interface KubeLeaseCandidateListV1Alpha2Props {
    * @schema io.k8s.api.coordination.v1alpha2.LeaseCandidateList#items
    */
   readonly items: KubeLeaseCandidateV1Alpha2Props[];
-
 }
 
 /**
@@ -11385,7 +11331,6 @@ export interface KubeLeaseCandidateV1Beta1Props {
    * @schema io.k8s.api.coordination.v1beta1.LeaseCandidate#spec
    */
   readonly spec?: LeaseCandidateSpecV1Beta1;
-
 }
 
 /**
@@ -11422,7 +11367,6 @@ export interface KubeLeaseCandidateListV1Beta1Props {
    * @schema io.k8s.api.coordination.v1beta1.LeaseCandidateList#items
    */
   readonly items: KubeLeaseCandidateV1Beta1Props[];
-
 }
 
 /**
@@ -11459,7 +11403,6 @@ export interface KubeBindingProps {
    * @schema io.k8s.api.core.v1.Binding#target
    */
   readonly target: ObjectReference;
-
 }
 
 /**
@@ -11496,7 +11439,6 @@ export interface KubeComponentStatusProps {
    * @schema io.k8s.api.core.v1.ComponentStatus#conditions
    */
   readonly conditions?: ComponentCondition[];
-
 }
 
 /**
@@ -11533,7 +11475,6 @@ export interface KubeComponentStatusListProps {
    * @schema io.k8s.api.core.v1.ComponentStatusList#items
    */
   readonly items: KubeComponentStatusProps[];
-
 }
 
 /**
@@ -11584,7 +11525,6 @@ export interface KubeConfigMapProps {
    * @schema io.k8s.api.core.v1.ConfigMap#immutable
    */
   readonly immutable?: boolean;
-
 }
 
 /**
@@ -11623,7 +11563,6 @@ export interface KubeConfigMapListProps {
    * @schema io.k8s.api.core.v1.ConfigMapList#items
    */
   readonly items: KubeConfigMapProps[];
-
 }
 
 /**
@@ -11676,7 +11615,6 @@ export interface KubeEndpointsProps {
    * @schema io.k8s.api.core.v1.Endpoints#subsets
    */
   readonly subsets?: EndpointSubset[];
-
 }
 
 /**
@@ -11713,7 +11651,6 @@ export interface KubeEndpointsListProps {
    * @schema io.k8s.api.core.v1.EndpointsList#items
    */
   readonly items: KubeEndpointsProps[];
-
 }
 
 /**
@@ -11841,7 +11778,6 @@ export interface KubeEventProps {
    * @schema io.k8s.api.events.v1.Event#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -11891,7 +11827,6 @@ export interface KubeEventListProps {
    * @schema io.k8s.api.events.v1.EventList#items
    */
   readonly items: KubeEventProps[];
-
 }
 
 /**
@@ -11928,7 +11863,6 @@ export interface KubeLimitRangeProps {
    * @schema io.k8s.api.core.v1.LimitRange#spec
    */
   readonly spec?: LimitRangeSpec;
-
 }
 
 /**
@@ -11965,7 +11899,6 @@ export interface KubeLimitRangeListProps {
    * @schema io.k8s.api.core.v1.LimitRangeList#items
    */
   readonly items: KubeLimitRangeProps[];
-
 }
 
 /**
@@ -12002,7 +11935,6 @@ export interface KubeNamespaceProps {
    * @schema io.k8s.api.core.v1.Namespace#spec
    */
   readonly spec?: NamespaceSpec;
-
 }
 
 /**
@@ -12039,7 +11971,6 @@ export interface KubeNamespaceListProps {
    * @schema io.k8s.api.core.v1.NamespaceList#items
    */
   readonly items: KubeNamespaceProps[];
-
 }
 
 /**
@@ -12076,7 +12007,6 @@ export interface KubeNodeProps {
    * @schema io.k8s.api.core.v1.Node#spec
    */
   readonly spec?: NodeSpec;
-
 }
 
 /**
@@ -12113,7 +12043,6 @@ export interface KubeNodeListProps {
    * @schema io.k8s.api.core.v1.NodeList#items
    */
   readonly items: KubeNodeProps[];
-
 }
 
 /**
@@ -12150,7 +12079,6 @@ export interface KubePersistentVolumeProps {
    * @schema io.k8s.api.core.v1.PersistentVolume#spec
    */
   readonly spec?: PersistentVolumeSpec;
-
 }
 
 /**
@@ -12187,7 +12115,6 @@ export interface KubePersistentVolumeClaimProps {
    * @schema io.k8s.api.core.v1.PersistentVolumeClaim#spec
    */
   readonly spec?: PersistentVolumeClaimSpec;
-
 }
 
 /**
@@ -12224,7 +12151,6 @@ export interface KubePersistentVolumeClaimListProps {
    * @schema io.k8s.api.core.v1.PersistentVolumeClaimList#items
    */
   readonly items: KubePersistentVolumeClaimProps[];
-
 }
 
 /**
@@ -12261,7 +12187,6 @@ export interface KubePersistentVolumeListProps {
    * @schema io.k8s.api.core.v1.PersistentVolumeList#items
    */
   readonly items: KubePersistentVolumeProps[];
-
 }
 
 /**
@@ -12298,7 +12223,6 @@ export interface KubePodProps {
    * @schema io.k8s.api.core.v1.Pod#spec
    */
   readonly spec?: PodSpec;
-
 }
 
 /**
@@ -12335,7 +12259,6 @@ export interface KubePodListProps {
    * @schema io.k8s.api.core.v1.PodList#items
    */
   readonly items: KubePodProps[];
-
 }
 
 /**
@@ -12372,7 +12295,6 @@ export interface KubePodTemplateProps {
    * @schema io.k8s.api.core.v1.PodTemplate#template
    */
   readonly template?: PodTemplateSpec;
-
 }
 
 /**
@@ -12409,7 +12331,6 @@ export interface KubePodTemplateListProps {
    * @schema io.k8s.api.core.v1.PodTemplateList#items
    */
   readonly items: KubePodTemplateProps[];
-
 }
 
 /**
@@ -12446,7 +12367,6 @@ export interface KubeReplicationControllerProps {
    * @schema io.k8s.api.core.v1.ReplicationController#spec
    */
   readonly spec?: ReplicationControllerSpec;
-
 }
 
 /**
@@ -12483,7 +12403,6 @@ export interface KubeReplicationControllerListProps {
    * @schema io.k8s.api.core.v1.ReplicationControllerList#items
    */
   readonly items: KubeReplicationControllerProps[];
-
 }
 
 /**
@@ -12520,7 +12439,6 @@ export interface KubeResourceQuotaProps {
    * @schema io.k8s.api.core.v1.ResourceQuota#spec
    */
   readonly spec?: ResourceQuotaSpec;
-
 }
 
 /**
@@ -12557,7 +12475,6 @@ export interface KubeResourceQuotaListProps {
    * @schema io.k8s.api.core.v1.ResourceQuotaList#items
    */
   readonly items: KubeResourceQuotaProps[];
-
 }
 
 /**
@@ -12615,7 +12532,6 @@ export interface KubeSecretProps {
    * @schema io.k8s.api.core.v1.Secret#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -12655,7 +12571,6 @@ export interface KubeSecretListProps {
    * @schema io.k8s.api.core.v1.SecretList#items
    */
   readonly items: KubeSecretProps[];
-
 }
 
 /**
@@ -12692,7 +12607,6 @@ export interface KubeServiceProps {
    * @schema io.k8s.api.core.v1.Service#spec
    */
   readonly spec?: ServiceSpec;
-
 }
 
 /**
@@ -12743,7 +12657,6 @@ export interface KubeServiceAccountProps {
    * @schema io.k8s.api.core.v1.ServiceAccount#secrets
    */
   readonly secrets?: ObjectReference[];
-
 }
 
 /**
@@ -12782,7 +12695,6 @@ export interface KubeServiceAccountListProps {
    * @schema io.k8s.api.core.v1.ServiceAccountList#items
    */
   readonly items: KubeServiceAccountProps[];
-
 }
 
 /**
@@ -12819,7 +12731,6 @@ export interface KubeServiceListProps {
    * @schema io.k8s.api.core.v1.ServiceList#items
    */
   readonly items: KubeServiceProps[];
-
 }
 
 /**
@@ -12870,7 +12781,6 @@ export interface KubeEndpointSliceProps {
    * @schema io.k8s.api.discovery.v1.EndpointSlice#ports
    */
   readonly ports?: EndpointPort[];
-
 }
 
 /**
@@ -12909,7 +12819,6 @@ export interface KubeEndpointSliceListProps {
    * @schema io.k8s.api.discovery.v1.EndpointSliceList#items
    */
   readonly items: KubeEndpointSliceProps[];
-
 }
 
 /**
@@ -12946,7 +12855,6 @@ export interface KubeFlowSchemaProps {
    * @schema io.k8s.api.flowcontrol.v1.FlowSchema#spec
    */
   readonly spec?: FlowSchemaSpec;
-
 }
 
 /**
@@ -12983,7 +12891,6 @@ export interface KubeFlowSchemaListProps {
    * @schema io.k8s.api.flowcontrol.v1.FlowSchemaList#items
    */
   readonly items: KubeFlowSchemaProps[];
-
 }
 
 /**
@@ -13020,7 +12927,6 @@ export interface KubePriorityLevelConfigurationProps {
    * @schema io.k8s.api.flowcontrol.v1.PriorityLevelConfiguration#spec
    */
   readonly spec?: PriorityLevelConfigurationSpec;
-
 }
 
 /**
@@ -13057,7 +12963,6 @@ export interface KubePriorityLevelConfigurationListProps {
    * @schema io.k8s.api.flowcontrol.v1.PriorityLevelConfigurationList#items
    */
   readonly items: KubePriorityLevelConfigurationProps[];
-
 }
 
 /**
@@ -13094,7 +12999,6 @@ export interface KubeIpAddressProps {
    * @schema io.k8s.api.networking.v1.IPAddress#spec
    */
   readonly spec?: IpAddressSpec;
-
 }
 
 /**
@@ -13131,7 +13035,6 @@ export interface KubeIpAddressListProps {
    * @schema io.k8s.api.networking.v1.IPAddressList#items
    */
   readonly items: KubeIpAddressProps[];
-
 }
 
 /**
@@ -13168,7 +13071,6 @@ export interface KubeIngressProps {
    * @schema io.k8s.api.networking.v1.Ingress#spec
    */
   readonly spec?: IngressSpec;
-
 }
 
 /**
@@ -13205,7 +13107,6 @@ export interface KubeIngressClassProps {
    * @schema io.k8s.api.networking.v1.IngressClass#spec
    */
   readonly spec?: IngressClassSpec;
-
 }
 
 /**
@@ -13242,7 +13143,6 @@ export interface KubeIngressClassListProps {
    * @schema io.k8s.api.networking.v1.IngressClassList#items
    */
   readonly items: KubeIngressClassProps[];
-
 }
 
 /**
@@ -13279,7 +13179,6 @@ export interface KubeIngressListProps {
    * @schema io.k8s.api.networking.v1.IngressList#items
    */
   readonly items: KubeIngressProps[];
-
 }
 
 /**
@@ -13316,7 +13215,6 @@ export interface KubeNetworkPolicyProps {
    * @schema io.k8s.api.networking.v1.NetworkPolicy#spec
    */
   readonly spec?: NetworkPolicySpec;
-
 }
 
 /**
@@ -13353,7 +13251,6 @@ export interface KubeNetworkPolicyListProps {
    * @schema io.k8s.api.networking.v1.NetworkPolicyList#items
    */
   readonly items: KubeNetworkPolicyProps[];
-
 }
 
 /**
@@ -13390,7 +13287,6 @@ export interface KubeServiceCidrProps {
    * @schema io.k8s.api.networking.v1.ServiceCIDR#spec
    */
   readonly spec?: ServiceCidrSpec;
-
 }
 
 /**
@@ -13427,7 +13323,6 @@ export interface KubeServiceCidrListProps {
    * @schema io.k8s.api.networking.v1.ServiceCIDRList#items
    */
   readonly items: KubeServiceCidrProps[];
-
 }
 
 /**
@@ -13464,7 +13359,6 @@ export interface KubeIpAddressV1Beta1Props {
    * @schema io.k8s.api.networking.v1beta1.IPAddress#spec
    */
   readonly spec?: IpAddressSpecV1Beta1;
-
 }
 
 /**
@@ -13501,7 +13395,6 @@ export interface KubeIpAddressListV1Beta1Props {
    * @schema io.k8s.api.networking.v1beta1.IPAddressList#items
    */
   readonly items: KubeIpAddressV1Beta1Props[];
-
 }
 
 /**
@@ -13538,7 +13431,6 @@ export interface KubeServiceCidrv1Beta1Props {
    * @schema io.k8s.api.networking.v1beta1.ServiceCIDR#spec
    */
   readonly spec?: ServiceCidrSpecV1Beta1;
-
 }
 
 /**
@@ -13575,7 +13467,6 @@ export interface KubeServiceCidrListV1Beta1Props {
    * @schema io.k8s.api.networking.v1beta1.ServiceCIDRList#items
    */
   readonly items: KubeServiceCidrv1Beta1Props[];
-
 }
 
 /**
@@ -13627,7 +13518,6 @@ export interface KubeRuntimeClassProps {
    * @schema io.k8s.api.node.v1.RuntimeClass#scheduling
    */
   readonly scheduling?: Scheduling;
-
 }
 
 /**
@@ -13666,7 +13556,6 @@ export interface KubeRuntimeClassListProps {
    * @schema io.k8s.api.node.v1.RuntimeClassList#items
    */
   readonly items: KubeRuntimeClassProps[];
-
 }
 
 /**
@@ -13703,7 +13592,6 @@ export interface KubeEvictionProps {
    * @schema io.k8s.api.policy.v1.Eviction#deleteOptions
    */
   readonly deleteOptions?: DeleteOptions;
-
 }
 
 /**
@@ -13740,7 +13628,6 @@ export interface KubePodDisruptionBudgetProps {
    * @schema io.k8s.api.policy.v1.PodDisruptionBudget#spec
    */
   readonly spec?: PodDisruptionBudgetSpec;
-
 }
 
 /**
@@ -13777,7 +13664,6 @@ export interface KubePodDisruptionBudgetListProps {
    * @schema io.k8s.api.policy.v1.PodDisruptionBudgetList#items
    */
   readonly items: KubePodDisruptionBudgetProps[];
-
 }
 
 /**
@@ -13821,7 +13707,6 @@ export interface KubeClusterRoleProps {
    * @schema io.k8s.api.rbac.v1.ClusterRole#rules
    */
   readonly rules?: PolicyRule[];
-
 }
 
 /**
@@ -13866,7 +13751,6 @@ export interface KubeClusterRoleBindingProps {
    * @schema io.k8s.api.rbac.v1.ClusterRoleBinding#subjects
    */
   readonly subjects?: Subject[];
-
 }
 
 /**
@@ -13904,7 +13788,6 @@ export interface KubeClusterRoleBindingListProps {
    * @schema io.k8s.api.rbac.v1.ClusterRoleBindingList#items
    */
   readonly items: KubeClusterRoleBindingProps[];
-
 }
 
 /**
@@ -13941,7 +13824,6 @@ export interface KubeClusterRoleListProps {
    * @schema io.k8s.api.rbac.v1.ClusterRoleList#items
    */
   readonly items: KubeClusterRoleProps[];
-
 }
 
 /**
@@ -13978,7 +13860,6 @@ export interface KubeRoleProps {
    * @schema io.k8s.api.rbac.v1.Role#rules
    */
   readonly rules?: PolicyRule[];
-
 }
 
 /**
@@ -14022,7 +13903,6 @@ export interface KubeRoleBindingProps {
    * @schema io.k8s.api.rbac.v1.RoleBinding#subjects
    */
   readonly subjects?: Subject[];
-
 }
 
 /**
@@ -14060,7 +13940,6 @@ export interface KubeRoleBindingListProps {
    * @schema io.k8s.api.rbac.v1.RoleBindingList#items
    */
   readonly items: KubeRoleBindingProps[];
-
 }
 
 /**
@@ -14097,7 +13976,6 @@ export interface KubeRoleListProps {
    * @schema io.k8s.api.rbac.v1.RoleList#items
    */
   readonly items: KubeRoleProps[];
-
 }
 
 /**
@@ -14140,7 +14018,6 @@ export interface KubeDeviceClassV1Alpha3Props {
    * @schema io.k8s.api.resource.v1alpha3.DeviceClass#spec
    */
   readonly spec: DeviceClassSpecV1Alpha3;
-
 }
 
 /**
@@ -14177,7 +14054,6 @@ export interface KubeDeviceClassListV1Alpha3Props {
    * @schema io.k8s.api.resource.v1alpha3.DeviceClassList#items
    */
   readonly items: KubeDeviceClassV1Alpha3Props[];
-
 }
 
 /**
@@ -14216,7 +14092,6 @@ export interface KubeDeviceTaintRuleV1Alpha3Props {
    * @schema io.k8s.api.resource.v1alpha3.DeviceTaintRule#spec
    */
   readonly spec: DeviceTaintRuleSpecV1Alpha3;
-
 }
 
 /**
@@ -14253,7 +14128,6 @@ export interface KubeDeviceTaintRuleListV1Alpha3Props {
    * @schema io.k8s.api.resource.v1alpha3.DeviceTaintRuleList#items
    */
   readonly items: KubeDeviceTaintRuleV1Alpha3Props[];
-
 }
 
 /**
@@ -14292,7 +14166,6 @@ export interface KubeResourceClaimV1Alpha3Props {
    * @schema io.k8s.api.resource.v1alpha3.ResourceClaim#spec
    */
   readonly spec: ResourceClaimSpecV1Alpha3;
-
 }
 
 /**
@@ -14329,7 +14202,6 @@ export interface KubeResourceClaimListV1Alpha3Props {
    * @schema io.k8s.api.resource.v1alpha3.ResourceClaimList#items
    */
   readonly items: KubeResourceClaimV1Alpha3Props[];
-
 }
 
 /**
@@ -14370,7 +14242,6 @@ export interface KubeResourceClaimTemplateV1Alpha3Props {
    * @schema io.k8s.api.resource.v1alpha3.ResourceClaimTemplate#spec
    */
   readonly spec: ResourceClaimTemplateSpecV1Alpha3;
-
 }
 
 /**
@@ -14407,7 +14278,6 @@ export interface KubeResourceClaimTemplateListV1Alpha3Props {
    * @schema io.k8s.api.resource.v1alpha3.ResourceClaimTemplateList#items
    */
   readonly items: KubeResourceClaimTemplateV1Alpha3Props[];
-
 }
 
 /**
@@ -14456,7 +14326,6 @@ export interface KubeResourceSliceV1Alpha3Props {
    * @schema io.k8s.api.resource.v1alpha3.ResourceSlice#spec
    */
   readonly spec: ResourceSliceSpecV1Alpha3;
-
 }
 
 /**
@@ -14493,7 +14362,6 @@ export interface KubeResourceSliceListV1Alpha3Props {
    * @schema io.k8s.api.resource.v1alpha3.ResourceSliceList#items
    */
   readonly items: KubeResourceSliceV1Alpha3Props[];
-
 }
 
 /**
@@ -14536,7 +14404,6 @@ export interface KubeDeviceClassV1Beta1Props {
    * @schema io.k8s.api.resource.v1beta1.DeviceClass#spec
    */
   readonly spec: DeviceClassSpecV1Beta1;
-
 }
 
 /**
@@ -14573,7 +14440,6 @@ export interface KubeDeviceClassListV1Beta1Props {
    * @schema io.k8s.api.resource.v1beta1.DeviceClassList#items
    */
   readonly items: KubeDeviceClassV1Beta1Props[];
-
 }
 
 /**
@@ -14612,7 +14478,6 @@ export interface KubeResourceClaimV1Beta1Props {
    * @schema io.k8s.api.resource.v1beta1.ResourceClaim#spec
    */
   readonly spec: ResourceClaimSpecV1Beta1;
-
 }
 
 /**
@@ -14649,7 +14514,6 @@ export interface KubeResourceClaimListV1Beta1Props {
    * @schema io.k8s.api.resource.v1beta1.ResourceClaimList#items
    */
   readonly items: KubeResourceClaimV1Beta1Props[];
-
 }
 
 /**
@@ -14690,7 +14554,6 @@ export interface KubeResourceClaimTemplateV1Beta1Props {
    * @schema io.k8s.api.resource.v1beta1.ResourceClaimTemplate#spec
    */
   readonly spec: ResourceClaimTemplateSpecV1Beta1;
-
 }
 
 /**
@@ -14727,7 +14590,6 @@ export interface KubeResourceClaimTemplateListV1Beta1Props {
    * @schema io.k8s.api.resource.v1beta1.ResourceClaimTemplateList#items
    */
   readonly items: KubeResourceClaimTemplateV1Beta1Props[];
-
 }
 
 /**
@@ -14776,7 +14638,6 @@ export interface KubeResourceSliceV1Beta1Props {
    * @schema io.k8s.api.resource.v1beta1.ResourceSlice#spec
    */
   readonly spec: ResourceSliceSpecV1Beta1;
-
 }
 
 /**
@@ -14813,7 +14674,6 @@ export interface KubeResourceSliceListV1Beta1Props {
    * @schema io.k8s.api.resource.v1beta1.ResourceSliceList#items
    */
   readonly items: KubeResourceSliceV1Beta1Props[];
-
 }
 
 /**
@@ -14856,7 +14716,6 @@ export interface KubeDeviceClassV1Beta2Props {
    * @schema io.k8s.api.resource.v1beta2.DeviceClass#spec
    */
   readonly spec: DeviceClassSpecV1Beta2;
-
 }
 
 /**
@@ -14893,7 +14752,6 @@ export interface KubeDeviceClassListV1Beta2Props {
    * @schema io.k8s.api.resource.v1beta2.DeviceClassList#items
    */
   readonly items: KubeDeviceClassV1Beta2Props[];
-
 }
 
 /**
@@ -14932,7 +14790,6 @@ export interface KubeResourceClaimV1Beta2Props {
    * @schema io.k8s.api.resource.v1beta2.ResourceClaim#spec
    */
   readonly spec: ResourceClaimSpecV1Beta2;
-
 }
 
 /**
@@ -14969,7 +14826,6 @@ export interface KubeResourceClaimListV1Beta2Props {
    * @schema io.k8s.api.resource.v1beta2.ResourceClaimList#items
    */
   readonly items: KubeResourceClaimV1Beta2Props[];
-
 }
 
 /**
@@ -15010,7 +14866,6 @@ export interface KubeResourceClaimTemplateV1Beta2Props {
    * @schema io.k8s.api.resource.v1beta2.ResourceClaimTemplate#spec
    */
   readonly spec: ResourceClaimTemplateSpecV1Beta2;
-
 }
 
 /**
@@ -15047,7 +14902,6 @@ export interface KubeResourceClaimTemplateListV1Beta2Props {
    * @schema io.k8s.api.resource.v1beta2.ResourceClaimTemplateList#items
    */
   readonly items: KubeResourceClaimTemplateV1Beta2Props[];
-
 }
 
 /**
@@ -15096,7 +14950,6 @@ export interface KubeResourceSliceV1Beta2Props {
    * @schema io.k8s.api.resource.v1beta2.ResourceSlice#spec
    */
   readonly spec: ResourceSliceSpecV1Beta2;
-
 }
 
 /**
@@ -15133,7 +14986,6 @@ export interface KubeResourceSliceListV1Beta2Props {
    * @schema io.k8s.api.resource.v1beta2.ResourceSliceList#items
    */
   readonly items: KubeResourceSliceV1Beta2Props[];
-
 }
 
 /**
@@ -15192,7 +15044,6 @@ export interface KubePriorityClassProps {
    * @schema io.k8s.api.scheduling.v1.PriorityClass#value
    */
   readonly value: number;
-
 }
 
 /**
@@ -15232,7 +15083,6 @@ export interface KubePriorityClassListProps {
    * @schema io.k8s.api.scheduling.v1.PriorityClassList#items
    */
   readonly items: KubePriorityClassProps[];
-
 }
 
 /**
@@ -15269,7 +15119,6 @@ export interface KubeCsiDriverProps {
    * @schema io.k8s.api.storage.v1.CSIDriver#spec
    */
   readonly spec: CsiDriverSpec;
-
 }
 
 /**
@@ -15306,7 +15155,6 @@ export interface KubeCsiDriverListProps {
    * @schema io.k8s.api.storage.v1.CSIDriverList#items
    */
   readonly items: KubeCsiDriverProps[];
-
 }
 
 /**
@@ -15343,7 +15191,6 @@ export interface KubeCsiNodeProps {
    * @schema io.k8s.api.storage.v1.CSINode#spec
    */
   readonly spec: CsiNodeSpec;
-
 }
 
 /**
@@ -15380,7 +15227,6 @@ export interface KubeCsiNodeListProps {
    * @schema io.k8s.api.storage.v1.CSINodeList#items
    */
   readonly items: KubeCsiNodeProps[];
-
 }
 
 /**
@@ -15454,7 +15300,6 @@ export interface KubeCsiStorageCapacityProps {
    * @schema io.k8s.api.storage.v1.CSIStorageCapacity#storageClassName
    */
   readonly storageClassName: string;
-
 }
 
 /**
@@ -15494,7 +15339,6 @@ export interface KubeCsiStorageCapacityListProps {
    * @schema io.k8s.api.storage.v1.CSIStorageCapacityList#items
    */
   readonly items: KubeCsiStorageCapacityProps[];
-
 }
 
 /**
@@ -15576,7 +15420,6 @@ export interface KubeStorageClassProps {
    * @schema io.k8s.api.storage.v1.StorageClass#volumeBindingMode
    */
   readonly volumeBindingMode?: string;
-
 }
 
 /**
@@ -15619,7 +15462,6 @@ export interface KubeStorageClassListProps {
    * @schema io.k8s.api.storage.v1.StorageClassList#items
    */
   readonly items: KubeStorageClassProps[];
-
 }
 
 /**
@@ -15658,7 +15500,6 @@ export interface KubeVolumeAttachmentProps {
    * @schema io.k8s.api.storage.v1.VolumeAttachment#spec
    */
   readonly spec: VolumeAttachmentSpec;
-
 }
 
 /**
@@ -15695,7 +15536,6 @@ export interface KubeVolumeAttachmentListProps {
    * @schema io.k8s.api.storage.v1.VolumeAttachmentList#items
    */
   readonly items: KubeVolumeAttachmentProps[];
-
 }
 
 /**
@@ -15741,7 +15581,6 @@ export interface KubeVolumeAttributesClassV1Alpha1Props {
    * @schema io.k8s.api.storage.v1alpha1.VolumeAttributesClass#parameters
    */
   readonly parameters?: { [key: string]: string };
-
 }
 
 /**
@@ -15779,7 +15618,6 @@ export interface KubeVolumeAttributesClassListV1Alpha1Props {
    * @schema io.k8s.api.storage.v1alpha1.VolumeAttributesClassList#items
    */
   readonly items: KubeVolumeAttributesClassV1Alpha1Props[];
-
 }
 
 /**
@@ -15825,7 +15663,6 @@ export interface KubeVolumeAttributesClassV1Beta1Props {
    * @schema io.k8s.api.storage.v1beta1.VolumeAttributesClass#parameters
    */
   readonly parameters?: { [key: string]: string };
-
 }
 
 /**
@@ -15863,7 +15700,6 @@ export interface KubeVolumeAttributesClassListV1Beta1Props {
    * @schema io.k8s.api.storage.v1beta1.VolumeAttributesClassList#items
    */
   readonly items: KubeVolumeAttributesClassV1Beta1Props[];
-
 }
 
 /**
@@ -15900,7 +15736,6 @@ export interface KubeStorageVersionMigrationV1Alpha1Props {
    * @schema io.k8s.api.storagemigration.v1alpha1.StorageVersionMigration#spec
    */
   readonly spec?: StorageVersionMigrationSpecV1Alpha1;
-
 }
 
 /**
@@ -15937,7 +15772,6 @@ export interface KubeStorageVersionMigrationListV1Alpha1Props {
    * @schema io.k8s.api.storagemigration.v1alpha1.StorageVersionMigrationList#items
    */
   readonly items: KubeStorageVersionMigrationV1Alpha1Props[];
-
 }
 
 /**
@@ -15974,7 +15808,6 @@ export interface KubeCustomResourceDefinitionProps {
    * @schema io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinition#spec
    */
   readonly spec: CustomResourceDefinitionSpec;
-
 }
 
 /**
@@ -16011,7 +15844,6 @@ export interface KubeCustomResourceDefinitionListProps {
    * @schema io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinitionList#items
    */
   readonly items: KubeCustomResourceDefinitionProps[];
-
 }
 
 /**
@@ -16069,7 +15901,6 @@ export interface KubeStatusProps {
    * @schema io.k8s.apimachinery.pkg.apis.meta.v1.Status#reason
    */
   readonly reason?: string;
-
 }
 
 /**
@@ -16109,7 +15940,6 @@ export interface KubeApiServiceProps {
    * @schema io.k8s.kube-aggregator.pkg.apis.apiregistration.v1.APIService#spec
    */
   readonly spec?: ApiServiceSpec;
-
 }
 
 /**
@@ -16146,7 +15976,6 @@ export interface KubeApiServiceListProps {
    * @schema io.k8s.kube-aggregator.pkg.apis.apiregistration.v1.APIServiceList#items
    */
   readonly items: KubeApiServiceProps[];
-
 }
 
 /**
@@ -16288,7 +16117,6 @@ export interface ObjectMeta {
    * @schema io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#uid
    */
   readonly uid?: string;
-
 }
 
 /**
@@ -16463,7 +16291,6 @@ export interface MutatingWebhook {
    * @schema io.k8s.api.admissionregistration.v1.MutatingWebhook#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
@@ -16524,7 +16351,6 @@ export interface ListMeta {
    * @schema io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta#selfLink
    */
   readonly selfLink?: string;
-
 }
 
 /**
@@ -16618,7 +16444,6 @@ export interface ValidatingAdmissionPolicySpec {
    * @schema io.k8s.api.admissionregistration.v1.ValidatingAdmissionPolicySpec#variables
    */
   readonly variables?: Variable[];
-
 }
 
 /**
@@ -16692,7 +16517,6 @@ export interface ValidatingAdmissionPolicyBindingSpec {
    * @schema io.k8s.api.admissionregistration.v1.ValidatingAdmissionPolicyBindingSpec#validationActions
    */
   readonly validationActions?: string[];
-
 }
 
 /**
@@ -16842,7 +16666,6 @@ export interface ValidatingWebhook {
    * @schema io.k8s.api.admissionregistration.v1.ValidatingWebhook#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
@@ -16945,7 +16768,6 @@ export interface MutatingAdmissionPolicySpecV1Alpha1 {
    * @schema io.k8s.api.admissionregistration.v1alpha1.MutatingAdmissionPolicySpec#variables
    */
   readonly variables?: VariableV1Alpha1[];
-
 }
 
 /**
@@ -16994,7 +16816,6 @@ export interface MutatingAdmissionPolicyBindingSpecV1Alpha1 {
    * @schema io.k8s.api.admissionregistration.v1alpha1.MutatingAdmissionPolicyBindingSpec#policyName
    */
   readonly policyName?: string;
-
 }
 
 /**
@@ -17087,7 +16908,6 @@ export interface ValidatingAdmissionPolicySpecV1Beta1 {
    * @schema io.k8s.api.admissionregistration.v1beta1.ValidatingAdmissionPolicySpec#variables
    */
   readonly variables?: VariableV1Beta1[];
-
 }
 
 /**
@@ -17161,7 +16981,6 @@ export interface ValidatingAdmissionPolicyBindingSpecV1Beta1 {
    * @schema io.k8s.api.admissionregistration.v1beta1.ValidatingAdmissionPolicyBindingSpec#validationActions
    */
   readonly validationActions?: string[];
-
 }
 
 /**
@@ -17223,7 +17042,6 @@ export interface DaemonSetSpec {
    * @schema io.k8s.api.apps.v1.DaemonSetSpec#updateStrategy
    */
   readonly updateStrategy?: DaemonSetUpdateStrategy;
-
 }
 
 /**
@@ -17309,7 +17127,6 @@ export interface DeploymentSpec {
    * @schema io.k8s.api.apps.v1.DeploymentSpec#template
    */
   readonly template: PodTemplateSpec;
-
 }
 
 /**
@@ -17368,7 +17185,6 @@ export interface ReplicaSetSpec {
    * @schema io.k8s.api.apps.v1.ReplicaSetSpec#template
    */
   readonly template?: PodTemplateSpec;
-
 }
 
 /**
@@ -17471,7 +17287,6 @@ export interface StatefulSetSpec {
    * @schema io.k8s.api.apps.v1.StatefulSetSpec#volumeClaimTemplates
    */
   readonly volumeClaimTemplates?: KubePersistentVolumeClaimProps[];
-
 }
 
 /**
@@ -17524,7 +17339,6 @@ export interface TokenRequestSpec {
    * @schema io.k8s.api.authentication.v1.TokenRequestSpec#expirationSeconds
    */
   readonly expirationSeconds?: number;
-
 }
 
 /**
@@ -17562,7 +17376,6 @@ export interface TokenReviewSpec {
    * @schema io.k8s.api.authentication.v1.TokenReviewSpec#token
    */
   readonly token?: string;
-
 }
 
 /**
@@ -17627,7 +17440,6 @@ export interface SubjectAccessReviewSpec {
    * @schema io.k8s.api.authorization.v1.SubjectAccessReviewSpec#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -17668,7 +17480,6 @@ export interface SelfSubjectAccessReviewSpec {
    * @schema io.k8s.api.authorization.v1.SelfSubjectAccessReviewSpec#resourceAttributes
    */
   readonly resourceAttributes?: ResourceAttributes;
-
 }
 
 /**
@@ -17698,7 +17509,6 @@ export interface SelfSubjectRulesReviewSpec {
    * @schema io.k8s.api.authorization.v1.SelfSubjectRulesReviewSpec#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -17748,7 +17558,6 @@ export interface HorizontalPodAutoscalerSpec {
    * @schema io.k8s.api.autoscaling.v1.HorizontalPodAutoscalerSpec#targetCPUUtilizationPercentage
    */
   readonly targetCpuUtilizationPercentage?: number;
-
 }
 
 /**
@@ -17780,7 +17589,6 @@ export interface ScaleSpec {
    * @schema io.k8s.api.autoscaling.v1.ScaleSpec#replicas
    */
   readonly replicas?: number;
-
 }
 
 /**
@@ -17837,7 +17645,6 @@ export interface HorizontalPodAutoscalerSpecV2 {
    * @schema io.k8s.api.autoscaling.v2.HorizontalPodAutoscalerSpec#scaleTargetRef
    */
   readonly scaleTargetRef: CrossVersionObjectReferenceV2;
-
 }
 
 /**
@@ -17924,7 +17731,6 @@ export interface CronJobSpec {
    * @schema io.k8s.api.batch.v1.CronJobSpec#timeZone
    */
   readonly timeZone?: string;
-
 }
 
 /**
@@ -18080,7 +17886,6 @@ export interface JobSpec {
    * @schema io.k8s.api.batch.v1.JobSpec#ttlSecondsAfterFinished
    */
   readonly ttlSecondsAfterFinished?: number;
-
 }
 
 /**
@@ -18217,7 +18022,6 @@ export interface CertificateSigningRequestSpec {
    * @schema io.k8s.api.certificates.v1.CertificateSigningRequestSpec#username
    */
   readonly username?: string;
-
 }
 
 /**
@@ -18272,7 +18076,6 @@ export interface ClusterTrustBundleSpecV1Alpha1 {
    * @schema io.k8s.api.certificates.v1alpha1.ClusterTrustBundleSpec#trustBundle
    */
   readonly trustBundle: string;
-
 }
 
 /**
@@ -18321,7 +18124,6 @@ export interface ClusterTrustBundleSpecV1Beta1 {
    * @schema io.k8s.api.certificates.v1beta1.ClusterTrustBundleSpec#trustBundle
    */
   readonly trustBundle: string;
-
 }
 
 /**
@@ -18393,7 +18195,6 @@ export interface LeaseSpec {
    * @schema io.k8s.api.coordination.v1.LeaseSpec#strategy
    */
   readonly strategy?: string;
-
 }
 
 /**
@@ -18463,7 +18264,6 @@ export interface LeaseCandidateSpecV1Alpha2 {
    * @schema io.k8s.api.coordination.v1alpha2.LeaseCandidateSpec#strategy
    */
   readonly strategy: string;
-
 }
 
 /**
@@ -18532,7 +18332,6 @@ export interface LeaseCandidateSpecV1Beta1 {
    * @schema io.k8s.api.coordination.v1beta1.LeaseCandidateSpec#strategy
    */
   readonly strategy: string;
-
 }
 
 /**
@@ -18608,7 +18407,6 @@ export interface ObjectReference {
    * @schema io.k8s.api.core.v1.ObjectReference#uid
    */
   readonly uid?: string;
-
 }
 
 /**
@@ -18664,7 +18462,6 @@ export interface ComponentCondition {
    * @schema io.k8s.api.core.v1.ComponentCondition#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -18722,7 +18519,6 @@ export interface EndpointSubset {
    * @schema io.k8s.api.core.v1.EndpointSubset#ports
    */
   readonly ports?: EndpointPort[];
-
 }
 
 /**
@@ -18760,7 +18556,6 @@ export interface EventSource {
    * @schema io.k8s.api.core.v1.EventSource#host
    */
   readonly host?: string;
-
 }
 
 /**
@@ -18797,7 +18592,6 @@ export interface EventSeries {
    * @schema io.k8s.api.events.v1.EventSeries#lastObservedTime
    */
   readonly lastObservedTime: Date;
-
 }
 
 /**
@@ -18827,7 +18621,6 @@ export interface LimitRangeSpec {
    * @schema io.k8s.api.core.v1.LimitRangeSpec#limits
    */
   readonly limits: LimitRangeItem[];
-
 }
 
 /**
@@ -18856,7 +18649,6 @@ export interface NamespaceSpec {
    * @schema io.k8s.api.core.v1.NamespaceSpec#finalizers
    */
   readonly finalizers?: string[];
-
 }
 
 /**
@@ -18927,7 +18719,6 @@ export interface NodeSpec {
    * @schema io.k8s.api.core.v1.NodeSpec#unschedulable
    */
   readonly unschedulable?: boolean;
-
 }
 
 /**
@@ -19172,7 +18963,6 @@ export interface PersistentVolumeSpec {
    * @schema io.k8s.api.core.v1.PersistentVolumeSpec#vsphereVolume
    */
   readonly vsphereVolume?: VsphereVirtualDiskVolumeSource;
-
 }
 
 /**
@@ -19294,7 +19084,6 @@ export interface PersistentVolumeClaimSpec {
    * @schema io.k8s.api.core.v1.PersistentVolumeClaimSpec#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -19630,7 +19419,6 @@ export interface PodSpec {
    * @schema io.k8s.api.core.v1.PodSpec#volumes
    */
   readonly volumes?: Volume[];
-
 }
 
 /**
@@ -19705,7 +19493,6 @@ export interface PodTemplateSpec {
    * @schema io.k8s.api.core.v1.PodTemplateSpec#spec
    */
   readonly spec?: PodSpec;
-
 }
 
 /**
@@ -19758,7 +19545,6 @@ export interface ReplicationControllerSpec {
    * @schema io.k8s.api.core.v1.ReplicationControllerSpec#template
    */
   readonly template?: PodTemplateSpec;
-
 }
 
 /**
@@ -19804,7 +19590,6 @@ export interface ResourceQuotaSpec {
    * @schema io.k8s.api.core.v1.ResourceQuotaSpec#scopes
    */
   readonly scopes?: string[];
-
 }
 
 /**
@@ -19975,7 +19760,6 @@ export interface ServiceSpec {
    * @schema io.k8s.api.core.v1.ServiceSpec#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -20023,7 +19807,6 @@ export interface LocalObjectReference {
    * @schema io.k8s.api.core.v1.LocalObjectReference#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -20101,7 +19884,6 @@ export interface Endpoint {
    * @schema io.k8s.api.discovery.v1.Endpoint#zone
    */
   readonly zone?: string;
-
 }
 
 /**
@@ -20168,7 +19950,6 @@ export interface EndpointPort {
    * @schema io.k8s.api.core.v1.EndpointPort#protocol
    */
   readonly protocol?: string;
-
 }
 
 /**
@@ -20221,7 +20002,6 @@ export interface FlowSchemaSpec {
    * @schema io.k8s.api.flowcontrol.v1.FlowSchemaSpec#rules
    */
   readonly rules?: PolicyRulesWithSubjects[];
-
 }
 
 /**
@@ -20267,7 +20047,6 @@ export interface PriorityLevelConfigurationSpec {
    * @schema io.k8s.api.flowcontrol.v1.PriorityLevelConfigurationSpec#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -20298,7 +20077,6 @@ export interface IpAddressSpec {
    * @schema io.k8s.api.networking.v1.IPAddressSpec#parentRef
    */
   readonly parentRef: ParentReference;
-
 }
 
 /**
@@ -20348,7 +20126,6 @@ export interface IngressSpec {
    * @schema io.k8s.api.networking.v1.IngressSpec#tls
    */
   readonly tls?: IngressTls[];
-
 }
 
 /**
@@ -20387,7 +20164,6 @@ export interface IngressClassSpec {
    * @schema io.k8s.api.networking.v1.IngressClassSpec#parameters
    */
   readonly parameters?: IngressClassParametersReference;
-
 }
 
 /**
@@ -20438,7 +20214,6 @@ export interface NetworkPolicySpec {
    * @schema io.k8s.api.networking.v1.NetworkPolicySpec#policyTypes
    */
   readonly policyTypes?: string[];
-
 }
 
 /**
@@ -20470,7 +20245,6 @@ export interface ServiceCidrSpec {
    * @schema io.k8s.api.networking.v1.ServiceCIDRSpec#cidrs
    */
   readonly cidrs?: string[];
-
 }
 
 /**
@@ -20499,7 +20273,6 @@ export interface IpAddressSpecV1Beta1 {
    * @schema io.k8s.api.networking.v1beta1.IPAddressSpec#parentRef
    */
   readonly parentRef: ParentReferenceV1Beta1;
-
 }
 
 /**
@@ -20528,7 +20301,6 @@ export interface ServiceCidrSpecV1Beta1 {
    * @schema io.k8s.api.networking.v1beta1.ServiceCIDRSpec#cidrs
    */
   readonly cidrs?: string[];
-
 }
 
 /**
@@ -20557,7 +20329,6 @@ export interface Overhead {
    * @schema io.k8s.api.node.v1.Overhead#podFixed
    */
   readonly podFixed?: { [key: string]: Quantity };
-
 }
 
 /**
@@ -20593,7 +20364,6 @@ export interface Scheduling {
    * @schema io.k8s.api.node.v1.Scheduling#tolerations
    */
   readonly tolerations?: Toleration[];
-
 }
 
 /**
@@ -20673,7 +20443,6 @@ export interface DeleteOptions {
    * @schema io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions#propagationPolicy
    */
   readonly propagationPolicy?: string;
-
 }
 
 /**
@@ -20738,7 +20507,6 @@ export interface PodDisruptionBudgetSpec {
    * @schema io.k8s.api.policy.v1.PodDisruptionBudgetSpec#unhealthyPodEvictionPolicy
    */
   readonly unhealthyPodEvictionPolicy?: string;
-
 }
 
 /**
@@ -20770,7 +20538,6 @@ export interface AggregationRule {
    * @schema io.k8s.api.rbac.v1.AggregationRule#clusterRoleSelectors
    */
   readonly clusterRoleSelectors?: LabelSelector[];
-
 }
 
 /**
@@ -20827,7 +20594,6 @@ export interface PolicyRule {
    * @schema io.k8s.api.rbac.v1.PolicyRule#verbs
    */
   readonly verbs: string[];
-
 }
 
 /**
@@ -20874,7 +20640,6 @@ export interface RoleRef {
    * @schema io.k8s.api.rbac.v1.RoleRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -20927,7 +20692,6 @@ export interface Subject {
    * @schema io.k8s.api.rbac.v1.Subject#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -20968,7 +20732,6 @@ export interface DeviceClassSpecV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.DeviceClassSpec#selectors
    */
   readonly selectors?: DeviceSelectorV1Alpha3[];
-
 }
 
 /**
@@ -21005,7 +20768,6 @@ export interface DeviceTaintRuleSpecV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.DeviceTaintRuleSpec#taint
    */
   readonly taint: DeviceTaintV1Alpha3;
-
 }
 
 /**
@@ -21035,7 +20797,6 @@ export interface ResourceClaimSpecV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.ResourceClaimSpec#devices
    */
   readonly devices?: DeviceClaimV1Alpha3;
-
 }
 
 /**
@@ -21071,7 +20832,6 @@ export interface ResourceClaimTemplateSpecV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.ResourceClaimTemplateSpec#spec
    */
   readonly spec: ResourceClaimSpecV1Alpha3;
-
 }
 
 /**
@@ -21170,7 +20930,6 @@ export interface ResourceSliceSpecV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.ResourceSliceSpec#sharedCounters
    */
   readonly sharedCounters?: CounterSetV1Alpha3[];
-
 }
 
 /**
@@ -21215,7 +20974,6 @@ export interface DeviceClassSpecV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.DeviceClassSpec#selectors
    */
   readonly selectors?: DeviceSelectorV1Beta1[];
-
 }
 
 /**
@@ -21245,7 +21003,6 @@ export interface ResourceClaimSpecV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.ResourceClaimSpec#devices
    */
   readonly devices?: DeviceClaimV1Beta1;
-
 }
 
 /**
@@ -21281,7 +21038,6 @@ export interface ResourceClaimTemplateSpecV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.ResourceClaimTemplateSpec#spec
    */
   readonly spec: ResourceClaimSpecV1Beta1;
-
 }
 
 /**
@@ -21380,7 +21136,6 @@ export interface ResourceSliceSpecV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.ResourceSliceSpec#sharedCounters
    */
   readonly sharedCounters?: CounterSetV1Beta1[];
-
 }
 
 /**
@@ -21425,7 +21180,6 @@ export interface DeviceClassSpecV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.DeviceClassSpec#selectors
    */
   readonly selectors?: DeviceSelectorV1Beta2[];
-
 }
 
 /**
@@ -21455,7 +21209,6 @@ export interface ResourceClaimSpecV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.ResourceClaimSpec#devices
    */
   readonly devices?: DeviceClaimV1Beta2;
-
 }
 
 /**
@@ -21491,7 +21244,6 @@ export interface ResourceClaimTemplateSpecV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.ResourceClaimTemplateSpec#spec
    */
   readonly spec: ResourceClaimSpecV1Beta2;
-
 }
 
 /**
@@ -21590,7 +21342,6 @@ export interface ResourceSliceSpecV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.ResourceSliceSpec#sharedCounters
    */
   readonly sharedCounters?: CounterSetV1Beta2[];
-
 }
 
 /**
@@ -21732,7 +21483,6 @@ export interface CsiDriverSpec {
    * @schema io.k8s.api.storage.v1.CSIDriverSpec#volumeLifecycleModes
    */
   readonly volumeLifecycleModes?: string[];
-
 }
 
 /**
@@ -21769,7 +21519,6 @@ export interface CsiNodeSpec {
    * @schema io.k8s.api.storage.v1.CSINodeSpec#drivers
    */
   readonly drivers: CsiNodeDriver[];
-
 }
 
 /**
@@ -21819,7 +21568,6 @@ export interface LabelSelector {
    * @schema io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -21849,7 +21597,6 @@ export interface TopologySelectorTerm {
    * @schema io.k8s.api.core.v1.TopologySelectorTerm#matchLabelExpressions
    */
   readonly matchLabelExpressions?: TopologySelectorLabelRequirement[];
-
 }
 
 /**
@@ -21892,7 +21639,6 @@ export interface VolumeAttachmentSpec {
    * @schema io.k8s.api.storage.v1.VolumeAttachmentSpec#source
    */
   readonly source: VolumeAttachmentSource;
-
 }
 
 /**
@@ -21930,7 +21676,6 @@ export interface StorageVersionMigrationSpecV1Alpha1 {
    * @schema io.k8s.api.storagemigration.v1alpha1.StorageVersionMigrationSpec#resource
    */
   readonly resource: GroupVersionResourceV1Alpha1;
-
 }
 
 /**
@@ -21995,7 +21740,6 @@ export interface CustomResourceDefinitionSpec {
    * @schema io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinitionSpec#versions
    */
   readonly versions: CustomResourceDefinitionVersion[];
-
 }
 
 /**
@@ -22064,7 +21808,6 @@ export interface StatusDetails {
    * @schema io.k8s.apimachinery.pkg.apis.meta.v1.StatusDetails#uid
    */
   readonly uid?: string;
-
 }
 
 /**
@@ -22140,7 +21883,6 @@ export interface ApiServiceSpec {
    * @schema io.k8s.kube-aggregator.pkg.apis.apiregistration.v1.APIServiceSpec#versionPriority
    */
   readonly versionPriority: number;
-
 }
 
 /**
@@ -22217,7 +21959,6 @@ export interface ManagedFieldsEntry {
    * @schema io.k8s.apimachinery.pkg.apis.meta.v1.ManagedFieldsEntry#time
    */
   readonly time?: Date;
-
 }
 
 /**
@@ -22288,7 +22029,6 @@ export interface OwnerReference {
    * @schema io.k8s.apimachinery.pkg.apis.meta.v1.OwnerReference#uid
    */
   readonly uid: string;
-
 }
 
 /**
@@ -22348,7 +22088,6 @@ export interface WebhookClientConfig {
    * @schema io.k8s.api.admissionregistration.v1.WebhookClientConfig#url
    */
   readonly url?: string;
-
 }
 
 /**
@@ -22396,7 +22135,6 @@ export interface MatchCondition {
    * @schema io.k8s.api.admissionregistration.v1.MatchCondition#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -22461,7 +22199,6 @@ export interface RuleWithOperations {
    * @schema io.k8s.api.admissionregistration.v1.RuleWithOperations#scope
    */
   readonly scope?: string;
-
 }
 
 /**
@@ -22511,7 +22248,6 @@ export interface AuditAnnotation {
    * @schema io.k8s.api.admissionregistration.v1.AuditAnnotation#valueExpression
    */
   readonly valueExpression: string;
-
 }
 
 /**
@@ -22608,7 +22344,6 @@ export interface MatchResources {
    * @schema io.k8s.api.admissionregistration.v1.MatchResources#resourceRules
    */
   readonly resourceRules?: NamedRuleWithOperations[];
-
 }
 
 /**
@@ -22648,7 +22383,6 @@ export interface ParamKind {
    * @schema io.k8s.api.admissionregistration.v1.ParamKind#kind
    */
   readonly kind?: string;
-
 }
 
 /**
@@ -22724,7 +22458,6 @@ export interface Validation {
    * @schema io.k8s.api.admissionregistration.v1.Validation#reason
    */
   readonly reason?: string;
-
 }
 
 /**
@@ -22763,7 +22496,6 @@ export interface Variable {
    * @schema io.k8s.api.admissionregistration.v1.Variable#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -22832,7 +22564,6 @@ export interface ParamRef {
    * @schema io.k8s.api.admissionregistration.v1.ParamRef#selector
    */
   readonly selector?: LabelSelector;
-
 }
 
 /**
@@ -22879,7 +22610,6 @@ export interface MatchConditionV1Alpha1 {
    * @schema io.k8s.api.admissionregistration.v1alpha1.MatchCondition#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -22976,7 +22706,6 @@ export interface MatchResourcesV1Alpha1 {
    * @schema io.k8s.api.admissionregistration.v1alpha1.MatchResources#resourceRules
    */
   readonly resourceRules?: NamedRuleWithOperationsV1Alpha1[];
-
 }
 
 /**
@@ -23023,7 +22752,6 @@ export interface MutationV1Alpha1 {
    * @schema io.k8s.api.admissionregistration.v1alpha1.Mutation#patchType
    */
   readonly patchType: string;
-
 }
 
 /**
@@ -23061,7 +22789,6 @@ export interface ParamKindV1Alpha1 {
    * @schema io.k8s.api.admissionregistration.v1alpha1.ParamKind#kind
    */
   readonly kind?: string;
-
 }
 
 /**
@@ -23098,7 +22825,6 @@ export interface VariableV1Alpha1 {
    * @schema io.k8s.api.admissionregistration.v1alpha1.Variable#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -23164,7 +22890,6 @@ export interface ParamRefV1Alpha1 {
    * @schema io.k8s.api.admissionregistration.v1alpha1.ParamRef#selector
    */
   readonly selector?: LabelSelector;
-
 }
 
 /**
@@ -23213,7 +22938,6 @@ export interface AuditAnnotationV1Beta1 {
    * @schema io.k8s.api.admissionregistration.v1beta1.AuditAnnotation#valueExpression
    */
   readonly valueExpression: string;
-
 }
 
 /**
@@ -23260,7 +22984,6 @@ export interface MatchConditionV1Beta1 {
    * @schema io.k8s.api.admissionregistration.v1beta1.MatchCondition#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -23357,7 +23080,6 @@ export interface MatchResourcesV1Beta1 {
    * @schema io.k8s.api.admissionregistration.v1beta1.MatchResources#resourceRules
    */
   readonly resourceRules?: NamedRuleWithOperationsV1Beta1[];
-
 }
 
 /**
@@ -23397,7 +23119,6 @@ export interface ParamKindV1Beta1 {
    * @schema io.k8s.api.admissionregistration.v1beta1.ParamKind#kind
    */
   readonly kind?: string;
-
 }
 
 /**
@@ -23473,7 +23194,6 @@ export interface ValidationV1Beta1 {
    * @schema io.k8s.api.admissionregistration.v1beta1.Validation#reason
    */
   readonly reason?: string;
-
 }
 
 /**
@@ -23512,7 +23232,6 @@ export interface VariableV1Beta1 {
    * @schema io.k8s.api.admissionregistration.v1beta1.Variable#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -23581,7 +23300,6 @@ export interface ParamRefV1Beta1 {
    * @schema io.k8s.api.admissionregistration.v1beta1.ParamRef#selector
    */
   readonly selector?: LabelSelector;
-
 }
 
 /**
@@ -23621,7 +23339,6 @@ export interface DaemonSetUpdateStrategy {
    * @schema io.k8s.api.apps.v1.DaemonSetUpdateStrategy#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -23659,7 +23376,6 @@ export interface DeploymentStrategy {
    * @schema io.k8s.api.apps.v1.DeploymentStrategy#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -23692,7 +23408,6 @@ export interface StatefulSetOrdinals {
    * @schema io.k8s.api.apps.v1.StatefulSetOrdinals#start
    */
   readonly start?: number;
-
 }
 
 /**
@@ -23728,7 +23443,6 @@ export interface StatefulSetPersistentVolumeClaimRetentionPolicy {
    * @schema io.k8s.api.apps.v1.StatefulSetPersistentVolumeClaimRetentionPolicy#whenScaled
    */
   readonly whenScaled?: string;
-
 }
 
 /**
@@ -23766,7 +23480,6 @@ export interface StatefulSetUpdateStrategy {
    * @schema io.k8s.api.apps.v1.StatefulSetUpdateStrategy#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -23817,7 +23530,6 @@ export interface BoundObjectReference {
    * @schema io.k8s.api.authentication.v1.BoundObjectReference#uid
    */
   readonly uid?: string;
-
 }
 
 /**
@@ -23856,7 +23568,6 @@ export interface NonResourceAttributes {
    * @schema io.k8s.api.authorization.v1.NonResourceAttributes#verb
    */
   readonly verb?: string;
-
 }
 
 /**
@@ -23946,7 +23657,6 @@ export interface ResourceAttributes {
    * @schema io.k8s.api.authorization.v1.ResourceAttributes#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -23997,7 +23707,6 @@ export interface CrossVersionObjectReference {
    * @schema io.k8s.api.autoscaling.v1.CrossVersionObjectReference#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -24038,7 +23747,6 @@ export interface HorizontalPodAutoscalerBehaviorV2 {
    * @schema io.k8s.api.autoscaling.v2.HorizontalPodAutoscalerBehavior#scaleUp
    */
   readonly scaleUp?: HpaScalingRulesV2;
-
 }
 
 /**
@@ -24103,7 +23811,6 @@ export interface MetricSpecV2 {
    * @schema io.k8s.api.autoscaling.v2.MetricSpec#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -24151,7 +23858,6 @@ export interface CrossVersionObjectReferenceV2 {
    * @schema io.k8s.api.autoscaling.v2.CrossVersionObjectReference#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -24189,7 +23895,6 @@ export interface JobTemplateSpec {
    * @schema io.k8s.api.batch.v1.JobTemplateSpec#spec
    */
   readonly spec?: JobSpec;
-
 }
 
 /**
@@ -24219,7 +23924,6 @@ export interface PodFailurePolicy {
    * @schema io.k8s.api.batch.v1.PodFailurePolicy#rules
    */
   readonly rules: PodFailurePolicyRule[];
-
 }
 
 /**
@@ -24248,7 +23952,6 @@ export interface SuccessPolicy {
    * @schema io.k8s.api.batch.v1.SuccessPolicy#rules
    */
   readonly rules: SuccessPolicyRule[];
-
 }
 
 /**
@@ -24298,7 +24001,6 @@ export interface EndpointAddress {
    * @schema io.k8s.api.core.v1.EndpointAddress#targetRef
    */
   readonly targetRef?: ObjectReference;
-
 }
 
 /**
@@ -24365,7 +24067,6 @@ export interface LimitRangeItem {
    * @schema io.k8s.api.core.v1.LimitRangeItem#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -24399,7 +24100,6 @@ export interface NodeConfigSource {
    * @schema io.k8s.api.core.v1.NodeConfigSource#configMap
    */
   readonly configMap?: ConfigMapNodeConfigSource;
-
 }
 
 /**
@@ -24449,7 +24149,6 @@ export interface Taint {
    * @schema io.k8s.api.core.v1.Taint#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -24504,7 +24203,6 @@ export interface AwsElasticBlockStoreVolumeSource {
    * @schema io.k8s.api.core.v1.AWSElasticBlockStoreVolumeSource#volumeID
    */
   readonly volumeId: string;
-
 }
 
 /**
@@ -24572,7 +24270,6 @@ export interface AzureDiskVolumeSource {
    * @schema io.k8s.api.core.v1.AzureDiskVolumeSource#readOnly
    */
   readonly readOnly?: boolean;
-
 }
 
 /**
@@ -24627,7 +24324,6 @@ export interface AzureFilePersistentVolumeSource {
    * @schema io.k8s.api.core.v1.AzureFilePersistentVolumeSource#shareName
    */
   readonly shareName: string;
-
 }
 
 /**
@@ -24695,7 +24391,6 @@ export interface CephFsPersistentVolumeSource {
    * @schema io.k8s.api.core.v1.CephFSPersistentVolumeSource#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -24751,7 +24446,6 @@ export interface CinderPersistentVolumeSource {
    * @schema io.k8s.api.core.v1.CinderPersistentVolumeSource#volumeID
    */
   readonly volumeId: string;
-
 }
 
 /**
@@ -24847,7 +24541,6 @@ export interface CsiPersistentVolumeSource {
    * @schema io.k8s.api.core.v1.CSIPersistentVolumeSource#volumeHandle
    */
   readonly volumeHandle: string;
-
 }
 
 /**
@@ -24914,7 +24607,6 @@ export interface FcVolumeSource {
    * @schema io.k8s.api.core.v1.FCVolumeSource#wwids
    */
   readonly wwids?: string[];
-
 }
 
 /**
@@ -24975,7 +24667,6 @@ export interface FlexPersistentVolumeSource {
    * @schema io.k8s.api.core.v1.FlexPersistentVolumeSource#secretRef
    */
   readonly secretRef?: SecretReference;
-
 }
 
 /**
@@ -25015,7 +24706,6 @@ export interface FlockerVolumeSource {
    * @schema io.k8s.api.core.v1.FlockerVolumeSource#datasetUUID
    */
   readonly datasetUuid?: string;
-
 }
 
 /**
@@ -25069,7 +24759,6 @@ export interface GcePersistentDiskVolumeSource {
    * @schema io.k8s.api.core.v1.GCEPersistentDiskVolumeSource#readOnly
    */
   readonly readOnly?: boolean;
-
 }
 
 /**
@@ -25123,7 +24812,6 @@ export interface GlusterfsPersistentVolumeSource {
    * @schema io.k8s.api.core.v1.GlusterfsPersistentVolumeSource#readOnly
    */
   readonly readOnly?: boolean;
-
 }
 
 /**
@@ -25163,7 +24851,6 @@ export interface HostPathVolumeSource {
    * @schema io.k8s.api.core.v1.HostPathVolumeSource#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -25265,7 +24952,6 @@ export interface IscsiPersistentVolumeSource {
    * @schema io.k8s.api.core.v1.ISCSIPersistentVolumeSource#targetPortal
    */
   readonly targetPortal: string;
-
 }
 
 /**
@@ -25311,7 +24997,6 @@ export interface LocalVolumeSource {
    * @schema io.k8s.api.core.v1.LocalVolumeSource#path
    */
   readonly path: string;
-
 }
 
 /**
@@ -25356,7 +25041,6 @@ export interface NfsVolumeSource {
    * @schema io.k8s.api.core.v1.NFSVolumeSource#server
    */
   readonly server: string;
-
 }
 
 /**
@@ -25387,7 +25071,6 @@ export interface VolumeNodeAffinity {
    * @schema io.k8s.api.core.v1.VolumeNodeAffinity#required
    */
   readonly required?: NodeSelector;
-
 }
 
 /**
@@ -25423,7 +25106,6 @@ export interface PhotonPersistentDiskVolumeSource {
    * @schema io.k8s.api.core.v1.PhotonPersistentDiskVolumeSource#pdID
    */
   readonly pdId: string;
-
 }
 
 /**
@@ -25467,7 +25149,6 @@ export interface PortworxVolumeSource {
    * @schema io.k8s.api.core.v1.PortworxVolumeSource#volumeID
    */
   readonly volumeId: string;
-
 }
 
 /**
@@ -25536,7 +25217,6 @@ export interface QuobyteVolumeSource {
    * @schema io.k8s.api.core.v1.QuobyteVolumeSource#volume
    */
   readonly volume: string;
-
 }
 
 /**
@@ -25624,7 +25304,6 @@ export interface RbdPersistentVolumeSource {
    * @schema io.k8s.api.core.v1.RBDPersistentVolumeSource#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -25725,7 +25404,6 @@ export interface ScaleIoPersistentVolumeSource {
    * @schema io.k8s.api.core.v1.ScaleIOPersistentVolumeSource#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -25791,7 +25469,6 @@ export interface StorageOsPersistentVolumeSource {
    * @schema io.k8s.api.core.v1.StorageOSPersistentVolumeSource#volumeNamespace
    */
   readonly volumeNamespace?: string;
-
 }
 
 /**
@@ -25845,7 +25522,6 @@ export interface VsphereVirtualDiskVolumeSource {
    * @schema io.k8s.api.core.v1.VsphereVirtualDiskVolumeSource#volumePath
    */
   readonly volumePath: string;
-
 }
 
 /**
@@ -25891,7 +25567,6 @@ export interface TypedLocalObjectReference {
    * @schema io.k8s.api.core.v1.TypedLocalObjectReference#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -25943,7 +25618,6 @@ export interface TypedObjectReference {
    * @schema io.k8s.api.core.v1.TypedObjectReference#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25982,7 +25656,6 @@ export interface VolumeResourceRequirements {
    * @schema io.k8s.api.core.v1.VolumeResourceRequirements#requests
    */
   readonly requests?: { [key: string]: Quantity };
-
 }
 
 /**
@@ -26026,7 +25699,6 @@ export interface Affinity {
    * @schema io.k8s.api.core.v1.Affinity#podAntiAffinity
    */
   readonly podAntiAffinity?: PodAntiAffinity;
-
 }
 
 /**
@@ -26224,7 +25896,6 @@ export interface Container {
    * @schema io.k8s.api.core.v1.Container#workingDir
    */
   readonly workingDir?: string;
-
 }
 
 /**
@@ -26290,7 +25961,6 @@ export interface PodDnsConfig {
    * @schema io.k8s.api.core.v1.PodDNSConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
@@ -26499,7 +26169,6 @@ export interface EphemeralContainer {
    * @schema io.k8s.api.core.v1.EphemeralContainer#workingDir
    */
   readonly workingDir?: string;
-
 }
 
 /**
@@ -26559,7 +26228,6 @@ export interface HostAlias {
    * @schema io.k8s.api.core.v1.HostAlias#ip
    */
   readonly ip: string;
-
 }
 
 /**
@@ -26589,7 +26257,6 @@ export interface PodOs {
    * @schema io.k8s.api.core.v1.PodOS#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -26618,7 +26285,6 @@ export interface PodReadinessGate {
    * @schema io.k8s.api.core.v1.PodReadinessGate#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
@@ -26671,7 +26337,6 @@ export interface PodResourceClaim {
    * @schema io.k8s.api.core.v1.PodResourceClaim#resourceClaimTemplateName
    */
   readonly resourceClaimTemplateName?: string;
-
 }
 
 /**
@@ -26720,7 +26385,6 @@ export interface ResourceRequirements {
    * @schema io.k8s.api.core.v1.ResourceRequirements#requests
    */
   readonly requests?: { [key: string]: Quantity };
-
 }
 
 /**
@@ -26751,7 +26415,6 @@ export interface PodSchedulingGate {
    * @schema io.k8s.api.core.v1.PodSchedulingGate#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -26879,7 +26542,6 @@ export interface PodSecurityContext {
    * @schema io.k8s.api.core.v1.PodSecurityContext#windowsOptions
    */
   readonly windowsOptions?: WindowsSecurityContextOptions;
-
 }
 
 /**
@@ -26949,7 +26611,6 @@ export interface Toleration {
    * @schema io.k8s.api.core.v1.Toleration#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -27042,7 +26703,6 @@ export interface TopologySpreadConstraint {
    * @schema io.k8s.api.core.v1.TopologySpreadConstraint#whenUnsatisfiable
    */
   readonly whenUnsatisfiable: string;
-
 }
 
 /**
@@ -27305,7 +26965,6 @@ export interface Volume {
    * @schema io.k8s.api.core.v1.Volume#vsphereVolume
    */
   readonly vsphereVolume?: VsphereVirtualDiskVolumeSource;
-
 }
 
 /**
@@ -27364,7 +27023,6 @@ export interface ScopeSelector {
    * @schema io.k8s.api.core.v1.ScopeSelector#matchExpressions
    */
   readonly matchExpressions?: ScopedResourceSelectorRequirement[];
-
 }
 
 /**
@@ -27438,7 +27096,6 @@ export interface ServicePort {
    * @schema io.k8s.api.core.v1.ServicePort#targetPort
    */
   readonly targetPort?: IntOrString;
-
 }
 
 /**
@@ -27472,7 +27129,6 @@ export interface SessionAffinityConfig {
    * @schema io.k8s.api.core.v1.SessionAffinityConfig#clientIP
    */
   readonly clientIp?: ClientIpConfig;
-
 }
 
 /**
@@ -27515,7 +27171,6 @@ export interface EndpointConditions {
    * @schema io.k8s.api.discovery.v1.EndpointConditions#terminating
    */
   readonly terminating?: boolean;
-
 }
 
 /**
@@ -27553,7 +27208,6 @@ export interface EndpointHints {
    * @schema io.k8s.api.discovery.v1.EndpointHints#forZones
    */
   readonly forZones?: ForZone[];
-
 }
 
 /**
@@ -27583,7 +27237,6 @@ export interface FlowDistinguisherMethod {
    * @schema io.k8s.api.flowcontrol.v1.FlowDistinguisherMethod#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -27612,7 +27265,6 @@ export interface PriorityLevelConfigurationReference {
    * @schema io.k8s.api.flowcontrol.v1.PriorityLevelConfigurationReference#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -27655,7 +27307,6 @@ export interface PolicyRulesWithSubjects {
    * @schema io.k8s.api.flowcontrol.v1.PolicyRulesWithSubjects#subjects
    */
   readonly subjects: Subject[];
-
 }
 
 /**
@@ -27699,7 +27350,6 @@ export interface ExemptPriorityLevelConfiguration {
    * @schema io.k8s.api.flowcontrol.v1.ExemptPriorityLevelConfiguration#nominalConcurrencyShares
    */
   readonly nominalConcurrencyShares?: number;
-
 }
 
 /**
@@ -27766,7 +27416,6 @@ export interface LimitedPriorityLevelConfiguration {
    * @schema io.k8s.api.flowcontrol.v1.LimitedPriorityLevelConfiguration#nominalConcurrencyShares
    */
   readonly nominalConcurrencyShares?: number;
-
 }
 
 /**
@@ -27819,7 +27468,6 @@ export interface ParentReference {
    * @schema io.k8s.api.networking.v1.ParentReference#resource
    */
   readonly resource: string;
-
 }
 
 /**
@@ -27858,7 +27506,6 @@ export interface IngressBackend {
    * @schema io.k8s.api.networking.v1.IngressBackend#service
    */
   readonly service?: IngressServiceBackend;
-
 }
 
 /**
@@ -27900,7 +27547,6 @@ export interface IngressRule {
    * @schema io.k8s.api.networking.v1.IngressRule#http
    */
   readonly http?: HttpIngressRuleValue;
-
 }
 
 /**
@@ -27938,7 +27584,6 @@ export interface IngressTls {
    * @schema io.k8s.api.networking.v1.IngressTLS#secretName
    */
   readonly secretName?: string;
-
 }
 
 /**
@@ -27996,7 +27641,6 @@ export interface IngressClassParametersReference {
    * @schema io.k8s.api.networking.v1.IngressClassParametersReference#scope
    */
   readonly scope?: string;
-
 }
 
 /**
@@ -28036,7 +27680,6 @@ export interface NetworkPolicyEgressRule {
    * @schema io.k8s.api.networking.v1.NetworkPolicyEgressRule#to
    */
   readonly to?: NetworkPolicyPeer[];
-
 }
 
 /**
@@ -28073,7 +27716,6 @@ export interface NetworkPolicyIngressRule {
    * @schema io.k8s.api.networking.v1.NetworkPolicyIngressRule#ports
    */
   readonly ports?: NetworkPolicyPort[];
-
 }
 
 /**
@@ -28124,7 +27766,6 @@ export interface ParentReferenceV1Beta1 {
    * @schema io.k8s.api.networking.v1beta1.ParentReference#resource
    */
   readonly resource: string;
-
 }
 
 /**
@@ -28173,7 +27814,6 @@ export interface Preconditions {
    * @schema io.k8s.apimachinery.pkg.apis.meta.v1.Preconditions#uid
    */
   readonly uid?: string;
-
 }
 
 /**
@@ -28217,7 +27857,6 @@ export interface DeviceClassConfigurationV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.DeviceClassConfiguration#opaque
    */
   readonly opaque?: OpaqueDeviceConfigurationV1Alpha3;
-
 }
 
 /**
@@ -28246,7 +27885,6 @@ export interface DeviceSelectorV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.DeviceSelector#cel
    */
   readonly cel?: CelDeviceSelectorV1Alpha3;
-
 }
 
 /**
@@ -28307,7 +27945,6 @@ export interface DeviceTaintSelectorV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.DeviceTaintSelector#selectors
    */
   readonly selectors?: DeviceSelectorV1Alpha3[];
-
 }
 
 /**
@@ -28361,7 +27998,6 @@ export interface DeviceTaintV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.DeviceTaint#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -28407,7 +28043,6 @@ export interface DeviceClaimV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.DeviceClaim#requests
    */
   readonly requests?: DeviceRequestV1Alpha3[];
-
 }
 
 /**
@@ -28445,7 +28080,6 @@ export interface DeviceV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.Device#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -28475,7 +28109,6 @@ export interface NodeSelector {
    * @schema io.k8s.api.core.v1.NodeSelector#nodeSelectorTerms
    */
   readonly nodeSelectorTerms: NodeSelectorTerm[];
-
 }
 
 /**
@@ -28524,7 +28157,6 @@ export interface ResourcePoolV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.ResourcePool#resourceSliceCount
    */
   readonly resourceSliceCount: number;
-
 }
 
 /**
@@ -28568,7 +28200,6 @@ export interface CounterSetV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.CounterSet#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -28598,7 +28229,6 @@ export interface DeviceClassConfigurationV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.DeviceClassConfiguration#opaque
    */
   readonly opaque?: OpaqueDeviceConfigurationV1Beta1;
-
 }
 
 /**
@@ -28627,7 +28257,6 @@ export interface DeviceSelectorV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.DeviceSelector#cel
    */
   readonly cel?: CelDeviceSelectorV1Beta1;
-
 }
 
 /**
@@ -28670,7 +28299,6 @@ export interface DeviceClaimV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.DeviceClaim#requests
    */
   readonly requests?: DeviceRequestV1Beta1[];
-
 }
 
 /**
@@ -28708,7 +28336,6 @@ export interface DeviceV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.Device#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -28758,7 +28385,6 @@ export interface ResourcePoolV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.ResourcePool#resourceSliceCount
    */
   readonly resourceSliceCount: number;
-
 }
 
 /**
@@ -28800,7 +28426,6 @@ export interface CounterSetV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.CounterSet#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -28830,7 +28455,6 @@ export interface DeviceClassConfigurationV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.DeviceClassConfiguration#opaque
    */
   readonly opaque?: OpaqueDeviceConfigurationV1Beta2;
-
 }
 
 /**
@@ -28859,7 +28483,6 @@ export interface DeviceSelectorV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.DeviceSelector#cel
    */
   readonly cel?: CelDeviceSelectorV1Beta2;
-
 }
 
 /**
@@ -28902,7 +28525,6 @@ export interface DeviceClaimV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.DeviceClaim#requests
    */
   readonly requests?: DeviceRequestV1Beta2[];
-
 }
 
 /**
@@ -29002,7 +28624,6 @@ export interface DeviceV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.Device#taints
    */
   readonly taints?: DeviceTaintV1Beta2[];
-
 }
 
 /**
@@ -29058,7 +28679,6 @@ export interface ResourcePoolV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.ResourcePool#resourceSliceCount
    */
   readonly resourceSliceCount: number;
-
 }
 
 /**
@@ -29100,7 +28720,6 @@ export interface CounterSetV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.CounterSet#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -29137,7 +28756,6 @@ export interface TokenRequest {
    * @schema io.k8s.api.storage.v1.TokenRequest#expirationSeconds
    */
   readonly expirationSeconds?: number;
-
 }
 
 /**
@@ -29188,7 +28806,6 @@ export interface CsiNodeDriver {
    * @schema io.k8s.api.storage.v1.CSINodeDriver#topologyKeys
    */
   readonly topologyKeys?: string[];
-
 }
 
 /**
@@ -29234,7 +28851,6 @@ export interface LabelSelectorRequirement {
    * @schema io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelectorRequirement#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -29272,7 +28888,6 @@ export interface TopologySelectorLabelRequirement {
    * @schema io.k8s.api.core.v1.TopologySelectorLabelRequirement#values
    */
   readonly values: string[];
-
 }
 
 /**
@@ -29309,7 +28924,6 @@ export interface VolumeAttachmentSource {
    * @schema io.k8s.api.storage.v1.VolumeAttachmentSource#persistentVolumeName
    */
   readonly persistentVolumeName?: string;
-
 }
 
 /**
@@ -29353,7 +28967,6 @@ export interface GroupVersionResourceV1Alpha1 {
    * @schema io.k8s.api.storagemigration.v1alpha1.GroupVersionResource#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -29392,7 +29005,6 @@ export interface CustomResourceConversion {
    * @schema io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceConversion#webhook
    */
   readonly webhook?: WebhookConversion;
-
 }
 
 /**
@@ -29459,7 +29071,6 @@ export interface CustomResourceDefinitionNames {
    * @schema io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinitionNames#singular
    */
   readonly singular?: string;
-
 }
 
 /**
@@ -29550,7 +29161,6 @@ export interface CustomResourceDefinitionVersion {
    * @schema io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinitionVersion#subresources
    */
   readonly subresources?: CustomResourceSubresources;
-
 }
 
 /**
@@ -29605,7 +29215,6 @@ export interface StatusCause {
    * @schema io.k8s.apimachinery.pkg.apis.meta.v1.StatusCause#reason
    */
   readonly reason?: string;
-
 }
 
 /**
@@ -29658,7 +29267,6 @@ export interface ServiceReference {
    * @schema io.k8s.api.admissionregistration.v1.ServiceReference#port
    */
   readonly port?: number;
-
 }
 
 /**
@@ -29732,7 +29340,6 @@ export interface NamedRuleWithOperations {
    * @schema io.k8s.api.admissionregistration.v1.NamedRuleWithOperations#scope
    */
   readonly scope?: string;
-
 }
 
 /**
@@ -29808,7 +29415,6 @@ export interface NamedRuleWithOperationsV1Alpha1 {
    * @schema io.k8s.api.admissionregistration.v1alpha1.NamedRuleWithOperations#scope
    */
   readonly scope?: string;
-
 }
 
 /**
@@ -29869,7 +29475,6 @@ export interface ApplyConfigurationV1Alpha1 {
    * @schema io.k8s.api.admissionregistration.v1alpha1.ApplyConfiguration#expression
    */
   readonly expression?: string;
-
 }
 
 /**
@@ -29951,7 +29556,6 @@ export interface JsonPatchV1Alpha1 {
    * @schema io.k8s.api.admissionregistration.v1alpha1.JSONPatch#expression
    */
   readonly expression?: string;
-
 }
 
 /**
@@ -30022,7 +29626,6 @@ export interface NamedRuleWithOperationsV1Beta1 {
    * @schema io.k8s.api.admissionregistration.v1beta1.NamedRuleWithOperations#scope
    */
   readonly scope?: string;
-
 }
 
 /**
@@ -30063,7 +29666,6 @@ export interface RollingUpdateDaemonSet {
    * @schema io.k8s.api.apps.v1.RollingUpdateDaemonSet#maxUnavailable
    */
   readonly maxUnavailable?: IntOrString;
-
 }
 
 /**
@@ -30102,7 +29704,6 @@ export interface RollingUpdateDeployment {
    * @schema io.k8s.api.apps.v1.RollingUpdateDeployment#maxUnavailable
    */
   readonly maxUnavailable?: IntOrString;
-
 }
 
 /**
@@ -30140,7 +29741,6 @@ export interface RollingUpdateStatefulSetStrategy {
    * @schema io.k8s.api.apps.v1.RollingUpdateStatefulSetStrategy#partition
    */
   readonly partition?: number;
-
 }
 
 /**
@@ -30177,7 +29777,6 @@ export interface FieldSelectorAttributes {
    * @schema io.k8s.api.authorization.v1.FieldSelectorAttributes#requirements
    */
   readonly requirements?: FieldSelectorRequirement[];
-
 }
 
 /**
@@ -30214,7 +29813,6 @@ export interface LabelSelectorAttributes {
    * @schema io.k8s.api.authorization.v1.LabelSelectorAttributes#requirements
    */
   readonly requirements?: LabelSelectorRequirement[];
-
 }
 
 /**
@@ -30273,7 +29871,6 @@ export interface HpaScalingRulesV2 {
    * @schema io.k8s.api.autoscaling.v2.HPAScalingRules#tolerance
    */
   readonly tolerance?: Quantity;
-
 }
 
 /**
@@ -30319,7 +29916,6 @@ export interface ContainerResourceMetricSourceV2 {
    * @schema io.k8s.api.autoscaling.v2.ContainerResourceMetricSource#target
    */
   readonly target: MetricTargetV2;
-
 }
 
 /**
@@ -30357,7 +29953,6 @@ export interface ExternalMetricSourceV2 {
    * @schema io.k8s.api.autoscaling.v2.ExternalMetricSource#target
    */
   readonly target: MetricTargetV2;
-
 }
 
 /**
@@ -30401,7 +29996,6 @@ export interface ObjectMetricSourceV2 {
    * @schema io.k8s.api.autoscaling.v2.ObjectMetricSource#target
    */
   readonly target: MetricTargetV2;
-
 }
 
 /**
@@ -30439,7 +30033,6 @@ export interface PodsMetricSourceV2 {
    * @schema io.k8s.api.autoscaling.v2.PodsMetricSource#target
    */
   readonly target: MetricTargetV2;
-
 }
 
 /**
@@ -30476,7 +30069,6 @@ export interface ResourceMetricSourceV2 {
    * @schema io.k8s.api.autoscaling.v2.ResourceMetricSource#target
    */
   readonly target: MetricTargetV2;
-
 }
 
 /**
@@ -30530,7 +30122,6 @@ export interface PodFailurePolicyRule {
    * @schema io.k8s.api.batch.v1.PodFailurePolicyRule#onPodConditions
    */
   readonly onPodConditions?: PodFailurePolicyOnPodConditionsPattern[];
-
 }
 
 /**
@@ -30568,7 +30159,6 @@ export interface SuccessPolicyRule {
    * @schema io.k8s.api.batch.v1.SuccessPolicyRule#succeededIndexes
    */
   readonly succeededIndexes?: string;
-
 }
 
 /**
@@ -30626,7 +30216,6 @@ export interface ConfigMapNodeConfigSource {
    * @schema io.k8s.api.core.v1.ConfigMapNodeConfigSource#uid
    */
   readonly uid?: string;
-
 }
 
 /**
@@ -30666,7 +30255,6 @@ export interface SecretReference {
    * @schema io.k8s.api.core.v1.SecretReference#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -30703,7 +30291,6 @@ export interface NodeAffinity {
    * @schema io.k8s.api.core.v1.NodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: NodeSelector;
-
 }
 
 /**
@@ -30740,7 +30327,6 @@ export interface PodAffinity {
    * @schema io.k8s.api.core.v1.PodAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: PodAffinityTerm[];
-
 }
 
 /**
@@ -30777,7 +30363,6 @@ export interface PodAntiAffinity {
    * @schema io.k8s.api.core.v1.PodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: PodAffinityTerm[];
-
 }
 
 /**
@@ -30822,7 +30407,6 @@ export interface EnvVar {
    * @schema io.k8s.api.core.v1.EnvVar#valueFrom
    */
   readonly valueFrom?: EnvVarSource;
-
 }
 
 /**
@@ -30867,7 +30451,6 @@ export interface EnvFromSource {
    * @schema io.k8s.api.core.v1.EnvFromSource#secretRef
    */
   readonly secretRef?: SecretEnvSource;
-
 }
 
 /**
@@ -30912,7 +30495,6 @@ export interface Lifecycle {
    * @schema io.k8s.api.core.v1.Lifecycle#stopSignal
    */
   readonly stopSignal?: string;
-
 }
 
 /**
@@ -31010,7 +30592,6 @@ export interface Probe {
    * @schema io.k8s.api.core.v1.Probe#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
@@ -31077,7 +30658,6 @@ export interface ContainerPort {
    * @schema io.k8s.api.core.v1.ContainerPort#protocol
    */
   readonly protocol?: string;
-
 }
 
 /**
@@ -31117,7 +30697,6 @@ export interface ContainerResizePolicy {
    * @schema io.k8s.api.core.v1.ContainerResizePolicy#restartPolicy
    */
   readonly restartPolicy: string;
-
 }
 
 /**
@@ -31228,7 +30807,6 @@ export interface SecurityContext {
    * @schema io.k8s.api.core.v1.SecurityContext#windowsOptions
    */
   readonly windowsOptions?: WindowsSecurityContextOptions;
-
 }
 
 /**
@@ -31275,7 +30853,6 @@ export interface VolumeDevice {
    * @schema io.k8s.api.core.v1.VolumeDevice#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -31358,7 +30935,6 @@ export interface VolumeMount {
    * @schema io.k8s.api.core.v1.VolumeMount#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -31400,7 +30976,6 @@ export interface PodDnsConfigOption {
    * @schema io.k8s.api.core.v1.PodDNSConfigOption#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -31437,7 +31012,6 @@ export interface ResourceClaim {
    * @schema io.k8s.api.core.v1.ResourceClaim#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -31477,7 +31051,6 @@ export interface AppArmorProfile {
    * @schema io.k8s.api.core.v1.AppArmorProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -31528,7 +31101,6 @@ export interface SeLinuxOptions {
    * @schema io.k8s.api.core.v1.SELinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -31569,7 +31141,6 @@ export interface SeccompProfile {
    * @schema io.k8s.api.core.v1.SeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -31606,7 +31177,6 @@ export interface Sysctl {
    * @schema io.k8s.api.core.v1.Sysctl#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -31658,7 +31228,6 @@ export interface WindowsSecurityContextOptions {
    * @schema io.k8s.api.core.v1.WindowsSecurityContextOptions#runAsUserName
    */
   readonly runAsUserName?: string;
-
 }
 
 /**
@@ -31704,7 +31273,6 @@ export interface AzureFileVolumeSource {
    * @schema io.k8s.api.core.v1.AzureFileVolumeSource#shareName
    */
   readonly shareName: string;
-
 }
 
 /**
@@ -31771,7 +31339,6 @@ export interface CephFsVolumeSource {
    * @schema io.k8s.api.core.v1.CephFSVolumeSource#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -31826,7 +31393,6 @@ export interface CinderVolumeSource {
    * @schema io.k8s.api.core.v1.CinderVolumeSource#volumeID
    */
   readonly volumeId: string;
-
 }
 
 /**
@@ -31882,7 +31448,6 @@ export interface ConfigMapVolumeSource {
    * @schema io.k8s.api.core.v1.ConfigMapVolumeSource#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -31943,7 +31508,6 @@ export interface CsiVolumeSource {
    * @schema io.k8s.api.core.v1.CSIVolumeSource#volumeAttributes
    */
   readonly volumeAttributes?: { [key: string]: string };
-
 }
 
 /**
@@ -31984,7 +31548,6 @@ export interface DownwardApiVolumeSource {
    * @schema io.k8s.api.core.v1.DownwardAPIVolumeSource#items
    */
   readonly items?: DownwardApiVolumeFile[];
-
 }
 
 /**
@@ -32021,7 +31584,6 @@ export interface EmptyDirVolumeSource {
    * @schema io.k8s.api.core.v1.EmptyDirVolumeSource#sizeLimit
    */
   readonly sizeLimit?: Quantity;
-
 }
 
 /**
@@ -32057,7 +31619,6 @@ export interface EphemeralVolumeSource {
    * @schema io.k8s.api.core.v1.EphemeralVolumeSource#volumeClaimTemplate
    */
   readonly volumeClaimTemplate?: PersistentVolumeClaimTemplate;
-
 }
 
 /**
@@ -32114,7 +31675,6 @@ export interface FlexVolumeSource {
    * @schema io.k8s.api.core.v1.FlexVolumeSource#secretRef
    */
   readonly secretRef?: LocalObjectReference;
-
 }
 
 /**
@@ -32163,7 +31723,6 @@ export interface GitRepoVolumeSource {
    * @schema io.k8s.api.core.v1.GitRepoVolumeSource#revision
    */
   readonly revision?: string;
-
 }
 
 /**
@@ -32209,7 +31768,6 @@ export interface GlusterfsVolumeSource {
    * @schema io.k8s.api.core.v1.GlusterfsVolumeSource#readOnly
    */
   readonly readOnly?: boolean;
-
 }
 
 /**
@@ -32248,7 +31806,6 @@ export interface ImageVolumeSource {
    * @schema io.k8s.api.core.v1.ImageVolumeSource#reference
    */
   readonly reference?: string;
-
 }
 
 /**
@@ -32350,7 +31907,6 @@ export interface IscsiVolumeSource {
    * @schema io.k8s.api.core.v1.ISCSIVolumeSource#targetPortal
    */
   readonly targetPortal: string;
-
 }
 
 /**
@@ -32396,7 +31952,6 @@ export interface PersistentVolumeClaimVolumeSource {
    * @schema io.k8s.api.core.v1.PersistentVolumeClaimVolumeSource#readOnly
    */
   readonly readOnly?: boolean;
-
 }
 
 /**
@@ -32433,7 +31988,6 @@ export interface ProjectedVolumeSource {
    * @schema io.k8s.api.core.v1.ProjectedVolumeSource#sources
    */
   readonly sources?: VolumeProjection[];
-
 }
 
 /**
@@ -32517,7 +32071,6 @@ export interface RbdVolumeSource {
    * @schema io.k8s.api.core.v1.RBDVolumeSource#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -32619,7 +32172,6 @@ export interface ScaleIoVolumeSource {
    * @schema io.k8s.api.core.v1.ScaleIOVolumeSource#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -32681,7 +32233,6 @@ export interface SecretVolumeSource {
    * @schema io.k8s.api.core.v1.SecretVolumeSource#secretName
    */
   readonly secretName?: string;
-
 }
 
 /**
@@ -32741,7 +32292,6 @@ export interface StorageOsVolumeSource {
    * @schema io.k8s.api.core.v1.StorageOSVolumeSource#volumeNamespace
    */
   readonly volumeNamespace?: string;
-
 }
 
 /**
@@ -32788,7 +32338,6 @@ export interface ScopedResourceSelectorRequirement {
    * @schema io.k8s.api.core.v1.ScopedResourceSelectorRequirement#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -32819,7 +32368,6 @@ export interface ClientIpConfig {
    * @schema io.k8s.api.core.v1.ClientIPConfig#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
@@ -32848,7 +32396,6 @@ export interface ForNode {
    * @schema io.k8s.api.discovery.v1.ForNode#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -32877,7 +32424,6 @@ export interface ForZone {
    * @schema io.k8s.api.discovery.v1.ForZone#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -32919,7 +32465,6 @@ export interface NonResourcePolicyRule {
    * @schema io.k8s.api.flowcontrol.v1.NonResourcePolicyRule#verbs
    */
   readonly verbs: string[];
-
 }
 
 /**
@@ -32977,7 +32522,6 @@ export interface ResourcePolicyRule {
    * @schema io.k8s.api.flowcontrol.v1.ResourcePolicyRule#verbs
    */
   readonly verbs: string[];
-
 }
 
 /**
@@ -33017,7 +32561,6 @@ export interface LimitResponse {
    * @schema io.k8s.api.flowcontrol.v1.LimitResponse#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -33054,7 +32597,6 @@ export interface IngressServiceBackend {
    * @schema io.k8s.api.networking.v1.IngressServiceBackend#port
    */
   readonly port?: ServiceBackendPort;
-
 }
 
 /**
@@ -33084,7 +32626,6 @@ export interface HttpIngressRuleValue {
    * @schema io.k8s.api.networking.v1.HTTPIngressRuleValue#paths
    */
   readonly paths: HttpIngressPath[];
-
 }
 
 /**
@@ -33127,7 +32668,6 @@ export interface NetworkPolicyPort {
    * @schema io.k8s.api.networking.v1.NetworkPolicyPort#protocol
    */
   readonly protocol?: string;
-
 }
 
 /**
@@ -33176,7 +32716,6 @@ export interface NetworkPolicyPeer {
    * @schema io.k8s.api.networking.v1.NetworkPolicyPeer#podSelector
    */
   readonly podSelector?: LabelSelector;
-
 }
 
 /**
@@ -33220,7 +32759,6 @@ export interface OpaqueDeviceConfigurationV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.OpaqueDeviceConfiguration#parameters
    */
   readonly parameters: any;
-
 }
 
 /**
@@ -33278,7 +32816,6 @@ export interface CelDeviceSelectorV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.CELDeviceSelector#expression
    */
   readonly expression: string;
-
 }
 
 /**
@@ -33316,7 +32853,6 @@ export interface DeviceClaimConfigurationV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.DeviceClaimConfiguration#requests
    */
   readonly requests?: string[];
-
 }
 
 /**
@@ -33359,7 +32895,6 @@ export interface DeviceConstraintV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.DeviceConstraint#requests
    */
   readonly requests?: string[];
-
 }
 
 /**
@@ -33481,7 +33016,6 @@ export interface DeviceRequestV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.DeviceRequest#tolerations
    */
   readonly tolerations?: DeviceTolerationV1Alpha3[];
-
 }
 
 /**
@@ -33577,7 +33111,6 @@ export interface BasicDeviceV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.BasicDevice#taints
    */
   readonly taints?: DeviceTaintV1Alpha3[];
-
 }
 
 /**
@@ -33619,7 +33152,6 @@ export interface NodeSelectorTerm {
    * @schema io.k8s.api.core.v1.NodeSelectorTerm#matchFields
    */
   readonly matchFields?: NodeSelectorRequirement[];
-
 }
 
 /**
@@ -33649,7 +33181,6 @@ export interface CounterV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.Counter#value
    */
   readonly value: Quantity;
-
 }
 
 /**
@@ -33691,7 +33222,6 @@ export interface OpaqueDeviceConfigurationV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.OpaqueDeviceConfiguration#parameters
    */
   readonly parameters: any;
-
 }
 
 /**
@@ -33749,7 +33279,6 @@ export interface CelDeviceSelectorV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.CELDeviceSelector#expression
    */
   readonly expression: string;
-
 }
 
 /**
@@ -33787,7 +33316,6 @@ export interface DeviceClaimConfigurationV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.DeviceClaimConfiguration#requests
    */
   readonly requests?: string[];
-
 }
 
 /**
@@ -33830,7 +33358,6 @@ export interface DeviceConstraintV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.DeviceConstraint#requests
    */
   readonly requests?: string[];
-
 }
 
 /**
@@ -33952,7 +33479,6 @@ export interface DeviceRequestV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.DeviceRequest#tolerations
    */
   readonly tolerations?: DeviceTolerationV1Beta1[];
-
 }
 
 /**
@@ -34050,7 +33576,6 @@ export interface BasicDeviceV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.BasicDevice#taints
    */
   readonly taints?: DeviceTaintV1Beta1[];
-
 }
 
 /**
@@ -34085,7 +33610,6 @@ export interface CounterV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.Counter#value
    */
   readonly value: Quantity;
-
 }
 
 /**
@@ -34127,7 +33651,6 @@ export interface OpaqueDeviceConfigurationV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.OpaqueDeviceConfiguration#parameters
    */
   readonly parameters: any;
-
 }
 
 /**
@@ -34185,7 +33708,6 @@ export interface CelDeviceSelectorV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.CELDeviceSelector#expression
    */
   readonly expression: string;
-
 }
 
 /**
@@ -34223,7 +33745,6 @@ export interface DeviceClaimConfigurationV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.DeviceClaimConfiguration#requests
    */
   readonly requests?: string[];
-
 }
 
 /**
@@ -34266,7 +33787,6 @@ export interface DeviceConstraintV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.DeviceConstraint#requests
    */
   readonly requests?: string[];
-
 }
 
 /**
@@ -34318,7 +33838,6 @@ export interface DeviceRequestV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.DeviceRequest#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -34370,7 +33889,6 @@ export interface DeviceAttributeV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.DeviceAttribute#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -34402,7 +33920,6 @@ export interface DeviceCapacityV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.DeviceCapacity#value
    */
   readonly value: Quantity;
-
 }
 
 /**
@@ -34440,7 +33957,6 @@ export interface DeviceCounterConsumptionV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.DeviceCounterConsumption#counters
    */
   readonly counters: { [key: string]: CounterV1Beta2 };
-
 }
 
 /**
@@ -34491,7 +34007,6 @@ export interface DeviceTaintV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.DeviceTaint#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -34523,7 +34038,6 @@ export interface CounterV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.Counter#value
    */
   readonly value: Quantity;
-
 }
 
 /**
@@ -34552,7 +34066,6 @@ export interface VolumeNodeResources {
    * @schema io.k8s.api.storage.v1.VolumeNodeResources#count
    */
   readonly count?: number;
-
 }
 
 /**
@@ -34588,7 +34101,6 @@ export interface WebhookConversion {
    * @schema io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.WebhookConversion#conversionReviewVersions
    */
   readonly conversionReviewVersions: string[];
-
 }
 
 /**
@@ -34653,7 +34165,6 @@ export interface CustomResourceColumnDefinition {
    * @schema io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceColumnDefinition#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -34687,7 +34198,6 @@ export interface CustomResourceValidation {
    * @schema io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceValidation#openAPIV3Schema
    */
   readonly openApiv3Schema?: JsonSchemaProps;
-
 }
 
 /**
@@ -34716,7 +34226,6 @@ export interface SelectableField {
    * @schema io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.SelectableField#jsonPath
    */
   readonly jsonPath: string;
-
 }
 
 /**
@@ -34752,7 +34261,6 @@ export interface CustomResourceSubresources {
    * @schema io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceSubresources#status
    */
   readonly status?: any;
-
 }
 
 /**
@@ -34796,7 +34304,6 @@ export interface FieldSelectorRequirement {
    * @schema io.k8s.apimachinery.pkg.apis.meta.v1.FieldSelectorRequirement#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -34841,7 +34348,6 @@ export interface HpaScalingPolicyV2 {
    * @schema io.k8s.api.autoscaling.v2.HPAScalingPolicy#value
    */
   readonly value: number;
-
 }
 
 /**
@@ -34893,7 +34399,6 @@ export interface MetricTargetV2 {
    * @schema io.k8s.api.autoscaling.v2.MetricTarget#value
    */
   readonly value?: Quantity;
-
 }
 
 /**
@@ -34932,7 +34437,6 @@ export interface MetricIdentifierV2 {
    * @schema io.k8s.api.autoscaling.v2.MetricIdentifier#selector
    */
   readonly selector?: LabelSelector;
-
 }
 
 /**
@@ -34984,7 +34488,6 @@ export interface PodFailurePolicyOnExitCodesRequirement {
    * @schema io.k8s.api.batch.v1.PodFailurePolicyOnExitCodesRequirement#values
    */
   readonly values: number[];
-
 }
 
 /**
@@ -35023,7 +34526,6 @@ export interface PodFailurePolicyOnPodConditionsPattern {
    * @schema io.k8s.api.batch.v1.PodFailurePolicyOnPodConditionsPattern#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -35060,7 +34562,6 @@ export interface PreferredSchedulingTerm {
    * @schema io.k8s.api.core.v1.PreferredSchedulingTerm#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -35097,7 +34598,6 @@ export interface WeightedPodAffinityTerm {
    * @schema io.k8s.api.core.v1.WeightedPodAffinityTerm#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -35162,7 +34662,6 @@ export interface PodAffinityTerm {
    * @schema io.k8s.api.core.v1.PodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -35217,7 +34716,6 @@ export interface EnvVarSource {
    * @schema io.k8s.api.core.v1.EnvVarSource#secretKeyRef
    */
   readonly secretKeyRef?: SecretKeySelector;
-
 }
 
 /**
@@ -35258,7 +34756,6 @@ export interface ConfigMapEnvSource {
    * @schema io.k8s.api.core.v1.ConfigMapEnvSource#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -35297,7 +34794,6 @@ export interface SecretEnvSource {
    * @schema io.k8s.api.core.v1.SecretEnvSource#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -35348,7 +34844,6 @@ export interface LifecycleHandler {
    * @schema io.k8s.api.core.v1.LifecycleHandler#tcpSocket
    */
   readonly tcpSocket?: TcpSocketAction;
-
 }
 
 /**
@@ -35380,7 +34875,6 @@ export interface ExecAction {
    * @schema io.k8s.api.core.v1.ExecAction#command
    */
   readonly command?: string[];
-
 }
 
 /**
@@ -35418,7 +34912,6 @@ export interface GrpcAction {
    * @schema io.k8s.api.core.v1.GRPCAction#service
    */
   readonly service?: string;
-
 }
 
 /**
@@ -35477,7 +34970,6 @@ export interface HttpGetAction {
    * @schema io.k8s.api.core.v1.HTTPGetAction#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
@@ -35517,7 +35009,6 @@ export interface TcpSocketAction {
    * @schema io.k8s.api.core.v1.TCPSocketAction#port
    */
   readonly port: IntOrString;
-
 }
 
 /**
@@ -35554,7 +35045,6 @@ export interface Capabilities {
    * @schema io.k8s.api.core.v1.Capabilities#drop
    */
   readonly drop?: string[];
-
 }
 
 /**
@@ -35598,7 +35088,6 @@ export interface KeyToPath {
    * @schema io.k8s.api.core.v1.KeyToPath#path
    */
   readonly path: string;
-
 }
 
 /**
@@ -35650,7 +35139,6 @@ export interface DownwardApiVolumeFile {
    * @schema io.k8s.api.core.v1.DownwardAPIVolumeFile#resourceFieldRef
    */
   readonly resourceFieldRef?: ResourceFieldSelector;
-
 }
 
 /**
@@ -35689,7 +35177,6 @@ export interface PersistentVolumeClaimTemplate {
    * @schema io.k8s.api.core.v1.PersistentVolumeClaimTemplate#spec
    */
   readonly spec: PersistentVolumeClaimSpec;
-
 }
 
 /**
@@ -35753,7 +35240,6 @@ export interface VolumeProjection {
    * @schema io.k8s.api.core.v1.VolumeProjection#serviceAccountToken
    */
   readonly serviceAccountToken?: ServiceAccountTokenProjection;
-
 }
 
 /**
@@ -35800,7 +35286,6 @@ export interface QueuingConfiguration {
    * @schema io.k8s.api.flowcontrol.v1.QueuingConfiguration#queues
    */
   readonly queues?: number;
-
 }
 
 /**
@@ -35838,7 +35323,6 @@ export interface ServiceBackendPort {
    * @schema io.k8s.api.networking.v1.ServiceBackendPort#number
    */
   readonly number?: number;
-
 }
 
 /**
@@ -35892,7 +35376,6 @@ export interface HttpIngressPath {
    * @schema io.k8s.api.networking.v1.HTTPIngressPath#pathType
    */
   readonly pathType: string;
-
 }
 
 /**
@@ -35930,7 +35413,6 @@ export interface IpBlock {
    * @schema io.k8s.api.networking.v1.IPBlock#except
    */
   readonly except?: string[];
-
 }
 
 /**
@@ -36023,7 +35505,6 @@ export interface DeviceSubRequestV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.DeviceSubRequest#tolerations
    */
   readonly tolerations?: DeviceTolerationV1Alpha3[];
-
 }
 
 /**
@@ -36086,7 +35567,6 @@ export interface DeviceTolerationV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.DeviceToleration#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -36140,7 +35620,6 @@ export interface DeviceAttributeV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.DeviceAttribute#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -36181,7 +35660,6 @@ export interface DeviceCounterConsumptionV1Alpha3 {
    * @schema io.k8s.api.resource.v1alpha3.DeviceCounterConsumption#counters
    */
   readonly counters: { [key: string]: CounterV1Alpha3 };
-
 }
 
 /**
@@ -36225,7 +35703,6 @@ export interface NodeSelectorRequirement {
    * @schema io.k8s.api.core.v1.NodeSelectorRequirement#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -36319,7 +35796,6 @@ export interface DeviceSubRequestV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.DeviceSubRequest#tolerations
    */
   readonly tolerations?: DeviceTolerationV1Beta1[];
-
 }
 
 /**
@@ -36382,7 +35858,6 @@ export interface DeviceTolerationV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.DeviceToleration#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -36436,7 +35911,6 @@ export interface DeviceAttributeV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.DeviceAttribute#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -36468,7 +35942,6 @@ export interface DeviceCapacityV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.DeviceCapacity#value
    */
   readonly value: Quantity;
-
 }
 
 /**
@@ -36506,7 +35979,6 @@ export interface DeviceCounterConsumptionV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.DeviceCounterConsumption#counters
    */
   readonly counters: { [key: string]: CounterV1Beta1 };
-
 }
 
 /**
@@ -36557,7 +36029,6 @@ export interface DeviceTaintV1Beta1 {
    * @schema io.k8s.api.resource.v1beta1.DeviceTaint#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -36651,7 +36122,6 @@ export interface ExactDeviceRequestV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.ExactDeviceRequest#tolerations
    */
   readonly tolerations?: DeviceTolerationV1Beta2[];
-
 }
 
 /**
@@ -36748,7 +36218,6 @@ export interface DeviceSubRequestV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.DeviceSubRequest#tolerations
    */
   readonly tolerations?: DeviceTolerationV1Beta2[];
-
 }
 
 /**
@@ -37049,7 +36518,6 @@ export interface JsonSchemaProps {
    * @schema io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSONSchemaProps#x-kubernetes-validations
    */
   readonly xKubernetesValidations?: ValidationRule[];
-
 }
 
 /**
@@ -37135,7 +36603,6 @@ export interface CustomResourceSubresourceScale {
    * @schema io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceSubresourceScale#statusReplicasPath
    */
   readonly statusReplicasPath: string;
-
 }
 
 /**
@@ -37180,7 +36647,6 @@ export interface ConfigMapKeySelector {
    * @schema io.k8s.api.core.v1.ConfigMapKeySelector#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -37218,7 +36684,6 @@ export interface ObjectFieldSelector {
    * @schema io.k8s.api.core.v1.ObjectFieldSelector#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
@@ -37262,7 +36727,6 @@ export interface ResourceFieldSelector {
    * @schema io.k8s.api.core.v1.ResourceFieldSelector#resource
    */
   readonly resource: string;
-
 }
 
 /**
@@ -37307,7 +36771,6 @@ export interface SecretKeySelector {
    * @schema io.k8s.api.core.v1.SecretKeySelector#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -37338,7 +36801,6 @@ export interface SleepAction {
    * @schema io.k8s.api.core.v1.SleepAction#seconds
    */
   readonly seconds: number;
-
 }
 
 /**
@@ -37374,7 +36836,6 @@ export interface HttpHeader {
    * @schema io.k8s.api.core.v1.HTTPHeader#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -37432,7 +36893,6 @@ export interface ClusterTrustBundleProjection {
    * @schema io.k8s.api.core.v1.ClusterTrustBundleProjection#signerName
    */
   readonly signerName?: string;
-
 }
 
 /**
@@ -37481,7 +36941,6 @@ export interface ConfigMapProjection {
    * @schema io.k8s.api.core.v1.ConfigMapProjection#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -37512,7 +36971,6 @@ export interface DownwardApiProjection {
    * @schema io.k8s.api.core.v1.DownwardAPIProjection#items
    */
   readonly items?: DownwardApiVolumeFile[];
-
 }
 
 /**
@@ -37557,7 +37015,6 @@ export interface SecretProjection {
    * @schema io.k8s.api.core.v1.SecretProjection#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -37603,7 +37060,6 @@ export interface ServiceAccountTokenProjection {
    * @schema io.k8s.api.core.v1.ServiceAccountTokenProjection#path
    */
   readonly path: string;
-
 }
 
 /**
@@ -37663,7 +37119,6 @@ export interface DeviceTolerationV1Beta2 {
    * @schema io.k8s.api.resource.v1beta2.DeviceToleration#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -37699,7 +37154,6 @@ export interface ExternalDocumentation {
    * @schema io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.ExternalDocumentation#url
    */
   readonly url?: string;
-
 }
 
 /**
@@ -37802,7 +37256,6 @@ export interface ValidationRule {
    * @schema io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.ValidationRule#rule
    */
   readonly rule: string;
-
 }
 
 /**

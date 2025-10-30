@@ -74,7 +74,6 @@ export interface VlAgentProps {
    * @schema VLAgent#spec
    */
   readonly spec?: VlAgentSpec;
-
 }
 
 /**
@@ -203,6 +202,7 @@ export interface VlAgentSpec {
    * @schema VlAgentSpec#hostNetwork
    */
   readonly hostNetwork?: boolean;
+
 
   /**
    * Image - docker image settings
@@ -516,7 +516,6 @@ export interface VlAgentSpec {
    * @schema VlAgentSpec#volumes
    */
   readonly volumes?: any[];
-
 }
 
 /**
@@ -636,7 +635,6 @@ export interface VlAgentSpecClaimTemplates {
    * @schema VlAgentSpecClaimTemplates#status
    */
   readonly status?: VlAgentSpecClaimTemplatesStatus;
-
 }
 
 /**
@@ -692,7 +690,6 @@ export interface VlAgentSpecDnsConfig {
    * @schema VlAgentSpecDnsConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
@@ -739,7 +736,6 @@ export interface VlAgentSpecExtraEnvs {
    * @schema VlAgentSpecExtraEnvs#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -783,7 +779,6 @@ export interface VlAgentSpecExtraEnvsFrom {
    * @schema VlAgentSpecExtraEnvsFrom#secretRef
    */
   readonly secretRef?: VlAgentSpecExtraEnvsFromSecretRef;
-
 }
 
 /**
@@ -822,7 +817,6 @@ export interface VlAgentSpecHostAliases {
    * @schema VlAgentSpecHostAliases#ip
    */
   readonly ip: string;
-
 }
 
 /**
@@ -867,7 +861,6 @@ export interface VlAgentSpecImage {
    * @schema VlAgentSpecImage#tag
    */
   readonly tag?: string;
-
 }
 
 /**
@@ -903,7 +896,6 @@ export interface VlAgentSpecImagePullSecrets {
    * @schema VlAgentSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -976,7 +968,6 @@ export interface VlAgentSpecManagedMetadata {
    * @schema VlAgentSpecManagedMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -1020,7 +1011,6 @@ export interface VlAgentSpecPersistentVolumeClaimRetentionPolicy {
    * @schema VlAgentSpecPersistentVolumeClaimRetentionPolicy#whenScaled
    */
   readonly whenScaled?: string;
-
 }
 
 /**
@@ -1071,7 +1061,6 @@ export interface VlAgentSpecPodDisruptionBudget {
    * @schema VlAgentSpecPodDisruptionBudget#selectorLabels
    */
   readonly selectorLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -1127,7 +1116,6 @@ export interface VlAgentSpecPodMetadata {
    * @schema VlAgentSpecPodMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -1158,7 +1146,6 @@ export interface VlAgentSpecReadinessGates {
    * @schema VlAgentSpecReadinessGates#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
@@ -1247,7 +1234,6 @@ export interface VlAgentSpecRemoteWrite {
    * @schema VlAgentSpecRemoteWrite#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -1320,7 +1306,6 @@ export interface VlAgentSpecRemoteWriteSettings {
    * @schema VlAgentSpecRemoteWriteSettings#tmpDataPath
    */
   readonly tmpDataPath?: string;
-
 }
 
 /**
@@ -1379,7 +1364,6 @@ export interface VlAgentSpecResources {
    * @schema VlAgentSpecResources#requests
    */
   readonly requests?: { [key: string]: VlAgentSpecResourcesRequests };
-
 }
 
 /**
@@ -1426,7 +1410,6 @@ export interface VlAgentSpecServiceSpec {
    * @schema VlAgentSpecServiceSpec#useAsDefault
    */
   readonly useAsDefault?: boolean;
-
 }
 
 /**
@@ -1473,7 +1456,6 @@ export interface VlAgentSpecStorage {
    * @schema VlAgentSpecStorage#volumeClaimTemplate
    */
   readonly volumeClaimTemplate?: VlAgentSpecStorageVolumeClaimTemplate;
-
 }
 
 /**
@@ -1511,7 +1493,6 @@ export interface VlAgentSpecSyslogSpec {
    * @schema VlAgentSpecSyslogSpec#udpListeners
    */
   readonly udpListeners?: VlAgentSpecSyslogSpecUdpListeners[];
-
 }
 
 /**
@@ -1580,7 +1561,6 @@ export interface VlAgentSpecTolerations {
    * @schema VlAgentSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -1684,7 +1664,6 @@ export interface VlAgentSpecVolumeMounts {
    * @schema VlAgentSpecVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -1823,7 +1802,6 @@ export interface VlAgentSpecClaimTemplatesSpec {
    * @schema VlAgentSpecClaimTemplatesSpec#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -1972,7 +1950,6 @@ export interface VlAgentSpecClaimTemplatesStatus {
    * @schema VlAgentSpecClaimTemplatesStatus#phase
    */
   readonly phase?: string;
-
 }
 
 /**
@@ -2016,7 +1993,6 @@ export interface VlAgentSpecDnsConfigOptions {
    * @schema VlAgentSpecDnsConfigOptions#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -2057,7 +2033,6 @@ export interface VlAgentSpecExtraEnvsFromConfigMapRef {
    * @schema VlAgentSpecExtraEnvsFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -2098,7 +2073,6 @@ export interface VlAgentSpecExtraEnvsFromSecretRef {
    * @schema VlAgentSpecExtraEnvsFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -2184,7 +2158,6 @@ export interface VlAgentSpecRemoteWriteBearerTokenSecret {
    * @schema VlAgentSpecRemoteWriteBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -2257,7 +2230,6 @@ export interface VlAgentSpecRemoteWriteOauth2 {
    * @schema VlAgentSpecRemoteWriteOauth2#tokenURL
    */
   readonly tokenUrl: string;
-
 }
 
 /**
@@ -2344,7 +2316,6 @@ export interface VlAgentSpecRemoteWriteTlsConfig {
    * @schema VlAgentSpecRemoteWriteTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -2391,7 +2362,6 @@ export interface VlAgentSpecResourcesClaims {
    * @schema VlAgentSpecResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -2474,7 +2444,6 @@ export interface VlAgentSpecServiceSpecMetadata {
    * @schema VlAgentSpecServiceSpecMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -2521,7 +2490,6 @@ export interface VlAgentSpecStorageEmptyDir {
    * @schema VlAgentSpecStorageEmptyDir#sizeLimit
    */
   readonly sizeLimit?: VlAgentSpecStorageEmptyDirSizeLimit;
-
 }
 
 /**
@@ -2589,7 +2557,6 @@ export interface VlAgentSpecStorageVolumeClaimTemplate {
    * @schema VlAgentSpecStorageVolumeClaimTemplate#status
    */
   readonly status?: VlAgentSpecStorageVolumeClaimTemplateStatus;
-
 }
 
 /**
@@ -2669,7 +2636,6 @@ export interface VlAgentSpecSyslogSpecTcpListeners {
    * @schema VlAgentSpecSyslogSpecTcpListeners#tlsConfig
    */
   readonly tlsConfig?: VlAgentSpecSyslogSpecTcpListenersTlsConfig;
-
 }
 
 /**
@@ -2744,7 +2710,6 @@ export interface VlAgentSpecSyslogSpecUdpListeners {
    * @schema VlAgentSpecSyslogSpecUdpListeners#tenantID
    */
   readonly tenantId?: string;
-
 }
 
 /**
@@ -2801,7 +2766,6 @@ export interface VlAgentSpecClaimTemplatesSpecDataSource {
    * @schema VlAgentSpecClaimTemplatesSpecDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -2879,7 +2843,6 @@ export interface VlAgentSpecClaimTemplatesSpecDataSourceRef {
    * @schema VlAgentSpecClaimTemplatesSpecDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -2926,7 +2889,6 @@ export interface VlAgentSpecClaimTemplatesSpecResources {
    * @schema VlAgentSpecClaimTemplatesSpecResources#requests
    */
   readonly requests?: { [key: string]: VlAgentSpecClaimTemplatesSpecResourcesRequests };
-
 }
 
 /**
@@ -2965,7 +2927,6 @@ export interface VlAgentSpecClaimTemplatesSpecSelector {
    * @schema VlAgentSpecClaimTemplatesSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -3063,7 +3024,6 @@ export interface VlAgentSpecClaimTemplatesStatusConditions {
    * @schema VlAgentSpecClaimTemplatesStatusConditions#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -3115,7 +3075,6 @@ export interface VlAgentSpecClaimTemplatesStatusModifyVolumeStatus {
    * @schema VlAgentSpecClaimTemplatesStatusModifyVolumeStatus#targetVolumeAttributesClassName
    */
   readonly targetVolumeAttributesClassName?: string;
-
 }
 
 /**
@@ -3163,7 +3122,6 @@ export interface VlAgentSpecRemoteWriteOauth2ClientIdSecret {
    * @schema VlAgentSpecRemoteWriteOauth2ClientIdSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -3212,7 +3170,6 @@ export interface VlAgentSpecRemoteWriteOauth2ClientSecret {
    * @schema VlAgentSpecRemoteWriteOauth2ClientSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -3261,7 +3218,6 @@ export interface VlAgentSpecRemoteWriteTlsConfigCaSecretKeyRef {
    * @schema VlAgentSpecRemoteWriteTlsConfigCaSecretKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -3311,7 +3267,6 @@ export interface VlAgentSpecRemoteWriteTlsConfigCertSecretKeyRef {
    * @schema VlAgentSpecRemoteWriteTlsConfigCertSecretKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -3360,7 +3315,6 @@ export interface VlAgentSpecRemoteWriteTlsConfigKeySecretKeyRef {
    * @schema VlAgentSpecRemoteWriteTlsConfigKeySecretKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -3437,7 +3391,6 @@ export interface VlAgentSpecStorageVolumeClaimTemplateMetadata {
    * @schema VlAgentSpecStorageVolumeClaimTemplateMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -3572,7 +3525,6 @@ export interface VlAgentSpecStorageVolumeClaimTemplateSpec {
    * @schema VlAgentSpecStorageVolumeClaimTemplateSpec#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -3721,7 +3673,6 @@ export interface VlAgentSpecStorageVolumeClaimTemplateStatus {
    * @schema VlAgentSpecStorageVolumeClaimTemplateStatus#phase
    */
   readonly phase?: string;
-
 }
 
 /**
@@ -3782,7 +3733,6 @@ export interface VlAgentSpecSyslogSpecTcpListenersTlsConfig {
    * @schema VlAgentSpecSyslogSpecTcpListenersTlsConfig#keySecret
    */
   readonly keySecret?: VlAgentSpecSyslogSpecTcpListenersTlsConfigKeySecret;
-
 }
 
 /**
@@ -3861,7 +3811,6 @@ export interface VlAgentSpecClaimTemplatesSpecSelectorMatchExpressions {
    * @schema VlAgentSpecClaimTemplatesSpecSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -3915,7 +3864,6 @@ export interface VlAgentSpecStorageVolumeClaimTemplateSpecDataSource {
    * @schema VlAgentSpecStorageVolumeClaimTemplateSpecDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -3993,7 +3941,6 @@ export interface VlAgentSpecStorageVolumeClaimTemplateSpecDataSourceRef {
    * @schema VlAgentSpecStorageVolumeClaimTemplateSpecDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -4040,7 +3987,6 @@ export interface VlAgentSpecStorageVolumeClaimTemplateSpecResources {
    * @schema VlAgentSpecStorageVolumeClaimTemplateSpecResources#requests
    */
   readonly requests?: { [key: string]: VlAgentSpecStorageVolumeClaimTemplateSpecResourcesRequests };
-
 }
 
 /**
@@ -4079,7 +4025,6 @@ export interface VlAgentSpecStorageVolumeClaimTemplateSpecSelector {
    * @schema VlAgentSpecStorageVolumeClaimTemplateSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -4177,7 +4122,6 @@ export interface VlAgentSpecStorageVolumeClaimTemplateStatusConditions {
    * @schema VlAgentSpecStorageVolumeClaimTemplateStatusConditions#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -4229,7 +4173,6 @@ export interface VlAgentSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus {
    * @schema VlAgentSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus#targetVolumeAttributesClassName
    */
   readonly targetVolumeAttributesClassName?: string;
-
 }
 
 /**
@@ -4278,7 +4221,6 @@ export interface VlAgentSpecSyslogSpecTcpListenersTlsConfigCertSecret {
    * @schema VlAgentSpecSyslogSpecTcpListenersTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -4328,7 +4270,6 @@ export interface VlAgentSpecSyslogSpecTcpListenersTlsConfigKeySecret {
    * @schema VlAgentSpecSyslogSpecTcpListenersTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -4406,7 +4347,6 @@ export interface VlAgentSpecStorageVolumeClaimTemplateSpecSelectorMatchExpressio
    * @schema VlAgentSpecStorageVolumeClaimTemplateSpecSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -4497,7 +4437,6 @@ export interface VlClusterProps {
    * @schema VLCluster#spec
    */
   readonly spec?: VlClusterSpec;
-
 }
 
 /**
@@ -4610,7 +4549,6 @@ export interface VlClusterSpec {
    * @schema VlClusterSpec#vlstorage
    */
   readonly vlstorage?: VlClusterSpecVlstorage;
-
 }
 
 /**
@@ -4654,7 +4592,6 @@ export interface VlClusterSpecImagePullSecrets {
    * @schema VlClusterSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -4696,7 +4633,6 @@ export interface VlClusterSpecManagedMetadata {
    * @schema VlClusterSpecManagedMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -4744,7 +4680,6 @@ export interface VlClusterSpecRequestsLoadBalancer {
    * @schema VlClusterSpecRequestsLoadBalancer#spec
    */
   readonly spec?: any;
-
 }
 
 /**
@@ -4868,6 +4803,7 @@ export interface VlClusterSpecVlinsert {
    * @schema VlClusterSpecVlinsert#hostNetwork
    */
   readonly hostNetwork?: boolean;
+
 
   /**
    * Configures horizontal pod autoscaling.
@@ -5148,7 +5084,6 @@ export interface VlClusterSpecVlinsert {
    * @schema VlClusterSpecVlinsert#volumes
    */
   readonly volumes?: any[];
-
 }
 
 /**
@@ -5316,6 +5251,7 @@ export interface VlClusterSpecVlselect {
    * @schema VlClusterSpecVlselect#hostNetwork
    */
   readonly hostNetwork?: boolean;
+
 
   /**
    * Configures horizontal pod autoscaling.
@@ -5589,7 +5525,6 @@ export interface VlClusterSpecVlselect {
    * @schema VlClusterSpecVlselect#volumes
    */
   readonly volumes?: any[];
-
 }
 
 /**
@@ -5771,6 +5706,7 @@ export interface VlClusterSpecVlstorage {
    * @schema VlClusterSpecVlstorage#hostNetwork
    */
   readonly hostNetwork?: boolean;
+
 
   /**
    * Image - docker image settings
@@ -6111,7 +6047,6 @@ export interface VlClusterSpecVlstorage {
    * @schema VlClusterSpecVlstorage#volumes
    */
   readonly volumes?: any[];
-
 }
 
 /**
@@ -6219,7 +6154,6 @@ export interface VlClusterSpecVlinsertDnsConfig {
    * @schema VlClusterSpecVlinsertDnsConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
@@ -6266,7 +6200,6 @@ export interface VlClusterSpecVlinsertExtraEnvs {
    * @schema VlClusterSpecVlinsertExtraEnvs#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -6310,7 +6243,6 @@ export interface VlClusterSpecVlinsertExtraEnvsFrom {
    * @schema VlClusterSpecVlinsertExtraEnvsFrom#secretRef
    */
   readonly secretRef?: VlClusterSpecVlinsertExtraEnvsFromSecretRef;
-
 }
 
 /**
@@ -6349,7 +6281,6 @@ export interface VlClusterSpecVlinsertHostAliases {
    * @schema VlClusterSpecVlinsertHostAliases#ip
    */
   readonly ip: string;
-
 }
 
 /**
@@ -6394,7 +6325,6 @@ export interface VlClusterSpecVlinsertImage {
    * @schema VlClusterSpecVlinsertImage#tag
    */
   readonly tag?: string;
-
 }
 
 /**
@@ -6430,7 +6360,6 @@ export interface VlClusterSpecVlinsertImagePullSecrets {
    * @schema VlClusterSpecVlinsertImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -6511,7 +6440,6 @@ export interface VlClusterSpecVlinsertPodDisruptionBudget {
    * @schema VlClusterSpecVlinsertPodDisruptionBudget#selectorLabels
    */
   readonly selectorLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -6567,7 +6495,6 @@ export interface VlClusterSpecVlinsertPodMetadata {
    * @schema VlClusterSpecVlinsertPodMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -6598,7 +6525,6 @@ export interface VlClusterSpecVlinsertReadinessGates {
    * @schema VlClusterSpecVlinsertReadinessGates#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
@@ -6652,7 +6578,6 @@ export interface VlClusterSpecVlinsertResources {
    * @schema VlClusterSpecVlinsertResources#requests
    */
   readonly requests?: { [key: string]: VlClusterSpecVlinsertResourcesRequests };
-
 }
 
 /**
@@ -6711,7 +6636,6 @@ export interface VlClusterSpecVlinsertRollingUpdate {
    * @schema VlClusterSpecVlinsertRollingUpdate#maxUnavailable
    */
   readonly maxUnavailable?: VlClusterSpecVlinsertRollingUpdateMaxUnavailable;
-
 }
 
 /**
@@ -6757,7 +6681,6 @@ export interface VlClusterSpecVlinsertServiceSpec {
    * @schema VlClusterSpecVlinsertServiceSpec#useAsDefault
    */
   readonly useAsDefault?: boolean;
-
 }
 
 /**
@@ -6795,7 +6718,6 @@ export interface VlClusterSpecVlinsertSyslogSpec {
    * @schema VlClusterSpecVlinsertSyslogSpec#udpListeners
    */
   readonly udpListeners?: VlClusterSpecVlinsertSyslogSpecUdpListeners[];
-
 }
 
 /**
@@ -6864,7 +6786,6 @@ export interface VlClusterSpecVlinsertTolerations {
    * @schema VlClusterSpecVlinsertTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -6980,7 +6901,6 @@ export interface VlClusterSpecVlinsertVolumeMounts {
    * @schema VlClusterSpecVlinsertVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -7038,7 +6958,6 @@ export interface VlClusterSpecVlselectDnsConfig {
    * @schema VlClusterSpecVlselectDnsConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
@@ -7085,7 +7004,6 @@ export interface VlClusterSpecVlselectExtraEnvs {
    * @schema VlClusterSpecVlselectExtraEnvs#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -7129,7 +7047,6 @@ export interface VlClusterSpecVlselectExtraEnvsFrom {
    * @schema VlClusterSpecVlselectExtraEnvsFrom#secretRef
    */
   readonly secretRef?: VlClusterSpecVlselectExtraEnvsFromSecretRef;
-
 }
 
 /**
@@ -7168,7 +7085,6 @@ export interface VlClusterSpecVlselectHostAliases {
    * @schema VlClusterSpecVlselectHostAliases#ip
    */
   readonly ip: string;
-
 }
 
 /**
@@ -7213,7 +7129,6 @@ export interface VlClusterSpecVlselectImage {
    * @schema VlClusterSpecVlselectImage#tag
    */
   readonly tag?: string;
-
 }
 
 /**
@@ -7249,7 +7164,6 @@ export interface VlClusterSpecVlselectImagePullSecrets {
    * @schema VlClusterSpecVlselectImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -7330,7 +7244,6 @@ export interface VlClusterSpecVlselectPodDisruptionBudget {
    * @schema VlClusterSpecVlselectPodDisruptionBudget#selectorLabels
    */
   readonly selectorLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -7386,7 +7299,6 @@ export interface VlClusterSpecVlselectPodMetadata {
    * @schema VlClusterSpecVlselectPodMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -7417,7 +7329,6 @@ export interface VlClusterSpecVlselectReadinessGates {
    * @schema VlClusterSpecVlselectReadinessGates#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
@@ -7471,7 +7382,6 @@ export interface VlClusterSpecVlselectResources {
    * @schema VlClusterSpecVlselectResources#requests
    */
   readonly requests?: { [key: string]: VlClusterSpecVlselectResourcesRequests };
-
 }
 
 /**
@@ -7530,7 +7440,6 @@ export interface VlClusterSpecVlselectRollingUpdate {
    * @schema VlClusterSpecVlselectRollingUpdate#maxUnavailable
    */
   readonly maxUnavailable?: VlClusterSpecVlselectRollingUpdateMaxUnavailable;
-
 }
 
 /**
@@ -7576,7 +7485,6 @@ export interface VlClusterSpecVlselectServiceSpec {
    * @schema VlClusterSpecVlselectServiceSpec#useAsDefault
    */
   readonly useAsDefault?: boolean;
-
 }
 
 /**
@@ -7646,7 +7554,6 @@ export interface VlClusterSpecVlselectTolerations {
    * @schema VlClusterSpecVlselectTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -7762,7 +7669,6 @@ export interface VlClusterSpecVlselectVolumeMounts {
    * @schema VlClusterSpecVlselectVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -7820,7 +7726,6 @@ export interface VlClusterSpecVlstorageDnsConfig {
    * @schema VlClusterSpecVlstorageDnsConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
@@ -7867,7 +7772,6 @@ export interface VlClusterSpecVlstorageExtraEnvs {
    * @schema VlClusterSpecVlstorageExtraEnvs#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -7911,7 +7815,6 @@ export interface VlClusterSpecVlstorageExtraEnvsFrom {
    * @schema VlClusterSpecVlstorageExtraEnvsFrom#secretRef
    */
   readonly secretRef?: VlClusterSpecVlstorageExtraEnvsFromSecretRef;
-
 }
 
 /**
@@ -7950,7 +7853,6 @@ export interface VlClusterSpecVlstorageHostAliases {
    * @schema VlClusterSpecVlstorageHostAliases#ip
    */
   readonly ip: string;
-
 }
 
 /**
@@ -7995,7 +7897,6 @@ export interface VlClusterSpecVlstorageImage {
    * @schema VlClusterSpecVlstorageImage#tag
    */
   readonly tag?: string;
-
 }
 
 /**
@@ -8031,7 +7932,6 @@ export interface VlClusterSpecVlstorageImagePullSecrets {
    * @schema VlClusterSpecVlstorageImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -8105,7 +8005,6 @@ export interface VlClusterSpecVlstoragePersistentVolumeClaimRetentionPolicy {
    * @schema VlClusterSpecVlstoragePersistentVolumeClaimRetentionPolicy#whenScaled
    */
   readonly whenScaled?: string;
-
 }
 
 /**
@@ -8156,7 +8055,6 @@ export interface VlClusterSpecVlstoragePodDisruptionBudget {
    * @schema VlClusterSpecVlstoragePodDisruptionBudget#selectorLabels
    */
   readonly selectorLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -8212,7 +8110,6 @@ export interface VlClusterSpecVlstoragePodMetadata {
    * @schema VlClusterSpecVlstoragePodMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -8243,7 +8140,6 @@ export interface VlClusterSpecVlstorageReadinessGates {
    * @schema VlClusterSpecVlstorageReadinessGates#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
@@ -8297,7 +8193,6 @@ export interface VlClusterSpecVlstorageResources {
    * @schema VlClusterSpecVlstorageResources#requests
    */
   readonly requests?: { [key: string]: VlClusterSpecVlstorageResourcesRequests };
-
 }
 
 /**
@@ -8331,7 +8226,6 @@ export interface VlClusterSpecVlstorageRollingUpdateStrategyBehavior {
    * @schema VlClusterSpecVlstorageRollingUpdateStrategyBehavior#maxUnavailable
    */
   readonly maxUnavailable?: VlClusterSpecVlstorageRollingUpdateStrategyBehaviorMaxUnavailable;
-
 }
 
 /**
@@ -8376,7 +8270,6 @@ export interface VlClusterSpecVlstorageServiceSpec {
    * @schema VlClusterSpecVlstorageServiceSpec#useAsDefault
    */
   readonly useAsDefault?: boolean;
-
 }
 
 /**
@@ -8423,7 +8316,6 @@ export interface VlClusterSpecVlstorageStorage {
    * @schema VlClusterSpecVlstorageStorage#volumeClaimTemplate
    */
   readonly volumeClaimTemplate?: any;
-
 }
 
 /**
@@ -8493,7 +8385,6 @@ export interface VlClusterSpecVlstorageTolerations {
    * @schema VlClusterSpecVlstorageTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -8597,7 +8488,6 @@ export interface VlClusterSpecVlstorageVolumeMounts {
    * @schema VlClusterSpecVlstorageVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -8640,7 +8530,6 @@ export interface VlClusterSpecVlinsertDnsConfigOptions {
    * @schema VlClusterSpecVlinsertDnsConfigOptions#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -8681,7 +8570,6 @@ export interface VlClusterSpecVlinsertExtraEnvsFromConfigMapRef {
    * @schema VlClusterSpecVlinsertExtraEnvsFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -8722,7 +8610,6 @@ export interface VlClusterSpecVlinsertExtraEnvsFromSecretRef {
    * @schema VlClusterSpecVlinsertExtraEnvsFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -8801,7 +8688,6 @@ export interface VlClusterSpecVlinsertResourcesClaims {
    * @schema VlClusterSpecVlinsertResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -8937,7 +8823,6 @@ export interface VlClusterSpecVlinsertServiceSpecMetadata {
    * @schema VlClusterSpecVlinsertServiceSpecMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -9015,7 +8900,6 @@ export interface VlClusterSpecVlinsertSyslogSpecTcpListeners {
    * @schema VlClusterSpecVlinsertSyslogSpecTcpListeners#tlsConfig
    */
   readonly tlsConfig?: VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfig;
-
 }
 
 /**
@@ -9090,7 +8974,6 @@ export interface VlClusterSpecVlinsertSyslogSpecUdpListeners {
    * @schema VlClusterSpecVlinsertSyslogSpecUdpListeners#tenantID
    */
   readonly tenantId?: string;
-
 }
 
 /**
@@ -9132,7 +9015,6 @@ export interface VlClusterSpecVlselectDnsConfigOptions {
    * @schema VlClusterSpecVlselectDnsConfigOptions#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -9173,7 +9055,6 @@ export interface VlClusterSpecVlselectExtraEnvsFromConfigMapRef {
    * @schema VlClusterSpecVlselectExtraEnvsFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -9214,7 +9095,6 @@ export interface VlClusterSpecVlselectExtraEnvsFromSecretRef {
    * @schema VlClusterSpecVlselectExtraEnvsFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -9293,7 +9173,6 @@ export interface VlClusterSpecVlselectResourcesClaims {
    * @schema VlClusterSpecVlselectResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -9429,7 +9308,6 @@ export interface VlClusterSpecVlselectServiceSpecMetadata {
    * @schema VlClusterSpecVlselectServiceSpecMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -9468,7 +9346,6 @@ export interface VlClusterSpecVlstorageDnsConfigOptions {
    * @schema VlClusterSpecVlstorageDnsConfigOptions#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -9509,7 +9386,6 @@ export interface VlClusterSpecVlstorageExtraEnvsFromConfigMapRef {
    * @schema VlClusterSpecVlstorageExtraEnvsFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -9550,7 +9426,6 @@ export interface VlClusterSpecVlstorageExtraEnvsFromSecretRef {
    * @schema VlClusterSpecVlstorageExtraEnvsFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -9629,7 +9504,6 @@ export interface VlClusterSpecVlstorageResourcesClaims {
    * @schema VlClusterSpecVlstorageResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -9730,7 +9604,6 @@ export interface VlClusterSpecVlstorageServiceSpecMetadata {
    * @schema VlClusterSpecVlstorageServiceSpecMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -9777,7 +9650,6 @@ export interface VlClusterSpecVlstorageStorageEmptyDir {
    * @schema VlClusterSpecVlstorageStorageEmptyDir#sizeLimit
    */
   readonly sizeLimit?: VlClusterSpecVlstorageStorageEmptyDirSizeLimit;
-
 }
 
 /**
@@ -9832,7 +9704,6 @@ export interface VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfig {
    * @schema VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfig#keySecret
    */
   readonly keySecret?: VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigKeySecret;
-
 }
 
 /**
@@ -9904,7 +9775,6 @@ export interface VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigCertSecret 
    * @schema VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -9954,7 +9824,6 @@ export interface VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigKeySecret {
    * @schema VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -10048,7 +9917,6 @@ export interface VLogsProps {
    * @schema VLogs#spec
    */
   readonly spec?: any;
-
 }
 
 /**
@@ -10140,7 +10008,6 @@ export interface VlSingleProps {
    * @schema VLSingle#spec
    */
   readonly spec?: VlSingleSpec;
-
 }
 
 /**
@@ -10270,6 +10137,7 @@ export interface VlSingleSpec {
    * @schema VlSingleSpec#hostNetwork
    */
   readonly hostNetwork?: boolean;
+
 
   /**
    * Image - docker image settings
@@ -10592,7 +10460,6 @@ export interface VlSingleSpec {
    * @schema VlSingleSpec#volumes
    */
   readonly volumes?: any[];
-
 }
 
 /**
@@ -10697,7 +10564,6 @@ export interface VlSingleSpecDnsConfig {
    * @schema VlSingleSpecDnsConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
@@ -10744,7 +10610,6 @@ export interface VlSingleSpecExtraEnvs {
    * @schema VlSingleSpecExtraEnvs#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -10788,7 +10653,6 @@ export interface VlSingleSpecExtraEnvsFrom {
    * @schema VlSingleSpecExtraEnvsFrom#secretRef
    */
   readonly secretRef?: VlSingleSpecExtraEnvsFromSecretRef;
-
 }
 
 /**
@@ -10827,7 +10691,6 @@ export interface VlSingleSpecHostAliases {
    * @schema VlSingleSpecHostAliases#ip
    */
   readonly ip: string;
-
 }
 
 /**
@@ -10872,7 +10735,6 @@ export interface VlSingleSpecImage {
    * @schema VlSingleSpecImage#tag
    */
   readonly tag?: string;
-
 }
 
 /**
@@ -10908,7 +10770,6 @@ export interface VlSingleSpecImagePullSecrets {
    * @schema VlSingleSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -10980,7 +10841,6 @@ export interface VlSingleSpecManagedMetadata {
    * @schema VlSingleSpecManagedMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -11035,7 +10895,6 @@ export interface VlSingleSpecPodMetadata {
    * @schema VlSingleSpecPodMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -11066,7 +10925,6 @@ export interface VlSingleSpecReadinessGates {
    * @schema VlSingleSpecReadinessGates#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
@@ -11120,7 +10978,6 @@ export interface VlSingleSpecResources {
    * @schema VlSingleSpecResources#requests
    */
   readonly requests?: { [key: string]: VlSingleSpecResourcesRequests };
-
 }
 
 /**
@@ -11167,7 +11024,6 @@ export interface VlSingleSpecServiceSpec {
    * @schema VlSingleSpecServiceSpec#useAsDefault
    */
   readonly useAsDefault?: boolean;
-
 }
 
 /**
@@ -11302,7 +11158,6 @@ export interface VlSingleSpecStorage {
    * @schema VlSingleSpecStorage#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -11364,7 +11219,6 @@ export interface VlSingleSpecStorageMetadata {
    * @schema VlSingleSpecStorageMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -11402,7 +11256,6 @@ export interface VlSingleSpecSyslogSpec {
    * @schema VlSingleSpecSyslogSpec#udpListeners
    */
   readonly udpListeners?: VlSingleSpecSyslogSpecUdpListeners[];
-
 }
 
 /**
@@ -11471,7 +11324,6 @@ export interface VlSingleSpecTolerations {
    * @schema VlSingleSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -11575,7 +11427,6 @@ export interface VlSingleSpecVolumeMounts {
    * @schema VlSingleSpecVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -11618,7 +11469,6 @@ export interface VlSingleSpecDnsConfigOptions {
    * @schema VlSingleSpecDnsConfigOptions#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -11659,7 +11509,6 @@ export interface VlSingleSpecExtraEnvsFromConfigMapRef {
    * @schema VlSingleSpecExtraEnvsFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -11700,7 +11549,6 @@ export interface VlSingleSpecExtraEnvsFromSecretRef {
    * @schema VlSingleSpecExtraEnvsFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -11741,7 +11589,6 @@ export interface VlSingleSpecResourcesClaims {
    * @schema VlSingleSpecResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -11824,7 +11671,6 @@ export interface VlSingleSpecServiceSpecMetadata {
    * @schema VlSingleSpecServiceSpecMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -11878,7 +11724,6 @@ export interface VlSingleSpecStorageDataSource {
    * @schema VlSingleSpecStorageDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -11956,7 +11801,6 @@ export interface VlSingleSpecStorageDataSourceRef {
    * @schema VlSingleSpecStorageDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -12003,7 +11847,6 @@ export interface VlSingleSpecStorageResources {
    * @schema VlSingleSpecStorageResources#requests
    */
   readonly requests?: { [key: string]: VlSingleSpecStorageResourcesRequests };
-
 }
 
 /**
@@ -12042,7 +11885,6 @@ export interface VlSingleSpecStorageSelector {
    * @schema VlSingleSpecStorageSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -12119,7 +11961,6 @@ export interface VlSingleSpecSyslogSpecTcpListeners {
    * @schema VlSingleSpecSyslogSpecTcpListeners#tlsConfig
    */
   readonly tlsConfig?: VlSingleSpecSyslogSpecTcpListenersTlsConfig;
-
 }
 
 /**
@@ -12194,7 +12035,6 @@ export interface VlSingleSpecSyslogSpecUdpListeners {
    * @schema VlSingleSpecSyslogSpecUdpListeners#tenantID
    */
   readonly tenantId?: string;
-
 }
 
 /**
@@ -12275,7 +12115,6 @@ export interface VlSingleSpecStorageSelectorMatchExpressions {
    * @schema VlSingleSpecStorageSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -12331,7 +12170,6 @@ export interface VlSingleSpecSyslogSpecTcpListenersTlsConfig {
    * @schema VlSingleSpecSyslogSpecTcpListenersTlsConfig#keySecret
    */
   readonly keySecret?: VlSingleSpecSyslogSpecTcpListenersTlsConfigKeySecret;
-
 }
 
 /**
@@ -12382,7 +12220,6 @@ export interface VlSingleSpecSyslogSpecTcpListenersTlsConfigCertSecret {
    * @schema VlSingleSpecSyslogSpecTcpListenersTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -12432,7 +12269,6 @@ export interface VlSingleSpecSyslogSpecTcpListenersTlsConfigKeySecret {
    * @schema VlSingleSpecSyslogSpecTcpListenersTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -12525,7 +12361,6 @@ export interface VmAgentProps {
    * @schema VMAgent#spec
    */
   readonly spec?: VmAgentSpec;
-
 }
 
 /**
@@ -12778,6 +12613,7 @@ export interface VmAgentSpec {
    * @schema VmAgentSpec#hostNetwork
    */
   readonly hostNetwork?: boolean;
+
 
   /**
    * IgnoreNamespaceSelectors if set to true will ignore NamespaceSelector settings from
@@ -13441,7 +13277,6 @@ export interface VmAgentSpec {
    * @schema VmAgentSpec#volumes
    */
   readonly volumes?: any[];
-
 }
 
 /**
@@ -13596,7 +13431,6 @@ export interface VmAgentSpecAdditionalScrapeConfigs {
    * @schema VmAgentSpecAdditionalScrapeConfigs#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -13666,7 +13500,6 @@ export interface VmAgentSpecApiServerConfig {
    * @schema VmAgentSpecApiServerConfig#tlsConfig
    */
   readonly tlsConfig?: VmAgentSpecApiServerConfigTlsConfig;
-
 }
 
 /**
@@ -13700,7 +13533,6 @@ export interface VmAgentSpecArbitraryFsAccessThroughSMs {
    * @schema VmAgentSpecArbitraryFsAccessThroughSMs#deny
    */
   readonly deny?: boolean;
-
 }
 
 /**
@@ -13768,7 +13600,6 @@ export interface VmAgentSpecClaimTemplates {
    * @schema VmAgentSpecClaimTemplates#status
    */
   readonly status?: VmAgentSpecClaimTemplatesStatus;
-
 }
 
 /**
@@ -13821,7 +13652,6 @@ export interface VmAgentSpecConfigReloadAuthKeySecret {
    * @schema VmAgentSpecConfigReloadAuthKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -13877,7 +13707,6 @@ export interface VmAgentSpecConfigReloaderResources {
    * @schema VmAgentSpecConfigReloaderResources#requests
    */
   readonly requests?: { [key: string]: VmAgentSpecConfigReloaderResourcesRequests };
-
 }
 
 /**
@@ -13931,7 +13760,6 @@ export interface VmAgentSpecDnsConfig {
    * @schema VmAgentSpecDnsConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
@@ -13978,7 +13806,6 @@ export interface VmAgentSpecExtraEnvs {
    * @schema VmAgentSpecExtraEnvs#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -14022,7 +13849,6 @@ export interface VmAgentSpecExtraEnvsFrom {
    * @schema VmAgentSpecExtraEnvsFrom#secretRef
    */
   readonly secretRef?: VmAgentSpecExtraEnvsFromSecretRef;
-
 }
 
 /**
@@ -14118,6 +13944,7 @@ export interface VmAgentSpecGlobalScrapeMetricRelabelConfigs {
    * @schema VmAgentSpecGlobalScrapeMetricRelabelConfigs#sourceLabels
    */
   readonly sourceLabels?: string[];
+
 
   /**
    * Label to which the resulting value is written in a replace action.
@@ -14230,6 +14057,7 @@ export interface VmAgentSpecGlobalScrapeRelabelConfigs {
    */
   readonly sourceLabels?: string[];
 
+
   /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
@@ -14283,7 +14111,6 @@ export interface VmAgentSpecHostAliases {
    * @schema VmAgentSpecHostAliases#ip
    */
   readonly ip: string;
-
 }
 
 /**
@@ -14328,7 +14155,6 @@ export interface VmAgentSpecImage {
    * @schema VmAgentSpecImage#tag
    */
   readonly tag?: string;
-
 }
 
 /**
@@ -14364,7 +14190,6 @@ export interface VmAgentSpecImagePullSecrets {
    * @schema VmAgentSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -14459,6 +14284,7 @@ export interface VmAgentSpecInlineRelabelConfig {
    */
   readonly sourceLabels?: string[];
 
+
   /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
@@ -14525,7 +14351,6 @@ export interface VmAgentSpecInsertPorts {
    * @schema VmAgentSpecInsertPorts#openTSDBPort
    */
   readonly openTsdbPort?: string;
-
 }
 
 /**
@@ -14581,7 +14406,6 @@ export interface VmAgentSpecLicense {
    * @schema VmAgentSpecLicense#reloadInterval
    */
   readonly reloadInterval?: string;
-
 }
 
 /**
@@ -14657,7 +14481,6 @@ export interface VmAgentSpecManagedMetadata {
    * @schema VmAgentSpecManagedMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -14700,7 +14523,6 @@ export interface VmAgentSpecNodeScrapeNamespaceSelector {
    * @schema VmAgentSpecNodeScrapeNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -14796,6 +14618,7 @@ export interface VmAgentSpecNodeScrapeRelabelTemplate {
    */
   readonly sourceLabels?: string[];
 
+
   /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
@@ -14854,7 +14677,6 @@ export interface VmAgentSpecNodeScrapeSelector {
    * @schema VmAgentSpecNodeScrapeSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -14898,7 +14720,6 @@ export interface VmAgentSpecPersistentVolumeClaimRetentionPolicy {
    * @schema VmAgentSpecPersistentVolumeClaimRetentionPolicy#whenScaled
    */
   readonly whenScaled?: string;
-
 }
 
 /**
@@ -14949,7 +14770,6 @@ export interface VmAgentSpecPodDisruptionBudget {
    * @schema VmAgentSpecPodDisruptionBudget#selectorLabels
    */
   readonly selectorLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -15005,7 +14825,6 @@ export interface VmAgentSpecPodMetadata {
    * @schema VmAgentSpecPodMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -15049,7 +14868,6 @@ export interface VmAgentSpecPodScrapeNamespaceSelector {
    * @schema VmAgentSpecPodScrapeNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -15145,6 +14963,7 @@ export interface VmAgentSpecPodScrapeRelabelTemplate {
    */
   readonly sourceLabels?: string[];
 
+
   /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
@@ -15203,7 +15022,6 @@ export interface VmAgentSpecPodScrapeSelector {
    * @schema VmAgentSpecPodScrapeSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -15246,7 +15064,6 @@ export interface VmAgentSpecProbeNamespaceSelector {
    * @schema VmAgentSpecProbeNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -15342,6 +15159,7 @@ export interface VmAgentSpecProbeScrapeRelabelTemplate {
    */
   readonly sourceLabels?: string[];
 
+
   /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
@@ -15400,7 +15218,6 @@ export interface VmAgentSpecProbeSelector {
    * @schema VmAgentSpecProbeSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -15430,7 +15247,6 @@ export interface VmAgentSpecReadinessGates {
    * @schema VmAgentSpecReadinessGates#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
@@ -15478,7 +15294,6 @@ export interface VmAgentSpecRelabelConfig {
    * @schema VmAgentSpecRelabelConfig#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -15605,7 +15420,6 @@ export interface VmAgentSpecRemoteWrite {
    * @schema VmAgentSpecRemoteWrite#urlRelabelConfig
    */
   readonly urlRelabelConfig?: VmAgentSpecRemoteWriteUrlRelabelConfig;
-
 }
 
 /**
@@ -15698,7 +15512,6 @@ export interface VmAgentSpecRemoteWriteSettings {
    * @schema VmAgentSpecRemoteWriteSettings#useMultiTenantMode
    */
   readonly useMultiTenantMode?: boolean;
-
 }
 
 /**
@@ -15759,7 +15572,6 @@ export interface VmAgentSpecResources {
    * @schema VmAgentSpecResources#requests
    */
   readonly requests?: { [key: string]: VmAgentSpecResourcesRequests };
-
 }
 
 /**
@@ -15818,7 +15630,6 @@ export interface VmAgentSpecRollingUpdate {
    * @schema VmAgentSpecRollingUpdate#maxUnavailable
    */
   readonly maxUnavailable?: VmAgentSpecRollingUpdateMaxUnavailable;
-
 }
 
 /**
@@ -15861,7 +15672,6 @@ export interface VmAgentSpecScrapeConfigNamespaceSelector {
    * @schema VmAgentSpecScrapeConfigNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -15957,6 +15767,7 @@ export interface VmAgentSpecScrapeConfigRelabelTemplate {
    */
   readonly sourceLabels?: string[];
 
+
   /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
@@ -16012,7 +15823,6 @@ export interface VmAgentSpecScrapeConfigSelector {
    * @schema VmAgentSpecScrapeConfigSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -16055,7 +15865,6 @@ export interface VmAgentSpecServiceScrapeNamespaceSelector {
    * @schema VmAgentSpecServiceScrapeNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -16151,6 +15960,7 @@ export interface VmAgentSpecServiceScrapeRelabelTemplate {
    */
   readonly sourceLabels?: string[];
 
+
   /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
@@ -16209,7 +16019,6 @@ export interface VmAgentSpecServiceScrapeSelector {
    * @schema VmAgentSpecServiceScrapeSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -16255,7 +16064,6 @@ export interface VmAgentSpecServiceSpec {
    * @schema VmAgentSpecServiceSpec#useAsDefault
    */
   readonly useAsDefault?: boolean;
-
 }
 
 /**
@@ -16302,7 +16110,6 @@ export interface VmAgentSpecStatefulStorage {
    * @schema VmAgentSpecStatefulStorage#volumeClaimTemplate
    */
   readonly volumeClaimTemplate?: VmAgentSpecStatefulStorageVolumeClaimTemplate;
-
 }
 
 /**
@@ -16346,7 +16153,6 @@ export interface VmAgentSpecStaticScrapeNamespaceSelector {
    * @schema VmAgentSpecStaticScrapeNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -16442,6 +16248,7 @@ export interface VmAgentSpecStaticScrapeRelabelTemplate {
    */
   readonly sourceLabels?: string[];
 
+
   /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
@@ -16500,7 +16307,6 @@ export interface VmAgentSpecStaticScrapeSelector {
    * @schema VmAgentSpecStaticScrapeSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -16593,7 +16399,6 @@ export interface VmAgentSpecStreamAggrConfig {
    * @schema VmAgentSpecStreamAggrConfig#rules
    */
   readonly rules?: VmAgentSpecStreamAggrConfigRules[];
-
 }
 
 /**
@@ -16670,7 +16475,6 @@ export interface VmAgentSpecTolerations {
    * @schema VmAgentSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -16787,7 +16591,6 @@ export interface VmAgentSpecVolumeMounts {
    * @schema VmAgentSpecVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -16836,7 +16639,6 @@ export interface VmAgentSpecApiServerConfigAuthorization {
    * @schema VmAgentSpecApiServerConfigAuthorization#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -16884,7 +16686,6 @@ export interface VmAgentSpecApiServerConfigBasicAuth {
    * @schema VmAgentSpecApiServerConfigBasicAuth#username
    */
   readonly username?: VmAgentSpecApiServerConfigBasicAuthUsername;
-
 }
 
 /**
@@ -16964,7 +16765,6 @@ export interface VmAgentSpecApiServerConfigTlsConfig {
    * @schema VmAgentSpecApiServerConfigTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -17104,7 +16904,6 @@ export interface VmAgentSpecClaimTemplatesSpec {
    * @schema VmAgentSpecClaimTemplatesSpec#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -17253,7 +17052,6 @@ export interface VmAgentSpecClaimTemplatesStatus {
    * @schema VmAgentSpecClaimTemplatesStatus#phase
    */
   readonly phase?: string;
-
 }
 
 /**
@@ -17300,7 +17098,6 @@ export interface VmAgentSpecConfigReloaderResourcesClaims {
    * @schema VmAgentSpecConfigReloaderResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -17366,7 +17163,6 @@ export interface VmAgentSpecDnsConfigOptions {
    * @schema VmAgentSpecDnsConfigOptions#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -17407,7 +17203,6 @@ export interface VmAgentSpecExtraEnvsFromConfigMapRef {
    * @schema VmAgentSpecExtraEnvsFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -17448,7 +17243,6 @@ export interface VmAgentSpecExtraEnvsFromSecretRef {
    * @schema VmAgentSpecExtraEnvsFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -17496,7 +17290,6 @@ export interface VmAgentSpecLicenseKeyRef {
    * @schema VmAgentSpecLicenseKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -17546,7 +17339,6 @@ export interface VmAgentSpecNodeScrapeNamespaceSelectorMatchExpressions {
    * @schema VmAgentSpecNodeScrapeNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -17596,7 +17388,6 @@ export interface VmAgentSpecNodeScrapeSelectorMatchExpressions {
    * @schema VmAgentSpecNodeScrapeSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -17684,7 +17475,6 @@ export interface VmAgentSpecPodScrapeNamespaceSelectorMatchExpressions {
    * @schema VmAgentSpecPodScrapeNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -17734,7 +17524,6 @@ export interface VmAgentSpecPodScrapeSelectorMatchExpressions {
    * @schema VmAgentSpecPodScrapeSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -17784,7 +17573,6 @@ export interface VmAgentSpecProbeNamespaceSelectorMatchExpressions {
    * @schema VmAgentSpecProbeNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -17834,7 +17622,6 @@ export interface VmAgentSpecProbeSelectorMatchExpressions {
    * @schema VmAgentSpecProbeSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -17900,7 +17687,6 @@ export interface VmAgentSpecRemoteWriteAws {
    * @schema VmAgentSpecRemoteWriteAws#useSigv4
    */
   readonly useSigv4?: boolean;
-
 }
 
 /**
@@ -17951,7 +17737,6 @@ export interface VmAgentSpecRemoteWriteBasicAuth {
    * @schema VmAgentSpecRemoteWriteBasicAuth#username
    */
   readonly username?: VmAgentSpecRemoteWriteBasicAuthUsername;
-
 }
 
 /**
@@ -18000,7 +17785,6 @@ export interface VmAgentSpecRemoteWriteBearerTokenSecret {
    * @schema VmAgentSpecRemoteWriteBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -18096,6 +17880,7 @@ export interface VmAgentSpecRemoteWriteInlineUrlRelabelConfig {
    * @schema VmAgentSpecRemoteWriteInlineUrlRelabelConfig#sourceLabels
    */
   readonly sourceLabels?: string[];
+
 
   /**
    * Label to which the resulting value is written in a replace action.
@@ -18195,7 +17980,6 @@ export interface VmAgentSpecRemoteWriteOauth2 {
    * @schema VmAgentSpecRemoteWriteOauth2#token_url
    */
   readonly tokenUrl: string;
-
 }
 
 /**
@@ -18294,7 +18078,6 @@ export interface VmAgentSpecRemoteWriteStreamAggrConfig {
    * @schema VmAgentSpecRemoteWriteStreamAggrConfig#rules
    */
   readonly rules?: VmAgentSpecRemoteWriteStreamAggrConfigRules[];
-
 }
 
 /**
@@ -18381,7 +18164,6 @@ export interface VmAgentSpecRemoteWriteTlsConfig {
    * @schema VmAgentSpecRemoteWriteTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -18435,7 +18217,6 @@ export interface VmAgentSpecRemoteWriteUrlRelabelConfig {
    * @schema VmAgentSpecRemoteWriteUrlRelabelConfig#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -18477,7 +18258,6 @@ export interface VmAgentSpecResourcesClaims {
    * @schema VmAgentSpecResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -18607,7 +18387,6 @@ export interface VmAgentSpecScrapeConfigNamespaceSelectorMatchExpressions {
    * @schema VmAgentSpecScrapeConfigNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -18657,7 +18436,6 @@ export interface VmAgentSpecScrapeConfigSelectorMatchExpressions {
    * @schema VmAgentSpecScrapeConfigSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -18707,7 +18485,6 @@ export interface VmAgentSpecServiceScrapeNamespaceSelectorMatchExpressions {
    * @schema VmAgentSpecServiceScrapeNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -18757,7 +18534,6 @@ export interface VmAgentSpecServiceScrapeSelectorMatchExpressions {
    * @schema VmAgentSpecServiceScrapeSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -18813,7 +18589,6 @@ export interface VmAgentSpecServiceSpecMetadata {
    * @schema VmAgentSpecServiceSpecMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -18860,7 +18635,6 @@ export interface VmAgentSpecStatefulStorageEmptyDir {
    * @schema VmAgentSpecStatefulStorageEmptyDir#sizeLimit
    */
   readonly sizeLimit?: VmAgentSpecStatefulStorageEmptyDirSizeLimit;
-
 }
 
 /**
@@ -18928,7 +18702,6 @@ export interface VmAgentSpecStatefulStorageVolumeClaimTemplate {
    * @schema VmAgentSpecStatefulStorageVolumeClaimTemplate#status
    */
   readonly status?: VmAgentSpecStatefulStorageVolumeClaimTemplateStatus;
-
 }
 
 /**
@@ -18980,7 +18753,6 @@ export interface VmAgentSpecStaticScrapeNamespaceSelectorMatchExpressions {
    * @schema VmAgentSpecStaticScrapeNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -19030,7 +18802,6 @@ export interface VmAgentSpecStaticScrapeSelectorMatchExpressions {
    * @schema VmAgentSpecStaticScrapeSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -19079,7 +18850,6 @@ export interface VmAgentSpecStreamAggrConfigConfigmap {
    * @schema VmAgentSpecStreamAggrConfigConfigmap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -19261,7 +19031,6 @@ export interface VmAgentSpecStreamAggrConfigRules {
    * @schema VmAgentSpecStreamAggrConfigRules#without
    */
   readonly without?: string[];
-
 }
 
 /**
@@ -19324,7 +19093,6 @@ export interface VmAgentSpecApiServerConfigAuthorizationCredentials {
    * @schema VmAgentSpecApiServerConfigAuthorizationCredentials#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -19374,7 +19142,6 @@ export interface VmAgentSpecApiServerConfigBasicAuthPassword {
    * @schema VmAgentSpecApiServerConfigBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -19424,7 +19191,6 @@ export interface VmAgentSpecApiServerConfigBasicAuthUsername {
    * @schema VmAgentSpecApiServerConfigBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -19462,7 +19228,6 @@ export interface VmAgentSpecApiServerConfigTlsConfigCa {
    * @schema VmAgentSpecApiServerConfigTlsConfigCa#secret
    */
   readonly secret?: VmAgentSpecApiServerConfigTlsConfigCaSecret;
-
 }
 
 /**
@@ -19499,7 +19264,6 @@ export interface VmAgentSpecApiServerConfigTlsConfigCert {
    * @schema VmAgentSpecApiServerConfigTlsConfigCert#secret
    */
   readonly secret?: VmAgentSpecApiServerConfigTlsConfigCertSecret;
-
 }
 
 /**
@@ -19547,7 +19311,6 @@ export interface VmAgentSpecApiServerConfigTlsConfigKeySecret {
    * @schema VmAgentSpecApiServerConfigTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -19601,7 +19364,6 @@ export interface VmAgentSpecClaimTemplatesSpecDataSource {
    * @schema VmAgentSpecClaimTemplatesSpecDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -19679,7 +19441,6 @@ export interface VmAgentSpecClaimTemplatesSpecDataSourceRef {
    * @schema VmAgentSpecClaimTemplatesSpecDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -19726,7 +19487,6 @@ export interface VmAgentSpecClaimTemplatesSpecResources {
    * @schema VmAgentSpecClaimTemplatesSpecResources#requests
    */
   readonly requests?: { [key: string]: VmAgentSpecClaimTemplatesSpecResourcesRequests };
-
 }
 
 /**
@@ -19765,7 +19525,6 @@ export interface VmAgentSpecClaimTemplatesSpecSelector {
    * @schema VmAgentSpecClaimTemplatesSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -19863,7 +19622,6 @@ export interface VmAgentSpecClaimTemplatesStatusConditions {
    * @schema VmAgentSpecClaimTemplatesStatusConditions#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -19915,7 +19673,6 @@ export interface VmAgentSpecClaimTemplatesStatusModifyVolumeStatus {
    * @schema VmAgentSpecClaimTemplatesStatusModifyVolumeStatus#targetVolumeAttributesClassName
    */
   readonly targetVolumeAttributesClassName?: string;
-
 }
 
 /**
@@ -19964,7 +19721,6 @@ export interface VmAgentSpecRemoteWriteBasicAuthPassword {
    * @schema VmAgentSpecRemoteWriteBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -20014,7 +19770,6 @@ export interface VmAgentSpecRemoteWriteBasicAuthUsername {
    * @schema VmAgentSpecRemoteWriteBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -20052,7 +19807,6 @@ export interface VmAgentSpecRemoteWriteOauth2ClientId {
    * @schema VmAgentSpecRemoteWriteOauth2ClientId#secret
    */
   readonly secret?: VmAgentSpecRemoteWriteOauth2ClientIdSecret;
-
 }
 
 /**
@@ -20100,7 +19854,6 @@ export interface VmAgentSpecRemoteWriteOauth2ClientSecret {
    * @schema VmAgentSpecRemoteWriteOauth2ClientSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -20149,7 +19902,6 @@ export interface VmAgentSpecRemoteWriteStreamAggrConfigConfigmap {
    * @schema VmAgentSpecRemoteWriteStreamAggrConfigConfigmap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -20331,7 +20083,6 @@ export interface VmAgentSpecRemoteWriteStreamAggrConfigRules {
    * @schema VmAgentSpecRemoteWriteStreamAggrConfigRules#without
    */
   readonly without?: string[];
-
 }
 
 /**
@@ -20383,7 +20134,6 @@ export interface VmAgentSpecRemoteWriteTlsConfigCa {
    * @schema VmAgentSpecRemoteWriteTlsConfigCa#secret
    */
   readonly secret?: VmAgentSpecRemoteWriteTlsConfigCaSecret;
-
 }
 
 /**
@@ -20420,7 +20170,6 @@ export interface VmAgentSpecRemoteWriteTlsConfigCert {
    * @schema VmAgentSpecRemoteWriteTlsConfigCert#secret
    */
   readonly secret?: VmAgentSpecRemoteWriteTlsConfigCertSecret;
-
 }
 
 /**
@@ -20468,7 +20217,6 @@ export interface VmAgentSpecRemoteWriteTlsConfigKeySecret {
    * @schema VmAgentSpecRemoteWriteTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -20545,7 +20293,6 @@ export interface VmAgentSpecStatefulStorageVolumeClaimTemplateMetadata {
    * @schema VmAgentSpecStatefulStorageVolumeClaimTemplateMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -20680,7 +20427,6 @@ export interface VmAgentSpecStatefulStorageVolumeClaimTemplateSpec {
    * @schema VmAgentSpecStatefulStorageVolumeClaimTemplateSpec#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -20829,7 +20575,6 @@ export interface VmAgentSpecStatefulStorageVolumeClaimTemplateStatus {
    * @schema VmAgentSpecStatefulStorageVolumeClaimTemplateStatus#phase
    */
   readonly phase?: string;
-
 }
 
 /**
@@ -20930,6 +20675,7 @@ export interface VmAgentSpecStreamAggrConfigRulesInputRelabelConfigs {
    * @schema VmAgentSpecStreamAggrConfigRulesInputRelabelConfigs#sourceLabels
    */
   readonly sourceLabels?: string[];
+
 
   /**
    * Label to which the resulting value is written in a replace action.
@@ -21042,6 +20788,7 @@ export interface VmAgentSpecStreamAggrConfigRulesOutputRelabelConfigs {
    */
   readonly sourceLabels?: string[];
 
+
   /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
@@ -21105,7 +20852,6 @@ export interface VmAgentSpecApiServerConfigTlsConfigCaConfigMap {
    * @schema VmAgentSpecApiServerConfigTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -21154,7 +20900,6 @@ export interface VmAgentSpecApiServerConfigTlsConfigCaSecret {
    * @schema VmAgentSpecApiServerConfigTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -21203,7 +20948,6 @@ export interface VmAgentSpecApiServerConfigTlsConfigCertConfigMap {
    * @schema VmAgentSpecApiServerConfigTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -21252,7 +20996,6 @@ export interface VmAgentSpecApiServerConfigTlsConfigCertSecret {
    * @schema VmAgentSpecApiServerConfigTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -21330,7 +21073,6 @@ export interface VmAgentSpecClaimTemplatesSpecSelectorMatchExpressions {
    * @schema VmAgentSpecClaimTemplatesSpecSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -21379,7 +21121,6 @@ export interface VmAgentSpecRemoteWriteOauth2ClientIdConfigMap {
    * @schema VmAgentSpecRemoteWriteOauth2ClientIdConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -21428,7 +21169,6 @@ export interface VmAgentSpecRemoteWriteOauth2ClientIdSecret {
    * @schema VmAgentSpecRemoteWriteOauth2ClientIdSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -21524,6 +21264,7 @@ export interface VmAgentSpecRemoteWriteStreamAggrConfigRulesInputRelabelConfigs 
    * @schema VmAgentSpecRemoteWriteStreamAggrConfigRulesInputRelabelConfigs#sourceLabels
    */
   readonly sourceLabels?: string[];
+
 
   /**
    * Label to which the resulting value is written in a replace action.
@@ -21636,6 +21377,7 @@ export interface VmAgentSpecRemoteWriteStreamAggrConfigRulesOutputRelabelConfigs
    */
   readonly sourceLabels?: string[];
 
+
   /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
@@ -21699,7 +21441,6 @@ export interface VmAgentSpecRemoteWriteTlsConfigCaConfigMap {
    * @schema VmAgentSpecRemoteWriteTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -21748,7 +21489,6 @@ export interface VmAgentSpecRemoteWriteTlsConfigCaSecret {
    * @schema VmAgentSpecRemoteWriteTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -21797,7 +21537,6 @@ export interface VmAgentSpecRemoteWriteTlsConfigCertConfigMap {
    * @schema VmAgentSpecRemoteWriteTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -21846,7 +21585,6 @@ export interface VmAgentSpecRemoteWriteTlsConfigCertSecret {
    * @schema VmAgentSpecRemoteWriteTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -21900,7 +21638,6 @@ export interface VmAgentSpecStatefulStorageVolumeClaimTemplateSpecDataSource {
    * @schema VmAgentSpecStatefulStorageVolumeClaimTemplateSpecDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -21978,7 +21715,6 @@ export interface VmAgentSpecStatefulStorageVolumeClaimTemplateSpecDataSourceRef 
    * @schema VmAgentSpecStatefulStorageVolumeClaimTemplateSpecDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -22025,7 +21761,6 @@ export interface VmAgentSpecStatefulStorageVolumeClaimTemplateSpecResources {
    * @schema VmAgentSpecStatefulStorageVolumeClaimTemplateSpecResources#requests
    */
   readonly requests?: { [key: string]: VmAgentSpecStatefulStorageVolumeClaimTemplateSpecResourcesRequests };
-
 }
 
 /**
@@ -22064,7 +21799,6 @@ export interface VmAgentSpecStatefulStorageVolumeClaimTemplateSpecSelector {
    * @schema VmAgentSpecStatefulStorageVolumeClaimTemplateSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -22162,7 +21896,6 @@ export interface VmAgentSpecStatefulStorageVolumeClaimTemplateStatusConditions {
    * @schema VmAgentSpecStatefulStorageVolumeClaimTemplateStatusConditions#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -22214,7 +21947,6 @@ export interface VmAgentSpecStatefulStorageVolumeClaimTemplateStatusModifyVolume
    * @schema VmAgentSpecStatefulStorageVolumeClaimTemplateStatusModifyVolumeStatus#targetVolumeAttributesClassName
    */
   readonly targetVolumeAttributesClassName?: string;
-
 }
 
 /**
@@ -22291,7 +22023,6 @@ export interface VmAgentSpecStatefulStorageVolumeClaimTemplateSpecSelectorMatchE
    * @schema VmAgentSpecStatefulStorageVolumeClaimTemplateSpecSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -22382,7 +22113,6 @@ export interface VmAlertProps {
    * @schema VMAlert#spec
    */
   readonly spec?: VmAlertSpec;
-
 }
 
 /**
@@ -22566,6 +22296,7 @@ export interface VmAlertSpec {
    * @schema VmAlertSpec#hostNetwork
    */
   readonly hostNetwork?: boolean;
+
 
   /**
    * Image - docker image settings
@@ -22958,7 +22689,6 @@ export interface VmAlertSpec {
    * @schema VmAlertSpec#volumes
    */
   readonly volumes?: any[];
-
 }
 
 /**
@@ -23073,7 +22803,6 @@ export interface VmAlertSpecConfigReloadAuthKeySecret {
    * @schema VmAlertSpecConfigReloadAuthKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -23129,7 +22858,6 @@ export interface VmAlertSpecConfigReloaderResources {
    * @schema VmAlertSpecConfigReloaderResources#requests
    */
   readonly requests?: { [key: string]: VmAlertSpecConfigReloaderResourcesRequests };
-
 }
 
 /**
@@ -23206,7 +22934,6 @@ export interface VmAlertSpecDatasource {
    * @schema VmAlertSpecDatasource#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -23264,7 +22991,6 @@ export interface VmAlertSpecDnsConfig {
    * @schema VmAlertSpecDnsConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
@@ -23311,7 +23037,6 @@ export interface VmAlertSpecExtraEnvs {
    * @schema VmAlertSpecExtraEnvs#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -23355,7 +23080,6 @@ export interface VmAlertSpecExtraEnvsFrom {
    * @schema VmAlertSpecExtraEnvsFrom#secretRef
    */
   readonly secretRef?: VmAlertSpecExtraEnvsFromSecretRef;
-
 }
 
 /**
@@ -23394,7 +23118,6 @@ export interface VmAlertSpecHostAliases {
    * @schema VmAlertSpecHostAliases#ip
    */
   readonly ip: string;
-
 }
 
 /**
@@ -23439,7 +23162,6 @@ export interface VmAlertSpecImage {
    * @schema VmAlertSpecImage#tag
    */
   readonly tag?: string;
-
 }
 
 /**
@@ -23475,7 +23197,6 @@ export interface VmAlertSpecImagePullSecrets {
    * @schema VmAlertSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -23528,7 +23249,6 @@ export interface VmAlertSpecLicense {
    * @schema VmAlertSpecLicense#reloadInterval
    */
   readonly reloadInterval?: string;
-
 }
 
 /**
@@ -23604,7 +23324,6 @@ export interface VmAlertSpecManagedMetadata {
    * @schema VmAlertSpecManagedMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -23691,7 +23410,6 @@ export interface VmAlertSpecNotifier {
    * @schema VmAlertSpecNotifier#url
    */
   readonly url?: string;
-
 }
 
 /**
@@ -23746,7 +23464,6 @@ export interface VmAlertSpecNotifierConfigRef {
    * @schema VmAlertSpecNotifierConfigRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -23832,7 +23549,6 @@ export interface VmAlertSpecNotifiers {
    * @schema VmAlertSpecNotifiers#url
    */
   readonly url?: string;
-
 }
 
 /**
@@ -23889,7 +23605,6 @@ export interface VmAlertSpecPodDisruptionBudget {
    * @schema VmAlertSpecPodDisruptionBudget#selectorLabels
    */
   readonly selectorLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -23945,7 +23660,6 @@ export interface VmAlertSpecPodMetadata {
    * @schema VmAlertSpecPodMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -23976,7 +23690,6 @@ export interface VmAlertSpecReadinessGates {
    * @schema VmAlertSpecReadinessGates#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
@@ -24063,7 +23776,6 @@ export interface VmAlertSpecRemoteRead {
    * @schema VmAlertSpecRemoteRead#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -24178,7 +23890,6 @@ export interface VmAlertSpecRemoteWrite {
    * @schema VmAlertSpecRemoteWrite#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -24242,7 +23953,6 @@ export interface VmAlertSpecResources {
    * @schema VmAlertSpecResources#requests
    */
   readonly requests?: { [key: string]: VmAlertSpecResourcesRequests };
-
 }
 
 /**
@@ -24301,7 +24011,6 @@ export interface VmAlertSpecRollingUpdate {
    * @schema VmAlertSpecRollingUpdate#maxUnavailable
    */
   readonly maxUnavailable?: VmAlertSpecRollingUpdateMaxUnavailable;
-
 }
 
 /**
@@ -24343,7 +24052,6 @@ export interface VmAlertSpecRuleNamespaceSelector {
    * @schema VmAlertSpecRuleNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -24386,7 +24094,6 @@ export interface VmAlertSpecRuleSelector {
    * @schema VmAlertSpecRuleSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -24432,7 +24139,6 @@ export interface VmAlertSpecServiceSpec {
    * @schema VmAlertSpecServiceSpec#useAsDefault
    */
   readonly useAsDefault?: boolean;
-
 }
 
 /**
@@ -24502,7 +24208,6 @@ export interface VmAlertSpecTolerations {
    * @schema VmAlertSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -24618,7 +24323,6 @@ export interface VmAlertSpecVolumeMounts {
    * @schema VmAlertSpecVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -24664,7 +24368,6 @@ export interface VmAlertSpecConfigReloaderResourcesClaims {
    * @schema VmAlertSpecConfigReloaderResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -24739,7 +24442,6 @@ export interface VmAlertSpecDatasourceBasicAuth {
    * @schema VmAlertSpecDatasourceBasicAuth#username
    */
   readonly username?: VmAlertSpecDatasourceBasicAuthUsername;
-
 }
 
 /**
@@ -24788,7 +24490,6 @@ export interface VmAlertSpecDatasourceBearerTokenSecret {
    * @schema VmAlertSpecDatasourceBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -24827,7 +24528,6 @@ export interface VmAlertSpecDnsConfigOptions {
    * @schema VmAlertSpecDnsConfigOptions#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -24868,7 +24568,6 @@ export interface VmAlertSpecExtraEnvsFromConfigMapRef {
    * @schema VmAlertSpecExtraEnvsFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -24909,7 +24608,6 @@ export interface VmAlertSpecExtraEnvsFromSecretRef {
    * @schema VmAlertSpecExtraEnvsFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -24957,7 +24655,6 @@ export interface VmAlertSpecLicenseKeyRef {
    * @schema VmAlertSpecLicenseKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -25005,7 +24702,6 @@ export interface VmAlertSpecNotifierBasicAuth {
    * @schema VmAlertSpecNotifierBasicAuth#username
    */
   readonly username?: VmAlertSpecNotifierBasicAuthUsername;
-
 }
 
 /**
@@ -25054,7 +24750,6 @@ export interface VmAlertSpecNotifierBearerTokenSecret {
    * @schema VmAlertSpecNotifierBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -25097,7 +24792,6 @@ export interface VmAlertSpecNotifierSelector {
    * @schema VmAlertSpecNotifierSelector#namespaceSelector
    */
   readonly namespaceSelector?: VmAlertSpecNotifierSelectorNamespaceSelector;
-
 }
 
 /**
@@ -25144,7 +24838,6 @@ export interface VmAlertSpecNotifiersBasicAuth {
    * @schema VmAlertSpecNotifiersBasicAuth#username
    */
   readonly username?: VmAlertSpecNotifiersBasicAuthUsername;
-
 }
 
 /**
@@ -25193,7 +24886,6 @@ export interface VmAlertSpecNotifiersBearerTokenSecret {
    * @schema VmAlertSpecNotifiersBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -25236,7 +24928,6 @@ export interface VmAlertSpecNotifiersSelector {
    * @schema VmAlertSpecNotifiersSelector#namespaceSelector
    */
   readonly namespaceSelector?: VmAlertSpecNotifiersSelectorNamespaceSelector;
-
 }
 
 /**
@@ -25321,7 +25012,6 @@ export interface VmAlertSpecRemoteReadBasicAuth {
    * @schema VmAlertSpecRemoteReadBasicAuth#username
    */
   readonly username?: VmAlertSpecRemoteReadBasicAuthUsername;
-
 }
 
 /**
@@ -25370,7 +25060,6 @@ export interface VmAlertSpecRemoteReadBearerTokenSecret {
    * @schema VmAlertSpecRemoteReadBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -25418,7 +25107,6 @@ export interface VmAlertSpecRemoteWriteBasicAuth {
    * @schema VmAlertSpecRemoteWriteBasicAuth#username
    */
   readonly username?: VmAlertSpecRemoteWriteBasicAuthUsername;
-
 }
 
 /**
@@ -25467,7 +25155,6 @@ export interface VmAlertSpecRemoteWriteBearerTokenSecret {
    * @schema VmAlertSpecRemoteWriteBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -25509,7 +25196,6 @@ export interface VmAlertSpecResourcesClaims {
    * @schema VmAlertSpecResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -25639,7 +25325,6 @@ export interface VmAlertSpecRuleNamespaceSelectorMatchExpressions {
    * @schema VmAlertSpecRuleNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -25689,7 +25374,6 @@ export interface VmAlertSpecRuleSelectorMatchExpressions {
    * @schema VmAlertSpecRuleSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -25745,7 +25429,6 @@ export interface VmAlertSpecServiceSpecMetadata {
    * @schema VmAlertSpecServiceSpecMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -25795,7 +25478,6 @@ export interface VmAlertSpecDatasourceBasicAuthPassword {
    * @schema VmAlertSpecDatasourceBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -25845,7 +25527,6 @@ export interface VmAlertSpecDatasourceBasicAuthUsername {
    * @schema VmAlertSpecDatasourceBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -25895,7 +25576,6 @@ export interface VmAlertSpecNotifierBasicAuthPassword {
    * @schema VmAlertSpecNotifierBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -25945,7 +25625,6 @@ export interface VmAlertSpecNotifierBasicAuthUsername {
    * @schema VmAlertSpecNotifierBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -25987,7 +25666,6 @@ export interface VmAlertSpecNotifierSelectorLabelSelector {
    * @schema VmAlertSpecNotifierSelectorLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -26026,7 +25704,6 @@ export interface VmAlertSpecNotifierSelectorNamespaceSelector {
    * @schema VmAlertSpecNotifierSelectorNamespaceSelector#matchNames
    */
   readonly matchNames?: string[];
-
 }
 
 /**
@@ -26075,7 +25752,6 @@ export interface VmAlertSpecNotifiersBasicAuthPassword {
    * @schema VmAlertSpecNotifiersBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -26125,7 +25801,6 @@ export interface VmAlertSpecNotifiersBasicAuthUsername {
    * @schema VmAlertSpecNotifiersBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -26167,7 +25842,6 @@ export interface VmAlertSpecNotifiersSelectorLabelSelector {
    * @schema VmAlertSpecNotifiersSelectorLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -26206,7 +25880,6 @@ export interface VmAlertSpecNotifiersSelectorNamespaceSelector {
    * @schema VmAlertSpecNotifiersSelectorNamespaceSelector#matchNames
    */
   readonly matchNames?: string[];
-
 }
 
 /**
@@ -26255,7 +25928,6 @@ export interface VmAlertSpecRemoteReadBasicAuthPassword {
    * @schema VmAlertSpecRemoteReadBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -26305,7 +25977,6 @@ export interface VmAlertSpecRemoteReadBasicAuthUsername {
    * @schema VmAlertSpecRemoteReadBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -26355,7 +26026,6 @@ export interface VmAlertSpecRemoteWriteBasicAuthPassword {
    * @schema VmAlertSpecRemoteWriteBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -26405,7 +26075,6 @@ export interface VmAlertSpecRemoteWriteBasicAuthUsername {
    * @schema VmAlertSpecRemoteWriteBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -26455,7 +26124,6 @@ export interface VmAlertSpecNotifierSelectorLabelSelectorMatchExpressions {
    * @schema VmAlertSpecNotifierSelectorLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -26505,7 +26173,6 @@ export interface VmAlertSpecNotifiersSelectorLabelSelectorMatchExpressions {
    * @schema VmAlertSpecNotifiersSelectorLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -26597,7 +26264,6 @@ export interface VmAlertmanagerProps {
    * @schema VMAlertmanager#spec
    */
   readonly spec: VmAlertmanagerSpec;
-
 }
 
 /**
@@ -26878,6 +26544,7 @@ export interface VmAlertmanagerSpec {
    * @schema VmAlertmanagerSpec#hostNetwork
    */
   readonly hostNetwork?: boolean;
+
 
   /**
    * Image - docker image settings
@@ -27241,7 +26908,6 @@ export interface VmAlertmanagerSpec {
    * @schema VmAlertmanagerSpec#webConfig
    */
   readonly webConfig?: VmAlertmanagerSpecWebConfig;
-
 }
 
 /**
@@ -27383,7 +27049,6 @@ export interface VmAlertmanagerSpecClaimTemplates {
    * @schema VmAlertmanagerSpecClaimTemplates#status
    */
   readonly status?: VmAlertmanagerSpecClaimTemplatesStatus;
-
 }
 
 /**
@@ -27429,7 +27094,6 @@ export interface VmAlertmanagerSpecConfigNamespaceSelector {
    * @schema VmAlertmanagerSpecConfigNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -27479,7 +27143,6 @@ export interface VmAlertmanagerSpecConfigReloadAuthKeySecret {
    * @schema VmAlertmanagerSpecConfigReloadAuthKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -27535,7 +27198,6 @@ export interface VmAlertmanagerSpecConfigReloaderResources {
    * @schema VmAlertmanagerSpecConfigReloaderResources#requests
    */
   readonly requests?: { [key: string]: VmAlertmanagerSpecConfigReloaderResourcesRequests };
-
 }
 
 /**
@@ -27579,7 +27241,6 @@ export interface VmAlertmanagerSpecConfigSelector {
    * @schema VmAlertmanagerSpecConfigSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -27632,7 +27293,6 @@ export interface VmAlertmanagerSpecDnsConfig {
    * @schema VmAlertmanagerSpecDnsConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
@@ -27679,7 +27339,6 @@ export interface VmAlertmanagerSpecExtraEnvs {
    * @schema VmAlertmanagerSpecExtraEnvs#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -27723,7 +27382,6 @@ export interface VmAlertmanagerSpecExtraEnvsFrom {
    * @schema VmAlertmanagerSpecExtraEnvsFrom#secretRef
    */
   readonly secretRef?: VmAlertmanagerSpecExtraEnvsFromSecretRef;
-
 }
 
 /**
@@ -27761,7 +27419,6 @@ export interface VmAlertmanagerSpecGossipConfig {
    * @schema VmAlertmanagerSpecGossipConfig#tls_server_config
    */
   readonly tlsServerConfig?: VmAlertmanagerSpecGossipConfigTlsServerConfig;
-
 }
 
 /**
@@ -27799,7 +27456,6 @@ export interface VmAlertmanagerSpecHostAliases {
    * @schema VmAlertmanagerSpecHostAliases#ip
    */
   readonly ip: string;
-
 }
 
 /**
@@ -27844,7 +27500,6 @@ export interface VmAlertmanagerSpecImage {
    * @schema VmAlertmanagerSpecImage#tag
    */
   readonly tag?: string;
-
 }
 
 /**
@@ -27880,7 +27535,6 @@ export interface VmAlertmanagerSpecImagePullSecrets {
    * @schema VmAlertmanagerSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -27950,7 +27604,6 @@ export interface VmAlertmanagerSpecManagedMetadata {
    * @schema VmAlertmanagerSpecManagedMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -27994,7 +27647,6 @@ export interface VmAlertmanagerSpecPersistentVolumeClaimRetentionPolicy {
    * @schema VmAlertmanagerSpecPersistentVolumeClaimRetentionPolicy#whenScaled
    */
   readonly whenScaled?: string;
-
 }
 
 /**
@@ -28045,7 +27697,6 @@ export interface VmAlertmanagerSpecPodDisruptionBudget {
    * @schema VmAlertmanagerSpecPodDisruptionBudget#selectorLabels
    */
   readonly selectorLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -28101,7 +27752,6 @@ export interface VmAlertmanagerSpecPodMetadata {
    * @schema VmAlertmanagerSpecPodMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -28132,7 +27782,6 @@ export interface VmAlertmanagerSpecReadinessGates {
    * @schema VmAlertmanagerSpecReadinessGates#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
@@ -28186,7 +27835,6 @@ export interface VmAlertmanagerSpecResources {
    * @schema VmAlertmanagerSpecResources#requests
    */
   readonly requests?: { [key: string]: VmAlertmanagerSpecResourcesRequests };
-
 }
 
 /**
@@ -28233,7 +27881,6 @@ export interface VmAlertmanagerSpecServiceSpec {
    * @schema VmAlertmanagerSpecServiceSpec#useAsDefault
    */
   readonly useAsDefault?: boolean;
-
 }
 
 /**
@@ -28281,7 +27928,6 @@ export interface VmAlertmanagerSpecStorage {
    * @schema VmAlertmanagerSpecStorage#volumeClaimTemplate
    */
   readonly volumeClaimTemplate?: VmAlertmanagerSpecStorageVolumeClaimTemplate;
-
 }
 
 /**
@@ -28323,7 +27969,6 @@ export interface VmAlertmanagerSpecTemplates {
    * @schema VmAlertmanagerSpecTemplates#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -28392,7 +28037,6 @@ export interface VmAlertmanagerSpecTolerations {
    * @schema VmAlertmanagerSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -28496,7 +28140,6 @@ export interface VmAlertmanagerSpecVolumeMounts {
    * @schema VmAlertmanagerSpecVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -28547,7 +28190,6 @@ export interface VmAlertmanagerSpecWebConfig {
    * @schema VmAlertmanagerSpecWebConfig#tls_server_config
    */
   readonly tlsServerConfig?: VmAlertmanagerSpecWebConfigTlsServerConfig;
-
 }
 
 /**
@@ -28682,7 +28324,6 @@ export interface VmAlertmanagerSpecClaimTemplatesSpec {
    * @schema VmAlertmanagerSpecClaimTemplatesSpec#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -28831,7 +28472,6 @@ export interface VmAlertmanagerSpecClaimTemplatesStatus {
    * @schema VmAlertmanagerSpecClaimTemplatesStatus#phase
    */
   readonly phase?: string;
-
 }
 
 /**
@@ -28886,7 +28526,6 @@ export interface VmAlertmanagerSpecConfigNamespaceSelectorMatchExpressions {
    * @schema VmAlertmanagerSpecConfigNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -28928,7 +28567,6 @@ export interface VmAlertmanagerSpecConfigReloaderResourcesClaims {
    * @schema VmAlertmanagerSpecConfigReloaderResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -29005,7 +28643,6 @@ export interface VmAlertmanagerSpecConfigSelectorMatchExpressions {
    * @schema VmAlertmanagerSpecConfigSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -29044,7 +28681,6 @@ export interface VmAlertmanagerSpecDnsConfigOptions {
    * @schema VmAlertmanagerSpecDnsConfigOptions#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -29085,7 +28721,6 @@ export interface VmAlertmanagerSpecExtraEnvsFromConfigMapRef {
    * @schema VmAlertmanagerSpecExtraEnvsFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -29126,7 +28761,6 @@ export interface VmAlertmanagerSpecExtraEnvsFromSecretRef {
    * @schema VmAlertmanagerSpecExtraEnvsFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -29212,7 +28846,6 @@ export interface VmAlertmanagerSpecGossipConfigTlsClientConfig {
    * @schema VmAlertmanagerSpecGossipConfigTlsClientConfig#server_name
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -29338,7 +28971,6 @@ export interface VmAlertmanagerSpecGossipConfigTlsServerConfig {
    * @schema VmAlertmanagerSpecGossipConfigTlsServerConfig#prefer_server_cipher_suites
    */
   readonly preferServerCipherSuites?: boolean;
-
 }
 
 /**
@@ -29427,7 +29059,6 @@ export interface VmAlertmanagerSpecResourcesClaims {
    * @schema VmAlertmanagerSpecResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -29510,7 +29141,6 @@ export interface VmAlertmanagerSpecServiceSpecMetadata {
    * @schema VmAlertmanagerSpecServiceSpecMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -29557,7 +29187,6 @@ export interface VmAlertmanagerSpecStorageEmptyDir {
    * @schema VmAlertmanagerSpecStorageEmptyDir#sizeLimit
    */
   readonly sizeLimit?: VmAlertmanagerSpecStorageEmptyDirSizeLimit;
-
 }
 
 /**
@@ -29625,7 +29254,6 @@ export interface VmAlertmanagerSpecStorageVolumeClaimTemplate {
    * @schema VmAlertmanagerSpecStorageVolumeClaimTemplate#status
    */
   readonly status?: VmAlertmanagerSpecStorageVolumeClaimTemplateStatus;
-
 }
 
 /**
@@ -29666,7 +29294,6 @@ export interface VmAlertmanagerSpecWebConfigHttpServerConfig {
    * @schema VmAlertmanagerSpecWebConfigHttpServerConfig#http2
    */
   readonly http2?: boolean;
-
 }
 
 /**
@@ -29786,7 +29413,6 @@ export interface VmAlertmanagerSpecWebConfigTlsServerConfig {
    * @schema VmAlertmanagerSpecWebConfigTlsServerConfig#prefer_server_cipher_suites
    */
   readonly preferServerCipherSuites?: boolean;
-
 }
 
 /**
@@ -29849,7 +29475,6 @@ export interface VmAlertmanagerSpecClaimTemplatesSpecDataSource {
    * @schema VmAlertmanagerSpecClaimTemplatesSpecDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -29927,7 +29552,6 @@ export interface VmAlertmanagerSpecClaimTemplatesSpecDataSourceRef {
    * @schema VmAlertmanagerSpecClaimTemplatesSpecDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -29974,7 +29598,6 @@ export interface VmAlertmanagerSpecClaimTemplatesSpecResources {
    * @schema VmAlertmanagerSpecClaimTemplatesSpecResources#requests
    */
   readonly requests?: { [key: string]: VmAlertmanagerSpecClaimTemplatesSpecResourcesRequests };
-
 }
 
 /**
@@ -30013,7 +29636,6 @@ export interface VmAlertmanagerSpecClaimTemplatesSpecSelector {
    * @schema VmAlertmanagerSpecClaimTemplatesSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -30111,7 +29733,6 @@ export interface VmAlertmanagerSpecClaimTemplatesStatusConditions {
    * @schema VmAlertmanagerSpecClaimTemplatesStatusConditions#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -30163,7 +29784,6 @@ export interface VmAlertmanagerSpecClaimTemplatesStatusModifyVolumeStatus {
    * @schema VmAlertmanagerSpecClaimTemplatesStatusModifyVolumeStatus#targetVolumeAttributesClassName
    */
   readonly targetVolumeAttributesClassName?: string;
-
 }
 
 /**
@@ -30212,7 +29832,6 @@ export interface VmAlertmanagerSpecGossipConfigTlsClientConfigCaSecretRef {
    * @schema VmAlertmanagerSpecGossipConfigTlsClientConfigCaSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -30262,7 +29881,6 @@ export interface VmAlertmanagerSpecGossipConfigTlsClientConfigCertSecretRef {
    * @schema VmAlertmanagerSpecGossipConfigTlsClientConfigCertSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -30312,7 +29930,6 @@ export interface VmAlertmanagerSpecGossipConfigTlsClientConfigKeySecretRef {
    * @schema VmAlertmanagerSpecGossipConfigTlsClientConfigKeySecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -30362,7 +29979,6 @@ export interface VmAlertmanagerSpecGossipConfigTlsServerConfigCertSecretRef {
    * @schema VmAlertmanagerSpecGossipConfigTlsServerConfigCertSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -30428,7 +30044,6 @@ export interface VmAlertmanagerSpecGossipConfigTlsServerConfigClientCaSecretRef 
    * @schema VmAlertmanagerSpecGossipConfigTlsServerConfigClientCaSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -30478,7 +30093,6 @@ export interface VmAlertmanagerSpecGossipConfigTlsServerConfigKeySecretRef {
    * @schema VmAlertmanagerSpecGossipConfigTlsServerConfigKeySecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -30587,7 +30201,6 @@ export interface VmAlertmanagerSpecStorageVolumeClaimTemplateMetadata {
    * @schema VmAlertmanagerSpecStorageVolumeClaimTemplateMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -30722,7 +30335,6 @@ export interface VmAlertmanagerSpecStorageVolumeClaimTemplateSpec {
    * @schema VmAlertmanagerSpecStorageVolumeClaimTemplateSpec#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -30871,7 +30483,6 @@ export interface VmAlertmanagerSpecStorageVolumeClaimTemplateStatus {
    * @schema VmAlertmanagerSpecStorageVolumeClaimTemplateStatus#phase
    */
   readonly phase?: string;
-
 }
 
 /**
@@ -30926,7 +30537,6 @@ export interface VmAlertmanagerSpecWebConfigTlsServerConfigCertSecretRef {
    * @schema VmAlertmanagerSpecWebConfigTlsServerConfigCertSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -30992,7 +30602,6 @@ export interface VmAlertmanagerSpecWebConfigTlsServerConfigClientCaSecretRef {
    * @schema VmAlertmanagerSpecWebConfigTlsServerConfigClientCaSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -31042,7 +30651,6 @@ export interface VmAlertmanagerSpecWebConfigTlsServerConfigKeySecretRef {
    * @schema VmAlertmanagerSpecWebConfigTlsServerConfigKeySecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -31152,7 +30760,6 @@ export interface VmAlertmanagerSpecClaimTemplatesSpecSelectorMatchExpressions {
    * @schema VmAlertmanagerSpecClaimTemplatesSpecSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -31206,7 +30813,6 @@ export interface VmAlertmanagerSpecStorageVolumeClaimTemplateSpecDataSource {
    * @schema VmAlertmanagerSpecStorageVolumeClaimTemplateSpecDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -31284,7 +30890,6 @@ export interface VmAlertmanagerSpecStorageVolumeClaimTemplateSpecDataSourceRef {
    * @schema VmAlertmanagerSpecStorageVolumeClaimTemplateSpecDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -31331,7 +30936,6 @@ export interface VmAlertmanagerSpecStorageVolumeClaimTemplateSpecResources {
    * @schema VmAlertmanagerSpecStorageVolumeClaimTemplateSpecResources#requests
    */
   readonly requests?: { [key: string]: VmAlertmanagerSpecStorageVolumeClaimTemplateSpecResourcesRequests };
-
 }
 
 /**
@@ -31370,7 +30974,6 @@ export interface VmAlertmanagerSpecStorageVolumeClaimTemplateSpecSelector {
    * @schema VmAlertmanagerSpecStorageVolumeClaimTemplateSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -31468,7 +31071,6 @@ export interface VmAlertmanagerSpecStorageVolumeClaimTemplateStatusConditions {
    * @schema VmAlertmanagerSpecStorageVolumeClaimTemplateStatusConditions#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -31520,7 +31122,6 @@ export interface VmAlertmanagerSpecStorageVolumeClaimTemplateStatusModifyVolumeS
    * @schema VmAlertmanagerSpecStorageVolumeClaimTemplateStatusModifyVolumeStatus#targetVolumeAttributesClassName
    */
   readonly targetVolumeAttributesClassName?: string;
-
 }
 
 /**
@@ -31597,7 +31198,6 @@ export interface VmAlertmanagerSpecStorageVolumeClaimTemplateSpecSelectorMatchEx
    * @schema VmAlertmanagerSpecStorageVolumeClaimTemplateSpecSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -31689,7 +31289,6 @@ export interface VmAlertmanagerConfigProps {
    * @schema VMAlertmanagerConfig#spec
    */
   readonly spec?: VmAlertmanagerConfigSpec;
-
 }
 
 /**
@@ -31743,7 +31342,6 @@ export interface VmAlertmanagerConfigSpec {
    * @schema VmAlertmanagerConfigSpec#time_intervals
    */
   readonly timeIntervals?: VmAlertmanagerConfigSpecTimeIntervals[];
-
 }
 
 /**
@@ -31795,7 +31393,6 @@ export interface VmAlertmanagerConfigSpecInhibitRules {
    * @schema VmAlertmanagerConfigSpecInhibitRules#target_matchers
    */
   readonly targetMatchers?: string[];
-
 }
 
 /**
@@ -31922,7 +31519,6 @@ export interface VmAlertmanagerConfigSpecReceivers {
    * @schema VmAlertmanagerConfigSpecReceivers#wechat_configs
    */
   readonly wechatConfigs?: VmAlertmanagerConfigSpecReceiversWechatConfigs[];
-
 }
 
 /**
@@ -32035,7 +31631,6 @@ export interface VmAlertmanagerConfigSpecRoute {
    * @schema VmAlertmanagerConfigSpecRoute#routes
    */
   readonly routes?: any[];
-
 }
 
 /**
@@ -32080,7 +31675,6 @@ export interface VmAlertmanagerConfigSpecTimeIntervals {
    * @schema VmAlertmanagerConfigSpecTimeIntervals#time_intervals
    */
   readonly timeIntervals: VmAlertmanagerConfigSpecTimeIntervalsTimeIntervals[];
-
 }
 
 /**
@@ -32170,7 +31764,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigs {
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigs#webhook_url_secret
    */
   readonly webhookUrlSecret?: VmAlertmanagerConfigSpecReceiversDiscordConfigsWebhookUrlSecret;
-
 }
 
 /**
@@ -32303,7 +31896,6 @@ export interface VmAlertmanagerConfigSpecReceiversEmailConfigs {
    * @schema VmAlertmanagerConfigSpecReceiversEmailConfigs#to
    */
   readonly to?: string;
-
 }
 
 /**
@@ -32448,7 +32040,6 @@ export interface VmAlertmanagerConfigSpecReceiversJiraConfigs {
    * @schema VmAlertmanagerConfigSpecReceiversJiraConfigs#wont_fix_resolution
    */
   readonly wontFixResolution?: string;
-
 }
 
 /**
@@ -32526,7 +32117,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigs {
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigs#webhook_url_secret
    */
   readonly webhookUrlSecret?: VmAlertmanagerConfigSpecReceiversMsteamsConfigsWebhookUrlSecret;
-
 }
 
 /**
@@ -32599,7 +32189,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsv2Configs {
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsv2Configs#webhook_url_secret
    */
   readonly webhookUrlSecret?: VmAlertmanagerConfigSpecReceiversMsteamsv2ConfigsWebhookUrlSecret;
-
 }
 
 /**
@@ -32735,7 +32324,6 @@ export interface VmAlertmanagerConfigSpecReceiversOpsgenieConfigs {
    * @schema VmAlertmanagerConfigSpecReceiversOpsgenieConfigs#update_alerts
    */
   readonly updateAlerts?: boolean;
-
 }
 
 /**
@@ -32882,7 +32470,6 @@ export interface VmAlertmanagerConfigSpecReceiversPagerdutyConfigs {
    * @schema VmAlertmanagerConfigSpecReceiversPagerdutyConfigs#url
    */
   readonly url?: string;
-
 }
 
 /**
@@ -33014,7 +32601,6 @@ export interface VmAlertmanagerConfigSpecReceiversPushoverConfigs {
    * @schema VmAlertmanagerConfigSpecReceiversPushoverConfigs#user_key
    */
   readonly userKey?: VmAlertmanagerConfigSpecReceiversPushoverConfigsUserKey;
-
 }
 
 /**
@@ -33150,7 +32736,6 @@ export interface VmAlertmanagerConfigSpecReceiversRocketchatConfigs {
    * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigs#token_id
    */
   readonly tokenId?: VmAlertmanagerConfigSpecReceiversRocketchatConfigsTokenId;
-
 }
 
 /**
@@ -33314,7 +32899,6 @@ export interface VmAlertmanagerConfigSpecReceiversSlackConfigs {
    * @schema VmAlertmanagerConfigSpecReceiversSlackConfigs#username
    */
   readonly username?: string;
-
 }
 
 /**
@@ -33427,7 +33011,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigs {
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigs#topic_arn
    */
   readonly topicArn?: string;
-
 }
 
 /**
@@ -33524,7 +33107,6 @@ export interface VmAlertmanagerConfigSpecReceiversTelegramConfigs {
    * @schema VmAlertmanagerConfigSpecReceiversTelegramConfigs#send_resolved
    */
   readonly sendResolved?: boolean;
-
 }
 
 /**
@@ -33628,7 +33210,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigs {
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigs#state_message
    */
   readonly stateMessage?: string;
-
 }
 
 /**
@@ -33692,7 +33273,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigs {
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigs#send_resolved
    */
   readonly sendResolved?: boolean;
-
 }
 
 /**
@@ -33765,7 +33345,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebhookConfigs {
    * @schema VmAlertmanagerConfigSpecReceiversWebhookConfigs#url_secret
    */
   readonly urlSecret?: VmAlertmanagerConfigSpecReceiversWebhookConfigsUrlSecret;
-
 }
 
 /**
@@ -33864,7 +33443,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigs {
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigs#to_user
    */
   readonly toUser?: string;
-
 }
 
 /**
@@ -33941,7 +33519,6 @@ export interface VmAlertmanagerConfigSpecTimeIntervalsTimeIntervals {
    * @schema VmAlertmanagerConfigSpecTimeIntervalsTimeIntervals#years
    */
   readonly years?: string[];
-
 }
 
 /**
@@ -34019,7 +33596,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfig {
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfig#tls_config
    */
   readonly tlsConfig?: VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsConfig;
-
 }
 
 /**
@@ -34074,7 +33650,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsWebhookUrlSecret
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsWebhookUrlSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -34123,7 +33698,6 @@ export interface VmAlertmanagerConfigSpecReceiversEmailConfigsAuthPassword {
    * @schema VmAlertmanagerConfigSpecReceiversEmailConfigsAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -34173,7 +33747,6 @@ export interface VmAlertmanagerConfigSpecReceiversEmailConfigsAuthSecret {
    * @schema VmAlertmanagerConfigSpecReceiversEmailConfigsAuthSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -34253,7 +33826,6 @@ export interface VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfig {
    * @schema VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -34333,7 +33905,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfig {
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfig#tls_config
    */
   readonly tlsConfig?: VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsConfig;
-
 }
 
 /**
@@ -34388,7 +33959,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsWebhookUrlSecret
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsWebhookUrlSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -34439,7 +34009,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsv2ConfigsWebhookUrlSecr
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsv2ConfigsWebhookUrlSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -34490,7 +34059,6 @@ export interface VmAlertmanagerConfigSpecReceiversOpsgenieConfigsApiKey {
    * @schema VmAlertmanagerConfigSpecReceiversOpsgenieConfigsApiKey#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -34543,7 +34111,6 @@ export interface VmAlertmanagerConfigSpecReceiversOpsgenieConfigsResponders {
    * @schema VmAlertmanagerConfigSpecReceiversOpsgenieConfigsResponders#username
    */
   readonly username?: string;
-
 }
 
 /**
@@ -34585,7 +34152,6 @@ export interface VmAlertmanagerConfigSpecReceiversPagerdutyConfigsImages {
    * @schema VmAlertmanagerConfigSpecReceiversPagerdutyConfigsImages#source
    */
   readonly source: string;
-
 }
 
 /**
@@ -34621,7 +34187,6 @@ export interface VmAlertmanagerConfigSpecReceiversPagerdutyConfigsLinks {
    * @schema VmAlertmanagerConfigSpecReceiversPagerdutyConfigsLinks#text
    */
   readonly text?: string;
-
 }
 
 /**
@@ -34671,7 +34236,6 @@ export interface VmAlertmanagerConfigSpecReceiversPagerdutyConfigsRoutingKey {
    * @schema VmAlertmanagerConfigSpecReceiversPagerdutyConfigsRoutingKey#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -34723,7 +34287,6 @@ export interface VmAlertmanagerConfigSpecReceiversPagerdutyConfigsServiceKey {
    * @schema VmAlertmanagerConfigSpecReceiversPagerdutyConfigsServiceKey#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -34773,7 +34336,6 @@ export interface VmAlertmanagerConfigSpecReceiversPushoverConfigsToken {
    * @schema VmAlertmanagerConfigSpecReceiversPushoverConfigsToken#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -34823,7 +34385,6 @@ export interface VmAlertmanagerConfigSpecReceiversPushoverConfigsUserKey {
    * @schema VmAlertmanagerConfigSpecReceiversPushoverConfigsUserKey#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -34868,7 +34429,6 @@ export interface VmAlertmanagerConfigSpecReceiversRocketchatConfigsActions {
    * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsActions#url
    */
   readonly url?: string;
-
 }
 
 /**
@@ -34909,7 +34469,6 @@ export interface VmAlertmanagerConfigSpecReceiversRocketchatConfigsFields {
    * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsFields#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -34958,7 +34517,6 @@ export interface VmAlertmanagerConfigSpecReceiversRocketchatConfigsToken {
    * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsToken#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -35008,7 +34566,6 @@ export interface VmAlertmanagerConfigSpecReceiversRocketchatConfigsTokenId {
    * @schema VmAlertmanagerConfigSpecReceiversRocketchatConfigsTokenId#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -35076,7 +34633,6 @@ export interface VmAlertmanagerConfigSpecReceiversSlackConfigsActions {
    * @schema VmAlertmanagerConfigSpecReceiversSlackConfigsActions#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -35131,7 +34687,6 @@ export interface VmAlertmanagerConfigSpecReceiversSlackConfigsApiUrl {
    * @schema VmAlertmanagerConfigSpecReceiversSlackConfigsApiUrl#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -35171,7 +34726,6 @@ export interface VmAlertmanagerConfigSpecReceiversSlackConfigsFields {
    * @schema VmAlertmanagerConfigSpecReceiversSlackConfigsFields#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -35246,7 +34800,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfig {
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfig#tls_config
    */
   readonly tlsConfig?: VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfig;
-
 }
 
 /**
@@ -35317,7 +34870,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsSigv4 {
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsSigv4#secret_key_selector
    */
   readonly secretKeySelector?: VmAlertmanagerConfigSpecReceiversSnsConfigsSigv4SecretKeySelector;
-
 }
 
 /**
@@ -35370,7 +34922,6 @@ export interface VmAlertmanagerConfigSpecReceiversTelegramConfigsBotToken {
    * @schema VmAlertmanagerConfigSpecReceiversTelegramConfigsBotToken#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -35421,7 +34972,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsApiKey {
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsApiKey#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -35496,7 +35046,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfig {
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfig#tls_config
    */
   readonly tlsConfig?: VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsConfig;
-
 }
 
 /**
@@ -35575,7 +35124,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfig {
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfig#tls_config
    */
   readonly tlsConfig?: VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfig;
-
 }
 
 /**
@@ -35630,7 +35178,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebhookConfigsUrlSecret {
    * @schema VmAlertmanagerConfigSpecReceiversWebhookConfigsUrlSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -35681,7 +35228,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsApiSecret {
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsApiSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -35756,7 +35302,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfig {
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfig#tls_config
    */
   readonly tlsConfig?: VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConfig;
-
 }
 
 /**
@@ -35798,7 +35343,6 @@ export interface VmAlertmanagerConfigSpecTimeIntervalsTimeIntervalsTimes {
    * @schema VmAlertmanagerConfigSpecTimeIntervalsTimeIntervalsTimes#start_time
    */
   readonly startTime: string;
-
 }
 
 /**
@@ -35843,7 +35387,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigAuthor
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigAuthorization#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -35891,7 +35434,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigBasicA
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigBasicAuth#username
    */
   readonly username?: VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigBasicAuthUsername;
-
 }
 
 /**
@@ -35941,7 +35483,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigBearer
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -36025,7 +35566,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigOauth2
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigOauth2#token_url
    */
   readonly tokenUrl: string;
-
 }
 
 /**
@@ -36110,7 +35650,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsCon
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -36153,7 +35692,6 @@ export interface VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfigCa {
    * @schema VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfigCa#secret
    */
   readonly secret?: VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfigCaSecret;
-
 }
 
 /**
@@ -36190,7 +35728,6 @@ export interface VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfigCert {
    * @schema VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfigCert#secret
    */
   readonly secret?: VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfigCertSecret;
-
 }
 
 /**
@@ -36238,7 +35775,6 @@ export interface VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfigKeySecret
    * @schema VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -36284,7 +35820,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigAuthor
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigAuthorization#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -36332,7 +35867,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigBasicA
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigBasicAuth#username
    */
   readonly username?: VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigBasicAuthUsername;
-
 }
 
 /**
@@ -36382,7 +35916,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigBearer
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -36466,7 +35999,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigOauth2
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigOauth2#token_url
    */
   readonly tokenUrl: string;
-
 }
 
 /**
@@ -36551,7 +36083,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsCon
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -36604,7 +36135,6 @@ export interface VmAlertmanagerConfigSpecReceiversSlackConfigsActionsConfirm {
    * @schema VmAlertmanagerConfigSpecReceiversSlackConfigsActionsConfirm#title
    */
   readonly title?: string;
-
 }
 
 /**
@@ -36651,7 +36181,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigAuthorizat
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigAuthorization#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -36699,7 +36228,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigBasicAuth 
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigBasicAuth#username
    */
   readonly username?: VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigBasicAuthUsername;
-
 }
 
 /**
@@ -36749,7 +36277,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigBearerToke
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -36833,7 +36360,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigOauth2 {
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigOauth2#token_url
    */
   readonly tokenUrl: string;
-
 }
 
 /**
@@ -36918,7 +36444,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfig 
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -36972,7 +36497,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsSigv4AccessKeySelect
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsSigv4AccessKeySelector#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -37021,7 +36545,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsSigv4SecretKeySelect
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsSigv4SecretKeySelector#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -37067,7 +36590,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigAuth
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigAuthorization#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -37115,7 +36637,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigBasi
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigBasicAuth#username
    */
   readonly username?: VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigBasicAuthUsername;
-
 }
 
 /**
@@ -37165,7 +36686,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigBear
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -37249,7 +36769,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigOaut
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigOauth2#token_url
    */
   readonly tokenUrl: string;
-
 }
 
 /**
@@ -37334,7 +36853,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsC
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -37385,7 +36903,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigAuthoriz
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigAuthorization#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -37433,7 +36950,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigBasicAut
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigBasicAuth#username
    */
   readonly username?: VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigBasicAuthUsername;
-
 }
 
 /**
@@ -37483,7 +36999,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigBearerTo
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -37567,7 +37082,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigOauth2 {
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigOauth2#token_url
    */
   readonly tokenUrl: string;
-
 }
 
 /**
@@ -37652,7 +37166,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfi
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -37703,7 +37216,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigAuthori
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigAuthorization#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -37751,7 +37263,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigBasicAu
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigBasicAuth#username
    */
   readonly username?: VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigBasicAuthUsername;
-
 }
 
 /**
@@ -37801,7 +37312,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigBearerT
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -37885,7 +37395,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigOauth2 
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigOauth2#token_url
    */
   readonly tokenUrl: string;
-
 }
 
 /**
@@ -37970,7 +37479,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConf
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -38024,7 +37532,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigAuthor
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigAuthorizationCredentials#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -38074,7 +37581,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigBasicA
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -38124,7 +37630,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigBasicA
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -38162,7 +37667,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigOauth2
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigOauth2ClientId#secret
    */
   readonly secret?: VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigOauth2ClientIdSecret;
-
 }
 
 /**
@@ -38210,7 +37714,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigOauth2
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigOauth2ClientSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -38248,7 +37751,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsCon
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsConfigCa#secret
    */
   readonly secret?: VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsConfigCaSecret;
-
 }
 
 /**
@@ -38285,7 +37787,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsCon
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsConfigCert#secret
    */
   readonly secret?: VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsConfigCertSecret;
-
 }
 
 /**
@@ -38333,7 +37834,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsCon
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -38382,7 +37882,6 @@ export interface VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfigCaConfigM
    * @schema VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -38431,7 +37930,6 @@ export interface VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfigCaSecret 
    * @schema VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -38480,7 +37978,6 @@ export interface VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfigCertConfi
    * @schema VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -38529,7 +38026,6 @@ export interface VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfigCertSecre
    * @schema VmAlertmanagerConfigSpecReceiversEmailConfigsTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -38578,7 +38074,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigAuthor
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigAuthorizationCredentials#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -38628,7 +38123,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigBasicA
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -38678,7 +38172,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigBasicA
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -38716,7 +38209,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigOauth2
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigOauth2ClientId#secret
    */
   readonly secret?: VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigOauth2ClientIdSecret;
-
 }
 
 /**
@@ -38764,7 +38256,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigOauth2
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigOauth2ClientSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -38802,7 +38293,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsCon
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsConfigCa#secret
    */
   readonly secret?: VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsConfigCaSecret;
-
 }
 
 /**
@@ -38839,7 +38329,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsCon
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsConfigCert#secret
    */
   readonly secret?: VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsConfigCertSecret;
-
 }
 
 /**
@@ -38887,7 +38376,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsCon
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -38936,7 +38424,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigAuthorizat
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigAuthorizationCredentials#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -38986,7 +38473,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigBasicAuthP
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -39036,7 +38522,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigBasicAuthU
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -39074,7 +38559,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigOauth2Clie
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigOauth2ClientId#secret
    */
   readonly secret?: VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigOauth2ClientIdSecret;
-
 }
 
 /**
@@ -39122,7 +38606,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigOauth2Clie
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigOauth2ClientSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -39160,7 +38643,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfigC
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfigCa#secret
    */
   readonly secret?: VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfigCaSecret;
-
 }
 
 /**
@@ -39197,7 +38679,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfigC
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfigCert#secret
    */
   readonly secret?: VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfigCertSecret;
-
 }
 
 /**
@@ -39245,7 +38726,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfigK
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -39294,7 +38774,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigAuth
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigAuthorizationCredentials#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -39344,7 +38823,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigBasi
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -39394,7 +38872,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigBasi
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -39432,7 +38909,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigOaut
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigOauth2ClientId#secret
    */
   readonly secret?: VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigOauth2ClientIdSecret;
-
 }
 
 /**
@@ -39480,7 +38956,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigOaut
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigOauth2ClientSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -39518,7 +38993,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsC
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsConfigCa#secret
    */
   readonly secret?: VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsConfigCaSecret;
-
 }
 
 /**
@@ -39555,7 +39029,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsC
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsConfigCert#secret
    */
   readonly secret?: VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsConfigCertSecret;
-
 }
 
 /**
@@ -39603,7 +39076,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsC
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -39652,7 +39124,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigAuthoriz
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigAuthorizationCredentials#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -39702,7 +39173,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigBasicAut
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -39752,7 +39222,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigBasicAut
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -39790,7 +39259,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigOauth2Cl
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigOauth2ClientId#secret
    */
   readonly secret?: VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigOauth2ClientIdSecret;
-
 }
 
 /**
@@ -39838,7 +39306,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigOauth2Cl
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigOauth2ClientSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -39876,7 +39343,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfi
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfigCa#secret
    */
   readonly secret?: VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfigCaSecret;
-
 }
 
 /**
@@ -39913,7 +39379,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfi
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfigCert#secret
    */
   readonly secret?: VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfigCertSecret;
-
 }
 
 /**
@@ -39961,7 +39426,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfi
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -40010,7 +39474,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigAuthori
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigAuthorizationCredentials#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -40060,7 +39523,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigBasicAu
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -40110,7 +39572,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigBasicAu
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -40148,7 +39609,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigOauth2C
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigOauth2ClientId#secret
    */
   readonly secret?: VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigOauth2ClientIdSecret;
-
 }
 
 /**
@@ -40196,7 +39656,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigOauth2C
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigOauth2ClientSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -40234,7 +39693,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConf
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConfigCa#secret
    */
   readonly secret?: VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConfigCaSecret;
-
 }
 
 /**
@@ -40271,7 +39729,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConf
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConfigCert#secret
    */
   readonly secret?: VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConfigCertSecret;
-
 }
 
 /**
@@ -40319,7 +39776,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConf
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -40368,7 +39824,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigOauth2
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigOauth2ClientIdConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -40417,7 +39872,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigOauth2
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigOauth2ClientIdSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -40466,7 +39920,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsCon
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -40515,7 +39968,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsCon
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -40564,7 +40016,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsCon
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -40613,7 +40064,6 @@ export interface VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsCon
    * @schema VmAlertmanagerConfigSpecReceiversDiscordConfigsHttpConfigTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -40662,7 +40112,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigOauth2
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigOauth2ClientIdConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -40711,7 +40160,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigOauth2
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigOauth2ClientIdSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -40760,7 +40208,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsCon
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -40809,7 +40256,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsCon
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -40858,7 +40304,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsCon
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -40907,7 +40352,6 @@ export interface VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsCon
    * @schema VmAlertmanagerConfigSpecReceiversMsteamsConfigsHttpConfigTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -40956,7 +40400,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigOauth2Clie
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigOauth2ClientIdConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41005,7 +40448,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigOauth2Clie
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigOauth2ClientIdSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41054,7 +40496,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfigC
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41103,7 +40544,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfigC
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41152,7 +40592,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfigC
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41201,7 +40640,6 @@ export interface VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfigC
    * @schema VmAlertmanagerConfigSpecReceiversSnsConfigsHttpConfigTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41250,7 +40688,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigOaut
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigOauth2ClientIdConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41299,7 +40736,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigOaut
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigOauth2ClientIdSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41348,7 +40784,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsC
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41397,7 +40832,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsC
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41446,7 +40880,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsC
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41495,7 +40928,6 @@ export interface VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsC
    * @schema VmAlertmanagerConfigSpecReceiversVictoropsConfigsHttpConfigTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41544,7 +40976,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigOauth2Cl
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigOauth2ClientIdConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41593,7 +41024,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigOauth2Cl
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigOauth2ClientIdSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41642,7 +41072,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfi
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41691,7 +41120,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfi
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41740,7 +41168,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfi
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41789,7 +41216,6 @@ export interface VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfi
    * @schema VmAlertmanagerConfigSpecReceiversWebexConfigsHttpConfigTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41838,7 +41264,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigOauth2C
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigOauth2ClientIdConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41887,7 +41312,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigOauth2C
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigOauth2ClientIdSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41936,7 +41360,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConf
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -41985,7 +41408,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConf
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -42034,7 +41456,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConf
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -42083,7 +41504,6 @@ export interface VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConf
    * @schema VmAlertmanagerConfigSpecReceiversWechatConfigsHttpConfigTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -42174,7 +41594,6 @@ export interface VmAnomalyProps {
    * @schema VMAnomaly#spec
    */
   readonly spec?: VmAnomalySpec;
-
 }
 
 /**
@@ -42325,6 +41744,7 @@ export interface VmAnomalySpec {
    * @schema VmAnomalySpec#hostNetwork
    */
   readonly hostNetwork?: boolean;
+
 
   /**
    * Image - docker image settings
@@ -42642,7 +42062,6 @@ export interface VmAnomalySpec {
    * @schema VmAnomalySpec#writer
    */
   readonly writer: VmAnomalySpecWriter;
-
 }
 
 /**
@@ -42764,7 +42183,6 @@ export interface VmAnomalySpecClaimTemplates {
    * @schema VmAnomalySpecClaimTemplates#status
    */
   readonly status?: VmAnomalySpecClaimTemplatesStatus;
-
 }
 
 /**
@@ -42821,7 +42239,6 @@ export interface VmAnomalySpecConfigSecret {
    * @schema VmAnomalySpecConfigSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -42875,7 +42292,6 @@ export interface VmAnomalySpecDnsConfig {
    * @schema VmAnomalySpecDnsConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
@@ -42922,7 +42338,6 @@ export interface VmAnomalySpecExtraEnvs {
    * @schema VmAnomalySpecExtraEnvs#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -42966,7 +42381,6 @@ export interface VmAnomalySpecExtraEnvsFrom {
    * @schema VmAnomalySpecExtraEnvsFrom#secretRef
    */
   readonly secretRef?: VmAnomalySpecExtraEnvsFromSecretRef;
-
 }
 
 /**
@@ -43005,7 +42419,6 @@ export interface VmAnomalySpecHostAliases {
    * @schema VmAnomalySpecHostAliases#ip
    */
   readonly ip: string;
-
 }
 
 /**
@@ -43050,7 +42463,6 @@ export interface VmAnomalySpecImage {
    * @schema VmAnomalySpecImage#tag
    */
   readonly tag?: string;
-
 }
 
 /**
@@ -43086,7 +42498,6 @@ export interface VmAnomalySpecImagePullSecrets {
    * @schema VmAnomalySpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -43139,7 +42550,6 @@ export interface VmAnomalySpecLicense {
    * @schema VmAnomalySpecLicense#reloadInterval
    */
   readonly reloadInterval?: string;
-
 }
 
 /**
@@ -43203,7 +42613,6 @@ export interface VmAnomalySpecManagedMetadata {
    * @schema VmAnomalySpecManagedMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -43244,7 +42653,6 @@ export interface VmAnomalySpecMonitoring {
    * @schema VmAnomalySpecMonitoring#push
    */
   readonly push?: VmAnomalySpecMonitoringPush;
-
 }
 
 /**
@@ -43288,7 +42696,6 @@ export interface VmAnomalySpecPersistentVolumeClaimRetentionPolicy {
    * @schema VmAnomalySpecPersistentVolumeClaimRetentionPolicy#whenScaled
    */
   readonly whenScaled?: string;
-
 }
 
 /**
@@ -43339,7 +42746,6 @@ export interface VmAnomalySpecPodDisruptionBudget {
    * @schema VmAnomalySpecPodDisruptionBudget#selectorLabels
    */
   readonly selectorLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -43395,7 +42801,6 @@ export interface VmAnomalySpecPodMetadata {
    * @schema VmAnomalySpecPodMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -43526,7 +42931,6 @@ export interface VmAnomalySpecReader {
    * @schema VmAnomalySpecReader#tz
    */
   readonly tz?: string;
-
 }
 
 /**
@@ -43569,7 +42973,6 @@ export interface VmAnomalySpecReadinessGates {
    * @schema VmAnomalySpecReadinessGates#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
@@ -43623,7 +43026,6 @@ export interface VmAnomalySpecResources {
    * @schema VmAnomalySpecResources#requests
    */
   readonly requests?: { [key: string]: VmAnomalySpecResourcesRequests };
-
 }
 
 /**
@@ -43670,7 +43072,6 @@ export interface VmAnomalySpecStorage {
    * @schema VmAnomalySpecStorage#volumeClaimTemplate
    */
   readonly volumeClaimTemplate?: VmAnomalySpecStorageVolumeClaimTemplate;
-
 }
 
 /**
@@ -43740,7 +43141,6 @@ export interface VmAnomalySpecTolerations {
    * @schema VmAnomalySpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -43844,7 +43244,6 @@ export interface VmAnomalySpecVolumeMounts {
    * @schema VmAnomalySpecVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -43931,7 +43330,6 @@ export interface VmAnomalySpecWriter {
    * @schema VmAnomalySpecWriter#tlsConfig
    */
   readonly tlsConfig?: VmAnomalySpecWriterTlsConfig;
-
 }
 
 /**
@@ -44071,7 +43469,6 @@ export interface VmAnomalySpecClaimTemplatesSpec {
    * @schema VmAnomalySpecClaimTemplatesSpec#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -44220,7 +43617,6 @@ export interface VmAnomalySpecClaimTemplatesStatus {
    * @schema VmAnomalySpecClaimTemplatesStatus#phase
    */
   readonly phase?: string;
-
 }
 
 /**
@@ -44264,7 +43660,6 @@ export interface VmAnomalySpecDnsConfigOptions {
    * @schema VmAnomalySpecDnsConfigOptions#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -44305,7 +43700,6 @@ export interface VmAnomalySpecExtraEnvsFromConfigMapRef {
    * @schema VmAnomalySpecExtraEnvsFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -44346,7 +43740,6 @@ export interface VmAnomalySpecExtraEnvsFromSecretRef {
    * @schema VmAnomalySpecExtraEnvsFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -44394,7 +43787,6 @@ export interface VmAnomalySpecLicenseKeyRef {
    * @schema VmAnomalySpecLicenseKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -44433,7 +43825,6 @@ export interface VmAnomalySpecMonitoringPull {
    * @schema VmAnomalySpecMonitoringPull#port
    */
   readonly port: string;
-
 }
 
 /**
@@ -44521,7 +43912,6 @@ export interface VmAnomalySpecMonitoringPush {
    * @schema VmAnomalySpecMonitoringPush#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -44613,7 +44003,6 @@ export interface VmAnomalySpecReaderBasicAuth {
    * @schema VmAnomalySpecReaderBasicAuth#username
    */
   readonly username?: VmAnomalySpecReaderBasicAuthUsername;
-
 }
 
 /**
@@ -44651,7 +44040,6 @@ export interface VmAnomalySpecReaderBearer {
    * @schema VmAnomalySpecReaderBearer#bearerTokenSecret
    */
   readonly bearerTokenSecret?: VmAnomalySpecReaderBearerBearerTokenSecret;
-
 }
 
 /**
@@ -44730,7 +44118,6 @@ export interface VmAnomalySpecReaderTlsConfig {
    * @schema VmAnomalySpecReaderTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -44777,7 +44164,6 @@ export interface VmAnomalySpecResourcesClaims {
    * @schema VmAnomalySpecResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -44851,7 +44237,6 @@ export interface VmAnomalySpecStorageEmptyDir {
    * @schema VmAnomalySpecStorageEmptyDir#sizeLimit
    */
   readonly sizeLimit?: VmAnomalySpecStorageEmptyDirSizeLimit;
-
 }
 
 /**
@@ -44919,7 +44304,6 @@ export interface VmAnomalySpecStorageVolumeClaimTemplate {
    * @schema VmAnomalySpecStorageVolumeClaimTemplate#status
    */
   readonly status?: VmAnomalySpecStorageVolumeClaimTemplateStatus;
-
 }
 
 /**
@@ -44969,7 +44353,6 @@ export interface VmAnomalySpecWriterBasicAuth {
    * @schema VmAnomalySpecWriterBasicAuth#username
    */
   readonly username?: VmAnomalySpecWriterBasicAuthUsername;
-
 }
 
 /**
@@ -45007,7 +44390,6 @@ export interface VmAnomalySpecWriterBearer {
    * @schema VmAnomalySpecWriterBearer#bearerTokenSecret
    */
   readonly bearerTokenSecret?: VmAnomalySpecWriterBearerBearerTokenSecret;
-
 }
 
 /**
@@ -45052,7 +44434,6 @@ export interface VmAnomalySpecWriterMetricFormat {
    * @schema VmAnomalySpecWriterMetricFormat#for
    */
   readonly for: string;
-
 }
 
 /**
@@ -45132,7 +44513,6 @@ export interface VmAnomalySpecWriterTlsConfig {
    * @schema VmAnomalySpecWriterTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -45191,7 +44571,6 @@ export interface VmAnomalySpecClaimTemplatesSpecDataSource {
    * @schema VmAnomalySpecClaimTemplatesSpecDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -45269,7 +44648,6 @@ export interface VmAnomalySpecClaimTemplatesSpecDataSourceRef {
    * @schema VmAnomalySpecClaimTemplatesSpecDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -45316,7 +44694,6 @@ export interface VmAnomalySpecClaimTemplatesSpecResources {
    * @schema VmAnomalySpecClaimTemplatesSpecResources#requests
    */
   readonly requests?: { [key: string]: VmAnomalySpecClaimTemplatesSpecResourcesRequests };
-
 }
 
 /**
@@ -45355,7 +44732,6 @@ export interface VmAnomalySpecClaimTemplatesSpecSelector {
    * @schema VmAnomalySpecClaimTemplatesSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -45453,7 +44829,6 @@ export interface VmAnomalySpecClaimTemplatesStatusConditions {
    * @schema VmAnomalySpecClaimTemplatesStatusConditions#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -45505,7 +44880,6 @@ export interface VmAnomalySpecClaimTemplatesStatusModifyVolumeStatus {
    * @schema VmAnomalySpecClaimTemplatesStatusModifyVolumeStatus#targetVolumeAttributesClassName
    */
   readonly targetVolumeAttributesClassName?: string;
-
 }
 
 /**
@@ -45552,7 +44926,6 @@ export interface VmAnomalySpecMonitoringPushBasicAuth {
    * @schema VmAnomalySpecMonitoringPushBasicAuth#username
    */
   readonly username?: VmAnomalySpecMonitoringPushBasicAuthUsername;
-
 }
 
 /**
@@ -45590,7 +44963,6 @@ export interface VmAnomalySpecMonitoringPushBearer {
    * @schema VmAnomalySpecMonitoringPushBearer#bearerTokenSecret
    */
   readonly bearerTokenSecret?: VmAnomalySpecMonitoringPushBearerBearerTokenSecret;
-
 }
 
 /**
@@ -45669,7 +45041,6 @@ export interface VmAnomalySpecMonitoringPushTlsConfig {
    * @schema VmAnomalySpecMonitoringPushTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -45724,7 +45095,6 @@ export interface VmAnomalySpecReaderBasicAuthPassword {
    * @schema VmAnomalySpecReaderBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -45774,7 +45144,6 @@ export interface VmAnomalySpecReaderBasicAuthUsername {
    * @schema VmAnomalySpecReaderBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -45823,7 +45192,6 @@ export interface VmAnomalySpecReaderBearerBearerTokenSecret {
    * @schema VmAnomalySpecReaderBearerBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -45861,7 +45229,6 @@ export interface VmAnomalySpecReaderTlsConfigCa {
    * @schema VmAnomalySpecReaderTlsConfigCa#secret
    */
   readonly secret?: VmAnomalySpecReaderTlsConfigCaSecret;
-
 }
 
 /**
@@ -45898,7 +45265,6 @@ export interface VmAnomalySpecReaderTlsConfigCert {
    * @schema VmAnomalySpecReaderTlsConfigCert#secret
    */
   readonly secret?: VmAnomalySpecReaderTlsConfigCertSecret;
-
 }
 
 /**
@@ -45946,7 +45312,6 @@ export interface VmAnomalySpecReaderTlsConfigKeySecret {
    * @schema VmAnomalySpecReaderTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -46023,7 +45388,6 @@ export interface VmAnomalySpecStorageVolumeClaimTemplateMetadata {
    * @schema VmAnomalySpecStorageVolumeClaimTemplateMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -46158,7 +45522,6 @@ export interface VmAnomalySpecStorageVolumeClaimTemplateSpec {
    * @schema VmAnomalySpecStorageVolumeClaimTemplateSpec#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -46307,7 +45670,6 @@ export interface VmAnomalySpecStorageVolumeClaimTemplateStatus {
    * @schema VmAnomalySpecStorageVolumeClaimTemplateStatus#phase
    */
   readonly phase?: string;
-
 }
 
 /**
@@ -46362,7 +45724,6 @@ export interface VmAnomalySpecWriterBasicAuthPassword {
    * @schema VmAnomalySpecWriterBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -46412,7 +45773,6 @@ export interface VmAnomalySpecWriterBasicAuthUsername {
    * @schema VmAnomalySpecWriterBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -46461,7 +45821,6 @@ export interface VmAnomalySpecWriterBearerBearerTokenSecret {
    * @schema VmAnomalySpecWriterBearerBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -46499,7 +45858,6 @@ export interface VmAnomalySpecWriterTlsConfigCa {
    * @schema VmAnomalySpecWriterTlsConfigCa#secret
    */
   readonly secret?: VmAnomalySpecWriterTlsConfigCaSecret;
-
 }
 
 /**
@@ -46536,7 +45894,6 @@ export interface VmAnomalySpecWriterTlsConfigCert {
    * @schema VmAnomalySpecWriterTlsConfigCert#secret
    */
   readonly secret?: VmAnomalySpecWriterTlsConfigCertSecret;
-
 }
 
 /**
@@ -46584,7 +45941,6 @@ export interface VmAnomalySpecWriterTlsConfigKeySecret {
    * @schema VmAnomalySpecWriterTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -46662,7 +46018,6 @@ export interface VmAnomalySpecClaimTemplatesSpecSelectorMatchExpressions {
    * @schema VmAnomalySpecClaimTemplatesSpecSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -46712,7 +46067,6 @@ export interface VmAnomalySpecMonitoringPushBasicAuthPassword {
    * @schema VmAnomalySpecMonitoringPushBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -46762,7 +46116,6 @@ export interface VmAnomalySpecMonitoringPushBasicAuthUsername {
    * @schema VmAnomalySpecMonitoringPushBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -46811,7 +46164,6 @@ export interface VmAnomalySpecMonitoringPushBearerBearerTokenSecret {
    * @schema VmAnomalySpecMonitoringPushBearerBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -46849,7 +46201,6 @@ export interface VmAnomalySpecMonitoringPushTlsConfigCa {
    * @schema VmAnomalySpecMonitoringPushTlsConfigCa#secret
    */
   readonly secret?: VmAnomalySpecMonitoringPushTlsConfigCaSecret;
-
 }
 
 /**
@@ -46886,7 +46237,6 @@ export interface VmAnomalySpecMonitoringPushTlsConfigCert {
    * @schema VmAnomalySpecMonitoringPushTlsConfigCert#secret
    */
   readonly secret?: VmAnomalySpecMonitoringPushTlsConfigCertSecret;
-
 }
 
 /**
@@ -46934,7 +46284,6 @@ export interface VmAnomalySpecMonitoringPushTlsConfigKeySecret {
    * @schema VmAnomalySpecMonitoringPushTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -46983,7 +46332,6 @@ export interface VmAnomalySpecReaderTlsConfigCaConfigMap {
    * @schema VmAnomalySpecReaderTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -47032,7 +46380,6 @@ export interface VmAnomalySpecReaderTlsConfigCaSecret {
    * @schema VmAnomalySpecReaderTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -47081,7 +46428,6 @@ export interface VmAnomalySpecReaderTlsConfigCertConfigMap {
    * @schema VmAnomalySpecReaderTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -47130,7 +46476,6 @@ export interface VmAnomalySpecReaderTlsConfigCertSecret {
    * @schema VmAnomalySpecReaderTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -47184,7 +46529,6 @@ export interface VmAnomalySpecStorageVolumeClaimTemplateSpecDataSource {
    * @schema VmAnomalySpecStorageVolumeClaimTemplateSpecDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -47262,7 +46606,6 @@ export interface VmAnomalySpecStorageVolumeClaimTemplateSpecDataSourceRef {
    * @schema VmAnomalySpecStorageVolumeClaimTemplateSpecDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -47309,7 +46652,6 @@ export interface VmAnomalySpecStorageVolumeClaimTemplateSpecResources {
    * @schema VmAnomalySpecStorageVolumeClaimTemplateSpecResources#requests
    */
   readonly requests?: { [key: string]: VmAnomalySpecStorageVolumeClaimTemplateSpecResourcesRequests };
-
 }
 
 /**
@@ -47348,7 +46690,6 @@ export interface VmAnomalySpecStorageVolumeClaimTemplateSpecSelector {
    * @schema VmAnomalySpecStorageVolumeClaimTemplateSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -47446,7 +46787,6 @@ export interface VmAnomalySpecStorageVolumeClaimTemplateStatusConditions {
    * @schema VmAnomalySpecStorageVolumeClaimTemplateStatusConditions#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -47498,7 +46838,6 @@ export interface VmAnomalySpecStorageVolumeClaimTemplateStatusModifyVolumeStatus
    * @schema VmAnomalySpecStorageVolumeClaimTemplateStatusModifyVolumeStatus#targetVolumeAttributesClassName
    */
   readonly targetVolumeAttributesClassName?: string;
-
 }
 
 /**
@@ -47546,7 +46885,6 @@ export interface VmAnomalySpecWriterTlsConfigCaConfigMap {
    * @schema VmAnomalySpecWriterTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -47595,7 +46933,6 @@ export interface VmAnomalySpecWriterTlsConfigCaSecret {
    * @schema VmAnomalySpecWriterTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -47644,7 +46981,6 @@ export interface VmAnomalySpecWriterTlsConfigCertConfigMap {
    * @schema VmAnomalySpecWriterTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -47693,7 +47029,6 @@ export interface VmAnomalySpecWriterTlsConfigCertSecret {
    * @schema VmAnomalySpecWriterTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -47742,7 +47077,6 @@ export interface VmAnomalySpecMonitoringPushTlsConfigCaConfigMap {
    * @schema VmAnomalySpecMonitoringPushTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -47791,7 +47125,6 @@ export interface VmAnomalySpecMonitoringPushTlsConfigCaSecret {
    * @schema VmAnomalySpecMonitoringPushTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -47840,7 +47173,6 @@ export interface VmAnomalySpecMonitoringPushTlsConfigCertConfigMap {
    * @schema VmAnomalySpecMonitoringPushTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -47889,7 +47221,6 @@ export interface VmAnomalySpecMonitoringPushTlsConfigCertSecret {
    * @schema VmAnomalySpecMonitoringPushTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -47967,7 +47298,6 @@ export interface VmAnomalySpecStorageVolumeClaimTemplateSpecSelectorMatchExpress
    * @schema VmAnomalySpecStorageVolumeClaimTemplateSpecSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -48058,7 +47388,6 @@ export interface VmAuthProps {
    * @schema VMAuth#spec
    */
   readonly spec?: VmAuthSpec;
-
 }
 
 /**
@@ -48232,6 +47561,7 @@ export interface VmAuthSpec {
    * @schema VmAuthSpec#hostNetwork
    */
   readonly hostNetwork?: boolean;
+
 
   /**
    * Image - docker image settings
@@ -48589,7 +47919,6 @@ export interface VmAuthSpec {
    * @schema VmAuthSpec#volumes
    */
   readonly volumes?: any[];
-
 }
 
 /**
@@ -48699,7 +48028,6 @@ export interface VmAuthSpecConfigReloadAuthKeySecret {
    * @schema VmAuthSpecConfigReloadAuthKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -48755,7 +48083,6 @@ export interface VmAuthSpecConfigReloaderResources {
    * @schema VmAuthSpecConfigReloaderResources#requests
    */
   readonly requests?: { [key: string]: VmAuthSpecConfigReloaderResourcesRequests };
-
 }
 
 /**
@@ -48809,7 +48136,6 @@ export interface VmAuthSpecDnsConfig {
    * @schema VmAuthSpecDnsConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
@@ -48849,7 +48175,6 @@ export interface VmAuthSpecExternalConfig {
    * @schema VmAuthSpecExternalConfig#secretRef
    */
   readonly secretRef?: VmAuthSpecExternalConfigSecretRef;
-
 }
 
 /**
@@ -48895,7 +48220,6 @@ export interface VmAuthSpecExtraEnvs {
    * @schema VmAuthSpecExtraEnvs#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -48939,7 +48263,6 @@ export interface VmAuthSpecExtraEnvsFrom {
    * @schema VmAuthSpecExtraEnvsFrom#secretRef
    */
   readonly secretRef?: VmAuthSpecExtraEnvsFromSecretRef;
-
 }
 
 /**
@@ -48978,7 +48301,6 @@ export interface VmAuthSpecHostAliases {
    * @schema VmAuthSpecHostAliases#ip
    */
   readonly ip: string;
-
 }
 
 /**
@@ -49023,7 +48345,6 @@ export interface VmAuthSpecImage {
    * @schema VmAuthSpecImage#tag
    */
   readonly tag?: string;
-
 }
 
 /**
@@ -49059,7 +48380,6 @@ export interface VmAuthSpecImagePullSecrets {
    * @schema VmAuthSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -49159,7 +48479,6 @@ export interface VmAuthSpecIngress {
    * @schema VmAuthSpecIngress#tlsSecretName
    */
   readonly tlsSecretName?: string;
-
 }
 
 /**
@@ -49220,7 +48539,6 @@ export interface VmAuthSpecLicense {
    * @schema VmAuthSpecLicense#reloadInterval
    */
   readonly reloadInterval?: string;
-
 }
 
 /**
@@ -49295,7 +48613,6 @@ export interface VmAuthSpecManagedMetadata {
    * @schema VmAuthSpecManagedMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -49346,7 +48663,6 @@ export interface VmAuthSpecPodDisruptionBudget {
    * @schema VmAuthSpecPodDisruptionBudget#selectorLabels
    */
   readonly selectorLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -49402,7 +48718,6 @@ export interface VmAuthSpecPodMetadata {
    * @schema VmAuthSpecPodMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -49433,7 +48748,6 @@ export interface VmAuthSpecReadinessGates {
    * @schema VmAuthSpecReadinessGates#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
@@ -49487,7 +48801,6 @@ export interface VmAuthSpecResources {
    * @schema VmAuthSpecResources#requests
    */
   readonly requests?: { [key: string]: VmAuthSpecResourcesRequests };
-
 }
 
 /**
@@ -49534,7 +48847,6 @@ export interface VmAuthSpecServiceSpec {
    * @schema VmAuthSpecServiceSpec#useAsDefault
    */
   readonly useAsDefault?: boolean;
-
 }
 
 /**
@@ -49604,7 +48916,6 @@ export interface VmAuthSpecTolerations {
    * @schema VmAuthSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -49745,7 +49056,6 @@ export interface VmAuthSpecUnauthorizedUserAccessSpec {
    * @schema VmAuthSpecUnauthorizedUserAccessSpec#url_prefix
    */
   readonly urlPrefix?: any;
-
 }
 
 /**
@@ -49800,7 +49110,6 @@ export interface VmAuthSpecUserNamespaceSelector {
    * @schema VmAuthSpecUserNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -49842,7 +49151,6 @@ export interface VmAuthSpecUserSelector {
    * @schema VmAuthSpecUserSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -49943,7 +49251,6 @@ export interface VmAuthSpecVolumeMounts {
    * @schema VmAuthSpecVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -49989,7 +49296,6 @@ export interface VmAuthSpecConfigReloaderResourcesClaims {
    * @schema VmAuthSpecConfigReloaderResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -50055,7 +49361,6 @@ export interface VmAuthSpecDnsConfigOptions {
    * @schema VmAuthSpecDnsConfigOptions#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -50103,7 +49408,6 @@ export interface VmAuthSpecExternalConfigSecretRef {
    * @schema VmAuthSpecExternalConfigSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -50145,7 +49449,6 @@ export interface VmAuthSpecExtraEnvsFromConfigMapRef {
    * @schema VmAuthSpecExtraEnvsFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -50186,7 +49489,6 @@ export interface VmAuthSpecExtraEnvsFromSecretRef {
    * @schema VmAuthSpecExtraEnvsFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -50250,7 +49552,6 @@ export interface VmAuthSpecIngressExtraRules {
    * @schema VmAuthSpecIngressExtraRules#http
    */
   readonly http?: VmAuthSpecIngressExtraRulesHttp;
-
 }
 
 /**
@@ -50295,7 +49596,6 @@ export interface VmAuthSpecIngressExtraTls {
    * @schema VmAuthSpecIngressExtraTls#secretName
    */
   readonly secretName?: string;
-
 }
 
 /**
@@ -50343,7 +49643,6 @@ export interface VmAuthSpecLicenseKeyRef {
    * @schema VmAuthSpecLicenseKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -50423,7 +49722,6 @@ export interface VmAuthSpecResourcesClaims {
    * @schema VmAuthSpecResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -50506,7 +49804,6 @@ export interface VmAuthSpecServiceSpecMetadata {
    * @schema VmAuthSpecServiceSpecMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -50541,7 +49838,6 @@ export interface VmAuthSpecUnauthorizedUserAccessSpecIpFilters {
    * @schema VmAuthSpecUnauthorizedUserAccessSpecIpFilters#deny_list
    */
   readonly denyList?: string[];
-
 }
 
 /**
@@ -50634,7 +49930,6 @@ export interface VmAuthSpecUnauthorizedUserAccessSpecTlsConfig {
    * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -50755,7 +50050,6 @@ export interface VmAuthSpecUnauthorizedUserAccessSpecUrlMap {
    * @schema VmAuthSpecUnauthorizedUserAccessSpecUrlMap#url_prefix
    */
   readonly urlPrefix?: any;
-
 }
 
 /**
@@ -50813,7 +50107,6 @@ export interface VmAuthSpecUserNamespaceSelectorMatchExpressions {
    * @schema VmAuthSpecUserNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -50863,7 +50156,6 @@ export interface VmAuthSpecUserSelectorMatchExpressions {
    * @schema VmAuthSpecUserSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -50898,7 +50190,6 @@ export interface VmAuthSpecIngressExtraRulesHttp {
    * @schema VmAuthSpecIngressExtraRulesHttp#paths
    */
   readonly paths: VmAuthSpecIngressExtraRulesHttpPaths[];
-
 }
 
 /**
@@ -50934,7 +50225,6 @@ export interface VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCa {
    * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCa#secret
    */
   readonly secret?: VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaSecret;
-
 }
 
 /**
@@ -50971,7 +50261,6 @@ export interface VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCert {
    * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCert#secret
    */
   readonly secret?: VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertSecret;
-
 }
 
 /**
@@ -51019,7 +50308,6 @@ export interface VmAuthSpecUnauthorizedUserAccessSpecTlsConfigKeySecret {
    * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -51096,7 +50384,6 @@ export interface VmAuthSpecIngressExtraRulesHttpPaths {
    * @schema VmAuthSpecIngressExtraRulesHttpPaths#pathType
    */
   readonly pathType: string;
-
 }
 
 /**
@@ -51145,7 +50432,6 @@ export interface VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaConfigMap {
    * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -51194,7 +50480,6 @@ export interface VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaSecret {
    * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -51243,7 +50528,6 @@ export interface VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertConfigMap {
    * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -51292,7 +50576,6 @@ export interface VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertSecret {
    * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -51335,7 +50618,6 @@ export interface VmAuthSpecIngressExtraRulesHttpPathsBackend {
    * @schema VmAuthSpecIngressExtraRulesHttpPathsBackend#service
    */
   readonly service?: VmAuthSpecIngressExtraRulesHttpPathsBackendService;
-
 }
 
 /**
@@ -51384,7 +50666,6 @@ export interface VmAuthSpecIngressExtraRulesHttpPathsBackendResource {
    * @schema VmAuthSpecIngressExtraRulesHttpPathsBackendResource#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -51425,7 +50706,6 @@ export interface VmAuthSpecIngressExtraRulesHttpPathsBackendService {
    * @schema VmAuthSpecIngressExtraRulesHttpPathsBackendService#port
    */
   readonly port?: VmAuthSpecIngressExtraRulesHttpPathsBackendServicePort;
-
 }
 
 /**
@@ -51465,7 +50745,6 @@ export interface VmAuthSpecIngressExtraRulesHttpPathsBackendServicePort {
    * @schema VmAuthSpecIngressExtraRulesHttpPathsBackendServicePort#number
    */
   readonly number?: number;
-
 }
 
 /**
@@ -51557,7 +50836,6 @@ export interface VmClusterProps {
    * @schema VMCluster#spec
    */
   readonly spec: VmClusterSpec;
-
 }
 
 /**
@@ -51694,7 +50972,6 @@ export interface VmClusterSpec {
    * @schema VmClusterSpec#vmstorage
    */
   readonly vmstorage?: VmClusterSpecVmstorage;
-
 }
 
 /**
@@ -51741,7 +51018,6 @@ export interface VmClusterSpecImagePullSecrets {
    * @schema VmClusterSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -51794,7 +51070,6 @@ export interface VmClusterSpecLicense {
    * @schema VmClusterSpecLicense#reloadInterval
    */
   readonly reloadInterval?: string;
-
 }
 
 /**
@@ -51839,7 +51114,6 @@ export interface VmClusterSpecManagedMetadata {
    * @schema VmClusterSpecManagedMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -51888,7 +51162,6 @@ export interface VmClusterSpecRequestsLoadBalancer {
    * @schema VmClusterSpecRequestsLoadBalancer#spec
    */
   readonly spec?: any;
-
 }
 
 /**
@@ -52018,6 +51291,7 @@ export interface VmClusterSpecVminsert {
    * @schema VmClusterSpecVminsert#hostNetwork
    */
   readonly hostNetwork?: boolean;
+
 
   /**
    * HPA defines kubernetes PodAutoScaling configuration version 2.
@@ -52298,7 +51572,6 @@ export interface VmClusterSpecVminsert {
    * @schema VmClusterSpecVminsert#volumes
    */
   readonly volumes?: any[];
-
 }
 
 /**
@@ -52490,6 +51763,7 @@ export interface VmClusterSpecVmselect {
    * @schema VmClusterSpecVmselect#hostNetwork
    */
   readonly hostNetwork?: boolean;
+
 
   /**
    * Configures horizontal pod autoscaling.
@@ -52792,7 +52066,6 @@ export interface VmClusterSpecVmselect {
    * @schema VmClusterSpecVmselect#volumes
    */
   readonly volumes?: any[];
-
 }
 
 /**
@@ -52970,6 +52243,7 @@ export interface VmClusterSpecVmstorage {
    * @schema VmClusterSpecVmstorage#hostNetwork
    */
   readonly hostNetwork?: boolean;
+
 
   /**
    * Image - docker image settings
@@ -53299,7 +52573,6 @@ export interface VmClusterSpecVmstorage {
    * @schema VmClusterSpecVmstorage#volumes
    */
   readonly volumes?: any[];
-
 }
 
 /**
@@ -53400,7 +52673,6 @@ export interface VmClusterSpecLicenseKeyRef {
    * @schema VmClusterSpecLicenseKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -53454,7 +52726,6 @@ export interface VmClusterSpecVminsertDnsConfig {
    * @schema VmClusterSpecVminsertDnsConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
@@ -53501,7 +52772,6 @@ export interface VmClusterSpecVminsertExtraEnvs {
    * @schema VmClusterSpecVminsertExtraEnvs#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -53545,7 +52815,6 @@ export interface VmClusterSpecVminsertExtraEnvsFrom {
    * @schema VmClusterSpecVminsertExtraEnvsFrom#secretRef
    */
   readonly secretRef?: VmClusterSpecVminsertExtraEnvsFromSecretRef;
-
 }
 
 /**
@@ -53584,7 +52853,6 @@ export interface VmClusterSpecVminsertHostAliases {
    * @schema VmClusterSpecVminsertHostAliases#ip
    */
   readonly ip: string;
-
 }
 
 /**
@@ -53629,7 +52897,6 @@ export interface VmClusterSpecVminsertImage {
    * @schema VmClusterSpecVminsertImage#tag
    */
   readonly tag?: string;
-
 }
 
 /**
@@ -53665,7 +52932,6 @@ export interface VmClusterSpecVminsertImagePullSecrets {
    * @schema VmClusterSpecVminsertImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -53715,7 +52981,6 @@ export interface VmClusterSpecVminsertInsertPorts {
    * @schema VmClusterSpecVminsertInsertPorts#openTSDBPort
    */
   readonly openTsdbPort?: string;
-
 }
 
 /**
@@ -53799,7 +53064,6 @@ export interface VmClusterSpecVminsertPodDisruptionBudget {
    * @schema VmClusterSpecVminsertPodDisruptionBudget#selectorLabels
    */
   readonly selectorLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -53855,7 +53119,6 @@ export interface VmClusterSpecVminsertPodMetadata {
    * @schema VmClusterSpecVminsertPodMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -53886,7 +53149,6 @@ export interface VmClusterSpecVminsertReadinessGates {
    * @schema VmClusterSpecVminsertReadinessGates#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
@@ -53940,7 +53202,6 @@ export interface VmClusterSpecVminsertResources {
    * @schema VmClusterSpecVminsertResources#requests
    */
   readonly requests?: { [key: string]: VmClusterSpecVminsertResourcesRequests };
-
 }
 
 /**
@@ -53999,7 +53260,6 @@ export interface VmClusterSpecVminsertRollingUpdate {
    * @schema VmClusterSpecVminsertRollingUpdate#maxUnavailable
    */
   readonly maxUnavailable?: VmClusterSpecVminsertRollingUpdateMaxUnavailable;
-
 }
 
 /**
@@ -54045,7 +53305,6 @@ export interface VmClusterSpecVminsertServiceSpec {
    * @schema VmClusterSpecVminsertServiceSpec#useAsDefault
    */
   readonly useAsDefault?: boolean;
-
 }
 
 /**
@@ -54115,7 +53374,6 @@ export interface VmClusterSpecVminsertTolerations {
    * @schema VmClusterSpecVminsertTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -54231,7 +53489,6 @@ export interface VmClusterSpecVminsertVolumeMounts {
    * @schema VmClusterSpecVminsertVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -54289,7 +53546,6 @@ export interface VmClusterSpecVmselectDnsConfig {
    * @schema VmClusterSpecVmselectDnsConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
@@ -54336,7 +53592,6 @@ export interface VmClusterSpecVmselectExtraEnvs {
    * @schema VmClusterSpecVmselectExtraEnvs#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -54380,7 +53635,6 @@ export interface VmClusterSpecVmselectExtraEnvsFrom {
    * @schema VmClusterSpecVmselectExtraEnvsFrom#secretRef
    */
   readonly secretRef?: VmClusterSpecVmselectExtraEnvsFromSecretRef;
-
 }
 
 /**
@@ -54419,7 +53673,6 @@ export interface VmClusterSpecVmselectHostAliases {
    * @schema VmClusterSpecVmselectHostAliases#ip
    */
   readonly ip: string;
-
 }
 
 /**
@@ -54464,7 +53717,6 @@ export interface VmClusterSpecVmselectImage {
    * @schema VmClusterSpecVmselectImage#tag
    */
   readonly tag?: string;
-
 }
 
 /**
@@ -54500,7 +53752,6 @@ export interface VmClusterSpecVmselectImagePullSecrets {
    * @schema VmClusterSpecVmselectImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -54578,7 +53829,6 @@ export interface VmClusterSpecVmselectPersistentVolume {
    * @schema VmClusterSpecVmselectPersistentVolume#volumeClaimTemplate
    */
   readonly volumeClaimTemplate?: any;
-
 }
 
 /**
@@ -54623,7 +53873,6 @@ export interface VmClusterSpecVmselectPersistentVolumeClaimRetentionPolicy {
    * @schema VmClusterSpecVmselectPersistentVolumeClaimRetentionPolicy#whenScaled
    */
   readonly whenScaled?: string;
-
 }
 
 /**
@@ -54674,7 +53923,6 @@ export interface VmClusterSpecVmselectPodDisruptionBudget {
    * @schema VmClusterSpecVmselectPodDisruptionBudget#selectorLabels
    */
   readonly selectorLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -54730,7 +53978,6 @@ export interface VmClusterSpecVmselectPodMetadata {
    * @schema VmClusterSpecVmselectPodMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -54761,7 +54008,6 @@ export interface VmClusterSpecVmselectReadinessGates {
    * @schema VmClusterSpecVmselectReadinessGates#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
@@ -54815,7 +54061,6 @@ export interface VmClusterSpecVmselectResources {
    * @schema VmClusterSpecVmselectResources#requests
    */
   readonly requests?: { [key: string]: VmClusterSpecVmselectResourcesRequests };
-
 }
 
 /**
@@ -54849,7 +54094,6 @@ export interface VmClusterSpecVmselectRollingUpdateStrategyBehavior {
    * @schema VmClusterSpecVmselectRollingUpdateStrategyBehavior#maxUnavailable
    */
   readonly maxUnavailable?: VmClusterSpecVmselectRollingUpdateStrategyBehaviorMaxUnavailable;
-
 }
 
 /**
@@ -54894,7 +54138,6 @@ export interface VmClusterSpecVmselectServiceSpec {
    * @schema VmClusterSpecVmselectServiceSpec#useAsDefault
    */
   readonly useAsDefault?: boolean;
-
 }
 
 /**
@@ -54942,7 +54185,6 @@ export interface VmClusterSpecVmselectStorage {
    * @schema VmClusterSpecVmselectStorage#volumeClaimTemplate
    */
   readonly volumeClaimTemplate?: VmClusterSpecVmselectStorageVolumeClaimTemplate;
-
 }
 
 /**
@@ -55012,7 +54254,6 @@ export interface VmClusterSpecVmselectTolerations {
    * @schema VmClusterSpecVmselectTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -55116,7 +54357,6 @@ export interface VmClusterSpecVmselectVolumeMounts {
    * @schema VmClusterSpecVmselectVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -55174,7 +54414,6 @@ export interface VmClusterSpecVmstorageDnsConfig {
    * @schema VmClusterSpecVmstorageDnsConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
@@ -55221,7 +54460,6 @@ export interface VmClusterSpecVmstorageExtraEnvs {
    * @schema VmClusterSpecVmstorageExtraEnvs#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -55265,7 +54503,6 @@ export interface VmClusterSpecVmstorageExtraEnvsFrom {
    * @schema VmClusterSpecVmstorageExtraEnvsFrom#secretRef
    */
   readonly secretRef?: VmClusterSpecVmstorageExtraEnvsFromSecretRef;
-
 }
 
 /**
@@ -55304,7 +54541,6 @@ export interface VmClusterSpecVmstorageHostAliases {
    * @schema VmClusterSpecVmstorageHostAliases#ip
    */
   readonly ip: string;
-
 }
 
 /**
@@ -55349,7 +54585,6 @@ export interface VmClusterSpecVmstorageImage {
    * @schema VmClusterSpecVmstorageImage#tag
    */
   readonly tag?: string;
-
 }
 
 /**
@@ -55385,7 +54620,6 @@ export interface VmClusterSpecVmstorageImagePullSecrets {
    * @schema VmClusterSpecVmstorageImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -55459,7 +54693,6 @@ export interface VmClusterSpecVmstoragePersistentVolumeClaimRetentionPolicy {
    * @schema VmClusterSpecVmstoragePersistentVolumeClaimRetentionPolicy#whenScaled
    */
   readonly whenScaled?: string;
-
 }
 
 /**
@@ -55510,7 +54743,6 @@ export interface VmClusterSpecVmstoragePodDisruptionBudget {
    * @schema VmClusterSpecVmstoragePodDisruptionBudget#selectorLabels
    */
   readonly selectorLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -55566,7 +54798,6 @@ export interface VmClusterSpecVmstoragePodMetadata {
    * @schema VmClusterSpecVmstoragePodMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -55597,7 +54828,6 @@ export interface VmClusterSpecVmstorageReadinessGates {
    * @schema VmClusterSpecVmstorageReadinessGates#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
@@ -55651,7 +54881,6 @@ export interface VmClusterSpecVmstorageResources {
    * @schema VmClusterSpecVmstorageResources#requests
    */
   readonly requests?: { [key: string]: VmClusterSpecVmstorageResourcesRequests };
-
 }
 
 /**
@@ -55685,7 +54914,6 @@ export interface VmClusterSpecVmstorageRollingUpdateStrategyBehavior {
    * @schema VmClusterSpecVmstorageRollingUpdateStrategyBehavior#maxUnavailable
    */
   readonly maxUnavailable?: VmClusterSpecVmstorageRollingUpdateStrategyBehaviorMaxUnavailable;
-
 }
 
 /**
@@ -55730,7 +54958,6 @@ export interface VmClusterSpecVmstorageServiceSpec {
    * @schema VmClusterSpecVmstorageServiceSpec#useAsDefault
    */
   readonly useAsDefault?: boolean;
-
 }
 
 /**
@@ -55778,7 +55005,6 @@ export interface VmClusterSpecVmstorageStorage {
    * @schema VmClusterSpecVmstorageStorage#volumeClaimTemplate
    */
   readonly volumeClaimTemplate?: any;
-
 }
 
 /**
@@ -55848,7 +55074,6 @@ export interface VmClusterSpecVmstorageTolerations {
    * @schema VmClusterSpecVmstorageTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -56038,7 +55263,6 @@ export interface VmClusterSpecVmstorageVmBackup {
    * @schema VmClusterSpecVmstorageVmBackup#volumeMounts
    */
   readonly volumeMounts?: VmClusterSpecVmstorageVmBackupVolumeMounts[];
-
 }
 
 /**
@@ -56159,7 +55383,6 @@ export interface VmClusterSpecVmstorageVolumeMounts {
    * @schema VmClusterSpecVmstorageVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -56202,7 +55425,6 @@ export interface VmClusterSpecVminsertDnsConfigOptions {
    * @schema VmClusterSpecVminsertDnsConfigOptions#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -56243,7 +55465,6 @@ export interface VmClusterSpecVminsertExtraEnvsFromConfigMapRef {
    * @schema VmClusterSpecVminsertExtraEnvsFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -56284,7 +55505,6 @@ export interface VmClusterSpecVminsertExtraEnvsFromSecretRef {
    * @schema VmClusterSpecVminsertExtraEnvsFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -56363,7 +55583,6 @@ export interface VmClusterSpecVminsertResourcesClaims {
    * @schema VmClusterSpecVminsertResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -56499,7 +55718,6 @@ export interface VmClusterSpecVminsertServiceSpecMetadata {
    * @schema VmClusterSpecVminsertServiceSpecMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -56538,7 +55756,6 @@ export interface VmClusterSpecVmselectDnsConfigOptions {
    * @schema VmClusterSpecVmselectDnsConfigOptions#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -56579,7 +55796,6 @@ export interface VmClusterSpecVmselectExtraEnvsFromConfigMapRef {
    * @schema VmClusterSpecVmselectExtraEnvsFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -56620,7 +55836,6 @@ export interface VmClusterSpecVmselectExtraEnvsFromSecretRef {
    * @schema VmClusterSpecVmselectExtraEnvsFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -56666,7 +55881,6 @@ export interface VmClusterSpecVmselectPersistentVolumeEmptyDir {
    * @schema VmClusterSpecVmselectPersistentVolumeEmptyDir#sizeLimit
    */
   readonly sizeLimit?: VmClusterSpecVmselectPersistentVolumeEmptyDirSizeLimit;
-
 }
 
 /**
@@ -56745,7 +55959,6 @@ export interface VmClusterSpecVmselectResourcesClaims {
    * @schema VmClusterSpecVmselectResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -56846,7 +56059,6 @@ export interface VmClusterSpecVmselectServiceSpecMetadata {
    * @schema VmClusterSpecVmselectServiceSpecMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -56893,7 +56105,6 @@ export interface VmClusterSpecVmselectStorageEmptyDir {
    * @schema VmClusterSpecVmselectStorageEmptyDir#sizeLimit
    */
   readonly sizeLimit?: VmClusterSpecVmselectStorageEmptyDirSizeLimit;
-
 }
 
 /**
@@ -56961,7 +56172,6 @@ export interface VmClusterSpecVmselectStorageVolumeClaimTemplate {
    * @schema VmClusterSpecVmselectStorageVolumeClaimTemplate#status
    */
   readonly status?: VmClusterSpecVmselectStorageVolumeClaimTemplateStatus;
-
 }
 
 /**
@@ -57002,7 +56212,6 @@ export interface VmClusterSpecVmstorageDnsConfigOptions {
    * @schema VmClusterSpecVmstorageDnsConfigOptions#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -57043,7 +56252,6 @@ export interface VmClusterSpecVmstorageExtraEnvsFromConfigMapRef {
    * @schema VmClusterSpecVmstorageExtraEnvsFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -57084,7 +56292,6 @@ export interface VmClusterSpecVmstorageExtraEnvsFromSecretRef {
    * @schema VmClusterSpecVmstorageExtraEnvsFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -57163,7 +56370,6 @@ export interface VmClusterSpecVmstorageResourcesClaims {
    * @schema VmClusterSpecVmstorageResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -57264,7 +56470,6 @@ export interface VmClusterSpecVmstorageServiceSpecMetadata {
    * @schema VmClusterSpecVmstorageServiceSpecMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -57311,7 +56516,6 @@ export interface VmClusterSpecVmstorageStorageEmptyDir {
    * @schema VmClusterSpecVmstorageStorageEmptyDir#sizeLimit
    */
   readonly sizeLimit?: VmClusterSpecVmstorageStorageEmptyDirSizeLimit;
-
 }
 
 /**
@@ -57360,7 +56564,6 @@ export interface VmClusterSpecVmstorageVmBackupCredentialsSecret {
    * @schema VmClusterSpecVmstorageVmBackupCredentialsSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -57414,7 +56617,6 @@ export interface VmClusterSpecVmstorageVmBackupExtraEnvs {
    * @schema VmClusterSpecVmstorageVmBackupExtraEnvs#valueFrom
    */
   readonly valueFrom?: VmClusterSpecVmstorageVmBackupExtraEnvsValueFrom;
-
 }
 
 /**
@@ -57459,7 +56661,6 @@ export interface VmClusterSpecVmstorageVmBackupExtraEnvsFrom {
    * @schema VmClusterSpecVmstorageVmBackupExtraEnvsFrom#secretRef
    */
   readonly secretRef?: VmClusterSpecVmstorageVmBackupExtraEnvsFromSecretRef;
-
 }
 
 /**
@@ -57504,7 +56705,6 @@ export interface VmClusterSpecVmstorageVmBackupImage {
    * @schema VmClusterSpecVmstorageVmBackupImage#tag
    */
   readonly tag?: string;
-
 }
 
 /**
@@ -57591,7 +56791,6 @@ export interface VmClusterSpecVmstorageVmBackupResources {
    * @schema VmClusterSpecVmstorageVmBackupResources#requests
    */
   readonly requests?: { [key: string]: VmClusterSpecVmstorageVmBackupResourcesRequests };
-
 }
 
 /**
@@ -57623,7 +56822,6 @@ export interface VmClusterSpecVmstorageVmBackupRestore {
    * @schema VmClusterSpecVmstorageVmBackupRestore#onStart
    */
   readonly onStart?: VmClusterSpecVmstorageVmBackupRestoreOnStart;
-
 }
 
 /**
@@ -57723,7 +56921,6 @@ export interface VmClusterSpecVmstorageVmBackupVolumeMounts {
    * @schema VmClusterSpecVmstorageVmBackupVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -57825,7 +57022,6 @@ export interface VmClusterSpecVmselectStorageVolumeClaimTemplateMetadata {
    * @schema VmClusterSpecVmselectStorageVolumeClaimTemplateMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -57960,7 +57156,6 @@ export interface VmClusterSpecVmselectStorageVolumeClaimTemplateSpec {
    * @schema VmClusterSpecVmselectStorageVolumeClaimTemplateSpec#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -58109,7 +57304,6 @@ export interface VmClusterSpecVmselectStorageVolumeClaimTemplateStatus {
    * @schema VmClusterSpecVmselectStorageVolumeClaimTemplateStatus#phase
    */
   readonly phase?: string;
-
 }
 
 /**
@@ -58189,7 +57383,6 @@ export interface VmClusterSpecVmstorageVmBackupExtraEnvsValueFrom {
    * @schema VmClusterSpecVmstorageVmBackupExtraEnvsValueFrom#secretKeyRef
    */
   readonly secretKeyRef?: VmClusterSpecVmstorageVmBackupExtraEnvsValueFromSecretKeyRef;
-
 }
 
 /**
@@ -58232,7 +57425,6 @@ export interface VmClusterSpecVmstorageVmBackupExtraEnvsFromConfigMapRef {
    * @schema VmClusterSpecVmstorageVmBackupExtraEnvsFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -58273,7 +57465,6 @@ export interface VmClusterSpecVmstorageVmBackupExtraEnvsFromSecretRef {
    * @schema VmClusterSpecVmstorageVmBackupExtraEnvsFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -58314,7 +57505,6 @@ export interface VmClusterSpecVmstorageVmBackupResourcesClaims {
    * @schema VmClusterSpecVmstorageVmBackupResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -58372,7 +57562,6 @@ export interface VmClusterSpecVmstorageVmBackupRestoreOnStart {
    * @schema VmClusterSpecVmstorageVmBackupRestoreOnStart#enabled
    */
   readonly enabled?: boolean;
-
 }
 
 /**
@@ -58424,7 +57613,6 @@ export interface VmClusterSpecVmselectStorageVolumeClaimTemplateSpecDataSource {
    * @schema VmClusterSpecVmselectStorageVolumeClaimTemplateSpecDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -58502,7 +57690,6 @@ export interface VmClusterSpecVmselectStorageVolumeClaimTemplateSpecDataSourceRe
    * @schema VmClusterSpecVmselectStorageVolumeClaimTemplateSpecDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -58549,7 +57736,6 @@ export interface VmClusterSpecVmselectStorageVolumeClaimTemplateSpecResources {
    * @schema VmClusterSpecVmselectStorageVolumeClaimTemplateSpecResources#requests
    */
   readonly requests?: { [key: string]: VmClusterSpecVmselectStorageVolumeClaimTemplateSpecResourcesRequests };
-
 }
 
 /**
@@ -58588,7 +57774,6 @@ export interface VmClusterSpecVmselectStorageVolumeClaimTemplateSpecSelector {
    * @schema VmClusterSpecVmselectStorageVolumeClaimTemplateSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -58686,7 +57871,6 @@ export interface VmClusterSpecVmselectStorageVolumeClaimTemplateStatusConditions
    * @schema VmClusterSpecVmselectStorageVolumeClaimTemplateStatusConditions#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -58738,7 +57922,6 @@ export interface VmClusterSpecVmselectStorageVolumeClaimTemplateStatusModifyVolu
    * @schema VmClusterSpecVmselectStorageVolumeClaimTemplateStatusModifyVolumeStatus#targetVolumeAttributesClassName
    */
   readonly targetVolumeAttributesClassName?: string;
-
 }
 
 /**
@@ -58786,7 +57969,6 @@ export interface VmClusterSpecVmstorageVmBackupExtraEnvsValueFromConfigMapKeyRef
    * @schema VmClusterSpecVmstorageVmBackupExtraEnvsValueFromConfigMapKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -58825,7 +58007,6 @@ export interface VmClusterSpecVmstorageVmBackupExtraEnvsValueFromFieldRef {
    * @schema VmClusterSpecVmstorageVmBackupExtraEnvsValueFromFieldRef#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
@@ -58870,7 +58051,6 @@ export interface VmClusterSpecVmstorageVmBackupExtraEnvsValueFromResourceFieldRe
    * @schema VmClusterSpecVmstorageVmBackupExtraEnvsValueFromResourceFieldRef#resource
    */
   readonly resource: string;
-
 }
 
 /**
@@ -58919,7 +58099,6 @@ export interface VmClusterSpecVmstorageVmBackupExtraEnvsValueFromSecretKeyRef {
    * @schema VmClusterSpecVmstorageVmBackupExtraEnvsValueFromSecretKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -58997,7 +58176,6 @@ export interface VmClusterSpecVmselectStorageVolumeClaimTemplateSpecSelectorMatc
    * @schema VmClusterSpecVmselectStorageVolumeClaimTemplateSpecSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -59108,7 +58286,6 @@ export interface VmNodeScrapeProps {
    * @schema VMNodeScrape#spec
    */
   readonly spec?: VmNodeScrapeSpec;
-
 }
 
 /**
@@ -59317,7 +58494,6 @@ export interface VmNodeScrapeSpec {
    * @schema VmNodeScrapeSpec#vm_scrape_params
    */
   readonly vmScrapeParams?: VmNodeScrapeSpecVmScrapeParams;
-
 }
 
 /**
@@ -59385,7 +58561,6 @@ export interface VmNodeScrapeSpecAuthorization {
    * @schema VmNodeScrapeSpecAuthorization#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -59433,7 +58608,6 @@ export interface VmNodeScrapeSpecBasicAuth {
    * @schema VmNodeScrapeSpecBasicAuth#username
    */
   readonly username?: VmNodeScrapeSpecBasicAuthUsername;
-
 }
 
 /**
@@ -59484,7 +58658,6 @@ export interface VmNodeScrapeSpecBearerTokenSecret {
    * @schema VmNodeScrapeSpecBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -59580,6 +58753,7 @@ export interface VmNodeScrapeSpecMetricRelabelConfigs {
    * @schema VmNodeScrapeSpecMetricRelabelConfigs#sourceLabels
    */
   readonly sourceLabels?: string[];
+
 
   /**
    * Label to which the resulting value is written in a replace action.
@@ -59679,7 +58853,6 @@ export interface VmNodeScrapeSpecOauth2 {
    * @schema VmNodeScrapeSpecOauth2#token_url
    */
   readonly tokenUrl: string;
-
 }
 
 /**
@@ -59781,6 +58954,7 @@ export interface VmNodeScrapeSpecRelabelConfigs {
    */
   readonly sourceLabels?: string[];
 
+
   /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
@@ -59847,7 +59021,6 @@ export interface VmNodeScrapeSpecSelector {
    * @schema VmNodeScrapeSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -59926,7 +59099,6 @@ export interface VmNodeScrapeSpecTlsConfig {
    * @schema VmNodeScrapeSpecTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -60011,7 +59183,6 @@ export interface VmNodeScrapeSpecVmScrapeParams {
    * @schema VmNodeScrapeSpecVmScrapeParams#stream_parse
    */
   readonly streamParse?: boolean;
-
 }
 
 /**
@@ -60065,7 +59236,6 @@ export interface VmNodeScrapeSpecAuthorizationCredentials {
    * @schema VmNodeScrapeSpecAuthorizationCredentials#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -60115,7 +59285,6 @@ export interface VmNodeScrapeSpecBasicAuthPassword {
    * @schema VmNodeScrapeSpecBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -60165,7 +59334,6 @@ export interface VmNodeScrapeSpecBasicAuthUsername {
    * @schema VmNodeScrapeSpecBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -60203,7 +59371,6 @@ export interface VmNodeScrapeSpecOauth2ClientId {
    * @schema VmNodeScrapeSpecOauth2ClientId#secret
    */
   readonly secret?: VmNodeScrapeSpecOauth2ClientIdSecret;
-
 }
 
 /**
@@ -60251,7 +59418,6 @@ export interface VmNodeScrapeSpecOauth2ClientSecret {
    * @schema VmNodeScrapeSpecOauth2ClientSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -60301,7 +59467,6 @@ export interface VmNodeScrapeSpecSelectorMatchExpressions {
    * @schema VmNodeScrapeSpecSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -60339,7 +59504,6 @@ export interface VmNodeScrapeSpecTlsConfigCa {
    * @schema VmNodeScrapeSpecTlsConfigCa#secret
    */
   readonly secret?: VmNodeScrapeSpecTlsConfigCaSecret;
-
 }
 
 /**
@@ -60376,7 +59540,6 @@ export interface VmNodeScrapeSpecTlsConfigCert {
    * @schema VmNodeScrapeSpecTlsConfigCert#secret
    */
   readonly secret?: VmNodeScrapeSpecTlsConfigCertSecret;
-
 }
 
 /**
@@ -60424,7 +59587,6 @@ export interface VmNodeScrapeSpecTlsConfigKeySecret {
    * @schema VmNodeScrapeSpecTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -60473,7 +59635,6 @@ export interface VmNodeScrapeSpecVmScrapeParamsProxyClientConfig {
    * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfig#tls_config
    */
   readonly tlsConfig?: any;
-
 }
 
 /**
@@ -60523,7 +59684,6 @@ export interface VmNodeScrapeSpecOauth2ClientIdConfigMap {
    * @schema VmNodeScrapeSpecOauth2ClientIdConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -60572,7 +59732,6 @@ export interface VmNodeScrapeSpecOauth2ClientIdSecret {
    * @schema VmNodeScrapeSpecOauth2ClientIdSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -60621,7 +59780,6 @@ export interface VmNodeScrapeSpecTlsConfigCaConfigMap {
    * @schema VmNodeScrapeSpecTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -60670,7 +59828,6 @@ export interface VmNodeScrapeSpecTlsConfigCaSecret {
    * @schema VmNodeScrapeSpecTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -60719,7 +59876,6 @@ export interface VmNodeScrapeSpecTlsConfigCertConfigMap {
    * @schema VmNodeScrapeSpecTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -60768,7 +59924,6 @@ export interface VmNodeScrapeSpecTlsConfigCertSecret {
    * @schema VmNodeScrapeSpecTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -60816,7 +59971,6 @@ export interface VmNodeScrapeSpecVmScrapeParamsProxyClientConfigBasicAuth {
    * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigBasicAuth#username
    */
   readonly username?: VmNodeScrapeSpecVmScrapeParamsProxyClientConfigBasicAuthUsername;
-
 }
 
 /**
@@ -60865,7 +60019,6 @@ export interface VmNodeScrapeSpecVmScrapeParamsProxyClientConfigBearerToken {
    * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigBearerToken#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -60915,7 +60068,6 @@ export interface VmNodeScrapeSpecVmScrapeParamsProxyClientConfigBasicAuthPasswor
    * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -60965,7 +60117,6 @@ export interface VmNodeScrapeSpecVmScrapeParamsProxyClientConfigBasicAuthUsernam
    * @schema VmNodeScrapeSpecVmScrapeParamsProxyClientConfigBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -61060,7 +60211,6 @@ export interface VmPodScrapeProps {
    * @schema VMPodScrape#spec
    */
   readonly spec?: VmPodScrapeSpec;
-
 }
 
 /**
@@ -61140,7 +60290,6 @@ export interface VmPodScrapeSpec {
    * @schema VmPodScrapeSpec#seriesLimit
    */
   readonly seriesLimit?: number;
-
 }
 
 /**
@@ -61177,7 +60326,6 @@ export interface VmPodScrapeSpecAttachMetadata {
    * @schema VmPodScrapeSpecAttachMetadata#node
    */
   readonly node?: boolean;
-
 }
 
 /**
@@ -61214,7 +60362,6 @@ export interface VmPodScrapeSpecNamespaceSelector {
    * @schema VmPodScrapeSpecNamespaceSelector#matchNames
    */
   readonly matchNames?: string[];
-
 }
 
 /**
@@ -61433,7 +60580,6 @@ export interface VmPodScrapeSpecPodMetricsEndpoints {
    * @schema VmPodScrapeSpecPodMetricsEndpoints#vm_scrape_params
    */
   readonly vmScrapeParams?: VmPodScrapeSpecPodMetricsEndpointsVmScrapeParams;
-
 }
 
 /**
@@ -61497,7 +60643,6 @@ export interface VmPodScrapeSpecSelector {
    * @schema VmPodScrapeSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -61528,7 +60673,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsAttachMetadata {
    * @schema VmPodScrapeSpecPodMetricsEndpointsAttachMetadata#node
    */
   readonly node?: boolean;
-
 }
 
 /**
@@ -61571,7 +60715,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsAuthorization {
    * @schema VmPodScrapeSpecPodMetricsEndpointsAuthorization#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -61619,7 +60762,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsBasicAuth {
    * @schema VmPodScrapeSpecPodMetricsEndpointsBasicAuth#username
    */
   readonly username?: VmPodScrapeSpecPodMetricsEndpointsBasicAuthUsername;
-
 }
 
 /**
@@ -61670,7 +60812,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsBearerTokenSecret {
    * @schema VmPodScrapeSpecPodMetricsEndpointsBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -61766,6 +60907,7 @@ export interface VmPodScrapeSpecPodMetricsEndpointsMetricRelabelConfigs {
    * @schema VmPodScrapeSpecPodMetricsEndpointsMetricRelabelConfigs#sourceLabels
    */
   readonly sourceLabels?: string[];
+
 
   /**
    * Label to which the resulting value is written in a replace action.
@@ -61865,7 +61007,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsOauth2 {
    * @schema VmPodScrapeSpecPodMetricsEndpointsOauth2#token_url
    */
   readonly tokenUrl: string;
-
 }
 
 /**
@@ -61966,6 +61107,7 @@ export interface VmPodScrapeSpecPodMetricsEndpointsRelabelConfigs {
    * @schema VmPodScrapeSpecPodMetricsEndpointsRelabelConfigs#sourceLabels
    */
   readonly sourceLabels?: string[];
+
 
   /**
    * Label to which the resulting value is written in a replace action.
@@ -62090,7 +61232,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsTlsConfig {
    * @schema VmPodScrapeSpecPodMetricsEndpointsTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -62175,7 +61316,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsVmScrapeParams {
    * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParams#stream_parse
    */
   readonly streamParse?: boolean;
-
 }
 
 /**
@@ -62230,7 +61370,6 @@ export interface VmPodScrapeSpecSelectorMatchExpressions {
    * @schema VmPodScrapeSpecSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -62279,7 +61418,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsAuthorizationCredentials {
    * @schema VmPodScrapeSpecPodMetricsEndpointsAuthorizationCredentials#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -62329,7 +61467,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsBasicAuthPassword {
    * @schema VmPodScrapeSpecPodMetricsEndpointsBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -62379,7 +61516,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsBasicAuthUsername {
    * @schema VmPodScrapeSpecPodMetricsEndpointsBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -62417,7 +61553,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsOauth2ClientId {
    * @schema VmPodScrapeSpecPodMetricsEndpointsOauth2ClientId#secret
    */
   readonly secret?: VmPodScrapeSpecPodMetricsEndpointsOauth2ClientIdSecret;
-
 }
 
 /**
@@ -62465,7 +61600,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsOauth2ClientSecret {
    * @schema VmPodScrapeSpecPodMetricsEndpointsOauth2ClientSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -62503,7 +61637,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsTlsConfigCa {
    * @schema VmPodScrapeSpecPodMetricsEndpointsTlsConfigCa#secret
    */
   readonly secret?: VmPodScrapeSpecPodMetricsEndpointsTlsConfigCaSecret;
-
 }
 
 /**
@@ -62540,7 +61673,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsTlsConfigCert {
    * @schema VmPodScrapeSpecPodMetricsEndpointsTlsConfigCert#secret
    */
   readonly secret?: VmPodScrapeSpecPodMetricsEndpointsTlsConfigCertSecret;
-
 }
 
 /**
@@ -62588,7 +61720,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsTlsConfigKeySecret {
    * @schema VmPodScrapeSpecPodMetricsEndpointsTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -62637,7 +61768,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConf
    * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfig#tls_config
    */
   readonly tlsConfig?: any;
-
 }
 
 /**
@@ -62687,7 +61817,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsOauth2ClientIdConfigMap {
    * @schema VmPodScrapeSpecPodMetricsEndpointsOauth2ClientIdConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -62736,7 +61865,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsOauth2ClientIdSecret {
    * @schema VmPodScrapeSpecPodMetricsEndpointsOauth2ClientIdSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -62785,7 +61913,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsTlsConfigCaConfigMap {
    * @schema VmPodScrapeSpecPodMetricsEndpointsTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -62834,7 +61961,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsTlsConfigCaSecret {
    * @schema VmPodScrapeSpecPodMetricsEndpointsTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -62883,7 +62009,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsTlsConfigCertConfigMap {
    * @schema VmPodScrapeSpecPodMetricsEndpointsTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -62932,7 +62057,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsTlsConfigCertSecret {
    * @schema VmPodScrapeSpecPodMetricsEndpointsTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -62980,7 +62104,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConf
    * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigBasicAuth#username
    */
   readonly username?: VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigBasicAuthUsername;
-
 }
 
 /**
@@ -63029,7 +62152,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConf
    * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigBearerToken#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -63079,7 +62201,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConf
    * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -63129,7 +62250,6 @@ export interface VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConf
    * @schema VmPodScrapeSpecPodMetricsEndpointsVmScrapeParamsProxyClientConfigBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -63224,7 +62344,6 @@ export interface VmProbeProps {
    * @schema VMProbe#spec
    */
   readonly spec: VmProbeSpec;
-
 }
 
 /**
@@ -63429,7 +62548,6 @@ export interface VmProbeSpec {
    * @schema VmProbeSpec#vm_scrape_params
    */
   readonly vmScrapeParams?: VmProbeSpecVmScrapeParams;
-
 }
 
 /**
@@ -63496,7 +62614,6 @@ export interface VmProbeSpecAuthorization {
    * @schema VmProbeSpecAuthorization#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -63544,7 +62661,6 @@ export interface VmProbeSpecBasicAuth {
    * @schema VmProbeSpecBasicAuth#username
    */
   readonly username?: VmProbeSpecBasicAuthUsername;
-
 }
 
 /**
@@ -63595,7 +62711,6 @@ export interface VmProbeSpecBearerTokenSecret {
    * @schema VmProbeSpecBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -63691,6 +62806,7 @@ export interface VmProbeSpecMetricRelabelConfigs {
    * @schema VmProbeSpecMetricRelabelConfigs#sourceLabels
    */
   readonly sourceLabels?: string[];
+
 
   /**
    * Label to which the resulting value is written in a replace action.
@@ -63790,7 +62906,6 @@ export interface VmProbeSpecOauth2 {
    * @schema VmProbeSpecOauth2#token_url
    */
   readonly tokenUrl: string;
-
 }
 
 /**
@@ -63845,7 +62960,6 @@ export interface VmProbeSpecTargets {
    * @schema VmProbeSpecTargets#staticConfig
    */
   readonly staticConfig?: VmProbeSpecTargetsStaticConfig;
-
 }
 
 /**
@@ -63924,7 +63038,6 @@ export interface VmProbeSpecTlsConfig {
    * @schema VmProbeSpecTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -63979,7 +63092,6 @@ export interface VmProbeSpecVmProberSpec {
    * @schema VmProbeSpecVmProberSpec#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -64059,7 +63171,6 @@ export interface VmProbeSpecVmScrapeParams {
    * @schema VmProbeSpecVmScrapeParams#stream_parse
    */
   readonly streamParse?: boolean;
-
 }
 
 /**
@@ -64113,7 +63224,6 @@ export interface VmProbeSpecAuthorizationCredentials {
    * @schema VmProbeSpecAuthorizationCredentials#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -64163,7 +63273,6 @@ export interface VmProbeSpecBasicAuthPassword {
    * @schema VmProbeSpecBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -64213,7 +63322,6 @@ export interface VmProbeSpecBasicAuthUsername {
    * @schema VmProbeSpecBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -64251,7 +63359,6 @@ export interface VmProbeSpecOauth2ClientId {
    * @schema VmProbeSpecOauth2ClientId#secret
    */
   readonly secret?: VmProbeSpecOauth2ClientIdSecret;
-
 }
 
 /**
@@ -64299,7 +63406,6 @@ export interface VmProbeSpecOauth2ClientSecret {
    * @schema VmProbeSpecOauth2ClientSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -64344,7 +63450,6 @@ export interface VmProbeSpecTargetsIngress {
    * @schema VmProbeSpecTargetsIngress#selector
    */
   readonly selector?: VmProbeSpecTargetsIngressSelector;
-
 }
 
 /**
@@ -64389,7 +63494,6 @@ export interface VmProbeSpecTargetsStaticConfig {
    * @schema VmProbeSpecTargetsStaticConfig#targets
    */
   readonly targets: string[];
-
 }
 
 /**
@@ -64427,7 +63531,6 @@ export interface VmProbeSpecTlsConfigCa {
    * @schema VmProbeSpecTlsConfigCa#secret
    */
   readonly secret?: VmProbeSpecTlsConfigCaSecret;
-
 }
 
 /**
@@ -64464,7 +63567,6 @@ export interface VmProbeSpecTlsConfigCert {
    * @schema VmProbeSpecTlsConfigCert#secret
    */
   readonly secret?: VmProbeSpecTlsConfigCertSecret;
-
 }
 
 /**
@@ -64512,7 +63614,6 @@ export interface VmProbeSpecTlsConfigKeySecret {
    * @schema VmProbeSpecTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -64575,7 +63676,6 @@ export interface VmProbeSpecVmScrapeParamsProxyClientConfig {
    * @schema VmProbeSpecVmScrapeParamsProxyClientConfig#tls_config
    */
   readonly tlsConfig?: any;
-
 }
 
 /**
@@ -64625,7 +63725,6 @@ export interface VmProbeSpecOauth2ClientIdConfigMap {
    * @schema VmProbeSpecOauth2ClientIdConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -64674,7 +63773,6 @@ export interface VmProbeSpecOauth2ClientIdSecret {
    * @schema VmProbeSpecOauth2ClientIdSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -64713,7 +63811,6 @@ export interface VmProbeSpecTargetsIngressNamespaceSelector {
    * @schema VmProbeSpecTargetsIngressNamespaceSelector#matchNames
    */
   readonly matchNames?: string[];
-
 }
 
 /**
@@ -64809,6 +63906,7 @@ export interface VmProbeSpecTargetsIngressRelabelingConfigs {
    */
   readonly sourceLabels?: string[];
 
+
   /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
@@ -64863,7 +63961,6 @@ export interface VmProbeSpecTargetsIngressSelector {
    * @schema VmProbeSpecTargetsIngressSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -64959,6 +64056,7 @@ export interface VmProbeSpecTargetsStaticConfigRelabelingConfigs {
    */
   readonly sourceLabels?: string[];
 
+
   /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
@@ -65022,7 +64120,6 @@ export interface VmProbeSpecTlsConfigCaConfigMap {
    * @schema VmProbeSpecTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -65071,7 +64168,6 @@ export interface VmProbeSpecTlsConfigCaSecret {
    * @schema VmProbeSpecTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -65120,7 +64216,6 @@ export interface VmProbeSpecTlsConfigCertConfigMap {
    * @schema VmProbeSpecTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -65169,7 +64264,6 @@ export interface VmProbeSpecTlsConfigCertSecret {
    * @schema VmProbeSpecTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -65217,7 +64311,6 @@ export interface VmProbeSpecVmScrapeParamsProxyClientConfigBasicAuth {
    * @schema VmProbeSpecVmScrapeParamsProxyClientConfigBasicAuth#username
    */
   readonly username?: VmProbeSpecVmScrapeParamsProxyClientConfigBasicAuthUsername;
-
 }
 
 /**
@@ -65266,7 +64359,6 @@ export interface VmProbeSpecVmScrapeParamsProxyClientConfigBearerToken {
    * @schema VmProbeSpecVmScrapeParamsProxyClientConfigBearerToken#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -65316,7 +64408,6 @@ export interface VmProbeSpecTargetsIngressSelectorMatchExpressions {
    * @schema VmProbeSpecTargetsIngressSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -65366,7 +64457,6 @@ export interface VmProbeSpecVmScrapeParamsProxyClientConfigBasicAuthPassword {
    * @schema VmProbeSpecVmScrapeParamsProxyClientConfigBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -65416,7 +64506,6 @@ export interface VmProbeSpecVmScrapeParamsProxyClientConfigBasicAuthUsername {
    * @schema VmProbeSpecVmScrapeParamsProxyClientConfigBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -65507,7 +64596,6 @@ export interface VmRuleProps {
    * @schema VMRule#spec
    */
   readonly spec: VmRuleSpec;
-
 }
 
 /**
@@ -65537,7 +64625,6 @@ export interface VmRuleSpec {
    * @schema VmRuleSpec#groups
    */
   readonly groups: VmRuleSpecGroups[];
-
 }
 
 /**
@@ -65689,7 +64776,6 @@ export interface VmRuleSpecGroups {
    * @schema VmRuleSpecGroups#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -65793,7 +64879,6 @@ export interface VmRuleSpecGroupsRules {
    * @schema VmRuleSpecGroupsRules#update_entries_limit
    */
   readonly updateEntriesLimit?: number;
-
 }
 
 /**
@@ -65890,7 +64975,6 @@ export interface VmScrapeConfigProps {
    * @schema VMScrapeConfig#spec
    */
   readonly spec?: VmScrapeConfigSpec;
-
 }
 
 /**
@@ -66148,7 +65232,6 @@ export interface VmScrapeConfigSpec {
    * @schema VmScrapeConfigSpec#vm_scrape_params
    */
   readonly vmScrapeParams?: VmScrapeConfigSpecVmScrapeParams;
-
 }
 
 /**
@@ -66223,7 +65306,6 @@ export interface VmScrapeConfigSpecAuthorization {
    * @schema VmScrapeConfigSpecAuthorization#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -66306,7 +65388,6 @@ export interface VmScrapeConfigSpecAzureSdConfigs {
    * @schema VmScrapeConfigSpecAzureSdConfigs#tenantID
    */
   readonly tenantId?: string;
-
 }
 
 /**
@@ -66359,7 +65440,6 @@ export interface VmScrapeConfigSpecBasicAuth {
    * @schema VmScrapeConfigSpecBasicAuth#username
    */
   readonly username?: VmScrapeConfigSpecBasicAuthUsername;
-
 }
 
 /**
@@ -66410,7 +65490,6 @@ export interface VmScrapeConfigSpecBearerTokenSecret {
    * @schema VmScrapeConfigSpecBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -66573,7 +65652,6 @@ export interface VmScrapeConfigSpecConsulSdConfigs {
    * @schema VmScrapeConfigSpecConsulSdConfigs#tokenRef
    */
   readonly tokenRef?: VmScrapeConfigSpecConsulSdConfigsTokenRef;
-
 }
 
 /**
@@ -66665,7 +65743,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigs {
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigs#tlsConfig
    */
   readonly tlsConfig?: VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfig;
-
 }
 
 /**
@@ -66715,7 +65792,6 @@ export interface VmScrapeConfigSpecDnsSdConfigs {
    * @schema VmScrapeConfigSpecDnsSdConfigs#type
    */
   readonly type?: VmScrapeConfigSpecDnsSdConfigsType;
-
 }
 
 /**
@@ -66788,7 +65864,6 @@ export interface VmScrapeConfigSpecEc2SdConfigs {
    * @schema VmScrapeConfigSpecEc2SdConfigs#secretKey
    */
   readonly secretKey?: VmScrapeConfigSpecEc2SdConfigsSecretKey;
-
 }
 
 /**
@@ -66823,7 +65898,6 @@ export interface VmScrapeConfigSpecFileSdConfigs {
    * @schema VmScrapeConfigSpecFileSdConfigs#files
    */
   readonly files: string[];
-
 }
 
 /**
@@ -66890,7 +65964,6 @@ export interface VmScrapeConfigSpecGceSdConfigs {
    * @schema VmScrapeConfigSpecGceSdConfigs#zone
    */
   readonly zone: any;
-
 }
 
 /**
@@ -66960,7 +66033,6 @@ export interface VmScrapeConfigSpecHttpSdConfigs {
    * @schema VmScrapeConfigSpecHttpSdConfigs#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -67077,7 +66149,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigs {
    * @schema VmScrapeConfigSpecKubernetesSdConfigs#tlsConfig
    */
   readonly tlsConfig?: VmScrapeConfigSpecKubernetesSdConfigsTlsConfig;
-
 }
 
 /**
@@ -67183,6 +66254,7 @@ export interface VmScrapeConfigSpecMetricRelabelConfigs {
    */
   readonly sourceLabels?: string[];
 
+
   /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
@@ -67281,7 +66353,6 @@ export interface VmScrapeConfigSpecOauth2 {
    * @schema VmScrapeConfigSpecOauth2#token_url
    */
   readonly tokenUrl: string;
-
 }
 
 /**
@@ -67445,7 +66516,6 @@ export interface VmScrapeConfigSpecOpenstackSdConfigs {
    * @schema VmScrapeConfigSpecOpenstackSdConfigs#username
    */
   readonly username?: string;
-
 }
 
 /**
@@ -67556,6 +66626,7 @@ export interface VmScrapeConfigSpecRelabelConfigs {
    */
   readonly sourceLabels?: string[];
 
+
   /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
@@ -67621,7 +66692,6 @@ export interface VmScrapeConfigSpecStaticConfigs {
    * @schema VmScrapeConfigSpecStaticConfigs#targets
    */
   readonly targets?: string[];
-
 }
 
 /**
@@ -67700,7 +66770,6 @@ export interface VmScrapeConfigSpecTlsConfig {
    * @schema VmScrapeConfigSpecTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -67785,7 +66854,6 @@ export interface VmScrapeConfigSpecVmScrapeParams {
    * @schema VmScrapeConfigSpecVmScrapeParams#stream_parse
    */
   readonly streamParse?: boolean;
-
 }
 
 /**
@@ -67839,7 +66907,6 @@ export interface VmScrapeConfigSpecAuthorizationCredentials {
    * @schema VmScrapeConfigSpecAuthorizationCredentials#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -67901,7 +66968,6 @@ export interface VmScrapeConfigSpecAzureSdConfigsClientSecret {
    * @schema VmScrapeConfigSpecAzureSdConfigsClientSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -67951,7 +67017,6 @@ export interface VmScrapeConfigSpecBasicAuthPassword {
    * @schema VmScrapeConfigSpecBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -68001,7 +67066,6 @@ export interface VmScrapeConfigSpecBasicAuthUsername {
    * @schema VmScrapeConfigSpecBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -68046,7 +67110,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsAuthorization {
    * @schema VmScrapeConfigSpecConsulSdConfigsAuthorization#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -68094,7 +67157,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsBasicAuth {
    * @schema VmScrapeConfigSpecConsulSdConfigsBasicAuth#username
    */
   readonly username?: VmScrapeConfigSpecConsulSdConfigsBasicAuthUsername;
-
 }
 
 /**
@@ -68178,7 +67240,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsOauth2 {
    * @schema VmScrapeConfigSpecConsulSdConfigsOauth2#token_url
    */
   readonly tokenUrl: string;
-
 }
 
 /**
@@ -68232,7 +67293,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsProxyClientConfig {
    * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfig#tls_config
    */
   readonly tlsConfig?: any;
-
 }
 
 /**
@@ -68325,7 +67385,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsTlsConfig {
    * @schema VmScrapeConfigSpecConsulSdConfigsTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -68379,7 +67438,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsTokenRef {
    * @schema VmScrapeConfigSpecConsulSdConfigsTokenRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -68424,7 +67482,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsAuthorization {
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsAuthorization#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -68508,7 +67565,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsOauth2 {
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsOauth2#token_url
    */
   readonly tokenUrl: string;
-
 }
 
 /**
@@ -68562,7 +67618,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfig {
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfig#tls_config
    */
   readonly tlsConfig?: any;
-
 }
 
 /**
@@ -68643,7 +67698,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfig {
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -68711,7 +67765,6 @@ export interface VmScrapeConfigSpecEc2SdConfigsAccessKey {
    * @schema VmScrapeConfigSpecEc2SdConfigsAccessKey#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -68745,7 +67798,6 @@ export interface VmScrapeConfigSpecEc2SdConfigsFilters {
    * @schema VmScrapeConfigSpecEc2SdConfigsFilters#values
    */
   readonly values: string[];
-
 }
 
 /**
@@ -68793,7 +67845,6 @@ export interface VmScrapeConfigSpecEc2SdConfigsSecretKey {
    * @schema VmScrapeConfigSpecEc2SdConfigsSecretKey#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -68838,7 +67889,6 @@ export interface VmScrapeConfigSpecHttpSdConfigsAuthorization {
    * @schema VmScrapeConfigSpecHttpSdConfigsAuthorization#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -68886,7 +67936,6 @@ export interface VmScrapeConfigSpecHttpSdConfigsBasicAuth {
    * @schema VmScrapeConfigSpecHttpSdConfigsBasicAuth#username
    */
   readonly username?: VmScrapeConfigSpecHttpSdConfigsBasicAuthUsername;
-
 }
 
 /**
@@ -68935,7 +67984,6 @@ export interface VmScrapeConfigSpecHttpSdConfigsProxyClientConfig {
    * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfig#tls_config
    */
   readonly tlsConfig?: any;
-
 }
 
 /**
@@ -69016,7 +68064,6 @@ export interface VmScrapeConfigSpecHttpSdConfigsTlsConfig {
    * @schema VmScrapeConfigSpecHttpSdConfigsTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -69053,7 +68100,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsAttachMetadata {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsAttachMetadata#node
    */
   readonly node?: boolean;
-
 }
 
 /**
@@ -69096,7 +68142,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsAuthorization {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsAuthorization#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -69144,7 +68189,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsBasicAuth {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsBasicAuth#username
    */
   readonly username?: VmScrapeConfigSpecKubernetesSdConfigsBasicAuthUsername;
-
 }
 
 /**
@@ -69183,7 +68227,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsNamespaces {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsNamespaces#ownNamespace
    */
   readonly ownNamespace?: boolean;
-
 }
 
 /**
@@ -69266,7 +68309,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsOauth2 {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsOauth2#token_url
    */
   readonly tokenUrl: string;
-
 }
 
 /**
@@ -69320,7 +68362,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfig {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfig#tls_config
    */
   readonly tlsConfig?: any;
-
 }
 
 /**
@@ -69360,7 +68401,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsSelectors {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsSelectors#role
    */
   readonly role: string;
-
 }
 
 /**
@@ -69440,7 +68480,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsTlsConfig {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -69483,7 +68522,6 @@ export interface VmScrapeConfigSpecOauth2ClientId {
    * @schema VmScrapeConfigSpecOauth2ClientId#secret
    */
   readonly secret?: VmScrapeConfigSpecOauth2ClientIdSecret;
-
 }
 
 /**
@@ -69531,7 +68569,6 @@ export interface VmScrapeConfigSpecOauth2ClientSecret {
    * @schema VmScrapeConfigSpecOauth2ClientSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -69581,7 +68618,6 @@ export interface VmScrapeConfigSpecOpenstackSdConfigsApplicationCredentialSecret
    * @schema VmScrapeConfigSpecOpenstackSdConfigsApplicationCredentialSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -69645,7 +68681,6 @@ export interface VmScrapeConfigSpecOpenstackSdConfigsPassword {
    * @schema VmScrapeConfigSpecOpenstackSdConfigsPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -69737,7 +68772,6 @@ export interface VmScrapeConfigSpecOpenstackSdConfigsTlsConfig {
    * @schema VmScrapeConfigSpecOpenstackSdConfigsTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -69780,7 +68814,6 @@ export interface VmScrapeConfigSpecTlsConfigCa {
    * @schema VmScrapeConfigSpecTlsConfigCa#secret
    */
   readonly secret?: VmScrapeConfigSpecTlsConfigCaSecret;
-
 }
 
 /**
@@ -69817,7 +68850,6 @@ export interface VmScrapeConfigSpecTlsConfigCert {
    * @schema VmScrapeConfigSpecTlsConfigCert#secret
    */
   readonly secret?: VmScrapeConfigSpecTlsConfigCertSecret;
-
 }
 
 /**
@@ -69865,7 +68897,6 @@ export interface VmScrapeConfigSpecTlsConfigKeySecret {
    * @schema VmScrapeConfigSpecTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -69914,7 +68945,6 @@ export interface VmScrapeConfigSpecVmScrapeParamsProxyClientConfig {
    * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfig#tls_config
    */
   readonly tlsConfig?: any;
-
 }
 
 /**
@@ -69964,7 +68994,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsAuthorizationCredentials {
    * @schema VmScrapeConfigSpecConsulSdConfigsAuthorizationCredentials#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -70014,7 +69043,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsBasicAuthPassword {
    * @schema VmScrapeConfigSpecConsulSdConfigsBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -70064,7 +69092,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsBasicAuthUsername {
    * @schema VmScrapeConfigSpecConsulSdConfigsBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -70102,7 +69129,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsOauth2ClientId {
    * @schema VmScrapeConfigSpecConsulSdConfigsOauth2ClientId#secret
    */
   readonly secret?: VmScrapeConfigSpecConsulSdConfigsOauth2ClientIdSecret;
-
 }
 
 /**
@@ -70150,7 +69176,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsOauth2ClientSecret {
    * @schema VmScrapeConfigSpecConsulSdConfigsOauth2ClientSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -70198,7 +69223,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsProxyClientConfigBasicAuth {
    * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigBasicAuth#username
    */
   readonly username?: VmScrapeConfigSpecConsulSdConfigsProxyClientConfigBasicAuthUsername;
-
 }
 
 /**
@@ -70247,7 +69271,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsProxyClientConfigBearerToken {
    * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigBearerToken#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -70285,7 +69308,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsTlsConfigCa {
    * @schema VmScrapeConfigSpecConsulSdConfigsTlsConfigCa#secret
    */
   readonly secret?: VmScrapeConfigSpecConsulSdConfigsTlsConfigCaSecret;
-
 }
 
 /**
@@ -70322,7 +69344,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsTlsConfigCert {
    * @schema VmScrapeConfigSpecConsulSdConfigsTlsConfigCert#secret
    */
   readonly secret?: VmScrapeConfigSpecConsulSdConfigsTlsConfigCertSecret;
-
 }
 
 /**
@@ -70370,7 +69391,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsTlsConfigKeySecret {
    * @schema VmScrapeConfigSpecConsulSdConfigsTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -70419,7 +69439,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsAuthorizationCredentials
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsAuthorizationCredentials#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -70457,7 +69476,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientId {
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientId#secret
    */
   readonly secret?: VmScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdSecret;
-
 }
 
 /**
@@ -70505,7 +69523,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientSecret {
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -70553,7 +69570,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigBasicAu
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigBasicAuth#username
    */
   readonly username?: VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigBasicAuthUsername;
-
 }
 
 /**
@@ -70602,7 +69618,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigBearerT
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigBearerToken#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -70640,7 +69655,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCa {
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCa#secret
    */
   readonly secret?: VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaSecret;
-
 }
 
 /**
@@ -70677,7 +69691,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCert {
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCert#secret
    */
   readonly secret?: VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertSecret;
-
 }
 
 /**
@@ -70725,7 +69738,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfigKeySecret {
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -70774,7 +69786,6 @@ export interface VmScrapeConfigSpecHttpSdConfigsAuthorizationCredentials {
    * @schema VmScrapeConfigSpecHttpSdConfigsAuthorizationCredentials#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -70824,7 +69835,6 @@ export interface VmScrapeConfigSpecHttpSdConfigsBasicAuthPassword {
    * @schema VmScrapeConfigSpecHttpSdConfigsBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -70874,7 +69884,6 @@ export interface VmScrapeConfigSpecHttpSdConfigsBasicAuthUsername {
    * @schema VmScrapeConfigSpecHttpSdConfigsBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -70922,7 +69931,6 @@ export interface VmScrapeConfigSpecHttpSdConfigsProxyClientConfigBasicAuth {
    * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigBasicAuth#username
    */
   readonly username?: VmScrapeConfigSpecHttpSdConfigsProxyClientConfigBasicAuthUsername;
-
 }
 
 /**
@@ -70971,7 +69979,6 @@ export interface VmScrapeConfigSpecHttpSdConfigsProxyClientConfigBearerToken {
    * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigBearerToken#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -71009,7 +70016,6 @@ export interface VmScrapeConfigSpecHttpSdConfigsTlsConfigCa {
    * @schema VmScrapeConfigSpecHttpSdConfigsTlsConfigCa#secret
    */
   readonly secret?: VmScrapeConfigSpecHttpSdConfigsTlsConfigCaSecret;
-
 }
 
 /**
@@ -71046,7 +70052,6 @@ export interface VmScrapeConfigSpecHttpSdConfigsTlsConfigCert {
    * @schema VmScrapeConfigSpecHttpSdConfigsTlsConfigCert#secret
    */
   readonly secret?: VmScrapeConfigSpecHttpSdConfigsTlsConfigCertSecret;
-
 }
 
 /**
@@ -71094,7 +70099,6 @@ export interface VmScrapeConfigSpecHttpSdConfigsTlsConfigKeySecret {
    * @schema VmScrapeConfigSpecHttpSdConfigsTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -71143,7 +70147,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsAuthorizationCredentials {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsAuthorizationCredentials#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -71193,7 +70196,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsBasicAuthPassword {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -71243,7 +70245,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsBasicAuthUsername {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -71281,7 +70282,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsOauth2ClientId {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsOauth2ClientId#secret
    */
   readonly secret?: VmScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdSecret;
-
 }
 
 /**
@@ -71329,7 +70329,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsOauth2ClientSecret {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsOauth2ClientSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -71377,7 +70376,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigBasicAuth
    * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigBasicAuth#username
    */
   readonly username?: VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigBasicAuthUsername;
-
 }
 
 /**
@@ -71426,7 +70424,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigBearerTok
    * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigBearerToken#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -71464,7 +70461,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsTlsConfigCa {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsTlsConfigCa#secret
    */
   readonly secret?: VmScrapeConfigSpecKubernetesSdConfigsTlsConfigCaSecret;
-
 }
 
 /**
@@ -71501,7 +70497,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsTlsConfigCert {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsTlsConfigCert#secret
    */
   readonly secret?: VmScrapeConfigSpecKubernetesSdConfigsTlsConfigCertSecret;
-
 }
 
 /**
@@ -71549,7 +70544,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsTlsConfigKeySecret {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -71598,7 +70592,6 @@ export interface VmScrapeConfigSpecOauth2ClientIdConfigMap {
    * @schema VmScrapeConfigSpecOauth2ClientIdConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -71647,7 +70640,6 @@ export interface VmScrapeConfigSpecOauth2ClientIdSecret {
    * @schema VmScrapeConfigSpecOauth2ClientIdSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -71685,7 +70677,6 @@ export interface VmScrapeConfigSpecOpenstackSdConfigsTlsConfigCa {
    * @schema VmScrapeConfigSpecOpenstackSdConfigsTlsConfigCa#secret
    */
   readonly secret?: VmScrapeConfigSpecOpenstackSdConfigsTlsConfigCaSecret;
-
 }
 
 /**
@@ -71722,7 +70713,6 @@ export interface VmScrapeConfigSpecOpenstackSdConfigsTlsConfigCert {
    * @schema VmScrapeConfigSpecOpenstackSdConfigsTlsConfigCert#secret
    */
   readonly secret?: VmScrapeConfigSpecOpenstackSdConfigsTlsConfigCertSecret;
-
 }
 
 /**
@@ -71770,7 +70760,6 @@ export interface VmScrapeConfigSpecOpenstackSdConfigsTlsConfigKeySecret {
    * @schema VmScrapeConfigSpecOpenstackSdConfigsTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -71819,7 +70808,6 @@ export interface VmScrapeConfigSpecTlsConfigCaConfigMap {
    * @schema VmScrapeConfigSpecTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -71868,7 +70856,6 @@ export interface VmScrapeConfigSpecTlsConfigCaSecret {
    * @schema VmScrapeConfigSpecTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -71917,7 +70904,6 @@ export interface VmScrapeConfigSpecTlsConfigCertConfigMap {
    * @schema VmScrapeConfigSpecTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -71966,7 +70952,6 @@ export interface VmScrapeConfigSpecTlsConfigCertSecret {
    * @schema VmScrapeConfigSpecTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -72014,7 +70999,6 @@ export interface VmScrapeConfigSpecVmScrapeParamsProxyClientConfigBasicAuth {
    * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigBasicAuth#username
    */
   readonly username?: VmScrapeConfigSpecVmScrapeParamsProxyClientConfigBasicAuthUsername;
-
 }
 
 /**
@@ -72063,7 +71047,6 @@ export interface VmScrapeConfigSpecVmScrapeParamsProxyClientConfigBearerToken {
    * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigBearerToken#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -72112,7 +71095,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsOauth2ClientIdConfigMap {
    * @schema VmScrapeConfigSpecConsulSdConfigsOauth2ClientIdConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -72161,7 +71143,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsOauth2ClientIdSecret {
    * @schema VmScrapeConfigSpecConsulSdConfigsOauth2ClientIdSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -72211,7 +71192,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsProxyClientConfigBasicAuthPass
    * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -72261,7 +71241,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsProxyClientConfigBasicAuthUser
    * @schema VmScrapeConfigSpecConsulSdConfigsProxyClientConfigBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -72310,7 +71289,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsTlsConfigCaConfigMap {
    * @schema VmScrapeConfigSpecConsulSdConfigsTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -72359,7 +71337,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsTlsConfigCaSecret {
    * @schema VmScrapeConfigSpecConsulSdConfigsTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -72408,7 +71385,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsTlsConfigCertConfigMap {
    * @schema VmScrapeConfigSpecConsulSdConfigsTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -72457,7 +71433,6 @@ export interface VmScrapeConfigSpecConsulSdConfigsTlsConfigCertSecret {
    * @schema VmScrapeConfigSpecConsulSdConfigsTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -72506,7 +71481,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdConfigMap 
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -72555,7 +71529,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdSecret {
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsOauth2ClientIdSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -72605,7 +71578,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigBasicAu
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -72655,7 +71627,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigBasicAu
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsProxyClientConfigBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -72704,7 +71675,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaConfigMap {
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -72753,7 +71723,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaSecret {
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -72802,7 +71771,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertConfigMap {
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -72851,7 +71819,6 @@ export interface VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertSecret {
    * @schema VmScrapeConfigSpecDigitalOceanSdConfigsTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -72901,7 +71868,6 @@ export interface VmScrapeConfigSpecHttpSdConfigsProxyClientConfigBasicAuthPasswo
    * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -72951,7 +71917,6 @@ export interface VmScrapeConfigSpecHttpSdConfigsProxyClientConfigBasicAuthUserna
    * @schema VmScrapeConfigSpecHttpSdConfigsProxyClientConfigBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -73000,7 +71965,6 @@ export interface VmScrapeConfigSpecHttpSdConfigsTlsConfigCaConfigMap {
    * @schema VmScrapeConfigSpecHttpSdConfigsTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -73049,7 +72013,6 @@ export interface VmScrapeConfigSpecHttpSdConfigsTlsConfigCaSecret {
    * @schema VmScrapeConfigSpecHttpSdConfigsTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -73098,7 +72061,6 @@ export interface VmScrapeConfigSpecHttpSdConfigsTlsConfigCertConfigMap {
    * @schema VmScrapeConfigSpecHttpSdConfigsTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -73147,7 +72109,6 @@ export interface VmScrapeConfigSpecHttpSdConfigsTlsConfigCertSecret {
    * @schema VmScrapeConfigSpecHttpSdConfigsTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -73196,7 +72157,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdConfigMap {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -73245,7 +72205,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdSecret {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsOauth2ClientIdSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -73295,7 +72254,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigBasicAuth
    * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -73345,7 +72303,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigBasicAuth
    * @schema VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -73394,7 +72351,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsTlsConfigCaConfigMap {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -73443,7 +72399,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsTlsConfigCaSecret {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -73492,7 +72447,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsTlsConfigCertConfigMap {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -73541,7 +72495,6 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsTlsConfigCertSecret {
    * @schema VmScrapeConfigSpecKubernetesSdConfigsTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -73590,7 +72543,6 @@ export interface VmScrapeConfigSpecOpenstackSdConfigsTlsConfigCaConfigMap {
    * @schema VmScrapeConfigSpecOpenstackSdConfigsTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -73639,7 +72591,6 @@ export interface VmScrapeConfigSpecOpenstackSdConfigsTlsConfigCaSecret {
    * @schema VmScrapeConfigSpecOpenstackSdConfigsTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -73688,7 +72639,6 @@ export interface VmScrapeConfigSpecOpenstackSdConfigsTlsConfigCertConfigMap {
    * @schema VmScrapeConfigSpecOpenstackSdConfigsTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -73737,7 +72687,6 @@ export interface VmScrapeConfigSpecOpenstackSdConfigsTlsConfigCertSecret {
    * @schema VmScrapeConfigSpecOpenstackSdConfigsTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -73787,7 +72736,6 @@ export interface VmScrapeConfigSpecVmScrapeParamsProxyClientConfigBasicAuthPassw
    * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -73837,7 +72785,6 @@ export interface VmScrapeConfigSpecVmScrapeParamsProxyClientConfigBasicAuthUsern
    * @schema VmScrapeConfigSpecVmScrapeParamsProxyClientConfigBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -73934,7 +72881,6 @@ export interface VmServiceScrapeProps {
    * @schema VMServiceScrape#spec
    */
   readonly spec: VmServiceScrapeSpec;
-
 }
 
 /**
@@ -74032,7 +72978,6 @@ export interface VmServiceScrapeSpec {
    * @schema VmServiceScrapeSpec#targetLabels
    */
   readonly targetLabels?: string[];
-
 }
 
 /**
@@ -74071,7 +73016,6 @@ export interface VmServiceScrapeSpecAttachMetadata {
    * @schema VmServiceScrapeSpecAttachMetadata#node
    */
   readonly node?: boolean;
-
 }
 
 /**
@@ -74291,7 +73235,6 @@ export interface VmServiceScrapeSpecEndpoints {
    * @schema VmServiceScrapeSpecEndpoints#vm_scrape_params
    */
   readonly vmScrapeParams?: VmServiceScrapeSpecEndpointsVmScrapeParams;
-
 }
 
 /**
@@ -74352,7 +73295,6 @@ export interface VmServiceScrapeSpecNamespaceSelector {
    * @schema VmServiceScrapeSpecNamespaceSelector#matchNames
    */
   readonly matchNames?: string[];
-
 }
 
 /**
@@ -74391,7 +73333,6 @@ export interface VmServiceScrapeSpecSelector {
    * @schema VmServiceScrapeSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -74422,7 +73363,6 @@ export interface VmServiceScrapeSpecEndpointsAttachMetadata {
    * @schema VmServiceScrapeSpecEndpointsAttachMetadata#node
    */
   readonly node?: boolean;
-
 }
 
 /**
@@ -74465,7 +73405,6 @@ export interface VmServiceScrapeSpecEndpointsAuthorization {
    * @schema VmServiceScrapeSpecEndpointsAuthorization#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -74513,7 +73452,6 @@ export interface VmServiceScrapeSpecEndpointsBasicAuth {
    * @schema VmServiceScrapeSpecEndpointsBasicAuth#username
    */
   readonly username?: VmServiceScrapeSpecEndpointsBasicAuthUsername;
-
 }
 
 /**
@@ -74564,7 +73502,6 @@ export interface VmServiceScrapeSpecEndpointsBearerTokenSecret {
    * @schema VmServiceScrapeSpecEndpointsBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -74660,6 +73597,7 @@ export interface VmServiceScrapeSpecEndpointsMetricRelabelConfigs {
    * @schema VmServiceScrapeSpecEndpointsMetricRelabelConfigs#sourceLabels
    */
   readonly sourceLabels?: string[];
+
 
   /**
    * Label to which the resulting value is written in a replace action.
@@ -74759,7 +73697,6 @@ export interface VmServiceScrapeSpecEndpointsOauth2 {
    * @schema VmServiceScrapeSpecEndpointsOauth2#token_url
    */
   readonly tokenUrl: string;
-
 }
 
 /**
@@ -74860,6 +73797,7 @@ export interface VmServiceScrapeSpecEndpointsRelabelConfigs {
    * @schema VmServiceScrapeSpecEndpointsRelabelConfigs#sourceLabels
    */
   readonly sourceLabels?: string[];
+
 
   /**
    * Label to which the resulting value is written in a replace action.
@@ -74984,7 +73922,6 @@ export interface VmServiceScrapeSpecEndpointsTlsConfig {
    * @schema VmServiceScrapeSpecEndpointsTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -75069,7 +74006,6 @@ export interface VmServiceScrapeSpecEndpointsVmScrapeParams {
    * @schema VmServiceScrapeSpecEndpointsVmScrapeParams#stream_parse
    */
   readonly streamParse?: boolean;
-
 }
 
 /**
@@ -75124,7 +74060,6 @@ export interface VmServiceScrapeSpecSelectorMatchExpressions {
    * @schema VmServiceScrapeSpecSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -75173,7 +74108,6 @@ export interface VmServiceScrapeSpecEndpointsAuthorizationCredentials {
    * @schema VmServiceScrapeSpecEndpointsAuthorizationCredentials#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -75223,7 +74157,6 @@ export interface VmServiceScrapeSpecEndpointsBasicAuthPassword {
    * @schema VmServiceScrapeSpecEndpointsBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -75273,7 +74206,6 @@ export interface VmServiceScrapeSpecEndpointsBasicAuthUsername {
    * @schema VmServiceScrapeSpecEndpointsBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -75311,7 +74243,6 @@ export interface VmServiceScrapeSpecEndpointsOauth2ClientId {
    * @schema VmServiceScrapeSpecEndpointsOauth2ClientId#secret
    */
   readonly secret?: VmServiceScrapeSpecEndpointsOauth2ClientIdSecret;
-
 }
 
 /**
@@ -75359,7 +74290,6 @@ export interface VmServiceScrapeSpecEndpointsOauth2ClientSecret {
    * @schema VmServiceScrapeSpecEndpointsOauth2ClientSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -75397,7 +74327,6 @@ export interface VmServiceScrapeSpecEndpointsTlsConfigCa {
    * @schema VmServiceScrapeSpecEndpointsTlsConfigCa#secret
    */
   readonly secret?: VmServiceScrapeSpecEndpointsTlsConfigCaSecret;
-
 }
 
 /**
@@ -75434,7 +74363,6 @@ export interface VmServiceScrapeSpecEndpointsTlsConfigCert {
    * @schema VmServiceScrapeSpecEndpointsTlsConfigCert#secret
    */
   readonly secret?: VmServiceScrapeSpecEndpointsTlsConfigCertSecret;
-
 }
 
 /**
@@ -75482,7 +74410,6 @@ export interface VmServiceScrapeSpecEndpointsTlsConfigKeySecret {
    * @schema VmServiceScrapeSpecEndpointsTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -75531,7 +74458,6 @@ export interface VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfig {
    * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfig#tls_config
    */
   readonly tlsConfig?: any;
-
 }
 
 /**
@@ -75581,7 +74507,6 @@ export interface VmServiceScrapeSpecEndpointsOauth2ClientIdConfigMap {
    * @schema VmServiceScrapeSpecEndpointsOauth2ClientIdConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -75630,7 +74555,6 @@ export interface VmServiceScrapeSpecEndpointsOauth2ClientIdSecret {
    * @schema VmServiceScrapeSpecEndpointsOauth2ClientIdSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -75679,7 +74603,6 @@ export interface VmServiceScrapeSpecEndpointsTlsConfigCaConfigMap {
    * @schema VmServiceScrapeSpecEndpointsTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -75728,7 +74651,6 @@ export interface VmServiceScrapeSpecEndpointsTlsConfigCaSecret {
    * @schema VmServiceScrapeSpecEndpointsTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -75777,7 +74699,6 @@ export interface VmServiceScrapeSpecEndpointsTlsConfigCertConfigMap {
    * @schema VmServiceScrapeSpecEndpointsTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -75826,7 +74747,6 @@ export interface VmServiceScrapeSpecEndpointsTlsConfigCertSecret {
    * @schema VmServiceScrapeSpecEndpointsTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -75874,7 +74794,6 @@ export interface VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigBasi
    * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigBasicAuth#username
    */
   readonly username?: VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigBasicAuthUsername;
-
 }
 
 /**
@@ -75923,7 +74842,6 @@ export interface VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigBear
    * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigBearerToken#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -75973,7 +74891,6 @@ export interface VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigBasi
    * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -76023,7 +74940,6 @@ export interface VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigBasi
    * @schema VmServiceScrapeSpecEndpointsVmScrapeParamsProxyClientConfigBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -76114,7 +75030,6 @@ export interface VmSingleProps {
    * @schema VMSingle#spec
    */
   readonly spec?: VmSingleSpec;
-
 }
 
 /**
@@ -76236,6 +75151,7 @@ export interface VmSingleSpec {
    * @schema VmSingleSpec#hostNetwork
    */
   readonly hostNetwork?: boolean;
+
 
   /**
    * Image - docker image settings
@@ -76569,7 +75485,6 @@ export interface VmSingleSpec {
    * @schema VmSingleSpec#volumes
    */
   readonly volumes?: any[];
-
 }
 
 /**
@@ -76674,7 +75589,6 @@ export interface VmSingleSpecDnsConfig {
    * @schema VmSingleSpecDnsConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
@@ -76721,7 +75635,6 @@ export interface VmSingleSpecExtraEnvs {
    * @schema VmSingleSpecExtraEnvs#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -76765,7 +75678,6 @@ export interface VmSingleSpecExtraEnvsFrom {
    * @schema VmSingleSpecExtraEnvsFrom#secretRef
    */
   readonly secretRef?: VmSingleSpecExtraEnvsFromSecretRef;
-
 }
 
 /**
@@ -76804,7 +75716,6 @@ export interface VmSingleSpecHostAliases {
    * @schema VmSingleSpecHostAliases#ip
    */
   readonly ip: string;
-
 }
 
 /**
@@ -76849,7 +75760,6 @@ export interface VmSingleSpecImage {
    * @schema VmSingleSpecImage#tag
    */
   readonly tag?: string;
-
 }
 
 /**
@@ -76885,7 +75795,6 @@ export interface VmSingleSpecImagePullSecrets {
    * @schema VmSingleSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -76935,7 +75844,6 @@ export interface VmSingleSpecInsertPorts {
    * @schema VmSingleSpecInsertPorts#openTSDBPort
    */
   readonly openTsdbPort?: string;
-
 }
 
 /**
@@ -76991,7 +75899,6 @@ export interface VmSingleSpecLicense {
    * @schema VmSingleSpecLicense#reloadInterval
    */
   readonly reloadInterval?: string;
-
 }
 
 /**
@@ -77066,7 +75973,6 @@ export interface VmSingleSpecManagedMetadata {
    * @schema VmSingleSpecManagedMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -77121,7 +76027,6 @@ export interface VmSingleSpecPodMetadata {
    * @schema VmSingleSpecPodMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -77152,7 +76057,6 @@ export interface VmSingleSpecReadinessGates {
    * @schema VmSingleSpecReadinessGates#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
@@ -77206,7 +76110,6 @@ export interface VmSingleSpecResources {
    * @schema VmSingleSpecResources#requests
    */
   readonly requests?: { [key: string]: VmSingleSpecResourcesRequests };
-
 }
 
 /**
@@ -77253,7 +76156,6 @@ export interface VmSingleSpecServiceSpec {
    * @schema VmSingleSpecServiceSpec#useAsDefault
    */
   readonly useAsDefault?: boolean;
-
 }
 
 /**
@@ -77389,7 +76291,6 @@ export interface VmSingleSpecStorage {
    * @schema VmSingleSpecStorage#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -77451,7 +76352,6 @@ export interface VmSingleSpecStorageMetadata {
    * @schema VmSingleSpecStorageMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -77545,7 +76445,6 @@ export interface VmSingleSpecStreamAggrConfig {
    * @schema VmSingleSpecStreamAggrConfig#rules
    */
   readonly rules?: VmSingleSpecStreamAggrConfigRules[];
-
 }
 
 /**
@@ -77622,7 +76521,6 @@ export interface VmSingleSpecTolerations {
    * @schema VmSingleSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -77812,7 +76710,6 @@ export interface VmSingleSpecVmBackup {
    * @schema VmSingleSpecVmBackup#volumeMounts
    */
   readonly volumeMounts?: VmSingleSpecVmBackupVolumeMounts[];
-
 }
 
 /**
@@ -77933,7 +76830,6 @@ export interface VmSingleSpecVolumeMounts {
    * @schema VmSingleSpecVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -77976,7 +76872,6 @@ export interface VmSingleSpecDnsConfigOptions {
    * @schema VmSingleSpecDnsConfigOptions#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -78017,7 +76912,6 @@ export interface VmSingleSpecExtraEnvsFromConfigMapRef {
    * @schema VmSingleSpecExtraEnvsFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -78058,7 +76952,6 @@ export interface VmSingleSpecExtraEnvsFromSecretRef {
    * @schema VmSingleSpecExtraEnvsFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -78106,7 +76999,6 @@ export interface VmSingleSpecLicenseKeyRef {
    * @schema VmSingleSpecLicenseKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -78148,7 +77040,6 @@ export interface VmSingleSpecResourcesClaims {
    * @schema VmSingleSpecResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -78231,7 +77122,6 @@ export interface VmSingleSpecServiceSpecMetadata {
    * @schema VmSingleSpecServiceSpecMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -78285,7 +77175,6 @@ export interface VmSingleSpecStorageDataSource {
    * @schema VmSingleSpecStorageDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -78363,7 +77252,6 @@ export interface VmSingleSpecStorageDataSourceRef {
    * @schema VmSingleSpecStorageDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -78410,7 +77298,6 @@ export interface VmSingleSpecStorageResources {
    * @schema VmSingleSpecStorageResources#requests
    */
   readonly requests?: { [key: string]: VmSingleSpecStorageResourcesRequests };
-
 }
 
 /**
@@ -78449,7 +77336,6 @@ export interface VmSingleSpecStorageSelector {
    * @schema VmSingleSpecStorageSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -78497,7 +77383,6 @@ export interface VmSingleSpecStreamAggrConfigConfigmap {
    * @schema VmSingleSpecStreamAggrConfigConfigmap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -78679,7 +77564,6 @@ export interface VmSingleSpecStreamAggrConfigRules {
    * @schema VmSingleSpecStreamAggrConfigRules#without
    */
   readonly without?: string[];
-
 }
 
 /**
@@ -78743,7 +77627,6 @@ export interface VmSingleSpecVmBackupCredentialsSecret {
    * @schema VmSingleSpecVmBackupCredentialsSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -78797,7 +77680,6 @@ export interface VmSingleSpecVmBackupExtraEnvs {
    * @schema VmSingleSpecVmBackupExtraEnvs#valueFrom
    */
   readonly valueFrom?: VmSingleSpecVmBackupExtraEnvsValueFrom;
-
 }
 
 /**
@@ -78842,7 +77724,6 @@ export interface VmSingleSpecVmBackupExtraEnvsFrom {
    * @schema VmSingleSpecVmBackupExtraEnvsFrom#secretRef
    */
   readonly secretRef?: VmSingleSpecVmBackupExtraEnvsFromSecretRef;
-
 }
 
 /**
@@ -78887,7 +77768,6 @@ export interface VmSingleSpecVmBackupImage {
    * @schema VmSingleSpecVmBackupImage#tag
    */
   readonly tag?: string;
-
 }
 
 /**
@@ -78974,7 +77854,6 @@ export interface VmSingleSpecVmBackupResources {
    * @schema VmSingleSpecVmBackupResources#requests
    */
   readonly requests?: { [key: string]: VmSingleSpecVmBackupResourcesRequests };
-
 }
 
 /**
@@ -79006,7 +77885,6 @@ export interface VmSingleSpecVmBackupRestore {
    * @schema VmSingleSpecVmBackupRestore#onStart
    */
   readonly onStart?: VmSingleSpecVmBackupRestoreOnStart;
-
 }
 
 /**
@@ -79106,7 +77984,6 @@ export interface VmSingleSpecVmBackupVolumeMounts {
    * @schema VmSingleSpecVmBackupVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -79188,7 +78065,6 @@ export interface VmSingleSpecStorageSelectorMatchExpressions {
    * @schema VmSingleSpecStorageSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -79284,6 +78160,7 @@ export interface VmSingleSpecStreamAggrConfigRulesInputRelabelConfigs {
    * @schema VmSingleSpecStreamAggrConfigRulesInputRelabelConfigs#sourceLabels
    */
   readonly sourceLabels?: string[];
+
 
   /**
    * Label to which the resulting value is written in a replace action.
@@ -79396,6 +78273,7 @@ export interface VmSingleSpecStreamAggrConfigRulesOutputRelabelConfigs {
    */
   readonly sourceLabels?: string[];
 
+
   /**
    * Label to which the resulting value is written in a replace action.
    * It is mandatory for replace actions. Regex capture groups are available.
@@ -79464,7 +78342,6 @@ export interface VmSingleSpecVmBackupExtraEnvsValueFrom {
    * @schema VmSingleSpecVmBackupExtraEnvsValueFrom#secretKeyRef
    */
   readonly secretKeyRef?: VmSingleSpecVmBackupExtraEnvsValueFromSecretKeyRef;
-
 }
 
 /**
@@ -79507,7 +78384,6 @@ export interface VmSingleSpecVmBackupExtraEnvsFromConfigMapRef {
    * @schema VmSingleSpecVmBackupExtraEnvsFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -79548,7 +78424,6 @@ export interface VmSingleSpecVmBackupExtraEnvsFromSecretRef {
    * @schema VmSingleSpecVmBackupExtraEnvsFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -79589,7 +78464,6 @@ export interface VmSingleSpecVmBackupResourcesClaims {
    * @schema VmSingleSpecVmBackupResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -79647,7 +78521,6 @@ export interface VmSingleSpecVmBackupRestoreOnStart {
    * @schema VmSingleSpecVmBackupRestoreOnStart#enabled
    */
   readonly enabled?: boolean;
-
 }
 
 /**
@@ -79694,7 +78567,6 @@ export interface VmSingleSpecVmBackupExtraEnvsValueFromConfigMapKeyRef {
    * @schema VmSingleSpecVmBackupExtraEnvsValueFromConfigMapKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -79733,7 +78605,6 @@ export interface VmSingleSpecVmBackupExtraEnvsValueFromFieldRef {
    * @schema VmSingleSpecVmBackupExtraEnvsValueFromFieldRef#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
@@ -79778,7 +78649,6 @@ export interface VmSingleSpecVmBackupExtraEnvsValueFromResourceFieldRef {
    * @schema VmSingleSpecVmBackupExtraEnvsValueFromResourceFieldRef#resource
    */
   readonly resource: string;
-
 }
 
 /**
@@ -79827,7 +78697,6 @@ export interface VmSingleSpecVmBackupExtraEnvsValueFromSecretKeyRef {
    * @schema VmSingleSpecVmBackupExtraEnvsValueFromSecretKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -79934,7 +78803,6 @@ export interface VmStaticScrapeProps {
    * @schema VMStaticScrape#spec
    */
   readonly spec?: VmStaticScrapeSpec;
-
 }
 
 /**
@@ -79986,7 +78854,6 @@ export interface VmStaticScrapeSpec {
    * @schema VmStaticScrapeSpec#targetEndpoints
    */
   readonly targetEndpoints: VmStaticScrapeSpecTargetEndpoints[];
-
 }
 
 /**
@@ -80183,7 +79050,6 @@ export interface VmStaticScrapeSpecTargetEndpoints {
    * @schema VmStaticScrapeSpecTargetEndpoints#vm_scrape_params
    */
   readonly vmScrapeParams?: VmStaticScrapeSpecTargetEndpointsVmScrapeParams;
-
 }
 
 /**
@@ -80249,7 +79115,6 @@ export interface VmStaticScrapeSpecTargetEndpointsAuthorization {
    * @schema VmStaticScrapeSpecTargetEndpointsAuthorization#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -80297,7 +79162,6 @@ export interface VmStaticScrapeSpecTargetEndpointsBasicAuth {
    * @schema VmStaticScrapeSpecTargetEndpointsBasicAuth#username
    */
   readonly username?: VmStaticScrapeSpecTargetEndpointsBasicAuthUsername;
-
 }
 
 /**
@@ -80348,7 +79212,6 @@ export interface VmStaticScrapeSpecTargetEndpointsBearerTokenSecret {
    * @schema VmStaticScrapeSpecTargetEndpointsBearerTokenSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -80444,6 +79307,7 @@ export interface VmStaticScrapeSpecTargetEndpointsMetricRelabelConfigs {
    * @schema VmStaticScrapeSpecTargetEndpointsMetricRelabelConfigs#sourceLabels
    */
   readonly sourceLabels?: string[];
+
 
   /**
    * Label to which the resulting value is written in a replace action.
@@ -80543,7 +79407,6 @@ export interface VmStaticScrapeSpecTargetEndpointsOauth2 {
    * @schema VmStaticScrapeSpecTargetEndpointsOauth2#token_url
    */
   readonly tokenUrl: string;
-
 }
 
 /**
@@ -80644,6 +79507,7 @@ export interface VmStaticScrapeSpecTargetEndpointsRelabelConfigs {
    * @schema VmStaticScrapeSpecTargetEndpointsRelabelConfigs#sourceLabels
    */
   readonly sourceLabels?: string[];
+
 
   /**
    * Label to which the resulting value is written in a replace action.
@@ -80751,7 +79615,6 @@ export interface VmStaticScrapeSpecTargetEndpointsTlsConfig {
    * @schema VmStaticScrapeSpecTargetEndpointsTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -80836,7 +79699,6 @@ export interface VmStaticScrapeSpecTargetEndpointsVmScrapeParams {
    * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParams#stream_parse
    */
   readonly streamParse?: boolean;
-
 }
 
 /**
@@ -80890,7 +79752,6 @@ export interface VmStaticScrapeSpecTargetEndpointsAuthorizationCredentials {
    * @schema VmStaticScrapeSpecTargetEndpointsAuthorizationCredentials#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -80940,7 +79801,6 @@ export interface VmStaticScrapeSpecTargetEndpointsBasicAuthPassword {
    * @schema VmStaticScrapeSpecTargetEndpointsBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -80990,7 +79850,6 @@ export interface VmStaticScrapeSpecTargetEndpointsBasicAuthUsername {
    * @schema VmStaticScrapeSpecTargetEndpointsBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -81028,7 +79887,6 @@ export interface VmStaticScrapeSpecTargetEndpointsOauth2ClientId {
    * @schema VmStaticScrapeSpecTargetEndpointsOauth2ClientId#secret
    */
   readonly secret?: VmStaticScrapeSpecTargetEndpointsOauth2ClientIdSecret;
-
 }
 
 /**
@@ -81076,7 +79934,6 @@ export interface VmStaticScrapeSpecTargetEndpointsOauth2ClientSecret {
    * @schema VmStaticScrapeSpecTargetEndpointsOauth2ClientSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -81114,7 +79971,6 @@ export interface VmStaticScrapeSpecTargetEndpointsTlsConfigCa {
    * @schema VmStaticScrapeSpecTargetEndpointsTlsConfigCa#secret
    */
   readonly secret?: VmStaticScrapeSpecTargetEndpointsTlsConfigCaSecret;
-
 }
 
 /**
@@ -81151,7 +80007,6 @@ export interface VmStaticScrapeSpecTargetEndpointsTlsConfigCert {
    * @schema VmStaticScrapeSpecTargetEndpointsTlsConfigCert#secret
    */
   readonly secret?: VmStaticScrapeSpecTargetEndpointsTlsConfigCertSecret;
-
 }
 
 /**
@@ -81199,7 +80054,6 @@ export interface VmStaticScrapeSpecTargetEndpointsTlsConfigKeySecret {
    * @schema VmStaticScrapeSpecTargetEndpointsTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -81248,7 +80102,6 @@ export interface VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfi
    * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfig#tls_config
    */
   readonly tlsConfig?: any;
-
 }
 
 /**
@@ -81298,7 +80151,6 @@ export interface VmStaticScrapeSpecTargetEndpointsOauth2ClientIdConfigMap {
    * @schema VmStaticScrapeSpecTargetEndpointsOauth2ClientIdConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -81347,7 +80199,6 @@ export interface VmStaticScrapeSpecTargetEndpointsOauth2ClientIdSecret {
    * @schema VmStaticScrapeSpecTargetEndpointsOauth2ClientIdSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -81396,7 +80247,6 @@ export interface VmStaticScrapeSpecTargetEndpointsTlsConfigCaConfigMap {
    * @schema VmStaticScrapeSpecTargetEndpointsTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -81445,7 +80295,6 @@ export interface VmStaticScrapeSpecTargetEndpointsTlsConfigCaSecret {
    * @schema VmStaticScrapeSpecTargetEndpointsTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -81494,7 +80343,6 @@ export interface VmStaticScrapeSpecTargetEndpointsTlsConfigCertConfigMap {
    * @schema VmStaticScrapeSpecTargetEndpointsTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -81543,7 +80391,6 @@ export interface VmStaticScrapeSpecTargetEndpointsTlsConfigCertSecret {
    * @schema VmStaticScrapeSpecTargetEndpointsTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -81591,7 +80438,6 @@ export interface VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfi
    * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigBasicAuth#username
    */
   readonly username?: VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigBasicAuthUsername;
-
 }
 
 /**
@@ -81640,7 +80486,6 @@ export interface VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfi
    * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigBearerToken#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -81690,7 +80535,6 @@ export interface VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfi
    * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -81740,7 +80584,6 @@ export interface VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfi
    * @schema VmStaticScrapeSpecTargetEndpointsVmScrapeParamsProxyClientConfigBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -81831,7 +80674,6 @@ export interface VmUserProps {
    * @schema VMUser#spec
    */
   readonly spec?: VmUserSpec;
-
 }
 
 /**
@@ -82022,7 +80864,6 @@ export interface VmUserSpec {
    * @schema VmUserSpec#username
    */
   readonly username?: string;
-
 }
 
 /**
@@ -82075,7 +80916,6 @@ export interface VmUserSpecIpFilters {
    * @schema VmUserSpecIpFilters#deny_list
    */
   readonly denyList?: string[];
-
 }
 
 /**
@@ -82137,7 +80977,6 @@ export interface VmUserSpecPasswordRef {
    * @schema VmUserSpecPasswordRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -82277,7 +81116,6 @@ export interface VmUserSpecTargetRefs {
    * @schema VmUserSpecTargetRefs#target_path_suffix
    */
   readonly targetPathSuffix?: string;
-
 }
 
 /**
@@ -82368,7 +81206,6 @@ export interface VmUserSpecTlsConfig {
    * @schema VmUserSpecTlsConfig#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -82422,7 +81259,6 @@ export interface VmUserSpecTokenRef {
    * @schema VmUserSpecTokenRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -82469,7 +81305,6 @@ export interface VmUserSpecTargetRefsCrd {
    * @schema VmUserSpecTargetRefsCrd#namespace
    */
   readonly namespace: string;
-
 }
 
 /**
@@ -82522,7 +81357,6 @@ export interface VmUserSpecTargetRefsStatic {
    * @schema VmUserSpecTargetRefsStatic#urls
    */
   readonly urls?: string[];
-
 }
 
 /**
@@ -82563,7 +81397,6 @@ export interface VmUserSpecTargetRefsTargetRefBasicAuth {
    * @schema VmUserSpecTargetRefsTargetRefBasicAuth#username
    */
   readonly username: VmUserSpecTargetRefsTargetRefBasicAuthUsername;
-
 }
 
 /**
@@ -82600,7 +81433,6 @@ export interface VmUserSpecTlsConfigCa {
    * @schema VmUserSpecTlsConfigCa#secret
    */
   readonly secret?: VmUserSpecTlsConfigCaSecret;
-
 }
 
 /**
@@ -82637,7 +81469,6 @@ export interface VmUserSpecTlsConfigCert {
    * @schema VmUserSpecTlsConfigCert#secret
    */
   readonly secret?: VmUserSpecTlsConfigCertSecret;
-
 }
 
 /**
@@ -82685,7 +81516,6 @@ export interface VmUserSpecTlsConfigKeySecret {
    * @schema VmUserSpecTlsConfigKeySecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -82779,7 +81609,6 @@ export interface VmUserSpecTargetRefsTargetRefBasicAuthPassword {
    * @schema VmUserSpecTargetRefsTargetRefBasicAuthPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -82830,7 +81659,6 @@ export interface VmUserSpecTargetRefsTargetRefBasicAuthUsername {
    * @schema VmUserSpecTargetRefsTargetRefBasicAuthUsername#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -82879,7 +81707,6 @@ export interface VmUserSpecTlsConfigCaConfigMap {
    * @schema VmUserSpecTlsConfigCaConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -82928,7 +81755,6 @@ export interface VmUserSpecTlsConfigCaSecret {
    * @schema VmUserSpecTlsConfigCaSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -82977,7 +81803,6 @@ export interface VmUserSpecTlsConfigCertConfigMap {
    * @schema VmUserSpecTlsConfigCertConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -83026,7 +81851,6 @@ export interface VmUserSpecTlsConfigCertSecret {
    * @schema VmUserSpecTlsConfigCertSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -83117,7 +81941,6 @@ export interface VtClusterProps {
    * @schema VTCluster#spec
    */
   readonly spec?: VtClusterSpec;
-
 }
 
 /**
@@ -83230,7 +82053,6 @@ export interface VtClusterSpec {
    * @schema VtClusterSpec#useStrictSecurity
    */
   readonly useStrictSecurity?: boolean;
-
 }
 
 /**
@@ -83274,7 +82096,6 @@ export interface VtClusterSpecImagePullSecrets {
    * @schema VtClusterSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -83395,6 +82216,7 @@ export interface VtClusterSpecInsert {
    * @schema VtClusterSpecInsert#hostNetwork
    */
   readonly hostNetwork?: boolean;
+
 
   /**
    * Configures horizontal pod autoscaling.
@@ -83668,7 +82490,6 @@ export interface VtClusterSpecInsert {
    * @schema VtClusterSpecInsert#volumes
    */
   readonly volumes?: any[];
-
 }
 
 /**
@@ -83756,7 +82577,6 @@ export interface VtClusterSpecManagedMetadata {
    * @schema VtClusterSpecManagedMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -83804,7 +82624,6 @@ export interface VtClusterSpecRequestsLoadBalancer {
    * @schema VtClusterSpecRequestsLoadBalancer#spec
    */
   readonly spec?: any;
-
 }
 
 /**
@@ -83928,6 +82747,7 @@ export interface VtClusterSpecSelect {
    * @schema VtClusterSpecSelect#hostNetwork
    */
   readonly hostNetwork?: boolean;
+
 
   /**
    * Configures horizontal pod autoscaling.
@@ -84201,7 +83021,6 @@ export interface VtClusterSpecSelect {
    * @schema VtClusterSpecSelect#volumes
    */
   readonly volumes?: any[];
-
 }
 
 /**
@@ -84384,6 +83203,7 @@ export interface VtClusterSpecStorage {
    * @schema VtClusterSpecStorage#hostNetwork
    */
   readonly hostNetwork?: boolean;
+
 
   /**
    * Image - docker image settings
@@ -84726,7 +83546,6 @@ export interface VtClusterSpecStorage {
    * @schema VtClusterSpecStorage#volumes
    */
   readonly volumes?: any[];
-
 }
 
 /**
@@ -84834,7 +83653,6 @@ export interface VtClusterSpecInsertDnsConfig {
    * @schema VtClusterSpecInsertDnsConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
@@ -84881,7 +83699,6 @@ export interface VtClusterSpecInsertExtraEnvs {
    * @schema VtClusterSpecInsertExtraEnvs#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -84925,7 +83742,6 @@ export interface VtClusterSpecInsertExtraEnvsFrom {
    * @schema VtClusterSpecInsertExtraEnvsFrom#secretRef
    */
   readonly secretRef?: VtClusterSpecInsertExtraEnvsFromSecretRef;
-
 }
 
 /**
@@ -84964,7 +83780,6 @@ export interface VtClusterSpecInsertHostAliases {
    * @schema VtClusterSpecInsertHostAliases#ip
    */
   readonly ip: string;
-
 }
 
 /**
@@ -85009,7 +83824,6 @@ export interface VtClusterSpecInsertImage {
    * @schema VtClusterSpecInsertImage#tag
    */
   readonly tag?: string;
-
 }
 
 /**
@@ -85045,7 +83859,6 @@ export interface VtClusterSpecInsertImagePullSecrets {
    * @schema VtClusterSpecInsertImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -85126,7 +83939,6 @@ export interface VtClusterSpecInsertPodDisruptionBudget {
    * @schema VtClusterSpecInsertPodDisruptionBudget#selectorLabels
    */
   readonly selectorLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -85182,7 +83994,6 @@ export interface VtClusterSpecInsertPodMetadata {
    * @schema VtClusterSpecInsertPodMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -85213,7 +84024,6 @@ export interface VtClusterSpecInsertReadinessGates {
    * @schema VtClusterSpecInsertReadinessGates#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
@@ -85267,7 +84077,6 @@ export interface VtClusterSpecInsertResources {
    * @schema VtClusterSpecInsertResources#requests
    */
   readonly requests?: { [key: string]: VtClusterSpecInsertResourcesRequests };
-
 }
 
 /**
@@ -85326,7 +84135,6 @@ export interface VtClusterSpecInsertRollingUpdate {
    * @schema VtClusterSpecInsertRollingUpdate#maxUnavailable
    */
   readonly maxUnavailable?: VtClusterSpecInsertRollingUpdateMaxUnavailable;
-
 }
 
 /**
@@ -85372,7 +84180,6 @@ export interface VtClusterSpecInsertServiceSpec {
    * @schema VtClusterSpecInsertServiceSpec#useAsDefault
    */
   readonly useAsDefault?: boolean;
-
 }
 
 /**
@@ -85442,7 +84249,6 @@ export interface VtClusterSpecInsertTolerations {
    * @schema VtClusterSpecInsertTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -85558,7 +84364,6 @@ export interface VtClusterSpecInsertVolumeMounts {
    * @schema VtClusterSpecInsertVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -85616,7 +84421,6 @@ export interface VtClusterSpecSelectDnsConfig {
    * @schema VtClusterSpecSelectDnsConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
@@ -85663,7 +84467,6 @@ export interface VtClusterSpecSelectExtraEnvs {
    * @schema VtClusterSpecSelectExtraEnvs#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -85707,7 +84510,6 @@ export interface VtClusterSpecSelectExtraEnvsFrom {
    * @schema VtClusterSpecSelectExtraEnvsFrom#secretRef
    */
   readonly secretRef?: VtClusterSpecSelectExtraEnvsFromSecretRef;
-
 }
 
 /**
@@ -85746,7 +84548,6 @@ export interface VtClusterSpecSelectHostAliases {
    * @schema VtClusterSpecSelectHostAliases#ip
    */
   readonly ip: string;
-
 }
 
 /**
@@ -85791,7 +84592,6 @@ export interface VtClusterSpecSelectImage {
    * @schema VtClusterSpecSelectImage#tag
    */
   readonly tag?: string;
-
 }
 
 /**
@@ -85827,7 +84627,6 @@ export interface VtClusterSpecSelectImagePullSecrets {
    * @schema VtClusterSpecSelectImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -85908,7 +84707,6 @@ export interface VtClusterSpecSelectPodDisruptionBudget {
    * @schema VtClusterSpecSelectPodDisruptionBudget#selectorLabels
    */
   readonly selectorLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -85964,7 +84762,6 @@ export interface VtClusterSpecSelectPodMetadata {
    * @schema VtClusterSpecSelectPodMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -85995,7 +84792,6 @@ export interface VtClusterSpecSelectReadinessGates {
    * @schema VtClusterSpecSelectReadinessGates#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
@@ -86049,7 +84845,6 @@ export interface VtClusterSpecSelectResources {
    * @schema VtClusterSpecSelectResources#requests
    */
   readonly requests?: { [key: string]: VtClusterSpecSelectResourcesRequests };
-
 }
 
 /**
@@ -86108,7 +84903,6 @@ export interface VtClusterSpecSelectRollingUpdate {
    * @schema VtClusterSpecSelectRollingUpdate#maxUnavailable
    */
   readonly maxUnavailable?: VtClusterSpecSelectRollingUpdateMaxUnavailable;
-
 }
 
 /**
@@ -86154,7 +84948,6 @@ export interface VtClusterSpecSelectServiceSpec {
    * @schema VtClusterSpecSelectServiceSpec#useAsDefault
    */
   readonly useAsDefault?: boolean;
-
 }
 
 /**
@@ -86224,7 +85017,6 @@ export interface VtClusterSpecSelectTolerations {
    * @schema VtClusterSpecSelectTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -86340,7 +85132,6 @@ export interface VtClusterSpecSelectVolumeMounts {
    * @schema VtClusterSpecSelectVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -86398,7 +85189,6 @@ export interface VtClusterSpecStorageDnsConfig {
    * @schema VtClusterSpecStorageDnsConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
@@ -86445,7 +85235,6 @@ export interface VtClusterSpecStorageExtraEnvs {
    * @schema VtClusterSpecStorageExtraEnvs#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -86489,7 +85278,6 @@ export interface VtClusterSpecStorageExtraEnvsFrom {
    * @schema VtClusterSpecStorageExtraEnvsFrom#secretRef
    */
   readonly secretRef?: VtClusterSpecStorageExtraEnvsFromSecretRef;
-
 }
 
 /**
@@ -86528,7 +85316,6 @@ export interface VtClusterSpecStorageHostAliases {
    * @schema VtClusterSpecStorageHostAliases#ip
    */
   readonly ip: string;
-
 }
 
 /**
@@ -86573,7 +85360,6 @@ export interface VtClusterSpecStorageImage {
    * @schema VtClusterSpecStorageImage#tag
    */
   readonly tag?: string;
-
 }
 
 /**
@@ -86609,7 +85395,6 @@ export interface VtClusterSpecStorageImagePullSecrets {
    * @schema VtClusterSpecStorageImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -86683,7 +85468,6 @@ export interface VtClusterSpecStoragePersistentVolumeClaimRetentionPolicy {
    * @schema VtClusterSpecStoragePersistentVolumeClaimRetentionPolicy#whenScaled
    */
   readonly whenScaled?: string;
-
 }
 
 /**
@@ -86734,7 +85518,6 @@ export interface VtClusterSpecStoragePodDisruptionBudget {
    * @schema VtClusterSpecStoragePodDisruptionBudget#selectorLabels
    */
   readonly selectorLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -86790,7 +85573,6 @@ export interface VtClusterSpecStoragePodMetadata {
    * @schema VtClusterSpecStoragePodMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -86821,7 +85603,6 @@ export interface VtClusterSpecStorageReadinessGates {
    * @schema VtClusterSpecStorageReadinessGates#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
@@ -86875,7 +85656,6 @@ export interface VtClusterSpecStorageResources {
    * @schema VtClusterSpecStorageResources#requests
    */
   readonly requests?: { [key: string]: VtClusterSpecStorageResourcesRequests };
-
 }
 
 /**
@@ -86909,7 +85689,6 @@ export interface VtClusterSpecStorageRollingUpdateStrategyBehavior {
    * @schema VtClusterSpecStorageRollingUpdateStrategyBehavior#maxUnavailable
    */
   readonly maxUnavailable?: VtClusterSpecStorageRollingUpdateStrategyBehaviorMaxUnavailable;
-
 }
 
 /**
@@ -86954,7 +85733,6 @@ export interface VtClusterSpecStorageServiceSpec {
    * @schema VtClusterSpecStorageServiceSpec#useAsDefault
    */
   readonly useAsDefault?: boolean;
-
 }
 
 /**
@@ -87001,7 +85779,6 @@ export interface VtClusterSpecStorageStorage {
    * @schema VtClusterSpecStorageStorage#volumeClaimTemplate
    */
   readonly volumeClaimTemplate?: any;
-
 }
 
 /**
@@ -87071,7 +85848,6 @@ export interface VtClusterSpecStorageTolerations {
    * @schema VtClusterSpecStorageTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -87175,7 +85951,6 @@ export interface VtClusterSpecStorageVolumeMounts {
    * @schema VtClusterSpecStorageVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -87218,7 +85993,6 @@ export interface VtClusterSpecInsertDnsConfigOptions {
    * @schema VtClusterSpecInsertDnsConfigOptions#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -87259,7 +86033,6 @@ export interface VtClusterSpecInsertExtraEnvsFromConfigMapRef {
    * @schema VtClusterSpecInsertExtraEnvsFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -87300,7 +86073,6 @@ export interface VtClusterSpecInsertExtraEnvsFromSecretRef {
    * @schema VtClusterSpecInsertExtraEnvsFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -87379,7 +86151,6 @@ export interface VtClusterSpecInsertResourcesClaims {
    * @schema VtClusterSpecInsertResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -87515,7 +86286,6 @@ export interface VtClusterSpecInsertServiceSpecMetadata {
    * @schema VtClusterSpecInsertServiceSpecMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -87554,7 +86324,6 @@ export interface VtClusterSpecSelectDnsConfigOptions {
    * @schema VtClusterSpecSelectDnsConfigOptions#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -87595,7 +86364,6 @@ export interface VtClusterSpecSelectExtraEnvsFromConfigMapRef {
    * @schema VtClusterSpecSelectExtraEnvsFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -87636,7 +86404,6 @@ export interface VtClusterSpecSelectExtraEnvsFromSecretRef {
    * @schema VtClusterSpecSelectExtraEnvsFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -87715,7 +86482,6 @@ export interface VtClusterSpecSelectResourcesClaims {
    * @schema VtClusterSpecSelectResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -87851,7 +86617,6 @@ export interface VtClusterSpecSelectServiceSpecMetadata {
    * @schema VtClusterSpecSelectServiceSpecMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -87890,7 +86655,6 @@ export interface VtClusterSpecStorageDnsConfigOptions {
    * @schema VtClusterSpecStorageDnsConfigOptions#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -87931,7 +86695,6 @@ export interface VtClusterSpecStorageExtraEnvsFromConfigMapRef {
    * @schema VtClusterSpecStorageExtraEnvsFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -87972,7 +86735,6 @@ export interface VtClusterSpecStorageExtraEnvsFromSecretRef {
    * @schema VtClusterSpecStorageExtraEnvsFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -88051,7 +86813,6 @@ export interface VtClusterSpecStorageResourcesClaims {
    * @schema VtClusterSpecStorageResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -88152,7 +86913,6 @@ export interface VtClusterSpecStorageServiceSpecMetadata {
    * @schema VtClusterSpecStorageServiceSpecMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -88199,7 +86959,6 @@ export interface VtClusterSpecStorageStorageEmptyDir {
    * @schema VtClusterSpecStorageStorageEmptyDir#sizeLimit
    */
   readonly sizeLimit?: VtClusterSpecStorageStorageEmptyDirSizeLimit;
-
 }
 
 /**
@@ -88312,7 +87071,6 @@ export interface VtSingleProps {
    * @schema VTSingle#spec
    */
   readonly spec?: VtSingleSpec;
-
 }
 
 /**
@@ -88443,6 +87201,7 @@ export interface VtSingleSpec {
    * @schema VtSingleSpec#hostNetwork
    */
   readonly hostNetwork?: boolean;
+
 
   /**
    * Image - docker image settings
@@ -88760,7 +87519,6 @@ export interface VtSingleSpec {
    * @schema VtSingleSpec#volumes
    */
   readonly volumes?: any[];
-
 }
 
 /**
@@ -88864,7 +87622,6 @@ export interface VtSingleSpecDnsConfig {
    * @schema VtSingleSpecDnsConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
@@ -88911,7 +87668,6 @@ export interface VtSingleSpecExtraEnvs {
    * @schema VtSingleSpecExtraEnvs#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -88955,7 +87711,6 @@ export interface VtSingleSpecExtraEnvsFrom {
    * @schema VtSingleSpecExtraEnvsFrom#secretRef
    */
   readonly secretRef?: VtSingleSpecExtraEnvsFromSecretRef;
-
 }
 
 /**
@@ -88994,7 +87749,6 @@ export interface VtSingleSpecHostAliases {
    * @schema VtSingleSpecHostAliases#ip
    */
   readonly ip: string;
-
 }
 
 /**
@@ -89039,7 +87793,6 @@ export interface VtSingleSpecImage {
    * @schema VtSingleSpecImage#tag
    */
   readonly tag?: string;
-
 }
 
 /**
@@ -89075,7 +87828,6 @@ export interface VtSingleSpecImagePullSecrets {
    * @schema VtSingleSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -89147,7 +87899,6 @@ export interface VtSingleSpecManagedMetadata {
    * @schema VtSingleSpecManagedMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -89202,7 +87953,6 @@ export interface VtSingleSpecPodMetadata {
    * @schema VtSingleSpecPodMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -89233,7 +87983,6 @@ export interface VtSingleSpecReadinessGates {
    * @schema VtSingleSpecReadinessGates#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
@@ -89287,7 +88036,6 @@ export interface VtSingleSpecResources {
    * @schema VtSingleSpecResources#requests
    */
   readonly requests?: { [key: string]: VtSingleSpecResourcesRequests };
-
 }
 
 /**
@@ -89334,7 +88082,6 @@ export interface VtSingleSpecServiceSpec {
    * @schema VtSingleSpecServiceSpec#useAsDefault
    */
   readonly useAsDefault?: boolean;
-
 }
 
 /**
@@ -89469,7 +88216,6 @@ export interface VtSingleSpecStorage {
    * @schema VtSingleSpecStorage#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -89531,7 +88277,6 @@ export interface VtSingleSpecStorageMetadata {
    * @schema VtSingleSpecStorageMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -89601,7 +88346,6 @@ export interface VtSingleSpecTolerations {
    * @schema VtSingleSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -89705,7 +88449,6 @@ export interface VtSingleSpecVolumeMounts {
    * @schema VtSingleSpecVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -89748,7 +88491,6 @@ export interface VtSingleSpecDnsConfigOptions {
    * @schema VtSingleSpecDnsConfigOptions#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -89789,7 +88531,6 @@ export interface VtSingleSpecExtraEnvsFromConfigMapRef {
    * @schema VtSingleSpecExtraEnvsFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -89830,7 +88571,6 @@ export interface VtSingleSpecExtraEnvsFromSecretRef {
    * @schema VtSingleSpecExtraEnvsFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -89871,7 +88611,6 @@ export interface VtSingleSpecResourcesClaims {
    * @schema VtSingleSpecResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -89954,7 +88693,6 @@ export interface VtSingleSpecServiceSpecMetadata {
    * @schema VtSingleSpecServiceSpecMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -90008,7 +88746,6 @@ export interface VtSingleSpecStorageDataSource {
    * @schema VtSingleSpecStorageDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -90086,7 +88823,6 @@ export interface VtSingleSpecStorageDataSourceRef {
    * @schema VtSingleSpecStorageDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -90133,7 +88869,6 @@ export interface VtSingleSpecStorageResources {
    * @schema VtSingleSpecStorageResources#requests
    */
   readonly requests?: { [key: string]: VtSingleSpecStorageResourcesRequests };
-
 }
 
 /**
@@ -90172,7 +88907,6 @@ export interface VtSingleSpecStorageSelector {
    * @schema VtSingleSpecStorageSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -90249,7 +88983,6 @@ export interface VtSingleSpecStorageSelectorMatchExpressions {
    * @schema VtSingleSpecStorageSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**

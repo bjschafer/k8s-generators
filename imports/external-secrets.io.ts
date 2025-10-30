@@ -74,7 +74,6 @@ export interface ClusterExternalSecretProps {
    * @schema ClusterExternalSecret#spec
    */
   readonly spec?: ClusterExternalSecretSpec;
-
 }
 
 /**
@@ -150,7 +149,6 @@ export interface ClusterExternalSecretSpec {
    * @schema ClusterExternalSecretSpec#refreshTime
    */
   readonly refreshTime?: string;
-
 }
 
 /**
@@ -188,7 +186,6 @@ export interface ClusterExternalSecretSpecExternalSecretMetadata {
    * @schema ClusterExternalSecretSpecExternalSecretMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -264,7 +261,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpec {
    * @schema ClusterExternalSecretSpecExternalSecretSpec#target
    */
   readonly target?: ClusterExternalSecretSpecExternalSecretSpecTarget;
-
 }
 
 /**
@@ -308,7 +304,6 @@ export interface ClusterExternalSecretSpecNamespaceSelector {
    * @schema ClusterExternalSecretSpecNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -349,7 +344,6 @@ export interface ClusterExternalSecretSpecNamespaceSelectors {
    * @schema ClusterExternalSecretSpecNamespaceSelectors#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -395,7 +389,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecData {
    * @schema ClusterExternalSecretSpecExternalSecretSpecData#sourceRef
    */
   readonly sourceRef?: ClusterExternalSecretSpecExternalSecretSpecDataSourceRef;
-
 }
 
 /**
@@ -453,7 +446,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFrom {
    * @schema ClusterExternalSecretSpecExternalSecretSpecDataFrom#sourceRef
    */
   readonly sourceRef?: ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRef;
-
 }
 
 /**
@@ -512,7 +504,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecSecretStoreRef {
    * @schema ClusterExternalSecretSpecExternalSecretSpecSecretStoreRef#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -577,7 +568,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTarget {
    * @schema ClusterExternalSecretSpecExternalSecretSpecTarget#template
    */
   readonly template?: ClusterExternalSecretSpecExternalSecretSpecTargetTemplate;
-
 }
 
 /**
@@ -629,7 +619,6 @@ export interface ClusterExternalSecretSpecNamespaceSelectorMatchExpressions {
    * @schema ClusterExternalSecretSpecNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -679,7 +668,6 @@ export interface ClusterExternalSecretSpecNamespaceSelectorsMatchExpressions {
    * @schema ClusterExternalSecretSpecNamespaceSelectorsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -747,7 +735,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataRemoteRef {
    * @schema ClusterExternalSecretSpecExternalSecretSpecDataRemoteRef#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -792,7 +779,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataSourceRef {
    * @schema ClusterExternalSecretSpecExternalSecretSpecDataSourceRef#storeRef
    */
   readonly storeRef?: ClusterExternalSecretSpecExternalSecretSpecDataSourceRefStoreRef;
-
 }
 
 /**
@@ -859,7 +845,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFromExtract {
    * @schema ClusterExternalSecretSpecExternalSecretSpecDataFromExtract#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -922,7 +907,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFromFind {
    * @schema ClusterExternalSecretSpecExternalSecretSpecDataFromFind#tags
    */
   readonly tags?: { [key: string]: string };
-
 }
 
 /**
@@ -970,7 +954,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFromRewrite {
    * @schema ClusterExternalSecretSpecExternalSecretSpecDataFromRewrite#transform
    */
   readonly transform?: ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteTransform;
-
 }
 
 /**
@@ -1013,7 +996,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRef {
    * @schema ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRef#storeRef
    */
   readonly storeRef?: ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRefStoreRef;
-
 }
 
 /**
@@ -1120,7 +1102,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplate {
    * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplate#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -1212,7 +1193,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataSourceRefGenerat
    * @schema ClusterExternalSecretSpecExternalSecretSpecDataSourceRefGeneratorRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1252,7 +1232,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataSourceRefStoreRe
    * @schema ClusterExternalSecretSpecExternalSecretSpecDataSourceRefStoreRef#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -1351,7 +1330,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFromFindName {
    * @schema ClusterExternalSecretSpecExternalSecretSpecDataFromFindName#regexp
    */
   readonly regexp?: string;
-
 }
 
 /**
@@ -1380,7 +1358,7 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteMerge
    *
    * @schema ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteMerge#conflictPolicy
    */
-  readonly conflictPolicy?: string;
+  readonly conflictPolicy?: ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteMergeConflictPolicy;
 
   /**
    * Used to define the target key of the merge operation.
@@ -1398,12 +1376,18 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteMerge
   readonly priority?: string[];
 
   /**
+   * Used to define the policy when a key in the priority list does not exist in the input.
+   *
+   * @schema ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteMerge#priorityPolicy
+   */
+  readonly priorityPolicy?: ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteMergePriorityPolicy;
+
+  /**
    * Used to define the strategy to use in the merge operation.
    *
    * @schema ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteMerge#strategy
    */
-  readonly strategy?: string;
-
+  readonly strategy?: ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteMergeStrategy;
 }
 
 /**
@@ -1416,6 +1400,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFromRewrit
     'conflictPolicy': obj.conflictPolicy,
     'into': obj.into,
     'priority': obj.priority?.map(y => y),
+    'priorityPolicy': obj.priorityPolicy,
     'strategy': obj.strategy,
   };
   // filter undefined values
@@ -1443,7 +1428,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteRegex
    * @schema ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteRegexp#target
    */
   readonly target: string;
-
 }
 
 /**
@@ -1475,7 +1459,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteTrans
    * @schema ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteTransform#template
    */
   readonly template: string;
-
 }
 
 /**
@@ -1518,7 +1501,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRefGen
    * @schema ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRefGeneratorRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1558,7 +1540,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRefSto
    * @schema ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRefStoreRef#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -1610,10 +1591,14 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplateMetada
   readonly annotations?: { [key: string]: string };
 
   /**
+   * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateMetadata#finalizers
+   */
+  readonly finalizers?: string[];
+
+  /**
    * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -1624,6 +1609,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplate
   if (obj === undefined) { return undefined; }
   const result = {
     'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'finalizers': obj.finalizers?.map(y => y),
     'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
   };
   // filter undefined values
@@ -1654,7 +1640,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTempla
    * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFrom#target
    */
   readonly target?: ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromTarget;
-
 }
 
 /**
@@ -1684,6 +1669,8 @@ export enum ClusterExternalSecretSpecExternalSecretSpecDataSourceRefGeneratorRef
   ACR_ACCESS_TOKEN = "ACRAccessToken",
   /** ClusterGenerator */
   CLUSTER_GENERATOR = "ClusterGenerator",
+  /** CloudsmithAccessToken */
+  CLOUDSMITH_ACCESS_TOKEN = "CloudsmithAccessToken",
   /** ECRAuthorizationToken */
   ECR_AUTHORIZATION_TOKEN = "ECRAuthorizationToken",
   /** Fake */
@@ -1696,6 +1683,8 @@ export enum ClusterExternalSecretSpecExternalSecretSpecDataSourceRefGeneratorRef
   QUAY_ACCESS_TOKEN = "QuayAccessToken",
   /** Password */
   PASSWORD = "Password",
+  /** SSHKey */
+  SSH_KEY = "SSHKey",
   /** STSSessionToken */
   STS_SESSION_TOKEN = "STSSessionToken",
   /** UUID */
@@ -1725,6 +1714,42 @@ export enum ClusterExternalSecretSpecExternalSecretSpecDataSourceRefStoreRefKind
 }
 
 /**
+ * Used to define the policy to use in conflict resolution.
+ *
+ * @schema ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteMergeConflictPolicy
+ */
+export enum ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteMergeConflictPolicy {
+  /** Ignore */
+  IGNORE = "Ignore",
+  /** Error */
+  ERROR = "Error",
+}
+
+/**
+ * Used to define the policy when a key in the priority list does not exist in the input.
+ *
+ * @schema ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteMergePriorityPolicy
+ */
+export enum ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteMergePriorityPolicy {
+  /** IgnoreNotFound */
+  IGNORE_NOT_FOUND = "IgnoreNotFound",
+  /** Strict */
+  STRICT = "Strict",
+}
+
+/**
+ * Used to define the strategy to use in the merge operation.
+ *
+ * @schema ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteMergeStrategy
+ */
+export enum ClusterExternalSecretSpecExternalSecretSpecDataFromRewriteMergeStrategy {
+  /** Extract */
+  EXTRACT = "Extract",
+  /** JSON */
+  JSON = "JSON",
+}
+
+/**
  * Specify the Kind of the generator resource
  *
  * @schema ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRefGeneratorRefKind
@@ -1734,6 +1759,8 @@ export enum ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRefGenerato
   ACR_ACCESS_TOKEN = "ACRAccessToken",
   /** ClusterGenerator */
   CLUSTER_GENERATOR = "ClusterGenerator",
+  /** CloudsmithAccessToken */
+  CLOUDSMITH_ACCESS_TOKEN = "CloudsmithAccessToken",
   /** ECRAuthorizationToken */
   ECR_AUTHORIZATION_TOKEN = "ECRAuthorizationToken",
   /** Fake */
@@ -1746,6 +1773,8 @@ export enum ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRefGenerato
   QUAY_ACCESS_TOKEN = "QuayAccessToken",
   /** Password */
   PASSWORD = "Password",
+  /** SSHKey */
+  SSH_KEY = "SSHKey",
   /** STSSessionToken */
   STS_SESSION_TOKEN = "STSSessionToken",
   /** UUID */
@@ -1791,7 +1820,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTempla
    * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromConfigMap#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1826,7 +1854,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTempla
    * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromSecret#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1871,7 +1898,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTempla
    * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromConfigMapItems#templateAs
    */
   readonly templateAs?: ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromConfigMapItemsTemplateAs;
-
 }
 
 /**
@@ -1904,7 +1930,6 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTempla
    * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromSecretItems#templateAs
    */
   readonly templateAs?: ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromSecretItemsTemplateAs;
-
 }
 
 /**
@@ -2014,7 +2039,6 @@ export interface ClusterExternalSecretV1Beta1Props {
    * @schema ClusterExternalSecretV1Beta1#spec
    */
   readonly spec?: ClusterExternalSecretV1Beta1Spec;
-
 }
 
 /**
@@ -2089,7 +2113,6 @@ export interface ClusterExternalSecretV1Beta1Spec {
    * @schema ClusterExternalSecretV1Beta1Spec#refreshTime
    */
   readonly refreshTime?: string;
-
 }
 
 /**
@@ -2127,7 +2150,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretMetadata {
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -2203,7 +2225,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpec {
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpec#target
    */
   readonly target?: ClusterExternalSecretV1Beta1SpecExternalSecretSpecTarget;
-
 }
 
 /**
@@ -2246,7 +2267,6 @@ export interface ClusterExternalSecretV1Beta1SpecNamespaceSelector {
    * @schema ClusterExternalSecretV1Beta1SpecNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -2287,7 +2307,6 @@ export interface ClusterExternalSecretV1Beta1SpecNamespaceSelectors {
    * @schema ClusterExternalSecretV1Beta1SpecNamespaceSelectors#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -2333,7 +2352,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecData {
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecData#sourceRef
    */
   readonly sourceRef?: ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataSourceRef;
-
 }
 
 /**
@@ -2391,7 +2409,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFrom {
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFrom#sourceRef
    */
   readonly sourceRef?: ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromSourceRef;
-
 }
 
 /**
@@ -2450,7 +2467,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecSecretStoreRe
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecSecretStoreRef#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -2515,7 +2531,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecTarget {
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTarget#template
    */
   readonly template?: ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplate;
-
 }
 
 /**
@@ -2567,7 +2582,6 @@ export interface ClusterExternalSecretV1Beta1SpecNamespaceSelectorMatchExpressio
    * @schema ClusterExternalSecretV1Beta1SpecNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -2617,7 +2631,6 @@ export interface ClusterExternalSecretV1Beta1SpecNamespaceSelectorsMatchExpressi
    * @schema ClusterExternalSecretV1Beta1SpecNamespaceSelectorsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -2685,7 +2698,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataRemoteRef
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataRemoteRef#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -2730,7 +2742,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataSourceRef
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataSourceRef#storeRef
    */
   readonly storeRef?: ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataSourceRefStoreRef;
-
 }
 
 /**
@@ -2797,7 +2808,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromExtra
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromExtract#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -2860,7 +2870,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromFind 
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromFind#tags
    */
   readonly tags?: { [key: string]: string };
-
 }
 
 /**
@@ -2900,7 +2909,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromRewri
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromRewrite#transform
    */
   readonly transform?: ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromRewriteTransform;
-
 }
 
 /**
@@ -2942,7 +2950,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromSourc
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromSourceRef#storeRef
    */
   readonly storeRef?: ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromSourceRefStoreRef;
-
 }
 
 /**
@@ -3049,7 +3056,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplat
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplate#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -3141,7 +3147,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataSourceRef
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataSourceRefGeneratorRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -3181,7 +3186,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataSourceRef
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataSourceRefStoreRef#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -3280,7 +3284,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromFindN
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromFindName#regexp
    */
   readonly regexp?: string;
-
 }
 
 /**
@@ -3317,7 +3320,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromRewri
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromRewriteRegexp#target
    */
   readonly target: string;
-
 }
 
 /**
@@ -3349,7 +3351,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromRewri
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromRewriteTransform#template
    */
   readonly template: string;
-
 }
 
 /**
@@ -3392,7 +3393,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromSourc
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromSourceRefGeneratorRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -3432,7 +3432,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromSourc
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromSourceRefStoreRef#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -3487,7 +3486,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplat
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -3528,7 +3526,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplat
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFrom#target
    */
   readonly target?: ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromTarget;
-
 }
 
 /**
@@ -3570,6 +3567,8 @@ export enum ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataSourceRefGener
   QUAY_ACCESS_TOKEN = "QuayAccessToken",
   /** Password */
   PASSWORD = "Password",
+  /** SSHKey */
+  SSH_KEY = "SSHKey",
   /** STSSessionToken */
   STS_SESSION_TOKEN = "STSSessionToken",
   /** UUID */
@@ -3618,6 +3617,8 @@ export enum ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromSourceRefG
   QUAY_ACCESS_TOKEN = "QuayAccessToken",
   /** Password */
   PASSWORD = "Password",
+  /** SSHKey */
+  SSH_KEY = "SSHKey",
   /** STSSessionToken */
   STS_SESSION_TOKEN = "STSSessionToken",
   /** UUID */
@@ -3661,7 +3662,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplat
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromConfigMap#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -3696,7 +3696,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplat
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromSecret#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -3741,7 +3740,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplat
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromConfigMapItems#templateAs
    */
   readonly templateAs?: ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromConfigMapItemsTemplateAs;
-
 }
 
 /**
@@ -3774,7 +3772,6 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplat
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromSecretItems#templateAs
    */
   readonly templateAs?: ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromSecretItemsTemplateAs;
-
 }
 
 /**
@@ -3880,7 +3877,6 @@ export interface ClusterPushSecretProps {
    * @schema ClusterPushSecret#spec
    */
   readonly spec?: ClusterPushSecretSpec;
-
 }
 
 /**
@@ -3938,7 +3934,6 @@ export interface ClusterPushSecretSpec {
    * @schema ClusterPushSecretSpec#refreshTime
    */
   readonly refreshTime?: string;
-
 }
 
 /**
@@ -3982,7 +3977,6 @@ export interface ClusterPushSecretSpecNamespaceSelectors {
    * @schema ClusterPushSecretSpecNamespaceSelectors#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -4015,7 +4009,6 @@ export interface ClusterPushSecretSpecPushSecretMetadata {
    * @schema ClusterPushSecretSpecPushSecretMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -4085,7 +4078,6 @@ export interface ClusterPushSecretSpecPushSecretSpec {
    * @schema ClusterPushSecretSpecPushSecretSpec#updatePolicy
    */
   readonly updatePolicy?: ClusterPushSecretSpecPushSecretSpecUpdatePolicy;
-
 }
 
 /**
@@ -4139,7 +4131,6 @@ export interface ClusterPushSecretSpecNamespaceSelectorsMatchExpressions {
    * @schema ClusterPushSecretSpecNamespaceSelectorsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -4183,7 +4174,6 @@ export interface ClusterPushSecretSpecPushSecretSpecData {
    * @schema ClusterPushSecretSpecPushSecretSpecData#metadata
    */
   readonly metadata?: any;
-
 }
 
 /**
@@ -4238,7 +4228,6 @@ export interface ClusterPushSecretSpecPushSecretSpecSecretStoreRefs {
    * @schema ClusterPushSecretSpecPushSecretSpecSecretStoreRefs#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -4276,7 +4265,6 @@ export interface ClusterPushSecretSpecPushSecretSpecSelector {
    * @schema ClusterPushSecretSpecPushSecretSpecSelector#secret
    */
   readonly secret?: ClusterPushSecretSpecPushSecretSpecSelectorSecret;
-
 }
 
 /**
@@ -4335,7 +4323,6 @@ export interface ClusterPushSecretSpecPushSecretSpecTemplate {
    * @schema ClusterPushSecretSpecPushSecretSpecTemplate#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -4400,7 +4387,6 @@ export interface ClusterPushSecretSpecPushSecretSpecDataMatch {
    * @schema ClusterPushSecretSpecPushSecretSpecDataMatch#secretKey
    */
   readonly secretKey?: string;
-
 }
 
 /**
@@ -4451,7 +4437,6 @@ export interface ClusterPushSecretSpecPushSecretSpecSecretStoreRefsLabelSelector
    * @schema ClusterPushSecretSpecPushSecretSpecSecretStoreRefsLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -4495,7 +4480,6 @@ export interface ClusterPushSecretSpecPushSecretSpecSelectorGeneratorRef {
    * @schema ClusterPushSecretSpecPushSecretSpecSelectorGeneratorRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4534,7 +4518,6 @@ export interface ClusterPushSecretSpecPushSecretSpecSelectorSecret {
    * @schema ClusterPushSecretSpecPushSecretSpecSelectorSecret#selector
    */
   readonly selector?: ClusterPushSecretSpecPushSecretSpecSelectorSecretSelector;
-
 }
 
 /**
@@ -4586,10 +4569,14 @@ export interface ClusterPushSecretSpecPushSecretSpecTemplateMetadata {
   readonly annotations?: { [key: string]: string };
 
   /**
+   * @schema ClusterPushSecretSpecPushSecretSpecTemplateMetadata#finalizers
+   */
+  readonly finalizers?: string[];
+
+  /**
    * @schema ClusterPushSecretSpecPushSecretSpecTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -4600,6 +4587,7 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecTemplateMetadata(obj: 
   if (obj === undefined) { return undefined; }
   const result = {
     'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'finalizers': obj.finalizers?.map(y => y),
     'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
   };
   // filter undefined values
@@ -4630,7 +4618,6 @@ export interface ClusterPushSecretSpecPushSecretSpecTemplateTemplateFrom {
    * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFrom#target
    */
   readonly target?: ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromTarget;
-
 }
 
 /**
@@ -4669,7 +4656,6 @@ export interface ClusterPushSecretSpecPushSecretSpecDataMatchRemoteRef {
    * @schema ClusterPushSecretSpecPushSecretSpecDataMatchRemoteRef#remoteKey
    */
   readonly remoteKey: string;
-
 }
 
 /**
@@ -4718,7 +4704,6 @@ export interface ClusterPushSecretSpecPushSecretSpecSecretStoreRefsLabelSelector
    * @schema ClusterPushSecretSpecPushSecretSpecSecretStoreRefsLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -4747,6 +4732,8 @@ export enum ClusterPushSecretSpecPushSecretSpecSelectorGeneratorRefKind {
   ACR_ACCESS_TOKEN = "ACRAccessToken",
   /** ClusterGenerator */
   CLUSTER_GENERATOR = "ClusterGenerator",
+  /** CloudsmithAccessToken */
+  CLOUDSMITH_ACCESS_TOKEN = "CloudsmithAccessToken",
   /** ECRAuthorizationToken */
   ECR_AUTHORIZATION_TOKEN = "ECRAuthorizationToken",
   /** Fake */
@@ -4759,6 +4746,8 @@ export enum ClusterPushSecretSpecPushSecretSpecSelectorGeneratorRefKind {
   QUAY_ACCESS_TOKEN = "QuayAccessToken",
   /** Password */
   PASSWORD = "Password",
+  /** SSHKey */
+  SSH_KEY = "SSHKey",
   /** STSSessionToken */
   STS_SESSION_TOKEN = "STSSessionToken",
   /** UUID */
@@ -4794,7 +4783,6 @@ export interface ClusterPushSecretSpecPushSecretSpecSelectorSecretSelector {
    * @schema ClusterPushSecretSpecPushSecretSpecSelectorSecretSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -4829,7 +4817,6 @@ export interface ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMa
    * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMap#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4864,7 +4851,6 @@ export interface ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecret {
    * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecret#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4925,7 +4911,6 @@ export interface ClusterPushSecretSpecPushSecretSpecSelectorSecretSelectorMatchE
    * @schema ClusterPushSecretSpecPushSecretSpecSelectorSecretSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -4959,7 +4944,6 @@ export interface ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMa
    * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMapItems#templateAs
    */
   readonly templateAs?: ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMapItemsTemplateAs;
-
 }
 
 /**
@@ -4992,7 +4976,6 @@ export interface ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecretIt
    * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecretItems#templateAs
    */
   readonly templateAs?: ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecretItemsTemplateAs;
-
 }
 
 /**
@@ -5102,7 +5085,6 @@ export interface ClusterSecretStoreProps {
    * @schema ClusterSecretStore#spec
    */
   readonly spec?: ClusterSecretStoreSpec;
-
 }
 
 /**
@@ -5161,7 +5143,6 @@ export interface ClusterSecretStoreSpec {
    * @schema ClusterSecretStoreSpec#retrySettings
    */
   readonly retrySettings?: ClusterSecretStoreSpecRetrySettings;
-
 }
 
 /**
@@ -5209,7 +5190,6 @@ export interface ClusterSecretStoreSpecConditions {
    * @schema ClusterSecretStoreSpecConditions#namespaces
    */
   readonly namespaces?: string[];
-
 }
 
 /**
@@ -5341,7 +5321,8 @@ export interface ClusterSecretStoreSpecProvider {
   readonly gcpsm?: ClusterSecretStoreSpecProviderGcpsm;
 
   /**
-   * Github configures this store to push Github Action secrets using Github API provider
+   * Github configures this store to push GitHub Action secrets using GitHub API provider.
+   * Note: This provider only supports write operations (PushSecret) and cannot fetch secrets from GitHub
    *
    * @schema ClusterSecretStoreSpecProvider#github
    */
@@ -5381,6 +5362,13 @@ export interface ClusterSecretStoreSpecProvider {
    * @schema ClusterSecretStoreSpecProvider#kubernetes
    */
   readonly kubernetes?: ClusterSecretStoreSpecProviderKubernetes;
+
+  /**
+   * Ngrok configures this store to sync secrets using the ngrok provider.
+   *
+   * @schema ClusterSecretStoreSpecProvider#ngrok
+   */
+  readonly ngrok?: ClusterSecretStoreSpecProviderNgrok;
 
   /**
    * Onboardbase configures this store to sync secrets using the Onboardbase provider
@@ -5466,6 +5454,13 @@ export interface ClusterSecretStoreSpecProvider {
   readonly vault?: ClusterSecretStoreSpecProviderVault;
 
   /**
+   * Volcengine configures this store to sync secrets using the Volcengine provider
+   *
+   * @schema ClusterSecretStoreSpecProvider#volcengine
+   */
+  readonly volcengine?: ClusterSecretStoreSpecProviderVolcengine;
+
+  /**
    * Webhook configures this store to sync secrets using a generic templated webhook
    *
    * @schema ClusterSecretStoreSpecProvider#webhook
@@ -5485,7 +5480,6 @@ export interface ClusterSecretStoreSpecProvider {
    * @schema ClusterSecretStoreSpecProvider#yandexlockbox
    */
   readonly yandexlockbox?: ClusterSecretStoreSpecProviderYandexlockbox;
-
 }
 
 /**
@@ -5516,6 +5510,7 @@ export function toJson_ClusterSecretStoreSpecProvider(obj: ClusterSecretStoreSpe
     'infisical': toJson_ClusterSecretStoreSpecProviderInfisical(obj.infisical),
     'keepersecurity': toJson_ClusterSecretStoreSpecProviderKeepersecurity(obj.keepersecurity),
     'kubernetes': toJson_ClusterSecretStoreSpecProviderKubernetes(obj.kubernetes),
+    'ngrok': toJson_ClusterSecretStoreSpecProviderNgrok(obj.ngrok),
     'onboardbase': toJson_ClusterSecretStoreSpecProviderOnboardbase(obj.onboardbase),
     'onepassword': toJson_ClusterSecretStoreSpecProviderOnepassword(obj.onepassword),
     'onepasswordSDK': toJson_ClusterSecretStoreSpecProviderOnepasswordSdk(obj.onepasswordSdk),
@@ -5528,6 +5523,7 @@ export function toJson_ClusterSecretStoreSpecProvider(obj: ClusterSecretStoreSpe
     'secretserver': toJson_ClusterSecretStoreSpecProviderSecretserver(obj.secretserver),
     'senhasegura': toJson_ClusterSecretStoreSpecProviderSenhasegura(obj.senhasegura),
     'vault': toJson_ClusterSecretStoreSpecProviderVault(obj.vault),
+    'volcengine': toJson_ClusterSecretStoreSpecProviderVolcengine(obj.volcengine),
     'webhook': toJson_ClusterSecretStoreSpecProviderWebhook(obj.webhook),
     'yandexcertificatemanager': toJson_ClusterSecretStoreSpecProviderYandexcertificatemanager(obj.yandexcertificatemanager),
     'yandexlockbox': toJson_ClusterSecretStoreSpecProviderYandexlockbox(obj.yandexlockbox),
@@ -5552,7 +5548,6 @@ export interface ClusterSecretStoreSpecRetrySettings {
    * @schema ClusterSecretStoreSpecRetrySettings#retryInterval
    */
   readonly retryInterval?: string;
-
 }
 
 /**
@@ -5591,7 +5586,6 @@ export interface ClusterSecretStoreSpecConditionsNamespaceSelector {
    * @schema ClusterSecretStoreSpecConditionsNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -5644,7 +5638,6 @@ export interface ClusterSecretStoreSpecProviderAkeyless {
    * @schema ClusterSecretStoreSpecProviderAkeyless#caProvider
    */
   readonly caProvider?: ClusterSecretStoreSpecProviderAkeylessCaProvider;
-
 }
 
 /**
@@ -5683,7 +5676,6 @@ export interface ClusterSecretStoreSpecProviderAlibaba {
    * @schema ClusterSecretStoreSpecProviderAlibaba#regionID
    */
   readonly regionId: string;
-
 }
 
 /**
@@ -5778,7 +5770,6 @@ export interface ClusterSecretStoreSpecProviderAws {
    * @schema ClusterSecretStoreSpecProviderAws#transitiveTagKeys
    */
   readonly transitiveTagKeys?: string[];
-
 }
 
 /**
@@ -5828,10 +5819,21 @@ export interface ClusterSecretStoreSpecProviderAzurekv {
   readonly authType?: ClusterSecretStoreSpecProviderAzurekvAuthType;
 
   /**
+   * CustomCloudConfig defines custom Azure Stack Hub or Azure Stack Edge endpoints.
+   * Required when EnvironmentType is AzureStackCloud.
+   * IMPORTANT: This feature REQUIRES UseAzureSDK to be set to true. Custom cloud
+   * configuration is not supported with the legacy go-autorest SDK.
+   *
+   * @schema ClusterSecretStoreSpecProviderAzurekv#customCloudConfig
+   */
+  readonly customCloudConfig?: ClusterSecretStoreSpecProviderAzurekvCustomCloudConfig;
+
+  /**
    * EnvironmentType specifies the Azure cloud environment endpoints to use for
    * connecting and authenticating with Azure. By default it points to the public cloud AAD endpoint.
    * The following endpoints are available, also see here: https://github.com/Azure/go-autorest/blob/main/autorest/azure/environments.go#L152
-   * PublicCloud, USGovernmentCloud, ChinaCloud, GermanCloud
+   * PublicCloud, USGovernmentCloud, ChinaCloud, GermanCloud, AzureStackCloud
+   * Use AzureStackCloud when you need to configure custom Azure Stack Hub or Azure Stack Edge endpoints.
    *
    * @schema ClusterSecretStoreSpecProviderAzurekv#environmentType
    */
@@ -5860,12 +5862,20 @@ export interface ClusterSecretStoreSpecProviderAzurekv {
   readonly tenantId?: string;
 
   /**
+   * UseAzureSDK enables the use of the new Azure SDK for Go (azcore-based) instead of the legacy go-autorest SDK.
+   * This is experimental and may have behavioral differences. Defaults to false (legacy SDK).
+   *
+   * @default false (legacy SDK).
+   * @schema ClusterSecretStoreSpecProviderAzurekv#useAzureSDK
+   */
+  readonly useAzureSdk?: boolean;
+
+  /**
    * Vault Url from which the secrets to be fetched from.
    *
    * @schema ClusterSecretStoreSpecProviderAzurekv#vaultUrl
    */
   readonly vaultUrl: string;
-
 }
 
 /**
@@ -5877,10 +5887,12 @@ export function toJson_ClusterSecretStoreSpecProviderAzurekv(obj: ClusterSecretS
   const result = {
     'authSecretRef': toJson_ClusterSecretStoreSpecProviderAzurekvAuthSecretRef(obj.authSecretRef),
     'authType': obj.authType,
+    'customCloudConfig': toJson_ClusterSecretStoreSpecProviderAzurekvCustomCloudConfig(obj.customCloudConfig),
     'environmentType': obj.environmentType,
     'identityId': obj.identityId,
     'serviceAccountRef': toJson_ClusterSecretStoreSpecProviderAzurekvServiceAccountRef(obj.serviceAccountRef),
     'tenantId': obj.tenantId,
+    'useAzureSDK': obj.useAzureSdk,
     'vaultUrl': obj.vaultUrl,
   };
   // filter undefined values
@@ -5907,7 +5919,6 @@ export interface ClusterSecretStoreSpecProviderBeyondtrust {
    * @schema ClusterSecretStoreSpecProviderBeyondtrust#server
    */
   readonly server: ClusterSecretStoreSpecProviderBeyondtrustServer;
-
 }
 
 /**
@@ -5982,7 +5993,6 @@ export interface ClusterSecretStoreSpecProviderBitwardensecretsmanager {
    * @schema ClusterSecretStoreSpecProviderBitwardensecretsmanager#projectID
    */
   readonly projectId: string;
-
 }
 
 /**
@@ -6032,7 +6042,6 @@ export interface ClusterSecretStoreSpecProviderChef {
    * @schema ClusterSecretStoreSpecProviderChef#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -6070,7 +6079,6 @@ export interface ClusterSecretStoreSpecProviderCloudrusm {
    * @schema ClusterSecretStoreSpecProviderCloudrusm#projectID
    */
   readonly projectId?: string;
-
 }
 
 /**
@@ -6123,7 +6131,6 @@ export interface ClusterSecretStoreSpecProviderConjur {
    * @schema ClusterSecretStoreSpecProviderConjur#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -6186,7 +6193,6 @@ export interface ClusterSecretStoreSpecProviderDelinea {
    * @schema ClusterSecretStoreSpecProviderDelinea#urlTemplate
    */
   readonly urlTemplate?: string;
-
 }
 
 /**
@@ -6226,7 +6232,6 @@ export interface ClusterSecretStoreSpecProviderDevice42 {
    * @schema ClusterSecretStoreSpecProviderDevice42#host
    */
   readonly host: string;
-
 }
 
 /**
@@ -6284,7 +6289,6 @@ export interface ClusterSecretStoreSpecProviderDoppler {
    * @schema ClusterSecretStoreSpecProviderDoppler#project
    */
   readonly project?: string;
-
 }
 
 /**
@@ -6316,6 +6320,10 @@ export interface ClusterSecretStoreSpecProviderFake {
    */
   readonly data: ClusterSecretStoreSpecProviderFakeData[];
 
+  /**
+   * @schema ClusterSecretStoreSpecProviderFake#validationResult
+   */
+  readonly validationResult?: number;
 }
 
 /**
@@ -6326,6 +6334,7 @@ export function toJson_ClusterSecretStoreSpecProviderFake(obj: ClusterSecretStor
   if (obj === undefined) { return undefined; }
   const result = {
     'data': obj.data?.map(y => toJson_ClusterSecretStoreSpecProviderFakeData(y)),
+    'validationResult': obj.validationResult,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -6352,7 +6361,6 @@ export interface ClusterSecretStoreSpecProviderFortanix {
    * @schema ClusterSecretStoreSpecProviderFortanix#apiUrl
    */
   readonly apiUrl?: string;
-
 }
 
 /**
@@ -6397,6 +6405,16 @@ export interface ClusterSecretStoreSpecProviderGcpsm {
    */
   readonly projectId?: string;
 
+  /**
+   * SecretVersionSelectionPolicy specifies how the provider selects a secret version
+   * when "latest" is disabled or destroyed.
+   * Possible values are:
+   * - LatestOrFail: the provider always uses "latest", or fails if that version is disabled/destroyed.
+   * - LatestOrFetch: the provider falls back to fetching the latest version if the version is DESTROYED or DISABLED
+   *
+   * @schema ClusterSecretStoreSpecProviderGcpsm#secretVersionSelectionPolicy
+   */
+  readonly secretVersionSelectionPolicy?: string;
 }
 
 /**
@@ -6409,6 +6427,7 @@ export function toJson_ClusterSecretStoreSpecProviderGcpsm(obj: ClusterSecretSto
     'auth': toJson_ClusterSecretStoreSpecProviderGcpsmAuth(obj.auth),
     'location': obj.location,
     'projectID': obj.projectId,
+    'secretVersionSelectionPolicy': obj.secretVersionSelectionPolicy,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -6416,7 +6435,8 @@ export function toJson_ClusterSecretStoreSpecProviderGcpsm(obj: ClusterSecretSto
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Github configures this store to push Github Action secrets using Github API provider
+ * Github configures this store to push GitHub Action secrets using GitHub API provider.
+ * Note: This provider only supports write operations (PushSecret) and cannot fetch secrets from GitHub
  *
  * @schema ClusterSecretStoreSpecProviderGithub
  */
@@ -6478,7 +6498,6 @@ export interface ClusterSecretStoreSpecProviderGithub {
    * @schema ClusterSecretStoreSpecProviderGithub#url
    */
   readonly url?: string;
-
 }
 
 /**
@@ -6565,7 +6584,6 @@ export interface ClusterSecretStoreSpecProviderGitlab {
    * @schema ClusterSecretStoreSpecProviderGitlab#url
    */
   readonly url?: string;
-
 }
 
 /**
@@ -6608,7 +6626,6 @@ export interface ClusterSecretStoreSpecProviderIbm {
    * @schema ClusterSecretStoreSpecProviderIbm#serviceUrl
    */
   readonly serviceUrl?: string;
-
 }
 
 /**
@@ -6652,7 +6669,6 @@ export interface ClusterSecretStoreSpecProviderInfisical {
    * @schema ClusterSecretStoreSpecProviderInfisical#secretsScope
    */
   readonly secretsScope: ClusterSecretStoreSpecProviderInfisicalSecretsScope;
-
 }
 
 /**
@@ -6689,7 +6705,6 @@ export interface ClusterSecretStoreSpecProviderKeepersecurity {
    * @schema ClusterSecretStoreSpecProviderKeepersecurity#folderID
    */
   readonly folderId: string;
-
 }
 
 /**
@@ -6740,7 +6755,6 @@ export interface ClusterSecretStoreSpecProviderKubernetes {
    * @schema ClusterSecretStoreSpecProviderKubernetes#server
    */
   readonly server?: ClusterSecretStoreSpecProviderKubernetesServer;
-
 }
 
 /**
@@ -6754,6 +6768,50 @@ export function toJson_ClusterSecretStoreSpecProviderKubernetes(obj: ClusterSecr
     'authRef': toJson_ClusterSecretStoreSpecProviderKubernetesAuthRef(obj.authRef),
     'remoteNamespace': obj.remoteNamespace,
     'server': toJson_ClusterSecretStoreSpecProviderKubernetesServer(obj.server),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Ngrok configures this store to sync secrets using the ngrok provider.
+ *
+ * @schema ClusterSecretStoreSpecProviderNgrok
+ */
+export interface ClusterSecretStoreSpecProviderNgrok {
+  /**
+   * APIURL is the URL of the ngrok API.
+   *
+   * @schema ClusterSecretStoreSpecProviderNgrok#apiUrl
+   */
+  readonly apiUrl?: string;
+
+  /**
+   * Auth configures how the ngrok provider authenticates with the ngrok API.
+   *
+   * @schema ClusterSecretStoreSpecProviderNgrok#auth
+   */
+  readonly auth: ClusterSecretStoreSpecProviderNgrokAuth;
+
+  /**
+   * Vault configures the ngrok vault to sync secrets with.
+   *
+   * @schema ClusterSecretStoreSpecProviderNgrok#vault
+   */
+  readonly vault: ClusterSecretStoreSpecProviderNgrokVault;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderNgrok' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderNgrok(obj: ClusterSecretStoreSpecProviderNgrok | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apiUrl': obj.apiUrl,
+    'auth': toJson_ClusterSecretStoreSpecProviderNgrokAuth(obj.auth),
+    'vault': toJson_ClusterSecretStoreSpecProviderNgrokVault(obj.vault),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -6793,7 +6851,6 @@ export interface ClusterSecretStoreSpecProviderOnboardbase {
    * @schema ClusterSecretStoreSpecProviderOnboardbase#project
    */
   readonly project: string;
-
 }
 
 /**
@@ -6839,7 +6896,6 @@ export interface ClusterSecretStoreSpecProviderOnepassword {
    * @schema ClusterSecretStoreSpecProviderOnepassword#vaults
    */
   readonly vaults: { [key: string]: number };
-
 }
 
 /**
@@ -6885,7 +6941,6 @@ export interface ClusterSecretStoreSpecProviderOnepasswordSdk {
    * @schema ClusterSecretStoreSpecProviderOnepasswordSdk#vault
    */
   readonly vault: string;
-
 }
 
 /**
@@ -6964,7 +7019,6 @@ export interface ClusterSecretStoreSpecProviderOracle {
    * @schema ClusterSecretStoreSpecProviderOracle#vault
    */
   readonly vault: string;
-
 }
 
 /**
@@ -7004,7 +7058,6 @@ export interface ClusterSecretStoreSpecProviderPassbolt {
    * @schema ClusterSecretStoreSpecProviderPassbolt#host
    */
   readonly host: string;
-
 }
 
 /**
@@ -7048,7 +7101,6 @@ export interface ClusterSecretStoreSpecProviderPassworddepot {
    * @schema ClusterSecretStoreSpecProviderPassworddepot#host
    */
   readonly host: string;
-
 }
 
 /**
@@ -7084,7 +7136,6 @@ export interface ClusterSecretStoreSpecProviderPrevider {
    * @schema ClusterSecretStoreSpecProviderPrevider#baseUri
    */
   readonly baseUri?: string;
-
 }
 
 /**
@@ -7146,7 +7197,6 @@ export interface ClusterSecretStoreSpecProviderPulumi {
    * @schema ClusterSecretStoreSpecProviderPulumi#project
    */
   readonly project: string;
-
 }
 
 /**
@@ -7208,7 +7258,6 @@ export interface ClusterSecretStoreSpecProviderScaleway {
    * @schema ClusterSecretStoreSpecProviderScaleway#secretKey
    */
   readonly secretKey: ClusterSecretStoreSpecProviderScalewaySecretKey;
-
 }
 
 /**
@@ -7237,6 +7286,13 @@ export function toJson_ClusterSecretStoreSpecProviderScaleway(obj: ClusterSecret
  */
 export interface ClusterSecretStoreSpecProviderSecretserver {
   /**
+   * Domain is the secret server domain.
+   *
+   * @schema ClusterSecretStoreSpecProviderSecretserver#domain
+   */
+  readonly domain?: string;
+
+  /**
    * Password is the secret server account password.
    *
    * @schema ClusterSecretStoreSpecProviderSecretserver#password
@@ -7257,7 +7313,6 @@ export interface ClusterSecretStoreSpecProviderSecretserver {
    * @schema ClusterSecretStoreSpecProviderSecretserver#username
    */
   readonly username: ClusterSecretStoreSpecProviderSecretserverUsername;
-
 }
 
 /**
@@ -7267,6 +7322,7 @@ export interface ClusterSecretStoreSpecProviderSecretserver {
 export function toJson_ClusterSecretStoreSpecProviderSecretserver(obj: ClusterSecretStoreSpecProviderSecretserver | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'domain': obj.domain,
     'password': toJson_ClusterSecretStoreSpecProviderSecretserverPassword(obj.password),
     'serverURL': obj.serverUrl,
     'username': toJson_ClusterSecretStoreSpecProviderSecretserverUsername(obj.username),
@@ -7309,7 +7365,6 @@ export interface ClusterSecretStoreSpecProviderSenhasegura {
    * @schema ClusterSecretStoreSpecProviderSenhasegura#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -7358,6 +7413,15 @@ export interface ClusterSecretStoreSpecProviderVault {
    * @schema ClusterSecretStoreSpecProviderVault#caProvider
    */
   readonly caProvider?: ClusterSecretStoreSpecProviderVaultCaProvider;
+
+  /**
+   * CheckAndSet defines the Check-And-Set (CAS) settings for PushSecret operations.
+   * Only applies to Vault KV v2 stores. When enabled, write operations must include
+   * the current version of the secret to prevent unintentional overwrites.
+   *
+   * @schema ClusterSecretStoreSpecProviderVault#checkAndSet
+   */
+  readonly checkAndSet?: ClusterSecretStoreSpecProviderVaultCheckAndSet;
 
   /**
    * ForwardInconsistent tells Vault to forward read-after-write requests to the Vault
@@ -7430,7 +7494,6 @@ export interface ClusterSecretStoreSpecProviderVault {
    * @schema ClusterSecretStoreSpecProviderVault#version
    */
   readonly version?: ClusterSecretStoreSpecProviderVaultVersion;
-
 }
 
 /**
@@ -7443,6 +7506,7 @@ export function toJson_ClusterSecretStoreSpecProviderVault(obj: ClusterSecretSto
     'auth': toJson_ClusterSecretStoreSpecProviderVaultAuth(obj.auth),
     'caBundle': obj.caBundle,
     'caProvider': toJson_ClusterSecretStoreSpecProviderVaultCaProvider(obj.caProvider),
+    'checkAndSet': toJson_ClusterSecretStoreSpecProviderVaultCheckAndSet(obj.checkAndSet),
     'forwardInconsistent': obj.forwardInconsistent,
     'headers': ((obj.headers) === undefined) ? undefined : (Object.entries(obj.headers).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'namespace': obj.namespace,
@@ -7451,6 +7515,43 @@ export function toJson_ClusterSecretStoreSpecProviderVault(obj: ClusterSecretSto
     'server': obj.server,
     'tls': toJson_ClusterSecretStoreSpecProviderVaultTls(obj.tls),
     'version': obj.version,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Volcengine configures this store to sync secrets using the Volcengine provider
+ *
+ * @schema ClusterSecretStoreSpecProviderVolcengine
+ */
+export interface ClusterSecretStoreSpecProviderVolcengine {
+  /**
+   * Auth defines the authentication method to use.
+   * If not specified, the provider will try to use IRSA (IAM Role for Service Account).
+   *
+   * @schema ClusterSecretStoreSpecProviderVolcengine#auth
+   */
+  readonly auth?: ClusterSecretStoreSpecProviderVolcengineAuth;
+
+  /**
+   * Region specifies the Volcengine region to connect to.
+   *
+   * @schema ClusterSecretStoreSpecProviderVolcengine#region
+   */
+  readonly region: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderVolcengine' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderVolcengine(obj: ClusterSecretStoreSpecProviderVolcengine | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'auth': toJson_ClusterSecretStoreSpecProviderVolcengineAuth(obj.auth),
+    'region': obj.region,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -7536,7 +7637,6 @@ export interface ClusterSecretStoreSpecProviderWebhook {
    * @schema ClusterSecretStoreSpecProviderWebhook#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -7576,7 +7676,7 @@ export interface ClusterSecretStoreSpecProviderYandexcertificatemanager {
   readonly apiEndpoint?: string;
 
   /**
-   * Auth defines the information necessary to authenticate against Yandex Certificate Manager
+   * Auth defines the information necessary to authenticate against Yandex.Cloud
    *
    * @schema ClusterSecretStoreSpecProviderYandexcertificatemanager#auth
    */
@@ -7589,6 +7689,12 @@ export interface ClusterSecretStoreSpecProviderYandexcertificatemanager {
    */
   readonly caProvider?: ClusterSecretStoreSpecProviderYandexcertificatemanagerCaProvider;
 
+  /**
+   * FetchingPolicy configures the provider to interpret the `data.secretKey.remoteRef.key` field in ExternalSecret as certificate ID or certificate name
+   *
+   * @schema ClusterSecretStoreSpecProviderYandexcertificatemanager#fetching
+   */
+  readonly fetching?: ClusterSecretStoreSpecProviderYandexcertificatemanagerFetching;
 }
 
 /**
@@ -7601,6 +7707,7 @@ export function toJson_ClusterSecretStoreSpecProviderYandexcertificatemanager(ob
     'apiEndpoint': obj.apiEndpoint,
     'auth': toJson_ClusterSecretStoreSpecProviderYandexcertificatemanagerAuth(obj.auth),
     'caProvider': toJson_ClusterSecretStoreSpecProviderYandexcertificatemanagerCaProvider(obj.caProvider),
+    'fetching': toJson_ClusterSecretStoreSpecProviderYandexcertificatemanagerFetching(obj.fetching),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -7621,7 +7728,7 @@ export interface ClusterSecretStoreSpecProviderYandexlockbox {
   readonly apiEndpoint?: string;
 
   /**
-   * Auth defines the information necessary to authenticate against Yandex Lockbox
+   * Auth defines the information necessary to authenticate against Yandex.Cloud
    *
    * @schema ClusterSecretStoreSpecProviderYandexlockbox#auth
    */
@@ -7634,6 +7741,12 @@ export interface ClusterSecretStoreSpecProviderYandexlockbox {
    */
   readonly caProvider?: ClusterSecretStoreSpecProviderYandexlockboxCaProvider;
 
+  /**
+   * FetchingPolicy configures the provider to interpret the `data.secretKey.remoteRef.key` field in ExternalSecret as secret ID or secret name
+   *
+   * @schema ClusterSecretStoreSpecProviderYandexlockbox#fetching
+   */
+  readonly fetching?: ClusterSecretStoreSpecProviderYandexlockboxFetching;
 }
 
 /**
@@ -7646,6 +7759,7 @@ export function toJson_ClusterSecretStoreSpecProviderYandexlockbox(obj: ClusterS
     'apiEndpoint': obj.apiEndpoint,
     'auth': toJson_ClusterSecretStoreSpecProviderYandexlockboxAuth(obj.auth),
     'caProvider': toJson_ClusterSecretStoreSpecProviderYandexlockboxCaProvider(obj.caProvider),
+    'fetching': toJson_ClusterSecretStoreSpecProviderYandexlockboxFetching(obj.fetching),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -7683,7 +7797,6 @@ export interface ClusterSecretStoreSpecConditionsNamespaceSelectorMatchExpressio
    * @schema ClusterSecretStoreSpecConditionsNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -7723,7 +7836,6 @@ export interface ClusterSecretStoreSpecProviderAkeylessAuthSecretRef {
    * @schema ClusterSecretStoreSpecProviderAkeylessAuthSecretRef#secretRef
    */
   readonly secretRef?: ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRef;
-
 }
 
 /**
@@ -7775,7 +7887,6 @@ export interface ClusterSecretStoreSpecProviderAkeylessCaProvider {
    * @schema ClusterSecretStoreSpecProviderAkeylessCaProvider#type
    */
   readonly type: ClusterSecretStoreSpecProviderAkeylessCaProviderType;
-
 }
 
 /**
@@ -7814,7 +7925,6 @@ export interface ClusterSecretStoreSpecProviderAlibabaAuth {
    * @schema ClusterSecretStoreSpecProviderAlibabaAuth#secretRef
    */
   readonly secretRef?: ClusterSecretStoreSpecProviderAlibabaAuthSecretRef;
-
 }
 
 /**
@@ -7854,7 +7964,6 @@ export interface ClusterSecretStoreSpecProviderAwsAuth {
    * @schema ClusterSecretStoreSpecProviderAwsAuth#secretRef
    */
   readonly secretRef?: ClusterSecretStoreSpecProviderAwsAuthSecretRef;
-
 }
 
 /**
@@ -7899,7 +8008,6 @@ export interface ClusterSecretStoreSpecProviderAwsSecretsManager {
    * @schema ClusterSecretStoreSpecProviderAwsSecretsManager#recoveryWindowInDays
    */
   readonly recoveryWindowInDays?: number;
-
 }
 
 /**
@@ -7942,7 +8050,6 @@ export interface ClusterSecretStoreSpecProviderAwsSessionTags {
    * @schema ClusterSecretStoreSpecProviderAwsSessionTags#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -7993,7 +8100,6 @@ export interface ClusterSecretStoreSpecProviderAzurekvAuthSecretRef {
    * @schema ClusterSecretStoreSpecProviderAzurekvAuthSecretRef#tenantId
    */
   readonly tenantId?: ClusterSecretStoreSpecProviderAzurekvAuthSecretRefTenantId;
-
 }
 
 /**
@@ -8031,10 +8137,67 @@ export enum ClusterSecretStoreSpecProviderAzurekvAuthType {
 }
 
 /**
+ * CustomCloudConfig defines custom Azure Stack Hub or Azure Stack Edge endpoints.
+ * Required when EnvironmentType is AzureStackCloud.
+ * IMPORTANT: This feature REQUIRES UseAzureSDK to be set to true. Custom cloud
+ * configuration is not supported with the legacy go-autorest SDK.
+ *
+ * @schema ClusterSecretStoreSpecProviderAzurekvCustomCloudConfig
+ */
+export interface ClusterSecretStoreSpecProviderAzurekvCustomCloudConfig {
+  /**
+   * ActiveDirectoryEndpoint is the AAD endpoint for authentication
+   * Required when using custom cloud configuration
+   *
+   * @schema ClusterSecretStoreSpecProviderAzurekvCustomCloudConfig#activeDirectoryEndpoint
+   */
+  readonly activeDirectoryEndpoint: string;
+
+  /**
+   * KeyVaultDNSSuffix is the DNS suffix for Key Vault URLs
+   *
+   * @schema ClusterSecretStoreSpecProviderAzurekvCustomCloudConfig#keyVaultDNSSuffix
+   */
+  readonly keyVaultDnsSuffix?: string;
+
+  /**
+   * KeyVaultEndpoint is the Key Vault service endpoint
+   *
+   * @schema ClusterSecretStoreSpecProviderAzurekvCustomCloudConfig#keyVaultEndpoint
+   */
+  readonly keyVaultEndpoint?: string;
+
+  /**
+   * ResourceManagerEndpoint is the Azure Resource Manager endpoint
+   *
+   * @schema ClusterSecretStoreSpecProviderAzurekvCustomCloudConfig#resourceManagerEndpoint
+   */
+  readonly resourceManagerEndpoint?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderAzurekvCustomCloudConfig' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderAzurekvCustomCloudConfig(obj: ClusterSecretStoreSpecProviderAzurekvCustomCloudConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'activeDirectoryEndpoint': obj.activeDirectoryEndpoint,
+    'keyVaultDNSSuffix': obj.keyVaultDnsSuffix,
+    'keyVaultEndpoint': obj.keyVaultEndpoint,
+    'resourceManagerEndpoint': obj.resourceManagerEndpoint,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * EnvironmentType specifies the Azure cloud environment endpoints to use for
  * connecting and authenticating with Azure. By default it points to the public cloud AAD endpoint.
  * The following endpoints are available, also see here: https://github.com/Azure/go-autorest/blob/main/autorest/azure/environments.go#L152
- * PublicCloud, USGovernmentCloud, ChinaCloud, GermanCloud
+ * PublicCloud, USGovernmentCloud, ChinaCloud, GermanCloud, AzureStackCloud
+ * Use AzureStackCloud when you need to configure custom Azure Stack Hub or Azure Stack Edge endpoints.
  *
  * @schema ClusterSecretStoreSpecProviderAzurekvEnvironmentType
  */
@@ -8047,6 +8210,8 @@ export enum ClusterSecretStoreSpecProviderAzurekvEnvironmentType {
   CHINA_CLOUD = "ChinaCloud",
   /** GermanCloud */
   GERMAN_CLOUD = "GermanCloud",
+  /** AzureStackCloud */
+  AZURE_STACK_CLOUD = "AzureStackCloud",
 }
 
 /**
@@ -8079,7 +8244,6 @@ export interface ClusterSecretStoreSpecProviderAzurekvServiceAccountRef {
    * @schema ClusterSecretStoreSpecProviderAzurekvServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -8138,7 +8302,6 @@ export interface ClusterSecretStoreSpecProviderBeyondtrustAuth {
    * @schema ClusterSecretStoreSpecProviderBeyondtrustAuth#clientSecret
    */
   readonly clientSecret?: ClusterSecretStoreSpecProviderBeyondtrustAuthClientSecret;
-
 }
 
 /**
@@ -8201,7 +8364,6 @@ export interface ClusterSecretStoreSpecProviderBeyondtrustServer {
    * @schema ClusterSecretStoreSpecProviderBeyondtrustServer#verifyCA
    */
   readonly verifyCa: boolean;
-
 }
 
 /**
@@ -8236,7 +8398,6 @@ export interface ClusterSecretStoreSpecProviderBitwardensecretsmanagerAuth {
    * @schema ClusterSecretStoreSpecProviderBitwardensecretsmanagerAuth#secretRef
    */
   readonly secretRef: ClusterSecretStoreSpecProviderBitwardensecretsmanagerAuthSecretRef;
-
 }
 
 /**
@@ -8287,7 +8448,6 @@ export interface ClusterSecretStoreSpecProviderBitwardensecretsmanagerCaProvider
    * @schema ClusterSecretStoreSpecProviderBitwardensecretsmanagerCaProvider#type
    */
   readonly type: ClusterSecretStoreSpecProviderBitwardensecretsmanagerCaProviderType;
-
 }
 
 /**
@@ -8319,7 +8479,6 @@ export interface ClusterSecretStoreSpecProviderChefAuth {
    * @schema ClusterSecretStoreSpecProviderChefAuth#secretRef
    */
   readonly secretRef: ClusterSecretStoreSpecProviderChefAuthSecretRef;
-
 }
 
 /**
@@ -8348,7 +8507,6 @@ export interface ClusterSecretStoreSpecProviderCloudrusmAuth {
    * @schema ClusterSecretStoreSpecProviderCloudrusmAuth#secretRef
    */
   readonly secretRef?: ClusterSecretStoreSpecProviderCloudrusmAuthSecretRef;
-
 }
 
 /**
@@ -8384,7 +8542,6 @@ export interface ClusterSecretStoreSpecProviderConjurAuth {
    * @schema ClusterSecretStoreSpecProviderConjurAuth#jwt
    */
   readonly jwt?: ClusterSecretStoreSpecProviderConjurAuthJwt;
-
 }
 
 /**
@@ -8438,7 +8595,6 @@ export interface ClusterSecretStoreSpecProviderConjurCaProvider {
    * @schema ClusterSecretStoreSpecProviderConjurCaProvider#type
    */
   readonly type: ClusterSecretStoreSpecProviderConjurCaProviderType;
-
 }
 
 /**
@@ -8477,7 +8633,6 @@ export interface ClusterSecretStoreSpecProviderDelineaClientId {
    * @schema ClusterSecretStoreSpecProviderDelineaClientId#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -8514,7 +8669,6 @@ export interface ClusterSecretStoreSpecProviderDelineaClientSecret {
    * @schema ClusterSecretStoreSpecProviderDelineaClientSecret#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -8542,7 +8696,6 @@ export interface ClusterSecretStoreSpecProviderDevice42Auth {
    * @schema ClusterSecretStoreSpecProviderDevice42Auth#secretRef
    */
   readonly secretRef: ClusterSecretStoreSpecProviderDevice42AuthSecretRef;
-
 }
 
 /**
@@ -8569,7 +8722,6 @@ export interface ClusterSecretStoreSpecProviderDopplerAuth {
    * @schema ClusterSecretStoreSpecProviderDopplerAuth#secretRef
    */
   readonly secretRef: ClusterSecretStoreSpecProviderDopplerAuthSecretRef;
-
 }
 
 /**
@@ -8642,7 +8794,6 @@ export interface ClusterSecretStoreSpecProviderFakeData {
    * @schema ClusterSecretStoreSpecProviderFakeData#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -8673,7 +8824,6 @@ export interface ClusterSecretStoreSpecProviderFortanixApiKey {
    * @schema ClusterSecretStoreSpecProviderFortanixApiKey#secretRef
    */
   readonly secretRef?: ClusterSecretStoreSpecProviderFortanixApiKeySecretRef;
-
 }
 
 /**
@@ -8706,6 +8856,12 @@ export interface ClusterSecretStoreSpecProviderGcpsmAuth {
    */
   readonly workloadIdentity?: ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentity;
 
+  /**
+   * GCPWorkloadIdentityFederation holds the configurations required for generating federated access tokens.
+   *
+   * @schema ClusterSecretStoreSpecProviderGcpsmAuth#workloadIdentityFederation
+   */
+  readonly workloadIdentityFederation?: ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation;
 }
 
 /**
@@ -8717,6 +8873,7 @@ export function toJson_ClusterSecretStoreSpecProviderGcpsmAuth(obj: ClusterSecre
   const result = {
     'secretRef': toJson_ClusterSecretStoreSpecProviderGcpsmAuthSecretRef(obj.secretRef),
     'workloadIdentity': toJson_ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentity(obj.workloadIdentity),
+    'workloadIdentityFederation': toJson_ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation(obj.workloadIdentityFederation),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -8736,7 +8893,6 @@ export interface ClusterSecretStoreSpecProviderGithubAuth {
    * @schema ClusterSecretStoreSpecProviderGithubAuth#privateKey
    */
   readonly privateKey: ClusterSecretStoreSpecProviderGithubAuthPrivateKey;
-
 }
 
 /**
@@ -8763,7 +8919,6 @@ export interface ClusterSecretStoreSpecProviderGitlabAuth {
    * @schema ClusterSecretStoreSpecProviderGitlabAuth#SecretRef
    */
   readonly secretRef: ClusterSecretStoreSpecProviderGitlabAuthSecretRef;
-
 }
 
 /**
@@ -8814,7 +8969,6 @@ export interface ClusterSecretStoreSpecProviderGitlabCaProvider {
    * @schema ClusterSecretStoreSpecProviderGitlabCaProvider#type
    */
   readonly type: ClusterSecretStoreSpecProviderGitlabCaProviderType;
-
 }
 
 /**
@@ -8851,7 +9005,6 @@ export interface ClusterSecretStoreSpecProviderIbmAuth {
    * @schema ClusterSecretStoreSpecProviderIbmAuth#secretRef
    */
   readonly secretRef?: ClusterSecretStoreSpecProviderIbmAuthSecretRef;
-
 }
 
 /**
@@ -8876,15 +9029,54 @@ export function toJson_ClusterSecretStoreSpecProviderIbmAuth(obj: ClusterSecretS
  */
 export interface ClusterSecretStoreSpecProviderInfisicalAuth {
   /**
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuth#awsAuthCredentials
+   */
+  readonly awsAuthCredentials?: ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentials;
+
+  /**
    * @schema ClusterSecretStoreSpecProviderInfisicalAuth#azureAuthCredentials
    */
   readonly azureAuthCredentials?: ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentials;
 
   /**
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuth#gcpIamAuthCredentials
+   */
+  readonly gcpIamAuthCredentials?: ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials;
+
+  /**
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuth#gcpIdTokenAuthCredentials
+   */
+  readonly gcpIdTokenAuthCredentials?: ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials;
+
+  /**
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuth#jwtAuthCredentials
+   */
+  readonly jwtAuthCredentials?: ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentials;
+
+  /**
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuth#kubernetesAuthCredentials
+   */
+  readonly kubernetesAuthCredentials?: ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials;
+
+  /**
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuth#ldapAuthCredentials
+   */
+  readonly ldapAuthCredentials?: ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentials;
+
+  /**
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuth#ociAuthCredentials
+   */
+  readonly ociAuthCredentials?: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials;
+
+  /**
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuth#tokenAuthCredentials
+   */
+  readonly tokenAuthCredentials?: ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentials;
+
+  /**
    * @schema ClusterSecretStoreSpecProviderInfisicalAuth#universalAuthCredentials
    */
   readonly universalAuthCredentials?: ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthCredentials;
-
 }
 
 /**
@@ -8894,7 +9086,15 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuth {
 export function toJson_ClusterSecretStoreSpecProviderInfisicalAuth(obj: ClusterSecretStoreSpecProviderInfisicalAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'awsAuthCredentials': toJson_ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentials(obj.awsAuthCredentials),
     'azureAuthCredentials': toJson_ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentials(obj.azureAuthCredentials),
+    'gcpIamAuthCredentials': toJson_ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials(obj.gcpIamAuthCredentials),
+    'gcpIdTokenAuthCredentials': toJson_ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials(obj.gcpIdTokenAuthCredentials),
+    'jwtAuthCredentials': toJson_ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentials(obj.jwtAuthCredentials),
+    'kubernetesAuthCredentials': toJson_ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials(obj.kubernetesAuthCredentials),
+    'ldapAuthCredentials': toJson_ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentials(obj.ldapAuthCredentials),
+    'ociAuthCredentials': toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials(obj.ociAuthCredentials),
+    'tokenAuthCredentials': toJson_ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentials(obj.tokenAuthCredentials),
     'universalAuthCredentials': toJson_ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthCredentials(obj.universalAuthCredentials),
   };
   // filter undefined values
@@ -8945,7 +9145,6 @@ export interface ClusterSecretStoreSpecProviderInfisicalSecretsScope {
    * @schema ClusterSecretStoreSpecProviderInfisicalSecretsScope#secretsPath
    */
   readonly secretsPath?: string;
-
 }
 
 /**
@@ -8995,7 +9194,6 @@ export interface ClusterSecretStoreSpecProviderKeepersecurityAuthRef {
    * @schema ClusterSecretStoreSpecProviderKeepersecurityAuthRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -9040,7 +9238,6 @@ export interface ClusterSecretStoreSpecProviderKubernetesAuth {
    * @schema ClusterSecretStoreSpecProviderKubernetesAuth#token
    */
   readonly token?: ClusterSecretStoreSpecProviderKubernetesAuthToken;
-
 }
 
 /**
@@ -9087,7 +9284,6 @@ export interface ClusterSecretStoreSpecProviderKubernetesAuthRef {
    * @schema ClusterSecretStoreSpecProviderKubernetesAuthRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -9132,7 +9328,6 @@ export interface ClusterSecretStoreSpecProviderKubernetesServer {
    * @schema ClusterSecretStoreSpecProviderKubernetesServer#url
    */
   readonly url?: string;
-
 }
 
 /**
@@ -9145,6 +9340,62 @@ export function toJson_ClusterSecretStoreSpecProviderKubernetesServer(obj: Clust
     'caBundle': obj.caBundle,
     'caProvider': toJson_ClusterSecretStoreSpecProviderKubernetesServerCaProvider(obj.caProvider),
     'url': obj.url,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Auth configures how the ngrok provider authenticates with the ngrok API.
+ *
+ * @schema ClusterSecretStoreSpecProviderNgrokAuth
+ */
+export interface ClusterSecretStoreSpecProviderNgrokAuth {
+  /**
+   * APIKey is the API Key used to authenticate with ngrok. See https://ngrok.com/docs/api/#authentication
+   *
+   * @schema ClusterSecretStoreSpecProviderNgrokAuth#apiKey
+   */
+  readonly apiKey?: ClusterSecretStoreSpecProviderNgrokAuthApiKey;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderNgrokAuth' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderNgrokAuth(obj: ClusterSecretStoreSpecProviderNgrokAuth | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apiKey': toJson_ClusterSecretStoreSpecProviderNgrokAuthApiKey(obj.apiKey),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Vault configures the ngrok vault to sync secrets with.
+ *
+ * @schema ClusterSecretStoreSpecProviderNgrokVault
+ */
+export interface ClusterSecretStoreSpecProviderNgrokVault {
+  /**
+   * Name is the name of the ngrok vault to sync secrets with.
+   *
+   * @schema ClusterSecretStoreSpecProviderNgrokVault#name
+   */
+  readonly name: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderNgrokVault' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderNgrokVault(obj: ClusterSecretStoreSpecProviderNgrokVault | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -9171,7 +9422,6 @@ export interface ClusterSecretStoreSpecProviderOnboardbaseAuth {
    * @schema ClusterSecretStoreSpecProviderOnboardbaseAuth#passcodeRef
    */
   readonly passcodeRef: ClusterSecretStoreSpecProviderOnboardbaseAuthPasscodeRef;
-
 }
 
 /**
@@ -9201,7 +9451,6 @@ export interface ClusterSecretStoreSpecProviderOnepasswordAuth {
    * @schema ClusterSecretStoreSpecProviderOnepasswordAuth#secretRef
    */
   readonly secretRef: ClusterSecretStoreSpecProviderOnepasswordAuthSecretRef;
-
 }
 
 /**
@@ -9230,7 +9479,6 @@ export interface ClusterSecretStoreSpecProviderOnepasswordSdkAuth {
    * @schema ClusterSecretStoreSpecProviderOnepasswordSdkAuth#serviceAccountSecretRef
    */
   readonly serviceAccountSecretRef: ClusterSecretStoreSpecProviderOnepasswordSdkAuthServiceAccountSecretRef;
-
 }
 
 /**
@@ -9267,7 +9515,6 @@ export interface ClusterSecretStoreSpecProviderOnepasswordSdkIntegrationInfo {
    * @schema ClusterSecretStoreSpecProviderOnepasswordSdkIntegrationInfo#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -9312,7 +9559,6 @@ export interface ClusterSecretStoreSpecProviderOracleAuth {
    * @schema ClusterSecretStoreSpecProviderOracleAuth#user
    */
   readonly user: string;
-
 }
 
 /**
@@ -9377,7 +9623,6 @@ export interface ClusterSecretStoreSpecProviderOracleServiceAccountRef {
    * @schema ClusterSecretStoreSpecProviderOracleServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -9417,7 +9662,6 @@ export interface ClusterSecretStoreSpecProviderPassboltAuth {
    * @schema ClusterSecretStoreSpecProviderPassboltAuth#privateKeySecretRef
    */
   readonly privateKeySecretRef: ClusterSecretStoreSpecProviderPassboltAuthPrivateKeySecretRef;
-
 }
 
 /**
@@ -9445,7 +9689,6 @@ export interface ClusterSecretStoreSpecProviderPassworddepotAuth {
    * @schema ClusterSecretStoreSpecProviderPassworddepotAuth#secretRef
    */
   readonly secretRef: ClusterSecretStoreSpecProviderPassworddepotAuthSecretRef;
-
 }
 
 /**
@@ -9474,7 +9717,6 @@ export interface ClusterSecretStoreSpecProviderPreviderAuth {
    * @schema ClusterSecretStoreSpecProviderPreviderAuth#secretRef
    */
   readonly secretRef?: ClusterSecretStoreSpecProviderPreviderAuthSecretRef;
-
 }
 
 /**
@@ -9503,7 +9745,6 @@ export interface ClusterSecretStoreSpecProviderPulumiAccessToken {
    * @schema ClusterSecretStoreSpecProviderPulumiAccessToken#secretRef
    */
   readonly secretRef?: ClusterSecretStoreSpecProviderPulumiAccessTokenSecretRef;
-
 }
 
 /**
@@ -9539,7 +9780,6 @@ export interface ClusterSecretStoreSpecProviderScalewayAccessKey {
    * @schema ClusterSecretStoreSpecProviderScalewayAccessKey#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -9576,7 +9816,6 @@ export interface ClusterSecretStoreSpecProviderScalewaySecretKey {
    * @schema ClusterSecretStoreSpecProviderScalewaySecretKey#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -9613,7 +9852,6 @@ export interface ClusterSecretStoreSpecProviderSecretserverPassword {
    * @schema ClusterSecretStoreSpecProviderSecretserverPassword#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -9650,7 +9888,6 @@ export interface ClusterSecretStoreSpecProviderSecretserverUsername {
    * @schema ClusterSecretStoreSpecProviderSecretserverUsername#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -9686,7 +9923,6 @@ export interface ClusterSecretStoreSpecProviderSenhaseguraAuth {
    * @schema ClusterSecretStoreSpecProviderSenhaseguraAuth#clientSecretSecretRef
    */
   readonly clientSecretSecretRef: ClusterSecretStoreSpecProviderSenhaseguraAuthClientSecretSecretRef;
-
 }
 
 /**
@@ -9782,7 +10018,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuth {
    * @schema ClusterSecretStoreSpecProviderVaultAuth#userPass
    */
   readonly userPass?: ClusterSecretStoreSpecProviderVaultAuthUserPass;
-
 }
 
 /**
@@ -9841,7 +10076,6 @@ export interface ClusterSecretStoreSpecProviderVaultCaProvider {
    * @schema ClusterSecretStoreSpecProviderVaultCaProvider#type
    */
   readonly type: ClusterSecretStoreSpecProviderVaultCaProviderType;
-
 }
 
 /**
@@ -9855,6 +10089,37 @@ export function toJson_ClusterSecretStoreSpecProviderVaultCaProvider(obj: Cluste
     'name': obj.name,
     'namespace': obj.namespace,
     'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * CheckAndSet defines the Check-And-Set (CAS) settings for PushSecret operations.
+ * Only applies to Vault KV v2 stores. When enabled, write operations must include
+ * the current version of the secret to prevent unintentional overwrites.
+ *
+ * @schema ClusterSecretStoreSpecProviderVaultCheckAndSet
+ */
+export interface ClusterSecretStoreSpecProviderVaultCheckAndSet {
+  /**
+   * Required when true, all write operations must include a check-and-set parameter.
+   * This helps prevent unintentional overwrites of secrets.
+   *
+   * @schema ClusterSecretStoreSpecProviderVaultCheckAndSet#required
+   */
+  readonly required?: boolean;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderVaultCheckAndSet' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderVaultCheckAndSet(obj: ClusterSecretStoreSpecProviderVaultCheckAndSet | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'required': obj.required,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -9888,7 +10153,6 @@ export interface ClusterSecretStoreSpecProviderVaultTls {
    * @schema ClusterSecretStoreSpecProviderVaultTls#keySecretRef
    */
   readonly keySecretRef?: ClusterSecretStoreSpecProviderVaultTlsKeySecretRef;
-
 }
 
 /**
@@ -9920,6 +10184,36 @@ export enum ClusterSecretStoreSpecProviderVaultVersion {
 }
 
 /**
+ * Auth defines the authentication method to use.
+ * If not specified, the provider will try to use IRSA (IAM Role for Service Account).
+ *
+ * @schema ClusterSecretStoreSpecProviderVolcengineAuth
+ */
+export interface ClusterSecretStoreSpecProviderVolcengineAuth {
+  /**
+   * SecretRef defines the static credentials to use for authentication.
+   * If not set, IRSA is used.
+   *
+   * @schema ClusterSecretStoreSpecProviderVolcengineAuth#secretRef
+   */
+  readonly secretRef?: ClusterSecretStoreSpecProviderVolcengineAuthSecretRef;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderVolcengineAuth' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderVolcengineAuth(obj: ClusterSecretStoreSpecProviderVolcengineAuth | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'secretRef': toJson_ClusterSecretStoreSpecProviderVolcengineAuthSecretRef(obj.secretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * Auth specifies a authorization protocol. Only one protocol may be set.
  *
  * @schema ClusterSecretStoreSpecProviderWebhookAuth
@@ -9931,7 +10225,6 @@ export interface ClusterSecretStoreSpecProviderWebhookAuth {
    * @schema ClusterSecretStoreSpecProviderWebhookAuth#ntlm
    */
   readonly ntlm?: ClusterSecretStoreSpecProviderWebhookAuthNtlm;
-
 }
 
 /**
@@ -9981,7 +10274,6 @@ export interface ClusterSecretStoreSpecProviderWebhookCaProvider {
    * @schema ClusterSecretStoreSpecProviderWebhookCaProvider#type
    */
   readonly type: ClusterSecretStoreSpecProviderWebhookCaProviderType;
-
 }
 
 /**
@@ -10013,7 +10305,6 @@ export interface ClusterSecretStoreSpecProviderWebhookResult {
    * @schema ClusterSecretStoreSpecProviderWebhookResult#jsonPath
    */
   readonly jsonPath?: string;
-
 }
 
 /**
@@ -10047,7 +10338,6 @@ export interface ClusterSecretStoreSpecProviderWebhookSecrets {
    * @schema ClusterSecretStoreSpecProviderWebhookSecrets#secretRef
    */
   readonly secretRef: ClusterSecretStoreSpecProviderWebhookSecretsSecretRef;
-
 }
 
 /**
@@ -10066,7 +10356,7 @@ export function toJson_ClusterSecretStoreSpecProviderWebhookSecrets(obj: Cluster
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Auth defines the information necessary to authenticate against Yandex Certificate Manager
+ * Auth defines the information necessary to authenticate against Yandex.Cloud
  *
  * @schema ClusterSecretStoreSpecProviderYandexcertificatemanagerAuth
  */
@@ -10077,7 +10367,6 @@ export interface ClusterSecretStoreSpecProviderYandexcertificatemanagerAuth {
    * @schema ClusterSecretStoreSpecProviderYandexcertificatemanagerAuth#authorizedKeySecretRef
    */
   readonly authorizedKeySecretRef?: ClusterSecretStoreSpecProviderYandexcertificatemanagerAuthAuthorizedKeySecretRef;
-
 }
 
 /**
@@ -10107,7 +10396,6 @@ export interface ClusterSecretStoreSpecProviderYandexcertificatemanagerCaProvide
    * @schema ClusterSecretStoreSpecProviderYandexcertificatemanagerCaProvider#certSecretRef
    */
   readonly certSecretRef?: ClusterSecretStoreSpecProviderYandexcertificatemanagerCaProviderCertSecretRef;
-
 }
 
 /**
@@ -10125,7 +10413,43 @@ export function toJson_ClusterSecretStoreSpecProviderYandexcertificatemanagerCaP
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Auth defines the information necessary to authenticate against Yandex Lockbox
+ * FetchingPolicy configures the provider to interpret the `data.secretKey.remoteRef.key` field in ExternalSecret as certificate ID or certificate name
+ *
+ * @schema ClusterSecretStoreSpecProviderYandexcertificatemanagerFetching
+ */
+export interface ClusterSecretStoreSpecProviderYandexcertificatemanagerFetching {
+  /**
+   * ByID configures the provider to interpret the `data.secretKey.remoteRef.key` field in ExternalSecret as secret ID.
+   *
+   * @schema ClusterSecretStoreSpecProviderYandexcertificatemanagerFetching#byID
+   */
+  readonly byId?: any;
+
+  /**
+   * ByName configures the provider to interpret the `data.secretKey.remoteRef.key` field in ExternalSecret as secret name.
+   *
+   * @schema ClusterSecretStoreSpecProviderYandexcertificatemanagerFetching#byName
+   */
+  readonly byName?: ClusterSecretStoreSpecProviderYandexcertificatemanagerFetchingByName;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderYandexcertificatemanagerFetching' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderYandexcertificatemanagerFetching(obj: ClusterSecretStoreSpecProviderYandexcertificatemanagerFetching | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'byID': obj.byId,
+    'byName': toJson_ClusterSecretStoreSpecProviderYandexcertificatemanagerFetchingByName(obj.byName),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Auth defines the information necessary to authenticate against Yandex.Cloud
  *
  * @schema ClusterSecretStoreSpecProviderYandexlockboxAuth
  */
@@ -10136,7 +10460,6 @@ export interface ClusterSecretStoreSpecProviderYandexlockboxAuth {
    * @schema ClusterSecretStoreSpecProviderYandexlockboxAuth#authorizedKeySecretRef
    */
   readonly authorizedKeySecretRef?: ClusterSecretStoreSpecProviderYandexlockboxAuthAuthorizedKeySecretRef;
-
 }
 
 /**
@@ -10166,7 +10489,6 @@ export interface ClusterSecretStoreSpecProviderYandexlockboxCaProvider {
    * @schema ClusterSecretStoreSpecProviderYandexlockboxCaProvider#certSecretRef
    */
   readonly certSecretRef?: ClusterSecretStoreSpecProviderYandexlockboxCaProviderCertSecretRef;
-
 }
 
 /**
@@ -10177,6 +10499,42 @@ export function toJson_ClusterSecretStoreSpecProviderYandexlockboxCaProvider(obj
   if (obj === undefined) { return undefined; }
   const result = {
     'certSecretRef': toJson_ClusterSecretStoreSpecProviderYandexlockboxCaProviderCertSecretRef(obj.certSecretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * FetchingPolicy configures the provider to interpret the `data.secretKey.remoteRef.key` field in ExternalSecret as secret ID or secret name
+ *
+ * @schema ClusterSecretStoreSpecProviderYandexlockboxFetching
+ */
+export interface ClusterSecretStoreSpecProviderYandexlockboxFetching {
+  /**
+   * ByID configures the provider to interpret the `data.secretKey.remoteRef.key` field in ExternalSecret as secret ID.
+   *
+   * @schema ClusterSecretStoreSpecProviderYandexlockboxFetching#byID
+   */
+  readonly byId?: any;
+
+  /**
+   * ByName configures the provider to interpret the `data.secretKey.remoteRef.key` field in ExternalSecret as secret name.
+   *
+   * @schema ClusterSecretStoreSpecProviderYandexlockboxFetching#byName
+   */
+  readonly byName?: ClusterSecretStoreSpecProviderYandexlockboxFetchingByName;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderYandexlockboxFetching' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderYandexlockboxFetching(obj: ClusterSecretStoreSpecProviderYandexlockboxFetching | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'byID': obj.byId,
+    'byName': toJson_ClusterSecretStoreSpecProviderYandexlockboxFetchingByName(obj.byName),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -10223,7 +10581,6 @@ export interface ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAu
    * @schema ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuth#serviceAccountRef
    */
   readonly serviceAccountRef?: ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthServiceAccountRef;
-
 }
 
 /**
@@ -10272,7 +10629,6 @@ export interface ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRef {
    * @schema ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRef#accessTypeParam
    */
   readonly accessTypeParam?: ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam;
-
 }
 
 /**
@@ -10328,7 +10684,6 @@ export interface ClusterSecretStoreSpecProviderAlibabaAuthRrsa {
    * @schema ClusterSecretStoreSpecProviderAlibabaAuthRrsa#sessionName
    */
   readonly sessionName: string;
-
 }
 
 /**
@@ -10367,7 +10722,6 @@ export interface ClusterSecretStoreSpecProviderAlibabaAuthSecretRef {
    * @schema ClusterSecretStoreSpecProviderAlibabaAuthSecretRef#accessKeySecretSecretRef
    */
   readonly accessKeySecretSecretRef: ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef;
-
 }
 
 /**
@@ -10397,7 +10751,6 @@ export interface ClusterSecretStoreSpecProviderAwsAuthJwt {
    * @schema ClusterSecretStoreSpecProviderAwsAuthJwt#serviceAccountRef
    */
   readonly serviceAccountRef?: ClusterSecretStoreSpecProviderAwsAuthJwtServiceAccountRef;
-
 }
 
 /**
@@ -10443,7 +10796,6 @@ export interface ClusterSecretStoreSpecProviderAwsAuthSecretRef {
    * @schema ClusterSecretStoreSpecProviderAwsAuthSecretRef#sessionTokenSecretRef
    */
   readonly sessionTokenSecretRef?: ClusterSecretStoreSpecProviderAwsAuthSecretRefSessionTokenSecretRef;
-
 }
 
 /**
@@ -10490,7 +10842,6 @@ export interface ClusterSecretStoreSpecProviderAzurekvAuthSecretRefClientCertifi
    * @schema ClusterSecretStoreSpecProviderAzurekvAuthSecretRefClientCertificate#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -10537,7 +10888,6 @@ export interface ClusterSecretStoreSpecProviderAzurekvAuthSecretRefClientId {
    * @schema ClusterSecretStoreSpecProviderAzurekvAuthSecretRefClientId#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -10584,7 +10934,6 @@ export interface ClusterSecretStoreSpecProviderAzurekvAuthSecretRefClientSecret 
    * @schema ClusterSecretStoreSpecProviderAzurekvAuthSecretRefClientSecret#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -10631,7 +10980,6 @@ export interface ClusterSecretStoreSpecProviderAzurekvAuthSecretRefTenantId {
    * @schema ClusterSecretStoreSpecProviderAzurekvAuthSecretRefTenantId#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -10669,7 +11017,6 @@ export interface ClusterSecretStoreSpecProviderBeyondtrustAuthApiKey {
    * @schema ClusterSecretStoreSpecProviderBeyondtrustAuthApiKey#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -10706,7 +11053,6 @@ export interface ClusterSecretStoreSpecProviderBeyondtrustAuthCertificate {
    * @schema ClusterSecretStoreSpecProviderBeyondtrustAuthCertificate#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -10743,7 +11089,6 @@ export interface ClusterSecretStoreSpecProviderBeyondtrustAuthCertificateKey {
    * @schema ClusterSecretStoreSpecProviderBeyondtrustAuthCertificateKey#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -10780,7 +11125,6 @@ export interface ClusterSecretStoreSpecProviderBeyondtrustAuthClientId {
    * @schema ClusterSecretStoreSpecProviderBeyondtrustAuthClientId#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -10817,7 +11161,6 @@ export interface ClusterSecretStoreSpecProviderBeyondtrustAuthClientSecret {
    * @schema ClusterSecretStoreSpecProviderBeyondtrustAuthClientSecret#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -10847,7 +11190,6 @@ export interface ClusterSecretStoreSpecProviderBitwardensecretsmanagerAuthSecret
    * @schema ClusterSecretStoreSpecProviderBitwardensecretsmanagerAuthSecretRef#credentials
    */
   readonly credentials: ClusterSecretStoreSpecProviderBitwardensecretsmanagerAuthSecretRefCredentials;
-
 }
 
 /**
@@ -10888,7 +11230,6 @@ export interface ClusterSecretStoreSpecProviderChefAuthSecretRef {
    * @schema ClusterSecretStoreSpecProviderChefAuthSecretRef#privateKeySecretRef
    */
   readonly privateKeySecretRef: ClusterSecretStoreSpecProviderChefAuthSecretRefPrivateKeySecretRef;
-
 }
 
 /**
@@ -10924,7 +11265,6 @@ export interface ClusterSecretStoreSpecProviderCloudrusmAuthSecretRef {
    * @schema ClusterSecretStoreSpecProviderCloudrusmAuthSecretRef#accessKeySecretSecretRef
    */
   readonly accessKeySecretSecretRef: ClusterSecretStoreSpecProviderCloudrusmAuthSecretRefAccessKeySecretSecretRef;
-
 }
 
 /**
@@ -10970,7 +11310,6 @@ export interface ClusterSecretStoreSpecProviderConjurAuthApikey {
    * @schema ClusterSecretStoreSpecProviderConjurAuthApikey#userRef
    */
   readonly userRef: ClusterSecretStoreSpecProviderConjurAuthApikeyUserRef;
-
 }
 
 /**
@@ -11032,7 +11371,6 @@ export interface ClusterSecretStoreSpecProviderConjurAuthJwt {
    * @schema ClusterSecretStoreSpecProviderConjurAuthJwt#serviceID
    */
   readonly serviceId: string;
-
 }
 
 /**
@@ -11093,7 +11431,6 @@ export interface ClusterSecretStoreSpecProviderDelineaClientIdSecretRef {
    * @schema ClusterSecretStoreSpecProviderDelineaClientIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -11140,7 +11477,6 @@ export interface ClusterSecretStoreSpecProviderDelineaClientSecretSecretRef {
    * @schema ClusterSecretStoreSpecProviderDelineaClientSecretSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -11169,7 +11505,6 @@ export interface ClusterSecretStoreSpecProviderDevice42AuthSecretRef {
    * @schema ClusterSecretStoreSpecProviderDevice42AuthSecretRef#credentials
    */
   readonly credentials?: ClusterSecretStoreSpecProviderDevice42AuthSecretRefCredentials;
-
 }
 
 /**
@@ -11198,7 +11533,6 @@ export interface ClusterSecretStoreSpecProviderDopplerAuthSecretRef {
    * @schema ClusterSecretStoreSpecProviderDopplerAuthSecretRef#dopplerToken
    */
   readonly dopplerToken: ClusterSecretStoreSpecProviderDopplerAuthSecretRefDopplerToken;
-
 }
 
 /**
@@ -11243,7 +11577,6 @@ export interface ClusterSecretStoreSpecProviderFortanixApiKeySecretRef {
    * @schema ClusterSecretStoreSpecProviderFortanixApiKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -11272,7 +11605,6 @@ export interface ClusterSecretStoreSpecProviderGcpsmAuthSecretRef {
    * @schema ClusterSecretStoreSpecProviderGcpsmAuthSecretRef#secretAccessKeySecretRef
    */
   readonly secretAccessKeySecretRef?: ClusterSecretStoreSpecProviderGcpsmAuthSecretRefSecretAccessKeySecretRef;
-
 }
 
 /**
@@ -11323,7 +11655,6 @@ export interface ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentity {
    * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentity#serviceAccountRef
    */
   readonly serviceAccountRef: ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef;
-
 }
 
 /**
@@ -11337,6 +11668,74 @@ export function toJson_ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentity(o
     'clusterName': obj.clusterName,
     'clusterProjectID': obj.clusterProjectId,
     'serviceAccountRef': toJson_ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef(obj.serviceAccountRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * GCPWorkloadIdentityFederation holds the configurations required for generating federated access tokens.
+ *
+ * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation
+ */
+export interface ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation {
+  /**
+   * audience is the Secure Token Service (STS) audience which contains the resource name for the workload identity pool and the provider identifier in that pool.
+   * If specified, Audience found in the external account credential config will be overridden with the configured value.
+   * audience must be provided when serviceAccountRef or awsSecurityCredentials is configured.
+   *
+   * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation#audience
+   */
+  readonly audience?: string;
+
+  /**
+   * awsSecurityCredentials is for configuring AWS region and credentials to use for obtaining the access token,
+   * when using the AWS metadata server is not an option.
+   *
+   * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation#awsSecurityCredentials
+   */
+  readonly awsSecurityCredentials?: ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentials;
+
+  /**
+   * credConfig holds the configmap reference containing the GCP external account credential configuration in JSON format and the key name containing the json data.
+   * For using Kubernetes cluster as the identity provider, use serviceAccountRef instead. Operators mounted serviceaccount token cannot be used as the token source, instead
+   * serviceAccountRef must be used by providing operators service account details.
+   *
+   * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation#credConfig
+   */
+  readonly credConfig?: ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationCredConfig;
+
+  /**
+   * externalTokenEndpoint is the endpoint explicitly set up to provide tokens, which will be matched against the
+   * credential_source.url in the provided credConfig. This field is merely to double-check the external token source
+   * URL is having the expected value.
+   *
+   * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation#externalTokenEndpoint
+   */
+  readonly externalTokenEndpoint?: string;
+
+  /**
+   * serviceAccountRef is the reference to the kubernetes ServiceAccount to be used for obtaining the tokens,
+   * when Kubernetes is configured as provider in workload identity pool.
+   *
+   * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation#serviceAccountRef
+   */
+  readonly serviceAccountRef?: ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationServiceAccountRef;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation(obj: ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'audience': obj.audience,
+    'awsSecurityCredentials': toJson_ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentials(obj.awsSecurityCredentials),
+    'credConfig': toJson_ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationCredConfig(obj.credConfig),
+    'externalTokenEndpoint': obj.externalTokenEndpoint,
+    'serviceAccountRef': toJson_ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationServiceAccountRef(obj.serviceAccountRef),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -11372,7 +11771,6 @@ export interface ClusterSecretStoreSpecProviderGithubAuthPrivateKey {
    * @schema ClusterSecretStoreSpecProviderGithubAuthPrivateKey#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -11401,7 +11799,6 @@ export interface ClusterSecretStoreSpecProviderGitlabAuthSecretRef {
    * @schema ClusterSecretStoreSpecProviderGitlabAuthSecretRef#accessToken
    */
   readonly accessToken?: ClusterSecretStoreSpecProviderGitlabAuthSecretRefAccessToken;
-
 }
 
 /**
@@ -11454,7 +11851,6 @@ export interface ClusterSecretStoreSpecProviderIbmAuthContainerAuth {
    * @schema ClusterSecretStoreSpecProviderIbmAuthContainerAuth#tokenLocation
    */
   readonly tokenLocation?: string;
-
 }
 
 /**
@@ -11483,7 +11879,6 @@ export interface ClusterSecretStoreSpecProviderIbmAuthSecretRef {
    * @schema ClusterSecretStoreSpecProviderIbmAuthSecretRef#secretApiKeySecretRef
    */
   readonly secretApiKeySecretRef?: ClusterSecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecretRef;
-
 }
 
 /**
@@ -11494,6 +11889,33 @@ export function toJson_ClusterSecretStoreSpecProviderIbmAuthSecretRef(obj: Clust
   if (obj === undefined) { return undefined; }
   const result = {
     'secretApiKeySecretRef': toJson_ClusterSecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecretRef(obj.secretApiKeySecretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentials
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentials {
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentials#identityId
+   */
+  readonly identityId: ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentials' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentials(obj: ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentials | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'identityId': toJson_ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId(obj.identityId),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -11519,7 +11941,6 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentials
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentials#resource
    */
   readonly resource?: ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsResource;
-
 }
 
 /**
@@ -11531,6 +11952,294 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCrede
   const result = {
     'identityId': toJson_ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsIdentityId(obj.identityId),
     'resource': toJson_ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsResource(obj.resource),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials {
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials#identityId
+   */
+  readonly identityId: ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials#serviceAccountKeyFilePath
+   */
+  readonly serviceAccountKeyFilePath: ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials(obj: ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'identityId': toJson_ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId(obj.identityId),
+    'serviceAccountKeyFilePath': toJson_ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath(obj.serviceAccountKeyFilePath),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials {
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials#identityId
+   */
+  readonly identityId: ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials(obj: ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'identityId': toJson_ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId(obj.identityId),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentials
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentials {
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentials#identityId
+   */
+  readonly identityId: ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentials#jwt
+   */
+  readonly jwt: ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentials' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentials(obj: ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentials | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'identityId': toJson_ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId(obj.identityId),
+    'jwt': toJson_ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt(obj.jwt),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials {
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials#identityId
+   */
+  readonly identityId: ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials#serviceAccountTokenPath
+   */
+  readonly serviceAccountTokenPath?: ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials(obj: ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'identityId': toJson_ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId(obj.identityId),
+    'serviceAccountTokenPath': toJson_ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath(obj.serviceAccountTokenPath),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentials
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentials {
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentials#identityId
+   */
+  readonly identityId: ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentials#ldapPassword
+   */
+  readonly ldapPassword: ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentials#ldapUsername
+   */
+  readonly ldapUsername: ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentials' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentials(obj: ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentials | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'identityId': toJson_ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId(obj.identityId),
+    'ldapPassword': toJson_ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword(obj.ldapPassword),
+    'ldapUsername': toJson_ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername(obj.ldapUsername),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials {
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials#fingerprint
+   */
+  readonly fingerprint: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials#identityId
+   */
+  readonly identityId: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials#privateKey
+   */
+  readonly privateKey: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials#privateKeyPassphrase
+   */
+  readonly privateKeyPassphrase?: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials#region
+   */
+  readonly region: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials#tenancyId
+   */
+  readonly tenancyId: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials#userId
+   */
+  readonly userId: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials(obj: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'fingerprint': toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint(obj.fingerprint),
+    'identityId': toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId(obj.identityId),
+    'privateKey': toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey(obj.privateKey),
+    'privateKeyPassphrase': toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase(obj.privateKeyPassphrase),
+    'region': toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion(obj.region),
+    'tenancyId': toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId(obj.tenancyId),
+    'userId': toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId(obj.userId),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentials
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentials {
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentials#accessToken
+   */
+  readonly accessToken: ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentials' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentials(obj: ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentials | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'accessToken': toJson_ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken(obj.accessToken),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -11556,7 +12265,6 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthCredent
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthCredentials#clientSecret
    */
   readonly clientSecret: ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthCredentialsClientSecret;
-
 }
 
 /**
@@ -11595,7 +12303,6 @@ export interface ClusterSecretStoreSpecProviderKubernetesAuthCert {
    * @schema ClusterSecretStoreSpecProviderKubernetesAuthCert#clientKey
    */
   readonly clientKey?: ClusterSecretStoreSpecProviderKubernetesAuthCertClientKey;
-
 }
 
 /**
@@ -11642,7 +12349,6 @@ export interface ClusterSecretStoreSpecProviderKubernetesAuthServiceAccount {
    * @schema ClusterSecretStoreSpecProviderKubernetesAuthServiceAccount#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -11674,7 +12380,6 @@ export interface ClusterSecretStoreSpecProviderKubernetesAuthToken {
    * @schema ClusterSecretStoreSpecProviderKubernetesAuthToken#bearerToken
    */
   readonly bearerToken?: ClusterSecretStoreSpecProviderKubernetesAuthTokenBearerToken;
-
 }
 
 /**
@@ -11725,7 +12430,6 @@ export interface ClusterSecretStoreSpecProviderKubernetesServerCaProvider {
    * @schema ClusterSecretStoreSpecProviderKubernetesServerCaProvider#type
    */
   readonly type: ClusterSecretStoreSpecProviderKubernetesServerCaProviderType;
-
 }
 
 /**
@@ -11739,6 +12443,34 @@ export function toJson_ClusterSecretStoreSpecProviderKubernetesServerCaProvider(
     'name': obj.name,
     'namespace': obj.namespace,
     'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * APIKey is the API Key used to authenticate with ngrok. See https://ngrok.com/docs/api/#authentication
+ *
+ * @schema ClusterSecretStoreSpecProviderNgrokAuthApiKey
+ */
+export interface ClusterSecretStoreSpecProviderNgrokAuthApiKey {
+  /**
+   * SecretRef is a reference to a secret containing the ngrok API key.
+   *
+   * @schema ClusterSecretStoreSpecProviderNgrokAuthApiKey#secretRef
+   */
+  readonly secretRef?: ClusterSecretStoreSpecProviderNgrokAuthApiKeySecretRef;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderNgrokAuthApiKey' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderNgrokAuthApiKey(obj: ClusterSecretStoreSpecProviderNgrokAuthApiKey | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'secretRef': toJson_ClusterSecretStoreSpecProviderNgrokAuthApiKeySecretRef(obj.secretRef),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -11774,7 +12506,6 @@ export interface ClusterSecretStoreSpecProviderOnboardbaseAuthApiKeyRef {
    * @schema ClusterSecretStoreSpecProviderOnboardbaseAuthApiKeyRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -11821,7 +12552,6 @@ export interface ClusterSecretStoreSpecProviderOnboardbaseAuthPasscodeRef {
    * @schema ClusterSecretStoreSpecProviderOnboardbaseAuthPasscodeRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -11852,7 +12582,6 @@ export interface ClusterSecretStoreSpecProviderOnepasswordAuthSecretRef {
    * @schema ClusterSecretStoreSpecProviderOnepasswordAuthSecretRef#connectTokenSecretRef
    */
   readonly connectTokenSecretRef: ClusterSecretStoreSpecProviderOnepasswordAuthSecretRefConnectTokenSecretRef;
-
 }
 
 /**
@@ -11897,7 +12626,6 @@ export interface ClusterSecretStoreSpecProviderOnepasswordSdkAuthServiceAccountS
    * @schema ClusterSecretStoreSpecProviderOnepasswordSdkAuthServiceAccountSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -11935,7 +12663,6 @@ export interface ClusterSecretStoreSpecProviderOracleAuthSecretRef {
    * @schema ClusterSecretStoreSpecProviderOracleAuthSecretRef#privatekey
    */
   readonly privatekey: ClusterSecretStoreSpecProviderOracleAuthSecretRefPrivatekey;
-
 }
 
 /**
@@ -11982,7 +12709,6 @@ export interface ClusterSecretStoreSpecProviderPassboltAuthPasswordSecretRef {
    * @schema ClusterSecretStoreSpecProviderPassboltAuthPasswordSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -12030,7 +12756,6 @@ export interface ClusterSecretStoreSpecProviderPassboltAuthPrivateKeySecretRef {
    * @schema ClusterSecretStoreSpecProviderPassboltAuthPrivateKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -12059,7 +12784,6 @@ export interface ClusterSecretStoreSpecProviderPassworddepotAuthSecretRef {
    * @schema ClusterSecretStoreSpecProviderPassworddepotAuthSecretRef#credentials
    */
   readonly credentials?: ClusterSecretStoreSpecProviderPassworddepotAuthSecretRefCredentials;
-
 }
 
 /**
@@ -12088,7 +12812,6 @@ export interface ClusterSecretStoreSpecProviderPreviderAuthSecretRef {
    * @schema ClusterSecretStoreSpecProviderPreviderAuthSecretRef#accessToken
    */
   readonly accessToken: ClusterSecretStoreSpecProviderPreviderAuthSecretRefAccessToken;
-
 }
 
 /**
@@ -12133,7 +12856,6 @@ export interface ClusterSecretStoreSpecProviderPulumiAccessTokenSecretRef {
    * @schema ClusterSecretStoreSpecProviderPulumiAccessTokenSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -12180,7 +12902,6 @@ export interface ClusterSecretStoreSpecProviderScalewayAccessKeySecretRef {
    * @schema ClusterSecretStoreSpecProviderScalewayAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -12227,7 +12948,6 @@ export interface ClusterSecretStoreSpecProviderScalewaySecretKeySecretRef {
    * @schema ClusterSecretStoreSpecProviderScalewaySecretKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -12274,7 +12994,6 @@ export interface ClusterSecretStoreSpecProviderSecretserverPasswordSecretRef {
    * @schema ClusterSecretStoreSpecProviderSecretserverPasswordSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -12321,7 +13040,6 @@ export interface ClusterSecretStoreSpecProviderSecretserverUsernameSecretRef {
    * @schema ClusterSecretStoreSpecProviderSecretserverUsernameSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -12369,7 +13087,6 @@ export interface ClusterSecretStoreSpecProviderSenhaseguraAuthClientSecretSecret
    * @schema ClusterSecretStoreSpecProviderSenhaseguraAuthClientSecretSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -12430,7 +13147,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthAppRole {
    * @schema ClusterSecretStoreSpecProviderVaultAuthAppRole#secretRef
    */
   readonly secretRef: ClusterSecretStoreSpecProviderVaultAuthAppRoleSecretRef;
-
 }
 
 /**
@@ -12466,13 +13182,20 @@ export interface ClusterSecretStoreSpecProviderVaultAuthCert {
   readonly clientCert?: ClusterSecretStoreSpecProviderVaultAuthCertClientCert;
 
   /**
+   * Path where the Certificate authentication backend is mounted
+   * in Vault, e.g: "cert"
+   *
+   * @schema ClusterSecretStoreSpecProviderVaultAuthCert#path
+   */
+  readonly path?: string;
+
+  /**
    * SecretRef to a key in a Secret resource containing client private key to
    * authenticate with Vault using the Cert authentication method
    *
    * @schema ClusterSecretStoreSpecProviderVaultAuthCert#secretRef
    */
   readonly secretRef?: ClusterSecretStoreSpecProviderVaultAuthCertSecretRef;
-
 }
 
 /**
@@ -12483,6 +13206,7 @@ export function toJson_ClusterSecretStoreSpecProviderVaultAuthCert(obj: ClusterS
   if (obj === undefined) { return undefined; }
   const result = {
     'clientCert': toJson_ClusterSecretStoreSpecProviderVaultAuthCertClientCert(obj.clientCert),
+    'path': obj.path,
     'secretRef': toJson_ClusterSecretStoreSpecProviderVaultAuthCertSecretRef(obj.secretRef),
   };
   // filter undefined values
@@ -12552,7 +13276,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthIam {
    * @schema ClusterSecretStoreSpecProviderVaultAuthIam#vaultRole
    */
   readonly vaultRole: string;
-
 }
 
 /**
@@ -12614,7 +13337,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthJwt {
    * @schema ClusterSecretStoreSpecProviderVaultAuthJwt#secretRef
    */
   readonly secretRef?: ClusterSecretStoreSpecProviderVaultAuthJwtSecretRef;
-
 }
 
 /**
@@ -12676,7 +13398,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthKubernetes {
    * @schema ClusterSecretStoreSpecProviderVaultAuthKubernetes#serviceAccountRef
    */
   readonly serviceAccountRef?: ClusterSecretStoreSpecProviderVaultAuthKubernetesServiceAccountRef;
-
 }
 
 /**
@@ -12727,7 +13448,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthLdap {
    * @schema ClusterSecretStoreSpecProviderVaultAuthLdap#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -12774,7 +13494,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthTokenSecretRef {
    * @schema ClusterSecretStoreSpecProviderVaultAuthTokenSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -12823,7 +13542,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthUserPass {
    * @schema ClusterSecretStoreSpecProviderVaultAuthUserPass#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -12884,7 +13602,6 @@ export interface ClusterSecretStoreSpecProviderVaultTlsCertSecretRef {
    * @schema ClusterSecretStoreSpecProviderVaultTlsCertSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -12933,7 +13650,6 @@ export interface ClusterSecretStoreSpecProviderVaultTlsKeySecretRef {
    * @schema ClusterSecretStoreSpecProviderVaultTlsKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -12946,6 +13662,51 @@ export function toJson_ClusterSecretStoreSpecProviderVaultTlsKeySecretRef(obj: C
     'key': obj.key,
     'name': obj.name,
     'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * SecretRef defines the static credentials to use for authentication.
+ * If not set, IRSA is used.
+ *
+ * @schema ClusterSecretStoreSpecProviderVolcengineAuthSecretRef
+ */
+export interface ClusterSecretStoreSpecProviderVolcengineAuthSecretRef {
+  /**
+   * AccessKeyID is the reference to the secret containing the Access Key ID.
+   *
+   * @schema ClusterSecretStoreSpecProviderVolcengineAuthSecretRef#accessKeyID
+   */
+  readonly accessKeyId: ClusterSecretStoreSpecProviderVolcengineAuthSecretRefAccessKeyId;
+
+  /**
+   * SecretAccessKey is the reference to the secret containing the Secret Access Key.
+   *
+   * @schema ClusterSecretStoreSpecProviderVolcengineAuthSecretRef#secretAccessKey
+   */
+  readonly secretAccessKey: ClusterSecretStoreSpecProviderVolcengineAuthSecretRefSecretAccessKey;
+
+  /**
+   * Token is the reference to the secret containing the STS(Security Token Service) Token.
+   *
+   * @schema ClusterSecretStoreSpecProviderVolcengineAuthSecretRef#token
+   */
+  readonly token?: ClusterSecretStoreSpecProviderVolcengineAuthSecretRefToken;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderVolcengineAuthSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderVolcengineAuthSecretRef(obj: ClusterSecretStoreSpecProviderVolcengineAuthSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'accessKeyID': toJson_ClusterSecretStoreSpecProviderVolcengineAuthSecretRefAccessKeyId(obj.accessKeyId),
+    'secretAccessKey': toJson_ClusterSecretStoreSpecProviderVolcengineAuthSecretRefSecretAccessKey(obj.secretAccessKey),
+    'token': toJson_ClusterSecretStoreSpecProviderVolcengineAuthSecretRefToken(obj.token),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -12973,7 +13734,6 @@ export interface ClusterSecretStoreSpecProviderWebhookAuthNtlm {
    * @schema ClusterSecretStoreSpecProviderWebhookAuthNtlm#usernameSecret
    */
   readonly usernameSecret: ClusterSecretStoreSpecProviderWebhookAuthNtlmUsernameSecret;
-
 }
 
 /**
@@ -13031,7 +13791,6 @@ export interface ClusterSecretStoreSpecProviderWebhookSecretsSecretRef {
    * @schema ClusterSecretStoreSpecProviderWebhookSecretsSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -13078,7 +13837,6 @@ export interface ClusterSecretStoreSpecProviderYandexcertificatemanagerAuthAutho
    * @schema ClusterSecretStoreSpecProviderYandexcertificatemanagerAuthAuthorizedKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -13126,7 +13884,6 @@ export interface ClusterSecretStoreSpecProviderYandexcertificatemanagerCaProvide
    * @schema ClusterSecretStoreSpecProviderYandexcertificatemanagerCaProviderCertSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -13139,6 +13896,34 @@ export function toJson_ClusterSecretStoreSpecProviderYandexcertificatemanagerCaP
     'key': obj.key,
     'name': obj.name,
     'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ByName configures the provider to interpret the `data.secretKey.remoteRef.key` field in ExternalSecret as secret name.
+ *
+ * @schema ClusterSecretStoreSpecProviderYandexcertificatemanagerFetchingByName
+ */
+export interface ClusterSecretStoreSpecProviderYandexcertificatemanagerFetchingByName {
+  /**
+   * The folder to fetch secrets from
+   *
+   * @schema ClusterSecretStoreSpecProviderYandexcertificatemanagerFetchingByName#folderID
+   */
+  readonly folderId: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderYandexcertificatemanagerFetchingByName' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderYandexcertificatemanagerFetchingByName(obj: ClusterSecretStoreSpecProviderYandexcertificatemanagerFetchingByName | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'folderID': obj.folderId,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -13173,7 +13958,6 @@ export interface ClusterSecretStoreSpecProviderYandexlockboxAuthAuthorizedKeySec
    * @schema ClusterSecretStoreSpecProviderYandexlockboxAuthAuthorizedKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -13221,7 +14005,6 @@ export interface ClusterSecretStoreSpecProviderYandexlockboxCaProviderCertSecret
    * @schema ClusterSecretStoreSpecProviderYandexlockboxCaProviderCertSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -13234,6 +14017,34 @@ export function toJson_ClusterSecretStoreSpecProviderYandexlockboxCaProviderCert
     'key': obj.key,
     'name': obj.name,
     'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ByName configures the provider to interpret the `data.secretKey.remoteRef.key` field in ExternalSecret as secret name.
+ *
+ * @schema ClusterSecretStoreSpecProviderYandexlockboxFetchingByName
+ */
+export interface ClusterSecretStoreSpecProviderYandexlockboxFetchingByName {
+  /**
+   * The folder to fetch secrets from
+   *
+   * @schema ClusterSecretStoreSpecProviderYandexlockboxFetchingByName#folderID
+   */
+  readonly folderId: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderYandexlockboxFetchingByName' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderYandexlockboxFetchingByName(obj: ClusterSecretStoreSpecProviderYandexlockboxFetchingByName | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'folderID': obj.folderId,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -13271,7 +14082,6 @@ export interface ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAu
    * @schema ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -13322,7 +14132,6 @@ export interface ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAu
    * @schema ClusterSecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -13369,7 +14178,6 @@ export interface ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAcc
    * @schema ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessId#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -13417,7 +14225,6 @@ export interface ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAcc
    * @schema ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessType#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -13465,7 +14272,6 @@ export interface ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAcc
    * @schema ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -13512,7 +14318,6 @@ export interface ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSe
    * @schema ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -13559,7 +14364,6 @@ export interface ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecr
    * @schema ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -13607,7 +14411,6 @@ export interface ClusterSecretStoreSpecProviderAwsAuthJwtServiceAccountRef {
    * @schema ClusterSecretStoreSpecProviderAwsAuthJwtServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -13654,7 +14457,6 @@ export interface ClusterSecretStoreSpecProviderAwsAuthSecretRefAccessKeyIdSecret
    * @schema ClusterSecretStoreSpecProviderAwsAuthSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -13701,7 +14503,6 @@ export interface ClusterSecretStoreSpecProviderAwsAuthSecretRefSecretAccessKeySe
    * @schema ClusterSecretStoreSpecProviderAwsAuthSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -13750,7 +14551,6 @@ export interface ClusterSecretStoreSpecProviderAwsAuthSecretRefSessionTokenSecre
    * @schema ClusterSecretStoreSpecProviderAwsAuthSecretRefSessionTokenSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -13797,7 +14597,6 @@ export interface ClusterSecretStoreSpecProviderBeyondtrustAuthApiKeySecretRef {
    * @schema ClusterSecretStoreSpecProviderBeyondtrustAuthApiKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -13844,7 +14643,6 @@ export interface ClusterSecretStoreSpecProviderBeyondtrustAuthCertificateSecretR
    * @schema ClusterSecretStoreSpecProviderBeyondtrustAuthCertificateSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -13891,7 +14689,6 @@ export interface ClusterSecretStoreSpecProviderBeyondtrustAuthCertificateKeySecr
    * @schema ClusterSecretStoreSpecProviderBeyondtrustAuthCertificateKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -13938,7 +14735,6 @@ export interface ClusterSecretStoreSpecProviderBeyondtrustAuthClientIdSecretRef 
    * @schema ClusterSecretStoreSpecProviderBeyondtrustAuthClientIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -13985,7 +14781,6 @@ export interface ClusterSecretStoreSpecProviderBeyondtrustAuthClientSecretSecret
    * @schema ClusterSecretStoreSpecProviderBeyondtrustAuthClientSecretSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14032,7 +14827,6 @@ export interface ClusterSecretStoreSpecProviderBitwardensecretsmanagerAuthSecret
    * @schema ClusterSecretStoreSpecProviderBitwardensecretsmanagerAuthSecretRefCredentials#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14079,7 +14873,6 @@ export interface ClusterSecretStoreSpecProviderChefAuthSecretRefPrivateKeySecret
    * @schema ClusterSecretStoreSpecProviderChefAuthSecretRefPrivateKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14126,7 +14919,6 @@ export interface ClusterSecretStoreSpecProviderCloudrusmAuthSecretRefAccessKeyId
    * @schema ClusterSecretStoreSpecProviderCloudrusmAuthSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14173,7 +14965,6 @@ export interface ClusterSecretStoreSpecProviderCloudrusmAuthSecretRefAccessKeySe
    * @schema ClusterSecretStoreSpecProviderCloudrusmAuthSecretRefAccessKeySecretSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14221,7 +15012,6 @@ export interface ClusterSecretStoreSpecProviderConjurAuthApikeyApiKeyRef {
    * @schema ClusterSecretStoreSpecProviderConjurAuthApikeyApiKeyRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14269,7 +15059,6 @@ export interface ClusterSecretStoreSpecProviderConjurAuthApikeyUserRef {
    * @schema ClusterSecretStoreSpecProviderConjurAuthApikeyUserRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14317,7 +15106,6 @@ export interface ClusterSecretStoreSpecProviderConjurAuthJwtSecretRef {
    * @schema ClusterSecretStoreSpecProviderConjurAuthJwtSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14366,7 +15154,6 @@ export interface ClusterSecretStoreSpecProviderConjurAuthJwtServiceAccountRef {
    * @schema ClusterSecretStoreSpecProviderConjurAuthJwtServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14413,7 +15200,6 @@ export interface ClusterSecretStoreSpecProviderDevice42AuthSecretRefCredentials 
    * @schema ClusterSecretStoreSpecProviderDevice42AuthSecretRefCredentials#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14462,7 +15248,6 @@ export interface ClusterSecretStoreSpecProviderDopplerAuthSecretRefDopplerToken 
    * @schema ClusterSecretStoreSpecProviderDopplerAuthSecretRefDopplerToken#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14509,7 +15294,6 @@ export interface ClusterSecretStoreSpecProviderGcpsmAuthSecretRefSecretAccessKey
    * @schema ClusterSecretStoreSpecProviderGcpsmAuthSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14557,7 +15341,6 @@ export interface ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceA
    * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14565,6 +15348,141 @@ export interface ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceA
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef(obj: ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'audiences': obj.audiences?.map(y => y),
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * awsSecurityCredentials is for configuring AWS region and credentials to use for obtaining the access token,
+ * when using the AWS metadata server is not an option.
+ *
+ * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentials
+ */
+export interface ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentials {
+  /**
+   * awsCredentialsSecretRef is the reference to the secret which holds the AWS credentials.
+   * Secret should be created with below names for keys
+   * - aws_access_key_id: Access Key ID, which is the unique identifier for the AWS account or the IAM user.
+   * - aws_secret_access_key: Secret Access Key, which is used to authenticate requests made to AWS services.
+   * - aws_session_token: Session Token, is the short-lived token to authenticate requests made to AWS services.
+   *
+   * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentials#awsCredentialsSecretRef
+   */
+  readonly awsCredentialsSecretRef: ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef;
+
+  /**
+   * region is for configuring the AWS region to be used.
+   *
+   * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentials#region
+   */
+  readonly region: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentials' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentials(obj: ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentials | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'awsCredentialsSecretRef': toJson_ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef(obj.awsCredentialsSecretRef),
+    'region': obj.region,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * credConfig holds the configmap reference containing the GCP external account credential configuration in JSON format and the key name containing the json data.
+ * For using Kubernetes cluster as the identity provider, use serviceAccountRef instead. Operators mounted serviceaccount token cannot be used as the token source, instead
+ * serviceAccountRef must be used by providing operators service account details.
+ *
+ * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationCredConfig
+ */
+export interface ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationCredConfig {
+  /**
+   * key name holding the external account credential config.
+   *
+   * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationCredConfig#key
+   */
+  readonly key: string;
+
+  /**
+   * name of the configmap.
+   *
+   * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationCredConfig#name
+   */
+  readonly name: string;
+
+  /**
+   * namespace in which the configmap exists. If empty, configmap will looked up in local namespace.
+   *
+   * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationCredConfig#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationCredConfig' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationCredConfig(obj: ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationCredConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * serviceAccountRef is the reference to the kubernetes ServiceAccount to be used for obtaining the tokens,
+ * when Kubernetes is configured as provider in workload identity pool.
+ *
+ * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationServiceAccountRef
+ */
+export interface ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationServiceAccountRef {
+  /**
+   * Audience specifies the `aud` claim for the service account token
+   * If the service account uses a well-known annotation for e.g. IRSA or GCP Workload Identity
+   * then this audiences will be appended to the list
+   *
+   * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationServiceAccountRef#audiences
+   */
+  readonly audiences?: string[];
+
+  /**
+   * The name of the ServiceAccount resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationServiceAccountRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationServiceAccountRef#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationServiceAccountRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationServiceAccountRef(obj: ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'audiences': obj.audiences?.map(y => y),
@@ -14604,7 +15522,6 @@ export interface ClusterSecretStoreSpecProviderGitlabAuthSecretRefAccessToken {
    * @schema ClusterSecretStoreSpecProviderGitlabAuthSecretRefAccessToken#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14651,7 +15568,6 @@ export interface ClusterSecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecre
    * @schema ClusterSecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14659,6 +15575,53 @@ export interface ClusterSecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecre
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecretRef(obj: ClusterSecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId(obj: ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -14699,7 +15662,6 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentials
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsIdentityId#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14747,7 +15709,6 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentials
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsResource#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14755,6 +15716,852 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentials
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsResource(obj: ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsResource | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId(obj: ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath(obj: ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId(obj: ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId(obj: ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt(obj: ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId(obj: ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath(obj: ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId(obj: ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword(obj: ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername(obj: ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint(obj: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId(obj: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey(obj: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase(obj: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion(obj: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId(obj: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId(obj: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken(obj: ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -14795,7 +16602,6 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthCredent
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthCredentialsClientId#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14843,7 +16649,6 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthCredent
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthCredentialsClientSecret#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14891,7 +16696,6 @@ export interface ClusterSecretStoreSpecProviderKubernetesAuthCertClientCert {
    * @schema ClusterSecretStoreSpecProviderKubernetesAuthCertClientCert#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14939,7 +16743,6 @@ export interface ClusterSecretStoreSpecProviderKubernetesAuthCertClientKey {
    * @schema ClusterSecretStoreSpecProviderKubernetesAuthCertClientKey#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14987,7 +16790,6 @@ export interface ClusterSecretStoreSpecProviderKubernetesAuthTokenBearerToken {
    * @schema ClusterSecretStoreSpecProviderKubernetesAuthTokenBearerToken#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -15019,6 +16821,52 @@ export enum ClusterSecretStoreSpecProviderKubernetesServerCaProviderType {
 }
 
 /**
+ * SecretRef is a reference to a secret containing the ngrok API key.
+ *
+ * @schema ClusterSecretStoreSpecProviderNgrokAuthApiKeySecretRef
+ */
+export interface ClusterSecretStoreSpecProviderNgrokAuthApiKeySecretRef {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderNgrokAuthApiKeySecretRef#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderNgrokAuthApiKeySecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderNgrokAuthApiKeySecretRef#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderNgrokAuthApiKeySecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderNgrokAuthApiKeySecretRef(obj: ClusterSecretStoreSpecProviderNgrokAuthApiKeySecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * The ConnectToken is used for authentication to a 1Password Connect Server.
  *
  * @schema ClusterSecretStoreSpecProviderOnepasswordAuthSecretRefConnectTokenSecretRef
@@ -15046,7 +16894,6 @@ export interface ClusterSecretStoreSpecProviderOnepasswordAuthSecretRefConnectTo
    * @schema ClusterSecretStoreSpecProviderOnepasswordAuthSecretRefConnectTokenSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -15093,7 +16940,6 @@ export interface ClusterSecretStoreSpecProviderOracleAuthSecretRefFingerprint {
    * @schema ClusterSecretStoreSpecProviderOracleAuthSecretRefFingerprint#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -15140,7 +16986,6 @@ export interface ClusterSecretStoreSpecProviderOracleAuthSecretRefPrivatekey {
    * @schema ClusterSecretStoreSpecProviderOracleAuthSecretRefPrivatekey#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -15187,7 +17032,6 @@ export interface ClusterSecretStoreSpecProviderPassworddepotAuthSecretRefCredent
    * @schema ClusterSecretStoreSpecProviderPassworddepotAuthSecretRefCredentials#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -15234,7 +17078,6 @@ export interface ClusterSecretStoreSpecProviderPreviderAuthSecretRefAccessToken 
    * @schema ClusterSecretStoreSpecProviderPreviderAuthSecretRefAccessToken#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -15284,7 +17127,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthAppRoleRoleRef {
    * @schema ClusterSecretStoreSpecProviderVaultAuthAppRoleRoleRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -15334,7 +17176,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthAppRoleSecretRef {
    * @schema ClusterSecretStoreSpecProviderVaultAuthAppRoleSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -15382,7 +17223,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthCertClientCert {
    * @schema ClusterSecretStoreSpecProviderVaultAuthCertClientCert#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -15430,7 +17270,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthCertSecretRef {
    * @schema ClusterSecretStoreSpecProviderVaultAuthCertSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -15461,7 +17300,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthIamJwt {
    * @schema ClusterSecretStoreSpecProviderVaultAuthIamJwt#serviceAccountRef
    */
   readonly serviceAccountRef?: ClusterSecretStoreSpecProviderVaultAuthIamJwtServiceAccountRef;
-
 }
 
 /**
@@ -15506,7 +17344,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthIamSecretRef {
    * @schema ClusterSecretStoreSpecProviderVaultAuthIamSecretRef#sessionTokenSecretRef
    */
   readonly sessionTokenSecretRef?: ClusterSecretStoreSpecProviderVaultAuthIamSecretRefSessionTokenSecretRef;
-
 }
 
 /**
@@ -15561,7 +17398,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthJwtKubernetesServiceAcco
    * @schema ClusterSecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountToken#serviceAccountRef
    */
   readonly serviceAccountRef: ClusterSecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountTokenServiceAccountRef;
-
 }
 
 /**
@@ -15609,7 +17445,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthJwtSecretRef {
    * @schema ClusterSecretStoreSpecProviderVaultAuthJwtSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -15659,7 +17494,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthKubernetesSecretRef {
    * @schema ClusterSecretStoreSpecProviderVaultAuthKubernetesSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -15710,7 +17544,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthKubernetesServiceAccount
    * @schema ClusterSecretStoreSpecProviderVaultAuthKubernetesServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -15759,7 +17592,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthLdapSecretRef {
    * @schema ClusterSecretStoreSpecProviderVaultAuthLdapSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -15808,7 +17640,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthUserPassSecretRef {
    * @schema ClusterSecretStoreSpecProviderVaultAuthUserPassSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -15816,6 +17647,144 @@ export interface ClusterSecretStoreSpecProviderVaultAuthUserPassSecretRef {
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderVaultAuthUserPassSecretRef(obj: ClusterSecretStoreSpecProviderVaultAuthUserPassSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * AccessKeyID is the reference to the secret containing the Access Key ID.
+ *
+ * @schema ClusterSecretStoreSpecProviderVolcengineAuthSecretRefAccessKeyId
+ */
+export interface ClusterSecretStoreSpecProviderVolcengineAuthSecretRefAccessKeyId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderVolcengineAuthSecretRefAccessKeyId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderVolcengineAuthSecretRefAccessKeyId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderVolcengineAuthSecretRefAccessKeyId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderVolcengineAuthSecretRefAccessKeyId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderVolcengineAuthSecretRefAccessKeyId(obj: ClusterSecretStoreSpecProviderVolcengineAuthSecretRefAccessKeyId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * SecretAccessKey is the reference to the secret containing the Secret Access Key.
+ *
+ * @schema ClusterSecretStoreSpecProviderVolcengineAuthSecretRefSecretAccessKey
+ */
+export interface ClusterSecretStoreSpecProviderVolcengineAuthSecretRefSecretAccessKey {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderVolcengineAuthSecretRefSecretAccessKey#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderVolcengineAuthSecretRefSecretAccessKey#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderVolcengineAuthSecretRefSecretAccessKey#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderVolcengineAuthSecretRefSecretAccessKey' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderVolcengineAuthSecretRefSecretAccessKey(obj: ClusterSecretStoreSpecProviderVolcengineAuthSecretRefSecretAccessKey | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Token is the reference to the secret containing the STS(Security Token Service) Token.
+ *
+ * @schema ClusterSecretStoreSpecProviderVolcengineAuthSecretRefToken
+ */
+export interface ClusterSecretStoreSpecProviderVolcengineAuthSecretRefToken {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderVolcengineAuthSecretRefToken#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderVolcengineAuthSecretRefToken#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderVolcengineAuthSecretRefToken#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderVolcengineAuthSecretRefToken' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderVolcengineAuthSecretRefToken(obj: ClusterSecretStoreSpecProviderVolcengineAuthSecretRefToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -15856,7 +17825,6 @@ export interface ClusterSecretStoreSpecProviderWebhookAuthNtlmPasswordSecret {
    * @schema ClusterSecretStoreSpecProviderWebhookAuthNtlmPasswordSecret#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -15904,7 +17872,6 @@ export interface ClusterSecretStoreSpecProviderWebhookAuthNtlmUsernameSecret {
    * @schema ClusterSecretStoreSpecProviderWebhookAuthNtlmUsernameSecret#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -15915,6 +17882,46 @@ export function toJson_ClusterSecretStoreSpecProviderWebhookAuthNtlmUsernameSecr
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * awsCredentialsSecretRef is the reference to the secret which holds the AWS credentials.
+ * Secret should be created with below names for keys
+ * - aws_access_key_id: Access Key ID, which is the unique identifier for the AWS account or the IAM user.
+ * - aws_secret_access_key: Secret Access Key, which is used to authenticate requests made to AWS services.
+ * - aws_session_token: Session Token, is the short-lived token to authenticate requests made to AWS services.
+ *
+ * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef
+ */
+export interface ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef {
+  /**
+   * name of the secret.
+   *
+   * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef#name
+   */
+  readonly name: string;
+
+  /**
+   * namespace in which the secret exists. If empty, secret will looked up in local namespace.
+   *
+   * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef(obj: ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
     'name': obj.name,
     'namespace': obj.namespace,
   };
@@ -15952,7 +17959,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthIamJwtServiceAccountRef 
    * @schema ClusterSecretStoreSpecProviderVaultAuthIamJwtServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -15999,7 +18005,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthIamSecretRefAccessKeyIdS
    * @schema ClusterSecretStoreSpecProviderVaultAuthIamSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -16046,7 +18051,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthIamSecretRefSecretAccess
    * @schema ClusterSecretStoreSpecProviderVaultAuthIamSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -16095,7 +18099,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthIamSecretRefSessionToken
    * @schema ClusterSecretStoreSpecProviderVaultAuthIamSecretRefSessionTokenSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -16143,7 +18146,6 @@ export interface ClusterSecretStoreSpecProviderVaultAuthJwtKubernetesServiceAcco
    * @schema ClusterSecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountTokenServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -16234,7 +18236,6 @@ export interface ClusterSecretStoreV1Beta1Props {
    * @schema ClusterSecretStoreV1Beta1#spec
    */
   readonly spec?: ClusterSecretStoreV1Beta1Spec;
-
 }
 
 /**
@@ -16293,7 +18294,6 @@ export interface ClusterSecretStoreV1Beta1Spec {
    * @schema ClusterSecretStoreV1Beta1Spec#retrySettings
    */
   readonly retrySettings?: ClusterSecretStoreV1Beta1SpecRetrySettings;
-
 }
 
 /**
@@ -16341,7 +18341,6 @@ export interface ClusterSecretStoreV1Beta1SpecConditions {
    * @schema ClusterSecretStoreV1Beta1SpecConditions#namespaces
    */
   readonly namespaces?: string[];
-
 }
 
 /**
@@ -16610,7 +18609,6 @@ export interface ClusterSecretStoreV1Beta1SpecProvider {
    * @schema ClusterSecretStoreV1Beta1SpecProvider#yandexlockbox
    */
   readonly yandexlockbox?: ClusterSecretStoreV1Beta1SpecProviderYandexlockbox;
-
 }
 
 /**
@@ -16676,7 +18674,6 @@ export interface ClusterSecretStoreV1Beta1SpecRetrySettings {
    * @schema ClusterSecretStoreV1Beta1SpecRetrySettings#retryInterval
    */
   readonly retryInterval?: string;
-
 }
 
 /**
@@ -16715,7 +18712,6 @@ export interface ClusterSecretStoreV1Beta1SpecConditionsNamespaceSelector {
    * @schema ClusterSecretStoreV1Beta1SpecConditionsNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -16768,7 +18764,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeyless {
    * @schema ClusterSecretStoreV1Beta1SpecProviderAkeyless#caProvider
    */
   readonly caProvider?: ClusterSecretStoreV1Beta1SpecProviderAkeylessCaProvider;
-
 }
 
 /**
@@ -16807,7 +18802,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAlibaba {
    * @schema ClusterSecretStoreV1Beta1SpecProviderAlibaba#regionID
    */
   readonly regionId: string;
-
 }
 
 /**
@@ -16902,7 +18896,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAws {
    * @schema ClusterSecretStoreV1Beta1SpecProviderAws#transitiveTagKeys
    */
   readonly transitiveTagKeys?: string[];
-
 }
 
 /**
@@ -16989,7 +18982,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAzurekv {
    * @schema ClusterSecretStoreV1Beta1SpecProviderAzurekv#vaultUrl
    */
   readonly vaultUrl: string;
-
 }
 
 /**
@@ -17031,7 +19023,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrust {
    * @schema ClusterSecretStoreV1Beta1SpecProviderBeyondtrust#server
    */
   readonly server: ClusterSecretStoreV1Beta1SpecProviderBeyondtrustServer;
-
 }
 
 /**
@@ -17106,7 +19097,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanager {
    * @schema ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanager#projectID
    */
   readonly projectId: string;
-
 }
 
 /**
@@ -17156,7 +19146,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderChef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderChef#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -17194,7 +19183,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderCloudrusm {
    * @schema ClusterSecretStoreV1Beta1SpecProviderCloudrusm#projectID
    */
   readonly projectId?: string;
-
 }
 
 /**
@@ -17247,7 +19235,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderConjur {
    * @schema ClusterSecretStoreV1Beta1SpecProviderConjur#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -17310,7 +19297,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDelinea {
    * @schema ClusterSecretStoreV1Beta1SpecProviderDelinea#urlTemplate
    */
   readonly urlTemplate?: string;
-
 }
 
 /**
@@ -17350,7 +19336,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDevice42 {
    * @schema ClusterSecretStoreV1Beta1SpecProviderDevice42#host
    */
   readonly host: string;
-
 }
 
 /**
@@ -17408,7 +19393,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDoppler {
    * @schema ClusterSecretStoreV1Beta1SpecProviderDoppler#project
    */
   readonly project?: string;
-
 }
 
 /**
@@ -17439,7 +19423,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderFake {
    * @schema ClusterSecretStoreV1Beta1SpecProviderFake#data
    */
   readonly data: ClusterSecretStoreV1Beta1SpecProviderFakeData[];
-
 }
 
 /**
@@ -17476,7 +19459,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderFortanix {
    * @schema ClusterSecretStoreV1Beta1SpecProviderFortanix#apiUrl
    */
   readonly apiUrl?: string;
-
 }
 
 /**
@@ -17520,7 +19502,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGcpsm {
    * @schema ClusterSecretStoreV1Beta1SpecProviderGcpsm#projectID
    */
   readonly projectId?: string;
-
 }
 
 /**
@@ -17602,7 +19583,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGithub {
    * @schema ClusterSecretStoreV1Beta1SpecProviderGithub#url
    */
   readonly url?: string;
-
 }
 
 /**
@@ -17689,7 +19669,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGitlab {
    * @schema ClusterSecretStoreV1Beta1SpecProviderGitlab#url
    */
   readonly url?: string;
-
 }
 
 /**
@@ -17732,7 +19711,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderIbm {
    * @schema ClusterSecretStoreV1Beta1SpecProviderIbm#serviceUrl
    */
   readonly serviceUrl?: string;
-
 }
 
 /**
@@ -17776,7 +19754,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderInfisical {
    * @schema ClusterSecretStoreV1Beta1SpecProviderInfisical#secretsScope
    */
   readonly secretsScope: ClusterSecretStoreV1Beta1SpecProviderInfisicalSecretsScope;
-
 }
 
 /**
@@ -17813,7 +19790,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKeepersecurity {
    * @schema ClusterSecretStoreV1Beta1SpecProviderKeepersecurity#folderID
    */
   readonly folderId: string;
-
 }
 
 /**
@@ -17864,7 +19840,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetes {
    * @schema ClusterSecretStoreV1Beta1SpecProviderKubernetes#server
    */
   readonly server?: ClusterSecretStoreV1Beta1SpecProviderKubernetesServer;
-
 }
 
 /**
@@ -17917,7 +19892,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOnboardbase {
    * @schema ClusterSecretStoreV1Beta1SpecProviderOnboardbase#project
    */
   readonly project: string;
-
 }
 
 /**
@@ -17963,7 +19937,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOnepassword {
    * @schema ClusterSecretStoreV1Beta1SpecProviderOnepassword#vaults
    */
   readonly vaults: { [key: string]: number };
-
 }
 
 /**
@@ -18042,7 +20015,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOracle {
    * @schema ClusterSecretStoreV1Beta1SpecProviderOracle#vault
    */
   readonly vault: string;
-
 }
 
 /**
@@ -18082,7 +20054,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPassbolt {
    * @schema ClusterSecretStoreV1Beta1SpecProviderPassbolt#host
    */
   readonly host: string;
-
 }
 
 /**
@@ -18126,7 +20097,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPassworddepot {
    * @schema ClusterSecretStoreV1Beta1SpecProviderPassworddepot#host
    */
   readonly host: string;
-
 }
 
 /**
@@ -18162,7 +20132,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPrevider {
    * @schema ClusterSecretStoreV1Beta1SpecProviderPrevider#baseUri
    */
   readonly baseUri?: string;
-
 }
 
 /**
@@ -18224,7 +20193,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPulumi {
    * @schema ClusterSecretStoreV1Beta1SpecProviderPulumi#project
    */
   readonly project: string;
-
 }
 
 /**
@@ -18286,7 +20254,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderScaleway {
    * @schema ClusterSecretStoreV1Beta1SpecProviderScaleway#secretKey
    */
   readonly secretKey: ClusterSecretStoreV1Beta1SpecProviderScalewaySecretKey;
-
 }
 
 /**
@@ -18335,7 +20302,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderSecretserver {
    * @schema ClusterSecretStoreV1Beta1SpecProviderSecretserver#username
    */
   readonly username: ClusterSecretStoreV1Beta1SpecProviderSecretserverUsername;
-
 }
 
 /**
@@ -18387,7 +20353,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderSenhasegura {
    * @schema ClusterSecretStoreV1Beta1SpecProviderSenhasegura#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -18508,7 +20473,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVault {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVault#version
    */
   readonly version?: ClusterSecretStoreV1Beta1SpecProviderVaultVersion;
-
 }
 
 /**
@@ -18614,7 +20578,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderWebhook {
    * @schema ClusterSecretStoreV1Beta1SpecProviderWebhook#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -18666,7 +20629,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanager {
    * @schema ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanager#caProvider
    */
   readonly caProvider?: ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProvider;
-
 }
 
 /**
@@ -18711,7 +20673,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderYandexlockbox {
    * @schema ClusterSecretStoreV1Beta1SpecProviderYandexlockbox#caProvider
    */
   readonly caProvider?: ClusterSecretStoreV1Beta1SpecProviderYandexlockboxCaProvider;
-
 }
 
 /**
@@ -18761,7 +20722,6 @@ export interface ClusterSecretStoreV1Beta1SpecConditionsNamespaceSelectorMatchEx
    * @schema ClusterSecretStoreV1Beta1SpecConditionsNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -18801,7 +20761,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRef#secretRef
    */
   readonly secretRef?: ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRef;
-
 }
 
 /**
@@ -18853,7 +20812,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeylessCaProvider {
    * @schema ClusterSecretStoreV1Beta1SpecProviderAkeylessCaProvider#type
    */
   readonly type: ClusterSecretStoreV1Beta1SpecProviderAkeylessCaProviderType;
-
 }
 
 /**
@@ -18892,7 +20850,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAlibabaAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderAlibabaAuth#secretRef
    */
   readonly secretRef?: ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef;
-
 }
 
 /**
@@ -18932,7 +20889,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAwsAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderAwsAuth#secretRef
    */
   readonly secretRef?: ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRef;
-
 }
 
 /**
@@ -18977,7 +20933,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAwsSecretsManager {
    * @schema ClusterSecretStoreV1Beta1SpecProviderAwsSecretsManager#recoveryWindowInDays
    */
   readonly recoveryWindowInDays?: number;
-
 }
 
 /**
@@ -19020,7 +20975,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAwsSessionTags {
    * @schema ClusterSecretStoreV1Beta1SpecProviderAwsSessionTags#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -19071,7 +21025,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRef#tenantId
    */
   readonly tenantId?: ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefTenantId;
-
 }
 
 /**
@@ -19157,7 +21110,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAzurekvServiceAccountRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderAzurekvServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -19216,7 +21168,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuth#clientSecret
    */
   readonly clientSecret?: ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecret;
-
 }
 
 /**
@@ -19279,7 +21230,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustServer {
    * @schema ClusterSecretStoreV1Beta1SpecProviderBeyondtrustServer#verifyCA
    */
   readonly verifyCa: boolean;
-
 }
 
 /**
@@ -19314,7 +21264,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAut
    * @schema ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuth#secretRef
    */
   readonly secretRef: ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecretRef;
-
 }
 
 /**
@@ -19365,7 +21314,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaP
    * @schema ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaProvider#type
    */
   readonly type: ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaProviderType;
-
 }
 
 /**
@@ -19397,7 +21345,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderChefAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderChefAuth#secretRef
    */
   readonly secretRef: ClusterSecretStoreV1Beta1SpecProviderChefAuthSecretRef;
-
 }
 
 /**
@@ -19426,7 +21373,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuth#secretRef
    */
   readonly secretRef?: ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRef;
-
 }
 
 /**
@@ -19462,7 +21408,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderConjurAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderConjurAuth#jwt
    */
   readonly jwt?: ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwt;
-
 }
 
 /**
@@ -19516,7 +21461,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderConjurCaProvider {
    * @schema ClusterSecretStoreV1Beta1SpecProviderConjurCaProvider#type
    */
   readonly type: ClusterSecretStoreV1Beta1SpecProviderConjurCaProviderType;
-
 }
 
 /**
@@ -19555,7 +21499,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDelineaClientId {
    * @schema ClusterSecretStoreV1Beta1SpecProviderDelineaClientId#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -19592,7 +21535,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDelineaClientSecret {
    * @schema ClusterSecretStoreV1Beta1SpecProviderDelineaClientSecret#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -19620,7 +21562,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDevice42Auth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderDevice42Auth#secretRef
    */
   readonly secretRef: ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRef;
-
 }
 
 /**
@@ -19647,7 +21588,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDopplerAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderDopplerAuth#secretRef
    */
   readonly secretRef: ClusterSecretStoreV1Beta1SpecProviderDopplerAuthSecretRef;
-
 }
 
 /**
@@ -19720,7 +21660,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderFakeData {
    * @schema ClusterSecretStoreV1Beta1SpecProviderFakeData#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -19751,7 +21690,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderFortanixApiKey {
    * @schema ClusterSecretStoreV1Beta1SpecProviderFortanixApiKey#secretRef
    */
   readonly secretRef?: ClusterSecretStoreV1Beta1SpecProviderFortanixApiKeySecretRef;
-
 }
 
 /**
@@ -19783,7 +21721,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGcpsmAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderGcpsmAuth#workloadIdentity
    */
   readonly workloadIdentity?: ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity;
-
 }
 
 /**
@@ -19814,7 +21751,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGithubAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderGithubAuth#privateKey
    */
   readonly privateKey: ClusterSecretStoreV1Beta1SpecProviderGithubAuthPrivateKey;
-
 }
 
 /**
@@ -19841,7 +21777,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGitlabAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderGitlabAuth#SecretRef
    */
   readonly secretRef: ClusterSecretStoreV1Beta1SpecProviderGitlabAuthSecretRef;
-
 }
 
 /**
@@ -19892,7 +21827,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGitlabCaProvider {
    * @schema ClusterSecretStoreV1Beta1SpecProviderGitlabCaProvider#type
    */
   readonly type: ClusterSecretStoreV1Beta1SpecProviderGitlabCaProviderType;
-
 }
 
 /**
@@ -19929,7 +21863,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderIbmAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderIbmAuth#secretRef
    */
   readonly secretRef?: ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRef;
-
 }
 
 /**
@@ -19957,7 +21890,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderInfisicalAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderInfisicalAuth#universalAuthCredentials
    */
   readonly universalAuthCredentials?: ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials;
-
 }
 
 /**
@@ -20017,7 +21949,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderInfisicalSecretsScope {
    * @schema ClusterSecretStoreV1Beta1SpecProviderInfisicalSecretsScope#secretsPath
    */
   readonly secretsPath?: string;
-
 }
 
 /**
@@ -20067,7 +21998,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKeepersecurityAuthRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderKeepersecurityAuthRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -20112,7 +22042,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderKubernetesAuth#token
    */
   readonly token?: ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthToken;
-
 }
 
 /**
@@ -20159,7 +22088,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -20204,7 +22132,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesServer {
    * @schema ClusterSecretStoreV1Beta1SpecProviderKubernetesServer#url
    */
   readonly url?: string;
-
 }
 
 /**
@@ -20243,7 +22170,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuth#passcodeRef
    */
   readonly passcodeRef: ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuthPasscodeRef;
-
 }
 
 /**
@@ -20273,7 +22199,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuth#secretRef
    */
   readonly secretRef: ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRef;
-
 }
 
 /**
@@ -20317,7 +22242,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOracleAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderOracleAuth#user
    */
   readonly user: string;
-
 }
 
 /**
@@ -20382,7 +22306,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOracleServiceAccountRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderOracleServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -20422,7 +22345,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPassboltAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderPassboltAuth#privateKeySecretRef
    */
   readonly privateKeySecretRef: ClusterSecretStoreV1Beta1SpecProviderPassboltAuthPrivateKeySecretRef;
-
 }
 
 /**
@@ -20450,7 +22372,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuth#secretRef
    */
   readonly secretRef: ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef;
-
 }
 
 /**
@@ -20479,7 +22400,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPreviderAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderPreviderAuth#secretRef
    */
   readonly secretRef?: ClusterSecretStoreV1Beta1SpecProviderPreviderAuthSecretRef;
-
 }
 
 /**
@@ -20508,7 +22428,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPulumiAccessToken {
    * @schema ClusterSecretStoreV1Beta1SpecProviderPulumiAccessToken#secretRef
    */
   readonly secretRef?: ClusterSecretStoreV1Beta1SpecProviderPulumiAccessTokenSecretRef;
-
 }
 
 /**
@@ -20544,7 +22463,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderScalewayAccessKey {
    * @schema ClusterSecretStoreV1Beta1SpecProviderScalewayAccessKey#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -20581,7 +22499,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderScalewaySecretKey {
    * @schema ClusterSecretStoreV1Beta1SpecProviderScalewaySecretKey#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -20618,7 +22535,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderSecretserverPassword {
    * @schema ClusterSecretStoreV1Beta1SpecProviderSecretserverPassword#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -20655,7 +22571,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderSecretserverUsername {
    * @schema ClusterSecretStoreV1Beta1SpecProviderSecretserverUsername#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -20691,7 +22606,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderSenhaseguraAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderSenhaseguraAuth#clientSecretSecretRef
    */
   readonly clientSecretSecretRef: ClusterSecretStoreV1Beta1SpecProviderSenhaseguraAuthClientSecretSecretRef;
-
 }
 
 /**
@@ -20787,7 +22701,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuth#userPass
    */
   readonly userPass?: ClusterSecretStoreV1Beta1SpecProviderVaultAuthUserPass;
-
 }
 
 /**
@@ -20846,7 +22759,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultCaProvider {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultCaProvider#type
    */
   readonly type: ClusterSecretStoreV1Beta1SpecProviderVaultCaProviderType;
-
 }
 
 /**
@@ -20893,7 +22805,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultTls {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultTls#keySecretRef
    */
   readonly keySecretRef?: ClusterSecretStoreV1Beta1SpecProviderVaultTlsKeySecretRef;
-
 }
 
 /**
@@ -20936,7 +22847,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderWebhookAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderWebhookAuth#ntlm
    */
   readonly ntlm?: ClusterSecretStoreV1Beta1SpecProviderWebhookAuthNtlm;
-
 }
 
 /**
@@ -20986,7 +22896,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderWebhookCaProvider {
    * @schema ClusterSecretStoreV1Beta1SpecProviderWebhookCaProvider#type
    */
   readonly type: ClusterSecretStoreV1Beta1SpecProviderWebhookCaProviderType;
-
 }
 
 /**
@@ -21018,7 +22927,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderWebhookResult {
    * @schema ClusterSecretStoreV1Beta1SpecProviderWebhookResult#jsonPath
    */
   readonly jsonPath?: string;
-
 }
 
 /**
@@ -21052,7 +22960,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderWebhookSecrets {
    * @schema ClusterSecretStoreV1Beta1SpecProviderWebhookSecrets#secretRef
    */
   readonly secretRef: ClusterSecretStoreV1Beta1SpecProviderWebhookSecretsSecretRef;
-
 }
 
 /**
@@ -21082,7 +22989,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerAu
    * @schema ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuth#authorizedKeySecretRef
    */
   readonly authorizedKeySecretRef?: ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuthAuthorizedKeySecretRef;
-
 }
 
 /**
@@ -21112,7 +23018,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerCa
    * @schema ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProvider#certSecretRef
    */
   readonly certSecretRef?: ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProviderCertSecretRef;
-
 }
 
 /**
@@ -21141,7 +23046,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderYandexlockboxAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderYandexlockboxAuth#authorizedKeySecretRef
    */
   readonly authorizedKeySecretRef?: ClusterSecretStoreV1Beta1SpecProviderYandexlockboxAuthAuthorizedKeySecretRef;
-
 }
 
 /**
@@ -21171,7 +23075,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderYandexlockboxCaProvider {
    * @schema ClusterSecretStoreV1Beta1SpecProviderYandexlockboxCaProvider#certSecretRef
    */
   readonly certSecretRef?: ClusterSecretStoreV1Beta1SpecProviderYandexlockboxCaProviderCertSecretRef;
-
 }
 
 /**
@@ -21228,7 +23131,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKuber
    * @schema ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuth#serviceAccountRef
    */
   readonly serviceAccountRef?: ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuthServiceAccountRef;
-
 }
 
 /**
@@ -21277,7 +23179,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecre
    * @schema ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRef#accessTypeParam
    */
   readonly accessTypeParam?: ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam;
-
 }
 
 /**
@@ -21333,7 +23234,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthRrsa {
    * @schema ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthRrsa#sessionName
    */
   readonly sessionName: string;
-
 }
 
 /**
@@ -21372,7 +23272,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef#accessKeySecretSecretRef
    */
   readonly accessKeySecretSecretRef: ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef;
-
 }
 
 /**
@@ -21402,7 +23301,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAwsAuthJwt {
    * @schema ClusterSecretStoreV1Beta1SpecProviderAwsAuthJwt#serviceAccountRef
    */
   readonly serviceAccountRef?: ClusterSecretStoreV1Beta1SpecProviderAwsAuthJwtServiceAccountRef;
-
 }
 
 /**
@@ -21448,7 +23346,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRef#sessionTokenSecretRef
    */
   readonly sessionTokenSecretRef?: ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefSessionTokenSecretRef;
-
 }
 
 /**
@@ -21495,7 +23392,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClient
    * @schema ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientCertificate#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -21542,7 +23438,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClient
    * @schema ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientId#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -21589,7 +23484,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClient
    * @schema ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientSecret#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -21636,7 +23530,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefTenant
    * @schema ClusterSecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefTenantId#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -21674,7 +23567,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKey {
    * @schema ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKey#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -21711,7 +23603,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificate
    * @schema ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificate#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -21748,7 +23639,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificate
    * @schema ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateKey#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -21785,7 +23675,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientId {
    * @schema ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientId#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -21822,7 +23711,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecre
    * @schema ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecret#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -21852,7 +23740,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAut
    * @schema ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecretRef#credentials
    */
   readonly credentials: ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecretRefCredentials;
-
 }
 
 /**
@@ -21893,7 +23780,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderChefAuthSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderChefAuthSecretRef#privateKeySecretRef
    */
   readonly privateKeySecretRef: ClusterSecretStoreV1Beta1SpecProviderChefAuthSecretRefPrivateKeySecretRef;
-
 }
 
 /**
@@ -21929,7 +23815,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRef#accessKeySecretSecretRef
    */
   readonly accessKeySecretSecretRef: ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeySecretSecretRef;
-
 }
 
 /**
@@ -21975,7 +23860,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikey {
    * @schema ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikey#userRef
    */
   readonly userRef: ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikeyUserRef;
-
 }
 
 /**
@@ -22037,7 +23921,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwt {
    * @schema ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwt#serviceID
    */
   readonly serviceId: string;
-
 }
 
 /**
@@ -22098,7 +23981,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDelineaClientIdSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderDelineaClientIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -22145,7 +24027,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDelineaClientSecretSecretR
    * @schema ClusterSecretStoreV1Beta1SpecProviderDelineaClientSecretSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -22174,7 +24055,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRef#credentials
    */
   readonly credentials?: ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRefCredentials;
-
 }
 
 /**
@@ -22203,7 +24083,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDopplerAuthSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderDopplerAuthSecretRef#dopplerToken
    */
   readonly dopplerToken: ClusterSecretStoreV1Beta1SpecProviderDopplerAuthSecretRefDopplerToken;
-
 }
 
 /**
@@ -22248,7 +24127,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderFortanixApiKeySecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderFortanixApiKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -22277,7 +24155,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef#secretAccessKeySecretRef
    */
   readonly secretAccessKeySecretRef?: ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRefSecretAccessKeySecretRef;
-
 }
 
 /**
@@ -22328,7 +24205,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity 
    * @schema ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity#serviceAccountRef
    */
   readonly serviceAccountRef: ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef;
-
 }
 
 /**
@@ -22377,7 +24253,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGithubAuthPrivateKey {
    * @schema ClusterSecretStoreV1Beta1SpecProviderGithubAuthPrivateKey#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -22406,7 +24281,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGitlabAuthSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderGitlabAuthSecretRef#accessToken
    */
   readonly accessToken?: ClusterSecretStoreV1Beta1SpecProviderGitlabAuthSecretRefAccessToken;
-
 }
 
 /**
@@ -22459,7 +24333,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderIbmAuthContainerAuth {
    * @schema ClusterSecretStoreV1Beta1SpecProviderIbmAuthContainerAuth#tokenLocation
    */
   readonly tokenLocation?: string;
-
 }
 
 /**
@@ -22488,7 +24361,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRef#secretApiKeySecretRef
    */
   readonly secretApiKeySecretRef?: ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRefSecretApiKeySecretRef;
-
 }
 
 /**
@@ -22524,7 +24396,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuth
    * @schema ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials#clientSecret
    */
   readonly clientSecret: ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientSecret;
-
 }
 
 /**
@@ -22563,7 +24434,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCert {
    * @schema ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCert#clientKey
    */
   readonly clientKey?: ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCertClientKey;
-
 }
 
 /**
@@ -22610,7 +24480,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthServiceAccou
    * @schema ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthServiceAccount#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -22642,7 +24511,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthToken {
    * @schema ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthToken#bearerToken
    */
   readonly bearerToken?: ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthTokenBearerToken;
-
 }
 
 /**
@@ -22693,7 +24561,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesServerCaProvider
    * @schema ClusterSecretStoreV1Beta1SpecProviderKubernetesServerCaProvider#type
    */
   readonly type: ClusterSecretStoreV1Beta1SpecProviderKubernetesServerCaProviderType;
-
 }
 
 /**
@@ -22742,7 +24609,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuthApiKeyRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuthApiKeyRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -22789,7 +24655,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuthPasscodeRef
    * @schema ClusterSecretStoreV1Beta1SpecProviderOnboardbaseAuthPasscodeRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -22820,7 +24685,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRef#connectTokenSecretRef
    */
   readonly connectTokenSecretRef: ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRefConnectTokenSecretRef;
-
 }
 
 /**
@@ -22856,7 +24720,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRef#privatekey
    */
   readonly privatekey: ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRefPrivatekey;
-
 }
 
 /**
@@ -22903,7 +24766,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPassboltAuthPasswordSecret
    * @schema ClusterSecretStoreV1Beta1SpecProviderPassboltAuthPasswordSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -22951,7 +24813,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPassboltAuthPrivateKeySecr
    * @schema ClusterSecretStoreV1Beta1SpecProviderPassboltAuthPrivateKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -22980,7 +24841,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef
    * @schema ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef#credentials
    */
   readonly credentials?: ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRefCredentials;
-
 }
 
 /**
@@ -23009,7 +24869,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPreviderAuthSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderPreviderAuthSecretRef#accessToken
    */
   readonly accessToken: ClusterSecretStoreV1Beta1SpecProviderPreviderAuthSecretRefAccessToken;
-
 }
 
 /**
@@ -23054,7 +24913,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPulumiAccessTokenSecretRef
    * @schema ClusterSecretStoreV1Beta1SpecProviderPulumiAccessTokenSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -23101,7 +24959,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderScalewayAccessKeySecretRef
    * @schema ClusterSecretStoreV1Beta1SpecProviderScalewayAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -23148,7 +25005,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderScalewaySecretKeySecretRef
    * @schema ClusterSecretStoreV1Beta1SpecProviderScalewaySecretKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -23195,7 +25051,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderSecretserverPasswordSecret
    * @schema ClusterSecretStoreV1Beta1SpecProviderSecretserverPasswordSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -23242,7 +25097,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderSecretserverUsernameSecret
    * @schema ClusterSecretStoreV1Beta1SpecProviderSecretserverUsernameSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -23290,7 +25144,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderSenhaseguraAuthClientSecre
    * @schema ClusterSecretStoreV1Beta1SpecProviderSenhaseguraAuthClientSecretSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -23351,7 +25204,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRole {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRole#secretRef
    */
   readonly secretRef: ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRoleSecretRef;
-
 }
 
 /**
@@ -23393,7 +25245,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthCert {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthCert#secretRef
    */
   readonly secretRef?: ClusterSecretStoreV1Beta1SpecProviderVaultAuthCertSecretRef;
-
 }
 
 /**
@@ -23473,7 +25324,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthIam {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthIam#vaultRole
    */
   readonly vaultRole: string;
-
 }
 
 /**
@@ -23535,7 +25385,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwt {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwt#secretRef
    */
   readonly secretRef?: ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtSecretRef;
-
 }
 
 /**
@@ -23597,7 +25446,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetes {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetes#serviceAccountRef
    */
   readonly serviceAccountRef?: ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetesServiceAccountRef;
-
 }
 
 /**
@@ -23648,7 +25496,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthLdap {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthLdap#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -23695,7 +25542,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthTokenSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthTokenSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -23744,7 +25590,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthUserPass {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthUserPass#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -23805,7 +25650,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultTlsCertSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultTlsCertSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -23854,7 +25698,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultTlsKeySecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultTlsKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -23894,7 +25737,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderWebhookAuthNtlm {
    * @schema ClusterSecretStoreV1Beta1SpecProviderWebhookAuthNtlm#usernameSecret
    */
   readonly usernameSecret: ClusterSecretStoreV1Beta1SpecProviderWebhookAuthNtlmUsernameSecret;
-
 }
 
 /**
@@ -23952,7 +25794,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderWebhookSecretsSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderWebhookSecretsSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -23999,7 +25840,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerAu
    * @schema ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuthAuthorizedKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24047,7 +25887,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerCa
    * @schema ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProviderCertSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24094,7 +25933,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderYandexlockboxAuthAuthorize
    * @schema ClusterSecretStoreV1Beta1SpecProviderYandexlockboxAuthAuthorizedKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24142,7 +25980,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderYandexlockboxCaProviderCer
    * @schema ClusterSecretStoreV1Beta1SpecProviderYandexlockboxCaProviderCertSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24192,7 +26029,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKuber
    * @schema ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuthSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24243,7 +26079,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKuber
    * @schema ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuthServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24290,7 +26125,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecre
    * @schema ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessId#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24338,7 +26172,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecre
    * @schema ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessType#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24386,7 +26219,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecre
    * @schema ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24433,7 +26265,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccess
    * @schema ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24480,7 +26311,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccess
    * @schema ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24528,7 +26358,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAwsAuthJwtServiceAccountRe
    * @schema ClusterSecretStoreV1Beta1SpecProviderAwsAuthJwtServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24575,7 +26404,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefAccessKeyI
    * @schema ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24622,7 +26450,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefSecretAcce
    * @schema ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24671,7 +26498,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefSessionTok
    * @schema ClusterSecretStoreV1Beta1SpecProviderAwsAuthSecretRefSessionTokenSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24718,7 +26544,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKeySecre
    * @schema ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24765,7 +26590,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificate
    * @schema ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24812,7 +26636,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificate
    * @schema ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24859,7 +26682,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientIdSec
    * @schema ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24906,7 +26728,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecre
    * @schema ClusterSecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecretSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24953,7 +26774,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAut
    * @schema ClusterSecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecretRefCredentials#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25000,7 +26820,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderChefAuthSecretRefPrivateKe
    * @schema ClusterSecretStoreV1Beta1SpecProviderChefAuthSecretRefPrivateKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25047,7 +26866,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAcce
    * @schema ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25094,7 +26912,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAcce
    * @schema ClusterSecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeySecretSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25142,7 +26959,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikeyApiKeyRef 
    * @schema ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikeyApiKeyRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25190,7 +27006,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikeyUserRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderConjurAuthApikeyUserRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25238,7 +27053,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwtSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwtSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25287,7 +27101,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwtServiceAccoun
    * @schema ClusterSecretStoreV1Beta1SpecProviderConjurAuthJwtServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25334,7 +27147,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRefCrede
    * @schema ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRefCredentials#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25383,7 +27195,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderDopplerAuthSecretRefDopple
    * @schema ClusterSecretStoreV1Beta1SpecProviderDopplerAuthSecretRefDopplerToken#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25430,7 +27241,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRefSecretAc
    * @schema ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25478,7 +27288,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentityS
    * @schema ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25525,7 +27334,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGitlabAuthSecretRefAccessT
    * @schema ClusterSecretStoreV1Beta1SpecProviderGitlabAuthSecretRefAccessToken#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25572,7 +27380,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRefSecretApiK
    * @schema ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRefSecretApiKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25620,7 +27427,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuth
    * @schema ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientId#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25668,7 +27474,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuth
    * @schema ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientSecret#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25716,7 +27521,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCertClientCe
    * @schema ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCertClientCert#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25764,7 +27568,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCertClientKe
    * @schema ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCertClientKey#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25812,7 +27615,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthTokenBearerT
    * @schema ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthTokenBearerToken#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25871,7 +27673,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRefCo
    * @schema ClusterSecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRefConnectTokenSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25918,7 +27719,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRefFingerp
    * @schema ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRefFingerprint#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25965,7 +27765,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRefPrivate
    * @schema ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRefPrivatekey#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -26012,7 +27811,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef
    * @schema ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRefCredentials#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -26059,7 +27857,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderPreviderAuthSecretRefAcces
    * @schema ClusterSecretStoreV1Beta1SpecProviderPreviderAuthSecretRefAccessToken#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -26109,7 +27906,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRoleRoleRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRoleRoleRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -26159,7 +27955,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRoleSecretRef 
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthAppRoleSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -26207,7 +28002,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthCertClientCert {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthCertClientCert#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -26255,7 +28049,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthCertSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthCertSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -26286,7 +28079,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamJwt {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamJwt#serviceAccountRef
    */
   readonly serviceAccountRef?: ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamJwtServiceAccountRef;
-
 }
 
 /**
@@ -26331,7 +28123,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRef#sessionTokenSecretRef
    */
   readonly sessionTokenSecretRef?: ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSessionTokenSecretRef;
-
 }
 
 /**
@@ -26386,7 +28177,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServ
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAccountToken#serviceAccountRef
    */
   readonly serviceAccountRef: ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAccountTokenServiceAccountRef;
-
 }
 
 /**
@@ -26434,7 +28224,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -26484,7 +28273,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetesSecretR
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetesSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -26535,7 +28323,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetesService
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthKubernetesServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -26584,7 +28371,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthLdapSecretRef {
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthLdapSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -26633,7 +28419,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthUserPassSecretRef
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthUserPassSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -26681,7 +28466,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderWebhookAuthNtlmPasswordSec
    * @schema ClusterSecretStoreV1Beta1SpecProviderWebhookAuthNtlmPasswordSecret#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -26729,7 +28513,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderWebhookAuthNtlmUsernameSec
    * @schema ClusterSecretStoreV1Beta1SpecProviderWebhookAuthNtlmUsernameSecret#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -26777,7 +28560,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamJwtServiceAcco
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamJwtServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -26824,7 +28606,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefAcces
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -26871,7 +28652,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSecre
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -26920,7 +28700,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSessi
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSessionTokenSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -26968,7 +28747,6 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServ
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAccountTokenServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -27059,7 +28837,6 @@ export interface ExternalSecretProps {
    * @schema ExternalSecret#spec
    */
   readonly spec?: ExternalSecretSpec;
-
 }
 
 /**
@@ -27135,7 +28912,6 @@ export interface ExternalSecretSpec {
    * @schema ExternalSecretSpec#target
    */
   readonly target?: ExternalSecretSpecTarget;
-
 }
 
 /**
@@ -27185,7 +28961,6 @@ export interface ExternalSecretSpecData {
    * @schema ExternalSecretSpecData#sourceRef
    */
   readonly sourceRef?: ExternalSecretSpecDataSourceRef;
-
 }
 
 /**
@@ -27243,7 +29018,6 @@ export interface ExternalSecretSpecDataFrom {
    * @schema ExternalSecretSpecDataFrom#sourceRef
    */
   readonly sourceRef?: ExternalSecretSpecDataFromSourceRef;
-
 }
 
 /**
@@ -27302,7 +29076,6 @@ export interface ExternalSecretSpecSecretStoreRef {
    * @schema ExternalSecretSpecSecretStoreRef#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -27367,7 +29140,6 @@ export interface ExternalSecretSpecTarget {
    * @schema ExternalSecretSpecTarget#template
    */
   readonly template?: ExternalSecretSpecTargetTemplate;
-
 }
 
 /**
@@ -27437,7 +29209,6 @@ export interface ExternalSecretSpecDataRemoteRef {
    * @schema ExternalSecretSpecDataRemoteRef#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -27482,7 +29253,6 @@ export interface ExternalSecretSpecDataSourceRef {
    * @schema ExternalSecretSpecDataSourceRef#storeRef
    */
   readonly storeRef?: ExternalSecretSpecDataSourceRefStoreRef;
-
 }
 
 /**
@@ -27549,7 +29319,6 @@ export interface ExternalSecretSpecDataFromExtract {
    * @schema ExternalSecretSpecDataFromExtract#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -27612,7 +29381,6 @@ export interface ExternalSecretSpecDataFromFind {
    * @schema ExternalSecretSpecDataFromFind#tags
    */
   readonly tags?: { [key: string]: string };
-
 }
 
 /**
@@ -27660,7 +29428,6 @@ export interface ExternalSecretSpecDataFromRewrite {
    * @schema ExternalSecretSpecDataFromRewrite#transform
    */
   readonly transform?: ExternalSecretSpecDataFromRewriteTransform;
-
 }
 
 /**
@@ -27703,7 +29470,6 @@ export interface ExternalSecretSpecDataFromSourceRef {
    * @schema ExternalSecretSpecDataFromSourceRef#storeRef
    */
   readonly storeRef?: ExternalSecretSpecDataFromSourceRefStoreRef;
-
 }
 
 /**
@@ -27810,7 +29576,6 @@ export interface ExternalSecretSpecTargetTemplate {
    * @schema ExternalSecretSpecTargetTemplate#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -27902,7 +29667,6 @@ export interface ExternalSecretSpecDataSourceRefGeneratorRef {
    * @schema ExternalSecretSpecDataSourceRefGeneratorRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -27942,7 +29706,6 @@ export interface ExternalSecretSpecDataSourceRefStoreRef {
    * @schema ExternalSecretSpecDataSourceRefStoreRef#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -28041,7 +29804,6 @@ export interface ExternalSecretSpecDataFromFindName {
    * @schema ExternalSecretSpecDataFromFindName#regexp
    */
   readonly regexp?: string;
-
 }
 
 /**
@@ -28070,7 +29832,7 @@ export interface ExternalSecretSpecDataFromRewriteMerge {
    *
    * @schema ExternalSecretSpecDataFromRewriteMerge#conflictPolicy
    */
-  readonly conflictPolicy?: string;
+  readonly conflictPolicy?: ExternalSecretSpecDataFromRewriteMergeConflictPolicy;
 
   /**
    * Used to define the target key of the merge operation.
@@ -28088,12 +29850,18 @@ export interface ExternalSecretSpecDataFromRewriteMerge {
   readonly priority?: string[];
 
   /**
+   * Used to define the policy when a key in the priority list does not exist in the input.
+   *
+   * @schema ExternalSecretSpecDataFromRewriteMerge#priorityPolicy
+   */
+  readonly priorityPolicy?: ExternalSecretSpecDataFromRewriteMergePriorityPolicy;
+
+  /**
    * Used to define the strategy to use in the merge operation.
    *
    * @schema ExternalSecretSpecDataFromRewriteMerge#strategy
    */
-  readonly strategy?: string;
-
+  readonly strategy?: ExternalSecretSpecDataFromRewriteMergeStrategy;
 }
 
 /**
@@ -28106,6 +29874,7 @@ export function toJson_ExternalSecretSpecDataFromRewriteMerge(obj: ExternalSecre
     'conflictPolicy': obj.conflictPolicy,
     'into': obj.into,
     'priority': obj.priority?.map(y => y),
+    'priorityPolicy': obj.priorityPolicy,
     'strategy': obj.strategy,
   };
   // filter undefined values
@@ -28133,7 +29902,6 @@ export interface ExternalSecretSpecDataFromRewriteRegexp {
    * @schema ExternalSecretSpecDataFromRewriteRegexp#target
    */
   readonly target: string;
-
 }
 
 /**
@@ -28165,7 +29933,6 @@ export interface ExternalSecretSpecDataFromRewriteTransform {
    * @schema ExternalSecretSpecDataFromRewriteTransform#template
    */
   readonly template: string;
-
 }
 
 /**
@@ -28208,7 +29975,6 @@ export interface ExternalSecretSpecDataFromSourceRefGeneratorRef {
    * @schema ExternalSecretSpecDataFromSourceRefGeneratorRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -28248,7 +30014,6 @@ export interface ExternalSecretSpecDataFromSourceRefStoreRef {
    * @schema ExternalSecretSpecDataFromSourceRefStoreRef#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -28300,10 +30065,14 @@ export interface ExternalSecretSpecTargetTemplateMetadata {
   readonly annotations?: { [key: string]: string };
 
   /**
+   * @schema ExternalSecretSpecTargetTemplateMetadata#finalizers
+   */
+  readonly finalizers?: string[];
+
+  /**
    * @schema ExternalSecretSpecTargetTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -28314,6 +30083,7 @@ export function toJson_ExternalSecretSpecTargetTemplateMetadata(obj: ExternalSec
   if (obj === undefined) { return undefined; }
   const result = {
     'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'finalizers': obj.finalizers?.map(y => y),
     'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
   };
   // filter undefined values
@@ -28344,7 +30114,6 @@ export interface ExternalSecretSpecTargetTemplateTemplateFrom {
    * @schema ExternalSecretSpecTargetTemplateTemplateFrom#target
    */
   readonly target?: ExternalSecretSpecTargetTemplateTemplateFromTarget;
-
 }
 
 /**
@@ -28374,6 +30143,8 @@ export enum ExternalSecretSpecDataSourceRefGeneratorRefKind {
   ACR_ACCESS_TOKEN = "ACRAccessToken",
   /** ClusterGenerator */
   CLUSTER_GENERATOR = "ClusterGenerator",
+  /** CloudsmithAccessToken */
+  CLOUDSMITH_ACCESS_TOKEN = "CloudsmithAccessToken",
   /** ECRAuthorizationToken */
   ECR_AUTHORIZATION_TOKEN = "ECRAuthorizationToken",
   /** Fake */
@@ -28386,6 +30157,8 @@ export enum ExternalSecretSpecDataSourceRefGeneratorRefKind {
   QUAY_ACCESS_TOKEN = "QuayAccessToken",
   /** Password */
   PASSWORD = "Password",
+  /** SSHKey */
+  SSH_KEY = "SSHKey",
   /** STSSessionToken */
   STS_SESSION_TOKEN = "STSSessionToken",
   /** UUID */
@@ -28415,6 +30188,42 @@ export enum ExternalSecretSpecDataSourceRefStoreRefKind {
 }
 
 /**
+ * Used to define the policy to use in conflict resolution.
+ *
+ * @schema ExternalSecretSpecDataFromRewriteMergeConflictPolicy
+ */
+export enum ExternalSecretSpecDataFromRewriteMergeConflictPolicy {
+  /** Ignore */
+  IGNORE = "Ignore",
+  /** Error */
+  ERROR = "Error",
+}
+
+/**
+ * Used to define the policy when a key in the priority list does not exist in the input.
+ *
+ * @schema ExternalSecretSpecDataFromRewriteMergePriorityPolicy
+ */
+export enum ExternalSecretSpecDataFromRewriteMergePriorityPolicy {
+  /** IgnoreNotFound */
+  IGNORE_NOT_FOUND = "IgnoreNotFound",
+  /** Strict */
+  STRICT = "Strict",
+}
+
+/**
+ * Used to define the strategy to use in the merge operation.
+ *
+ * @schema ExternalSecretSpecDataFromRewriteMergeStrategy
+ */
+export enum ExternalSecretSpecDataFromRewriteMergeStrategy {
+  /** Extract */
+  EXTRACT = "Extract",
+  /** JSON */
+  JSON = "JSON",
+}
+
+/**
  * Specify the Kind of the generator resource
  *
  * @schema ExternalSecretSpecDataFromSourceRefGeneratorRefKind
@@ -28424,6 +30233,8 @@ export enum ExternalSecretSpecDataFromSourceRefGeneratorRefKind {
   ACR_ACCESS_TOKEN = "ACRAccessToken",
   /** ClusterGenerator */
   CLUSTER_GENERATOR = "ClusterGenerator",
+  /** CloudsmithAccessToken */
+  CLOUDSMITH_ACCESS_TOKEN = "CloudsmithAccessToken",
   /** ECRAuthorizationToken */
   ECR_AUTHORIZATION_TOKEN = "ECRAuthorizationToken",
   /** Fake */
@@ -28436,6 +30247,8 @@ export enum ExternalSecretSpecDataFromSourceRefGeneratorRefKind {
   QUAY_ACCESS_TOKEN = "QuayAccessToken",
   /** Password */
   PASSWORD = "Password",
+  /** SSHKey */
+  SSH_KEY = "SSHKey",
   /** STSSessionToken */
   STS_SESSION_TOKEN = "STSSessionToken",
   /** UUID */
@@ -28481,7 +30294,6 @@ export interface ExternalSecretSpecTargetTemplateTemplateFromConfigMap {
    * @schema ExternalSecretSpecTargetTemplateTemplateFromConfigMap#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -28516,7 +30328,6 @@ export interface ExternalSecretSpecTargetTemplateTemplateFromSecret {
    * @schema ExternalSecretSpecTargetTemplateTemplateFromSecret#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -28561,7 +30372,6 @@ export interface ExternalSecretSpecTargetTemplateTemplateFromConfigMapItems {
    * @schema ExternalSecretSpecTargetTemplateTemplateFromConfigMapItems#templateAs
    */
   readonly templateAs?: ExternalSecretSpecTargetTemplateTemplateFromConfigMapItemsTemplateAs;
-
 }
 
 /**
@@ -28594,7 +30404,6 @@ export interface ExternalSecretSpecTargetTemplateTemplateFromSecretItems {
    * @schema ExternalSecretSpecTargetTemplateTemplateFromSecretItems#templateAs
    */
   readonly templateAs?: ExternalSecretSpecTargetTemplateTemplateFromSecretItemsTemplateAs;
-
 }
 
 /**
@@ -28704,7 +30513,6 @@ export interface ExternalSecretV1Beta1Props {
    * @schema ExternalSecretV1Beta1#spec
    */
   readonly spec?: ExternalSecretV1Beta1Spec;
-
 }
 
 /**
@@ -28780,7 +30588,6 @@ export interface ExternalSecretV1Beta1Spec {
    * @schema ExternalSecretV1Beta1Spec#target
    */
   readonly target?: ExternalSecretV1Beta1SpecTarget;
-
 }
 
 /**
@@ -28830,7 +30637,6 @@ export interface ExternalSecretV1Beta1SpecData {
    * @schema ExternalSecretV1Beta1SpecData#sourceRef
    */
   readonly sourceRef?: ExternalSecretV1Beta1SpecDataSourceRef;
-
 }
 
 /**
@@ -28888,7 +30694,6 @@ export interface ExternalSecretV1Beta1SpecDataFrom {
    * @schema ExternalSecretV1Beta1SpecDataFrom#sourceRef
    */
   readonly sourceRef?: ExternalSecretV1Beta1SpecDataFromSourceRef;
-
 }
 
 /**
@@ -28947,7 +30752,6 @@ export interface ExternalSecretV1Beta1SpecSecretStoreRef {
    * @schema ExternalSecretV1Beta1SpecSecretStoreRef#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -29012,7 +30816,6 @@ export interface ExternalSecretV1Beta1SpecTarget {
    * @schema ExternalSecretV1Beta1SpecTarget#template
    */
   readonly template?: ExternalSecretV1Beta1SpecTargetTemplate;
-
 }
 
 /**
@@ -29082,7 +30885,6 @@ export interface ExternalSecretV1Beta1SpecDataRemoteRef {
    * @schema ExternalSecretV1Beta1SpecDataRemoteRef#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -29127,7 +30929,6 @@ export interface ExternalSecretV1Beta1SpecDataSourceRef {
    * @schema ExternalSecretV1Beta1SpecDataSourceRef#storeRef
    */
   readonly storeRef?: ExternalSecretV1Beta1SpecDataSourceRefStoreRef;
-
 }
 
 /**
@@ -29194,7 +30995,6 @@ export interface ExternalSecretV1Beta1SpecDataFromExtract {
    * @schema ExternalSecretV1Beta1SpecDataFromExtract#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -29257,7 +31057,6 @@ export interface ExternalSecretV1Beta1SpecDataFromFind {
    * @schema ExternalSecretV1Beta1SpecDataFromFind#tags
    */
   readonly tags?: { [key: string]: string };
-
 }
 
 /**
@@ -29297,7 +31096,6 @@ export interface ExternalSecretV1Beta1SpecDataFromRewrite {
    * @schema ExternalSecretV1Beta1SpecDataFromRewrite#transform
    */
   readonly transform?: ExternalSecretV1Beta1SpecDataFromRewriteTransform;
-
 }
 
 /**
@@ -29339,7 +31137,6 @@ export interface ExternalSecretV1Beta1SpecDataFromSourceRef {
    * @schema ExternalSecretV1Beta1SpecDataFromSourceRef#storeRef
    */
   readonly storeRef?: ExternalSecretV1Beta1SpecDataFromSourceRefStoreRef;
-
 }
 
 /**
@@ -29446,7 +31243,6 @@ export interface ExternalSecretV1Beta1SpecTargetTemplate {
    * @schema ExternalSecretV1Beta1SpecTargetTemplate#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -29538,7 +31334,6 @@ export interface ExternalSecretV1Beta1SpecDataSourceRefGeneratorRef {
    * @schema ExternalSecretV1Beta1SpecDataSourceRefGeneratorRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -29578,7 +31373,6 @@ export interface ExternalSecretV1Beta1SpecDataSourceRefStoreRef {
    * @schema ExternalSecretV1Beta1SpecDataSourceRefStoreRef#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -29677,7 +31471,6 @@ export interface ExternalSecretV1Beta1SpecDataFromFindName {
    * @schema ExternalSecretV1Beta1SpecDataFromFindName#regexp
    */
   readonly regexp?: string;
-
 }
 
 /**
@@ -29714,7 +31507,6 @@ export interface ExternalSecretV1Beta1SpecDataFromRewriteRegexp {
    * @schema ExternalSecretV1Beta1SpecDataFromRewriteRegexp#target
    */
   readonly target: string;
-
 }
 
 /**
@@ -29746,7 +31538,6 @@ export interface ExternalSecretV1Beta1SpecDataFromRewriteTransform {
    * @schema ExternalSecretV1Beta1SpecDataFromRewriteTransform#template
    */
   readonly template: string;
-
 }
 
 /**
@@ -29789,7 +31580,6 @@ export interface ExternalSecretV1Beta1SpecDataFromSourceRefGeneratorRef {
    * @schema ExternalSecretV1Beta1SpecDataFromSourceRefGeneratorRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -29829,7 +31619,6 @@ export interface ExternalSecretV1Beta1SpecDataFromSourceRefStoreRef {
    * @schema ExternalSecretV1Beta1SpecDataFromSourceRefStoreRef#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -29884,7 +31673,6 @@ export interface ExternalSecretV1Beta1SpecTargetTemplateMetadata {
    * @schema ExternalSecretV1Beta1SpecTargetTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -29925,7 +31713,6 @@ export interface ExternalSecretV1Beta1SpecTargetTemplateTemplateFrom {
    * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFrom#target
    */
   readonly target?: ExternalSecretV1Beta1SpecTargetTemplateTemplateFromTarget;
-
 }
 
 /**
@@ -29967,6 +31754,8 @@ export enum ExternalSecretV1Beta1SpecDataSourceRefGeneratorRefKind {
   QUAY_ACCESS_TOKEN = "QuayAccessToken",
   /** Password */
   PASSWORD = "Password",
+  /** SSHKey */
+  SSH_KEY = "SSHKey",
   /** STSSessionToken */
   STS_SESSION_TOKEN = "STSSessionToken",
   /** UUID */
@@ -30015,6 +31804,8 @@ export enum ExternalSecretV1Beta1SpecDataFromSourceRefGeneratorRefKind {
   QUAY_ACCESS_TOKEN = "QuayAccessToken",
   /** Password */
   PASSWORD = "Password",
+  /** SSHKey */
+  SSH_KEY = "SSHKey",
   /** STSSessionToken */
   STS_SESSION_TOKEN = "STSSessionToken",
   /** UUID */
@@ -30058,7 +31849,6 @@ export interface ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMap {
    * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMap#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -30093,7 +31883,6 @@ export interface ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecret {
    * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecret#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -30138,7 +31927,6 @@ export interface ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMapIte
    * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMapItems#templateAs
    */
   readonly templateAs?: ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMapItemsTemplateAs;
-
 }
 
 /**
@@ -30171,7 +31959,6 @@ export interface ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecretItems 
    * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecretItems#templateAs
    */
   readonly templateAs?: ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecretItemsTemplateAs;
-
 }
 
 /**
@@ -30279,7 +32066,6 @@ export interface PushSecretProps {
    * @schema PushSecret#spec
    */
   readonly spec?: PushSecretSpec;
-
 }
 
 /**
@@ -30349,7 +32135,6 @@ export interface PushSecretSpec {
    * @schema PushSecretSpec#updatePolicy
    */
   readonly updatePolicy?: PushSecretSpecUpdatePolicy;
-
 }
 
 /**
@@ -30397,7 +32182,6 @@ export interface PushSecretSpecData {
    * @schema PushSecretSpecData#metadata
    */
   readonly metadata?: any;
-
 }
 
 /**
@@ -30452,7 +32236,6 @@ export interface PushSecretSpecSecretStoreRefs {
    * @schema PushSecretSpecSecretStoreRefs#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -30490,7 +32273,6 @@ export interface PushSecretSpecSelector {
    * @schema PushSecretSpecSelector#secret
    */
   readonly secret?: PushSecretSpecSelectorSecret;
-
 }
 
 /**
@@ -30549,7 +32331,6 @@ export interface PushSecretSpecTemplate {
    * @schema PushSecretSpecTemplate#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -30614,7 +32395,6 @@ export interface PushSecretSpecDataMatch {
    * @schema PushSecretSpecDataMatch#secretKey
    */
   readonly secretKey?: string;
-
 }
 
 /**
@@ -30665,7 +32445,6 @@ export interface PushSecretSpecSecretStoreRefsLabelSelector {
    * @schema PushSecretSpecSecretStoreRefsLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -30709,7 +32488,6 @@ export interface PushSecretSpecSelectorGeneratorRef {
    * @schema PushSecretSpecSelectorGeneratorRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -30748,7 +32526,6 @@ export interface PushSecretSpecSelectorSecret {
    * @schema PushSecretSpecSelectorSecret#selector
    */
   readonly selector?: PushSecretSpecSelectorSecretSelector;
-
 }
 
 /**
@@ -30800,10 +32577,14 @@ export interface PushSecretSpecTemplateMetadata {
   readonly annotations?: { [key: string]: string };
 
   /**
+   * @schema PushSecretSpecTemplateMetadata#finalizers
+   */
+  readonly finalizers?: string[];
+
+  /**
    * @schema PushSecretSpecTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -30814,6 +32595,7 @@ export function toJson_PushSecretSpecTemplateMetadata(obj: PushSecretSpecTemplat
   if (obj === undefined) { return undefined; }
   const result = {
     'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'finalizers': obj.finalizers?.map(y => y),
     'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
   };
   // filter undefined values
@@ -30844,7 +32626,6 @@ export interface PushSecretSpecTemplateTemplateFrom {
    * @schema PushSecretSpecTemplateTemplateFrom#target
    */
   readonly target?: PushSecretSpecTemplateTemplateFromTarget;
-
 }
 
 /**
@@ -30883,7 +32664,6 @@ export interface PushSecretSpecDataMatchRemoteRef {
    * @schema PushSecretSpecDataMatchRemoteRef#remoteKey
    */
   readonly remoteKey: string;
-
 }
 
 /**
@@ -30932,7 +32712,6 @@ export interface PushSecretSpecSecretStoreRefsLabelSelectorMatchExpressions {
    * @schema PushSecretSpecSecretStoreRefsLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -30961,6 +32740,8 @@ export enum PushSecretSpecSelectorGeneratorRefKind {
   ACR_ACCESS_TOKEN = "ACRAccessToken",
   /** ClusterGenerator */
   CLUSTER_GENERATOR = "ClusterGenerator",
+  /** CloudsmithAccessToken */
+  CLOUDSMITH_ACCESS_TOKEN = "CloudsmithAccessToken",
   /** ECRAuthorizationToken */
   ECR_AUTHORIZATION_TOKEN = "ECRAuthorizationToken",
   /** Fake */
@@ -30973,6 +32754,8 @@ export enum PushSecretSpecSelectorGeneratorRefKind {
   QUAY_ACCESS_TOKEN = "QuayAccessToken",
   /** Password */
   PASSWORD = "Password",
+  /** SSHKey */
+  SSH_KEY = "SSHKey",
   /** STSSessionToken */
   STS_SESSION_TOKEN = "STSSessionToken",
   /** UUID */
@@ -31008,7 +32791,6 @@ export interface PushSecretSpecSelectorSecretSelector {
    * @schema PushSecretSpecSelectorSecretSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -31043,7 +32825,6 @@ export interface PushSecretSpecTemplateTemplateFromConfigMap {
    * @schema PushSecretSpecTemplateTemplateFromConfigMap#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -31078,7 +32859,6 @@ export interface PushSecretSpecTemplateTemplateFromSecret {
    * @schema PushSecretSpecTemplateTemplateFromSecret#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -31139,7 +32919,6 @@ export interface PushSecretSpecSelectorSecretSelectorMatchExpressions {
    * @schema PushSecretSpecSelectorSecretSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -31173,7 +32952,6 @@ export interface PushSecretSpecTemplateTemplateFromConfigMapItems {
    * @schema PushSecretSpecTemplateTemplateFromConfigMapItems#templateAs
    */
   readonly templateAs?: PushSecretSpecTemplateTemplateFromConfigMapItemsTemplateAs;
-
 }
 
 /**
@@ -31206,7 +32984,6 @@ export interface PushSecretSpecTemplateTemplateFromSecretItems {
    * @schema PushSecretSpecTemplateTemplateFromSecretItems#templateAs
    */
   readonly templateAs?: PushSecretSpecTemplateTemplateFromSecretItemsTemplateAs;
-
 }
 
 /**
@@ -31316,7 +33093,6 @@ export interface SecretStoreProps {
    * @schema SecretStore#spec
    */
   readonly spec?: SecretStoreSpec;
-
 }
 
 /**
@@ -31375,7 +33151,6 @@ export interface SecretStoreSpec {
    * @schema SecretStoreSpec#retrySettings
    */
   readonly retrySettings?: SecretStoreSpecRetrySettings;
-
 }
 
 /**
@@ -31423,7 +33198,6 @@ export interface SecretStoreSpecConditions {
    * @schema SecretStoreSpecConditions#namespaces
    */
   readonly namespaces?: string[];
-
 }
 
 /**
@@ -31555,7 +33329,8 @@ export interface SecretStoreSpecProvider {
   readonly gcpsm?: SecretStoreSpecProviderGcpsm;
 
   /**
-   * Github configures this store to push Github Action secrets using Github API provider
+   * Github configures this store to push GitHub Action secrets using GitHub API provider.
+   * Note: This provider only supports write operations (PushSecret) and cannot fetch secrets from GitHub
    *
    * @schema SecretStoreSpecProvider#github
    */
@@ -31595,6 +33370,13 @@ export interface SecretStoreSpecProvider {
    * @schema SecretStoreSpecProvider#kubernetes
    */
   readonly kubernetes?: SecretStoreSpecProviderKubernetes;
+
+  /**
+   * Ngrok configures this store to sync secrets using the ngrok provider.
+   *
+   * @schema SecretStoreSpecProvider#ngrok
+   */
+  readonly ngrok?: SecretStoreSpecProviderNgrok;
 
   /**
    * Onboardbase configures this store to sync secrets using the Onboardbase provider
@@ -31680,6 +33462,13 @@ export interface SecretStoreSpecProvider {
   readonly vault?: SecretStoreSpecProviderVault;
 
   /**
+   * Volcengine configures this store to sync secrets using the Volcengine provider
+   *
+   * @schema SecretStoreSpecProvider#volcengine
+   */
+  readonly volcengine?: SecretStoreSpecProviderVolcengine;
+
+  /**
    * Webhook configures this store to sync secrets using a generic templated webhook
    *
    * @schema SecretStoreSpecProvider#webhook
@@ -31699,7 +33488,6 @@ export interface SecretStoreSpecProvider {
    * @schema SecretStoreSpecProvider#yandexlockbox
    */
   readonly yandexlockbox?: SecretStoreSpecProviderYandexlockbox;
-
 }
 
 /**
@@ -31730,6 +33518,7 @@ export function toJson_SecretStoreSpecProvider(obj: SecretStoreSpecProvider | un
     'infisical': toJson_SecretStoreSpecProviderInfisical(obj.infisical),
     'keepersecurity': toJson_SecretStoreSpecProviderKeepersecurity(obj.keepersecurity),
     'kubernetes': toJson_SecretStoreSpecProviderKubernetes(obj.kubernetes),
+    'ngrok': toJson_SecretStoreSpecProviderNgrok(obj.ngrok),
     'onboardbase': toJson_SecretStoreSpecProviderOnboardbase(obj.onboardbase),
     'onepassword': toJson_SecretStoreSpecProviderOnepassword(obj.onepassword),
     'onepasswordSDK': toJson_SecretStoreSpecProviderOnepasswordSdk(obj.onepasswordSdk),
@@ -31742,6 +33531,7 @@ export function toJson_SecretStoreSpecProvider(obj: SecretStoreSpecProvider | un
     'secretserver': toJson_SecretStoreSpecProviderSecretserver(obj.secretserver),
     'senhasegura': toJson_SecretStoreSpecProviderSenhasegura(obj.senhasegura),
     'vault': toJson_SecretStoreSpecProviderVault(obj.vault),
+    'volcengine': toJson_SecretStoreSpecProviderVolcengine(obj.volcengine),
     'webhook': toJson_SecretStoreSpecProviderWebhook(obj.webhook),
     'yandexcertificatemanager': toJson_SecretStoreSpecProviderYandexcertificatemanager(obj.yandexcertificatemanager),
     'yandexlockbox': toJson_SecretStoreSpecProviderYandexlockbox(obj.yandexlockbox),
@@ -31766,7 +33556,6 @@ export interface SecretStoreSpecRetrySettings {
    * @schema SecretStoreSpecRetrySettings#retryInterval
    */
   readonly retryInterval?: string;
-
 }
 
 /**
@@ -31805,7 +33594,6 @@ export interface SecretStoreSpecConditionsNamespaceSelector {
    * @schema SecretStoreSpecConditionsNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -31858,7 +33646,6 @@ export interface SecretStoreSpecProviderAkeyless {
    * @schema SecretStoreSpecProviderAkeyless#caProvider
    */
   readonly caProvider?: SecretStoreSpecProviderAkeylessCaProvider;
-
 }
 
 /**
@@ -31897,7 +33684,6 @@ export interface SecretStoreSpecProviderAlibaba {
    * @schema SecretStoreSpecProviderAlibaba#regionID
    */
   readonly regionId: string;
-
 }
 
 /**
@@ -31992,7 +33778,6 @@ export interface SecretStoreSpecProviderAws {
    * @schema SecretStoreSpecProviderAws#transitiveTagKeys
    */
   readonly transitiveTagKeys?: string[];
-
 }
 
 /**
@@ -32042,10 +33827,21 @@ export interface SecretStoreSpecProviderAzurekv {
   readonly authType?: SecretStoreSpecProviderAzurekvAuthType;
 
   /**
+   * CustomCloudConfig defines custom Azure Stack Hub or Azure Stack Edge endpoints.
+   * Required when EnvironmentType is AzureStackCloud.
+   * IMPORTANT: This feature REQUIRES UseAzureSDK to be set to true. Custom cloud
+   * configuration is not supported with the legacy go-autorest SDK.
+   *
+   * @schema SecretStoreSpecProviderAzurekv#customCloudConfig
+   */
+  readonly customCloudConfig?: SecretStoreSpecProviderAzurekvCustomCloudConfig;
+
+  /**
    * EnvironmentType specifies the Azure cloud environment endpoints to use for
    * connecting and authenticating with Azure. By default it points to the public cloud AAD endpoint.
    * The following endpoints are available, also see here: https://github.com/Azure/go-autorest/blob/main/autorest/azure/environments.go#L152
-   * PublicCloud, USGovernmentCloud, ChinaCloud, GermanCloud
+   * PublicCloud, USGovernmentCloud, ChinaCloud, GermanCloud, AzureStackCloud
+   * Use AzureStackCloud when you need to configure custom Azure Stack Hub or Azure Stack Edge endpoints.
    *
    * @schema SecretStoreSpecProviderAzurekv#environmentType
    */
@@ -32074,12 +33870,20 @@ export interface SecretStoreSpecProviderAzurekv {
   readonly tenantId?: string;
 
   /**
+   * UseAzureSDK enables the use of the new Azure SDK for Go (azcore-based) instead of the legacy go-autorest SDK.
+   * This is experimental and may have behavioral differences. Defaults to false (legacy SDK).
+   *
+   * @default false (legacy SDK).
+   * @schema SecretStoreSpecProviderAzurekv#useAzureSDK
+   */
+  readonly useAzureSdk?: boolean;
+
+  /**
    * Vault Url from which the secrets to be fetched from.
    *
    * @schema SecretStoreSpecProviderAzurekv#vaultUrl
    */
   readonly vaultUrl: string;
-
 }
 
 /**
@@ -32091,10 +33895,12 @@ export function toJson_SecretStoreSpecProviderAzurekv(obj: SecretStoreSpecProvid
   const result = {
     'authSecretRef': toJson_SecretStoreSpecProviderAzurekvAuthSecretRef(obj.authSecretRef),
     'authType': obj.authType,
+    'customCloudConfig': toJson_SecretStoreSpecProviderAzurekvCustomCloudConfig(obj.customCloudConfig),
     'environmentType': obj.environmentType,
     'identityId': obj.identityId,
     'serviceAccountRef': toJson_SecretStoreSpecProviderAzurekvServiceAccountRef(obj.serviceAccountRef),
     'tenantId': obj.tenantId,
+    'useAzureSDK': obj.useAzureSdk,
     'vaultUrl': obj.vaultUrl,
   };
   // filter undefined values
@@ -32121,7 +33927,6 @@ export interface SecretStoreSpecProviderBeyondtrust {
    * @schema SecretStoreSpecProviderBeyondtrust#server
    */
   readonly server: SecretStoreSpecProviderBeyondtrustServer;
-
 }
 
 /**
@@ -32196,7 +34001,6 @@ export interface SecretStoreSpecProviderBitwardensecretsmanager {
    * @schema SecretStoreSpecProviderBitwardensecretsmanager#projectID
    */
   readonly projectId: string;
-
 }
 
 /**
@@ -32246,7 +34050,6 @@ export interface SecretStoreSpecProviderChef {
    * @schema SecretStoreSpecProviderChef#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -32284,7 +34087,6 @@ export interface SecretStoreSpecProviderCloudrusm {
    * @schema SecretStoreSpecProviderCloudrusm#projectID
    */
   readonly projectId?: string;
-
 }
 
 /**
@@ -32337,7 +34139,6 @@ export interface SecretStoreSpecProviderConjur {
    * @schema SecretStoreSpecProviderConjur#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -32400,7 +34201,6 @@ export interface SecretStoreSpecProviderDelinea {
    * @schema SecretStoreSpecProviderDelinea#urlTemplate
    */
   readonly urlTemplate?: string;
-
 }
 
 /**
@@ -32440,7 +34240,6 @@ export interface SecretStoreSpecProviderDevice42 {
    * @schema SecretStoreSpecProviderDevice42#host
    */
   readonly host: string;
-
 }
 
 /**
@@ -32498,7 +34297,6 @@ export interface SecretStoreSpecProviderDoppler {
    * @schema SecretStoreSpecProviderDoppler#project
    */
   readonly project?: string;
-
 }
 
 /**
@@ -32530,6 +34328,10 @@ export interface SecretStoreSpecProviderFake {
    */
   readonly data: SecretStoreSpecProviderFakeData[];
 
+  /**
+   * @schema SecretStoreSpecProviderFake#validationResult
+   */
+  readonly validationResult?: number;
 }
 
 /**
@@ -32540,6 +34342,7 @@ export function toJson_SecretStoreSpecProviderFake(obj: SecretStoreSpecProviderF
   if (obj === undefined) { return undefined; }
   const result = {
     'data': obj.data?.map(y => toJson_SecretStoreSpecProviderFakeData(y)),
+    'validationResult': obj.validationResult,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -32566,7 +34369,6 @@ export interface SecretStoreSpecProviderFortanix {
    * @schema SecretStoreSpecProviderFortanix#apiUrl
    */
   readonly apiUrl?: string;
-
 }
 
 /**
@@ -32611,6 +34413,16 @@ export interface SecretStoreSpecProviderGcpsm {
    */
   readonly projectId?: string;
 
+  /**
+   * SecretVersionSelectionPolicy specifies how the provider selects a secret version
+   * when "latest" is disabled or destroyed.
+   * Possible values are:
+   * - LatestOrFail: the provider always uses "latest", or fails if that version is disabled/destroyed.
+   * - LatestOrFetch: the provider falls back to fetching the latest version if the version is DESTROYED or DISABLED
+   *
+   * @schema SecretStoreSpecProviderGcpsm#secretVersionSelectionPolicy
+   */
+  readonly secretVersionSelectionPolicy?: string;
 }
 
 /**
@@ -32623,6 +34435,7 @@ export function toJson_SecretStoreSpecProviderGcpsm(obj: SecretStoreSpecProvider
     'auth': toJson_SecretStoreSpecProviderGcpsmAuth(obj.auth),
     'location': obj.location,
     'projectID': obj.projectId,
+    'secretVersionSelectionPolicy': obj.secretVersionSelectionPolicy,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -32630,7 +34443,8 @@ export function toJson_SecretStoreSpecProviderGcpsm(obj: SecretStoreSpecProvider
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Github configures this store to push Github Action secrets using Github API provider
+ * Github configures this store to push GitHub Action secrets using GitHub API provider.
+ * Note: This provider only supports write operations (PushSecret) and cannot fetch secrets from GitHub
  *
  * @schema SecretStoreSpecProviderGithub
  */
@@ -32692,7 +34506,6 @@ export interface SecretStoreSpecProviderGithub {
    * @schema SecretStoreSpecProviderGithub#url
    */
   readonly url?: string;
-
 }
 
 /**
@@ -32779,7 +34592,6 @@ export interface SecretStoreSpecProviderGitlab {
    * @schema SecretStoreSpecProviderGitlab#url
    */
   readonly url?: string;
-
 }
 
 /**
@@ -32822,7 +34634,6 @@ export interface SecretStoreSpecProviderIbm {
    * @schema SecretStoreSpecProviderIbm#serviceUrl
    */
   readonly serviceUrl?: string;
-
 }
 
 /**
@@ -32866,7 +34677,6 @@ export interface SecretStoreSpecProviderInfisical {
    * @schema SecretStoreSpecProviderInfisical#secretsScope
    */
   readonly secretsScope: SecretStoreSpecProviderInfisicalSecretsScope;
-
 }
 
 /**
@@ -32903,7 +34713,6 @@ export interface SecretStoreSpecProviderKeepersecurity {
    * @schema SecretStoreSpecProviderKeepersecurity#folderID
    */
   readonly folderId: string;
-
 }
 
 /**
@@ -32954,7 +34763,6 @@ export interface SecretStoreSpecProviderKubernetes {
    * @schema SecretStoreSpecProviderKubernetes#server
    */
   readonly server?: SecretStoreSpecProviderKubernetesServer;
-
 }
 
 /**
@@ -32968,6 +34776,50 @@ export function toJson_SecretStoreSpecProviderKubernetes(obj: SecretStoreSpecPro
     'authRef': toJson_SecretStoreSpecProviderKubernetesAuthRef(obj.authRef),
     'remoteNamespace': obj.remoteNamespace,
     'server': toJson_SecretStoreSpecProviderKubernetesServer(obj.server),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Ngrok configures this store to sync secrets using the ngrok provider.
+ *
+ * @schema SecretStoreSpecProviderNgrok
+ */
+export interface SecretStoreSpecProviderNgrok {
+  /**
+   * APIURL is the URL of the ngrok API.
+   *
+   * @schema SecretStoreSpecProviderNgrok#apiUrl
+   */
+  readonly apiUrl?: string;
+
+  /**
+   * Auth configures how the ngrok provider authenticates with the ngrok API.
+   *
+   * @schema SecretStoreSpecProviderNgrok#auth
+   */
+  readonly auth: SecretStoreSpecProviderNgrokAuth;
+
+  /**
+   * Vault configures the ngrok vault to sync secrets with.
+   *
+   * @schema SecretStoreSpecProviderNgrok#vault
+   */
+  readonly vault: SecretStoreSpecProviderNgrokVault;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderNgrok' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderNgrok(obj: SecretStoreSpecProviderNgrok | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apiUrl': obj.apiUrl,
+    'auth': toJson_SecretStoreSpecProviderNgrokAuth(obj.auth),
+    'vault': toJson_SecretStoreSpecProviderNgrokVault(obj.vault),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -33007,7 +34859,6 @@ export interface SecretStoreSpecProviderOnboardbase {
    * @schema SecretStoreSpecProviderOnboardbase#project
    */
   readonly project: string;
-
 }
 
 /**
@@ -33053,7 +34904,6 @@ export interface SecretStoreSpecProviderOnepassword {
    * @schema SecretStoreSpecProviderOnepassword#vaults
    */
   readonly vaults: { [key: string]: number };
-
 }
 
 /**
@@ -33099,7 +34949,6 @@ export interface SecretStoreSpecProviderOnepasswordSdk {
    * @schema SecretStoreSpecProviderOnepasswordSdk#vault
    */
   readonly vault: string;
-
 }
 
 /**
@@ -33178,7 +35027,6 @@ export interface SecretStoreSpecProviderOracle {
    * @schema SecretStoreSpecProviderOracle#vault
    */
   readonly vault: string;
-
 }
 
 /**
@@ -33218,7 +35066,6 @@ export interface SecretStoreSpecProviderPassbolt {
    * @schema SecretStoreSpecProviderPassbolt#host
    */
   readonly host: string;
-
 }
 
 /**
@@ -33262,7 +35109,6 @@ export interface SecretStoreSpecProviderPassworddepot {
    * @schema SecretStoreSpecProviderPassworddepot#host
    */
   readonly host: string;
-
 }
 
 /**
@@ -33298,7 +35144,6 @@ export interface SecretStoreSpecProviderPrevider {
    * @schema SecretStoreSpecProviderPrevider#baseUri
    */
   readonly baseUri?: string;
-
 }
 
 /**
@@ -33360,7 +35205,6 @@ export interface SecretStoreSpecProviderPulumi {
    * @schema SecretStoreSpecProviderPulumi#project
    */
   readonly project: string;
-
 }
 
 /**
@@ -33422,7 +35266,6 @@ export interface SecretStoreSpecProviderScaleway {
    * @schema SecretStoreSpecProviderScaleway#secretKey
    */
   readonly secretKey: SecretStoreSpecProviderScalewaySecretKey;
-
 }
 
 /**
@@ -33451,6 +35294,13 @@ export function toJson_SecretStoreSpecProviderScaleway(obj: SecretStoreSpecProvi
  */
 export interface SecretStoreSpecProviderSecretserver {
   /**
+   * Domain is the secret server domain.
+   *
+   * @schema SecretStoreSpecProviderSecretserver#domain
+   */
+  readonly domain?: string;
+
+  /**
    * Password is the secret server account password.
    *
    * @schema SecretStoreSpecProviderSecretserver#password
@@ -33471,7 +35321,6 @@ export interface SecretStoreSpecProviderSecretserver {
    * @schema SecretStoreSpecProviderSecretserver#username
    */
   readonly username: SecretStoreSpecProviderSecretserverUsername;
-
 }
 
 /**
@@ -33481,6 +35330,7 @@ export interface SecretStoreSpecProviderSecretserver {
 export function toJson_SecretStoreSpecProviderSecretserver(obj: SecretStoreSpecProviderSecretserver | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'domain': obj.domain,
     'password': toJson_SecretStoreSpecProviderSecretserverPassword(obj.password),
     'serverURL': obj.serverUrl,
     'username': toJson_SecretStoreSpecProviderSecretserverUsername(obj.username),
@@ -33523,7 +35373,6 @@ export interface SecretStoreSpecProviderSenhasegura {
    * @schema SecretStoreSpecProviderSenhasegura#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -33572,6 +35421,15 @@ export interface SecretStoreSpecProviderVault {
    * @schema SecretStoreSpecProviderVault#caProvider
    */
   readonly caProvider?: SecretStoreSpecProviderVaultCaProvider;
+
+  /**
+   * CheckAndSet defines the Check-And-Set (CAS) settings for PushSecret operations.
+   * Only applies to Vault KV v2 stores. When enabled, write operations must include
+   * the current version of the secret to prevent unintentional overwrites.
+   *
+   * @schema SecretStoreSpecProviderVault#checkAndSet
+   */
+  readonly checkAndSet?: SecretStoreSpecProviderVaultCheckAndSet;
 
   /**
    * ForwardInconsistent tells Vault to forward read-after-write requests to the Vault
@@ -33644,7 +35502,6 @@ export interface SecretStoreSpecProviderVault {
    * @schema SecretStoreSpecProviderVault#version
    */
   readonly version?: SecretStoreSpecProviderVaultVersion;
-
 }
 
 /**
@@ -33657,6 +35514,7 @@ export function toJson_SecretStoreSpecProviderVault(obj: SecretStoreSpecProvider
     'auth': toJson_SecretStoreSpecProviderVaultAuth(obj.auth),
     'caBundle': obj.caBundle,
     'caProvider': toJson_SecretStoreSpecProviderVaultCaProvider(obj.caProvider),
+    'checkAndSet': toJson_SecretStoreSpecProviderVaultCheckAndSet(obj.checkAndSet),
     'forwardInconsistent': obj.forwardInconsistent,
     'headers': ((obj.headers) === undefined) ? undefined : (Object.entries(obj.headers).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'namespace': obj.namespace,
@@ -33665,6 +35523,43 @@ export function toJson_SecretStoreSpecProviderVault(obj: SecretStoreSpecProvider
     'server': obj.server,
     'tls': toJson_SecretStoreSpecProviderVaultTls(obj.tls),
     'version': obj.version,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Volcengine configures this store to sync secrets using the Volcengine provider
+ *
+ * @schema SecretStoreSpecProviderVolcengine
+ */
+export interface SecretStoreSpecProviderVolcengine {
+  /**
+   * Auth defines the authentication method to use.
+   * If not specified, the provider will try to use IRSA (IAM Role for Service Account).
+   *
+   * @schema SecretStoreSpecProviderVolcengine#auth
+   */
+  readonly auth?: SecretStoreSpecProviderVolcengineAuth;
+
+  /**
+   * Region specifies the Volcengine region to connect to.
+   *
+   * @schema SecretStoreSpecProviderVolcengine#region
+   */
+  readonly region: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderVolcengine' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderVolcengine(obj: SecretStoreSpecProviderVolcengine | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'auth': toJson_SecretStoreSpecProviderVolcengineAuth(obj.auth),
+    'region': obj.region,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -33750,7 +35645,6 @@ export interface SecretStoreSpecProviderWebhook {
    * @schema SecretStoreSpecProviderWebhook#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -33790,7 +35684,7 @@ export interface SecretStoreSpecProviderYandexcertificatemanager {
   readonly apiEndpoint?: string;
 
   /**
-   * Auth defines the information necessary to authenticate against Yandex Certificate Manager
+   * Auth defines the information necessary to authenticate against Yandex.Cloud
    *
    * @schema SecretStoreSpecProviderYandexcertificatemanager#auth
    */
@@ -33803,6 +35697,12 @@ export interface SecretStoreSpecProviderYandexcertificatemanager {
    */
   readonly caProvider?: SecretStoreSpecProviderYandexcertificatemanagerCaProvider;
 
+  /**
+   * FetchingPolicy configures the provider to interpret the `data.secretKey.remoteRef.key` field in ExternalSecret as certificate ID or certificate name
+   *
+   * @schema SecretStoreSpecProviderYandexcertificatemanager#fetching
+   */
+  readonly fetching?: SecretStoreSpecProviderYandexcertificatemanagerFetching;
 }
 
 /**
@@ -33815,6 +35715,7 @@ export function toJson_SecretStoreSpecProviderYandexcertificatemanager(obj: Secr
     'apiEndpoint': obj.apiEndpoint,
     'auth': toJson_SecretStoreSpecProviderYandexcertificatemanagerAuth(obj.auth),
     'caProvider': toJson_SecretStoreSpecProviderYandexcertificatemanagerCaProvider(obj.caProvider),
+    'fetching': toJson_SecretStoreSpecProviderYandexcertificatemanagerFetching(obj.fetching),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -33835,7 +35736,7 @@ export interface SecretStoreSpecProviderYandexlockbox {
   readonly apiEndpoint?: string;
 
   /**
-   * Auth defines the information necessary to authenticate against Yandex Lockbox
+   * Auth defines the information necessary to authenticate against Yandex.Cloud
    *
    * @schema SecretStoreSpecProviderYandexlockbox#auth
    */
@@ -33848,6 +35749,12 @@ export interface SecretStoreSpecProviderYandexlockbox {
    */
   readonly caProvider?: SecretStoreSpecProviderYandexlockboxCaProvider;
 
+  /**
+   * FetchingPolicy configures the provider to interpret the `data.secretKey.remoteRef.key` field in ExternalSecret as secret ID or secret name
+   *
+   * @schema SecretStoreSpecProviderYandexlockbox#fetching
+   */
+  readonly fetching?: SecretStoreSpecProviderYandexlockboxFetching;
 }
 
 /**
@@ -33860,6 +35767,7 @@ export function toJson_SecretStoreSpecProviderYandexlockbox(obj: SecretStoreSpec
     'apiEndpoint': obj.apiEndpoint,
     'auth': toJson_SecretStoreSpecProviderYandexlockboxAuth(obj.auth),
     'caProvider': toJson_SecretStoreSpecProviderYandexlockboxCaProvider(obj.caProvider),
+    'fetching': toJson_SecretStoreSpecProviderYandexlockboxFetching(obj.fetching),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -33897,7 +35805,6 @@ export interface SecretStoreSpecConditionsNamespaceSelectorMatchExpressions {
    * @schema SecretStoreSpecConditionsNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -33937,7 +35844,6 @@ export interface SecretStoreSpecProviderAkeylessAuthSecretRef {
    * @schema SecretStoreSpecProviderAkeylessAuthSecretRef#secretRef
    */
   readonly secretRef?: SecretStoreSpecProviderAkeylessAuthSecretRefSecretRef;
-
 }
 
 /**
@@ -33989,7 +35895,6 @@ export interface SecretStoreSpecProviderAkeylessCaProvider {
    * @schema SecretStoreSpecProviderAkeylessCaProvider#type
    */
   readonly type: SecretStoreSpecProviderAkeylessCaProviderType;
-
 }
 
 /**
@@ -34028,7 +35933,6 @@ export interface SecretStoreSpecProviderAlibabaAuth {
    * @schema SecretStoreSpecProviderAlibabaAuth#secretRef
    */
   readonly secretRef?: SecretStoreSpecProviderAlibabaAuthSecretRef;
-
 }
 
 /**
@@ -34068,7 +35972,6 @@ export interface SecretStoreSpecProviderAwsAuth {
    * @schema SecretStoreSpecProviderAwsAuth#secretRef
    */
   readonly secretRef?: SecretStoreSpecProviderAwsAuthSecretRef;
-
 }
 
 /**
@@ -34113,7 +36016,6 @@ export interface SecretStoreSpecProviderAwsSecretsManager {
    * @schema SecretStoreSpecProviderAwsSecretsManager#recoveryWindowInDays
    */
   readonly recoveryWindowInDays?: number;
-
 }
 
 /**
@@ -34156,7 +36058,6 @@ export interface SecretStoreSpecProviderAwsSessionTags {
    * @schema SecretStoreSpecProviderAwsSessionTags#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -34207,7 +36108,6 @@ export interface SecretStoreSpecProviderAzurekvAuthSecretRef {
    * @schema SecretStoreSpecProviderAzurekvAuthSecretRef#tenantId
    */
   readonly tenantId?: SecretStoreSpecProviderAzurekvAuthSecretRefTenantId;
-
 }
 
 /**
@@ -34245,10 +36145,67 @@ export enum SecretStoreSpecProviderAzurekvAuthType {
 }
 
 /**
+ * CustomCloudConfig defines custom Azure Stack Hub or Azure Stack Edge endpoints.
+ * Required when EnvironmentType is AzureStackCloud.
+ * IMPORTANT: This feature REQUIRES UseAzureSDK to be set to true. Custom cloud
+ * configuration is not supported with the legacy go-autorest SDK.
+ *
+ * @schema SecretStoreSpecProviderAzurekvCustomCloudConfig
+ */
+export interface SecretStoreSpecProviderAzurekvCustomCloudConfig {
+  /**
+   * ActiveDirectoryEndpoint is the AAD endpoint for authentication
+   * Required when using custom cloud configuration
+   *
+   * @schema SecretStoreSpecProviderAzurekvCustomCloudConfig#activeDirectoryEndpoint
+   */
+  readonly activeDirectoryEndpoint: string;
+
+  /**
+   * KeyVaultDNSSuffix is the DNS suffix for Key Vault URLs
+   *
+   * @schema SecretStoreSpecProviderAzurekvCustomCloudConfig#keyVaultDNSSuffix
+   */
+  readonly keyVaultDnsSuffix?: string;
+
+  /**
+   * KeyVaultEndpoint is the Key Vault service endpoint
+   *
+   * @schema SecretStoreSpecProviderAzurekvCustomCloudConfig#keyVaultEndpoint
+   */
+  readonly keyVaultEndpoint?: string;
+
+  /**
+   * ResourceManagerEndpoint is the Azure Resource Manager endpoint
+   *
+   * @schema SecretStoreSpecProviderAzurekvCustomCloudConfig#resourceManagerEndpoint
+   */
+  readonly resourceManagerEndpoint?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderAzurekvCustomCloudConfig' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderAzurekvCustomCloudConfig(obj: SecretStoreSpecProviderAzurekvCustomCloudConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'activeDirectoryEndpoint': obj.activeDirectoryEndpoint,
+    'keyVaultDNSSuffix': obj.keyVaultDnsSuffix,
+    'keyVaultEndpoint': obj.keyVaultEndpoint,
+    'resourceManagerEndpoint': obj.resourceManagerEndpoint,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * EnvironmentType specifies the Azure cloud environment endpoints to use for
  * connecting and authenticating with Azure. By default it points to the public cloud AAD endpoint.
  * The following endpoints are available, also see here: https://github.com/Azure/go-autorest/blob/main/autorest/azure/environments.go#L152
- * PublicCloud, USGovernmentCloud, ChinaCloud, GermanCloud
+ * PublicCloud, USGovernmentCloud, ChinaCloud, GermanCloud, AzureStackCloud
+ * Use AzureStackCloud when you need to configure custom Azure Stack Hub or Azure Stack Edge endpoints.
  *
  * @schema SecretStoreSpecProviderAzurekvEnvironmentType
  */
@@ -34261,6 +36218,8 @@ export enum SecretStoreSpecProviderAzurekvEnvironmentType {
   CHINA_CLOUD = "ChinaCloud",
   /** GermanCloud */
   GERMAN_CLOUD = "GermanCloud",
+  /** AzureStackCloud */
+  AZURE_STACK_CLOUD = "AzureStackCloud",
 }
 
 /**
@@ -34293,7 +36252,6 @@ export interface SecretStoreSpecProviderAzurekvServiceAccountRef {
    * @schema SecretStoreSpecProviderAzurekvServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -34352,7 +36310,6 @@ export interface SecretStoreSpecProviderBeyondtrustAuth {
    * @schema SecretStoreSpecProviderBeyondtrustAuth#clientSecret
    */
   readonly clientSecret?: SecretStoreSpecProviderBeyondtrustAuthClientSecret;
-
 }
 
 /**
@@ -34415,7 +36372,6 @@ export interface SecretStoreSpecProviderBeyondtrustServer {
    * @schema SecretStoreSpecProviderBeyondtrustServer#verifyCA
    */
   readonly verifyCa: boolean;
-
 }
 
 /**
@@ -34450,7 +36406,6 @@ export interface SecretStoreSpecProviderBitwardensecretsmanagerAuth {
    * @schema SecretStoreSpecProviderBitwardensecretsmanagerAuth#secretRef
    */
   readonly secretRef: SecretStoreSpecProviderBitwardensecretsmanagerAuthSecretRef;
-
 }
 
 /**
@@ -34501,7 +36456,6 @@ export interface SecretStoreSpecProviderBitwardensecretsmanagerCaProvider {
    * @schema SecretStoreSpecProviderBitwardensecretsmanagerCaProvider#type
    */
   readonly type: SecretStoreSpecProviderBitwardensecretsmanagerCaProviderType;
-
 }
 
 /**
@@ -34533,7 +36487,6 @@ export interface SecretStoreSpecProviderChefAuth {
    * @schema SecretStoreSpecProviderChefAuth#secretRef
    */
   readonly secretRef: SecretStoreSpecProviderChefAuthSecretRef;
-
 }
 
 /**
@@ -34562,7 +36515,6 @@ export interface SecretStoreSpecProviderCloudrusmAuth {
    * @schema SecretStoreSpecProviderCloudrusmAuth#secretRef
    */
   readonly secretRef?: SecretStoreSpecProviderCloudrusmAuthSecretRef;
-
 }
 
 /**
@@ -34598,7 +36550,6 @@ export interface SecretStoreSpecProviderConjurAuth {
    * @schema SecretStoreSpecProviderConjurAuth#jwt
    */
   readonly jwt?: SecretStoreSpecProviderConjurAuthJwt;
-
 }
 
 /**
@@ -34652,7 +36603,6 @@ export interface SecretStoreSpecProviderConjurCaProvider {
    * @schema SecretStoreSpecProviderConjurCaProvider#type
    */
   readonly type: SecretStoreSpecProviderConjurCaProviderType;
-
 }
 
 /**
@@ -34691,7 +36641,6 @@ export interface SecretStoreSpecProviderDelineaClientId {
    * @schema SecretStoreSpecProviderDelineaClientId#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -34728,7 +36677,6 @@ export interface SecretStoreSpecProviderDelineaClientSecret {
    * @schema SecretStoreSpecProviderDelineaClientSecret#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -34756,7 +36704,6 @@ export interface SecretStoreSpecProviderDevice42Auth {
    * @schema SecretStoreSpecProviderDevice42Auth#secretRef
    */
   readonly secretRef: SecretStoreSpecProviderDevice42AuthSecretRef;
-
 }
 
 /**
@@ -34783,7 +36730,6 @@ export interface SecretStoreSpecProviderDopplerAuth {
    * @schema SecretStoreSpecProviderDopplerAuth#secretRef
    */
   readonly secretRef: SecretStoreSpecProviderDopplerAuthSecretRef;
-
 }
 
 /**
@@ -34856,7 +36802,6 @@ export interface SecretStoreSpecProviderFakeData {
    * @schema SecretStoreSpecProviderFakeData#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -34887,7 +36832,6 @@ export interface SecretStoreSpecProviderFortanixApiKey {
    * @schema SecretStoreSpecProviderFortanixApiKey#secretRef
    */
   readonly secretRef?: SecretStoreSpecProviderFortanixApiKeySecretRef;
-
 }
 
 /**
@@ -34920,6 +36864,12 @@ export interface SecretStoreSpecProviderGcpsmAuth {
    */
   readonly workloadIdentity?: SecretStoreSpecProviderGcpsmAuthWorkloadIdentity;
 
+  /**
+   * GCPWorkloadIdentityFederation holds the configurations required for generating federated access tokens.
+   *
+   * @schema SecretStoreSpecProviderGcpsmAuth#workloadIdentityFederation
+   */
+  readonly workloadIdentityFederation?: SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation;
 }
 
 /**
@@ -34931,6 +36881,7 @@ export function toJson_SecretStoreSpecProviderGcpsmAuth(obj: SecretStoreSpecProv
   const result = {
     'secretRef': toJson_SecretStoreSpecProviderGcpsmAuthSecretRef(obj.secretRef),
     'workloadIdentity': toJson_SecretStoreSpecProviderGcpsmAuthWorkloadIdentity(obj.workloadIdentity),
+    'workloadIdentityFederation': toJson_SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation(obj.workloadIdentityFederation),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -34950,7 +36901,6 @@ export interface SecretStoreSpecProviderGithubAuth {
    * @schema SecretStoreSpecProviderGithubAuth#privateKey
    */
   readonly privateKey: SecretStoreSpecProviderGithubAuthPrivateKey;
-
 }
 
 /**
@@ -34977,7 +36927,6 @@ export interface SecretStoreSpecProviderGitlabAuth {
    * @schema SecretStoreSpecProviderGitlabAuth#SecretRef
    */
   readonly secretRef: SecretStoreSpecProviderGitlabAuthSecretRef;
-
 }
 
 /**
@@ -35028,7 +36977,6 @@ export interface SecretStoreSpecProviderGitlabCaProvider {
    * @schema SecretStoreSpecProviderGitlabCaProvider#type
    */
   readonly type: SecretStoreSpecProviderGitlabCaProviderType;
-
 }
 
 /**
@@ -35065,7 +37013,6 @@ export interface SecretStoreSpecProviderIbmAuth {
    * @schema SecretStoreSpecProviderIbmAuth#secretRef
    */
   readonly secretRef?: SecretStoreSpecProviderIbmAuthSecretRef;
-
 }
 
 /**
@@ -35090,15 +37037,54 @@ export function toJson_SecretStoreSpecProviderIbmAuth(obj: SecretStoreSpecProvid
  */
 export interface SecretStoreSpecProviderInfisicalAuth {
   /**
+   * @schema SecretStoreSpecProviderInfisicalAuth#awsAuthCredentials
+   */
+  readonly awsAuthCredentials?: SecretStoreSpecProviderInfisicalAuthAwsAuthCredentials;
+
+  /**
    * @schema SecretStoreSpecProviderInfisicalAuth#azureAuthCredentials
    */
   readonly azureAuthCredentials?: SecretStoreSpecProviderInfisicalAuthAzureAuthCredentials;
 
   /**
+   * @schema SecretStoreSpecProviderInfisicalAuth#gcpIamAuthCredentials
+   */
+  readonly gcpIamAuthCredentials?: SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials;
+
+  /**
+   * @schema SecretStoreSpecProviderInfisicalAuth#gcpIdTokenAuthCredentials
+   */
+  readonly gcpIdTokenAuthCredentials?: SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials;
+
+  /**
+   * @schema SecretStoreSpecProviderInfisicalAuth#jwtAuthCredentials
+   */
+  readonly jwtAuthCredentials?: SecretStoreSpecProviderInfisicalAuthJwtAuthCredentials;
+
+  /**
+   * @schema SecretStoreSpecProviderInfisicalAuth#kubernetesAuthCredentials
+   */
+  readonly kubernetesAuthCredentials?: SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials;
+
+  /**
+   * @schema SecretStoreSpecProviderInfisicalAuth#ldapAuthCredentials
+   */
+  readonly ldapAuthCredentials?: SecretStoreSpecProviderInfisicalAuthLdapAuthCredentials;
+
+  /**
+   * @schema SecretStoreSpecProviderInfisicalAuth#ociAuthCredentials
+   */
+  readonly ociAuthCredentials?: SecretStoreSpecProviderInfisicalAuthOciAuthCredentials;
+
+  /**
+   * @schema SecretStoreSpecProviderInfisicalAuth#tokenAuthCredentials
+   */
+  readonly tokenAuthCredentials?: SecretStoreSpecProviderInfisicalAuthTokenAuthCredentials;
+
+  /**
    * @schema SecretStoreSpecProviderInfisicalAuth#universalAuthCredentials
    */
   readonly universalAuthCredentials?: SecretStoreSpecProviderInfisicalAuthUniversalAuthCredentials;
-
 }
 
 /**
@@ -35108,7 +37094,15 @@ export interface SecretStoreSpecProviderInfisicalAuth {
 export function toJson_SecretStoreSpecProviderInfisicalAuth(obj: SecretStoreSpecProviderInfisicalAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'awsAuthCredentials': toJson_SecretStoreSpecProviderInfisicalAuthAwsAuthCredentials(obj.awsAuthCredentials),
     'azureAuthCredentials': toJson_SecretStoreSpecProviderInfisicalAuthAzureAuthCredentials(obj.azureAuthCredentials),
+    'gcpIamAuthCredentials': toJson_SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials(obj.gcpIamAuthCredentials),
+    'gcpIdTokenAuthCredentials': toJson_SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials(obj.gcpIdTokenAuthCredentials),
+    'jwtAuthCredentials': toJson_SecretStoreSpecProviderInfisicalAuthJwtAuthCredentials(obj.jwtAuthCredentials),
+    'kubernetesAuthCredentials': toJson_SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials(obj.kubernetesAuthCredentials),
+    'ldapAuthCredentials': toJson_SecretStoreSpecProviderInfisicalAuthLdapAuthCredentials(obj.ldapAuthCredentials),
+    'ociAuthCredentials': toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentials(obj.ociAuthCredentials),
+    'tokenAuthCredentials': toJson_SecretStoreSpecProviderInfisicalAuthTokenAuthCredentials(obj.tokenAuthCredentials),
     'universalAuthCredentials': toJson_SecretStoreSpecProviderInfisicalAuthUniversalAuthCredentials(obj.universalAuthCredentials),
   };
   // filter undefined values
@@ -35159,7 +37153,6 @@ export interface SecretStoreSpecProviderInfisicalSecretsScope {
    * @schema SecretStoreSpecProviderInfisicalSecretsScope#secretsPath
    */
   readonly secretsPath?: string;
-
 }
 
 /**
@@ -35209,7 +37202,6 @@ export interface SecretStoreSpecProviderKeepersecurityAuthRef {
    * @schema SecretStoreSpecProviderKeepersecurityAuthRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -35254,7 +37246,6 @@ export interface SecretStoreSpecProviderKubernetesAuth {
    * @schema SecretStoreSpecProviderKubernetesAuth#token
    */
   readonly token?: SecretStoreSpecProviderKubernetesAuthToken;
-
 }
 
 /**
@@ -35301,7 +37292,6 @@ export interface SecretStoreSpecProviderKubernetesAuthRef {
    * @schema SecretStoreSpecProviderKubernetesAuthRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -35346,7 +37336,6 @@ export interface SecretStoreSpecProviderKubernetesServer {
    * @schema SecretStoreSpecProviderKubernetesServer#url
    */
   readonly url?: string;
-
 }
 
 /**
@@ -35359,6 +37348,62 @@ export function toJson_SecretStoreSpecProviderKubernetesServer(obj: SecretStoreS
     'caBundle': obj.caBundle,
     'caProvider': toJson_SecretStoreSpecProviderKubernetesServerCaProvider(obj.caProvider),
     'url': obj.url,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Auth configures how the ngrok provider authenticates with the ngrok API.
+ *
+ * @schema SecretStoreSpecProviderNgrokAuth
+ */
+export interface SecretStoreSpecProviderNgrokAuth {
+  /**
+   * APIKey is the API Key used to authenticate with ngrok. See https://ngrok.com/docs/api/#authentication
+   *
+   * @schema SecretStoreSpecProviderNgrokAuth#apiKey
+   */
+  readonly apiKey?: SecretStoreSpecProviderNgrokAuthApiKey;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderNgrokAuth' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderNgrokAuth(obj: SecretStoreSpecProviderNgrokAuth | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apiKey': toJson_SecretStoreSpecProviderNgrokAuthApiKey(obj.apiKey),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Vault configures the ngrok vault to sync secrets with.
+ *
+ * @schema SecretStoreSpecProviderNgrokVault
+ */
+export interface SecretStoreSpecProviderNgrokVault {
+  /**
+   * Name is the name of the ngrok vault to sync secrets with.
+   *
+   * @schema SecretStoreSpecProviderNgrokVault#name
+   */
+  readonly name: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderNgrokVault' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderNgrokVault(obj: SecretStoreSpecProviderNgrokVault | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -35385,7 +37430,6 @@ export interface SecretStoreSpecProviderOnboardbaseAuth {
    * @schema SecretStoreSpecProviderOnboardbaseAuth#passcodeRef
    */
   readonly passcodeRef: SecretStoreSpecProviderOnboardbaseAuthPasscodeRef;
-
 }
 
 /**
@@ -35415,7 +37459,6 @@ export interface SecretStoreSpecProviderOnepasswordAuth {
    * @schema SecretStoreSpecProviderOnepasswordAuth#secretRef
    */
   readonly secretRef: SecretStoreSpecProviderOnepasswordAuthSecretRef;
-
 }
 
 /**
@@ -35444,7 +37487,6 @@ export interface SecretStoreSpecProviderOnepasswordSdkAuth {
    * @schema SecretStoreSpecProviderOnepasswordSdkAuth#serviceAccountSecretRef
    */
   readonly serviceAccountSecretRef: SecretStoreSpecProviderOnepasswordSdkAuthServiceAccountSecretRef;
-
 }
 
 /**
@@ -35481,7 +37523,6 @@ export interface SecretStoreSpecProviderOnepasswordSdkIntegrationInfo {
    * @schema SecretStoreSpecProviderOnepasswordSdkIntegrationInfo#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -35526,7 +37567,6 @@ export interface SecretStoreSpecProviderOracleAuth {
    * @schema SecretStoreSpecProviderOracleAuth#user
    */
   readonly user: string;
-
 }
 
 /**
@@ -35591,7 +37631,6 @@ export interface SecretStoreSpecProviderOracleServiceAccountRef {
    * @schema SecretStoreSpecProviderOracleServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -35631,7 +37670,6 @@ export interface SecretStoreSpecProviderPassboltAuth {
    * @schema SecretStoreSpecProviderPassboltAuth#privateKeySecretRef
    */
   readonly privateKeySecretRef: SecretStoreSpecProviderPassboltAuthPrivateKeySecretRef;
-
 }
 
 /**
@@ -35659,7 +37697,6 @@ export interface SecretStoreSpecProviderPassworddepotAuth {
    * @schema SecretStoreSpecProviderPassworddepotAuth#secretRef
    */
   readonly secretRef: SecretStoreSpecProviderPassworddepotAuthSecretRef;
-
 }
 
 /**
@@ -35688,7 +37725,6 @@ export interface SecretStoreSpecProviderPreviderAuth {
    * @schema SecretStoreSpecProviderPreviderAuth#secretRef
    */
   readonly secretRef?: SecretStoreSpecProviderPreviderAuthSecretRef;
-
 }
 
 /**
@@ -35717,7 +37753,6 @@ export interface SecretStoreSpecProviderPulumiAccessToken {
    * @schema SecretStoreSpecProviderPulumiAccessToken#secretRef
    */
   readonly secretRef?: SecretStoreSpecProviderPulumiAccessTokenSecretRef;
-
 }
 
 /**
@@ -35753,7 +37788,6 @@ export interface SecretStoreSpecProviderScalewayAccessKey {
    * @schema SecretStoreSpecProviderScalewayAccessKey#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -35790,7 +37824,6 @@ export interface SecretStoreSpecProviderScalewaySecretKey {
    * @schema SecretStoreSpecProviderScalewaySecretKey#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -35827,7 +37860,6 @@ export interface SecretStoreSpecProviderSecretserverPassword {
    * @schema SecretStoreSpecProviderSecretserverPassword#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -35864,7 +37896,6 @@ export interface SecretStoreSpecProviderSecretserverUsername {
    * @schema SecretStoreSpecProviderSecretserverUsername#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -35900,7 +37931,6 @@ export interface SecretStoreSpecProviderSenhaseguraAuth {
    * @schema SecretStoreSpecProviderSenhaseguraAuth#clientSecretSecretRef
    */
   readonly clientSecretSecretRef: SecretStoreSpecProviderSenhaseguraAuthClientSecretSecretRef;
-
 }
 
 /**
@@ -35996,7 +38026,6 @@ export interface SecretStoreSpecProviderVaultAuth {
    * @schema SecretStoreSpecProviderVaultAuth#userPass
    */
   readonly userPass?: SecretStoreSpecProviderVaultAuthUserPass;
-
 }
 
 /**
@@ -36055,7 +38084,6 @@ export interface SecretStoreSpecProviderVaultCaProvider {
    * @schema SecretStoreSpecProviderVaultCaProvider#type
    */
   readonly type: SecretStoreSpecProviderVaultCaProviderType;
-
 }
 
 /**
@@ -36069,6 +38097,37 @@ export function toJson_SecretStoreSpecProviderVaultCaProvider(obj: SecretStoreSp
     'name': obj.name,
     'namespace': obj.namespace,
     'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * CheckAndSet defines the Check-And-Set (CAS) settings for PushSecret operations.
+ * Only applies to Vault KV v2 stores. When enabled, write operations must include
+ * the current version of the secret to prevent unintentional overwrites.
+ *
+ * @schema SecretStoreSpecProviderVaultCheckAndSet
+ */
+export interface SecretStoreSpecProviderVaultCheckAndSet {
+  /**
+   * Required when true, all write operations must include a check-and-set parameter.
+   * This helps prevent unintentional overwrites of secrets.
+   *
+   * @schema SecretStoreSpecProviderVaultCheckAndSet#required
+   */
+  readonly required?: boolean;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderVaultCheckAndSet' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderVaultCheckAndSet(obj: SecretStoreSpecProviderVaultCheckAndSet | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'required': obj.required,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -36102,7 +38161,6 @@ export interface SecretStoreSpecProviderVaultTls {
    * @schema SecretStoreSpecProviderVaultTls#keySecretRef
    */
   readonly keySecretRef?: SecretStoreSpecProviderVaultTlsKeySecretRef;
-
 }
 
 /**
@@ -36134,6 +38192,36 @@ export enum SecretStoreSpecProviderVaultVersion {
 }
 
 /**
+ * Auth defines the authentication method to use.
+ * If not specified, the provider will try to use IRSA (IAM Role for Service Account).
+ *
+ * @schema SecretStoreSpecProviderVolcengineAuth
+ */
+export interface SecretStoreSpecProviderVolcengineAuth {
+  /**
+   * SecretRef defines the static credentials to use for authentication.
+   * If not set, IRSA is used.
+   *
+   * @schema SecretStoreSpecProviderVolcengineAuth#secretRef
+   */
+  readonly secretRef?: SecretStoreSpecProviderVolcengineAuthSecretRef;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderVolcengineAuth' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderVolcengineAuth(obj: SecretStoreSpecProviderVolcengineAuth | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'secretRef': toJson_SecretStoreSpecProviderVolcengineAuthSecretRef(obj.secretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * Auth specifies a authorization protocol. Only one protocol may be set.
  *
  * @schema SecretStoreSpecProviderWebhookAuth
@@ -36145,7 +38233,6 @@ export interface SecretStoreSpecProviderWebhookAuth {
    * @schema SecretStoreSpecProviderWebhookAuth#ntlm
    */
   readonly ntlm?: SecretStoreSpecProviderWebhookAuthNtlm;
-
 }
 
 /**
@@ -36195,7 +38282,6 @@ export interface SecretStoreSpecProviderWebhookCaProvider {
    * @schema SecretStoreSpecProviderWebhookCaProvider#type
    */
   readonly type: SecretStoreSpecProviderWebhookCaProviderType;
-
 }
 
 /**
@@ -36227,7 +38313,6 @@ export interface SecretStoreSpecProviderWebhookResult {
    * @schema SecretStoreSpecProviderWebhookResult#jsonPath
    */
   readonly jsonPath?: string;
-
 }
 
 /**
@@ -36261,7 +38346,6 @@ export interface SecretStoreSpecProviderWebhookSecrets {
    * @schema SecretStoreSpecProviderWebhookSecrets#secretRef
    */
   readonly secretRef: SecretStoreSpecProviderWebhookSecretsSecretRef;
-
 }
 
 /**
@@ -36280,7 +38364,7 @@ export function toJson_SecretStoreSpecProviderWebhookSecrets(obj: SecretStoreSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Auth defines the information necessary to authenticate against Yandex Certificate Manager
+ * Auth defines the information necessary to authenticate against Yandex.Cloud
  *
  * @schema SecretStoreSpecProviderYandexcertificatemanagerAuth
  */
@@ -36291,7 +38375,6 @@ export interface SecretStoreSpecProviderYandexcertificatemanagerAuth {
    * @schema SecretStoreSpecProviderYandexcertificatemanagerAuth#authorizedKeySecretRef
    */
   readonly authorizedKeySecretRef?: SecretStoreSpecProviderYandexcertificatemanagerAuthAuthorizedKeySecretRef;
-
 }
 
 /**
@@ -36321,7 +38404,6 @@ export interface SecretStoreSpecProviderYandexcertificatemanagerCaProvider {
    * @schema SecretStoreSpecProviderYandexcertificatemanagerCaProvider#certSecretRef
    */
   readonly certSecretRef?: SecretStoreSpecProviderYandexcertificatemanagerCaProviderCertSecretRef;
-
 }
 
 /**
@@ -36339,7 +38421,43 @@ export function toJson_SecretStoreSpecProviderYandexcertificatemanagerCaProvider
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Auth defines the information necessary to authenticate against Yandex Lockbox
+ * FetchingPolicy configures the provider to interpret the `data.secretKey.remoteRef.key` field in ExternalSecret as certificate ID or certificate name
+ *
+ * @schema SecretStoreSpecProviderYandexcertificatemanagerFetching
+ */
+export interface SecretStoreSpecProviderYandexcertificatemanagerFetching {
+  /**
+   * ByID configures the provider to interpret the `data.secretKey.remoteRef.key` field in ExternalSecret as secret ID.
+   *
+   * @schema SecretStoreSpecProviderYandexcertificatemanagerFetching#byID
+   */
+  readonly byId?: any;
+
+  /**
+   * ByName configures the provider to interpret the `data.secretKey.remoteRef.key` field in ExternalSecret as secret name.
+   *
+   * @schema SecretStoreSpecProviderYandexcertificatemanagerFetching#byName
+   */
+  readonly byName?: SecretStoreSpecProviderYandexcertificatemanagerFetchingByName;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderYandexcertificatemanagerFetching' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderYandexcertificatemanagerFetching(obj: SecretStoreSpecProviderYandexcertificatemanagerFetching | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'byID': obj.byId,
+    'byName': toJson_SecretStoreSpecProviderYandexcertificatemanagerFetchingByName(obj.byName),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Auth defines the information necessary to authenticate against Yandex.Cloud
  *
  * @schema SecretStoreSpecProviderYandexlockboxAuth
  */
@@ -36350,7 +38468,6 @@ export interface SecretStoreSpecProviderYandexlockboxAuth {
    * @schema SecretStoreSpecProviderYandexlockboxAuth#authorizedKeySecretRef
    */
   readonly authorizedKeySecretRef?: SecretStoreSpecProviderYandexlockboxAuthAuthorizedKeySecretRef;
-
 }
 
 /**
@@ -36380,7 +38497,6 @@ export interface SecretStoreSpecProviderYandexlockboxCaProvider {
    * @schema SecretStoreSpecProviderYandexlockboxCaProvider#certSecretRef
    */
   readonly certSecretRef?: SecretStoreSpecProviderYandexlockboxCaProviderCertSecretRef;
-
 }
 
 /**
@@ -36391,6 +38507,42 @@ export function toJson_SecretStoreSpecProviderYandexlockboxCaProvider(obj: Secre
   if (obj === undefined) { return undefined; }
   const result = {
     'certSecretRef': toJson_SecretStoreSpecProviderYandexlockboxCaProviderCertSecretRef(obj.certSecretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * FetchingPolicy configures the provider to interpret the `data.secretKey.remoteRef.key` field in ExternalSecret as secret ID or secret name
+ *
+ * @schema SecretStoreSpecProviderYandexlockboxFetching
+ */
+export interface SecretStoreSpecProviderYandexlockboxFetching {
+  /**
+   * ByID configures the provider to interpret the `data.secretKey.remoteRef.key` field in ExternalSecret as secret ID.
+   *
+   * @schema SecretStoreSpecProviderYandexlockboxFetching#byID
+   */
+  readonly byId?: any;
+
+  /**
+   * ByName configures the provider to interpret the `data.secretKey.remoteRef.key` field in ExternalSecret as secret name.
+   *
+   * @schema SecretStoreSpecProviderYandexlockboxFetching#byName
+   */
+  readonly byName?: SecretStoreSpecProviderYandexlockboxFetchingByName;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderYandexlockboxFetching' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderYandexlockboxFetching(obj: SecretStoreSpecProviderYandexlockboxFetching | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'byID': obj.byId,
+    'byName': toJson_SecretStoreSpecProviderYandexlockboxFetchingByName(obj.byName),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -36437,7 +38589,6 @@ export interface SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuth {
    * @schema SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuth#serviceAccountRef
    */
   readonly serviceAccountRef?: SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthServiceAccountRef;
-
 }
 
 /**
@@ -36486,7 +38637,6 @@ export interface SecretStoreSpecProviderAkeylessAuthSecretRefSecretRef {
    * @schema SecretStoreSpecProviderAkeylessAuthSecretRefSecretRef#accessTypeParam
    */
   readonly accessTypeParam?: SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam;
-
 }
 
 /**
@@ -36542,7 +38692,6 @@ export interface SecretStoreSpecProviderAlibabaAuthRrsa {
    * @schema SecretStoreSpecProviderAlibabaAuthRrsa#sessionName
    */
   readonly sessionName: string;
-
 }
 
 /**
@@ -36581,7 +38730,6 @@ export interface SecretStoreSpecProviderAlibabaAuthSecretRef {
    * @schema SecretStoreSpecProviderAlibabaAuthSecretRef#accessKeySecretSecretRef
    */
   readonly accessKeySecretSecretRef: SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef;
-
 }
 
 /**
@@ -36611,7 +38759,6 @@ export interface SecretStoreSpecProviderAwsAuthJwt {
    * @schema SecretStoreSpecProviderAwsAuthJwt#serviceAccountRef
    */
   readonly serviceAccountRef?: SecretStoreSpecProviderAwsAuthJwtServiceAccountRef;
-
 }
 
 /**
@@ -36657,7 +38804,6 @@ export interface SecretStoreSpecProviderAwsAuthSecretRef {
    * @schema SecretStoreSpecProviderAwsAuthSecretRef#sessionTokenSecretRef
    */
   readonly sessionTokenSecretRef?: SecretStoreSpecProviderAwsAuthSecretRefSessionTokenSecretRef;
-
 }
 
 /**
@@ -36704,7 +38850,6 @@ export interface SecretStoreSpecProviderAzurekvAuthSecretRefClientCertificate {
    * @schema SecretStoreSpecProviderAzurekvAuthSecretRefClientCertificate#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -36751,7 +38896,6 @@ export interface SecretStoreSpecProviderAzurekvAuthSecretRefClientId {
    * @schema SecretStoreSpecProviderAzurekvAuthSecretRefClientId#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -36798,7 +38942,6 @@ export interface SecretStoreSpecProviderAzurekvAuthSecretRefClientSecret {
    * @schema SecretStoreSpecProviderAzurekvAuthSecretRefClientSecret#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -36845,7 +38988,6 @@ export interface SecretStoreSpecProviderAzurekvAuthSecretRefTenantId {
    * @schema SecretStoreSpecProviderAzurekvAuthSecretRefTenantId#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -36883,7 +39025,6 @@ export interface SecretStoreSpecProviderBeyondtrustAuthApiKey {
    * @schema SecretStoreSpecProviderBeyondtrustAuthApiKey#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -36920,7 +39061,6 @@ export interface SecretStoreSpecProviderBeyondtrustAuthCertificate {
    * @schema SecretStoreSpecProviderBeyondtrustAuthCertificate#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -36957,7 +39097,6 @@ export interface SecretStoreSpecProviderBeyondtrustAuthCertificateKey {
    * @schema SecretStoreSpecProviderBeyondtrustAuthCertificateKey#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -36994,7 +39133,6 @@ export interface SecretStoreSpecProviderBeyondtrustAuthClientId {
    * @schema SecretStoreSpecProviderBeyondtrustAuthClientId#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -37031,7 +39169,6 @@ export interface SecretStoreSpecProviderBeyondtrustAuthClientSecret {
    * @schema SecretStoreSpecProviderBeyondtrustAuthClientSecret#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -37061,7 +39198,6 @@ export interface SecretStoreSpecProviderBitwardensecretsmanagerAuthSecretRef {
    * @schema SecretStoreSpecProviderBitwardensecretsmanagerAuthSecretRef#credentials
    */
   readonly credentials: SecretStoreSpecProviderBitwardensecretsmanagerAuthSecretRefCredentials;
-
 }
 
 /**
@@ -37102,7 +39238,6 @@ export interface SecretStoreSpecProviderChefAuthSecretRef {
    * @schema SecretStoreSpecProviderChefAuthSecretRef#privateKeySecretRef
    */
   readonly privateKeySecretRef: SecretStoreSpecProviderChefAuthSecretRefPrivateKeySecretRef;
-
 }
 
 /**
@@ -37138,7 +39273,6 @@ export interface SecretStoreSpecProviderCloudrusmAuthSecretRef {
    * @schema SecretStoreSpecProviderCloudrusmAuthSecretRef#accessKeySecretSecretRef
    */
   readonly accessKeySecretSecretRef: SecretStoreSpecProviderCloudrusmAuthSecretRefAccessKeySecretSecretRef;
-
 }
 
 /**
@@ -37184,7 +39318,6 @@ export interface SecretStoreSpecProviderConjurAuthApikey {
    * @schema SecretStoreSpecProviderConjurAuthApikey#userRef
    */
   readonly userRef: SecretStoreSpecProviderConjurAuthApikeyUserRef;
-
 }
 
 /**
@@ -37246,7 +39379,6 @@ export interface SecretStoreSpecProviderConjurAuthJwt {
    * @schema SecretStoreSpecProviderConjurAuthJwt#serviceID
    */
   readonly serviceId: string;
-
 }
 
 /**
@@ -37307,7 +39439,6 @@ export interface SecretStoreSpecProviderDelineaClientIdSecretRef {
    * @schema SecretStoreSpecProviderDelineaClientIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -37354,7 +39485,6 @@ export interface SecretStoreSpecProviderDelineaClientSecretSecretRef {
    * @schema SecretStoreSpecProviderDelineaClientSecretSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -37383,7 +39513,6 @@ export interface SecretStoreSpecProviderDevice42AuthSecretRef {
    * @schema SecretStoreSpecProviderDevice42AuthSecretRef#credentials
    */
   readonly credentials?: SecretStoreSpecProviderDevice42AuthSecretRefCredentials;
-
 }
 
 /**
@@ -37412,7 +39541,6 @@ export interface SecretStoreSpecProviderDopplerAuthSecretRef {
    * @schema SecretStoreSpecProviderDopplerAuthSecretRef#dopplerToken
    */
   readonly dopplerToken: SecretStoreSpecProviderDopplerAuthSecretRefDopplerToken;
-
 }
 
 /**
@@ -37457,7 +39585,6 @@ export interface SecretStoreSpecProviderFortanixApiKeySecretRef {
    * @schema SecretStoreSpecProviderFortanixApiKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -37486,7 +39613,6 @@ export interface SecretStoreSpecProviderGcpsmAuthSecretRef {
    * @schema SecretStoreSpecProviderGcpsmAuthSecretRef#secretAccessKeySecretRef
    */
   readonly secretAccessKeySecretRef?: SecretStoreSpecProviderGcpsmAuthSecretRefSecretAccessKeySecretRef;
-
 }
 
 /**
@@ -37537,7 +39663,6 @@ export interface SecretStoreSpecProviderGcpsmAuthWorkloadIdentity {
    * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentity#serviceAccountRef
    */
   readonly serviceAccountRef: SecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef;
-
 }
 
 /**
@@ -37551,6 +39676,74 @@ export function toJson_SecretStoreSpecProviderGcpsmAuthWorkloadIdentity(obj: Sec
     'clusterName': obj.clusterName,
     'clusterProjectID': obj.clusterProjectId,
     'serviceAccountRef': toJson_SecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef(obj.serviceAccountRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * GCPWorkloadIdentityFederation holds the configurations required for generating federated access tokens.
+ *
+ * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation
+ */
+export interface SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation {
+  /**
+   * audience is the Secure Token Service (STS) audience which contains the resource name for the workload identity pool and the provider identifier in that pool.
+   * If specified, Audience found in the external account credential config will be overridden with the configured value.
+   * audience must be provided when serviceAccountRef or awsSecurityCredentials is configured.
+   *
+   * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation#audience
+   */
+  readonly audience?: string;
+
+  /**
+   * awsSecurityCredentials is for configuring AWS region and credentials to use for obtaining the access token,
+   * when using the AWS metadata server is not an option.
+   *
+   * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation#awsSecurityCredentials
+   */
+  readonly awsSecurityCredentials?: SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentials;
+
+  /**
+   * credConfig holds the configmap reference containing the GCP external account credential configuration in JSON format and the key name containing the json data.
+   * For using Kubernetes cluster as the identity provider, use serviceAccountRef instead. Operators mounted serviceaccount token cannot be used as the token source, instead
+   * serviceAccountRef must be used by providing operators service account details.
+   *
+   * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation#credConfig
+   */
+  readonly credConfig?: SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationCredConfig;
+
+  /**
+   * externalTokenEndpoint is the endpoint explicitly set up to provide tokens, which will be matched against the
+   * credential_source.url in the provided credConfig. This field is merely to double-check the external token source
+   * URL is having the expected value.
+   *
+   * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation#externalTokenEndpoint
+   */
+  readonly externalTokenEndpoint?: string;
+
+  /**
+   * serviceAccountRef is the reference to the kubernetes ServiceAccount to be used for obtaining the tokens,
+   * when Kubernetes is configured as provider in workload identity pool.
+   *
+   * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation#serviceAccountRef
+   */
+  readonly serviceAccountRef?: SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationServiceAccountRef;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation(obj: SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederation | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'audience': obj.audience,
+    'awsSecurityCredentials': toJson_SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentials(obj.awsSecurityCredentials),
+    'credConfig': toJson_SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationCredConfig(obj.credConfig),
+    'externalTokenEndpoint': obj.externalTokenEndpoint,
+    'serviceAccountRef': toJson_SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationServiceAccountRef(obj.serviceAccountRef),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -37586,7 +39779,6 @@ export interface SecretStoreSpecProviderGithubAuthPrivateKey {
    * @schema SecretStoreSpecProviderGithubAuthPrivateKey#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -37615,7 +39807,6 @@ export interface SecretStoreSpecProviderGitlabAuthSecretRef {
    * @schema SecretStoreSpecProviderGitlabAuthSecretRef#accessToken
    */
   readonly accessToken?: SecretStoreSpecProviderGitlabAuthSecretRefAccessToken;
-
 }
 
 /**
@@ -37668,7 +39859,6 @@ export interface SecretStoreSpecProviderIbmAuthContainerAuth {
    * @schema SecretStoreSpecProviderIbmAuthContainerAuth#tokenLocation
    */
   readonly tokenLocation?: string;
-
 }
 
 /**
@@ -37697,7 +39887,6 @@ export interface SecretStoreSpecProviderIbmAuthSecretRef {
    * @schema SecretStoreSpecProviderIbmAuthSecretRef#secretApiKeySecretRef
    */
   readonly secretApiKeySecretRef?: SecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecretRef;
-
 }
 
 /**
@@ -37708,6 +39897,33 @@ export function toJson_SecretStoreSpecProviderIbmAuthSecretRef(obj: SecretStoreS
   if (obj === undefined) { return undefined; }
   const result = {
     'secretApiKeySecretRef': toJson_SecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecretRef(obj.secretApiKeySecretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema SecretStoreSpecProviderInfisicalAuthAwsAuthCredentials
+ */
+export interface SecretStoreSpecProviderInfisicalAuthAwsAuthCredentials {
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthAwsAuthCredentials#identityId
+   */
+  readonly identityId: SecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthAwsAuthCredentials' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthAwsAuthCredentials(obj: SecretStoreSpecProviderInfisicalAuthAwsAuthCredentials | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'identityId': toJson_SecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId(obj.identityId),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -37733,7 +39949,6 @@ export interface SecretStoreSpecProviderInfisicalAuthAzureAuthCredentials {
    * @schema SecretStoreSpecProviderInfisicalAuthAzureAuthCredentials#resource
    */
   readonly resource?: SecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsResource;
-
 }
 
 /**
@@ -37745,6 +39960,294 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthAzureAuthCredentials(
   const result = {
     'identityId': toJson_SecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsIdentityId(obj.identityId),
     'resource': toJson_SecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsResource(obj.resource),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials
+ */
+export interface SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials {
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials#identityId
+   */
+  readonly identityId: SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials#serviceAccountKeyFilePath
+   */
+  readonly serviceAccountKeyFilePath: SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials(obj: SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'identityId': toJson_SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId(obj.identityId),
+    'serviceAccountKeyFilePath': toJson_SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath(obj.serviceAccountKeyFilePath),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials
+ */
+export interface SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials {
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials#identityId
+   */
+  readonly identityId: SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials(obj: SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'identityId': toJson_SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId(obj.identityId),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema SecretStoreSpecProviderInfisicalAuthJwtAuthCredentials
+ */
+export interface SecretStoreSpecProviderInfisicalAuthJwtAuthCredentials {
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthJwtAuthCredentials#identityId
+   */
+  readonly identityId: SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthJwtAuthCredentials#jwt
+   */
+  readonly jwt: SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthJwtAuthCredentials' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthJwtAuthCredentials(obj: SecretStoreSpecProviderInfisicalAuthJwtAuthCredentials | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'identityId': toJson_SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId(obj.identityId),
+    'jwt': toJson_SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt(obj.jwt),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials
+ */
+export interface SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials {
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials#identityId
+   */
+  readonly identityId: SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials#serviceAccountTokenPath
+   */
+  readonly serviceAccountTokenPath?: SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials(obj: SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'identityId': toJson_SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId(obj.identityId),
+    'serviceAccountTokenPath': toJson_SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath(obj.serviceAccountTokenPath),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentials
+ */
+export interface SecretStoreSpecProviderInfisicalAuthLdapAuthCredentials {
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentials#identityId
+   */
+  readonly identityId: SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentials#ldapPassword
+   */
+  readonly ldapPassword: SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentials#ldapUsername
+   */
+  readonly ldapUsername: SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthLdapAuthCredentials' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthLdapAuthCredentials(obj: SecretStoreSpecProviderInfisicalAuthLdapAuthCredentials | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'identityId': toJson_SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId(obj.identityId),
+    'ldapPassword': toJson_SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword(obj.ldapPassword),
+    'ldapUsername': toJson_SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername(obj.ldapUsername),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentials
+ */
+export interface SecretStoreSpecProviderInfisicalAuthOciAuthCredentials {
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentials#fingerprint
+   */
+  readonly fingerprint: SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentials#identityId
+   */
+  readonly identityId: SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentials#privateKey
+   */
+  readonly privateKey: SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentials#privateKeyPassphrase
+   */
+  readonly privateKeyPassphrase?: SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentials#region
+   */
+  readonly region: SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentials#tenancyId
+   */
+  readonly tenancyId: SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId;
+
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentials#userId
+   */
+  readonly userId: SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthOciAuthCredentials' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentials(obj: SecretStoreSpecProviderInfisicalAuthOciAuthCredentials | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'fingerprint': toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint(obj.fingerprint),
+    'identityId': toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId(obj.identityId),
+    'privateKey': toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey(obj.privateKey),
+    'privateKeyPassphrase': toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase(obj.privateKeyPassphrase),
+    'region': toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion(obj.region),
+    'tenancyId': toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId(obj.tenancyId),
+    'userId': toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId(obj.userId),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema SecretStoreSpecProviderInfisicalAuthTokenAuthCredentials
+ */
+export interface SecretStoreSpecProviderInfisicalAuthTokenAuthCredentials {
+  /**
+   * A reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthTokenAuthCredentials#accessToken
+   */
+  readonly accessToken: SecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthTokenAuthCredentials' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthTokenAuthCredentials(obj: SecretStoreSpecProviderInfisicalAuthTokenAuthCredentials | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'accessToken': toJson_SecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken(obj.accessToken),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -37770,7 +40273,6 @@ export interface SecretStoreSpecProviderInfisicalAuthUniversalAuthCredentials {
    * @schema SecretStoreSpecProviderInfisicalAuthUniversalAuthCredentials#clientSecret
    */
   readonly clientSecret: SecretStoreSpecProviderInfisicalAuthUniversalAuthCredentialsClientSecret;
-
 }
 
 /**
@@ -37809,7 +40311,6 @@ export interface SecretStoreSpecProviderKubernetesAuthCert {
    * @schema SecretStoreSpecProviderKubernetesAuthCert#clientKey
    */
   readonly clientKey?: SecretStoreSpecProviderKubernetesAuthCertClientKey;
-
 }
 
 /**
@@ -37856,7 +40357,6 @@ export interface SecretStoreSpecProviderKubernetesAuthServiceAccount {
    * @schema SecretStoreSpecProviderKubernetesAuthServiceAccount#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -37888,7 +40388,6 @@ export interface SecretStoreSpecProviderKubernetesAuthToken {
    * @schema SecretStoreSpecProviderKubernetesAuthToken#bearerToken
    */
   readonly bearerToken?: SecretStoreSpecProviderKubernetesAuthTokenBearerToken;
-
 }
 
 /**
@@ -37939,7 +40438,6 @@ export interface SecretStoreSpecProviderKubernetesServerCaProvider {
    * @schema SecretStoreSpecProviderKubernetesServerCaProvider#type
    */
   readonly type: SecretStoreSpecProviderKubernetesServerCaProviderType;
-
 }
 
 /**
@@ -37953,6 +40451,34 @@ export function toJson_SecretStoreSpecProviderKubernetesServerCaProvider(obj: Se
     'name': obj.name,
     'namespace': obj.namespace,
     'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * APIKey is the API Key used to authenticate with ngrok. See https://ngrok.com/docs/api/#authentication
+ *
+ * @schema SecretStoreSpecProviderNgrokAuthApiKey
+ */
+export interface SecretStoreSpecProviderNgrokAuthApiKey {
+  /**
+   * SecretRef is a reference to a secret containing the ngrok API key.
+   *
+   * @schema SecretStoreSpecProviderNgrokAuthApiKey#secretRef
+   */
+  readonly secretRef?: SecretStoreSpecProviderNgrokAuthApiKeySecretRef;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderNgrokAuthApiKey' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderNgrokAuthApiKey(obj: SecretStoreSpecProviderNgrokAuthApiKey | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'secretRef': toJson_SecretStoreSpecProviderNgrokAuthApiKeySecretRef(obj.secretRef),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -37988,7 +40514,6 @@ export interface SecretStoreSpecProviderOnboardbaseAuthApiKeyRef {
    * @schema SecretStoreSpecProviderOnboardbaseAuthApiKeyRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -38035,7 +40560,6 @@ export interface SecretStoreSpecProviderOnboardbaseAuthPasscodeRef {
    * @schema SecretStoreSpecProviderOnboardbaseAuthPasscodeRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -38066,7 +40590,6 @@ export interface SecretStoreSpecProviderOnepasswordAuthSecretRef {
    * @schema SecretStoreSpecProviderOnepasswordAuthSecretRef#connectTokenSecretRef
    */
   readonly connectTokenSecretRef: SecretStoreSpecProviderOnepasswordAuthSecretRefConnectTokenSecretRef;
-
 }
 
 /**
@@ -38111,7 +40634,6 @@ export interface SecretStoreSpecProviderOnepasswordSdkAuthServiceAccountSecretRe
    * @schema SecretStoreSpecProviderOnepasswordSdkAuthServiceAccountSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -38149,7 +40671,6 @@ export interface SecretStoreSpecProviderOracleAuthSecretRef {
    * @schema SecretStoreSpecProviderOracleAuthSecretRef#privatekey
    */
   readonly privatekey: SecretStoreSpecProviderOracleAuthSecretRefPrivatekey;
-
 }
 
 /**
@@ -38196,7 +40717,6 @@ export interface SecretStoreSpecProviderPassboltAuthPasswordSecretRef {
    * @schema SecretStoreSpecProviderPassboltAuthPasswordSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -38244,7 +40764,6 @@ export interface SecretStoreSpecProviderPassboltAuthPrivateKeySecretRef {
    * @schema SecretStoreSpecProviderPassboltAuthPrivateKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -38273,7 +40792,6 @@ export interface SecretStoreSpecProviderPassworddepotAuthSecretRef {
    * @schema SecretStoreSpecProviderPassworddepotAuthSecretRef#credentials
    */
   readonly credentials?: SecretStoreSpecProviderPassworddepotAuthSecretRefCredentials;
-
 }
 
 /**
@@ -38302,7 +40820,6 @@ export interface SecretStoreSpecProviderPreviderAuthSecretRef {
    * @schema SecretStoreSpecProviderPreviderAuthSecretRef#accessToken
    */
   readonly accessToken: SecretStoreSpecProviderPreviderAuthSecretRefAccessToken;
-
 }
 
 /**
@@ -38347,7 +40864,6 @@ export interface SecretStoreSpecProviderPulumiAccessTokenSecretRef {
    * @schema SecretStoreSpecProviderPulumiAccessTokenSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -38394,7 +40910,6 @@ export interface SecretStoreSpecProviderScalewayAccessKeySecretRef {
    * @schema SecretStoreSpecProviderScalewayAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -38441,7 +40956,6 @@ export interface SecretStoreSpecProviderScalewaySecretKeySecretRef {
    * @schema SecretStoreSpecProviderScalewaySecretKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -38488,7 +41002,6 @@ export interface SecretStoreSpecProviderSecretserverPasswordSecretRef {
    * @schema SecretStoreSpecProviderSecretserverPasswordSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -38535,7 +41048,6 @@ export interface SecretStoreSpecProviderSecretserverUsernameSecretRef {
    * @schema SecretStoreSpecProviderSecretserverUsernameSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -38583,7 +41095,6 @@ export interface SecretStoreSpecProviderSenhaseguraAuthClientSecretSecretRef {
    * @schema SecretStoreSpecProviderSenhaseguraAuthClientSecretSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -38644,7 +41155,6 @@ export interface SecretStoreSpecProviderVaultAuthAppRole {
    * @schema SecretStoreSpecProviderVaultAuthAppRole#secretRef
    */
   readonly secretRef: SecretStoreSpecProviderVaultAuthAppRoleSecretRef;
-
 }
 
 /**
@@ -38680,13 +41190,20 @@ export interface SecretStoreSpecProviderVaultAuthCert {
   readonly clientCert?: SecretStoreSpecProviderVaultAuthCertClientCert;
 
   /**
+   * Path where the Certificate authentication backend is mounted
+   * in Vault, e.g: "cert"
+   *
+   * @schema SecretStoreSpecProviderVaultAuthCert#path
+   */
+  readonly path?: string;
+
+  /**
    * SecretRef to a key in a Secret resource containing client private key to
    * authenticate with Vault using the Cert authentication method
    *
    * @schema SecretStoreSpecProviderVaultAuthCert#secretRef
    */
   readonly secretRef?: SecretStoreSpecProviderVaultAuthCertSecretRef;
-
 }
 
 /**
@@ -38697,6 +41214,7 @@ export function toJson_SecretStoreSpecProviderVaultAuthCert(obj: SecretStoreSpec
   if (obj === undefined) { return undefined; }
   const result = {
     'clientCert': toJson_SecretStoreSpecProviderVaultAuthCertClientCert(obj.clientCert),
+    'path': obj.path,
     'secretRef': toJson_SecretStoreSpecProviderVaultAuthCertSecretRef(obj.secretRef),
   };
   // filter undefined values
@@ -38766,7 +41284,6 @@ export interface SecretStoreSpecProviderVaultAuthIam {
    * @schema SecretStoreSpecProviderVaultAuthIam#vaultRole
    */
   readonly vaultRole: string;
-
 }
 
 /**
@@ -38828,7 +41345,6 @@ export interface SecretStoreSpecProviderVaultAuthJwt {
    * @schema SecretStoreSpecProviderVaultAuthJwt#secretRef
    */
   readonly secretRef?: SecretStoreSpecProviderVaultAuthJwtSecretRef;
-
 }
 
 /**
@@ -38890,7 +41406,6 @@ export interface SecretStoreSpecProviderVaultAuthKubernetes {
    * @schema SecretStoreSpecProviderVaultAuthKubernetes#serviceAccountRef
    */
   readonly serviceAccountRef?: SecretStoreSpecProviderVaultAuthKubernetesServiceAccountRef;
-
 }
 
 /**
@@ -38941,7 +41456,6 @@ export interface SecretStoreSpecProviderVaultAuthLdap {
    * @schema SecretStoreSpecProviderVaultAuthLdap#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -38988,7 +41502,6 @@ export interface SecretStoreSpecProviderVaultAuthTokenSecretRef {
    * @schema SecretStoreSpecProviderVaultAuthTokenSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -39037,7 +41550,6 @@ export interface SecretStoreSpecProviderVaultAuthUserPass {
    * @schema SecretStoreSpecProviderVaultAuthUserPass#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -39098,7 +41610,6 @@ export interface SecretStoreSpecProviderVaultTlsCertSecretRef {
    * @schema SecretStoreSpecProviderVaultTlsCertSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -39147,7 +41658,6 @@ export interface SecretStoreSpecProviderVaultTlsKeySecretRef {
    * @schema SecretStoreSpecProviderVaultTlsKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -39160,6 +41670,51 @@ export function toJson_SecretStoreSpecProviderVaultTlsKeySecretRef(obj: SecretSt
     'key': obj.key,
     'name': obj.name,
     'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * SecretRef defines the static credentials to use for authentication.
+ * If not set, IRSA is used.
+ *
+ * @schema SecretStoreSpecProviderVolcengineAuthSecretRef
+ */
+export interface SecretStoreSpecProviderVolcengineAuthSecretRef {
+  /**
+   * AccessKeyID is the reference to the secret containing the Access Key ID.
+   *
+   * @schema SecretStoreSpecProviderVolcengineAuthSecretRef#accessKeyID
+   */
+  readonly accessKeyId: SecretStoreSpecProviderVolcengineAuthSecretRefAccessKeyId;
+
+  /**
+   * SecretAccessKey is the reference to the secret containing the Secret Access Key.
+   *
+   * @schema SecretStoreSpecProviderVolcengineAuthSecretRef#secretAccessKey
+   */
+  readonly secretAccessKey: SecretStoreSpecProviderVolcengineAuthSecretRefSecretAccessKey;
+
+  /**
+   * Token is the reference to the secret containing the STS(Security Token Service) Token.
+   *
+   * @schema SecretStoreSpecProviderVolcengineAuthSecretRef#token
+   */
+  readonly token?: SecretStoreSpecProviderVolcengineAuthSecretRefToken;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderVolcengineAuthSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderVolcengineAuthSecretRef(obj: SecretStoreSpecProviderVolcengineAuthSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'accessKeyID': toJson_SecretStoreSpecProviderVolcengineAuthSecretRefAccessKeyId(obj.accessKeyId),
+    'secretAccessKey': toJson_SecretStoreSpecProviderVolcengineAuthSecretRefSecretAccessKey(obj.secretAccessKey),
+    'token': toJson_SecretStoreSpecProviderVolcengineAuthSecretRefToken(obj.token),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -39187,7 +41742,6 @@ export interface SecretStoreSpecProviderWebhookAuthNtlm {
    * @schema SecretStoreSpecProviderWebhookAuthNtlm#usernameSecret
    */
   readonly usernameSecret: SecretStoreSpecProviderWebhookAuthNtlmUsernameSecret;
-
 }
 
 /**
@@ -39245,7 +41799,6 @@ export interface SecretStoreSpecProviderWebhookSecretsSecretRef {
    * @schema SecretStoreSpecProviderWebhookSecretsSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -39292,7 +41845,6 @@ export interface SecretStoreSpecProviderYandexcertificatemanagerAuthAuthorizedKe
    * @schema SecretStoreSpecProviderYandexcertificatemanagerAuthAuthorizedKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -39340,7 +41892,6 @@ export interface SecretStoreSpecProviderYandexcertificatemanagerCaProviderCertSe
    * @schema SecretStoreSpecProviderYandexcertificatemanagerCaProviderCertSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -39353,6 +41904,34 @@ export function toJson_SecretStoreSpecProviderYandexcertificatemanagerCaProvider
     'key': obj.key,
     'name': obj.name,
     'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ByName configures the provider to interpret the `data.secretKey.remoteRef.key` field in ExternalSecret as secret name.
+ *
+ * @schema SecretStoreSpecProviderYandexcertificatemanagerFetchingByName
+ */
+export interface SecretStoreSpecProviderYandexcertificatemanagerFetchingByName {
+  /**
+   * The folder to fetch secrets from
+   *
+   * @schema SecretStoreSpecProviderYandexcertificatemanagerFetchingByName#folderID
+   */
+  readonly folderId: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderYandexcertificatemanagerFetchingByName' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderYandexcertificatemanagerFetchingByName(obj: SecretStoreSpecProviderYandexcertificatemanagerFetchingByName | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'folderID': obj.folderId,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -39387,7 +41966,6 @@ export interface SecretStoreSpecProviderYandexlockboxAuthAuthorizedKeySecretRef 
    * @schema SecretStoreSpecProviderYandexlockboxAuthAuthorizedKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -39435,7 +42013,6 @@ export interface SecretStoreSpecProviderYandexlockboxCaProviderCertSecretRef {
    * @schema SecretStoreSpecProviderYandexlockboxCaProviderCertSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -39448,6 +42025,34 @@ export function toJson_SecretStoreSpecProviderYandexlockboxCaProviderCertSecretR
     'key': obj.key,
     'name': obj.name,
     'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ByName configures the provider to interpret the `data.secretKey.remoteRef.key` field in ExternalSecret as secret name.
+ *
+ * @schema SecretStoreSpecProviderYandexlockboxFetchingByName
+ */
+export interface SecretStoreSpecProviderYandexlockboxFetchingByName {
+  /**
+   * The folder to fetch secrets from
+   *
+   * @schema SecretStoreSpecProviderYandexlockboxFetchingByName#folderID
+   */
+  readonly folderId: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderYandexlockboxFetchingByName' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderYandexlockboxFetchingByName(obj: SecretStoreSpecProviderYandexlockboxFetchingByName | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'folderID': obj.folderId,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -39485,7 +42090,6 @@ export interface SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthSecre
    * @schema SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -39536,7 +42140,6 @@ export interface SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthServi
    * @schema SecretStoreSpecProviderAkeylessAuthSecretRefKubernetesAuthServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -39583,7 +42186,6 @@ export interface SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessId {
    * @schema SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessId#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -39631,7 +42233,6 @@ export interface SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessType
    * @schema SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessType#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -39679,7 +42280,6 @@ export interface SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessType
    * @schema SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -39726,7 +42326,6 @@ export interface SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef
    * @schema SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -39773,7 +42372,6 @@ export interface SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecre
    * @schema SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -39821,7 +42419,6 @@ export interface SecretStoreSpecProviderAwsAuthJwtServiceAccountRef {
    * @schema SecretStoreSpecProviderAwsAuthJwtServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -39868,7 +42465,6 @@ export interface SecretStoreSpecProviderAwsAuthSecretRefAccessKeyIdSecretRef {
    * @schema SecretStoreSpecProviderAwsAuthSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -39915,7 +42511,6 @@ export interface SecretStoreSpecProviderAwsAuthSecretRefSecretAccessKeySecretRef
    * @schema SecretStoreSpecProviderAwsAuthSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -39964,7 +42559,6 @@ export interface SecretStoreSpecProviderAwsAuthSecretRefSessionTokenSecretRef {
    * @schema SecretStoreSpecProviderAwsAuthSecretRefSessionTokenSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40011,7 +42605,6 @@ export interface SecretStoreSpecProviderBeyondtrustAuthApiKeySecretRef {
    * @schema SecretStoreSpecProviderBeyondtrustAuthApiKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40058,7 +42651,6 @@ export interface SecretStoreSpecProviderBeyondtrustAuthCertificateSecretRef {
    * @schema SecretStoreSpecProviderBeyondtrustAuthCertificateSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40105,7 +42697,6 @@ export interface SecretStoreSpecProviderBeyondtrustAuthCertificateKeySecretRef {
    * @schema SecretStoreSpecProviderBeyondtrustAuthCertificateKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40152,7 +42743,6 @@ export interface SecretStoreSpecProviderBeyondtrustAuthClientIdSecretRef {
    * @schema SecretStoreSpecProviderBeyondtrustAuthClientIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40199,7 +42789,6 @@ export interface SecretStoreSpecProviderBeyondtrustAuthClientSecretSecretRef {
    * @schema SecretStoreSpecProviderBeyondtrustAuthClientSecretSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40246,7 +42835,6 @@ export interface SecretStoreSpecProviderBitwardensecretsmanagerAuthSecretRefCred
    * @schema SecretStoreSpecProviderBitwardensecretsmanagerAuthSecretRefCredentials#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40293,7 +42881,6 @@ export interface SecretStoreSpecProviderChefAuthSecretRefPrivateKeySecretRef {
    * @schema SecretStoreSpecProviderChefAuthSecretRefPrivateKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40340,7 +42927,6 @@ export interface SecretStoreSpecProviderCloudrusmAuthSecretRefAccessKeyIdSecretR
    * @schema SecretStoreSpecProviderCloudrusmAuthSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40387,7 +42973,6 @@ export interface SecretStoreSpecProviderCloudrusmAuthSecretRefAccessKeySecretSec
    * @schema SecretStoreSpecProviderCloudrusmAuthSecretRefAccessKeySecretSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40435,7 +43020,6 @@ export interface SecretStoreSpecProviderConjurAuthApikeyApiKeyRef {
    * @schema SecretStoreSpecProviderConjurAuthApikeyApiKeyRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40483,7 +43067,6 @@ export interface SecretStoreSpecProviderConjurAuthApikeyUserRef {
    * @schema SecretStoreSpecProviderConjurAuthApikeyUserRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40531,7 +43114,6 @@ export interface SecretStoreSpecProviderConjurAuthJwtSecretRef {
    * @schema SecretStoreSpecProviderConjurAuthJwtSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40580,7 +43162,6 @@ export interface SecretStoreSpecProviderConjurAuthJwtServiceAccountRef {
    * @schema SecretStoreSpecProviderConjurAuthJwtServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40627,7 +43208,6 @@ export interface SecretStoreSpecProviderDevice42AuthSecretRefCredentials {
    * @schema SecretStoreSpecProviderDevice42AuthSecretRefCredentials#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40676,7 +43256,6 @@ export interface SecretStoreSpecProviderDopplerAuthSecretRefDopplerToken {
    * @schema SecretStoreSpecProviderDopplerAuthSecretRefDopplerToken#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40723,7 +43302,6 @@ export interface SecretStoreSpecProviderGcpsmAuthSecretRefSecretAccessKeySecretR
    * @schema SecretStoreSpecProviderGcpsmAuthSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40771,7 +43349,6 @@ export interface SecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountR
    * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40779,6 +43356,141 @@ export interface SecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountR
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef(obj: SecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'audiences': obj.audiences?.map(y => y),
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * awsSecurityCredentials is for configuring AWS region and credentials to use for obtaining the access token,
+ * when using the AWS metadata server is not an option.
+ *
+ * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentials
+ */
+export interface SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentials {
+  /**
+   * awsCredentialsSecretRef is the reference to the secret which holds the AWS credentials.
+   * Secret should be created with below names for keys
+   * - aws_access_key_id: Access Key ID, which is the unique identifier for the AWS account or the IAM user.
+   * - aws_secret_access_key: Secret Access Key, which is used to authenticate requests made to AWS services.
+   * - aws_session_token: Session Token, is the short-lived token to authenticate requests made to AWS services.
+   *
+   * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentials#awsCredentialsSecretRef
+   */
+  readonly awsCredentialsSecretRef: SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef;
+
+  /**
+   * region is for configuring the AWS region to be used.
+   *
+   * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentials#region
+   */
+  readonly region: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentials' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentials(obj: SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentials | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'awsCredentialsSecretRef': toJson_SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef(obj.awsCredentialsSecretRef),
+    'region': obj.region,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * credConfig holds the configmap reference containing the GCP external account credential configuration in JSON format and the key name containing the json data.
+ * For using Kubernetes cluster as the identity provider, use serviceAccountRef instead. Operators mounted serviceaccount token cannot be used as the token source, instead
+ * serviceAccountRef must be used by providing operators service account details.
+ *
+ * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationCredConfig
+ */
+export interface SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationCredConfig {
+  /**
+   * key name holding the external account credential config.
+   *
+   * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationCredConfig#key
+   */
+  readonly key: string;
+
+  /**
+   * name of the configmap.
+   *
+   * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationCredConfig#name
+   */
+  readonly name: string;
+
+  /**
+   * namespace in which the configmap exists. If empty, configmap will looked up in local namespace.
+   *
+   * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationCredConfig#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationCredConfig' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationCredConfig(obj: SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationCredConfig | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * serviceAccountRef is the reference to the kubernetes ServiceAccount to be used for obtaining the tokens,
+ * when Kubernetes is configured as provider in workload identity pool.
+ *
+ * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationServiceAccountRef
+ */
+export interface SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationServiceAccountRef {
+  /**
+   * Audience specifies the `aud` claim for the service account token
+   * If the service account uses a well-known annotation for e.g. IRSA or GCP Workload Identity
+   * then this audiences will be appended to the list
+   *
+   * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationServiceAccountRef#audiences
+   */
+  readonly audiences?: string[];
+
+  /**
+   * The name of the ServiceAccount resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationServiceAccountRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationServiceAccountRef#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationServiceAccountRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationServiceAccountRef(obj: SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'audiences': obj.audiences?.map(y => y),
@@ -40818,7 +43530,6 @@ export interface SecretStoreSpecProviderGitlabAuthSecretRefAccessToken {
    * @schema SecretStoreSpecProviderGitlabAuthSecretRefAccessToken#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40865,7 +43576,6 @@ export interface SecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecretRef {
    * @schema SecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40873,6 +43583,53 @@ export interface SecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecretRef {
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecretRef(obj: SecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId
+ */
+export interface SecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId(obj: SecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -40913,7 +43670,6 @@ export interface SecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsIdentit
    * @schema SecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsIdentityId#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40961,7 +43717,6 @@ export interface SecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsResourc
    * @schema SecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsResource#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -40969,6 +43724,852 @@ export interface SecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsResourc
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsResource(obj: SecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsResource | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId
+ */
+export interface SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId(obj: SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath
+ */
+export interface SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath(obj: SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId
+ */
+export interface SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId(obj: SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId
+ */
+export interface SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId(obj: SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt
+ */
+export interface SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt(obj: SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId
+ */
+export interface SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId(obj: SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath
+ */
+export interface SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath(obj: SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId
+ */
+export interface SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId(obj: SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword
+ */
+export interface SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword(obj: SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername
+ */
+export interface SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername(obj: SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint
+ */
+export interface SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint(obj: SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId
+ */
+export interface SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId(obj: SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey
+ */
+export interface SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey(obj: SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase
+ */
+export interface SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase(obj: SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion
+ */
+export interface SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion(obj: SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId
+ */
+export interface SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId(obj: SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId
+ */
+export interface SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId(obj: SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken
+ */
+export interface SecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken(obj: SecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -41009,7 +44610,6 @@ export interface SecretStoreSpecProviderInfisicalAuthUniversalAuthCredentialsCli
    * @schema SecretStoreSpecProviderInfisicalAuthUniversalAuthCredentialsClientId#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -41057,7 +44657,6 @@ export interface SecretStoreSpecProviderInfisicalAuthUniversalAuthCredentialsCli
    * @schema SecretStoreSpecProviderInfisicalAuthUniversalAuthCredentialsClientSecret#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -41105,7 +44704,6 @@ export interface SecretStoreSpecProviderKubernetesAuthCertClientCert {
    * @schema SecretStoreSpecProviderKubernetesAuthCertClientCert#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -41153,7 +44751,6 @@ export interface SecretStoreSpecProviderKubernetesAuthCertClientKey {
    * @schema SecretStoreSpecProviderKubernetesAuthCertClientKey#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -41201,7 +44798,6 @@ export interface SecretStoreSpecProviderKubernetesAuthTokenBearerToken {
    * @schema SecretStoreSpecProviderKubernetesAuthTokenBearerToken#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -41233,6 +44829,52 @@ export enum SecretStoreSpecProviderKubernetesServerCaProviderType {
 }
 
 /**
+ * SecretRef is a reference to a secret containing the ngrok API key.
+ *
+ * @schema SecretStoreSpecProviderNgrokAuthApiKeySecretRef
+ */
+export interface SecretStoreSpecProviderNgrokAuthApiKeySecretRef {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderNgrokAuthApiKeySecretRef#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderNgrokAuthApiKeySecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderNgrokAuthApiKeySecretRef#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderNgrokAuthApiKeySecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderNgrokAuthApiKeySecretRef(obj: SecretStoreSpecProviderNgrokAuthApiKeySecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * The ConnectToken is used for authentication to a 1Password Connect Server.
  *
  * @schema SecretStoreSpecProviderOnepasswordAuthSecretRefConnectTokenSecretRef
@@ -41260,7 +44902,6 @@ export interface SecretStoreSpecProviderOnepasswordAuthSecretRefConnectTokenSecr
    * @schema SecretStoreSpecProviderOnepasswordAuthSecretRefConnectTokenSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -41307,7 +44948,6 @@ export interface SecretStoreSpecProviderOracleAuthSecretRefFingerprint {
    * @schema SecretStoreSpecProviderOracleAuthSecretRefFingerprint#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -41354,7 +44994,6 @@ export interface SecretStoreSpecProviderOracleAuthSecretRefPrivatekey {
    * @schema SecretStoreSpecProviderOracleAuthSecretRefPrivatekey#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -41401,7 +45040,6 @@ export interface SecretStoreSpecProviderPassworddepotAuthSecretRefCredentials {
    * @schema SecretStoreSpecProviderPassworddepotAuthSecretRefCredentials#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -41448,7 +45086,6 @@ export interface SecretStoreSpecProviderPreviderAuthSecretRefAccessToken {
    * @schema SecretStoreSpecProviderPreviderAuthSecretRefAccessToken#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -41498,7 +45135,6 @@ export interface SecretStoreSpecProviderVaultAuthAppRoleRoleRef {
    * @schema SecretStoreSpecProviderVaultAuthAppRoleRoleRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -41548,7 +45184,6 @@ export interface SecretStoreSpecProviderVaultAuthAppRoleSecretRef {
    * @schema SecretStoreSpecProviderVaultAuthAppRoleSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -41596,7 +45231,6 @@ export interface SecretStoreSpecProviderVaultAuthCertClientCert {
    * @schema SecretStoreSpecProviderVaultAuthCertClientCert#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -41644,7 +45278,6 @@ export interface SecretStoreSpecProviderVaultAuthCertSecretRef {
    * @schema SecretStoreSpecProviderVaultAuthCertSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -41675,7 +45308,6 @@ export interface SecretStoreSpecProviderVaultAuthIamJwt {
    * @schema SecretStoreSpecProviderVaultAuthIamJwt#serviceAccountRef
    */
   readonly serviceAccountRef?: SecretStoreSpecProviderVaultAuthIamJwtServiceAccountRef;
-
 }
 
 /**
@@ -41720,7 +45352,6 @@ export interface SecretStoreSpecProviderVaultAuthIamSecretRef {
    * @schema SecretStoreSpecProviderVaultAuthIamSecretRef#sessionTokenSecretRef
    */
   readonly sessionTokenSecretRef?: SecretStoreSpecProviderVaultAuthIamSecretRefSessionTokenSecretRef;
-
 }
 
 /**
@@ -41775,7 +45406,6 @@ export interface SecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountToke
    * @schema SecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountToken#serviceAccountRef
    */
   readonly serviceAccountRef: SecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountTokenServiceAccountRef;
-
 }
 
 /**
@@ -41823,7 +45453,6 @@ export interface SecretStoreSpecProviderVaultAuthJwtSecretRef {
    * @schema SecretStoreSpecProviderVaultAuthJwtSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -41873,7 +45502,6 @@ export interface SecretStoreSpecProviderVaultAuthKubernetesSecretRef {
    * @schema SecretStoreSpecProviderVaultAuthKubernetesSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -41924,7 +45552,6 @@ export interface SecretStoreSpecProviderVaultAuthKubernetesServiceAccountRef {
    * @schema SecretStoreSpecProviderVaultAuthKubernetesServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -41973,7 +45600,6 @@ export interface SecretStoreSpecProviderVaultAuthLdapSecretRef {
    * @schema SecretStoreSpecProviderVaultAuthLdapSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -42022,7 +45648,6 @@ export interface SecretStoreSpecProviderVaultAuthUserPassSecretRef {
    * @schema SecretStoreSpecProviderVaultAuthUserPassSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -42030,6 +45655,144 @@ export interface SecretStoreSpecProviderVaultAuthUserPassSecretRef {
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderVaultAuthUserPassSecretRef(obj: SecretStoreSpecProviderVaultAuthUserPassSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * AccessKeyID is the reference to the secret containing the Access Key ID.
+ *
+ * @schema SecretStoreSpecProviderVolcengineAuthSecretRefAccessKeyId
+ */
+export interface SecretStoreSpecProviderVolcengineAuthSecretRefAccessKeyId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderVolcengineAuthSecretRefAccessKeyId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderVolcengineAuthSecretRefAccessKeyId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderVolcengineAuthSecretRefAccessKeyId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderVolcengineAuthSecretRefAccessKeyId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderVolcengineAuthSecretRefAccessKeyId(obj: SecretStoreSpecProviderVolcengineAuthSecretRefAccessKeyId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * SecretAccessKey is the reference to the secret containing the Secret Access Key.
+ *
+ * @schema SecretStoreSpecProviderVolcengineAuthSecretRefSecretAccessKey
+ */
+export interface SecretStoreSpecProviderVolcengineAuthSecretRefSecretAccessKey {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderVolcengineAuthSecretRefSecretAccessKey#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderVolcengineAuthSecretRefSecretAccessKey#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderVolcengineAuthSecretRefSecretAccessKey#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderVolcengineAuthSecretRefSecretAccessKey' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderVolcengineAuthSecretRefSecretAccessKey(obj: SecretStoreSpecProviderVolcengineAuthSecretRefSecretAccessKey | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Token is the reference to the secret containing the STS(Security Token Service) Token.
+ *
+ * @schema SecretStoreSpecProviderVolcengineAuthSecretRefToken
+ */
+export interface SecretStoreSpecProviderVolcengineAuthSecretRefToken {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderVolcengineAuthSecretRefToken#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderVolcengineAuthSecretRefToken#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderVolcengineAuthSecretRefToken#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderVolcengineAuthSecretRefToken' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderVolcengineAuthSecretRefToken(obj: SecretStoreSpecProviderVolcengineAuthSecretRefToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -42070,7 +45833,6 @@ export interface SecretStoreSpecProviderWebhookAuthNtlmPasswordSecret {
    * @schema SecretStoreSpecProviderWebhookAuthNtlmPasswordSecret#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -42118,7 +45880,6 @@ export interface SecretStoreSpecProviderWebhookAuthNtlmUsernameSecret {
    * @schema SecretStoreSpecProviderWebhookAuthNtlmUsernameSecret#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -42129,6 +45890,46 @@ export function toJson_SecretStoreSpecProviderWebhookAuthNtlmUsernameSecret(obj:
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * awsCredentialsSecretRef is the reference to the secret which holds the AWS credentials.
+ * Secret should be created with below names for keys
+ * - aws_access_key_id: Access Key ID, which is the unique identifier for the AWS account or the IAM user.
+ * - aws_secret_access_key: Secret Access Key, which is used to authenticate requests made to AWS services.
+ * - aws_session_token: Session Token, is the short-lived token to authenticate requests made to AWS services.
+ *
+ * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef
+ */
+export interface SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef {
+  /**
+   * name of the secret.
+   *
+   * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef#name
+   */
+  readonly name: string;
+
+  /**
+   * namespace in which the secret exists. If empty, secret will looked up in local namespace.
+   *
+   * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef(obj: SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
     'name': obj.name,
     'namespace': obj.namespace,
   };
@@ -42166,7 +45967,6 @@ export interface SecretStoreSpecProviderVaultAuthIamJwtServiceAccountRef {
    * @schema SecretStoreSpecProviderVaultAuthIamJwtServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -42213,7 +46013,6 @@ export interface SecretStoreSpecProviderVaultAuthIamSecretRefAccessKeyIdSecretRe
    * @schema SecretStoreSpecProviderVaultAuthIamSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -42260,7 +46059,6 @@ export interface SecretStoreSpecProviderVaultAuthIamSecretRefSecretAccessKeySecr
    * @schema SecretStoreSpecProviderVaultAuthIamSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -42309,7 +46107,6 @@ export interface SecretStoreSpecProviderVaultAuthIamSecretRefSessionTokenSecretR
    * @schema SecretStoreSpecProviderVaultAuthIamSecretRefSessionTokenSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -42357,7 +46154,6 @@ export interface SecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountToke
    * @schema SecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountTokenServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -42448,7 +46244,6 @@ export interface SecretStoreV1Beta1Props {
    * @schema SecretStoreV1Beta1#spec
    */
   readonly spec?: SecretStoreV1Beta1Spec;
-
 }
 
 /**
@@ -42507,7 +46302,6 @@ export interface SecretStoreV1Beta1Spec {
    * @schema SecretStoreV1Beta1Spec#retrySettings
    */
   readonly retrySettings?: SecretStoreV1Beta1SpecRetrySettings;
-
 }
 
 /**
@@ -42555,7 +46349,6 @@ export interface SecretStoreV1Beta1SpecConditions {
    * @schema SecretStoreV1Beta1SpecConditions#namespaces
    */
   readonly namespaces?: string[];
-
 }
 
 /**
@@ -42824,7 +46617,6 @@ export interface SecretStoreV1Beta1SpecProvider {
    * @schema SecretStoreV1Beta1SpecProvider#yandexlockbox
    */
   readonly yandexlockbox?: SecretStoreV1Beta1SpecProviderYandexlockbox;
-
 }
 
 /**
@@ -42890,7 +46682,6 @@ export interface SecretStoreV1Beta1SpecRetrySettings {
    * @schema SecretStoreV1Beta1SpecRetrySettings#retryInterval
    */
   readonly retryInterval?: string;
-
 }
 
 /**
@@ -42929,7 +46720,6 @@ export interface SecretStoreV1Beta1SpecConditionsNamespaceSelector {
    * @schema SecretStoreV1Beta1SpecConditionsNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -42982,7 +46772,6 @@ export interface SecretStoreV1Beta1SpecProviderAkeyless {
    * @schema SecretStoreV1Beta1SpecProviderAkeyless#caProvider
    */
   readonly caProvider?: SecretStoreV1Beta1SpecProviderAkeylessCaProvider;
-
 }
 
 /**
@@ -43021,7 +46810,6 @@ export interface SecretStoreV1Beta1SpecProviderAlibaba {
    * @schema SecretStoreV1Beta1SpecProviderAlibaba#regionID
    */
   readonly regionId: string;
-
 }
 
 /**
@@ -43116,7 +46904,6 @@ export interface SecretStoreV1Beta1SpecProviderAws {
    * @schema SecretStoreV1Beta1SpecProviderAws#transitiveTagKeys
    */
   readonly transitiveTagKeys?: string[];
-
 }
 
 /**
@@ -43203,7 +46990,6 @@ export interface SecretStoreV1Beta1SpecProviderAzurekv {
    * @schema SecretStoreV1Beta1SpecProviderAzurekv#vaultUrl
    */
   readonly vaultUrl: string;
-
 }
 
 /**
@@ -43245,7 +47031,6 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrust {
    * @schema SecretStoreV1Beta1SpecProviderBeyondtrust#server
    */
   readonly server: SecretStoreV1Beta1SpecProviderBeyondtrustServer;
-
 }
 
 /**
@@ -43320,7 +47105,6 @@ export interface SecretStoreV1Beta1SpecProviderBitwardensecretsmanager {
    * @schema SecretStoreV1Beta1SpecProviderBitwardensecretsmanager#projectID
    */
   readonly projectId: string;
-
 }
 
 /**
@@ -43370,7 +47154,6 @@ export interface SecretStoreV1Beta1SpecProviderChef {
    * @schema SecretStoreV1Beta1SpecProviderChef#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -43408,7 +47191,6 @@ export interface SecretStoreV1Beta1SpecProviderCloudrusm {
    * @schema SecretStoreV1Beta1SpecProviderCloudrusm#projectID
    */
   readonly projectId?: string;
-
 }
 
 /**
@@ -43461,7 +47243,6 @@ export interface SecretStoreV1Beta1SpecProviderConjur {
    * @schema SecretStoreV1Beta1SpecProviderConjur#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -43524,7 +47305,6 @@ export interface SecretStoreV1Beta1SpecProviderDelinea {
    * @schema SecretStoreV1Beta1SpecProviderDelinea#urlTemplate
    */
   readonly urlTemplate?: string;
-
 }
 
 /**
@@ -43564,7 +47344,6 @@ export interface SecretStoreV1Beta1SpecProviderDevice42 {
    * @schema SecretStoreV1Beta1SpecProviderDevice42#host
    */
   readonly host: string;
-
 }
 
 /**
@@ -43622,7 +47401,6 @@ export interface SecretStoreV1Beta1SpecProviderDoppler {
    * @schema SecretStoreV1Beta1SpecProviderDoppler#project
    */
   readonly project?: string;
-
 }
 
 /**
@@ -43653,7 +47431,6 @@ export interface SecretStoreV1Beta1SpecProviderFake {
    * @schema SecretStoreV1Beta1SpecProviderFake#data
    */
   readonly data: SecretStoreV1Beta1SpecProviderFakeData[];
-
 }
 
 /**
@@ -43690,7 +47467,6 @@ export interface SecretStoreV1Beta1SpecProviderFortanix {
    * @schema SecretStoreV1Beta1SpecProviderFortanix#apiUrl
    */
   readonly apiUrl?: string;
-
 }
 
 /**
@@ -43734,7 +47510,6 @@ export interface SecretStoreV1Beta1SpecProviderGcpsm {
    * @schema SecretStoreV1Beta1SpecProviderGcpsm#projectID
    */
   readonly projectId?: string;
-
 }
 
 /**
@@ -43816,7 +47591,6 @@ export interface SecretStoreV1Beta1SpecProviderGithub {
    * @schema SecretStoreV1Beta1SpecProviderGithub#url
    */
   readonly url?: string;
-
 }
 
 /**
@@ -43903,7 +47677,6 @@ export interface SecretStoreV1Beta1SpecProviderGitlab {
    * @schema SecretStoreV1Beta1SpecProviderGitlab#url
    */
   readonly url?: string;
-
 }
 
 /**
@@ -43946,7 +47719,6 @@ export interface SecretStoreV1Beta1SpecProviderIbm {
    * @schema SecretStoreV1Beta1SpecProviderIbm#serviceUrl
    */
   readonly serviceUrl?: string;
-
 }
 
 /**
@@ -43990,7 +47762,6 @@ export interface SecretStoreV1Beta1SpecProviderInfisical {
    * @schema SecretStoreV1Beta1SpecProviderInfisical#secretsScope
    */
   readonly secretsScope: SecretStoreV1Beta1SpecProviderInfisicalSecretsScope;
-
 }
 
 /**
@@ -44027,7 +47798,6 @@ export interface SecretStoreV1Beta1SpecProviderKeepersecurity {
    * @schema SecretStoreV1Beta1SpecProviderKeepersecurity#folderID
    */
   readonly folderId: string;
-
 }
 
 /**
@@ -44078,7 +47848,6 @@ export interface SecretStoreV1Beta1SpecProviderKubernetes {
    * @schema SecretStoreV1Beta1SpecProviderKubernetes#server
    */
   readonly server?: SecretStoreV1Beta1SpecProviderKubernetesServer;
-
 }
 
 /**
@@ -44131,7 +47900,6 @@ export interface SecretStoreV1Beta1SpecProviderOnboardbase {
    * @schema SecretStoreV1Beta1SpecProviderOnboardbase#project
    */
   readonly project: string;
-
 }
 
 /**
@@ -44177,7 +47945,6 @@ export interface SecretStoreV1Beta1SpecProviderOnepassword {
    * @schema SecretStoreV1Beta1SpecProviderOnepassword#vaults
    */
   readonly vaults: { [key: string]: number };
-
 }
 
 /**
@@ -44256,7 +48023,6 @@ export interface SecretStoreV1Beta1SpecProviderOracle {
    * @schema SecretStoreV1Beta1SpecProviderOracle#vault
    */
   readonly vault: string;
-
 }
 
 /**
@@ -44296,7 +48062,6 @@ export interface SecretStoreV1Beta1SpecProviderPassbolt {
    * @schema SecretStoreV1Beta1SpecProviderPassbolt#host
    */
   readonly host: string;
-
 }
 
 /**
@@ -44340,7 +48105,6 @@ export interface SecretStoreV1Beta1SpecProviderPassworddepot {
    * @schema SecretStoreV1Beta1SpecProviderPassworddepot#host
    */
   readonly host: string;
-
 }
 
 /**
@@ -44376,7 +48140,6 @@ export interface SecretStoreV1Beta1SpecProviderPrevider {
    * @schema SecretStoreV1Beta1SpecProviderPrevider#baseUri
    */
   readonly baseUri?: string;
-
 }
 
 /**
@@ -44438,7 +48201,6 @@ export interface SecretStoreV1Beta1SpecProviderPulumi {
    * @schema SecretStoreV1Beta1SpecProviderPulumi#project
    */
   readonly project: string;
-
 }
 
 /**
@@ -44500,7 +48262,6 @@ export interface SecretStoreV1Beta1SpecProviderScaleway {
    * @schema SecretStoreV1Beta1SpecProviderScaleway#secretKey
    */
   readonly secretKey: SecretStoreV1Beta1SpecProviderScalewaySecretKey;
-
 }
 
 /**
@@ -44549,7 +48310,6 @@ export interface SecretStoreV1Beta1SpecProviderSecretserver {
    * @schema SecretStoreV1Beta1SpecProviderSecretserver#username
    */
   readonly username: SecretStoreV1Beta1SpecProviderSecretserverUsername;
-
 }
 
 /**
@@ -44601,7 +48361,6 @@ export interface SecretStoreV1Beta1SpecProviderSenhasegura {
    * @schema SecretStoreV1Beta1SpecProviderSenhasegura#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -44722,7 +48481,6 @@ export interface SecretStoreV1Beta1SpecProviderVault {
    * @schema SecretStoreV1Beta1SpecProviderVault#version
    */
   readonly version?: SecretStoreV1Beta1SpecProviderVaultVersion;
-
 }
 
 /**
@@ -44828,7 +48586,6 @@ export interface SecretStoreV1Beta1SpecProviderWebhook {
    * @schema SecretStoreV1Beta1SpecProviderWebhook#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -44880,7 +48637,6 @@ export interface SecretStoreV1Beta1SpecProviderYandexcertificatemanager {
    * @schema SecretStoreV1Beta1SpecProviderYandexcertificatemanager#caProvider
    */
   readonly caProvider?: SecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProvider;
-
 }
 
 /**
@@ -44925,7 +48681,6 @@ export interface SecretStoreV1Beta1SpecProviderYandexlockbox {
    * @schema SecretStoreV1Beta1SpecProviderYandexlockbox#caProvider
    */
   readonly caProvider?: SecretStoreV1Beta1SpecProviderYandexlockboxCaProvider;
-
 }
 
 /**
@@ -44975,7 +48730,6 @@ export interface SecretStoreV1Beta1SpecConditionsNamespaceSelectorMatchExpressio
    * @schema SecretStoreV1Beta1SpecConditionsNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -45015,7 +48769,6 @@ export interface SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRef#secretRef
    */
   readonly secretRef?: SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRef;
-
 }
 
 /**
@@ -45067,7 +48820,6 @@ export interface SecretStoreV1Beta1SpecProviderAkeylessCaProvider {
    * @schema SecretStoreV1Beta1SpecProviderAkeylessCaProvider#type
    */
   readonly type: SecretStoreV1Beta1SpecProviderAkeylessCaProviderType;
-
 }
 
 /**
@@ -45106,7 +48858,6 @@ export interface SecretStoreV1Beta1SpecProviderAlibabaAuth {
    * @schema SecretStoreV1Beta1SpecProviderAlibabaAuth#secretRef
    */
   readonly secretRef?: SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef;
-
 }
 
 /**
@@ -45146,7 +48897,6 @@ export interface SecretStoreV1Beta1SpecProviderAwsAuth {
    * @schema SecretStoreV1Beta1SpecProviderAwsAuth#secretRef
    */
   readonly secretRef?: SecretStoreV1Beta1SpecProviderAwsAuthSecretRef;
-
 }
 
 /**
@@ -45191,7 +48941,6 @@ export interface SecretStoreV1Beta1SpecProviderAwsSecretsManager {
    * @schema SecretStoreV1Beta1SpecProviderAwsSecretsManager#recoveryWindowInDays
    */
   readonly recoveryWindowInDays?: number;
-
 }
 
 /**
@@ -45234,7 +48983,6 @@ export interface SecretStoreV1Beta1SpecProviderAwsSessionTags {
    * @schema SecretStoreV1Beta1SpecProviderAwsSessionTags#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -45285,7 +49033,6 @@ export interface SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRef#tenantId
    */
   readonly tenantId?: SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefTenantId;
-
 }
 
 /**
@@ -45371,7 +49118,6 @@ export interface SecretStoreV1Beta1SpecProviderAzurekvServiceAccountRef {
    * @schema SecretStoreV1Beta1SpecProviderAzurekvServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -45430,7 +49176,6 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuth {
    * @schema SecretStoreV1Beta1SpecProviderBeyondtrustAuth#clientSecret
    */
   readonly clientSecret?: SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecret;
-
 }
 
 /**
@@ -45493,7 +49238,6 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustServer {
    * @schema SecretStoreV1Beta1SpecProviderBeyondtrustServer#verifyCA
    */
   readonly verifyCa: boolean;
-
 }
 
 /**
@@ -45528,7 +49272,6 @@ export interface SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuth {
    * @schema SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuth#secretRef
    */
   readonly secretRef: SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecretRef;
-
 }
 
 /**
@@ -45579,7 +49322,6 @@ export interface SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaProvider
    * @schema SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaProvider#type
    */
   readonly type: SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerCaProviderType;
-
 }
 
 /**
@@ -45611,7 +49353,6 @@ export interface SecretStoreV1Beta1SpecProviderChefAuth {
    * @schema SecretStoreV1Beta1SpecProviderChefAuth#secretRef
    */
   readonly secretRef: SecretStoreV1Beta1SpecProviderChefAuthSecretRef;
-
 }
 
 /**
@@ -45640,7 +49381,6 @@ export interface SecretStoreV1Beta1SpecProviderCloudrusmAuth {
    * @schema SecretStoreV1Beta1SpecProviderCloudrusmAuth#secretRef
    */
   readonly secretRef?: SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRef;
-
 }
 
 /**
@@ -45676,7 +49416,6 @@ export interface SecretStoreV1Beta1SpecProviderConjurAuth {
    * @schema SecretStoreV1Beta1SpecProviderConjurAuth#jwt
    */
   readonly jwt?: SecretStoreV1Beta1SpecProviderConjurAuthJwt;
-
 }
 
 /**
@@ -45730,7 +49469,6 @@ export interface SecretStoreV1Beta1SpecProviderConjurCaProvider {
    * @schema SecretStoreV1Beta1SpecProviderConjurCaProvider#type
    */
   readonly type: SecretStoreV1Beta1SpecProviderConjurCaProviderType;
-
 }
 
 /**
@@ -45769,7 +49507,6 @@ export interface SecretStoreV1Beta1SpecProviderDelineaClientId {
    * @schema SecretStoreV1Beta1SpecProviderDelineaClientId#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -45806,7 +49543,6 @@ export interface SecretStoreV1Beta1SpecProviderDelineaClientSecret {
    * @schema SecretStoreV1Beta1SpecProviderDelineaClientSecret#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -45834,7 +49570,6 @@ export interface SecretStoreV1Beta1SpecProviderDevice42Auth {
    * @schema SecretStoreV1Beta1SpecProviderDevice42Auth#secretRef
    */
   readonly secretRef: SecretStoreV1Beta1SpecProviderDevice42AuthSecretRef;
-
 }
 
 /**
@@ -45861,7 +49596,6 @@ export interface SecretStoreV1Beta1SpecProviderDopplerAuth {
    * @schema SecretStoreV1Beta1SpecProviderDopplerAuth#secretRef
    */
   readonly secretRef: SecretStoreV1Beta1SpecProviderDopplerAuthSecretRef;
-
 }
 
 /**
@@ -45934,7 +49668,6 @@ export interface SecretStoreV1Beta1SpecProviderFakeData {
    * @schema SecretStoreV1Beta1SpecProviderFakeData#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -45965,7 +49698,6 @@ export interface SecretStoreV1Beta1SpecProviderFortanixApiKey {
    * @schema SecretStoreV1Beta1SpecProviderFortanixApiKey#secretRef
    */
   readonly secretRef?: SecretStoreV1Beta1SpecProviderFortanixApiKeySecretRef;
-
 }
 
 /**
@@ -45997,7 +49729,6 @@ export interface SecretStoreV1Beta1SpecProviderGcpsmAuth {
    * @schema SecretStoreV1Beta1SpecProviderGcpsmAuth#workloadIdentity
    */
   readonly workloadIdentity?: SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity;
-
 }
 
 /**
@@ -46028,7 +49759,6 @@ export interface SecretStoreV1Beta1SpecProviderGithubAuth {
    * @schema SecretStoreV1Beta1SpecProviderGithubAuth#privateKey
    */
   readonly privateKey: SecretStoreV1Beta1SpecProviderGithubAuthPrivateKey;
-
 }
 
 /**
@@ -46055,7 +49785,6 @@ export interface SecretStoreV1Beta1SpecProviderGitlabAuth {
    * @schema SecretStoreV1Beta1SpecProviderGitlabAuth#SecretRef
    */
   readonly secretRef: SecretStoreV1Beta1SpecProviderGitlabAuthSecretRef;
-
 }
 
 /**
@@ -46106,7 +49835,6 @@ export interface SecretStoreV1Beta1SpecProviderGitlabCaProvider {
    * @schema SecretStoreV1Beta1SpecProviderGitlabCaProvider#type
    */
   readonly type: SecretStoreV1Beta1SpecProviderGitlabCaProviderType;
-
 }
 
 /**
@@ -46143,7 +49871,6 @@ export interface SecretStoreV1Beta1SpecProviderIbmAuth {
    * @schema SecretStoreV1Beta1SpecProviderIbmAuth#secretRef
    */
   readonly secretRef?: SecretStoreV1Beta1SpecProviderIbmAuthSecretRef;
-
 }
 
 /**
@@ -46171,7 +49898,6 @@ export interface SecretStoreV1Beta1SpecProviderInfisicalAuth {
    * @schema SecretStoreV1Beta1SpecProviderInfisicalAuth#universalAuthCredentials
    */
   readonly universalAuthCredentials?: SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials;
-
 }
 
 /**
@@ -46231,7 +49957,6 @@ export interface SecretStoreV1Beta1SpecProviderInfisicalSecretsScope {
    * @schema SecretStoreV1Beta1SpecProviderInfisicalSecretsScope#secretsPath
    */
   readonly secretsPath?: string;
-
 }
 
 /**
@@ -46281,7 +50006,6 @@ export interface SecretStoreV1Beta1SpecProviderKeepersecurityAuthRef {
    * @schema SecretStoreV1Beta1SpecProviderKeepersecurityAuthRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -46326,7 +50050,6 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesAuth {
    * @schema SecretStoreV1Beta1SpecProviderKubernetesAuth#token
    */
   readonly token?: SecretStoreV1Beta1SpecProviderKubernetesAuthToken;
-
 }
 
 /**
@@ -46373,7 +50096,6 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesAuthRef {
    * @schema SecretStoreV1Beta1SpecProviderKubernetesAuthRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -46418,7 +50140,6 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesServer {
    * @schema SecretStoreV1Beta1SpecProviderKubernetesServer#url
    */
   readonly url?: string;
-
 }
 
 /**
@@ -46457,7 +50178,6 @@ export interface SecretStoreV1Beta1SpecProviderOnboardbaseAuth {
    * @schema SecretStoreV1Beta1SpecProviderOnboardbaseAuth#passcodeRef
    */
   readonly passcodeRef: SecretStoreV1Beta1SpecProviderOnboardbaseAuthPasscodeRef;
-
 }
 
 /**
@@ -46487,7 +50207,6 @@ export interface SecretStoreV1Beta1SpecProviderOnepasswordAuth {
    * @schema SecretStoreV1Beta1SpecProviderOnepasswordAuth#secretRef
    */
   readonly secretRef: SecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRef;
-
 }
 
 /**
@@ -46531,7 +50250,6 @@ export interface SecretStoreV1Beta1SpecProviderOracleAuth {
    * @schema SecretStoreV1Beta1SpecProviderOracleAuth#user
    */
   readonly user: string;
-
 }
 
 /**
@@ -46596,7 +50314,6 @@ export interface SecretStoreV1Beta1SpecProviderOracleServiceAccountRef {
    * @schema SecretStoreV1Beta1SpecProviderOracleServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -46636,7 +50353,6 @@ export interface SecretStoreV1Beta1SpecProviderPassboltAuth {
    * @schema SecretStoreV1Beta1SpecProviderPassboltAuth#privateKeySecretRef
    */
   readonly privateKeySecretRef: SecretStoreV1Beta1SpecProviderPassboltAuthPrivateKeySecretRef;
-
 }
 
 /**
@@ -46664,7 +50380,6 @@ export interface SecretStoreV1Beta1SpecProviderPassworddepotAuth {
    * @schema SecretStoreV1Beta1SpecProviderPassworddepotAuth#secretRef
    */
   readonly secretRef: SecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef;
-
 }
 
 /**
@@ -46693,7 +50408,6 @@ export interface SecretStoreV1Beta1SpecProviderPreviderAuth {
    * @schema SecretStoreV1Beta1SpecProviderPreviderAuth#secretRef
    */
   readonly secretRef?: SecretStoreV1Beta1SpecProviderPreviderAuthSecretRef;
-
 }
 
 /**
@@ -46722,7 +50436,6 @@ export interface SecretStoreV1Beta1SpecProviderPulumiAccessToken {
    * @schema SecretStoreV1Beta1SpecProviderPulumiAccessToken#secretRef
    */
   readonly secretRef?: SecretStoreV1Beta1SpecProviderPulumiAccessTokenSecretRef;
-
 }
 
 /**
@@ -46758,7 +50471,6 @@ export interface SecretStoreV1Beta1SpecProviderScalewayAccessKey {
    * @schema SecretStoreV1Beta1SpecProviderScalewayAccessKey#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -46795,7 +50507,6 @@ export interface SecretStoreV1Beta1SpecProviderScalewaySecretKey {
    * @schema SecretStoreV1Beta1SpecProviderScalewaySecretKey#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -46832,7 +50543,6 @@ export interface SecretStoreV1Beta1SpecProviderSecretserverPassword {
    * @schema SecretStoreV1Beta1SpecProviderSecretserverPassword#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -46869,7 +50579,6 @@ export interface SecretStoreV1Beta1SpecProviderSecretserverUsername {
    * @schema SecretStoreV1Beta1SpecProviderSecretserverUsername#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -46905,7 +50614,6 @@ export interface SecretStoreV1Beta1SpecProviderSenhaseguraAuth {
    * @schema SecretStoreV1Beta1SpecProviderSenhaseguraAuth#clientSecretSecretRef
    */
   readonly clientSecretSecretRef: SecretStoreV1Beta1SpecProviderSenhaseguraAuthClientSecretSecretRef;
-
 }
 
 /**
@@ -47001,7 +50709,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuth {
    * @schema SecretStoreV1Beta1SpecProviderVaultAuth#userPass
    */
   readonly userPass?: SecretStoreV1Beta1SpecProviderVaultAuthUserPass;
-
 }
 
 /**
@@ -47060,7 +50767,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultCaProvider {
    * @schema SecretStoreV1Beta1SpecProviderVaultCaProvider#type
    */
   readonly type: SecretStoreV1Beta1SpecProviderVaultCaProviderType;
-
 }
 
 /**
@@ -47107,7 +50813,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultTls {
    * @schema SecretStoreV1Beta1SpecProviderVaultTls#keySecretRef
    */
   readonly keySecretRef?: SecretStoreV1Beta1SpecProviderVaultTlsKeySecretRef;
-
 }
 
 /**
@@ -47150,7 +50855,6 @@ export interface SecretStoreV1Beta1SpecProviderWebhookAuth {
    * @schema SecretStoreV1Beta1SpecProviderWebhookAuth#ntlm
    */
   readonly ntlm?: SecretStoreV1Beta1SpecProviderWebhookAuthNtlm;
-
 }
 
 /**
@@ -47200,7 +50904,6 @@ export interface SecretStoreV1Beta1SpecProviderWebhookCaProvider {
    * @schema SecretStoreV1Beta1SpecProviderWebhookCaProvider#type
    */
   readonly type: SecretStoreV1Beta1SpecProviderWebhookCaProviderType;
-
 }
 
 /**
@@ -47232,7 +50935,6 @@ export interface SecretStoreV1Beta1SpecProviderWebhookResult {
    * @schema SecretStoreV1Beta1SpecProviderWebhookResult#jsonPath
    */
   readonly jsonPath?: string;
-
 }
 
 /**
@@ -47266,7 +50968,6 @@ export interface SecretStoreV1Beta1SpecProviderWebhookSecrets {
    * @schema SecretStoreV1Beta1SpecProviderWebhookSecrets#secretRef
    */
   readonly secretRef: SecretStoreV1Beta1SpecProviderWebhookSecretsSecretRef;
-
 }
 
 /**
@@ -47296,7 +50997,6 @@ export interface SecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuth {
    * @schema SecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuth#authorizedKeySecretRef
    */
   readonly authorizedKeySecretRef?: SecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuthAuthorizedKeySecretRef;
-
 }
 
 /**
@@ -47326,7 +51026,6 @@ export interface SecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProvide
    * @schema SecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProvider#certSecretRef
    */
   readonly certSecretRef?: SecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProviderCertSecretRef;
-
 }
 
 /**
@@ -47355,7 +51054,6 @@ export interface SecretStoreV1Beta1SpecProviderYandexlockboxAuth {
    * @schema SecretStoreV1Beta1SpecProviderYandexlockboxAuth#authorizedKeySecretRef
    */
   readonly authorizedKeySecretRef?: SecretStoreV1Beta1SpecProviderYandexlockboxAuthAuthorizedKeySecretRef;
-
 }
 
 /**
@@ -47385,7 +51083,6 @@ export interface SecretStoreV1Beta1SpecProviderYandexlockboxCaProvider {
    * @schema SecretStoreV1Beta1SpecProviderYandexlockboxCaProvider#certSecretRef
    */
   readonly certSecretRef?: SecretStoreV1Beta1SpecProviderYandexlockboxCaProviderCertSecretRef;
-
 }
 
 /**
@@ -47442,7 +51139,6 @@ export interface SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAu
    * @schema SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuth#serviceAccountRef
    */
   readonly serviceAccountRef?: SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuthServiceAccountRef;
-
 }
 
 /**
@@ -47491,7 +51187,6 @@ export interface SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRef#accessTypeParam
    */
   readonly accessTypeParam?: SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam;
-
 }
 
 /**
@@ -47547,7 +51242,6 @@ export interface SecretStoreV1Beta1SpecProviderAlibabaAuthRrsa {
    * @schema SecretStoreV1Beta1SpecProviderAlibabaAuthRrsa#sessionName
    */
   readonly sessionName: string;
-
 }
 
 /**
@@ -47586,7 +51280,6 @@ export interface SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef#accessKeySecretSecretRef
    */
   readonly accessKeySecretSecretRef: SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef;
-
 }
 
 /**
@@ -47616,7 +51309,6 @@ export interface SecretStoreV1Beta1SpecProviderAwsAuthJwt {
    * @schema SecretStoreV1Beta1SpecProviderAwsAuthJwt#serviceAccountRef
    */
   readonly serviceAccountRef?: SecretStoreV1Beta1SpecProviderAwsAuthJwtServiceAccountRef;
-
 }
 
 /**
@@ -47662,7 +51354,6 @@ export interface SecretStoreV1Beta1SpecProviderAwsAuthSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderAwsAuthSecretRef#sessionTokenSecretRef
    */
   readonly sessionTokenSecretRef?: SecretStoreV1Beta1SpecProviderAwsAuthSecretRefSessionTokenSecretRef;
-
 }
 
 /**
@@ -47709,7 +51400,6 @@ export interface SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientCertifi
    * @schema SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientCertificate#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -47756,7 +51446,6 @@ export interface SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientId {
    * @schema SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientId#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -47803,7 +51492,6 @@ export interface SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientSecret 
    * @schema SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefClientSecret#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -47850,7 +51538,6 @@ export interface SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefTenantId {
    * @schema SecretStoreV1Beta1SpecProviderAzurekvAuthSecretRefTenantId#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -47888,7 +51575,6 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKey {
    * @schema SecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKey#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -47925,7 +51611,6 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificate {
    * @schema SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificate#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -47962,7 +51647,6 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateKey {
    * @schema SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateKey#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -47999,7 +51683,6 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientId {
    * @schema SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientId#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -48036,7 +51719,6 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecret {
    * @schema SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecret#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -48066,7 +51748,6 @@ export interface SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecret
    * @schema SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecretRef#credentials
    */
   readonly credentials: SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecretRefCredentials;
-
 }
 
 /**
@@ -48107,7 +51788,6 @@ export interface SecretStoreV1Beta1SpecProviderChefAuthSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderChefAuthSecretRef#privateKeySecretRef
    */
   readonly privateKeySecretRef: SecretStoreV1Beta1SpecProviderChefAuthSecretRefPrivateKeySecretRef;
-
 }
 
 /**
@@ -48143,7 +51823,6 @@ export interface SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRef#accessKeySecretSecretRef
    */
   readonly accessKeySecretSecretRef: SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeySecretSecretRef;
-
 }
 
 /**
@@ -48189,7 +51868,6 @@ export interface SecretStoreV1Beta1SpecProviderConjurAuthApikey {
    * @schema SecretStoreV1Beta1SpecProviderConjurAuthApikey#userRef
    */
   readonly userRef: SecretStoreV1Beta1SpecProviderConjurAuthApikeyUserRef;
-
 }
 
 /**
@@ -48251,7 +51929,6 @@ export interface SecretStoreV1Beta1SpecProviderConjurAuthJwt {
    * @schema SecretStoreV1Beta1SpecProviderConjurAuthJwt#serviceID
    */
   readonly serviceId: string;
-
 }
 
 /**
@@ -48312,7 +51989,6 @@ export interface SecretStoreV1Beta1SpecProviderDelineaClientIdSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderDelineaClientIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -48359,7 +52035,6 @@ export interface SecretStoreV1Beta1SpecProviderDelineaClientSecretSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderDelineaClientSecretSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -48388,7 +52063,6 @@ export interface SecretStoreV1Beta1SpecProviderDevice42AuthSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderDevice42AuthSecretRef#credentials
    */
   readonly credentials?: SecretStoreV1Beta1SpecProviderDevice42AuthSecretRefCredentials;
-
 }
 
 /**
@@ -48417,7 +52091,6 @@ export interface SecretStoreV1Beta1SpecProviderDopplerAuthSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderDopplerAuthSecretRef#dopplerToken
    */
   readonly dopplerToken: SecretStoreV1Beta1SpecProviderDopplerAuthSecretRefDopplerToken;
-
 }
 
 /**
@@ -48462,7 +52135,6 @@ export interface SecretStoreV1Beta1SpecProviderFortanixApiKeySecretRef {
    * @schema SecretStoreV1Beta1SpecProviderFortanixApiKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -48491,7 +52163,6 @@ export interface SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef#secretAccessKeySecretRef
    */
   readonly secretAccessKeySecretRef?: SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRefSecretAccessKeySecretRef;
-
 }
 
 /**
@@ -48542,7 +52213,6 @@ export interface SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity {
    * @schema SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity#serviceAccountRef
    */
   readonly serviceAccountRef: SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef;
-
 }
 
 /**
@@ -48591,7 +52261,6 @@ export interface SecretStoreV1Beta1SpecProviderGithubAuthPrivateKey {
    * @schema SecretStoreV1Beta1SpecProviderGithubAuthPrivateKey#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -48620,7 +52289,6 @@ export interface SecretStoreV1Beta1SpecProviderGitlabAuthSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderGitlabAuthSecretRef#accessToken
    */
   readonly accessToken?: SecretStoreV1Beta1SpecProviderGitlabAuthSecretRefAccessToken;
-
 }
 
 /**
@@ -48673,7 +52341,6 @@ export interface SecretStoreV1Beta1SpecProviderIbmAuthContainerAuth {
    * @schema SecretStoreV1Beta1SpecProviderIbmAuthContainerAuth#tokenLocation
    */
   readonly tokenLocation?: string;
-
 }
 
 /**
@@ -48702,7 +52369,6 @@ export interface SecretStoreV1Beta1SpecProviderIbmAuthSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderIbmAuthSecretRef#secretApiKeySecretRef
    */
   readonly secretApiKeySecretRef?: SecretStoreV1Beta1SpecProviderIbmAuthSecretRefSecretApiKeySecretRef;
-
 }
 
 /**
@@ -48738,7 +52404,6 @@ export interface SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredent
    * @schema SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials#clientSecret
    */
   readonly clientSecret: SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientSecret;
-
 }
 
 /**
@@ -48777,7 +52442,6 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesAuthCert {
    * @schema SecretStoreV1Beta1SpecProviderKubernetesAuthCert#clientKey
    */
   readonly clientKey?: SecretStoreV1Beta1SpecProviderKubernetesAuthCertClientKey;
-
 }
 
 /**
@@ -48824,7 +52488,6 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesAuthServiceAccount {
    * @schema SecretStoreV1Beta1SpecProviderKubernetesAuthServiceAccount#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -48856,7 +52519,6 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesAuthToken {
    * @schema SecretStoreV1Beta1SpecProviderKubernetesAuthToken#bearerToken
    */
   readonly bearerToken?: SecretStoreV1Beta1SpecProviderKubernetesAuthTokenBearerToken;
-
 }
 
 /**
@@ -48907,7 +52569,6 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesServerCaProvider {
    * @schema SecretStoreV1Beta1SpecProviderKubernetesServerCaProvider#type
    */
   readonly type: SecretStoreV1Beta1SpecProviderKubernetesServerCaProviderType;
-
 }
 
 /**
@@ -48956,7 +52617,6 @@ export interface SecretStoreV1Beta1SpecProviderOnboardbaseAuthApiKeyRef {
    * @schema SecretStoreV1Beta1SpecProviderOnboardbaseAuthApiKeyRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -49003,7 +52663,6 @@ export interface SecretStoreV1Beta1SpecProviderOnboardbaseAuthPasscodeRef {
    * @schema SecretStoreV1Beta1SpecProviderOnboardbaseAuthPasscodeRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -49034,7 +52693,6 @@ export interface SecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRef#connectTokenSecretRef
    */
   readonly connectTokenSecretRef: SecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRefConnectTokenSecretRef;
-
 }
 
 /**
@@ -49070,7 +52728,6 @@ export interface SecretStoreV1Beta1SpecProviderOracleAuthSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderOracleAuthSecretRef#privatekey
    */
   readonly privatekey: SecretStoreV1Beta1SpecProviderOracleAuthSecretRefPrivatekey;
-
 }
 
 /**
@@ -49117,7 +52774,6 @@ export interface SecretStoreV1Beta1SpecProviderPassboltAuthPasswordSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderPassboltAuthPasswordSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -49165,7 +52821,6 @@ export interface SecretStoreV1Beta1SpecProviderPassboltAuthPrivateKeySecretRef {
    * @schema SecretStoreV1Beta1SpecProviderPassboltAuthPrivateKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -49194,7 +52849,6 @@ export interface SecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef#credentials
    */
   readonly credentials?: SecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRefCredentials;
-
 }
 
 /**
@@ -49223,7 +52877,6 @@ export interface SecretStoreV1Beta1SpecProviderPreviderAuthSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderPreviderAuthSecretRef#accessToken
    */
   readonly accessToken: SecretStoreV1Beta1SpecProviderPreviderAuthSecretRefAccessToken;
-
 }
 
 /**
@@ -49268,7 +52921,6 @@ export interface SecretStoreV1Beta1SpecProviderPulumiAccessTokenSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderPulumiAccessTokenSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -49315,7 +52967,6 @@ export interface SecretStoreV1Beta1SpecProviderScalewayAccessKeySecretRef {
    * @schema SecretStoreV1Beta1SpecProviderScalewayAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -49362,7 +53013,6 @@ export interface SecretStoreV1Beta1SpecProviderScalewaySecretKeySecretRef {
    * @schema SecretStoreV1Beta1SpecProviderScalewaySecretKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -49409,7 +53059,6 @@ export interface SecretStoreV1Beta1SpecProviderSecretserverPasswordSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderSecretserverPasswordSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -49456,7 +53105,6 @@ export interface SecretStoreV1Beta1SpecProviderSecretserverUsernameSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderSecretserverUsernameSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -49504,7 +53152,6 @@ export interface SecretStoreV1Beta1SpecProviderSenhaseguraAuthClientSecretSecret
    * @schema SecretStoreV1Beta1SpecProviderSenhaseguraAuthClientSecretSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -49565,7 +53212,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthAppRole {
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthAppRole#secretRef
    */
   readonly secretRef: SecretStoreV1Beta1SpecProviderVaultAuthAppRoleSecretRef;
-
 }
 
 /**
@@ -49607,7 +53253,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthCert {
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthCert#secretRef
    */
   readonly secretRef?: SecretStoreV1Beta1SpecProviderVaultAuthCertSecretRef;
-
 }
 
 /**
@@ -49687,7 +53332,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthIam {
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthIam#vaultRole
    */
   readonly vaultRole: string;
-
 }
 
 /**
@@ -49749,7 +53393,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthJwt {
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthJwt#secretRef
    */
   readonly secretRef?: SecretStoreV1Beta1SpecProviderVaultAuthJwtSecretRef;
-
 }
 
 /**
@@ -49811,7 +53454,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthKubernetes {
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthKubernetes#serviceAccountRef
    */
   readonly serviceAccountRef?: SecretStoreV1Beta1SpecProviderVaultAuthKubernetesServiceAccountRef;
-
 }
 
 /**
@@ -49862,7 +53504,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthLdap {
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthLdap#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -49909,7 +53550,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthTokenSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthTokenSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -49958,7 +53598,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthUserPass {
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthUserPass#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -50019,7 +53658,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultTlsCertSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderVaultTlsCertSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -50068,7 +53706,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultTlsKeySecretRef {
    * @schema SecretStoreV1Beta1SpecProviderVaultTlsKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -50108,7 +53745,6 @@ export interface SecretStoreV1Beta1SpecProviderWebhookAuthNtlm {
    * @schema SecretStoreV1Beta1SpecProviderWebhookAuthNtlm#usernameSecret
    */
   readonly usernameSecret: SecretStoreV1Beta1SpecProviderWebhookAuthNtlmUsernameSecret;
-
 }
 
 /**
@@ -50166,7 +53802,6 @@ export interface SecretStoreV1Beta1SpecProviderWebhookSecretsSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderWebhookSecretsSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -50213,7 +53848,6 @@ export interface SecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuthAutho
    * @schema SecretStoreV1Beta1SpecProviderYandexcertificatemanagerAuthAuthorizedKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -50261,7 +53895,6 @@ export interface SecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProvide
    * @schema SecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProviderCertSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -50308,7 +53941,6 @@ export interface SecretStoreV1Beta1SpecProviderYandexlockboxAuthAuthorizedKeySec
    * @schema SecretStoreV1Beta1SpecProviderYandexlockboxAuthAuthorizedKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -50356,7 +53988,6 @@ export interface SecretStoreV1Beta1SpecProviderYandexlockboxCaProviderCertSecret
    * @schema SecretStoreV1Beta1SpecProviderYandexlockboxCaProviderCertSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -50406,7 +54037,6 @@ export interface SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAu
    * @schema SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuthSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -50457,7 +54087,6 @@ export interface SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAu
    * @schema SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefKubernetesAuthServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -50504,7 +54133,6 @@ export interface SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAcc
    * @schema SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessId#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -50552,7 +54180,6 @@ export interface SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAcc
    * @schema SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessType#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -50600,7 +54227,6 @@ export interface SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAcc
    * @schema SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -50647,7 +54273,6 @@ export interface SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeyIdSe
    * @schema SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -50694,7 +54319,6 @@ export interface SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeySecr
    * @schema SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -50742,7 +54366,6 @@ export interface SecretStoreV1Beta1SpecProviderAwsAuthJwtServiceAccountRef {
    * @schema SecretStoreV1Beta1SpecProviderAwsAuthJwtServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -50789,7 +54412,6 @@ export interface SecretStoreV1Beta1SpecProviderAwsAuthSecretRefAccessKeyIdSecret
    * @schema SecretStoreV1Beta1SpecProviderAwsAuthSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -50836,7 +54458,6 @@ export interface SecretStoreV1Beta1SpecProviderAwsAuthSecretRefSecretAccessKeySe
    * @schema SecretStoreV1Beta1SpecProviderAwsAuthSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -50885,7 +54506,6 @@ export interface SecretStoreV1Beta1SpecProviderAwsAuthSecretRefSessionTokenSecre
    * @schema SecretStoreV1Beta1SpecProviderAwsAuthSecretRefSessionTokenSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -50932,7 +54552,6 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKeySecretRef {
    * @schema SecretStoreV1Beta1SpecProviderBeyondtrustAuthApiKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -50979,7 +54598,6 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateSecretR
    * @schema SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51026,7 +54644,6 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateKeySecr
    * @schema SecretStoreV1Beta1SpecProviderBeyondtrustAuthCertificateKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51073,7 +54690,6 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientIdSecretRef 
    * @schema SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51120,7 +54736,6 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecretSecret
    * @schema SecretStoreV1Beta1SpecProviderBeyondtrustAuthClientSecretSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51167,7 +54782,6 @@ export interface SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecret
    * @schema SecretStoreV1Beta1SpecProviderBitwardensecretsmanagerAuthSecretRefCredentials#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51214,7 +54828,6 @@ export interface SecretStoreV1Beta1SpecProviderChefAuthSecretRefPrivateKeySecret
    * @schema SecretStoreV1Beta1SpecProviderChefAuthSecretRefPrivateKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51261,7 +54874,6 @@ export interface SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeyId
    * @schema SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51308,7 +54920,6 @@ export interface SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeySe
    * @schema SecretStoreV1Beta1SpecProviderCloudrusmAuthSecretRefAccessKeySecretSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51356,7 +54967,6 @@ export interface SecretStoreV1Beta1SpecProviderConjurAuthApikeyApiKeyRef {
    * @schema SecretStoreV1Beta1SpecProviderConjurAuthApikeyApiKeyRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51404,7 +55014,6 @@ export interface SecretStoreV1Beta1SpecProviderConjurAuthApikeyUserRef {
    * @schema SecretStoreV1Beta1SpecProviderConjurAuthApikeyUserRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51452,7 +55061,6 @@ export interface SecretStoreV1Beta1SpecProviderConjurAuthJwtSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderConjurAuthJwtSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51501,7 +55109,6 @@ export interface SecretStoreV1Beta1SpecProviderConjurAuthJwtServiceAccountRef {
    * @schema SecretStoreV1Beta1SpecProviderConjurAuthJwtServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51548,7 +55155,6 @@ export interface SecretStoreV1Beta1SpecProviderDevice42AuthSecretRefCredentials 
    * @schema SecretStoreV1Beta1SpecProviderDevice42AuthSecretRefCredentials#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51597,7 +55203,6 @@ export interface SecretStoreV1Beta1SpecProviderDopplerAuthSecretRefDopplerToken 
    * @schema SecretStoreV1Beta1SpecProviderDopplerAuthSecretRefDopplerToken#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51644,7 +55249,6 @@ export interface SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRefSecretAccessKey
    * @schema SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51692,7 +55296,6 @@ export interface SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentityServiceA
    * @schema SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51739,7 +55342,6 @@ export interface SecretStoreV1Beta1SpecProviderGitlabAuthSecretRefAccessToken {
    * @schema SecretStoreV1Beta1SpecProviderGitlabAuthSecretRefAccessToken#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51786,7 +55388,6 @@ export interface SecretStoreV1Beta1SpecProviderIbmAuthSecretRefSecretApiKeySecre
    * @schema SecretStoreV1Beta1SpecProviderIbmAuthSecretRefSecretApiKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51834,7 +55435,6 @@ export interface SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredent
    * @schema SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientId#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51882,7 +55482,6 @@ export interface SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredent
    * @schema SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientSecret#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51930,7 +55529,6 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesAuthCertClientCert {
    * @schema SecretStoreV1Beta1SpecProviderKubernetesAuthCertClientCert#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -51978,7 +55576,6 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesAuthCertClientKey {
    * @schema SecretStoreV1Beta1SpecProviderKubernetesAuthCertClientKey#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -52026,7 +55623,6 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesAuthTokenBearerToken {
    * @schema SecretStoreV1Beta1SpecProviderKubernetesAuthTokenBearerToken#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -52085,7 +55681,6 @@ export interface SecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRefConnectTo
    * @schema SecretStoreV1Beta1SpecProviderOnepasswordAuthSecretRefConnectTokenSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -52132,7 +55727,6 @@ export interface SecretStoreV1Beta1SpecProviderOracleAuthSecretRefFingerprint {
    * @schema SecretStoreV1Beta1SpecProviderOracleAuthSecretRefFingerprint#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -52179,7 +55773,6 @@ export interface SecretStoreV1Beta1SpecProviderOracleAuthSecretRefPrivatekey {
    * @schema SecretStoreV1Beta1SpecProviderOracleAuthSecretRefPrivatekey#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -52226,7 +55819,6 @@ export interface SecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRefCredent
    * @schema SecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRefCredentials#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -52273,7 +55865,6 @@ export interface SecretStoreV1Beta1SpecProviderPreviderAuthSecretRefAccessToken 
    * @schema SecretStoreV1Beta1SpecProviderPreviderAuthSecretRefAccessToken#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -52323,7 +55914,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthAppRoleRoleRef {
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthAppRoleRoleRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -52373,7 +55963,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthAppRoleSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthAppRoleSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -52421,7 +56010,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthCertClientCert {
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthCertClientCert#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -52469,7 +56057,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthCertSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthCertSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -52500,7 +56087,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthIamJwt {
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthIamJwt#serviceAccountRef
    */
   readonly serviceAccountRef?: SecretStoreV1Beta1SpecProviderVaultAuthIamJwtServiceAccountRef;
-
 }
 
 /**
@@ -52545,7 +56131,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRef#sessionTokenSecretRef
    */
   readonly sessionTokenSecretRef?: SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSessionTokenSecretRef;
-
 }
 
 /**
@@ -52600,7 +56185,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAcco
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAccountToken#serviceAccountRef
    */
   readonly serviceAccountRef: SecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAccountTokenServiceAccountRef;
-
 }
 
 /**
@@ -52648,7 +56232,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthJwtSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthJwtSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -52698,7 +56281,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthKubernetesSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthKubernetesSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -52749,7 +56331,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthKubernetesServiceAccount
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthKubernetesServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -52798,7 +56379,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthLdapSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthLdapSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -52847,7 +56427,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthUserPassSecretRef {
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthUserPassSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -52895,7 +56474,6 @@ export interface SecretStoreV1Beta1SpecProviderWebhookAuthNtlmPasswordSecret {
    * @schema SecretStoreV1Beta1SpecProviderWebhookAuthNtlmPasswordSecret#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -52943,7 +56521,6 @@ export interface SecretStoreV1Beta1SpecProviderWebhookAuthNtlmUsernameSecret {
    * @schema SecretStoreV1Beta1SpecProviderWebhookAuthNtlmUsernameSecret#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -52991,7 +56568,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthIamJwtServiceAccountRef 
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthIamJwtServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -53038,7 +56614,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefAccessKeyIdS
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -53085,7 +56660,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSecretAccess
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -53134,7 +56708,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSessionToken
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthIamSecretRefSessionTokenSecretRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -53182,7 +56755,6 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAcco
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAccountTokenServiceAccountRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**

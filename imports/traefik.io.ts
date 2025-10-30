@@ -74,7 +74,6 @@ export interface IngressRouteProps {
    * @schema IngressRoute#spec
    */
   readonly spec: IngressRouteSpec;
-
 }
 
 /**
@@ -122,7 +121,6 @@ export interface IngressRouteSpec {
    * @schema IngressRouteSpec#tls
    */
   readonly tls?: IngressRouteSpecTls;
-
 }
 
 /**
@@ -203,7 +201,6 @@ export interface IngressRouteSpecRoutes {
    * @schema IngressRouteSpecRoutes#syntax
    */
   readonly syntax?: string;
-
 }
 
 /**
@@ -273,7 +270,6 @@ export interface IngressRouteSpecTls {
    * @schema IngressRouteSpecTls#store
    */
   readonly store?: IngressRouteSpecTlsStore;
-
 }
 
 /**
@@ -325,7 +321,6 @@ export interface IngressRouteSpecRoutesMiddlewares {
    * @schema IngressRouteSpecRoutesMiddlewares#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -364,7 +359,6 @@ export interface IngressRouteSpecRoutesObservability {
    * @schema IngressRouteSpecRoutesObservability#tracing
    */
   readonly tracing?: boolean;
-
 }
 
 /**
@@ -501,7 +495,6 @@ export interface IngressRouteSpecRoutesServices {
    * @schema IngressRouteSpecRoutesServices#weight
    */
   readonly weight?: number;
-
 }
 
 /**
@@ -550,7 +543,6 @@ export interface IngressRouteSpecTlsDomains {
    * @schema IngressRouteSpecTlsDomains#sans
    */
   readonly sans?: string[];
-
 }
 
 /**
@@ -591,7 +583,6 @@ export interface IngressRouteSpecTlsOptions {
    * @schema IngressRouteSpecTlsOptions#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -631,7 +622,6 @@ export interface IngressRouteSpecTlsStore {
    * @schema IngressRouteSpecTlsStore#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -736,7 +726,6 @@ export interface IngressRouteSpecRoutesServicesHealthCheck {
    * @schema IngressRouteSpecRoutesServicesHealthCheck#timeout
    */
   readonly timeout?: IngressRouteSpecRoutesServicesHealthCheckTimeout;
-
 }
 
 /**
@@ -808,7 +797,6 @@ export interface IngressRouteSpecRoutesServicesResponseForwarding {
    * @schema IngressRouteSpecRoutesServicesResponseForwarding#flushInterval
    */
   readonly flushInterval?: string;
-
 }
 
 /**
@@ -838,7 +826,6 @@ export interface IngressRouteSpecRoutesServicesSticky {
    * @schema IngressRouteSpecRoutesServicesSticky#cookie
    */
   readonly cookie?: IngressRouteSpecRoutesServicesStickyCookie;
-
 }
 
 /**
@@ -941,7 +928,6 @@ export interface IngressRouteSpecRoutesServicesStickyCookie {
    * @schema IngressRouteSpecRoutesServicesStickyCookie#secure
    */
   readonly secure?: boolean;
-
 }
 
 /**
@@ -1035,7 +1021,6 @@ export interface IngressRouteTcpProps {
    * @schema IngressRouteTCP#spec
    */
   readonly spec: IngressRouteTcpSpec;
-
 }
 
 /**
@@ -1083,7 +1068,6 @@ export interface IngressRouteTcpSpec {
    * @schema IngressRouteTcpSpec#tls
    */
   readonly tls?: IngressRouteTcpSpecTls;
-
 }
 
 /**
@@ -1145,7 +1129,6 @@ export interface IngressRouteTcpSpecRoutes {
    * @schema IngressRouteTcpSpecRoutes#syntax
    */
   readonly syntax?: string;
-
 }
 
 /**
@@ -1220,7 +1203,6 @@ export interface IngressRouteTcpSpecTls {
    * @schema IngressRouteTcpSpecTls#store
    */
   readonly store?: IngressRouteTcpSpecTlsStore;
-
 }
 
 /**
@@ -1261,7 +1243,6 @@ export interface IngressRouteTcpSpecRoutesMiddlewares {
    * @schema IngressRouteTcpSpecRoutesMiddlewares#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -1369,7 +1350,6 @@ export interface IngressRouteTcpSpecRoutesServices {
    * @schema IngressRouteTcpSpecRoutesServices#weight
    */
   readonly weight?: number;
-
 }
 
 /**
@@ -1414,7 +1394,6 @@ export interface IngressRouteTcpSpecTlsDomains {
    * @schema IngressRouteTcpSpecTlsDomains#sans
    */
   readonly sans?: string[];
-
 }
 
 /**
@@ -1453,7 +1432,6 @@ export interface IngressRouteTcpSpecTlsOptions {
    * @schema IngressRouteTcpSpecTlsOptions#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -1491,7 +1469,6 @@ export interface IngressRouteTcpSpecTlsStore {
    * @schema IngressRouteTcpSpecTlsStore#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -1539,7 +1516,6 @@ export interface IngressRouteTcpSpecRoutesServicesProxyProtocol {
    * @schema IngressRouteTcpSpecRoutesServicesProxyProtocol#version
    */
   readonly version?: number;
-
 }
 
 /**
@@ -1628,7 +1604,6 @@ export interface IngressRouteUdpProps {
    * @schema IngressRouteUDP#spec
    */
   readonly spec: IngressRouteUdpSpec;
-
 }
 
 /**
@@ -1668,7 +1643,6 @@ export interface IngressRouteUdpSpec {
    * @schema IngressRouteUdpSpec#routes
    */
   readonly routes: IngressRouteUdpSpecRoutes[];
-
 }
 
 /**
@@ -1698,7 +1672,6 @@ export interface IngressRouteUdpSpecRoutes {
    * @schema IngressRouteUdpSpecRoutes#services
    */
   readonly services?: IngressRouteUdpSpecRoutesServices[];
-
 }
 
 /**
@@ -1769,7 +1742,6 @@ export interface IngressRouteUdpSpecRoutesServices {
    * @schema IngressRouteUdpSpecRoutesServices#weight
    */
   readonly weight?: number;
-
 }
 
 /**
@@ -1882,7 +1854,6 @@ export interface MiddlewareProps {
    * @schema Middleware#spec
    */
   readonly spec: MiddlewareSpec;
-
 }
 
 /**
@@ -2124,7 +2095,6 @@ export interface MiddlewareSpec {
    * @schema MiddlewareSpec#stripPrefixRegex
    */
   readonly stripPrefixRegex?: MiddlewareSpecStripPrefixRegex;
-
 }
 
 /**
@@ -2180,7 +2150,6 @@ export interface MiddlewareSpecAddPrefix {
    * @schema MiddlewareSpecAddPrefix#prefix
    */
   readonly prefix?: string;
-
 }
 
 /**
@@ -2235,7 +2204,6 @@ export interface MiddlewareSpecBasicAuth {
    * @schema MiddlewareSpecBasicAuth#secret
    */
   readonly secret?: string;
-
 }
 
 /**
@@ -2305,7 +2273,6 @@ export interface MiddlewareSpecBuffering {
    * @schema MiddlewareSpecBuffering#retryExpression
    */
   readonly retryExpression?: string;
-
 }
 
 /**
@@ -2340,7 +2307,6 @@ export interface MiddlewareSpecChain {
    * @schema MiddlewareSpecChain#middlewares
    */
   readonly middlewares?: MiddlewareSpecChainMiddlewares[];
-
 }
 
 /**
@@ -2397,7 +2363,6 @@ export interface MiddlewareSpecCircuitBreaker {
    * @schema MiddlewareSpecCircuitBreaker#responseCode
    */
   readonly responseCode?: number;
-
 }
 
 /**
@@ -2462,7 +2427,6 @@ export interface MiddlewareSpecCompress {
    * @schema MiddlewareSpecCompress#minResponseBodyBytes
    */
   readonly minResponseBodyBytes?: number;
-
 }
 
 /**
@@ -2498,7 +2462,6 @@ export interface MiddlewareSpecContentType {
    * @schema MiddlewareSpecContentType#autoDetect
    */
   readonly autoDetect?: boolean;
-
 }
 
 /**
@@ -2552,7 +2515,6 @@ export interface MiddlewareSpecDigestAuth {
    * @schema MiddlewareSpecDigestAuth#secret
    */
   readonly secret?: string;
-
 }
 
 /**
@@ -2606,7 +2568,6 @@ export interface MiddlewareSpecErrors {
    * @schema MiddlewareSpecErrors#status
    */
   readonly status?: string[];
-
 }
 
 /**
@@ -2704,7 +2665,6 @@ export interface MiddlewareSpecForwardAuth {
    * @schema MiddlewareSpecForwardAuth#trustForwardHeader
    */
   readonly trustForwardHeader?: boolean;
-
 }
 
 /**
@@ -2744,7 +2704,6 @@ export interface MiddlewareSpecGrpcWeb {
    * @schema MiddlewareSpecGrpcWeb#allowOrigins
    */
   readonly allowOrigins?: string[];
-
 }
 
 /**
@@ -3008,7 +2967,6 @@ export interface MiddlewareSpecHeaders {
    * @schema MiddlewareSpecHeaders#stsSeconds
    */
   readonly stsSeconds?: number;
-
 }
 
 /**
@@ -3082,7 +3040,6 @@ export interface MiddlewareSpecInFlightReq {
    * @schema MiddlewareSpecInFlightReq#sourceCriterion
    */
   readonly sourceCriterion?: MiddlewareSpecInFlightReqSourceCriterion;
-
 }
 
 /**
@@ -3130,7 +3087,6 @@ export interface MiddlewareSpecIpAllowList {
    * @schema MiddlewareSpecIpAllowList#sourceRange
    */
   readonly sourceRange?: string[];
-
 }
 
 /**
@@ -3169,7 +3125,6 @@ export interface MiddlewareSpecIpWhiteList {
    * @schema MiddlewareSpecIpWhiteList#sourceRange
    */
   readonly sourceRange?: string[];
-
 }
 
 /**
@@ -3208,7 +3163,6 @@ export interface MiddlewareSpecPassTlsClientCert {
    * @schema MiddlewareSpecPassTlsClientCert#pem
    */
   readonly pem?: boolean;
-
 }
 
 /**
@@ -3268,7 +3222,6 @@ export interface MiddlewareSpecRateLimit {
    * @schema MiddlewareSpecRateLimit#sourceCriterion
    */
   readonly sourceCriterion?: MiddlewareSpecRateLimitSourceCriterion;
-
 }
 
 /**
@@ -3316,7 +3269,6 @@ export interface MiddlewareSpecRedirectRegex {
    * @schema MiddlewareSpecRedirectRegex#replacement
    */
   readonly replacement?: string;
-
 }
 
 /**
@@ -3363,7 +3315,6 @@ export interface MiddlewareSpecRedirectScheme {
    * @schema MiddlewareSpecRedirectScheme#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
@@ -3396,7 +3347,6 @@ export interface MiddlewareSpecReplacePath {
    * @schema MiddlewareSpecReplacePath#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -3434,7 +3384,6 @@ export interface MiddlewareSpecReplacePathRegex {
    * @schema MiddlewareSpecReplacePathRegex#replacement
    */
   readonly replacement?: string;
-
 }
 
 /**
@@ -3478,7 +3427,6 @@ export interface MiddlewareSpecRetry {
    * @schema MiddlewareSpecRetry#initialInterval
    */
   readonly initialInterval?: MiddlewareSpecRetryInitialInterval;
-
 }
 
 /**
@@ -3519,7 +3467,6 @@ export interface MiddlewareSpecStripPrefix {
    * @schema MiddlewareSpecStripPrefix#prefixes
    */
   readonly prefixes?: string[];
-
 }
 
 /**
@@ -3551,7 +3498,6 @@ export interface MiddlewareSpecStripPrefixRegex {
    * @schema MiddlewareSpecStripPrefixRegex#regex
    */
   readonly regex?: string[];
-
 }
 
 /**
@@ -3587,7 +3533,6 @@ export interface MiddlewareSpecChainMiddlewares {
    * @schema MiddlewareSpecChainMiddlewares#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -3772,7 +3717,6 @@ export interface MiddlewareSpecErrorsService {
    * @schema MiddlewareSpecErrorsService#weight
    */
   readonly weight?: number;
-
 }
 
 /**
@@ -3837,7 +3781,6 @@ export interface MiddlewareSpecForwardAuthTls {
    * @schema MiddlewareSpecForwardAuthTls#insecureSkipVerify
    */
   readonly insecureSkipVerify?: boolean;
-
 }
 
 /**
@@ -3887,7 +3830,6 @@ export interface MiddlewareSpecInFlightReqSourceCriterion {
    * @schema MiddlewareSpecInFlightReqSourceCriterion#requestHost
    */
   readonly requestHost?: boolean;
-
 }
 
 /**
@@ -3933,7 +3875,6 @@ export interface MiddlewareSpecIpAllowListIpStrategy {
    * @schema MiddlewareSpecIpAllowListIpStrategy#ipv6Subnet
    */
   readonly ipv6Subnet?: number;
-
 }
 
 /**
@@ -3979,7 +3920,6 @@ export interface MiddlewareSpecIpWhiteListIpStrategy {
    * @schema MiddlewareSpecIpWhiteListIpStrategy#ipv6Subnet
    */
   readonly ipv6Subnet?: number;
-
 }
 
 /**
@@ -4045,7 +3985,6 @@ export interface MiddlewareSpecPassTlsClientCertInfo {
    * @schema MiddlewareSpecPassTlsClientCertInfo#subject
    */
   readonly subject?: MiddlewareSpecPassTlsClientCertInfoSubject;
-
 }
 
 /**
@@ -4113,7 +4052,6 @@ export interface MiddlewareSpecRateLimitSourceCriterion {
    * @schema MiddlewareSpecRateLimitSourceCriterion#requestHost
    */
   readonly requestHost?: boolean;
-
 }
 
 /**
@@ -4239,7 +4177,6 @@ export interface MiddlewareSpecErrorsServiceHealthCheck {
    * @schema MiddlewareSpecErrorsServiceHealthCheck#timeout
    */
   readonly timeout?: MiddlewareSpecErrorsServiceHealthCheckTimeout;
-
 }
 
 /**
@@ -4311,7 +4248,6 @@ export interface MiddlewareSpecErrorsServiceResponseForwarding {
    * @schema MiddlewareSpecErrorsServiceResponseForwarding#flushInterval
    */
   readonly flushInterval?: string;
-
 }
 
 /**
@@ -4341,7 +4277,6 @@ export interface MiddlewareSpecErrorsServiceSticky {
    * @schema MiddlewareSpecErrorsServiceSticky#cookie
    */
   readonly cookie?: MiddlewareSpecErrorsServiceStickyCookie;
-
 }
 
 /**
@@ -4385,7 +4320,6 @@ export interface MiddlewareSpecInFlightReqSourceCriterionIpStrategy {
    * @schema MiddlewareSpecInFlightReqSourceCriterionIpStrategy#ipv6Subnet
    */
   readonly ipv6Subnet?: number;
-
 }
 
 /**
@@ -4458,7 +4392,6 @@ export interface MiddlewareSpecPassTlsClientCertInfoIssuer {
    * @schema MiddlewareSpecPassTlsClientCertInfoIssuer#serialNumber
    */
   readonly serialNumber?: boolean;
-
 }
 
 /**
@@ -4542,7 +4475,6 @@ export interface MiddlewareSpecPassTlsClientCertInfoSubject {
    * @schema MiddlewareSpecPassTlsClientCertInfoSubject#serialNumber
    */
   readonly serialNumber?: boolean;
-
 }
 
 /**
@@ -4593,7 +4525,6 @@ export interface MiddlewareSpecRateLimitSourceCriterionIpStrategy {
    * @schema MiddlewareSpecRateLimitSourceCriterionIpStrategy#ipv6Subnet
    */
   readonly ipv6Subnet?: number;
-
 }
 
 /**
@@ -4698,7 +4629,6 @@ export interface MiddlewareSpecErrorsServiceStickyCookie {
    * @schema MiddlewareSpecErrorsServiceStickyCookie#secure
    */
   readonly secure?: boolean;
-
 }
 
 /**
@@ -4794,7 +4724,6 @@ export interface MiddlewareTcpProps {
    * @schema MiddlewareTCP#spec
    */
   readonly spec: MiddlewareTcpSpec;
-
 }
 
 /**
@@ -4843,7 +4772,6 @@ export interface MiddlewareTcpSpec {
    * @schema MiddlewareTcpSpec#ipWhiteList
    */
   readonly ipWhiteList?: MiddlewareTcpSpecIpWhiteList;
-
 }
 
 /**
@@ -4875,7 +4803,6 @@ export interface MiddlewareTcpSpecInFlightConn {
    * @schema MiddlewareTcpSpecInFlightConn#amount
    */
   readonly amount?: number;
-
 }
 
 /**
@@ -4906,7 +4833,6 @@ export interface MiddlewareTcpSpecIpAllowList {
    * @schema MiddlewareTcpSpecIpAllowList#sourceRange
    */
   readonly sourceRange?: string[];
-
 }
 
 /**
@@ -4938,7 +4864,6 @@ export interface MiddlewareTcpSpecIpWhiteList {
    * @schema MiddlewareTcpSpecIpWhiteList#sourceRange
    */
   readonly sourceRange?: string[];
-
 }
 
 /**
@@ -5033,7 +4958,6 @@ export interface ServersTransportProps {
    * @schema ServersTransport#spec
    */
   readonly spec: ServersTransportSpec;
-
 }
 
 /**
@@ -5119,7 +5043,6 @@ export interface ServersTransportSpec {
    * @schema ServersTransportSpec#spiffe
    */
   readonly spiffe?: ServersTransportSpecSpiffe;
-
 }
 
 /**
@@ -5184,7 +5107,6 @@ export interface ServersTransportSpecForwardingTimeouts {
    * @schema ServersTransportSpecForwardingTimeouts#responseHeaderTimeout
    */
   readonly responseHeaderTimeout?: ServersTransportSpecForwardingTimeoutsResponseHeaderTimeout;
-
 }
 
 /**
@@ -5224,7 +5146,6 @@ export interface ServersTransportSpecSpiffe {
    * @schema ServersTransportSpecSpiffe#trustDomain
    */
   readonly trustDomain?: string;
-
 }
 
 /**
@@ -5400,7 +5321,6 @@ export interface ServersTransportTcpProps {
    * @schema ServersTransportTCP#spec
    */
   readonly spec: ServersTransportTcpSpec;
-
 }
 
 /**
@@ -5451,7 +5371,6 @@ export interface ServersTransportTcpSpec {
    * @schema ServersTransportTcpSpec#tls
    */
   readonly tls?: ServersTransportTcpSpecTls;
-
 }
 
 /**
@@ -5567,7 +5486,6 @@ export interface ServersTransportTcpSpecTls {
    * @schema ServersTransportTcpSpecTls#spiffe
    */
   readonly spiffe?: ServersTransportTcpSpecTlsSpiffe;
-
 }
 
 /**
@@ -5608,7 +5526,6 @@ export interface ServersTransportTcpSpecTlsSpiffe {
    * @schema ServersTransportTcpSpecTlsSpiffe#trustDomain
    */
   readonly trustDomain?: string;
-
 }
 
 /**
@@ -5700,7 +5617,6 @@ export interface TlsOptionProps {
    * @schema TLSOption#spec
    */
   readonly spec: TlsOptionSpec;
-
 }
 
 /**
@@ -5788,7 +5704,6 @@ export interface TlsOptionSpec {
    * @schema TlsOptionSpec#sniStrict
    */
   readonly sniStrict?: boolean;
-
 }
 
 /**
@@ -5831,7 +5746,6 @@ export interface TlsOptionSpecClientAuth {
    * @schema TlsOptionSpecClientAuth#secretNames
    */
   readonly secretNames?: string[];
-
 }
 
 /**
@@ -5945,7 +5859,6 @@ export interface TlsStoreProps {
    * @schema TLSStore#spec
    */
   readonly spec: TlsStoreSpec;
-
 }
 
 /**
@@ -5989,7 +5902,6 @@ export interface TlsStoreSpec {
    * @schema TlsStoreSpec#defaultGeneratedCert
    */
   readonly defaultGeneratedCert?: TlsStoreSpecDefaultGeneratedCert;
-
 }
 
 /**
@@ -6020,7 +5932,6 @@ export interface TlsStoreSpecCertificates {
    * @schema TlsStoreSpecCertificates#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -6049,7 +5960,6 @@ export interface TlsStoreSpecDefaultCertificate {
    * @schema TlsStoreSpecDefaultCertificate#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -6085,7 +5995,6 @@ export interface TlsStoreSpecDefaultGeneratedCert {
    * @schema TlsStoreSpecDefaultGeneratedCert#resolver
    */
   readonly resolver?: string;
-
 }
 
 /**
@@ -6122,7 +6031,6 @@ export interface TlsStoreSpecDefaultGeneratedCertDomain {
    * @schema TlsStoreSpecDefaultGeneratedCertDomain#sans
    */
   readonly sans?: string[];
-
 }
 
 /**
@@ -6220,7 +6128,6 @@ export interface TraefikServiceProps {
    * @schema TraefikService#spec
    */
   readonly spec: TraefikServiceSpec;
-
 }
 
 /**
@@ -6257,7 +6164,6 @@ export interface TraefikServiceSpec {
    * @schema TraefikServiceSpec#weighted
    */
   readonly weighted?: TraefikServiceSpecWeighted;
-
 }
 
 /**
@@ -6417,7 +6323,6 @@ export interface TraefikServiceSpecMirroring {
    * @schema TraefikServiceSpecMirroring#weight
    */
   readonly weight?: number;
-
 }
 
 /**
@@ -6470,7 +6375,6 @@ export interface TraefikServiceSpecWeighted {
    * @schema TraefikServiceSpecWeighted#sticky
    */
   readonly sticky?: TraefikServiceSpecWeightedSticky;
-
 }
 
 /**
@@ -6575,7 +6479,6 @@ export interface TraefikServiceSpecMirroringHealthCheck {
    * @schema TraefikServiceSpecMirroringHealthCheck#timeout
    */
   readonly timeout?: TraefikServiceSpecMirroringHealthCheckTimeout;
-
 }
 
 /**
@@ -6740,7 +6643,6 @@ export interface TraefikServiceSpecMirroringMirrors {
    * @schema TraefikServiceSpecMirroringMirrors#weight
    */
   readonly weight?: number;
-
 }
 
 /**
@@ -6804,7 +6706,6 @@ export interface TraefikServiceSpecMirroringResponseForwarding {
    * @schema TraefikServiceSpecMirroringResponseForwarding#flushInterval
    */
   readonly flushInterval?: string;
-
 }
 
 /**
@@ -6834,7 +6735,6 @@ export interface TraefikServiceSpecMirroringSticky {
    * @schema TraefikServiceSpecMirroringSticky#cookie
    */
   readonly cookie?: TraefikServiceSpecMirroringStickyCookie;
-
 }
 
 /**
@@ -6969,7 +6869,6 @@ export interface TraefikServiceSpecWeightedServices {
    * @schema TraefikServiceSpecWeightedServices#weight
    */
   readonly weight?: number;
-
 }
 
 /**
@@ -7012,7 +6911,6 @@ export interface TraefikServiceSpecWeightedSticky {
    * @schema TraefikServiceSpecWeightedSticky#cookie
    */
   readonly cookie?: TraefikServiceSpecWeightedStickyCookie;
-
 }
 
 /**
@@ -7150,7 +7048,6 @@ export interface TraefikServiceSpecMirroringMirrorsHealthCheck {
    * @schema TraefikServiceSpecMirroringMirrorsHealthCheck#timeout
    */
   readonly timeout?: TraefikServiceSpecMirroringMirrorsHealthCheckTimeout;
-
 }
 
 /**
@@ -7222,7 +7119,6 @@ export interface TraefikServiceSpecMirroringMirrorsResponseForwarding {
    * @schema TraefikServiceSpecMirroringMirrorsResponseForwarding#flushInterval
    */
   readonly flushInterval?: string;
-
 }
 
 /**
@@ -7252,7 +7148,6 @@ export interface TraefikServiceSpecMirroringMirrorsSticky {
    * @schema TraefikServiceSpecMirroringMirrorsSticky#cookie
    */
   readonly cookie?: TraefikServiceSpecMirroringMirrorsStickyCookie;
-
 }
 
 /**
@@ -7321,7 +7216,6 @@ export interface TraefikServiceSpecMirroringStickyCookie {
    * @schema TraefikServiceSpecMirroringStickyCookie#secure
    */
   readonly secure?: boolean;
-
 }
 
 /**
@@ -7430,7 +7324,6 @@ export interface TraefikServiceSpecWeightedServicesHealthCheck {
    * @schema TraefikServiceSpecWeightedServicesHealthCheck#timeout
    */
   readonly timeout?: TraefikServiceSpecWeightedServicesHealthCheckTimeout;
-
 }
 
 /**
@@ -7502,7 +7395,6 @@ export interface TraefikServiceSpecWeightedServicesResponseForwarding {
    * @schema TraefikServiceSpecWeightedServicesResponseForwarding#flushInterval
    */
   readonly flushInterval?: string;
-
 }
 
 /**
@@ -7532,7 +7424,6 @@ export interface TraefikServiceSpecWeightedServicesSticky {
    * @schema TraefikServiceSpecWeightedServicesSticky#cookie
    */
   readonly cookie?: TraefikServiceSpecWeightedServicesStickyCookie;
-
 }
 
 /**
@@ -7601,7 +7492,6 @@ export interface TraefikServiceSpecWeightedStickyCookie {
    * @schema TraefikServiceSpecWeightedStickyCookie#secure
    */
   readonly secure?: boolean;
-
 }
 
 /**
@@ -7709,7 +7599,6 @@ export interface TraefikServiceSpecMirroringMirrorsStickyCookie {
    * @schema TraefikServiceSpecMirroringMirrorsStickyCookie#secure
    */
   readonly secure?: boolean;
-
 }
 
 /**
@@ -7817,7 +7706,6 @@ export interface TraefikServiceSpecWeightedServicesStickyCookie {
    * @schema TraefikServiceSpecWeightedServicesStickyCookie#secure
    */
   readonly secure?: boolean;
-
 }
 
 /**

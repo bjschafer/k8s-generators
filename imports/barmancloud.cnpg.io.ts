@@ -75,7 +75,6 @@ export interface ObjectStoreProps {
    * @schema ObjectStore#spec
    */
   readonly spec: ObjectStoreSpec;
-
 }
 
 /**
@@ -123,7 +122,6 @@ export interface ObjectStoreSpec {
    * @schema ObjectStoreSpec#retentionPolicy
    */
   readonly retentionPolicy?: string;
-
 }
 
 /**
@@ -237,7 +235,6 @@ export interface ObjectStoreSpecConfiguration {
    * @schema ObjectStoreSpecConfiguration#wal
    */
   readonly wal?: ObjectStoreSpecConfigurationWal;
-
 }
 
 /**
@@ -271,11 +268,27 @@ export function toJson_ObjectStoreSpecConfiguration(obj: ObjectStoreSpecConfigur
  */
 export interface ObjectStoreSpecInstanceSidecarConfiguration {
   /**
+   * AdditionalContainerArgs is an optional list of command-line arguments
+   * to be passed to the sidecar container when it starts.
+   * The provided arguments are appended to the container’s default arguments.
+   *
+   * @schema ObjectStoreSpecInstanceSidecarConfiguration#additionalContainerArgs
+   */
+  readonly additionalContainerArgs?: string[];
+
+  /**
    * The environment to be explicitly passed to the sidecar
    *
    * @schema ObjectStoreSpecInstanceSidecarConfiguration#env
    */
   readonly env?: ObjectStoreSpecInstanceSidecarConfigurationEnv[];
+
+  /**
+   * The log level for PostgreSQL instances. Valid values are: `error`, `warning`, `info` (default), `debug`, `trace`
+   *
+   * @schema ObjectStoreSpecInstanceSidecarConfiguration#logLevel
+   */
+  readonly logLevel?: ObjectStoreSpecInstanceSidecarConfigurationLogLevel;
 
   /**
    * Resources define cpu/memory requests and limits for the sidecar that runs in the instance pods.
@@ -291,7 +304,6 @@ export interface ObjectStoreSpecInstanceSidecarConfiguration {
    * @schema ObjectStoreSpecInstanceSidecarConfiguration#retentionPolicyIntervalSeconds
    */
   readonly retentionPolicyIntervalSeconds?: number;
-
 }
 
 /**
@@ -301,7 +313,9 @@ export interface ObjectStoreSpecInstanceSidecarConfiguration {
 export function toJson_ObjectStoreSpecInstanceSidecarConfiguration(obj: ObjectStoreSpecInstanceSidecarConfiguration | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'additionalContainerArgs': obj.additionalContainerArgs?.map(y => y),
     'env': obj.env?.map(y => toJson_ObjectStoreSpecInstanceSidecarConfigurationEnv(y)),
+    'logLevel': obj.logLevel,
     'resources': toJson_ObjectStoreSpecInstanceSidecarConfigurationResources(obj.resources),
     'retentionPolicyIntervalSeconds': obj.retentionPolicyIntervalSeconds,
   };
@@ -352,7 +366,6 @@ export interface ObjectStoreSpecConfigurationAzureCredentials {
    * @schema ObjectStoreSpecConfigurationAzureCredentials#storageSasToken
    */
   readonly storageSasToken?: ObjectStoreSpecConfigurationAzureCredentialsStorageSasToken;
-
 }
 
 /**
@@ -439,7 +452,6 @@ export interface ObjectStoreSpecConfigurationData {
    * @schema ObjectStoreSpecConfigurationData#jobs
    */
   readonly jobs?: number;
-
 }
 
 /**
@@ -481,7 +493,6 @@ export interface ObjectStoreSpecConfigurationEndpointCa {
    * @schema ObjectStoreSpecConfigurationEndpointCa#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -519,7 +530,6 @@ export interface ObjectStoreSpecConfigurationGoogleCredentials {
    * @schema ObjectStoreSpecConfigurationGoogleCredentials#gkeEnvironment
    */
   readonly gkeEnvironment?: boolean;
-
 }
 
 /**
@@ -577,7 +587,6 @@ export interface ObjectStoreSpecConfigurationS3Credentials {
    * @schema ObjectStoreSpecConfigurationS3Credentials#sessionToken
    */
   readonly sessionToken?: ObjectStoreSpecConfigurationS3CredentialsSessionToken;
-
 }
 
 /**
@@ -674,7 +683,6 @@ export interface ObjectStoreSpecConfigurationWal {
    * @schema ObjectStoreSpecConfigurationWal#restoreAdditionalCommandArgs
    */
   readonly restoreAdditionalCommandArgs?: string[];
-
 }
 
 /**
@@ -702,7 +710,8 @@ export function toJson_ObjectStoreSpecConfigurationWal(obj: ObjectStoreSpecConfi
  */
 export interface ObjectStoreSpecInstanceSidecarConfigurationEnv {
   /**
-   * Name of the environment variable. Must be a C_IDENTIFIER.
+   * Name of the environment variable.
+   * May consist of any printable ASCII characters except '='.
    *
    * @schema ObjectStoreSpecInstanceSidecarConfigurationEnv#name
    */
@@ -730,7 +739,6 @@ export interface ObjectStoreSpecInstanceSidecarConfigurationEnv {
    * @schema ObjectStoreSpecInstanceSidecarConfigurationEnv#valueFrom
    */
   readonly valueFrom?: ObjectStoreSpecInstanceSidecarConfigurationEnvValueFrom;
-
 }
 
 /**
@@ -750,6 +758,24 @@ export function toJson_ObjectStoreSpecInstanceSidecarConfigurationEnv(obj: Objec
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The log level for PostgreSQL instances. Valid values are: `error`, `warning`, `info` (default), `debug`, `trace`
+ *
+ * @schema ObjectStoreSpecInstanceSidecarConfigurationLogLevel
+ */
+export enum ObjectStoreSpecInstanceSidecarConfigurationLogLevel {
+  /** error */
+  ERROR = "error",
+  /** warning */
+  WARNING = "warning",
+  /** info */
+  INFO = "info",
+  /** debug */
+  DEBUG = "debug",
+  /** trace */
+  TRACE = "trace",
+}
+
+/**
  * Resources define cpu/memory requests and limits for the sidecar that runs in the instance pods.
  *
  * @schema ObjectStoreSpecInstanceSidecarConfigurationResources
@@ -759,7 +785,7 @@ export interface ObjectStoreSpecInstanceSidecarConfigurationResources {
    * Claims lists the names of resources, defined in spec.resourceClaims,
    * that are used by this container.
    *
-   * This is an alpha field and requires enabling the
+   * This field depends on the
    * DynamicResourceAllocation feature gate.
    *
    * This field is immutable. It can only be set for containers.
@@ -785,7 +811,6 @@ export interface ObjectStoreSpecInstanceSidecarConfigurationResources {
    * @schema ObjectStoreSpecInstanceSidecarConfigurationResources#requests
    */
   readonly requests?: { [key: string]: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests };
-
 }
 
 /**
@@ -823,7 +848,6 @@ export interface ObjectStoreSpecConfigurationAzureCredentialsConnectionString {
    * @schema ObjectStoreSpecConfigurationAzureCredentialsConnectionString#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -860,7 +884,6 @@ export interface ObjectStoreSpecConfigurationAzureCredentialsStorageAccount {
    * @schema ObjectStoreSpecConfigurationAzureCredentialsStorageAccount#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -898,7 +921,6 @@ export interface ObjectStoreSpecConfigurationAzureCredentialsStorageKey {
    * @schema ObjectStoreSpecConfigurationAzureCredentialsStorageKey#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -936,7 +958,6 @@ export interface ObjectStoreSpecConfigurationAzureCredentialsStorageSasToken {
    * @schema ObjectStoreSpecConfigurationAzureCredentialsStorageSasToken#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1004,7 +1025,6 @@ export interface ObjectStoreSpecConfigurationGoogleCredentialsApplicationCredent
    * @schema ObjectStoreSpecConfigurationGoogleCredentialsApplicationCredentials#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1041,7 +1061,6 @@ export interface ObjectStoreSpecConfigurationS3CredentialsAccessKeyId {
    * @schema ObjectStoreSpecConfigurationS3CredentialsAccessKeyId#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1078,7 +1097,6 @@ export interface ObjectStoreSpecConfigurationS3CredentialsRegion {
    * @schema ObjectStoreSpecConfigurationS3CredentialsRegion#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1115,7 +1133,6 @@ export interface ObjectStoreSpecConfigurationS3CredentialsSecretAccessKey {
    * @schema ObjectStoreSpecConfigurationS3CredentialsSecretAccessKey#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1152,7 +1169,6 @@ export interface ObjectStoreSpecConfigurationS3CredentialsSessionToken {
    * @schema ObjectStoreSpecConfigurationS3CredentialsSessionToken#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1229,6 +1245,14 @@ export interface ObjectStoreSpecInstanceSidecarConfigurationEnvValueFrom {
   readonly fieldRef?: ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFieldRef;
 
   /**
+   * FileKeyRef selects a key of the env file.
+   * Requires the EnvFiles feature gate to be enabled.
+   *
+   * @schema ObjectStoreSpecInstanceSidecarConfigurationEnvValueFrom#fileKeyRef
+   */
+  readonly fileKeyRef?: ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFileKeyRef;
+
+  /**
    * Selects a resource of the container: only resources limits and requests
    * (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu, requests.memory and requests.ephemeral-storage) are currently supported.
    *
@@ -1242,7 +1266,6 @@ export interface ObjectStoreSpecInstanceSidecarConfigurationEnvValueFrom {
    * @schema ObjectStoreSpecInstanceSidecarConfigurationEnvValueFrom#secretKeyRef
    */
   readonly secretKeyRef?: ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromSecretKeyRef;
-
 }
 
 /**
@@ -1254,6 +1277,7 @@ export function toJson_ObjectStoreSpecInstanceSidecarConfigurationEnvValueFrom(o
   const result = {
     'configMapKeyRef': toJson_ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromConfigMapKeyRef(obj.configMapKeyRef),
     'fieldRef': toJson_ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFieldRef(obj.fieldRef),
+    'fileKeyRef': toJson_ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFileKeyRef(obj.fileKeyRef),
     'resourceFieldRef': toJson_ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromResourceFieldRef(obj.resourceFieldRef),
     'secretKeyRef': toJson_ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromSecretKeyRef(obj.secretKeyRef),
   };
@@ -1285,7 +1309,6 @@ export interface ObjectStoreSpecInstanceSidecarConfigurationResourcesClaims {
    * @schema ObjectStoreSpecInstanceSidecarConfigurationResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -1361,7 +1384,6 @@ export interface ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromConfigMa
    * @schema ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromConfigMapKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -1400,7 +1422,6 @@ export interface ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFieldRef
    * @schema ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFieldRef#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
@@ -1412,6 +1433,68 @@ export function toJson_ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFi
   const result = {
     'apiVersion': obj.apiVersion,
     'fieldPath': obj.fieldPath,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * FileKeyRef selects a key of the env file.
+ * Requires the EnvFiles feature gate to be enabled.
+ *
+ * @schema ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFileKeyRef
+ */
+export interface ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFileKeyRef {
+  /**
+   * The key within the env file. An invalid key will prevent the pod from starting.
+   * The keys defined within a source may consist of any printable ASCII characters except '='.
+   * During Alpha stage of the EnvFiles feature gate, the key size is limited to 128 characters.
+   *
+   * @schema ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFileKeyRef#key
+   */
+  readonly key: string;
+
+  /**
+   * Specify whether the file or its key must be defined. If the file or key
+   * does not exist, then the env var is not published.
+   * If optional is set to true and the specified key does not exist,
+   * the environment variable will not be set in the Pod's containers.
+   *
+   * If optional is set to false and the specified key does not exist,
+   * an error will be returned during Pod creation.
+   *
+   * @schema ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFileKeyRef#optional
+   */
+  readonly optional?: boolean;
+
+  /**
+   * The path within the volume from which to select the file.
+   * Must be relative and may not contain the '..' path or start with '..'.
+   *
+   * @schema ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFileKeyRef#path
+   */
+  readonly path: string;
+
+  /**
+   * The name of the volume mount containing the env file.
+   *
+   * @schema ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFileKeyRef#volumeName
+   */
+  readonly volumeName: string;
+}
+
+/**
+ * Converts an object of type 'ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFileKeyRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFileKeyRef(obj: ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFileKeyRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'optional': obj.optional,
+    'path': obj.path,
+    'volumeName': obj.volumeName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -1445,7 +1528,6 @@ export interface ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromResource
    * @schema ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromResourceFieldRef#resource
    */
   readonly resource: string;
-
 }
 
 /**
@@ -1494,7 +1576,6 @@ export interface ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromSecretKe
    * @schema ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromSecretKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**

@@ -78,7 +78,6 @@ export interface AddonProps {
    * @schema Addon#spec
    */
   readonly spec?: AddonSpec;
-
 }
 
 /**
@@ -115,7 +114,6 @@ export interface AddonSpec {
    * @schema AddonSpec#source
    */
   readonly source?: string;
-
 }
 
 /**
@@ -205,7 +203,6 @@ export interface EtcdSnapshotFileProps {
    * @schema ETCDSnapshotFile#spec
    */
   readonly spec?: EtcdSnapshotFileSpec;
-
 }
 
 /**
@@ -271,7 +268,6 @@ export interface EtcdSnapshotFileSpec {
    * @schema EtcdSnapshotFileSpec#snapshotName
    */
   readonly snapshotName: string;
-
 }
 
 /**
@@ -355,7 +351,6 @@ export interface EtcdSnapshotFileSpecS3 {
    * @schema EtcdSnapshotFileSpecS3#skipSSLVerify
    */
   readonly skipSslVerify?: boolean;
-
 }
 
 /**

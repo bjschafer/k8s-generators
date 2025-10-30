@@ -75,7 +75,6 @@ export interface BackupProps {
    * @schema Backup#spec
    */
   readonly spec: BackupSpec;
-
 }
 
 /**
@@ -151,7 +150,6 @@ export interface BackupSpec {
    * @schema BackupSpec#target
    */
   readonly target?: BackupSpecTarget;
-
 }
 
 /**
@@ -185,7 +183,6 @@ export interface BackupSpecCluster {
    * @schema BackupSpecCluster#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -250,7 +247,6 @@ export interface BackupSpecOnlineConfiguration {
    * @schema BackupSpecOnlineConfiguration#waitForArchive
    */
   readonly waitForArchive?: boolean;
-
 }
 
 /**
@@ -288,7 +284,6 @@ export interface BackupSpecPluginConfiguration {
    * @schema BackupSpecPluginConfiguration#parameters
    */
   readonly parameters?: { [key: string]: string };
-
 }
 
 /**
@@ -325,7 +320,8 @@ export enum BackupSpecTarget {
 
 
 /**
- * Cluster is the Schema for the PostgreSQL API
+ * Cluster defines the API schema for a highly available PostgreSQL database cluster
+managed by CloudNativePG.
  *
  * @schema Cluster
  */
@@ -379,7 +375,8 @@ export class Cluster extends ApiObject {
 }
 
 /**
- * Cluster is the Schema for the PostgreSQL API
+ * Cluster defines the API schema for a highly available PostgreSQL database cluster
+ * managed by CloudNativePG.
  *
  * @schema Cluster
  */
@@ -396,7 +393,6 @@ export interface ClusterProps {
    * @schema Cluster#spec
    */
   readonly spec: ClusterSpec;
-
 }
 
 /**
@@ -758,8 +754,9 @@ export interface ClusterSpec {
   /**
    * The time in seconds that controls the window of time reserved for the smart shutdown of Postgres to complete.
    * Make sure you reserve enough time for the operator to request a fast shutdown of Postgres
-   * (that is: `stopDelay` - `smartShutdownTimeout`).
+   * (that is: `stopDelay` - `smartShutdownTimeout`). Default is 180 seconds.
    *
+   * @default 180 seconds.
    * @schema ClusterSpec#smartShutdownTimeout
    */
   readonly smartShutdownTimeout?: number;
@@ -828,7 +825,6 @@ export interface ClusterSpec {
    * @schema ClusterSpec#walStorage
    */
   readonly walStorage?: ClusterSpecWalStorage;
-
 }
 
 /**
@@ -968,7 +964,6 @@ export interface ClusterSpecAffinity {
    * @schema ClusterSpecAffinity#topologyKey
    */
   readonly topologyKey?: string;
-
 }
 
 /**
@@ -1032,7 +1027,6 @@ export interface ClusterSpecBackup {
    * @schema ClusterSpecBackup#volumeSnapshot
    */
   readonly volumeSnapshot?: ClusterSpecBackupVolumeSnapshot;
-
 }
 
 /**
@@ -1079,7 +1073,6 @@ export interface ClusterSpecBootstrap {
    * @schema ClusterSpecBootstrap#recovery
    */
   readonly recovery?: ClusterSpecBootstrapRecovery;
-
 }
 
 /**
@@ -1160,7 +1153,6 @@ export interface ClusterSpecCertificates {
    * @schema ClusterSpecCertificates#serverTLSSecret
    */
   readonly serverTlsSecret?: string;
-
 }
 
 /**
@@ -1188,7 +1180,8 @@ export function toJson_ClusterSpecCertificates(obj: ClusterSpecCertificates | un
  */
 export interface ClusterSpecEnv {
   /**
-   * Name of the environment variable. Must be a C_IDENTIFIER.
+   * Name of the environment variable.
+   * May consist of any printable ASCII characters except '='.
    *
    * @schema ClusterSpecEnv#name
    */
@@ -1216,7 +1209,6 @@ export interface ClusterSpecEnv {
    * @schema ClusterSpecEnv#valueFrom
    */
   readonly valueFrom?: ClusterSpecEnvValueFrom;
-
 }
 
 /**
@@ -1249,7 +1241,8 @@ export interface ClusterSpecEnvFrom {
   readonly configMapRef?: ClusterSpecEnvFromConfigMapRef;
 
   /**
-   * Optional text to prepend to the name of each environment variable. Must be a C_IDENTIFIER.
+   * Optional text to prepend to the name of each environment variable.
+   * May consist of any printable ASCII characters except '='.
    *
    * @schema ClusterSpecEnvFrom#prefix
    */
@@ -1261,7 +1254,6 @@ export interface ClusterSpecEnvFrom {
    * @schema ClusterSpecEnvFrom#secretRef
    */
   readonly secretRef?: ClusterSpecEnvFromSecretRef;
-
 }
 
 /**
@@ -1312,7 +1304,6 @@ export interface ClusterSpecEphemeralVolumeSource {
    * @schema ClusterSpecEphemeralVolumeSource#volumeClaimTemplate
    */
   readonly volumeClaimTemplate?: ClusterSpecEphemeralVolumeSourceVolumeClaimTemplate;
-
 }
 
 /**
@@ -1349,7 +1340,6 @@ export interface ClusterSpecEphemeralVolumesSizeLimit {
    * @schema ClusterSpecEphemeralVolumesSizeLimit#temporaryData
    */
   readonly temporaryData?: ClusterSpecEphemeralVolumesSizeLimitTemporaryData;
-
 }
 
 /**
@@ -1439,7 +1429,6 @@ export interface ClusterSpecExternalClusters {
    * @schema ClusterSpecExternalClusters#sslRootCert
    */
   readonly sslRootCert?: ClusterSpecExternalClustersSslRootCert;
-
 }
 
 /**
@@ -1498,7 +1487,6 @@ export interface ClusterSpecImageCatalogRef {
    * @schema ClusterSpecImageCatalogRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1531,7 +1519,6 @@ export interface ClusterSpecImagePullSecrets {
    * @schema ClusterSpecImagePullSecrets#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1563,7 +1550,6 @@ export interface ClusterSpecInheritedMetadata {
    * @schema ClusterSpecInheritedMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -1618,7 +1604,6 @@ export interface ClusterSpecManaged {
    * @schema ClusterSpecManaged#services
    */
   readonly services?: ClusterSpecManagedServices;
-
 }
 
 /**
@@ -1668,6 +1653,9 @@ export interface ClusterSpecMonitoring {
   /**
    * Enable or disable the `PodMonitor`
    *
+   * Deprecated: This feature will be removed in an upcoming release. If
+   * you need this functionality, you can create a PodMonitor manually.
+   *
    * @schema ClusterSpecMonitoring#enablePodMonitor
    */
   readonly enablePodMonitor?: boolean;
@@ -1675,12 +1663,18 @@ export interface ClusterSpecMonitoring {
   /**
    * The list of metric relabelings for the `PodMonitor`. Applied to samples before ingestion.
    *
+   * Deprecated: This feature will be removed in an upcoming release. If
+   * you need this functionality, you can create a PodMonitor manually.
+   *
    * @schema ClusterSpecMonitoring#podMonitorMetricRelabelings
    */
   readonly podMonitorMetricRelabelings?: ClusterSpecMonitoringPodMonitorMetricRelabelings[];
 
   /**
    * The list of relabelings for the `PodMonitor`. Applied to samples before scraping.
+   *
+   * Deprecated: This feature will be removed in an upcoming release. If
+   * you need this functionality, you can create a PodMonitor manually.
    *
    * @schema ClusterSpecMonitoring#podMonitorRelabelings
    */
@@ -1693,7 +1687,6 @@ export interface ClusterSpecMonitoring {
    * @schema ClusterSpecMonitoring#tls
    */
   readonly tls?: ClusterSpecMonitoringTls;
-
 }
 
 /**
@@ -1736,7 +1729,6 @@ export interface ClusterSpecNodeMaintenanceWindow {
    * @schema ClusterSpecNodeMaintenanceWindow#reusePVC
    */
   readonly reusePvc?: boolean;
-
 }
 
 /**
@@ -1769,8 +1761,9 @@ export interface ClusterSpecPlugins {
   readonly enabled?: boolean;
 
   /**
-   * Only one plugin can be declared as WALArchiver.
-   * Cannot be active if ".spec.backup.barmanObjectStore" configuration is present.
+   * Marks the plugin as the WAL archiver. At most one plugin can be
+   * designated as a WAL archiver. This cannot be enabled if the
+   * `.spec.backup.barmanObjectStore` configuration is present.
    *
    * @schema ClusterSpecPlugins#isWALArchiver
    */
@@ -1789,7 +1782,6 @@ export interface ClusterSpecPlugins {
    * @schema ClusterSpecPlugins#parameters
    */
   readonly parameters?: { [key: string]: string };
-
 }
 
 /**
@@ -1825,6 +1817,13 @@ export interface ClusterSpecPostgresql {
    * @schema ClusterSpecPostgresql#enableAlterSystem
    */
   readonly enableAlterSystem?: boolean;
+
+  /**
+   * The configuration of the extensions to be added
+   *
+   * @schema ClusterSpecPostgresql#extensions
+   */
+  readonly extensions?: ClusterSpecPostgresqlExtensions[];
 
   /**
    * Options to specify LDAP configuration
@@ -1886,7 +1885,6 @@ export interface ClusterSpecPostgresql {
    * @schema ClusterSpecPostgresql#synchronous
    */
   readonly synchronous?: ClusterSpecPostgresqlSynchronous;
-
 }
 
 /**
@@ -1897,6 +1895,7 @@ export function toJson_ClusterSpecPostgresql(obj: ClusterSpecPostgresql | undefi
   if (obj === undefined) { return undefined; }
   const result = {
     'enableAlterSystem': obj.enableAlterSystem,
+    'extensions': obj.extensions?.map(y => toJson_ClusterSpecPostgresqlExtensions(y)),
     'ldap': toJson_ClusterSpecPostgresqlLdap(obj.ldap),
     'parameters': ((obj.parameters) === undefined) ? undefined : (Object.entries(obj.parameters).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'pg_hba': obj.pgHba?.map(y => y),
@@ -1966,7 +1965,6 @@ export interface ClusterSpecProbes {
    * @schema ClusterSpecProbes#startup
    */
   readonly startup?: ClusterSpecProbesStartup;
-
 }
 
 /**
@@ -2011,7 +2009,6 @@ export interface ClusterSpecProjectedVolumeTemplate {
    * @schema ClusterSpecProjectedVolumeTemplate#sources
    */
   readonly sources?: ClusterSpecProjectedVolumeTemplateSources[];
-
 }
 
 /**
@@ -2086,7 +2083,6 @@ export interface ClusterSpecReplica {
    * @schema ClusterSpecReplica#source
    */
   readonly source: string;
-
 }
 
 /**
@@ -2135,7 +2131,6 @@ export interface ClusterSpecReplicationSlots {
    * @schema ClusterSpecReplicationSlots#updateInterval
    */
   readonly updateInterval?: number;
-
 }
 
 /**
@@ -2166,7 +2161,7 @@ export interface ClusterSpecResources {
    * Claims lists the names of resources, defined in spec.resourceClaims,
    * that are used by this container.
    *
-   * This is an alpha field and requires enabling the
+   * This field depends on the
    * DynamicResourceAllocation feature gate.
    *
    * This field is immutable. It can only be set for containers.
@@ -2192,7 +2187,6 @@ export interface ClusterSpecResources {
    * @schema ClusterSpecResources#requests
    */
   readonly requests?: { [key: string]: ClusterSpecResourcesRequests };
-
 }
 
 /**
@@ -2240,7 +2234,6 @@ export interface ClusterSpecSeccompProfile {
    * @schema ClusterSpecSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -2271,7 +2264,6 @@ export interface ClusterSpecServiceAccountTemplate {
    * @schema ClusterSpecServiceAccountTemplate#metadata
    */
   readonly metadata: ClusterSpecServiceAccountTemplateMetadata;
-
 }
 
 /**
@@ -2326,7 +2318,6 @@ export interface ClusterSpecStorage {
    * @schema ClusterSpecStorage#storageClass
    */
   readonly storageClass?: string;
-
 }
 
 /**
@@ -2359,7 +2350,6 @@ export interface ClusterSpecSuperuserSecret {
    * @schema ClusterSpecSuperuserSecret#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -2413,7 +2403,6 @@ export interface ClusterSpecTablespaces {
    * @schema ClusterSpecTablespaces#temporary
    */
   readonly temporary?: boolean;
-
 }
 
 /**
@@ -2576,7 +2565,6 @@ export interface ClusterSpecTopologySpreadConstraints {
    * @schema ClusterSpecTopologySpreadConstraints#whenUnsatisfiable
    */
   readonly whenUnsatisfiable: string;
-
 }
 
 /**
@@ -2638,7 +2626,6 @@ export interface ClusterSpecWalStorage {
    * @schema ClusterSpecWalStorage#storageClass
    */
   readonly storageClass?: string;
-
 }
 
 /**
@@ -2691,7 +2678,6 @@ export interface ClusterSpecAffinityAdditionalPodAffinity {
    * @schema ClusterSpecAffinityAdditionalPodAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
@@ -2723,8 +2709,8 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinity {
    * most preferred is the one with the greatest sum of weights, i.e.
    * for each node that meets all of the scheduling requirements (resource
    * request, requiredDuringScheduling anti-affinity expressions, etc.),
-   * compute a sum by iterating through the elements of this field and adding
-   * "weight" to the sum if the node has pods which matches the corresponding podAffinityTerm; the
+   * compute a sum by iterating through the elements of this field and subtracting
+   * "weight" from the sum if the node has pods which matches the corresponding podAffinityTerm; the
    * node(s) with the highest sum are the most preferred.
    *
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinity#preferredDuringSchedulingIgnoredDuringExecution
@@ -2743,7 +2729,6 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinity {
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
@@ -2793,7 +2778,6 @@ export interface ClusterSpecAffinityNodeAffinity {
    * @schema ClusterSpecAffinityNodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution;
-
 }
 
 /**
@@ -2862,7 +2846,6 @@ export interface ClusterSpecAffinityTolerations {
    * @schema ClusterSpecAffinityTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -2978,7 +2961,6 @@ export interface ClusterSpecBackupBarmanObjectStore {
    * @schema ClusterSpecBackupBarmanObjectStore#wal
    */
   readonly wal?: ClusterSpecBackupBarmanObjectStoreWal;
-
 }
 
 /**
@@ -3084,7 +3066,6 @@ export interface ClusterSpecBackupVolumeSnapshot {
    * @schema ClusterSpecBackupVolumeSnapshot#walClassName
    */
   readonly walClassName?: string;
-
 }
 
 /**
@@ -3301,7 +3282,6 @@ export interface ClusterSpecBootstrapInitdb {
    * @schema ClusterSpecBootstrapInitdb#walSegmentSize
    */
   readonly walSegmentSize?: number;
-
 }
 
 /**
@@ -3376,7 +3356,6 @@ export interface ClusterSpecBootstrapPgBasebackup {
    * @schema ClusterSpecBootstrapPgBasebackup#source
    */
   readonly source: string;
-
 }
 
 /**
@@ -3471,7 +3450,6 @@ export interface ClusterSpecBootstrapRecovery {
    * @schema ClusterSpecBootstrapRecovery#volumeSnapshots
    */
   readonly volumeSnapshots?: ClusterSpecBootstrapRecoveryVolumeSnapshots;
-
 }
 
 /**
@@ -3516,6 +3494,14 @@ export interface ClusterSpecEnvValueFrom {
   readonly fieldRef?: ClusterSpecEnvValueFromFieldRef;
 
   /**
+   * FileKeyRef selects a key of the env file.
+   * Requires the EnvFiles feature gate to be enabled.
+   *
+   * @schema ClusterSpecEnvValueFrom#fileKeyRef
+   */
+  readonly fileKeyRef?: ClusterSpecEnvValueFromFileKeyRef;
+
+  /**
    * Selects a resource of the container: only resources limits and requests
    * (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu, requests.memory and requests.ephemeral-storage) are currently supported.
    *
@@ -3529,7 +3515,6 @@ export interface ClusterSpecEnvValueFrom {
    * @schema ClusterSpecEnvValueFrom#secretKeyRef
    */
   readonly secretKeyRef?: ClusterSpecEnvValueFromSecretKeyRef;
-
 }
 
 /**
@@ -3541,6 +3526,7 @@ export function toJson_ClusterSpecEnvValueFrom(obj: ClusterSpecEnvValueFrom | un
   const result = {
     'configMapKeyRef': toJson_ClusterSpecEnvValueFromConfigMapKeyRef(obj.configMapKeyRef),
     'fieldRef': toJson_ClusterSpecEnvValueFromFieldRef(obj.fieldRef),
+    'fileKeyRef': toJson_ClusterSpecEnvValueFromFileKeyRef(obj.fileKeyRef),
     'resourceFieldRef': toJson_ClusterSpecEnvValueFromResourceFieldRef(obj.resourceFieldRef),
     'secretKeyRef': toJson_ClusterSpecEnvValueFromSecretKeyRef(obj.secretKeyRef),
   };
@@ -3572,7 +3558,6 @@ export interface ClusterSpecEnvFromConfigMapRef {
    * @schema ClusterSpecEnvFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -3613,7 +3598,6 @@ export interface ClusterSpecEnvFromSecretRef {
    * @schema ClusterSpecEnvFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -3675,7 +3659,6 @@ export interface ClusterSpecEphemeralVolumeSourceVolumeClaimTemplate {
    * @schema ClusterSpecEphemeralVolumeSourceVolumeClaimTemplate#spec
    */
   readonly spec: ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpec;
-
 }
 
 /**
@@ -3820,7 +3803,6 @@ export interface ClusterSpecExternalClustersBarmanObjectStore {
    * @schema ClusterSpecExternalClustersBarmanObjectStore#wal
    */
   readonly wal?: ClusterSpecExternalClustersBarmanObjectStoreWal;
-
 }
 
 /**
@@ -3883,7 +3865,6 @@ export interface ClusterSpecExternalClustersPassword {
    * @schema ClusterSpecExternalClustersPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -3917,8 +3898,9 @@ export interface ClusterSpecExternalClustersPlugin {
   readonly enabled?: boolean;
 
   /**
-   * Only one plugin can be declared as WALArchiver.
-   * Cannot be active if ".spec.backup.barmanObjectStore" configuration is present.
+   * Marks the plugin as the WAL archiver. At most one plugin can be
+   * designated as a WAL archiver. This cannot be enabled if the
+   * `.spec.backup.barmanObjectStore` configuration is present.
    *
    * @schema ClusterSpecExternalClustersPlugin#isWALArchiver
    */
@@ -3937,7 +3919,6 @@ export interface ClusterSpecExternalClustersPlugin {
    * @schema ClusterSpecExternalClustersPlugin#parameters
    */
   readonly parameters?: { [key: string]: string };
-
 }
 
 /**
@@ -3988,7 +3969,6 @@ export interface ClusterSpecExternalClustersSslCert {
    * @schema ClusterSpecExternalClustersSslCert#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -4038,7 +4018,6 @@ export interface ClusterSpecExternalClustersSslKey {
    * @schema ClusterSpecExternalClustersSslKey#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -4088,7 +4067,6 @@ export interface ClusterSpecExternalClustersSslRootCert {
    * @schema ClusterSpecExternalClustersSslRootCert#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -4250,7 +4228,6 @@ export interface ClusterSpecManagedRoles {
    * @schema ClusterSpecManagedRoles#validUntil
    */
   readonly validUntil?: Date;
-
 }
 
 /**
@@ -4301,7 +4278,6 @@ export interface ClusterSpecManagedServices {
    * @schema ClusterSpecManagedServices#disabledDefaultServices
    */
   readonly disabledDefaultServices?: ClusterSpecManagedServicesDisabledDefaultServices[];
-
 }
 
 /**
@@ -4339,7 +4315,6 @@ export interface ClusterSpecMonitoringCustomQueriesConfigMap {
    * @schema ClusterSpecMonitoringCustomQueriesConfigMap#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4377,7 +4352,6 @@ export interface ClusterSpecMonitoringCustomQueriesSecret {
    * @schema ClusterSpecMonitoringCustomQueriesSecret#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4405,7 +4379,7 @@ export function toJson_ClusterSpecMonitoringCustomQueriesSecret(obj: ClusterSpec
  */
 export interface ClusterSpecMonitoringPodMonitorMetricRelabelings {
   /**
-   * Action to perform based on the regex matching.
+   * action to perform based on the regex matching.
    *
    * `Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0.
    * `DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.
@@ -4417,7 +4391,7 @@ export interface ClusterSpecMonitoringPodMonitorMetricRelabelings {
   readonly action?: ClusterSpecMonitoringPodMonitorMetricRelabelingsAction;
 
   /**
-   * Modulus to take of the hash of the source label values.
+   * modulus to take of the hash of the source label values.
    *
    * Only applicable when the action is `HashMod`.
    *
@@ -4426,14 +4400,14 @@ export interface ClusterSpecMonitoringPodMonitorMetricRelabelings {
   readonly modulus?: number;
 
   /**
-   * Regular expression against which the extracted value is matched.
+   * regex defines the regular expression against which the extracted value is matched.
    *
    * @schema ClusterSpecMonitoringPodMonitorMetricRelabelings#regex
    */
   readonly regex?: string;
 
   /**
-   * Replacement value against which a Replace action is performed if the
+   * replacement value against which a Replace action is performed if the
    * regular expression matches.
    *
    * Regex capture groups are available.
@@ -4443,14 +4417,14 @@ export interface ClusterSpecMonitoringPodMonitorMetricRelabelings {
   readonly replacement?: string;
 
   /**
-   * Separator is the string between concatenated SourceLabels.
+   * separator defines the string between concatenated SourceLabels.
    *
    * @schema ClusterSpecMonitoringPodMonitorMetricRelabelings#separator
    */
   readonly separator?: string;
 
   /**
-   * The source labels select values from existing labels. Their content is
+   * sourceLabels defines the source labels select values from existing labels. Their content is
    * concatenated using the configured Separator and matched against the
    * configured regular expression.
    *
@@ -4459,7 +4433,7 @@ export interface ClusterSpecMonitoringPodMonitorMetricRelabelings {
   readonly sourceLabels?: string[];
 
   /**
-   * Label to which the resulting string is written in a replacement.
+   * targetLabel defines the label to which the resulting string is written in a replacement.
    *
    * It is mandatory for `Replace`, `HashMod`, `Lowercase`, `Uppercase`,
    * `KeepEqual` and `DropEqual` actions.
@@ -4469,7 +4443,6 @@ export interface ClusterSpecMonitoringPodMonitorMetricRelabelings {
    * @schema ClusterSpecMonitoringPodMonitorMetricRelabelings#targetLabel
    */
   readonly targetLabel?: string;
-
 }
 
 /**
@@ -4502,7 +4475,7 @@ export function toJson_ClusterSpecMonitoringPodMonitorMetricRelabelings(obj: Clu
  */
 export interface ClusterSpecMonitoringPodMonitorRelabelings {
   /**
-   * Action to perform based on the regex matching.
+   * action to perform based on the regex matching.
    *
    * `Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0.
    * `DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.
@@ -4514,7 +4487,7 @@ export interface ClusterSpecMonitoringPodMonitorRelabelings {
   readonly action?: ClusterSpecMonitoringPodMonitorRelabelingsAction;
 
   /**
-   * Modulus to take of the hash of the source label values.
+   * modulus to take of the hash of the source label values.
    *
    * Only applicable when the action is `HashMod`.
    *
@@ -4523,14 +4496,14 @@ export interface ClusterSpecMonitoringPodMonitorRelabelings {
   readonly modulus?: number;
 
   /**
-   * Regular expression against which the extracted value is matched.
+   * regex defines the regular expression against which the extracted value is matched.
    *
    * @schema ClusterSpecMonitoringPodMonitorRelabelings#regex
    */
   readonly regex?: string;
 
   /**
-   * Replacement value against which a Replace action is performed if the
+   * replacement value against which a Replace action is performed if the
    * regular expression matches.
    *
    * Regex capture groups are available.
@@ -4540,14 +4513,14 @@ export interface ClusterSpecMonitoringPodMonitorRelabelings {
   readonly replacement?: string;
 
   /**
-   * Separator is the string between concatenated SourceLabels.
+   * separator defines the string between concatenated SourceLabels.
    *
    * @schema ClusterSpecMonitoringPodMonitorRelabelings#separator
    */
   readonly separator?: string;
 
   /**
-   * The source labels select values from existing labels. Their content is
+   * sourceLabels defines the source labels select values from existing labels. Their content is
    * concatenated using the configured Separator and matched against the
    * configured regular expression.
    *
@@ -4556,7 +4529,7 @@ export interface ClusterSpecMonitoringPodMonitorRelabelings {
   readonly sourceLabels?: string[];
 
   /**
-   * Label to which the resulting string is written in a replacement.
+   * targetLabel defines the label to which the resulting string is written in a replacement.
    *
    * It is mandatory for `Replace`, `HashMod`, `Lowercase`, `Uppercase`,
    * `KeepEqual` and `DropEqual` actions.
@@ -4566,7 +4539,6 @@ export interface ClusterSpecMonitoringPodMonitorRelabelings {
    * @schema ClusterSpecMonitoringPodMonitorRelabelings#targetLabel
    */
   readonly targetLabel?: string;
-
 }
 
 /**
@@ -4603,7 +4575,6 @@ export interface ClusterSpecMonitoringTls {
    * @schema ClusterSpecMonitoringTls#enabled
    */
   readonly enabled?: boolean;
-
 }
 
 /**
@@ -4614,6 +4585,69 @@ export function toJson_ClusterSpecMonitoringTls(obj: ClusterSpecMonitoringTls | 
   if (obj === undefined) { return undefined; }
   const result = {
     'enabled': obj.enabled,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ExtensionConfiguration is the configuration used to add
+ * PostgreSQL extensions to the Cluster.
+ *
+ * @schema ClusterSpecPostgresqlExtensions
+ */
+export interface ClusterSpecPostgresqlExtensions {
+  /**
+   * The list of directories inside the image which should be added to dynamic_library_path.
+   * If not defined, defaults to "/lib".
+   *
+   * @schema ClusterSpecPostgresqlExtensions#dynamic_library_path
+   */
+  readonly dynamicLibraryPath?: string[];
+
+  /**
+   * The list of directories inside the image which should be added to extension_control_path.
+   * If not defined, defaults to "/share".
+   *
+   * @schema ClusterSpecPostgresqlExtensions#extension_control_path
+   */
+  readonly extensionControlPath?: string[];
+
+  /**
+   * The image containing the extension, required
+   *
+   * @schema ClusterSpecPostgresqlExtensions#image
+   */
+  readonly image: ClusterSpecPostgresqlExtensionsImage;
+
+  /**
+   * The list of directories inside the image which should be added to ld_library_path.
+   *
+   * @schema ClusterSpecPostgresqlExtensions#ld_library_path
+   */
+  readonly ldLibraryPath?: string[];
+
+  /**
+   * The name of the extension, required
+   *
+   * @schema ClusterSpecPostgresqlExtensions#name
+   */
+  readonly name: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSpecPostgresqlExtensions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecPostgresqlExtensions(obj: ClusterSpecPostgresqlExtensions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'dynamic_library_path': obj.dynamicLibraryPath?.map(y => y),
+    'extension_control_path': obj.extensionControlPath?.map(y => y),
+    'image': toJson_ClusterSpecPostgresqlExtensionsImage(obj.image),
+    'ld_library_path': obj.ldLibraryPath?.map(y => y),
+    'name': obj.name,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -4667,7 +4701,6 @@ export interface ClusterSpecPostgresqlLdap {
    * @schema ClusterSpecPostgresqlLdap#tls
    */
   readonly tls?: boolean;
-
 }
 
 /**
@@ -4709,7 +4742,6 @@ export interface ClusterSpecPostgresqlSyncReplicaElectionConstraint {
    * @schema ClusterSpecPostgresqlSyncReplicaElectionConstraint#nodeLabelsAntiAffinity
    */
   readonly nodeLabelsAntiAffinity?: string[];
-
 }
 
 /**
@@ -4790,7 +4822,6 @@ export interface ClusterSpecPostgresqlSynchronous {
    * @schema ClusterSpecPostgresqlSynchronous#standbyNamesPre
    */
   readonly standbyNamesPre?: string[];
-
 }
 
 /**
@@ -4836,6 +4867,17 @@ export interface ClusterSpecProbesLiveness {
   readonly initialDelaySeconds?: number;
 
   /**
+   * Configure the feature that extends the liveness probe for a primary
+   * instance. In addition to the basic checks, this verifies whether the
+   * primary is isolated from the Kubernetes API server and from its
+   * replicas, ensuring that it can be safely shut down if network
+   * partition or API unavailability is detected. Enabled by default.
+   *
+   * @schema ClusterSpecProbesLiveness#isolationCheck
+   */
+  readonly isolationCheck?: ClusterSpecProbesLivenessIsolationCheck;
+
+  /**
    * How often (in seconds) to perform the probe.
    * Default to 10 seconds. Minimum value is 1.
    *
@@ -4878,7 +4920,6 @@ export interface ClusterSpecProbesLiveness {
    * @schema ClusterSpecProbesLiveness#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
@@ -4890,6 +4931,7 @@ export function toJson_ClusterSpecProbesLiveness(obj: ClusterSpecProbesLiveness 
   const result = {
     'failureThreshold': obj.failureThreshold,
     'initialDelaySeconds': obj.initialDelaySeconds,
+    'isolationCheck': toJson_ClusterSpecProbesLivenessIsolationCheck(obj.isolationCheck),
     'periodSeconds': obj.periodSeconds,
     'successThreshold': obj.successThreshold,
     'terminationGracePeriodSeconds': obj.terminationGracePeriodSeconds,
@@ -4980,7 +5022,6 @@ export interface ClusterSpecProbesReadiness {
    * @schema ClusterSpecProbesReadiness#type
    */
   readonly type?: ClusterSpecProbesReadinessType;
-
 }
 
 /**
@@ -5084,7 +5125,6 @@ export interface ClusterSpecProbesStartup {
    * @schema ClusterSpecProbesStartup#type
    */
   readonly type?: ClusterSpecProbesStartupType;
-
 }
 
 /**
@@ -5149,6 +5189,46 @@ export interface ClusterSpecProjectedVolumeTemplateSources {
   readonly downwardApi?: ClusterSpecProjectedVolumeTemplateSourcesDownwardApi;
 
   /**
+   * Projects an auto-rotating credential bundle (private key and certificate
+   * chain) that the pod can use either as a TLS client or server.
+   *
+   * Kubelet generates a private key and uses it to send a
+   * PodCertificateRequest to the named signer.  Once the signer approves the
+   * request and issues a certificate chain, Kubelet writes the key and
+   * certificate chain to the pod filesystem.  The pod does not start until
+   * certificates have been issued for each podCertificate projected volume
+   * source in its spec.
+   *
+   * Kubelet will begin trying to rotate the certificate at the time indicated
+   * by the signer using the PodCertificateRequest.Status.BeginRefreshAt
+   * timestamp.
+   *
+   * Kubelet can write a single file, indicated by the credentialBundlePath
+   * field, or separate files, indicated by the keyPath and
+   * certificateChainPath fields.
+   *
+   * The credential bundle is a single file in PEM format.  The first PEM
+   * entry is the private key (in PKCS#8 format), and the remaining PEM
+   * entries are the certificate chain issued by the signer (typically,
+   * signers will return their certificate chain in leaf-to-root order).
+   *
+   * Prefer using the credential bundle format, since your application code
+   * can read it atomically.  If you use keyPath and certificateChainPath,
+   * your application must make two separate file reads. If these coincide
+   * with a certificate rotation, it is possible that the private key and leaf
+   * certificate you read may not correspond to each other.  Your application
+   * will need to check for this condition, and re-read until they are
+   * consistent.
+   *
+   * The named signer controls chooses the format of the certificate it
+   * issues; consult the signer implementation's documentation to learn how to
+   * use the certificates it issues.
+   *
+   * @schema ClusterSpecProjectedVolumeTemplateSources#podCertificate
+   */
+  readonly podCertificate?: ClusterSpecProjectedVolumeTemplateSourcesPodCertificate;
+
+  /**
    * secret information about the secret data to project
    *
    * @schema ClusterSpecProjectedVolumeTemplateSources#secret
@@ -5161,7 +5241,6 @@ export interface ClusterSpecProjectedVolumeTemplateSources {
    * @schema ClusterSpecProjectedVolumeTemplateSources#serviceAccountToken
    */
   readonly serviceAccountToken?: ClusterSpecProjectedVolumeTemplateSourcesServiceAccountToken;
-
 }
 
 /**
@@ -5174,6 +5253,7 @@ export function toJson_ClusterSpecProjectedVolumeTemplateSources(obj: ClusterSpe
     'clusterTrustBundle': toJson_ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundle(obj.clusterTrustBundle),
     'configMap': toJson_ClusterSpecProjectedVolumeTemplateSourcesConfigMap(obj.configMap),
     'downwardAPI': toJson_ClusterSpecProjectedVolumeTemplateSourcesDownwardApi(obj.downwardApi),
+    'podCertificate': toJson_ClusterSpecProjectedVolumeTemplateSourcesPodCertificate(obj.podCertificate),
     'secret': toJson_ClusterSpecProjectedVolumeTemplateSourcesSecret(obj.secret),
     'serviceAccountToken': toJson_ClusterSpecProjectedVolumeTemplateSourcesServiceAccountToken(obj.serviceAccountToken),
   };
@@ -5210,6 +5290,17 @@ export interface ClusterSpecReplicationSlotsHighAvailability {
    */
   readonly slotPrefix?: string;
 
+  /**
+   * When enabled, the operator automatically manages synchronization of logical
+   * decoding (replication) slots across high-availability clusters.
+   *
+   * Requires one of the following conditions:
+   * - PostgreSQL version 17 or later
+   * - PostgreSQL version < 17 with pg_failover_slots extension enabled
+   *
+   * @schema ClusterSpecReplicationSlotsHighAvailability#synchronizeLogicalDecoding
+   */
+  readonly synchronizeLogicalDecoding?: boolean;
 }
 
 /**
@@ -5221,6 +5312,7 @@ export function toJson_ClusterSpecReplicationSlotsHighAvailability(obj: ClusterS
   const result = {
     'enabled': obj.enabled,
     'slotPrefix': obj.slotPrefix,
+    'synchronizeLogicalDecoding': obj.synchronizeLogicalDecoding,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -5246,7 +5338,6 @@ export interface ClusterSpecReplicationSlotsSynchronizeReplicas {
    * @schema ClusterSpecReplicationSlotsSynchronizeReplicas#excludePatterns
    */
   readonly excludePatterns?: string[];
-
 }
 
 /**
@@ -5287,7 +5378,6 @@ export interface ClusterSpecResourcesClaims {
    * @schema ClusterSpecResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -5366,7 +5456,6 @@ export interface ClusterSpecServiceAccountTemplateMetadata {
    * @schema ClusterSpecServiceAccountTemplateMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -5472,15 +5561,13 @@ export interface ClusterSpecStoragePvcTemplate {
    * volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim.
    * If specified, the CSI driver will create or update the volume with the attributes defined
    * in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName,
-   * it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass
-   * will be applied to the claim but it's not allowed to reset this field to empty string once it is set.
-   * If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass
-   * will be set by the persistentvolume controller if it exists.
+   * it can be changed after the claim is created. An empty string or nil value indicates that no
+   * VolumeAttributesClass will be applied to the claim. If the claim enters an Infeasible error state,
+   * this field can be reset to its previous value (including nil) to cancel the modification.
    * If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be
    * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
    * exists.
    * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
    *
    * @schema ClusterSpecStoragePvcTemplate#volumeAttributesClassName
    */
@@ -5500,7 +5587,6 @@ export interface ClusterSpecStoragePvcTemplate {
    * @schema ClusterSpecStoragePvcTemplate#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -5535,7 +5621,6 @@ export interface ClusterSpecTablespacesOwner {
    * @schema ClusterSpecTablespacesOwner#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -5590,7 +5675,6 @@ export interface ClusterSpecTablespacesStorage {
    * @schema ClusterSpecTablespacesStorage#storageClass
    */
   readonly storageClass?: string;
-
 }
 
 /**
@@ -5633,7 +5717,6 @@ export interface ClusterSpecTopologySpreadConstraintsLabelSelector {
    * @schema ClusterSpecTopologySpreadConstraintsLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -5738,15 +5821,13 @@ export interface ClusterSpecWalStoragePvcTemplate {
    * volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim.
    * If specified, the CSI driver will create or update the volume with the attributes defined
    * in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName,
-   * it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass
-   * will be applied to the claim but it's not allowed to reset this field to empty string once it is set.
-   * If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass
-   * will be set by the persistentvolume controller if it exists.
+   * it can be changed after the claim is created. An empty string or nil value indicates that no
+   * VolumeAttributesClass will be applied to the claim. If the claim enters an Infeasible error state,
+   * this field can be reset to its previous value (including nil) to cancel the modification.
    * If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be
    * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
    * exists.
    * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
    *
    * @schema ClusterSpecWalStoragePvcTemplate#volumeAttributesClassName
    */
@@ -5766,7 +5847,6 @@ export interface ClusterSpecWalStoragePvcTemplate {
    * @schema ClusterSpecWalStoragePvcTemplate#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -5811,7 +5891,6 @@ export interface ClusterSpecAffinityAdditionalPodAffinityPreferredDuringScheduli
    * @schema ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -5907,7 +5986,6 @@ export interface ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulin
    * @schema ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -5949,7 +6027,6 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSche
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -6045,7 +6122,6 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSched
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -6087,7 +6163,6 @@ export interface ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnored
    * @schema ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -6121,7 +6196,6 @@ export interface ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredD
    * @schema ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution#nodeSelectorTerms
    */
   readonly nodeSelectorTerms: ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms[];
-
 }
 
 /**
@@ -6180,7 +6254,6 @@ export interface ClusterSpecBackupBarmanObjectStoreAzureCredentials {
    * @schema ClusterSpecBackupBarmanObjectStoreAzureCredentials#storageSasToken
    */
   readonly storageSasToken?: ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageSasToken;
-
 }
 
 /**
@@ -6267,7 +6340,6 @@ export interface ClusterSpecBackupBarmanObjectStoreData {
    * @schema ClusterSpecBackupBarmanObjectStoreData#jobs
    */
   readonly jobs?: number;
-
 }
 
 /**
@@ -6309,7 +6381,6 @@ export interface ClusterSpecBackupBarmanObjectStoreEndpointCa {
    * @schema ClusterSpecBackupBarmanObjectStoreEndpointCa#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -6347,7 +6418,6 @@ export interface ClusterSpecBackupBarmanObjectStoreGoogleCredentials {
    * @schema ClusterSpecBackupBarmanObjectStoreGoogleCredentials#gkeEnvironment
    */
   readonly gkeEnvironment?: boolean;
-
 }
 
 /**
@@ -6405,7 +6475,6 @@ export interface ClusterSpecBackupBarmanObjectStoreS3Credentials {
    * @schema ClusterSpecBackupBarmanObjectStoreS3Credentials#sessionToken
    */
   readonly sessionToken?: ClusterSpecBackupBarmanObjectStoreS3CredentialsSessionToken;
-
 }
 
 /**
@@ -6502,7 +6571,6 @@ export interface ClusterSpecBackupBarmanObjectStoreWal {
    * @schema ClusterSpecBackupBarmanObjectStoreWal#restoreAdditionalCommandArgs
    */
   readonly restoreAdditionalCommandArgs?: string[];
-
 }
 
 /**
@@ -6554,7 +6622,6 @@ export interface ClusterSpecBackupVolumeSnapshotOnlineConfiguration {
    * @schema ClusterSpecBackupVolumeSnapshotOnlineConfiguration#waitForArchive
    */
   readonly waitForArchive?: boolean;
-
 }
 
 /**
@@ -6657,7 +6724,6 @@ export interface ClusterSpecBootstrapInitdbImport {
    * @schema ClusterSpecBootstrapInitdbImport#type
    */
   readonly type: ClusterSpecBootstrapInitdbImportType;
-
 }
 
 /**
@@ -6706,7 +6772,6 @@ export interface ClusterSpecBootstrapInitdbPostInitApplicationSqlRefs {
    * @schema ClusterSpecBootstrapInitdbPostInitApplicationSqlRefs#secretRefs
    */
   readonly secretRefs?: ClusterSpecBootstrapInitdbPostInitApplicationSqlRefsSecretRefs[];
-
 }
 
 /**
@@ -6749,7 +6814,6 @@ export interface ClusterSpecBootstrapInitdbPostInitSqlRefs {
    * @schema ClusterSpecBootstrapInitdbPostInitSqlRefs#secretRefs
    */
   readonly secretRefs?: ClusterSpecBootstrapInitdbPostInitSqlRefsSecretRefs[];
-
 }
 
 /**
@@ -6792,7 +6856,6 @@ export interface ClusterSpecBootstrapInitdbPostInitTemplateSqlRefs {
    * @schema ClusterSpecBootstrapInitdbPostInitTemplateSqlRefs#secretRefs
    */
   readonly secretRefs?: ClusterSpecBootstrapInitdbPostInitTemplateSqlRefsSecretRefs[];
-
 }
 
 /**
@@ -6824,7 +6887,6 @@ export interface ClusterSpecBootstrapInitdbSecret {
    * @schema ClusterSpecBootstrapInitdbSecret#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -6855,7 +6917,6 @@ export interface ClusterSpecBootstrapPgBasebackupSecret {
    * @schema ClusterSpecBootstrapPgBasebackupSecret#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -6895,7 +6956,6 @@ export interface ClusterSpecBootstrapRecoveryBackup {
    * @schema ClusterSpecBootstrapRecoveryBackup#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -6984,7 +7044,6 @@ export interface ClusterSpecBootstrapRecoveryRecoveryTarget {
    * @schema ClusterSpecBootstrapRecoveryRecoveryTarget#targetXID
    */
   readonly targetXid?: string;
-
 }
 
 /**
@@ -7022,7 +7081,6 @@ export interface ClusterSpecBootstrapRecoverySecret {
    * @schema ClusterSpecBootstrapRecoverySecret#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -7072,7 +7130,6 @@ export interface ClusterSpecBootstrapRecoveryVolumeSnapshots {
    * @schema ClusterSpecBootstrapRecoveryVolumeSnapshots#walStorage
    */
   readonly walStorage?: ClusterSpecBootstrapRecoveryVolumeSnapshotsWalStorage;
-
 }
 
 /**
@@ -7121,7 +7178,6 @@ export interface ClusterSpecEnvValueFromConfigMapKeyRef {
    * @schema ClusterSpecEnvValueFromConfigMapKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -7160,7 +7216,6 @@ export interface ClusterSpecEnvValueFromFieldRef {
    * @schema ClusterSpecEnvValueFromFieldRef#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
@@ -7172,6 +7227,68 @@ export function toJson_ClusterSpecEnvValueFromFieldRef(obj: ClusterSpecEnvValueF
   const result = {
     'apiVersion': obj.apiVersion,
     'fieldPath': obj.fieldPath,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * FileKeyRef selects a key of the env file.
+ * Requires the EnvFiles feature gate to be enabled.
+ *
+ * @schema ClusterSpecEnvValueFromFileKeyRef
+ */
+export interface ClusterSpecEnvValueFromFileKeyRef {
+  /**
+   * The key within the env file. An invalid key will prevent the pod from starting.
+   * The keys defined within a source may consist of any printable ASCII characters except '='.
+   * During Alpha stage of the EnvFiles feature gate, the key size is limited to 128 characters.
+   *
+   * @schema ClusterSpecEnvValueFromFileKeyRef#key
+   */
+  readonly key: string;
+
+  /**
+   * Specify whether the file or its key must be defined. If the file or key
+   * does not exist, then the env var is not published.
+   * If optional is set to true and the specified key does not exist,
+   * the environment variable will not be set in the Pod's containers.
+   *
+   * If optional is set to false and the specified key does not exist,
+   * an error will be returned during Pod creation.
+   *
+   * @schema ClusterSpecEnvValueFromFileKeyRef#optional
+   */
+  readonly optional?: boolean;
+
+  /**
+   * The path within the volume from which to select the file.
+   * Must be relative and may not contain the '..' path or start with '..'.
+   *
+   * @schema ClusterSpecEnvValueFromFileKeyRef#path
+   */
+  readonly path: string;
+
+  /**
+   * The name of the volume mount containing the env file.
+   *
+   * @schema ClusterSpecEnvValueFromFileKeyRef#volumeName
+   */
+  readonly volumeName: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSpecEnvValueFromFileKeyRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecEnvValueFromFileKeyRef(obj: ClusterSpecEnvValueFromFileKeyRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'optional': obj.optional,
+    'path': obj.path,
+    'volumeName': obj.volumeName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -7205,7 +7322,6 @@ export interface ClusterSpecEnvValueFromResourceFieldRef {
    * @schema ClusterSpecEnvValueFromResourceFieldRef#resource
    */
   readonly resource: string;
-
 }
 
 /**
@@ -7254,7 +7370,6 @@ export interface ClusterSpecEnvValueFromSecretKeyRef {
    * @schema ClusterSpecEnvValueFromSecretKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -7363,15 +7478,13 @@ export interface ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpec {
    * volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim.
    * If specified, the CSI driver will create or update the volume with the attributes defined
    * in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName,
-   * it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass
-   * will be applied to the claim but it's not allowed to reset this field to empty string once it is set.
-   * If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass
-   * will be set by the persistentvolume controller if it exists.
+   * it can be changed after the claim is created. An empty string or nil value indicates that no
+   * VolumeAttributesClass will be applied to the claim. If the claim enters an Infeasible error state,
+   * this field can be reset to its previous value (including nil) to cancel the modification.
    * If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be
    * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
    * exists.
    * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
    *
    * @schema ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpec#volumeAttributesClassName
    */
@@ -7391,7 +7504,6 @@ export interface ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpec {
    * @schema ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpec#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -7458,7 +7570,6 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreAzureCredentials {
    * @schema ClusterSpecExternalClustersBarmanObjectStoreAzureCredentials#storageSasToken
    */
   readonly storageSasToken?: ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageSasToken;
-
 }
 
 /**
@@ -7545,7 +7656,6 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreData {
    * @schema ClusterSpecExternalClustersBarmanObjectStoreData#jobs
    */
   readonly jobs?: number;
-
 }
 
 /**
@@ -7587,7 +7697,6 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreEndpointCa {
    * @schema ClusterSpecExternalClustersBarmanObjectStoreEndpointCa#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -7625,7 +7734,6 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreGoogleCredentials {
    * @schema ClusterSpecExternalClustersBarmanObjectStoreGoogleCredentials#gkeEnvironment
    */
   readonly gkeEnvironment?: boolean;
-
 }
 
 /**
@@ -7683,7 +7791,6 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreS3Credentials {
    * @schema ClusterSpecExternalClustersBarmanObjectStoreS3Credentials#sessionToken
    */
   readonly sessionToken?: ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsSessionToken;
-
 }
 
 /**
@@ -7780,7 +7887,6 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreWal {
    * @schema ClusterSpecExternalClustersBarmanObjectStoreWal#restoreAdditionalCommandArgs
    */
   readonly restoreAdditionalCommandArgs?: string[];
-
 }
 
 /**
@@ -7826,7 +7932,6 @@ export interface ClusterSpecManagedRolesPasswordSecret {
    * @schema ClusterSpecManagedRolesPasswordSecret#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -7871,7 +7976,6 @@ export interface ClusterSpecManagedServicesAdditional {
    * @schema ClusterSpecManagedServicesAdditional#updateStrategy
    */
   readonly updateStrategy?: ClusterSpecManagedServicesAdditionalUpdateStrategy;
-
 }
 
 /**
@@ -7906,7 +8010,7 @@ export enum ClusterSpecManagedServicesDisabledDefaultServices {
 }
 
 /**
- * Action to perform based on the regex matching.
+ * action to perform based on the regex matching.
  *
  * `Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0.
  * `DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.
@@ -7941,7 +8045,7 @@ export enum ClusterSpecMonitoringPodMonitorMetricRelabelingsAction {
 }
 
 /**
- * Action to perform based on the regex matching.
+ * action to perform based on the regex matching.
  *
  * `Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0.
  * `DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.
@@ -7976,6 +8080,52 @@ export enum ClusterSpecMonitoringPodMonitorRelabelingsAction {
 }
 
 /**
+ * The image containing the extension, required
+ *
+ * @schema ClusterSpecPostgresqlExtensionsImage
+ */
+export interface ClusterSpecPostgresqlExtensionsImage {
+  /**
+   * Policy for pulling OCI objects. Possible values are:
+   * Always: the kubelet always attempts to pull the reference. Container creation will fail If the pull fails.
+   * Never: the kubelet never pulls the reference and only uses a local image or artifact. Container creation will fail if the reference isn't present.
+   * IfNotPresent: the kubelet pulls if the reference isn't already present on disk. Container creation will fail if the reference isn't present and the pull fails.
+   * Defaults to Always if :latest tag is specified, or IfNotPresent otherwise.
+   *
+   * @default Always if :latest tag is specified, or IfNotPresent otherwise.
+   * @schema ClusterSpecPostgresqlExtensionsImage#pullPolicy
+   */
+  readonly pullPolicy?: string;
+
+  /**
+   * Required: Image or artifact reference to be used.
+   * Behaves in the same way as pod.spec.containers[*].image.
+   * Pull secrets will be assembled in the same way as for the container image by looking up node credentials, SA image pull secrets, and pod spec image pull secrets.
+   * More info: https://kubernetes.io/docs/concepts/containers/images
+   * This field is optional to allow higher level config management to default or override
+   * container images in workload controllers like Deployments and StatefulSets.
+   *
+   * @schema ClusterSpecPostgresqlExtensionsImage#reference
+   */
+  readonly reference?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSpecPostgresqlExtensionsImage' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecPostgresqlExtensionsImage(obj: ClusterSpecPostgresqlExtensionsImage | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'pullPolicy': obj.pullPolicy,
+    'reference': obj.reference,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * Bind as authentication configuration
  *
  * @schema ClusterSpecPostgresqlLdapBindAsAuth
@@ -7994,7 +8144,6 @@ export interface ClusterSpecPostgresqlLdapBindAsAuth {
    * @schema ClusterSpecPostgresqlLdapBindAsAuth#suffix
    */
   readonly suffix?: string;
-
 }
 
 /**
@@ -8052,7 +8201,6 @@ export interface ClusterSpecPostgresqlLdapBindSearchAuth {
    * @schema ClusterSpecPostgresqlLdapBindSearchAuth#searchFilter
    */
   readonly searchFilter?: string;
-
 }
 
 /**
@@ -8117,6 +8265,54 @@ export enum ClusterSpecPostgresqlSynchronousMethod {
   /** first */
   FIRST = "first",
 }
+
+/**
+ * Configure the feature that extends the liveness probe for a primary
+ * instance. In addition to the basic checks, this verifies whether the
+ * primary is isolated from the Kubernetes API server and from its
+ * replicas, ensuring that it can be safely shut down if network
+ * partition or API unavailability is detected. Enabled by default.
+ *
+ * @schema ClusterSpecProbesLivenessIsolationCheck
+ */
+export interface ClusterSpecProbesLivenessIsolationCheck {
+  /**
+   * Timeout in milliseconds for connections during the primary isolation check
+   *
+   * @schema ClusterSpecProbesLivenessIsolationCheck#connectionTimeout
+   */
+  readonly connectionTimeout?: number;
+
+  /**
+   * Whether primary isolation checking is enabled for the liveness probe
+   *
+   * @schema ClusterSpecProbesLivenessIsolationCheck#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
+   * Timeout in milliseconds for requests during the primary isolation check
+   *
+   * @schema ClusterSpecProbesLivenessIsolationCheck#requestTimeout
+   */
+  readonly requestTimeout?: number;
+}
+
+/**
+ * Converts an object of type 'ClusterSpecProbesLivenessIsolationCheck' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecProbesLivenessIsolationCheck(obj: ClusterSpecProbesLivenessIsolationCheck | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'connectionTimeout': obj.connectionTimeout,
+    'enabled': obj.enabled,
+    'requestTimeout': obj.requestTimeout,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Lag limit. Used only for `streaming` strategy
@@ -8240,7 +8436,6 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundle {
    * @schema ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundle#signerName
    */
   readonly signerName?: string;
-
 }
 
 /**
@@ -8297,7 +8492,6 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesConfigMap {
    * @schema ClusterSpecProjectedVolumeTemplateSourcesConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -8328,7 +8522,6 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesDownwardApi {
    * @schema ClusterSpecProjectedVolumeTemplateSourcesDownwardApi#items
    */
   readonly items?: ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItems[];
-
 }
 
 /**
@@ -8339,6 +8532,146 @@ export function toJson_ClusterSpecProjectedVolumeTemplateSourcesDownwardApi(obj:
   if (obj === undefined) { return undefined; }
   const result = {
     'items': obj.items?.map(y => toJson_ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItems(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Projects an auto-rotating credential bundle (private key and certificate
+ * chain) that the pod can use either as a TLS client or server.
+ *
+ * Kubelet generates a private key and uses it to send a
+ * PodCertificateRequest to the named signer.  Once the signer approves the
+ * request and issues a certificate chain, Kubelet writes the key and
+ * certificate chain to the pod filesystem.  The pod does not start until
+ * certificates have been issued for each podCertificate projected volume
+ * source in its spec.
+ *
+ * Kubelet will begin trying to rotate the certificate at the time indicated
+ * by the signer using the PodCertificateRequest.Status.BeginRefreshAt
+ * timestamp.
+ *
+ * Kubelet can write a single file, indicated by the credentialBundlePath
+ * field, or separate files, indicated by the keyPath and
+ * certificateChainPath fields.
+ *
+ * The credential bundle is a single file in PEM format.  The first PEM
+ * entry is the private key (in PKCS#8 format), and the remaining PEM
+ * entries are the certificate chain issued by the signer (typically,
+ * signers will return their certificate chain in leaf-to-root order).
+ *
+ * Prefer using the credential bundle format, since your application code
+ * can read it atomically.  If you use keyPath and certificateChainPath,
+ * your application must make two separate file reads. If these coincide
+ * with a certificate rotation, it is possible that the private key and leaf
+ * certificate you read may not correspond to each other.  Your application
+ * will need to check for this condition, and re-read until they are
+ * consistent.
+ *
+ * The named signer controls chooses the format of the certificate it
+ * issues; consult the signer implementation's documentation to learn how to
+ * use the certificates it issues.
+ *
+ * @schema ClusterSpecProjectedVolumeTemplateSourcesPodCertificate
+ */
+export interface ClusterSpecProjectedVolumeTemplateSourcesPodCertificate {
+  /**
+   * Write the certificate chain at this path in the projected volume.
+   *
+   * Most applications should use credentialBundlePath.  When using keyPath
+   * and certificateChainPath, your application needs to check that the key
+   * and leaf certificate are consistent, because it is possible to read the
+   * files mid-rotation.
+   *
+   * @schema ClusterSpecProjectedVolumeTemplateSourcesPodCertificate#certificateChainPath
+   */
+  readonly certificateChainPath?: string;
+
+  /**
+   * Write the credential bundle at this path in the projected volume.
+   *
+   * The credential bundle is a single file that contains multiple PEM blocks.
+   * The first PEM block is a PRIVATE KEY block, containing a PKCS#8 private
+   * key.
+   *
+   * The remaining blocks are CERTIFICATE blocks, containing the issued
+   * certificate chain from the signer (leaf and any intermediates).
+   *
+   * Using credentialBundlePath lets your Pod's application code make a single
+   * atomic read that retrieves a consistent key and certificate chain.  If you
+   * project them to separate files, your application code will need to
+   * additionally check that the leaf certificate was issued to the key.
+   *
+   * @schema ClusterSpecProjectedVolumeTemplateSourcesPodCertificate#credentialBundlePath
+   */
+  readonly credentialBundlePath?: string;
+
+  /**
+   * Write the key at this path in the projected volume.
+   *
+   * Most applications should use credentialBundlePath.  When using keyPath
+   * and certificateChainPath, your application needs to check that the key
+   * and leaf certificate are consistent, because it is possible to read the
+   * files mid-rotation.
+   *
+   * @schema ClusterSpecProjectedVolumeTemplateSourcesPodCertificate#keyPath
+   */
+  readonly keyPath?: string;
+
+  /**
+   * The type of keypair Kubelet will generate for the pod.
+   *
+   * Valid values are "RSA3072", "RSA4096", "ECDSAP256", "ECDSAP384",
+   * "ECDSAP521", and "ED25519".
+   *
+   * @schema ClusterSpecProjectedVolumeTemplateSourcesPodCertificate#keyType
+   */
+  readonly keyType: string;
+
+  /**
+   * maxExpirationSeconds is the maximum lifetime permitted for the
+   * certificate.
+   *
+   * Kubelet copies this value verbatim into the PodCertificateRequests it
+   * generates for this projection.
+   *
+   * If omitted, kube-apiserver will set it to 86400(24 hours). kube-apiserver
+   * will reject values shorter than 3600 (1 hour).  The maximum allowable
+   * value is 7862400 (91 days).
+   *
+   * The signer implementation is then free to issue a certificate with any
+   * lifetime *shorter* than MaxExpirationSeconds, but no shorter than 3600
+   * seconds (1 hour).  This constraint is enforced by kube-apiserver.
+   * `kubernetes.io` signers will never issue certificates with a lifetime
+   * longer than 24 hours.
+   *
+   * @schema ClusterSpecProjectedVolumeTemplateSourcesPodCertificate#maxExpirationSeconds
+   */
+  readonly maxExpirationSeconds?: number;
+
+  /**
+   * Kubelet's generated CSRs will be addressed to this signer.
+   *
+   * @schema ClusterSpecProjectedVolumeTemplateSourcesPodCertificate#signerName
+   */
+  readonly signerName: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSpecProjectedVolumeTemplateSourcesPodCertificate' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecProjectedVolumeTemplateSourcesPodCertificate(obj: ClusterSpecProjectedVolumeTemplateSourcesPodCertificate | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'certificateChainPath': obj.certificateChainPath,
+    'credentialBundlePath': obj.credentialBundlePath,
+    'keyPath': obj.keyPath,
+    'keyType': obj.keyType,
+    'maxExpirationSeconds': obj.maxExpirationSeconds,
+    'signerName': obj.signerName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -8381,7 +8714,6 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesSecret {
    * @schema ClusterSpecProjectedVolumeTemplateSourcesSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -8436,7 +8768,6 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesServiceAccountToken {
    * @schema ClusterSpecProjectedVolumeTemplateSourcesServiceAccountToken#path
    */
   readonly path: string;
-
 }
 
 /**
@@ -8490,7 +8821,6 @@ export interface ClusterSpecStoragePvcTemplateDataSource {
    * @schema ClusterSpecStoragePvcTemplateDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -8568,7 +8898,6 @@ export interface ClusterSpecStoragePvcTemplateDataSourceRef {
    * @schema ClusterSpecStoragePvcTemplateDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -8615,7 +8944,6 @@ export interface ClusterSpecStoragePvcTemplateResources {
    * @schema ClusterSpecStoragePvcTemplateResources#requests
    */
   readonly requests?: { [key: string]: ClusterSpecStoragePvcTemplateResourcesRequests };
-
 }
 
 /**
@@ -8654,7 +8982,6 @@ export interface ClusterSpecStoragePvcTemplateSelector {
    * @schema ClusterSpecStoragePvcTemplateSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -8759,15 +9086,13 @@ export interface ClusterSpecTablespacesStoragePvcTemplate {
    * volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim.
    * If specified, the CSI driver will create or update the volume with the attributes defined
    * in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName,
-   * it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass
-   * will be applied to the claim but it's not allowed to reset this field to empty string once it is set.
-   * If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass
-   * will be set by the persistentvolume controller if it exists.
+   * it can be changed after the claim is created. An empty string or nil value indicates that no
+   * VolumeAttributesClass will be applied to the claim. If the claim enters an Infeasible error state,
+   * this field can be reset to its previous value (including nil) to cancel the modification.
    * If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be
    * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
    * exists.
    * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
    *
    * @schema ClusterSpecTablespacesStoragePvcTemplate#volumeAttributesClassName
    */
@@ -8787,7 +9112,6 @@ export interface ClusterSpecTablespacesStoragePvcTemplate {
    * @schema ClusterSpecTablespacesStoragePvcTemplate#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -8843,7 +9167,6 @@ export interface ClusterSpecTopologySpreadConstraintsLabelSelectorMatchExpressio
    * @schema ClusterSpecTopologySpreadConstraintsLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -8897,7 +9220,6 @@ export interface ClusterSpecWalStoragePvcTemplateDataSource {
    * @schema ClusterSpecWalStoragePvcTemplateDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -8975,7 +9297,6 @@ export interface ClusterSpecWalStoragePvcTemplateDataSourceRef {
    * @schema ClusterSpecWalStoragePvcTemplateDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -9022,7 +9343,6 @@ export interface ClusterSpecWalStoragePvcTemplateResources {
    * @schema ClusterSpecWalStoragePvcTemplateResources#requests
    */
   readonly requests?: { [key: string]: ClusterSpecWalStoragePvcTemplateResourcesRequests };
-
 }
 
 /**
@@ -9061,7 +9381,6 @@ export interface ClusterSpecWalStoragePvcTemplateSelector {
    * @schema ClusterSpecWalStoragePvcTemplateSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -9152,7 +9471,6 @@ export interface ClusterSpecAffinityAdditionalPodAffinityPreferredDuringScheduli
    * @schema ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -9196,7 +9514,6 @@ export interface ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulin
    * @schema ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -9239,7 +9556,6 @@ export interface ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulin
    * @schema ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -9330,7 +9646,6 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSche
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -9374,7 +9689,6 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSched
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -9417,7 +9731,6 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSched
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -9454,7 +9767,6 @@ export interface ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnored
    * @schema ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchFields
    */
   readonly matchFields?: ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields[];
-
 }
 
 /**
@@ -9493,7 +9805,6 @@ export interface ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredD
    * @schema ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchFields
    */
   readonly matchFields?: ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields[];
-
 }
 
 /**
@@ -9530,7 +9841,6 @@ export interface ClusterSpecBackupBarmanObjectStoreAzureCredentialsConnectionStr
    * @schema ClusterSpecBackupBarmanObjectStoreAzureCredentialsConnectionString#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -9567,7 +9877,6 @@ export interface ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageAccoun
    * @schema ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageAccount#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -9605,7 +9914,6 @@ export interface ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageKey {
    * @schema ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageKey#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -9643,7 +9951,6 @@ export interface ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageSasTok
    * @schema ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageSasToken#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -9711,7 +10018,6 @@ export interface ClusterSpecBackupBarmanObjectStoreGoogleCredentialsApplicationC
    * @schema ClusterSpecBackupBarmanObjectStoreGoogleCredentialsApplicationCredentials#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -9748,7 +10054,6 @@ export interface ClusterSpecBackupBarmanObjectStoreS3CredentialsAccessKeyId {
    * @schema ClusterSpecBackupBarmanObjectStoreS3CredentialsAccessKeyId#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -9785,7 +10090,6 @@ export interface ClusterSpecBackupBarmanObjectStoreS3CredentialsRegion {
    * @schema ClusterSpecBackupBarmanObjectStoreS3CredentialsRegion#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -9822,7 +10126,6 @@ export interface ClusterSpecBackupBarmanObjectStoreS3CredentialsSecretAccessKey 
    * @schema ClusterSpecBackupBarmanObjectStoreS3CredentialsSecretAccessKey#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -9859,7 +10162,6 @@ export interface ClusterSpecBackupBarmanObjectStoreS3CredentialsSessionToken {
    * @schema ClusterSpecBackupBarmanObjectStoreS3CredentialsSessionToken#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -9926,7 +10228,6 @@ export interface ClusterSpecBootstrapInitdbImportSource {
    * @schema ClusterSpecBootstrapInitdbImportSource#externalCluster
    */
   readonly externalCluster: string;
-
 }
 
 /**
@@ -9975,7 +10276,6 @@ export interface ClusterSpecBootstrapInitdbPostInitApplicationSqlRefsConfigMapRe
    * @schema ClusterSpecBootstrapInitdbPostInitApplicationSqlRefsConfigMapRefs#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10013,7 +10313,6 @@ export interface ClusterSpecBootstrapInitdbPostInitApplicationSqlRefsSecretRefs 
    * @schema ClusterSpecBootstrapInitdbPostInitApplicationSqlRefsSecretRefs#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10051,7 +10350,6 @@ export interface ClusterSpecBootstrapInitdbPostInitSqlRefsConfigMapRefs {
    * @schema ClusterSpecBootstrapInitdbPostInitSqlRefsConfigMapRefs#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10089,7 +10387,6 @@ export interface ClusterSpecBootstrapInitdbPostInitSqlRefsSecretRefs {
    * @schema ClusterSpecBootstrapInitdbPostInitSqlRefsSecretRefs#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10127,7 +10424,6 @@ export interface ClusterSpecBootstrapInitdbPostInitTemplateSqlRefsConfigMapRefs 
    * @schema ClusterSpecBootstrapInitdbPostInitTemplateSqlRefsConfigMapRefs#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10165,7 +10461,6 @@ export interface ClusterSpecBootstrapInitdbPostInitTemplateSqlRefsSecretRefs {
    * @schema ClusterSpecBootstrapInitdbPostInitTemplateSqlRefsSecretRefs#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10204,7 +10499,6 @@ export interface ClusterSpecBootstrapRecoveryBackupEndpointCa {
    * @schema ClusterSpecBootstrapRecoveryBackupEndpointCa#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10250,7 +10544,6 @@ export interface ClusterSpecBootstrapRecoveryVolumeSnapshotsStorage {
    * @schema ClusterSpecBootstrapRecoveryVolumeSnapshotsStorage#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10298,7 +10591,6 @@ export interface ClusterSpecBootstrapRecoveryVolumeSnapshotsTablespaceStorage {
    * @schema ClusterSpecBootstrapRecoveryVolumeSnapshotsTablespaceStorage#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10345,7 +10637,6 @@ export interface ClusterSpecBootstrapRecoveryVolumeSnapshotsWalStorage {
    * @schema ClusterSpecBootstrapRecoveryVolumeSnapshotsWalStorage#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10415,7 +10706,6 @@ export interface ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecDataSour
    * @schema ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10493,7 +10783,6 @@ export interface ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecDataSour
    * @schema ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -10540,7 +10829,6 @@ export interface ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecResource
    * @schema ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecResources#requests
    */
   readonly requests?: { [key: string]: ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecResourcesRequests };
-
 }
 
 /**
@@ -10579,7 +10867,6 @@ export interface ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecSelector
    * @schema ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -10616,7 +10903,6 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsCon
    * @schema ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsConnectionString#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10653,7 +10939,6 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsSto
    * @schema ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageAccount#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10691,7 +10976,6 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsSto
    * @schema ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageKey#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10729,7 +11013,6 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsSto
    * @schema ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageSasToken#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10797,7 +11080,6 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreGoogleCredentialsAp
    * @schema ClusterSpecExternalClustersBarmanObjectStoreGoogleCredentialsApplicationCredentials#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10834,7 +11116,6 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsAccess
    * @schema ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsAccessKeyId#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10871,7 +11152,6 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsRegion
    * @schema ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsRegion#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10908,7 +11188,6 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsSecret
    * @schema ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsSecretAccessKey#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10945,7 +11224,6 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsSessio
    * @schema ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsSessionToken#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -11036,7 +11314,6 @@ export interface ClusterSpecManagedServicesAdditionalServiceTemplate {
    * @schema ClusterSpecManagedServicesAdditionalServiceTemplate#spec
    */
   readonly spec?: ClusterSpecManagedServicesAdditionalServiceTemplateSpec;
-
 }
 
 /**
@@ -11096,7 +11373,6 @@ export interface ClusterSpecPostgresqlLdapBindSearchAuthBindPassword {
    * @schema ClusterSpecPostgresqlLdapBindSearchAuthBindPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -11139,7 +11415,6 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundleLabe
    * @schema ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundleLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -11191,7 +11466,6 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesConfigMapItems {
    * @schema ClusterSpecProjectedVolumeTemplateSourcesConfigMapItems#path
    */
   readonly path: string;
-
 }
 
 /**
@@ -11249,7 +11523,6 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItems {
    * @schema ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItems#resourceFieldRef
    */
   readonly resourceFieldRef?: ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItemsResourceFieldRef;
-
 }
 
 /**
@@ -11303,7 +11576,6 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesSecretItems {
    * @schema ClusterSpecProjectedVolumeTemplateSourcesSecretItems#path
    */
   readonly path: string;
-
 }
 
 /**
@@ -11381,7 +11653,6 @@ export interface ClusterSpecStoragePvcTemplateSelectorMatchExpressions {
    * @schema ClusterSpecStoragePvcTemplateSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -11435,7 +11706,6 @@ export interface ClusterSpecTablespacesStoragePvcTemplateDataSource {
    * @schema ClusterSpecTablespacesStoragePvcTemplateDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -11513,7 +11783,6 @@ export interface ClusterSpecTablespacesStoragePvcTemplateDataSourceRef {
    * @schema ClusterSpecTablespacesStoragePvcTemplateDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -11560,7 +11829,6 @@ export interface ClusterSpecTablespacesStoragePvcTemplateResources {
    * @schema ClusterSpecTablespacesStoragePvcTemplateResources#requests
    */
   readonly requests?: { [key: string]: ClusterSpecTablespacesStoragePvcTemplateResourcesRequests };
-
 }
 
 /**
@@ -11599,7 +11867,6 @@ export interface ClusterSpecTablespacesStoragePvcTemplateSelector {
    * @schema ClusterSpecTablespacesStoragePvcTemplateSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -11676,7 +11943,6 @@ export interface ClusterSpecWalStoragePvcTemplateSelectorMatchExpressions {
    * @schema ClusterSpecWalStoragePvcTemplateSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -11717,7 +11983,6 @@ export interface ClusterSpecAffinityAdditionalPodAffinityPreferredDuringScheduli
    * @schema ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -11760,7 +12025,6 @@ export interface ClusterSpecAffinityAdditionalPodAffinityPreferredDuringScheduli
    * @schema ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -11809,7 +12073,6 @@ export interface ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulin
    * @schema ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -11859,7 +12122,6 @@ export interface ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulin
    * @schema ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -11900,7 +12162,6 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSche
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -11943,7 +12204,6 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSche
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -11992,7 +12252,6 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSched
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -12042,7 +12301,6 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSched
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -12093,7 +12351,6 @@ export interface ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnored
    * @schema ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -12144,7 +12401,6 @@ export interface ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnored
    * @schema ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -12195,7 +12451,6 @@ export interface ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredD
    * @schema ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -12246,7 +12501,6 @@ export interface ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredD
    * @schema ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -12324,7 +12578,6 @@ export interface ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecSelector
    * @schema ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -12376,7 +12629,6 @@ export interface ClusterSpecManagedServicesAdditionalServiceTemplateMetadata {
    * @schema ClusterSpecManagedServicesAdditionalServiceTemplateMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -12696,7 +12948,6 @@ export interface ClusterSpecManagedServicesAdditionalServiceTemplateSpec {
    * @schema ClusterSpecManagedServicesAdditionalServiceTemplateSpec#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -12763,7 +13014,6 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundleLabe
    * @schema ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundleLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -12801,7 +13051,6 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItemsFieldR
    * @schema ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItemsFieldRef#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
@@ -12846,7 +13095,6 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItemsResour
    * @schema ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItemsResourceFieldRef#resource
    */
   readonly resource: string;
-
 }
 
 /**
@@ -12924,7 +13172,6 @@ export interface ClusterSpecTablespacesStoragePvcTemplateSelectorMatchExpression
    * @schema ClusterSpecTablespacesStoragePvcTemplateSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -12974,7 +13221,6 @@ export interface ClusterSpecAffinityAdditionalPodAffinityPreferredDuringScheduli
    * @schema ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -13024,7 +13270,6 @@ export interface ClusterSpecAffinityAdditionalPodAffinityPreferredDuringScheduli
    * @schema ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -13074,7 +13319,6 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSche
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -13124,7 +13368,6 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSche
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -13225,7 +13468,6 @@ export interface ClusterSpecManagedServicesAdditionalServiceTemplateSpecPorts {
    * @schema ClusterSpecManagedServicesAdditionalServiceTemplateSpecPorts#targetPort
    */
   readonly targetPort?: ClusterSpecManagedServicesAdditionalServiceTemplateSpecPortsTargetPort;
-
 }
 
 /**
@@ -13259,7 +13501,6 @@ export interface ClusterSpecManagedServicesAdditionalServiceTemplateSpecSessionA
    * @schema ClusterSpecManagedServicesAdditionalServiceTemplateSpecSessionAffinityConfig#clientIP
    */
   readonly clientIp?: ClusterSpecManagedServicesAdditionalServiceTemplateSpecSessionAffinityConfigClientIp;
-
 }
 
 /**
@@ -13329,7 +13570,6 @@ export interface ClusterSpecManagedServicesAdditionalServiceTemplateSpecSessionA
    * @schema ClusterSpecManagedServicesAdditionalServiceTemplateSpecSessionAffinityConfigClientIp#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
@@ -13419,7 +13659,6 @@ export interface ClusterImageCatalogProps {
    * @schema ClusterImageCatalog#spec
    */
   readonly spec: ClusterImageCatalogSpec;
-
 }
 
 /**
@@ -13450,7 +13689,6 @@ export interface ClusterImageCatalogSpec {
    * @schema ClusterImageCatalogSpec#images
    */
   readonly images: ClusterImageCatalogSpecImages[];
-
 }
 
 /**
@@ -13486,7 +13724,6 @@ export interface ClusterImageCatalogSpecImages {
    * @schema ClusterImageCatalogSpecImages#major
    */
   readonly major: number;
-
 }
 
 /**
@@ -13577,7 +13814,6 @@ export interface DatabaseProps {
    * @schema Database#spec
    */
   readonly spec: DatabaseSpec;
-
 }
 
 /**
@@ -13778,7 +14014,6 @@ export interface DatabaseSpec {
    * @schema DatabaseSpec#template
    */
   readonly template?: string;
-
 }
 
 /**
@@ -13831,7 +14066,6 @@ export interface DatabaseSpecCluster {
    * @schema DatabaseSpecCluster#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -13914,7 +14148,6 @@ export interface DatabaseSpecExtensions {
    * @schema DatabaseSpecExtensions#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -13965,7 +14198,6 @@ export interface DatabaseSpecSchemas {
    * @schema DatabaseSpecSchemas#owner
    */
   readonly owner?: string;
-
 }
 
 /**
@@ -14013,6 +14245,93 @@ export enum DatabaseSpecSchemasEnsure {
   /** absent */
   ABSENT = "absent",
 }
+
+
+/**
+ * FailoverQuorum contains the information about the current failover
+quorum status of a PG cluster. It is updated by the instance manager
+of the primary node and reset to zero by the operator to trigger
+an update.
+ *
+ * @schema FailoverQuorum
+ */
+export class FailoverQuorum extends ApiObject {
+  /**
+   * Returns the apiVersion and kind for "FailoverQuorum"
+   */
+  public static readonly GVK: GroupVersionKind = {
+    apiVersion: 'postgresql.cnpg.io/v1',
+    kind: 'FailoverQuorum',
+  }
+
+  /**
+   * Renders a Kubernetes manifest for "FailoverQuorum".
+   *
+   * This can be used to inline resource manifests inside other objects (e.g. as templates).
+   *
+   * @param props initialization props
+   */
+  public static manifest(props: FailoverQuorumProps): any {
+    return {
+      ...FailoverQuorum.GVK,
+      ...toJson_FailoverQuorumProps(props),
+    };
+  }
+
+  /**
+   * Defines a "FailoverQuorum" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialization props
+   */
+  public constructor(scope: Construct, id: string, props: FailoverQuorumProps) {
+    super(scope, id, {
+      ...FailoverQuorum.GVK,
+      ...props,
+    });
+  }
+
+  /**
+   * Renders the object to Kubernetes JSON.
+   */
+  public override toJson(): any {
+    const resolved = super.toJson();
+
+    return {
+      ...FailoverQuorum.GVK,
+      ...toJson_FailoverQuorumProps(resolved),
+    };
+  }
+}
+
+/**
+ * FailoverQuorum contains the information about the current failover
+ * quorum status of a PG cluster. It is updated by the instance manager
+ * of the primary node and reset to zero by the operator to trigger
+ * an update.
+ *
+ * @schema FailoverQuorum
+ */
+export interface FailoverQuorumProps {
+  /**
+   * @schema FailoverQuorum#metadata
+   */
+  readonly metadata: ApiObjectMetadata;
+}
+
+/**
+ * Converts an object of type 'FailoverQuorumProps' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_FailoverQuorumProps(obj: FailoverQuorumProps | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': obj.metadata,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -14087,7 +14406,6 @@ export interface ImageCatalogProps {
    * @schema ImageCatalog#spec
    */
   readonly spec: ImageCatalogSpec;
-
 }
 
 /**
@@ -14118,7 +14436,6 @@ export interface ImageCatalogSpec {
    * @schema ImageCatalogSpec#images
    */
   readonly images: ImageCatalogSpecImages[];
-
 }
 
 /**
@@ -14154,7 +14471,6 @@ export interface ImageCatalogSpecImages {
    * @schema ImageCatalogSpecImages#major
    */
   readonly major: number;
-
 }
 
 /**
@@ -14245,7 +14561,6 @@ export interface PoolerProps {
    * @schema Pooler#spec
    */
   readonly spec: PoolerSpec;
-
 }
 
 /**
@@ -14295,6 +14610,9 @@ export interface PoolerSpec {
   /**
    * The configuration of the monitoring infrastructure of this pooler.
    *
+   * Deprecated: This feature will be removed in an upcoming release. If
+   * you need this functionality, you can create a PodMonitor manually.
+   *
    * @schema PoolerSpec#monitoring
    */
   readonly monitoring?: PoolerSpecMonitoring;
@@ -14326,7 +14644,6 @@ export interface PoolerSpec {
    * @schema PoolerSpec#type
    */
   readonly type?: PoolerSpecType;
-
 }
 
 /**
@@ -14363,7 +14680,6 @@ export interface PoolerSpecCluster {
    * @schema PoolerSpecCluster#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -14401,7 +14717,6 @@ export interface PoolerSpecDeploymentStrategy {
    * @schema PoolerSpecDeploymentStrategy#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -14421,6 +14736,9 @@ export function toJson_PoolerSpecDeploymentStrategy(obj: PoolerSpecDeploymentStr
 
 /**
  * The configuration of the monitoring infrastructure of this pooler.
+ *
+ * Deprecated: This feature will be removed in an upcoming release. If
+ * you need this functionality, you can create a PodMonitor manually.
  *
  * @schema PoolerSpecMonitoring
  */
@@ -14445,7 +14763,6 @@ export interface PoolerSpecMonitoring {
    * @schema PoolerSpecMonitoring#podMonitorRelabelings
    */
   readonly podMonitorRelabelings?: PoolerSpecMonitoringPodMonitorRelabelings[];
-
 }
 
 /**
@@ -14522,7 +14839,6 @@ export interface PoolerSpecPgbouncer {
    * @schema PoolerSpecPgbouncer#poolMode
    */
   readonly poolMode?: PoolerSpecPgbouncerPoolMode;
-
 }
 
 /**
@@ -14565,7 +14881,6 @@ export interface PoolerSpecServiceTemplate {
    * @schema PoolerSpecServiceTemplate#spec
    */
   readonly spec?: PoolerSpecServiceTemplateSpec;
-
 }
 
 /**
@@ -14604,7 +14919,6 @@ export interface PoolerSpecTemplate {
    * @schema PoolerSpecTemplate#spec
    */
   readonly spec?: PoolerSpecTemplateSpec;
-
 }
 
 /**
@@ -14677,7 +14991,6 @@ export interface PoolerSpecDeploymentStrategyRollingUpdate {
    * @schema PoolerSpecDeploymentStrategyRollingUpdate#maxUnavailable
    */
   readonly maxUnavailable?: PoolerSpecDeploymentStrategyRollingUpdateMaxUnavailable;
-
 }
 
 /**
@@ -14705,7 +15018,7 @@ export function toJson_PoolerSpecDeploymentStrategyRollingUpdate(obj: PoolerSpec
  */
 export interface PoolerSpecMonitoringPodMonitorMetricRelabelings {
   /**
-   * Action to perform based on the regex matching.
+   * action to perform based on the regex matching.
    *
    * `Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0.
    * `DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.
@@ -14717,7 +15030,7 @@ export interface PoolerSpecMonitoringPodMonitorMetricRelabelings {
   readonly action?: PoolerSpecMonitoringPodMonitorMetricRelabelingsAction;
 
   /**
-   * Modulus to take of the hash of the source label values.
+   * modulus to take of the hash of the source label values.
    *
    * Only applicable when the action is `HashMod`.
    *
@@ -14726,14 +15039,14 @@ export interface PoolerSpecMonitoringPodMonitorMetricRelabelings {
   readonly modulus?: number;
 
   /**
-   * Regular expression against which the extracted value is matched.
+   * regex defines the regular expression against which the extracted value is matched.
    *
    * @schema PoolerSpecMonitoringPodMonitorMetricRelabelings#regex
    */
   readonly regex?: string;
 
   /**
-   * Replacement value against which a Replace action is performed if the
+   * replacement value against which a Replace action is performed if the
    * regular expression matches.
    *
    * Regex capture groups are available.
@@ -14743,14 +15056,14 @@ export interface PoolerSpecMonitoringPodMonitorMetricRelabelings {
   readonly replacement?: string;
 
   /**
-   * Separator is the string between concatenated SourceLabels.
+   * separator defines the string between concatenated SourceLabels.
    *
    * @schema PoolerSpecMonitoringPodMonitorMetricRelabelings#separator
    */
   readonly separator?: string;
 
   /**
-   * The source labels select values from existing labels. Their content is
+   * sourceLabels defines the source labels select values from existing labels. Their content is
    * concatenated using the configured Separator and matched against the
    * configured regular expression.
    *
@@ -14759,7 +15072,7 @@ export interface PoolerSpecMonitoringPodMonitorMetricRelabelings {
   readonly sourceLabels?: string[];
 
   /**
-   * Label to which the resulting string is written in a replacement.
+   * targetLabel defines the label to which the resulting string is written in a replacement.
    *
    * It is mandatory for `Replace`, `HashMod`, `Lowercase`, `Uppercase`,
    * `KeepEqual` and `DropEqual` actions.
@@ -14769,7 +15082,6 @@ export interface PoolerSpecMonitoringPodMonitorMetricRelabelings {
    * @schema PoolerSpecMonitoringPodMonitorMetricRelabelings#targetLabel
    */
   readonly targetLabel?: string;
-
 }
 
 /**
@@ -14802,7 +15114,7 @@ export function toJson_PoolerSpecMonitoringPodMonitorMetricRelabelings(obj: Pool
  */
 export interface PoolerSpecMonitoringPodMonitorRelabelings {
   /**
-   * Action to perform based on the regex matching.
+   * action to perform based on the regex matching.
    *
    * `Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0.
    * `DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.
@@ -14814,7 +15126,7 @@ export interface PoolerSpecMonitoringPodMonitorRelabelings {
   readonly action?: PoolerSpecMonitoringPodMonitorRelabelingsAction;
 
   /**
-   * Modulus to take of the hash of the source label values.
+   * modulus to take of the hash of the source label values.
    *
    * Only applicable when the action is `HashMod`.
    *
@@ -14823,14 +15135,14 @@ export interface PoolerSpecMonitoringPodMonitorRelabelings {
   readonly modulus?: number;
 
   /**
-   * Regular expression against which the extracted value is matched.
+   * regex defines the regular expression against which the extracted value is matched.
    *
    * @schema PoolerSpecMonitoringPodMonitorRelabelings#regex
    */
   readonly regex?: string;
 
   /**
-   * Replacement value against which a Replace action is performed if the
+   * replacement value against which a Replace action is performed if the
    * regular expression matches.
    *
    * Regex capture groups are available.
@@ -14840,14 +15152,14 @@ export interface PoolerSpecMonitoringPodMonitorRelabelings {
   readonly replacement?: string;
 
   /**
-   * Separator is the string between concatenated SourceLabels.
+   * separator defines the string between concatenated SourceLabels.
    *
    * @schema PoolerSpecMonitoringPodMonitorRelabelings#separator
    */
   readonly separator?: string;
 
   /**
-   * The source labels select values from existing labels. Their content is
+   * sourceLabels defines the source labels select values from existing labels. Their content is
    * concatenated using the configured Separator and matched against the
    * configured regular expression.
    *
@@ -14856,7 +15168,7 @@ export interface PoolerSpecMonitoringPodMonitorRelabelings {
   readonly sourceLabels?: string[];
 
   /**
-   * Label to which the resulting string is written in a replacement.
+   * targetLabel defines the label to which the resulting string is written in a replacement.
    *
    * It is mandatory for `Replace`, `HashMod`, `Lowercase`, `Uppercase`,
    * `KeepEqual` and `DropEqual` actions.
@@ -14866,7 +15178,6 @@ export interface PoolerSpecMonitoringPodMonitorRelabelings {
    * @schema PoolerSpecMonitoringPodMonitorRelabelings#targetLabel
    */
   readonly targetLabel?: string;
-
 }
 
 /**
@@ -14904,7 +15215,6 @@ export interface PoolerSpecPgbouncerAuthQuerySecret {
    * @schema PoolerSpecPgbouncerAuthQuerySecret#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -14966,7 +15276,6 @@ export interface PoolerSpecServiceTemplateMetadata {
    * @schema PoolerSpecServiceTemplateMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -15286,7 +15595,6 @@ export interface PoolerSpecServiceTemplateSpec {
    * @schema PoolerSpecServiceTemplateSpec#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -15355,7 +15663,6 @@ export interface PoolerSpecTemplateMetadata {
    * @schema PoolerSpecTemplateMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -15475,7 +15782,9 @@ export interface PoolerSpecTemplateSpec {
 
   /**
    * Host networking requested for this pod. Use the host's network namespace.
-   * If this option is set, the ports that will be used must be specified.
+   * When using HostNetwork you should specify ports so the scheduler is aware.
+   * When `hostNetwork` is true, specified `hostPort` fields in port definitions must match `containerPort`,
+   * and unspecified `hostPort` fields in port definitions are defaulted to match `containerPort`.
    * Default to false.
    *
    * @default false.
@@ -15515,6 +15824,22 @@ export interface PoolerSpecTemplateSpec {
    * @schema PoolerSpecTemplateSpec#hostname
    */
   readonly hostname?: string;
+
+  /**
+   * HostnameOverride specifies an explicit override for the pod's hostname as perceived by the pod.
+   * This field only specifies the pod's hostname and does not affect its DNS records.
+   * When this field is set to a non-empty string:
+   * - It takes precedence over the values set in `hostname` and `subdomain`.
+   * - The Pod's hostname will be set to this value.
+   * - `setHostnameAsFQDN` must be nil or set to false.
+   * - `hostNetwork` must be set to false.
+   *
+   * This field must be a valid DNS subdomain as defined in RFC 1123 and contain at most 64 characters.
+   * Requires the HostnameOverride feature gate to be enabled.
+   *
+   * @schema PoolerSpecTemplateSpec#hostnameOverride
+   */
+  readonly hostnameOverride?: string;
 
   /**
    * ImagePullSecrets is an optional list of references to secrets in the same namespace to use for pulling any of the images used by this PodSpec.
@@ -15575,6 +15900,7 @@ export interface PoolerSpecTemplateSpec {
    * - spec.hostPID
    * - spec.hostIPC
    * - spec.hostUsers
+   * - spec.resources
    * - spec.securityContext.appArmorProfile
    * - spec.securityContext.seLinuxOptions
    * - spec.securityContext.seccompProfile
@@ -15675,7 +16001,7 @@ export interface PoolerSpecTemplateSpec {
   /**
    * Resources is the total amount of CPU and Memory resources required by all
    * containers in the pod. It supports specifying Requests and Limits for
-   * "cpu" and "memory" resource names only. ResourceClaims are not supported.
+   * "cpu", "memory" and "hugepages-" resource names only. ResourceClaims are not supported.
    *
    * This field enables fine-grained control over resource allocation for the
    * entire pod, allowing resource sharing among containers in a pod.
@@ -15823,7 +16149,6 @@ export interface PoolerSpecTemplateSpec {
    * @schema PoolerSpecTemplateSpec#volumes
    */
   readonly volumes?: PoolerSpecTemplateSpecVolumes[];
-
 }
 
 /**
@@ -15847,6 +16172,7 @@ export function toJson_PoolerSpecTemplateSpec(obj: PoolerSpecTemplateSpec | unde
     'hostPID': obj.hostPid,
     'hostUsers': obj.hostUsers,
     'hostname': obj.hostname,
+    'hostnameOverride': obj.hostnameOverride,
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_PoolerSpecTemplateSpecImagePullSecrets(y)),
     'initContainers': obj.initContainers?.map(y => toJson_PoolerSpecTemplateSpecInitContainers(y)),
     'nodeName': obj.nodeName,
@@ -15933,7 +16259,7 @@ export class PoolerSpecDeploymentStrategyRollingUpdateMaxUnavailable {
 }
 
 /**
- * Action to perform based on the regex matching.
+ * action to perform based on the regex matching.
  *
  * `Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0.
  * `DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.
@@ -15968,7 +16294,7 @@ export enum PoolerSpecMonitoringPodMonitorMetricRelabelingsAction {
 }
 
 /**
- * Action to perform based on the regex matching.
+ * action to perform based on the regex matching.
  *
  * `Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0.
  * `DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.
@@ -16084,7 +16410,6 @@ export interface PoolerSpecServiceTemplateSpecPorts {
    * @schema PoolerSpecServiceTemplateSpecPorts#targetPort
    */
   readonly targetPort?: PoolerSpecServiceTemplateSpecPortsTargetPort;
-
 }
 
 /**
@@ -16118,7 +16443,6 @@ export interface PoolerSpecServiceTemplateSpecSessionAffinityConfig {
    * @schema PoolerSpecServiceTemplateSpecSessionAffinityConfig#clientIP
    */
   readonly clientIp?: PoolerSpecServiceTemplateSpecSessionAffinityConfigClientIp;
-
 }
 
 /**
@@ -16161,7 +16485,6 @@ export interface PoolerSpecTemplateSpecAffinity {
    * @schema PoolerSpecTemplateSpecAffinity#podAntiAffinity
    */
   readonly podAntiAffinity?: PoolerSpecTemplateSpecAffinityPodAntiAffinity;
-
 }
 
 /**
@@ -16224,8 +16547,8 @@ export interface PoolerSpecTemplateSpecContainers {
 
   /**
    * List of sources to populate environment variables in the container.
-   * The keys defined within a source must be a C_IDENTIFIER. All invalid keys
-   * will be reported as an event when the container is starting. When a key exists in multiple
+   * The keys defined within a source may consist of any printable ASCII characters except '='.
+   * When a key exists in multiple
    * sources, the value associated with the last source will take precedence.
    * Values defined by an Env with a duplicate key will take precedence.
    * Cannot be updated.
@@ -16324,10 +16647,10 @@ export interface PoolerSpecTemplateSpecContainers {
 
   /**
    * RestartPolicy defines the restart behavior of individual containers in a pod.
-   * This field may only be set for init containers, and the only allowed value is "Always".
-   * For non-init containers or when this field is not specified,
+   * This overrides the pod-level restart policy. When this field is not specified,
    * the restart behavior is defined by the Pod's restart policy and the container type.
-   * Setting the RestartPolicy as "Always" for the init container will have the following effect:
+   * Additionally, setting the RestartPolicy as "Always" for the init container will
+   * have the following effect:
    * this init container will be continually restarted on
    * exit until all regular containers have terminated. Once all regular
    * containers have completed, all init containers with restartPolicy "Always"
@@ -16342,6 +16665,23 @@ export interface PoolerSpecTemplateSpecContainers {
    * @schema PoolerSpecTemplateSpecContainers#restartPolicy
    */
   readonly restartPolicy?: string;
+
+  /**
+   * Represents a list of rules to be checked to determine if the
+   * container should be restarted on exit. The rules are evaluated in
+   * order. Once a rule matches a container exit condition, the remaining
+   * rules are ignored. If no rule matches the container exit condition,
+   * the Container-level restart policy determines the whether the container
+   * is restarted or not. Constraints on the rules:
+   * - At most 20 rules are allowed.
+   * - Rules can have the same action.
+   * - Identical rules are not forbidden in validations.
+   * When rules are specified, container MUST set RestartPolicy explicitly
+   * even it if matches the Pod's RestartPolicy.
+   *
+   * @schema PoolerSpecTemplateSpecContainers#restartPolicyRules
+   */
+  readonly restartPolicyRules?: PoolerSpecTemplateSpecContainersRestartPolicyRules[];
 
   /**
    * SecurityContext defines the security options the container should be run with.
@@ -16450,7 +16790,6 @@ export interface PoolerSpecTemplateSpecContainers {
    * @schema PoolerSpecTemplateSpecContainers#workingDir
    */
   readonly workingDir?: string;
-
 }
 
 /**
@@ -16474,6 +16813,7 @@ export function toJson_PoolerSpecTemplateSpecContainers(obj: PoolerSpecTemplateS
     'resizePolicy': obj.resizePolicy?.map(y => toJson_PoolerSpecTemplateSpecContainersResizePolicy(y)),
     'resources': toJson_PoolerSpecTemplateSpecContainersResources(obj.resources),
     'restartPolicy': obj.restartPolicy,
+    'restartPolicyRules': obj.restartPolicyRules?.map(y => toJson_PoolerSpecTemplateSpecContainersRestartPolicyRules(y)),
     'securityContext': toJson_PoolerSpecTemplateSpecContainersSecurityContext(obj.securityContext),
     'startupProbe': toJson_PoolerSpecTemplateSpecContainersStartupProbe(obj.startupProbe),
     'stdin': obj.stdin,
@@ -16525,7 +16865,6 @@ export interface PoolerSpecTemplateSpecDnsConfig {
    * @schema PoolerSpecTemplateSpecDnsConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
@@ -16595,8 +16934,8 @@ export interface PoolerSpecTemplateSpecEphemeralContainers {
 
   /**
    * List of sources to populate environment variables in the container.
-   * The keys defined within a source must be a C_IDENTIFIER. All invalid keys
-   * will be reported as an event when the container is starting. When a key exists in multiple
+   * The keys defined within a source may consist of any printable ASCII characters except '='.
+   * When a key exists in multiple
    * sources, the value associated with the last source will take precedence.
    * Values defined by an Env with a duplicate key will take precedence.
    * Cannot be updated.
@@ -16679,12 +17018,20 @@ export interface PoolerSpecTemplateSpecEphemeralContainers {
   /**
    * Restart policy for the container to manage the restart behavior of each
    * container within a pod.
-   * This may only be set for init containers. You cannot set this field on
-   * ephemeral containers.
+   * You cannot set this field on ephemeral containers.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainers#restartPolicy
    */
   readonly restartPolicy?: string;
+
+  /**
+   * Represents a list of rules to be checked to determine if the
+   * container should be restarted on exit. You cannot set this field on
+   * ephemeral containers.
+   *
+   * @schema PoolerSpecTemplateSpecEphemeralContainers#restartPolicyRules
+   */
+  readonly restartPolicyRules?: PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRules[];
 
   /**
    * Optional: SecurityContext defines the security options the ephemeral container should be run with.
@@ -16798,7 +17145,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainers {
    * @schema PoolerSpecTemplateSpecEphemeralContainers#workingDir
    */
   readonly workingDir?: string;
-
 }
 
 /**
@@ -16822,6 +17168,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainers(obj: PoolerSpec
     'resizePolicy': obj.resizePolicy?.map(y => toJson_PoolerSpecTemplateSpecEphemeralContainersResizePolicy(y)),
     'resources': toJson_PoolerSpecTemplateSpecEphemeralContainersResources(obj.resources),
     'restartPolicy': obj.restartPolicy,
+    'restartPolicyRules': obj.restartPolicyRules?.map(y => toJson_PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRules(y)),
     'securityContext': toJson_PoolerSpecTemplateSpecEphemeralContainersSecurityContext(obj.securityContext),
     'startupProbe': toJson_PoolerSpecTemplateSpecEphemeralContainersStartupProbe(obj.startupProbe),
     'stdin': obj.stdin,
@@ -16859,7 +17206,6 @@ export interface PoolerSpecTemplateSpecHostAliases {
    * @schema PoolerSpecTemplateSpecHostAliases#ip
    */
   readonly ip: string;
-
 }
 
 /**
@@ -16894,7 +17240,6 @@ export interface PoolerSpecTemplateSpecImagePullSecrets {
    * @schema PoolerSpecTemplateSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -16955,8 +17300,8 @@ export interface PoolerSpecTemplateSpecInitContainers {
 
   /**
    * List of sources to populate environment variables in the container.
-   * The keys defined within a source must be a C_IDENTIFIER. All invalid keys
-   * will be reported as an event when the container is starting. When a key exists in multiple
+   * The keys defined within a source may consist of any printable ASCII characters except '='.
+   * When a key exists in multiple
    * sources, the value associated with the last source will take precedence.
    * Values defined by an Env with a duplicate key will take precedence.
    * Cannot be updated.
@@ -17055,10 +17400,10 @@ export interface PoolerSpecTemplateSpecInitContainers {
 
   /**
    * RestartPolicy defines the restart behavior of individual containers in a pod.
-   * This field may only be set for init containers, and the only allowed value is "Always".
-   * For non-init containers or when this field is not specified,
+   * This overrides the pod-level restart policy. When this field is not specified,
    * the restart behavior is defined by the Pod's restart policy and the container type.
-   * Setting the RestartPolicy as "Always" for the init container will have the following effect:
+   * Additionally, setting the RestartPolicy as "Always" for the init container will
+   * have the following effect:
    * this init container will be continually restarted on
    * exit until all regular containers have terminated. Once all regular
    * containers have completed, all init containers with restartPolicy "Always"
@@ -17073,6 +17418,23 @@ export interface PoolerSpecTemplateSpecInitContainers {
    * @schema PoolerSpecTemplateSpecInitContainers#restartPolicy
    */
   readonly restartPolicy?: string;
+
+  /**
+   * Represents a list of rules to be checked to determine if the
+   * container should be restarted on exit. The rules are evaluated in
+   * order. Once a rule matches a container exit condition, the remaining
+   * rules are ignored. If no rule matches the container exit condition,
+   * the Container-level restart policy determines the whether the container
+   * is restarted or not. Constraints on the rules:
+   * - At most 20 rules are allowed.
+   * - Rules can have the same action.
+   * - Identical rules are not forbidden in validations.
+   * When rules are specified, container MUST set RestartPolicy explicitly
+   * even it if matches the Pod's RestartPolicy.
+   *
+   * @schema PoolerSpecTemplateSpecInitContainers#restartPolicyRules
+   */
+  readonly restartPolicyRules?: PoolerSpecTemplateSpecInitContainersRestartPolicyRules[];
 
   /**
    * SecurityContext defines the security options the container should be run with.
@@ -17181,7 +17543,6 @@ export interface PoolerSpecTemplateSpecInitContainers {
    * @schema PoolerSpecTemplateSpecInitContainers#workingDir
    */
   readonly workingDir?: string;
-
 }
 
 /**
@@ -17205,6 +17566,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainers(obj: PoolerSpecTempl
     'resizePolicy': obj.resizePolicy?.map(y => toJson_PoolerSpecTemplateSpecInitContainersResizePolicy(y)),
     'resources': toJson_PoolerSpecTemplateSpecInitContainersResources(obj.resources),
     'restartPolicy': obj.restartPolicy,
+    'restartPolicyRules': obj.restartPolicyRules?.map(y => toJson_PoolerSpecTemplateSpecInitContainersRestartPolicyRules(y)),
     'securityContext': toJson_PoolerSpecTemplateSpecInitContainersSecurityContext(obj.securityContext),
     'startupProbe': toJson_PoolerSpecTemplateSpecInitContainersStartupProbe(obj.startupProbe),
     'stdin': obj.stdin,
@@ -17232,6 +17594,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainers(obj: PoolerSpecTempl
  * - spec.hostPID
  * - spec.hostIPC
  * - spec.hostUsers
+ * - spec.resources
  * - spec.securityContext.appArmorProfile
  * - spec.securityContext.seLinuxOptions
  * - spec.securityContext.seccompProfile
@@ -17266,7 +17629,6 @@ export interface PoolerSpecTemplateSpecOs {
    * @schema PoolerSpecTemplateSpecOs#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -17309,7 +17671,6 @@ export interface PoolerSpecTemplateSpecReadinessGates {
    * @schema PoolerSpecTemplateSpecReadinessGates#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
@@ -17376,7 +17737,6 @@ export interface PoolerSpecTemplateSpecResourceClaims {
    * @schema PoolerSpecTemplateSpecResourceClaims#resourceClaimTemplateName
    */
   readonly resourceClaimTemplateName?: string;
-
 }
 
 /**
@@ -17398,7 +17758,7 @@ export function toJson_PoolerSpecTemplateSpecResourceClaims(obj: PoolerSpecTempl
 /**
  * Resources is the total amount of CPU and Memory resources required by all
  * containers in the pod. It supports specifying Requests and Limits for
- * "cpu" and "memory" resource names only. ResourceClaims are not supported.
+ * "cpu", "memory" and "hugepages-" resource names only. ResourceClaims are not supported.
  *
  * This field enables fine-grained control over resource allocation for the
  * entire pod, allowing resource sharing among containers in a pod.
@@ -17413,7 +17773,7 @@ export interface PoolerSpecTemplateSpecResources {
    * Claims lists the names of resources, defined in spec.resourceClaims,
    * that are used by this container.
    *
-   * This is an alpha field and requires enabling the
+   * This field depends on the
    * DynamicResourceAllocation feature gate.
    *
    * This field is immutable. It can only be set for containers.
@@ -17439,7 +17799,6 @@ export interface PoolerSpecTemplateSpecResources {
    * @schema PoolerSpecTemplateSpecResources#requests
    */
   readonly requests?: { [key: string]: PoolerSpecTemplateSpecResourcesRequests };
-
 }
 
 /**
@@ -17471,7 +17830,6 @@ export interface PoolerSpecTemplateSpecSchedulingGates {
    * @schema PoolerSpecTemplateSpecSchedulingGates#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -17663,7 +18021,6 @@ export interface PoolerSpecTemplateSpecSecurityContext {
    * @schema PoolerSpecTemplateSpecSecurityContext#windowsOptions
    */
   readonly windowsOptions?: PoolerSpecTemplateSpecSecurityContextWindowsOptions;
-
 }
 
 /**
@@ -17743,7 +18100,6 @@ export interface PoolerSpecTemplateSpecTolerations {
    * @schema PoolerSpecTemplateSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -17907,7 +18263,6 @@ export interface PoolerSpecTemplateSpecTopologySpreadConstraints {
    * @schema PoolerSpecTemplateSpecTopologySpreadConstraints#whenUnsatisfiable
    */
   readonly whenUnsatisfiable: string;
-
 }
 
 /**
@@ -18091,7 +18446,6 @@ export interface PoolerSpecTemplateSpecVolumes {
   /**
    * glusterfs represents a Glusterfs mount on the host that shares a pod's lifetime.
    * Deprecated: Glusterfs is deprecated and the in-tree glusterfs type is no longer supported.
-   * More info: https://examples.k8s.io/volumes/glusterfs/README.md
    *
    * @schema PoolerSpecTemplateSpecVolumes#glusterfs
    */
@@ -18131,7 +18485,7 @@ export interface PoolerSpecTemplateSpecVolumes {
   /**
    * iscsi represents an ISCSI Disk resource that is attached to a
    * kubelet's host machine and then exposed to the pod.
-   * More info: https://examples.k8s.io/volumes/iscsi/README.md
+   * More info: https://kubernetes.io/docs/concepts/storage/volumes/#iscsi
    *
    * @schema PoolerSpecTemplateSpecVolumes#iscsi
    */
@@ -18199,7 +18553,6 @@ export interface PoolerSpecTemplateSpecVolumes {
   /**
    * rbd represents a Rados Block Device mount on the host that shares a pod's lifetime.
    * Deprecated: RBD is deprecated and the in-tree rbd type is no longer supported.
-   * More info: https://examples.k8s.io/volumes/rbd/README.md
    *
    * @schema PoolerSpecTemplateSpecVolumes#rbd
    */
@@ -18237,7 +18590,6 @@ export interface PoolerSpecTemplateSpecVolumes {
    * @schema PoolerSpecTemplateSpecVolumes#vsphereVolume
    */
   readonly vsphereVolume?: PoolerSpecTemplateSpecVolumesVsphereVolume;
-
 }
 
 /**
@@ -18321,7 +18673,6 @@ export interface PoolerSpecServiceTemplateSpecSessionAffinityConfigClientIp {
    * @schema PoolerSpecServiceTemplateSpecSessionAffinityConfigClientIp#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
@@ -18369,7 +18720,6 @@ export interface PoolerSpecTemplateSpecAffinityNodeAffinity {
    * @schema PoolerSpecTemplateSpecAffinityNodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution;
-
 }
 
 /**
@@ -18420,7 +18770,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinity {
    * @schema PoolerSpecTemplateSpecAffinityPodAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
@@ -18451,8 +18800,8 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinity {
    * most preferred is the one with the greatest sum of weights, i.e.
    * for each node that meets all of the scheduling requirements (resource
    * request, requiredDuringScheduling anti-affinity expressions, etc.),
-   * compute a sum by iterating through the elements of this field and adding
-   * "weight" to the sum if the node has pods which matches the corresponding podAffinityTerm; the
+   * compute a sum by iterating through the elements of this field and subtracting
+   * "weight" from the sum if the node has pods which matches the corresponding podAffinityTerm; the
    * node(s) with the highest sum are the most preferred.
    *
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinity#preferredDuringSchedulingIgnoredDuringExecution
@@ -18471,7 +18820,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinity {
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
@@ -18496,7 +18844,8 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinity(obj: Pooler
  */
 export interface PoolerSpecTemplateSpecContainersEnv {
   /**
-   * Name of the environment variable. Must be a C_IDENTIFIER.
+   * Name of the environment variable.
+   * May consist of any printable ASCII characters except '='.
    *
    * @schema PoolerSpecTemplateSpecContainersEnv#name
    */
@@ -18524,7 +18873,6 @@ export interface PoolerSpecTemplateSpecContainersEnv {
    * @schema PoolerSpecTemplateSpecContainersEnv#valueFrom
    */
   readonly valueFrom?: PoolerSpecTemplateSpecContainersEnvValueFrom;
-
 }
 
 /**
@@ -18557,7 +18905,8 @@ export interface PoolerSpecTemplateSpecContainersEnvFrom {
   readonly configMapRef?: PoolerSpecTemplateSpecContainersEnvFromConfigMapRef;
 
   /**
-   * Optional text to prepend to the name of each environment variable. Must be a C_IDENTIFIER.
+   * Optional text to prepend to the name of each environment variable.
+   * May consist of any printable ASCII characters except '='.
    *
    * @schema PoolerSpecTemplateSpecContainersEnvFrom#prefix
    */
@@ -18569,7 +18918,6 @@ export interface PoolerSpecTemplateSpecContainersEnvFrom {
    * @schema PoolerSpecTemplateSpecContainersEnvFrom#secretRef
    */
   readonly secretRef?: PoolerSpecTemplateSpecContainersEnvFromSecretRef;
-
 }
 
 /**
@@ -18628,7 +18976,6 @@ export interface PoolerSpecTemplateSpecContainersLifecycle {
    * @schema PoolerSpecTemplateSpecContainersLifecycle#stopSignal
    */
   readonly stopSignal?: string;
-
 }
 
 /**
@@ -18744,7 +19091,6 @@ export interface PoolerSpecTemplateSpecContainersLivenessProbe {
    * @schema PoolerSpecTemplateSpecContainersLivenessProbe#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
@@ -18818,7 +19164,6 @@ export interface PoolerSpecTemplateSpecContainersPorts {
    * @schema PoolerSpecTemplateSpecContainersPorts#protocol
    */
   readonly protocol?: string;
-
 }
 
 /**
@@ -18936,7 +19281,6 @@ export interface PoolerSpecTemplateSpecContainersReadinessProbe {
    * @schema PoolerSpecTemplateSpecContainersReadinessProbe#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
@@ -18983,7 +19327,6 @@ export interface PoolerSpecTemplateSpecContainersResizePolicy {
    * @schema PoolerSpecTemplateSpecContainersResizePolicy#restartPolicy
    */
   readonly restartPolicy: string;
-
 }
 
 /**
@@ -19013,7 +19356,7 @@ export interface PoolerSpecTemplateSpecContainersResources {
    * Claims lists the names of resources, defined in spec.resourceClaims,
    * that are used by this container.
    *
-   * This is an alpha field and requires enabling the
+   * This field depends on the
    * DynamicResourceAllocation feature gate.
    *
    * This field is immutable. It can only be set for containers.
@@ -19039,7 +19382,6 @@ export interface PoolerSpecTemplateSpecContainersResources {
    * @schema PoolerSpecTemplateSpecContainersResources#requests
    */
   readonly requests?: { [key: string]: PoolerSpecTemplateSpecContainersResourcesRequests };
-
 }
 
 /**
@@ -19052,6 +19394,44 @@ export function toJson_PoolerSpecTemplateSpecContainersResources(obj: PoolerSpec
     'claims': obj.claims?.map(y => toJson_PoolerSpecTemplateSpecContainersResourcesClaims(y)),
     'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ContainerRestartRule describes how a container exit is handled.
+ *
+ * @schema PoolerSpecTemplateSpecContainersRestartPolicyRules
+ */
+export interface PoolerSpecTemplateSpecContainersRestartPolicyRules {
+  /**
+   * Specifies the action taken on a container exit if the requirements
+   * are satisfied. The only possible value is "Restart" to restart the
+   * container.
+   *
+   * @schema PoolerSpecTemplateSpecContainersRestartPolicyRules#action
+   */
+  readonly action: string;
+
+  /**
+   * Represents the exit codes to check on container exits.
+   *
+   * @schema PoolerSpecTemplateSpecContainersRestartPolicyRules#exitCodes
+   */
+  readonly exitCodes?: PoolerSpecTemplateSpecContainersRestartPolicyRulesExitCodes;
+}
+
+/**
+ * Converts an object of type 'PoolerSpecTemplateSpecContainersRestartPolicyRules' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_PoolerSpecTemplateSpecContainersRestartPolicyRules(obj: PoolerSpecTemplateSpecContainersRestartPolicyRules | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'action': obj.action,
+    'exitCodes': toJson_PoolerSpecTemplateSpecContainersRestartPolicyRulesExitCodes(obj.exitCodes),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -19195,7 +19575,6 @@ export interface PoolerSpecTemplateSpecContainersSecurityContext {
    * @schema PoolerSpecTemplateSpecContainersSecurityContext#windowsOptions
    */
   readonly windowsOptions?: PoolerSpecTemplateSpecContainersSecurityContextWindowsOptions;
-
 }
 
 /**
@@ -19323,7 +19702,6 @@ export interface PoolerSpecTemplateSpecContainersStartupProbe {
    * @schema PoolerSpecTemplateSpecContainersStartupProbe#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
@@ -19368,7 +19746,6 @@ export interface PoolerSpecTemplateSpecContainersVolumeDevices {
    * @schema PoolerSpecTemplateSpecContainersVolumeDevices#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -19469,7 +19846,6 @@ export interface PoolerSpecTemplateSpecContainersVolumeMounts {
    * @schema PoolerSpecTemplateSpecContainersVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -19512,7 +19888,6 @@ export interface PoolerSpecTemplateSpecDnsConfigOptions {
    * @schema PoolerSpecTemplateSpecDnsConfigOptions#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -19537,7 +19912,8 @@ export function toJson_PoolerSpecTemplateSpecDnsConfigOptions(obj: PoolerSpecTem
  */
 export interface PoolerSpecTemplateSpecEphemeralContainersEnv {
   /**
-   * Name of the environment variable. Must be a C_IDENTIFIER.
+   * Name of the environment variable.
+   * May consist of any printable ASCII characters except '='.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnv#name
    */
@@ -19565,7 +19941,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnv {
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnv#valueFrom
    */
   readonly valueFrom?: PoolerSpecTemplateSpecEphemeralContainersEnvValueFrom;
-
 }
 
 /**
@@ -19598,7 +19973,8 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvFrom {
   readonly configMapRef?: PoolerSpecTemplateSpecEphemeralContainersEnvFromConfigMapRef;
 
   /**
-   * Optional text to prepend to the name of each environment variable. Must be a C_IDENTIFIER.
+   * Optional text to prepend to the name of each environment variable.
+   * May consist of any printable ASCII characters except '='.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvFrom#prefix
    */
@@ -19610,7 +19986,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvFrom {
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvFrom#secretRef
    */
   readonly secretRef?: PoolerSpecTemplateSpecEphemeralContainersEnvFromSecretRef;
-
 }
 
 /**
@@ -19668,7 +20043,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecycle {
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecycle#stopSignal
    */
   readonly stopSignal?: string;
-
 }
 
 /**
@@ -19781,7 +20155,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLivenessProbe {
    * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbe#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
@@ -19855,7 +20228,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersPorts {
    * @schema PoolerSpecTemplateSpecEphemeralContainersPorts#protocol
    */
   readonly protocol?: string;
-
 }
 
 /**
@@ -19970,7 +20342,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersReadinessProbe {
    * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbe#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
@@ -20017,7 +20388,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersResizePolicy {
    * @schema PoolerSpecTemplateSpecEphemeralContainersResizePolicy#restartPolicy
    */
   readonly restartPolicy: string;
-
 }
 
 /**
@@ -20046,7 +20416,7 @@ export interface PoolerSpecTemplateSpecEphemeralContainersResources {
    * Claims lists the names of resources, defined in spec.resourceClaims,
    * that are used by this container.
    *
-   * This is an alpha field and requires enabling the
+   * This field depends on the
    * DynamicResourceAllocation feature gate.
    *
    * This field is immutable. It can only be set for containers.
@@ -20072,7 +20442,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersResources {
    * @schema PoolerSpecTemplateSpecEphemeralContainersResources#requests
    */
   readonly requests?: { [key: string]: PoolerSpecTemplateSpecEphemeralContainersResourcesRequests };
-
 }
 
 /**
@@ -20085,6 +20454,44 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersResources(obj: P
     'claims': obj.claims?.map(y => toJson_PoolerSpecTemplateSpecEphemeralContainersResourcesClaims(y)),
     'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ContainerRestartRule describes how a container exit is handled.
+ *
+ * @schema PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRules
+ */
+export interface PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRules {
+  /**
+   * Specifies the action taken on a container exit if the requirements
+   * are satisfied. The only possible value is "Restart" to restart the
+   * container.
+   *
+   * @schema PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRules#action
+   */
+  readonly action: string;
+
+  /**
+   * Represents the exit codes to check on container exits.
+   *
+   * @schema PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRules#exitCodes
+   */
+  readonly exitCodes?: PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRulesExitCodes;
+}
+
+/**
+ * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRules' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRules(obj: PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRules | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'action': obj.action,
+    'exitCodes': toJson_PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRulesExitCodes(obj.exitCodes),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -20227,7 +20634,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersSecurityContext {
    * @schema PoolerSpecTemplateSpecEphemeralContainersSecurityContext#windowsOptions
    */
   readonly windowsOptions?: PoolerSpecTemplateSpecEphemeralContainersSecurityContextWindowsOptions;
-
 }
 
 /**
@@ -20349,7 +20755,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersStartupProbe {
    * @schema PoolerSpecTemplateSpecEphemeralContainersStartupProbe#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
@@ -20394,7 +20799,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersVolumeDevices {
    * @schema PoolerSpecTemplateSpecEphemeralContainersVolumeDevices#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -20495,7 +20899,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersVolumeMounts {
    * @schema PoolerSpecTemplateSpecEphemeralContainersVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -20525,7 +20928,8 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersVolumeMounts(obj
  */
 export interface PoolerSpecTemplateSpecInitContainersEnv {
   /**
-   * Name of the environment variable. Must be a C_IDENTIFIER.
+   * Name of the environment variable.
+   * May consist of any printable ASCII characters except '='.
    *
    * @schema PoolerSpecTemplateSpecInitContainersEnv#name
    */
@@ -20553,7 +20957,6 @@ export interface PoolerSpecTemplateSpecInitContainersEnv {
    * @schema PoolerSpecTemplateSpecInitContainersEnv#valueFrom
    */
   readonly valueFrom?: PoolerSpecTemplateSpecInitContainersEnvValueFrom;
-
 }
 
 /**
@@ -20586,7 +20989,8 @@ export interface PoolerSpecTemplateSpecInitContainersEnvFrom {
   readonly configMapRef?: PoolerSpecTemplateSpecInitContainersEnvFromConfigMapRef;
 
   /**
-   * Optional text to prepend to the name of each environment variable. Must be a C_IDENTIFIER.
+   * Optional text to prepend to the name of each environment variable.
+   * May consist of any printable ASCII characters except '='.
    *
    * @schema PoolerSpecTemplateSpecInitContainersEnvFrom#prefix
    */
@@ -20598,7 +21002,6 @@ export interface PoolerSpecTemplateSpecInitContainersEnvFrom {
    * @schema PoolerSpecTemplateSpecInitContainersEnvFrom#secretRef
    */
   readonly secretRef?: PoolerSpecTemplateSpecInitContainersEnvFromSecretRef;
-
 }
 
 /**
@@ -20657,7 +21060,6 @@ export interface PoolerSpecTemplateSpecInitContainersLifecycle {
    * @schema PoolerSpecTemplateSpecInitContainersLifecycle#stopSignal
    */
   readonly stopSignal?: string;
-
 }
 
 /**
@@ -20773,7 +21175,6 @@ export interface PoolerSpecTemplateSpecInitContainersLivenessProbe {
    * @schema PoolerSpecTemplateSpecInitContainersLivenessProbe#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
@@ -20847,7 +21248,6 @@ export interface PoolerSpecTemplateSpecInitContainersPorts {
    * @schema PoolerSpecTemplateSpecInitContainersPorts#protocol
    */
   readonly protocol?: string;
-
 }
 
 /**
@@ -20965,7 +21365,6 @@ export interface PoolerSpecTemplateSpecInitContainersReadinessProbe {
    * @schema PoolerSpecTemplateSpecInitContainersReadinessProbe#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
@@ -21012,7 +21411,6 @@ export interface PoolerSpecTemplateSpecInitContainersResizePolicy {
    * @schema PoolerSpecTemplateSpecInitContainersResizePolicy#restartPolicy
    */
   readonly restartPolicy: string;
-
 }
 
 /**
@@ -21042,7 +21440,7 @@ export interface PoolerSpecTemplateSpecInitContainersResources {
    * Claims lists the names of resources, defined in spec.resourceClaims,
    * that are used by this container.
    *
-   * This is an alpha field and requires enabling the
+   * This field depends on the
    * DynamicResourceAllocation feature gate.
    *
    * This field is immutable. It can only be set for containers.
@@ -21068,7 +21466,6 @@ export interface PoolerSpecTemplateSpecInitContainersResources {
    * @schema PoolerSpecTemplateSpecInitContainersResources#requests
    */
   readonly requests?: { [key: string]: PoolerSpecTemplateSpecInitContainersResourcesRequests };
-
 }
 
 /**
@@ -21081,6 +21478,44 @@ export function toJson_PoolerSpecTemplateSpecInitContainersResources(obj: Pooler
     'claims': obj.claims?.map(y => toJson_PoolerSpecTemplateSpecInitContainersResourcesClaims(y)),
     'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ContainerRestartRule describes how a container exit is handled.
+ *
+ * @schema PoolerSpecTemplateSpecInitContainersRestartPolicyRules
+ */
+export interface PoolerSpecTemplateSpecInitContainersRestartPolicyRules {
+  /**
+   * Specifies the action taken on a container exit if the requirements
+   * are satisfied. The only possible value is "Restart" to restart the
+   * container.
+   *
+   * @schema PoolerSpecTemplateSpecInitContainersRestartPolicyRules#action
+   */
+  readonly action: string;
+
+  /**
+   * Represents the exit codes to check on container exits.
+   *
+   * @schema PoolerSpecTemplateSpecInitContainersRestartPolicyRules#exitCodes
+   */
+  readonly exitCodes?: PoolerSpecTemplateSpecInitContainersRestartPolicyRulesExitCodes;
+}
+
+/**
+ * Converts an object of type 'PoolerSpecTemplateSpecInitContainersRestartPolicyRules' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_PoolerSpecTemplateSpecInitContainersRestartPolicyRules(obj: PoolerSpecTemplateSpecInitContainersRestartPolicyRules | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'action': obj.action,
+    'exitCodes': toJson_PoolerSpecTemplateSpecInitContainersRestartPolicyRulesExitCodes(obj.exitCodes),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -21224,7 +21659,6 @@ export interface PoolerSpecTemplateSpecInitContainersSecurityContext {
    * @schema PoolerSpecTemplateSpecInitContainersSecurityContext#windowsOptions
    */
   readonly windowsOptions?: PoolerSpecTemplateSpecInitContainersSecurityContextWindowsOptions;
-
 }
 
 /**
@@ -21352,7 +21786,6 @@ export interface PoolerSpecTemplateSpecInitContainersStartupProbe {
    * @schema PoolerSpecTemplateSpecInitContainersStartupProbe#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
@@ -21397,7 +21830,6 @@ export interface PoolerSpecTemplateSpecInitContainersVolumeDevices {
    * @schema PoolerSpecTemplateSpecInitContainersVolumeDevices#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -21498,7 +21930,6 @@ export interface PoolerSpecTemplateSpecInitContainersVolumeMounts {
    * @schema PoolerSpecTemplateSpecInitContainersVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
@@ -21544,7 +21975,6 @@ export interface PoolerSpecTemplateSpecResourcesClaims {
    * @schema PoolerSpecTemplateSpecResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -21617,7 +22047,6 @@ export interface PoolerSpecTemplateSpecSecurityContextAppArmorProfile {
    * @schema PoolerSpecTemplateSpecSecurityContextAppArmorProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -21673,7 +22102,6 @@ export interface PoolerSpecTemplateSpecSecurityContextSeLinuxOptions {
    * @schema PoolerSpecTemplateSpecSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -21721,7 +22149,6 @@ export interface PoolerSpecTemplateSpecSecurityContextSeccompProfile {
    * @schema PoolerSpecTemplateSpecSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -21758,7 +22185,6 @@ export interface PoolerSpecTemplateSpecSecurityContextSysctls {
    * @schema PoolerSpecTemplateSpecSecurityContextSysctls#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -21821,7 +22247,6 @@ export interface PoolerSpecTemplateSpecSecurityContextWindowsOptions {
    * @schema PoolerSpecTemplateSpecSecurityContextWindowsOptions#runAsUserName
    */
   readonly runAsUserName?: string;
-
 }
 
 /**
@@ -21864,7 +22289,6 @@ export interface PoolerSpecTemplateSpecTopologySpreadConstraintsLabelSelector {
    * @schema PoolerSpecTemplateSpecTopologySpreadConstraintsLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -21927,7 +22351,6 @@ export interface PoolerSpecTemplateSpecVolumesAwsElasticBlockStore {
    * @schema PoolerSpecTemplateSpecVolumesAwsElasticBlockStore#volumeID
    */
   readonly volumeId: string;
-
 }
 
 /**
@@ -22000,7 +22423,6 @@ export interface PoolerSpecTemplateSpecVolumesAzureDisk {
    * @schema PoolerSpecTemplateSpecVolumesAzureDisk#readOnly
    */
   readonly readOnly?: boolean;
-
 }
 
 /**
@@ -22051,7 +22473,6 @@ export interface PoolerSpecTemplateSpecVolumesAzureFile {
    * @schema PoolerSpecTemplateSpecVolumesAzureFile#shareName
    */
   readonly shareName: string;
-
 }
 
 /**
@@ -22125,7 +22546,6 @@ export interface PoolerSpecTemplateSpecVolumesCephfs {
    * @schema PoolerSpecTemplateSpecVolumesCephfs#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -22190,7 +22610,6 @@ export interface PoolerSpecTemplateSpecVolumesCinder {
    * @schema PoolerSpecTemplateSpecVolumesCinder#volumeID
    */
   readonly volumeId: string;
-
 }
 
 /**
@@ -22260,7 +22679,6 @@ export interface PoolerSpecTemplateSpecVolumesConfigMap {
    * @schema PoolerSpecTemplateSpecVolumesConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -22330,7 +22748,6 @@ export interface PoolerSpecTemplateSpecVolumesCsi {
    * @schema PoolerSpecTemplateSpecVolumesCsi#volumeAttributes
    */
   readonly volumeAttributes?: { [key: string]: string };
-
 }
 
 /**
@@ -22378,7 +22795,6 @@ export interface PoolerSpecTemplateSpecVolumesDownwardApi {
    * @schema PoolerSpecTemplateSpecVolumesDownwardApi#items
    */
   readonly items?: PoolerSpecTemplateSpecVolumesDownwardApiItems[];
-
 }
 
 /**
@@ -22424,7 +22840,6 @@ export interface PoolerSpecTemplateSpecVolumesEmptyDir {
    * @schema PoolerSpecTemplateSpecVolumesEmptyDir#sizeLimit
    */
   readonly sizeLimit?: PoolerSpecTemplateSpecVolumesEmptyDirSizeLimit;
-
 }
 
 /**
@@ -22497,7 +22912,6 @@ export interface PoolerSpecTemplateSpecVolumesEphemeral {
    * @schema PoolerSpecTemplateSpecVolumesEphemeral#volumeClaimTemplate
    */
   readonly volumeClaimTemplate?: PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplate;
-
 }
 
 /**
@@ -22559,7 +22973,6 @@ export interface PoolerSpecTemplateSpecVolumesFc {
    * @schema PoolerSpecTemplateSpecVolumesFc#wwids
    */
   readonly wwids?: string[];
-
 }
 
 /**
@@ -22629,7 +23042,6 @@ export interface PoolerSpecTemplateSpecVolumesFlexVolume {
    * @schema PoolerSpecTemplateSpecVolumesFlexVolume#secretRef
    */
   readonly secretRef?: PoolerSpecTemplateSpecVolumesFlexVolumeSecretRef;
-
 }
 
 /**
@@ -22671,7 +23083,6 @@ export interface PoolerSpecTemplateSpecVolumesFlocker {
    * @schema PoolerSpecTemplateSpecVolumesFlocker#datasetUUID
    */
   readonly datasetUuid?: string;
-
 }
 
 /**
@@ -22737,7 +23148,6 @@ export interface PoolerSpecTemplateSpecVolumesGcePersistentDisk {
    * @schema PoolerSpecTemplateSpecVolumesGcePersistentDisk#readOnly
    */
   readonly readOnly?: boolean;
-
 }
 
 /**
@@ -22789,7 +23199,6 @@ export interface PoolerSpecTemplateSpecVolumesGitRepo {
    * @schema PoolerSpecTemplateSpecVolumesGitRepo#revision
    */
   readonly revision?: string;
-
 }
 
 /**
@@ -22811,14 +23220,12 @@ export function toJson_PoolerSpecTemplateSpecVolumesGitRepo(obj: PoolerSpecTempl
 /**
  * glusterfs represents a Glusterfs mount on the host that shares a pod's lifetime.
  * Deprecated: Glusterfs is deprecated and the in-tree glusterfs type is no longer supported.
- * More info: https://examples.k8s.io/volumes/glusterfs/README.md
  *
  * @schema PoolerSpecTemplateSpecVolumesGlusterfs
  */
 export interface PoolerSpecTemplateSpecVolumesGlusterfs {
   /**
    * endpoints is the endpoint name that details Glusterfs topology.
-   * More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
    *
    * @schema PoolerSpecTemplateSpecVolumesGlusterfs#endpoints
    */
@@ -22841,7 +23248,6 @@ export interface PoolerSpecTemplateSpecVolumesGlusterfs {
    * @schema PoolerSpecTemplateSpecVolumesGlusterfs#readOnly
    */
   readonly readOnly?: boolean;
-
 }
 
 /**
@@ -22888,7 +23294,6 @@ export interface PoolerSpecTemplateSpecVolumesHostPath {
    * @schema PoolerSpecTemplateSpecVolumesHostPath#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -22948,7 +23353,6 @@ export interface PoolerSpecTemplateSpecVolumesImage {
    * @schema PoolerSpecTemplateSpecVolumesImage#reference
    */
   readonly reference?: string;
-
 }
 
 /**
@@ -22969,7 +23373,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesImage(obj: PoolerSpecTemplat
 /**
  * iscsi represents an ISCSI Disk resource that is attached to a
  * kubelet's host machine and then exposed to the pod.
- * More info: https://examples.k8s.io/volumes/iscsi/README.md
+ * More info: https://kubernetes.io/docs/concepts/storage/volumes/#iscsi
  *
  * @schema PoolerSpecTemplateSpecVolumesIscsi
  */
@@ -23061,7 +23465,6 @@ export interface PoolerSpecTemplateSpecVolumesIscsi {
    * @schema PoolerSpecTemplateSpecVolumesIscsi#targetPortal
    */
   readonly targetPortal: string;
-
 }
 
 /**
@@ -23120,7 +23523,6 @@ export interface PoolerSpecTemplateSpecVolumesNfs {
    * @schema PoolerSpecTemplateSpecVolumesNfs#server
    */
   readonly server: string;
-
 }
 
 /**
@@ -23162,7 +23564,6 @@ export interface PoolerSpecTemplateSpecVolumesPersistentVolumeClaim {
    * @schema PoolerSpecTemplateSpecVolumesPersistentVolumeClaim#readOnly
    */
   readonly readOnly?: boolean;
-
 }
 
 /**
@@ -23202,7 +23603,6 @@ export interface PoolerSpecTemplateSpecVolumesPhotonPersistentDisk {
    * @schema PoolerSpecTemplateSpecVolumesPhotonPersistentDisk#pdID
    */
   readonly pdId: string;
-
 }
 
 /**
@@ -23252,7 +23652,6 @@ export interface PoolerSpecTemplateSpecVolumesPortworxVolume {
    * @schema PoolerSpecTemplateSpecVolumesPortworxVolume#volumeID
    */
   readonly volumeId: string;
-
 }
 
 /**
@@ -23296,7 +23695,6 @@ export interface PoolerSpecTemplateSpecVolumesProjected {
    * @schema PoolerSpecTemplateSpecVolumesProjected#sources
    */
   readonly sources?: PoolerSpecTemplateSpecVolumesProjectedSources[];
-
 }
 
 /**
@@ -23371,7 +23769,6 @@ export interface PoolerSpecTemplateSpecVolumesQuobyte {
    * @schema PoolerSpecTemplateSpecVolumesQuobyte#volume
    */
   readonly volume: string;
-
 }
 
 /**
@@ -23396,7 +23793,6 @@ export function toJson_PoolerSpecTemplateSpecVolumesQuobyte(obj: PoolerSpecTempl
 /**
  * rbd represents a Rados Block Device mount on the host that shares a pod's lifetime.
  * Deprecated: RBD is deprecated and the in-tree rbd type is no longer supported.
- * More info: https://examples.k8s.io/volumes/rbd/README.md
  *
  * @schema PoolerSpecTemplateSpecVolumesRbd
  */
@@ -23477,7 +23873,6 @@ export interface PoolerSpecTemplateSpecVolumesRbd {
    * @schema PoolerSpecTemplateSpecVolumesRbd#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -23587,7 +23982,6 @@ export interface PoolerSpecTemplateSpecVolumesScaleIo {
    * @schema PoolerSpecTemplateSpecVolumesScaleIo#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -23661,7 +24055,6 @@ export interface PoolerSpecTemplateSpecVolumesSecret {
    * @schema PoolerSpecTemplateSpecVolumesSecret#secretName
    */
   readonly secretName?: string;
-
 }
 
 /**
@@ -23732,7 +24125,6 @@ export interface PoolerSpecTemplateSpecVolumesStorageos {
    * @schema PoolerSpecTemplateSpecVolumesStorageos#volumeNamespace
    */
   readonly volumeNamespace?: string;
-
 }
 
 /**
@@ -23790,7 +24182,6 @@ export interface PoolerSpecTemplateSpecVolumesVsphereVolume {
    * @schema PoolerSpecTemplateSpecVolumesVsphereVolume#volumePath
    */
   readonly volumePath: string;
-
 }
 
 /**
@@ -23830,7 +24221,6 @@ export interface PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedu
    * @schema PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -23864,7 +24254,6 @@ export interface PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedul
    * @schema PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution#nodeSelectorTerms
    */
   readonly nodeSelectorTerms: PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms[];
-
 }
 
 /**
@@ -23901,7 +24290,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedul
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -23997,7 +24385,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringScheduli
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -24039,7 +24426,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSch
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -24135,7 +24521,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSche
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -24179,6 +24564,14 @@ export interface PoolerSpecTemplateSpecContainersEnvValueFrom {
   readonly fieldRef?: PoolerSpecTemplateSpecContainersEnvValueFromFieldRef;
 
   /**
+   * FileKeyRef selects a key of the env file.
+   * Requires the EnvFiles feature gate to be enabled.
+   *
+   * @schema PoolerSpecTemplateSpecContainersEnvValueFrom#fileKeyRef
+   */
+  readonly fileKeyRef?: PoolerSpecTemplateSpecContainersEnvValueFromFileKeyRef;
+
+  /**
    * Selects a resource of the container: only resources limits and requests
    * (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu, requests.memory and requests.ephemeral-storage) are currently supported.
    *
@@ -24192,7 +24585,6 @@ export interface PoolerSpecTemplateSpecContainersEnvValueFrom {
    * @schema PoolerSpecTemplateSpecContainersEnvValueFrom#secretKeyRef
    */
   readonly secretKeyRef?: PoolerSpecTemplateSpecContainersEnvValueFromSecretKeyRef;
-
 }
 
 /**
@@ -24204,6 +24596,7 @@ export function toJson_PoolerSpecTemplateSpecContainersEnvValueFrom(obj: PoolerS
   const result = {
     'configMapKeyRef': toJson_PoolerSpecTemplateSpecContainersEnvValueFromConfigMapKeyRef(obj.configMapKeyRef),
     'fieldRef': toJson_PoolerSpecTemplateSpecContainersEnvValueFromFieldRef(obj.fieldRef),
+    'fileKeyRef': toJson_PoolerSpecTemplateSpecContainersEnvValueFromFileKeyRef(obj.fileKeyRef),
     'resourceFieldRef': toJson_PoolerSpecTemplateSpecContainersEnvValueFromResourceFieldRef(obj.resourceFieldRef),
     'secretKeyRef': toJson_PoolerSpecTemplateSpecContainersEnvValueFromSecretKeyRef(obj.secretKeyRef),
   };
@@ -24235,7 +24628,6 @@ export interface PoolerSpecTemplateSpecContainersEnvFromConfigMapRef {
    * @schema PoolerSpecTemplateSpecContainersEnvFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -24276,7 +24668,6 @@ export interface PoolerSpecTemplateSpecContainersEnvFromSecretRef {
    * @schema PoolerSpecTemplateSpecContainersEnvFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -24332,7 +24723,6 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePostStart {
    * @schema PoolerSpecTemplateSpecContainersLifecyclePostStart#tcpSocket
    */
   readonly tcpSocket?: PoolerSpecTemplateSpecContainersLifecyclePostStartTcpSocket;
-
 }
 
 /**
@@ -24395,7 +24785,6 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePreStop {
    * @schema PoolerSpecTemplateSpecContainersLifecyclePreStop#tcpSocket
    */
   readonly tcpSocket?: PoolerSpecTemplateSpecContainersLifecyclePreStopTcpSocket;
-
 }
 
 /**
@@ -24431,7 +24820,6 @@ export interface PoolerSpecTemplateSpecContainersLivenessProbeExec {
    * @schema PoolerSpecTemplateSpecContainersLivenessProbeExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
@@ -24470,7 +24858,6 @@ export interface PoolerSpecTemplateSpecContainersLivenessProbeGrpc {
    * @schema PoolerSpecTemplateSpecContainersLivenessProbeGrpc#service
    */
   readonly service?: string;
-
 }
 
 /**
@@ -24533,7 +24920,6 @@ export interface PoolerSpecTemplateSpecContainersLivenessProbeHttpGet {
    * @schema PoolerSpecTemplateSpecContainersLivenessProbeHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
@@ -24575,7 +24961,6 @@ export interface PoolerSpecTemplateSpecContainersLivenessProbeTcpSocket {
    * @schema PoolerSpecTemplateSpecContainersLivenessProbeTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecContainersLivenessProbeTcpSocketPort;
-
 }
 
 /**
@@ -24609,7 +24994,6 @@ export interface PoolerSpecTemplateSpecContainersReadinessProbeExec {
    * @schema PoolerSpecTemplateSpecContainersReadinessProbeExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
@@ -24648,7 +25032,6 @@ export interface PoolerSpecTemplateSpecContainersReadinessProbeGrpc {
    * @schema PoolerSpecTemplateSpecContainersReadinessProbeGrpc#service
    */
   readonly service?: string;
-
 }
 
 /**
@@ -24711,7 +25094,6 @@ export interface PoolerSpecTemplateSpecContainersReadinessProbeHttpGet {
    * @schema PoolerSpecTemplateSpecContainersReadinessProbeHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
@@ -24753,7 +25135,6 @@ export interface PoolerSpecTemplateSpecContainersReadinessProbeTcpSocket {
    * @schema PoolerSpecTemplateSpecContainersReadinessProbeTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecContainersReadinessProbeTcpSocketPort;
-
 }
 
 /**
@@ -24794,7 +25175,6 @@ export interface PoolerSpecTemplateSpecContainersResourcesClaims {
    * @schema PoolerSpecTemplateSpecContainersResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -24841,6 +25221,48 @@ export class PoolerSpecTemplateSpecContainersResourcesRequests {
 }
 
 /**
+ * Represents the exit codes to check on container exits.
+ *
+ * @schema PoolerSpecTemplateSpecContainersRestartPolicyRulesExitCodes
+ */
+export interface PoolerSpecTemplateSpecContainersRestartPolicyRulesExitCodes {
+  /**
+   * Represents the relationship between the container exit code(s) and the
+   * specified values. Possible values are:
+   * - In: the requirement is satisfied if the container exit code is in the
+   * set of specified values.
+   * - NotIn: the requirement is satisfied if the container exit code is
+   * not in the set of specified values.
+   *
+   * @schema PoolerSpecTemplateSpecContainersRestartPolicyRulesExitCodes#operator
+   */
+  readonly operator: string;
+
+  /**
+   * Specifies the set of values to check for container exit codes.
+   * At most 255 elements are allowed.
+   *
+   * @schema PoolerSpecTemplateSpecContainersRestartPolicyRulesExitCodes#values
+   */
+  readonly values?: number[];
+}
+
+/**
+ * Converts an object of type 'PoolerSpecTemplateSpecContainersRestartPolicyRulesExitCodes' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_PoolerSpecTemplateSpecContainersRestartPolicyRulesExitCodes(obj: PoolerSpecTemplateSpecContainersRestartPolicyRulesExitCodes | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * appArmorProfile is the AppArmor options to use by this container. If set, this profile
  * overrides the pod's appArmorProfile.
  * Note that this field cannot be set when spec.os.name is windows.
@@ -24868,7 +25290,6 @@ export interface PoolerSpecTemplateSpecContainersSecurityContextAppArmorProfile 
    * @schema PoolerSpecTemplateSpecContainersSecurityContextAppArmorProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -24908,7 +25329,6 @@ export interface PoolerSpecTemplateSpecContainersSecurityContextCapabilities {
    * @schema PoolerSpecTemplateSpecContainersSecurityContextCapabilities#drop
    */
   readonly drop?: string[];
-
 }
 
 /**
@@ -24963,7 +25383,6 @@ export interface PoolerSpecTemplateSpecContainersSecurityContextSeLinuxOptions {
    * @schema PoolerSpecTemplateSpecContainersSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -25013,7 +25432,6 @@ export interface PoolerSpecTemplateSpecContainersSecurityContextSeccompProfile {
    * @schema PoolerSpecTemplateSpecContainersSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -25076,7 +25494,6 @@ export interface PoolerSpecTemplateSpecContainersSecurityContextWindowsOptions {
    * @schema PoolerSpecTemplateSpecContainersSecurityContextWindowsOptions#runAsUserName
    */
   readonly runAsUserName?: string;
-
 }
 
 /**
@@ -25112,7 +25529,6 @@ export interface PoolerSpecTemplateSpecContainersStartupProbeExec {
    * @schema PoolerSpecTemplateSpecContainersStartupProbeExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
@@ -25151,7 +25567,6 @@ export interface PoolerSpecTemplateSpecContainersStartupProbeGrpc {
    * @schema PoolerSpecTemplateSpecContainersStartupProbeGrpc#service
    */
   readonly service?: string;
-
 }
 
 /**
@@ -25214,7 +25629,6 @@ export interface PoolerSpecTemplateSpecContainersStartupProbeHttpGet {
    * @schema PoolerSpecTemplateSpecContainersStartupProbeHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
@@ -25256,7 +25670,6 @@ export interface PoolerSpecTemplateSpecContainersStartupProbeTcpSocket {
    * @schema PoolerSpecTemplateSpecContainersStartupProbeTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecContainersStartupProbeTcpSocketPort;
-
 }
 
 /**
@@ -25296,6 +25709,14 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvValueFrom {
   readonly fieldRef?: PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFieldRef;
 
   /**
+   * FileKeyRef selects a key of the env file.
+   * Requires the EnvFiles feature gate to be enabled.
+   *
+   * @schema PoolerSpecTemplateSpecEphemeralContainersEnvValueFrom#fileKeyRef
+   */
+  readonly fileKeyRef?: PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFileKeyRef;
+
+  /**
    * Selects a resource of the container: only resources limits and requests
    * (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu, requests.memory and requests.ephemeral-storage) are currently supported.
    *
@@ -25309,7 +25730,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvValueFrom {
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvValueFrom#secretKeyRef
    */
   readonly secretKeyRef?: PoolerSpecTemplateSpecEphemeralContainersEnvValueFromSecretKeyRef;
-
 }
 
 /**
@@ -25321,6 +25741,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFrom(obj
   const result = {
     'configMapKeyRef': toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFromConfigMapKeyRef(obj.configMapKeyRef),
     'fieldRef': toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFieldRef(obj.fieldRef),
+    'fileKeyRef': toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFileKeyRef(obj.fileKeyRef),
     'resourceFieldRef': toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFromResourceFieldRef(obj.resourceFieldRef),
     'secretKeyRef': toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFromSecretKeyRef(obj.secretKeyRef),
   };
@@ -25352,7 +25773,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvFromConfigMapRef {
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -25393,7 +25813,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvFromSecretRef {
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -25449,7 +25868,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStart {
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStart#tcpSocket
    */
   readonly tcpSocket?: PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartTcpSocket;
-
 }
 
 /**
@@ -25512,7 +25930,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop {
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop#tcpSocket
    */
   readonly tcpSocket?: PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopTcpSocket;
-
 }
 
 /**
@@ -25548,7 +25965,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLivenessProbeExec {
    * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbeExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
@@ -25587,7 +26003,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLivenessProbeGrpc {
    * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbeGrpc#service
    */
   readonly service?: string;
-
 }
 
 /**
@@ -25650,7 +26065,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLivenessProbeHttpGet {
    * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbeHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
@@ -25692,7 +26106,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLivenessProbeTcpSocket
    * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbeTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecEphemeralContainersLivenessProbeTcpSocketPort;
-
 }
 
 /**
@@ -25726,7 +26139,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersReadinessProbeExec {
    * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbeExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
@@ -25765,7 +26177,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersReadinessProbeGrpc {
    * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbeGrpc#service
    */
   readonly service?: string;
-
 }
 
 /**
@@ -25828,7 +26239,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersReadinessProbeHttpGet 
    * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbeHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
@@ -25870,7 +26280,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersReadinessProbeTcpSocke
    * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbeTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecEphemeralContainersReadinessProbeTcpSocketPort;
-
 }
 
 /**
@@ -25911,7 +26320,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersResourcesClaims {
    * @schema PoolerSpecTemplateSpecEphemeralContainersResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -25958,6 +26366,48 @@ export class PoolerSpecTemplateSpecEphemeralContainersResourcesRequests {
 }
 
 /**
+ * Represents the exit codes to check on container exits.
+ *
+ * @schema PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRulesExitCodes
+ */
+export interface PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRulesExitCodes {
+  /**
+   * Represents the relationship between the container exit code(s) and the
+   * specified values. Possible values are:
+   * - In: the requirement is satisfied if the container exit code is in the
+   * set of specified values.
+   * - NotIn: the requirement is satisfied if the container exit code is
+   * not in the set of specified values.
+   *
+   * @schema PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRulesExitCodes#operator
+   */
+  readonly operator: string;
+
+  /**
+   * Specifies the set of values to check for container exit codes.
+   * At most 255 elements are allowed.
+   *
+   * @schema PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRulesExitCodes#values
+   */
+  readonly values?: number[];
+}
+
+/**
+ * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRulesExitCodes' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRulesExitCodes(obj: PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRulesExitCodes | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * appArmorProfile is the AppArmor options to use by this container. If set, this profile
  * overrides the pod's appArmorProfile.
  * Note that this field cannot be set when spec.os.name is windows.
@@ -25985,7 +26435,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersSecurityContextAppArmo
    * @schema PoolerSpecTemplateSpecEphemeralContainersSecurityContextAppArmorProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -26025,7 +26474,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersSecurityContextCapabil
    * @schema PoolerSpecTemplateSpecEphemeralContainersSecurityContextCapabilities#drop
    */
   readonly drop?: string[];
-
 }
 
 /**
@@ -26080,7 +26528,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersSecurityContextSeLinux
    * @schema PoolerSpecTemplateSpecEphemeralContainersSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -26130,7 +26577,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersSecurityContextSeccomp
    * @schema PoolerSpecTemplateSpecEphemeralContainersSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -26193,7 +26639,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersSecurityContextWindows
    * @schema PoolerSpecTemplateSpecEphemeralContainersSecurityContextWindowsOptions#runAsUserName
    */
   readonly runAsUserName?: string;
-
 }
 
 /**
@@ -26229,7 +26674,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersStartupProbeExec {
    * @schema PoolerSpecTemplateSpecEphemeralContainersStartupProbeExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
@@ -26268,7 +26712,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersStartupProbeGrpc {
    * @schema PoolerSpecTemplateSpecEphemeralContainersStartupProbeGrpc#service
    */
   readonly service?: string;
-
 }
 
 /**
@@ -26331,7 +26774,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersStartupProbeHttpGet {
    * @schema PoolerSpecTemplateSpecEphemeralContainersStartupProbeHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
@@ -26373,7 +26815,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersStartupProbeTcpSocket 
    * @schema PoolerSpecTemplateSpecEphemeralContainersStartupProbeTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecEphemeralContainersStartupProbeTcpSocketPort;
-
 }
 
 /**
@@ -26413,6 +26854,14 @@ export interface PoolerSpecTemplateSpecInitContainersEnvValueFrom {
   readonly fieldRef?: PoolerSpecTemplateSpecInitContainersEnvValueFromFieldRef;
 
   /**
+   * FileKeyRef selects a key of the env file.
+   * Requires the EnvFiles feature gate to be enabled.
+   *
+   * @schema PoolerSpecTemplateSpecInitContainersEnvValueFrom#fileKeyRef
+   */
+  readonly fileKeyRef?: PoolerSpecTemplateSpecInitContainersEnvValueFromFileKeyRef;
+
+  /**
    * Selects a resource of the container: only resources limits and requests
    * (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu, requests.memory and requests.ephemeral-storage) are currently supported.
    *
@@ -26426,7 +26875,6 @@ export interface PoolerSpecTemplateSpecInitContainersEnvValueFrom {
    * @schema PoolerSpecTemplateSpecInitContainersEnvValueFrom#secretKeyRef
    */
   readonly secretKeyRef?: PoolerSpecTemplateSpecInitContainersEnvValueFromSecretKeyRef;
-
 }
 
 /**
@@ -26438,6 +26886,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersEnvValueFrom(obj: Poo
   const result = {
     'configMapKeyRef': toJson_PoolerSpecTemplateSpecInitContainersEnvValueFromConfigMapKeyRef(obj.configMapKeyRef),
     'fieldRef': toJson_PoolerSpecTemplateSpecInitContainersEnvValueFromFieldRef(obj.fieldRef),
+    'fileKeyRef': toJson_PoolerSpecTemplateSpecInitContainersEnvValueFromFileKeyRef(obj.fileKeyRef),
     'resourceFieldRef': toJson_PoolerSpecTemplateSpecInitContainersEnvValueFromResourceFieldRef(obj.resourceFieldRef),
     'secretKeyRef': toJson_PoolerSpecTemplateSpecInitContainersEnvValueFromSecretKeyRef(obj.secretKeyRef),
   };
@@ -26469,7 +26918,6 @@ export interface PoolerSpecTemplateSpecInitContainersEnvFromConfigMapRef {
    * @schema PoolerSpecTemplateSpecInitContainersEnvFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -26510,7 +26958,6 @@ export interface PoolerSpecTemplateSpecInitContainersEnvFromSecretRef {
    * @schema PoolerSpecTemplateSpecInitContainersEnvFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -26566,7 +27013,6 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePostStart {
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePostStart#tcpSocket
    */
   readonly tcpSocket?: PoolerSpecTemplateSpecInitContainersLifecyclePostStartTcpSocket;
-
 }
 
 /**
@@ -26629,7 +27075,6 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePreStop {
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePreStop#tcpSocket
    */
   readonly tcpSocket?: PoolerSpecTemplateSpecInitContainersLifecyclePreStopTcpSocket;
-
 }
 
 /**
@@ -26665,7 +27110,6 @@ export interface PoolerSpecTemplateSpecInitContainersLivenessProbeExec {
    * @schema PoolerSpecTemplateSpecInitContainersLivenessProbeExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
@@ -26704,7 +27148,6 @@ export interface PoolerSpecTemplateSpecInitContainersLivenessProbeGrpc {
    * @schema PoolerSpecTemplateSpecInitContainersLivenessProbeGrpc#service
    */
   readonly service?: string;
-
 }
 
 /**
@@ -26767,7 +27210,6 @@ export interface PoolerSpecTemplateSpecInitContainersLivenessProbeHttpGet {
    * @schema PoolerSpecTemplateSpecInitContainersLivenessProbeHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
@@ -26809,7 +27251,6 @@ export interface PoolerSpecTemplateSpecInitContainersLivenessProbeTcpSocket {
    * @schema PoolerSpecTemplateSpecInitContainersLivenessProbeTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecInitContainersLivenessProbeTcpSocketPort;
-
 }
 
 /**
@@ -26843,7 +27284,6 @@ export interface PoolerSpecTemplateSpecInitContainersReadinessProbeExec {
    * @schema PoolerSpecTemplateSpecInitContainersReadinessProbeExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
@@ -26882,7 +27322,6 @@ export interface PoolerSpecTemplateSpecInitContainersReadinessProbeGrpc {
    * @schema PoolerSpecTemplateSpecInitContainersReadinessProbeGrpc#service
    */
   readonly service?: string;
-
 }
 
 /**
@@ -26945,7 +27384,6 @@ export interface PoolerSpecTemplateSpecInitContainersReadinessProbeHttpGet {
    * @schema PoolerSpecTemplateSpecInitContainersReadinessProbeHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
@@ -26987,7 +27425,6 @@ export interface PoolerSpecTemplateSpecInitContainersReadinessProbeTcpSocket {
    * @schema PoolerSpecTemplateSpecInitContainersReadinessProbeTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecInitContainersReadinessProbeTcpSocketPort;
-
 }
 
 /**
@@ -27028,7 +27465,6 @@ export interface PoolerSpecTemplateSpecInitContainersResourcesClaims {
    * @schema PoolerSpecTemplateSpecInitContainersResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -27075,6 +27511,48 @@ export class PoolerSpecTemplateSpecInitContainersResourcesRequests {
 }
 
 /**
+ * Represents the exit codes to check on container exits.
+ *
+ * @schema PoolerSpecTemplateSpecInitContainersRestartPolicyRulesExitCodes
+ */
+export interface PoolerSpecTemplateSpecInitContainersRestartPolicyRulesExitCodes {
+  /**
+   * Represents the relationship between the container exit code(s) and the
+   * specified values. Possible values are:
+   * - In: the requirement is satisfied if the container exit code is in the
+   * set of specified values.
+   * - NotIn: the requirement is satisfied if the container exit code is
+   * not in the set of specified values.
+   *
+   * @schema PoolerSpecTemplateSpecInitContainersRestartPolicyRulesExitCodes#operator
+   */
+  readonly operator: string;
+
+  /**
+   * Specifies the set of values to check for container exit codes.
+   * At most 255 elements are allowed.
+   *
+   * @schema PoolerSpecTemplateSpecInitContainersRestartPolicyRulesExitCodes#values
+   */
+  readonly values?: number[];
+}
+
+/**
+ * Converts an object of type 'PoolerSpecTemplateSpecInitContainersRestartPolicyRulesExitCodes' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_PoolerSpecTemplateSpecInitContainersRestartPolicyRulesExitCodes(obj: PoolerSpecTemplateSpecInitContainersRestartPolicyRulesExitCodes | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * appArmorProfile is the AppArmor options to use by this container. If set, this profile
  * overrides the pod's appArmorProfile.
  * Note that this field cannot be set when spec.os.name is windows.
@@ -27102,7 +27580,6 @@ export interface PoolerSpecTemplateSpecInitContainersSecurityContextAppArmorProf
    * @schema PoolerSpecTemplateSpecInitContainersSecurityContextAppArmorProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -27142,7 +27619,6 @@ export interface PoolerSpecTemplateSpecInitContainersSecurityContextCapabilities
    * @schema PoolerSpecTemplateSpecInitContainersSecurityContextCapabilities#drop
    */
   readonly drop?: string[];
-
 }
 
 /**
@@ -27197,7 +27673,6 @@ export interface PoolerSpecTemplateSpecInitContainersSecurityContextSeLinuxOptio
    * @schema PoolerSpecTemplateSpecInitContainersSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -27247,7 +27722,6 @@ export interface PoolerSpecTemplateSpecInitContainersSecurityContextSeccompProfi
    * @schema PoolerSpecTemplateSpecInitContainersSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -27310,7 +27784,6 @@ export interface PoolerSpecTemplateSpecInitContainersSecurityContextWindowsOptio
    * @schema PoolerSpecTemplateSpecInitContainersSecurityContextWindowsOptions#runAsUserName
    */
   readonly runAsUserName?: string;
-
 }
 
 /**
@@ -27346,7 +27819,6 @@ export interface PoolerSpecTemplateSpecInitContainersStartupProbeExec {
    * @schema PoolerSpecTemplateSpecInitContainersStartupProbeExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
@@ -27385,7 +27857,6 @@ export interface PoolerSpecTemplateSpecInitContainersStartupProbeGrpc {
    * @schema PoolerSpecTemplateSpecInitContainersStartupProbeGrpc#service
    */
   readonly service?: string;
-
 }
 
 /**
@@ -27448,7 +27919,6 @@ export interface PoolerSpecTemplateSpecInitContainersStartupProbeHttpGet {
    * @schema PoolerSpecTemplateSpecInitContainersStartupProbeHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
@@ -27490,7 +27960,6 @@ export interface PoolerSpecTemplateSpecInitContainersStartupProbeTcpSocket {
    * @schema PoolerSpecTemplateSpecInitContainersStartupProbeTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecInitContainersStartupProbeTcpSocketPort;
-
 }
 
 /**
@@ -27539,7 +28008,6 @@ export interface PoolerSpecTemplateSpecTopologySpreadConstraintsLabelSelectorMat
    * @schema PoolerSpecTemplateSpecTopologySpreadConstraintsLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -27575,7 +28043,6 @@ export interface PoolerSpecTemplateSpecVolumesCephfsSecretRef {
    * @schema PoolerSpecTemplateSpecVolumesCephfsSecretRef#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -27609,7 +28076,6 @@ export interface PoolerSpecTemplateSpecVolumesCinderSecretRef {
    * @schema PoolerSpecTemplateSpecVolumesCinderSecretRef#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -27660,7 +28126,6 @@ export interface PoolerSpecTemplateSpecVolumesConfigMapItems {
    * @schema PoolerSpecTemplateSpecVolumesConfigMapItems#path
    */
   readonly path: string;
-
 }
 
 /**
@@ -27699,7 +28164,6 @@ export interface PoolerSpecTemplateSpecVolumesCsiNodePublishSecretRef {
    * @schema PoolerSpecTemplateSpecVolumesCsiNodePublishSecretRef#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -27755,7 +28219,6 @@ export interface PoolerSpecTemplateSpecVolumesDownwardApiItems {
    * @schema PoolerSpecTemplateSpecVolumesDownwardApiItems#resourceFieldRef
    */
   readonly resourceFieldRef?: PoolerSpecTemplateSpecVolumesDownwardApiItemsResourceFieldRef;
-
 }
 
 /**
@@ -27840,7 +28303,6 @@ export interface PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplate {
    * @schema PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplate#spec
    */
   readonly spec: PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpec;
-
 }
 
 /**
@@ -27878,7 +28340,6 @@ export interface PoolerSpecTemplateSpecVolumesFlexVolumeSecretRef {
    * @schema PoolerSpecTemplateSpecVolumesFlexVolumeSecretRef#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -27911,7 +28372,6 @@ export interface PoolerSpecTemplateSpecVolumesIscsiSecretRef {
    * @schema PoolerSpecTemplateSpecVolumesIscsiSecretRef#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -27969,6 +28429,46 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSources {
   readonly downwardApi?: PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApi;
 
   /**
+   * Projects an auto-rotating credential bundle (private key and certificate
+   * chain) that the pod can use either as a TLS client or server.
+   *
+   * Kubelet generates a private key and uses it to send a
+   * PodCertificateRequest to the named signer.  Once the signer approves the
+   * request and issues a certificate chain, Kubelet writes the key and
+   * certificate chain to the pod filesystem.  The pod does not start until
+   * certificates have been issued for each podCertificate projected volume
+   * source in its spec.
+   *
+   * Kubelet will begin trying to rotate the certificate at the time indicated
+   * by the signer using the PodCertificateRequest.Status.BeginRefreshAt
+   * timestamp.
+   *
+   * Kubelet can write a single file, indicated by the credentialBundlePath
+   * field, or separate files, indicated by the keyPath and
+   * certificateChainPath fields.
+   *
+   * The credential bundle is a single file in PEM format.  The first PEM
+   * entry is the private key (in PKCS#8 format), and the remaining PEM
+   * entries are the certificate chain issued by the signer (typically,
+   * signers will return their certificate chain in leaf-to-root order).
+   *
+   * Prefer using the credential bundle format, since your application code
+   * can read it atomically.  If you use keyPath and certificateChainPath,
+   * your application must make two separate file reads. If these coincide
+   * with a certificate rotation, it is possible that the private key and leaf
+   * certificate you read may not correspond to each other.  Your application
+   * will need to check for this condition, and re-read until they are
+   * consistent.
+   *
+   * The named signer controls chooses the format of the certificate it
+   * issues; consult the signer implementation's documentation to learn how to
+   * use the certificates it issues.
+   *
+   * @schema PoolerSpecTemplateSpecVolumesProjectedSources#podCertificate
+   */
+  readonly podCertificate?: PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate;
+
+  /**
    * secret information about the secret data to project
    *
    * @schema PoolerSpecTemplateSpecVolumesProjectedSources#secret
@@ -27981,7 +28481,6 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSources {
    * @schema PoolerSpecTemplateSpecVolumesProjectedSources#serviceAccountToken
    */
   readonly serviceAccountToken?: PoolerSpecTemplateSpecVolumesProjectedSourcesServiceAccountToken;
-
 }
 
 /**
@@ -27994,6 +28493,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesProjectedSources(obj: Pooler
     'clusterTrustBundle': toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundle(obj.clusterTrustBundle),
     'configMap': toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesConfigMap(obj.configMap),
     'downwardAPI': toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApi(obj.downwardApi),
+    'podCertificate': toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate(obj.podCertificate),
     'secret': toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesSecret(obj.secret),
     'serviceAccountToken': toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesServiceAccountToken(obj.serviceAccountToken),
   };
@@ -28022,7 +28522,6 @@ export interface PoolerSpecTemplateSpecVolumesRbdSecretRef {
    * @schema PoolerSpecTemplateSpecVolumesRbdSecretRef#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -28056,7 +28555,6 @@ export interface PoolerSpecTemplateSpecVolumesScaleIoSecretRef {
    * @schema PoolerSpecTemplateSpecVolumesScaleIoSecretRef#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -28107,7 +28605,6 @@ export interface PoolerSpecTemplateSpecVolumesSecretItems {
    * @schema PoolerSpecTemplateSpecVolumesSecretItems#path
    */
   readonly path: string;
-
 }
 
 /**
@@ -28143,7 +28640,6 @@ export interface PoolerSpecTemplateSpecVolumesStorageosSecretRef {
    * @schema PoolerSpecTemplateSpecVolumesStorageosSecretRef#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -28179,7 +28675,6 @@ export interface PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedu
    * @schema PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchFields
    */
   readonly matchFields?: PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields[];
-
 }
 
 /**
@@ -28218,7 +28713,6 @@ export interface PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedul
    * @schema PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchFields
    */
   readonly matchFields?: PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields[];
-
 }
 
 /**
@@ -28309,7 +28803,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedul
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -28353,7 +28846,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringScheduli
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -28396,7 +28888,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringScheduli
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -28487,7 +28978,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSch
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -28531,7 +29021,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSche
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -28574,7 +29063,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSche
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -28622,7 +29110,6 @@ export interface PoolerSpecTemplateSpecContainersEnvValueFromConfigMapKeyRef {
    * @schema PoolerSpecTemplateSpecContainersEnvValueFromConfigMapKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -28661,7 +29148,6 @@ export interface PoolerSpecTemplateSpecContainersEnvValueFromFieldRef {
    * @schema PoolerSpecTemplateSpecContainersEnvValueFromFieldRef#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
@@ -28673,6 +29159,68 @@ export function toJson_PoolerSpecTemplateSpecContainersEnvValueFromFieldRef(obj:
   const result = {
     'apiVersion': obj.apiVersion,
     'fieldPath': obj.fieldPath,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * FileKeyRef selects a key of the env file.
+ * Requires the EnvFiles feature gate to be enabled.
+ *
+ * @schema PoolerSpecTemplateSpecContainersEnvValueFromFileKeyRef
+ */
+export interface PoolerSpecTemplateSpecContainersEnvValueFromFileKeyRef {
+  /**
+   * The key within the env file. An invalid key will prevent the pod from starting.
+   * The keys defined within a source may consist of any printable ASCII characters except '='.
+   * During Alpha stage of the EnvFiles feature gate, the key size is limited to 128 characters.
+   *
+   * @schema PoolerSpecTemplateSpecContainersEnvValueFromFileKeyRef#key
+   */
+  readonly key: string;
+
+  /**
+   * Specify whether the file or its key must be defined. If the file or key
+   * does not exist, then the env var is not published.
+   * If optional is set to true and the specified key does not exist,
+   * the environment variable will not be set in the Pod's containers.
+   *
+   * If optional is set to false and the specified key does not exist,
+   * an error will be returned during Pod creation.
+   *
+   * @schema PoolerSpecTemplateSpecContainersEnvValueFromFileKeyRef#optional
+   */
+  readonly optional?: boolean;
+
+  /**
+   * The path within the volume from which to select the file.
+   * Must be relative and may not contain the '..' path or start with '..'.
+   *
+   * @schema PoolerSpecTemplateSpecContainersEnvValueFromFileKeyRef#path
+   */
+  readonly path: string;
+
+  /**
+   * The name of the volume mount containing the env file.
+   *
+   * @schema PoolerSpecTemplateSpecContainersEnvValueFromFileKeyRef#volumeName
+   */
+  readonly volumeName: string;
+}
+
+/**
+ * Converts an object of type 'PoolerSpecTemplateSpecContainersEnvValueFromFileKeyRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_PoolerSpecTemplateSpecContainersEnvValueFromFileKeyRef(obj: PoolerSpecTemplateSpecContainersEnvValueFromFileKeyRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'optional': obj.optional,
+    'path': obj.path,
+    'volumeName': obj.volumeName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -28706,7 +29254,6 @@ export interface PoolerSpecTemplateSpecContainersEnvValueFromResourceFieldRef {
    * @schema PoolerSpecTemplateSpecContainersEnvValueFromResourceFieldRef#resource
    */
   readonly resource: string;
-
 }
 
 /**
@@ -28755,7 +29302,6 @@ export interface PoolerSpecTemplateSpecContainersEnvValueFromSecretKeyRef {
    * @schema PoolerSpecTemplateSpecContainersEnvValueFromSecretKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -28790,7 +29336,6 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePostStartExec {
    * @schema PoolerSpecTemplateSpecContainersLifecyclePostStartExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
@@ -28852,7 +29397,6 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePostStartHttpGet {
    * @schema PoolerSpecTemplateSpecContainersLifecyclePostStartHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
@@ -28885,7 +29429,6 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePostStartSleep {
    * @schema PoolerSpecTemplateSpecContainersLifecyclePostStartSleep#seconds
    */
   readonly seconds: number;
-
 }
 
 /**
@@ -28925,7 +29468,6 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePostStartTcpSocket {
    * @schema PoolerSpecTemplateSpecContainersLifecyclePostStartTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecContainersLifecyclePostStartTcpSocketPort;
-
 }
 
 /**
@@ -28959,7 +29501,6 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePreStopExec {
    * @schema PoolerSpecTemplateSpecContainersLifecyclePreStopExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
@@ -29021,7 +29562,6 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePreStopHttpGet {
    * @schema PoolerSpecTemplateSpecContainersLifecyclePreStopHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
@@ -29054,7 +29594,6 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePreStopSleep {
    * @schema PoolerSpecTemplateSpecContainersLifecyclePreStopSleep#seconds
    */
   readonly seconds: number;
-
 }
 
 /**
@@ -29094,7 +29633,6 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePreStopTcpSocket {
    * @schema PoolerSpecTemplateSpecContainersLifecyclePreStopTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecContainersLifecyclePreStopTcpSocketPort;
-
 }
 
 /**
@@ -29132,7 +29670,6 @@ export interface PoolerSpecTemplateSpecContainersLivenessProbeHttpGetHttpHeaders
    * @schema PoolerSpecTemplateSpecContainersLivenessProbeHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -29206,7 +29743,6 @@ export interface PoolerSpecTemplateSpecContainersReadinessProbeHttpGetHttpHeader
    * @schema PoolerSpecTemplateSpecContainersReadinessProbeHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -29280,7 +29816,6 @@ export interface PoolerSpecTemplateSpecContainersStartupProbeHttpGetHttpHeaders 
    * @schema PoolerSpecTemplateSpecContainersStartupProbeHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -29364,7 +29899,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvValueFromConfigMapK
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvValueFromConfigMapKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -29403,7 +29937,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFieldRef {
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFieldRef#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
@@ -29415,6 +29948,68 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFiel
   const result = {
     'apiVersion': obj.apiVersion,
     'fieldPath': obj.fieldPath,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * FileKeyRef selects a key of the env file.
+ * Requires the EnvFiles feature gate to be enabled.
+ *
+ * @schema PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFileKeyRef
+ */
+export interface PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFileKeyRef {
+  /**
+   * The key within the env file. An invalid key will prevent the pod from starting.
+   * The keys defined within a source may consist of any printable ASCII characters except '='.
+   * During Alpha stage of the EnvFiles feature gate, the key size is limited to 128 characters.
+   *
+   * @schema PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFileKeyRef#key
+   */
+  readonly key: string;
+
+  /**
+   * Specify whether the file or its key must be defined. If the file or key
+   * does not exist, then the env var is not published.
+   * If optional is set to true and the specified key does not exist,
+   * the environment variable will not be set in the Pod's containers.
+   *
+   * If optional is set to false and the specified key does not exist,
+   * an error will be returned during Pod creation.
+   *
+   * @schema PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFileKeyRef#optional
+   */
+  readonly optional?: boolean;
+
+  /**
+   * The path within the volume from which to select the file.
+   * Must be relative and may not contain the '..' path or start with '..'.
+   *
+   * @schema PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFileKeyRef#path
+   */
+  readonly path: string;
+
+  /**
+   * The name of the volume mount containing the env file.
+   *
+   * @schema PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFileKeyRef#volumeName
+   */
+  readonly volumeName: string;
+}
+
+/**
+ * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFileKeyRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFileKeyRef(obj: PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFileKeyRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'optional': obj.optional,
+    'path': obj.path,
+    'volumeName': obj.volumeName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -29448,7 +30043,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvValueFromResourceFi
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvValueFromResourceFieldRef#resource
    */
   readonly resource: string;
-
 }
 
 /**
@@ -29497,7 +30091,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvValueFromSecretKeyR
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvValueFromSecretKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -29532,7 +30125,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartExec
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
@@ -29594,7 +30186,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartHttp
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
@@ -29627,7 +30218,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartSlee
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartSleep#seconds
    */
   readonly seconds: number;
-
 }
 
 /**
@@ -29667,7 +30257,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartTcpS
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartTcpSocketPort;
-
 }
 
 /**
@@ -29701,7 +30290,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopExec {
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
@@ -29763,7 +30351,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopHttpGe
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
@@ -29796,7 +30383,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopSleep 
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopSleep#seconds
    */
   readonly seconds: number;
-
 }
 
 /**
@@ -29836,7 +30422,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopTcpSoc
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopTcpSocketPort;
-
 }
 
 /**
@@ -29874,7 +30459,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLivenessProbeHttpGetHt
    * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbeHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -29948,7 +30532,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersReadinessProbeHttpGetH
    * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbeHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -30022,7 +30605,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersStartupProbeHttpGetHtt
    * @schema PoolerSpecTemplateSpecEphemeralContainersStartupProbeHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -30106,7 +30688,6 @@ export interface PoolerSpecTemplateSpecInitContainersEnvValueFromConfigMapKeyRef
    * @schema PoolerSpecTemplateSpecInitContainersEnvValueFromConfigMapKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -30145,7 +30726,6 @@ export interface PoolerSpecTemplateSpecInitContainersEnvValueFromFieldRef {
    * @schema PoolerSpecTemplateSpecInitContainersEnvValueFromFieldRef#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
@@ -30157,6 +30737,68 @@ export function toJson_PoolerSpecTemplateSpecInitContainersEnvValueFromFieldRef(
   const result = {
     'apiVersion': obj.apiVersion,
     'fieldPath': obj.fieldPath,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * FileKeyRef selects a key of the env file.
+ * Requires the EnvFiles feature gate to be enabled.
+ *
+ * @schema PoolerSpecTemplateSpecInitContainersEnvValueFromFileKeyRef
+ */
+export interface PoolerSpecTemplateSpecInitContainersEnvValueFromFileKeyRef {
+  /**
+   * The key within the env file. An invalid key will prevent the pod from starting.
+   * The keys defined within a source may consist of any printable ASCII characters except '='.
+   * During Alpha stage of the EnvFiles feature gate, the key size is limited to 128 characters.
+   *
+   * @schema PoolerSpecTemplateSpecInitContainersEnvValueFromFileKeyRef#key
+   */
+  readonly key: string;
+
+  /**
+   * Specify whether the file or its key must be defined. If the file or key
+   * does not exist, then the env var is not published.
+   * If optional is set to true and the specified key does not exist,
+   * the environment variable will not be set in the Pod's containers.
+   *
+   * If optional is set to false and the specified key does not exist,
+   * an error will be returned during Pod creation.
+   *
+   * @schema PoolerSpecTemplateSpecInitContainersEnvValueFromFileKeyRef#optional
+   */
+  readonly optional?: boolean;
+
+  /**
+   * The path within the volume from which to select the file.
+   * Must be relative and may not contain the '..' path or start with '..'.
+   *
+   * @schema PoolerSpecTemplateSpecInitContainersEnvValueFromFileKeyRef#path
+   */
+  readonly path: string;
+
+  /**
+   * The name of the volume mount containing the env file.
+   *
+   * @schema PoolerSpecTemplateSpecInitContainersEnvValueFromFileKeyRef#volumeName
+   */
+  readonly volumeName: string;
+}
+
+/**
+ * Converts an object of type 'PoolerSpecTemplateSpecInitContainersEnvValueFromFileKeyRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_PoolerSpecTemplateSpecInitContainersEnvValueFromFileKeyRef(obj: PoolerSpecTemplateSpecInitContainersEnvValueFromFileKeyRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'optional': obj.optional,
+    'path': obj.path,
+    'volumeName': obj.volumeName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -30190,7 +30832,6 @@ export interface PoolerSpecTemplateSpecInitContainersEnvValueFromResourceFieldRe
    * @schema PoolerSpecTemplateSpecInitContainersEnvValueFromResourceFieldRef#resource
    */
   readonly resource: string;
-
 }
 
 /**
@@ -30239,7 +30880,6 @@ export interface PoolerSpecTemplateSpecInitContainersEnvValueFromSecretKeyRef {
    * @schema PoolerSpecTemplateSpecInitContainersEnvValueFromSecretKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -30274,7 +30914,6 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePostStartExec {
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePostStartExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
@@ -30336,7 +30975,6 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePostStartHttpGet {
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePostStartHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
@@ -30369,7 +31007,6 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePostStartSleep {
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePostStartSleep#seconds
    */
   readonly seconds: number;
-
 }
 
 /**
@@ -30409,7 +31046,6 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePostStartTcpSocket
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePostStartTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecInitContainersLifecyclePostStartTcpSocketPort;
-
 }
 
 /**
@@ -30443,7 +31079,6 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePreStopExec {
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePreStopExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
@@ -30505,7 +31140,6 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePreStopHttpGet {
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePreStopHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
@@ -30538,7 +31172,6 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePreStopSleep {
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePreStopSleep#seconds
    */
   readonly seconds: number;
-
 }
 
 /**
@@ -30578,7 +31211,6 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePreStopTcpSocket {
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePreStopTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecInitContainersLifecyclePreStopTcpSocketPort;
-
 }
 
 /**
@@ -30616,7 +31248,6 @@ export interface PoolerSpecTemplateSpecInitContainersLivenessProbeHttpGetHttpHea
    * @schema PoolerSpecTemplateSpecInitContainersLivenessProbeHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -30690,7 +31321,6 @@ export interface PoolerSpecTemplateSpecInitContainersReadinessProbeHttpGetHttpHe
    * @schema PoolerSpecTemplateSpecInitContainersReadinessProbeHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -30764,7 +31394,6 @@ export interface PoolerSpecTemplateSpecInitContainersStartupProbeHttpGetHttpHead
    * @schema PoolerSpecTemplateSpecInitContainersStartupProbeHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -30837,7 +31466,6 @@ export interface PoolerSpecTemplateSpecVolumesDownwardApiItemsFieldRef {
    * @schema PoolerSpecTemplateSpecVolumesDownwardApiItemsFieldRef#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
@@ -30882,7 +31510,6 @@ export interface PoolerSpecTemplateSpecVolumesDownwardApiItemsResourceFieldRef {
    * @schema PoolerSpecTemplateSpecVolumesDownwardApiItemsResourceFieldRef#resource
    */
   readonly resource: string;
-
 }
 
 /**
@@ -30991,15 +31618,13 @@ export interface PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpec {
    * volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim.
    * If specified, the CSI driver will create or update the volume with the attributes defined
    * in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName,
-   * it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass
-   * will be applied to the claim but it's not allowed to reset this field to empty string once it is set.
-   * If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass
-   * will be set by the persistentvolume controller if it exists.
+   * it can be changed after the claim is created. An empty string or nil value indicates that no
+   * VolumeAttributesClass will be applied to the claim. If the claim enters an Infeasible error state,
+   * this field can be reset to its previous value (including nil) to cancel the modification.
    * If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be
    * set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
    * exists.
    * More info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/
-   * (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
    *
    * @schema PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpec#volumeAttributesClassName
    */
@@ -31019,7 +31644,6 @@ export interface PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpec {
    * @schema PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpec#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
@@ -31106,7 +31730,6 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundle
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundle#signerName
    */
   readonly signerName?: string;
-
 }
 
 /**
@@ -31163,7 +31786,6 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesConfigMap {
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -31194,7 +31816,6 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApi {
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApi#items
    */
   readonly items?: PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItems[];
-
 }
 
 /**
@@ -31205,6 +31826,146 @@ export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApi(
   if (obj === undefined) { return undefined; }
   const result = {
     'items': obj.items?.map(y => toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItems(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Projects an auto-rotating credential bundle (private key and certificate
+ * chain) that the pod can use either as a TLS client or server.
+ *
+ * Kubelet generates a private key and uses it to send a
+ * PodCertificateRequest to the named signer.  Once the signer approves the
+ * request and issues a certificate chain, Kubelet writes the key and
+ * certificate chain to the pod filesystem.  The pod does not start until
+ * certificates have been issued for each podCertificate projected volume
+ * source in its spec.
+ *
+ * Kubelet will begin trying to rotate the certificate at the time indicated
+ * by the signer using the PodCertificateRequest.Status.BeginRefreshAt
+ * timestamp.
+ *
+ * Kubelet can write a single file, indicated by the credentialBundlePath
+ * field, or separate files, indicated by the keyPath and
+ * certificateChainPath fields.
+ *
+ * The credential bundle is a single file in PEM format.  The first PEM
+ * entry is the private key (in PKCS#8 format), and the remaining PEM
+ * entries are the certificate chain issued by the signer (typically,
+ * signers will return their certificate chain in leaf-to-root order).
+ *
+ * Prefer using the credential bundle format, since your application code
+ * can read it atomically.  If you use keyPath and certificateChainPath,
+ * your application must make two separate file reads. If these coincide
+ * with a certificate rotation, it is possible that the private key and leaf
+ * certificate you read may not correspond to each other.  Your application
+ * will need to check for this condition, and re-read until they are
+ * consistent.
+ *
+ * The named signer controls chooses the format of the certificate it
+ * issues; consult the signer implementation's documentation to learn how to
+ * use the certificates it issues.
+ *
+ * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate
+ */
+export interface PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate {
+  /**
+   * Write the certificate chain at this path in the projected volume.
+   *
+   * Most applications should use credentialBundlePath.  When using keyPath
+   * and certificateChainPath, your application needs to check that the key
+   * and leaf certificate are consistent, because it is possible to read the
+   * files mid-rotation.
+   *
+   * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate#certificateChainPath
+   */
+  readonly certificateChainPath?: string;
+
+  /**
+   * Write the credential bundle at this path in the projected volume.
+   *
+   * The credential bundle is a single file that contains multiple PEM blocks.
+   * The first PEM block is a PRIVATE KEY block, containing a PKCS#8 private
+   * key.
+   *
+   * The remaining blocks are CERTIFICATE blocks, containing the issued
+   * certificate chain from the signer (leaf and any intermediates).
+   *
+   * Using credentialBundlePath lets your Pod's application code make a single
+   * atomic read that retrieves a consistent key and certificate chain.  If you
+   * project them to separate files, your application code will need to
+   * additionally check that the leaf certificate was issued to the key.
+   *
+   * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate#credentialBundlePath
+   */
+  readonly credentialBundlePath?: string;
+
+  /**
+   * Write the key at this path in the projected volume.
+   *
+   * Most applications should use credentialBundlePath.  When using keyPath
+   * and certificateChainPath, your application needs to check that the key
+   * and leaf certificate are consistent, because it is possible to read the
+   * files mid-rotation.
+   *
+   * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate#keyPath
+   */
+  readonly keyPath?: string;
+
+  /**
+   * The type of keypair Kubelet will generate for the pod.
+   *
+   * Valid values are "RSA3072", "RSA4096", "ECDSAP256", "ECDSAP384",
+   * "ECDSAP521", and "ED25519".
+   *
+   * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate#keyType
+   */
+  readonly keyType: string;
+
+  /**
+   * maxExpirationSeconds is the maximum lifetime permitted for the
+   * certificate.
+   *
+   * Kubelet copies this value verbatim into the PodCertificateRequests it
+   * generates for this projection.
+   *
+   * If omitted, kube-apiserver will set it to 86400(24 hours). kube-apiserver
+   * will reject values shorter than 3600 (1 hour).  The maximum allowable
+   * value is 7862400 (91 days).
+   *
+   * The signer implementation is then free to issue a certificate with any
+   * lifetime *shorter* than MaxExpirationSeconds, but no shorter than 3600
+   * seconds (1 hour).  This constraint is enforced by kube-apiserver.
+   * `kubernetes.io` signers will never issue certificates with a lifetime
+   * longer than 24 hours.
+   *
+   * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate#maxExpirationSeconds
+   */
+  readonly maxExpirationSeconds?: number;
+
+  /**
+   * Kubelet's generated CSRs will be addressed to this signer.
+   *
+   * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate#signerName
+   */
+  readonly signerName: string;
+}
+
+/**
+ * Converts an object of type 'PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate(obj: PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'certificateChainPath': obj.certificateChainPath,
+    'credentialBundlePath': obj.credentialBundlePath,
+    'keyPath': obj.keyPath,
+    'keyType': obj.keyType,
+    'maxExpirationSeconds': obj.maxExpirationSeconds,
+    'signerName': obj.signerName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -31247,7 +32008,6 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesSecret {
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -31302,7 +32062,6 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesServiceAccountToke
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesServiceAccountToken#path
    */
   readonly path: string;
-
 }
 
 /**
@@ -31353,7 +32112,6 @@ export interface PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedu
    * @schema PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -31404,7 +32162,6 @@ export interface PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedu
    * @schema PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -31455,7 +32212,6 @@ export interface PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedul
    * @schema PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -31506,7 +32262,6 @@ export interface PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedul
    * @schema PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -31547,7 +32302,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedul
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -31590,7 +32344,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedul
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -31639,7 +32392,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringScheduli
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -31689,7 +32441,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringScheduli
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -31730,7 +32481,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSch
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -31773,7 +32523,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSch
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -31822,7 +32571,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSche
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -31872,7 +32620,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSche
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -31927,7 +32674,6 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePostStartHttpGetHttpHe
    * @schema PoolerSpecTemplateSpecContainersLifecyclePostStartHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -32001,7 +32747,6 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePreStopHttpGetHttpHead
    * @schema PoolerSpecTemplateSpecContainersLifecyclePreStopHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -32091,7 +32836,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartHttp
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -32165,7 +32909,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopHttpGe
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -32255,7 +32998,6 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePostStartHttpGetHt
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePostStartHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -32329,7 +33071,6 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePreStopHttpGetHttp
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePreStopHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -32434,7 +33175,6 @@ export interface PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecDa
    * @schema PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -32512,7 +33252,6 @@ export interface PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecDa
    * @schema PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -32559,7 +33298,6 @@ export interface PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecRe
    * @schema PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecResources#requests
    */
   readonly requests?: { [key: string]: PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesRequests };
-
 }
 
 /**
@@ -32598,7 +33336,6 @@ export interface PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecSe
    * @schema PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -32640,7 +33377,6 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundle
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -32692,7 +33428,6 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesConfigMapItems {
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesConfigMapItems#path
    */
   readonly path: string;
-
 }
 
 /**
@@ -32750,7 +33485,6 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItems {
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItems#resourceFieldRef
    */
   readonly resourceFieldRef?: PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItemsResourceFieldRef;
-
 }
 
 /**
@@ -32804,7 +33538,6 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesSecretItems {
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesSecretItems#path
    */
   readonly path: string;
-
 }
 
 /**
@@ -32854,7 +33587,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedul
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -32904,7 +33636,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedul
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -32954,7 +33685,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSch
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -33004,7 +33734,6 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSch
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -33082,7 +33811,6 @@ export interface PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecSe
    * @schema PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -33132,7 +33860,6 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundle
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -33170,7 +33897,6 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItemsFi
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItemsFieldRef#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
@@ -33215,7 +33941,6 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItemsRe
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItemsResourceFieldRef#resource
    */
   readonly resource: string;
-
 }
 
 /**
@@ -33322,7 +34047,6 @@ export interface PublicationProps {
    * @schema Publication#spec
    */
   readonly spec: PublicationSpec;
-
 }
 
 /**
@@ -33389,7 +34113,6 @@ export interface PublicationSpec {
    * @schema PublicationSpec#target
    */
   readonly target: PublicationSpecTarget;
-
 }
 
 /**
@@ -33427,7 +34150,6 @@ export interface PublicationSpecCluster {
    * @schema PublicationSpecCluster#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -33477,7 +34199,6 @@ export interface PublicationSpecTarget {
    * @schema PublicationSpecTarget#objects
    */
   readonly objects?: PublicationSpecTargetObjects[];
-
 }
 
 /**
@@ -33517,7 +34238,6 @@ export interface PublicationSpecTargetObjects {
    * @schema PublicationSpecTargetObjects#tablesInSchema
    */
   readonly tablesInSchema?: string;
-
 }
 
 /**
@@ -33569,7 +34289,6 @@ export interface PublicationSpecTargetObjectsTable {
    * @schema PublicationSpecTargetObjectsTable#schema
    */
   readonly schema?: string;
-
 }
 
 /**
@@ -33662,7 +34381,6 @@ export interface ScheduledBackupProps {
    * @schema ScheduledBackup#spec
    */
   readonly spec: ScheduledBackupSpec;
-
 }
 
 /**
@@ -33771,7 +34489,6 @@ export interface ScheduledBackupSpec {
    * @schema ScheduledBackupSpec#target
    */
   readonly target?: ScheduledBackupSpecTarget;
-
 }
 
 /**
@@ -33826,7 +34543,6 @@ export interface ScheduledBackupSpecCluster {
    * @schema ScheduledBackupSpecCluster#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -33891,7 +34607,6 @@ export interface ScheduledBackupSpecOnlineConfiguration {
    * @schema ScheduledBackupSpecOnlineConfiguration#waitForArchive
    */
   readonly waitForArchive?: boolean;
-
 }
 
 /**
@@ -33929,7 +34644,6 @@ export interface ScheduledBackupSpecPluginConfiguration {
    * @schema ScheduledBackupSpecPluginConfiguration#parameters
    */
   readonly parameters?: { [key: string]: string };
-
 }
 
 /**
@@ -34036,7 +34750,6 @@ export interface SubscriptionProps {
    * @schema Subscription#spec
    */
   readonly spec: SubscriptionSpec;
-
 }
 
 /**
@@ -34123,7 +34836,6 @@ export interface SubscriptionSpec {
    * @schema SubscriptionSpec#subscriptionReclaimPolicy
    */
   readonly subscriptionReclaimPolicy?: SubscriptionSpecSubscriptionReclaimPolicy;
-
 }
 
 /**
@@ -34163,7 +34875,6 @@ export interface SubscriptionSpecCluster {
    * @schema SubscriptionSpecCluster#name
    */
   readonly name?: string;
-
 }
 
 /**

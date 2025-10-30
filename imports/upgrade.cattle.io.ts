@@ -74,7 +74,6 @@ export interface PlanProps {
    * @schema Plan#spec
    */
   readonly spec?: PlanSpec;
-
 }
 
 /**
@@ -216,7 +215,6 @@ export interface PlanSpec {
    * @schema PlanSpec#window
    */
   readonly window?: PlanSpecWindow;
-
 }
 
 /**
@@ -306,7 +304,6 @@ export interface PlanSpecDrain {
    * @schema PlanSpecDrain#timeout
    */
   readonly timeout?: number;
-
 }
 
 /**
@@ -348,7 +345,6 @@ export interface PlanSpecImagePullSecrets {
    * @schema PlanSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -386,7 +382,6 @@ export interface PlanSpecNodeSelector {
    * @schema PlanSpecNodeSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -450,7 +445,6 @@ export interface PlanSpecPrepare {
    * @schema PlanSpecPrepare#volumes
    */
   readonly volumes?: PlanSpecPrepareVolumes[];
-
 }
 
 /**
@@ -499,7 +493,6 @@ export interface PlanSpecSecrets {
    * @schema PlanSpecSecrets#path
    */
   readonly path: string;
-
 }
 
 /**
@@ -569,7 +562,6 @@ export interface PlanSpecTolerations {
    * @schema PlanSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -636,7 +628,6 @@ export interface PlanSpecUpgrade {
    * @schema PlanSpecUpgrade#volumes
    */
   readonly volumes?: PlanSpecUpgradeVolumes[];
-
 }
 
 /**
@@ -693,7 +684,6 @@ export interface PlanSpecWindow {
    * @schema PlanSpecWindow#timeZone
    */
   readonly timeZone?: string;
-
 }
 
 /**
@@ -736,7 +726,6 @@ export interface PlanSpecDrainPodSelector {
    * @schema PlanSpecDrainPodSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -785,7 +774,6 @@ export interface PlanSpecNodeSelectorMatchExpressions {
    * @schema PlanSpecNodeSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -830,7 +818,6 @@ export interface PlanSpecPrepareEnvFrom {
    * @schema PlanSpecPrepareEnvFrom#secretRef
    */
   readonly secretRef?: PlanSpecPrepareEnvFromSecretRef;
-
 }
 
 /**
@@ -884,7 +871,6 @@ export interface PlanSpecPrepareEnvs {
    * @schema PlanSpecPrepareEnvs#valueFrom
    */
   readonly valueFrom?: PlanSpecPrepareEnvsValueFrom;
-
 }
 
 /**
@@ -1040,7 +1026,6 @@ export interface PlanSpecPrepareSecurityContext {
    * @schema PlanSpecPrepareSecurityContext#windowsOptions
    */
   readonly windowsOptions?: PlanSpecPrepareSecurityContextWindowsOptions;
-
 }
 
 /**
@@ -1094,7 +1079,6 @@ export interface PlanSpecPrepareVolumes {
    * @schema PlanSpecPrepareVolumes#source
    */
   readonly source: string;
-
 }
 
 /**
@@ -1139,7 +1123,6 @@ export interface PlanSpecUpgradeEnvFrom {
    * @schema PlanSpecUpgradeEnvFrom#secretRef
    */
   readonly secretRef?: PlanSpecUpgradeEnvFromSecretRef;
-
 }
 
 /**
@@ -1193,7 +1176,6 @@ export interface PlanSpecUpgradeEnvs {
    * @schema PlanSpecUpgradeEnvs#valueFrom
    */
   readonly valueFrom?: PlanSpecUpgradeEnvsValueFrom;
-
 }
 
 /**
@@ -1349,7 +1331,6 @@ export interface PlanSpecUpgradeSecurityContext {
    * @schema PlanSpecUpgradeSecurityContext#windowsOptions
    */
   readonly windowsOptions?: PlanSpecUpgradeSecurityContextWindowsOptions;
-
 }
 
 /**
@@ -1403,7 +1384,6 @@ export interface PlanSpecUpgradeVolumes {
    * @schema PlanSpecUpgradeVolumes#source
    */
   readonly source: string;
-
 }
 
 /**
@@ -1515,7 +1495,6 @@ export interface PlanSpecDrainPodSelectorMatchExpressions {
    * @schema PlanSpecDrainPodSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -1557,7 +1536,6 @@ export interface PlanSpecPrepareEnvFromConfigMapRef {
    * @schema PlanSpecPrepareEnvFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -1598,7 +1576,6 @@ export interface PlanSpecPrepareEnvFromSecretRef {
    * @schema PlanSpecPrepareEnvFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -1651,7 +1628,6 @@ export interface PlanSpecPrepareEnvsValueFrom {
    * @schema PlanSpecPrepareEnvsValueFrom#secretKeyRef
    */
   readonly secretKeyRef?: PlanSpecPrepareEnvsValueFromSecretKeyRef;
-
 }
 
 /**
@@ -1699,7 +1675,6 @@ export interface PlanSpecPrepareSecurityContextAppArmorProfile {
    * @schema PlanSpecPrepareSecurityContextAppArmorProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -1739,7 +1714,6 @@ export interface PlanSpecPrepareSecurityContextCapabilities {
    * @schema PlanSpecPrepareSecurityContextCapabilities#drop
    */
   readonly drop?: string[];
-
 }
 
 /**
@@ -1794,7 +1768,6 @@ export interface PlanSpecPrepareSecurityContextSeLinuxOptions {
    * @schema PlanSpecPrepareSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -1844,7 +1817,6 @@ export interface PlanSpecPrepareSecurityContextSeccompProfile {
    * @schema PlanSpecPrepareSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -1907,7 +1879,6 @@ export interface PlanSpecPrepareSecurityContextWindowsOptions {
    * @schema PlanSpecPrepareSecurityContextWindowsOptions#runAsUserName
    */
   readonly runAsUserName?: string;
-
 }
 
 /**
@@ -1950,7 +1921,6 @@ export interface PlanSpecUpgradeEnvFromConfigMapRef {
    * @schema PlanSpecUpgradeEnvFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -1991,7 +1961,6 @@ export interface PlanSpecUpgradeEnvFromSecretRef {
    * @schema PlanSpecUpgradeEnvFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -2044,7 +2013,6 @@ export interface PlanSpecUpgradeEnvsValueFrom {
    * @schema PlanSpecUpgradeEnvsValueFrom#secretKeyRef
    */
   readonly secretKeyRef?: PlanSpecUpgradeEnvsValueFromSecretKeyRef;
-
 }
 
 /**
@@ -2092,7 +2060,6 @@ export interface PlanSpecUpgradeSecurityContextAppArmorProfile {
    * @schema PlanSpecUpgradeSecurityContextAppArmorProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -2132,7 +2099,6 @@ export interface PlanSpecUpgradeSecurityContextCapabilities {
    * @schema PlanSpecUpgradeSecurityContextCapabilities#drop
    */
   readonly drop?: string[];
-
 }
 
 /**
@@ -2187,7 +2153,6 @@ export interface PlanSpecUpgradeSecurityContextSeLinuxOptions {
    * @schema PlanSpecUpgradeSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -2237,7 +2202,6 @@ export interface PlanSpecUpgradeSecurityContextSeccompProfile {
    * @schema PlanSpecUpgradeSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -2300,7 +2264,6 @@ export interface PlanSpecUpgradeSecurityContextWindowsOptions {
    * @schema PlanSpecUpgradeSecurityContextWindowsOptions#runAsUserName
    */
   readonly runAsUserName?: string;
-
 }
 
 /**
@@ -2350,7 +2313,6 @@ export interface PlanSpecPrepareEnvsValueFromConfigMapKeyRef {
    * @schema PlanSpecPrepareEnvsValueFromConfigMapKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -2389,7 +2351,6 @@ export interface PlanSpecPrepareEnvsValueFromFieldRef {
    * @schema PlanSpecPrepareEnvsValueFromFieldRef#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
@@ -2434,7 +2395,6 @@ export interface PlanSpecPrepareEnvsValueFromResourceFieldRef {
    * @schema PlanSpecPrepareEnvsValueFromResourceFieldRef#resource
    */
   readonly resource: string;
-
 }
 
 /**
@@ -2483,7 +2443,6 @@ export interface PlanSpecPrepareEnvsValueFromSecretKeyRef {
    * @schema PlanSpecPrepareEnvsValueFromSecretKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -2532,7 +2491,6 @@ export interface PlanSpecUpgradeEnvsValueFromConfigMapKeyRef {
    * @schema PlanSpecUpgradeEnvsValueFromConfigMapKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
@@ -2571,7 +2529,6 @@ export interface PlanSpecUpgradeEnvsValueFromFieldRef {
    * @schema PlanSpecUpgradeEnvsValueFromFieldRef#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
@@ -2616,7 +2573,6 @@ export interface PlanSpecUpgradeEnvsValueFromResourceFieldRef {
    * @schema PlanSpecUpgradeEnvsValueFromResourceFieldRef#resource
    */
   readonly resource: string;
-
 }
 
 /**
@@ -2665,7 +2621,6 @@ export interface PlanSpecUpgradeEnvsValueFromSecretKeyRef {
    * @schema PlanSpecUpgradeEnvsValueFromSecretKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**

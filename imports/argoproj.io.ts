@@ -81,7 +81,6 @@ export interface ApplicationProps {
    * @schema Application#spec
    */
   readonly spec: ApplicationSpec;
-
 }
 
 /**
@@ -133,7 +132,6 @@ export interface ApplicationOperation {
    * @schema ApplicationOperation#sync
    */
   readonly sync?: ApplicationOperationSync;
-
 }
 
 /**
@@ -227,7 +225,6 @@ export interface ApplicationSpec {
    * @schema ApplicationSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSpecSyncPolicy;
-
 }
 
 /**
@@ -265,7 +262,6 @@ export interface ApplicationOperationInfo {
    * @schema ApplicationOperationInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -302,7 +298,6 @@ export interface ApplicationOperationInitiatedBy {
    * @schema ApplicationOperationInitiatedBy#username
    */
   readonly username?: string;
-
 }
 
 /**
@@ -339,7 +334,6 @@ export interface ApplicationOperationRetry {
    * @schema ApplicationOperationRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -443,7 +437,6 @@ export interface ApplicationOperationSync {
    * @schema ApplicationOperationSync#syncStrategy
    */
   readonly syncStrategy?: ApplicationOperationSyncSyncStrategy;
-
 }
 
 /**
@@ -497,7 +490,6 @@ export interface ApplicationSpecDestination {
    * @schema ApplicationSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -559,7 +551,6 @@ export interface ApplicationSpecIgnoreDifferences {
    * @schema ApplicationSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -595,7 +586,6 @@ export interface ApplicationSpecInfo {
    * @schema ApplicationSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -690,7 +680,6 @@ export interface ApplicationSpecSource {
    * @schema ApplicationSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -743,7 +732,6 @@ export interface ApplicationSpecSourceHydrator {
    * @schema ApplicationSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -839,7 +827,6 @@ export interface ApplicationSpecSources {
    * @schema ApplicationSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -898,7 +885,6 @@ export interface ApplicationSpecSyncPolicy {
    * @schema ApplicationSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -944,7 +930,6 @@ export interface ApplicationOperationRetryBackoff {
    * @schema ApplicationOperationRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -988,7 +973,6 @@ export interface ApplicationOperationSyncResources {
    * @schema ApplicationOperationSyncResources#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -1086,7 +1070,6 @@ export interface ApplicationOperationSyncSource {
    * @schema ApplicationOperationSyncSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -1189,7 +1172,6 @@ export interface ApplicationOperationSyncSources {
    * @schema ApplicationOperationSyncSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -1234,7 +1216,6 @@ export interface ApplicationOperationSyncSyncStrategy {
    * @schema ApplicationOperationSyncSyncStrategy#hook
    */
   readonly hook?: ApplicationOperationSyncSyncStrategyHook;
-
 }
 
 /**
@@ -1285,7 +1266,6 @@ export interface ApplicationSpecSourceDirectory {
    * @schema ApplicationSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -1417,7 +1397,6 @@ export interface ApplicationSpecSourceHelm {
    * @schema ApplicationSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -1581,7 +1560,6 @@ export interface ApplicationSpecSourceKustomize {
    * @schema ApplicationSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -1637,7 +1615,6 @@ export interface ApplicationSpecSourcePlugin {
    * @schema ApplicationSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -1682,7 +1659,6 @@ export interface ApplicationSpecSourceHydratorDrySource {
    * @schema ApplicationSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -1714,7 +1690,6 @@ export interface ApplicationSpecSourceHydratorHydrateTo {
    * @schema ApplicationSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -1751,7 +1726,6 @@ export interface ApplicationSpecSourceHydratorSyncSource {
    * @schema ApplicationSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -1802,7 +1776,6 @@ export interface ApplicationSpecSourcesDirectory {
    * @schema ApplicationSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -1934,7 +1907,6 @@ export interface ApplicationSpecSourcesHelm {
    * @schema ApplicationSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -2098,7 +2070,6 @@ export interface ApplicationSpecSourcesKustomize {
    * @schema ApplicationSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -2154,7 +2125,6 @@ export interface ApplicationSpecSourcesPlugin {
    * @schema ApplicationSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -2206,7 +2176,6 @@ export interface ApplicationSpecSyncPolicyAutomated {
    * @schema ApplicationSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -2241,7 +2210,6 @@ export interface ApplicationSpecSyncPolicyManagedNamespaceMetadata {
    * @schema ApplicationSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -2278,7 +2246,6 @@ export interface ApplicationSpecSyncPolicyRetry {
    * @schema ApplicationSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -2329,7 +2296,6 @@ export interface ApplicationOperationSyncSourceDirectory {
    * @schema ApplicationOperationSyncSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -2461,7 +2427,6 @@ export interface ApplicationOperationSyncSourceHelm {
    * @schema ApplicationOperationSyncSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -2625,7 +2590,6 @@ export interface ApplicationOperationSyncSourceKustomize {
    * @schema ApplicationOperationSyncSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -2681,7 +2645,6 @@ export interface ApplicationOperationSyncSourcePlugin {
    * @schema ApplicationOperationSyncSourcePlugin#parameters
    */
   readonly parameters?: ApplicationOperationSyncSourcePluginParameters[];
-
 }
 
 /**
@@ -2733,7 +2696,6 @@ export interface ApplicationOperationSyncSourcesDirectory {
    * @schema ApplicationOperationSyncSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -2865,7 +2827,6 @@ export interface ApplicationOperationSyncSourcesHelm {
    * @schema ApplicationOperationSyncSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -3029,7 +2990,6 @@ export interface ApplicationOperationSyncSourcesKustomize {
    * @schema ApplicationOperationSyncSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -3085,7 +3045,6 @@ export interface ApplicationOperationSyncSourcesPlugin {
    * @schema ApplicationOperationSyncSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationOperationSyncSourcesPluginParameters[];
-
 }
 
 /**
@@ -3118,7 +3077,6 @@ export interface ApplicationOperationSyncSyncStrategyApply {
    * @schema ApplicationOperationSyncSyncStrategyApply#force
    */
   readonly force?: boolean;
-
 }
 
 /**
@@ -3149,7 +3107,6 @@ export interface ApplicationOperationSyncSyncStrategyHook {
    * @schema ApplicationOperationSyncSyncStrategyHook#force
    */
   readonly force?: boolean;
-
 }
 
 /**
@@ -3192,7 +3149,6 @@ export interface ApplicationSpecSourceDirectoryJsonnet {
    * @schema ApplicationSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -3230,7 +3186,6 @@ export interface ApplicationSpecSourceHelmFileParameters {
    * @schema ApplicationSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -3274,7 +3229,6 @@ export interface ApplicationSpecSourceHelmParameters {
    * @schema ApplicationSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -3316,7 +3270,6 @@ export interface ApplicationSpecSourceKustomizePatches {
    * @schema ApplicationSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -3353,7 +3306,6 @@ export interface ApplicationSpecSourceKustomizeReplicas {
    * @schema ApplicationSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -3390,7 +3342,6 @@ export interface ApplicationSpecSourcePluginEnv {
    * @schema ApplicationSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -3439,7 +3390,6 @@ export interface ApplicationSpecSourcePluginParameters {
    * @schema ApplicationSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -3485,7 +3435,6 @@ export interface ApplicationSpecSourcesDirectoryJsonnet {
    * @schema ApplicationSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -3523,7 +3472,6 @@ export interface ApplicationSpecSourcesHelmFileParameters {
    * @schema ApplicationSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -3567,7 +3515,6 @@ export interface ApplicationSpecSourcesHelmParameters {
    * @schema ApplicationSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -3609,7 +3556,6 @@ export interface ApplicationSpecSourcesKustomizePatches {
    * @schema ApplicationSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -3646,7 +3592,6 @@ export interface ApplicationSpecSourcesKustomizeReplicas {
    * @schema ApplicationSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -3683,7 +3628,6 @@ export interface ApplicationSpecSourcesPluginEnv {
    * @schema ApplicationSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -3732,7 +3676,6 @@ export interface ApplicationSpecSourcesPluginParameters {
    * @schema ApplicationSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -3778,7 +3721,6 @@ export interface ApplicationSpecSyncPolicyRetryBackoff {
    * @schema ApplicationSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -3823,7 +3765,6 @@ export interface ApplicationOperationSyncSourceDirectoryJsonnet {
    * @schema ApplicationOperationSyncSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationOperationSyncSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -3861,7 +3802,6 @@ export interface ApplicationOperationSyncSourceHelmFileParameters {
    * @schema ApplicationOperationSyncSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -3905,7 +3845,6 @@ export interface ApplicationOperationSyncSourceHelmParameters {
    * @schema ApplicationOperationSyncSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -3947,7 +3886,6 @@ export interface ApplicationOperationSyncSourceKustomizePatches {
    * @schema ApplicationOperationSyncSourceKustomizePatches#target
    */
   readonly target?: ApplicationOperationSyncSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -3984,7 +3922,6 @@ export interface ApplicationOperationSyncSourceKustomizeReplicas {
    * @schema ApplicationOperationSyncSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4021,7 +3958,6 @@ export interface ApplicationOperationSyncSourcePluginEnv {
    * @schema ApplicationOperationSyncSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -4070,7 +4006,6 @@ export interface ApplicationOperationSyncSourcePluginParameters {
    * @schema ApplicationOperationSyncSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -4116,7 +4051,6 @@ export interface ApplicationOperationSyncSourcesDirectoryJsonnet {
    * @schema ApplicationOperationSyncSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationOperationSyncSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -4154,7 +4088,6 @@ export interface ApplicationOperationSyncSourcesHelmFileParameters {
    * @schema ApplicationOperationSyncSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -4198,7 +4131,6 @@ export interface ApplicationOperationSyncSourcesHelmParameters {
    * @schema ApplicationOperationSyncSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -4240,7 +4172,6 @@ export interface ApplicationOperationSyncSourcesKustomizePatches {
    * @schema ApplicationOperationSyncSourcesKustomizePatches#target
    */
   readonly target?: ApplicationOperationSyncSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -4277,7 +4208,6 @@ export interface ApplicationOperationSyncSourcesKustomizeReplicas {
    * @schema ApplicationOperationSyncSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4314,7 +4244,6 @@ export interface ApplicationOperationSyncSourcesPluginEnv {
    * @schema ApplicationOperationSyncSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -4363,7 +4292,6 @@ export interface ApplicationOperationSyncSourcesPluginParameters {
    * @schema ApplicationOperationSyncSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -4403,7 +4331,6 @@ export interface ApplicationSpecSourceDirectoryJsonnetExtVars {
    * @schema ApplicationSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -4442,7 +4369,6 @@ export interface ApplicationSpecSourceDirectoryJsonnetTlas {
    * @schema ApplicationSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -4499,7 +4425,6 @@ export interface ApplicationSpecSourceKustomizePatchesTarget {
    * @schema ApplicationSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -4558,7 +4483,6 @@ export interface ApplicationSpecSourcesDirectoryJsonnetExtVars {
    * @schema ApplicationSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -4597,7 +4521,6 @@ export interface ApplicationSpecSourcesDirectoryJsonnetTlas {
    * @schema ApplicationSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -4654,7 +4577,6 @@ export interface ApplicationSpecSourcesKustomizePatchesTarget {
    * @schema ApplicationSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -4713,7 +4635,6 @@ export interface ApplicationOperationSyncSourceDirectoryJsonnetExtVars {
    * @schema ApplicationOperationSyncSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -4752,7 +4673,6 @@ export interface ApplicationOperationSyncSourceDirectoryJsonnetTlas {
    * @schema ApplicationOperationSyncSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -4809,7 +4729,6 @@ export interface ApplicationOperationSyncSourceKustomizePatchesTarget {
    * @schema ApplicationOperationSyncSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -4868,7 +4787,6 @@ export interface ApplicationOperationSyncSourcesDirectoryJsonnetExtVars {
    * @schema ApplicationOperationSyncSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -4907,7 +4825,6 @@ export interface ApplicationOperationSyncSourcesDirectoryJsonnetTlas {
    * @schema ApplicationOperationSyncSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -4964,7 +4881,6 @@ export interface ApplicationOperationSyncSourcesKustomizePatchesTarget {
    * @schema ApplicationOperationSyncSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -5071,7 +4987,6 @@ export interface ApplicationSetProps {
    * @schema ApplicationSet#spec
    */
   readonly spec: ApplicationSetSpec;
-
 }
 
 /**
@@ -5142,7 +5057,6 @@ export interface ApplicationSetSpec {
    * @schema ApplicationSetSpec#templatePatch
    */
   readonly templatePatch?: string;
-
 }
 
 /**
@@ -5221,7 +5135,6 @@ export interface ApplicationSetSpecGenerators {
    * @schema ApplicationSetSpecGenerators#selector
    */
   readonly selector?: ApplicationSetSpecGeneratorsSelector;
-
 }
 
 /**
@@ -5265,7 +5178,6 @@ export interface ApplicationSetSpecIgnoreApplicationDifferences {
    * @schema ApplicationSetSpecIgnoreApplicationDifferences#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -5297,7 +5209,6 @@ export interface ApplicationSetSpecPreservedFields {
    * @schema ApplicationSetSpecPreservedFields#labels
    */
   readonly labels?: string[];
-
 }
 
 /**
@@ -5328,7 +5239,6 @@ export interface ApplicationSetSpecStrategy {
    * @schema ApplicationSetSpecStrategy#type
    */
   readonly type?: string;
-
 }
 
 /**
@@ -5359,7 +5269,6 @@ export interface ApplicationSetSpecSyncPolicy {
    * @schema ApplicationSetSpecSyncPolicy#preserveResourcesOnDeletion
    */
   readonly preserveResourcesOnDeletion?: boolean;
-
 }
 
 /**
@@ -5390,7 +5299,6 @@ export interface ApplicationSetSpecTemplate {
    * @schema ApplicationSetSpecTemplate#spec
    */
   readonly spec: ApplicationSetSpecTemplateSpec;
-
 }
 
 /**
@@ -5441,7 +5349,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResource {
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResource#values
    */
   readonly values?: { [key: string]: string };
-
 }
 
 /**
@@ -5486,7 +5393,6 @@ export interface ApplicationSetSpecGeneratorsClusters {
    * @schema ApplicationSetSpecGeneratorsClusters#values
    */
   readonly values?: { [key: string]: string };
-
 }
 
 /**
@@ -5549,7 +5455,6 @@ export interface ApplicationSetSpecGeneratorsGit {
    * @schema ApplicationSetSpecGeneratorsGit#values
    */
   readonly values?: { [key: string]: string };
-
 }
 
 /**
@@ -5591,7 +5496,6 @@ export interface ApplicationSetSpecGeneratorsList {
    * @schema ApplicationSetSpecGeneratorsList#template
    */
   readonly template?: ApplicationSetSpecGeneratorsListTemplate;
-
 }
 
 /**
@@ -5623,7 +5527,6 @@ export interface ApplicationSetSpecGeneratorsMatrix {
    * @schema ApplicationSetSpecGeneratorsMatrix#template
    */
   readonly template?: ApplicationSetSpecGeneratorsMatrixTemplate;
-
 }
 
 /**
@@ -5659,7 +5562,6 @@ export interface ApplicationSetSpecGeneratorsMerge {
    * @schema ApplicationSetSpecGeneratorsMerge#template
    */
   readonly template?: ApplicationSetSpecGeneratorsMergeTemplate;
-
 }
 
 /**
@@ -5706,7 +5608,6 @@ export interface ApplicationSetSpecGeneratorsPlugin {
    * @schema ApplicationSetSpecGeneratorsPlugin#values
    */
   readonly values?: { [key: string]: string };
-
 }
 
 /**
@@ -5780,7 +5681,6 @@ export interface ApplicationSetSpecGeneratorsPullRequest {
    * @schema ApplicationSetSpecGeneratorsPullRequest#values
    */
   readonly values?: { [key: string]: string };
-
 }
 
 /**
@@ -5869,7 +5769,6 @@ export interface ApplicationSetSpecGeneratorsScmProvider {
    * @schema ApplicationSetSpecGeneratorsScmProvider#values
    */
   readonly values?: { [key: string]: string };
-
 }
 
 /**
@@ -5910,7 +5809,6 @@ export interface ApplicationSetSpecGeneratorsSelector {
    * @schema ApplicationSetSpecGeneratorsSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -5936,7 +5834,6 @@ export interface ApplicationSetSpecStrategyRollingSync {
    * @schema ApplicationSetSpecStrategyRollingSync#steps
    */
   readonly steps?: ApplicationSetSpecStrategyRollingSyncSteps[];
-
 }
 
 /**
@@ -5995,7 +5892,6 @@ export interface ApplicationSetSpecTemplateMetadata {
    * @schema ApplicationSetSpecTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -6064,7 +5960,6 @@ export interface ApplicationSetSpecTemplateSpec {
    * @schema ApplicationSetSpecTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -6102,7 +5997,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceLabelSelecto
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -6133,7 +6027,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplate {
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec;
-
 }
 
 /**
@@ -6164,7 +6057,6 @@ export interface ApplicationSetSpecGeneratorsClustersSelector {
    * @schema ApplicationSetSpecGeneratorsClustersSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -6195,7 +6087,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplate {
    * @schema ApplicationSetSpecGeneratorsClustersTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsClustersTemplateSpec;
-
 }
 
 /**
@@ -6226,7 +6117,6 @@ export interface ApplicationSetSpecGeneratorsGitDirectories {
    * @schema ApplicationSetSpecGeneratorsGitDirectories#path
    */
   readonly path: string;
-
 }
 
 /**
@@ -6257,7 +6147,6 @@ export interface ApplicationSetSpecGeneratorsGitFiles {
    * @schema ApplicationSetSpecGeneratorsGitFiles#path
    */
   readonly path: string;
-
 }
 
 /**
@@ -6288,7 +6177,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplate {
    * @schema ApplicationSetSpecGeneratorsGitTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsGitTemplateSpec;
-
 }
 
 /**
@@ -6319,7 +6207,6 @@ export interface ApplicationSetSpecGeneratorsListTemplate {
    * @schema ApplicationSetSpecGeneratorsListTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsListTemplateSpec;
-
 }
 
 /**
@@ -6390,7 +6277,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGenerators {
    * @schema ApplicationSetSpecGeneratorsMatrixGenerators#selector
    */
   readonly selector?: ApplicationSetSpecGeneratorsMatrixGeneratorsSelector;
-
 }
 
 /**
@@ -6429,7 +6315,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplate {
    * @schema ApplicationSetSpecGeneratorsMatrixTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsMatrixTemplateSpec;
-
 }
 
 /**
@@ -6500,7 +6385,6 @@ export interface ApplicationSetSpecGeneratorsMergeGenerators {
    * @schema ApplicationSetSpecGeneratorsMergeGenerators#selector
    */
   readonly selector?: ApplicationSetSpecGeneratorsMergeGeneratorsSelector;
-
 }
 
 /**
@@ -6539,7 +6423,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplate {
    * @schema ApplicationSetSpecGeneratorsMergeTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsMergeTemplateSpec;
-
 }
 
 /**
@@ -6565,7 +6448,6 @@ export interface ApplicationSetSpecGeneratorsPluginConfigMapRef {
    * @schema ApplicationSetSpecGeneratorsPluginConfigMapRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -6590,7 +6472,6 @@ export interface ApplicationSetSpecGeneratorsPluginInput {
    * @schema ApplicationSetSpecGeneratorsPluginInput#parameters
    */
   readonly parameters?: { [key: string]: any };
-
 }
 
 /**
@@ -6620,7 +6501,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplate {
    * @schema ApplicationSetSpecGeneratorsPluginTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsPluginTemplateSpec;
-
 }
 
 /**
@@ -6671,7 +6551,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestAzuredevops {
    * @schema ApplicationSetSpecGeneratorsPullRequestAzuredevops#tokenRef
    */
   readonly tokenRef?: ApplicationSetSpecGeneratorsPullRequestAzuredevopsTokenRef;
-
 }
 
 /**
@@ -6721,7 +6600,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestBitbucket {
    * @schema ApplicationSetSpecGeneratorsPullRequestBitbucket#repo
    */
   readonly repo: string;
-
 }
 
 /**
@@ -6780,7 +6658,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestBitbucketServer {
    * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketServer#repo
    */
   readonly repo: string;
-
 }
 
 /**
@@ -6816,7 +6693,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestFilters {
    * @schema ApplicationSetSpecGeneratorsPullRequestFilters#targetBranchMatch
    */
   readonly targetBranchMatch?: string;
-
 }
 
 /**
@@ -6867,7 +6743,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestGitea {
    * @schema ApplicationSetSpecGeneratorsPullRequestGitea#tokenRef
    */
   readonly tokenRef?: ApplicationSetSpecGeneratorsPullRequestGiteaTokenRef;
-
 }
 
 /**
@@ -6922,7 +6797,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestGithub {
    * @schema ApplicationSetSpecGeneratorsPullRequestGithub#tokenRef
    */
   readonly tokenRef?: ApplicationSetSpecGeneratorsPullRequestGithubTokenRef;
-
 }
 
 /**
@@ -6982,7 +6856,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestGitlab {
    * @schema ApplicationSetSpecGeneratorsPullRequestGitlab#tokenRef
    */
   readonly tokenRef?: ApplicationSetSpecGeneratorsPullRequestGitlabTokenRef;
-
 }
 
 /**
@@ -7018,7 +6891,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplate {
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsPullRequestTemplateSpec;
-
 }
 
 /**
@@ -7059,7 +6931,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderAwsCodeCommit {
    * @schema ApplicationSetSpecGeneratorsScmProviderAwsCodeCommit#tagFilters
    */
   readonly tagFilters?: ApplicationSetSpecGeneratorsScmProviderAwsCodeCommitTagFilters[];
-
 }
 
 /**
@@ -7107,7 +6978,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderAzureDevOps {
    * @schema ApplicationSetSpecGeneratorsScmProviderAzureDevOps#teamProject
    */
   readonly teamProject: string;
-
 }
 
 /**
@@ -7151,7 +7021,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderBitbucket {
    * @schema ApplicationSetSpecGeneratorsScmProviderBitbucket#user
    */
   readonly user: string;
-
 }
 
 /**
@@ -7209,7 +7078,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderBitbucketServer {
    * @schema ApplicationSetSpecGeneratorsScmProviderBitbucketServer#project
    */
   readonly project: string;
-
 }
 
 /**
@@ -7260,7 +7128,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderFilters {
    * @schema ApplicationSetSpecGeneratorsScmProviderFilters#repositoryMatch
    */
   readonly repositoryMatch?: string;
-
 }
 
 /**
@@ -7309,7 +7176,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderGitea {
    * @schema ApplicationSetSpecGeneratorsScmProviderGitea#tokenRef
    */
   readonly tokenRef?: ApplicationSetSpecGeneratorsScmProviderGiteaTokenRef;
-
 }
 
 /**
@@ -7358,7 +7224,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderGithub {
    * @schema ApplicationSetSpecGeneratorsScmProviderGithub#tokenRef
    */
   readonly tokenRef?: ApplicationSetSpecGeneratorsScmProviderGithubTokenRef;
-
 }
 
 /**
@@ -7427,7 +7292,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderGitlab {
    * @schema ApplicationSetSpecGeneratorsScmProviderGitlab#topic
    */
   readonly topic?: string;
-
 }
 
 /**
@@ -7465,7 +7329,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplate {
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsScmProviderTemplateSpec;
-
 }
 
 /**
@@ -7501,7 +7364,6 @@ export interface ApplicationSetSpecGeneratorsSelectorMatchExpressions {
    * @schema ApplicationSetSpecGeneratorsSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -7533,7 +7395,6 @@ export interface ApplicationSetSpecStrategyRollingSyncSteps {
    * @schema ApplicationSetSpecStrategyRollingSyncSteps#maxUpdate
    */
   readonly maxUpdate?: ApplicationSetSpecStrategyRollingSyncStepsMaxUpdate;
-
 }
 
 /**
@@ -7569,7 +7430,6 @@ export interface ApplicationSetSpecTemplateSpecDestination {
    * @schema ApplicationSetSpecTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -7626,7 +7486,6 @@ export interface ApplicationSetSpecTemplateSpecIgnoreDifferences {
    * @schema ApplicationSetSpecTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -7662,7 +7521,6 @@ export interface ApplicationSetSpecTemplateSpecInfo {
    * @schema ApplicationSetSpecTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -7733,7 +7591,6 @@ export interface ApplicationSetSpecTemplateSpecSource {
    * @schema ApplicationSetSpecTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -7777,7 +7634,6 @@ export interface ApplicationSetSpecTemplateSpecSourceHydrator {
    * @schema ApplicationSetSpecTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -7849,7 +7705,6 @@ export interface ApplicationSetSpecTemplateSpecSources {
    * @schema ApplicationSetSpecTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -7898,7 +7753,6 @@ export interface ApplicationSetSpecTemplateSpecSyncPolicy {
    * @schema ApplicationSetSpecTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -7936,7 +7790,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceLabelSelecto
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -7983,7 +7836,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateMeta
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -8052,7 +7904,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -8095,7 +7946,6 @@ export interface ApplicationSetSpecGeneratorsClustersSelectorMatchExpressions {
    * @schema ApplicationSetSpecGeneratorsClustersSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -8142,7 +7992,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateMetadata {
    * @schema ApplicationSetSpecGeneratorsClustersTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -8211,7 +8060,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpec {
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsClustersTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -8264,7 +8112,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateMetadata {
    * @schema ApplicationSetSpecGeneratorsGitTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -8333,7 +8180,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpec {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsGitTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -8386,7 +8232,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateMetadata {
    * @schema ApplicationSetSpecGeneratorsListTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -8455,7 +8300,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpec {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsListTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -8513,7 +8357,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResource#values
    */
   readonly values?: { [key: string]: string };
-
 }
 
 /**
@@ -8558,7 +8401,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusters {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusters#values
    */
   readonly values?: { [key: string]: string };
-
 }
 
 /**
@@ -8621,7 +8463,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGit {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGit#values
    */
   readonly values?: { [key: string]: string };
-
 }
 
 /**
@@ -8663,7 +8504,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsList {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsList#template
    */
   readonly template?: ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplate;
-
 }
 
 /**
@@ -8710,7 +8550,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPlugin {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPlugin#values
    */
   readonly values?: { [key: string]: string };
-
 }
 
 /**
@@ -8784,7 +8623,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequest {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequest#values
    */
   readonly values?: { [key: string]: string };
-
 }
 
 /**
@@ -8873,7 +8711,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProvider {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProvider#values
    */
   readonly values?: { [key: string]: string };
-
 }
 
 /**
@@ -8914,7 +8751,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsSelector {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -8960,7 +8796,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateMetadata {
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -9029,7 +8864,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpec {
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsMatrixTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -9087,7 +8921,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResource#values
    */
   readonly values?: { [key: string]: string };
-
 }
 
 /**
@@ -9132,7 +8965,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusters {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusters#values
    */
   readonly values?: { [key: string]: string };
-
 }
 
 /**
@@ -9195,7 +9027,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGit {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGit#values
    */
   readonly values?: { [key: string]: string };
-
 }
 
 /**
@@ -9237,7 +9068,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsList {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsList#template
    */
   readonly template?: ApplicationSetSpecGeneratorsMergeGeneratorsListTemplate;
-
 }
 
 /**
@@ -9284,7 +9114,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPlugin {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPlugin#values
    */
   readonly values?: { [key: string]: string };
-
 }
 
 /**
@@ -9358,7 +9187,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequest {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequest#values
    */
   readonly values?: { [key: string]: string };
-
 }
 
 /**
@@ -9447,7 +9275,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProvider {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProvider#values
    */
   readonly values?: { [key: string]: string };
-
 }
 
 /**
@@ -9488,7 +9315,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsSelector {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -9534,7 +9360,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateMetadata {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -9603,7 +9428,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpec {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsMergeTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -9656,7 +9480,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateMetadata {
    * @schema ApplicationSetSpecGeneratorsPluginTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -9725,7 +9548,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpec {
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsPluginTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -9763,7 +9585,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestAzuredevopsTokenRef {
    * @schema ApplicationSetSpecGeneratorsPullRequestAzuredevopsTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -9794,7 +9615,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestBitbucketBasicAuth {
    * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketBasicAuth#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -9820,7 +9640,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestBitbucketBearerToken {
    * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketBearerToken#tokenRef
    */
   readonly tokenRef: ApplicationSetSpecGeneratorsPullRequestBitbucketBearerTokenTokenRef;
-
 }
 
 /**
@@ -9850,7 +9669,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestBitbucketServerBasicAuth
    * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketServerBasicAuth#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -9876,7 +9694,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerTok
    * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerToken#tokenRef
    */
   readonly tokenRef: ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerTokenTokenRef;
-
 }
 
 /**
@@ -9906,7 +9723,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestBitbucketServerCaRef {
    * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketServerCaRef#key
    */
   readonly key: string;
-
 }
 
 /**
@@ -9937,7 +9753,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestGiteaTokenRef {
    * @schema ApplicationSetSpecGeneratorsPullRequestGiteaTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -9968,7 +9783,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestGithubTokenRef {
    * @schema ApplicationSetSpecGeneratorsPullRequestGithubTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -9999,7 +9813,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestGitlabCaRef {
    * @schema ApplicationSetSpecGeneratorsPullRequestGitlabCaRef#key
    */
   readonly key: string;
-
 }
 
 /**
@@ -10030,7 +9843,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestGitlabTokenRef {
    * @schema ApplicationSetSpecGeneratorsPullRequestGitlabTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -10076,7 +9888,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateMetadata {
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -10145,7 +9956,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpec {
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsPullRequestTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -10183,7 +9993,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderAwsCodeCommitTagFilters 
    * @schema ApplicationSetSpecGeneratorsScmProviderAwsCodeCommitTagFilters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -10214,7 +10023,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderAzureDevOpsAccessTokenRe
    * @schema ApplicationSetSpecGeneratorsScmProviderAzureDevOpsAccessTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -10245,7 +10053,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderBitbucketAppPasswordRef 
    * @schema ApplicationSetSpecGeneratorsScmProviderBitbucketAppPasswordRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -10276,7 +10083,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderBitbucketServerBasicAuth
    * @schema ApplicationSetSpecGeneratorsScmProviderBitbucketServerBasicAuth#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -10302,7 +10108,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerTok
    * @schema ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerToken#tokenRef
    */
   readonly tokenRef: ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerTokenTokenRef;
-
 }
 
 /**
@@ -10332,7 +10137,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderBitbucketServerCaRef {
    * @schema ApplicationSetSpecGeneratorsScmProviderBitbucketServerCaRef#key
    */
   readonly key: string;
-
 }
 
 /**
@@ -10363,7 +10167,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderGiteaTokenRef {
    * @schema ApplicationSetSpecGeneratorsScmProviderGiteaTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -10394,7 +10197,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderGithubTokenRef {
    * @schema ApplicationSetSpecGeneratorsScmProviderGithubTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -10425,7 +10227,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderGitlabCaRef {
    * @schema ApplicationSetSpecGeneratorsScmProviderGitlabCaRef#key
    */
   readonly key: string;
-
 }
 
 /**
@@ -10456,7 +10257,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderGitlabTokenRef {
    * @schema ApplicationSetSpecGeneratorsScmProviderGitlabTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -10502,7 +10302,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateMetadata {
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -10571,7 +10370,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpec {
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsScmProviderTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -10614,7 +10412,6 @@ export interface ApplicationSetSpecStrategyRollingSyncStepsMatchExpressions {
    * @schema ApplicationSetSpecStrategyRollingSyncStepsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -10670,7 +10467,6 @@ export interface ApplicationSetSpecTemplateSpecSourceDirectory {
    * @schema ApplicationSetSpecTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -10768,7 +10564,6 @@ export interface ApplicationSetSpecTemplateSpecSourceHelm {
    * @schema ApplicationSetSpecTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -10892,7 +10687,6 @@ export interface ApplicationSetSpecTemplateSpecSourceKustomize {
    * @schema ApplicationSetSpecTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -10944,7 +10738,6 @@ export interface ApplicationSetSpecTemplateSpecSourcePlugin {
    * @schema ApplicationSetSpecTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -10981,7 +10774,6 @@ export interface ApplicationSetSpecTemplateSpecSourceHydratorDrySource {
    * @schema ApplicationSetSpecTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -11008,7 +10800,6 @@ export interface ApplicationSetSpecTemplateSpecSourceHydratorHydrateTo {
    * @schema ApplicationSetSpecTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -11038,7 +10829,6 @@ export interface ApplicationSetSpecTemplateSpecSourceHydratorSyncSource {
    * @schema ApplicationSetSpecTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -11079,7 +10869,6 @@ export interface ApplicationSetSpecTemplateSpecSourcesDirectory {
    * @schema ApplicationSetSpecTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -11177,7 +10966,6 @@ export interface ApplicationSetSpecTemplateSpecSourcesHelm {
    * @schema ApplicationSetSpecTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -11301,7 +11089,6 @@ export interface ApplicationSetSpecTemplateSpecSourcesKustomize {
    * @schema ApplicationSetSpecTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -11353,7 +11140,6 @@ export interface ApplicationSetSpecTemplateSpecSourcesPlugin {
    * @schema ApplicationSetSpecTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -11395,7 +11181,6 @@ export interface ApplicationSetSpecTemplateSpecSyncPolicyAutomated {
    * @schema ApplicationSetSpecTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -11428,7 +11213,6 @@ export interface ApplicationSetSpecTemplateSpecSyncPolicyManagedNamespaceMetadat
    * @schema ApplicationSetSpecTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -11459,7 +11243,6 @@ export interface ApplicationSetSpecTemplateSpecSyncPolicyRetry {
    * @schema ApplicationSetSpecTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -11495,7 +11278,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -11552,7 +11334,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -11588,7 +11369,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -11659,7 +11439,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -11703,7 +11482,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -11775,7 +11553,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -11824,7 +11601,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -11862,7 +11638,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecDestination {
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -11919,7 +11694,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecIgnoreDifferenc
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -11955,7 +11729,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecInfo {
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -12026,7 +11799,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSource {
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -12070,7 +11842,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHydrator 
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -12142,7 +11913,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSources {
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -12191,7 +11961,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSyncPolicy {
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -12229,7 +11998,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecDestination {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -12286,7 +12054,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecIgnoreDifferences {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -12322,7 +12089,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecInfo {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -12393,7 +12159,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSource {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -12437,7 +12202,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceHydrator {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsGitTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -12509,7 +12273,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSources {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -12558,7 +12321,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSyncPolicy {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -12596,7 +12358,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecDestination {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -12653,7 +12414,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecIgnoreDifferences {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -12689,7 +12449,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecInfo {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -12760,7 +12519,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSource {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -12804,7 +12562,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceHydrator {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsListTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -12876,7 +12633,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSources {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -12925,7 +12681,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSyncPolicy {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -12958,7 +12713,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -12989,7 +12743,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpec;
-
 }
 
 /**
@@ -13020,7 +12773,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersSelector {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -13051,7 +12803,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplate {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpec;
-
 }
 
 /**
@@ -13082,7 +12833,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitDirectories {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitDirectories#path
    */
   readonly path: string;
-
 }
 
 /**
@@ -13113,7 +12863,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitFiles {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitFiles#path
    */
   readonly path: string;
-
 }
 
 /**
@@ -13144,7 +12893,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplate {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpec;
-
 }
 
 /**
@@ -13175,7 +12923,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplate {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpec;
-
 }
 
 /**
@@ -13201,7 +12948,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginConfigMapRef 
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginConfigMapRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -13226,7 +12972,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginInput {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginInput#parameters
    */
   readonly parameters?: { [key: string]: any };
-
 }
 
 /**
@@ -13256,7 +13001,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplate {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpec;
-
 }
 
 /**
@@ -13307,7 +13051,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestAzuredev
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestAzuredevops#tokenRef
    */
   readonly tokenRef?: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestAzuredevopsTokenRef;
-
 }
 
 /**
@@ -13357,7 +13100,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucke
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucket#repo
    */
   readonly repo: string;
-
 }
 
 /**
@@ -13416,7 +13158,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucke
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServer#repo
    */
   readonly repo: string;
-
 }
 
 /**
@@ -13452,7 +13193,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestFilters 
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestFilters#targetBranchMatch
    */
   readonly targetBranchMatch?: string;
-
 }
 
 /**
@@ -13503,7 +13243,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitea {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitea#tokenRef
    */
   readonly tokenRef?: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGiteaTokenRef;
-
 }
 
 /**
@@ -13558,7 +13297,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGithub {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGithub#tokenRef
    */
   readonly tokenRef?: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGithubTokenRef;
-
 }
 
 /**
@@ -13618,7 +13356,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitlab {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitlab#tokenRef
    */
   readonly tokenRef?: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitlabTokenRef;
-
 }
 
 /**
@@ -13654,7 +13391,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpec;
-
 }
 
 /**
@@ -13695,7 +13431,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderAwsCodeC
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderAwsCodeCommit#tagFilters
    */
   readonly tagFilters?: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderAwsCodeCommitTagFilters[];
-
 }
 
 /**
@@ -13743,7 +13478,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderAzureDev
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderAzureDevOps#teamProject
    */
   readonly teamProject: string;
-
 }
 
 /**
@@ -13787,7 +13521,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucke
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucket#user
    */
   readonly user: string;
-
 }
 
 /**
@@ -13845,7 +13578,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucke
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServer#project
    */
   readonly project: string;
-
 }
 
 /**
@@ -13896,7 +13628,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderFilters 
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderFilters#repositoryMatch
    */
   readonly repositoryMatch?: string;
-
 }
 
 /**
@@ -13945,7 +13676,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGitea {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGitea#tokenRef
    */
   readonly tokenRef?: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGiteaTokenRef;
-
 }
 
 /**
@@ -13994,7 +13724,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGithub {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGithub#tokenRef
    */
   readonly tokenRef?: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGithubTokenRef;
-
 }
 
 /**
@@ -14063,7 +13792,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGitlab {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGitlab#topic
    */
   readonly topic?: string;
-
 }
 
 /**
@@ -14101,7 +13829,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpec;
-
 }
 
 /**
@@ -14137,7 +13864,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsSelectorMatchExpres
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -14174,7 +13900,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecDestination {
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -14231,7 +13956,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecIgnoreDifferences
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -14267,7 +13991,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecInfo {
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -14338,7 +14061,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSource {
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -14382,7 +14104,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHydrator {
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -14454,7 +14175,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSources {
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -14503,7 +14223,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSyncPolicy {
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -14536,7 +14255,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -14567,7 +14285,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpec;
-
 }
 
 /**
@@ -14598,7 +14315,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersSelector {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -14629,7 +14345,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplate {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec;
-
 }
 
 /**
@@ -14660,7 +14375,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitDirectories {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitDirectories#path
    */
   readonly path: string;
-
 }
 
 /**
@@ -14691,7 +14405,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitFiles {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitFiles#path
    */
   readonly path: string;
-
 }
 
 /**
@@ -14722,7 +14435,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplate {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpec;
-
 }
 
 /**
@@ -14753,7 +14465,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplate {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpec;
-
 }
 
 /**
@@ -14779,7 +14490,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginConfigMapRef {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginConfigMapRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -14804,7 +14514,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginInput {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginInput#parameters
    */
   readonly parameters?: { [key: string]: any };
-
 }
 
 /**
@@ -14834,7 +14543,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplate {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpec;
-
 }
 
 /**
@@ -14885,7 +14593,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestAzuredevo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestAzuredevops#tokenRef
    */
   readonly tokenRef?: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestAzuredevopsTokenRef;
-
 }
 
 /**
@@ -14935,7 +14642,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucket
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucket#repo
    */
   readonly repo: string;
-
 }
 
 /**
@@ -14994,7 +14700,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucket
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServer#repo
    */
   readonly repo: string;
-
 }
 
 /**
@@ -15030,7 +14735,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestFilters {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestFilters#targetBranchMatch
    */
   readonly targetBranchMatch?: string;
-
 }
 
 /**
@@ -15081,7 +14785,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitea {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitea#tokenRef
    */
   readonly tokenRef?: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGiteaTokenRef;
-
 }
 
 /**
@@ -15136,7 +14839,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGithub {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGithub#tokenRef
    */
   readonly tokenRef?: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGithubTokenRef;
-
 }
 
 /**
@@ -15196,7 +14898,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitlab {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitlab#tokenRef
    */
   readonly tokenRef?: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitlabTokenRef;
-
 }
 
 /**
@@ -15232,7 +14933,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplate 
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpec;
-
 }
 
 /**
@@ -15273,7 +14973,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderAwsCodeCo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderAwsCodeCommit#tagFilters
    */
   readonly tagFilters?: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderAwsCodeCommitTagFilters[];
-
 }
 
 /**
@@ -15321,7 +15020,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderAzureDevO
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderAzureDevOps#teamProject
    */
   readonly teamProject: string;
-
 }
 
 /**
@@ -15365,7 +15063,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucket
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucket#user
    */
   readonly user: string;
-
 }
 
 /**
@@ -15423,7 +15120,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucket
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServer#project
    */
   readonly project: string;
-
 }
 
 /**
@@ -15474,7 +15170,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderFilters {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderFilters#repositoryMatch
    */
   readonly repositoryMatch?: string;
-
 }
 
 /**
@@ -15523,7 +15218,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGitea {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGitea#tokenRef
    */
   readonly tokenRef?: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGiteaTokenRef;
-
 }
 
 /**
@@ -15572,7 +15266,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGithub {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGithub#tokenRef
    */
   readonly tokenRef?: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGithubTokenRef;
-
 }
 
 /**
@@ -15641,7 +15334,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGitlab {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGitlab#topic
    */
   readonly topic?: string;
-
 }
 
 /**
@@ -15679,7 +15371,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplate 
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplate#spec
    */
   readonly spec: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpec;
-
 }
 
 /**
@@ -15715,7 +15406,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsSelectorMatchExpress
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -15752,7 +15442,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecDestination {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -15809,7 +15498,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecIgnoreDifferences 
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -15845,7 +15533,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecInfo {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -15916,7 +15603,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSource {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -15960,7 +15646,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHydrator {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -16032,7 +15717,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSources {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -16081,7 +15765,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSyncPolicy {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -16119,7 +15802,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecDestination {
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -16176,7 +15858,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecIgnoreDifferences
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -16212,7 +15893,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecInfo {
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -16283,7 +15963,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSource {
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -16327,7 +16006,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHydrator {
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -16399,7 +16077,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSources {
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -16448,7 +16125,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSyncPolicy {
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -16481,7 +16157,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestBitbucketBasicAuthPasswo
    * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketBasicAuthPasswordRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -16512,7 +16187,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestBitbucketBearerTokenToke
    * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketBearerTokenTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -16543,7 +16217,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestBitbucketServerBasicAuth
    * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketServerBasicAuthPasswordRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -16574,7 +16247,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerTok
    * @schema ApplicationSetSpecGeneratorsPullRequestBitbucketServerBearerTokenTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -16610,7 +16282,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecDestination 
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -16667,7 +16338,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecIgnoreDiffer
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -16703,7 +16373,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecInfo {
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -16774,7 +16443,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSource {
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -16818,7 +16486,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHydrat
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -16890,7 +16557,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSources {
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -16939,7 +16605,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSyncPolicy {
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -16972,7 +16637,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderBitbucketServerBasicAuth
    * @schema ApplicationSetSpecGeneratorsScmProviderBitbucketServerBasicAuthPasswordRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -17003,7 +16667,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerTok
    * @schema ApplicationSetSpecGeneratorsScmProviderBitbucketServerBearerTokenTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -17039,7 +16702,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecDestination 
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -17096,7 +16758,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecIgnoreDiffer
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -17132,7 +16793,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecInfo {
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -17203,7 +16863,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSource {
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -17247,7 +16906,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHydrat
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -17319,7 +16977,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSources {
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -17368,7 +17025,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSyncPolicy {
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -17406,7 +17062,6 @@ export interface ApplicationSetSpecTemplateSpecSourceDirectoryJsonnet {
    * @schema ApplicationSetSpecTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -17438,7 +17093,6 @@ export interface ApplicationSetSpecTemplateSpecSourceHelmFileParameters {
    * @schema ApplicationSetSpecTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -17474,7 +17128,6 @@ export interface ApplicationSetSpecTemplateSpecSourceHelmParameters {
    * @schema ApplicationSetSpecTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -17516,7 +17169,6 @@ export interface ApplicationSetSpecTemplateSpecSourceKustomizePatches {
    * @schema ApplicationSetSpecTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -17549,7 +17201,6 @@ export interface ApplicationSetSpecTemplateSpecSourceKustomizeReplicas {
    * @schema ApplicationSetSpecTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -17580,7 +17231,6 @@ export interface ApplicationSetSpecTemplateSpecSourcePluginEnv {
    * @schema ApplicationSetSpecTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -17621,7 +17271,6 @@ export interface ApplicationSetSpecTemplateSpecSourcePluginParameters {
    * @schema ApplicationSetSpecTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -17659,7 +17308,6 @@ export interface ApplicationSetSpecTemplateSpecSourcesDirectoryJsonnet {
    * @schema ApplicationSetSpecTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -17691,7 +17339,6 @@ export interface ApplicationSetSpecTemplateSpecSourcesHelmFileParameters {
    * @schema ApplicationSetSpecTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -17727,7 +17374,6 @@ export interface ApplicationSetSpecTemplateSpecSourcesHelmParameters {
    * @schema ApplicationSetSpecTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -17769,7 +17415,6 @@ export interface ApplicationSetSpecTemplateSpecSourcesKustomizePatches {
    * @schema ApplicationSetSpecTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -17802,7 +17447,6 @@ export interface ApplicationSetSpecTemplateSpecSourcesKustomizeReplicas {
    * @schema ApplicationSetSpecTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -17833,7 +17477,6 @@ export interface ApplicationSetSpecTemplateSpecSourcesPluginEnv {
    * @schema ApplicationSetSpecTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -17874,7 +17517,6 @@ export interface ApplicationSetSpecTemplateSpecSourcesPluginParameters {
    * @schema ApplicationSetSpecTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -17912,7 +17554,6 @@ export interface ApplicationSetSpecTemplateSpecSyncPolicyRetryBackoff {
    * @schema ApplicationSetSpecTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -17954,7 +17595,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -18052,7 +17692,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -18176,7 +17815,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -18228,7 +17866,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -18265,7 +17902,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -18292,7 +17928,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -18322,7 +17957,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -18363,7 +17997,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -18461,7 +18094,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -18585,7 +18217,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -18637,7 +18268,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -18679,7 +18309,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -18712,7 +18341,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -18743,7 +18371,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -18784,7 +18411,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceDirectory
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -18882,7 +18508,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHelm {
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -19006,7 +18631,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomize
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -19058,7 +18682,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcePlugin {
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsClustersTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -19095,7 +18718,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHydratorD
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -19122,7 +18744,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHydratorH
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -19152,7 +18773,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHydratorS
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -19193,7 +18813,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesDirector
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -19291,7 +18910,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHelm {
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -19415,7 +19033,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomiz
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -19467,7 +19084,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesPlugin {
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -19509,7 +19125,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSyncPolicyAutom
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -19542,7 +19157,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSyncPolicyManag
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -19573,7 +19187,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSyncPolicyRetry
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -19614,7 +19227,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceDirectory {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -19712,7 +19324,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelm {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -19836,7 +19447,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomize {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -19888,7 +19498,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcePlugin {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsGitTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -19925,7 +19534,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceHydratorDrySou
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -19952,7 +19560,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceHydratorHydrat
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -19982,7 +19589,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceHydratorSyncSo
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -20023,7 +19629,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesDirectory {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -20121,7 +19726,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelm {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -20245,7 +19849,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomize {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -20297,7 +19900,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesPlugin {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsGitTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -20339,7 +19941,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSyncPolicyAutomated 
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -20372,7 +19973,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSyncPolicyManagedNam
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -20403,7 +20003,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSyncPolicyRetry {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -20444,7 +20043,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceDirectory {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -20542,7 +20140,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceHelm {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -20666,7 +20263,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomize {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -20718,7 +20314,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcePlugin {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsListTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -20755,7 +20350,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceHydratorDrySo
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -20782,7 +20376,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceHydratorHydra
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -20812,7 +20405,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceHydratorSyncS
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -20853,7 +20445,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesDirectory {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -20951,7 +20542,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelm {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -21075,7 +20665,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomize {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -21127,7 +20716,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesPlugin {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsListTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -21169,7 +20757,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSyncPolicyAutomated
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -21202,7 +20789,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSyncPolicyManagedNa
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -21233,7 +20819,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSyncPolicyRetry {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -21269,7 +20854,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -21316,7 +20900,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -21385,7 +20968,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -21428,7 +21010,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersSelectorMat
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -21475,7 +21056,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateMet
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -21544,7 +21124,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -21597,7 +21176,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateMetadata
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -21666,7 +21244,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpec {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -21719,7 +21296,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateMetadat
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -21788,7 +21364,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpec {
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -21841,7 +21416,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateMetad
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -21910,7 +21484,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpec 
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -21948,7 +21521,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestAzuredev
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestAzuredevopsTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -21979,7 +21551,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucke
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketBasicAuth#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -22005,7 +21576,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucke
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketBearerToken#tokenRef
    */
   readonly tokenRef: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketBearerTokenTokenRef;
-
 }
 
 /**
@@ -22035,7 +21605,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucke
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBasicAuth#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -22061,7 +21630,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucke
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBearerToken#tokenRef
    */
   readonly tokenRef: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBearerTokenTokenRef;
-
 }
 
 /**
@@ -22091,7 +21659,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucke
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerCaRef#key
    */
   readonly key: string;
-
 }
 
 /**
@@ -22122,7 +21689,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGiteaTok
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGiteaTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -22153,7 +21719,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGithubTo
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGithubTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -22184,7 +21749,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitlabCa
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitlabCaRef#key
    */
   readonly key: string;
-
 }
 
 /**
@@ -22215,7 +21779,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitlabTo
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestGitlabTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -22261,7 +21824,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -22330,7 +21892,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -22368,7 +21929,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderAwsCodeC
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderAwsCodeCommitTagFilters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -22399,7 +21959,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderAzureDev
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderAzureDevOpsAccessTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -22430,7 +21989,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucke
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketAppPasswordRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -22461,7 +22019,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucke
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBasicAuth#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -22487,7 +22044,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucke
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBearerToken#tokenRef
    */
   readonly tokenRef: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBearerTokenTokenRef;
-
 }
 
 /**
@@ -22517,7 +22073,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucke
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerCaRef#key
    */
   readonly key: string;
-
 }
 
 /**
@@ -22548,7 +22103,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGiteaTok
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGiteaTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -22579,7 +22133,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGithubTo
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGithubTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -22610,7 +22163,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGitlabCa
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGitlabCaRef#key
    */
   readonly key: string;
-
 }
 
 /**
@@ -22641,7 +22193,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGitlabTo
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderGitlabTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -22687,7 +22238,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -22756,7 +22306,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -22804,7 +22353,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceDirectory {
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -22902,7 +22450,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelm {
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -23026,7 +22573,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomize {
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -23078,7 +22624,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcePlugin {
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -23115,7 +22660,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHydratorDry
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -23142,7 +22686,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHydratorHyd
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -23172,7 +22715,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHydratorSyn
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -23213,7 +22755,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesDirectory 
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -23311,7 +22852,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelm {
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -23435,7 +22975,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomize 
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -23487,7 +23026,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesPlugin {
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -23529,7 +23067,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSyncPolicyAutomat
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -23562,7 +23099,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSyncPolicyManaged
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -23593,7 +23129,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSyncPolicyRetry {
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -23629,7 +23164,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -23676,7 +23210,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -23745,7 +23278,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -23788,7 +23320,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersSelectorMatc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -23835,7 +23366,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateMeta
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -23904,7 +23434,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -23957,7 +23486,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateMetadata 
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24026,7 +23554,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpec {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -24079,7 +23606,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateMetadata
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24148,7 +23674,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpec {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -24201,7 +23726,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateMetada
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24270,7 +23794,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpec {
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -24308,7 +23831,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestAzuredevo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestAzuredevopsTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -24339,7 +23861,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucket
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketBasicAuth#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -24365,7 +23886,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucket
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketBearerToken#tokenRef
    */
   readonly tokenRef: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketBearerTokenTokenRef;
-
 }
 
 /**
@@ -24395,7 +23915,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucket
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBasicAuth#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -24421,7 +23940,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucket
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBearerToken#tokenRef
    */
   readonly tokenRef: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBearerTokenTokenRef;
-
 }
 
 /**
@@ -24451,7 +23969,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucket
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerCaRef#key
    */
   readonly key: string;
-
 }
 
 /**
@@ -24482,7 +23999,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGiteaToke
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGiteaTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -24513,7 +24029,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGithubTok
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGithubTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -24544,7 +24059,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitlabCaR
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitlabCaRef#key
    */
   readonly key: string;
-
 }
 
 /**
@@ -24575,7 +24089,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitlabTok
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestGitlabTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -24621,7 +24134,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateM
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -24690,7 +24202,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -24728,7 +24239,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderAwsCodeCo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderAwsCodeCommitTagFilters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -24759,7 +24269,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderAzureDevO
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderAzureDevOpsAccessTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -24790,7 +24299,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucket
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketAppPasswordRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -24821,7 +24329,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucket
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBasicAuth#username
    */
   readonly username: string;
-
 }
 
 /**
@@ -24847,7 +24354,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucket
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBearerToken#tokenRef
    */
   readonly tokenRef: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBearerTokenTokenRef;
-
 }
 
 /**
@@ -24877,7 +24383,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucket
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerCaRef#key
    */
   readonly key: string;
-
 }
 
 /**
@@ -24908,7 +24413,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGiteaToke
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGiteaTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -24939,7 +24443,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGithubTok
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGithubTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -24970,7 +24473,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGitlabCaR
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGitlabCaRef#key
    */
   readonly key: string;
-
 }
 
 /**
@@ -25001,7 +24503,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGitlabTok
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderGitlabTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -25047,7 +24548,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateM
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateMetadata#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -25116,7 +24616,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpec#syncPolicy
    */
   readonly syncPolicy?: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSyncPolicy;
-
 }
 
 /**
@@ -25164,7 +24663,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceDirectory {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -25262,7 +24760,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelm {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -25386,7 +24883,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomize {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -25438,7 +24934,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcePlugin {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMergeTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -25475,7 +24970,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHydratorDryS
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -25502,7 +24996,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHydratorHydr
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -25532,7 +25025,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHydratorSync
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -25573,7 +25065,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesDirectory {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -25671,7 +25162,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelm {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -25795,7 +25285,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomize {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -25847,7 +25336,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesPlugin {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -25889,7 +25377,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSyncPolicyAutomate
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -25922,7 +25409,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSyncPolicyManagedN
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -25953,7 +25439,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSyncPolicyRetry {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -25994,7 +25479,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceDirectory {
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -26092,7 +25576,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelm {
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -26216,7 +25699,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomize {
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -26268,7 +25750,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcePlugin {
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsPluginTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -26305,7 +25786,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHydratorDry
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -26332,7 +25812,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHydratorHyd
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -26362,7 +25841,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHydratorSyn
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -26403,7 +25881,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesDirectory 
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -26501,7 +25978,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelm {
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -26625,7 +26101,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomize 
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -26677,7 +26152,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesPlugin {
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -26719,7 +26193,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSyncPolicyAutomat
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -26752,7 +26225,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSyncPolicyManaged
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -26783,7 +26255,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSyncPolicyRetry {
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -26824,7 +26295,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceDirect
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -26922,7 +26392,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHelm {
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -27046,7 +26515,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustom
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -27098,7 +26566,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcePlugin
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -27135,7 +26602,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHydrat
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -27162,7 +26628,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHydrat
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -27192,7 +26657,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHydrat
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -27233,7 +26697,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesDirec
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -27331,7 +26794,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesHelm 
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -27455,7 +26917,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKusto
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -27507,7 +26968,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesPlugi
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -27549,7 +27009,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSyncPolicyAu
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -27582,7 +27041,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSyncPolicyMa
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -27613,7 +27071,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSyncPolicyRe
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -27654,7 +27111,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceDirect
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -27752,7 +27208,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHelm {
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -27876,7 +27331,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustom
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -27928,7 +27382,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcePlugin
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -27965,7 +27418,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHydrat
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -27992,7 +27444,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHydrat
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -28022,7 +27473,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHydrat
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -28063,7 +27513,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesDirec
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -28161,7 +27610,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesHelm 
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -28285,7 +27733,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKusto
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -28337,7 +27784,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesPlugi
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -28379,7 +27825,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSyncPolicyAu
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -28412,7 +27857,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSyncPolicyMa
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -28443,7 +27887,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSyncPolicyRe
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -28479,7 +27922,6 @@ export interface ApplicationSetSpecTemplateSpecSourceDirectoryJsonnetExtVars {
    * @schema ApplicationSetSpecTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -28516,7 +27958,6 @@ export interface ApplicationSetSpecTemplateSpecSourceDirectoryJsonnetTlas {
    * @schema ApplicationSetSpecTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -28573,7 +28014,6 @@ export interface ApplicationSetSpecTemplateSpecSourceKustomizePatchesTarget {
    * @schema ApplicationSetSpecTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -28628,7 +28068,6 @@ export interface ApplicationSetSpecTemplateSpecSourcesDirectoryJsonnetExtVars {
    * @schema ApplicationSetSpecTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -28665,7 +28104,6 @@ export interface ApplicationSetSpecTemplateSpecSourcesDirectoryJsonnetTlas {
    * @schema ApplicationSetSpecTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -28722,7 +28160,6 @@ export interface ApplicationSetSpecTemplateSpecSourcesKustomizePatchesTarget {
    * @schema ApplicationSetSpecTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -28777,7 +28214,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -28809,7 +28245,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -28845,7 +28280,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -28887,7 +28321,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -28920,7 +28353,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -28951,7 +28383,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -28992,7 +28423,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -29030,7 +28460,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -29062,7 +28491,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -29098,7 +28526,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -29140,7 +28567,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -29173,7 +28599,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -29204,7 +28629,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -29245,7 +28669,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -29283,7 +28706,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -29320,7 +28742,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceDirectory
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsClustersTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -29352,7 +28773,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHelmFileP
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -29388,7 +28808,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHelmParam
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -29430,7 +28849,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomize
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -29463,7 +28881,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomize
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -29494,7 +28911,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcePluginEnv
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -29535,7 +28951,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcePluginPar
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -29573,7 +28988,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesDirector
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -29605,7 +29019,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHelmFile
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -29641,7 +29054,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHelmPara
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -29683,7 +29095,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomiz
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -29716,7 +29127,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomiz
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -29747,7 +29157,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesPluginEn
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -29788,7 +29197,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesPluginPa
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -29826,7 +29234,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSyncPolicyRetry
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -29863,7 +29270,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceDirectoryJsonn
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsGitTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -29895,7 +29301,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelmFileParame
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -29931,7 +29336,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelmParameters
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -29973,7 +29377,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomizePatch
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -30006,7 +29409,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomizeRepli
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -30037,7 +29439,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcePluginEnv {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -30078,7 +29479,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcePluginParamete
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -30116,7 +29516,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesDirectoryJson
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsGitTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -30148,7 +29547,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelmFileParam
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -30184,7 +29582,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelmParameter
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -30226,7 +29623,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomizePatc
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -30259,7 +29655,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomizeRepl
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -30290,7 +29685,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesPluginEnv {
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -30331,7 +29725,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesPluginParamet
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -30369,7 +29762,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSyncPolicyRetryBacko
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -30406,7 +29798,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceDirectoryJson
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsListTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -30438,7 +29829,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceHelmFileParam
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -30474,7 +29864,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceHelmParameter
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -30516,7 +29905,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomizePatc
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -30549,7 +29937,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomizeRepl
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -30580,7 +29967,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcePluginEnv {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -30621,7 +30007,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcePluginParamet
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -30659,7 +30044,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesDirectoryJso
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsListTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -30691,7 +30075,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelmFilePara
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -30727,7 +30110,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelmParamete
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -30769,7 +30151,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomizePat
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -30802,7 +30183,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomizeRep
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -30833,7 +30213,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesPluginEnv {
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -30874,7 +30253,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesPluginParame
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -30912,7 +30290,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSyncPolicyRetryBack
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -30949,7 +30326,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -31006,7 +30382,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -31042,7 +30417,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -31113,7 +30487,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -31157,7 +30530,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -31229,7 +30601,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -31278,7 +30649,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -31316,7 +30686,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -31373,7 +30742,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -31409,7 +30777,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -31480,7 +30847,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -31524,7 +30890,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -31596,7 +30961,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -31645,7 +31009,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -31683,7 +31046,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecDest
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -31740,7 +31102,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecIgno
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -31776,7 +31137,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecInfo
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -31847,7 +31207,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -31891,7 +31250,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -31963,7 +31321,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -32012,7 +31369,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSync
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -32050,7 +31406,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecDes
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -32107,7 +31462,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecIgn
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -32143,7 +31497,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecInf
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -32214,7 +31567,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -32258,7 +31610,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -32330,7 +31681,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -32379,7 +31729,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSyn
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -32417,7 +31766,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecD
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -32474,7 +31822,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecI
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -32510,7 +31857,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecI
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -32581,7 +31927,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -32625,7 +31970,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -32697,7 +32041,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -32746,7 +32089,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -32779,7 +32121,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucke
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketBasicAuthPasswordRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -32810,7 +32151,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucke
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketBearerTokenTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -32841,7 +32181,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucke
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBasicAuthPasswordRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -32872,7 +32211,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucke
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestBitbucketServerBearerTokenTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -32908,7 +32246,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -32965,7 +32302,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -33001,7 +32337,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -33072,7 +32407,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -33116,7 +32450,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -33188,7 +32521,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -33237,7 +32569,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -33270,7 +32601,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucke
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBasicAuthPasswordRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -33301,7 +32631,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucke
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderBitbucketServerBearerTokenTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -33337,7 +32666,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -33394,7 +32722,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -33430,7 +32757,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -33501,7 +32827,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -33545,7 +32870,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -33617,7 +32941,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -33666,7 +32989,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -33704,7 +33026,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceDirectoryJs
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -33736,7 +33057,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelmFilePar
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -33772,7 +33092,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelmParamet
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -33814,7 +33133,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomizePa
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -33847,7 +33165,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomizeRe
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -33878,7 +33195,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcePluginEnv {
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -33919,7 +33235,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcePluginParam
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -33957,7 +33272,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesDirectoryJ
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -33989,7 +33303,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelmFilePa
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -34025,7 +33338,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelmParame
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -34067,7 +33379,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomizeP
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -34100,7 +33411,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomizeR
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -34131,7 +33441,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesPluginEnv 
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -34172,7 +33481,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesPluginPara
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -34210,7 +33518,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSyncPolicyRetryBa
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -34247,7 +33554,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -34304,7 +33610,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -34340,7 +33645,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -34411,7 +33715,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -34455,7 +33758,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -34527,7 +33829,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -34576,7 +33877,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -34614,7 +33914,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -34671,7 +33970,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -34707,7 +34005,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -34778,7 +34075,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -34822,7 +34118,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -34894,7 +34189,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -34943,7 +34237,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -34981,7 +34274,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecDesti
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -35038,7 +34330,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecIgnor
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -35074,7 +34365,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecInfo 
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -35145,7 +34435,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -35189,7 +34478,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -35261,7 +34549,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -35310,7 +34597,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSyncP
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -35348,7 +34634,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecDest
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -35405,7 +34690,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecIgno
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -35441,7 +34725,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecInfo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -35512,7 +34795,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -35556,7 +34838,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -35628,7 +34909,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -35677,7 +34957,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSync
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -35715,7 +34994,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecDe
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -35772,7 +35050,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecIg
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -35808,7 +35085,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecIn
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -35879,7 +35155,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -35923,7 +35198,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -35995,7 +35269,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -36044,7 +35317,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSy
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -36077,7 +35349,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucket
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketBasicAuthPasswordRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -36108,7 +35379,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucket
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketBearerTokenTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -36139,7 +35409,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucket
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBasicAuthPasswordRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -36170,7 +35439,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucket
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestBitbucketServerBearerTokenTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -36206,7 +35474,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -36263,7 +35530,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -36299,7 +35565,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -36370,7 +35635,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -36414,7 +35678,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -36486,7 +35749,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -36535,7 +35797,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -36568,7 +35829,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucket
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBasicAuthPasswordRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -36599,7 +35859,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucket
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderBitbucketServerBearerTokenTokenRef#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -36635,7 +35894,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecDestination#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -36692,7 +35950,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecIgnoreDifferences#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -36728,7 +35985,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecInfo#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -36799,7 +36055,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSource#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -36843,7 +36098,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceHydrator#syncSource
    */
   readonly syncSource: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceHydratorSyncSource;
-
 }
 
 /**
@@ -36915,7 +36169,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSources#targetRevision
    */
   readonly targetRevision?: string;
-
 }
 
 /**
@@ -36964,7 +36217,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSyncPolicy#syncOptions
    */
   readonly syncOptions?: string[];
-
 }
 
 /**
@@ -37002,7 +36254,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceDirectoryJso
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMergeTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -37034,7 +36285,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelmFilePara
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -37070,7 +36320,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelmParamete
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -37112,7 +36361,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomizePat
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -37145,7 +36393,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomizeRep
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -37176,7 +36423,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcePluginEnv {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -37217,7 +36463,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcePluginParame
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -37255,7 +36500,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesDirectoryJs
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -37287,7 +36531,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelmFilePar
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -37323,7 +36566,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelmParamet
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -37365,7 +36607,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomizePa
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -37398,7 +36639,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomizeRe
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -37429,7 +36669,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesPluginEnv {
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -37470,7 +36709,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesPluginParam
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -37508,7 +36746,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSyncPolicyRetryBac
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -37545,7 +36782,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceDirectoryJs
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsPluginTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -37577,7 +36813,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelmFilePar
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -37613,7 +36848,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelmParamet
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -37655,7 +36889,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomizePa
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -37688,7 +36921,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomizeRe
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -37719,7 +36951,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcePluginEnv {
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -37760,7 +36991,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcePluginParam
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -37798,7 +37028,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesDirectoryJ
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -37830,7 +37059,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelmFilePa
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -37866,7 +37094,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelmParame
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -37908,7 +37135,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomizeP
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -37941,7 +37167,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomizeR
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -37972,7 +37197,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesPluginEnv 
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -38013,7 +37237,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesPluginPara
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -38051,7 +37274,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSyncPolicyRetryBa
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -38088,7 +37310,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceDirect
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -38120,7 +37341,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHelmFi
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -38156,7 +37376,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHelmPa
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -38198,7 +37417,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustom
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -38231,7 +37449,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustom
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -38262,7 +37479,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcePlugin
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -38303,7 +37519,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcePlugin
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -38341,7 +37556,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesDirec
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -38373,7 +37587,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesHelmF
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -38409,7 +37622,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesHelmP
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -38451,7 +37663,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKusto
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -38484,7 +37695,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKusto
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -38515,7 +37725,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesPlugi
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -38556,7 +37765,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesPlugi
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -38594,7 +37802,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSyncPolicyRe
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -38631,7 +37838,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceDirect
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -38663,7 +37869,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHelmFi
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -38699,7 +37904,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHelmPa
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -38741,7 +37945,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustom
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -38774,7 +37977,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustom
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -38805,7 +38007,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcePlugin
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -38846,7 +38047,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcePlugin
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -38884,7 +38084,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesDirec
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -38916,7 +38115,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesHelmF
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -38952,7 +38150,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesHelmP
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -38994,7 +38191,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKusto
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -39027,7 +38223,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKusto
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -39058,7 +38253,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesPlugi
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -39099,7 +38293,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesPlugi
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -39137,7 +38330,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSyncPolicyRe
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -39174,7 +38366,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -39211,7 +38402,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -39268,7 +38458,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -39323,7 +38512,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -39360,7 +38548,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -39417,7 +38604,6 @@ export interface ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpec
    * @schema ApplicationSetSpecGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -39472,7 +38658,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceDirectory
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -39509,7 +38694,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceDirectory
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -39566,7 +38750,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomize
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -39621,7 +38804,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesDirector
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -39658,7 +38840,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesDirector
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -39715,7 +38896,6 @@ export interface ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomiz
    * @schema ApplicationSetSpecGeneratorsClustersTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -39770,7 +38950,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceDirectoryJsonn
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -39807,7 +38986,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceDirectoryJsonn
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -39864,7 +39042,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomizePatch
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -39919,7 +39096,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesDirectoryJson
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -39956,7 +39132,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesDirectoryJson
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -40013,7 +39188,6 @@ export interface ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomizePatc
    * @schema ApplicationSetSpecGeneratorsGitTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -40068,7 +39242,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceDirectoryJson
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -40105,7 +39278,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceDirectoryJson
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -40162,7 +39334,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomizePatc
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -40217,7 +39388,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesDirectoryJso
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -40254,7 +39424,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesDirectoryJso
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -40311,7 +39480,6 @@ export interface ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomizePat
    * @schema ApplicationSetSpecGeneratorsListTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -40371,7 +39539,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -40469,7 +39636,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -40593,7 +39759,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -40645,7 +39810,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -40682,7 +39846,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -40709,7 +39872,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -40739,7 +39901,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -40780,7 +39941,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -40878,7 +40038,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -41002,7 +40161,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -41054,7 +40212,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -41096,7 +40253,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -41129,7 +40285,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -41160,7 +40315,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -41201,7 +40355,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -41299,7 +40452,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -41423,7 +40575,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -41475,7 +40626,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -41512,7 +40662,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -41539,7 +40688,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -41569,7 +40717,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -41610,7 +40757,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -41708,7 +40854,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -41832,7 +40977,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -41884,7 +41028,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -41926,7 +41069,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -41959,7 +41101,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -41990,7 +41131,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -42031,7 +41171,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -42129,7 +41268,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -42253,7 +41391,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -42305,7 +41442,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -42342,7 +41478,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -42369,7 +41504,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -42399,7 +41533,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -42440,7 +41573,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -42538,7 +41670,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -42662,7 +41793,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -42714,7 +41844,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -42756,7 +41885,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSync
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -42789,7 +41917,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSync
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -42820,7 +41947,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSync
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -42861,7 +41987,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -42959,7 +42084,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -43083,7 +42207,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -43135,7 +42258,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -43172,7 +42294,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -43199,7 +42320,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -43229,7 +42349,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -43270,7 +42389,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -43368,7 +42486,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -43492,7 +42609,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -43544,7 +42660,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -43586,7 +42701,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSyn
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -43619,7 +42733,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSyn
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -43650,7 +42763,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSyn
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -43691,7 +42803,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -43789,7 +42900,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -43913,7 +43023,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -43965,7 +43074,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -44002,7 +43110,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -44029,7 +43136,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -44059,7 +43165,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -44100,7 +43205,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -44198,7 +43302,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -44322,7 +43425,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -44374,7 +43476,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -44416,7 +43517,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -44449,7 +43549,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -44480,7 +43579,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -44521,7 +43619,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -44619,7 +43716,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -44743,7 +43839,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -44795,7 +43890,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -44832,7 +43926,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -44859,7 +43952,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -44889,7 +43981,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -44930,7 +44021,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -45028,7 +44118,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -45152,7 +44241,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -45204,7 +44292,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -45246,7 +44333,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -45279,7 +44365,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -45310,7 +44395,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -45351,7 +44435,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -45449,7 +44532,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -45573,7 +44655,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -45625,7 +44706,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -45662,7 +44742,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -45689,7 +44768,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -45719,7 +44797,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -45760,7 +44837,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -45858,7 +44934,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -45982,7 +45057,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -46034,7 +45108,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -46076,7 +45149,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -46109,7 +45181,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -46140,7 +45211,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -46176,7 +45246,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceDirectoryJs
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -46213,7 +45282,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceDirectoryJs
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -46270,7 +45338,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomizePa
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -46325,7 +45392,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesDirectoryJ
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -46362,7 +45428,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesDirectoryJ
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -46419,7 +45484,6 @@ export interface ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomizeP
    * @schema ApplicationSetSpecGeneratorsMatrixTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -46479,7 +45543,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -46577,7 +45640,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -46701,7 +45763,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -46753,7 +45814,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -46790,7 +45850,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -46817,7 +45876,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -46847,7 +45905,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -46888,7 +45945,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -46986,7 +46042,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -47110,7 +46165,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -47162,7 +46216,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -47204,7 +46257,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -47237,7 +46289,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -47268,7 +46319,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -47309,7 +46359,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -47407,7 +46456,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -47531,7 +46579,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -47583,7 +46630,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -47620,7 +46666,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -47647,7 +46692,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -47677,7 +46721,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -47718,7 +46761,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -47816,7 +46858,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -47940,7 +46981,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -47992,7 +47032,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -48034,7 +47073,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -48067,7 +47105,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -48098,7 +47135,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -48139,7 +47175,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -48237,7 +47272,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -48361,7 +47395,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -48413,7 +47446,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -48450,7 +47482,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -48477,7 +47508,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -48507,7 +47537,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -48548,7 +47577,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -48646,7 +47674,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -48770,7 +47797,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -48822,7 +47848,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -48864,7 +47889,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSyncP
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -48897,7 +47921,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSyncP
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -48928,7 +47951,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSyncP
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -48969,7 +47991,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -49067,7 +48088,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -49191,7 +48211,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -49243,7 +48262,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -49280,7 +48298,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -49307,7 +48324,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -49337,7 +48353,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -49378,7 +48393,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -49476,7 +48490,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -49600,7 +48613,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -49652,7 +48664,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -49694,7 +48705,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSync
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -49727,7 +48737,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSync
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -49758,7 +48767,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSync
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -49799,7 +48807,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -49897,7 +48904,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -50021,7 +49027,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -50073,7 +49078,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -50110,7 +49114,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -50137,7 +49140,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -50167,7 +49169,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -50208,7 +49209,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -50306,7 +49306,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -50430,7 +49429,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -50482,7 +49480,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -50524,7 +49521,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSy
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -50557,7 +49553,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSy
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -50588,7 +49583,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSy
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -50629,7 +49623,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -50727,7 +49720,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -50851,7 +49843,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -50903,7 +49894,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -50940,7 +49930,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -50967,7 +49956,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -50997,7 +49985,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -51038,7 +50025,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -51136,7 +50122,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -51260,7 +50245,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -51312,7 +50296,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -51354,7 +50337,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -51387,7 +50369,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -51418,7 +50399,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -51459,7 +50439,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -51557,7 +50536,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -51681,7 +50659,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -51733,7 +50710,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcePlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcePluginParameters[];
-
 }
 
 /**
@@ -51770,7 +50746,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceHydratorDrySource#targetRevision
    */
   readonly targetRevision: string;
-
 }
 
 /**
@@ -51797,7 +50772,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceHydratorHydrateTo#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -51827,7 +50801,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceHydratorSyncSource#targetBranch
    */
   readonly targetBranch: string;
-
 }
 
 /**
@@ -51868,7 +50841,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesDirectory#recurse
    */
   readonly recurse?: boolean;
-
 }
 
 /**
@@ -51966,7 +50938,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesHelm#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -52090,7 +51061,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesKustomize#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -52142,7 +51112,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesPlugin#parameters
    */
   readonly parameters?: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesPluginParameters[];
-
 }
 
 /**
@@ -52184,7 +51153,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSyncPolicyAutomated#selfHeal
    */
   readonly selfHeal?: boolean;
-
 }
 
 /**
@@ -52217,7 +51185,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSyncPolicyManagedNamespaceMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -52248,7 +51215,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSyncPolicyRetry#limit
    */
   readonly limit?: number;
-
 }
 
 /**
@@ -52284,7 +51250,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceDirectoryJso
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -52321,7 +51286,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceDirectoryJso
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -52378,7 +51342,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomizePat
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -52433,7 +51396,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesDirectoryJs
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -52470,7 +51432,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesDirectoryJs
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -52527,7 +51488,6 @@ export interface ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomizePa
    * @schema ApplicationSetSpecGeneratorsMergeTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -52582,7 +51542,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceDirectoryJs
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -52619,7 +51578,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceDirectoryJs
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -52676,7 +51634,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomizePa
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -52731,7 +51688,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesDirectoryJ
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -52768,7 +51724,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesDirectoryJ
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -52825,7 +51780,6 @@ export interface ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomizeP
    * @schema ApplicationSetSpecGeneratorsPluginTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -52880,7 +51834,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceDirect
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -52917,7 +51870,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceDirect
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -52974,7 +51926,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustom
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -53029,7 +51980,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesDirec
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -53066,7 +52016,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesDirec
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -53123,7 +52072,6 @@ export interface ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKusto
    * @schema ApplicationSetSpecGeneratorsPullRequestTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -53178,7 +52126,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceDirect
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -53215,7 +52162,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceDirect
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -53272,7 +52218,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustom
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -53327,7 +52272,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesDirec
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -53364,7 +52308,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesDirec
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -53421,7 +52364,6 @@ export interface ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKusto
    * @schema ApplicationSetSpecGeneratorsScmProviderTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -53476,7 +52418,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -53508,7 +52449,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -53544,7 +52484,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -53586,7 +52525,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -53619,7 +52557,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -53650,7 +52587,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -53691,7 +52627,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -53729,7 +52664,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -53761,7 +52695,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -53797,7 +52730,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -53839,7 +52771,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -53872,7 +52803,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -53903,7 +52833,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -53944,7 +52873,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -53982,7 +52910,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -54019,7 +52946,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -54051,7 +52977,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -54087,7 +53012,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -54129,7 +53053,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -54162,7 +53085,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -54193,7 +53115,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -54234,7 +53155,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -54272,7 +53192,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -54304,7 +53223,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -54340,7 +53258,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -54382,7 +53299,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -54415,7 +53331,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -54446,7 +53361,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -54487,7 +53401,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -54525,7 +53438,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -54562,7 +53474,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -54594,7 +53505,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -54630,7 +53540,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -54672,7 +53581,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -54705,7 +53613,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -54736,7 +53643,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -54777,7 +53683,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -54815,7 +53720,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -54847,7 +53751,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -54883,7 +53786,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -54925,7 +53827,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -54958,7 +53859,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -54989,7 +53889,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -55030,7 +53929,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -55068,7 +53966,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSync
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -55105,7 +54002,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -55137,7 +54033,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -55173,7 +54068,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -55215,7 +54109,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -55248,7 +54141,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -55279,7 +54171,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -55320,7 +54211,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -55358,7 +54248,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -55390,7 +54279,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -55426,7 +54314,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -55468,7 +54355,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -55501,7 +54387,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -55532,7 +54417,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -55573,7 +54457,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -55611,7 +54494,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSyn
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -55648,7 +54530,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -55680,7 +54561,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -55716,7 +54596,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -55758,7 +54637,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -55791,7 +54669,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -55822,7 +54699,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -55863,7 +54739,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -55901,7 +54776,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -55933,7 +54807,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -55969,7 +54842,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -56011,7 +54883,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -56044,7 +54915,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -56075,7 +54945,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -56116,7 +54985,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -56154,7 +55022,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -56191,7 +55058,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -56223,7 +55089,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -56259,7 +55124,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -56301,7 +55165,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -56334,7 +55197,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -56365,7 +55227,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -56406,7 +55267,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -56444,7 +55304,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -56476,7 +55335,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -56512,7 +55370,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -56554,7 +55411,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -56587,7 +55443,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -56618,7 +55473,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -56659,7 +55513,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -56697,7 +55550,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -56734,7 +55586,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -56766,7 +55617,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -56802,7 +55652,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -56844,7 +55693,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -56877,7 +55725,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -56908,7 +55755,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -56949,7 +55795,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -56987,7 +55832,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -57019,7 +55863,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -57055,7 +55898,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -57097,7 +55939,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -57130,7 +55971,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -57161,7 +56001,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -57202,7 +56041,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -57240,7 +56078,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -57277,7 +56114,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -57309,7 +56145,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -57345,7 +56180,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -57387,7 +56221,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -57420,7 +56253,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -57451,7 +56283,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -57492,7 +56323,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -57530,7 +56360,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -57562,7 +56391,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -57598,7 +56426,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -57640,7 +56467,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -57673,7 +56499,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -57704,7 +56529,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -57745,7 +56569,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -57783,7 +56606,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -57820,7 +56642,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -57852,7 +56673,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -57888,7 +56708,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -57930,7 +56749,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -57963,7 +56781,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -57994,7 +56811,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -58035,7 +56851,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -58073,7 +56888,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -58105,7 +56919,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -58141,7 +56954,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -58183,7 +56995,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -58216,7 +57027,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -58247,7 +57057,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -58288,7 +57097,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -58326,7 +57134,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -58363,7 +57170,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -58395,7 +57201,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -58431,7 +57236,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -58473,7 +57277,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -58506,7 +57309,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -58537,7 +57339,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -58578,7 +57379,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -58616,7 +57416,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -58648,7 +57447,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -58684,7 +57482,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -58726,7 +57523,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -58759,7 +57555,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -58790,7 +57585,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -58831,7 +57625,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -58869,7 +57662,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSyncP
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -58906,7 +57698,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -58938,7 +57729,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -58974,7 +57764,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -59016,7 +57805,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -59049,7 +57837,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -59080,7 +57867,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -59121,7 +57907,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -59159,7 +57944,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -59191,7 +57975,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -59227,7 +58010,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -59269,7 +58051,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -59302,7 +58083,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -59333,7 +58113,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -59374,7 +58153,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -59412,7 +58190,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSync
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -59449,7 +58226,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -59481,7 +58257,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -59517,7 +58292,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -59559,7 +58333,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -59592,7 +58365,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -59623,7 +58395,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -59664,7 +58435,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -59702,7 +58472,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -59734,7 +58503,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -59770,7 +58538,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -59812,7 +58579,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -59845,7 +58611,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -59876,7 +58641,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -59917,7 +58681,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -59955,7 +58718,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSy
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -59992,7 +58754,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -60024,7 +58785,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -60060,7 +58820,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -60102,7 +58861,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -60135,7 +58893,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -60166,7 +58923,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -60207,7 +58963,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -60245,7 +59000,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -60277,7 +59031,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -60313,7 +59066,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -60355,7 +59107,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -60388,7 +59139,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -60419,7 +59169,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -60460,7 +59209,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -60498,7 +59246,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -60535,7 +59282,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -60567,7 +59313,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -60603,7 +59348,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -60645,7 +59389,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceKustomizePatchesTarget;
-
 }
 
 /**
@@ -60678,7 +59421,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -60709,7 +59451,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcePluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -60750,7 +59491,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcePluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -60788,7 +59528,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesDirectoryJsonnet#tlas
    */
   readonly tlas?: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesDirectoryJsonnetTlas[];
-
 }
 
 /**
@@ -60820,7 +59559,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesHelmFileParameters#path
    */
   readonly path?: string;
-
 }
 
 /**
@@ -60856,7 +59594,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesHelmParameters#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -60898,7 +59635,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesKustomizePatches#target
    */
   readonly target?: ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesKustomizePatchesTarget;
-
 }
 
 /**
@@ -60931,7 +59667,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesKustomizeReplicas#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -60962,7 +59697,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesPluginEnv#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -61003,7 +59737,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesPluginParameters#string
    */
   readonly string?: string;
-
 }
 
 /**
@@ -61041,7 +59774,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSyncPolicyRetryBackoff#maxDuration
    */
   readonly maxDuration?: string;
-
 }
 
 /**
@@ -61078,7 +59810,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -61115,7 +59846,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -61172,7 +59902,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -61227,7 +59956,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -61264,7 +59992,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -61321,7 +60048,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionReso
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -61376,7 +60102,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -61413,7 +60138,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -61470,7 +60194,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -61525,7 +60248,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -61562,7 +60284,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -61619,7 +60340,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpe
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsClustersTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -61674,7 +60394,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -61711,7 +60430,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -61768,7 +60486,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -61823,7 +60540,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -61860,7 +60576,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -61917,7 +60632,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsGitTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -61972,7 +60686,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -62009,7 +60722,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -62066,7 +60778,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -62121,7 +60832,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -62158,7 +60868,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -62215,7 +60924,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSou
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsListTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -62270,7 +60978,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -62307,7 +61014,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -62364,7 +61070,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -62419,7 +61124,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -62456,7 +61160,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -62513,7 +61216,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecS
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPluginTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -62568,7 +61270,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -62605,7 +61306,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -62662,7 +61362,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -62717,7 +61416,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -62754,7 +61452,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -62811,7 +61508,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsPullRequestTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -62866,7 +61562,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -62903,7 +61598,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -62960,7 +61654,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -63015,7 +61708,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -63052,7 +61744,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -63109,7 +61800,6 @@ export interface ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplate
    * @schema ApplicationSetSpecGeneratorsMatrixGeneratorsScmProviderTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -63164,7 +61854,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -63201,7 +61890,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -63258,7 +61946,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -63313,7 +62000,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -63350,7 +62036,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -63407,7 +62092,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResou
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClusterDecisionResourceTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -63462,7 +62146,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -63499,7 +62182,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -63556,7 +62238,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -63611,7 +62292,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -63648,7 +62328,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -63705,7 +62384,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpec
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsClustersTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -63760,7 +62438,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -63797,7 +62474,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -63854,7 +62530,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -63909,7 +62584,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -63946,7 +62620,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -64003,7 +62676,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourc
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsGitTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -64058,7 +62730,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -64095,7 +62766,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -64152,7 +62822,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -64207,7 +62876,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -64244,7 +62912,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -64301,7 +62968,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSour
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsListTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -64356,7 +63022,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -64393,7 +63058,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -64450,7 +63114,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -64505,7 +63168,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -64542,7 +63204,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -64599,7 +63260,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSo
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPluginTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -64654,7 +63314,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -64691,7 +63350,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -64748,7 +63406,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -64803,7 +63460,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -64840,7 +63496,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -64897,7 +63552,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsPullRequestTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -64952,7 +63606,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -64989,7 +63642,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -65046,7 +63698,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourceKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -65101,7 +63752,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesDirectoryJsonnetExtVars#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -65138,7 +63788,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesDirectoryJsonnetTlas#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -65195,7 +63844,6 @@ export interface ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateS
    * @schema ApplicationSetSpecGeneratorsMergeGeneratorsScmProviderTemplateSpecSourcesKustomizePatchesTarget#version
    */
   readonly version?: string;
-
 }
 
 /**
@@ -65314,7 +63962,6 @@ export interface AppProjectProps {
    * @schema AppProject#spec
    */
   readonly spec: AppProjectSpec;
-
 }
 
 /**
@@ -65435,7 +64082,6 @@ export interface AppProjectSpec {
    * @schema AppProjectSpec#syncWindows
    */
   readonly syncWindows?: AppProjectSpecSyncWindows[];
-
 }
 
 /**
@@ -65481,7 +64127,6 @@ export interface AppProjectSpecClusterResourceBlacklist {
    * @schema AppProjectSpecClusterResourceBlacklist#kind
    */
   readonly kind: string;
-
 }
 
 /**
@@ -65515,7 +64160,6 @@ export interface AppProjectSpecClusterResourceWhitelist {
    * @schema AppProjectSpecClusterResourceWhitelist#kind
    */
   readonly kind: string;
-
 }
 
 /**
@@ -65559,7 +64203,6 @@ export interface AppProjectSpecDestinationServiceAccounts {
    * @schema AppProjectSpecDestinationServiceAccounts#server
    */
   readonly server: string;
-
 }
 
 /**
@@ -65605,7 +64248,6 @@ export interface AppProjectSpecDestinations {
    * @schema AppProjectSpecDestinations#server
    */
   readonly server?: string;
-
 }
 
 /**
@@ -65640,7 +64282,6 @@ export interface AppProjectSpecNamespaceResourceBlacklist {
    * @schema AppProjectSpecNamespaceResourceBlacklist#kind
    */
   readonly kind: string;
-
 }
 
 /**
@@ -65674,7 +64315,6 @@ export interface AppProjectSpecNamespaceResourceWhitelist {
    * @schema AppProjectSpecNamespaceResourceWhitelist#kind
    */
   readonly kind: string;
-
 }
 
 /**
@@ -65711,7 +64351,6 @@ export interface AppProjectSpecOrphanedResources {
    * @schema AppProjectSpecOrphanedResources#warn
    */
   readonly warn?: boolean;
-
 }
 
 /**
@@ -65769,7 +64408,6 @@ export interface AppProjectSpecRoles {
    * @schema AppProjectSpecRoles#policies
    */
   readonly policies?: string[];
-
 }
 
 /**
@@ -65802,7 +64440,6 @@ export interface AppProjectSpecSignatureKeys {
    * @schema AppProjectSpecSignatureKeys#keyID
    */
   readonly keyId: string;
-
 }
 
 /**
@@ -65894,7 +64531,6 @@ export interface AppProjectSpecSyncWindows {
    * @schema AppProjectSpecSyncWindows#timeZone
    */
   readonly timeZone?: string;
-
 }
 
 /**
@@ -65940,7 +64576,6 @@ export interface AppProjectSpecOrphanedResourcesIgnore {
    * @schema AppProjectSpecOrphanedResourcesIgnore#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -65979,7 +64614,6 @@ export interface AppProjectSpecRolesJwtTokens {
    * @schema AppProjectSpecRolesJwtTokens#id
    */
   readonly id?: string;
-
 }
 
 /**

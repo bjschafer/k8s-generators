@@ -74,7 +74,6 @@ export interface VolumeSnapshotProps {
    * @schema VolumeSnapshot#spec
    */
   readonly spec: VolumeSnapshotSpec;
-
 }
 
 /**
@@ -111,7 +110,6 @@ export interface VolumeSnapshotSpec {
    * @schema VolumeSnapshotSpec#volumeSnapshotClassName
    */
   readonly volumeSnapshotClassName?: string;
-
 }
 
 /**
@@ -148,7 +146,6 @@ export interface VolumeSnapshotSpecSource {
    * @schema VolumeSnapshotSpecSource#volumeSnapshotContentName
    */
   readonly volumeSnapshotContentName?: string;
-
 }
 
 /**
@@ -238,7 +235,6 @@ export interface VolumeSnapshotV1Beta1Props {
    * @schema VolumeSnapshotV1Beta1#spec
    */
   readonly spec: VolumeSnapshotV1Beta1Spec;
-
 }
 
 /**
@@ -275,7 +271,6 @@ export interface VolumeSnapshotV1Beta1Spec {
    * @schema VolumeSnapshotV1Beta1Spec#volumeSnapshotClassName
    */
   readonly volumeSnapshotClassName?: string;
-
 }
 
 /**
@@ -312,7 +307,6 @@ export interface VolumeSnapshotV1Beta1SpecSource {
    * @schema VolumeSnapshotV1Beta1SpecSource#volumeSnapshotContentName
    */
   readonly volumeSnapshotContentName?: string;
-
 }
 
 /**
@@ -416,7 +410,6 @@ export interface VolumeSnapshotClassProps {
    * @schema VolumeSnapshotClass#parameters
    */
   readonly parameters?: { [key: string]: string };
-
 }
 
 /**
@@ -534,7 +527,6 @@ export interface VolumeSnapshotClassV1Beta1Props {
    * @schema VolumeSnapshotClassV1Beta1#parameters
    */
   readonly parameters?: { [key: string]: string };
-
 }
 
 /**
@@ -638,7 +630,6 @@ export interface VolumeSnapshotContentProps {
    * @schema VolumeSnapshotContent#spec
    */
   readonly spec: VolumeSnapshotContentSpec;
-
 }
 
 /**
@@ -703,7 +694,6 @@ export interface VolumeSnapshotContentSpec {
    * @schema VolumeSnapshotContentSpec#volumeSnapshotRef
    */
   readonly volumeSnapshotRef: VolumeSnapshotContentSpecVolumeSnapshotRef;
-
 }
 
 /**
@@ -756,7 +746,6 @@ export interface VolumeSnapshotContentSpecSource {
    * @schema VolumeSnapshotContentSpecSource#volumeHandle
    */
   readonly volumeHandle?: string;
-
 }
 
 /**
@@ -828,7 +817,6 @@ export interface VolumeSnapshotContentSpecVolumeSnapshotRef {
    * @schema VolumeSnapshotContentSpecVolumeSnapshotRef#uid
    */
   readonly uid?: string;
-
 }
 
 /**
@@ -923,7 +911,6 @@ export interface VolumeSnapshotContentV1Beta1Props {
    * @schema VolumeSnapshotContentV1Beta1#spec
    */
   readonly spec: VolumeSnapshotContentV1Beta1Spec;
-
 }
 
 /**
@@ -981,7 +968,6 @@ export interface VolumeSnapshotContentV1Beta1Spec {
    * @schema VolumeSnapshotContentV1Beta1Spec#volumeSnapshotRef
    */
   readonly volumeSnapshotRef: VolumeSnapshotContentV1Beta1SpecVolumeSnapshotRef;
-
 }
 
 /**
@@ -1033,7 +1019,6 @@ export interface VolumeSnapshotContentV1Beta1SpecSource {
    * @schema VolumeSnapshotContentV1Beta1SpecSource#volumeHandle
    */
   readonly volumeHandle?: string;
-
 }
 
 /**
@@ -1105,7 +1090,6 @@ export interface VolumeSnapshotContentV1Beta1SpecVolumeSnapshotRef {
    * @schema VolumeSnapshotContentV1Beta1SpecVolumeSnapshotRef#uid
    */
   readonly uid?: string;
-
 }
 
 /**

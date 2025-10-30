@@ -76,7 +76,6 @@ export interface GatewayProps {
    * @schema Gateway#spec
    */
   readonly spec: GatewaySpec;
-
 }
 
 /**
@@ -267,7 +266,6 @@ export interface GatewaySpec {
    * @schema GatewaySpec#listeners
    */
   readonly listeners: GatewaySpecListeners[];
-
 }
 
 /**
@@ -309,7 +307,6 @@ export interface GatewaySpecAddresses {
    * @schema GatewaySpecAddresses#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -382,7 +379,6 @@ export interface GatewaySpecInfrastructure {
    * @schema GatewaySpecInfrastructure#parametersRef
    */
   readonly parametersRef?: GatewaySpecInfrastructureParametersRef;
-
 }
 
 /**
@@ -515,7 +511,6 @@ export interface GatewaySpecListeners {
    * @schema GatewaySpecListeners#tls
    */
   readonly tls?: GatewaySpecListenersTls;
-
 }
 
 /**
@@ -573,7 +568,6 @@ export interface GatewaySpecInfrastructureParametersRef {
    * @schema GatewaySpecInfrastructureParametersRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -647,7 +641,6 @@ export interface GatewaySpecListenersAllowedRoutes {
    * @schema GatewaySpecListenersAllowedRoutes#namespaces
    */
   readonly namespaces?: GatewaySpecListenersAllowedRoutesNamespaces;
-
 }
 
 /**
@@ -745,7 +738,6 @@ export interface GatewaySpecListenersTls {
    * @schema GatewaySpecListenersTls#options
    */
   readonly options?: { [key: string]: string };
-
 }
 
 /**
@@ -783,7 +775,6 @@ export interface GatewaySpecListenersAllowedRoutesKinds {
    * @schema GatewaySpecListenersAllowedRoutesKinds#kind
    */
   readonly kind: string;
-
 }
 
 /**
@@ -835,7 +826,6 @@ export interface GatewaySpecListenersAllowedRoutesNamespaces {
    * @schema GatewaySpecListenersAllowedRoutesNamespaces#selector
    */
   readonly selector?: GatewaySpecListenersAllowedRoutesNamespacesSelector;
-
 }
 
 /**
@@ -903,7 +893,6 @@ export interface GatewaySpecListenersTlsCertificateRefs {
    * @schema GatewaySpecListenersTlsCertificateRefs#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -994,7 +983,6 @@ export interface GatewaySpecListenersAllowedRoutesNamespacesSelector {
    * @schema GatewaySpecListenersAllowedRoutesNamespacesSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -1043,7 +1031,6 @@ export interface GatewaySpecListenersAllowedRoutesNamespacesSelectorMatchExpress
    * @schema GatewaySpecListenersAllowedRoutesNamespacesSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -1136,7 +1123,6 @@ export interface GatewayV1Beta1Props {
    * @schema GatewayV1Beta1#spec
    */
   readonly spec: GatewayV1Beta1Spec;
-
 }
 
 /**
@@ -1327,7 +1313,6 @@ export interface GatewayV1Beta1Spec {
    * @schema GatewayV1Beta1Spec#listeners
    */
   readonly listeners: GatewayV1Beta1SpecListeners[];
-
 }
 
 /**
@@ -1369,7 +1354,6 @@ export interface GatewayV1Beta1SpecAddresses {
    * @schema GatewayV1Beta1SpecAddresses#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -1442,7 +1426,6 @@ export interface GatewayV1Beta1SpecInfrastructure {
    * @schema GatewayV1Beta1SpecInfrastructure#parametersRef
    */
   readonly parametersRef?: GatewayV1Beta1SpecInfrastructureParametersRef;
-
 }
 
 /**
@@ -1575,7 +1558,6 @@ export interface GatewayV1Beta1SpecListeners {
    * @schema GatewayV1Beta1SpecListeners#tls
    */
   readonly tls?: GatewayV1Beta1SpecListenersTls;
-
 }
 
 /**
@@ -1633,7 +1615,6 @@ export interface GatewayV1Beta1SpecInfrastructureParametersRef {
    * @schema GatewayV1Beta1SpecInfrastructureParametersRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1707,7 +1688,6 @@ export interface GatewayV1Beta1SpecListenersAllowedRoutes {
    * @schema GatewayV1Beta1SpecListenersAllowedRoutes#namespaces
    */
   readonly namespaces?: GatewayV1Beta1SpecListenersAllowedRoutesNamespaces;
-
 }
 
 /**
@@ -1805,7 +1785,6 @@ export interface GatewayV1Beta1SpecListenersTls {
    * @schema GatewayV1Beta1SpecListenersTls#options
    */
   readonly options?: { [key: string]: string };
-
 }
 
 /**
@@ -1843,7 +1822,6 @@ export interface GatewayV1Beta1SpecListenersAllowedRoutesKinds {
    * @schema GatewayV1Beta1SpecListenersAllowedRoutesKinds#kind
    */
   readonly kind: string;
-
 }
 
 /**
@@ -1895,7 +1873,6 @@ export interface GatewayV1Beta1SpecListenersAllowedRoutesNamespaces {
    * @schema GatewayV1Beta1SpecListenersAllowedRoutesNamespaces#selector
    */
   readonly selector?: GatewayV1Beta1SpecListenersAllowedRoutesNamespacesSelector;
-
 }
 
 /**
@@ -1963,7 +1940,6 @@ export interface GatewayV1Beta1SpecListenersTlsCertificateRefs {
    * @schema GatewayV1Beta1SpecListenersTlsCertificateRefs#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -2054,7 +2030,6 @@ export interface GatewayV1Beta1SpecListenersAllowedRoutesNamespacesSelector {
    * @schema GatewayV1Beta1SpecListenersAllowedRoutesNamespacesSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -2103,7 +2078,6 @@ export interface GatewayV1Beta1SpecListenersAllowedRoutesNamespacesSelectorMatch
    * @schema GatewayV1Beta1SpecListenersAllowedRoutesNamespacesSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -2226,7 +2200,6 @@ export interface GatewayClassProps {
    * @schema GatewayClass#spec
    */
   readonly spec: GatewayClassSpec;
-
 }
 
 /**
@@ -2294,7 +2267,6 @@ export interface GatewayClassSpec {
    * @schema GatewayClassSpec#parametersRef
    */
   readonly parametersRef?: GatewayClassSpecParametersRef;
-
 }
 
 /**
@@ -2365,7 +2337,6 @@ export interface GatewayClassSpecParametersRef {
    * @schema GatewayClassSpecParametersRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -2489,7 +2460,6 @@ export interface GatewayClassV1Beta1Props {
    * @schema GatewayClassV1Beta1#spec
    */
   readonly spec: GatewayClassV1Beta1Spec;
-
 }
 
 /**
@@ -2557,7 +2527,6 @@ export interface GatewayClassV1Beta1Spec {
    * @schema GatewayClassV1Beta1Spec#parametersRef
    */
   readonly parametersRef?: GatewayClassV1Beta1SpecParametersRef;
-
 }
 
 /**
@@ -2628,7 +2597,6 @@ export interface GatewayClassV1Beta1SpecParametersRef {
    * @schema GatewayClassV1Beta1SpecParametersRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -2772,7 +2740,6 @@ export interface GrpcRouteProps {
    * @schema GRPCRoute#spec
    */
   readonly spec?: GrpcRouteSpec;
-
 }
 
 /**
@@ -2923,7 +2890,6 @@ export interface GrpcRouteSpec {
    * @schema GrpcRouteSpec#rules
    */
   readonly rules?: GrpcRouteSpecRules[];
-
 }
 
 /**
@@ -3073,7 +3039,6 @@ export interface GrpcRouteSpecParentRefs {
    * @schema GrpcRouteSpecParentRefs#sectionName
    */
   readonly sectionName?: string;
-
 }
 
 /**
@@ -3221,7 +3186,6 @@ export interface GrpcRouteSpecRules {
    * @schema GrpcRouteSpecRules#matches
    */
   readonly matches?: GrpcRouteSpecRulesMatches[];
-
 }
 
 /**
@@ -3360,7 +3324,6 @@ export interface GrpcRouteSpecRulesBackendRefs {
    * @schema GrpcRouteSpecRulesBackendRefs#weight
    */
   readonly weight?: number;
-
 }
 
 /**
@@ -3476,7 +3439,6 @@ export interface GrpcRouteSpecRulesFilters {
    * @schema GrpcRouteSpecRulesFilters#type
    */
   readonly type: GrpcRouteSpecRulesFiltersType;
-
 }
 
 /**
@@ -3535,7 +3497,6 @@ export interface GrpcRouteSpecRulesMatches {
    * @schema GrpcRouteSpecRulesMatches#method
    */
   readonly method?: GrpcRouteSpecRulesMatchesMethod;
-
 }
 
 /**
@@ -3646,7 +3607,6 @@ export interface GrpcRouteSpecRulesBackendRefsFilters {
    * @schema GrpcRouteSpecRulesBackendRefsFilters#type
    */
   readonly type: GrpcRouteSpecRulesBackendRefsFiltersType;
-
 }
 
 /**
@@ -3701,7 +3661,6 @@ export interface GrpcRouteSpecRulesFiltersExtensionRef {
    * @schema GrpcRouteSpecRulesFiltersExtensionRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -3794,7 +3753,6 @@ export interface GrpcRouteSpecRulesFiltersRequestHeaderModifier {
    * @schema GrpcRouteSpecRulesFiltersRequestHeaderModifier#set
    */
   readonly set?: GrpcRouteSpecRulesFiltersRequestHeaderModifierSet[];
-
 }
 
 /**
@@ -3857,7 +3815,6 @@ export interface GrpcRouteSpecRulesFiltersRequestMirror {
    * @schema GrpcRouteSpecRulesFiltersRequestMirror#backendRef
    */
   readonly backendRef: GrpcRouteSpecRulesFiltersRequestMirrorBackendRef;
-
 }
 
 /**
@@ -3948,7 +3905,6 @@ export interface GrpcRouteSpecRulesFiltersResponseHeaderModifier {
    * @schema GrpcRouteSpecRulesFiltersResponseHeaderModifier#set
    */
   readonly set?: GrpcRouteSpecRulesFiltersResponseHeaderModifierSet[];
-
 }
 
 /**
@@ -4041,7 +3997,6 @@ export interface GrpcRouteSpecRulesMatchesHeaders {
    * @schema GrpcRouteSpecRulesMatchesHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -4098,7 +4053,6 @@ export interface GrpcRouteSpecRulesMatchesMethod {
    * @schema GrpcRouteSpecRulesMatchesMethod#type
    */
   readonly type?: GrpcRouteSpecRulesMatchesMethodType;
-
 }
 
 /**
@@ -4151,7 +4105,6 @@ export interface GrpcRouteSpecRulesBackendRefsFiltersExtensionRef {
    * @schema GrpcRouteSpecRulesBackendRefsFiltersExtensionRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4244,7 +4197,6 @@ export interface GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifier {
    * @schema GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifier#set
    */
   readonly set?: GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifierSet[];
-
 }
 
 /**
@@ -4307,7 +4259,6 @@ export interface GrpcRouteSpecRulesBackendRefsFiltersRequestMirror {
    * @schema GrpcRouteSpecRulesBackendRefsFiltersRequestMirror#backendRef
    */
   readonly backendRef: GrpcRouteSpecRulesBackendRefsFiltersRequestMirrorBackendRef;
-
 }
 
 /**
@@ -4398,7 +4349,6 @@ export interface GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifier {
    * @schema GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifier#set
    */
   readonly set?: GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifierSet[];
-
 }
 
 /**
@@ -4484,7 +4434,6 @@ export interface GrpcRouteSpecRulesFiltersRequestHeaderModifierAdd {
    * @schema GrpcRouteSpecRulesFiltersRequestHeaderModifierAdd#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -4528,7 +4477,6 @@ export interface GrpcRouteSpecRulesFiltersRequestHeaderModifierSet {
    * @schema GrpcRouteSpecRulesFiltersRequestHeaderModifierSet#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -4635,7 +4583,6 @@ export interface GrpcRouteSpecRulesFiltersRequestMirrorBackendRef {
    * @schema GrpcRouteSpecRulesFiltersRequestMirrorBackendRef#port
    */
   readonly port?: number;
-
 }
 
 /**
@@ -4682,7 +4629,6 @@ export interface GrpcRouteSpecRulesFiltersResponseHeaderModifierAdd {
    * @schema GrpcRouteSpecRulesFiltersResponseHeaderModifierAdd#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -4726,7 +4672,6 @@ export interface GrpcRouteSpecRulesFiltersResponseHeaderModifierSet {
    * @schema GrpcRouteSpecRulesFiltersResponseHeaderModifierSet#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -4799,7 +4744,6 @@ export interface GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifierAdd {
    * @schema GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifierAdd#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -4843,7 +4787,6 @@ export interface GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifierSet {
    * @schema GrpcRouteSpecRulesBackendRefsFiltersRequestHeaderModifierSet#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -4950,7 +4893,6 @@ export interface GrpcRouteSpecRulesBackendRefsFiltersRequestMirrorBackendRef {
    * @schema GrpcRouteSpecRulesBackendRefsFiltersRequestMirrorBackendRef#port
    */
   readonly port?: number;
-
 }
 
 /**
@@ -4997,7 +4939,6 @@ export interface GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifierAdd {
    * @schema GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifierAdd#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -5041,7 +4982,6 @@ export interface GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifierSet {
    * @schema GrpcRouteSpecRulesBackendRefsFiltersResponseHeaderModifierSet#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -5137,7 +5077,6 @@ export interface HttpRouteProps {
    * @schema HTTPRoute#spec
    */
   readonly spec: HttpRouteSpec;
-
 }
 
 /**
@@ -5291,7 +5230,6 @@ export interface HttpRouteSpec {
    * @schema HttpRouteSpec#rules
    */
   readonly rules?: HttpRouteSpecRules[];
-
 }
 
 /**
@@ -5441,7 +5379,6 @@ export interface HttpRouteSpecParentRefs {
    * @schema HttpRouteSpecParentRefs#sectionName
    */
   readonly sectionName?: string;
-
 }
 
 /**
@@ -5624,7 +5561,6 @@ export interface HttpRouteSpecRules {
    * @schema HttpRouteSpecRules#timeouts
    */
   readonly timeouts?: HttpRouteSpecRulesTimeouts;
-
 }
 
 /**
@@ -5764,7 +5700,6 @@ export interface HttpRouteSpecRulesBackendRefs {
    * @schema HttpRouteSpecRulesBackendRefs#weight
    */
   readonly weight?: number;
-
 }
 
 /**
@@ -5905,7 +5840,6 @@ export interface HttpRouteSpecRulesFilters {
    * @schema HttpRouteSpecRulesFilters#urlRewrite
    */
   readonly urlRewrite?: HttpRouteSpecRulesFiltersUrlRewrite;
-
 }
 
 /**
@@ -5988,7 +5922,6 @@ export interface HttpRouteSpecRulesMatches {
    * @schema HttpRouteSpecRulesMatches#queryParams
    */
   readonly queryParams?: HttpRouteSpecRulesMatchesQueryParams[];
-
 }
 
 /**
@@ -6068,7 +6001,6 @@ export interface HttpRouteSpecRulesTimeouts {
    * @schema HttpRouteSpecRulesTimeouts#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -6204,7 +6136,6 @@ export interface HttpRouteSpecRulesBackendRefsFilters {
    * @schema HttpRouteSpecRulesBackendRefsFilters#urlRewrite
    */
   readonly urlRewrite?: HttpRouteSpecRulesBackendRefsFiltersUrlRewrite;
-
 }
 
 /**
@@ -6261,7 +6192,6 @@ export interface HttpRouteSpecRulesFiltersExtensionRef {
    * @schema HttpRouteSpecRulesFiltersExtensionRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -6354,7 +6284,6 @@ export interface HttpRouteSpecRulesFiltersRequestHeaderModifier {
    * @schema HttpRouteSpecRulesFiltersRequestHeaderModifier#set
    */
   readonly set?: HttpRouteSpecRulesFiltersRequestHeaderModifierSet[];
-
 }
 
 /**
@@ -6417,7 +6346,6 @@ export interface HttpRouteSpecRulesFiltersRequestMirror {
    * @schema HttpRouteSpecRulesFiltersRequestMirror#backendRef
    */
   readonly backendRef: HttpRouteSpecRulesFiltersRequestMirrorBackendRef;
-
 }
 
 /**
@@ -6528,7 +6456,6 @@ export interface HttpRouteSpecRulesFiltersRequestRedirect {
    * @schema HttpRouteSpecRulesFiltersRequestRedirect#statusCode
    */
   readonly statusCode?: HttpRouteSpecRulesFiltersRequestRedirectStatusCode;
-
 }
 
 /**
@@ -6623,7 +6550,6 @@ export interface HttpRouteSpecRulesFiltersResponseHeaderModifier {
    * @schema HttpRouteSpecRulesFiltersResponseHeaderModifier#set
    */
   readonly set?: HttpRouteSpecRulesFiltersResponseHeaderModifierSet[];
-
 }
 
 /**
@@ -6719,7 +6645,6 @@ export interface HttpRouteSpecRulesFiltersUrlRewrite {
    * @schema HttpRouteSpecRulesFiltersUrlRewrite#path
    */
   readonly path?: HttpRouteSpecRulesFiltersUrlRewritePath;
-
 }
 
 /**
@@ -6786,7 +6711,6 @@ export interface HttpRouteSpecRulesMatchesHeaders {
    * @schema HttpRouteSpecRulesMatchesHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -6859,7 +6783,6 @@ export interface HttpRouteSpecRulesMatchesPath {
    * @schema HttpRouteSpecRulesMatchesPath#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -6929,7 +6852,6 @@ export interface HttpRouteSpecRulesMatchesQueryParams {
    * @schema HttpRouteSpecRulesMatchesQueryParams#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -6982,7 +6904,6 @@ export interface HttpRouteSpecRulesBackendRefsFiltersExtensionRef {
    * @schema HttpRouteSpecRulesBackendRefsFiltersExtensionRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -7075,7 +6996,6 @@ export interface HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifier {
    * @schema HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifier#set
    */
   readonly set?: HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifierSet[];
-
 }
 
 /**
@@ -7138,7 +7058,6 @@ export interface HttpRouteSpecRulesBackendRefsFiltersRequestMirror {
    * @schema HttpRouteSpecRulesBackendRefsFiltersRequestMirror#backendRef
    */
   readonly backendRef: HttpRouteSpecRulesBackendRefsFiltersRequestMirrorBackendRef;
-
 }
 
 /**
@@ -7249,7 +7168,6 @@ export interface HttpRouteSpecRulesBackendRefsFiltersRequestRedirect {
    * @schema HttpRouteSpecRulesBackendRefsFiltersRequestRedirect#statusCode
    */
   readonly statusCode?: HttpRouteSpecRulesBackendRefsFiltersRequestRedirectStatusCode;
-
 }
 
 /**
@@ -7344,7 +7262,6 @@ export interface HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifier {
    * @schema HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifier#set
    */
   readonly set?: HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifierSet[];
-
 }
 
 /**
@@ -7440,7 +7357,6 @@ export interface HttpRouteSpecRulesBackendRefsFiltersUrlRewrite {
    * @schema HttpRouteSpecRulesBackendRefsFiltersUrlRewrite#path
    */
   readonly path?: HttpRouteSpecRulesBackendRefsFiltersUrlRewritePath;
-
 }
 
 /**
@@ -7484,7 +7400,6 @@ export interface HttpRouteSpecRulesFiltersRequestHeaderModifierAdd {
    * @schema HttpRouteSpecRulesFiltersRequestHeaderModifierAdd#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -7528,7 +7443,6 @@ export interface HttpRouteSpecRulesFiltersRequestHeaderModifierSet {
    * @schema HttpRouteSpecRulesFiltersRequestHeaderModifierSet#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -7635,7 +7549,6 @@ export interface HttpRouteSpecRulesFiltersRequestMirrorBackendRef {
    * @schema HttpRouteSpecRulesFiltersRequestMirrorBackendRef#port
    */
   readonly port?: number;
-
 }
 
 /**
@@ -7710,7 +7623,6 @@ export interface HttpRouteSpecRulesFiltersRequestRedirectPath {
    * @schema HttpRouteSpecRulesFiltersRequestRedirectPath#type
    */
   readonly type: HttpRouteSpecRulesFiltersRequestRedirectPathType;
-
 }
 
 /**
@@ -7801,7 +7713,6 @@ export interface HttpRouteSpecRulesFiltersResponseHeaderModifierAdd {
    * @schema HttpRouteSpecRulesFiltersResponseHeaderModifierAdd#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -7845,7 +7756,6 @@ export interface HttpRouteSpecRulesFiltersResponseHeaderModifierSet {
    * @schema HttpRouteSpecRulesFiltersResponseHeaderModifierSet#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -7915,7 +7825,6 @@ export interface HttpRouteSpecRulesFiltersUrlRewritePath {
    * @schema HttpRouteSpecRulesFiltersUrlRewritePath#type
    */
   readonly type: HttpRouteSpecRulesFiltersUrlRewritePathType;
-
 }
 
 /**
@@ -8020,7 +7929,6 @@ export interface HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifierAdd {
    * @schema HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifierAdd#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -8064,7 +7972,6 @@ export interface HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifierSet {
    * @schema HttpRouteSpecRulesBackendRefsFiltersRequestHeaderModifierSet#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -8171,7 +8078,6 @@ export interface HttpRouteSpecRulesBackendRefsFiltersRequestMirrorBackendRef {
    * @schema HttpRouteSpecRulesBackendRefsFiltersRequestMirrorBackendRef#port
    */
   readonly port?: number;
-
 }
 
 /**
@@ -8246,7 +8152,6 @@ export interface HttpRouteSpecRulesBackendRefsFiltersRequestRedirectPath {
    * @schema HttpRouteSpecRulesBackendRefsFiltersRequestRedirectPath#type
    */
   readonly type: HttpRouteSpecRulesBackendRefsFiltersRequestRedirectPathType;
-
 }
 
 /**
@@ -8337,7 +8242,6 @@ export interface HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifierAdd {
    * @schema HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifierAdd#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -8381,7 +8285,6 @@ export interface HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifierSet {
    * @schema HttpRouteSpecRulesBackendRefsFiltersResponseHeaderModifierSet#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -8451,7 +8354,6 @@ export interface HttpRouteSpecRulesBackendRefsFiltersUrlRewritePath {
    * @schema HttpRouteSpecRulesBackendRefsFiltersUrlRewritePath#type
    */
   readonly type: HttpRouteSpecRulesBackendRefsFiltersUrlRewritePathType;
-
 }
 
 /**
@@ -8628,7 +8530,6 @@ export interface HttpRouteV1Beta1Props {
    * @schema HTTPRouteV1Beta1#spec
    */
   readonly spec: HttpRouteV1Beta1Spec;
-
 }
 
 /**
@@ -8782,7 +8683,6 @@ export interface HttpRouteV1Beta1Spec {
    * @schema HttpRouteV1Beta1Spec#rules
    */
   readonly rules?: HttpRouteV1Beta1SpecRules[];
-
 }
 
 /**
@@ -8932,7 +8832,6 @@ export interface HttpRouteV1Beta1SpecParentRefs {
    * @schema HttpRouteV1Beta1SpecParentRefs#sectionName
    */
   readonly sectionName?: string;
-
 }
 
 /**
@@ -9115,7 +9014,6 @@ export interface HttpRouteV1Beta1SpecRules {
    * @schema HttpRouteV1Beta1SpecRules#timeouts
    */
   readonly timeouts?: HttpRouteV1Beta1SpecRulesTimeouts;
-
 }
 
 /**
@@ -9255,7 +9153,6 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefs {
    * @schema HttpRouteV1Beta1SpecRulesBackendRefs#weight
    */
   readonly weight?: number;
-
 }
 
 /**
@@ -9396,7 +9293,6 @@ export interface HttpRouteV1Beta1SpecRulesFilters {
    * @schema HttpRouteV1Beta1SpecRulesFilters#urlRewrite
    */
   readonly urlRewrite?: HttpRouteV1Beta1SpecRulesFiltersUrlRewrite;
-
 }
 
 /**
@@ -9479,7 +9375,6 @@ export interface HttpRouteV1Beta1SpecRulesMatches {
    * @schema HttpRouteV1Beta1SpecRulesMatches#queryParams
    */
   readonly queryParams?: HttpRouteV1Beta1SpecRulesMatchesQueryParams[];
-
 }
 
 /**
@@ -9559,7 +9454,6 @@ export interface HttpRouteV1Beta1SpecRulesTimeouts {
    * @schema HttpRouteV1Beta1SpecRulesTimeouts#request
    */
   readonly request?: string;
-
 }
 
 /**
@@ -9695,7 +9589,6 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFilters {
    * @schema HttpRouteV1Beta1SpecRulesBackendRefsFilters#urlRewrite
    */
   readonly urlRewrite?: HttpRouteV1Beta1SpecRulesBackendRefsFiltersUrlRewrite;
-
 }
 
 /**
@@ -9752,7 +9645,6 @@ export interface HttpRouteV1Beta1SpecRulesFiltersExtensionRef {
    * @schema HttpRouteV1Beta1SpecRulesFiltersExtensionRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -9845,7 +9737,6 @@ export interface HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifier {
    * @schema HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifier#set
    */
   readonly set?: HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifierSet[];
-
 }
 
 /**
@@ -9908,7 +9799,6 @@ export interface HttpRouteV1Beta1SpecRulesFiltersRequestMirror {
    * @schema HttpRouteV1Beta1SpecRulesFiltersRequestMirror#backendRef
    */
   readonly backendRef: HttpRouteV1Beta1SpecRulesFiltersRequestMirrorBackendRef;
-
 }
 
 /**
@@ -10019,7 +9909,6 @@ export interface HttpRouteV1Beta1SpecRulesFiltersRequestRedirect {
    * @schema HttpRouteV1Beta1SpecRulesFiltersRequestRedirect#statusCode
    */
   readonly statusCode?: HttpRouteV1Beta1SpecRulesFiltersRequestRedirectStatusCode;
-
 }
 
 /**
@@ -10114,7 +10003,6 @@ export interface HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifier {
    * @schema HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifier#set
    */
   readonly set?: HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifierSet[];
-
 }
 
 /**
@@ -10210,7 +10098,6 @@ export interface HttpRouteV1Beta1SpecRulesFiltersUrlRewrite {
    * @schema HttpRouteV1Beta1SpecRulesFiltersUrlRewrite#path
    */
   readonly path?: HttpRouteV1Beta1SpecRulesFiltersUrlRewritePath;
-
 }
 
 /**
@@ -10277,7 +10164,6 @@ export interface HttpRouteV1Beta1SpecRulesMatchesHeaders {
    * @schema HttpRouteV1Beta1SpecRulesMatchesHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -10350,7 +10236,6 @@ export interface HttpRouteV1Beta1SpecRulesMatchesPath {
    * @schema HttpRouteV1Beta1SpecRulesMatchesPath#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -10420,7 +10305,6 @@ export interface HttpRouteV1Beta1SpecRulesMatchesQueryParams {
    * @schema HttpRouteV1Beta1SpecRulesMatchesQueryParams#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -10473,7 +10357,6 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersExtensionRef {
    * @schema HttpRouteV1Beta1SpecRulesBackendRefsFiltersExtensionRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10566,7 +10449,6 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderModifie
    * @schema HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderModifier#set
    */
   readonly set?: HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderModifierSet[];
-
 }
 
 /**
@@ -10629,7 +10511,6 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestMirror {
    * @schema HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestMirror#backendRef
    */
   readonly backendRef: HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestMirrorBackendRef;
-
 }
 
 /**
@@ -10740,7 +10621,6 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestRedirect {
    * @schema HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestRedirect#statusCode
    */
   readonly statusCode?: HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestRedirectStatusCode;
-
 }
 
 /**
@@ -10835,7 +10715,6 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeaderModifi
    * @schema HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeaderModifier#set
    */
   readonly set?: HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeaderModifierSet[];
-
 }
 
 /**
@@ -10931,7 +10810,6 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersUrlRewrite {
    * @schema HttpRouteV1Beta1SpecRulesBackendRefsFiltersUrlRewrite#path
    */
   readonly path?: HttpRouteV1Beta1SpecRulesBackendRefsFiltersUrlRewritePath;
-
 }
 
 /**
@@ -10975,7 +10853,6 @@ export interface HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifierAdd {
    * @schema HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifierAdd#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -11019,7 +10896,6 @@ export interface HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifierSet {
    * @schema HttpRouteV1Beta1SpecRulesFiltersRequestHeaderModifierSet#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -11126,7 +11002,6 @@ export interface HttpRouteV1Beta1SpecRulesFiltersRequestMirrorBackendRef {
    * @schema HttpRouteV1Beta1SpecRulesFiltersRequestMirrorBackendRef#port
    */
   readonly port?: number;
-
 }
 
 /**
@@ -11201,7 +11076,6 @@ export interface HttpRouteV1Beta1SpecRulesFiltersRequestRedirectPath {
    * @schema HttpRouteV1Beta1SpecRulesFiltersRequestRedirectPath#type
    */
   readonly type: HttpRouteV1Beta1SpecRulesFiltersRequestRedirectPathType;
-
 }
 
 /**
@@ -11292,7 +11166,6 @@ export interface HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifierAdd {
    * @schema HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifierAdd#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -11336,7 +11209,6 @@ export interface HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifierSet {
    * @schema HttpRouteV1Beta1SpecRulesFiltersResponseHeaderModifierSet#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -11406,7 +11278,6 @@ export interface HttpRouteV1Beta1SpecRulesFiltersUrlRewritePath {
    * @schema HttpRouteV1Beta1SpecRulesFiltersUrlRewritePath#type
    */
   readonly type: HttpRouteV1Beta1SpecRulesFiltersUrlRewritePathType;
-
 }
 
 /**
@@ -11511,7 +11382,6 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderModifie
    * @schema HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderModifierAdd#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -11555,7 +11425,6 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderModifie
    * @schema HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestHeaderModifierSet#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -11662,7 +11531,6 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestMirrorBackend
    * @schema HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestMirrorBackendRef#port
    */
   readonly port?: number;
-
 }
 
 /**
@@ -11737,7 +11605,6 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestRedirectPath 
    * @schema HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestRedirectPath#type
    */
   readonly type: HttpRouteV1Beta1SpecRulesBackendRefsFiltersRequestRedirectPathType;
-
 }
 
 /**
@@ -11828,7 +11695,6 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeaderModifi
    * @schema HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeaderModifierAdd#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -11872,7 +11738,6 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeaderModifi
    * @schema HttpRouteV1Beta1SpecRulesBackendRefsFiltersResponseHeaderModifierSet#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -11942,7 +11807,6 @@ export interface HttpRouteV1Beta1SpecRulesBackendRefsFiltersUrlRewritePath {
    * @schema HttpRouteV1Beta1SpecRulesBackendRefsFiltersUrlRewritePath#type
    */
   readonly type: HttpRouteV1Beta1SpecRulesBackendRefsFiltersUrlRewritePathType;
-
 }
 
 /**
@@ -12143,7 +12007,6 @@ export interface ReferenceGrantProps {
    * @schema ReferenceGrant#spec
    */
   readonly spec?: ReferenceGrantSpec;
-
 }
 
 /**
@@ -12190,7 +12053,6 @@ export interface ReferenceGrantSpec {
    * @schema ReferenceGrantSpec#to
    */
   readonly to: ReferenceGrantSpecTo[];
-
 }
 
 /**
@@ -12253,7 +12115,6 @@ export interface ReferenceGrantSpecFrom {
    * @schema ReferenceGrantSpecFrom#namespace
    */
   readonly namespace: string;
-
 }
 
 /**
@@ -12309,7 +12170,6 @@ export interface ReferenceGrantSpecTo {
    * @schema ReferenceGrantSpecTo#name
    */
   readonly name?: string;
-
 }
 
 /**

@@ -74,7 +74,6 @@ export interface AccessControlPolicyProps {
    * @schema AccessControlPolicy#spec
    */
   readonly spec?: AccessControlPolicySpec;
-
 }
 
 /**
@@ -139,7 +138,6 @@ export interface AccessControlPolicySpec {
    * @schema AccessControlPolicySpec#oidcGoogle
    */
   readonly oidcGoogle?: AccessControlPolicySpecOidcGoogle;
-
 }
 
 /**
@@ -187,7 +185,6 @@ export interface AccessControlPolicySpecApiKey {
    * @schema AccessControlPolicySpecApiKey#keys
    */
   readonly keys?: AccessControlPolicySpecApiKeyKeys[];
-
 }
 
 /**
@@ -231,7 +228,6 @@ export interface AccessControlPolicySpecBasicAuth {
    * @schema AccessControlPolicySpecBasicAuth#users
    */
   readonly users?: string[];
-
 }
 
 /**
@@ -301,7 +297,6 @@ export interface AccessControlPolicySpecJwt {
    * @schema AccessControlPolicySpecJwt#tokenQueryKey
    */
   readonly tokenQueryKey?: string;
-
 }
 
 /**
@@ -356,7 +351,6 @@ export interface AccessControlPolicySpecOAuthIntro {
    * @schema AccessControlPolicySpecOAuthIntro#tokenSource
    */
   readonly tokenSource: AccessControlPolicySpecOAuthIntroTokenSource;
-
 }
 
 /**
@@ -448,7 +442,6 @@ export interface AccessControlPolicySpecOidc {
    * @schema AccessControlPolicySpecOidc#stateCookie
    */
   readonly stateCookie?: AccessControlPolicySpecOidcStateCookie;
-
 }
 
 /**
@@ -535,7 +528,6 @@ export interface AccessControlPolicySpecOidcGoogle {
    * @schema AccessControlPolicySpecOidcGoogle#stateCookie
    */
   readonly stateCookie?: AccessControlPolicySpecOidcGoogleStateCookie;
-
 }
 
 /**
@@ -594,7 +586,6 @@ export interface AccessControlPolicySpecApiKeyKeySource {
    * @schema AccessControlPolicySpecApiKeyKeySource#query
    */
   readonly query?: string;
-
 }
 
 /**
@@ -640,7 +631,6 @@ export interface AccessControlPolicySpecApiKeyKeys {
    * @schema AccessControlPolicySpecApiKeyKeys#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -707,7 +697,6 @@ export interface AccessControlPolicySpecOAuthIntroClientConfig {
    * @schema AccessControlPolicySpecOAuthIntroClientConfig#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -764,7 +753,6 @@ export interface AccessControlPolicySpecOAuthIntroTokenSource {
    * @schema AccessControlPolicySpecOAuthIntroTokenSource#query
    */
   readonly query?: string;
-
 }
 
 /**
@@ -804,7 +792,6 @@ export interface AccessControlPolicySpecOidcSecret {
    * @schema AccessControlPolicySpecOidcSecret#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -852,7 +839,6 @@ export interface AccessControlPolicySpecOidcSession {
    * @schema AccessControlPolicySpecOidcSession#secure
    */
   readonly secure?: boolean;
-
 }
 
 /**
@@ -898,7 +884,6 @@ export interface AccessControlPolicySpecOidcStateCookie {
    * @schema AccessControlPolicySpecOidcStateCookie#secure
    */
   readonly secure?: boolean;
-
 }
 
 /**
@@ -938,7 +923,6 @@ export interface AccessControlPolicySpecOidcGoogleSecret {
    * @schema AccessControlPolicySpecOidcGoogleSecret#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
@@ -986,7 +970,6 @@ export interface AccessControlPolicySpecOidcGoogleSession {
    * @schema AccessControlPolicySpecOidcGoogleSession#secure
    */
   readonly secure?: boolean;
-
 }
 
 /**
@@ -1032,7 +1015,6 @@ export interface AccessControlPolicySpecOidcGoogleStateCookie {
    * @schema AccessControlPolicySpecOidcGoogleStateCookie#secure
    */
   readonly secure?: boolean;
-
 }
 
 /**
@@ -1072,7 +1054,6 @@ export interface AccessControlPolicySpecOAuthIntroClientConfigTls {
    * @schema AccessControlPolicySpecOAuthIntroClientConfigTls#insecureSkipVerify
    */
   readonly insecureSkipVerify?: boolean;
-
 }
 
 /**
@@ -1162,7 +1143,6 @@ export interface AiServiceProps {
    * @schema AIService#spec
    */
   readonly spec?: AiServiceSpec;
-
 }
 
 /**
@@ -1241,7 +1221,6 @@ export interface AiServiceSpec {
    * @schema AiServiceSpec#openai
    */
   readonly openai?: AiServiceSpecOpenai;
-
 }
 
 /**
@@ -1287,7 +1266,6 @@ export interface AiServiceSpecAnthropic {
    * @schema AiServiceSpecAnthropic#token
    */
   readonly token: string;
-
 }
 
 /**
@@ -1338,7 +1316,6 @@ export interface AiServiceSpecAzureOpenai {
    * @schema AiServiceSpecAzureOpenai#params
    */
   readonly params?: AiServiceSpecAzureOpenaiParams;
-
 }
 
 /**
@@ -1386,7 +1363,6 @@ export interface AiServiceSpecBedrock {
    * @schema AiServiceSpecBedrock#systemMessage
    */
   readonly systemMessage?: boolean;
-
 }
 
 /**
@@ -1428,7 +1404,6 @@ export interface AiServiceSpecCohere {
    * @schema AiServiceSpecCohere#token
    */
   readonly token: string;
-
 }
 
 /**
@@ -1469,7 +1444,6 @@ export interface AiServiceSpecGemini {
    * @schema AiServiceSpecGemini#params
    */
   readonly params?: AiServiceSpecGeminiParams;
-
 }
 
 /**
@@ -1510,7 +1484,6 @@ export interface AiServiceSpecMistral {
    * @schema AiServiceSpecMistral#params
    */
   readonly params?: AiServiceSpecMistralParams;
-
 }
 
 /**
@@ -1551,7 +1524,6 @@ export interface AiServiceSpecOllama {
    * @schema AiServiceSpecOllama#params
    */
   readonly params?: AiServiceSpecOllamaParams;
-
 }
 
 /**
@@ -1592,7 +1564,6 @@ export interface AiServiceSpecOpenai {
    * @schema AiServiceSpecOpenai#token
    */
   readonly token: string;
-
 }
 
 /**
@@ -1641,7 +1612,6 @@ export interface AiServiceSpecAnthropicParams {
    * @schema AiServiceSpecAnthropicParams#topP
    */
   readonly topP?: number;
-
 }
 
 /**
@@ -1692,7 +1662,6 @@ export interface AiServiceSpecAzureOpenaiParams {
    * @schema AiServiceSpecAzureOpenaiParams#topP
    */
   readonly topP?: number;
-
 }
 
 /**
@@ -1743,7 +1712,6 @@ export interface AiServiceSpecBedrockParams {
    * @schema AiServiceSpecBedrockParams#topP
    */
   readonly topP?: number;
-
 }
 
 /**
@@ -1794,7 +1762,6 @@ export interface AiServiceSpecCohereParams {
    * @schema AiServiceSpecCohereParams#topP
    */
   readonly topP?: number;
-
 }
 
 /**
@@ -1845,7 +1812,6 @@ export interface AiServiceSpecGeminiParams {
    * @schema AiServiceSpecGeminiParams#topP
    */
   readonly topP?: number;
-
 }
 
 /**
@@ -1896,7 +1862,6 @@ export interface AiServiceSpecMistralParams {
    * @schema AiServiceSpecMistralParams#topP
    */
   readonly topP?: number;
-
 }
 
 /**
@@ -1947,7 +1912,6 @@ export interface AiServiceSpecOllamaParams {
    * @schema AiServiceSpecOllamaParams#topP
    */
   readonly topP?: number;
-
 }
 
 /**
@@ -1998,7 +1962,6 @@ export interface AiServiceSpecOpenaiParams {
    * @schema AiServiceSpecOpenaiParams#topP
    */
   readonly topP?: number;
-
 }
 
 /**
@@ -2095,7 +2058,6 @@ export interface ApiProps {
    * @schema API#spec
    */
   readonly spec?: ApiSpec;
-
 }
 
 /**
@@ -2132,7 +2094,6 @@ export interface ApiSpec {
    * @schema ApiSpec#versions
    */
   readonly versions?: ApiSpecVersions[];
-
 }
 
 /**
@@ -2195,7 +2156,6 @@ export interface ApiSpecOpenApiSpec {
    * @schema ApiSpecOpenApiSpec#validateRequestMethodAndPath
    */
   readonly validateRequestMethodAndPath?: boolean;
-
 }
 
 /**
@@ -2228,7 +2188,6 @@ export interface ApiSpecVersions {
    * @schema ApiSpecVersions#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -2265,7 +2224,6 @@ export interface ApiSpecOpenApiSpecOperationSets {
    * @schema ApiSpecOpenApiSpecOperationSets#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -2293,7 +2251,6 @@ export interface ApiSpecOpenApiSpecOverride {
    * @schema ApiSpecOpenApiSpecOverride#servers
    */
   readonly servers: ApiSpecOpenApiSpecOverrideServers[];
-
 }
 
 /**
@@ -2343,7 +2300,6 @@ export interface ApiSpecOpenApiSpecOperationSetsMatchers {
    * @schema ApiSpecOpenApiSpecOperationSetsMatchers#pathRegex
    */
   readonly pathRegex?: string;
-
 }
 
 /**
@@ -2371,7 +2327,6 @@ export interface ApiSpecOpenApiSpecOverrideServers {
    * @schema ApiSpecOpenApiSpecOverrideServers#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -2460,7 +2415,6 @@ export interface ApiAccessProps {
    * @schema APIAccess#spec
    */
   readonly spec?: ApiAccessSpec;
-
 }
 
 /**
@@ -2547,7 +2501,6 @@ export interface ApiAccessSpec {
    * @schema ApiAccessSpec#weight
    */
   readonly weight?: number;
-
 }
 
 /**
@@ -2583,7 +2536,6 @@ export interface ApiAccessSpecApiBundles {
    * @schema ApiAccessSpecApiBundles#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -2612,7 +2564,6 @@ export interface ApiAccessSpecApiPlan {
    * @schema ApiAccessSpecApiPlan#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -2653,7 +2604,6 @@ export interface ApiAccessSpecApiSelector {
    * @schema ApiAccessSpecApiSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -2683,7 +2633,6 @@ export interface ApiAccessSpecApis {
    * @schema ApiAccessSpecApis#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -2714,7 +2663,6 @@ export interface ApiAccessSpecOperationFilter {
    * @schema ApiAccessSpecOperationFilter#include
    */
   readonly include?: string[];
-
 }
 
 /**
@@ -2762,7 +2710,6 @@ export interface ApiAccessSpecApiSelectorMatchExpressions {
    * @schema ApiAccessSpecApiSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -2853,7 +2800,6 @@ export interface ApiBundleProps {
    * @schema APIBundle#spec
    */
   readonly spec?: ApiBundleSpec;
-
 }
 
 /**
@@ -2895,7 +2841,6 @@ export interface ApiBundleSpec {
    * @schema ApiBundleSpec#apis
    */
   readonly apis?: ApiBundleSpecApis[];
-
 }
 
 /**
@@ -2937,7 +2882,6 @@ export interface ApiBundleSpecApiSelector {
    * @schema ApiBundleSpecApiSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -2967,7 +2911,6 @@ export interface ApiBundleSpecApis {
    * @schema ApiBundleSpecApis#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -3015,7 +2958,6 @@ export interface ApiBundleSpecApiSelectorMatchExpressions {
    * @schema ApiBundleSpecApiSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -3106,7 +3048,6 @@ export interface ApiCatalogItemProps {
    * @schema APICatalogItem#spec
    */
   readonly spec?: ApiCatalogItemSpec;
-
 }
 
 /**
@@ -3188,7 +3129,6 @@ export interface ApiCatalogItemSpec {
    * @schema ApiCatalogItemSpec#operationFilter
    */
   readonly operationFilter?: ApiCatalogItemSpecOperationFilter;
-
 }
 
 /**
@@ -3223,7 +3163,6 @@ export interface ApiCatalogItemSpecApiBundles {
    * @schema ApiCatalogItemSpecApiBundles#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -3254,7 +3193,6 @@ export interface ApiCatalogItemSpecApiPlan {
    * @schema ApiCatalogItemSpecApiPlan#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -3295,7 +3233,6 @@ export interface ApiCatalogItemSpecApiSelector {
    * @schema ApiCatalogItemSpecApiSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -3325,7 +3262,6 @@ export interface ApiCatalogItemSpecApis {
    * @schema ApiCatalogItemSpecApis#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -3356,7 +3292,6 @@ export interface ApiCatalogItemSpecOperationFilter {
    * @schema ApiCatalogItemSpecOperationFilter#include
    */
   readonly include?: string[];
-
 }
 
 /**
@@ -3404,7 +3339,6 @@ export interface ApiCatalogItemSpecApiSelectorMatchExpressions {
    * @schema ApiCatalogItemSpecApiSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -3495,7 +3429,6 @@ export interface ApiPlanProps {
    * @schema APIPlan#spec
    */
   readonly spec?: ApiPlanSpec;
-
 }
 
 /**
@@ -3546,7 +3479,6 @@ export interface ApiPlanSpec {
    * @schema ApiPlanSpec#title
    */
   readonly title: string;
-
 }
 
 /**
@@ -3585,7 +3517,6 @@ export interface ApiPlanSpecQuota {
    * @schema ApiPlanSpecQuota#period
    */
   readonly period?: string;
-
 }
 
 /**
@@ -3622,7 +3553,6 @@ export interface ApiPlanSpecRateLimit {
    * @schema ApiPlanSpecRateLimit#period
    */
   readonly period?: string;
-
 }
 
 /**
@@ -3712,7 +3642,6 @@ export interface ApiPortalProps {
    * @schema APIPortal#spec
    */
   readonly spec?: ApiPortalSpec;
-
 }
 
 /**
@@ -3763,7 +3692,6 @@ export interface ApiPortalSpec {
    * @schema ApiPortalSpec#ui
    */
   readonly ui?: ApiPortalSpecUi;
-
 }
 
 /**
@@ -3795,7 +3723,6 @@ export interface ApiPortalSpecUi {
    * @schema ApiPortalSpecUi#logoUrl
    */
   readonly logoUrl?: string;
-
 }
 
 /**
@@ -3884,7 +3811,6 @@ export interface ApiRateLimitProps {
    * @schema APIRateLimit#spec
    */
   readonly spec?: ApiRateLimitSpec;
-
 }
 
 /**
@@ -3965,7 +3891,6 @@ export interface ApiRateLimitSpec {
    * @schema ApiRateLimitSpec#strategy
    */
   readonly strategy?: ApiRateLimitSpecStrategy;
-
 }
 
 /**
@@ -4012,7 +3937,6 @@ export interface ApiRateLimitSpecApiSelector {
    * @schema ApiRateLimitSpecApiSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -4042,7 +3966,6 @@ export interface ApiRateLimitSpecApis {
    * @schema ApiRateLimitSpecApis#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4103,7 +4026,6 @@ export interface ApiRateLimitSpecApiSelectorMatchExpressions {
    * @schema ApiRateLimitSpecApiSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -4194,7 +4116,6 @@ export interface ApiVersionProps {
    * @schema APIVersion#spec
    */
   readonly spec?: ApiVersionSpec;
-
 }
 
 /**
@@ -4239,7 +4160,6 @@ export interface ApiVersionSpec {
    * @schema ApiVersionSpec#title
    */
   readonly title?: string;
-
 }
 
 /**
@@ -4303,7 +4223,6 @@ export interface ApiVersionSpecOpenApiSpec {
    * @schema ApiVersionSpecOpenApiSpec#validateRequestMethodAndPath
    */
   readonly validateRequestMethodAndPath?: boolean;
-
 }
 
 /**
@@ -4344,7 +4263,6 @@ export interface ApiVersionSpecOpenApiSpecOperationSets {
    * @schema ApiVersionSpecOpenApiSpecOperationSets#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4372,7 +4290,6 @@ export interface ApiVersionSpecOpenApiSpecOverride {
    * @schema ApiVersionSpecOpenApiSpecOverride#servers
    */
   readonly servers: ApiVersionSpecOpenApiSpecOverrideServers[];
-
 }
 
 /**
@@ -4422,7 +4339,6 @@ export interface ApiVersionSpecOpenApiSpecOperationSetsMatchers {
    * @schema ApiVersionSpecOpenApiSpecOperationSetsMatchers#pathRegex
    */
   readonly pathRegex?: string;
-
 }
 
 /**
@@ -4450,7 +4366,6 @@ export interface ApiVersionSpecOpenApiSpecOverrideServers {
    * @schema ApiVersionSpecOpenApiSpecOverrideServers#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -4541,7 +4456,6 @@ export interface ManagedSubscriptionProps {
    * @schema ManagedSubscription#spec
    */
   readonly spec?: ManagedSubscriptionSpec;
-
 }
 
 /**
@@ -4631,7 +4545,6 @@ export interface ManagedSubscriptionSpec {
    * @schema ManagedSubscriptionSpec#weight
    */
   readonly weight?: number;
-
 }
 
 /**
@@ -4667,7 +4580,6 @@ export interface ManagedSubscriptionSpecApiBundles {
    * @schema ManagedSubscriptionSpecApiBundles#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4696,7 +4608,6 @@ export interface ManagedSubscriptionSpecApiPlan {
    * @schema ManagedSubscriptionSpecApiPlan#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4737,7 +4648,6 @@ export interface ManagedSubscriptionSpecApiSelector {
    * @schema ManagedSubscriptionSpecApiSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -4767,7 +4677,6 @@ export interface ManagedSubscriptionSpecApis {
    * @schema ManagedSubscriptionSpecApis#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4797,7 +4706,6 @@ export interface ManagedSubscriptionSpecApplications {
    * @schema ManagedSubscriptionSpecApplications#appId
    */
   readonly appId: string;
-
 }
 
 /**
@@ -4828,7 +4736,6 @@ export interface ManagedSubscriptionSpecOperationFilter {
    * @schema ManagedSubscriptionSpecOperationFilter#include
    */
   readonly include?: string[];
-
 }
 
 /**
@@ -4876,7 +4783,6 @@ export interface ManagedSubscriptionSpecApiSelectorMatchExpressions {
    * @schema ManagedSubscriptionSpecApiSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**

@@ -81,7 +81,6 @@ export interface CertificateProps {
    * @schema Certificate#spec
    */
   readonly spec?: CertificateSpec;
-
 }
 
 /**
@@ -363,7 +362,6 @@ export interface CertificateSpec {
    * @schema CertificateSpec#usages
    */
   readonly usages?: CertificateSpecUsages[];
-
 }
 
 /**
@@ -417,7 +415,6 @@ export interface CertificateSpecAdditionalOutputFormats {
    * @schema CertificateSpecAdditionalOutputFormats#type
    */
   readonly type: CertificateSpecAdditionalOutputFormatsType;
-
 }
 
 /**
@@ -465,7 +462,6 @@ export interface CertificateSpecIssuerRef {
    * @schema CertificateSpecIssuerRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -505,7 +501,6 @@ export interface CertificateSpecKeystores {
    * @schema CertificateSpecKeystores#pkcs12
    */
   readonly pkcs12?: CertificateSpecKeystoresPkcs12;
-
 }
 
 /**
@@ -556,7 +551,6 @@ export interface CertificateSpecNameConstraints {
    * @schema CertificateSpecNameConstraints#permitted
    */
   readonly permitted?: CertificateSpecNameConstraintsPermitted;
-
 }
 
 /**
@@ -595,7 +589,6 @@ export interface CertificateSpecOtherNames {
    * @schema CertificateSpecOtherNames#utf8Value
    */
   readonly utf8Value?: string;
-
 }
 
 /**
@@ -681,7 +674,6 @@ export interface CertificateSpecPrivateKey {
    * @schema CertificateSpecPrivateKey#size
    */
   readonly size?: number;
-
 }
 
 /**
@@ -724,7 +716,6 @@ export interface CertificateSpecSecretTemplate {
    * @schema CertificateSpecSecretTemplate#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -832,7 +823,6 @@ export interface CertificateSpecSubject {
    * @schema CertificateSpecSubject#streetAddresses
    */
   readonly streetAddresses?: string[];
-
 }
 
 /**
@@ -999,7 +989,6 @@ export interface CertificateSpecKeystoresJks {
    * @schema CertificateSpecKeystoresJks#passwordSecretRef
    */
   readonly passwordSecretRef?: CertificateSpecKeystoresJksPasswordSecretRef;
-
 }
 
 /**
@@ -1074,7 +1063,6 @@ export interface CertificateSpecKeystoresPkcs12 {
    * @schema CertificateSpecKeystoresPkcs12#profile
    */
   readonly profile?: CertificateSpecKeystoresPkcs12Profile;
-
 }
 
 /**
@@ -1130,7 +1118,6 @@ export interface CertificateSpecNameConstraintsExcluded {
    * @schema CertificateSpecNameConstraintsExcluded#uriDomains
    */
   readonly uriDomains?: string[];
-
 }
 
 /**
@@ -1184,7 +1171,6 @@ export interface CertificateSpecNameConstraintsPermitted {
    * @schema CertificateSpecNameConstraintsPermitted#uriDomains
    */
   readonly uriDomains?: string[];
-
 }
 
 /**
@@ -1294,7 +1280,6 @@ export interface CertificateSpecKeystoresJksPasswordSecretRef {
    * @schema CertificateSpecKeystoresJksPasswordSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1337,7 +1322,6 @@ export interface CertificateSpecKeystoresPkcs12PasswordSecretRef {
    * @schema CertificateSpecKeystoresPkcs12PasswordSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1466,7 +1450,6 @@ export interface CertificateRequestProps {
    * @schema CertificateRequest#spec
    */
   readonly spec?: CertificateRequestSpec;
-
 }
 
 /**
@@ -1586,7 +1569,6 @@ export interface CertificateRequestSpec {
    * @schema CertificateRequestSpec#username
    */
   readonly username?: string;
-
 }
 
 /**
@@ -1642,7 +1624,6 @@ export interface CertificateRequestSpecIssuerRef {
    * @schema CertificateRequestSpecIssuerRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -1823,7 +1804,6 @@ export interface ClusterIssuerProps {
    * @schema ClusterIssuer#spec
    */
   readonly spec: ClusterIssuerSpec;
-
 }
 
 /**
@@ -1887,7 +1867,6 @@ export interface ClusterIssuerSpec {
    * @schema ClusterIssuerSpec#venafi
    */
   readonly venafi?: ClusterIssuerSpecVenafi;
-
 }
 
 /**
@@ -2042,7 +2021,6 @@ export interface ClusterIssuerSpecAcme {
    * @schema ClusterIssuerSpecAcme#solvers
    */
   readonly solvers?: ClusterIssuerSpecAcmeSolvers[];
-
 }
 
 /**
@@ -2113,7 +2091,6 @@ export interface ClusterIssuerSpecCa {
    * @schema ClusterIssuerSpecCa#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -2148,7 +2125,6 @@ export interface ClusterIssuerSpecSelfSigned {
    * @schema ClusterIssuerSpecSelfSigned#crlDistributionPoints
    */
   readonly crlDistributionPoints?: string[];
-
 }
 
 /**
@@ -2249,7 +2225,6 @@ export interface ClusterIssuerSpecVault {
    * @schema ClusterIssuerSpecVault#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -2306,7 +2281,6 @@ export interface ClusterIssuerSpecVenafi {
    * @schema ClusterIssuerSpecVenafi#zone
    */
   readonly zone: string;
-
 }
 
 /**
@@ -2362,7 +2336,6 @@ export interface ClusterIssuerSpecAcmeExternalAccountBinding {
    * @schema ClusterIssuerSpecAcmeExternalAccountBinding#keySecretRef
    */
   readonly keySecretRef: ClusterIssuerSpecAcmeExternalAccountBindingKeySecretRef;
-
 }
 
 /**
@@ -2407,7 +2380,6 @@ export interface ClusterIssuerSpecAcmePrivateKeySecretRef {
    * @schema ClusterIssuerSpecAcmePrivateKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -2461,7 +2433,6 @@ export interface ClusterIssuerSpecAcmeSolvers {
    * @schema ClusterIssuerSpecAcmeSolvers#selector
    */
   readonly selector?: ClusterIssuerSpecAcmeSolversSelector;
-
 }
 
 /**
@@ -2517,7 +2488,6 @@ export interface ClusterIssuerSpecVaultAuth {
    * @schema ClusterIssuerSpecVaultAuth#tokenSecretRef
    */
   readonly tokenSecretRef?: ClusterIssuerSpecVaultAuthTokenSecretRef;
-
 }
 
 /**
@@ -2564,7 +2534,6 @@ export interface ClusterIssuerSpecVaultCaBundleSecretRef {
    * @schema ClusterIssuerSpecVaultCaBundleSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -2605,7 +2574,6 @@ export interface ClusterIssuerSpecVaultClientCertSecretRef {
    * @schema ClusterIssuerSpecVaultClientCertSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -2646,7 +2614,6 @@ export interface ClusterIssuerSpecVaultClientKeySecretRef {
    * @schema ClusterIssuerSpecVaultClientKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -2686,7 +2653,6 @@ export interface ClusterIssuerSpecVenafiCloud {
    * @schema ClusterIssuerSpecVenafiCloud#url
    */
   readonly url?: string;
-
 }
 
 /**
@@ -2748,7 +2714,6 @@ export interface ClusterIssuerSpecVenafiTpp {
    * @schema ClusterIssuerSpecVenafiTpp#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -2812,7 +2777,6 @@ export interface ClusterIssuerSpecAcmeExternalAccountBindingKeySecretRef {
    * @schema ClusterIssuerSpecAcmeExternalAccountBindingKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -2910,7 +2874,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01 {
    * @schema ClusterIssuerSpecAcmeSolversDns01#webhook
    */
   readonly webhook?: ClusterIssuerSpecAcmeSolversDns01Webhook;
-
 }
 
 /**
@@ -2964,7 +2927,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01 {
    * @schema ClusterIssuerSpecAcmeSolversHttp01#ingress
    */
   readonly ingress?: ClusterIssuerSpecAcmeSolversHttp01Ingress;
-
 }
 
 /**
@@ -3027,7 +2989,6 @@ export interface ClusterIssuerSpecAcmeSolversSelector {
    * @schema ClusterIssuerSpecAcmeSolversSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -3078,7 +3039,6 @@ export interface ClusterIssuerSpecVaultAuthAppRole {
    * @schema ClusterIssuerSpecVaultAuthAppRole#secretRef
    */
   readonly secretRef: ClusterIssuerSpecVaultAuthAppRoleSecretRef;
-
 }
 
 /**
@@ -3131,7 +3091,6 @@ export interface ClusterIssuerSpecVaultAuthClientCertificate {
    * @schema ClusterIssuerSpecVaultAuthClientCertificate#secretName
    */
   readonly secretName?: string;
-
 }
 
 /**
@@ -3194,7 +3153,6 @@ export interface ClusterIssuerSpecVaultAuthKubernetes {
    * @schema ClusterIssuerSpecVaultAuthKubernetes#serviceAccountRef
    */
   readonly serviceAccountRef?: ClusterIssuerSpecVaultAuthKubernetesServiceAccountRef;
-
 }
 
 /**
@@ -3236,7 +3194,6 @@ export interface ClusterIssuerSpecVaultAuthTokenSecretRef {
    * @schema ClusterIssuerSpecVaultAuthTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -3276,7 +3233,6 @@ export interface ClusterIssuerSpecVenafiCloudApiTokenSecretRef {
    * @schema ClusterIssuerSpecVenafiCloudApiTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -3320,7 +3276,6 @@ export interface ClusterIssuerSpecVenafiTppCaBundleSecretRef {
    * @schema ClusterIssuerSpecVenafiTppCaBundleSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -3353,7 +3308,6 @@ export interface ClusterIssuerSpecVenafiTppCredentialsRef {
    * @schema ClusterIssuerSpecVenafiTppCredentialsRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -3389,7 +3343,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01AcmeDns {
    * @schema ClusterIssuerSpecAcmeSolversDns01AcmeDns#host
    */
   readonly host: string;
-
 }
 
 /**
@@ -3441,7 +3394,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01Akamai {
    * @schema ClusterIssuerSpecAcmeSolversDns01Akamai#serviceConsumerDomain
    */
   readonly serviceConsumerDomain: string;
-
 }
 
 /**
@@ -3530,7 +3482,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01AzureDns {
    * @schema ClusterIssuerSpecAcmeSolversDns01AzureDns#tenantID
    */
   readonly tenantId?: string;
-
 }
 
 /**
@@ -3581,7 +3532,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01CloudDns {
    * @schema ClusterIssuerSpecAcmeSolversDns01CloudDns#serviceAccountSecretRef
    */
   readonly serviceAccountSecretRef?: ClusterIssuerSpecAcmeSolversDns01CloudDnsServiceAccountSecretRef;
-
 }
 
 /**
@@ -3628,7 +3578,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01Cloudflare {
    * @schema ClusterIssuerSpecAcmeSolversDns01Cloudflare#email
    */
   readonly email?: string;
-
 }
 
 /**
@@ -3673,7 +3622,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01Digitalocean {
    * @schema ClusterIssuerSpecAcmeSolversDns01Digitalocean#tokenSecretRef
    */
   readonly tokenSecretRef: ClusterIssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef;
-
 }
 
 /**
@@ -3732,7 +3680,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01Rfc2136 {
    * @schema ClusterIssuerSpecAcmeSolversDns01Rfc2136#tsigSecretSecretRef
    */
   readonly tsigSecretSecretRef?: ClusterIssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef;
-
 }
 
 /**
@@ -3840,7 +3787,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01Route53 {
    * @schema ClusterIssuerSpecAcmeSolversDns01Route53#secretAccessKeySecretRef
    */
   readonly secretAccessKeySecretRef?: ClusterIssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef;
-
 }
 
 /**
@@ -3902,7 +3848,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01Webhook {
    * @schema ClusterIssuerSpecAcmeSolversDns01Webhook#solverName
    */
   readonly solverName: string;
-
 }
 
 /**
@@ -3963,7 +3908,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoute {
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoute#serviceType
    */
   readonly serviceType?: string;
-
 }
 
 /**
@@ -4047,7 +3991,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01Ingress {
    * @schema ClusterIssuerSpecAcmeSolversHttp01Ingress#serviceType
    */
   readonly serviceType?: string;
-
 }
 
 /**
@@ -4094,7 +4037,6 @@ export interface ClusterIssuerSpecVaultAuthAppRoleSecretRef {
    * @schema ClusterIssuerSpecVaultAuthAppRoleSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4136,7 +4078,6 @@ export interface ClusterIssuerSpecVaultAuthKubernetesSecretRef {
    * @schema ClusterIssuerSpecVaultAuthKubernetesSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4178,7 +4119,6 @@ export interface ClusterIssuerSpecVaultAuthKubernetesServiceAccountRef {
    * @schema ClusterIssuerSpecVaultAuthKubernetesServiceAccountRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4219,7 +4159,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01AcmeDnsAccountSecretRef {
    * @schema ClusterIssuerSpecAcmeSolversDns01AcmeDnsAccountSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4260,7 +4199,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01AkamaiAccessTokenSecretRef {
    * @schema ClusterIssuerSpecAcmeSolversDns01AkamaiAccessTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4301,7 +4239,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01AkamaiClientSecretSecretRef {
    * @schema ClusterIssuerSpecAcmeSolversDns01AkamaiClientSecretSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4342,7 +4279,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01AkamaiClientTokenSecretRef {
    * @schema ClusterIssuerSpecAcmeSolversDns01AkamaiClientTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4384,7 +4320,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01AzureDnsClientSecretSecretRef 
    * @schema ClusterIssuerSpecAcmeSolversDns01AzureDnsClientSecretSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4447,7 +4382,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01AzureDnsManagedIdentity {
    * @schema ClusterIssuerSpecAcmeSolversDns01AzureDnsManagedIdentity#tenantID
    */
   readonly tenantId?: string;
-
 }
 
 /**
@@ -4489,7 +4423,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01CloudDnsServiceAccountSecretRe
    * @schema ClusterIssuerSpecAcmeSolversDns01CloudDnsServiceAccountSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4531,7 +4464,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01CloudflareApiKeySecretRef {
    * @schema ClusterIssuerSpecAcmeSolversDns01CloudflareApiKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4571,7 +4503,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01CloudflareApiTokenSecretRef {
    * @schema ClusterIssuerSpecAcmeSolversDns01CloudflareApiTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4612,7 +4543,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef {
    * @schema ClusterIssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4653,7 +4583,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef {
    * @schema ClusterIssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4698,7 +4627,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01Route53AccessKeyIdSecretRef {
    * @schema ClusterIssuerSpecAcmeSolversDns01Route53AccessKeyIdSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4729,7 +4657,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01Route53Auth {
    * @schema ClusterIssuerSpecAcmeSolversDns01Route53Auth#kubernetes
    */
   readonly kubernetes: ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetes;
-
 }
 
 /**
@@ -4771,7 +4698,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRe
    * @schema ClusterIssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -4934,7 +4860,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs#sectionName
    */
   readonly sectionName?: string;
-
 }
 
 /**
@@ -4981,7 +4906,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate {
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate#spec
    */
   readonly spec?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec;
-
 }
 
 /**
@@ -5015,7 +4939,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplate {
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplate#metadata
    */
   readonly metadata?: ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata;
-
 }
 
 /**
@@ -5057,7 +4980,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplate {
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplate#spec
    */
   readonly spec?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpec;
-
 }
 
 /**
@@ -5090,7 +5012,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetes {
    * @schema ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetes#serviceAccountRef
    */
   readonly serviceAccountRef: ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAccountRef;
-
 }
 
 /**
@@ -5129,7 +5050,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMe
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -5205,7 +5125,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec#tolerations
    */
   readonly tolerations?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations[];
-
 }
 
 /**
@@ -5250,7 +5169,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadat
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -5290,7 +5208,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata {
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -5366,7 +5283,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpec {
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpec#tolerations
    */
   readonly tolerations?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations[];
-
 }
 
 /**
@@ -5413,7 +5329,6 @@ export interface ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAc
    * @schema ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAccountRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -5457,7 +5372,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity#podAntiAffinity
    */
   readonly podAntiAffinity?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity;
-
 }
 
 /**
@@ -5493,7 +5407,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -5623,7 +5536,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#sysctls
    */
   readonly sysctls?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls[];
-
 }
 
 /**
@@ -5699,7 +5611,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -5746,7 +5657,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity#podAntiAffinity
    */
   readonly podAntiAffinity?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinity;
-
 }
 
 /**
@@ -5782,7 +5692,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePu
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -5912,7 +5821,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#sysctls
    */
   readonly sysctls?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls[];
-
 }
 
 /**
@@ -5988,7 +5896,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerat
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -6040,7 +5947,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution;
-
 }
 
 /**
@@ -6091,7 +5997,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
@@ -6142,7 +6047,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
@@ -6198,7 +6102,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -6246,7 +6149,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -6283,7 +6185,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -6332,7 +6233,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution;
-
 }
 
 /**
@@ -6383,7 +6283,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
@@ -6434,7 +6333,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
@@ -6490,7 +6388,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -6538,7 +6435,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -6575,7 +6471,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -6613,7 +6508,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -6647,7 +6541,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution#nodeSelectorTerms
    */
   readonly nodeSelectorTerms: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms[];
-
 }
 
 /**
@@ -6684,7 +6577,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -6782,7 +6674,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -6824,7 +6715,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -6922,7 +6812,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -6964,7 +6853,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -6998,7 +6886,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution#nodeSelectorTerms
    */
   readonly nodeSelectorTerms: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms[];
-
 }
 
 /**
@@ -7035,7 +6922,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -7133,7 +7019,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -7175,7 +7060,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -7273,7 +7157,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -7314,7 +7197,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchFields
    */
   readonly matchFields?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields[];
-
 }
 
 /**
@@ -7353,7 +7235,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchFields
    */
   readonly matchFields?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields[];
-
 }
 
 /**
@@ -7450,7 +7331,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -7495,7 +7375,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -7539,7 +7418,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -7636,7 +7514,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -7681,7 +7558,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -7725,7 +7601,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -7762,7 +7637,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchFields
    */
   readonly matchFields?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields[];
-
 }
 
 /**
@@ -7801,7 +7675,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchFields
    */
   readonly matchFields?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields[];
-
 }
 
 /**
@@ -7898,7 +7771,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -7943,7 +7815,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -7987,7 +7858,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -8084,7 +7954,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -8129,7 +7998,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -8173,7 +8041,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -8226,7 +8093,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -8280,7 +8146,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -8334,7 +8199,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -8388,7 +8252,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -8431,7 +8294,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -8476,7 +8338,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -8528,7 +8389,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -8581,7 +8441,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -8624,7 +8483,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -8669,7 +8527,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -8721,7 +8578,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -8774,7 +8630,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -8828,7 +8683,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -8882,7 +8736,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -8936,7 +8789,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -8990,7 +8842,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -9033,7 +8884,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -9078,7 +8928,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -9130,7 +8979,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -9183,7 +9031,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -9226,7 +9073,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -9271,7 +9117,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -9323,7 +9168,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -9376,7 +9220,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -9428,7 +9271,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -9480,7 +9322,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -9532,7 +9373,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -9584,7 +9424,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -9636,7 +9475,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -9688,7 +9526,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -9740,7 +9577,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -9792,7 +9628,6 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -9889,7 +9724,6 @@ export interface IssuerProps {
    * @schema Issuer#spec
    */
   readonly spec: IssuerSpec;
-
 }
 
 /**
@@ -9953,7 +9787,6 @@ export interface IssuerSpec {
    * @schema IssuerSpec#venafi
    */
   readonly venafi?: IssuerSpecVenafi;
-
 }
 
 /**
@@ -10108,7 +9941,6 @@ export interface IssuerSpecAcme {
    * @schema IssuerSpecAcme#solvers
    */
   readonly solvers?: IssuerSpecAcmeSolvers[];
-
 }
 
 /**
@@ -10179,7 +10011,6 @@ export interface IssuerSpecCa {
    * @schema IssuerSpecCa#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
@@ -10214,7 +10045,6 @@ export interface IssuerSpecSelfSigned {
    * @schema IssuerSpecSelfSigned#crlDistributionPoints
    */
   readonly crlDistributionPoints?: string[];
-
 }
 
 /**
@@ -10315,7 +10145,6 @@ export interface IssuerSpecVault {
    * @schema IssuerSpecVault#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
@@ -10372,7 +10201,6 @@ export interface IssuerSpecVenafi {
    * @schema IssuerSpecVenafi#zone
    */
   readonly zone: string;
-
 }
 
 /**
@@ -10428,7 +10256,6 @@ export interface IssuerSpecAcmeExternalAccountBinding {
    * @schema IssuerSpecAcmeExternalAccountBinding#keySecretRef
    */
   readonly keySecretRef: IssuerSpecAcmeExternalAccountBindingKeySecretRef;
-
 }
 
 /**
@@ -10473,7 +10300,6 @@ export interface IssuerSpecAcmePrivateKeySecretRef {
    * @schema IssuerSpecAcmePrivateKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10527,7 +10353,6 @@ export interface IssuerSpecAcmeSolvers {
    * @schema IssuerSpecAcmeSolvers#selector
    */
   readonly selector?: IssuerSpecAcmeSolversSelector;
-
 }
 
 /**
@@ -10583,7 +10408,6 @@ export interface IssuerSpecVaultAuth {
    * @schema IssuerSpecVaultAuth#tokenSecretRef
    */
   readonly tokenSecretRef?: IssuerSpecVaultAuthTokenSecretRef;
-
 }
 
 /**
@@ -10630,7 +10454,6 @@ export interface IssuerSpecVaultCaBundleSecretRef {
    * @schema IssuerSpecVaultCaBundleSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10671,7 +10494,6 @@ export interface IssuerSpecVaultClientCertSecretRef {
    * @schema IssuerSpecVaultClientCertSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10712,7 +10534,6 @@ export interface IssuerSpecVaultClientKeySecretRef {
    * @schema IssuerSpecVaultClientKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10752,7 +10573,6 @@ export interface IssuerSpecVenafiCloud {
    * @schema IssuerSpecVenafiCloud#url
    */
   readonly url?: string;
-
 }
 
 /**
@@ -10814,7 +10634,6 @@ export interface IssuerSpecVenafiTpp {
    * @schema IssuerSpecVenafiTpp#url
    */
   readonly url: string;
-
 }
 
 /**
@@ -10878,7 +10697,6 @@ export interface IssuerSpecAcmeExternalAccountBindingKeySecretRef {
    * @schema IssuerSpecAcmeExternalAccountBindingKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -10976,7 +10794,6 @@ export interface IssuerSpecAcmeSolversDns01 {
    * @schema IssuerSpecAcmeSolversDns01#webhook
    */
   readonly webhook?: IssuerSpecAcmeSolversDns01Webhook;
-
 }
 
 /**
@@ -11030,7 +10847,6 @@ export interface IssuerSpecAcmeSolversHttp01 {
    * @schema IssuerSpecAcmeSolversHttp01#ingress
    */
   readonly ingress?: IssuerSpecAcmeSolversHttp01Ingress;
-
 }
 
 /**
@@ -11093,7 +10909,6 @@ export interface IssuerSpecAcmeSolversSelector {
    * @schema IssuerSpecAcmeSolversSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -11144,7 +10959,6 @@ export interface IssuerSpecVaultAuthAppRole {
    * @schema IssuerSpecVaultAuthAppRole#secretRef
    */
   readonly secretRef: IssuerSpecVaultAuthAppRoleSecretRef;
-
 }
 
 /**
@@ -11197,7 +11011,6 @@ export interface IssuerSpecVaultAuthClientCertificate {
    * @schema IssuerSpecVaultAuthClientCertificate#secretName
    */
   readonly secretName?: string;
-
 }
 
 /**
@@ -11260,7 +11073,6 @@ export interface IssuerSpecVaultAuthKubernetes {
    * @schema IssuerSpecVaultAuthKubernetes#serviceAccountRef
    */
   readonly serviceAccountRef?: IssuerSpecVaultAuthKubernetesServiceAccountRef;
-
 }
 
 /**
@@ -11302,7 +11114,6 @@ export interface IssuerSpecVaultAuthTokenSecretRef {
    * @schema IssuerSpecVaultAuthTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -11342,7 +11153,6 @@ export interface IssuerSpecVenafiCloudApiTokenSecretRef {
    * @schema IssuerSpecVenafiCloudApiTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -11386,7 +11196,6 @@ export interface IssuerSpecVenafiTppCaBundleSecretRef {
    * @schema IssuerSpecVenafiTppCaBundleSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -11419,7 +11228,6 @@ export interface IssuerSpecVenafiTppCredentialsRef {
    * @schema IssuerSpecVenafiTppCredentialsRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -11455,7 +11263,6 @@ export interface IssuerSpecAcmeSolversDns01AcmeDns {
    * @schema IssuerSpecAcmeSolversDns01AcmeDns#host
    */
   readonly host: string;
-
 }
 
 /**
@@ -11507,7 +11314,6 @@ export interface IssuerSpecAcmeSolversDns01Akamai {
    * @schema IssuerSpecAcmeSolversDns01Akamai#serviceConsumerDomain
    */
   readonly serviceConsumerDomain: string;
-
 }
 
 /**
@@ -11596,7 +11402,6 @@ export interface IssuerSpecAcmeSolversDns01AzureDns {
    * @schema IssuerSpecAcmeSolversDns01AzureDns#tenantID
    */
   readonly tenantId?: string;
-
 }
 
 /**
@@ -11647,7 +11452,6 @@ export interface IssuerSpecAcmeSolversDns01CloudDns {
    * @schema IssuerSpecAcmeSolversDns01CloudDns#serviceAccountSecretRef
    */
   readonly serviceAccountSecretRef?: IssuerSpecAcmeSolversDns01CloudDnsServiceAccountSecretRef;
-
 }
 
 /**
@@ -11694,7 +11498,6 @@ export interface IssuerSpecAcmeSolversDns01Cloudflare {
    * @schema IssuerSpecAcmeSolversDns01Cloudflare#email
    */
   readonly email?: string;
-
 }
 
 /**
@@ -11739,7 +11542,6 @@ export interface IssuerSpecAcmeSolversDns01Digitalocean {
    * @schema IssuerSpecAcmeSolversDns01Digitalocean#tokenSecretRef
    */
   readonly tokenSecretRef: IssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef;
-
 }
 
 /**
@@ -11798,7 +11600,6 @@ export interface IssuerSpecAcmeSolversDns01Rfc2136 {
    * @schema IssuerSpecAcmeSolversDns01Rfc2136#tsigSecretSecretRef
    */
   readonly tsigSecretSecretRef?: IssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef;
-
 }
 
 /**
@@ -11906,7 +11707,6 @@ export interface IssuerSpecAcmeSolversDns01Route53 {
    * @schema IssuerSpecAcmeSolversDns01Route53#secretAccessKeySecretRef
    */
   readonly secretAccessKeySecretRef?: IssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef;
-
 }
 
 /**
@@ -11968,7 +11768,6 @@ export interface IssuerSpecAcmeSolversDns01Webhook {
    * @schema IssuerSpecAcmeSolversDns01Webhook#solverName
    */
   readonly solverName: string;
-
 }
 
 /**
@@ -12029,7 +11828,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoute {
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoute#serviceType
    */
   readonly serviceType?: string;
-
 }
 
 /**
@@ -12113,7 +11911,6 @@ export interface IssuerSpecAcmeSolversHttp01Ingress {
    * @schema IssuerSpecAcmeSolversHttp01Ingress#serviceType
    */
   readonly serviceType?: string;
-
 }
 
 /**
@@ -12160,7 +11957,6 @@ export interface IssuerSpecVaultAuthAppRoleSecretRef {
    * @schema IssuerSpecVaultAuthAppRoleSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -12202,7 +11998,6 @@ export interface IssuerSpecVaultAuthKubernetesSecretRef {
    * @schema IssuerSpecVaultAuthKubernetesSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -12244,7 +12039,6 @@ export interface IssuerSpecVaultAuthKubernetesServiceAccountRef {
    * @schema IssuerSpecVaultAuthKubernetesServiceAccountRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -12285,7 +12079,6 @@ export interface IssuerSpecAcmeSolversDns01AcmeDnsAccountSecretRef {
    * @schema IssuerSpecAcmeSolversDns01AcmeDnsAccountSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -12326,7 +12119,6 @@ export interface IssuerSpecAcmeSolversDns01AkamaiAccessTokenSecretRef {
    * @schema IssuerSpecAcmeSolversDns01AkamaiAccessTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -12367,7 +12159,6 @@ export interface IssuerSpecAcmeSolversDns01AkamaiClientSecretSecretRef {
    * @schema IssuerSpecAcmeSolversDns01AkamaiClientSecretSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -12408,7 +12199,6 @@ export interface IssuerSpecAcmeSolversDns01AkamaiClientTokenSecretRef {
    * @schema IssuerSpecAcmeSolversDns01AkamaiClientTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -12450,7 +12240,6 @@ export interface IssuerSpecAcmeSolversDns01AzureDnsClientSecretSecretRef {
    * @schema IssuerSpecAcmeSolversDns01AzureDnsClientSecretSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -12513,7 +12302,6 @@ export interface IssuerSpecAcmeSolversDns01AzureDnsManagedIdentity {
    * @schema IssuerSpecAcmeSolversDns01AzureDnsManagedIdentity#tenantID
    */
   readonly tenantId?: string;
-
 }
 
 /**
@@ -12555,7 +12343,6 @@ export interface IssuerSpecAcmeSolversDns01CloudDnsServiceAccountSecretRef {
    * @schema IssuerSpecAcmeSolversDns01CloudDnsServiceAccountSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -12597,7 +12384,6 @@ export interface IssuerSpecAcmeSolversDns01CloudflareApiKeySecretRef {
    * @schema IssuerSpecAcmeSolversDns01CloudflareApiKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -12637,7 +12423,6 @@ export interface IssuerSpecAcmeSolversDns01CloudflareApiTokenSecretRef {
    * @schema IssuerSpecAcmeSolversDns01CloudflareApiTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -12678,7 +12463,6 @@ export interface IssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef {
    * @schema IssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -12719,7 +12503,6 @@ export interface IssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef {
    * @schema IssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -12764,7 +12547,6 @@ export interface IssuerSpecAcmeSolversDns01Route53AccessKeyIdSecretRef {
    * @schema IssuerSpecAcmeSolversDns01Route53AccessKeyIdSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -12795,7 +12577,6 @@ export interface IssuerSpecAcmeSolversDns01Route53Auth {
    * @schema IssuerSpecAcmeSolversDns01Route53Auth#kubernetes
    */
   readonly kubernetes: IssuerSpecAcmeSolversDns01Route53AuthKubernetes;
-
 }
 
 /**
@@ -12837,7 +12618,6 @@ export interface IssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef {
    * @schema IssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -13000,7 +12780,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs#sectionName
    */
   readonly sectionName?: string;
-
 }
 
 /**
@@ -13047,7 +12826,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate {
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate#spec
    */
   readonly spec?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec;
-
 }
 
 /**
@@ -13081,7 +12859,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressIngressTemplate {
    * @schema IssuerSpecAcmeSolversHttp01IngressIngressTemplate#metadata
    */
   readonly metadata?: IssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata;
-
 }
 
 /**
@@ -13123,7 +12900,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplate {
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplate#spec
    */
   readonly spec?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpec;
-
 }
 
 /**
@@ -13156,7 +12932,6 @@ export interface IssuerSpecAcmeSolversDns01Route53AuthKubernetes {
    * @schema IssuerSpecAcmeSolversDns01Route53AuthKubernetes#serviceAccountRef
    */
   readonly serviceAccountRef: IssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAccountRef;
-
 }
 
 /**
@@ -13195,7 +12970,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata 
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -13271,7 +13045,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec {
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec#tolerations
    */
   readonly tolerations?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations[];
-
 }
 
 /**
@@ -13316,7 +13089,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata {
    * @schema IssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -13356,7 +13128,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata {
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
@@ -13432,7 +13203,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpec {
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpec#tolerations
    */
   readonly tolerations?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations[];
-
 }
 
 /**
@@ -13479,7 +13249,6 @@ export interface IssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAccountRe
    * @schema IssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAccountRef#name
    */
   readonly name: string;
-
 }
 
 /**
@@ -13523,7 +13292,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity#podAntiAffinity
    */
   readonly podAntiAffinity?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity;
-
 }
 
 /**
@@ -13559,7 +13327,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImage
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -13689,7 +13456,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecur
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#sysctls
    */
   readonly sysctls?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls[];
-
 }
 
 /**
@@ -13765,7 +13531,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecToler
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -13812,7 +13577,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity {
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity#podAntiAffinity
    */
   readonly podAntiAffinity?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinity;
-
 }
 
 /**
@@ -13848,7 +13612,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecre
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
@@ -13978,7 +13741,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContex
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#sysctls
    */
   readonly sysctls?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls[];
-
 }
 
 /**
@@ -14054,7 +13816,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations {
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
@@ -14106,7 +13867,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution;
-
 }
 
 /**
@@ -14157,7 +13917,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
@@ -14208,7 +13967,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
@@ -14264,7 +14022,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecur
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -14312,7 +14069,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecur
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -14349,7 +14105,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecur
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -14398,7 +14153,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution;
-
 }
 
 /**
@@ -14449,7 +14203,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
@@ -14500,7 +14253,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
@@ -14556,7 +14308,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContex
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
@@ -14604,7 +14355,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContex
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
@@ -14641,7 +14391,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContex
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls#value
    */
   readonly value: string;
-
 }
 
 /**
@@ -14679,7 +14428,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -14713,7 +14461,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution#nodeSelectorTerms
    */
   readonly nodeSelectorTerms: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms[];
-
 }
 
 /**
@@ -14750,7 +14497,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -14848,7 +14594,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -14890,7 +14635,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -14988,7 +14732,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -15030,7 +14773,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -15064,7 +14806,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution#nodeSelectorTerms
    */
   readonly nodeSelectorTerms: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms[];
-
 }
 
 /**
@@ -15101,7 +14842,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -15199,7 +14939,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -15241,7 +14980,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
@@ -15339,7 +15077,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -15380,7 +15117,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchFields
    */
   readonly matchFields?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields[];
-
 }
 
 /**
@@ -15419,7 +15155,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchFields
    */
   readonly matchFields?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields[];
-
 }
 
 /**
@@ -15516,7 +15251,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -15561,7 +15295,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -15605,7 +15338,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -15702,7 +15434,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -15747,7 +15478,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -15791,7 +15521,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -15828,7 +15557,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchFields
    */
   readonly matchFields?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields[];
-
 }
 
 /**
@@ -15867,7 +15595,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchFields
    */
   readonly matchFields?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields[];
-
 }
 
 /**
@@ -15964,7 +15691,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -16009,7 +15735,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -16053,7 +15778,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -16150,7 +15874,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
@@ -16195,7 +15918,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -16239,7 +15961,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -16292,7 +16013,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -16346,7 +16066,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -16400,7 +16119,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -16454,7 +16172,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -16497,7 +16214,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -16542,7 +16258,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -16594,7 +16309,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -16647,7 +16361,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -16690,7 +16403,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -16735,7 +16447,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -16787,7 +16498,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -16840,7 +16550,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -16894,7 +16603,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -16948,7 +16656,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -17002,7 +16709,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -17056,7 +16762,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -17099,7 +16804,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -17144,7 +16848,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -17196,7 +16899,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -17249,7 +16951,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -17292,7 +16993,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -17337,7 +17037,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -17389,7 +17088,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -17442,7 +17140,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -17494,7 +17191,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -17546,7 +17242,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -17598,7 +17293,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -17650,7 +17344,6 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -17702,7 +17395,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -17754,7 +17446,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -17806,7 +17497,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
@@ -17858,7 +17548,6 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
