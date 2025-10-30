@@ -1,0 +1,11 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: garage
+  namespace: metrics
+spec:
+  staticConfigs:
+    - labels:
+        job: garage
+      targets:
+        - garage-admin.cmdcentral.xyz:443
