@@ -179,25 +179,6 @@ class Velero extends Chart {
       },
     });
 
-    new BackupStorageLocation(this, "minio", {
-      metadata: {
-        name: "minio",
-        namespace: namespace,
-      },
-      spec: {
-        config: {
-          region: "us-east-1",
-          s3ForcePathStyle: "true",
-          s3Url: "https://minio.cmdcentral.xyz",
-        },
-        default: false,
-        objectStorage: {
-          bucket: "velero",
-        },
-        provider: "aws",
-      },
-    });
-
     new BackupStorageLocation(this, "wasabi", {
       metadata: {
         name: "wasabi",
