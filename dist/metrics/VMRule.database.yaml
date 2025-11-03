@@ -23,5 +23,6 @@ spec:
           expr: 100 * sum by (pod) (cnpg_backends_total{namespace=~"postgres"}) / sum by (pod) (cnpg_pg_settings_setting{name="max_connections", namespace=~"postgres"}) > 90
           for: 5m
           labels:
+            namespace: metrics
             priority: "0"
             push_notify: "true"

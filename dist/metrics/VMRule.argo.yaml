@@ -22,5 +22,6 @@ spec:
           expr: increase(argocd_image_updater_images_errors_total[5m]) > 0
           for: 15m
           labels:
+            namespace: metrics
             priority: "0"
             push_notify: "true"
