@@ -15,6 +15,7 @@ spec:
           expr: max(max by(persistentvolumeclaim) (1 - kubelet_volume_stats_available_bytes{namespace="postgres"} / kubelet_volume_stats_capacity_bytes{namespace="postgres"})) > 0.85
           for: 15m
           labels:
+            namespace: metrics
             priority: "0"
             push_notify: "true"
         - alert: CNPGMaxConnectionsReached

@@ -28,5 +28,6 @@ spec:
           expr: avg(probe_success{job!="blackbox-ping-lakelair",job=~"blackbox-ping.*"}) < 0.9
           for: 10m
           labels:
+            namespace: metrics
             priority: "1"
             push_notify: "true"

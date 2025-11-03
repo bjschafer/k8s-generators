@@ -19,6 +19,7 @@ spec:
           expr: ceph_health_state != 0
           for: 0m
           labels:
+            namespace: metrics
             priority: "1"
             push_notify: "true"
         - alert: CephOsdDown
@@ -31,6 +32,7 @@ spec:
           expr: ceph_osd_up == 0
           for: 0m
           labels:
+            namespace: metrics
             push_notify: "true"
             severity: critical
         - alert: CephOsdLowSpace
@@ -51,6 +53,7 @@ spec:
           expr: max(ceph_osd_flag_norebalance) by (instance) > 0
           for: 60m
           labels:
+            namespace: metrics
             push_notify: "true"
             severity: critical
         - alert: CephHighOsdLatency

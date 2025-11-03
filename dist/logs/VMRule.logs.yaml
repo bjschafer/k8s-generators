@@ -15,6 +15,7 @@ spec:
           expr: hostname:"k8s" AND job:"systemd-journal" AND "Remounting filesystem read-only" | stats by (hostname) count(*) logs_count | filter logs_count:>0
           for: 0m
           labels:
+            namespace: logs
             priority: "0"
             push_notify: "true"
             severity: critical

@@ -15,6 +15,7 @@ spec:
           expr: sum by (schedule) (increase(velero_backup_partial_failure_total{schedule!=""}[1h])) > 0
           for: 0m
           labels:
+            namespace: metrics
             priority: "0"
             push_notify: "true"
         - alert: VeleroBackupFailures
@@ -23,5 +24,6 @@ spec:
           expr: sum by (schedule) (increase(velero_backup_failure_total{schedule!=""}[1h])) > 0
           for: 0m
           labels:
+            namespace: metrics
             priority: "0"
             push_notify: "true"

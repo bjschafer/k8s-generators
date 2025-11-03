@@ -33,6 +33,31 @@ export class Alert extends Chart {
   constructor(scope: Construct, id: string, props: AlertProps) {
     super(scope, id);
 
+    // Automatically inject namespace label for alerts with pushover routing
+    // VMAlertmanagerConfig routes are wrapped with namespace matchers, so alerts
+    // must have namespace set to match the config's namespace for routing to work
+    const processedRules = props.rules.map((rule) => {
+      const shouldInjectNamespace =
+        rule.labels &&
+        (rule.labels.push_notify === "true" ||
+          (rule.labels.priority !== undefined &&
+            (rule.labels.priority === "0" ||
+              rule.labels.priority === "1" ||
+              rule.labels.priority === PRIORITY.NORMAL ||
+              rule.labels.priority === PRIORITY.HIGH)));
+
+      if (shouldInjectNamespace && !rule.labels!.namespace) {
+        return {
+          ...rule,
+          labels: {
+            ...rule.labels,
+            namespace: props.namespace,
+          },
+        };
+      }
+      return rule;
+    });
+
     new VmRule(this, `${id}-rule`, {
       metadata: {
         name: props.name,
@@ -46,7 +71,7 @@ export class Alert extends Chart {
           {
             name: props.name,
             type: props.logs ? "vlogs" : undefined,
-            rules: props.rules,
+            rules: processedRules,
           },
         ],
       },

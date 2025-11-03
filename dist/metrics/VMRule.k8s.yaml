@@ -19,6 +19,7 @@ spec:
           expr: kube_node_status_condition{condition="Ready",status="true"} == 0
           for: 10m
           labels:
+            namespace: metrics
             priority: "1"
             push_notify: "true"
         - alert: KubernetesMemoryPressure
@@ -31,6 +32,7 @@ spec:
           expr: kube_node_status_condition{condition="MemoryPressure",status="true"} == 1
           for: 2m
           labels:
+            namespace: metrics
             priority: "1"
         - alert: KubernetesDiskPressure
           annotations:
@@ -42,6 +44,7 @@ spec:
           expr: kube_node_status_condition{condition="DiskPressure",status="true"} == 1
           for: 2m
           labels:
+            namespace: metrics
             priority: "1"
         - alert: KubernetesContainerOomKilled
           annotations:
@@ -77,6 +80,7 @@ spec:
           expr: kubelet_volume_stats_available_bytes / kubelet_volume_stats_capacity_bytes * 100 < 10
           for: 2m
           labels:
+            namespace: metrics
             priority: "0"
         - alert: KubernetesPersistentvolumeError
           annotations:
@@ -88,6 +92,7 @@ spec:
           expr: kube_persistentvolume_status_phase{phase=~"Failed|Pending", job="kube-state-metrics"} > 0
           for: 0m
           labels:
+            namespace: metrics
             priority: "1"
         - alert: KubernetesStatefulsetDown
           annotations:
@@ -99,6 +104,7 @@ spec:
           expr: (kube_statefulset_status_replicas_ready / kube_statefulset_status_replicas) != 1
           for: 1m
           labels:
+            namespace: metrics
             priority: "1"
         - alert: KubernetesHpaScaleCapability
           annotations:
@@ -147,6 +153,7 @@ spec:
           expr: kube_deployment_status_observed_generation != kube_deployment_metadata_generation
           for: 10m
           labels:
+            namespace: metrics
             priority: "1"
         - alert: KubernetesStatefulsetGenerationMismatch
           annotations:
@@ -158,6 +165,7 @@ spec:
           expr: kube_statefulset_status_observed_generation != kube_statefulset_metadata_generation
           for: 10m
           labels:
+            namespace: metrics
             priority: "1"
         - alert: KubernetesStatefulsetUpdateNotRolledOut
           annotations:
@@ -169,6 +177,7 @@ spec:
           expr: max without (revision) (kube_statefulset_status_current_revision unless kube_statefulset_status_update_revision) * (kube_statefulset_replicas != kube_statefulset_status_replicas_updated)
           for: 10m
           labels:
+            namespace: metrics
             priority: "0"
         - alert: KubernetesDaemonsetRolloutStuck
           annotations:
@@ -180,6 +189,7 @@ spec:
           expr: kube_daemonset_status_number_ready / kube_daemonset_status_desired_number_scheduled * 100 < 100 or kube_daemonset_status_desired_number_scheduled - kube_daemonset_status_current_number_scheduled > 0
           for: 10m
           labels:
+            namespace: metrics
             priority: "0"
             push_notify: "true"
         - alert: KubernetesDaemonsetMisscheduled
@@ -192,6 +202,7 @@ spec:
           expr: kube_daemonset_status_number_misscheduled > 0
           for: 1m
           labels:
+            namespace: metrics
             priority: "1"
         - alert: KubernetesApiServerErrors
           annotations:
@@ -203,6 +214,7 @@ spec:
           expr: sum(rate(apiserver_request_total{job="apiserver",code=~"(?:5..)"}[1m])) / sum(rate(apiserver_request_total{job="apiserver"}[1m])) * 100 > 3
           for: 2m
           labels:
+            namespace: metrics
             priority: "1"
         - alert: KubernetesApiClientErrors
           annotations:
@@ -214,6 +226,7 @@ spec:
           expr: (sum(rate(rest_client_requests_total{code=~"(4|5)..",job!="metrics-victoria-metrics-operator"}[1m])) by (instance, job) / sum(rate(rest_client_requests_total[1m])) by (instance, job)) * 100 > 1
           for: 2m
           labels:
+            namespace: metrics
             priority: "1"
         - alert: KubernetesClientCertificateExpiresNextWeek
           annotations:
@@ -227,6 +240,7 @@ spec:
           expr: sum by (job) (apiserver_client_certificate_expiration_seconds_count{job="apiserver"}) > 0 and histogram_quantile(0.01, sum by (job, le) (rate(apiserver_client_certificate_expiration_seconds_bucket{job="apiserver"}[5m]))) < 7*24*60*60
           for: 0m
           labels:
+            namespace: metrics
             priority: "0"
         - alert: KubernetesApiServerLatency
           annotations:
@@ -239,6 +253,7 @@ spec:
           expr: histogram_quantile(0.99, sum(rate(apiserver_request_latencies_bucket{subresource!="log",verb!~"(?:CONNECT|WATCHLIST|WATCH|PROXY)"} [10m])) WITHOUT (instance, resource)) / 1e+06 > 1
           for: 2m
           labels:
+            namespace: metrics
             priority: "0"
         - alert: KubeRebootRequired
           annotations:
@@ -248,6 +263,7 @@ spec:
           expr: max(kured_reboot_required) by (node) != 0
           for: 4h
           labels:
+            namespace: metrics
             priority: "0"
             push_notify: "true"
         - alert: KubeletVersionSkew
@@ -256,6 +272,7 @@ spec:
           expr: min(count(kube_node_info) by (kubelet_version)) < count(kube_node_info)
           for: 1h
           labels:
+            namespace: metrics
             priority: "0"
             push_notify: "true"
         - alert: KubernetesPodCpuThrottling

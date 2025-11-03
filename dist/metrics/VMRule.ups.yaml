@@ -19,4 +19,5 @@ spec:
           expr: nut_load * 100 > 75
           for: 5m
           labels:
+            namespace: metrics
             priority: "0"

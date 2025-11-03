@@ -26,6 +26,7 @@ spec:
             node_memory_MemTotal_bytes * 100 < 10
           for: 2m
           labels:
+            namespace: metrics
             priority: "0"
             push_notify: "true"
         - alert: HostMemoryUnderMemoryPressure
@@ -35,6 +36,7 @@ spec:
           expr: rate(node_vmstat_pgmajfault[1m]) > 1000
           for: 2m
           labels:
+            namespace: metrics
             priority: "0"
         - alert: HostOutOfDiskSpace
           annotations:
@@ -48,6 +50,7 @@ spec:
           expr: (node_filesystem_avail_bytes{mountpoint!="/boot/firmware"} * 100) / node_filesystem_size_bytes < 10 and ON (instance, device, mountpoint) node_filesystem_readonly == 0
           for: 2m
           labels:
+            namespace: metrics
             priority: "0"
         - alert: HostOutOfInodes
           annotations:
@@ -61,6 +64,7 @@ spec:
           expr: node_filesystem_files_free{} / node_filesystem_files{} * 100 < 10 and ON (instance, device, mountpoint) node_filesystem_readonly{} == 0
           for: 2m
           labels:
+            namespace: metrics
             priority: "0"
         - alert: HostInodesWillFillIn24Hours
           annotations:
@@ -107,6 +111,7 @@ spec:
           expr: sum by (instance) (irate(node_disk_writes_completed_total{device=~"[a-z]+|nvme[0-9]+n[0-9]+"}[5m])) + sum by (instance) (irate(node_disk_reads_completed_total{device=~"[a-z]+|nvme[0-9]+n[0-9]+"}[5m])) > 5000
           for: 15m
           labels:
+            namespace: metrics
             priority: "0"
         - alert: HostHighCpuLoad
           annotations:
@@ -117,6 +122,7 @@ spec:
             summary: Host high CPU load (instance {{ $labels.instance }})
           expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[2m])) * 100) > 80
           labels:
+            namespace: metrics
             priority: "0"
         - alert: HostCpuStealNoisyNeighbor
           annotations:
@@ -181,6 +187,7 @@ spec:
             summary: Host {{ $labels.instance }} OOM kill detected
           expr: increase(node_vmstat_oom_kill[1m]) > 0
           labels:
+            namespace: metrics
             priority: "0"
             push_notify: "true"
         - alert: HostNetworkInterfaceSaturated
@@ -204,6 +211,7 @@ spec:
             ) / node_network_speed_bytes{device!~"tap.*",job!="vmhost"} > 0.8 < 10000
           for: 1m
           labels:
+            namespace: metrics
             priority: "-1"
             push_notify: "true"
         - alert: HostRequiresReboot

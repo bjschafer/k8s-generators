@@ -26,7 +26,6 @@ export function addAlerts(scope: Construct, id: string): void {
         for: "15m",
         labels: {
           priority: PRIORITY.NORMAL,
-          namespace: "metrics", // Override pod namespace for alertmanager routing
           ...SEND_TO_PUSHOVER,
         },
         annotations: {
@@ -145,7 +144,6 @@ export function addAlerts(scope: Construct, id: string): void {
         for: "5m",
         labels: {
           priority: PRIORITY.NORMAL,
-          namespace: "metrics", // Override pod namespace for alertmanager routing
           ...SEND_TO_PUSHOVER,
         },
         annotations: {
@@ -452,7 +450,6 @@ export function addAlerts(scope: Construct, id: string): void {
         for: "0m",
         labels: {
           priority: PRIORITY.NORMAL,
-          namespace: "metrics", // Override pod namespace for alertmanager routing
           ...SEND_TO_PUSHOVER,
         },
         annotations: {
@@ -538,7 +535,6 @@ export function addAlerts(scope: Construct, id: string): void {
         for: "5m",
         labels: {
           priority: PRIORITY.HIGH,
-          namespace: "metrics", // Override pod namespace for alertmanager routing
           push_notify: "true",
         },
         annotations: {
@@ -554,7 +550,6 @@ export function addAlerts(scope: Construct, id: string): void {
         for: "15m",
         labels: {
           priority: PRIORITY.NORMAL,
-          namespace: "metrics", // Override pod namespace for alertmanager routing
           push_notify: "true",
         },
         annotations: {
@@ -724,7 +719,6 @@ export function addAlerts(scope: Construct, id: string): void {
         for: "30m",
         labels: {
           priority: PRIORITY.NORMAL,
-          namespace: "metrics", // Override pod namespace for alertmanager routing
           push_notify: "true",
         },
         annotations: {
