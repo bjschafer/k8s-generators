@@ -56,6 +56,16 @@ class AuthentikRBAC extends Chart {
           verbs: ["get", "create", "update", "list", "patch"],
         },
         {
+          apiGroups: ["apps"],
+          resources: ["deployments"],
+          verbs: ["get", "create", "update", "list", "patch"],
+        },
+        {
+          apiGroups: ["gateway.networking.k8s.io"],
+          resources: ["httproutes"],
+          verbs: ["get", "create", "update", "list", "patch"],
+        },
+        {
           apiGroups: ["extensions", "networking.k8s.io"],
           resources: ["ingresses"],
           verbs: ["get", "create", "update", "list", "patch"],
