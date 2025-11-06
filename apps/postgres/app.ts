@@ -147,6 +147,7 @@ class ProdPostgres extends Chart {
           parameters: {
             max_client_conn: "1000",
             default_pool_size: "20",
+            ignore_startup_parameters: "search_path",
           },
         },
       },

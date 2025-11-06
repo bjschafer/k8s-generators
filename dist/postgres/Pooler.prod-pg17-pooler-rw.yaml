@@ -10,6 +10,7 @@ spec:
   pgbouncer:
     parameters:
       default_pool_size: "20"
+      ignore_startup_parameters: search_path
       max_client_conn: "1000"
     poolMode: session
   type: rw
