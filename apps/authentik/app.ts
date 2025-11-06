@@ -268,7 +268,7 @@ class AuthentikMonitoring extends Chart {
           "app.kubernetes.io/name": "authentik-outpost-ldap",
           "goauthentik.io/outpost-name": "ldap",
           "goauthentik.io/outpost-type": "ldap",
-          "goauthentik.io/outpost-uuid": "031cac9c33df4b5db1f95795c07b6d6d",
+          "goauthentik.io/outpost-uuid": "e081b496b3354364bb3198f42a8875d0",
         },
         ports: [
           {
