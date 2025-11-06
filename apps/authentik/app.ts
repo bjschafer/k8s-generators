@@ -53,17 +53,17 @@ class AuthentikRBAC extends Chart {
         {
           apiGroups: [""],
           resources: ["secrets", "services", "configmaps"],
-          verbs: ["get", "create", "update", "list"],
+          verbs: ["get", "create", "update", "list", "patch"],
         },
         {
           apiGroups: ["extensions", "networking.k8s.io"],
           resources: ["ingresses"],
-          verbs: ["get", "create", "update", "list"],
+          verbs: ["get", "create", "update", "list", "patch"],
         },
         {
           apiGroups: ["traefik.containo.us", "traefik.io"],
           resources: ["middlewares"],
-          verbs: ["get", "create", "update", "list"],
+          verbs: ["get", "create", "update", "list", "patch"],
         },
         {
           apiGroups: ["apiextensions.k8s.io"],
