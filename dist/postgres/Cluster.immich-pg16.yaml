@@ -12,7 +12,7 @@ spec:
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
     kind: ImageCatalog
-    major: 16
+    major: 17
     name: vectorchord
   instances: 3
   monitoring:

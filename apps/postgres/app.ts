@@ -264,11 +264,11 @@ class VectorPostgres extends Chart {
       spec: {
         images: [
           {
-            image: `${imageBase}:16.9-0.4.2`,
+            image: `${imageBase}:16.9-0.4.3`,
             major: 16,
           },
           {
-            image: `${imageBase}:17.5-0.4.2`,
+            image: `${imageBase}:17.5-0.4.3`,
             major: 17,
           },
         ],
@@ -325,7 +325,7 @@ class VectorPostgres extends Chart {
         imageCatalogRef: {
           apiGroup: catalog.apiGroup,
           kind: catalog.kind,
-          major: 16,
+          major: 17,
           name: catalog.name,
         },
         monitoring: {
