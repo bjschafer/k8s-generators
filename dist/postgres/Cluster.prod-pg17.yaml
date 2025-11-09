@@ -21,6 +21,8 @@ spec:
     major: 17
     name: postgresql
   instances: 3
+  managed:
+    roles: []
   monitoring:
     enablePodMonitor: false
   plugins:

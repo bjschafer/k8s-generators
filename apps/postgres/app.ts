@@ -9,6 +9,7 @@ import {
   Cluster,
   ClusterSpec,
   ClusterSpecBootstrapInitdbImportType,
+  ClusterSpecManagedRoles,
   ImageCatalog,
   Pooler,
   PoolerSpecPgbouncerPoolMode,
@@ -53,12 +54,15 @@ const s3Creds = new BitwardenSecret(app, "s3-creds", {
 const barmanPluginName = "barman-cloud.cloudnative-pg.io";
 
 class ProdPostgres extends Chart {
+  readonly Cluster: Cluster;
+  private managedRoles: ClusterSpecManagedRoles[] = [];
+
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
     const name = "prod-pg17";
 
-    new Cluster(this, "cluster-17", {
+    this.Cluster = new Cluster(this, "cluster-17", {
       metadata: {
         namespace: namespace,
         name: name,
@@ -108,6 +112,9 @@ class ProdPostgres extends Chart {
           storageClass: StorageClass.CEPH_RBD,
         },
         enableSuperuserAccess: true,
+        managed: {
+          roles: this.managedRoles,
+        },
         postgresql: {
           pgHba: [
             "host pdns pdns 10.0.10.0/24 scram-sha-256",
@@ -236,6 +243,21 @@ class ProdPostgres extends Chart {
         ],
       },
     });
+  }
+
+  /**
+   * Register a managed role with this cluster.
+   * Must be called before app.synth().
+   */
+  public addManagedRole(role: ClusterSpecManagedRoles): void {
+    this.managedRoles.push(role);
+  }
+
+  /**
+   * Get the cluster name for connection strings.
+   */
+  public get clusterName(): string {
+    return this.Cluster.name;
   }
 }
 
@@ -428,6 +450,9 @@ class VectorPostgres extends Chart {
   }
 }
 
-new ProdPostgres(app, "prod");
+const prod_pg_17 = new ProdPostgres(app, "prod");
+// Export the ProdPostgres instance so other apps can register databases
+export const PROD_CLUSTER = prod_pg_17;
+
 new VectorPostgres(app, "immich-pg16", "immich-pg16");
 app.synth();
