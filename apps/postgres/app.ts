@@ -454,5 +454,21 @@ const prod_pg_17 = new ProdPostgres(app, "prod");
 // Export the ProdPostgres instance so other apps can register databases
 export const PROD_CLUSTER = prod_pg_17;
 
+// Import database provisioning functions
+import {
+  createManagedRoles,
+  createPostgresSecrets,
+  createDatabases,
+} from "./database-provisioning";
+
+// Create secrets for all database credentials in postgres namespace
+createPostgresSecrets(app);
+
+// Register all managed roles with the cluster
+createManagedRoles(prod_pg_17.addManagedRole.bind(prod_pg_17));
+
+// Create all Database CRDs
+createDatabases(app, prod_pg_17.clusterName);
+
 new VectorPostgres(app, "immich-pg16", "immich-pg16");
 app.synth();
