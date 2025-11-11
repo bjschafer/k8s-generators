@@ -1,0 +1,11 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: romm
+  namespace: postgres
+spec:
+  cluster:
+    name: prod-pg17
+  ensure: present
+  name: romm
+  owner: romm

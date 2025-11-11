@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: romm
+  namespace: romm
+spec:
+  rules:
+    - host: romm.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: romm
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+    - host: roms.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: romm
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - romm.cmdcentral.xyz
+        - roms.cmdcentral.xyz
+      secretName: romm-tls

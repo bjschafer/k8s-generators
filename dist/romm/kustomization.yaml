@@ -1,0 +1,12 @@
+resources:
+  - Deployment.romm.yaml
+  - ExternalSecret.romm-db-credentials.yaml
+  - ExternalSecret.romm-secrets.yaml
+  - Ingress.romm.yaml
+  - PersistentVolume.nfs-media-roms.yaml
+  - PersistentVolumeClaim.data.yaml
+  - PersistentVolumeClaim.nfs-media-roms.yaml
+  - Secret.romm-valkey.yaml
+  - Service.romm-valkey-master.yaml
+  - Service.romm.yaml
+  - StatefulSet.romm-valkey-master.yaml

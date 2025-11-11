@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: romm
+  name: romm
+  namespace: romm
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: romm-romm-deployment-c8fc762a
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        backup.velero.io/backup-volumes: pvc-data
+      labels:
+        app.kubernetes.io/name: romm
+        cdk8s.io/metadata.addr: romm-romm-deployment-c8fc762a
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: DB_HOST
+              value: prod.postgres.svc.cluster.local
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: romm
+            - name: DB_USER
+              value: romm
+            - name: DB_PASSWD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: romm-db-credentials
+            - name: ROMM_DB_DRIVER
+              value: postgres
+            - name: REDIS_HOST
+              value: romm-valkey-master
+            - name: TZ
+              value: America/Chicago
+            - name: ROMM_AUTH_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: ROMM_AUTH_SECRET_KEY
+                  name: romm-secrets
+          image: ghcr.io/rommapp/romm:latest
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 8080
+          name: romm
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 8080
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /romm
+              name: pvc-data
+            - mountPath: /romm/library
+              name: pvc-nfs-media-roms
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: pvc-data
+          persistentVolumeClaim:
+            claimName: data
+            readOnly: false
+        - name: pvc-nfs-media-roms
+          persistentVolumeClaim:
+            claimName: nfs-media-roms
+            readOnly: false

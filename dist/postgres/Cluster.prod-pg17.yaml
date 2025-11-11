@@ -22,7 +22,13 @@ spec:
     name: postgresql
   instances: 3
   managed:
-    roles: []
+    roles:
+      - comment: ROMM database owner
+        ensure: present
+        login: true
+        name: romm
+        passwordSecret:
+          name: romm-db-credentials
   monitoring:
     enablePodMonitor: false
   plugins:

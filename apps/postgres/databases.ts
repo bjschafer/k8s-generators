@@ -46,7 +46,7 @@ export const DATABASES: DatabaseConfig[] = [
   {
     name: "romm",
     comment: "ROMM database owner",
-    bitwardenPasswordId: "your-bitwarden-id-here",
+    bitwardenPasswordId: "efb8a53a-dfd4-4f3a-b2e2-b39200423731",
     appNamespace: "romm",
   },
 ];
