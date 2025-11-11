@@ -19,14 +19,14 @@ const image = "ghcr.io/rommapp/romm";
 
 NewArgoApp(name, {
   namespace: namespace,
-    autoUpdate: {
-        images: [
-            {
-                image: image,
-                strategy: "digest",
-          }
-      ]
-  }
+  autoUpdate: {
+    images: [
+      {
+        image: image,
+        strategy: "digest",
+      },
+    ],
+  },
 });
 
 const nfsVol = new NFSVolumeContainer(app, "nfs-volume-container");
@@ -60,7 +60,7 @@ const valkey = new Valkey(app, "valkey", {
       memory: Quantity.fromString("64Mi"),
     },
   },
-})
+});
 
 const server = new AppPlus(app, name, {
   name: name,
@@ -73,7 +73,7 @@ const server = new AppPlus(app, name, {
     },
     memory: {
       request: Size.mebibytes(64),
-    }
+    },
   },
   extraIngressHosts: ["roms.cmdcentral.xyz"],
   extraEnv: {
@@ -105,15 +105,17 @@ const server = new AppPlus(app, name, {
       props: {
         storage: Size.gibibytes(20),
       },
-    }
-  ]
-})
+    },
+  ],
+});
 
-const nfsMount = Volume.fromPersistentVolumeClaim(app, "nfs-media-roms", nfsVol.Get("nfs-media-roms").pvc);
+const nfsMount = Volume.fromPersistentVolumeClaim(
+  app,
+  "nfs-media-roms",
+  nfsVol.Get("nfs-media-roms").pvc,
+);
 server.Deployment.addVolume(nfsMount);
 server.Deployment.containers[0].mount("/romm/library", nfsMount);
-
-
 
 app.synth();
 NewKustomize(app.outdir);

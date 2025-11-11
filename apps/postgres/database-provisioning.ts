@@ -58,10 +58,7 @@ export function createPostgresSecrets(scope: Construct): void {
  * Call this in the postgres app to create all databases at once.
  * Returns a Chart containing all the databases.
  */
-export function createDatabases(
-  scope: Construct,
-  clusterName: string,
-): Chart {
+export function createDatabases(scope: Construct, clusterName: string): Chart {
   const chart = new Chart(scope, "databases");
 
   for (const db of DATABASES) {
