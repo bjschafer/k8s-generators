@@ -46,7 +46,6 @@ export function createPostgresSecrets(scope: Construct): void {
         name: `${db.name}-db-credentials`,
         namespace: "postgres",
         data: {
-          username: db.name,
           password: db.bitwardenPasswordId,
         },
       });
