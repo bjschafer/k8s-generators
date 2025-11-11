@@ -1,13 +1,13 @@
 import { Chart } from "cdk8s";
 import { Construct } from "constructs";
 import {
-  Database as CnpgDatabase,
-  DatabaseSpecEnsure,
   ClusterSpecManagedRoles,
   ClusterSpecManagedRolesEnsure,
+  Database as CnpgDatabase,
+  DatabaseSpecEnsure,
 } from "../../imports/postgresql.cnpg.io";
 import { BitwardenSecret } from "../../lib/secrets";
-import { DatabaseConfig, DATABASES } from "./databases";
+import { DATABASES } from "./databases";
 
 /**
  * Creates managed roles for all configured databases.
@@ -120,7 +120,6 @@ export function createAppDatabaseSecret(
     name: `${databaseName}-db-credentials`,
     namespace: db.appNamespace,
     data: {
-      username: databaseName,
       password: db.bitwardenPasswordId,
     },
   });
