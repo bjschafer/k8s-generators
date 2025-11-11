@@ -51,7 +51,7 @@ spec:
                 secretKeyRef:
                   key: ROMM_AUTH_SECRET_KEY
                   name: romm-secrets
-          image: ghcr.io/rommapp/romm:latest
+          image: ghcr.io/rommapp/romm
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3

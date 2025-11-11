@@ -3,8 +3,8 @@ kind: Application
 metadata:
   annotations:
     argocd-image-updater.argoproj.io/git-branch: main
-    argocd-image-updater.argoproj.io/image-list: romm:latest=ghcr.io/rommapp/romm:latest:latest
-    argocd-image-updater.argoproj.io/romm:latest.update-strategy: digest
+    argocd-image-updater.argoproj.io/image-list: romm=ghcr.io/rommapp/romm:latest
+    argocd-image-updater.argoproj.io/romm.update-strategy: digest
     argocd-image-updater.argoproj.io/write-back-method: git
   labels:
     app.kubernetes.io/name: romm

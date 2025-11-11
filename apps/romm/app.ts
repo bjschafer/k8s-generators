@@ -3,7 +3,7 @@ import { Cpu, EnvValue, Volume } from "cdk8s-plus-33";
 import { Quantity } from "cdk8s-plus-33/lib/imports/k8s";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
-import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
+import { NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { NFSVolumeContainer } from "../../lib/nfs";
@@ -15,18 +15,10 @@ const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
-const image = "ghcr.io/rommapp/romm:latest";
+const image = "ghcr.io/rommapp/romm";
 
 NewArgoApp(name, {
-  sync_policy: {
-    automated: {
-      prune: true,
-      selfHeal: true,
-    },
-  },
   namespace: namespace,
-  source: ArgoAppSource.GENERATORS,
-  recurse: true,
     autoUpdate: {
         images: [
             {
