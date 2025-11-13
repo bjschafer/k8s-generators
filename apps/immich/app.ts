@@ -4,7 +4,6 @@ import {
   EnvValue,
   PersistentVolumeAccessMode,
   Probe,
-  Secret,
   Volume,
 } from "cdk8s-plus-33";
 import { basename } from "path";
@@ -79,7 +78,7 @@ const commonEnv: Record<string, EnvValue> = {
   REDIS_HOSTNAME: EnvValue.fromValue(valkey.Service.name),
   REDIS_PORT: EnvValue.fromValue("6379"),
   REDIS_PASSWORD: EnvValue.fromSecretValue({
-    secret: Secret.fromSecretName(app, "valkey-secret", "immich-valkey"),
+    secret: valkey.secret,
     key: "valkey-password",
   }),
   DB_DATABASE_NAME: EnvValue.fromValue("immich"),

@@ -41,9 +41,14 @@ spec:
                   key: password
                   name: romm-db-credentials
             - name: ROMM_DB_DRIVER
-              value: postgres
+              value: postgresql
             - name: REDIS_HOST
               value: romm-valkey-master
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: valkey-password
+                  name: romm-valkey
             - name: TZ
               value: America/Chicago
             - name: ROMM_AUTH_SECRET_KEY
@@ -67,7 +72,7 @@ spec:
           resources:
             requests:
               cpu: 100m
-              memory: 64Mi
+              memory: 256Mi
           securityContext:
             allowPrivilegeEscalation: false
             privileged: false
@@ -78,6 +83,7 @@ spec:
               name: pvc-data
             - mountPath: /romm/library
               name: pvc-nfs-media-roms
+              subPath: managed
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always

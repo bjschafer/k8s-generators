@@ -72,7 +72,7 @@ const server = new AppPlus(app, name, {
       request: Cpu.millis(100),
     },
     memory: {
-      request: Size.mebibytes(64),
+      request: Size.mebibytes(256),
     },
   },
   extraIngressHosts: ["roms.cmdcentral.xyz"],
@@ -85,8 +85,12 @@ const server = new AppPlus(app, name, {
       secret: dbCreds.secret,
       key: "password",
     }),
-    ROMM_DB_DRIVER: EnvValue.fromValue("postgres"),
+    ROMM_DB_DRIVER: EnvValue.fromValue("postgresql"),
     REDIS_HOST: EnvValue.fromValue(valkey.Service.name),
+    REDIS_PASSWORD: EnvValue.fromSecretValue({
+      secret: valkey.secret,
+      key: "valkey-password",
+    }),
     TZ: EnvValue.fromValue("America/Chicago"),
     ...rommSecrets.toEnvValues(),
     /*
@@ -115,7 +119,9 @@ const nfsMount = Volume.fromPersistentVolumeClaim(
   nfsVol.Get("nfs-media-roms").pvc,
 );
 server.Deployment.addVolume(nfsMount);
-server.Deployment.containers[0].mount("/romm/library", nfsMount);
+server.Deployment.containers[0].mount("/romm/library", nfsMount, {
+  subPath: "managed",
+});
 
 app.synth();
 NewKustomize(app.outdir);

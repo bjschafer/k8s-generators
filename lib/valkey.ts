@@ -6,6 +6,7 @@ import {
   KubeStatefulSet,
   KubeSecret,
 } from "../imports/k8s";
+import { ISecret, Secret } from "cdk8s-plus-33";
 import { Quantity, ResourceRequirements } from "cdk8s-plus-33/lib/imports/k8s";
 
 export type ValkeyVersion = "7" | "7-alpine";
@@ -24,6 +25,7 @@ export interface ValkeyProps {
 export class Valkey extends Chart {
   public readonly Service: KubeService;
   public readonly Secret: KubeSecret;
+  public readonly secret: ISecret; // cdk8s-plus compatible secret reference
 
   constructor(scope: Construct, id: string, props: ValkeyProps) {
     super(scope, id);
@@ -48,6 +50,13 @@ export class Valkey extends Chart {
         ),
       },
     });
+
+    // Create cdk8s-plus compatible secret reference for use with EnvValue APIs
+    this.secret = Secret.fromSecretName(
+      this,
+      `${id}-isecret`,
+      `${props.name}-valkey`,
+    );
 
     const volumeConfig = props.storageSize
       ? {}
