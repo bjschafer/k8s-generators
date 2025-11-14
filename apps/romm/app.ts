@@ -1,5 +1,5 @@
-import { App, Size } from "cdk8s";
-import { Cpu, EnvValue, Volume } from "cdk8s-plus-33";
+import { App, Duration, Size } from "cdk8s";
+import { Cpu, EnvValue, Probe, Volume } from "cdk8s-plus-33";
 import { Quantity } from "cdk8s-plus-33/lib/imports/k8s";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
@@ -14,6 +14,7 @@ import { createAppDatabaseSecret } from "../postgres/database-provisioning";
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
+const port = 8080;
 
 const image = "ghcr.io/rommapp/romm";
 
@@ -66,7 +67,7 @@ const server = new AppPlus(app, name, {
   name: name,
   namespace: namespace,
   image: image,
-  ports: [8080],
+  ports: [port],
   resources: {
     cpu: {
       request: Cpu.millis(100),
@@ -86,7 +87,7 @@ const server = new AppPlus(app, name, {
       key: "password",
     }),
     ROMM_DB_DRIVER: EnvValue.fromValue("postgresql"),
-    ROMM_PORT: EnvValue.fromValue("8080"), // this seems to be a bug
+    ROMM_PORT: EnvValue.fromValue(`${port}`), // this seems to be a bug
     REDIS_HOST: EnvValue.fromValue(valkey.Service.name),
     REDIS_PASSWORD: EnvValue.fromSecretValue({
       secret: valkey.secret,
@@ -102,6 +103,16 @@ const server = new AppPlus(app, name, {
       - HASHEOUS_API_ENABLED=true # https://docs.romm.app/latest/Getting-Started/Metadata-Providers/#hasheous
       */
   },
+  livenessProbe: Probe.fromHttpGet("/api/heartbeat", {
+    initialDelaySeconds: Duration.seconds(45),
+    failureThreshold: 5,
+    port: port,
+  }),
+  readinessProbe: Probe.fromHttpGet("/api/heartbeat", {
+    initialDelaySeconds: Duration.seconds(45),
+    failureThreshold: 5,
+    port: port,
+  }),
   volumes: [
     {
       name: "data",

@@ -61,16 +61,22 @@ spec:
           image: ghcr.io/rommapp/romm
           imagePullPolicy: Always
           livenessProbe:
-            failureThreshold: 3
-            tcpSocket:
+            failureThreshold: 5
+            httpGet:
+              path: /api/heartbeat
               port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 45
           name: romm
           ports:
             - containerPort: 8080
           readinessProbe:
-            failureThreshold: 3
-            tcpSocket:
+            failureThreshold: 5
+            httpGet:
+              path: /api/heartbeat
               port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 45
           resources:
             requests:
               cpu: 100m
