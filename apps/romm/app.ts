@@ -125,6 +125,13 @@ const server = new AppPlus(app, name, {
   ],
 });
 
+const dataVolume = server.Deployment.volumes[0];
+["assets", "config", "resources"].forEach((path) => {
+  server.Deployment.containers[0].mount(`/romm/${path}`, dataVolume, {
+    subPath: path,
+  });
+});
+
 const nfsMount = Volume.fromPersistentVolumeClaim(
   app,
   "nfs-media-roms",

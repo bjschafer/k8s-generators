@@ -89,6 +89,15 @@ spec:
           volumeMounts:
             - mountPath: /romm
               name: pvc-data
+            - mountPath: /romm/assets
+              name: pvc-data
+              subPath: assets
+            - mountPath: /romm/config
+              name: pvc-data
+              subPath: config
+            - mountPath: /romm/resources
+              name: pvc-data
+              subPath: resources
             - mountPath: /romm/library
               name: pvc-nfs-media-roms
               subPath: managed
