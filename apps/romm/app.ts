@@ -86,6 +86,7 @@ const server = new AppPlus(app, name, {
       key: "password",
     }),
     ROMM_DB_DRIVER: EnvValue.fromValue("postgresql"),
+    ROMM_PORT: EnvValue.fromValue("8080"), // this seems to be a bug
     REDIS_HOST: EnvValue.fromValue(valkey.Service.name),
     REDIS_PASSWORD: EnvValue.fromSecretValue({
       secret: valkey.secret,

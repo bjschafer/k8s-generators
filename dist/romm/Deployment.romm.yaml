@@ -42,6 +42,8 @@ spec:
                   name: romm-db-credentials
             - name: ROMM_DB_DRIVER
               value: postgresql
+            - name: ROMM_PORT
+              value: "8080"
             - name: REDIS_HOST
               value: romm-valkey-master
             - name: REDIS_PASSWORD
