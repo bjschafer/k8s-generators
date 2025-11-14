@@ -44,6 +44,10 @@ const rommSecrets = new BitwardenSecret(app, "romm-secrets", {
   namespace: namespace,
   data: {
     ROMM_AUTH_SECRET_KEY: "a3aba159-fc66-439f-a5e3-b392004420dc",
+    STEAMGRIDDB_API_KEY: "a8eb88f1-883f-4d4b-8a68-b39500311177",
+    IGDB_CLIENT_ID: "dbd8a5ac-244f-45a3-9761-b3950031deac",
+    IGDB_CLIENT_SECRET: "55c730d8-d24b-47eb-9243-b3950031f0d9",
+    RETROACHIEVEMENTS_API_KEY: "e9deabc9-41bd-4771-ba72-b3950032ac28",
   },
 });
 
@@ -94,14 +98,9 @@ const server = new AppPlus(app, name, {
       key: "valkey-password",
     }),
     TZ: EnvValue.fromValue("America/Chicago"),
+    HASHEUS_API_ENABLED: EnvValue.fromValue("true"),
+    HLTB_API_ENABLED: EnvValue.fromValue("true"),
     ...rommSecrets.toEnvValues(),
-    /*
-      - SCREENSCRAPER_USER= # These are the recommended metadata providers
-      - SCREENSCRAPER_PASSWORD= # https://docs.romm.app/latest/Getting-Started/Metadata-Providers/#screenscraper
-      - RETROACHIEVEMENTS_API_KEY= # https://docs.romm.app/latest/Getting-Started/Metadata-Providers/#retroachievements
-      - STEAMGRIDDB_API_KEY= # https://docs.romm.app/latest/Getting-Started/Metadata-Providers/#steamgriddb
-      - HASHEOUS_API_ENABLED=true # https://docs.romm.app/latest/Getting-Started/Metadata-Providers/#hasheous
-      */
   },
   livenessProbe: Probe.fromHttpGet("/api/heartbeat", {
     initialDelaySeconds: Duration.seconds(45),

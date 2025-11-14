@@ -53,10 +53,34 @@ spec:
                   name: romm-valkey
             - name: TZ
               value: America/Chicago
+            - name: HASHEUS_API_ENABLED
+              value: "true"
+            - name: HLTB_API_ENABLED
+              value: "true"
             - name: ROMM_AUTH_SECRET_KEY
               valueFrom:
                 secretKeyRef:
                   key: ROMM_AUTH_SECRET_KEY
+                  name: romm-secrets
+            - name: STEAMGRIDDB_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: STEAMGRIDDB_API_KEY
+                  name: romm-secrets
+            - name: IGDB_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  key: IGDB_CLIENT_ID
+                  name: romm-secrets
+            - name: IGDB_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: IGDB_CLIENT_SECRET
+                  name: romm-secrets
+            - name: RETROACHIEVEMENTS_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: RETROACHIEVEMENTS_API_KEY
                   name: romm-secrets
           image: ghcr.io/rommapp/romm
           imagePullPolicy: Always
