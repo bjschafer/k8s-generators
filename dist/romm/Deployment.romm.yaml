@@ -40,6 +40,20 @@ spec:
                 secretKeyRef:
                   key: password
                   name: romm-db-credentials
+            - name: HASHEOUS_API_ENABLED
+              value: "true"
+            - name: HLTB_API_ENABLED
+              value: "true"
+            - name: OIDC_ENABLED
+              value: "true"
+            - name: OIDC_PROVIDER
+              value: authentik
+            - name: OIDC_CLIENT_ID
+              value: fU7QdKmVDx3WeOV0UGAkUbMNAJsMOX2j7gc7ExX5
+            - name: OIDC_REDIRECT_URI
+              value: https://roms.cmdcentral.xyz/api/oauth/openid
+            - name: OIDC_SERVER_APPLICATION_URL
+              value: https://login.cmdcentral.xyz/application/o/romm
             - name: ROMM_DB_DRIVER
               value: postgresql
             - name: ROMM_PORT
@@ -51,16 +65,19 @@ spec:
                 secretKeyRef:
                   key: valkey-password
                   name: romm-valkey
+            - name: SCAN_WORKERS
+              value: "4"
             - name: TZ
               value: America/Chicago
-            - name: HASHEUS_API_ENABLED
-              value: "true"
-            - name: HLTB_API_ENABLED
-              value: "true"
             - name: ROMM_AUTH_SECRET_KEY
               valueFrom:
                 secretKeyRef:
                   key: ROMM_AUTH_SECRET_KEY
+                  name: romm-secrets
+            - name: OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: OIDC_CLIENT_SECRET
                   name: romm-secrets
             - name: STEAMGRIDDB_API_KEY
               valueFrom:

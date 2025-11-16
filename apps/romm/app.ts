@@ -44,6 +44,7 @@ const rommSecrets = new BitwardenSecret(app, "romm-secrets", {
   namespace: namespace,
   data: {
     ROMM_AUTH_SECRET_KEY: "a3aba159-fc66-439f-a5e3-b392004420dc",
+    OIDC_CLIENT_SECRET: "c8455351-69c8-4c7b-a2a8-b3970045bc37",
     STEAMGRIDDB_API_KEY: "a8eb88f1-883f-4d4b-8a68-b39500311177",
     IGDB_CLIENT_ID: "dbd8a5ac-244f-45a3-9761-b3950031deac",
     IGDB_CLIENT_SECRET: "55c730d8-d24b-47eb-9243-b3950031f0d9",
@@ -90,16 +91,35 @@ const server = new AppPlus(app, name, {
       secret: dbCreds.secret,
       key: "password",
     }),
+
+    HASHEOUS_API_ENABLED: EnvValue.fromValue("true"),
+    HLTB_API_ENABLED: EnvValue.fromValue("true"),
+
+    OIDC_ENABLED: EnvValue.fromValue("true"),
+    OIDC_PROVIDER: EnvValue.fromValue("authentik"),
+    OIDC_CLIENT_ID: EnvValue.fromValue(
+      "fU7QdKmVDx3WeOV0UGAkUbMNAJsMOX2j7gc7ExX5",
+    ),
+    OIDC_REDIRECT_URI: EnvValue.fromValue(
+      "https://roms.cmdcentral.xyz/api/oauth/openid",
+    ),
+    OIDC_SERVER_APPLICATION_URL: EnvValue.fromValue(
+      "https://login.cmdcentral.xyz/application/o/romm",
+    ),
+
     ROMM_DB_DRIVER: EnvValue.fromValue("postgresql"),
     ROMM_PORT: EnvValue.fromValue(`${port}`), // this seems to be a bug
+
     REDIS_HOST: EnvValue.fromValue(valkey.Service.name),
     REDIS_PASSWORD: EnvValue.fromSecretValue({
       secret: valkey.secret,
       key: "valkey-password",
     }),
+
+    SCAN_WORKERS: EnvValue.fromValue("4"),
+
     TZ: EnvValue.fromValue("America/Chicago"),
-    HASHEUS_API_ENABLED: EnvValue.fromValue("true"),
-    HLTB_API_ENABLED: EnvValue.fromValue("true"),
+
     ...rommSecrets.toEnvValues(),
   },
   livenessProbe: Probe.fromHttpGet("/api/heartbeat", {
