@@ -44,6 +44,8 @@ spec:
               value: "true"
             - name: HLTB_API_ENABLED
               value: "true"
+            - name: DISABLE_USERPASS_LOGIN
+              value: "true"
             - name: OIDC_ENABLED
               value: "true"
             - name: OIDC_PROVIDER

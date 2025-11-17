@@ -95,6 +95,7 @@ const server = new AppPlus(app, name, {
     HASHEOUS_API_ENABLED: EnvValue.fromValue("true"),
     HLTB_API_ENABLED: EnvValue.fromValue("true"),
 
+    DISABLE_USERPASS_LOGIN: EnvValue.fromValue("true"),
     OIDC_ENABLED: EnvValue.fromValue("true"),
     OIDC_PROVIDER: EnvValue.fromValue("authentik"),
     OIDC_CLIENT_ID: EnvValue.fromValue(
