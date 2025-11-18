@@ -9,23 +9,20 @@ metadata:
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/component: crds
-    app.kubernetes.io/version: v1.18.2
+    app.kubernetes.io/version: v1.19.1
 spec:
   group: acme.cert-manager.io
   names:
+    categories:
+      - cert-manager
+      - cert-manager-acme
     kind: Order
     listKind: OrderList
     plural: orders
     singular: order
-    categories:
-      - cert-manager
-      - cert-manager-acme
   scope: Namespaced
   versions:
-    - name: v1
-      subresources:
-        status: {}
-      additionalPrinterColumns:
+    - additionalPrinterColumns:
         - jsonPath: .status.state
           name: State
           type: string
@@ -37,20 +34,17 @@ spec:
           name: Reason
           priority: 1
           type: string
-        - jsonPath: .metadata.creationTimestamp
-          description: CreationTimestamp is a timestamp representing the server time when
+        - description: CreationTimestamp is a timestamp representing the server time when
             this object was created. It is not guaranteed to be set in
             happens-before order across separate operations. Clients may not set
             this value. It is represented in RFC3339 form and is in UTC.
+          jsonPath: .metadata.creationTimestamp
           name: Age
           type: date
+      name: v1
       schema:
         openAPIV3Schema:
           description: Order is a type to represent an Order with an ACME server
-          type: object
-          required:
-            - metadata
-            - spec
           properties:
             apiVersion:
               description: |-
@@ -70,10 +64,6 @@ spec:
             metadata:
               type: object
             spec:
-              type: object
-              required:
-                - issuerRef
-                - request
               properties:
                 commonName:
                   description: >-
@@ -95,9 +85,10 @@ spec:
 
                     This field must match the corresponding field on the DER
                     encoded CSR.
-                  type: array
                   items:
                     type: string
+                  type: array
+                  x-kubernetes-list-type: atomic
                 duration:
                   description: >-
                     Duration is the duration for the not after date for the
@@ -114,9 +105,10 @@ spec:
 
                     This field must match the corresponding field on the DER
                     encoded CSR.
-                  type: array
                   items:
                     type: string
+                  type: array
+                  x-kubernetes-list-type: atomic
                 issuerRef:
                   description: >-
                     IssuerRef references a properly configured ACME-type Issuer
@@ -130,19 +122,23 @@ spec:
                     returned and the
 
                     Order will be marked as failed.
-                  type: object
-                  required:
-                    - name
                   properties:
                     group:
-                      description: Group of the resource being referred to.
+                      description: |-
+                        Group of the issuer being referred to.
+                        Defaults to 'cert-manager.io'.
                       type: string
                     kind:
-                      description: Kind of the resource being referred to.
+                      description: |-
+                        Kind of the issuer being referred to.
+                        Defaults to 'Issuer'.
                       type: string
                     name:
-                      description: Name of the resource being referred to.
+                      description: Name of the issuer being referred to.
                       type: string
+                  required:
+                    - name
+                  type: object
                 profile:
                   description: >-
                     Profile allows requesting a certificate profile from the
@@ -156,10 +152,13 @@ spec:
                     Certificate signing request bytes in DER encoding.
                     This will be used when finalizing the order.
                     This field must be set on the order.
-                  type: string
                   format: byte
-            status:
+                  type: string
+              required:
+                - issuerRef
+                - request
               type: object
+            status:
               properties:
                 authorizations:
                   description: >-
@@ -170,7 +169,6 @@ spec:
                     DNS names
 
                     specified on the Order.
-                  type: array
                   items:
                     description: >-
                       ACMEAuthorization contains data returned from the ACME
@@ -180,9 +178,6 @@ spec:
                       DNS name on an ACME
 
                       Order resource.
-                    type: object
-                    required:
-                      - url
                     properties:
                       challenges:
                         description: >-
@@ -196,7 +191,6 @@ spec:
                           created to perform
 
                           the ACME challenge process.
-                        type: array
                         items:
                           description: >-
                             Challenge specifies a challenge offered by the ACME
@@ -206,11 +200,6 @@ spec:
                             perform the ACME
 
                             challenge process.
-                          type: object
-                          required:
-                            - token
-                            - type
-                            - url
                           properties:
                             token:
                               description: >-
@@ -243,6 +232,13 @@ spec:
                                 metadata about the Challenge from the ACME
                                 server.
                               type: string
+                          required:
+                            - token
+                            - type
+                            - url
+                          type: object
+                        type: array
+                        x-kubernetes-list-type: atomic
                       identifier:
                         description: Identifier is the DNS name to be validated as part of this
                           authorization
@@ -269,7 +265,6 @@ spec:
                           assumed to be pending
 
                           and a Challenge will be created.
-                        type: string
                         enum:
                           - valid
                           - ready
@@ -278,6 +273,7 @@ spec:
                           - invalid
                           - expired
                           - errored
+                        type: string
                       url:
                         description: URL is the URL of the Authorization that must be completed
                         type: string
@@ -297,6 +293,11 @@ spec:
                           field will be 'true' and the 'identifier' field will
                           be 'example.com'.
                         type: boolean
+                    required:
+                      - url
+                    type: object
+                  type: array
+                  x-kubernetes-list-type: atomic
                 certificate:
                   description: >-
                     Certificate is a copy of the PEM encoded certificate for
@@ -309,14 +310,14 @@ spec:
                     transitioned to the
 
                     'valid' state.
-                  type: string
                   format: byte
+                  type: string
                 failureTime:
                   description: |-
                     FailureTime stores the time that this order failed.
                     This is used to influence garbage collection and back-off.
-                  type: string
                   format: date-time
+                  type: string
                 finalizeURL:
                   description: >-
                     FinalizeURL of the Order.
@@ -335,7 +336,6 @@ spec:
                   description: |-
                     State contains the current state of this Order resource.
                     States 'success' and 'expired' are 'final'
-                  type: string
                   enum:
                     - valid
                     - ready
@@ -344,6 +344,7 @@ spec:
                     - invalid
                     - expired
                     - errored
+                  type: string
                 url:
                   description: >-
                     URL of the Order.
@@ -356,5 +357,12 @@ spec:
 
                     This field will be immutable after it is initially set.
                   type: string
+              type: object
+          required:
+            - metadata
+            - spec
+          type: object
       served: true
       storage: true
+      subresources:
+        status: {}

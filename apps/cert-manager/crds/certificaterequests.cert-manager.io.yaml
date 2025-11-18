@@ -8,10 +8,13 @@ metadata:
     app: cert-manager
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/version: v1.18.2
+    app.kubernetes.io/component: crds
+    app.kubernetes.io/version: v1.19.1
 spec:
   group: cert-manager.io
   names:
+    categories:
+      - cert-manager
     kind: CertificateRequest
     listKind: CertificateRequestList
     plural: certificaterequests
@@ -19,21 +22,16 @@ spec:
       - cr
       - crs
     singular: certificaterequest
-    categories:
-      - cert-manager
   scope: Namespaced
   versions:
-    - name: v1
-      subresources:
-        status: {}
-      additionalPrinterColumns:
-        - jsonPath: .status.conditions[?(@.type=="Approved")].status
+    - additionalPrinterColumns:
+        - jsonPath: .status.conditions[?(@.type == "Approved")].status
           name: Approved
           type: string
-        - jsonPath: .status.conditions[?(@.type=="Denied")].status
+        - jsonPath: .status.conditions[?(@.type == "Denied")].status
           name: Denied
           type: string
-        - jsonPath: .status.conditions[?(@.type=="Ready")].status
+        - jsonPath: .status.conditions[?(@.type == "Ready")].status
           name: Ready
           type: string
         - jsonPath: .spec.issuerRef.name
@@ -42,17 +40,18 @@ spec:
         - jsonPath: .spec.username
           name: Requester
           type: string
-        - jsonPath: .status.conditions[?(@.type=="Ready")].message
+        - jsonPath: .status.conditions[?(@.type == "Ready")].message
           name: Status
           priority: 1
           type: string
-        - jsonPath: .metadata.creationTimestamp
-          description: CreationTimestamp is a timestamp representing the server time when
+        - description: CreationTimestamp is a timestamp representing the server time when
             this object was created. It is not guaranteed to be set in
             happens-before order across separate operations. Clients may not set
             this value. It is represented in RFC3339 form and is in UTC.
+          jsonPath: .metadata.creationTimestamp
           name: Age
           type: date
+      name: v1
       schema:
         openAPIV3Schema:
           description: >-
@@ -75,7 +74,6 @@ spec:
             single
 
             point in time request for a certificate and cannot be re-used.
-          type: object
           properties:
             apiVersion:
               description: |-
@@ -98,10 +96,6 @@ spec:
               description: |-
                 Specification of the desired state of the CertificateRequest resource.
                 https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
-              type: object
-              required:
-                - issuerRef
-                - request
               properties:
                 duration:
                   description: >-
@@ -114,6 +108,10 @@ spec:
                     requested attribute.
                   type: string
                 extra:
+                  additionalProperties:
+                    items:
+                      type: string
+                    type: array
                   description: >-
                     Extra contains extra attributes of the user that created the
                     CertificateRequest.
@@ -121,10 +119,6 @@ spec:
                     Populated by the cert-manager webhook on creation and
                     immutable.
                   type: object
-                  additionalProperties:
-                    type: array
-                    items:
-                      type: string
                 groups:
                   description: >-
                     Groups contains group membership of the user that created
@@ -132,9 +126,9 @@ spec:
 
                     Populated by the cert-manager webhook on creation and
                     immutable.
-                  type: array
                   items:
                     type: string
+                  type: array
                   x-kubernetes-list-type: atomic
                 isCA:
                   description: >-
@@ -171,19 +165,23 @@ spec:
 
 
                     The `name` field of the reference must always be specified.
-                  type: object
-                  required:
-                    - name
                   properties:
                     group:
-                      description: Group of the resource being referred to.
+                      description: |-
+                        Group of the issuer being referred to.
+                        Defaults to 'cert-manager.io'.
                       type: string
                     kind:
-                      description: Kind of the resource being referred to.
+                      description: |-
+                        Kind of the issuer being referred to.
+                        Defaults to 'Issuer'.
                       type: string
                     name:
-                      description: Name of the resource being referred to.
+                      description: Name of the issuer being referred to.
                       type: string
+                  required:
+                    - name
+                  type: object
                 request:
                   description: >-
                     The PEM-encoded X.509 certificate signing request to be
@@ -209,8 +207,8 @@ spec:
                     this
 
                     CertificateRequest.
-                  type: string
                   format: byte
+                  type: string
                 uid:
                   description: >-
                     UID contains the uid of the user that created the
@@ -235,7 +233,6 @@ spec:
 
                     If unset, defaults to `digital signature` and `key
                     encipherment`.
-                  type: array
                   items:
                     description: |-
                       KeyUsage specifies valid usage contexts for keys.
@@ -267,7 +264,6 @@ spec:
                       "ocsp signing",
                       "microsoft sgc",
                       "netscape sgc"
-                    type: string
                     enum:
                       - signing
                       - digital signature
@@ -292,6 +288,9 @@ spec:
                       - ocsp signing
                       - microsoft sgc
                       - netscape sgc
+                    type: string
+                  type: array
+                  x-kubernetes-list-type: atomic
                 username:
                   description: >-
                     Username contains the name of the user that created the
@@ -300,13 +299,16 @@ spec:
                     Populated by the cert-manager webhook on creation and
                     immutable.
                   type: string
+              required:
+                - issuerRef
+                - request
+              type: object
             status:
               description: |-
                 Status of the CertificateRequest.
                 This is set and managed automatically.
                 Read-only.
                 More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
-              type: object
               properties:
                 ca:
                   description: >-
@@ -318,8 +320,8 @@ spec:
                     This is set on a best-effort basis by different issuers.
 
                     If not set, the CA is assumed to be unknown/not available.
-                  type: string
                   format: byte
+                  type: string
                 certificate:
                   description: >-
                     The PEM encoded X.509 certificate resulting from the
@@ -334,8 +336,8 @@ spec:
                     the
 
                     `conditions` field.
-                  type: string
                   format: byte
+                  type: string
                 conditions:
                   description: >-
                     List of status conditions to indicate the status of a
@@ -343,14 +345,9 @@ spec:
 
                     Known condition types are `Ready`, `InvalidRequest`,
                     `Approved` and `Denied`.
-                  type: array
                   items:
                     description: CertificateRequestCondition contains condition information for a
                       CertificateRequest.
-                    type: object
-                    required:
-                      - status
-                      - type
                     properties:
                       lastTransitionTime:
                         description: >-
@@ -358,8 +355,8 @@ spec:
                           the last status
 
                           change of this condition.
-                        type: string
                         format: date-time
+                        type: string
                       message:
                         description: >-
                           Message is a human readable description of the details
@@ -376,11 +373,11 @@ spec:
                         type: string
                       status:
                         description: Status of the condition, one of (`True`, `False`, `Unknown`).
-                        type: string
                         enum:
                           - "True"
                           - "False"
                           - Unknown
+                        type: string
                       type:
                         description: >-
                           Type of the condition, known values are (`Ready`,
@@ -388,6 +385,11 @@ spec:
 
                           `Approved`, `Denied`).
                         type: string
+                    required:
+                      - status
+                      - type
+                    type: object
+                  type: array
                   x-kubernetes-list-map-keys:
                     - type
                   x-kubernetes-list-type: map
@@ -397,7 +399,11 @@ spec:
                     failed. This is
 
                     used to influence garbage collection and back-off.
-                  type: string
                   format: date-time
+                  type: string
+              type: object
+          type: object
       served: true
       storage: true
+      subresources:
+        status: {}
