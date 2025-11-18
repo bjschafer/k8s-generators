@@ -25,7 +25,7 @@
     "cdk8s-plus-33": "^2.4.6",
     "constructs": "^10.4.3",
     "eslint": "^9.39.1",
-    "js-yaml": "4.1.0",
+    "js-yaml": "4.1.1",
     "prettier": "^3.6.2",
     "tsheredoc": "^1.0.1",
     "yaml": "^2.8.1"
