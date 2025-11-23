@@ -1,12 +1,6 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  annotations:
-    argocd-image-updater.argoproj.io/git-branch: main
-    argocd-image-updater.argoproj.io/image-list: recipes=ghcr.io/tandoorrecipes/recipes:latest,nginx=public.ecr.aws/nginx/nginx:latest
-    argocd-image-updater.argoproj.io/nginx.update-strategy: digest
-    argocd-image-updater.argoproj.io/recipes.update-strategy: digest
-    argocd-image-updater.argoproj.io/write-back-method: git
   labels:
     app.kubernetes.io/name: recipes
   name: recipes
@@ -26,3 +20,28 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+---
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  labels:
+    app.kubernetes.io/name: recipes
+  name: recipes-updater
+  namespace: argocd
+spec:
+  applicationRefs:
+    - images:
+        - alias: recipes
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: ghcr.io/tandoorrecipes/recipes:latest
+        - alias: nginx
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: public.ecr.aws/nginx/nginx:latest
+      namePattern: recipes
+  namespace: argocd
+  writeBackConfig:
+    gitConfig:
+      branch: main
+    method: git

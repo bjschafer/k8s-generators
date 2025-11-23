@@ -1,12 +1,17 @@
+import { App, AppProps, Chart, YamlOutputType } from "cdk8s";
+import { SecretReference } from "cdk8s-plus-33/lib/imports/k8s";
+import { Construct } from "constructs";
+import * as path from "node:path";
+import {
+  ImageUpdater,
+  ImageUpdaterSpecApplicationRefsImages,
+  ImageUpdaterSpecWriteBackConfig,
+} from "../imports/argocd-image-updater.argoproj.io";
 import {
   Application,
   ApplicationSpecIgnoreDifferences,
   ApplicationSpecSyncPolicy,
 } from "../imports/argoproj.io";
-import { App, AppProps, Chart, YamlOutputType } from "cdk8s";
-import { Construct } from "constructs";
-import { SecretReference } from "cdk8s-plus-33/lib/imports/k8s";
-import * as path from "node:path";
 
 export const ARGO_NAMESPACE = "argocd";
 export const ARGO_DESTINATION_SERVER = "https://kubernetes.default.svc";
@@ -83,7 +88,7 @@ export class ArgoApp extends Chart {
       syncOptions,
     };
 
-    const app = new Application(this, `${name}-application`, {
+    new Application(this, `${name}-application`, {
       metadata: {
         name: name,
         namespace: ARGO_NAMESPACE,
@@ -108,65 +113,77 @@ export class ArgoApp extends Chart {
     });
 
     if (props.autoUpdate) {
-      app.metadata.addAnnotation(
-        `${argoUpdateAnnotationBase}/write-back-method`,
-        props.autoUpdate.writebackMethod?.method ?? "git",
-      );
-      if (
-        !props.autoUpdate.writebackMethod?.method ||
-        props.autoUpdate.writebackMethod?.method === "git"
-      ) {
-        app.metadata.addAnnotation(
-          `${argoUpdateAnnotationBase}/git-branch`,
-          props.autoUpdate.writebackMethod?.gitBranch ?? "main",
-        );
-      }
-
-      // the annotation expects images to be in the format
-      // alias=image:version,alias=image:version
-      const imageList = props.autoUpdate.images
-        .map((image) => {
+      const images: ImageUpdaterSpecApplicationRefsImages[] =
+        props.autoUpdate.images.map((image) => {
           const alias = this.getImageAlias(image.image);
           const versionConstraint = image.versionConstraint
             ? `:${image.versionConstraint}`
             : ":latest";
-          return `${alias}=${image.image}${versionConstraint}`;
-        })
-        .join(",");
 
-      app.metadata.addAnnotation(
-        `${argoUpdateAnnotationBase}/image-list`,
-        imageList,
-      );
+          const updateStrategy = this.mapUpdateStrategy(image.strategy);
 
-      for (const image of props.autoUpdate.images) {
-        const alias = this.getImageAlias(image.image);
+          return {
+            alias,
+            imageName: `${image.image}${versionConstraint}`,
+            commonUpdateSettings: {
+              updateStrategy,
+              allowTags: image.allowTags
+                ? `regexp:${image.allowTags}`
+                : undefined,
+              ignoreTags: image.ignoreTags,
+              pullSecret: image.imagePullSecret
+                ? `${image.imagePullSecret.namespace}/${image.imagePullSecret.name}`
+                : undefined,
+            },
+            manifestTargets: image.helm
+              ? {
+                  helm: {
+                    name: image.helm.name,
+                    tag: image.helm.tag,
+                  },
+                }
+              : undefined,
+          };
+        });
 
-        app.metadata.addAnnotation(
-          `${argoUpdateAnnotationBase}/${alias}.update-strategy`,
-          image.strategy,
-        );
+      const writeBackMethod = props.autoUpdate.writebackMethod?.method ?? "git";
+      const writeBackConfig: ImageUpdaterSpecWriteBackConfig = {
+        method: writeBackMethod,
+        gitConfig:
+          writeBackMethod === "git"
+            ? {
+                branch: props.autoUpdate.writebackMethod?.gitBranch ?? "main",
+              }
+            : undefined,
+      };
 
-        if (image.allowTags) {
-          app.metadata.addAnnotation(
-            `${argoUpdateAnnotationBase}/${alias}.allow-tags`,
-            `regexp:${image.allowTags}`,
-          );
-        }
-        if (image.ignoreTags) {
-          app.metadata.addAnnotation(
-            `${argoUpdateAnnotationBase}/${alias}.ignore-tags`,
-            image.ignoreTags.join(", "),
-          );
-        }
+      new ImageUpdater(this, `${name}-updater`, {
+        metadata: {
+          name: `${name}-updater`,
+          namespace: ARGO_NAMESPACE,
+        },
+        spec: {
+          namespace: ARGO_NAMESPACE,
+          applicationRefs: [
+            {
+              namePattern: name,
+              images,
+            },
+          ],
+          writeBackConfig,
+        },
+      });
+    }
+  }
 
-        if (image.imagePullSecret) {
-          app.metadata.addAnnotation(
-            `${argoUpdateAnnotationBase}/${alias}.imagePullSecret`,
-            `pullsecret:${image.imagePullSecret.namespace}/${image.imagePullSecret.name}}`,
-          );
-        }
-      }
+  private mapUpdateStrategy(strategy: ArgoUpdateStrategy): string {
+    switch (strategy) {
+      case "newest-build":
+        return "latest";
+      case "alphabetical":
+        return "name";
+      default:
+        return strategy;
     }
   }
 
@@ -179,13 +196,6 @@ export class ArgoApp extends Chart {
   }
 }
 
-const argoUpdateAnnotationBase = "argocd-image-updater.argoproj.io";
-
-/**
- * How ArgoCD Image Updater will determine if an image is out of date.
- * Odds are, you probably want digest, not latest.
- * @see - https://argocd-image-updater.readthedocs.io/en/stable/basics/update-strategies/
- */
 export type ArgoUpdateStrategy =
   | "digest"
   | "semver"

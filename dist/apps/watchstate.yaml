@@ -1,11 +1,6 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  annotations:
-    argocd-image-updater.argoproj.io/git-branch: main
-    argocd-image-updater.argoproj.io/image-list: watchstate=ghcr.io/arabcoders/watchstate:latest
-    argocd-image-updater.argoproj.io/watchstate.update-strategy: digest
-    argocd-image-updater.argoproj.io/write-back-method: git
   labels:
     app.kubernetes.io/name: watchstate
   name: watchstate
@@ -25,3 +20,24 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+---
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  labels:
+    app.kubernetes.io/name: watchstate
+  name: watchstate-updater
+  namespace: argocd
+spec:
+  applicationRefs:
+    - images:
+        - alias: watchstate
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: ghcr.io/arabcoders/watchstate:latest
+      namePattern: watchstate
+  namespace: argocd
+  writeBackConfig:
+    gitConfig:
+      branch: main
+    method: git

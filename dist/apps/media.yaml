@@ -1,16 +1,6 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  annotations:
-    argocd-image-updater.argoproj.io/git-branch: main
-    argocd-image-updater.argoproj.io/image-list: navidrome=ghcr.io/navidrome/navidrome:latest,sonarr=ghcr.io/linuxserver/sonarr:latest,radarr=ghcr.io/linuxserver/radarr:latest,lidarr=ghcr.io/linuxserver/lidarr:latest,sabnzbd=ghcr.io/linuxserver/sabnzbd:latest,prowlarr=ghcr.io/linuxserver/prowlarr:latest
-    argocd-image-updater.argoproj.io/lidarr.update-strategy: digest
-    argocd-image-updater.argoproj.io/navidrome.update-strategy: digest
-    argocd-image-updater.argoproj.io/prowlarr.update-strategy: digest
-    argocd-image-updater.argoproj.io/radarr.update-strategy: digest
-    argocd-image-updater.argoproj.io/sabnzbd.update-strategy: digest
-    argocd-image-updater.argoproj.io/sonarr.update-strategy: digest
-    argocd-image-updater.argoproj.io/write-back-method: git
   labels:
     app.kubernetes.io/name: media
   name: media
@@ -30,3 +20,44 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+---
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  labels:
+    app.kubernetes.io/name: media
+  name: media-updater
+  namespace: argocd
+spec:
+  applicationRefs:
+    - images:
+        - alias: navidrome
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: ghcr.io/navidrome/navidrome:latest
+        - alias: sonarr
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: ghcr.io/linuxserver/sonarr:latest
+        - alias: radarr
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: ghcr.io/linuxserver/radarr:latest
+        - alias: lidarr
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: ghcr.io/linuxserver/lidarr:latest
+        - alias: sabnzbd
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: ghcr.io/linuxserver/sabnzbd:latest
+        - alias: prowlarr
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: ghcr.io/linuxserver/prowlarr:latest
+      namePattern: media
+  namespace: argocd
+  writeBackConfig:
+    gitConfig:
+      branch: main
+    method: git

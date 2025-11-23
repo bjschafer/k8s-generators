@@ -1,11 +1,6 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  annotations:
-    argocd-image-updater.argoproj.io/git-branch: main
-    argocd-image-updater.argoproj.io/image-list: spoolman=ghcr.io/donkie/spoolman:latest
-    argocd-image-updater.argoproj.io/spoolman.update-strategy: digest
-    argocd-image-updater.argoproj.io/write-back-method: git
   labels:
     app.kubernetes.io/name: spoolman
   name: spoolman
@@ -25,3 +20,24 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+---
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  labels:
+    app.kubernetes.io/name: spoolman
+  name: spoolman-updater
+  namespace: argocd
+spec:
+  applicationRefs:
+    - images:
+        - alias: spoolman
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: ghcr.io/donkie/spoolman:latest
+      namePattern: spoolman
+  namespace: argocd
+  writeBackConfig:
+    gitConfig:
+      branch: main
+    method: git
