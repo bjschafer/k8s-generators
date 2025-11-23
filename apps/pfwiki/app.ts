@@ -12,6 +12,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { MysqlInstance } from "../../lib/mysql";
 import { basename } from "../../lib/util";
 import { StorageClass } from "../../lib/volume";
+import { NewKustomize } from "../../lib/kustomize";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -98,3 +99,5 @@ new AppPlus(app, "pfwiki", {
 });
 
 app.synth();
+
+NewKustomize(app.outdir);

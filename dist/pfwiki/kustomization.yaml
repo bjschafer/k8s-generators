@@ -1,0 +1,7 @@
+resources:
+  - Deployment.pfwiki.yaml
+  - Ingress.pfwiki.yaml
+  - PersistentVolumeClaim.data.yaml
+  - Service.db.yaml
+  - Service.pfwiki.yaml
+  - StatefulSet.db.yaml
