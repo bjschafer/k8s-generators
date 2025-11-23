@@ -116,13 +116,15 @@ export function toJson_AcrAccessTokenProps(obj: AcrAccessTokenProps | undefined)
  */
 export interface AcrAccessTokenSpec {
   /**
+   * ACRAuth defines the authentication methods for Azure Container Registry.
+   *
    * @schema AcrAccessTokenSpec#auth
    */
   readonly auth: AcrAccessTokenSpecAuth;
 
   /**
    * EnvironmentType specifies the Azure cloud environment endpoints to use for
-   * connecting and authenticating with Azure. By default it points to the public cloud AAD endpoint.
+   * connecting and authenticating with Azure. By default, it points to the public cloud AAD endpoint.
    * The following endpoints are available, also see here: https://github.com/Azure/go-autorest/blob/main/autorest/azure/environments.go#L152
    * PublicCloud, USGovernmentCloud, ChinaCloud, GermanCloud
    *
@@ -180,6 +182,8 @@ export function toJson_AcrAccessTokenSpec(obj: AcrAccessTokenSpec | undefined): 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * ACRAuth defines the authentication methods for Azure Container Registry.
+ *
  * @schema AcrAccessTokenSpecAuth
  */
 export interface AcrAccessTokenSpecAuth {
@@ -223,7 +227,7 @@ export function toJson_AcrAccessTokenSpecAuth(obj: AcrAccessTokenSpecAuth | unde
 
 /**
  * EnvironmentType specifies the Azure cloud environment endpoints to use for
- * connecting and authenticating with Azure. By default it points to the public cloud AAD endpoint.
+ * connecting and authenticating with Azure. By default, it points to the public cloud AAD endpoint.
  * The following endpoints are available, also see here: https://github.com/Azure/go-autorest/blob/main/autorest/azure/environments.go#L152
  * PublicCloud, USGovernmentCloud, ChinaCloud, GermanCloud
  *
@@ -277,8 +281,8 @@ export function toJson_AcrAccessTokenSpecAuthManagedIdentity(obj: AcrAccessToken
  */
 export interface AcrAccessTokenSpecAuthServicePrincipal {
   /**
-   * Configuration used to authenticate with Azure using static
-   * credentials stored in a Kind=Secret.
+   * AzureACRServicePrincipalAuthSecretRef defines the secret references for Azure Service Principal authentication.
+   * It uses static credentials stored in a Kind=Secret.
    *
    * @schema AcrAccessTokenSpecAuthServicePrincipal#secretRef
    */
@@ -329,8 +333,8 @@ export function toJson_AcrAccessTokenSpecAuthWorkloadIdentity(obj: AcrAccessToke
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Configuration used to authenticate with Azure using static
- * credentials stored in a Kind=Secret.
+ * AzureACRServicePrincipalAuthSecretRef defines the secret references for Azure Service Principal authentication.
+ * It uses static credentials stored in a Kind=Secret.
  *
  * @schema AcrAccessTokenSpecAuthServicePrincipalSecretRef
  */
@@ -572,6 +576,8 @@ export interface CloudsmithAccessTokenProps {
   readonly metadata?: ApiObjectMetadata;
 
   /**
+   * CloudsmithAccessTokenSpec defines the configuration for generating a Cloudsmith access token using OIDC authentication.
+   *
    * @schema CloudsmithAccessToken#spec
    */
   readonly spec?: CloudsmithAccessTokenSpec;
@@ -593,6 +599,8 @@ export function toJson_CloudsmithAccessTokenProps(obj: CloudsmithAccessTokenProp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * CloudsmithAccessTokenSpec defines the configuration for generating a Cloudsmith access token using OIDC authentication.
+ *
  * @schema CloudsmithAccessTokenSpec
  */
 export interface CloudsmithAccessTokenSpec {
@@ -757,6 +765,8 @@ export interface ClusterGeneratorProps {
   readonly metadata?: ApiObjectMetadata;
 
   /**
+   * ClusterGeneratorSpec defines the desired state of a ClusterGenerator.
+   *
    * @schema ClusterGenerator#spec
    */
   readonly spec?: ClusterGeneratorSpec;
@@ -778,6 +788,8 @@ export function toJson_ClusterGeneratorProps(obj: ClusterGeneratorProps | undefi
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * ClusterGeneratorSpec defines the desired state of a ClusterGenerator.
+ *
  * @schema ClusterGeneratorSpec
  */
 export interface ClusterGeneratorSpec {
@@ -827,11 +839,15 @@ export interface ClusterGeneratorSpecGenerator {
   readonly acrAccessTokenSpec?: ClusterGeneratorSpecGeneratorAcrAccessTokenSpec;
 
   /**
+   * CloudsmithAccessTokenSpec defines the configuration for generating a Cloudsmith access token using OIDC authentication.
+   *
    * @schema ClusterGeneratorSpecGenerator#cloudsmithAccessTokenSpec
    */
   readonly cloudsmithAccessTokenSpec?: ClusterGeneratorSpecGeneratorCloudsmithAccessTokenSpec;
 
   /**
+   * ECRAuthorizationTokenSpec defines the desired state to generate an AWS ECR authorization token.
+   *
    * @schema ClusterGeneratorSpecGenerator#ecrAuthorizationTokenSpec
    */
   readonly ecrAuthorizationTokenSpec?: ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpec;
@@ -844,11 +860,15 @@ export interface ClusterGeneratorSpecGenerator {
   readonly fakeSpec?: ClusterGeneratorSpecGeneratorFakeSpec;
 
   /**
+   * GCRAccessTokenSpec defines the desired state to generate a Google Container Registry access token.
+   *
    * @schema ClusterGeneratorSpecGenerator#gcrAccessTokenSpec
    */
   readonly gcrAccessTokenSpec?: ClusterGeneratorSpecGeneratorGcrAccessTokenSpec;
 
   /**
+   * GithubAccessTokenSpec defines the desired state to generate a GitHub access token.
+   *
    * @schema ClusterGeneratorSpecGenerator#githubAccessTokenSpec
    */
   readonly githubAccessTokenSpec?: ClusterGeneratorSpecGeneratorGithubAccessTokenSpec;
@@ -875,6 +895,8 @@ export interface ClusterGeneratorSpecGenerator {
   readonly passwordSpec?: ClusterGeneratorSpecGeneratorPasswordSpec;
 
   /**
+   * QuayAccessTokenSpec defines the desired state to generate a Quay access token.
+   *
    * @schema ClusterGeneratorSpecGenerator#quayAccessTokenSpec
    */
   readonly quayAccessTokenSpec?: ClusterGeneratorSpecGeneratorQuayAccessTokenSpec;
@@ -887,6 +909,8 @@ export interface ClusterGeneratorSpecGenerator {
   readonly sshKeySpec?: ClusterGeneratorSpecGeneratorSshKeySpec;
 
   /**
+   * STSSessionTokenSpec defines the desired state to generate an AWS STS session token.
+   *
    * @schema ClusterGeneratorSpecGenerator#stsSessionTokenSpec
    */
   readonly stsSessionTokenSpec?: ClusterGeneratorSpecGeneratorStsSessionTokenSpec;
@@ -899,6 +923,8 @@ export interface ClusterGeneratorSpecGenerator {
   readonly uuidSpec?: any;
 
   /**
+   * VaultDynamicSecretSpec defines the desired spec of VaultDynamicSecret.
+   *
    * @schema ClusterGeneratorSpecGenerator#vaultDynamicSecretSpec
    */
   readonly vaultDynamicSecretSpec?: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpec;
@@ -984,13 +1010,15 @@ export enum ClusterGeneratorSpecKind {
  */
 export interface ClusterGeneratorSpecGeneratorAcrAccessTokenSpec {
   /**
+   * ACRAuth defines the authentication methods for Azure Container Registry.
+   *
    * @schema ClusterGeneratorSpecGeneratorAcrAccessTokenSpec#auth
    */
   readonly auth: ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuth;
 
   /**
    * EnvironmentType specifies the Azure cloud environment endpoints to use for
-   * connecting and authenticating with Azure. By default it points to the public cloud AAD endpoint.
+   * connecting and authenticating with Azure. By default, it points to the public cloud AAD endpoint.
    * The following endpoints are available, also see here: https://github.com/Azure/go-autorest/blob/main/autorest/azure/environments.go#L152
    * PublicCloud, USGovernmentCloud, ChinaCloud, GermanCloud
    *
@@ -1048,6 +1076,8 @@ export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpec(obj: Clus
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * CloudsmithAccessTokenSpec defines the configuration for generating a Cloudsmith access token using OIDC authentication.
+ *
  * @schema ClusterGeneratorSpecGeneratorCloudsmithAccessTokenSpec
  */
 export interface ClusterGeneratorSpecGeneratorCloudsmithAccessTokenSpec {
@@ -1099,6 +1129,8 @@ export function toJson_ClusterGeneratorSpecGeneratorCloudsmithAccessTokenSpec(ob
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * ECRAuthorizationTokenSpec defines the desired state to generate an AWS ECR authorization token.
+ *
  * @schema ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpec
  */
 export interface ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpec {
@@ -1189,6 +1221,8 @@ export function toJson_ClusterGeneratorSpecGeneratorFakeSpec(obj: ClusterGenerat
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GCRAccessTokenSpec defines the desired state to generate a Google Container Registry access token.
+ *
  * @schema ClusterGeneratorSpecGeneratorGcrAccessTokenSpec
  */
 export interface ClusterGeneratorSpecGeneratorGcrAccessTokenSpec {
@@ -1223,6 +1257,8 @@ export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpec(obj: Clus
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GithubAccessTokenSpec defines the desired state to generate a GitHub access token.
+ *
  * @schema ClusterGeneratorSpecGeneratorGithubAccessTokenSpec
  */
 export interface ClusterGeneratorSpecGeneratorGithubAccessTokenSpec {
@@ -1259,7 +1295,7 @@ export interface ClusterGeneratorSpecGeneratorGithubAccessTokenSpec {
   readonly repositories?: string[];
 
   /**
-   * URL configures the Github instance URL. Defaults to https://github.com/.
+   * URL configures the GitHub instance URL. Defaults to https://github.com/.
    *
    * @default https://github.com/.
    * @schema ClusterGeneratorSpecGeneratorGithubAccessTokenSpec#url
@@ -1417,6 +1453,19 @@ export interface ClusterGeneratorSpecGeneratorPasswordSpec {
   readonly digits?: number;
 
   /**
+   * Encoding specifies the encoding of the generated password.
+   * Valid values are:
+   * - "raw" (default): no encoding
+   * - "base64": standard base64 encoding
+   * - "base64url": base64url encoding
+   * - "base32": base32 encoding
+   * - "hex": hexadecimal encoding
+   *
+   * @schema ClusterGeneratorSpecGeneratorPasswordSpec#encoding
+   */
+  readonly encoding?: ClusterGeneratorSpecGeneratorPasswordSpecEncoding;
+
+  /**
    * Length of the password to be generated.
    * Defaults to 24
    *
@@ -1458,6 +1507,7 @@ export function toJson_ClusterGeneratorSpecGeneratorPasswordSpec(obj: ClusterGen
   const result = {
     'allowRepeat': obj.allowRepeat,
     'digits': obj.digits,
+    'encoding': obj.encoding,
     'length': obj.length,
     'noUpper': obj.noUpper,
     'symbolCharacters': obj.symbolCharacters,
@@ -1469,6 +1519,8 @@ export function toJson_ClusterGeneratorSpecGeneratorPasswordSpec(obj: ClusterGen
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * QuayAccessTokenSpec defines the desired state to generate a Quay access token.
+ *
  * @schema ClusterGeneratorSpecGeneratorQuayAccessTokenSpec
  */
 export interface ClusterGeneratorSpecGeneratorQuayAccessTokenSpec {
@@ -1558,6 +1610,8 @@ export function toJson_ClusterGeneratorSpecGeneratorSshKeySpec(obj: ClusterGener
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * STSSessionTokenSpec defines the desired state to generate an AWS STS session token.
+ *
  * @schema ClusterGeneratorSpecGeneratorStsSessionTokenSpec
  */
 export interface ClusterGeneratorSpecGeneratorStsSessionTokenSpec {
@@ -1609,6 +1663,8 @@ export function toJson_ClusterGeneratorSpecGeneratorStsSessionTokenSpec(obj: Clu
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * VaultDynamicSecretSpec defines the desired spec of VaultDynamicSecret.
+ *
  * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpec
  */
 export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpec {
@@ -1657,7 +1713,7 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpec {
 
   /**
    * Result type defines which data is returned from the generator.
-   * By default it is the "data" section of the Vault API response.
+   * By default, it is the "data" section of the Vault API response.
    * When using e.g. /auth/token/create the "data" section is empty but
    * the "auth" section contains the generated token.
    * Please refer to the vault docs regarding the result data structure.
@@ -1801,6 +1857,8 @@ export function toJson_ClusterGeneratorSpecGeneratorWebhookSpec(obj: ClusterGene
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * ACRAuth defines the authentication methods for Azure Container Registry.
+ *
  * @schema ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuth
  */
 export interface ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuth {
@@ -1844,7 +1902,7 @@ export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuth(obj: 
 
 /**
  * EnvironmentType specifies the Azure cloud environment endpoints to use for
- * connecting and authenticating with Azure. By default it points to the public cloud AAD endpoint.
+ * connecting and authenticating with Azure. By default, it points to the public cloud AAD endpoint.
  * The following endpoints are available, also see here: https://github.com/Azure/go-autorest/blob/main/autorest/azure/environments.go#L152
  * PublicCloud, USGovernmentCloud, ChinaCloud, GermanCloud
  *
@@ -1917,7 +1975,7 @@ export function toJson_ClusterGeneratorSpecGeneratorCloudsmithAccessTokenSpecSer
  */
 export interface ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuth {
   /**
-   * Authenticate against AWS using service account tokens.
+   * AWSJWTAuth provides configuration to authenticate against AWS using service account tokens.
    *
    * @schema ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuth#jwt
    */
@@ -1954,11 +2012,15 @@ export function toJson_ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAut
  */
 export interface ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuth {
   /**
+   * GCPSMAuthSecretRef defines the reference to a secret containing Google Cloud Platform credentials.
+   *
    * @schema ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuth#secretRef
    */
   readonly secretRef?: ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthSecretRef;
 
   /**
+   * GCPWorkloadIdentity defines the configuration for using GCP Workload Identity authentication.
+   *
    * @schema ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuth#workloadIdentity
    */
   readonly workloadIdentity?: ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentity;
@@ -1994,6 +2056,8 @@ export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuth(obj: 
  */
 export interface ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuth {
   /**
+   * GithubSecretRef references a secret containing GitHub credentials.
+   *
    * @schema ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuth#privateKey
    */
   readonly privateKey: ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuthPrivateKey;
@@ -2142,6 +2206,30 @@ export function toJson_ClusterGeneratorSpecGeneratorMfaSpecSecret(obj: ClusterGe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Encoding specifies the encoding of the generated password.
+ * Valid values are:
+ * - "raw" (default): no encoding
+ * - "base64": standard base64 encoding
+ * - "base64url": base64url encoding
+ * - "base32": base32 encoding
+ * - "hex": hexadecimal encoding
+ *
+ * @schema ClusterGeneratorSpecGeneratorPasswordSpecEncoding
+ */
+export enum ClusterGeneratorSpecGeneratorPasswordSpecEncoding {
+  /** base64 */
+  BASE64 = "base64",
+  /** base64url */
+  BASE64URL = "base64url",
+  /** base32 */
+  BASE32 = "base32",
+  /** hex */
+  HEX = "hex",
+  /** raw */
+  RAW = "raw",
+}
+
+/**
  * Name of the service account you are federating with
  *
  * @schema ClusterGeneratorSpecGeneratorQuayAccessTokenSpecServiceAccountRef
@@ -2207,7 +2295,7 @@ export enum ClusterGeneratorSpecGeneratorSshKeySpecKeyType {
  */
 export interface ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuth {
   /**
-   * Authenticate against AWS using service account tokens.
+   * AWSJWTAuth provides configuration to authenticate against AWS using service account tokens.
    *
    * @schema ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuth#jwt
    */
@@ -2421,7 +2509,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
 
 /**
  * Result type defines which data is returned from the generator.
- * By default it is the "data" section of the Vault API response.
+ * By default, it is the "data" section of the Vault API response.
  * When using e.g. /auth/token/create the "data" section is empty but
  * the "auth" section contains the generated token.
  * Please refer to the vault docs regarding the result data structure.
@@ -2579,6 +2667,8 @@ export function toJson_ClusterGeneratorSpecGeneratorWebhookSpecResult(obj: Clust
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * WebhookSecret defines a secret reference that will be used in webhook templates.
+ *
  * @schema ClusterGeneratorSpecGeneratorWebhookSpecSecrets
  */
 export interface ClusterGeneratorSpecGeneratorWebhookSpecSecrets {
@@ -2647,8 +2737,8 @@ export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthManage
  */
 export interface ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipal {
   /**
-   * Configuration used to authenticate with Azure using static
-   * credentials stored in a Kind=Secret.
+   * AzureACRServicePrincipalAuthSecretRef defines the secret references for Azure Service Principal authentication.
+   * It uses static credentials stored in a Kind=Secret.
    *
    * @schema ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipal#secretRef
    */
@@ -2699,13 +2789,13 @@ export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthWorklo
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Authenticate against AWS using service account tokens.
+ * AWSJWTAuth provides configuration to authenticate against AWS using service account tokens.
  *
  * @schema ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthJwt
  */
 export interface ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthJwt {
   /**
-   * A reference to a ServiceAccount resource.
+   * ServiceAccountSelector is a reference to a ServiceAccount resource.
    *
    * @schema ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthJwt#serviceAccountRef
    */
@@ -2774,6 +2864,8 @@ export function toJson_ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAut
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GCPSMAuthSecretRef defines the reference to a secret containing Google Cloud Platform credentials.
+ *
  * @schema ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthSecretRef
  */
 export interface ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthSecretRef {
@@ -2800,6 +2892,8 @@ export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthSecret
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GCPWorkloadIdentity defines the configuration for using GCP Workload Identity authentication.
+ *
  * @schema ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentity
  */
 export interface ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentity {
@@ -2819,7 +2913,7 @@ export interface ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIden
   readonly clusterProjectId?: string;
 
   /**
-   * A reference to a ServiceAccount resource.
+   * ServiceAccountSelector is a reference to a ServiceAccount resource.
    *
    * @schema ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentity#serviceAccountRef
    */
@@ -2912,11 +3006,13 @@ export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorklo
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GithubSecretRef references a secret containing GitHub credentials.
+ *
  * @schema ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuthPrivateKey
  */
 export interface ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuthPrivateKey {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuthPrivateKey#secretRef
@@ -3017,13 +3113,13 @@ export function toJson_ClusterGeneratorSpecGeneratorGrafanaSpecAuthToken(obj: Cl
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Authenticate against AWS using service account tokens.
+ * AWSJWTAuth provides configuration to authenticate against AWS using service account tokens.
  *
  * @schema ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthJwt
  */
 export interface ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthJwt {
   /**
-   * A reference to a ServiceAccount resource.
+   * ServiceAccountSelector is a reference to a ServiceAccount resource.
    *
    * @schema ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthJwt#serviceAccountRef
    */
@@ -3341,7 +3437,7 @@ export enum ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderVersion {
  */
 export interface ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlm {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlm#passwordSecret
@@ -3349,7 +3445,7 @@ export interface ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlm {
   readonly passwordSecret: ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlmPasswordSecret;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlm#usernameSecret
@@ -3421,8 +3517,8 @@ export function toJson_ClusterGeneratorSpecGeneratorWebhookSpecSecretsSecretRef(
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Configuration used to authenticate with Azure using static
- * credentials stored in a Kind=Secret.
+ * AzureACRServicePrincipalAuthSecretRef defines the secret references for Azure Service Principal authentication.
+ * It uses static credentials stored in a Kind=Secret.
  *
  * @schema ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipalSecretRef
  */
@@ -3506,7 +3602,7 @@ export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthWorklo
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a ServiceAccount resource.
+ * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthJwtServiceAccountRef
  */
@@ -3739,7 +3835,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthSecret
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a ServiceAccount resource.
+ * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef
  */
@@ -3921,7 +4017,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorklo
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuthPrivateKeySecretRef
@@ -4004,7 +4100,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGrafanaSpecAuthBasicPassword
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a ServiceAccount resource.
+ * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthJwtServiceAccountRef
  */
@@ -4754,7 +4850,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlmPasswordSecret
@@ -4801,7 +4897,7 @@ export function toJson_ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlmPasswordS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlmUsernameSecret
@@ -5178,7 +5274,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
  */
 export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamJwt {
   /**
-   * A reference to a ServiceAccount resource.
+   * ServiceAccountSelector is a reference to a ServiceAccount resource.
    *
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamJwt#serviceAccountRef
    */
@@ -5542,7 +5638,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a ServiceAccount resource.
+ * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamJwtServiceAccountRef
  */
@@ -5777,8 +5873,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
 
 
 /**
- * ECRAuthorizationTokenSpec uses the GetAuthorizationToken API to retrieve an
-authorization token.
+ * ECRAuthorizationToken uses the GetAuthorizationToken API to retrieve an authorization token.
 The authorization token is valid for 12 hours.
 The authorizationToken returned is a base64 encoded string that can be decoded
 and used in a docker login command to authenticate to a registry.
@@ -5836,8 +5931,7 @@ export class EcrAuthorizationToken extends ApiObject {
 }
 
 /**
- * ECRAuthorizationTokenSpec uses the GetAuthorizationToken API to retrieve an
- * authorization token.
+ * ECRAuthorizationToken uses the GetAuthorizationToken API to retrieve an authorization token.
  * The authorization token is valid for 12 hours.
  * The authorizationToken returned is a base64 encoded string that can be decoded
  * and used in a docker login command to authenticate to a registry.
@@ -5852,6 +5946,8 @@ export interface EcrAuthorizationTokenProps {
   readonly metadata?: ApiObjectMetadata;
 
   /**
+   * ECRAuthorizationTokenSpec defines the desired state to generate an AWS ECR authorization token.
+   *
    * @schema ECRAuthorizationToken#spec
    */
   readonly spec?: EcrAuthorizationTokenSpec;
@@ -5873,6 +5969,8 @@ export function toJson_EcrAuthorizationTokenProps(obj: EcrAuthorizationTokenProp
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * ECRAuthorizationTokenSpec defines the desired state to generate an AWS ECR authorization token.
+ *
  * @schema EcrAuthorizationTokenSpec
  */
 export interface EcrAuthorizationTokenSpec {
@@ -5931,7 +6029,7 @@ export function toJson_EcrAuthorizationTokenSpec(obj: EcrAuthorizationTokenSpec 
  */
 export interface EcrAuthorizationTokenSpecAuth {
   /**
-   * Authenticate against AWS using service account tokens.
+   * AWSJWTAuth provides configuration to authenticate against AWS using service account tokens.
    *
    * @schema EcrAuthorizationTokenSpecAuth#jwt
    */
@@ -5962,13 +6060,13 @@ export function toJson_EcrAuthorizationTokenSpecAuth(obj: EcrAuthorizationTokenS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Authenticate against AWS using service account tokens.
+ * AWSJWTAuth provides configuration to authenticate against AWS using service account tokens.
  *
  * @schema EcrAuthorizationTokenSpecAuthJwt
  */
 export interface EcrAuthorizationTokenSpecAuthJwt {
   /**
-   * A reference to a ServiceAccount resource.
+   * ServiceAccountSelector is a reference to a ServiceAccount resource.
    *
    * @schema EcrAuthorizationTokenSpecAuthJwt#serviceAccountRef
    */
@@ -6037,7 +6135,7 @@ export function toJson_EcrAuthorizationTokenSpecAuthSecretRef(obj: EcrAuthorizat
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a ServiceAccount resource.
+ * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema EcrAuthorizationTokenSpecAuthJwtServiceAccountRef
  */
@@ -6421,6 +6519,8 @@ export interface GcrAccessTokenProps {
   readonly metadata?: ApiObjectMetadata;
 
   /**
+   * GCRAccessTokenSpec defines the desired state to generate a Google Container Registry access token.
+   *
    * @schema GCRAccessToken#spec
    */
   readonly spec?: GcrAccessTokenSpec;
@@ -6442,6 +6542,8 @@ export function toJson_GcrAccessTokenProps(obj: GcrAccessTokenProps | undefined)
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GCRAccessTokenSpec defines the desired state to generate a Google Container Registry access token.
+ *
  * @schema GcrAccessTokenSpec
  */
 export interface GcrAccessTokenSpec {
@@ -6482,11 +6584,15 @@ export function toJson_GcrAccessTokenSpec(obj: GcrAccessTokenSpec | undefined): 
  */
 export interface GcrAccessTokenSpecAuth {
   /**
+   * GCPSMAuthSecretRef defines the reference to a secret containing Google Cloud Platform credentials.
+   *
    * @schema GcrAccessTokenSpecAuth#secretRef
    */
   readonly secretRef?: GcrAccessTokenSpecAuthSecretRef;
 
   /**
+   * GCPWorkloadIdentity defines the configuration for using GCP Workload Identity authentication.
+   *
    * @schema GcrAccessTokenSpecAuth#workloadIdentity
    */
   readonly workloadIdentity?: GcrAccessTokenSpecAuthWorkloadIdentity;
@@ -6516,6 +6622,8 @@ export function toJson_GcrAccessTokenSpecAuth(obj: GcrAccessTokenSpecAuth | unde
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GCPSMAuthSecretRef defines the reference to a secret containing Google Cloud Platform credentials.
+ *
  * @schema GcrAccessTokenSpecAuthSecretRef
  */
 export interface GcrAccessTokenSpecAuthSecretRef {
@@ -6542,6 +6650,8 @@ export function toJson_GcrAccessTokenSpecAuthSecretRef(obj: GcrAccessTokenSpecAu
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GCPWorkloadIdentity defines the configuration for using GCP Workload Identity authentication.
+ *
  * @schema GcrAccessTokenSpecAuthWorkloadIdentity
  */
 export interface GcrAccessTokenSpecAuthWorkloadIdentity {
@@ -6561,7 +6671,7 @@ export interface GcrAccessTokenSpecAuthWorkloadIdentity {
   readonly clusterProjectId?: string;
 
   /**
-   * A reference to a ServiceAccount resource.
+   * ServiceAccountSelector is a reference to a ServiceAccount resource.
    *
    * @schema GcrAccessTokenSpecAuthWorkloadIdentity#serviceAccountRef
    */
@@ -6700,7 +6810,7 @@ export function toJson_GcrAccessTokenSpecAuthSecretRefSecretAccessKeySecretRef(o
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a ServiceAccount resource.
+ * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema GcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef
  */
@@ -6923,7 +7033,7 @@ export function toJson_GcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecuri
 
 
 /**
- *
+ * GeneratorState represents the state created and managed by a generator resource.
  *
  * @schema GeneratorState
  */
@@ -6977,6 +7087,8 @@ export class GeneratorState extends ApiObject {
 }
 
 /**
+ * GeneratorState represents the state created and managed by a generator resource.
+ *
  * @schema GeneratorState
  */
 export interface GeneratorStateProps {
@@ -6986,6 +7098,8 @@ export interface GeneratorStateProps {
   readonly metadata?: ApiObjectMetadata;
 
   /**
+   * GeneratorStateSpec defines the desired state of a generator state resource.
+   *
    * @schema GeneratorState#spec
    */
   readonly spec?: GeneratorStateSpec;
@@ -7007,6 +7121,8 @@ export function toJson_GeneratorStateProps(obj: GeneratorStateProps | undefined)
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GeneratorStateSpec defines the desired state of a generator state resource.
+ *
  * @schema GeneratorStateSpec
  */
 export interface GeneratorStateSpec {
@@ -7123,6 +7239,8 @@ export interface GithubAccessTokenProps {
   readonly metadata?: ApiObjectMetadata;
 
   /**
+   * GithubAccessTokenSpec defines the desired state to generate a GitHub access token.
+   *
    * @schema GithubAccessToken#spec
    */
   readonly spec?: GithubAccessTokenSpec;
@@ -7144,6 +7262,8 @@ export function toJson_GithubAccessTokenProps(obj: GithubAccessTokenProps | unde
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GithubAccessTokenSpec defines the desired state to generate a GitHub access token.
+ *
  * @schema GithubAccessTokenSpec
  */
 export interface GithubAccessTokenSpec {
@@ -7180,7 +7300,7 @@ export interface GithubAccessTokenSpec {
   readonly repositories?: string[];
 
   /**
-   * URL configures the Github instance URL. Defaults to https://github.com/.
+   * URL configures the GitHub instance URL. Defaults to https://github.com/.
    *
    * @default https://github.com/.
    * @schema GithubAccessTokenSpec#url
@@ -7214,6 +7334,8 @@ export function toJson_GithubAccessTokenSpec(obj: GithubAccessTokenSpec | undefi
  */
 export interface GithubAccessTokenSpecAuth {
   /**
+   * GithubSecretRef references a secret containing GitHub credentials.
+   *
    * @schema GithubAccessTokenSpecAuth#privateKey
    */
   readonly privateKey: GithubAccessTokenSpecAuthPrivateKey;
@@ -7234,11 +7356,13 @@ export function toJson_GithubAccessTokenSpecAuth(obj: GithubAccessTokenSpecAuth 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GithubSecretRef references a secret containing GitHub credentials.
+ *
  * @schema GithubAccessTokenSpecAuthPrivateKey
  */
 export interface GithubAccessTokenSpecAuthPrivateKey {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema GithubAccessTokenSpecAuthPrivateKey#secretRef
@@ -7261,7 +7385,7 @@ export function toJson_GithubAccessTokenSpecAuthPrivateKey(obj: GithubAccessToke
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema GithubAccessTokenSpecAuthPrivateKeySecretRef
@@ -7309,7 +7433,7 @@ export function toJson_GithubAccessTokenSpecAuthPrivateKeySecretRef(obj: GithubA
 
 
 /**
- *
+ * Grafana represents a generator for Grafana service account tokens.
  *
  * @schema Grafana
  */
@@ -7363,6 +7487,8 @@ export class Grafana extends ApiObject {
 }
 
 /**
+ * Grafana represents a generator for Grafana service account tokens.
+ *
  * @schema Grafana
  */
 export interface GrafanaProps {
@@ -7949,6 +8075,19 @@ export interface PasswordSpec {
   readonly digits?: number;
 
   /**
+   * Encoding specifies the encoding of the generated password.
+   * Valid values are:
+   * - "raw" (default): no encoding
+   * - "base64": standard base64 encoding
+   * - "base64url": base64url encoding
+   * - "base32": base32 encoding
+   * - "hex": hexadecimal encoding
+   *
+   * @schema PasswordSpec#encoding
+   */
+  readonly encoding?: PasswordSpecEncoding;
+
+  /**
    * Length of the password to be generated.
    * Defaults to 24
    *
@@ -7990,6 +8129,7 @@ export function toJson_PasswordSpec(obj: PasswordSpec | undefined): Record<strin
   const result = {
     'allowRepeat': obj.allowRepeat,
     'digits': obj.digits,
+    'encoding': obj.encoding,
     'length': obj.length,
     'noUpper': obj.noUpper,
     'symbolCharacters': obj.symbolCharacters,
@@ -7999,6 +8139,30 @@ export function toJson_PasswordSpec(obj: PasswordSpec | undefined): Record<strin
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Encoding specifies the encoding of the generated password.
+ * Valid values are:
+ * - "raw" (default): no encoding
+ * - "base64": standard base64 encoding
+ * - "base64url": base64url encoding
+ * - "base32": base32 encoding
+ * - "hex": hexadecimal encoding
+ *
+ * @schema PasswordSpecEncoding
+ */
+export enum PasswordSpecEncoding {
+  /** base64 */
+  BASE64 = "base64",
+  /** base64url */
+  BASE64URL = "base64url",
+  /** base32 */
+  BASE32 = "base32",
+  /** hex */
+  HEX = "hex",
+  /** raw */
+  RAW = "raw",
+}
 
 
 /**
@@ -8067,6 +8231,8 @@ export interface QuayAccessTokenProps {
   readonly metadata?: ApiObjectMetadata;
 
   /**
+   * QuayAccessTokenSpec defines the desired state to generate a Quay access token.
+   *
    * @schema QuayAccessToken#spec
    */
   readonly spec?: QuayAccessTokenSpec;
@@ -8088,6 +8254,8 @@ export function toJson_QuayAccessTokenProps(obj: QuayAccessTokenProps | undefine
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * QuayAccessTokenSpec defines the desired state to generate a Quay access token.
+ *
  * @schema QuayAccessTokenSpec
  */
 export interface QuayAccessTokenSpec {
@@ -8397,6 +8565,8 @@ export interface StsSessionTokenProps {
   readonly metadata?: ApiObjectMetadata;
 
   /**
+   * STSSessionTokenSpec defines the desired state to generate an AWS STS session token.
+   *
    * @schema STSSessionToken#spec
    */
   readonly spec?: StsSessionTokenSpec;
@@ -8418,6 +8588,8 @@ export function toJson_StsSessionTokenProps(obj: StsSessionTokenProps | undefine
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * STSSessionTokenSpec defines the desired state to generate an AWS STS session token.
+ *
  * @schema StsSessionTokenSpec
  */
 export interface StsSessionTokenSpec {
@@ -8475,7 +8647,7 @@ export function toJson_StsSessionTokenSpec(obj: StsSessionTokenSpec | undefined)
  */
 export interface StsSessionTokenSpecAuth {
   /**
-   * Authenticate against AWS using service account tokens.
+   * AWSJWTAuth provides configuration to authenticate against AWS using service account tokens.
    *
    * @schema StsSessionTokenSpecAuth#jwt
    */
@@ -8551,13 +8723,13 @@ export function toJson_StsSessionTokenSpecRequestParameters(obj: StsSessionToken
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Authenticate against AWS using service account tokens.
+ * AWSJWTAuth provides configuration to authenticate against AWS using service account tokens.
  *
  * @schema StsSessionTokenSpecAuthJwt
  */
 export interface StsSessionTokenSpecAuthJwt {
   /**
-   * A reference to a ServiceAccount resource.
+   * ServiceAccountSelector is a reference to a ServiceAccount resource.
    *
    * @schema StsSessionTokenSpecAuthJwt#serviceAccountRef
    */
@@ -8626,7 +8798,7 @@ export function toJson_StsSessionTokenSpecAuthSecretRef(obj: StsSessionTokenSpec
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a ServiceAccount resource.
+ * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema StsSessionTokenSpecAuthJwtServiceAccountRef
  */
@@ -8903,7 +9075,7 @@ export function toJson_UuidProps(obj: UuidProps | undefined): Record<string, any
 
 
 /**
- *
+ * VaultDynamicSecret represents a generator that can create dynamic secrets from HashiCorp Vault.
  *
  * @schema VaultDynamicSecret
  */
@@ -8957,6 +9129,8 @@ export class VaultDynamicSecret extends ApiObject {
 }
 
 /**
+ * VaultDynamicSecret represents a generator that can create dynamic secrets from HashiCorp Vault.
+ *
  * @schema VaultDynamicSecret
  */
 export interface VaultDynamicSecretProps {
@@ -8966,6 +9140,8 @@ export interface VaultDynamicSecretProps {
   readonly metadata?: ApiObjectMetadata;
 
   /**
+   * VaultDynamicSecretSpec defines the desired spec of VaultDynamicSecret.
+   *
    * @schema VaultDynamicSecret#spec
    */
   readonly spec?: VaultDynamicSecretSpec;
@@ -8987,6 +9163,8 @@ export function toJson_VaultDynamicSecretProps(obj: VaultDynamicSecretProps | un
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * VaultDynamicSecretSpec defines the desired spec of VaultDynamicSecret.
+ *
  * @schema VaultDynamicSecretSpec
  */
 export interface VaultDynamicSecretSpec {
@@ -9035,7 +9213,7 @@ export interface VaultDynamicSecretSpec {
 
   /**
    * Result type defines which data is returned from the generator.
-   * By default it is the "data" section of the Vault API response.
+   * By default, it is the "data" section of the Vault API response.
    * When using e.g. /auth/token/create the "data" section is empty but
    * the "auth" section contains the generated token.
    * Please refer to the vault docs regarding the result data structure.
@@ -9213,7 +9391,7 @@ export function toJson_VaultDynamicSecretSpecProvider(obj: VaultDynamicSecretSpe
 
 /**
  * Result type defines which data is returned from the generator.
- * By default it is the "data" section of the Vault API response.
+ * By default, it is the "data" section of the Vault API response.
  * When using e.g. /auth/token/create the "data" section is empty but
  * the "auth" section contains the generated token.
  * Please refer to the vault docs regarding the result data structure.
@@ -10267,7 +10445,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthCertSecretRef(obj: Vaul
  */
 export interface VaultDynamicSecretSpecProviderAuthIamJwt {
   /**
-   * A reference to a ServiceAccount resource.
+   * ServiceAccountSelector is a reference to a ServiceAccount resource.
    *
    * @schema VaultDynamicSecretSpecProviderAuthIamJwt#serviceAccountRef
    */
@@ -10631,7 +10809,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthUserPassSecretRef(obj: 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a ServiceAccount resource.
+ * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema VaultDynamicSecretSpecProviderAuthIamJwtServiceAccountRef
  */
@@ -11172,6 +11350,8 @@ export function toJson_WebhookSpecResult(obj: WebhookSpecResult | undefined): Re
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * WebhookSecret defines a secret reference that will be used in webhook templates.
+ *
  * @schema WebhookSpecSecrets
  */
 export interface WebhookSpecSecrets {
@@ -11212,7 +11392,7 @@ export function toJson_WebhookSpecSecrets(obj: WebhookSpecSecrets | undefined): 
  */
 export interface WebhookSpecAuthNtlm {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema WebhookSpecAuthNtlm#passwordSecret
@@ -11220,7 +11400,7 @@ export interface WebhookSpecAuthNtlm {
   readonly passwordSecret: WebhookSpecAuthNtlmPasswordSecret;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema WebhookSpecAuthNtlm#usernameSecret
@@ -11292,7 +11472,7 @@ export function toJson_WebhookSpecSecretsSecretRef(obj: WebhookSpecSecretsSecret
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema WebhookSpecAuthNtlmPasswordSecret
@@ -11339,7 +11519,7 @@ export function toJson_WebhookSpecAuthNtlmPasswordSecret(obj: WebhookSpecAuthNtl
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema WebhookSpecAuthNtlmUsernameSecret

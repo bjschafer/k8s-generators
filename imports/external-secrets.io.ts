@@ -255,8 +255,8 @@ export interface ClusterExternalSecretSpecExternalSecretSpec {
   readonly secretStoreRef?: ClusterExternalSecretSpecExternalSecretSpecSecretStoreRef;
 
   /**
-   * ExternalSecretTarget defines the Kubernetes Secret to be created
-   * There can be only one target per ExternalSecret.
+   * ExternalSecretTarget defines the Kubernetes Secret to be created,
+   * there can be only one target per ExternalSecret.
    *
    * @schema ClusterExternalSecretSpecExternalSecretSpec#target
    */
@@ -408,6 +408,9 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecData(obj: Clus
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * ExternalSecretDataFromRemoteRef defines the connection between the Kubernetes Secret keys and the Provider data
+ * when using DataFrom to fetch multiple values from a Provider.
+ *
  * @schema ClusterExternalSecretSpecExternalSecretSpecDataFrom
  */
 export interface ClusterExternalSecretSpecExternalSecretSpecDataFrom {
@@ -522,8 +525,8 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecSecretStoreRef
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * ExternalSecretTarget defines the Kubernetes Secret to be created
- * There can be only one target per ExternalSecret.
+ * ExternalSecretTarget defines the Kubernetes Secret to be created,
+ * there can be only one target per ExternalSecret.
  *
  * @schema ClusterExternalSecretSpecExternalSecretSpecTarget
  */
@@ -554,6 +557,16 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTarget {
   readonly immutable?: boolean;
 
   /**
+   * Manifest defines a custom Kubernetes resource to create instead of a Secret.
+   * When specified, ExternalSecret will create the resource type defined here
+   * (e.g., ConfigMap, Custom Resource) instead of a Secret.
+   * Warning: Using Generic target. Make sure access policies and encryption are properly configured.
+   *
+   * @schema ClusterExternalSecretSpecExternalSecretSpecTarget#manifest
+   */
+  readonly manifest?: ClusterExternalSecretSpecExternalSecretSpecTargetManifest;
+
+  /**
    * The name of the Secret resource to be managed.
    * Defaults to the .metadata.name of the ExternalSecret resource
    *
@@ -580,6 +593,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecTarget(obj: Cl
     'creationPolicy': obj.creationPolicy,
     'deletionPolicy': obj.deletionPolicy,
     'immutable': obj.immutable,
+    'manifest': toJson_ClusterExternalSecretSpecExternalSecretSpecTargetManifest(obj.manifest),
     'name': obj.name,
     'template': toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplate(obj.template),
   };
@@ -928,6 +942,8 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecDataFromFind(o
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * ExternalSecretRewrite defines how to rewrite secret data values before they are written to the Secret.
+ *
  * @schema ClusterExternalSecretSpecExternalSecretSpecDataFromRewrite
  */
 export interface ClusterExternalSecretSpecExternalSecretSpecDataFromRewrite {
@@ -1062,6 +1078,45 @@ export enum ClusterExternalSecretSpecExternalSecretSpecTargetDeletionPolicy {
 }
 
 /**
+ * Manifest defines a custom Kubernetes resource to create instead of a Secret.
+ * When specified, ExternalSecret will create the resource type defined here
+ * (e.g., ConfigMap, Custom Resource) instead of a Secret.
+ * Warning: Using Generic target. Make sure access policies and encryption are properly configured.
+ *
+ * @schema ClusterExternalSecretSpecExternalSecretSpecTargetManifest
+ */
+export interface ClusterExternalSecretSpecExternalSecretSpecTargetManifest {
+  /**
+   * APIVersion of the target resource (e.g., "v1" for ConfigMap, "argoproj.io/v1alpha1" for ArgoCD Application)
+   *
+   * @schema ClusterExternalSecretSpecExternalSecretSpecTargetManifest#apiVersion
+   */
+  readonly apiVersion: string;
+
+  /**
+   * Kind of the target resource (e.g., "ConfigMap", "Application")
+   *
+   * @schema ClusterExternalSecretSpecExternalSecretSpecTargetManifest#kind
+   */
+  readonly kind: string;
+}
+
+/**
+ * Converts an object of type 'ClusterExternalSecretSpecExternalSecretSpecTargetManifest' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetManifest(obj: ClusterExternalSecretSpecExternalSecretSpecTargetManifest | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apiVersion': obj.apiVersion,
+    'kind': obj.kind,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * Template defines a blueprint for the created Secret resource.
  *
  * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplate
@@ -1082,6 +1137,8 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplate {
   readonly engineVersion?: ClusterExternalSecretSpecExternalSecretSpecTargetTemplateEngineVersion;
 
   /**
+   * TemplateMergePolicy defines how the rendered template should be merged with the existing Secret data.
+   *
    * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplate#mergePolicy
    */
   readonly mergePolicy?: ClusterExternalSecretSpecExternalSecretSpecTargetTemplateMergePolicy;
@@ -1570,6 +1627,8 @@ export enum ClusterExternalSecretSpecExternalSecretSpecTargetTemplateEngineVersi
 }
 
 /**
+ * TemplateMergePolicy defines how the rendered template should be merged with the existing Secret data.
+ *
  * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateMergePolicy
  */
 export enum ClusterExternalSecretSpecExternalSecretSpecTargetTemplateMergePolicy {
@@ -1618,10 +1677,15 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplate
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateFrom specifies a source for templates.
+ * Each item in the list can either reference a ConfigMap or a Secret resource.
+ *
  * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFrom
  */
 export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFrom {
   /**
+   * TemplateRef specifies a reference to either a ConfigMap or a Secret resource.
+   *
    * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFrom#configMap
    */
   readonly configMap?: ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromConfigMap;
@@ -1632,14 +1696,21 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTempla
   readonly literal?: string;
 
   /**
+   * TemplateRef specifies a reference to either a ConfigMap or a Secret resource.
+   *
    * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFrom#secret
    */
   readonly secret?: ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromSecret;
 
   /**
+   * Target specifies where to place the template result.
+   * For Secret resources, common values are: "Data", "Annotations", "Labels".
+   * For custom resources (when spec.target.manifest is set), this supports
+   * nested paths like "spec.database.config" or "data".
+   *
    * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFrom#target
    */
-  readonly target?: ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromTarget;
+  readonly target?: string;
 }
 
 /**
@@ -1804,6 +1875,8 @@ export enum ClusterExternalSecretSpecExternalSecretSpecDataFromSourceRefStoreRef
 }
 
 /**
+ * TemplateRef specifies a reference to either a ConfigMap or a Secret resource.
+ *
  * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromConfigMap
  */
 export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromConfigMap {
@@ -1838,6 +1911,8 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplate
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateRef specifies a reference to either a ConfigMap or a Secret resource.
+ *
  * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromSecret
  */
 export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromSecret {
@@ -1872,18 +1947,8 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplate
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromTarget
- */
-export enum ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromTarget {
-  /** Data */
-  DATA = "Data",
-  /** Annotations */
-  ANNOTATIONS = "Annotations",
-  /** Labels */
-  LABELS = "Labels",
-}
-
-/**
+ * TemplateRefItem specifies a key in the ConfigMap/Secret to use as a template for Secret data.
+ *
  * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromConfigMapItems
  */
 export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromConfigMapItems {
@@ -1895,6 +1960,8 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTempla
   readonly key: string;
 
   /**
+   * TemplateScope specifies how the template keys should be interpreted.
+   *
    * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromConfigMapItems#templateAs
    */
   readonly templateAs?: ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromConfigMapItemsTemplateAs;
@@ -1916,6 +1983,8 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplate
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateRefItem specifies a key in the ConfigMap/Secret to use as a template for Secret data.
+ *
  * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromSecretItems
  */
 export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromSecretItems {
@@ -1927,6 +1996,8 @@ export interface ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTempla
   readonly key: string;
 
   /**
+   * TemplateScope specifies how the template keys should be interpreted.
+   *
    * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromSecretItems#templateAs
    */
   readonly templateAs?: ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromSecretItemsTemplateAs;
@@ -1948,6 +2019,8 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpecTargetTemplate
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateScope specifies how the template keys should be interpreted.
+ *
  * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromConfigMapItemsTemplateAs
  */
 export enum ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromConfigMapItemsTemplateAs {
@@ -1958,6 +2031,8 @@ export enum ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFro
 }
 
 /**
+ * TemplateScope specifies how the template keys should be interpreted.
+ *
  * @schema ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromSecretItemsTemplateAs
  */
 export enum ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFromSecretItemsTemplateAs {
@@ -1969,7 +2044,7 @@ export enum ClusterExternalSecretSpecExternalSecretSpecTargetTemplateTemplateFro
 
 
 /**
- * ClusterExternalSecret is the Schema for the clusterexternalsecrets API.
+ * ClusterExternalSecret is the schema for the clusterexternalsecrets API.
  *
  * @schema ClusterExternalSecretV1Beta1
  */
@@ -2023,7 +2098,7 @@ export class ClusterExternalSecretV1Beta1 extends ApiObject {
 }
 
 /**
- * ClusterExternalSecret is the Schema for the clusterexternalsecrets API.
+ * ClusterExternalSecret is the schema for the clusterexternalsecrets API.
  *
  * @schema ClusterExternalSecretV1Beta1
  */
@@ -2371,6 +2446,8 @@ export function toJson_ClusterExternalSecretV1Beta1SpecExternalSecretSpecData(ob
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * ExternalSecretDataFromRemoteRef defines a reference to multiple secrets in the provider to be fetched using options.
+ *
  * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFrom
  */
 export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFrom {
@@ -2891,6 +2968,8 @@ export function toJson_ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFro
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * ExternalSecretRewrite defines rules on how to rewrite secret keys.
+ *
  * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromRewrite
  */
 export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromRewrite {
@@ -3036,6 +3115,8 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplat
   readonly engineVersion?: ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateEngineVersion;
 
   /**
+   * TemplateMergePolicy defines how template values should be merged when generating a secret.
+   *
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplate#mergePolicy
    */
   readonly mergePolicy?: ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateMergePolicy;
@@ -3462,6 +3543,8 @@ export enum ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateEngi
 }
 
 /**
+ * TemplateMergePolicy defines how template values should be merged when generating a secret.
+ *
  * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateMergePolicy
  */
 export enum ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateMergePolicy {
@@ -3504,10 +3587,14 @@ export function toJson_ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetT
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateFrom defines a source for template data.
+ *
  * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFrom
  */
 export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFrom {
   /**
+   * TemplateRef defines a reference to a template source in a ConfigMap or Secret.
+   *
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFrom#configMap
    */
   readonly configMap?: ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromConfigMap;
@@ -3518,11 +3605,15 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplat
   readonly literal?: string;
 
   /**
+   * TemplateRef defines a reference to a template source in a ConfigMap or Secret.
+   *
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFrom#secret
    */
   readonly secret?: ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromSecret;
 
   /**
+   * TemplateTarget defines the target field where the template result will be stored.
+   *
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFrom#target
    */
   readonly target?: ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromTarget;
@@ -3646,6 +3737,8 @@ export enum ClusterExternalSecretV1Beta1SpecExternalSecretSpecDataFromSourceRefS
 }
 
 /**
+ * TemplateRef defines a reference to a template source in a ConfigMap or Secret.
+ *
  * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromConfigMap
  */
 export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromConfigMap {
@@ -3680,6 +3773,8 @@ export function toJson_ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetT
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateRef defines a reference to a template source in a ConfigMap or Secret.
+ *
  * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromSecret
  */
 export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromSecret {
@@ -3714,6 +3809,8 @@ export function toJson_ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetT
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateTarget defines the target field where the template result will be stored.
+ *
  * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromTarget
  */
 export enum ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromTarget {
@@ -3726,6 +3823,8 @@ export enum ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemp
 }
 
 /**
+ * TemplateRefItem defines which key in the referenced ConfigMap or Secret to use as a template.
+ *
  * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromConfigMapItems
  */
 export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromConfigMapItems {
@@ -3737,6 +3836,8 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplat
   readonly key: string;
 
   /**
+   * TemplateScope defines the scope of the template when processing template data.
+   *
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromConfigMapItems#templateAs
    */
   readonly templateAs?: ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromConfigMapItemsTemplateAs;
@@ -3758,6 +3859,8 @@ export function toJson_ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetT
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateRefItem defines which key in the referenced ConfigMap or Secret to use as a template.
+ *
  * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromSecretItems
  */
 export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromSecretItems {
@@ -3769,6 +3872,8 @@ export interface ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplat
   readonly key: string;
 
   /**
+   * TemplateScope defines the scope of the template when processing template data.
+   *
    * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromSecretItems#templateAs
    */
   readonly templateAs?: ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromSecretItemsTemplateAs;
@@ -3790,6 +3895,8 @@ export function toJson_ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetT
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateScope defines the scope of the template when processing template data.
+ *
  * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromConfigMapItemsTemplateAs
  */
 export enum ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromConfigMapItemsTemplateAs {
@@ -3800,6 +3907,8 @@ export enum ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemp
 }
 
 /**
+ * TemplateScope defines the scope of the template when processing template data.
+ *
  * @schema ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromSecretItemsTemplateAs
  */
 export enum ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemplateFromSecretItemsTemplateAs {
@@ -3811,7 +3920,7 @@ export enum ClusterExternalSecretV1Beta1SpecExternalSecretSpecTargetTemplateTemp
 
 
 /**
- *
+ * ClusterPushSecret is the Schema for the ClusterPushSecrets API that enables cluster-wide management of pushing Kubernetes secrets to external providers.
  *
  * @schema ClusterPushSecret
  */
@@ -3865,6 +3974,8 @@ export class ClusterPushSecret extends ApiObject {
 }
 
 /**
+ * ClusterPushSecret is the Schema for the ClusterPushSecrets API that enables cluster-wide management of pushing Kubernetes secrets to external providers.
+ *
  * @schema ClusterPushSecret
  */
 export interface ClusterPushSecretProps {
@@ -3874,6 +3985,8 @@ export interface ClusterPushSecretProps {
   readonly metadata?: ApiObjectMetadata;
 
   /**
+   * ClusterPushSecretSpec defines the configuration for a ClusterPushSecret resource.
+   *
    * @schema ClusterPushSecret#spec
    */
   readonly spec?: ClusterPushSecretSpec;
@@ -3895,6 +4008,8 @@ export function toJson_ClusterPushSecretProps(obj: ClusterPushSecretProps | unde
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * ClusterPushSecretSpec defines the configuration for a ClusterPushSecret resource.
+ *
  * @schema ClusterPushSecretSpec
  */
 export interface ClusterPushSecretSpec {
@@ -4150,6 +4265,8 @@ export function toJson_ClusterPushSecretSpecNamespaceSelectorsMatchExpressions(o
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * PushSecretData defines data to be pushed to the provider and associated metadata.
+ *
  * @schema ClusterPushSecretSpecPushSecretSpecData
  */
 export interface ClusterPushSecretSpecPushSecretSpecData {
@@ -4205,6 +4322,8 @@ export enum ClusterPushSecretSpecPushSecretSpecDeletionPolicy {
 }
 
 /**
+ * PushSecretStoreRef contains a reference on how to sync to a SecretStore.
+ *
  * @schema ClusterPushSecretSpecPushSecretSpecSecretStoreRefs
  */
 export interface ClusterPushSecretSpecPushSecretSpecSecretStoreRefs {
@@ -4303,6 +4422,8 @@ export interface ClusterPushSecretSpecPushSecretSpecTemplate {
   readonly engineVersion?: ClusterPushSecretSpecPushSecretSpecTemplateEngineVersion;
 
   /**
+   * TemplateMergePolicy defines how the rendered template should be merged with the existing Secret data.
+   *
    * @schema ClusterPushSecretSpecPushSecretSpecTemplate#mergePolicy
    */
   readonly mergePolicy?: ClusterPushSecretSpecPushSecretSpecTemplateMergePolicy;
@@ -4548,6 +4669,8 @@ export enum ClusterPushSecretSpecPushSecretSpecTemplateEngineVersion {
 }
 
 /**
+ * TemplateMergePolicy defines how the rendered template should be merged with the existing Secret data.
+ *
  * @schema ClusterPushSecretSpecPushSecretSpecTemplateMergePolicy
  */
 export enum ClusterPushSecretSpecPushSecretSpecTemplateMergePolicy {
@@ -4596,10 +4719,15 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecTemplateMetadata(obj: 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateFrom specifies a source for templates.
+ * Each item in the list can either reference a ConfigMap or a Secret resource.
+ *
  * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFrom
  */
 export interface ClusterPushSecretSpecPushSecretSpecTemplateTemplateFrom {
   /**
+   * TemplateRef specifies a reference to either a ConfigMap or a Secret resource.
+   *
    * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFrom#configMap
    */
   readonly configMap?: ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMap;
@@ -4610,14 +4738,21 @@ export interface ClusterPushSecretSpecPushSecretSpecTemplateTemplateFrom {
   readonly literal?: string;
 
   /**
+   * TemplateRef specifies a reference to either a ConfigMap or a Secret resource.
+   *
    * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFrom#secret
    */
   readonly secret?: ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecret;
 
   /**
+   * Target specifies where to place the template result.
+   * For Secret resources, common values are: "Data", "Annotations", "Labels".
+   * For custom resources (when spec.target.manifest is set), this supports
+   * nested paths like "spec.database.config" or "data".
+   *
    * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFrom#target
    */
-  readonly target?: ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromTarget;
+  readonly target?: string;
 }
 
 /**
@@ -4801,6 +4936,8 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecSelectorSecretSelector
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateRef specifies a reference to either a ConfigMap or a Secret resource.
+ *
  * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMap
  */
 export interface ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMap {
@@ -4835,6 +4972,8 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromCo
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateRef specifies a reference to either a ConfigMap or a Secret resource.
+ *
  * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecret
  */
 export interface ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecret {
@@ -4867,18 +5006,6 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSe
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromTarget
- */
-export enum ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromTarget {
-  /** Data */
-  DATA = "Data",
-  /** Annotations */
-  ANNOTATIONS = "Annotations",
-  /** Labels */
-  LABELS = "Labels",
-}
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -4930,6 +5057,8 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecSelectorSecretSelector
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateRefItem specifies a key in the ConfigMap/Secret to use as a template for Secret data.
+ *
  * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMapItems
  */
 export interface ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMapItems {
@@ -4941,6 +5070,8 @@ export interface ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMa
   readonly key: string;
 
   /**
+   * TemplateScope specifies how the template keys should be interpreted.
+   *
    * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMapItems#templateAs
    */
   readonly templateAs?: ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMapItemsTemplateAs;
@@ -4962,6 +5093,8 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromCo
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateRefItem specifies a key in the ConfigMap/Secret to use as a template for Secret data.
+ *
  * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecretItems
  */
 export interface ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecretItems {
@@ -4973,6 +5106,8 @@ export interface ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecretIt
   readonly key: string;
 
   /**
+   * TemplateScope specifies how the template keys should be interpreted.
+   *
    * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecretItems#templateAs
    */
   readonly templateAs?: ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecretItemsTemplateAs;
@@ -4994,6 +5129,8 @@ export function toJson_ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateScope specifies how the template keys should be interpreted.
+ *
  * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMapItemsTemplateAs
  */
 export enum ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMapItemsTemplateAs {
@@ -5004,6 +5141,8 @@ export enum ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromConfigMapItem
 }
 
 /**
+ * TemplateScope specifies how the template keys should be interpreted.
+ *
  * @schema ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecretItemsTemplateAs
  */
 export enum ClusterPushSecretSpecPushSecretSpecTemplateTemplateFromSecretItemsTemplateAs {
@@ -5399,12 +5538,15 @@ export interface ClusterSecretStoreSpecProvider {
   readonly oracle?: ClusterSecretStoreSpecProviderOracle;
 
   /**
+   * PassboltProvider provides access to Passbolt secrets manager.
+   * See: https://www.passbolt.com.
+   *
    * @schema ClusterSecretStoreSpecProvider#passbolt
    */
   readonly passbolt?: ClusterSecretStoreSpecProviderPassbolt;
 
   /**
-   * Configures a store to sync secrets with a Password Depot instance.
+   * PasswordDepotProvider configures a store to sync secrets with a Password Depot instance.
    *
    * @schema ClusterSecretStoreSpecProvider#passworddepot
    */
@@ -6321,6 +6463,8 @@ export interface ClusterSecretStoreSpecProviderFake {
   readonly data: ClusterSecretStoreSpecProviderFakeData[];
 
   /**
+   * ValidationResult is defined type for the number of validation results.
+   *
    * @schema ClusterSecretStoreSpecProviderFake#validationResult
    */
   readonly validationResult?: number;
@@ -6694,7 +6838,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisical(obj: ClusterSecre
  */
 export interface ClusterSecretStoreSpecProviderKeepersecurity {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderKeepersecurity#authRef
@@ -7042,6 +7186,9 @@ export function toJson_ClusterSecretStoreSpecProviderOracle(obj: ClusterSecretSt
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * PassboltProvider provides access to Passbolt secrets manager.
+ * See: https://www.passbolt.com.
+ *
  * @schema ClusterSecretStoreSpecProviderPassbolt
  */
 export interface ClusterSecretStoreSpecProviderPassbolt {
@@ -7076,7 +7223,7 @@ export function toJson_ClusterSecretStoreSpecProviderPassbolt(obj: ClusterSecret
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Configures a store to sync secrets with a Password Depot instance.
+ * PasswordDepotProvider configures a store to sync secrets with a Password Depot instance.
  *
  * @schema ClusterSecretStoreSpecProviderPassworddepot
  */
@@ -7614,7 +7761,7 @@ export interface ClusterSecretStoreSpecProviderWebhook {
    *
    * @schema ClusterSecretStoreSpecProviderWebhook#result
    */
-  readonly result: ClusterSecretStoreSpecProviderWebhookResult;
+  readonly result?: ClusterSecretStoreSpecProviderWebhookResult;
 
   /**
    * Secrets to fill in templates
@@ -7913,7 +8060,7 @@ export function toJson_ClusterSecretStoreSpecProviderAkeylessCaProvider(obj: Clu
  */
 export interface ClusterSecretStoreSpecProviderAlibabaAuth {
   /**
-   * Authenticate against Alibaba using RRSA.
+   * AlibabaRRSAAuth authenticates against Alibaba using RRSA.
    *
    * @schema ClusterSecretStoreSpecProviderAlibabaAuth#rrsa
    */
@@ -7951,7 +8098,7 @@ export function toJson_ClusterSecretStoreSpecProviderAlibabaAuth(obj: ClusterSec
  */
 export interface ClusterSecretStoreSpecProviderAwsAuth {
   /**
-   * Authenticate against AWS using service account tokens.
+   * AWSJWTAuth stores reference to Authenticate against AWS using service account tokens.
    *
    * @schema ClusterSecretStoreSpecProviderAwsAuth#jwt
    */
@@ -8002,7 +8149,7 @@ export interface ClusterSecretStoreSpecProviderAwsSecretsManager {
    * The number of days from 7 to 30 that Secrets Manager waits before
    * permanently deleting the secret. You can't use both this parameter and
    * ForceDeleteWithoutRecovery in the same call. If you don't use either,
-   * then by default Secrets Manager uses a 30 day recovery window.
+   * then by default Secrets Manager uses a 30-day recovery window.
    * see: https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_DeleteSecret.html#SecretsManager-DeleteSecret-request-RecoveryWindowInDays
    *
    * @schema ClusterSecretStoreSpecProviderAwsSecretsManager#recoveryWindowInDays
@@ -8038,6 +8185,9 @@ export enum ClusterSecretStoreSpecProviderAwsService {
 }
 
 /**
+ * Tag is a key-value pair that can be attached to an AWS resource.
+ * see: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+ *
  * @schema ClusterSecretStoreSpecProviderAwsSessionTags
  */
 export interface ClusterSecretStoreSpecProviderAwsSessionTags {
@@ -8693,6 +8843,8 @@ export function toJson_ClusterSecretStoreSpecProviderDelineaClientSecret(obj: Cl
  */
 export interface ClusterSecretStoreSpecProviderDevice42Auth {
   /**
+   * Device42SecretRef contains the secret reference for accessing the Device42 instance.
+   *
    * @schema ClusterSecretStoreSpecProviderDevice42Auth#secretRef
    */
   readonly secretRef: ClusterSecretStoreSpecProviderDevice42AuthSecretRef;
@@ -8719,6 +8871,8 @@ export function toJson_ClusterSecretStoreSpecProviderDevice42Auth(obj: ClusterSe
  */
 export interface ClusterSecretStoreSpecProviderDopplerAuth {
   /**
+   * DopplerAuthSecretRef contains the secret reference for accessing the Doppler API.
+   *
    * @schema ClusterSecretStoreSpecProviderDopplerAuth#secretRef
    */
   readonly secretRef: ClusterSecretStoreSpecProviderDopplerAuthSecretRef;
@@ -8777,6 +8931,8 @@ export enum ClusterSecretStoreSpecProviderDopplerNameTransformer {
 }
 
 /**
+ * FakeProviderData defines a key-value pair with optional version for the fake provider.
+ *
  * @schema ClusterSecretStoreSpecProviderFakeData
  */
 export interface ClusterSecretStoreSpecProviderFakeData {
@@ -8847,11 +9003,15 @@ export function toJson_ClusterSecretStoreSpecProviderFortanixApiKey(obj: Cluster
  */
 export interface ClusterSecretStoreSpecProviderGcpsmAuth {
   /**
+   * GCPSMAuthSecretRef contains the secret references for GCP Secret Manager authentication.
+   *
    * @schema ClusterSecretStoreSpecProviderGcpsmAuth#secretRef
    */
   readonly secretRef?: ClusterSecretStoreSpecProviderGcpsmAuthSecretRef;
 
   /**
+   * GCPWorkloadIdentity defines configuration for workload identity authentication to GCP.
+   *
    * @schema ClusterSecretStoreSpecProviderGcpsmAuth#workloadIdentity
    */
   readonly workloadIdentity?: ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentity;
@@ -8887,7 +9047,7 @@ export function toJson_ClusterSecretStoreSpecProviderGcpsmAuth(obj: ClusterSecre
  */
 export interface ClusterSecretStoreSpecProviderGithubAuth {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderGithubAuth#privateKey
@@ -8916,6 +9076,8 @@ export function toJson_ClusterSecretStoreSpecProviderGithubAuth(obj: ClusterSecr
  */
 export interface ClusterSecretStoreSpecProviderGitlabAuth {
   /**
+   * GitlabSecretRef contains the secret reference for GitLab authentication credentials.
+   *
    * @schema ClusterSecretStoreSpecProviderGitlabAuth#SecretRef
    */
   readonly secretRef: ClusterSecretStoreSpecProviderGitlabAuthSecretRef;
@@ -8995,13 +9157,15 @@ export function toJson_ClusterSecretStoreSpecProviderGitlabCaProvider(obj: Clust
  */
 export interface ClusterSecretStoreSpecProviderIbmAuth {
   /**
-   * IBM Container-based auth with IAM Trusted Profile.
+   * IBMAuthContainerAuth defines container-based authentication with IAM Trusted Profile.
    *
    * @schema ClusterSecretStoreSpecProviderIbmAuth#containerAuth
    */
   readonly containerAuth?: ClusterSecretStoreSpecProviderIbmAuthContainerAuth;
 
   /**
+   * IBMAuthSecretRef contains the secret reference for IBM Cloud API key authentication.
+   *
    * @schema ClusterSecretStoreSpecProviderIbmAuth#secretRef
    */
   readonly secretRef?: ClusterSecretStoreSpecProviderIbmAuthSecretRef;
@@ -9029,51 +9193,71 @@ export function toJson_ClusterSecretStoreSpecProviderIbmAuth(obj: ClusterSecretS
  */
 export interface ClusterSecretStoreSpecProviderInfisicalAuth {
   /**
+   * AwsAuthCredentials represents the credentials for AWS authentication.
+   *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuth#awsAuthCredentials
    */
   readonly awsAuthCredentials?: ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentials;
 
   /**
+   * AzureAuthCredentials represents the credentials for Azure authentication.
+   *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuth#azureAuthCredentials
    */
   readonly azureAuthCredentials?: ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentials;
 
   /**
+   * GcpIamAuthCredentials represents the credentials for GCP IAM authentication.
+   *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuth#gcpIamAuthCredentials
    */
   readonly gcpIamAuthCredentials?: ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials;
 
   /**
+   * GcpIDTokenAuthCredentials represents the credentials for GCP ID token authentication.
+   *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuth#gcpIdTokenAuthCredentials
    */
   readonly gcpIdTokenAuthCredentials?: ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials;
 
   /**
+   * JwtAuthCredentials represents the credentials for JWT authentication.
+   *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuth#jwtAuthCredentials
    */
   readonly jwtAuthCredentials?: ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentials;
 
   /**
+   * KubernetesAuthCredentials represents the credentials for Kubernetes authentication.
+   *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuth#kubernetesAuthCredentials
    */
   readonly kubernetesAuthCredentials?: ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials;
 
   /**
+   * LdapAuthCredentials represents the credentials for LDAP authentication.
+   *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuth#ldapAuthCredentials
    */
   readonly ldapAuthCredentials?: ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentials;
 
   /**
+   * OciAuthCredentials represents the credentials for OCI authentication.
+   *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuth#ociAuthCredentials
    */
   readonly ociAuthCredentials?: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials;
 
   /**
+   * TokenAuthCredentials represents the credentials for access token-based authentication.
+   *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuth#tokenAuthCredentials
    */
   readonly tokenAuthCredentials?: ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentials;
 
   /**
+   * UniversalAuthCredentials represents the client credentials for universal authentication.
+   *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuth#universalAuthCredentials
    */
   readonly universalAuthCredentials?: ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthCredentials;
@@ -9166,7 +9350,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalSecretsScope(obj: 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderKeepersecurityAuthRef
@@ -9648,7 +9832,7 @@ export function toJson_ClusterSecretStoreSpecProviderOracleServiceAccountRef(obj
  */
 export interface ClusterSecretStoreSpecProviderPassboltAuth {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderPassboltAuth#passwordSecretRef
@@ -9656,7 +9840,7 @@ export interface ClusterSecretStoreSpecProviderPassboltAuth {
   readonly passwordSecretRef: ClusterSecretStoreSpecProviderPassboltAuthPasswordSecretRef;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderPassboltAuth#privateKeySecretRef
@@ -9686,6 +9870,8 @@ export function toJson_ClusterSecretStoreSpecProviderPassboltAuth(obj: ClusterSe
  */
 export interface ClusterSecretStoreSpecProviderPassworddepotAuth {
   /**
+   * PasswordDepotSecretRef contains the secret reference for Password Depot authentication.
+   *
    * @schema ClusterSecretStoreSpecProviderPassworddepotAuth#secretRef
    */
   readonly secretRef: ClusterSecretStoreSpecProviderPassworddepotAuthSecretRef;
@@ -9917,7 +10103,7 @@ export interface ClusterSecretStoreSpecProviderSenhaseguraAuth {
   readonly clientId: string;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderSenhaseguraAuth#clientSecretSecretRef
@@ -10322,6 +10508,8 @@ export function toJson_ClusterSecretStoreSpecProviderWebhookResult(obj: ClusterS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * WebhookSecret defines a secret that will be passed to the webhook request.
+ *
  * @schema ClusterSecretStoreSpecProviderWebhookSecrets
  */
 export interface ClusterSecretStoreSpecProviderWebhookSecrets {
@@ -10390,7 +10578,7 @@ export function toJson_ClusterSecretStoreSpecProviderYandexcertificatemanagerAut
  */
 export interface ClusterSecretStoreSpecProviderYandexcertificatemanagerCaProvider {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderYandexcertificatemanagerCaProvider#certSecretRef
@@ -10483,7 +10671,7 @@ export function toJson_ClusterSecretStoreSpecProviderYandexlockboxAuth(obj: Clus
  */
 export interface ClusterSecretStoreSpecProviderYandexlockboxCaProvider {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderYandexlockboxCaProvider#certSecretRef
@@ -10615,7 +10803,7 @@ export interface ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRef {
   readonly accessId?: ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRef#accessType
@@ -10623,7 +10811,7 @@ export interface ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRef {
   readonly accessType?: ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessType;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRef#accessTypeParam
@@ -10660,7 +10848,7 @@ export enum ClusterSecretStoreSpecProviderAkeylessCaProviderType {
 }
 
 /**
- * Authenticate against Alibaba using RRSA.
+ * AlibabaRRSAAuth authenticates against Alibaba using RRSA.
  *
  * @schema ClusterSecretStoreSpecProviderAlibabaAuthRrsa
  */
@@ -10740,13 +10928,13 @@ export function toJson_ClusterSecretStoreSpecProviderAlibabaAuthSecretRef(obj: C
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Authenticate against AWS using service account tokens.
+ * AWSJWTAuth stores reference to Authenticate against AWS using service account tokens.
  *
  * @schema ClusterSecretStoreSpecProviderAwsAuthJwt
  */
 export interface ClusterSecretStoreSpecProviderAwsAuthJwt {
   /**
-   * A reference to a ServiceAccount resource.
+   * ServiceAccountSelector is a reference to a ServiceAccount resource.
    *
    * @schema ClusterSecretStoreSpecProviderAwsAuthJwt#serviceAccountRef
    */
@@ -11496,6 +11684,8 @@ export function toJson_ClusterSecretStoreSpecProviderDelineaClientSecretSecretRe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Device42SecretRef contains the secret reference for accessing the Device42 instance.
+ *
  * @schema ClusterSecretStoreSpecProviderDevice42AuthSecretRef
  */
 export interface ClusterSecretStoreSpecProviderDevice42AuthSecretRef {
@@ -11522,6 +11712,8 @@ export function toJson_ClusterSecretStoreSpecProviderDevice42AuthSecretRef(obj: 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * DopplerAuthSecretRef contains the secret reference for accessing the Doppler API.
+ *
  * @schema ClusterSecretStoreSpecProviderDopplerAuthSecretRef
  */
 export interface ClusterSecretStoreSpecProviderDopplerAuthSecretRef {
@@ -11596,6 +11788,8 @@ export function toJson_ClusterSecretStoreSpecProviderFortanixApiKeySecretRef(obj
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GCPSMAuthSecretRef contains the secret references for GCP Secret Manager authentication.
+ *
  * @schema ClusterSecretStoreSpecProviderGcpsmAuthSecretRef
  */
 export interface ClusterSecretStoreSpecProviderGcpsmAuthSecretRef {
@@ -11622,6 +11816,8 @@ export function toJson_ClusterSecretStoreSpecProviderGcpsmAuthSecretRef(obj: Clu
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GCPWorkloadIdentity defines configuration for workload identity authentication to GCP.
+ *
  * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentity
  */
 export interface ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentity {
@@ -11650,7 +11846,7 @@ export interface ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentity {
   readonly clusterProjectId?: string;
 
   /**
-   * A reference to a ServiceAccount resource.
+   * ServiceAccountSelector is a reference to a ServiceAccount resource.
    *
    * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentity#serviceAccountRef
    */
@@ -11743,7 +11939,7 @@ export function toJson_ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderGithubAuthPrivateKey
@@ -11790,6 +11986,8 @@ export function toJson_ClusterSecretStoreSpecProviderGithubAuthPrivateKey(obj: C
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GitlabSecretRef contains the secret reference for GitLab authentication credentials.
+ *
  * @schema ClusterSecretStoreSpecProviderGitlabAuthSecretRef
  */
 export interface ClusterSecretStoreSpecProviderGitlabAuthSecretRef {
@@ -11828,7 +12026,7 @@ export enum ClusterSecretStoreSpecProviderGitlabCaProviderType {
 }
 
 /**
- * IBM Container-based auth with IAM Trusted Profile.
+ * IBMAuthContainerAuth defines container-based authentication with IAM Trusted Profile.
  *
  * @schema ClusterSecretStoreSpecProviderIbmAuthContainerAuth
  */
@@ -11870,6 +12068,8 @@ export function toJson_ClusterSecretStoreSpecProviderIbmAuthContainerAuth(obj: C
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * IBMAuthSecretRef contains the secret reference for IBM Cloud API key authentication.
+ *
  * @schema ClusterSecretStoreSpecProviderIbmAuthSecretRef
  */
 export interface ClusterSecretStoreSpecProviderIbmAuthSecretRef {
@@ -11896,11 +12096,13 @@ export function toJson_ClusterSecretStoreSpecProviderIbmAuthSecretRef(obj: Clust
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * AwsAuthCredentials represents the credentials for AWS authentication.
+ *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentials
  */
 export interface ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentials#identityId
@@ -11923,11 +12125,13 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredent
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * AzureAuthCredentials represents the credentials for Azure authentication.
+ *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentials
  */
 export interface ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentials#identityId
@@ -11935,7 +12139,7 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentials
   readonly identityId: ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsIdentityId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentials#resource
@@ -11959,11 +12163,13 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCrede
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GcpIamAuthCredentials represents the credentials for GCP IAM authentication.
+ *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials
  */
 export interface ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials#identityId
@@ -11971,7 +12177,7 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredential
   readonly identityId: ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials#serviceAccountKeyFilePath
@@ -11995,11 +12201,13 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCred
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GcpIDTokenAuthCredentials represents the credentials for GCP ID token authentication.
+ *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials
  */
 export interface ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials#identityId
@@ -12022,11 +12230,13 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuth
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * JwtAuthCredentials represents the credentials for JWT authentication.
+ *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentials
  */
 export interface ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentials#identityId
@@ -12034,7 +12244,7 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentials {
   readonly identityId: ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentials#jwt
@@ -12058,11 +12268,13 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredent
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * KubernetesAuthCredentials represents the credentials for Kubernetes authentication.
+ *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials
  */
 export interface ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials#identityId
@@ -12070,7 +12282,7 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCreden
   readonly identityId: ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials#serviceAccountTokenPath
@@ -12094,11 +12306,13 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuth
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * LdapAuthCredentials represents the credentials for LDAP authentication.
+ *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentials
  */
 export interface ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentials#identityId
@@ -12106,7 +12320,7 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentials 
   readonly identityId: ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentials#ldapPassword
@@ -12114,7 +12328,7 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentials 
   readonly ldapPassword: ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentials#ldapUsername
@@ -12139,11 +12353,13 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCreden
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * OciAuthCredentials represents the credentials for OCI authentication.
+ *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials
  */
 export interface ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials#fingerprint
@@ -12151,7 +12367,7 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials {
   readonly fingerprint: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials#identityId
@@ -12159,7 +12375,7 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials {
   readonly identityId: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials#privateKey
@@ -12167,7 +12383,7 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials {
   readonly privateKey: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials#privateKeyPassphrase
@@ -12175,7 +12391,7 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials {
   readonly privateKeyPassphrase?: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials#region
@@ -12183,7 +12399,7 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials {
   readonly region: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials#tenancyId
@@ -12191,7 +12407,7 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials {
   readonly tenancyId: ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentials#userId
@@ -12220,11 +12436,13 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredent
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TokenAuthCredentials represents the credentials for access token-based authentication.
+ *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentials
  */
 export interface ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentials#accessToken
@@ -12247,11 +12465,13 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCrede
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * UniversalAuthCredentials represents the client credentials for universal authentication.
+ *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthCredentials
  */
 export interface ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthCredentials#clientId
@@ -12259,7 +12479,7 @@ export interface ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthCredent
   readonly clientId: ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthCredentialsClientId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthCredentials#clientSecret
@@ -12289,7 +12509,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthC
  */
 export interface ClusterSecretStoreSpecProviderKubernetesAuthCert {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderKubernetesAuthCert#clientCert
@@ -12297,7 +12517,7 @@ export interface ClusterSecretStoreSpecProviderKubernetesAuthCert {
   readonly clientCert?: ClusterSecretStoreSpecProviderKubernetesAuthCertClientCert;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderKubernetesAuthCert#clientKey
@@ -12374,7 +12594,7 @@ export function toJson_ClusterSecretStoreSpecProviderKubernetesAuthServiceAccoun
  */
 export interface ClusterSecretStoreSpecProviderKubernetesAuthToken {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderKubernetesAuthToken#bearerToken
@@ -12681,7 +12901,7 @@ export function toJson_ClusterSecretStoreSpecProviderOracleAuthSecretRef(obj: Cl
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderPassboltAuthPasswordSecretRef
@@ -12728,7 +12948,7 @@ export function toJson_ClusterSecretStoreSpecProviderPassboltAuthPasswordSecretR
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderPassboltAuthPrivateKeySecretRef
@@ -12775,6 +12995,8 @@ export function toJson_ClusterSecretStoreSpecProviderPassboltAuthPrivateKeySecre
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * PasswordDepotSecretRef contains the secret reference for Password Depot authentication.
+ *
  * @schema ClusterSecretStoreSpecProviderPassworddepotAuthSecretRef
  */
 export interface ClusterSecretStoreSpecProviderPassworddepotAuthSecretRef {
@@ -13059,7 +13281,7 @@ export function toJson_ClusterSecretStoreSpecProviderSecretserverUsernameSecretR
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderSenhaseguraAuthClientSecretSecretRef
@@ -13720,7 +13942,7 @@ export function toJson_ClusterSecretStoreSpecProviderVolcengineAuthSecretRef(obj
  */
 export interface ClusterSecretStoreSpecProviderWebhookAuthNtlm {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderWebhookAuthNtlm#passwordSecret
@@ -13728,7 +13950,7 @@ export interface ClusterSecretStoreSpecProviderWebhookAuthNtlm {
   readonly passwordSecret: ClusterSecretStoreSpecProviderWebhookAuthNtlmPasswordSecret;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreSpecProviderWebhookAuthNtlm#usernameSecret
@@ -13856,7 +14078,7 @@ export function toJson_ClusterSecretStoreSpecProviderYandexcertificatemanagerAut
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderYandexcertificatemanagerCaProviderCertSecretRef
@@ -13977,7 +14199,7 @@ export function toJson_ClusterSecretStoreSpecProviderYandexlockboxAuthAuthorized
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderYandexlockboxCaProviderCertSecretRef
@@ -14197,7 +14419,7 @@ export function toJson_ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecret
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessType
@@ -14244,7 +14466,7 @@ export function toJson_ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecret
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam
@@ -14383,7 +14605,7 @@ export function toJson_ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessK
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a ServiceAccount resource.
+ * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema ClusterSecretStoreSpecProviderAwsAuthJwtServiceAccountRef
  */
@@ -15313,7 +15535,7 @@ export function toJson_ClusterSecretStoreSpecProviderGcpsmAuthSecretRefSecretAcc
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a ServiceAccount resource.
+ * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef
  */
@@ -15587,7 +15809,7 @@ export function toJson_ClusterSecretStoreSpecProviderIbmAuthSecretRefSecretApiKe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId
@@ -15634,7 +15856,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthAwsAuthCredent
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsIdentityId
@@ -15681,7 +15903,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCrede
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsResource
@@ -15728,7 +15950,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthAzureAuthCrede
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId
@@ -15775,7 +15997,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCred
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath
@@ -15822,7 +16044,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthGcpIamAuthCred
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId
@@ -15869,7 +16091,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthGcpIdTokenAuth
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId
@@ -15916,7 +16138,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredent
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt
@@ -15963,7 +16185,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthJwtAuthCredent
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId
@@ -16010,7 +16232,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuth
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath
@@ -16057,7 +16279,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthKubernetesAuth
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId
@@ -16104,7 +16326,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCreden
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword
@@ -16151,7 +16373,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCreden
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername
@@ -16198,7 +16420,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthLdapAuthCreden
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint
@@ -16245,7 +16467,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredent
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId
@@ -16292,7 +16514,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredent
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey
@@ -16339,7 +16561,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredent
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase
@@ -16386,7 +16608,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredent
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion
@@ -16433,7 +16655,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredent
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId
@@ -16480,7 +16702,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredent
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId
@@ -16527,7 +16749,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthOciAuthCredent
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken
@@ -16574,7 +16796,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthTokenAuthCrede
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthCredentialsClientId
@@ -16621,7 +16843,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthC
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthCredentialsClientSecret
@@ -16668,7 +16890,7 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthC
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderKubernetesAuthCertClientCert
@@ -16715,7 +16937,7 @@ export function toJson_ClusterSecretStoreSpecProviderKubernetesAuthCertClientCer
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderKubernetesAuthCertClientKey
@@ -16762,7 +16984,7 @@ export function toJson_ClusterSecretStoreSpecProviderKubernetesAuthCertClientKey
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderKubernetesAuthTokenBearerToken
@@ -17295,7 +17517,7 @@ export function toJson_ClusterSecretStoreSpecProviderVaultAuthCertSecretRef(obj:
  */
 export interface ClusterSecretStoreSpecProviderVaultAuthIamJwt {
   /**
-   * A reference to a ServiceAccount resource.
+   * ServiceAccountSelector is a reference to a ServiceAccount resource.
    *
    * @schema ClusterSecretStoreSpecProviderVaultAuthIamJwt#serviceAccountRef
    */
@@ -17797,7 +18019,7 @@ export function toJson_ClusterSecretStoreSpecProviderVolcengineAuthSecretRefToke
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderWebhookAuthNtlmPasswordSecret
@@ -17844,7 +18066,7 @@ export function toJson_ClusterSecretStoreSpecProviderWebhookAuthNtlmPasswordSecr
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreSpecProviderWebhookAuthNtlmUsernameSecret
@@ -17931,7 +18153,7 @@ export function toJson_ClusterSecretStoreSpecProviderGcpsmAuthWorkloadIdentityFe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a ServiceAccount resource.
+ * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema ClusterSecretStoreSpecProviderVaultAuthIamJwtServiceAccountRef
  */
@@ -18535,12 +18757,14 @@ export interface ClusterSecretStoreV1Beta1SpecProvider {
   readonly oracle?: ClusterSecretStoreV1Beta1SpecProviderOracle;
 
   /**
+   * PassboltProvider defines configuration for the Passbolt provider.
+   *
    * @schema ClusterSecretStoreV1Beta1SpecProvider#passbolt
    */
   readonly passbolt?: ClusterSecretStoreV1Beta1SpecProviderPassbolt;
 
   /**
-   * Configures a store to sync secrets with a Password Depot instance.
+   * PasswordDepotProvider configures a store to sync secrets with a Password Depot instance.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProvider#passworddepot
    */
@@ -18666,11 +18890,15 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProvider(obj: ClusterSecretS
  */
 export interface ClusterSecretStoreV1Beta1SpecRetrySettings {
   /**
+   * MaxRetries is the maximum number of retry attempts.
+   *
    * @schema ClusterSecretStoreV1Beta1SpecRetrySettings#maxRetries
    */
   readonly maxRetries?: number;
 
   /**
+   * RetryInterval is the interval between retry attempts.
+   *
    * @schema ClusterSecretStoreV1Beta1SpecRetrySettings#retryInterval
    */
   readonly retryInterval?: string;
@@ -19779,7 +20007,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderInfisical(obj: Clust
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderKeepersecurity {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderKeepersecurity#authRef
@@ -20038,6 +20266,8 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderOracle(obj: ClusterS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * PassboltProvider defines configuration for the Passbolt provider.
+ *
  * @schema ClusterSecretStoreV1Beta1SpecProviderPassbolt
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderPassbolt {
@@ -20072,7 +20302,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderPassbolt(obj: Cluste
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Configures a store to sync secrets with a Password Depot instance.
+ * PasswordDepotProvider configures a store to sync secrets with a Password Depot instance.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderPassworddepot
  */
@@ -20838,7 +21068,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessCaProvider(o
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderAlibabaAuth {
   /**
-   * Authenticate against Alibaba using RRSA.
+   * AlibabaRRSAAuth authenticates against Alibaba using RRSA (Resource-oriented RAM-based Service Authentication).
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderAlibabaAuth#rrsa
    */
@@ -20876,7 +21106,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAlibabaAuth(obj: Clu
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderAwsAuth {
   /**
-   * Authenticate against AWS using service account tokens.
+   * AWSJWTAuth authenticates against AWS using service account tokens from the Kubernetes cluster.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderAwsAuth#jwt
    */
@@ -20963,6 +21193,8 @@ export enum ClusterSecretStoreV1Beta1SpecProviderAwsService {
 }
 
 /**
+ * Tag defines a tag key and value for AWS resources.
+ *
  * @schema ClusterSecretStoreV1Beta1SpecProviderAwsSessionTags
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderAwsSessionTags {
@@ -21559,6 +21791,8 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderDelineaClientSecret(
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderDevice42Auth {
   /**
+   * Device42SecretRef defines a reference to a secret containing credentials for the Device42 provider.
+   *
    * @schema ClusterSecretStoreV1Beta1SpecProviderDevice42Auth#secretRef
    */
   readonly secretRef: ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRef;
@@ -21585,6 +21819,8 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderDevice42Auth(obj: Cl
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderDopplerAuth {
   /**
+   * DopplerAuthSecretRef defines a reference to a secret containing credentials for the Doppler provider.
+   *
    * @schema ClusterSecretStoreV1Beta1SpecProviderDopplerAuth#secretRef
    */
   readonly secretRef: ClusterSecretStoreV1Beta1SpecProviderDopplerAuthSecretRef;
@@ -21643,6 +21879,8 @@ export enum ClusterSecretStoreV1Beta1SpecProviderDopplerNameTransformer {
 }
 
 /**
+ * FakeProviderData defines a key-value pair for the fake provider used in testing.
+ *
  * @schema ClusterSecretStoreV1Beta1SpecProviderFakeData
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderFakeData {
@@ -21713,11 +21951,15 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderFortanixApiKey(obj: 
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderGcpsmAuth {
   /**
+   * GCPSMAuthSecretRef defines a reference to a secret containing credentials for the GCP Secret Manager provider.
+   *
    * @schema ClusterSecretStoreV1Beta1SpecProviderGcpsmAuth#secretRef
    */
   readonly secretRef?: ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef;
 
   /**
+   * GCPWorkloadIdentity defines configuration for using GCP Workload Identity authentication.
+   *
    * @schema ClusterSecretStoreV1Beta1SpecProviderGcpsmAuth#workloadIdentity
    */
   readonly workloadIdentity?: ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity;
@@ -21745,7 +21987,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGcpsmAuth(obj: Clust
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderGithubAuth {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderGithubAuth#privateKey
@@ -21774,6 +22016,8 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGithubAuth(obj: Clus
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderGitlabAuth {
   /**
+   * GitlabSecretRef defines a reference to a secret containing credentials for the GitLab provider.
+   *
    * @schema ClusterSecretStoreV1Beta1SpecProviderGitlabAuth#SecretRef
    */
   readonly secretRef: ClusterSecretStoreV1Beta1SpecProviderGitlabAuthSecretRef;
@@ -21853,13 +22097,15 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGitlabCaProvider(obj
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderIbmAuth {
   /**
-   * IBM Container-based auth with IAM Trusted Profile.
+   * IBMAuthContainerAuth defines authentication using IBM Container-based auth with IAM Trusted Profile.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderIbmAuth#containerAuth
    */
   readonly containerAuth?: ClusterSecretStoreV1Beta1SpecProviderIbmAuthContainerAuth;
 
   /**
+   * IBMAuthSecretRef defines a reference to a secret containing credentials for the IBM provider.
+   *
    * @schema ClusterSecretStoreV1Beta1SpecProviderIbmAuth#secretRef
    */
   readonly secretRef?: ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRef;
@@ -21887,6 +22133,8 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderIbmAuth(obj: Cluster
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderInfisicalAuth {
   /**
+   * UniversalAuthCredentials defines the credentials for Infisical Universal Auth.
+   *
    * @schema ClusterSecretStoreV1Beta1SpecProviderInfisicalAuth#universalAuthCredentials
    */
   readonly universalAuthCredentials?: ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials;
@@ -21970,7 +22218,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderInfisicalSecretsScop
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderKeepersecurityAuthRef
@@ -22331,16 +22579,14 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderOracleServiceAccount
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderPassboltAuth {
   /**
-   * A reference to a specific 'key' within a Secret resource.
-   * In some instances, `key` is a required field.
+   * PasswordSecretRef is a reference to the secret containing the Passbolt password
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderPassboltAuth#passwordSecretRef
    */
   readonly passwordSecretRef: ClusterSecretStoreV1Beta1SpecProviderPassboltAuthPasswordSecretRef;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
-   * In some instances, `key` is a required field.
+   * PrivateKeySecretRef is a reference to the secret containing the Passbolt private key
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderPassboltAuth#privateKeySecretRef
    */
@@ -22369,6 +22615,8 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderPassboltAuth(obj: Cl
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuth {
   /**
+   * PasswordDepotSecretRef defines a reference to a secret containing credentials for the Password Depot provider.
+   *
    * @schema ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuth#secretRef
    */
   readonly secretRef: ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef;
@@ -22600,7 +22848,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderSenhaseguraAuth {
   readonly clientId: string;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderSenhaseguraAuth#clientSecretSecretRef
@@ -22944,6 +23192,8 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderWebhookResult(obj: C
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * WebhookSecret defines a secret to be used in webhook templates.
+ *
  * @schema ClusterSecretStoreV1Beta1SpecProviderWebhookSecrets
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderWebhookSecrets {
@@ -23012,7 +23262,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexcertificateman
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProvider {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProvider#certSecretRef
@@ -23069,7 +23319,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexlockboxAuth(ob
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderYandexlockboxCaProvider {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderYandexlockboxCaProvider#certSecretRef
@@ -23165,7 +23415,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecre
   readonly accessId?: ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRef#accessType
@@ -23173,7 +23423,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecre
   readonly accessType?: ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessType;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRef#accessTypeParam
@@ -23210,7 +23460,7 @@ export enum ClusterSecretStoreV1Beta1SpecProviderAkeylessCaProviderType {
 }
 
 /**
- * Authenticate against Alibaba using RRSA.
+ * AlibabaRRSAAuth authenticates against Alibaba using RRSA (Resource-oriented RAM-based Service Authentication).
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthRrsa
  */
@@ -23290,13 +23540,13 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Authenticate against AWS using service account tokens.
+ * AWSJWTAuth authenticates against AWS using service account tokens from the Kubernetes cluster.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderAwsAuthJwt
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderAwsAuthJwt {
   /**
-   * A reference to a ServiceAccount resource.
+   * ServiceAccountSelector is a reference to a ServiceAccount resource.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderAwsAuthJwt#serviceAccountRef
    */
@@ -24046,6 +24296,8 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderDelineaClientSecretS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Device42SecretRef defines a reference to a secret containing credentials for the Device42 provider.
+ *
  * @schema ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRef
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRef {
@@ -24072,6 +24324,8 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderDevice42AuthSecretRe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * DopplerAuthSecretRef defines a reference to a secret containing credentials for the Doppler provider.
+ *
  * @schema ClusterSecretStoreV1Beta1SpecProviderDopplerAuthSecretRef
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderDopplerAuthSecretRef {
@@ -24146,6 +24400,8 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderFortanixApiKeySecret
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GCPSMAuthSecretRef defines a reference to a secret containing credentials for the GCP Secret Manager provider.
+ *
  * @schema ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef {
@@ -24172,6 +24428,8 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef(o
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GCPWorkloadIdentity defines configuration for using GCP Workload Identity authentication.
+ *
  * @schema ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity {
@@ -24200,7 +24458,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity 
   readonly clusterProjectId?: string;
 
   /**
-   * A reference to a ServiceAccount resource.
+   * ServiceAccountSelector is a reference to a ServiceAccount resource.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity#serviceAccountRef
    */
@@ -24225,7 +24483,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIde
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderGithubAuthPrivateKey
@@ -24272,6 +24530,8 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGithubAuthPrivateKey
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GitlabSecretRef defines a reference to a secret containing credentials for the GitLab provider.
+ *
  * @schema ClusterSecretStoreV1Beta1SpecProviderGitlabAuthSecretRef
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderGitlabAuthSecretRef {
@@ -24310,7 +24570,7 @@ export enum ClusterSecretStoreV1Beta1SpecProviderGitlabCaProviderType {
 }
 
 /**
- * IBM Container-based auth with IAM Trusted Profile.
+ * IBMAuthContainerAuth defines authentication using IBM Container-based auth with IAM Trusted Profile.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderIbmAuthContainerAuth
  */
@@ -24352,6 +24612,8 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderIbmAuthContainerAuth
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * IBMAuthSecretRef defines a reference to a secret containing credentials for the IBM provider.
+ *
  * @schema ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRef
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRef {
@@ -24378,11 +24640,13 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRef(obj
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * UniversalAuthCredentials defines the credentials for Infisical Universal Auth.
+ *
  * @schema ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials#clientId
@@ -24390,7 +24654,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuth
   readonly clientId: ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials#clientSecret
@@ -24420,7 +24684,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUnivers
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCert {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCert#clientCert
@@ -24428,7 +24692,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCert {
   readonly clientCert?: ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCertClientCert;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCert#clientKey
@@ -24505,7 +24769,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthServic
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthToken {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthToken#bearerToken
@@ -24738,8 +25002,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderOracleAuthSecretRef(
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
- * In some instances, `key` is a required field.
+ * PasswordSecretRef is a reference to the secret containing the Passbolt password
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderPassboltAuthPasswordSecretRef
  */
@@ -24785,8 +25048,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderPassboltAuthPassword
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
- * In some instances, `key` is a required field.
+ * PrivateKeySecretRef is a reference to the secret containing the Passbolt private key
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderPassboltAuthPrivateKeySecretRef
  */
@@ -24832,6 +25094,8 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderPassboltAuthPrivateK
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * PasswordDepotSecretRef defines a reference to a secret containing credentials for the Password Depot provider.
+ *
  * @schema ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef {
@@ -25116,7 +25380,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderSecretserverUsername
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderSenhaseguraAuthClientSecretSecretRef
@@ -25723,7 +25987,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultTlsKeySecretRef
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderWebhookAuthNtlm {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderWebhookAuthNtlm#passwordSecret
@@ -25731,7 +25995,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderWebhookAuthNtlm {
   readonly passwordSecret: ClusterSecretStoreV1Beta1SpecProviderWebhookAuthNtlmPasswordSecret;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderWebhookAuthNtlm#usernameSecret
@@ -25859,7 +26123,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexcertificateman
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProviderCertSecretRef
@@ -25952,7 +26216,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderYandexlockboxAuthAut
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderYandexlockboxCaProviderCertSecretRef
@@ -26144,7 +26408,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessType
@@ -26191,7 +26455,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam
@@ -26330,7 +26594,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a ServiceAccount resource.
+ * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderAwsAuthJwtServiceAccountRef
  */
@@ -27260,7 +27524,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthSecretRefSe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a ServiceAccount resource.
+ * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef
  */
@@ -27399,7 +27663,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderIbmAuthSecretRefSecr
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientId
@@ -27446,7 +27710,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUnivers
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientSecret
@@ -27493,7 +27757,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderInfisicalAuthUnivers
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCertClientCert
@@ -27540,7 +27804,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCertCl
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCertClientKey
@@ -27587,7 +27851,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthCertCl
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderKubernetesAuthTokenBearerToken
@@ -28074,7 +28338,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthCertSecretR
  */
 export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamJwt {
   /**
-   * A reference to a ServiceAccount resource.
+   * ServiceAccountSelector is a reference to a ServiceAccount resource.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamJwt#serviceAccountRef
    */
@@ -28438,7 +28702,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthUserPassSec
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderWebhookAuthNtlmPasswordSecret
@@ -28485,7 +28749,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderWebhookAuthNtlmPassw
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderWebhookAuthNtlmUsernameSecret
@@ -28532,7 +28796,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderWebhookAuthNtlmUsern
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a ServiceAccount resource.
+ * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderVaultAuthIamJwtServiceAccountRef
  */
@@ -28768,6 +29032,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtKubernet
 
 /**
  * ExternalSecret is the Schema for the external-secrets API.
+It defines how to fetch data from external APIs and make it available as Kubernetes Secrets.
  *
  * @schema ExternalSecret
  */
@@ -28822,6 +29087,7 @@ export class ExternalSecret extends ApiObject {
 
 /**
  * ExternalSecret is the Schema for the external-secrets API.
+ * It defines how to fetch data from external APIs and make it available as Kubernetes Secrets.
  *
  * @schema ExternalSecret
  */
@@ -28906,8 +29172,8 @@ export interface ExternalSecretSpec {
   readonly secretStoreRef?: ExternalSecretSpecSecretStoreRef;
 
   /**
-   * ExternalSecretTarget defines the Kubernetes Secret to be created
-   * There can be only one target per ExternalSecret.
+   * ExternalSecretTarget defines the Kubernetes Secret to be created,
+   * there can be only one target per ExternalSecret.
    *
    * @schema ExternalSecretSpec#target
    */
@@ -28980,6 +29246,9 @@ export function toJson_ExternalSecretSpecData(obj: ExternalSecretSpecData | unde
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * ExternalSecretDataFromRemoteRef defines the connection between the Kubernetes Secret keys and the Provider data
+ * when using DataFrom to fetch multiple values from a Provider.
+ *
  * @schema ExternalSecretSpecDataFrom
  */
 export interface ExternalSecretSpecDataFrom {
@@ -29094,8 +29363,8 @@ export function toJson_ExternalSecretSpecSecretStoreRef(obj: ExternalSecretSpecS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * ExternalSecretTarget defines the Kubernetes Secret to be created
- * There can be only one target per ExternalSecret.
+ * ExternalSecretTarget defines the Kubernetes Secret to be created,
+ * there can be only one target per ExternalSecret.
  *
  * @schema ExternalSecretSpecTarget
  */
@@ -29126,6 +29395,16 @@ export interface ExternalSecretSpecTarget {
   readonly immutable?: boolean;
 
   /**
+   * Manifest defines a custom Kubernetes resource to create instead of a Secret.
+   * When specified, ExternalSecret will create the resource type defined here
+   * (e.g., ConfigMap, Custom Resource) instead of a Secret.
+   * Warning: Using Generic target. Make sure access policies and encryption are properly configured.
+   *
+   * @schema ExternalSecretSpecTarget#manifest
+   */
+  readonly manifest?: ExternalSecretSpecTargetManifest;
+
+  /**
    * The name of the Secret resource to be managed.
    * Defaults to the .metadata.name of the ExternalSecret resource
    *
@@ -29152,6 +29431,7 @@ export function toJson_ExternalSecretSpecTarget(obj: ExternalSecretSpecTarget | 
     'creationPolicy': obj.creationPolicy,
     'deletionPolicy': obj.deletionPolicy,
     'immutable': obj.immutable,
+    'manifest': toJson_ExternalSecretSpecTargetManifest(obj.manifest),
     'name': obj.name,
     'template': toJson_ExternalSecretSpecTargetTemplate(obj.template),
   };
@@ -29402,6 +29682,8 @@ export function toJson_ExternalSecretSpecDataFromFind(obj: ExternalSecretSpecDat
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * ExternalSecretRewrite defines how to rewrite secret data values before they are written to the Secret.
+ *
  * @schema ExternalSecretSpecDataFromRewrite
  */
 export interface ExternalSecretSpecDataFromRewrite {
@@ -29536,6 +29818,45 @@ export enum ExternalSecretSpecTargetDeletionPolicy {
 }
 
 /**
+ * Manifest defines a custom Kubernetes resource to create instead of a Secret.
+ * When specified, ExternalSecret will create the resource type defined here
+ * (e.g., ConfigMap, Custom Resource) instead of a Secret.
+ * Warning: Using Generic target. Make sure access policies and encryption are properly configured.
+ *
+ * @schema ExternalSecretSpecTargetManifest
+ */
+export interface ExternalSecretSpecTargetManifest {
+  /**
+   * APIVersion of the target resource (e.g., "v1" for ConfigMap, "argoproj.io/v1alpha1" for ArgoCD Application)
+   *
+   * @schema ExternalSecretSpecTargetManifest#apiVersion
+   */
+  readonly apiVersion: string;
+
+  /**
+   * Kind of the target resource (e.g., "ConfigMap", "Application")
+   *
+   * @schema ExternalSecretSpecTargetManifest#kind
+   */
+  readonly kind: string;
+}
+
+/**
+ * Converts an object of type 'ExternalSecretSpecTargetManifest' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ExternalSecretSpecTargetManifest(obj: ExternalSecretSpecTargetManifest | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apiVersion': obj.apiVersion,
+    'kind': obj.kind,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * Template defines a blueprint for the created Secret resource.
  *
  * @schema ExternalSecretSpecTargetTemplate
@@ -29556,6 +29877,8 @@ export interface ExternalSecretSpecTargetTemplate {
   readonly engineVersion?: ExternalSecretSpecTargetTemplateEngineVersion;
 
   /**
+   * TemplateMergePolicy defines how the rendered template should be merged with the existing Secret data.
+   *
    * @schema ExternalSecretSpecTargetTemplate#mergePolicy
    */
   readonly mergePolicy?: ExternalSecretSpecTargetTemplateMergePolicy;
@@ -30044,6 +30367,8 @@ export enum ExternalSecretSpecTargetTemplateEngineVersion {
 }
 
 /**
+ * TemplateMergePolicy defines how the rendered template should be merged with the existing Secret data.
+ *
  * @schema ExternalSecretSpecTargetTemplateMergePolicy
  */
 export enum ExternalSecretSpecTargetTemplateMergePolicy {
@@ -30092,10 +30417,15 @@ export function toJson_ExternalSecretSpecTargetTemplateMetadata(obj: ExternalSec
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateFrom specifies a source for templates.
+ * Each item in the list can either reference a ConfigMap or a Secret resource.
+ *
  * @schema ExternalSecretSpecTargetTemplateTemplateFrom
  */
 export interface ExternalSecretSpecTargetTemplateTemplateFrom {
   /**
+   * TemplateRef specifies a reference to either a ConfigMap or a Secret resource.
+   *
    * @schema ExternalSecretSpecTargetTemplateTemplateFrom#configMap
    */
   readonly configMap?: ExternalSecretSpecTargetTemplateTemplateFromConfigMap;
@@ -30106,14 +30436,21 @@ export interface ExternalSecretSpecTargetTemplateTemplateFrom {
   readonly literal?: string;
 
   /**
+   * TemplateRef specifies a reference to either a ConfigMap or a Secret resource.
+   *
    * @schema ExternalSecretSpecTargetTemplateTemplateFrom#secret
    */
   readonly secret?: ExternalSecretSpecTargetTemplateTemplateFromSecret;
 
   /**
+   * Target specifies where to place the template result.
+   * For Secret resources, common values are: "Data", "Annotations", "Labels".
+   * For custom resources (when spec.target.manifest is set), this supports
+   * nested paths like "spec.database.config" or "data".
+   *
    * @schema ExternalSecretSpecTargetTemplateTemplateFrom#target
    */
-  readonly target?: ExternalSecretSpecTargetTemplateTemplateFromTarget;
+  readonly target?: string;
 }
 
 /**
@@ -30278,6 +30615,8 @@ export enum ExternalSecretSpecDataFromSourceRefStoreRefKind {
 }
 
 /**
+ * TemplateRef specifies a reference to either a ConfigMap or a Secret resource.
+ *
  * @schema ExternalSecretSpecTargetTemplateTemplateFromConfigMap
  */
 export interface ExternalSecretSpecTargetTemplateTemplateFromConfigMap {
@@ -30312,6 +30651,8 @@ export function toJson_ExternalSecretSpecTargetTemplateTemplateFromConfigMap(obj
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateRef specifies a reference to either a ConfigMap or a Secret resource.
+ *
  * @schema ExternalSecretSpecTargetTemplateTemplateFromSecret
  */
 export interface ExternalSecretSpecTargetTemplateTemplateFromSecret {
@@ -30346,18 +30687,8 @@ export function toJson_ExternalSecretSpecTargetTemplateTemplateFromSecret(obj: E
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * @schema ExternalSecretSpecTargetTemplateTemplateFromTarget
- */
-export enum ExternalSecretSpecTargetTemplateTemplateFromTarget {
-  /** Data */
-  DATA = "Data",
-  /** Annotations */
-  ANNOTATIONS = "Annotations",
-  /** Labels */
-  LABELS = "Labels",
-}
-
-/**
+ * TemplateRefItem specifies a key in the ConfigMap/Secret to use as a template for Secret data.
+ *
  * @schema ExternalSecretSpecTargetTemplateTemplateFromConfigMapItems
  */
 export interface ExternalSecretSpecTargetTemplateTemplateFromConfigMapItems {
@@ -30369,6 +30700,8 @@ export interface ExternalSecretSpecTargetTemplateTemplateFromConfigMapItems {
   readonly key: string;
 
   /**
+   * TemplateScope specifies how the template keys should be interpreted.
+   *
    * @schema ExternalSecretSpecTargetTemplateTemplateFromConfigMapItems#templateAs
    */
   readonly templateAs?: ExternalSecretSpecTargetTemplateTemplateFromConfigMapItemsTemplateAs;
@@ -30390,6 +30723,8 @@ export function toJson_ExternalSecretSpecTargetTemplateTemplateFromConfigMapItem
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateRefItem specifies a key in the ConfigMap/Secret to use as a template for Secret data.
+ *
  * @schema ExternalSecretSpecTargetTemplateTemplateFromSecretItems
  */
 export interface ExternalSecretSpecTargetTemplateTemplateFromSecretItems {
@@ -30401,6 +30736,8 @@ export interface ExternalSecretSpecTargetTemplateTemplateFromSecretItems {
   readonly key: string;
 
   /**
+   * TemplateScope specifies how the template keys should be interpreted.
+   *
    * @schema ExternalSecretSpecTargetTemplateTemplateFromSecretItems#templateAs
    */
   readonly templateAs?: ExternalSecretSpecTargetTemplateTemplateFromSecretItemsTemplateAs;
@@ -30422,6 +30759,8 @@ export function toJson_ExternalSecretSpecTargetTemplateTemplateFromSecretItems(o
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateScope specifies how the template keys should be interpreted.
+ *
  * @schema ExternalSecretSpecTargetTemplateTemplateFromConfigMapItemsTemplateAs
  */
 export enum ExternalSecretSpecTargetTemplateTemplateFromConfigMapItemsTemplateAs {
@@ -30432,6 +30771,8 @@ export enum ExternalSecretSpecTargetTemplateTemplateFromConfigMapItemsTemplateAs
 }
 
 /**
+ * TemplateScope specifies how the template keys should be interpreted.
+ *
  * @schema ExternalSecretSpecTargetTemplateTemplateFromSecretItemsTemplateAs
  */
 export enum ExternalSecretSpecTargetTemplateTemplateFromSecretItemsTemplateAs {
@@ -30443,7 +30784,7 @@ export enum ExternalSecretSpecTargetTemplateTemplateFromSecretItemsTemplateAs {
 
 
 /**
- * ExternalSecret is the Schema for the external-secrets API.
+ * ExternalSecret is the schema for the external-secrets API.
  *
  * @schema ExternalSecretV1Beta1
  */
@@ -30497,7 +30838,7 @@ export class ExternalSecretV1Beta1 extends ApiObject {
 }
 
 /**
- * ExternalSecret is the Schema for the external-secrets API.
+ * ExternalSecret is the schema for the external-secrets API.
  *
  * @schema ExternalSecretV1Beta1
  */
@@ -30656,6 +30997,8 @@ export function toJson_ExternalSecretV1Beta1SpecData(obj: ExternalSecretV1Beta1S
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * ExternalSecretDataFromRemoteRef defines a reference to multiple secrets in the provider to be fetched using options.
+ *
  * @schema ExternalSecretV1Beta1SpecDataFrom
  */
 export interface ExternalSecretV1Beta1SpecDataFrom {
@@ -31078,6 +31421,8 @@ export function toJson_ExternalSecretV1Beta1SpecDataFromFind(obj: ExternalSecret
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * ExternalSecretRewrite defines rules on how to rewrite secret keys.
+ *
  * @schema ExternalSecretV1Beta1SpecDataFromRewrite
  */
 export interface ExternalSecretV1Beta1SpecDataFromRewrite {
@@ -31223,6 +31568,8 @@ export interface ExternalSecretV1Beta1SpecTargetTemplate {
   readonly engineVersion?: ExternalSecretV1Beta1SpecTargetTemplateEngineVersion;
 
   /**
+   * TemplateMergePolicy defines how template values should be merged when generating a secret.
+   *
    * @schema ExternalSecretV1Beta1SpecTargetTemplate#mergePolicy
    */
   readonly mergePolicy?: ExternalSecretV1Beta1SpecTargetTemplateMergePolicy;
@@ -31649,6 +31996,8 @@ export enum ExternalSecretV1Beta1SpecTargetTemplateEngineVersion {
 }
 
 /**
+ * TemplateMergePolicy defines how template values should be merged when generating a secret.
+ *
  * @schema ExternalSecretV1Beta1SpecTargetTemplateMergePolicy
  */
 export enum ExternalSecretV1Beta1SpecTargetTemplateMergePolicy {
@@ -31691,10 +32040,14 @@ export function toJson_ExternalSecretV1Beta1SpecTargetTemplateMetadata(obj: Exte
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateFrom defines a source for template data.
+ *
  * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFrom
  */
 export interface ExternalSecretV1Beta1SpecTargetTemplateTemplateFrom {
   /**
+   * TemplateRef defines a reference to a template source in a ConfigMap or Secret.
+   *
    * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFrom#configMap
    */
   readonly configMap?: ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMap;
@@ -31705,11 +32058,15 @@ export interface ExternalSecretV1Beta1SpecTargetTemplateTemplateFrom {
   readonly literal?: string;
 
   /**
+   * TemplateRef defines a reference to a template source in a ConfigMap or Secret.
+   *
    * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFrom#secret
    */
   readonly secret?: ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecret;
 
   /**
+   * TemplateTarget defines the target field where the template result will be stored.
+   *
    * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFrom#target
    */
   readonly target?: ExternalSecretV1Beta1SpecTargetTemplateTemplateFromTarget;
@@ -31833,6 +32190,8 @@ export enum ExternalSecretV1Beta1SpecDataFromSourceRefStoreRefKind {
 }
 
 /**
+ * TemplateRef defines a reference to a template source in a ConfigMap or Secret.
+ *
  * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMap
  */
 export interface ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMap {
@@ -31867,6 +32226,8 @@ export function toJson_ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfig
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateRef defines a reference to a template source in a ConfigMap or Secret.
+ *
  * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecret
  */
 export interface ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecret {
@@ -31901,6 +32262,8 @@ export function toJson_ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecret
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateTarget defines the target field where the template result will be stored.
+ *
  * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFromTarget
  */
 export enum ExternalSecretV1Beta1SpecTargetTemplateTemplateFromTarget {
@@ -31913,6 +32276,8 @@ export enum ExternalSecretV1Beta1SpecTargetTemplateTemplateFromTarget {
 }
 
 /**
+ * TemplateRefItem defines which key in the referenced ConfigMap or Secret to use as a template.
+ *
  * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMapItems
  */
 export interface ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMapItems {
@@ -31924,6 +32289,8 @@ export interface ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMapIte
   readonly key: string;
 
   /**
+   * TemplateScope defines the scope of the template when processing template data.
+   *
    * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMapItems#templateAs
    */
   readonly templateAs?: ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMapItemsTemplateAs;
@@ -31945,6 +32312,8 @@ export function toJson_ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfig
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateRefItem defines which key in the referenced ConfigMap or Secret to use as a template.
+ *
  * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecretItems
  */
 export interface ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecretItems {
@@ -31956,6 +32325,8 @@ export interface ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecretItems 
   readonly key: string;
 
   /**
+   * TemplateScope defines the scope of the template when processing template data.
+   *
    * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecretItems#templateAs
    */
   readonly templateAs?: ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecretItemsTemplateAs;
@@ -31977,6 +32348,8 @@ export function toJson_ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecret
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateScope defines the scope of the template when processing template data.
+ *
  * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMapItemsTemplateAs
  */
 export enum ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMapItemsTemplateAs {
@@ -31987,6 +32360,8 @@ export enum ExternalSecretV1Beta1SpecTargetTemplateTemplateFromConfigMapItemsTem
 }
 
 /**
+ * TemplateScope defines the scope of the template when processing template data.
+ *
  * @schema ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecretItemsTemplateAs
  */
 export enum ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecretItemsTemplateAs {
@@ -31998,7 +32373,7 @@ export enum ExternalSecretV1Beta1SpecTargetTemplateTemplateFromSecretItemsTempla
 
 
 /**
- *
+ * PushSecret is the Schema for the PushSecrets API that enables pushing Kubernetes secrets to external secret providers.
  *
  * @schema PushSecret
  */
@@ -32052,6 +32427,8 @@ export class PushSecret extends ApiObject {
 }
 
 /**
+ * PushSecret is the Schema for the PushSecrets API that enables pushing Kubernetes secrets to external secret providers.
+ *
  * @schema PushSecret
  */
 export interface PushSecretProps {
@@ -32158,6 +32535,8 @@ export function toJson_PushSecretSpec(obj: PushSecretSpec | undefined): Record<s
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * PushSecretData defines data to be pushed to the provider and associated metadata.
+ *
  * @schema PushSecretSpecData
  */
 export interface PushSecretSpecData {
@@ -32213,6 +32592,8 @@ export enum PushSecretSpecDeletionPolicy {
 }
 
 /**
+ * PushSecretStoreRef contains a reference on how to sync to a SecretStore.
+ *
  * @schema PushSecretSpecSecretStoreRefs
  */
 export interface PushSecretSpecSecretStoreRefs {
@@ -32311,6 +32692,8 @@ export interface PushSecretSpecTemplate {
   readonly engineVersion?: PushSecretSpecTemplateEngineVersion;
 
   /**
+   * TemplateMergePolicy defines how the rendered template should be merged with the existing Secret data.
+   *
    * @schema PushSecretSpecTemplate#mergePolicy
    */
   readonly mergePolicy?: PushSecretSpecTemplateMergePolicy;
@@ -32556,6 +32939,8 @@ export enum PushSecretSpecTemplateEngineVersion {
 }
 
 /**
+ * TemplateMergePolicy defines how the rendered template should be merged with the existing Secret data.
+ *
  * @schema PushSecretSpecTemplateMergePolicy
  */
 export enum PushSecretSpecTemplateMergePolicy {
@@ -32604,10 +32989,15 @@ export function toJson_PushSecretSpecTemplateMetadata(obj: PushSecretSpecTemplat
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateFrom specifies a source for templates.
+ * Each item in the list can either reference a ConfigMap or a Secret resource.
+ *
  * @schema PushSecretSpecTemplateTemplateFrom
  */
 export interface PushSecretSpecTemplateTemplateFrom {
   /**
+   * TemplateRef specifies a reference to either a ConfigMap or a Secret resource.
+   *
    * @schema PushSecretSpecTemplateTemplateFrom#configMap
    */
   readonly configMap?: PushSecretSpecTemplateTemplateFromConfigMap;
@@ -32618,14 +33008,21 @@ export interface PushSecretSpecTemplateTemplateFrom {
   readonly literal?: string;
 
   /**
+   * TemplateRef specifies a reference to either a ConfigMap or a Secret resource.
+   *
    * @schema PushSecretSpecTemplateTemplateFrom#secret
    */
   readonly secret?: PushSecretSpecTemplateTemplateFromSecret;
 
   /**
+   * Target specifies where to place the template result.
+   * For Secret resources, common values are: "Data", "Annotations", "Labels".
+   * For custom resources (when spec.target.manifest is set), this supports
+   * nested paths like "spec.database.config" or "data".
+   *
    * @schema PushSecretSpecTemplateTemplateFrom#target
    */
-  readonly target?: PushSecretSpecTemplateTemplateFromTarget;
+  readonly target?: string;
 }
 
 /**
@@ -32809,6 +33206,8 @@ export function toJson_PushSecretSpecSelectorSecretSelector(obj: PushSecretSpecS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateRef specifies a reference to either a ConfigMap or a Secret resource.
+ *
  * @schema PushSecretSpecTemplateTemplateFromConfigMap
  */
 export interface PushSecretSpecTemplateTemplateFromConfigMap {
@@ -32843,6 +33242,8 @@ export function toJson_PushSecretSpecTemplateTemplateFromConfigMap(obj: PushSecr
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateRef specifies a reference to either a ConfigMap or a Secret resource.
+ *
  * @schema PushSecretSpecTemplateTemplateFromSecret
  */
 export interface PushSecretSpecTemplateTemplateFromSecret {
@@ -32875,18 +33276,6 @@ export function toJson_PushSecretSpecTemplateTemplateFromSecret(obj: PushSecretS
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * @schema PushSecretSpecTemplateTemplateFromTarget
- */
-export enum PushSecretSpecTemplateTemplateFromTarget {
-  /** Data */
-  DATA = "Data",
-  /** Annotations */
-  ANNOTATIONS = "Annotations",
-  /** Labels */
-  LABELS = "Labels",
-}
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -32938,6 +33327,8 @@ export function toJson_PushSecretSpecSelectorSecretSelectorMatchExpressions(obj:
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateRefItem specifies a key in the ConfigMap/Secret to use as a template for Secret data.
+ *
  * @schema PushSecretSpecTemplateTemplateFromConfigMapItems
  */
 export interface PushSecretSpecTemplateTemplateFromConfigMapItems {
@@ -32949,6 +33340,8 @@ export interface PushSecretSpecTemplateTemplateFromConfigMapItems {
   readonly key: string;
 
   /**
+   * TemplateScope specifies how the template keys should be interpreted.
+   *
    * @schema PushSecretSpecTemplateTemplateFromConfigMapItems#templateAs
    */
   readonly templateAs?: PushSecretSpecTemplateTemplateFromConfigMapItemsTemplateAs;
@@ -32970,6 +33363,8 @@ export function toJson_PushSecretSpecTemplateTemplateFromConfigMapItems(obj: Pus
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateRefItem specifies a key in the ConfigMap/Secret to use as a template for Secret data.
+ *
  * @schema PushSecretSpecTemplateTemplateFromSecretItems
  */
 export interface PushSecretSpecTemplateTemplateFromSecretItems {
@@ -32981,6 +33376,8 @@ export interface PushSecretSpecTemplateTemplateFromSecretItems {
   readonly key: string;
 
   /**
+   * TemplateScope specifies how the template keys should be interpreted.
+   *
    * @schema PushSecretSpecTemplateTemplateFromSecretItems#templateAs
    */
   readonly templateAs?: PushSecretSpecTemplateTemplateFromSecretItemsTemplateAs;
@@ -33002,6 +33399,8 @@ export function toJson_PushSecretSpecTemplateTemplateFromSecretItems(obj: PushSe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TemplateScope specifies how the template keys should be interpreted.
+ *
  * @schema PushSecretSpecTemplateTemplateFromConfigMapItemsTemplateAs
  */
 export enum PushSecretSpecTemplateTemplateFromConfigMapItemsTemplateAs {
@@ -33012,6 +33411,8 @@ export enum PushSecretSpecTemplateTemplateFromConfigMapItemsTemplateAs {
 }
 
 /**
+ * TemplateScope specifies how the template keys should be interpreted.
+ *
  * @schema PushSecretSpecTemplateTemplateFromSecretItemsTemplateAs
  */
 export enum PushSecretSpecTemplateTemplateFromSecretItemsTemplateAs {
@@ -33407,12 +33808,15 @@ export interface SecretStoreSpecProvider {
   readonly oracle?: SecretStoreSpecProviderOracle;
 
   /**
+   * PassboltProvider provides access to Passbolt secrets manager.
+   * See: https://www.passbolt.com.
+   *
    * @schema SecretStoreSpecProvider#passbolt
    */
   readonly passbolt?: SecretStoreSpecProviderPassbolt;
 
   /**
-   * Configures a store to sync secrets with a Password Depot instance.
+   * PasswordDepotProvider configures a store to sync secrets with a Password Depot instance.
    *
    * @schema SecretStoreSpecProvider#passworddepot
    */
@@ -34329,6 +34733,8 @@ export interface SecretStoreSpecProviderFake {
   readonly data: SecretStoreSpecProviderFakeData[];
 
   /**
+   * ValidationResult is defined type for the number of validation results.
+   *
    * @schema SecretStoreSpecProviderFake#validationResult
    */
   readonly validationResult?: number;
@@ -34702,7 +35108,7 @@ export function toJson_SecretStoreSpecProviderInfisical(obj: SecretStoreSpecProv
  */
 export interface SecretStoreSpecProviderKeepersecurity {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderKeepersecurity#authRef
@@ -35050,6 +35456,9 @@ export function toJson_SecretStoreSpecProviderOracle(obj: SecretStoreSpecProvide
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * PassboltProvider provides access to Passbolt secrets manager.
+ * See: https://www.passbolt.com.
+ *
  * @schema SecretStoreSpecProviderPassbolt
  */
 export interface SecretStoreSpecProviderPassbolt {
@@ -35084,7 +35493,7 @@ export function toJson_SecretStoreSpecProviderPassbolt(obj: SecretStoreSpecProvi
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Configures a store to sync secrets with a Password Depot instance.
+ * PasswordDepotProvider configures a store to sync secrets with a Password Depot instance.
  *
  * @schema SecretStoreSpecProviderPassworddepot
  */
@@ -35622,7 +36031,7 @@ export interface SecretStoreSpecProviderWebhook {
    *
    * @schema SecretStoreSpecProviderWebhook#result
    */
-  readonly result: SecretStoreSpecProviderWebhookResult;
+  readonly result?: SecretStoreSpecProviderWebhookResult;
 
   /**
    * Secrets to fill in templates
@@ -35921,7 +36330,7 @@ export function toJson_SecretStoreSpecProviderAkeylessCaProvider(obj: SecretStor
  */
 export interface SecretStoreSpecProviderAlibabaAuth {
   /**
-   * Authenticate against Alibaba using RRSA.
+   * AlibabaRRSAAuth authenticates against Alibaba using RRSA.
    *
    * @schema SecretStoreSpecProviderAlibabaAuth#rrsa
    */
@@ -35959,7 +36368,7 @@ export function toJson_SecretStoreSpecProviderAlibabaAuth(obj: SecretStoreSpecPr
  */
 export interface SecretStoreSpecProviderAwsAuth {
   /**
-   * Authenticate against AWS using service account tokens.
+   * AWSJWTAuth stores reference to Authenticate against AWS using service account tokens.
    *
    * @schema SecretStoreSpecProviderAwsAuth#jwt
    */
@@ -36010,7 +36419,7 @@ export interface SecretStoreSpecProviderAwsSecretsManager {
    * The number of days from 7 to 30 that Secrets Manager waits before
    * permanently deleting the secret. You can't use both this parameter and
    * ForceDeleteWithoutRecovery in the same call. If you don't use either,
-   * then by default Secrets Manager uses a 30 day recovery window.
+   * then by default Secrets Manager uses a 30-day recovery window.
    * see: https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_DeleteSecret.html#SecretsManager-DeleteSecret-request-RecoveryWindowInDays
    *
    * @schema SecretStoreSpecProviderAwsSecretsManager#recoveryWindowInDays
@@ -36046,6 +36455,9 @@ export enum SecretStoreSpecProviderAwsService {
 }
 
 /**
+ * Tag is a key-value pair that can be attached to an AWS resource.
+ * see: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+ *
  * @schema SecretStoreSpecProviderAwsSessionTags
  */
 export interface SecretStoreSpecProviderAwsSessionTags {
@@ -36701,6 +37113,8 @@ export function toJson_SecretStoreSpecProviderDelineaClientSecret(obj: SecretSto
  */
 export interface SecretStoreSpecProviderDevice42Auth {
   /**
+   * Device42SecretRef contains the secret reference for accessing the Device42 instance.
+   *
    * @schema SecretStoreSpecProviderDevice42Auth#secretRef
    */
   readonly secretRef: SecretStoreSpecProviderDevice42AuthSecretRef;
@@ -36727,6 +37141,8 @@ export function toJson_SecretStoreSpecProviderDevice42Auth(obj: SecretStoreSpecP
  */
 export interface SecretStoreSpecProviderDopplerAuth {
   /**
+   * DopplerAuthSecretRef contains the secret reference for accessing the Doppler API.
+   *
    * @schema SecretStoreSpecProviderDopplerAuth#secretRef
    */
   readonly secretRef: SecretStoreSpecProviderDopplerAuthSecretRef;
@@ -36785,6 +37201,8 @@ export enum SecretStoreSpecProviderDopplerNameTransformer {
 }
 
 /**
+ * FakeProviderData defines a key-value pair with optional version for the fake provider.
+ *
  * @schema SecretStoreSpecProviderFakeData
  */
 export interface SecretStoreSpecProviderFakeData {
@@ -36855,11 +37273,15 @@ export function toJson_SecretStoreSpecProviderFortanixApiKey(obj: SecretStoreSpe
  */
 export interface SecretStoreSpecProviderGcpsmAuth {
   /**
+   * GCPSMAuthSecretRef contains the secret references for GCP Secret Manager authentication.
+   *
    * @schema SecretStoreSpecProviderGcpsmAuth#secretRef
    */
   readonly secretRef?: SecretStoreSpecProviderGcpsmAuthSecretRef;
 
   /**
+   * GCPWorkloadIdentity defines configuration for workload identity authentication to GCP.
+   *
    * @schema SecretStoreSpecProviderGcpsmAuth#workloadIdentity
    */
   readonly workloadIdentity?: SecretStoreSpecProviderGcpsmAuthWorkloadIdentity;
@@ -36895,7 +37317,7 @@ export function toJson_SecretStoreSpecProviderGcpsmAuth(obj: SecretStoreSpecProv
  */
 export interface SecretStoreSpecProviderGithubAuth {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderGithubAuth#privateKey
@@ -36924,6 +37346,8 @@ export function toJson_SecretStoreSpecProviderGithubAuth(obj: SecretStoreSpecPro
  */
 export interface SecretStoreSpecProviderGitlabAuth {
   /**
+   * GitlabSecretRef contains the secret reference for GitLab authentication credentials.
+   *
    * @schema SecretStoreSpecProviderGitlabAuth#SecretRef
    */
   readonly secretRef: SecretStoreSpecProviderGitlabAuthSecretRef;
@@ -37003,13 +37427,15 @@ export function toJson_SecretStoreSpecProviderGitlabCaProvider(obj: SecretStoreS
  */
 export interface SecretStoreSpecProviderIbmAuth {
   /**
-   * IBM Container-based auth with IAM Trusted Profile.
+   * IBMAuthContainerAuth defines container-based authentication with IAM Trusted Profile.
    *
    * @schema SecretStoreSpecProviderIbmAuth#containerAuth
    */
   readonly containerAuth?: SecretStoreSpecProviderIbmAuthContainerAuth;
 
   /**
+   * IBMAuthSecretRef contains the secret reference for IBM Cloud API key authentication.
+   *
    * @schema SecretStoreSpecProviderIbmAuth#secretRef
    */
   readonly secretRef?: SecretStoreSpecProviderIbmAuthSecretRef;
@@ -37037,51 +37463,71 @@ export function toJson_SecretStoreSpecProviderIbmAuth(obj: SecretStoreSpecProvid
  */
 export interface SecretStoreSpecProviderInfisicalAuth {
   /**
+   * AwsAuthCredentials represents the credentials for AWS authentication.
+   *
    * @schema SecretStoreSpecProviderInfisicalAuth#awsAuthCredentials
    */
   readonly awsAuthCredentials?: SecretStoreSpecProviderInfisicalAuthAwsAuthCredentials;
 
   /**
+   * AzureAuthCredentials represents the credentials for Azure authentication.
+   *
    * @schema SecretStoreSpecProviderInfisicalAuth#azureAuthCredentials
    */
   readonly azureAuthCredentials?: SecretStoreSpecProviderInfisicalAuthAzureAuthCredentials;
 
   /**
+   * GcpIamAuthCredentials represents the credentials for GCP IAM authentication.
+   *
    * @schema SecretStoreSpecProviderInfisicalAuth#gcpIamAuthCredentials
    */
   readonly gcpIamAuthCredentials?: SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials;
 
   /**
+   * GcpIDTokenAuthCredentials represents the credentials for GCP ID token authentication.
+   *
    * @schema SecretStoreSpecProviderInfisicalAuth#gcpIdTokenAuthCredentials
    */
   readonly gcpIdTokenAuthCredentials?: SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials;
 
   /**
+   * JwtAuthCredentials represents the credentials for JWT authentication.
+   *
    * @schema SecretStoreSpecProviderInfisicalAuth#jwtAuthCredentials
    */
   readonly jwtAuthCredentials?: SecretStoreSpecProviderInfisicalAuthJwtAuthCredentials;
 
   /**
+   * KubernetesAuthCredentials represents the credentials for Kubernetes authentication.
+   *
    * @schema SecretStoreSpecProviderInfisicalAuth#kubernetesAuthCredentials
    */
   readonly kubernetesAuthCredentials?: SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials;
 
   /**
+   * LdapAuthCredentials represents the credentials for LDAP authentication.
+   *
    * @schema SecretStoreSpecProviderInfisicalAuth#ldapAuthCredentials
    */
   readonly ldapAuthCredentials?: SecretStoreSpecProviderInfisicalAuthLdapAuthCredentials;
 
   /**
+   * OciAuthCredentials represents the credentials for OCI authentication.
+   *
    * @schema SecretStoreSpecProviderInfisicalAuth#ociAuthCredentials
    */
   readonly ociAuthCredentials?: SecretStoreSpecProviderInfisicalAuthOciAuthCredentials;
 
   /**
+   * TokenAuthCredentials represents the credentials for access token-based authentication.
+   *
    * @schema SecretStoreSpecProviderInfisicalAuth#tokenAuthCredentials
    */
   readonly tokenAuthCredentials?: SecretStoreSpecProviderInfisicalAuthTokenAuthCredentials;
 
   /**
+   * UniversalAuthCredentials represents the client credentials for universal authentication.
+   *
    * @schema SecretStoreSpecProviderInfisicalAuth#universalAuthCredentials
    */
   readonly universalAuthCredentials?: SecretStoreSpecProviderInfisicalAuthUniversalAuthCredentials;
@@ -37174,7 +37620,7 @@ export function toJson_SecretStoreSpecProviderInfisicalSecretsScope(obj: SecretS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderKeepersecurityAuthRef
@@ -37656,7 +38102,7 @@ export function toJson_SecretStoreSpecProviderOracleServiceAccountRef(obj: Secre
  */
 export interface SecretStoreSpecProviderPassboltAuth {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderPassboltAuth#passwordSecretRef
@@ -37664,7 +38110,7 @@ export interface SecretStoreSpecProviderPassboltAuth {
   readonly passwordSecretRef: SecretStoreSpecProviderPassboltAuthPasswordSecretRef;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderPassboltAuth#privateKeySecretRef
@@ -37694,6 +38140,8 @@ export function toJson_SecretStoreSpecProviderPassboltAuth(obj: SecretStoreSpecP
  */
 export interface SecretStoreSpecProviderPassworddepotAuth {
   /**
+   * PasswordDepotSecretRef contains the secret reference for Password Depot authentication.
+   *
    * @schema SecretStoreSpecProviderPassworddepotAuth#secretRef
    */
   readonly secretRef: SecretStoreSpecProviderPassworddepotAuthSecretRef;
@@ -37925,7 +38373,7 @@ export interface SecretStoreSpecProviderSenhaseguraAuth {
   readonly clientId: string;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderSenhaseguraAuth#clientSecretSecretRef
@@ -38330,6 +38778,8 @@ export function toJson_SecretStoreSpecProviderWebhookResult(obj: SecretStoreSpec
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * WebhookSecret defines a secret that will be passed to the webhook request.
+ *
  * @schema SecretStoreSpecProviderWebhookSecrets
  */
 export interface SecretStoreSpecProviderWebhookSecrets {
@@ -38398,7 +38848,7 @@ export function toJson_SecretStoreSpecProviderYandexcertificatemanagerAuth(obj: 
  */
 export interface SecretStoreSpecProviderYandexcertificatemanagerCaProvider {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderYandexcertificatemanagerCaProvider#certSecretRef
@@ -38491,7 +38941,7 @@ export function toJson_SecretStoreSpecProviderYandexlockboxAuth(obj: SecretStore
  */
 export interface SecretStoreSpecProviderYandexlockboxCaProvider {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderYandexlockboxCaProvider#certSecretRef
@@ -38623,7 +39073,7 @@ export interface SecretStoreSpecProviderAkeylessAuthSecretRefSecretRef {
   readonly accessId?: SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderAkeylessAuthSecretRefSecretRef#accessType
@@ -38631,7 +39081,7 @@ export interface SecretStoreSpecProviderAkeylessAuthSecretRefSecretRef {
   readonly accessType?: SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessType;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderAkeylessAuthSecretRefSecretRef#accessTypeParam
@@ -38668,7 +39118,7 @@ export enum SecretStoreSpecProviderAkeylessCaProviderType {
 }
 
 /**
- * Authenticate against Alibaba using RRSA.
+ * AlibabaRRSAAuth authenticates against Alibaba using RRSA.
  *
  * @schema SecretStoreSpecProviderAlibabaAuthRrsa
  */
@@ -38748,13 +39198,13 @@ export function toJson_SecretStoreSpecProviderAlibabaAuthSecretRef(obj: SecretSt
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Authenticate against AWS using service account tokens.
+ * AWSJWTAuth stores reference to Authenticate against AWS using service account tokens.
  *
  * @schema SecretStoreSpecProviderAwsAuthJwt
  */
 export interface SecretStoreSpecProviderAwsAuthJwt {
   /**
-   * A reference to a ServiceAccount resource.
+   * ServiceAccountSelector is a reference to a ServiceAccount resource.
    *
    * @schema SecretStoreSpecProviderAwsAuthJwt#serviceAccountRef
    */
@@ -39504,6 +39954,8 @@ export function toJson_SecretStoreSpecProviderDelineaClientSecretSecretRef(obj: 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Device42SecretRef contains the secret reference for accessing the Device42 instance.
+ *
  * @schema SecretStoreSpecProviderDevice42AuthSecretRef
  */
 export interface SecretStoreSpecProviderDevice42AuthSecretRef {
@@ -39530,6 +39982,8 @@ export function toJson_SecretStoreSpecProviderDevice42AuthSecretRef(obj: SecretS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * DopplerAuthSecretRef contains the secret reference for accessing the Doppler API.
+ *
  * @schema SecretStoreSpecProviderDopplerAuthSecretRef
  */
 export interface SecretStoreSpecProviderDopplerAuthSecretRef {
@@ -39604,6 +40058,8 @@ export function toJson_SecretStoreSpecProviderFortanixApiKeySecretRef(obj: Secre
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GCPSMAuthSecretRef contains the secret references for GCP Secret Manager authentication.
+ *
  * @schema SecretStoreSpecProviderGcpsmAuthSecretRef
  */
 export interface SecretStoreSpecProviderGcpsmAuthSecretRef {
@@ -39630,6 +40086,8 @@ export function toJson_SecretStoreSpecProviderGcpsmAuthSecretRef(obj: SecretStor
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GCPWorkloadIdentity defines configuration for workload identity authentication to GCP.
+ *
  * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentity
  */
 export interface SecretStoreSpecProviderGcpsmAuthWorkloadIdentity {
@@ -39658,7 +40116,7 @@ export interface SecretStoreSpecProviderGcpsmAuthWorkloadIdentity {
   readonly clusterProjectId?: string;
 
   /**
-   * A reference to a ServiceAccount resource.
+   * ServiceAccountSelector is a reference to a ServiceAccount resource.
    *
    * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentity#serviceAccountRef
    */
@@ -39751,7 +40209,7 @@ export function toJson_SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederatio
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderGithubAuthPrivateKey
@@ -39798,6 +40256,8 @@ export function toJson_SecretStoreSpecProviderGithubAuthPrivateKey(obj: SecretSt
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GitlabSecretRef contains the secret reference for GitLab authentication credentials.
+ *
  * @schema SecretStoreSpecProviderGitlabAuthSecretRef
  */
 export interface SecretStoreSpecProviderGitlabAuthSecretRef {
@@ -39836,7 +40296,7 @@ export enum SecretStoreSpecProviderGitlabCaProviderType {
 }
 
 /**
- * IBM Container-based auth with IAM Trusted Profile.
+ * IBMAuthContainerAuth defines container-based authentication with IAM Trusted Profile.
  *
  * @schema SecretStoreSpecProviderIbmAuthContainerAuth
  */
@@ -39878,6 +40338,8 @@ export function toJson_SecretStoreSpecProviderIbmAuthContainerAuth(obj: SecretSt
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * IBMAuthSecretRef contains the secret reference for IBM Cloud API key authentication.
+ *
  * @schema SecretStoreSpecProviderIbmAuthSecretRef
  */
 export interface SecretStoreSpecProviderIbmAuthSecretRef {
@@ -39904,11 +40366,13 @@ export function toJson_SecretStoreSpecProviderIbmAuthSecretRef(obj: SecretStoreS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * AwsAuthCredentials represents the credentials for AWS authentication.
+ *
  * @schema SecretStoreSpecProviderInfisicalAuthAwsAuthCredentials
  */
 export interface SecretStoreSpecProviderInfisicalAuthAwsAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthAwsAuthCredentials#identityId
@@ -39931,11 +40395,13 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthAwsAuthCredentials(ob
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * AzureAuthCredentials represents the credentials for Azure authentication.
+ *
  * @schema SecretStoreSpecProviderInfisicalAuthAzureAuthCredentials
  */
 export interface SecretStoreSpecProviderInfisicalAuthAzureAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthAzureAuthCredentials#identityId
@@ -39943,7 +40409,7 @@ export interface SecretStoreSpecProviderInfisicalAuthAzureAuthCredentials {
   readonly identityId: SecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsIdentityId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthAzureAuthCredentials#resource
@@ -39967,11 +40433,13 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthAzureAuthCredentials(
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GcpIamAuthCredentials represents the credentials for GCP IAM authentication.
+ *
  * @schema SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials
  */
 export interface SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials#identityId
@@ -39979,7 +40447,7 @@ export interface SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials {
   readonly identityId: SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials#serviceAccountKeyFilePath
@@ -40003,11 +40471,13 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GcpIDTokenAuthCredentials represents the credentials for GCP ID token authentication.
+ *
  * @schema SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials
  */
 export interface SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentials#identityId
@@ -40030,11 +40500,13 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredent
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * JwtAuthCredentials represents the credentials for JWT authentication.
+ *
  * @schema SecretStoreSpecProviderInfisicalAuthJwtAuthCredentials
  */
 export interface SecretStoreSpecProviderInfisicalAuthJwtAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthJwtAuthCredentials#identityId
@@ -40042,7 +40514,7 @@ export interface SecretStoreSpecProviderInfisicalAuthJwtAuthCredentials {
   readonly identityId: SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthJwtAuthCredentials#jwt
@@ -40066,11 +40538,13 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthJwtAuthCredentials(ob
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * KubernetesAuthCredentials represents the credentials for Kubernetes authentication.
+ *
  * @schema SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials
  */
 export interface SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials#identityId
@@ -40078,7 +40552,7 @@ export interface SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials {
   readonly identityId: SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentials#serviceAccountTokenPath
@@ -40102,11 +40576,13 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredent
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * LdapAuthCredentials represents the credentials for LDAP authentication.
+ *
  * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentials
  */
 export interface SecretStoreSpecProviderInfisicalAuthLdapAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentials#identityId
@@ -40114,7 +40590,7 @@ export interface SecretStoreSpecProviderInfisicalAuthLdapAuthCredentials {
   readonly identityId: SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentials#ldapPassword
@@ -40122,7 +40598,7 @@ export interface SecretStoreSpecProviderInfisicalAuthLdapAuthCredentials {
   readonly ldapPassword: SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentials#ldapUsername
@@ -40147,11 +40623,13 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthLdapAuthCredentials(o
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * OciAuthCredentials represents the credentials for OCI authentication.
+ *
  * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentials
  */
 export interface SecretStoreSpecProviderInfisicalAuthOciAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentials#fingerprint
@@ -40159,7 +40637,7 @@ export interface SecretStoreSpecProviderInfisicalAuthOciAuthCredentials {
   readonly fingerprint: SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentials#identityId
@@ -40167,7 +40645,7 @@ export interface SecretStoreSpecProviderInfisicalAuthOciAuthCredentials {
   readonly identityId: SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentials#privateKey
@@ -40175,7 +40653,7 @@ export interface SecretStoreSpecProviderInfisicalAuthOciAuthCredentials {
   readonly privateKey: SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentials#privateKeyPassphrase
@@ -40183,7 +40661,7 @@ export interface SecretStoreSpecProviderInfisicalAuthOciAuthCredentials {
   readonly privateKeyPassphrase?: SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentials#region
@@ -40191,7 +40669,7 @@ export interface SecretStoreSpecProviderInfisicalAuthOciAuthCredentials {
   readonly region: SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentials#tenancyId
@@ -40199,7 +40677,7 @@ export interface SecretStoreSpecProviderInfisicalAuthOciAuthCredentials {
   readonly tenancyId: SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentials#userId
@@ -40228,11 +40706,13 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentials(ob
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * TokenAuthCredentials represents the credentials for access token-based authentication.
+ *
  * @schema SecretStoreSpecProviderInfisicalAuthTokenAuthCredentials
  */
 export interface SecretStoreSpecProviderInfisicalAuthTokenAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthTokenAuthCredentials#accessToken
@@ -40255,11 +40735,13 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthTokenAuthCredentials(
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * UniversalAuthCredentials represents the client credentials for universal authentication.
+ *
  * @schema SecretStoreSpecProviderInfisicalAuthUniversalAuthCredentials
  */
 export interface SecretStoreSpecProviderInfisicalAuthUniversalAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthUniversalAuthCredentials#clientId
@@ -40267,7 +40749,7 @@ export interface SecretStoreSpecProviderInfisicalAuthUniversalAuthCredentials {
   readonly clientId: SecretStoreSpecProviderInfisicalAuthUniversalAuthCredentialsClientId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderInfisicalAuthUniversalAuthCredentials#clientSecret
@@ -40297,7 +40779,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthUniversalAuthCredenti
  */
 export interface SecretStoreSpecProviderKubernetesAuthCert {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderKubernetesAuthCert#clientCert
@@ -40305,7 +40787,7 @@ export interface SecretStoreSpecProviderKubernetesAuthCert {
   readonly clientCert?: SecretStoreSpecProviderKubernetesAuthCertClientCert;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderKubernetesAuthCert#clientKey
@@ -40382,7 +40864,7 @@ export function toJson_SecretStoreSpecProviderKubernetesAuthServiceAccount(obj: 
  */
 export interface SecretStoreSpecProviderKubernetesAuthToken {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderKubernetesAuthToken#bearerToken
@@ -40689,7 +41171,7 @@ export function toJson_SecretStoreSpecProviderOracleAuthSecretRef(obj: SecretSto
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderPassboltAuthPasswordSecretRef
@@ -40736,7 +41218,7 @@ export function toJson_SecretStoreSpecProviderPassboltAuthPasswordSecretRef(obj:
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderPassboltAuthPrivateKeySecretRef
@@ -40783,6 +41265,8 @@ export function toJson_SecretStoreSpecProviderPassboltAuthPrivateKeySecretRef(ob
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * PasswordDepotSecretRef contains the secret reference for Password Depot authentication.
+ *
  * @schema SecretStoreSpecProviderPassworddepotAuthSecretRef
  */
 export interface SecretStoreSpecProviderPassworddepotAuthSecretRef {
@@ -41067,7 +41551,7 @@ export function toJson_SecretStoreSpecProviderSecretserverUsernameSecretRef(obj:
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderSenhaseguraAuthClientSecretSecretRef
@@ -41728,7 +42212,7 @@ export function toJson_SecretStoreSpecProviderVolcengineAuthSecretRef(obj: Secre
  */
 export interface SecretStoreSpecProviderWebhookAuthNtlm {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderWebhookAuthNtlm#passwordSecret
@@ -41736,7 +42220,7 @@ export interface SecretStoreSpecProviderWebhookAuthNtlm {
   readonly passwordSecret: SecretStoreSpecProviderWebhookAuthNtlmPasswordSecret;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreSpecProviderWebhookAuthNtlm#usernameSecret
@@ -41864,7 +42348,7 @@ export function toJson_SecretStoreSpecProviderYandexcertificatemanagerAuthAuthor
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderYandexcertificatemanagerCaProviderCertSecretRef
@@ -41985,7 +42469,7 @@ export function toJson_SecretStoreSpecProviderYandexlockboxAuthAuthorizedKeySecr
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderYandexlockboxCaProviderCertSecretRef
@@ -42205,7 +42689,7 @@ export function toJson_SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAcce
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessType
@@ -42252,7 +42736,7 @@ export function toJson_SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAcce
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam
@@ -42391,7 +42875,7 @@ export function toJson_SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecre
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a ServiceAccount resource.
+ * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema SecretStoreSpecProviderAwsAuthJwtServiceAccountRef
  */
@@ -43321,7 +43805,7 @@ export function toJson_SecretStoreSpecProviderGcpsmAuthSecretRefSecretAccessKeyS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a ServiceAccount resource.
+ * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema SecretStoreSpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef
  */
@@ -43595,7 +44079,7 @@ export function toJson_SecretStoreSpecProviderIbmAuthSecretRefSecretApiKeySecret
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIdentityId
@@ -43642,7 +44126,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthAwsAuthCredentialsIde
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsIdentityId
@@ -43689,7 +44173,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsI
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsResource
@@ -43736,7 +44220,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthAzureAuthCredentialsR
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsIdentityId
@@ -43783,7 +44267,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentialsServiceAccountKeyFilePath
@@ -43830,7 +44314,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthGcpIamAuthCredentials
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredentialsIdentityId
@@ -43877,7 +44361,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthGcpIdTokenAuthCredent
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIdentityId
@@ -43924,7 +44408,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsIde
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt
@@ -43971,7 +44455,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthJwtAuthCredentialsJwt
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsIdentityId
@@ -44018,7 +44502,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredent
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredentialsServiceAccountTokenPath
@@ -44065,7 +44549,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthKubernetesAuthCredent
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsIdentityId
@@ -44112,7 +44596,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsId
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapPassword
@@ -44159,7 +44643,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLd
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLdapUsername
@@ -44206,7 +44690,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthLdapAuthCredentialsLd
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFingerprint
@@ -44253,7 +44737,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsFin
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIdentityId
@@ -44300,7 +44784,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsIde
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKey
@@ -44347,7 +44831,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPri
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPrivateKeyPassphrase
@@ -44394,7 +44878,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsPri
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsRegion
@@ -44441,7 +44925,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsReg
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTenancyId
@@ -44488,7 +44972,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsTen
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUserId
@@ -44535,7 +45019,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthOciAuthCredentialsUse
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsAccessToken
@@ -44582,7 +45066,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthTokenAuthCredentialsA
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthUniversalAuthCredentialsClientId
@@ -44629,7 +45113,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthUniversalAuthCredenti
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderInfisicalAuthUniversalAuthCredentialsClientSecret
@@ -44676,7 +45160,7 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthUniversalAuthCredenti
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderKubernetesAuthCertClientCert
@@ -44723,7 +45207,7 @@ export function toJson_SecretStoreSpecProviderKubernetesAuthCertClientCert(obj: 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderKubernetesAuthCertClientKey
@@ -44770,7 +45254,7 @@ export function toJson_SecretStoreSpecProviderKubernetesAuthCertClientKey(obj: S
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderKubernetesAuthTokenBearerToken
@@ -45303,7 +45787,7 @@ export function toJson_SecretStoreSpecProviderVaultAuthCertSecretRef(obj: Secret
  */
 export interface SecretStoreSpecProviderVaultAuthIamJwt {
   /**
-   * A reference to a ServiceAccount resource.
+   * ServiceAccountSelector is a reference to a ServiceAccount resource.
    *
    * @schema SecretStoreSpecProviderVaultAuthIamJwt#serviceAccountRef
    */
@@ -45805,7 +46289,7 @@ export function toJson_SecretStoreSpecProviderVolcengineAuthSecretRefToken(obj: 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderWebhookAuthNtlmPasswordSecret
@@ -45852,7 +46336,7 @@ export function toJson_SecretStoreSpecProviderWebhookAuthNtlmPasswordSecret(obj:
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreSpecProviderWebhookAuthNtlmUsernameSecret
@@ -45939,7 +46423,7 @@ export function toJson_SecretStoreSpecProviderGcpsmAuthWorkloadIdentityFederatio
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a ServiceAccount resource.
+ * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema SecretStoreSpecProviderVaultAuthIamJwtServiceAccountRef
  */
@@ -46543,12 +47027,14 @@ export interface SecretStoreV1Beta1SpecProvider {
   readonly oracle?: SecretStoreV1Beta1SpecProviderOracle;
 
   /**
+   * PassboltProvider defines configuration for the Passbolt provider.
+   *
    * @schema SecretStoreV1Beta1SpecProvider#passbolt
    */
   readonly passbolt?: SecretStoreV1Beta1SpecProviderPassbolt;
 
   /**
-   * Configures a store to sync secrets with a Password Depot instance.
+   * PasswordDepotProvider configures a store to sync secrets with a Password Depot instance.
    *
    * @schema SecretStoreV1Beta1SpecProvider#passworddepot
    */
@@ -46674,11 +47160,15 @@ export function toJson_SecretStoreV1Beta1SpecProvider(obj: SecretStoreV1Beta1Spe
  */
 export interface SecretStoreV1Beta1SpecRetrySettings {
   /**
+   * MaxRetries is the maximum number of retry attempts.
+   *
    * @schema SecretStoreV1Beta1SpecRetrySettings#maxRetries
    */
   readonly maxRetries?: number;
 
   /**
+   * RetryInterval is the interval between retry attempts.
+   *
    * @schema SecretStoreV1Beta1SpecRetrySettings#retryInterval
    */
   readonly retryInterval?: string;
@@ -47787,7 +48277,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderInfisical(obj: SecretStoreV
  */
 export interface SecretStoreV1Beta1SpecProviderKeepersecurity {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreV1Beta1SpecProviderKeepersecurity#authRef
@@ -48046,6 +48536,8 @@ export function toJson_SecretStoreV1Beta1SpecProviderOracle(obj: SecretStoreV1Be
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * PassboltProvider defines configuration for the Passbolt provider.
+ *
  * @schema SecretStoreV1Beta1SpecProviderPassbolt
  */
 export interface SecretStoreV1Beta1SpecProviderPassbolt {
@@ -48080,7 +48572,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderPassbolt(obj: SecretStoreV1
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Configures a store to sync secrets with a Password Depot instance.
+ * PasswordDepotProvider configures a store to sync secrets with a Password Depot instance.
  *
  * @schema SecretStoreV1Beta1SpecProviderPassworddepot
  */
@@ -48846,7 +49338,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAkeylessCaProvider(obj: Sec
  */
 export interface SecretStoreV1Beta1SpecProviderAlibabaAuth {
   /**
-   * Authenticate against Alibaba using RRSA.
+   * AlibabaRRSAAuth authenticates against Alibaba using RRSA (Resource-oriented RAM-based Service Authentication).
    *
    * @schema SecretStoreV1Beta1SpecProviderAlibabaAuth#rrsa
    */
@@ -48884,7 +49376,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAlibabaAuth(obj: SecretStor
  */
 export interface SecretStoreV1Beta1SpecProviderAwsAuth {
   /**
-   * Authenticate against AWS using service account tokens.
+   * AWSJWTAuth authenticates against AWS using service account tokens from the Kubernetes cluster.
    *
    * @schema SecretStoreV1Beta1SpecProviderAwsAuth#jwt
    */
@@ -48971,6 +49463,8 @@ export enum SecretStoreV1Beta1SpecProviderAwsService {
 }
 
 /**
+ * Tag defines a tag key and value for AWS resources.
+ *
  * @schema SecretStoreV1Beta1SpecProviderAwsSessionTags
  */
 export interface SecretStoreV1Beta1SpecProviderAwsSessionTags {
@@ -49567,6 +50061,8 @@ export function toJson_SecretStoreV1Beta1SpecProviderDelineaClientSecret(obj: Se
  */
 export interface SecretStoreV1Beta1SpecProviderDevice42Auth {
   /**
+   * Device42SecretRef defines a reference to a secret containing credentials for the Device42 provider.
+   *
    * @schema SecretStoreV1Beta1SpecProviderDevice42Auth#secretRef
    */
   readonly secretRef: SecretStoreV1Beta1SpecProviderDevice42AuthSecretRef;
@@ -49593,6 +50089,8 @@ export function toJson_SecretStoreV1Beta1SpecProviderDevice42Auth(obj: SecretSto
  */
 export interface SecretStoreV1Beta1SpecProviderDopplerAuth {
   /**
+   * DopplerAuthSecretRef defines a reference to a secret containing credentials for the Doppler provider.
+   *
    * @schema SecretStoreV1Beta1SpecProviderDopplerAuth#secretRef
    */
   readonly secretRef: SecretStoreV1Beta1SpecProviderDopplerAuthSecretRef;
@@ -49651,6 +50149,8 @@ export enum SecretStoreV1Beta1SpecProviderDopplerNameTransformer {
 }
 
 /**
+ * FakeProviderData defines a key-value pair for the fake provider used in testing.
+ *
  * @schema SecretStoreV1Beta1SpecProviderFakeData
  */
 export interface SecretStoreV1Beta1SpecProviderFakeData {
@@ -49721,11 +50221,15 @@ export function toJson_SecretStoreV1Beta1SpecProviderFortanixApiKey(obj: SecretS
  */
 export interface SecretStoreV1Beta1SpecProviderGcpsmAuth {
   /**
+   * GCPSMAuthSecretRef defines a reference to a secret containing credentials for the GCP Secret Manager provider.
+   *
    * @schema SecretStoreV1Beta1SpecProviderGcpsmAuth#secretRef
    */
   readonly secretRef?: SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef;
 
   /**
+   * GCPWorkloadIdentity defines configuration for using GCP Workload Identity authentication.
+   *
    * @schema SecretStoreV1Beta1SpecProviderGcpsmAuth#workloadIdentity
    */
   readonly workloadIdentity?: SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity;
@@ -49753,7 +50257,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderGcpsmAuth(obj: SecretStoreV
  */
 export interface SecretStoreV1Beta1SpecProviderGithubAuth {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreV1Beta1SpecProviderGithubAuth#privateKey
@@ -49782,6 +50286,8 @@ export function toJson_SecretStoreV1Beta1SpecProviderGithubAuth(obj: SecretStore
  */
 export interface SecretStoreV1Beta1SpecProviderGitlabAuth {
   /**
+   * GitlabSecretRef defines a reference to a secret containing credentials for the GitLab provider.
+   *
    * @schema SecretStoreV1Beta1SpecProviderGitlabAuth#SecretRef
    */
   readonly secretRef: SecretStoreV1Beta1SpecProviderGitlabAuthSecretRef;
@@ -49861,13 +50367,15 @@ export function toJson_SecretStoreV1Beta1SpecProviderGitlabCaProvider(obj: Secre
  */
 export interface SecretStoreV1Beta1SpecProviderIbmAuth {
   /**
-   * IBM Container-based auth with IAM Trusted Profile.
+   * IBMAuthContainerAuth defines authentication using IBM Container-based auth with IAM Trusted Profile.
    *
    * @schema SecretStoreV1Beta1SpecProviderIbmAuth#containerAuth
    */
   readonly containerAuth?: SecretStoreV1Beta1SpecProviderIbmAuthContainerAuth;
 
   /**
+   * IBMAuthSecretRef defines a reference to a secret containing credentials for the IBM provider.
+   *
    * @schema SecretStoreV1Beta1SpecProviderIbmAuth#secretRef
    */
   readonly secretRef?: SecretStoreV1Beta1SpecProviderIbmAuthSecretRef;
@@ -49895,6 +50403,8 @@ export function toJson_SecretStoreV1Beta1SpecProviderIbmAuth(obj: SecretStoreV1B
  */
 export interface SecretStoreV1Beta1SpecProviderInfisicalAuth {
   /**
+   * UniversalAuthCredentials defines the credentials for Infisical Universal Auth.
+   *
    * @schema SecretStoreV1Beta1SpecProviderInfisicalAuth#universalAuthCredentials
    */
   readonly universalAuthCredentials?: SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials;
@@ -49978,7 +50488,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderInfisicalSecretsScope(obj: 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreV1Beta1SpecProviderKeepersecurityAuthRef
@@ -50339,16 +50849,14 @@ export function toJson_SecretStoreV1Beta1SpecProviderOracleServiceAccountRef(obj
  */
 export interface SecretStoreV1Beta1SpecProviderPassboltAuth {
   /**
-   * A reference to a specific 'key' within a Secret resource.
-   * In some instances, `key` is a required field.
+   * PasswordSecretRef is a reference to the secret containing the Passbolt password
    *
    * @schema SecretStoreV1Beta1SpecProviderPassboltAuth#passwordSecretRef
    */
   readonly passwordSecretRef: SecretStoreV1Beta1SpecProviderPassboltAuthPasswordSecretRef;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
-   * In some instances, `key` is a required field.
+   * PrivateKeySecretRef is a reference to the secret containing the Passbolt private key
    *
    * @schema SecretStoreV1Beta1SpecProviderPassboltAuth#privateKeySecretRef
    */
@@ -50377,6 +50885,8 @@ export function toJson_SecretStoreV1Beta1SpecProviderPassboltAuth(obj: SecretSto
  */
 export interface SecretStoreV1Beta1SpecProviderPassworddepotAuth {
   /**
+   * PasswordDepotSecretRef defines a reference to a secret containing credentials for the Password Depot provider.
+   *
    * @schema SecretStoreV1Beta1SpecProviderPassworddepotAuth#secretRef
    */
   readonly secretRef: SecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef;
@@ -50608,7 +51118,7 @@ export interface SecretStoreV1Beta1SpecProviderSenhaseguraAuth {
   readonly clientId: string;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreV1Beta1SpecProviderSenhaseguraAuth#clientSecretSecretRef
@@ -50952,6 +51462,8 @@ export function toJson_SecretStoreV1Beta1SpecProviderWebhookResult(obj: SecretSt
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * WebhookSecret defines a secret to be used in webhook templates.
+ *
  * @schema SecretStoreV1Beta1SpecProviderWebhookSecrets
  */
 export interface SecretStoreV1Beta1SpecProviderWebhookSecrets {
@@ -51020,7 +51532,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderYandexcertificatemanagerAut
  */
 export interface SecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProvider {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProvider#certSecretRef
@@ -51077,7 +51589,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderYandexlockboxAuth(obj: Secr
  */
 export interface SecretStoreV1Beta1SpecProviderYandexlockboxCaProvider {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreV1Beta1SpecProviderYandexlockboxCaProvider#certSecretRef
@@ -51173,7 +51685,7 @@ export interface SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRef {
   readonly accessId?: SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRef#accessType
@@ -51181,7 +51693,7 @@ export interface SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRef {
   readonly accessType?: SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessType;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRef#accessTypeParam
@@ -51218,7 +51730,7 @@ export enum SecretStoreV1Beta1SpecProviderAkeylessCaProviderType {
 }
 
 /**
- * Authenticate against Alibaba using RRSA.
+ * AlibabaRRSAAuth authenticates against Alibaba using RRSA (Resource-oriented RAM-based Service Authentication).
  *
  * @schema SecretStoreV1Beta1SpecProviderAlibabaAuthRrsa
  */
@@ -51298,13 +51810,13 @@ export function toJson_SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRef(obj: S
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Authenticate against AWS using service account tokens.
+ * AWSJWTAuth authenticates against AWS using service account tokens from the Kubernetes cluster.
  *
  * @schema SecretStoreV1Beta1SpecProviderAwsAuthJwt
  */
 export interface SecretStoreV1Beta1SpecProviderAwsAuthJwt {
   /**
-   * A reference to a ServiceAccount resource.
+   * ServiceAccountSelector is a reference to a ServiceAccount resource.
    *
    * @schema SecretStoreV1Beta1SpecProviderAwsAuthJwt#serviceAccountRef
    */
@@ -52054,6 +52566,8 @@ export function toJson_SecretStoreV1Beta1SpecProviderDelineaClientSecretSecretRe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Device42SecretRef defines a reference to a secret containing credentials for the Device42 provider.
+ *
  * @schema SecretStoreV1Beta1SpecProviderDevice42AuthSecretRef
  */
 export interface SecretStoreV1Beta1SpecProviderDevice42AuthSecretRef {
@@ -52080,6 +52594,8 @@ export function toJson_SecretStoreV1Beta1SpecProviderDevice42AuthSecretRef(obj: 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * DopplerAuthSecretRef defines a reference to a secret containing credentials for the Doppler provider.
+ *
  * @schema SecretStoreV1Beta1SpecProviderDopplerAuthSecretRef
  */
 export interface SecretStoreV1Beta1SpecProviderDopplerAuthSecretRef {
@@ -52154,6 +52670,8 @@ export function toJson_SecretStoreV1Beta1SpecProviderFortanixApiKeySecretRef(obj
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GCPSMAuthSecretRef defines a reference to a secret containing credentials for the GCP Secret Manager provider.
+ *
  * @schema SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef
  */
 export interface SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef {
@@ -52180,6 +52698,8 @@ export function toJson_SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRef(obj: Sec
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GCPWorkloadIdentity defines configuration for using GCP Workload Identity authentication.
+ *
  * @schema SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity
  */
 export interface SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity {
@@ -52208,7 +52728,7 @@ export interface SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity {
   readonly clusterProjectId?: string;
 
   /**
-   * A reference to a ServiceAccount resource.
+   * ServiceAccountSelector is a reference to a ServiceAccount resource.
    *
    * @schema SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity#serviceAccountRef
    */
@@ -52233,7 +52753,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentity(o
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreV1Beta1SpecProviderGithubAuthPrivateKey
@@ -52280,6 +52800,8 @@ export function toJson_SecretStoreV1Beta1SpecProviderGithubAuthPrivateKey(obj: S
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * GitlabSecretRef defines a reference to a secret containing credentials for the GitLab provider.
+ *
  * @schema SecretStoreV1Beta1SpecProviderGitlabAuthSecretRef
  */
 export interface SecretStoreV1Beta1SpecProviderGitlabAuthSecretRef {
@@ -52318,7 +52840,7 @@ export enum SecretStoreV1Beta1SpecProviderGitlabCaProviderType {
 }
 
 /**
- * IBM Container-based auth with IAM Trusted Profile.
+ * IBMAuthContainerAuth defines authentication using IBM Container-based auth with IAM Trusted Profile.
  *
  * @schema SecretStoreV1Beta1SpecProviderIbmAuthContainerAuth
  */
@@ -52360,6 +52882,8 @@ export function toJson_SecretStoreV1Beta1SpecProviderIbmAuthContainerAuth(obj: S
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * IBMAuthSecretRef defines a reference to a secret containing credentials for the IBM provider.
+ *
  * @schema SecretStoreV1Beta1SpecProviderIbmAuthSecretRef
  */
 export interface SecretStoreV1Beta1SpecProviderIbmAuthSecretRef {
@@ -52386,11 +52910,13 @@ export function toJson_SecretStoreV1Beta1SpecProviderIbmAuthSecretRef(obj: Secre
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * UniversalAuthCredentials defines the credentials for Infisical Universal Auth.
+ *
  * @schema SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials
  */
 export interface SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials#clientId
@@ -52398,7 +52924,7 @@ export interface SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredent
   readonly clientId: SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientId;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentials#clientSecret
@@ -52428,7 +52954,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthC
  */
 export interface SecretStoreV1Beta1SpecProviderKubernetesAuthCert {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreV1Beta1SpecProviderKubernetesAuthCert#clientCert
@@ -52436,7 +52962,7 @@ export interface SecretStoreV1Beta1SpecProviderKubernetesAuthCert {
   readonly clientCert?: SecretStoreV1Beta1SpecProviderKubernetesAuthCertClientCert;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreV1Beta1SpecProviderKubernetesAuthCert#clientKey
@@ -52513,7 +53039,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderKubernetesAuthServiceAccoun
  */
 export interface SecretStoreV1Beta1SpecProviderKubernetesAuthToken {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreV1Beta1SpecProviderKubernetesAuthToken#bearerToken
@@ -52746,8 +53272,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderOracleAuthSecretRef(obj: Se
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
- * In some instances, `key` is a required field.
+ * PasswordSecretRef is a reference to the secret containing the Passbolt password
  *
  * @schema SecretStoreV1Beta1SpecProviderPassboltAuthPasswordSecretRef
  */
@@ -52793,8 +53318,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderPassboltAuthPasswordSecretR
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
- * In some instances, `key` is a required field.
+ * PrivateKeySecretRef is a reference to the secret containing the Passbolt private key
  *
  * @schema SecretStoreV1Beta1SpecProviderPassboltAuthPrivateKeySecretRef
  */
@@ -52840,6 +53364,8 @@ export function toJson_SecretStoreV1Beta1SpecProviderPassboltAuthPrivateKeySecre
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * PasswordDepotSecretRef defines a reference to a secret containing credentials for the Password Depot provider.
+ *
  * @schema SecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef
  */
 export interface SecretStoreV1Beta1SpecProviderPassworddepotAuthSecretRef {
@@ -53124,7 +53650,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderSecretserverUsernameSecretR
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreV1Beta1SpecProviderSenhaseguraAuthClientSecretSecretRef
@@ -53731,7 +54257,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultTlsKeySecretRef(obj: S
  */
 export interface SecretStoreV1Beta1SpecProviderWebhookAuthNtlm {
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreV1Beta1SpecProviderWebhookAuthNtlm#passwordSecret
@@ -53739,7 +54265,7 @@ export interface SecretStoreV1Beta1SpecProviderWebhookAuthNtlm {
   readonly passwordSecret: SecretStoreV1Beta1SpecProviderWebhookAuthNtlmPasswordSecret;
 
   /**
-   * A reference to a specific 'key' within a Secret resource.
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
    * In some instances, `key` is a required field.
    *
    * @schema SecretStoreV1Beta1SpecProviderWebhookAuthNtlm#usernameSecret
@@ -53867,7 +54393,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderYandexcertificatemanagerAut
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreV1Beta1SpecProviderYandexcertificatemanagerCaProviderCertSecretRef
@@ -53960,7 +54486,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderYandexlockboxAuthAuthorized
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreV1Beta1SpecProviderYandexlockboxCaProviderCertSecretRef
@@ -54152,7 +54678,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecret
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessType
@@ -54199,7 +54725,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecret
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreV1Beta1SpecProviderAkeylessAuthSecretRefSecretRefAccessTypeParam
@@ -54338,7 +54864,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderAlibabaAuthSecretRefAccessK
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a ServiceAccount resource.
+ * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema SecretStoreV1Beta1SpecProviderAwsAuthJwtServiceAccountRef
  */
@@ -55268,7 +55794,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderGcpsmAuthSecretRefSecretAcc
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a ServiceAccount resource.
+ * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema SecretStoreV1Beta1SpecProviderGcpsmAuthWorkloadIdentityServiceAccountRef
  */
@@ -55407,7 +55933,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderIbmAuthSecretRefSecretApiKe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientId
@@ -55454,7 +55980,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthC
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthCredentialsClientSecret
@@ -55501,7 +56027,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderInfisicalAuthUniversalAuthC
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreV1Beta1SpecProviderKubernetesAuthCertClientCert
@@ -55548,7 +56074,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderKubernetesAuthCertClientCer
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreV1Beta1SpecProviderKubernetesAuthCertClientKey
@@ -55595,7 +56121,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderKubernetesAuthCertClientKey
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreV1Beta1SpecProviderKubernetesAuthTokenBearerToken
@@ -56082,7 +56608,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthCertSecretRef(obj:
  */
 export interface SecretStoreV1Beta1SpecProviderVaultAuthIamJwt {
   /**
-   * A reference to a ServiceAccount resource.
+   * ServiceAccountSelector is a reference to a ServiceAccount resource.
    *
    * @schema SecretStoreV1Beta1SpecProviderVaultAuthIamJwt#serviceAccountRef
    */
@@ -56446,7 +56972,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderVaultAuthUserPassSecretRef(
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreV1Beta1SpecProviderWebhookAuthNtlmPasswordSecret
@@ -56493,7 +57019,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderWebhookAuthNtlmPasswordSecr
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a specific 'key' within a Secret resource.
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
  * In some instances, `key` is a required field.
  *
  * @schema SecretStoreV1Beta1SpecProviderWebhookAuthNtlmUsernameSecret
@@ -56540,7 +57066,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderWebhookAuthNtlmUsernameSecr
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * A reference to a ServiceAccount resource.
+ * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema SecretStoreV1Beta1SpecProviderVaultAuthIamJwtServiceAccountRef
  */
