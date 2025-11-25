@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - lscr.io/linuxserver/bookstack:latest@sha256:d216ba423d5a863b6edeee17b72fc3826a9307b683d5ea25031030ccf9a8067d
+  - lscr.io/linuxserver/bookstack:latest@sha256:f40d0fd5e11eaba3133e234612914c8d4c863338b91b3074513abcfab42560a8
