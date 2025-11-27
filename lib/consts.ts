@@ -1,6 +1,6 @@
-import { EnvVar, Quantity } from "../imports/k8s";
 import { AppProps, YamlOutputType } from "cdk8s";
 import { EnvValue } from "cdk8s-plus-33";
+import { EnvVar, Quantity } from "../imports/k8s";
 
 export const DEFAULT_CPU_LIMIT = Quantity.fromString("250m");
 export const DEFAULT_MEM_LIMIT = Quantity.fromString("256Mi");
@@ -101,3 +101,4 @@ export const RELOADER_ENABLED = {
 
 export const EXTERNAL_DNS_ANNOTATION_KEY =
   "external-dns.alpha.kubernetes.io/hostname";
+export const METALLB_IP_ANNOTATION_KEY = "metallb.io/loadBalancerIPs";

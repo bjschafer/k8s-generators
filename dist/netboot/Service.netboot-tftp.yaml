@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: netboot-tftp
+  namespace: netboot
+spec:
+  externalIPs: []
+  ports:
+    - name: tftp
+      port: 69
+      targetPort: 69
+  selector:
+    cdk8s.io/metadata.addr: netboot-netboot-deployment-c8828365
+  type: LoadBalancer

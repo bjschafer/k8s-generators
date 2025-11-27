@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: netboot
+  namespace: netboot
+spec:
+  externalIPs: []
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+    - name: http-1
+      port: 69
+      targetPort: 69
+  selector:
+    cdk8s.io/metadata.addr: netboot-netboot-deployment-c8828365
+  type: ClusterIP
