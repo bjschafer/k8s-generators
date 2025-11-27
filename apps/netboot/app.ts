@@ -36,7 +36,17 @@ const deploy = new AppPlus(app, name, {
       request: Size.mebibytes(64),
     },
   },
-  ports: [3000, 69],
+  ports: [
+    {
+      name: "http",
+      number: 3000,
+    },
+    {
+      name: "tftp",
+      number: 69,
+      protocol: Protocol.UDP,
+    },
+  ],
   livenessProbe: Probe.fromCommand(["/healthcheck.sh"], {
     initialDelaySeconds: Duration.seconds(15),
     timeoutSeconds: Duration.seconds(5),

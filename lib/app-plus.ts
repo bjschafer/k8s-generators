@@ -28,8 +28,8 @@ import {
   CLUSTER_ISSUER,
   DEFAULT_SECURITY_CONTEXT,
 } from "./consts";
-import { StorageClass } from "./volume";
 import { WellKnownLabels } from "./labels";
+import { StorageClass } from "./volume";
 
 export interface AppPlusVolume {
   readonly props: PersistentVolumeClaimProps;
@@ -58,7 +58,7 @@ export interface AppPlusProps {
   readonly annotations?: { [p: string]: string };
   readonly labels?: { [p: string]: string };
   readonly replicas?: number;
-  readonly ports?: number[];
+  readonly ports?: number[] | ContainerPort[];
   readonly volumes?: AppPlusVolume[];
   readonly configmapMounts?: ConfigMapVolume[];
   readonly extraEnv?: { [key: string]: EnvValue };
@@ -134,14 +134,19 @@ export class AppPlus extends Chart {
 
     const ports: ContainerPort[] = [];
     if (props.ports) {
-      ports.push(
-        ...props.ports.map(function (port: number): ContainerPort {
-          return {
-            number: port,
-          };
-        }),
-      );
+      if (props.ports.every((p) => typeof p === "number")) {
+        ports.push(
+          ...props.ports.map(function (port: number): ContainerPort {
+            return {
+              number: port,
+            };
+          }),
+        );
+      } else {
+        ports.push(...(props.ports as ContainerPort[]));
+      }
     }
+
     if (props.monitoringConfig) {
       ports.push({
         number: props.monitoringConfig.port,
@@ -191,11 +196,11 @@ export class AppPlus extends Chart {
           readiness: props.disableProbes
             ? undefined
             : (props.readinessProbe ??
-              Probe.fromTcpSocket({ port: props.ports?.at(0) })),
+              Probe.fromTcpSocket({ port: ports[0]?.number })),
           liveness: props.disableProbes
             ? undefined
             : (props.livenessProbe ??
-              Probe.fromTcpSocket({ port: props.ports?.at(0) })),
+              Probe.fromTcpSocket({ port: ports[0]?.number })),
         },
       ],
     });
@@ -234,22 +239,19 @@ export class AppPlus extends Chart {
       }
     }
 
-    const svcPorts = props.ports?.map(function (
-      port: number,
+    const svcPorts: ServicePort[] = ports.map(function (
+      port: ContainerPort,
       index: number,
     ): ServicePort {
       return {
-        targetPort: port,
-        port: port,
-        name: index === 0 ? "http" : `http-${index}`,
+        targetPort: port.number,
+        port: port.number,
+        protocol: port.protocol,
+        name: port.name ?? (index === 0 ? "http" : `http-${index}`),
       };
     });
     if (props.monitoringConfig) {
-      svcPorts?.push({
-        targetPort: props.monitoringConfig.port,
-        port: props.monitoringConfig.port,
-        name: "metrics",
-      });
+      // No-op: monitoring port already included via container ports above
     }
 
     const svc = deploy.exposeViaService({
@@ -292,7 +294,7 @@ export class AppPlus extends Chart {
         ingress.addHostRule(
           host,
           "/",
-          IngressBackend.fromService(svc, { port: props.ports?.at(0) }),
+          IngressBackend.fromService(svc, { port: ports[0]?.number }),
         );
       }
       ingress.addTls([

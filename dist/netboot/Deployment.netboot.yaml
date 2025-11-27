@@ -38,7 +38,10 @@ spec:
           name: netboot
           ports:
             - containerPort: 3000
+              name: http
             - containerPort: 69
+              name: tftp
+              protocol: UDP
           readinessProbe:
             exec:
               command:
