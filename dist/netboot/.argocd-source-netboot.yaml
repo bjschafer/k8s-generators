@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - ghcr.io/netbootxyz/netbootxyz:latest@sha256:e95b81cebf3af6f7223666289ff3841c607b83914a6c13a9c05fd6b7524ab190
