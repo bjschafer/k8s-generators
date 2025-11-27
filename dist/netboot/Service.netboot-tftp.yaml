@@ -5,6 +5,7 @@ metadata:
   namespace: netboot
 spec:
   externalIPs: []
+  externalTrafficPolicy: Local
   ports:
     - name: tftp
       port: 69

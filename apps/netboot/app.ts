@@ -1,4 +1,4 @@
-import { App, Duration, Size } from "cdk8s";
+import { ApiObject, App, Duration, JsonPatch, Size } from "cdk8s";
 import { Cpu, Probe, Protocol, ServiceType } from "cdk8s-plus-33";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
@@ -75,7 +75,7 @@ const deploy = new AppPlus(app, name, {
   ],
 });
 
-deploy.Deployment.exposeViaService({
+const svc = deploy.Deployment.exposeViaService({
   name: `${name}-tftp`,
   ports: [
     {
@@ -87,6 +87,9 @@ deploy.Deployment.exposeViaService({
   ],
   serviceType: ServiceType.LOAD_BALANCER,
 });
+ApiObject.of(svc).addJsonPatch(
+  JsonPatch.replace("/spec/externalTrafficPolicy", "Local"),
+);
 
 app.synth();
 NewKustomize(app.outdir);
