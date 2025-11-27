@@ -8,6 +8,7 @@ spec:
   ports:
     - name: tftp
       port: 69
+      protocol: UDP
       targetPort: 69
   selector:
     cdk8s.io/metadata.addr: netboot-netboot-deployment-c8828365
