@@ -33,6 +33,8 @@ spec:
               command:
                 - /healthcheck.sh
             failureThreshold: 3
+            initialDelaySeconds: 15
+            timeoutSeconds: 5
           name: netboot
           ports:
             - containerPort: 3000
@@ -42,6 +44,8 @@ spec:
               command:
                 - /healthcheck.sh
             failureThreshold: 3
+            initialDelaySeconds: 15
+            timeoutSeconds: 5
           resources:
             requests:
               cpu: 50m

@@ -1,5 +1,5 @@
 
-import { App, Size } from "cdk8s";
+import { App, Duration, Size } from "cdk8s";
 import { Cpu, Probe, ServiceType } from "cdk8s-plus-33";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
@@ -38,8 +38,14 @@ const deploy = new AppPlus(app, name, {
     },
   },
   ports: [3000, 69],
-  livenessProbe: Probe.fromCommand(["/healthcheck.sh"]),
-  readinessProbe: Probe.fromCommand(["/healthcheck.sh"]),
+  livenessProbe: Probe.fromCommand(["/healthcheck.sh"], {
+    initialDelaySeconds: Duration.seconds(15),
+    timeoutSeconds: Duration.seconds(5),
+  }),
+  readinessProbe: Probe.fromCommand(["/healthcheck.sh"], {
+    initialDelaySeconds: Duration.seconds(15),
+    timeoutSeconds: Duration.seconds(5),
+  }),
   volumes: [
     {
       name: "config",
