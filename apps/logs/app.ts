@@ -64,7 +64,7 @@ class VMLogs extends Chart {
           },
           resources: {
             limits: {
-              cpu: "1200m",
+              cpu: "2000m",
               memory: "3Gi",
             },
             requests: {
