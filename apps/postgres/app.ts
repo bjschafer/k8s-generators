@@ -2,10 +2,7 @@ import { App, Chart } from "cdk8s";
 import { IntOrString, KubeService } from "cdk8s-plus-33/lib/imports/k8s";
 import { Construct } from "constructs";
 import { basename } from "path";
-import {
-  ObjectStore,
-  ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests,
-} from "../../imports/barmancloud.cnpg.io";
+import { ObjectStore, ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests } from "../../imports/barmancloud.cnpg.io";
 import { Quantity } from "../../imports/k8s";
 import { VmPodScrape } from "../../imports/operator.victoriametrics.com";
 import {
@@ -120,11 +117,6 @@ class ProdPostgres extends Chart {
         },
         postgresql: {
           pgHba: [
-            // Workaround for CNPG bug: pooler uses server cert (server auth EKU) instead of
-            // pooler client cert (client auth EKU) when connecting to postgres.
-            // This allows password auth for pooler before the fixed cert-only rule.
-            // See: https://github.com/cloudnative-pg/cloudnative-pg/issues/8672
-            "hostssl all cnpg_pooler_pgbouncer all scram-sha-256",
             "host pdns pdns 10.0.10.0/24 scram-sha-256",
             "hostssl pdns pdns 10.0.10.0/24 scram-sha-256",
           ],
@@ -215,25 +207,15 @@ class ProdPostgres extends Chart {
         instanceSidecarConfiguration: {
           resources: {
             requests: {
-              memory:
-                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                  "512Mi",
-                ),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                "250m",
-              ),
+              memory: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("250m"),
             },
             limits: {
-              memory:
-                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                  "512Mi",
-                ),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                "250m",
-              ),
+              memory: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("250m"),
             },
-          },
-        },
+          }
+        }
       },
     });
 
@@ -441,25 +423,15 @@ class VectorPostgres extends Chart {
         instanceSidecarConfiguration: {
           resources: {
             requests: {
-              memory:
-                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                  "512Mi",
-                ),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                "250m",
-              ),
+              memory: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("250m"),
             },
             limits: {
-              memory:
-                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                  "512Mi",
-                ),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                "250m",
-              ),
+              memory: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("250m"),
             },
-          },
-        },
+          }
+        }
       },
     });
 

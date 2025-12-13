@@ -41,7 +41,6 @@ spec:
       max_connections: "200"
       max_slot_wal_keep_size: 1GB
     pg_hba:
-      - hostssl all cnpg_pooler_pgbouncer all scram-sha-256
       - host pdns pdns 10.0.10.0/24 scram-sha-256
       - hostssl pdns pdns 10.0.10.0/24 scram-sha-256
   resources:

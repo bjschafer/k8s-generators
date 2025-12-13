@@ -3,11 +3,7 @@ import { basename } from "path";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { EsoValuesSchema } from "../../imports/helm-values/eso-values.schema";
-import {
-  Certificate,
-  ClusterIssuer,
-  Issuer,
-} from "../../imports/cert-manager.io";
+import { Certificate, ClusterIssuer, Issuer } from "../../imports/cert-manager.io";
 import { Construct } from "constructs";
 import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";
 import { ENABLE_SERVERSIDE_APPLY, NewArgoApp } from "../../lib/argo";
@@ -123,11 +119,14 @@ class EsoConfig extends Chart {
           `bitwarden-sdk-server.${namespace}.svc`,
           `bitwarden-sdk-server.${namespace}.svc.cluster.local`,
         ],
-        ipAddresses: ["127.0.0.1", "::1"],
+        ipAddresses: [
+          "127.0.0.1",
+          "::1",
+        ],
       },
     });
 
-    // create a CA issuer
+    // create a CA issuer 
     const issuer = new Issuer(this, "bitwarden-issuer", {
       metadata: {
         name: "bitwarden-certificate-issuer",
@@ -165,7 +164,10 @@ class EsoConfig extends Chart {
           `bitwarden-sdk-server.${namespace}.svc.cluster.local`,
           "localhost",
         ],
-        ipAddresses: ["127.0.0.1", "::1"],
+        ipAddresses: [
+          "127.0.0.1",
+          "::1",
+        ],
       },
     });
 
