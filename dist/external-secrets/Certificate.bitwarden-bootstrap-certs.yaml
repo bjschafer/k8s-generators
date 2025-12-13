@@ -19,7 +19,7 @@ spec:
     group: cert-manager.io
     kind: Issuer
     name: bitwarden-bootstrap-issuer
-  secretName: bitwarden-tls-certs
+  secretName: bitwarden-ca-certs
   subject:
     organizations:
       - external-secrets.io

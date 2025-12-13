@@ -5,4 +5,4 @@ metadata:
   namespace: external-secrets
 spec:
   ca:
-    secretName: bitwarden-tls-certs
+    secretName: bitwarden-ca-certs

@@ -82,7 +82,8 @@ class EsoConfig extends Chart {
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
-    const secretName = "bitwarden-tls-certs";
+    const tlsSecretName = "bitwarden-tls-certs";
+    const caSecretName = "bitwarden-ca-certs";
 
     // bootstrap a self-signed issuer used to create the CA
     const bootstrapIssuer = new Issuer(this, "bootstrap-issuer", {
@@ -109,7 +110,7 @@ class EsoConfig extends Chart {
           group: Issuer.GVK.apiVersion.split("/")[0],
           name: bootstrapIssuer.name,
         },
-        secretName: secretName,
+        secretName: caSecretName,
         commonName: "bitwarden-sdk-server",
         duration: "8760h",
         dnsNames: [
@@ -133,7 +134,7 @@ class EsoConfig extends Chart {
       },
       spec: {
         ca: {
-          secretName: secretName,
+          secretName: caSecretName,
         },
       },
     });
@@ -154,7 +155,7 @@ class EsoConfig extends Chart {
           group: Issuer.GVK.apiVersion.split("/")[0],
           name: issuer.name,
         },
-        secretName: secretName,
+        secretName: tlsSecretName,
         commonName: "bitwarden-sdk-server",
         duration: "8760h",
         dnsNames: [
@@ -219,7 +220,7 @@ class EsoConfig extends Chart {
             caProvider: {
               type: ClusterSecretStoreSpecProviderBitwardensecretsmanagerCaProviderType.SECRET,
               namespace: namespace,
-              name: "bitwarden-tls-certs",
+              name: tlsSecretName,
               key: "ca.crt",
             },
           },
