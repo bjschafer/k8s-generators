@@ -84,6 +84,7 @@ class EsoConfig extends Chart {
 
     const secretName = "bitwarden-tls-certs";
 
+    // bootstrap a self-signed issuer used to create the CA
     const bootstrapIssuer = new Issuer(this, "bootstrap-issuer", {
       metadata: {
         name: "bitwarden-bootstrap-issuer",
@@ -92,21 +93,9 @@ class EsoConfig extends Chart {
         selfSigned: {},
       }
     })
-
-    new Issuer(this, "bitwarden-issuer", {
+    new Certificate(this, "bitwarden-bootstrap-certs", {
       metadata: {
-        name: "bitwarden-certificate-issuer",
-      },
-      spec: {
-        ca: {
-          secretName: secretName,
-        },
-      },
-    });
-
-    new Certificate(this, "bitwarden-tls-certs", {
-      metadata: {
-        name: "bitwarden-tls-certs",
+        name: "bitwarden-bootstrap-certs",
         namespace: namespace,
       },
       spec: {
@@ -127,6 +116,51 @@ class EsoConfig extends Chart {
           `bitwarden-sdk-server.${namespace}`,
           `bitwarden-sdk-server.${namespace}.svc`,
           `bitwarden-sdk-server.${namespace}.svc.cluster.local`,
+        ],
+        ipAddresses: [
+          "127.0.0.1",
+          "::1",
+        ],
+      },
+    });
+
+    // create a CA issuer 
+    const issuer = new Issuer(this, "bitwarden-issuer", {
+      metadata: {
+        name: "bitwarden-certificate-issuer",
+      },
+      spec: {
+        ca: {
+          secretName: secretName,
+        },
+      },
+    });
+
+    // actual issuer used by bitwarden-sdk-server
+    new Certificate(this, "bitwarden-tls-certs", {
+      metadata: {
+        name: "bitwarden-tls-certs",
+        namespace: namespace,
+      },
+      spec: {
+        isCa: true,
+        subject: {
+          organizations: ["external-secrets.io"],
+        },
+        issuerRef: {
+          kind: Issuer.GVK.kind,
+          group: Issuer.GVK.apiVersion.split("/")[0],
+          name: issuer.name,
+        },
+        secretName: secretName,
+        commonName: "bitwarden-sdk-server",
+        duration: "8760h",
+        dnsNames: [
+          "bitwarden-sdk-server",
+          `bitwarden-sdk-server.${namespace}`,
+          `bitwarden-sdk-server.${namespace}.svc`,
+          `bitwarden-sdk-server.${namespace}.svc.cluster.local`,
+          "localhost",
         ],
         ipAddresses: [
           "127.0.0.1",
