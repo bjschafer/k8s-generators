@@ -45,10 +45,10 @@ spec:
       - hostssl pdns pdns 10.0.10.0/24 scram-sha-256
   resources:
     limits:
-      cpu: 750m
+      cpu: 1
       memory: 1Gi
     requests:
-      cpu: 750m
+      cpu: 1
       memory: 1Gi
   storage:
     size: 15Gi

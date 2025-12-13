@@ -2,7 +2,7 @@ import { App, Chart } from "cdk8s";
 import { IntOrString, KubeService } from "cdk8s-plus-33/lib/imports/k8s";
 import { Construct } from "constructs";
 import { basename } from "path";
-import { ObjectStore } from "../../imports/barmancloud.cnpg.io";
+import { ObjectStore, ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests } from "../../imports/barmancloud.cnpg.io";
 import { Quantity } from "../../imports/k8s";
 import { VmPodScrape } from "../../imports/operator.victoriametrics.com";
 import {
@@ -99,11 +99,11 @@ class ProdPostgres extends Chart {
         },
         resources: {
           requests: {
-            cpu: Quantity.fromString("750m"),
+            cpu: Quantity.fromNumber(1),
             memory: Quantity.fromString("1Gi"),
           },
           limits: {
-            cpu: Quantity.fromString("750m"),
+            cpu: Quantity.fromNumber(1),
             memory: Quantity.fromString("1Gi"),
           },
         },
@@ -204,6 +204,18 @@ class ProdPostgres extends Chart {
             },
           },
         },
+        instanceSidecarConfiguration: {
+          resources: {
+            requests: {
+              memory: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("250m"),
+            },
+            limits: {
+              memory: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("250m"),
+            },
+          }
+        }
       },
     });
 
@@ -408,6 +420,18 @@ class VectorPostgres extends Chart {
             },
           },
         },
+        instanceSidecarConfiguration: {
+          resources: {
+            requests: {
+              memory: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("250m"),
+            },
+            limits: {
+              memory: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("250m"),
+            },
+          }
+        }
       },
     });
 

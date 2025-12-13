@@ -14,3 +14,11 @@ spec:
       secretAccessKey:
         key: SECRET_ACCESS_KEY
         name: s3-creds
+  instanceSidecarConfiguration:
+    resources:
+      limits:
+        cpu: 250m
+        memory: 512Mi
+      requests:
+        cpu: 250m
+        memory: 512Mi
