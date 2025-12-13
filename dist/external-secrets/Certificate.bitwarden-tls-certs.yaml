@@ -15,7 +15,6 @@ spec:
   ipAddresses:
     - 127.0.0.1
     - ::1
-  isCA: true
   issuerRef:
     group: cert-manager.io
     kind: Issuer

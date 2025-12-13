@@ -146,7 +146,6 @@ class EsoConfig extends Chart {
         namespace: namespace,
       },
       spec: {
-        isCa: true,
         subject: {
           organizations: ["external-secrets.io"],
         },
