@@ -164,30 +164,6 @@ export class ScrapeConfigs extends Chart {
       },
     });
 
-    ["cluster", "node"].forEach((kind: string) => {
-      new VmScrapeConfig(this, `minio-${kind}`, {
-        metadata: {
-          name: `minio-${kind}`,
-          namespace: namespace,
-        },
-        spec: {
-          staticConfigs: [
-            {
-              labels: { job: `minio-${kind}` },
-              targets: ["minio.cmdcentral.xyz:9000"],
-            },
-          ],
-          path: `/minio/v2/metrics/${kind}`,
-          authorization: {
-            credentials: {
-              name: "minio-bearer-token",
-              key: "token",
-            },
-          },
-        },
-      });
-    });
-
     new VmScrapeConfig(this, "nut", {
       metadata: {
         name: "nut",
