@@ -88,11 +88,12 @@ class EsoConfig extends Chart {
     const bootstrapIssuer = new Issuer(this, "bootstrap-issuer", {
       metadata: {
         name: "bitwarden-bootstrap-issuer",
+        namespace,
       },
       spec: {
         selfSigned: {},
-      }
-    })
+      },
+    });
     new Certificate(this, "bitwarden-bootstrap-certs", {
       metadata: {
         name: "bitwarden-bootstrap-certs",
@@ -128,6 +129,7 @@ class EsoConfig extends Chart {
     const issuer = new Issuer(this, "bitwarden-issuer", {
       metadata: {
         name: "bitwarden-certificate-issuer",
+        namespace,
       },
       spec: {
         ca: {

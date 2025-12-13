@@ -2,5 +2,6 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: bitwarden-bootstrap-issuer
+  namespace: external-secrets
 spec:
   selfSigned: {}
