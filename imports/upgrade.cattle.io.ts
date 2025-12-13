@@ -47,7 +47,7 @@ export class Plan extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -74,12 +74,13 @@ export interface PlanProps {
    * @schema Plan#spec
    */
   readonly spec?: PlanSpec;
+
 }
 
 /**
  * Converts an object of type 'PlanProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanProps(obj: PlanProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -89,7 +90,7 @@ export function toJson_PlanProps(obj: PlanProps | undefined): Record<string, any
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * PlanSpec represents the user-configurable details of a Plan.
@@ -215,12 +216,13 @@ export interface PlanSpec {
    * @schema PlanSpec#window
    */
   readonly window?: PlanSpecWindow;
+
 }
 
 /**
  * Converts an object of type 'PlanSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpec(obj: PlanSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -244,7 +246,7 @@ export function toJson_PlanSpec(obj: PlanSpec | undefined): Record<string, any> 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Configuration for draining nodes prior to upgrade. If left unspecified, no drain will be performed.
@@ -304,12 +306,13 @@ export interface PlanSpecDrain {
    * @schema PlanSpecDrain#timeout
    */
   readonly timeout?: number;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecDrain' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecDrain(obj: PlanSpecDrain | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -326,7 +329,7 @@ export function toJson_PlanSpecDrain(obj: PlanSpecDrain | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * LocalObjectReference contains enough information to let you locate the
@@ -345,12 +348,13 @@ export interface PlanSpecImagePullSecrets {
    * @schema PlanSpecImagePullSecrets#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecImagePullSecrets' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecImagePullSecrets(obj: PlanSpecImagePullSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -359,7 +363,7 @@ export function toJson_PlanSpecImagePullSecrets(obj: PlanSpecImagePullSecrets | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Select which nodes this plan can be applied to.
@@ -382,12 +386,13 @@ export interface PlanSpecNodeSelector {
    * @schema PlanSpecNodeSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'PlanSpecNodeSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecNodeSelector(obj: PlanSpecNodeSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -397,7 +402,7 @@ export function toJson_PlanSpecNodeSelector(obj: PlanSpecNodeSelector | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The prepare init container, if specified, is run before cordon/drain which is run before the upgrade container.
@@ -445,12 +450,13 @@ export interface PlanSpecPrepare {
    * @schema PlanSpecPrepare#volumes
    */
   readonly volumes?: PlanSpecPrepareVolumes[];
+
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepare' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecPrepare(obj: PlanSpecPrepare | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -465,7 +471,7 @@ export function toJson_PlanSpecPrepare(obj: PlanSpecPrepare | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SecretSpec describes a Secret to be mounted for prepare/upgrade containers.
@@ -493,12 +499,13 @@ export interface PlanSpecSecrets {
    * @schema PlanSpecSecrets#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecSecrets' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecSecrets(obj: PlanSpecSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -509,7 +516,7 @@ export function toJson_PlanSpecSecrets(obj: PlanSpecSecrets | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The pod this Toleration is attached to tolerates any taint that matches
@@ -562,12 +569,13 @@ export interface PlanSpecTolerations {
    * @schema PlanSpecTolerations#value
    */
   readonly value?: string;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecTolerations' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecTolerations(obj: PlanSpecTolerations | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -580,7 +588,7 @@ export function toJson_PlanSpecTolerations(obj: PlanSpecTolerations | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The upgrade container; must be specified.
@@ -628,12 +636,13 @@ export interface PlanSpecUpgrade {
    * @schema PlanSpecUpgrade#volumes
    */
   readonly volumes?: PlanSpecUpgradeVolumes[];
+
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgrade' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecUpgrade(obj: PlanSpecUpgrade | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -648,7 +657,7 @@ export function toJson_PlanSpecUpgrade(obj: PlanSpecUpgrade | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A time window in which to execute Jobs for this Plan.
@@ -684,12 +693,13 @@ export interface PlanSpecWindow {
    * @schema PlanSpecWindow#timeZone
    */
   readonly timeZone?: string;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecWindow' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecWindow(obj: PlanSpecWindow | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -701,7 +711,7 @@ export function toJson_PlanSpecWindow(obj: PlanSpecWindow | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector is a label query over a set of resources. The result of matchLabels and
@@ -726,12 +736,13 @@ export interface PlanSpecDrainPodSelector {
    * @schema PlanSpecDrainPodSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'PlanSpecDrainPodSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecDrainPodSelector(obj: PlanSpecDrainPodSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -741,7 +752,7 @@ export function toJson_PlanSpecDrainPodSelector(obj: PlanSpecDrainPodSelector | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -774,12 +785,13 @@ export interface PlanSpecNodeSelectorMatchExpressions {
    * @schema PlanSpecNodeSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'PlanSpecNodeSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecNodeSelectorMatchExpressions(obj: PlanSpecNodeSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -790,7 +802,7 @@ export function toJson_PlanSpecNodeSelectorMatchExpressions(obj: PlanSpecNodeSel
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * EnvFromSource represents the source of a set of ConfigMaps or Secrets
@@ -818,12 +830,13 @@ export interface PlanSpecPrepareEnvFrom {
    * @schema PlanSpecPrepareEnvFrom#secretRef
    */
   readonly secretRef?: PlanSpecPrepareEnvFromSecretRef;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareEnvFrom' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecPrepareEnvFrom(obj: PlanSpecPrepareEnvFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -834,7 +847,7 @@ export function toJson_PlanSpecPrepareEnvFrom(obj: PlanSpecPrepareEnvFrom | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * EnvVar represents an environment variable present in a Container.
@@ -871,12 +884,13 @@ export interface PlanSpecPrepareEnvs {
    * @schema PlanSpecPrepareEnvs#valueFrom
    */
   readonly valueFrom?: PlanSpecPrepareEnvsValueFrom;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareEnvs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecPrepareEnvs(obj: PlanSpecPrepareEnvs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -887,7 +901,7 @@ export function toJson_PlanSpecPrepareEnvs(obj: PlanSpecPrepareEnvs | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SecurityContext holds security configuration that will be applied to a container.
@@ -1026,12 +1040,13 @@ export interface PlanSpecPrepareSecurityContext {
    * @schema PlanSpecPrepareSecurityContext#windowsOptions
    */
   readonly windowsOptions?: PlanSpecPrepareSecurityContextWindowsOptions;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareSecurityContext' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecPrepareSecurityContext(obj: PlanSpecPrepareSecurityContext | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1051,7 +1066,7 @@ export function toJson_PlanSpecPrepareSecurityContext(obj: PlanSpecPrepareSecuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HostPath volume to mount into the pod
@@ -1079,12 +1094,13 @@ export interface PlanSpecPrepareVolumes {
    * @schema PlanSpecPrepareVolumes#source
    */
   readonly source: string;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareVolumes' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecPrepareVolumes(obj: PlanSpecPrepareVolumes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1095,7 +1111,7 @@ export function toJson_PlanSpecPrepareVolumes(obj: PlanSpecPrepareVolumes | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * EnvFromSource represents the source of a set of ConfigMaps or Secrets
@@ -1123,12 +1139,13 @@ export interface PlanSpecUpgradeEnvFrom {
    * @schema PlanSpecUpgradeEnvFrom#secretRef
    */
   readonly secretRef?: PlanSpecUpgradeEnvFromSecretRef;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeEnvFrom' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecUpgradeEnvFrom(obj: PlanSpecUpgradeEnvFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1139,7 +1156,7 @@ export function toJson_PlanSpecUpgradeEnvFrom(obj: PlanSpecUpgradeEnvFrom | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * EnvVar represents an environment variable present in a Container.
@@ -1176,12 +1193,13 @@ export interface PlanSpecUpgradeEnvs {
    * @schema PlanSpecUpgradeEnvs#valueFrom
    */
   readonly valueFrom?: PlanSpecUpgradeEnvsValueFrom;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeEnvs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecUpgradeEnvs(obj: PlanSpecUpgradeEnvs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1192,7 +1210,7 @@ export function toJson_PlanSpecUpgradeEnvs(obj: PlanSpecUpgradeEnvs | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SecurityContext holds security configuration that will be applied to a container.
@@ -1331,12 +1349,13 @@ export interface PlanSpecUpgradeSecurityContext {
    * @schema PlanSpecUpgradeSecurityContext#windowsOptions
    */
   readonly windowsOptions?: PlanSpecUpgradeSecurityContextWindowsOptions;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeSecurityContext' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecUpgradeSecurityContext(obj: PlanSpecUpgradeSecurityContext | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1356,7 +1375,7 @@ export function toJson_PlanSpecUpgradeSecurityContext(obj: PlanSpecUpgradeSecuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * HostPath volume to mount into the pod
@@ -1384,12 +1403,13 @@ export interface PlanSpecUpgradeVolumes {
    * @schema PlanSpecUpgradeVolumes#source
    */
   readonly source: string;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeVolumes' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecUpgradeVolumes(obj: PlanSpecUpgradeVolumes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1400,7 +1420,7 @@ export function toJson_PlanSpecUpgradeVolumes(obj: PlanSpecUpgradeVolumes | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema PlanSpecWindowDays
@@ -1495,12 +1515,13 @@ export interface PlanSpecDrainPodSelectorMatchExpressions {
    * @schema PlanSpecDrainPodSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'PlanSpecDrainPodSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecDrainPodSelectorMatchExpressions(obj: PlanSpecDrainPodSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1511,7 +1532,7 @@ export function toJson_PlanSpecDrainPodSelectorMatchExpressions(obj: PlanSpecDra
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The ConfigMap to select from
@@ -1536,12 +1557,13 @@ export interface PlanSpecPrepareEnvFromConfigMapRef {
    * @schema PlanSpecPrepareEnvFromConfigMapRef#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareEnvFromConfigMapRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecPrepareEnvFromConfigMapRef(obj: PlanSpecPrepareEnvFromConfigMapRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1551,7 +1573,7 @@ export function toJson_PlanSpecPrepareEnvFromConfigMapRef(obj: PlanSpecPrepareEn
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The Secret to select from
@@ -1576,12 +1598,13 @@ export interface PlanSpecPrepareEnvFromSecretRef {
    * @schema PlanSpecPrepareEnvFromSecretRef#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareEnvFromSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecPrepareEnvFromSecretRef(obj: PlanSpecPrepareEnvFromSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1591,7 +1614,7 @@ export function toJson_PlanSpecPrepareEnvFromSecretRef(obj: PlanSpecPrepareEnvFr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Source for the environment variable's value. Cannot be used if value is not empty.
@@ -1628,12 +1651,13 @@ export interface PlanSpecPrepareEnvsValueFrom {
    * @schema PlanSpecPrepareEnvsValueFrom#secretKeyRef
    */
   readonly secretKeyRef?: PlanSpecPrepareEnvsValueFromSecretKeyRef;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareEnvsValueFrom' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecPrepareEnvsValueFrom(obj: PlanSpecPrepareEnvsValueFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1645,7 +1669,7 @@ export function toJson_PlanSpecPrepareEnvsValueFrom(obj: PlanSpecPrepareEnvsValu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * appArmorProfile is the AppArmor options to use by this container. If set, this profile
@@ -1675,12 +1699,13 @@ export interface PlanSpecPrepareSecurityContextAppArmorProfile {
    * @schema PlanSpecPrepareSecurityContextAppArmorProfile#type
    */
   readonly type: string;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareSecurityContextAppArmorProfile' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecPrepareSecurityContextAppArmorProfile(obj: PlanSpecPrepareSecurityContextAppArmorProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1690,7 +1715,7 @@ export function toJson_PlanSpecPrepareSecurityContextAppArmorProfile(obj: PlanSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The capabilities to add/drop when running containers.
@@ -1714,12 +1739,13 @@ export interface PlanSpecPrepareSecurityContextCapabilities {
    * @schema PlanSpecPrepareSecurityContextCapabilities#drop
    */
   readonly drop?: string[];
+
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareSecurityContextCapabilities' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecPrepareSecurityContextCapabilities(obj: PlanSpecPrepareSecurityContextCapabilities | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1729,7 +1755,7 @@ export function toJson_PlanSpecPrepareSecurityContextCapabilities(obj: PlanSpecP
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SELinux context to be applied to the container.
@@ -1768,12 +1794,13 @@ export interface PlanSpecPrepareSecurityContextSeLinuxOptions {
    * @schema PlanSpecPrepareSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareSecurityContextSeLinuxOptions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecPrepareSecurityContextSeLinuxOptions(obj: PlanSpecPrepareSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1785,7 +1812,7 @@ export function toJson_PlanSpecPrepareSecurityContextSeLinuxOptions(obj: PlanSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The seccomp options to use by this container. If seccomp options are
@@ -1817,12 +1844,13 @@ export interface PlanSpecPrepareSecurityContextSeccompProfile {
    * @schema PlanSpecPrepareSecurityContextSeccompProfile#type
    */
   readonly type: string;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareSecurityContextSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecPrepareSecurityContextSeccompProfile(obj: PlanSpecPrepareSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1832,7 +1860,7 @@ export function toJson_PlanSpecPrepareSecurityContextSeccompProfile(obj: PlanSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The Windows specific settings applied to all containers.
@@ -1879,12 +1907,13 @@ export interface PlanSpecPrepareSecurityContextWindowsOptions {
    * @schema PlanSpecPrepareSecurityContextWindowsOptions#runAsUserName
    */
   readonly runAsUserName?: string;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareSecurityContextWindowsOptions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecPrepareSecurityContextWindowsOptions(obj: PlanSpecPrepareSecurityContextWindowsOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1896,7 +1925,7 @@ export function toJson_PlanSpecPrepareSecurityContextWindowsOptions(obj: PlanSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The ConfigMap to select from
@@ -1921,12 +1950,13 @@ export interface PlanSpecUpgradeEnvFromConfigMapRef {
    * @schema PlanSpecUpgradeEnvFromConfigMapRef#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeEnvFromConfigMapRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecUpgradeEnvFromConfigMapRef(obj: PlanSpecUpgradeEnvFromConfigMapRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1936,7 +1966,7 @@ export function toJson_PlanSpecUpgradeEnvFromConfigMapRef(obj: PlanSpecUpgradeEn
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The Secret to select from
@@ -1961,12 +1991,13 @@ export interface PlanSpecUpgradeEnvFromSecretRef {
    * @schema PlanSpecUpgradeEnvFromSecretRef#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeEnvFromSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecUpgradeEnvFromSecretRef(obj: PlanSpecUpgradeEnvFromSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1976,7 +2007,7 @@ export function toJson_PlanSpecUpgradeEnvFromSecretRef(obj: PlanSpecUpgradeEnvFr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Source for the environment variable's value. Cannot be used if value is not empty.
@@ -2013,12 +2044,13 @@ export interface PlanSpecUpgradeEnvsValueFrom {
    * @schema PlanSpecUpgradeEnvsValueFrom#secretKeyRef
    */
   readonly secretKeyRef?: PlanSpecUpgradeEnvsValueFromSecretKeyRef;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeEnvsValueFrom' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecUpgradeEnvsValueFrom(obj: PlanSpecUpgradeEnvsValueFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2030,7 +2062,7 @@ export function toJson_PlanSpecUpgradeEnvsValueFrom(obj: PlanSpecUpgradeEnvsValu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * appArmorProfile is the AppArmor options to use by this container. If set, this profile
@@ -2060,12 +2092,13 @@ export interface PlanSpecUpgradeSecurityContextAppArmorProfile {
    * @schema PlanSpecUpgradeSecurityContextAppArmorProfile#type
    */
   readonly type: string;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeSecurityContextAppArmorProfile' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecUpgradeSecurityContextAppArmorProfile(obj: PlanSpecUpgradeSecurityContextAppArmorProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2075,7 +2108,7 @@ export function toJson_PlanSpecUpgradeSecurityContextAppArmorProfile(obj: PlanSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The capabilities to add/drop when running containers.
@@ -2099,12 +2132,13 @@ export interface PlanSpecUpgradeSecurityContextCapabilities {
    * @schema PlanSpecUpgradeSecurityContextCapabilities#drop
    */
   readonly drop?: string[];
+
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeSecurityContextCapabilities' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecUpgradeSecurityContextCapabilities(obj: PlanSpecUpgradeSecurityContextCapabilities | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2114,7 +2148,7 @@ export function toJson_PlanSpecUpgradeSecurityContextCapabilities(obj: PlanSpecU
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SELinux context to be applied to the container.
@@ -2153,12 +2187,13 @@ export interface PlanSpecUpgradeSecurityContextSeLinuxOptions {
    * @schema PlanSpecUpgradeSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeSecurityContextSeLinuxOptions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecUpgradeSecurityContextSeLinuxOptions(obj: PlanSpecUpgradeSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2170,7 +2205,7 @@ export function toJson_PlanSpecUpgradeSecurityContextSeLinuxOptions(obj: PlanSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The seccomp options to use by this container. If seccomp options are
@@ -2202,12 +2237,13 @@ export interface PlanSpecUpgradeSecurityContextSeccompProfile {
    * @schema PlanSpecUpgradeSecurityContextSeccompProfile#type
    */
   readonly type: string;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeSecurityContextSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecUpgradeSecurityContextSeccompProfile(obj: PlanSpecUpgradeSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2217,7 +2253,7 @@ export function toJson_PlanSpecUpgradeSecurityContextSeccompProfile(obj: PlanSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The Windows specific settings applied to all containers.
@@ -2264,12 +2300,13 @@ export interface PlanSpecUpgradeSecurityContextWindowsOptions {
    * @schema PlanSpecUpgradeSecurityContextWindowsOptions#runAsUserName
    */
   readonly runAsUserName?: string;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeSecurityContextWindowsOptions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecUpgradeSecurityContextWindowsOptions(obj: PlanSpecUpgradeSecurityContextWindowsOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2281,7 +2318,7 @@ export function toJson_PlanSpecUpgradeSecurityContextWindowsOptions(obj: PlanSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Selects a key of a ConfigMap.
@@ -2313,12 +2350,13 @@ export interface PlanSpecPrepareEnvsValueFromConfigMapKeyRef {
    * @schema PlanSpecPrepareEnvsValueFromConfigMapKeyRef#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareEnvsValueFromConfigMapKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecPrepareEnvsValueFromConfigMapKeyRef(obj: PlanSpecPrepareEnvsValueFromConfigMapKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2329,7 +2367,7 @@ export function toJson_PlanSpecPrepareEnvsValueFromConfigMapKeyRef(obj: PlanSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Selects a field of the pod: supports metadata.name, metadata.namespace, `metadata.labels['<KEY>']`, `metadata.annotations['<KEY>']`,
@@ -2351,12 +2389,13 @@ export interface PlanSpecPrepareEnvsValueFromFieldRef {
    * @schema PlanSpecPrepareEnvsValueFromFieldRef#fieldPath
    */
   readonly fieldPath: string;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareEnvsValueFromFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecPrepareEnvsValueFromFieldRef(obj: PlanSpecPrepareEnvsValueFromFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2366,7 +2405,7 @@ export function toJson_PlanSpecPrepareEnvsValueFromFieldRef(obj: PlanSpecPrepare
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Selects a resource of the container: only resources limits and requests
@@ -2395,12 +2434,13 @@ export interface PlanSpecPrepareEnvsValueFromResourceFieldRef {
    * @schema PlanSpecPrepareEnvsValueFromResourceFieldRef#resource
    */
   readonly resource: string;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareEnvsValueFromResourceFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecPrepareEnvsValueFromResourceFieldRef(obj: PlanSpecPrepareEnvsValueFromResourceFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2411,7 +2451,7 @@ export function toJson_PlanSpecPrepareEnvsValueFromResourceFieldRef(obj: PlanSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Selects a key of a secret in the pod's namespace
@@ -2443,12 +2483,13 @@ export interface PlanSpecPrepareEnvsValueFromSecretKeyRef {
    * @schema PlanSpecPrepareEnvsValueFromSecretKeyRef#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecPrepareEnvsValueFromSecretKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecPrepareEnvsValueFromSecretKeyRef(obj: PlanSpecPrepareEnvsValueFromSecretKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2459,7 +2500,7 @@ export function toJson_PlanSpecPrepareEnvsValueFromSecretKeyRef(obj: PlanSpecPre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Selects a key of a ConfigMap.
@@ -2491,12 +2532,13 @@ export interface PlanSpecUpgradeEnvsValueFromConfigMapKeyRef {
    * @schema PlanSpecUpgradeEnvsValueFromConfigMapKeyRef#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeEnvsValueFromConfigMapKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecUpgradeEnvsValueFromConfigMapKeyRef(obj: PlanSpecUpgradeEnvsValueFromConfigMapKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2507,7 +2549,7 @@ export function toJson_PlanSpecUpgradeEnvsValueFromConfigMapKeyRef(obj: PlanSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Selects a field of the pod: supports metadata.name, metadata.namespace, `metadata.labels['<KEY>']`, `metadata.annotations['<KEY>']`,
@@ -2529,12 +2571,13 @@ export interface PlanSpecUpgradeEnvsValueFromFieldRef {
    * @schema PlanSpecUpgradeEnvsValueFromFieldRef#fieldPath
    */
   readonly fieldPath: string;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeEnvsValueFromFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecUpgradeEnvsValueFromFieldRef(obj: PlanSpecUpgradeEnvsValueFromFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2544,7 +2587,7 @@ export function toJson_PlanSpecUpgradeEnvsValueFromFieldRef(obj: PlanSpecUpgrade
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Selects a resource of the container: only resources limits and requests
@@ -2573,12 +2616,13 @@ export interface PlanSpecUpgradeEnvsValueFromResourceFieldRef {
    * @schema PlanSpecUpgradeEnvsValueFromResourceFieldRef#resource
    */
   readonly resource: string;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeEnvsValueFromResourceFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecUpgradeEnvsValueFromResourceFieldRef(obj: PlanSpecUpgradeEnvsValueFromResourceFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2589,7 +2633,7 @@ export function toJson_PlanSpecUpgradeEnvsValueFromResourceFieldRef(obj: PlanSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Selects a key of a secret in the pod's namespace
@@ -2621,12 +2665,13 @@ export interface PlanSpecUpgradeEnvsValueFromSecretKeyRef {
    * @schema PlanSpecUpgradeEnvsValueFromSecretKeyRef#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'PlanSpecUpgradeEnvsValueFromSecretKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PlanSpecUpgradeEnvsValueFromSecretKeyRef(obj: PlanSpecUpgradeEnvsValueFromSecretKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2637,7 +2682,7 @@ export function toJson_PlanSpecUpgradeEnvsValueFromSecretKeyRef(obj: PlanSpecUpg
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Specifies the output format of the exposed resources, defaults to "1"
