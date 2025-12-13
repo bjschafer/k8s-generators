@@ -61,8 +61,10 @@ interface values {
   [key: string]: any;
 }
 
-export interface HelmAppProps<T extends values>
-  extends Omit<HelmProps, "values"> {
+export interface HelmAppProps<T extends values> extends Omit<
+  HelmProps,
+  "values"
+> {
   readonly chart: string;
   readonly repo: string;
   readonly version: string;
