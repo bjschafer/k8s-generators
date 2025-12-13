@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.61.10
+    helm.sh/chart: victoria-metrics-k8s-stack-0.65.1
   name: metrics-victoria-metrics-k8s-stack-kubernetes-resources
   namespace: metrics
 spec:
@@ -57,7 +57,7 @@ spec:
             description: Namespace {{ $labels.namespace }} is using {{ $value | humanizePercentage }} of its {{ $labels.resource }} quota on cluster {{ $labels.cluster }}.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubequotaalmostfull
             summary: Namespace quota is going to be full.
-          expr: ((kube_resourcequota{job="kube-state-metrics",type="used"} / ignoring(instance,job,type) (kube_resourcequota{job="kube-state-metrics",type="hard"} > 0)) > 0.9) < 1
+          expr: ((max(kube_resourcequota{job="kube-state-metrics",type="used"}) without(instance,job,type) / on(cluster,namespace,resource,resourcequota) group_left() (max(kube_resourcequota{job="kube-state-metrics",type="hard"}) without(instance,job,type) > 0)) > 0.9) < 1
           for: 15m
           labels:
             severity: info
@@ -66,7 +66,7 @@ spec:
             description: Namespace {{ $labels.namespace }} is using {{ $value | humanizePercentage }} of its {{ $labels.resource }} quota on cluster {{ $labels.cluster }}.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubequotafullyused
             summary: Namespace quota is fully used.
-          expr: (kube_resourcequota{job="kube-state-metrics",type="used"} / ignoring(instance,job,type) (kube_resourcequota{job="kube-state-metrics",type="hard"} > 0)) == 1
+          expr: (max(kube_resourcequota{job="kube-state-metrics",type="used"}) without(instance,job,type) / on(cluster,namespace,resource,resourcequota) group_left() (max(kube_resourcequota{job="kube-state-metrics",type="hard"}) without(instance,job,type) > 0)) == 1
           for: 15m
           labels:
             severity: info
@@ -75,7 +75,7 @@ spec:
             description: Namespace {{ $labels.namespace }} is using {{ $value | humanizePercentage }} of its {{ $labels.resource }} quota on cluster {{ $labels.cluster }}.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubequotaexceeded
             summary: Namespace quota has exceeded the limits.
-          expr: (kube_resourcequota{job="kube-state-metrics",type="used"} / ignoring(instance,job,type) (kube_resourcequota{job="kube-state-metrics",type="hard"} > 0)) > 1
+          expr: (max(kube_resourcequota{job="kube-state-metrics",type="used"}) without(instance,job,type) / on(cluster,namespace,resource,resourcequota) group_left() (max(kube_resourcequota{job="kube-state-metrics",type="hard"}) without(instance,job,type) > 0)) > 1
           for: 15m
           labels:
             severity: warning
@@ -84,7 +84,7 @@ spec:
             description: "{{ $value | humanizePercentage }} throttling of CPU in namespace {{ $labels.namespace }} for container {{ $labels.container }} in pod {{ $labels.pod }} on cluster {{ $labels.cluster }}."
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/cputhrottlinghigh
             summary: Processes experience elevated CPU throttling.
-          expr: (sum(increase(container_cpu_cfs_throttled_periods_total{container!="",job="kubelet",metrics_path="/metrics/cadvisor"}[5m])) without(id,metrics_path,name,image,endpoint,job,node) / on(cluster,namespace,pod,container,instance) group_left() sum(increase(container_cpu_cfs_periods_total{job="kubelet",metrics_path="/metrics/cadvisor"}[5m])) without(id,metrics_path,name,image,endpoint,job,node)) > 0.25
+          expr: (sum(topk(1, increase(container_cpu_cfs_throttled_periods_total{container!="",job="kubelet",metrics_path="/metrics/cadvisor"}[5m])) by(cluster,namespace,pod,container,instance)) without(id,metrics_path,name,image,endpoint,job,node) / on(cluster,namespace,pod,container,instance) group_left() sum(topk(1, increase(container_cpu_cfs_periods_total{job="kubelet",metrics_path="/metrics/cadvisor"}[5m])) by(cluster,namespace,pod,container,instance)) without(id,metrics_path,name,image,endpoint,job,node)) > 0.25
           for: 15m
           labels:
             severity: info

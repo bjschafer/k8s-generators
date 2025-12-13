@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.61.10
+    helm.sh/chart: victoria-metrics-k8s-stack-0.65.1
   name: metrics-victoria-metrics-k8s-stack-vmalert
   namespace: metrics
 spec:
@@ -26,7 +26,7 @@ spec:
             severity: warning
         - alert: AlertingRulesError
           annotations:
-            dashboard: http:///d/LzldHAVnz?viewPanel=13&var-instance={{ $labels.instance }}&var-file={{ $labels.file }}&var-group={{ $labels.group }}
+            dashboard: http:///d/LzldHAVnz?viewPanel=13&var-instance={{ $labels.instance }}&var-file={{ $labels.file }}&var-group={{ $labels.group }}&var-cluster={{ $labels.cluster }}
             description: Alerting rules execution is failing for "{{ $labels.alertname }}" from group "{{ $labels.group }}" in file "{{ $labels.file }}". Check vmalert's logs for detailed error message.
             summary: Alerting rules are failing for vmalert instance {{ $labels.instance }}
           expr: sum(increase(vmalert_alerting_rules_errors_total[5m])) without(id) > 0
@@ -35,7 +35,7 @@ spec:
             severity: warning
         - alert: RecordingRulesError
           annotations:
-            dashboard: http:///d/LzldHAVnz?viewPanel=30&var-instance={{ $labels.instance }}&var-file={{ $labels.file }}&var-group={{ $labels.group }}
+            dashboard: http:///d/LzldHAVnz?viewPanel=30&var-instance={{ $labels.instance }}&var-file={{ $labels.file }}&var-group={{ $labels.group }}&var-cluster={{ $labels.cluster }}
             description: Recording rules execution is failing for "{{ $labels.recording }}" from group "{{ $labels.group }}" in file "{{ $labels.file }}". Check vmalert's logs for detailed error message.
             summary: Recording rules are failing for vmalert instance {{ $labels.instance }}
           expr: sum(increase(vmalert_recording_rules_errors_total[5m])) without(id) > 0
@@ -44,7 +44,7 @@ spec:
             severity: warning
         - alert: RecordingRulesNoData
           annotations:
-            dashboard: http:///d/LzldHAVnz?viewPanel=33&var-file={{ $labels.file }}&var-group={{ $labels.group }}
+            dashboard: http:///d/LzldHAVnz?viewPanel=33&var-file={{ $labels.file }}&var-group={{ $labels.group }}&var-cluster={{ $labels.cluster }}
             description: Recording rule "{{ $labels.recording }}" from group "{{ $labels.group }} in file "{{ $labels.file }}" produces 0 samples over the last 30min. It might be caused by a misconfiguration or incorrect query expression.
             summary: Recording rule {{ $labels.recording }} ({{ $labels.group }}) produces no data
           expr: sum(vmalert_recording_rules_last_evaluation_samples) without(id) < 1

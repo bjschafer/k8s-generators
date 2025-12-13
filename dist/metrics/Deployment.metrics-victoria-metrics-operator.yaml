@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: metrics
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-operator
-    app.kubernetes.io/version: v0.63.0
-    helm.sh/chart: victoria-metrics-operator-0.54.0
+    app.kubernetes.io/version: v0.66.1
+    helm.sh/chart: victoria-metrics-operator-0.57.1
   name: metrics-victoria-metrics-operator
   namespace: metrics
 spec:
@@ -36,9 +36,13 @@ spec:
                   fieldPath: metadata.name
             - name: OPERATOR_NAME
               value: victoria-metrics-operator
+            - name: VM_USECUSTOMCONFIGRELOADER
+              value: "true"
+            - name: VM_CUSTOMCONFIGRELOADERIMAGE
+              value: victoriametrics/operator:config-reloader-v0.66.1
             - name: VM_ENABLEDPROMETHEUSCONVERTEROWNERREFERENCES
               value: "false"
-          image: victoriametrics/operator:v0.63.0
+          image: victoriametrics/operator:v0.66.1
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3

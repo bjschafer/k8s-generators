@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.61.10
+    helm.sh/chart: victoria-metrics-k8s-stack-0.65.1
   name: metrics-victoria-metrics-k8s-stack-kube-prometheus-node-recording.rules
   namespace: metrics
 spec:
@@ -29,7 +29,7 @@ spec:
           labels: {}
           record: instance:node_network_transmit_bytes:rate:sum
         - annotations: {}
-          expr: sum(rate(node_cpu_seconds_total{mode!="idle",mode!="iowait",mode!="steal"}[5m])) without(cpu,mode) / on(instance) group_left() count(sum(node_cpu_seconds_total) by(instance,cpu,cluster)) by(instance,cluster)
+          expr: sum(rate(node_cpu_seconds_total{mode!="idle",mode!="iowait",mode!="steal"}[5m])) without(cpu,mode) / on(instance,cluster) group_left() count(sum(node_cpu_seconds_total) by(instance,cpu,cluster)) by(instance,cluster)
           labels: {}
           record: instance:node_cpu:ratio
         - annotations: {}

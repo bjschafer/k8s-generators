@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.61.10
+    helm.sh/chart: victoria-metrics-k8s-stack-0.65.1
   name: metrics-victoria-metrics-k8s-stack-vmsingle
   namespace: metrics
 spec:
@@ -20,7 +20,7 @@ spec:
       rules:
         - alert: DiskRunsOutOfSpaceIn3Days
           annotations:
-            dashboard: http:///d/wNf0q_kZk?viewPanel=53&var-instance={{ $labels.instance }}
+            dashboard: http:///d/wNf0q_kZk?viewPanel=53&var-instance={{ $labels.instance }}&var-cluster={{ $labels.cluster }}
             description: |-
               Taking into account current ingestion rate, free disk space will be enough only for {{ $value | humanizeDuration }} on instance {{ $labels.instance }}.
                Consider to limit the ingestion rate, decrease retention or scale the disk space if possible.
@@ -31,7 +31,7 @@ spec:
             severity: critical
         - alert: NodeBecomesReadonlyIn3Days
           annotations:
-            dashboard: http:///d/oS7Bi_0Wz?viewPanel=53&var-instance={{ $labels.instance }}
+            dashboard: http:///d/oS7Bi_0Wz?viewPanel=53&var-instance={{ $labels.instance }}&var-cluster={{ $labels.cluster }}
             description: |-
               Taking into account current ingestion rate and free disk space instance {{ $labels.instance }} is writable for {{ $value | humanizeDuration }}.
                Consider to limit the ingestion rate, decrease retention or scale the disk space up if possible.
@@ -42,7 +42,7 @@ spec:
             severity: warning
         - alert: DiskRunsOutOfSpace
           annotations:
-            dashboard: http:///d/wNf0q_kZk?viewPanel=53&var-instance={{ $labels.instance }}
+            dashboard: http:///d/wNf0q_kZk?viewPanel=53&var-instance={{ $labels.instance }}&var-cluster={{ $labels.cluster }}
             description: |-
               Disk utilisation on instance {{ $labels.instance }} is more than 80%.
                Having less than 20% of free disk space could cripple merge processes and overall performance. Consider to limit the ingestion rate, decrease retention or scale the disk space if possible.
@@ -53,7 +53,7 @@ spec:
             severity: critical
         - alert: RequestErrorsToAPI
           annotations:
-            dashboard: http:///d/wNf0q_kZk?viewPanel=35&var-instance={{ $labels.instance }}
+            dashboard: http:///d/wNf0q_kZk?viewPanel=35&var-instance={{ $labels.instance }}&var-cluster={{ $labels.cluster }}
             description: Requests to path {{ $labels.path }} are receiving errors. Please verify if clients are sending correct requests.
             summary: Too many errors served for path {{ $labels.path }} (instance {{ $labels.instance }})
           expr: increase(vm_http_request_errors_total[5m]) > 0
@@ -62,7 +62,7 @@ spec:
             severity: warning
         - alert: TooHighChurnRate
           annotations:
-            dashboard: http:///d/wNf0q_kZk?viewPanel=66&var-instance={{ $labels.instance }}
+            dashboard: http:///d/wNf0q_kZk?viewPanel=66&var-instance={{ $labels.instance }}&var-cluster={{ $labels.cluster }}
             description: |-
               VM constantly creates new time series on "{{ $labels.instance }}".
                This effect is known as Churn Rate.
@@ -74,7 +74,7 @@ spec:
             severity: warning
         - alert: TooHighChurnRate24h
           annotations:
-            dashboard: http:///d/wNf0q_kZk?viewPanel=66&var-instance={{ $labels.instance }}
+            dashboard: http:///d/wNf0q_kZk?viewPanel=66&var-instance={{ $labels.instance }}&var-cluster={{ $labels.cluster }}
             description: |-
               The number of created new time series over last 24h is 3x times higher than current number of active series on "{{ $labels.instance }}".
                This effect is known as Churn Rate.
@@ -86,7 +86,7 @@ spec:
             severity: warning
         - alert: TooHighSlowInsertsRate
           annotations:
-            dashboard: http:///d/wNf0q_kZk?viewPanel=68&var-instance={{ $labels.instance }}
+            dashboard: http:///d/wNf0q_kZk?viewPanel=68&var-instance={{ $labels.instance }}&var-cluster={{ $labels.cluster }}
             description: High rate of slow inserts on "{{ $labels.instance }}" may be a sign of resource exhaustion for the current load. It is likely more RAM is needed for optimal handling of the current number of active time series. See also https://github.com/VictoriaMetrics/VictoriaMetrics/issues/3976#issuecomment-1476883183
             summary: Percentage of slow inserts is more than 5% on "{{ $labels.instance }}" for the last 15m
           expr: (sum(rate(vm_slow_row_inserts_total[5m])) by(instance,cluster) / sum(rate(vm_rows_inserted_total[5m])) by(instance,cluster)) > 0.05

@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.61.10
+    helm.sh/chart: victoria-metrics-k8s-stack-0.65.1
   name: metrics-victoria-metrics-k8s-stack-general.rules
   namespace: metrics
 spec:
@@ -49,6 +49,6 @@ spec:
               This alert should be routed to a null receiver and configured to inhibit alerts with severity="info".
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/general/infoinhibitor
             summary: Info-level alert inhibition.
-          expr: (ALERTS{severity="info"} == 1) unless on(namespace) (ALERTS{alertname!="InfoInhibitor",severity=~"warning|critical",alertstate="firing"} == 1)
+          expr: (ALERTS{severity="info"} == 1) unless on(namespace,cluster) (ALERTS{alertname!="InfoInhibitor",severity=~"warning|critical",alertstate="firing"} == 1)
           labels:
             severity: none
