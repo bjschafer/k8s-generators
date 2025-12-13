@@ -220,7 +220,7 @@ class EsoConfig extends Chart {
             caProvider: {
               type: ClusterSecretStoreSpecProviderBitwardensecretsmanagerCaProviderType.SECRET,
               namespace: namespace,
-              name: tlsSecretName,
+              name: caSecretName,
               key: "ca.crt",
             },
           },
