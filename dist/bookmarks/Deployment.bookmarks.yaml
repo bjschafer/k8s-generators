@@ -44,7 +44,7 @@ spec:
             - name: NEXT_PUBLIC_CREDENTIALS_ENABLED
               value: "false"
             - name: OPENAI_MODEL
-              value: "@cf/openai/gpt-oss-20b"
+              value: "@cf/meta/llama-4-scout-17b-16e-instruct"
             - name: CUSTOM_OPENAI_BASE_URL
               valueFrom:
                 secretKeyRef:

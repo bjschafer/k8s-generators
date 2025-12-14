@@ -81,7 +81,7 @@ new AppPlus(app, `${name}-app`, {
     NEXT_PUBLIC_CREDENTIALS_ENABLED: EnvValue.fromValue("false"), // disable non-SSO signin
 
     // Try LLM categorization on CF workers
-    OPENAI_MODEL: EnvValue.fromValue("@cf/openai/gpt-oss-20b"),
+    OPENAI_MODEL: EnvValue.fromValue("@cf/meta/llama-4-scout-17b-16e-instruct"),
     ...aiSecrets.toEnvValues(),
 
     // Authentik SSO
