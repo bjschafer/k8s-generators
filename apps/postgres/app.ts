@@ -2,7 +2,10 @@ import { App, Chart } from "cdk8s";
 import { IntOrString, KubeService } from "cdk8s-plus-33/lib/imports/k8s";
 import { Construct } from "constructs";
 import { basename } from "path";
-import { ObjectStore, ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests } from "../../imports/barmancloud.cnpg.io";
+import {
+  ObjectStore,
+  ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests,
+} from "../../imports/barmancloud.cnpg.io";
 import { Quantity } from "../../imports/k8s";
 import { VmPodScrape } from "../../imports/operator.victoriametrics.com";
 import {
@@ -150,7 +153,7 @@ class ProdPostgres extends Chart {
         instances: 3,
         type: PoolerSpecType.RW,
         pgbouncer: {
-          poolMode: PoolerSpecPgbouncerPoolMode.SESSION,
+          poolMode: PoolerSpecPgbouncerPoolMode.TRANSACTION,
           parameters: {
             max_client_conn: "1000",
             default_pool_size: "20",
@@ -207,15 +210,25 @@ class ProdPostgres extends Chart {
         instanceSidecarConfiguration: {
           resources: {
             requests: {
-              memory: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("250m"),
+              memory:
+                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                  "512Mi",
+                ),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                "250m",
+              ),
             },
             limits: {
-              memory: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("250m"),
+              memory:
+                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                  "512Mi",
+                ),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                "250m",
+              ),
             },
-          }
-        }
+          },
+        },
       },
     });
 
@@ -423,15 +436,25 @@ class VectorPostgres extends Chart {
         instanceSidecarConfiguration: {
           resources: {
             requests: {
-              memory: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("250m"),
+              memory:
+                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                  "512Mi",
+                ),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                "250m",
+              ),
             },
             limits: {
-              memory: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("250m"),
+              memory:
+                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                  "512Mi",
+                ),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                "250m",
+              ),
             },
-          }
-        }
+          },
+        },
       },
     });
 
