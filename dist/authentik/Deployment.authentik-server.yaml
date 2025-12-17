@@ -82,7 +82,7 @@ spec:
                 secretKeyRef:
                   key: AUTHENTIK_EMAIL__PASSWORD
                   name: creds
-          image: ghcr.io/goauthentik/server:2025.10.2
+          image: ghcr.io/goauthentik/server:2025.10.3
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
