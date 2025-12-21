@@ -83,7 +83,7 @@ spec:
                   divisor: "1"
                   resource: limits.memory
             - name: GF_DATABASE_HOST
-              value: prod.postgres.svc.cluster.local:5432
+              value: prod-pg17-rw.postgres.svc.cluster.local:5432
             - name: GF_DATABASE_NAME
               value: grafana
             - name: GF_DATABASE_SSL_MODE
