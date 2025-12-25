@@ -1,0 +1,76 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  labels:
+    app.kubernetes.io/instance: media
+    app.kubernetes.io/name: navidrome
+  name: kometa
+  namespace: media
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            cdk8s.io/metadata.addr: kometa-kometa-deploy-c8214964
+        spec:
+          automountServiceAccountToken: false
+          containers:
+            - args:
+                - --run
+                - --read-only-config
+              env:
+                - name: KOMETA_PLEX_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      key: KOMETA_PLEX_TOKEN
+                      name: kometa-secrets
+                - name: KOMETA_TMDB_API_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      key: KOMETA_TMDB_API_KEY
+                      name: kometa-secrets
+              image: kometateam/kometa:latest
+              imagePullPolicy: IfNotPresent
+              name: kometa
+              resources:
+                limits:
+                  cpu: 250m
+                  memory: 256Mi
+                requests:
+                  cpu: 250m
+                  memory: 256Mi
+              securityContext:
+                allowPrivilegeEscalation: false
+                privileged: false
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+              volumeMounts:
+                - mountPath: /config
+                  name: pvc-kometa-config
+                - mountPath: /config/config.yml
+                  name: configmap-kometa-config
+                  subPath: config.yml
+          dnsPolicy: ClusterFirst
+          hostNetwork: false
+          restartPolicy: OnFailure
+          securityContext:
+            fsGroupChangePolicy: Always
+            runAsNonRoot: true
+          setHostnameAsFQDN: false
+          shareProcessNamespace: false
+          terminationGracePeriodSeconds: 30
+          volumes:
+            - name: pvc-kometa-config
+              persistentVolumeClaim:
+                claimName: kometa-config
+                readOnly: false
+            - configMap:
+                name: kometa-config
+              name: configmap-kometa-config
+  schedule: 0 0 * * *
+  startingDeadlineSeconds: 10
+  successfulJobsHistoryLimit: 3
+  suspend: false

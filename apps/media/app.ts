@@ -1,17 +1,18 @@
 import { App, Chart, Size } from "cdk8s";
-import { NFSVolumeContainer } from "../../lib/nfs";
+import { Cpu, Secret } from "cdk8s-plus-33";
+import { Construct } from "constructs";
+import { Certificate } from "../../imports/cert-manager.io";
 import {
   ArgoAppSource,
   ArgoUpdaterImageProps,
   NewArgoApp,
 } from "../../lib/argo";
-import { MediaApp, MediaAppProps } from "../../lib/media-app";
 import { CLUSTER_ISSUER, DEFAULT_APP_PROPS } from "../../lib/consts";
-import { basename } from "../../lib/util";
-import { Cpu, Secret } from "cdk8s-plus-33";
 import { NewKustomize } from "../../lib/kustomize";
-import { Construct } from "constructs";
-import { Certificate } from "../../imports/cert-manager.io";
+import { MediaApp, MediaAppProps } from "../../lib/media-app";
+import { NFSVolumeContainer } from "../../lib/nfs";
+import { basename } from "../../lib/util";
+import { Kometa } from "./kometa";
 import { Navidrome } from "./navidrome";
 
 export const namespace = basename(__dirname);
@@ -251,6 +252,7 @@ class MediaCert extends Chart {
 }
 new MediaCert(app, "certs");
 
+new Kometa(app, "kometa");
 new Navidrome(app, "navidrome");
 
 NewArgoApp("media", {
