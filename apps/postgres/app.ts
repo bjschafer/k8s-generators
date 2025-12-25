@@ -216,7 +216,7 @@ class ProdPostgres extends Chart {
                   "512Mi",
                 ),
               cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                "250m",
+                "500m",
               ),
             },
             limits: {
@@ -225,7 +225,7 @@ class ProdPostgres extends Chart {
                   "512Mi",
                 ),
               cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                "250m",
+                "500m",
               ),
             },
           },
@@ -369,7 +369,7 @@ class VectorPostgres extends Chart {
         name: name,
       },
       spec: {
-        instances: 3,
+        instances: 2,
         imageCatalogRef: {
           apiGroup: catalog.apiGroup,
           kind: catalog.kind,
@@ -442,7 +442,7 @@ class VectorPostgres extends Chart {
                   "512Mi",
                 ),
               cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                "250m",
+                "500m",
               ),
             },
             limits: {
@@ -451,7 +451,7 @@ class VectorPostgres extends Chart {
                   "512Mi",
                 ),
               cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                "250m",
+                "500m",
               ),
             },
           },
@@ -504,9 +504,9 @@ export const PROD_CLUSTER = prod_pg_17;
 
 // Import database provisioning functions
 import {
+  createDatabases,
   createManagedRoles,
   createPostgresSecrets,
-  createDatabases,
 } from "./database-provisioning";
 
 // Create secrets for all database credentials in postgres namespace

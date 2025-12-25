@@ -14,7 +14,7 @@ spec:
     kind: ImageCatalog
     major: 17
     name: vectorchord
-  instances: 3
+  instances: 2
   monitoring:
     enablePodMonitor: false
   plugins:
