@@ -176,12 +176,12 @@ export class Kometa extends Chart {
           },
           resources: {
             cpu: {
-              request: Cpu.millis(250),
-              limit: Cpu.millis(250),
+              request: Cpu.millis(500),
+              limit: Cpu.millis(500),
             },
             memory: {
-              request: Size.mebibytes(256),
-              limit: Size.mebibytes(256),
+              request: Size.mebibytes(512),
+              limit: Size.mebibytes(512),
             },
           },
           securityContext: DEFAULT_SECURITY_CONTEXT,

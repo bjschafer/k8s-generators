@@ -37,11 +37,11 @@ spec:
               name: kometa
               resources:
                 limits:
-                  cpu: 250m
-                  memory: 256Mi
+                  cpu: 500m
+                  memory: 512Mi
                 requests:
-                  cpu: 250m
-                  memory: 256Mi
+                  cpu: 500m
+                  memory: 512Mi
               securityContext:
                 allowPrivilegeEscalation: false
                 privileged: false
