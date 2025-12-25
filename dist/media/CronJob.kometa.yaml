@@ -45,8 +45,8 @@ spec:
               securityContext:
                 allowPrivilegeEscalation: false
                 privileged: false
-                readOnlyRootFilesystem: true
-                runAsNonRoot: true
+                readOnlyRootFilesystem: false
+                runAsNonRoot: false
               volumeMounts:
                 - mountPath: /config
                   name: pvc-kometa-config
@@ -58,7 +58,7 @@ spec:
           restartPolicy: OnFailure
           securityContext:
             fsGroupChangePolicy: Always
-            runAsNonRoot: true
+            runAsNonRoot: false
           setHostnameAsFQDN: false
           shareProcessNamespace: false
           terminationGracePeriodSeconds: 30
@@ -72,5 +72,5 @@ spec:
               name: configmap-kometa-config
   schedule: 0 0 * * *
   startingDeadlineSeconds: 10
-  successfulJobsHistoryLimit: 3
+  successfulJobsHistoryLimit: 1
   suspend: false

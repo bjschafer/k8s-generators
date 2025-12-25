@@ -2,6 +2,7 @@ import { Chart, Cron, Size, Yaml } from "cdk8s";
 import { ConcurrencyPolicy, ConfigMap, Cpu, CronJob, ImagePullPolicy, PersistentVolumeAccessMode, PersistentVolumeClaim, PersistentVolumeMode, RestartPolicy, Volume } from "cdk8s-plus-33";
 import { Construct } from "constructs";
 import { KometaConfigSchema } from "../../imports/helm-values/kometa-config.schema";
+import { DEFAULT_SECURITY_CONTEXT } from "../../lib/consts";
 import { BitwardenSecret } from "../../lib/secrets";
 import { StorageClass } from "../../lib/volume";
 import { mediaLabel, namespace } from "./app";
@@ -156,6 +157,9 @@ export class Kometa extends Chart {
           schedule: Cron.daily(),
           restartPolicy: RestartPolicy.ON_FAILURE,
           concurrencyPolicy: ConcurrencyPolicy.FORBID,
+          successfulJobsRetained: 1,
+          failedJobsRetained: 1,
+          securityContext: DEFAULT_SECURITY_CONTEXT,
           containers: [{
               name: name,
               image: "kometateam/kometa:latest",
@@ -177,6 +181,7 @@ export class Kometa extends Chart {
                       limit: Size.mebibytes(256),
                   }
               },
+              securityContext: DEFAULT_SECURITY_CONTEXT,
           }]
       });
 
