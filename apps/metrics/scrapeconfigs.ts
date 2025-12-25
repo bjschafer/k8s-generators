@@ -329,7 +329,7 @@ export class ScrapeConfigs extends Chart {
         podMetricsEndpoints: [
           {
             targetPort:
-              VmPodScrapeSpecPodMetricsEndpointsTargetPort.fromNumber(8081),
+              VmPodScrapeSpecPodMetricsEndpointsTargetPort.fromNumber(8080),
           },
         ],
         selector: {

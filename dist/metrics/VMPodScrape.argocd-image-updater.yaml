@@ -8,7 +8,7 @@ spec:
     matchNames:
       - argocd
   podMetricsEndpoints:
-    - targetPort: 8081
+    - targetPort: 8080
   selector:
     matchLabels:
       app.kubernetes.io/name: argocd-image-updater
