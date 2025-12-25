@@ -22,15 +22,15 @@ spec:
                 - --run
                 - --read-only-config
               env:
-                - name: KOMETA_PLEX_TOKEN
+                - name: KOMETA_PLEXTOKEN
                   valueFrom:
                     secretKeyRef:
-                      key: KOMETA_PLEX_TOKEN
+                      key: KOMETA_PLEXTOKEN
                       name: kometa-secrets
-                - name: KOMETA_TMDB_API_KEY
+                - name: KOMETA_TMDBAPIKEY
                   valueFrom:
                     secretKeyRef:
-                      key: KOMETA_TMDB_API_KEY
+                      key: KOMETA_TMDBAPIKEY
                       name: kometa-secrets
               image: kometateam/kometa:latest
               imagePullPolicy: IfNotPresent

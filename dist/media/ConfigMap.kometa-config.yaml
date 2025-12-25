@@ -7,7 +7,7 @@ data:
   config.yml: |
     plex:
       url: http://plex.cmdcentral.xyz:32400
-      token: <<PLEX_TOKEN>>
+      token: <<PLEXTOKEN>>
       timeout: 60
       db_cache: 40
       clean_bundles: false
@@ -15,7 +15,7 @@ data:
       optimize: false
       verify_ssl: false
     tmdb:
-      apikey: <<TMDB_API_KEY>>
+      apikey: <<TMDBAPIKEY>>
       cache_expiration: 60
       language: en
       region: US
