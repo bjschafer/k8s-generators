@@ -27,8 +27,6 @@ spec:
       automountServiceAccountToken: false
       containers:
         - env:
-            - name: DISABLE_BUILTIN_AUTH
-              value: "true"
             - name: TZ
               value: America/Chicago
           image: ghcr.io/wizarrrr/wizarr

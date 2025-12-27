@@ -37,7 +37,7 @@ new AppPlus(app, name, {
   ports: [port],
 
   extraEnv: {
-    DISABLE_BUILTIN_AUTH: EnvValue.fromValue("true"),
+    // DISABLE_BUILTIN_AUTH: EnvValue.fromValue("true"),
     TZ: EnvValue.fromValue("America/Chicago"),
   },
   extraIngressHosts: ["invites.cmdcentral.xyz"],
