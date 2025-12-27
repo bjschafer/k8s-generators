@@ -1,4 +1,5 @@
 resources:
   - Deployment.wizarr.yaml
   - Ingress.wizarr.yaml
+  - PersistentVolumeClaim.data.yaml
   - Service.wizarr.yaml

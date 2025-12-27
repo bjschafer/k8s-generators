@@ -1,5 +1,5 @@
 import { App, Size } from "cdk8s";
-import { EnvValue } from "cdk8s-plus-33";
+import { EnvValue, PersistentVolumeAccessMode } from "cdk8s-plus-33";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
@@ -41,6 +41,16 @@ new AppPlus(app, name, {
     TZ: EnvValue.fromValue("America/Chicago"),
   },
   extraIngressHosts: ["invites.cmdcentral.xyz"],
+
+    volumes: [{
+        name: "data",
+        mountPath: "/data",
+        enableBackups: true,
+        props: {
+            storage: Size.gibibytes(5),
+            accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
+        }
+  }]
 });
 
 app.synth();

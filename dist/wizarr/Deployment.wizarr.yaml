@@ -15,12 +15,11 @@ spec:
     matchLabels:
       cdk8s.io/metadata.addr: wizarr-wizarr-deployment-c8baf10c
   strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
+    type: Recreate
   template:
     metadata:
+      annotations:
+        backup.velero.io/backup-volumes: pvc-data
       labels:
         app.kubernetes.io/name: wizarr
         cdk8s.io/metadata.addr: wizarr-wizarr-deployment-c8baf10c
@@ -55,6 +54,9 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /data
+              name: pvc-data
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
@@ -64,3 +66,8 @@ spec:
       setHostnameAsFQDN: false
       shareProcessNamespace: false
       terminationGracePeriodSeconds: 30
+      volumes:
+        - name: pvc-data
+          persistentVolumeClaim:
+            claimName: data
+            readOnly: false
