@@ -1,0 +1,4 @@
+resources:
+  - Deployment.wizarr.yaml
+  - Ingress.wizarr.yaml
+  - Service.wizarr.yaml

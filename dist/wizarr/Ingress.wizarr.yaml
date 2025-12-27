@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: wizarr
+  namespace: wizarr
+spec:
+  rules:
+    - host: wizarr.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: wizarr
+                port:
+                  number: 5690
+            path: /
+            pathType: Prefix
+    - host: invites.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: wizarr
+                port:
+                  number: 5690
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - wizarr.cmdcentral.xyz
+        - invites.cmdcentral.xyz
+      secretName: wizarr-tls

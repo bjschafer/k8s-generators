@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: wizarr
+  name: wizarr
+  namespace: wizarr
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: wizarr-wizarr-deployment-c8baf10c
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: wizarr
+        cdk8s.io/metadata.addr: wizarr-wizarr-deployment-c8baf10c
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: DISABLE_BUILTIN_AUTH
+              value: "true"
+            - name: TZ
+              value: America/Chicago
+          image: ghcr.io/wizarrrr/wizarr
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 5690
+          name: wizarr
+          ports:
+            - containerPort: 5690
+          readinessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 5690
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30
