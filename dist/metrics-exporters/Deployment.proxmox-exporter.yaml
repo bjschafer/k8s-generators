@@ -1,10 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    reloader.stakater.com/auto: "true"
   labels:
-    app: unifi-exporter
-  name: unifi-exporter
-  namespace: metrics
+    app: proxmox-exporter
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: proxmox-exporter
+  name: proxmox-exporter
+  namespace: metrics-exporters
 spec:
   minReadySeconds: 0
   progressDeadlineSeconds: 600
@@ -12,62 +16,63 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      cdk8s.io/metadata.addr: unifi-unifi-deployment-c8b5698b
+      cdk8s.io/metadata.addr: proxmox-proxmox-app-proxmox-app-deployment-c8596826
   strategy:
-    type: Recreate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
       labels:
-        cdk8s.io/metadata.addr: unifi-unifi-deployment-c8b5698b
+        app.kubernetes.io/name: proxmox-exporter
+        cdk8s.io/metadata.addr: proxmox-proxmox-app-proxmox-app-deployment-c8596826
     spec:
       automountServiceAccountToken: false
       containers:
         - env:
-            - name: GOMAXPROCS
+            - name: PVE_USER
+              value: prometheus@pve
+            - name: PVE_TOKEN_NAME
+              value: k8s
+            - name: PVE_TOKEN_VALUE
               valueFrom:
-                resourceFieldRef:
-                  resource: limits.cpu
-            - name: GOMEMLIMIT
-              valueFrom:
-                resourceFieldRef:
-                  resource: limits.memory
-          envFrom:
-            - secretRef:
-                name: unifi-creds
-          image: ghcr.io/unpoller/unpoller:latest
+                secretKeyRef:
+                  key: PVE_TOKEN_VALUE
+                  name: proxmox-exporter
+          image: prompve/prometheus-pve-exporter
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
             httpGet:
-              path: /health
-              port: 9130
+              path: /
+              port: 9221
               scheme: HTTP
-          name: unifi-exporter
+          name: proxmox-exporter
           ports:
-            - containerPort: 9130
-              name: metrics
+            - containerPort: 9221
           readinessProbe:
             failureThreshold: 3
             httpGet:
-              path: /health
-              port: 9130
+              path: /
+              port: 9221
               scheme: HTTP
           resources:
             limits:
-              cpu: 1000m
-              memory: 256Mi
+              cpu: 500m
+              memory: 64Mi
             requests:
-              cpu: 100m
-              memory: 96Mi
+              cpu: 50m
+              memory: 32Mi
           securityContext:
             allowPrivilegeEscalation: false
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
           volumeMounts:
-            - mountPath: /etc/unpoller/up.conf
-              name: configmap-unifi-exporter
-              subPath: up.conf
+            - mountPath: /etc/pve.yml
+              name: configmap-proxmox-exporter
+              subPath: pve.yml
       dnsConfig:
         nameservers:
           - 10.0.10.100
@@ -85,5 +90,5 @@ spec:
       terminationGracePeriodSeconds: 30
       volumes:
         - configMap:
-            name: unifi-exporter
-          name: configmap-unifi-exporter
+            name: proxmox-exporter
+          name: configmap-proxmox-exporter

@@ -1,0 +1,15 @@
+resources:
+  - ConfigMap.proxmox-exporter.yaml
+  - ConfigMap.unifi-exporter.yaml
+  - Deployment.klipper-exporter.yaml
+  - Deployment.proxmox-exporter.yaml
+  - Deployment.unifi-exporter.yaml
+  - ExternalSecret.proxmox-exporter.yaml
+  - ExternalSecret.unifi-exporter.yaml
+  - Service.klipper-exporter.yaml
+  - Service.proxmox-exporter.yaml
+  - Service.unifi-exporter.yaml
+  - VMProbe.klipper-exporter.yaml
+  - VMProbe.proxmox-exporter.yaml
+  - VMServiceScrape.klipper-exporter-self.yaml
+  - VMServiceScrape.unifi-exporter.yaml

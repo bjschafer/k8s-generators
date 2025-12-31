@@ -4,13 +4,13 @@ metadata:
   labels:
     app: proxmox-exporter
   name: proxmox-exporter
-  namespace: metrics
+  namespace: metrics-exporters
 spec:
   externalIPs: []
   ports:
-    - name: metrics
+    - name: http
       port: 9221
       targetPort: 9221
   selector:
-    cdk8s.io/metadata.addr: proxmox-proxmox-deployment-c8b6edee
+    cdk8s.io/metadata.addr: proxmox-proxmox-app-proxmox-app-deployment-c8596826
   type: ClusterIP

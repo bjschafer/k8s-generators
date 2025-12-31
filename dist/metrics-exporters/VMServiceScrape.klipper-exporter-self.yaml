@@ -1,14 +1,14 @@
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMServiceScrape
 metadata:
-  name: unifi-exporter
-  namespace: metrics
+  name: klipper-exporter-self
+  namespace: metrics-exporters
 spec:
   endpoints:
     - port: metrics
   namespaceSelector:
     matchNames:
-      - metrics
+      - metrics-exporters
   selector:
     matchLabels:
-      app: unifi-exporter
+      app: klipper-exporter

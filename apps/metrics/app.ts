@@ -5,9 +5,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { addAlerts } from "./alerts";
 import { BlackboxExporter } from "./blackbox";
-import { ProxmoxExporter } from "./proxmox";
 import { ScrapeConfigs } from "./scrapeconfigs";
-import { UnifiExporter } from "./unifi";
 import { VmResources } from "./vmresources";
 
 export const namespace = basename(__dirname);
@@ -150,9 +148,7 @@ new HelmApp(app, "stack", {
 });
 
 new BlackboxExporter(app, "blackbox");
-new ProxmoxExporter(app, "proxmox");
 new ScrapeConfigs(app, "scrapes");
-new UnifiExporter(app, "unifi");
 new VmResources(app, "resources");
 
 addAlerts(app, "alerts");

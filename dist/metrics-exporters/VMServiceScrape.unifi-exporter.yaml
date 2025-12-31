@@ -1,0 +1,14 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: unifi-exporter
+  namespace: metrics-exporters
+spec:
+  endpoints:
+    - port: metrics
+  namespaceSelector:
+    matchNames:
+      - metrics-exporters
+  selector:
+    matchLabels:
+      app: unifi-exporter

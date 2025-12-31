@@ -42,15 +42,17 @@ new AppPlus(app, name, {
   },
   extraIngressHosts: ["invites.cmdcentral.xyz"],
 
-    volumes: [{
-        name: "data",
-        mountPath: "/data",
-        enableBackups: true,
-        props: {
-            storage: Size.gibibytes(5),
-            accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
-        }
-  }]
+  volumes: [
+    {
+      name: "data",
+      mountPath: "/data",
+      enableBackups: true,
+      props: {
+        storage: Size.gibibytes(5),
+        accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
+      },
+    },
+  ],
 });
 
 app.synth();

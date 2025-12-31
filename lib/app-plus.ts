@@ -14,6 +14,7 @@ import {
   PersistentVolumeClaim,
   PersistentVolumeClaimProps,
   PersistentVolumeMode,
+  PodDnsProps,
   Probe,
   Secret,
   Service,
@@ -78,6 +79,7 @@ export interface AppPlusProps {
   // if true, configures traefik to talk tls to the backend
   readonly backendHTTPS?: boolean;
   readonly service?: ServiceProps;
+  readonly dns?: PodDnsProps;
 }
 
 export class AppPlus extends Chart {
@@ -183,6 +185,7 @@ export class AppPlus extends Chart {
       securityContext: DEFAULT_SECURITY_CONTEXT,
       serviceAccount: serviceAccount,
       automountServiceAccountToken: props.automountServiceAccount,
+      dns: props.dns,
       containers: [
         {
           name: props.name,

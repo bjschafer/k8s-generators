@@ -4,7 +4,7 @@ metadata:
   labels:
     app: proxmox-exporter
   name: proxmox-exporter
-  namespace: metrics
+  namespace: metrics-exporters
 data:
   pve.yml: |
     default:

@@ -2,7 +2,7 @@ apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMProbe
 metadata:
   name: proxmox-exporter
-  namespace: metrics
+  namespace: metrics-exporters
 spec:
   jobName: proxmox
   targets:
@@ -30,4 +30,4 @@ spec:
         - vmhost.cmdcentral.xyz:443
   vmProberSpec:
     path: /pve
-    url: proxmox-exporter:9221
+    url: 9221:9221

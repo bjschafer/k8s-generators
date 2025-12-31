@@ -4,13 +4,13 @@ metadata:
   labels:
     app: unifi-exporter
   name: unifi-exporter
-  namespace: metrics
+  namespace: metrics-exporters
 spec:
   externalIPs: []
   ports:
-    - name: metrics
+    - name: http
       port: 9130
       targetPort: 9130
   selector:
-    cdk8s.io/metadata.addr: unifi-unifi-deployment-c8b5698b
+    cdk8s.io/metadata.addr: unifi-unifi-app-unifi-app-deployment-c85aea89
   type: ClusterIP

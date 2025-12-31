@@ -372,18 +372,6 @@ export class ScrapeConfigs extends Chart {
       });
     });
 
-    new VmServiceScrape(this, "unifi-exporter", {
-      metadata: {
-        name: "unifi-exporter",
-        namespace: namespace,
-      },
-      spec: {
-        namespaceSelector: { matchNames: ["prometheus"] },
-        selector: { matchLabels: { app: "unifi-exporter" } },
-        endpoints: [{ port: "metrics" }],
-      },
-    });
-
     // --- gitlab
     [
       { job_name: "gitlab-nginx", port: 8060 },

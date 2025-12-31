@@ -1,5 +1,5 @@
 import { AppProps, YamlOutputType } from "cdk8s";
-import { EnvValue } from "cdk8s-plus-33";
+import { DnsPolicy, EnvValue } from "cdk8s-plus-33";
 import { EnvVar, Quantity } from "../imports/k8s";
 
 export const DEFAULT_CPU_LIMIT = Quantity.fromString("250m");
@@ -31,6 +31,12 @@ export const LSIO_ENVVALUE: { [key: string]: EnvValue } = {
 
 export const DNS_NAMESERVERS = ["10.0.10.100", "10.0.10.101"];
 export const DNS_SEARCH = ["cmdcentral.xyz"];
+
+export const DNS_POLICY_NONE = {
+  policy: DnsPolicy.NONE,
+  nameservers: DNS_NAMESERVERS,
+  searches: DNS_SEARCH,
+};
 
 export const BACKUP_ANNOTATION_NAME = "backup.velero.io/backup-volumes";
 export const BACKUP_ANNOTATION_EXCLUDE = "velero.io/exclude-from-backup";

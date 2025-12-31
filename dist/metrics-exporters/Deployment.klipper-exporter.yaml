@@ -2,9 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: proxmox-exporter
-  name: proxmox-exporter
-  namespace: metrics
+    app: klipper-exporter
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: klipper-exporter
+  name: klipper-exporter
+  namespace: metrics-exporters
 spec:
   minReadySeconds: 0
   progressDeadlineSeconds: 600
@@ -12,37 +14,34 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      cdk8s.io/metadata.addr: proxmox-proxmox-deployment-c8b6edee
+      cdk8s.io/metadata.addr: klipper-klipper-app-klipper-app-deployment-c87f6dde
   strategy:
-    type: Recreate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
       labels:
-        cdk8s.io/metadata.addr: proxmox-proxmox-deployment-c8b6edee
+        app.kubernetes.io/name: klipper-exporter
+        cdk8s.io/metadata.addr: klipper-klipper-app-klipper-app-deployment-c87f6dde
     spec:
       automountServiceAccountToken: false
       containers:
-        - envFrom:
-            - secretRef:
-                name: proxmox-exporter
-          image: prompve/prometheus-pve-exporter
+        - image: ghcr.io/scross01/prometheus-klipper-exporter
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
-            httpGet:
-              path: /
-              port: 9221
-              scheme: HTTP
-          name: proxmox-exporter
+            tcpSocket:
+              port: 9101
+          name: klipper-exporter
           ports:
-            - containerPort: 9221
+            - containerPort: 9101
               name: metrics
           readinessProbe:
             failureThreshold: 3
-            httpGet:
-              path: /
-              port: 9221
-              scheme: HTTP
+            tcpSocket:
+              port: 9101
           resources:
             limits:
               cpu: 500m
@@ -55,10 +54,6 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
-          volumeMounts:
-            - mountPath: /etc/pve.yml
-              name: configmap-proxmox-exporter
-              subPath: pve.yml
       dnsConfig:
         nameservers:
           - 10.0.10.100
@@ -74,7 +69,3 @@ spec:
       setHostnameAsFQDN: false
       shareProcessNamespace: false
       terminationGracePeriodSeconds: 30
-      volumes:
-        - configMap:
-            name: proxmox-exporter
-          name: configmap-proxmox-exporter

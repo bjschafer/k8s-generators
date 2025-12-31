@@ -4,7 +4,7 @@ metadata:
   labels:
     app: unifi-exporter
   name: unifi-exporter
-  namespace: metrics
+  namespace: metrics-exporters
 data:
   up.conf: |
     [prometheus]
@@ -31,7 +31,4 @@ data:
       save_anomalies = true
       hash_pii = false
       verify_ssl = false
-
-    [loki]
-      url = "https://loki.cmdcentral.xyz"
 immutable: false

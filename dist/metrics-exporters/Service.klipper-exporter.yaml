@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: klipper-exporter
+  name: klipper-exporter
+  namespace: metrics-exporters
+spec:
+  externalIPs: []
+  ports:
+    - name: metrics
+      port: 9101
+      targetPort: 9101
+  selector:
+    cdk8s.io/metadata.addr: klipper-klipper-app-klipper-app-deployment-c87f6dde
+  type: ClusterIP
