@@ -89,7 +89,7 @@ export class ProxmoxExporter extends Chart {
       spec: {
         jobName: "proxmox",
         vmProberSpec: {
-          url: `${app.Service.port}:${port}`,
+          url: `${app.Service.name}.${namespace}.svc.cluster.local:${port}`,
           path: "/pve",
         },
         targets: {

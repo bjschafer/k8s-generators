@@ -38,4 +38,4 @@ spec:
         - trident.cmdcentral.xyz:7125
   vmProberSpec:
     path: /probe
-    url: 9101:9101
+    url: klipper-exporter.metrics-exporters.svc.cluster.local:9101

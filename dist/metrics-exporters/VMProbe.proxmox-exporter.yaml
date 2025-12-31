@@ -30,4 +30,4 @@ spec:
         - vmhost.cmdcentral.xyz:443
   vmProberSpec:
     path: /pve
-    url: 9221:9221
+    url: proxmox-exporter.metrics-exporters.svc.cluster.local:9221

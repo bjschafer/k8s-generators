@@ -114,7 +114,7 @@ scrape_configs:
       spec: {
         jobName: "klipper",
         vmProberSpec: {
-          url: `${app.Service.port}:${port}`,
+          url: `${app.Service.name}.${namespace}.svc.cluster.local:${port}`,
           path: "/probe",
         },
         params: {
