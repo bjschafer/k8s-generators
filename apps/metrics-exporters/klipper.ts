@@ -49,40 +49,6 @@ export class KlipperExporter extends Chart {
       disableIngress: true,
     });
 
-    /*
-scrape_configs:
-
-  - job_name: "klipper"
-    scrape_interval: 5s
-    metrics_path: /probe
-    static_configs:
-      - targets: [ 'klipper-host:7125' ]
-    params:
-      modules: [
-        "process_stats",
-        "job_queue",
-        "system_info",
-        "network_stats",
-        "directory_info",
-        "printer_objects",
-        "history",
-      ]
-    relabel_configs:
-      - source_labels: [__address__]
-        target_label: __param_target
-      - source_labels: [__param_target]
-        target_label: instance
-      - target_label: __address__
-        replacement: klipper-exporter:9101
-
-  # optional exporter metrics
-  - job_name: "klipper-exporter"
-    scrape_interval: 5s
-    metrics_path: /metrics
-    static_configs:
-      - targets: [ 'klipper-exporter:9101' ]
-    */
-
     // self-metrics
     new VmServiceScrape(this, "scrape", {
       metadata: {

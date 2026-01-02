@@ -76,7 +76,10 @@ export class UnifiExporter extends Chart {
       labels: labels,
       annotations: RELOADER_ENABLED,
       image: "ghcr.io/unpoller/unpoller:latest",
-      ports: [port],
+      ports: [{
+        name: "metrics",
+        number: port,
+      }],
       extraEnv: {
         GOMAXPROCS: EnvValue.fromResource(ResourceFieldPaths.CPU_LIMIT),
         GOMEMLIMIT: EnvValue.fromResource(ResourceFieldPaths.MEMORY_LIMIT),

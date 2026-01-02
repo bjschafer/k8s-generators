@@ -55,6 +55,7 @@ spec:
           name: unifi-exporter
           ports:
             - containerPort: 9130
+              name: metrics
           readinessProbe:
             failureThreshold: 3
             httpGet:

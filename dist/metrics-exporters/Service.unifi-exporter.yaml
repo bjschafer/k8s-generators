@@ -8,7 +8,7 @@ metadata:
 spec:
   externalIPs: []
   ports:
-    - name: http
+    - name: metrics
       port: 9130
       targetPort: 9130
   selector:

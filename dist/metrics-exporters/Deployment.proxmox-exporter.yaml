@@ -51,6 +51,7 @@ spec:
           name: proxmox-exporter
           ports:
             - containerPort: 9221
+              name: metrics
           readinessProbe:
             failureThreshold: 3
             httpGet:
