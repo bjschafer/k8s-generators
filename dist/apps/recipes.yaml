@@ -35,10 +35,6 @@ spec:
           commonUpdateSettings:
             updateStrategy: digest
           imageName: ghcr.io/tandoorrecipes/recipes:latest
-        - alias: nginx
-          commonUpdateSettings:
-            updateStrategy: digest
-          imageName: public.ecr.aws/nginx/nginx:latest
       namePattern: recipes
   namespace: argocd
   writeBackConfig:

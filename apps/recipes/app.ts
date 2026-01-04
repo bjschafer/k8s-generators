@@ -45,11 +45,6 @@ NewArgoApp(name, {
         versionConstraint: "latest",
         strategy: "digest",
       },
-      {
-        image: "public.ecr.aws/nginx/nginx",
-        versionConstraint: "latest",
-        strategy: "digest",
-      },
     ],
   },
 });
