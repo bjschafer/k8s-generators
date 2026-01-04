@@ -165,7 +165,7 @@ export class Navidrome extends Chart {
             priority: 10,
             middlewares: [
               {
-                name: "authentik",
+                name: "ak-outpost-authentik-embedded-outpost",
                 namespace: "authentik",
               },
             ],

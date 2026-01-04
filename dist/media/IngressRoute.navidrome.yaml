@@ -13,7 +13,7 @@ spec:
     - kind: Rule
       match: Host(`music.cmdcentral.xyz`) || Host(`navidrome.cmdcentral.xyz`)
       middlewares:
-        - name: authentik
+        - name: ak-outpost-authentik-embedded-outpost
           namespace: authentik
       priority: 10
       services:
