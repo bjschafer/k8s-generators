@@ -8,21 +8,14 @@ spec:
     - action: replace
       sourceLabels:
         - __address__
-      source_labels:
-        - __address__
       targetLabel: __param_target
-      target_label: __param_target
     - action: replace
       sourceLabels:
         - __param_target
-      source_labels:
-        - __param_target
       targetLabel: instance
-      target_label: instance
     - action: replace
       replacement: infra2.cmdcentral.xyz:9995
       targetLabel: __address__
-      target_label: __address__
   staticConfigs:
     - labels:
         job: nut

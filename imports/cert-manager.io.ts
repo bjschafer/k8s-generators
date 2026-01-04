@@ -50,7 +50,7 @@ export class Certificate extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -81,13 +81,12 @@ export interface CertificateProps {
    * @schema Certificate#spec
    */
   readonly spec?: CertificateSpec;
-
 }
 
 /**
  * Converts an object of type 'CertificateProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_CertificateProps(obj: CertificateProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -97,7 +96,7 @@ export function toJson_CertificateProps(obj: CertificateProps | undefined): Reco
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specification of the desired state of the Certificate resource.
@@ -363,13 +362,12 @@ export interface CertificateSpec {
    * @schema CertificateSpec#usages
    */
   readonly usages?: CertificateSpecUsages[];
-
 }
 
 /**
  * Converts an object of type 'CertificateSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_CertificateSpec(obj: CertificateSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -400,7 +398,7 @@ export function toJson_CertificateSpec(obj: CertificateSpec | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * CertificateAdditionalOutputFormat defines an additional output format of a
@@ -417,13 +415,12 @@ export interface CertificateSpecAdditionalOutputFormats {
    * @schema CertificateSpecAdditionalOutputFormats#type
    */
   readonly type: CertificateSpecAdditionalOutputFormatsType;
-
 }
 
 /**
  * Converts an object of type 'CertificateSpecAdditionalOutputFormats' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_CertificateSpecAdditionalOutputFormats(obj: CertificateSpecAdditionalOutputFormats | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -432,7 +429,7 @@ export function toJson_CertificateSpecAdditionalOutputFormats(obj: CertificateSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to the issuer responsible for issuing the certificate.
@@ -469,13 +466,12 @@ export interface CertificateSpecIssuerRef {
    * @schema CertificateSpecIssuerRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'CertificateSpecIssuerRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_CertificateSpecIssuerRef(obj: CertificateSpecIssuerRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -486,7 +482,7 @@ export function toJson_CertificateSpecIssuerRef(obj: CertificateSpecIssuerRef | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Additional keystore output formats to be stored in the Certificate's Secret.
@@ -509,13 +505,12 @@ export interface CertificateSpecKeystores {
    * @schema CertificateSpecKeystores#pkcs12
    */
   readonly pkcs12?: CertificateSpecKeystoresPkcs12;
-
 }
 
 /**
  * Converts an object of type 'CertificateSpecKeystores' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_CertificateSpecKeystores(obj: CertificateSpecKeystores | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -525,7 +520,7 @@ export function toJson_CertificateSpecKeystores(obj: CertificateSpecKeystores | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * x.509 certificate NameConstraint extension which MUST NOT be used in a non-CA certificate.
@@ -560,13 +555,12 @@ export interface CertificateSpecNameConstraints {
    * @schema CertificateSpecNameConstraints#permitted
    */
   readonly permitted?: CertificateSpecNameConstraintsPermitted;
-
 }
 
 /**
  * Converts an object of type 'CertificateSpecNameConstraints' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_CertificateSpecNameConstraints(obj: CertificateSpecNameConstraints | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -577,7 +571,7 @@ export function toJson_CertificateSpecNameConstraints(obj: CertificateSpecNameCo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema CertificateSpecOtherNames
@@ -599,13 +593,12 @@ export interface CertificateSpecOtherNames {
    * @schema CertificateSpecOtherNames#utf8Value
    */
   readonly utf8Value?: string;
-
 }
 
 /**
  * Converts an object of type 'CertificateSpecOtherNames' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_CertificateSpecOtherNames(obj: CertificateSpecOtherNames | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -615,7 +608,7 @@ export function toJson_CertificateSpecOtherNames(obj: CertificateSpecOtherNames 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Private key options. These include the key algorithm and size, the used
@@ -685,13 +678,12 @@ export interface CertificateSpecPrivateKey {
    * @schema CertificateSpecPrivateKey#size
    */
   readonly size?: number;
-
 }
 
 /**
  * Converts an object of type 'CertificateSpecPrivateKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_CertificateSpecPrivateKey(obj: CertificateSpecPrivateKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -703,7 +695,7 @@ export function toJson_CertificateSpecPrivateKey(obj: CertificateSpecPrivateKey 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Defines annotations and labels to be copied to the Certificate's Secret.
@@ -728,13 +720,12 @@ export interface CertificateSpecSecretTemplate {
    * @schema CertificateSpecSecretTemplate#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'CertificateSpecSecretTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_CertificateSpecSecretTemplate(obj: CertificateSpecSecretTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -744,7 +735,7 @@ export function toJson_CertificateSpecSecretTemplate(obj: CertificateSpecSecretT
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Signature algorithm to use.
@@ -836,13 +827,12 @@ export interface CertificateSpecSubject {
    * @schema CertificateSpecSubject#streetAddresses
    */
   readonly streetAddresses?: string[];
-
 }
 
 /**
  * Converts an object of type 'CertificateSpecSubject' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_CertificateSpecSubject(obj: CertificateSpecSubject | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -858,7 +848,7 @@ export function toJson_CertificateSpecSubject(obj: CertificateSpecSubject | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * KeyUsage specifies valid usage contexts for keys.
@@ -1003,13 +993,12 @@ export interface CertificateSpecKeystoresJks {
    * @schema CertificateSpecKeystoresJks#passwordSecretRef
    */
   readonly passwordSecretRef?: CertificateSpecKeystoresJksPasswordSecretRef;
-
 }
 
 /**
  * Converts an object of type 'CertificateSpecKeystoresJks' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_CertificateSpecKeystoresJks(obj: CertificateSpecKeystoresJks | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1021,7 +1010,7 @@ export function toJson_CertificateSpecKeystoresJks(obj: CertificateSpecKeystores
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PKCS12 configures options for storing a PKCS12 keystore in the
@@ -1078,13 +1067,12 @@ export interface CertificateSpecKeystoresPkcs12 {
    * @schema CertificateSpecKeystoresPkcs12#profile
    */
   readonly profile?: CertificateSpecKeystoresPkcs12Profile;
-
 }
 
 /**
  * Converts an object of type 'CertificateSpecKeystoresPkcs12' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_CertificateSpecKeystoresPkcs12(obj: CertificateSpecKeystoresPkcs12 | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1096,7 +1084,7 @@ export function toJson_CertificateSpecKeystoresPkcs12(obj: CertificateSpecKeysto
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Excluded contains the constraints which must be disallowed. Any name matching a
@@ -1134,13 +1122,12 @@ export interface CertificateSpecNameConstraintsExcluded {
    * @schema CertificateSpecNameConstraintsExcluded#uriDomains
    */
   readonly uriDomains?: string[];
-
 }
 
 /**
  * Converts an object of type 'CertificateSpecNameConstraintsExcluded' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_CertificateSpecNameConstraintsExcluded(obj: CertificateSpecNameConstraintsExcluded | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1152,7 +1139,7 @@ export function toJson_CertificateSpecNameConstraintsExcluded(obj: CertificateSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Permitted contains the constraints in which the names must be located.
@@ -1188,13 +1175,12 @@ export interface CertificateSpecNameConstraintsPermitted {
    * @schema CertificateSpecNameConstraintsPermitted#uriDomains
    */
   readonly uriDomains?: string[];
-
 }
 
 /**
  * Converts an object of type 'CertificateSpecNameConstraintsPermitted' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_CertificateSpecNameConstraintsPermitted(obj: CertificateSpecNameConstraintsPermitted | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1206,7 +1192,7 @@ export function toJson_CertificateSpecNameConstraintsPermitted(obj: CertificateS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Algorithm is the private key algorithm of the corresponding private key
@@ -1298,13 +1284,12 @@ export interface CertificateSpecKeystoresJksPasswordSecretRef {
    * @schema CertificateSpecKeystoresJksPasswordSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'CertificateSpecKeystoresJksPasswordSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_CertificateSpecKeystoresJksPasswordSecretRef(obj: CertificateSpecKeystoresJksPasswordSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1314,7 +1299,7 @@ export function toJson_CertificateSpecKeystoresJksPasswordSecretRef(obj: Certifi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PasswordSecretRef is a reference to a non-empty key in a Secret resource
@@ -1341,13 +1326,12 @@ export interface CertificateSpecKeystoresPkcs12PasswordSecretRef {
    * @schema CertificateSpecKeystoresPkcs12PasswordSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'CertificateSpecKeystoresPkcs12PasswordSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_CertificateSpecKeystoresPkcs12PasswordSecretRef(obj: CertificateSpecKeystoresPkcs12PasswordSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1357,7 +1341,7 @@ export function toJson_CertificateSpecKeystoresPkcs12PasswordSecretRef(obj: Cert
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Profile specifies the key and certificate encryption algorithms and the HMAC algorithm
@@ -1434,7 +1418,7 @@ export class CertificateRequest extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -1470,13 +1454,12 @@ export interface CertificateRequestProps {
    * @schema CertificateRequest#spec
    */
   readonly spec?: CertificateRequestSpec;
-
 }
 
 /**
  * Converts an object of type 'CertificateRequestProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_CertificateRequestProps(obj: CertificateRequestProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1486,7 +1469,7 @@ export function toJson_CertificateRequestProps(obj: CertificateRequestProps | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specification of the desired state of the CertificateRequest resource.
@@ -1590,13 +1573,12 @@ export interface CertificateRequestSpec {
    * @schema CertificateRequestSpec#username
    */
   readonly username?: string;
-
 }
 
 /**
  * Converts an object of type 'CertificateRequestSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_CertificateRequestSpec(obj: CertificateRequestSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1613,7 +1595,7 @@ export function toJson_CertificateRequestSpec(obj: CertificateRequestSpec | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to the issuer responsible for issuing the certificate.
@@ -1650,13 +1632,12 @@ export interface CertificateRequestSpecIssuerRef {
    * @schema CertificateRequestSpecIssuerRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'CertificateRequestSpecIssuerRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_CertificateRequestSpecIssuerRef(obj: CertificateRequestSpecIssuerRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1667,7 +1648,7 @@ export function toJson_CertificateRequestSpecIssuerRef(obj: CertificateRequestSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * KeyUsage specifies valid usage contexts for keys.
@@ -1800,7 +1781,7 @@ export class ClusterIssuer extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -1831,13 +1812,12 @@ export interface ClusterIssuerProps {
    * @schema ClusterIssuer#spec
    */
   readonly spec: ClusterIssuerSpec;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerProps(obj: ClusterIssuerProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1847,7 +1827,7 @@ export function toJson_ClusterIssuerProps(obj: ClusterIssuerProps | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Desired state of the ClusterIssuer resource.
@@ -1895,13 +1875,12 @@ export interface ClusterIssuerSpec {
    * @schema ClusterIssuerSpec#venafi
    */
   readonly venafi?: ClusterIssuerSpecVenafi;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpec(obj: ClusterIssuerSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1914,7 +1893,7 @@ export function toJson_ClusterIssuerSpec(obj: ClusterIssuerSpec | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ACME configures this issuer to communicate with a RFC8555 (ACME) server
@@ -2050,13 +2029,12 @@ export interface ClusterIssuerSpecAcme {
    * @schema ClusterIssuerSpecAcme#solvers
    */
   readonly solvers?: ClusterIssuerSpecAcmeSolvers[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcme' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcme(obj: ClusterIssuerSpecAcme | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2075,7 +2053,7 @@ export function toJson_ClusterIssuerSpecAcme(obj: ClusterIssuerSpecAcme | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * CA configures this issuer to sign certificates using a signing CA keypair
@@ -2121,13 +2099,12 @@ export interface ClusterIssuerSpecCa {
    * @schema ClusterIssuerSpecCa#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecCa' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecCa(obj: ClusterIssuerSpecCa | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2139,7 +2116,7 @@ export function toJson_ClusterIssuerSpecCa(obj: ClusterIssuerSpecCa | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SelfSigned configures this issuer to 'self sign' certificates using the
@@ -2156,13 +2133,12 @@ export interface ClusterIssuerSpecSelfSigned {
    * @schema ClusterIssuerSpecSelfSigned#crlDistributionPoints
    */
   readonly crlDistributionPoints?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecSelfSigned' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecSelfSigned(obj: ClusterIssuerSpecSelfSigned | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2171,7 +2147,7 @@ export function toJson_ClusterIssuerSpecSelfSigned(obj: ClusterIssuerSpecSelfSig
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Vault configures this issuer to sign certificates using a HashiCorp Vault
@@ -2257,13 +2233,12 @@ export interface ClusterIssuerSpecVault {
    * @schema ClusterIssuerSpecVault#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecVault' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecVault(obj: ClusterIssuerSpecVault | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2280,7 +2255,7 @@ export function toJson_ClusterIssuerSpecVault(obj: ClusterIssuerSpecVault | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Venafi configures this issuer to sign certificates using a Venafi TPP
@@ -2314,13 +2289,12 @@ export interface ClusterIssuerSpecVenafi {
    * @schema ClusterIssuerSpecVenafi#zone
    */
   readonly zone: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecVenafi' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecVenafi(obj: ClusterIssuerSpecVenafi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2331,7 +2305,7 @@ export function toJson_ClusterIssuerSpecVenafi(obj: ClusterIssuerSpecVenafi | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ExternalAccountBinding is a reference to a CA external account of the ACME
@@ -2370,13 +2344,12 @@ export interface ClusterIssuerSpecAcmeExternalAccountBinding {
    * @schema ClusterIssuerSpecAcmeExternalAccountBinding#keySecretRef
    */
   readonly keySecretRef: ClusterIssuerSpecAcmeExternalAccountBindingKeySecretRef;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeExternalAccountBinding' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeExternalAccountBinding(obj: ClusterIssuerSpecAcmeExternalAccountBinding | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2387,7 +2360,7 @@ export function toJson_ClusterIssuerSpecAcmeExternalAccountBinding(obj: ClusterI
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PrivateKey is the name of a Kubernetes Secret resource that will be used to
@@ -2415,13 +2388,12 @@ export interface ClusterIssuerSpecAcmePrivateKeySecretRef {
    * @schema ClusterIssuerSpecAcmePrivateKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmePrivateKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmePrivateKeySecretRef(obj: ClusterIssuerSpecAcmePrivateKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2431,7 +2403,7 @@ export function toJson_ClusterIssuerSpecAcmePrivateKeySecretRef(obj: ClusterIssu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * An ACMEChallengeSolver describes how to solve ACME challenges for the issuer it is part of.
@@ -2469,13 +2441,12 @@ export interface ClusterIssuerSpecAcmeSolvers {
    * @schema ClusterIssuerSpecAcmeSolvers#selector
    */
   readonly selector?: ClusterIssuerSpecAcmeSolversSelector;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolvers' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolvers(obj: ClusterIssuerSpecAcmeSolvers | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2486,7 +2457,7 @@ export function toJson_ClusterIssuerSpecAcmeSolvers(obj: ClusterIssuerSpecAcmeSo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how cert-manager authenticates with the Vault server.
@@ -2525,13 +2496,12 @@ export interface ClusterIssuerSpecVaultAuth {
    * @schema ClusterIssuerSpecVaultAuth#tokenSecretRef
    */
   readonly tokenSecretRef?: ClusterIssuerSpecVaultAuthTokenSecretRef;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecVaultAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecVaultAuth(obj: ClusterIssuerSpecVaultAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2543,7 +2513,7 @@ export function toJson_ClusterIssuerSpecVaultAuth(obj: ClusterIssuerSpecVaultAut
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a Secret containing a bundle of PEM-encoded CAs to use when
@@ -2572,13 +2542,12 @@ export interface ClusterIssuerSpecVaultCaBundleSecretRef {
    * @schema ClusterIssuerSpecVaultCaBundleSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecVaultCaBundleSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecVaultCaBundleSecretRef(obj: ClusterIssuerSpecVaultCaBundleSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2588,7 +2557,7 @@ export function toJson_ClusterIssuerSpecVaultCaBundleSecretRef(obj: ClusterIssue
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a Secret containing a PEM-encoded Client Certificate to use when the
@@ -2613,13 +2582,12 @@ export interface ClusterIssuerSpecVaultClientCertSecretRef {
    * @schema ClusterIssuerSpecVaultClientCertSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecVaultClientCertSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecVaultClientCertSecretRef(obj: ClusterIssuerSpecVaultClientCertSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2629,7 +2597,7 @@ export function toJson_ClusterIssuerSpecVaultClientCertSecretRef(obj: ClusterIss
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a Secret containing a PEM-encoded Client Private Key to use when the
@@ -2654,13 +2622,12 @@ export interface ClusterIssuerSpecVaultClientKeySecretRef {
    * @schema ClusterIssuerSpecVaultClientKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecVaultClientKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecVaultClientKeySecretRef(obj: ClusterIssuerSpecVaultClientKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2670,7 +2637,7 @@ export function toJson_ClusterIssuerSpecVaultClientKeySecretRef(obj: ClusterIssu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Cloud specifies the Venafi cloud configuration settings.
@@ -2694,13 +2661,12 @@ export interface ClusterIssuerSpecVenafiCloud {
    * @schema ClusterIssuerSpecVenafiCloud#url
    */
   readonly url?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecVenafiCloud' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecVenafiCloud(obj: ClusterIssuerSpecVenafiCloud | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2710,7 +2676,7 @@ export function toJson_ClusterIssuerSpecVenafiCloud(obj: ClusterIssuerSpecVenafi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TPP specifies Trust Protection Platform configuration settings.
@@ -2756,13 +2722,12 @@ export interface ClusterIssuerSpecVenafiTpp {
    * @schema ClusterIssuerSpecVenafiTpp#url
    */
   readonly url: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecVenafiTpp' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecVenafiTpp(obj: ClusterIssuerSpecVenafiTpp | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2774,7 +2739,7 @@ export function toJson_ClusterIssuerSpecVenafiTpp(obj: ClusterIssuerSpecVenafiTp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Deprecated: keyAlgorithm field exists for historical compatibility
@@ -2820,13 +2785,12 @@ export interface ClusterIssuerSpecAcmeExternalAccountBindingKeySecretRef {
    * @schema ClusterIssuerSpecAcmeExternalAccountBindingKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeExternalAccountBindingKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeExternalAccountBindingKeySecretRef(obj: ClusterIssuerSpecAcmeExternalAccountBindingKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2836,7 +2800,7 @@ export function toJson_ClusterIssuerSpecAcmeExternalAccountBindingKeySecretRef(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configures cert-manager to attempt to complete authorizations by
@@ -2918,13 +2882,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01 {
    * @schema ClusterIssuerSpecAcmeSolversDns01#webhook
    */
   readonly webhook?: ClusterIssuerSpecAcmeSolversDns01Webhook;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01(obj: ClusterIssuerSpecAcmeSolversDns01 | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2942,7 +2905,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01(obj: ClusterIssuerSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configures cert-manager to attempt to complete authorizations by
@@ -2972,13 +2935,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01 {
    * @schema ClusterIssuerSpecAcmeSolversHttp01#ingress
    */
   readonly ingress?: ClusterIssuerSpecAcmeSolversHttp01Ingress;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01(obj: ClusterIssuerSpecAcmeSolversHttp01 | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2988,7 +2950,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01(obj: ClusterIssuerSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selector selects a set of DNSNames on the Certificate resource that
@@ -3035,13 +2997,12 @@ export interface ClusterIssuerSpecAcmeSolversSelector {
    * @schema ClusterIssuerSpecAcmeSolversSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversSelector(obj: ClusterIssuerSpecAcmeSolversSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3052,7 +3013,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversSelector(obj: ClusterIssuerSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AppRole authenticates with Vault using the App Role auth mechanism,
@@ -3086,13 +3047,12 @@ export interface ClusterIssuerSpecVaultAuthAppRole {
    * @schema ClusterIssuerSpecVaultAuthAppRole#secretRef
    */
   readonly secretRef: ClusterIssuerSpecVaultAuthAppRoleSecretRef;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecVaultAuthAppRole' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecVaultAuthAppRole(obj: ClusterIssuerSpecVaultAuthAppRole | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3103,7 +3063,7 @@ export function toJson_ClusterIssuerSpecVaultAuthAppRole(obj: ClusterIssuerSpecV
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ClientCertificate authenticates with Vault by presenting a client
@@ -3139,13 +3099,12 @@ export interface ClusterIssuerSpecVaultAuthClientCertificate {
    * @schema ClusterIssuerSpecVaultAuthClientCertificate#secretName
    */
   readonly secretName?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecVaultAuthClientCertificate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecVaultAuthClientCertificate(obj: ClusterIssuerSpecVaultAuthClientCertificate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3156,7 +3115,7 @@ export function toJson_ClusterIssuerSpecVaultAuthClientCertificate(obj: ClusterI
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kubernetes authenticates with Vault by passing the ServiceAccount
@@ -3202,13 +3161,12 @@ export interface ClusterIssuerSpecVaultAuthKubernetes {
    * @schema ClusterIssuerSpecVaultAuthKubernetes#serviceAccountRef
    */
   readonly serviceAccountRef?: ClusterIssuerSpecVaultAuthKubernetesServiceAccountRef;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecVaultAuthKubernetes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecVaultAuthKubernetes(obj: ClusterIssuerSpecVaultAuthKubernetes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3220,7 +3178,7 @@ export function toJson_ClusterIssuerSpecVaultAuthKubernetes(obj: ClusterIssuerSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TokenSecretRef authenticates with Vault by presenting a token.
@@ -3244,13 +3202,12 @@ export interface ClusterIssuerSpecVaultAuthTokenSecretRef {
    * @schema ClusterIssuerSpecVaultAuthTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecVaultAuthTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecVaultAuthTokenSecretRef(obj: ClusterIssuerSpecVaultAuthTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3260,7 +3217,7 @@ export function toJson_ClusterIssuerSpecVaultAuthTokenSecretRef(obj: ClusterIssu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APITokenSecretRef is a secret key selector for the Venafi Cloud API token.
@@ -3284,13 +3241,12 @@ export interface ClusterIssuerSpecVenafiCloudApiTokenSecretRef {
    * @schema ClusterIssuerSpecVenafiCloudApiTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecVenafiCloudApiTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecVenafiCloudApiTokenSecretRef(obj: ClusterIssuerSpecVenafiCloudApiTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3300,7 +3256,7 @@ export function toJson_ClusterIssuerSpecVenafiCloudApiTokenSecretRef(obj: Cluste
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a Secret containing a base64-encoded bundle of PEM CAs
@@ -3328,13 +3284,12 @@ export interface ClusterIssuerSpecVenafiTppCaBundleSecretRef {
    * @schema ClusterIssuerSpecVenafiTppCaBundleSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecVenafiTppCaBundleSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecVenafiTppCaBundleSecretRef(obj: ClusterIssuerSpecVenafiTppCaBundleSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3344,7 +3299,7 @@ export function toJson_ClusterIssuerSpecVenafiTppCaBundleSecretRef(obj: ClusterI
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * CredentialsRef is a reference to a Secret containing the Venafi TPP API credentials.
@@ -3361,13 +3316,12 @@ export interface ClusterIssuerSpecVenafiTppCredentialsRef {
    * @schema ClusterIssuerSpecVenafiTppCredentialsRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecVenafiTppCredentialsRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecVenafiTppCredentialsRef(obj: ClusterIssuerSpecVenafiTppCredentialsRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3376,7 +3330,7 @@ export function toJson_ClusterIssuerSpecVenafiTppCredentialsRef(obj: ClusterIssu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Use the 'ACME DNS' (https://github.com/joohoi/acme-dns) API to manage
@@ -3397,13 +3351,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01AcmeDns {
    * @schema ClusterIssuerSpecAcmeSolversDns01AcmeDns#host
    */
   readonly host: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01AcmeDns' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01AcmeDns(obj: ClusterIssuerSpecAcmeSolversDns01AcmeDns | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3413,7 +3366,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01AcmeDns(obj: ClusterIssu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Use the Akamai DNS zone management API to manage DNS01 challenge records.
@@ -3449,13 +3402,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01Akamai {
    * @schema ClusterIssuerSpecAcmeSolversDns01Akamai#serviceConsumerDomain
    */
   readonly serviceConsumerDomain: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01Akamai' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01Akamai(obj: ClusterIssuerSpecAcmeSolversDns01Akamai | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3467,7 +3419,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01Akamai(obj: ClusterIssue
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Use the Microsoft Azure DNS API to manage DNS01 challenge records.
@@ -3538,13 +3490,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01AzureDns {
    * @schema ClusterIssuerSpecAcmeSolversDns01AzureDns#tenantID
    */
   readonly tenantId?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01AzureDns' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01AzureDns(obj: ClusterIssuerSpecAcmeSolversDns01AzureDns | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3560,7 +3511,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01AzureDns(obj: ClusterIss
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Use the Google Cloud DNS API to manage DNS01 challenge records.
@@ -3589,13 +3540,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01CloudDns {
    * @schema ClusterIssuerSpecAcmeSolversDns01CloudDns#serviceAccountSecretRef
    */
   readonly serviceAccountSecretRef?: ClusterIssuerSpecAcmeSolversDns01CloudDnsServiceAccountSecretRef;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01CloudDns' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01CloudDns(obj: ClusterIssuerSpecAcmeSolversDns01CloudDns | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3606,7 +3556,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01CloudDns(obj: ClusterIss
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Use the Cloudflare API to manage DNS01 challenge records.
@@ -3636,13 +3586,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01Cloudflare {
    * @schema ClusterIssuerSpecAcmeSolversDns01Cloudflare#email
    */
   readonly email?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01Cloudflare' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01Cloudflare(obj: ClusterIssuerSpecAcmeSolversDns01Cloudflare | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3653,7 +3602,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01Cloudflare(obj: ClusterI
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * CNAMEStrategy configures how the DNS01 provider should handle CNAME
@@ -3681,13 +3630,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01Digitalocean {
    * @schema ClusterIssuerSpecAcmeSolversDns01Digitalocean#tokenSecretRef
    */
   readonly tokenSecretRef: ClusterIssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01Digitalocean' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01Digitalocean(obj: ClusterIssuerSpecAcmeSolversDns01Digitalocean | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3696,7 +3644,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01Digitalocean(obj: Cluste
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Use RFC2136 ("Dynamic Updates in the Domain Name System") (https://datatracker.ietf.org/doc/rfc2136/)
@@ -3747,13 +3695,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01Rfc2136 {
    * @schema ClusterIssuerSpecAcmeSolversDns01Rfc2136#tsigSecretSecretRef
    */
   readonly tsigSecretSecretRef?: ClusterIssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01Rfc2136' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01Rfc2136(obj: ClusterIssuerSpecAcmeSolversDns01Rfc2136 | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3766,7 +3713,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01Rfc2136(obj: ClusterIssu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Use the AWS Route53 API to manage DNS01 challenge records.
@@ -3856,13 +3803,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01Route53 {
    * @schema ClusterIssuerSpecAcmeSolversDns01Route53#secretAccessKeySecretRef
    */
   readonly secretAccessKeySecretRef?: ClusterIssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01Route53' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01Route53(obj: ClusterIssuerSpecAcmeSolversDns01Route53 | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3877,7 +3823,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01Route53(obj: ClusterIssu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configure an external webhook based DNS01 challenge solver to manage
@@ -3918,13 +3864,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01Webhook {
    * @schema ClusterIssuerSpecAcmeSolversDns01Webhook#solverName
    */
   readonly solverName: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01Webhook' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01Webhook(obj: ClusterIssuerSpecAcmeSolversDns01Webhook | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3935,7 +3880,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01Webhook(obj: ClusterIssu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Gateway API is a sig-network community API that models service networking
@@ -3979,13 +3924,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoute {
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoute#serviceType
    */
   readonly serviceType?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoute' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoute(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoute | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3997,7 +3941,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoute(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The ingress based HTTP01 challenge solver will solve challenges by
@@ -4063,13 +4007,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01Ingress {
    * @schema ClusterIssuerSpecAcmeSolversHttp01Ingress#serviceType
    */
   readonly serviceType?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01Ingress' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01Ingress(obj: ClusterIssuerSpecAcmeSolversHttp01Ingress | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4083,7 +4026,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01Ingress(obj: ClusterIss
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a key in a Secret that contains the App Role secret used
@@ -4110,13 +4053,12 @@ export interface ClusterIssuerSpecVaultAuthAppRoleSecretRef {
    * @schema ClusterIssuerSpecVaultAuthAppRoleSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecVaultAuthAppRoleSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecVaultAuthAppRoleSecretRef(obj: ClusterIssuerSpecVaultAuthAppRoleSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4126,7 +4068,7 @@ export function toJson_ClusterIssuerSpecVaultAuthAppRoleSecretRef(obj: ClusterIs
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The required Secret field containing a Kubernetes ServiceAccount JWT used
@@ -4152,13 +4094,12 @@ export interface ClusterIssuerSpecVaultAuthKubernetesSecretRef {
    * @schema ClusterIssuerSpecVaultAuthKubernetesSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecVaultAuthKubernetesSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecVaultAuthKubernetesSecretRef(obj: ClusterIssuerSpecVaultAuthKubernetesSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4168,7 +4109,7 @@ export function toJson_ClusterIssuerSpecVaultAuthKubernetesSecretRef(obj: Cluste
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a service account that will be used to request a bound
@@ -4194,13 +4135,12 @@ export interface ClusterIssuerSpecVaultAuthKubernetesServiceAccountRef {
    * @schema ClusterIssuerSpecVaultAuthKubernetesServiceAccountRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecVaultAuthKubernetesServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecVaultAuthKubernetesServiceAccountRef(obj: ClusterIssuerSpecVaultAuthKubernetesServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4210,7 +4150,7 @@ export function toJson_ClusterIssuerSpecVaultAuthKubernetesServiceAccountRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -4235,13 +4175,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01AcmeDnsAccountSecretRef {
    * @schema ClusterIssuerSpecAcmeSolversDns01AcmeDnsAccountSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01AcmeDnsAccountSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01AcmeDnsAccountSecretRef(obj: ClusterIssuerSpecAcmeSolversDns01AcmeDnsAccountSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4251,7 +4190,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01AcmeDnsAccountSecretRef(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -4276,13 +4215,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01AkamaiAccessTokenSecretRef {
    * @schema ClusterIssuerSpecAcmeSolversDns01AkamaiAccessTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01AkamaiAccessTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01AkamaiAccessTokenSecretRef(obj: ClusterIssuerSpecAcmeSolversDns01AkamaiAccessTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4292,7 +4230,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01AkamaiAccessTokenSecretR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -4317,13 +4255,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01AkamaiClientSecretSecretRef {
    * @schema ClusterIssuerSpecAcmeSolversDns01AkamaiClientSecretSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01AkamaiClientSecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01AkamaiClientSecretSecretRef(obj: ClusterIssuerSpecAcmeSolversDns01AkamaiClientSecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4333,7 +4270,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01AkamaiClientSecretSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -4358,13 +4295,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01AkamaiClientTokenSecretRef {
    * @schema ClusterIssuerSpecAcmeSolversDns01AkamaiClientTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01AkamaiClientTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01AkamaiClientTokenSecretRef(obj: ClusterIssuerSpecAcmeSolversDns01AkamaiClientTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4374,7 +4310,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01AkamaiClientTokenSecretR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth: Azure Service Principal:
@@ -4400,13 +4336,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01AzureDnsClientSecretSecretRef 
    * @schema ClusterIssuerSpecAcmeSolversDns01AzureDnsClientSecretSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01AzureDnsClientSecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01AzureDnsClientSecretSecretRef(obj: ClusterIssuerSpecAcmeSolversDns01AzureDnsClientSecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4416,7 +4351,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01AzureDnsClientSecretSecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * name of the Azure environment (default AzurePublicCloud)
@@ -4463,13 +4398,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01AzureDnsManagedIdentity {
    * @schema ClusterIssuerSpecAcmeSolversDns01AzureDnsManagedIdentity#tenantID
    */
   readonly tenantId?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01AzureDnsManagedIdentity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01AzureDnsManagedIdentity(obj: ClusterIssuerSpecAcmeSolversDns01AzureDnsManagedIdentity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4480,7 +4414,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01AzureDnsManagedIdentity(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -4505,13 +4439,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01CloudDnsServiceAccountSecretRe
    * @schema ClusterIssuerSpecAcmeSolversDns01CloudDnsServiceAccountSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01CloudDnsServiceAccountSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01CloudDnsServiceAccountSecretRef(obj: ClusterIssuerSpecAcmeSolversDns01CloudDnsServiceAccountSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4521,7 +4454,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01CloudDnsServiceAccountSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * API key to use to authenticate with Cloudflare.
@@ -4547,13 +4480,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01CloudflareApiKeySecretRef {
    * @schema ClusterIssuerSpecAcmeSolversDns01CloudflareApiKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01CloudflareApiKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01CloudflareApiKeySecretRef(obj: ClusterIssuerSpecAcmeSolversDns01CloudflareApiKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4563,7 +4495,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01CloudflareApiKeySecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * API token used to authenticate with Cloudflare.
@@ -4587,13 +4519,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01CloudflareApiTokenSecretRef {
    * @schema ClusterIssuerSpecAcmeSolversDns01CloudflareApiTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01CloudflareApiTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01CloudflareApiTokenSecretRef(obj: ClusterIssuerSpecAcmeSolversDns01CloudflareApiTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4603,7 +4534,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01CloudflareApiTokenSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -4628,13 +4559,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef {
    * @schema ClusterIssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef(obj: ClusterIssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4644,7 +4574,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01DigitaloceanTokenSecretR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Protocol to use for dynamic DNS update queries. Valid values are (case-sensitive) ``TCP`` and ``UDP``; ``UDP`` (default).
@@ -4681,13 +4611,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef {
    * @schema ClusterIssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef(obj: ClusterIssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4697,7 +4626,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessKey is used for authentication. If set, pull the AWS
@@ -4726,13 +4655,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01Route53AccessKeyIdSecretRef {
    * @schema ClusterIssuerSpecAcmeSolversDns01Route53AccessKeyIdSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01Route53AccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01Route53AccessKeyIdSecretRef(obj: ClusterIssuerSpecAcmeSolversDns01Route53AccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4742,7 +4670,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01Route53AccessKeyIdSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how cert-manager authenticates.
@@ -4757,13 +4685,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01Route53Auth {
    * @schema ClusterIssuerSpecAcmeSolversDns01Route53Auth#kubernetes
    */
   readonly kubernetes: ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetes;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01Route53Auth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01Route53Auth(obj: ClusterIssuerSpecAcmeSolversDns01Route53Auth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4772,7 +4699,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01Route53Auth(obj: Cluster
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessKey is used for authentication.
@@ -4799,13 +4726,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRe
    * @schema ClusterIssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef(obj: ClusterIssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4815,7 +4741,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01Route53SecretAccessKeySe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ParentReference identifies an API object (usually a Gateway) that can be considered
@@ -4962,13 +4888,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs#sectionName
    */
   readonly sectionName?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4982,7 +4907,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRouteParentR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional pod template used to configure the ACME challenge solver pods
@@ -5009,13 +4934,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate {
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate#spec
    */
   readonly spec?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5025,7 +4949,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional ingress template used to configure the ACME challenge solver
@@ -5043,13 +4967,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplate {
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplate#metadata
    */
   readonly metadata?: ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplate(obj: ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5058,7 +4981,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplate(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional pod template used to configure the ACME challenge solver pods
@@ -5085,13 +5008,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplate {
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplate#spec
    */
   readonly spec?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpec;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplate(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5101,7 +5023,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplate(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kubernetes authenticates with Route53 using AssumeRoleWithWebIdentity
@@ -5118,13 +5040,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetes {
    * @schema ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetes#serviceAccountRef
    */
   readonly serviceAccountRef: ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAccountRef;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetes(obj: ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5133,7 +5054,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetes(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ObjectMeta overrides for the pod used to solve HTTP01 challenges.
@@ -5157,13 +5078,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMe
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5173,7 +5093,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PodSpec defines overrides for the HTTP01 challenge solver pod.
@@ -5245,13 +5165,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec#tolerations
    */
   readonly tolerations?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5267,7 +5186,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ObjectMeta overrides for the ingress used to solve HTTP01 challenges.
@@ -5291,13 +5210,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadat
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata(obj: ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5307,7 +5225,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplateM
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ObjectMeta overrides for the pod used to solve HTTP01 challenges.
@@ -5331,13 +5249,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata {
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5347,7 +5264,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateMetad
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PodSpec defines overrides for the HTTP01 challenge solver pod.
@@ -5419,13 +5336,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpec {
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpec#tolerations
    */
   readonly tolerations?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpec(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5441,7 +5357,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpec(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a service account that will be used to request a bound
@@ -5467,13 +5383,12 @@ export interface ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAc
    * @schema ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAccountRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAccountRef(obj: ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5483,7 +5398,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetesSer
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * If specified, the pod's scheduling constraints
@@ -5511,13 +5426,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity#podAntiAffinity
    */
   readonly podAntiAffinity?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5528,7 +5442,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * LocalObjectReference contains enough information to let you locate the
@@ -5547,13 +5461,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5562,7 +5475,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * If specified, the pod's resource requirements.
@@ -5592,13 +5505,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecResources#requests
    */
   readonly requests?: { [key: string]: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecResourcesRequests };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecResources' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecResources(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5608,7 +5520,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * If specified, the pod's security context
@@ -5723,13 +5635,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#sysctls
    */
   readonly sysctls?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5746,7 +5657,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The pod this Toleration is attached to tolerates any taint that matches
@@ -5799,13 +5710,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5818,7 +5728,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * If specified, the pod's scheduling constraints
@@ -5846,13 +5756,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity#podAntiAffinity
    */
   readonly podAntiAffinity?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinity;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5863,7 +5772,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * LocalObjectReference contains enough information to let you locate the
@@ -5882,13 +5791,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePu
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecrets' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecrets(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5897,7 +5805,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecI
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * If specified, the pod's resource requirements.
@@ -5927,13 +5835,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecResourc
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecResources#requests
    */
   readonly requests?: { [key: string]: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecResourcesRequests };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecResources' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecResources(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5943,7 +5850,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * If specified, the pod's security context
@@ -6058,13 +5965,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#sysctls
    */
   readonly sysctls?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6081,7 +5987,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The pod this Toleration is attached to tolerates any taint that matches
@@ -6134,13 +6040,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerat
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6153,7 +6058,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecT
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Describes node affinity scheduling rules for the pod.
@@ -6186,13 +6091,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6202,7 +6106,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Describes pod affinity scheduling rules (e.g. co-locate this pod in the same node, zone, etc. as some other pod(s)).
@@ -6237,13 +6141,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6253,7 +6156,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Describes pod anti-affinity scheduling rules (e.g. avoid putting this pod in the same node, zone, etc. as some other pod(s)).
@@ -6288,13 +6191,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6304,7 +6206,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecResourcesLimits
@@ -6372,13 +6274,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6390,7 +6291,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The seccomp options to use by the containers in this pod.
@@ -6420,13 +6321,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6436,7 +6336,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Sysctl defines a kernel parameter to be set
@@ -6457,13 +6357,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6473,7 +6372,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Describes node affinity scheduling rules for the pod.
@@ -6506,13 +6405,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinity(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6522,7 +6420,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Describes pod affinity scheduling rules (e.g. co-locate this pod in the same node, zone, etc. as some other pod(s)).
@@ -6557,13 +6455,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinity(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6573,7 +6470,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Describes pod anti-affinity scheduling rules (e.g. avoid putting this pod in the same node, zone, etc. as some other pod(s)).
@@ -6608,13 +6505,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinity(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6624,7 +6520,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecResourcesLimits
@@ -6692,13 +6588,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6710,7 +6605,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The seccomp options to use by the containers in this pod.
@@ -6740,13 +6635,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6756,7 +6650,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Sysctl defines a kernel parameter to be set
@@ -6777,13 +6671,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6793,7 +6686,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * An empty preferred scheduling term matches all objects with implicit weight 0
@@ -6815,13 +6708,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6831,7 +6723,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * If the affinity requirements specified by this field are not met at
@@ -6849,13 +6741,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution#nodeSelectorTerms
    */
   readonly nodeSelectorTerms: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6864,7 +6755,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -6886,13 +6777,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6902,7 +6792,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -6982,13 +6872,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7002,7 +6891,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -7024,13 +6913,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7040,7 +6928,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -7120,13 +7008,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7140,7 +7027,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * An empty preferred scheduling term matches all objects with implicit weight 0
@@ -7162,13 +7049,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7178,7 +7064,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * If the affinity requirements specified by this field are not met at
@@ -7196,13 +7082,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution#nodeSelectorTerms
    */
   readonly nodeSelectorTerms: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7211,7 +7096,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -7233,13 +7118,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7249,7 +7133,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -7329,13 +7213,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7349,7 +7232,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -7371,13 +7254,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7387,7 +7269,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -7467,13 +7349,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7487,7 +7368,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A node selector term, associated with the corresponding weight.
@@ -7508,13 +7389,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchFields
    */
   readonly matchFields?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7524,7 +7404,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A null or empty node selector term matches no objects. The requirements of
@@ -7547,13 +7427,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchFields
    */
   readonly matchFields?: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7563,7 +7442,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -7643,13 +7522,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7663,7 +7541,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -7688,13 +7566,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7704,7 +7581,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -7732,13 +7609,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7748,7 +7624,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -7828,13 +7704,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7848,7 +7723,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -7873,13 +7748,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7889,7 +7763,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -7917,13 +7791,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7933,7 +7806,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A node selector term, associated with the corresponding weight.
@@ -7954,13 +7827,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchFields
    */
   readonly matchFields?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7970,7 +7842,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A null or empty node selector term matches no objects. The requirements of
@@ -7993,13 +7865,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchFields
    */
   readonly matchFields?: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8009,7 +7880,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -8089,13 +7960,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8109,7 +7979,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -8134,13 +8004,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8150,7 +8019,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -8178,13 +8047,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8194,7 +8062,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -8274,13 +8142,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8294,7 +8161,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -8319,13 +8186,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8335,7 +8201,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -8363,13 +8229,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8379,7 +8244,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -8416,13 +8281,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8433,7 +8297,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -8470,13 +8334,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8487,7 +8350,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -8524,13 +8387,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8541,7 +8403,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -8578,13 +8440,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8595,7 +8456,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -8621,13 +8482,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8637,7 +8497,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -8666,13 +8526,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8682,7 +8541,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -8718,13 +8577,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8735,7 +8593,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -8771,13 +8629,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8788,7 +8645,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -8814,13 +8671,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8830,7 +8686,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -8859,13 +8715,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8875,7 +8730,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -8911,13 +8766,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8928,7 +8782,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -8964,13 +8818,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8981,7 +8834,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -9018,13 +8871,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9035,7 +8887,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -9072,13 +8924,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9089,7 +8940,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -9126,13 +8977,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9143,7 +8993,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -9180,13 +9030,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9197,7 +9046,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -9223,13 +9072,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9239,7 +9087,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -9268,13 +9116,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9284,7 +9131,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -9320,13 +9167,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9337,7 +9183,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -9373,13 +9219,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9390,7 +9235,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -9416,13 +9261,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9432,7 +9276,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -9461,13 +9305,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9477,7 +9320,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -9513,13 +9356,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9530,7 +9372,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -9566,13 +9408,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9583,7 +9424,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -9618,13 +9459,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9635,7 +9475,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -9670,13 +9510,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9687,7 +9526,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -9722,13 +9561,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9739,7 +9577,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -9774,13 +9612,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSp
    * @schema ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9791,7 +9628,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -9826,13 +9663,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9843,7 +9679,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -9878,13 +9714,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9895,7 +9730,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -9930,13 +9765,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9947,7 +9781,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -9982,13 +9816,12 @@ export interface ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinit
    * @schema ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9999,7 +9832,7 @@ export function toJson_ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -10049,7 +9882,7 @@ export class Issuer extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -10079,13 +9912,12 @@ export interface IssuerProps {
    * @schema Issuer#spec
    */
   readonly spec: IssuerSpec;
-
 }
 
 /**
  * Converts an object of type 'IssuerProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerProps(obj: IssuerProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10095,7 +9927,7 @@ export function toJson_IssuerProps(obj: IssuerProps | undefined): Record<string,
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Desired state of the Issuer resource.
@@ -10143,13 +9975,12 @@ export interface IssuerSpec {
    * @schema IssuerSpec#venafi
    */
   readonly venafi?: IssuerSpecVenafi;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpec(obj: IssuerSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10162,7 +9993,7 @@ export function toJson_IssuerSpec(obj: IssuerSpec | undefined): Record<string, a
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ACME configures this issuer to communicate with a RFC8555 (ACME) server
@@ -10298,13 +10129,12 @@ export interface IssuerSpecAcme {
    * @schema IssuerSpecAcme#solvers
    */
   readonly solvers?: IssuerSpecAcmeSolvers[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcme' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcme(obj: IssuerSpecAcme | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10323,7 +10153,7 @@ export function toJson_IssuerSpecAcme(obj: IssuerSpecAcme | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * CA configures this issuer to sign certificates using a signing CA keypair
@@ -10369,13 +10199,12 @@ export interface IssuerSpecCa {
    * @schema IssuerSpecCa#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecCa' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecCa(obj: IssuerSpecCa | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10387,7 +10216,7 @@ export function toJson_IssuerSpecCa(obj: IssuerSpecCa | undefined): Record<strin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SelfSigned configures this issuer to 'self sign' certificates using the
@@ -10404,13 +10233,12 @@ export interface IssuerSpecSelfSigned {
    * @schema IssuerSpecSelfSigned#crlDistributionPoints
    */
   readonly crlDistributionPoints?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecSelfSigned' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecSelfSigned(obj: IssuerSpecSelfSigned | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10419,7 +10247,7 @@ export function toJson_IssuerSpecSelfSigned(obj: IssuerSpecSelfSigned | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Vault configures this issuer to sign certificates using a HashiCorp Vault
@@ -10505,13 +10333,12 @@ export interface IssuerSpecVault {
    * @schema IssuerSpecVault#serverName
    */
   readonly serverName?: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecVault' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecVault(obj: IssuerSpecVault | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10528,7 +10355,7 @@ export function toJson_IssuerSpecVault(obj: IssuerSpecVault | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Venafi configures this issuer to sign certificates using a Venafi TPP
@@ -10562,13 +10389,12 @@ export interface IssuerSpecVenafi {
    * @schema IssuerSpecVenafi#zone
    */
   readonly zone: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecVenafi' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecVenafi(obj: IssuerSpecVenafi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10579,7 +10405,7 @@ export function toJson_IssuerSpecVenafi(obj: IssuerSpecVenafi | undefined): Reco
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ExternalAccountBinding is a reference to a CA external account of the ACME
@@ -10618,13 +10444,12 @@ export interface IssuerSpecAcmeExternalAccountBinding {
    * @schema IssuerSpecAcmeExternalAccountBinding#keySecretRef
    */
   readonly keySecretRef: IssuerSpecAcmeExternalAccountBindingKeySecretRef;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeExternalAccountBinding' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeExternalAccountBinding(obj: IssuerSpecAcmeExternalAccountBinding | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10635,7 +10460,7 @@ export function toJson_IssuerSpecAcmeExternalAccountBinding(obj: IssuerSpecAcmeE
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PrivateKey is the name of a Kubernetes Secret resource that will be used to
@@ -10663,13 +10488,12 @@ export interface IssuerSpecAcmePrivateKeySecretRef {
    * @schema IssuerSpecAcmePrivateKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmePrivateKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmePrivateKeySecretRef(obj: IssuerSpecAcmePrivateKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10679,7 +10503,7 @@ export function toJson_IssuerSpecAcmePrivateKeySecretRef(obj: IssuerSpecAcmePriv
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * An ACMEChallengeSolver describes how to solve ACME challenges for the issuer it is part of.
@@ -10717,13 +10541,12 @@ export interface IssuerSpecAcmeSolvers {
    * @schema IssuerSpecAcmeSolvers#selector
    */
   readonly selector?: IssuerSpecAcmeSolversSelector;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolvers' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolvers(obj: IssuerSpecAcmeSolvers | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10734,7 +10557,7 @@ export function toJson_IssuerSpecAcmeSolvers(obj: IssuerSpecAcmeSolvers | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how cert-manager authenticates with the Vault server.
@@ -10773,13 +10596,12 @@ export interface IssuerSpecVaultAuth {
    * @schema IssuerSpecVaultAuth#tokenSecretRef
    */
   readonly tokenSecretRef?: IssuerSpecVaultAuthTokenSecretRef;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecVaultAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecVaultAuth(obj: IssuerSpecVaultAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10791,7 +10613,7 @@ export function toJson_IssuerSpecVaultAuth(obj: IssuerSpecVaultAuth | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a Secret containing a bundle of PEM-encoded CAs to use when
@@ -10820,13 +10642,12 @@ export interface IssuerSpecVaultCaBundleSecretRef {
    * @schema IssuerSpecVaultCaBundleSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecVaultCaBundleSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecVaultCaBundleSecretRef(obj: IssuerSpecVaultCaBundleSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10836,7 +10657,7 @@ export function toJson_IssuerSpecVaultCaBundleSecretRef(obj: IssuerSpecVaultCaBu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a Secret containing a PEM-encoded Client Certificate to use when the
@@ -10861,13 +10682,12 @@ export interface IssuerSpecVaultClientCertSecretRef {
    * @schema IssuerSpecVaultClientCertSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecVaultClientCertSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecVaultClientCertSecretRef(obj: IssuerSpecVaultClientCertSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10877,7 +10697,7 @@ export function toJson_IssuerSpecVaultClientCertSecretRef(obj: IssuerSpecVaultCl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a Secret containing a PEM-encoded Client Private Key to use when the
@@ -10902,13 +10722,12 @@ export interface IssuerSpecVaultClientKeySecretRef {
    * @schema IssuerSpecVaultClientKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecVaultClientKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecVaultClientKeySecretRef(obj: IssuerSpecVaultClientKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10918,7 +10737,7 @@ export function toJson_IssuerSpecVaultClientKeySecretRef(obj: IssuerSpecVaultCli
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Cloud specifies the Venafi cloud configuration settings.
@@ -10942,13 +10761,12 @@ export interface IssuerSpecVenafiCloud {
    * @schema IssuerSpecVenafiCloud#url
    */
   readonly url?: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecVenafiCloud' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecVenafiCloud(obj: IssuerSpecVenafiCloud | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10958,7 +10776,7 @@ export function toJson_IssuerSpecVenafiCloud(obj: IssuerSpecVenafiCloud | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TPP specifies Trust Protection Platform configuration settings.
@@ -11004,13 +10822,12 @@ export interface IssuerSpecVenafiTpp {
    * @schema IssuerSpecVenafiTpp#url
    */
   readonly url: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecVenafiTpp' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecVenafiTpp(obj: IssuerSpecVenafiTpp | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11022,7 +10839,7 @@ export function toJson_IssuerSpecVenafiTpp(obj: IssuerSpecVenafiTpp | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Deprecated: keyAlgorithm field exists for historical compatibility
@@ -11068,13 +10885,12 @@ export interface IssuerSpecAcmeExternalAccountBindingKeySecretRef {
    * @schema IssuerSpecAcmeExternalAccountBindingKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeExternalAccountBindingKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeExternalAccountBindingKeySecretRef(obj: IssuerSpecAcmeExternalAccountBindingKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11084,7 +10900,7 @@ export function toJson_IssuerSpecAcmeExternalAccountBindingKeySecretRef(obj: Iss
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configures cert-manager to attempt to complete authorizations by
@@ -11166,13 +10982,12 @@ export interface IssuerSpecAcmeSolversDns01 {
    * @schema IssuerSpecAcmeSolversDns01#webhook
    */
   readonly webhook?: IssuerSpecAcmeSolversDns01Webhook;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01(obj: IssuerSpecAcmeSolversDns01 | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11190,7 +11005,7 @@ export function toJson_IssuerSpecAcmeSolversDns01(obj: IssuerSpecAcmeSolversDns0
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configures cert-manager to attempt to complete authorizations by
@@ -11220,13 +11035,12 @@ export interface IssuerSpecAcmeSolversHttp01 {
    * @schema IssuerSpecAcmeSolversHttp01#ingress
    */
   readonly ingress?: IssuerSpecAcmeSolversHttp01Ingress;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01(obj: IssuerSpecAcmeSolversHttp01 | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11236,7 +11050,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01(obj: IssuerSpecAcmeSolversHtt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selector selects a set of DNSNames on the Certificate resource that
@@ -11283,13 +11097,12 @@ export interface IssuerSpecAcmeSolversSelector {
    * @schema IssuerSpecAcmeSolversSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversSelector(obj: IssuerSpecAcmeSolversSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11300,7 +11113,7 @@ export function toJson_IssuerSpecAcmeSolversSelector(obj: IssuerSpecAcmeSolversS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AppRole authenticates with Vault using the App Role auth mechanism,
@@ -11334,13 +11147,12 @@ export interface IssuerSpecVaultAuthAppRole {
    * @schema IssuerSpecVaultAuthAppRole#secretRef
    */
   readonly secretRef: IssuerSpecVaultAuthAppRoleSecretRef;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecVaultAuthAppRole' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecVaultAuthAppRole(obj: IssuerSpecVaultAuthAppRole | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11351,7 +11163,7 @@ export function toJson_IssuerSpecVaultAuthAppRole(obj: IssuerSpecVaultAuthAppRol
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ClientCertificate authenticates with Vault by presenting a client
@@ -11387,13 +11199,12 @@ export interface IssuerSpecVaultAuthClientCertificate {
    * @schema IssuerSpecVaultAuthClientCertificate#secretName
    */
   readonly secretName?: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecVaultAuthClientCertificate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecVaultAuthClientCertificate(obj: IssuerSpecVaultAuthClientCertificate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11404,7 +11215,7 @@ export function toJson_IssuerSpecVaultAuthClientCertificate(obj: IssuerSpecVault
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kubernetes authenticates with Vault by passing the ServiceAccount
@@ -11450,13 +11261,12 @@ export interface IssuerSpecVaultAuthKubernetes {
    * @schema IssuerSpecVaultAuthKubernetes#serviceAccountRef
    */
   readonly serviceAccountRef?: IssuerSpecVaultAuthKubernetesServiceAccountRef;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecVaultAuthKubernetes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecVaultAuthKubernetes(obj: IssuerSpecVaultAuthKubernetes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11468,7 +11278,7 @@ export function toJson_IssuerSpecVaultAuthKubernetes(obj: IssuerSpecVaultAuthKub
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TokenSecretRef authenticates with Vault by presenting a token.
@@ -11492,13 +11302,12 @@ export interface IssuerSpecVaultAuthTokenSecretRef {
    * @schema IssuerSpecVaultAuthTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecVaultAuthTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecVaultAuthTokenSecretRef(obj: IssuerSpecVaultAuthTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11508,7 +11317,7 @@ export function toJson_IssuerSpecVaultAuthTokenSecretRef(obj: IssuerSpecVaultAut
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * APITokenSecretRef is a secret key selector for the Venafi Cloud API token.
@@ -11532,13 +11341,12 @@ export interface IssuerSpecVenafiCloudApiTokenSecretRef {
    * @schema IssuerSpecVenafiCloudApiTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecVenafiCloudApiTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecVenafiCloudApiTokenSecretRef(obj: IssuerSpecVenafiCloudApiTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11548,7 +11356,7 @@ export function toJson_IssuerSpecVenafiCloudApiTokenSecretRef(obj: IssuerSpecVen
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a Secret containing a base64-encoded bundle of PEM CAs
@@ -11576,13 +11384,12 @@ export interface IssuerSpecVenafiTppCaBundleSecretRef {
    * @schema IssuerSpecVenafiTppCaBundleSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecVenafiTppCaBundleSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecVenafiTppCaBundleSecretRef(obj: IssuerSpecVenafiTppCaBundleSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11592,7 +11399,7 @@ export function toJson_IssuerSpecVenafiTppCaBundleSecretRef(obj: IssuerSpecVenaf
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * CredentialsRef is a reference to a Secret containing the Venafi TPP API credentials.
@@ -11609,13 +11416,12 @@ export interface IssuerSpecVenafiTppCredentialsRef {
    * @schema IssuerSpecVenafiTppCredentialsRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecVenafiTppCredentialsRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecVenafiTppCredentialsRef(obj: IssuerSpecVenafiTppCredentialsRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11624,7 +11430,7 @@ export function toJson_IssuerSpecVenafiTppCredentialsRef(obj: IssuerSpecVenafiTp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Use the 'ACME DNS' (https://github.com/joohoi/acme-dns) API to manage
@@ -11645,13 +11451,12 @@ export interface IssuerSpecAcmeSolversDns01AcmeDns {
    * @schema IssuerSpecAcmeSolversDns01AcmeDns#host
    */
   readonly host: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01AcmeDns' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01AcmeDns(obj: IssuerSpecAcmeSolversDns01AcmeDns | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11661,7 +11466,7 @@ export function toJson_IssuerSpecAcmeSolversDns01AcmeDns(obj: IssuerSpecAcmeSolv
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Use the Akamai DNS zone management API to manage DNS01 challenge records.
@@ -11697,13 +11502,12 @@ export interface IssuerSpecAcmeSolversDns01Akamai {
    * @schema IssuerSpecAcmeSolversDns01Akamai#serviceConsumerDomain
    */
   readonly serviceConsumerDomain: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01Akamai' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01Akamai(obj: IssuerSpecAcmeSolversDns01Akamai | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11715,7 +11519,7 @@ export function toJson_IssuerSpecAcmeSolversDns01Akamai(obj: IssuerSpecAcmeSolve
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Use the Microsoft Azure DNS API to manage DNS01 challenge records.
@@ -11786,13 +11590,12 @@ export interface IssuerSpecAcmeSolversDns01AzureDns {
    * @schema IssuerSpecAcmeSolversDns01AzureDns#tenantID
    */
   readonly tenantId?: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01AzureDns' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01AzureDns(obj: IssuerSpecAcmeSolversDns01AzureDns | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11808,7 +11611,7 @@ export function toJson_IssuerSpecAcmeSolversDns01AzureDns(obj: IssuerSpecAcmeSol
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Use the Google Cloud DNS API to manage DNS01 challenge records.
@@ -11837,13 +11640,12 @@ export interface IssuerSpecAcmeSolversDns01CloudDns {
    * @schema IssuerSpecAcmeSolversDns01CloudDns#serviceAccountSecretRef
    */
   readonly serviceAccountSecretRef?: IssuerSpecAcmeSolversDns01CloudDnsServiceAccountSecretRef;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01CloudDns' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01CloudDns(obj: IssuerSpecAcmeSolversDns01CloudDns | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11854,7 +11656,7 @@ export function toJson_IssuerSpecAcmeSolversDns01CloudDns(obj: IssuerSpecAcmeSol
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Use the Cloudflare API to manage DNS01 challenge records.
@@ -11884,13 +11686,12 @@ export interface IssuerSpecAcmeSolversDns01Cloudflare {
    * @schema IssuerSpecAcmeSolversDns01Cloudflare#email
    */
   readonly email?: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01Cloudflare' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01Cloudflare(obj: IssuerSpecAcmeSolversDns01Cloudflare | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11901,7 +11702,7 @@ export function toJson_IssuerSpecAcmeSolversDns01Cloudflare(obj: IssuerSpecAcmeS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * CNAMEStrategy configures how the DNS01 provider should handle CNAME
@@ -11929,13 +11730,12 @@ export interface IssuerSpecAcmeSolversDns01Digitalocean {
    * @schema IssuerSpecAcmeSolversDns01Digitalocean#tokenSecretRef
    */
   readonly tokenSecretRef: IssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01Digitalocean' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01Digitalocean(obj: IssuerSpecAcmeSolversDns01Digitalocean | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11944,7 +11744,7 @@ export function toJson_IssuerSpecAcmeSolversDns01Digitalocean(obj: IssuerSpecAcm
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Use RFC2136 ("Dynamic Updates in the Domain Name System") (https://datatracker.ietf.org/doc/rfc2136/)
@@ -11995,13 +11795,12 @@ export interface IssuerSpecAcmeSolversDns01Rfc2136 {
    * @schema IssuerSpecAcmeSolversDns01Rfc2136#tsigSecretSecretRef
    */
   readonly tsigSecretSecretRef?: IssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01Rfc2136' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01Rfc2136(obj: IssuerSpecAcmeSolversDns01Rfc2136 | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12014,7 +11813,7 @@ export function toJson_IssuerSpecAcmeSolversDns01Rfc2136(obj: IssuerSpecAcmeSolv
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Use the AWS Route53 API to manage DNS01 challenge records.
@@ -12104,13 +11903,12 @@ export interface IssuerSpecAcmeSolversDns01Route53 {
    * @schema IssuerSpecAcmeSolversDns01Route53#secretAccessKeySecretRef
    */
   readonly secretAccessKeySecretRef?: IssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01Route53' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01Route53(obj: IssuerSpecAcmeSolversDns01Route53 | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12125,7 +11923,7 @@ export function toJson_IssuerSpecAcmeSolversDns01Route53(obj: IssuerSpecAcmeSolv
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configure an external webhook based DNS01 challenge solver to manage
@@ -12166,13 +11964,12 @@ export interface IssuerSpecAcmeSolversDns01Webhook {
    * @schema IssuerSpecAcmeSolversDns01Webhook#solverName
    */
   readonly solverName: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01Webhook' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01Webhook(obj: IssuerSpecAcmeSolversDns01Webhook | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12183,7 +11980,7 @@ export function toJson_IssuerSpecAcmeSolversDns01Webhook(obj: IssuerSpecAcmeSolv
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Gateway API is a sig-network community API that models service networking
@@ -12227,13 +12024,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoute {
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoute#serviceType
    */
   readonly serviceType?: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoute' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoute(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoute | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12245,7 +12041,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoute(obj: IssuerSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The ingress based HTTP01 challenge solver will solve challenges by
@@ -12311,13 +12107,12 @@ export interface IssuerSpecAcmeSolversHttp01Ingress {
    * @schema IssuerSpecAcmeSolversHttp01Ingress#serviceType
    */
   readonly serviceType?: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01Ingress' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01Ingress(obj: IssuerSpecAcmeSolversHttp01Ingress | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12331,7 +12126,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01Ingress(obj: IssuerSpecAcmeSol
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a key in a Secret that contains the App Role secret used
@@ -12358,13 +12153,12 @@ export interface IssuerSpecVaultAuthAppRoleSecretRef {
    * @schema IssuerSpecVaultAuthAppRoleSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecVaultAuthAppRoleSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecVaultAuthAppRoleSecretRef(obj: IssuerSpecVaultAuthAppRoleSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12374,7 +12168,7 @@ export function toJson_IssuerSpecVaultAuthAppRoleSecretRef(obj: IssuerSpecVaultA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The required Secret field containing a Kubernetes ServiceAccount JWT used
@@ -12400,13 +12194,12 @@ export interface IssuerSpecVaultAuthKubernetesSecretRef {
    * @schema IssuerSpecVaultAuthKubernetesSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecVaultAuthKubernetesSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecVaultAuthKubernetesSecretRef(obj: IssuerSpecVaultAuthKubernetesSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12416,7 +12209,7 @@ export function toJson_IssuerSpecVaultAuthKubernetesSecretRef(obj: IssuerSpecVau
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a service account that will be used to request a bound
@@ -12442,13 +12235,12 @@ export interface IssuerSpecVaultAuthKubernetesServiceAccountRef {
    * @schema IssuerSpecVaultAuthKubernetesServiceAccountRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecVaultAuthKubernetesServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecVaultAuthKubernetesServiceAccountRef(obj: IssuerSpecVaultAuthKubernetesServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12458,7 +12250,7 @@ export function toJson_IssuerSpecVaultAuthKubernetesServiceAccountRef(obj: Issue
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -12483,13 +12275,12 @@ export interface IssuerSpecAcmeSolversDns01AcmeDnsAccountSecretRef {
    * @schema IssuerSpecAcmeSolversDns01AcmeDnsAccountSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01AcmeDnsAccountSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01AcmeDnsAccountSecretRef(obj: IssuerSpecAcmeSolversDns01AcmeDnsAccountSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12499,7 +12290,7 @@ export function toJson_IssuerSpecAcmeSolversDns01AcmeDnsAccountSecretRef(obj: Is
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -12524,13 +12315,12 @@ export interface IssuerSpecAcmeSolversDns01AkamaiAccessTokenSecretRef {
    * @schema IssuerSpecAcmeSolversDns01AkamaiAccessTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01AkamaiAccessTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01AkamaiAccessTokenSecretRef(obj: IssuerSpecAcmeSolversDns01AkamaiAccessTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12540,7 +12330,7 @@ export function toJson_IssuerSpecAcmeSolversDns01AkamaiAccessTokenSecretRef(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -12565,13 +12355,12 @@ export interface IssuerSpecAcmeSolversDns01AkamaiClientSecretSecretRef {
    * @schema IssuerSpecAcmeSolversDns01AkamaiClientSecretSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01AkamaiClientSecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01AkamaiClientSecretSecretRef(obj: IssuerSpecAcmeSolversDns01AkamaiClientSecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12581,7 +12370,7 @@ export function toJson_IssuerSpecAcmeSolversDns01AkamaiClientSecretSecretRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -12606,13 +12395,12 @@ export interface IssuerSpecAcmeSolversDns01AkamaiClientTokenSecretRef {
    * @schema IssuerSpecAcmeSolversDns01AkamaiClientTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01AkamaiClientTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01AkamaiClientTokenSecretRef(obj: IssuerSpecAcmeSolversDns01AkamaiClientTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12622,7 +12410,7 @@ export function toJson_IssuerSpecAcmeSolversDns01AkamaiClientTokenSecretRef(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth: Azure Service Principal:
@@ -12648,13 +12436,12 @@ export interface IssuerSpecAcmeSolversDns01AzureDnsClientSecretSecretRef {
    * @schema IssuerSpecAcmeSolversDns01AzureDnsClientSecretSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01AzureDnsClientSecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01AzureDnsClientSecretSecretRef(obj: IssuerSpecAcmeSolversDns01AzureDnsClientSecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12664,7 +12451,7 @@ export function toJson_IssuerSpecAcmeSolversDns01AzureDnsClientSecretSecretRef(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * name of the Azure environment (default AzurePublicCloud)
@@ -12711,13 +12498,12 @@ export interface IssuerSpecAcmeSolversDns01AzureDnsManagedIdentity {
    * @schema IssuerSpecAcmeSolversDns01AzureDnsManagedIdentity#tenantID
    */
   readonly tenantId?: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01AzureDnsManagedIdentity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01AzureDnsManagedIdentity(obj: IssuerSpecAcmeSolversDns01AzureDnsManagedIdentity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12728,7 +12514,7 @@ export function toJson_IssuerSpecAcmeSolversDns01AzureDnsManagedIdentity(obj: Is
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -12753,13 +12539,12 @@ export interface IssuerSpecAcmeSolversDns01CloudDnsServiceAccountSecretRef {
    * @schema IssuerSpecAcmeSolversDns01CloudDnsServiceAccountSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01CloudDnsServiceAccountSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01CloudDnsServiceAccountSecretRef(obj: IssuerSpecAcmeSolversDns01CloudDnsServiceAccountSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12769,7 +12554,7 @@ export function toJson_IssuerSpecAcmeSolversDns01CloudDnsServiceAccountSecretRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * API key to use to authenticate with Cloudflare.
@@ -12795,13 +12580,12 @@ export interface IssuerSpecAcmeSolversDns01CloudflareApiKeySecretRef {
    * @schema IssuerSpecAcmeSolversDns01CloudflareApiKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01CloudflareApiKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01CloudflareApiKeySecretRef(obj: IssuerSpecAcmeSolversDns01CloudflareApiKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12811,7 +12595,7 @@ export function toJson_IssuerSpecAcmeSolversDns01CloudflareApiKeySecretRef(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * API token used to authenticate with Cloudflare.
@@ -12835,13 +12619,12 @@ export interface IssuerSpecAcmeSolversDns01CloudflareApiTokenSecretRef {
    * @schema IssuerSpecAcmeSolversDns01CloudflareApiTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01CloudflareApiTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01CloudflareApiTokenSecretRef(obj: IssuerSpecAcmeSolversDns01CloudflareApiTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12851,7 +12634,7 @@ export function toJson_IssuerSpecAcmeSolversDns01CloudflareApiTokenSecretRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a specific 'key' within a Secret resource.
@@ -12876,13 +12659,12 @@ export interface IssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef {
    * @schema IssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef(obj: IssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12892,7 +12674,7 @@ export function toJson_IssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Protocol to use for dynamic DNS update queries. Valid values are (case-sensitive) ``TCP`` and ``UDP``; ``UDP`` (default).
@@ -12929,13 +12711,12 @@ export interface IssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef {
    * @schema IssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef(obj: IssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12945,7 +12726,7 @@ export function toJson_IssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessKey is used for authentication. If set, pull the AWS
@@ -12974,13 +12755,12 @@ export interface IssuerSpecAcmeSolversDns01Route53AccessKeyIdSecretRef {
    * @schema IssuerSpecAcmeSolversDns01Route53AccessKeyIdSecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01Route53AccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01Route53AccessKeyIdSecretRef(obj: IssuerSpecAcmeSolversDns01Route53AccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12990,7 +12770,7 @@ export function toJson_IssuerSpecAcmeSolversDns01Route53AccessKeyIdSecretRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Auth configures how cert-manager authenticates.
@@ -13005,13 +12785,12 @@ export interface IssuerSpecAcmeSolversDns01Route53Auth {
    * @schema IssuerSpecAcmeSolversDns01Route53Auth#kubernetes
    */
   readonly kubernetes: IssuerSpecAcmeSolversDns01Route53AuthKubernetes;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01Route53Auth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01Route53Auth(obj: IssuerSpecAcmeSolversDns01Route53Auth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13020,7 +12799,7 @@ export function toJson_IssuerSpecAcmeSolversDns01Route53Auth(obj: IssuerSpecAcme
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SecretAccessKey is used for authentication.
@@ -13047,13 +12826,12 @@ export interface IssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef {
    * @schema IssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef(obj: IssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13063,7 +12841,7 @@ export function toJson_IssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ParentReference identifies an API object (usually a Gateway) that can be considered
@@ -13210,13 +12988,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs {
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs#sectionName
    */
   readonly sectionName?: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13230,7 +13007,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRouteParentRefs(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional pod template used to configure the ACME challenge solver pods
@@ -13257,13 +13034,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate {
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate#spec
    */
   readonly spec?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13273,7 +13049,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplate(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional ingress template used to configure the ACME challenge solver
@@ -13291,13 +13067,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressIngressTemplate {
    * @schema IssuerSpecAcmeSolversHttp01IngressIngressTemplate#metadata
    */
   readonly metadata?: IssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressIngressTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressIngressTemplate(obj: IssuerSpecAcmeSolversHttp01IngressIngressTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13306,7 +13081,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressIngressTemplate(obj: Is
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional pod template used to configure the ACME challenge solver pods
@@ -13333,13 +13108,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplate {
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplate#spec
    */
   readonly spec?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpec;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplate(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13349,7 +13123,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplate(obj: Issuer
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kubernetes authenticates with Route53 using AssumeRoleWithWebIdentity
@@ -13366,13 +13140,12 @@ export interface IssuerSpecAcmeSolversDns01Route53AuthKubernetes {
    * @schema IssuerSpecAcmeSolversDns01Route53AuthKubernetes#serviceAccountRef
    */
   readonly serviceAccountRef: IssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAccountRef;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01Route53AuthKubernetes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01Route53AuthKubernetes(obj: IssuerSpecAcmeSolversDns01Route53AuthKubernetes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13381,7 +13154,7 @@ export function toJson_IssuerSpecAcmeSolversDns01Route53AuthKubernetes(obj: Issu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ObjectMeta overrides for the pod used to solve HTTP01 challenges.
@@ -13405,13 +13178,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata 
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13421,7 +13193,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateMet
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PodSpec defines overrides for the HTTP01 challenge solver pod.
@@ -13493,13 +13265,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec {
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec#tolerations
    */
   readonly tolerations?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13515,7 +13286,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ObjectMeta overrides for the ingress used to solve HTTP01 challenges.
@@ -13539,13 +13310,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata {
    * @schema IssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata(obj: IssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13555,7 +13325,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ObjectMeta overrides for the pod used to solve HTTP01 challenges.
@@ -13579,13 +13349,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata {
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13595,7 +13364,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PodSpec defines overrides for the HTTP01 challenge solver pod.
@@ -13667,13 +13436,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpec {
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpec#tolerations
    */
   readonly tolerations?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpec(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13689,7 +13457,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpec(obj: Is
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A reference to a service account that will be used to request a bound
@@ -13715,13 +13483,12 @@ export interface IssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAccountRe
    * @schema IssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAccountRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAccountRef(obj: IssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13731,7 +13498,7 @@ export function toJson_IssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAcc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * If specified, the pod's scheduling constraints
@@ -13759,13 +13526,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity#podAntiAffinity
    */
   readonly podAntiAffinity?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13776,7 +13542,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * LocalObjectReference contains enough information to let you locate the
@@ -13795,13 +13561,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImage
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecImagePullSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13810,7 +13575,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * If specified, the pod's resource requirements.
@@ -13840,13 +13605,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecResou
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecResources#requests
    */
   readonly requests?: { [key: string]: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecResourcesRequests };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecResources' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecResources(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13856,7 +13620,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * If specified, the pod's security context
@@ -13971,13 +13735,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecur
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext#sysctls
    */
   readonly sysctls?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContext | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13994,7 +13757,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The pod this Toleration is attached to tolerates any taint that matches
@@ -14047,13 +13810,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecToler
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecTolerations | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14066,7 +13828,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * If specified, the pod's scheduling constraints
@@ -14094,13 +13856,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity {
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity#podAntiAffinity
    */
   readonly podAntiAffinity?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinity;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14111,7 +13872,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * LocalObjectReference contains enough information to let you locate the
@@ -14130,13 +13891,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecre
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecrets' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecrets(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14145,7 +13905,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePul
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * If specified, the pod's resource requirements.
@@ -14175,13 +13935,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecResources {
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecResources#requests
    */
   readonly requests?: { [key: string]: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecResourcesRequests };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecResources' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecResources(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14191,7 +13950,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecResource
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * If specified, the pod's security context
@@ -14306,13 +14065,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContex
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext#sysctls
    */
   readonly sysctls?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14329,7 +14087,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The pod this Toleration is attached to tolerates any taint that matches
@@ -14382,13 +14140,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations {
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14401,7 +14158,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerati
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Describes node affinity scheduling rules for the pod.
@@ -14434,13 +14191,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14450,7 +14206,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Describes pod affinity scheduling rules (e.g. co-locate this pod in the same node, zone, etc. as some other pod(s)).
@@ -14485,13 +14241,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14501,7 +14256,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Describes pod anti-affinity scheduling rules (e.g. avoid putting this pod in the same node, zone, etc. as some other pod(s)).
@@ -14536,13 +14291,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14552,7 +14306,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecResourcesLimits
@@ -14620,13 +14374,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecur
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14638,7 +14391,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The seccomp options to use by the containers in this pod.
@@ -14668,13 +14421,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecur
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14684,7 +14436,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Sysctl defines a kernel parameter to be set
@@ -14705,13 +14457,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecur
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecSecurityContextSysctls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14721,7 +14472,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Describes node affinity scheduling rules for the pod.
@@ -14754,13 +14505,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinity(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14770,7 +14520,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Describes pod affinity scheduling rules (e.g. co-locate this pod in the same node, zone, etc. as some other pod(s)).
@@ -14805,13 +14555,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinity(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14821,7 +14570,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Describes pod anti-affinity scheduling rules (e.g. avoid putting this pod in the same node, zone, etc. as some other pod(s)).
@@ -14856,13 +14605,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinity(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14872,7 +14620,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecResourcesLimits
@@ -14940,13 +14688,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContex
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14958,7 +14705,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The seccomp options to use by the containers in this pod.
@@ -14988,13 +14735,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContex
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15004,7 +14750,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Sysctl defines a kernel parameter to be set
@@ -15025,13 +14771,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContex
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15041,7 +14786,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * An empty preferred scheduling term matches all objects with implicit weight 0
@@ -15063,13 +14808,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15079,7 +14823,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * If the affinity requirements specified by this field are not met at
@@ -15097,13 +14841,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution#nodeSelectorTerms
    */
   readonly nodeSelectorTerms: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15112,7 +14855,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -15134,13 +14877,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15150,7 +14892,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -15230,13 +14972,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15250,7 +14991,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -15272,13 +15013,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15288,7 +15028,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -15368,13 +15108,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15388,7 +15127,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * An empty preferred scheduling term matches all objects with implicit weight 0
@@ -15410,13 +15149,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15426,7 +15164,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * If the affinity requirements specified by this field are not met at
@@ -15444,13 +15182,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution#nodeSelectorTerms
    */
   readonly nodeSelectorTerms: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15459,7 +15196,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -15481,13 +15218,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15497,7 +15233,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -15577,13 +15313,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15597,7 +15332,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -15619,13 +15354,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15635,7 +15369,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -15715,13 +15449,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15735,7 +15468,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A node selector term, associated with the corresponding weight.
@@ -15756,13 +15489,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchFields
    */
   readonly matchFields?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15772,7 +15504,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A null or empty node selector term matches no objects. The requirements of
@@ -15795,13 +15527,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchFields
    */
   readonly matchFields?: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15811,7 +15542,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -15891,13 +15622,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15911,7 +15641,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -15936,13 +15666,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15952,7 +15681,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -15980,13 +15709,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15996,7 +15724,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -16076,13 +15804,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16096,7 +15823,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -16121,13 +15848,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16137,7 +15863,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -16165,13 +15891,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16181,7 +15906,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A node selector term, associated with the corresponding weight.
@@ -16202,13 +15927,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchFields
    */
   readonly matchFields?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16218,7 +15942,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A null or empty node selector term matches no objects. The requirements of
@@ -16241,13 +15965,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchFields
    */
   readonly matchFields?: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16257,7 +15980,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -16337,13 +16060,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16357,7 +16079,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -16382,13 +16104,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16398,7 +16119,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -16426,13 +16147,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16442,7 +16162,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -16522,13 +16242,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16542,7 +16261,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -16567,13 +16286,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16583,7 +16301,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -16611,13 +16329,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16627,7 +16344,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -16664,13 +16381,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16681,7 +16397,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -16718,13 +16434,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16735,7 +16450,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -16772,13 +16487,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16789,7 +16503,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -16826,13 +16540,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16843,7 +16556,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -16869,13 +16582,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16885,7 +16597,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -16914,13 +16626,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16930,7 +16641,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -16966,13 +16677,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16983,7 +16693,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -17019,13 +16729,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17036,7 +16745,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -17062,13 +16771,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17078,7 +16786,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -17107,13 +16815,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17123,7 +16830,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -17159,13 +16866,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17176,7 +16882,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -17212,13 +16918,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17229,7 +16934,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -17266,13 +16971,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17283,7 +16987,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -17320,13 +17024,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17337,7 +17040,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -17374,13 +17077,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17391,7 +17093,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -17428,13 +17130,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAf
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17445,7 +17146,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -17471,13 +17172,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17487,7 +17187,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -17516,13 +17216,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17532,7 +17231,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -17568,13 +17267,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17585,7 +17283,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -17621,13 +17319,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17638,7 +17335,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -17664,13 +17361,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17680,7 +17376,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -17709,13 +17405,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17725,7 +17420,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -17761,13 +17456,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17778,7 +17472,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -17814,13 +17508,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17831,7 +17524,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -17866,13 +17559,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17883,7 +17575,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -17918,13 +17610,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17935,7 +17626,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -17970,13 +17661,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17987,7 +17677,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -18022,13 +17712,12 @@ export interface IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffin
    * @schema IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18039,7 +17728,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01GatewayHttpRoutePodTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -18074,13 +17763,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18091,7 +17779,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -18126,13 +17814,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAff
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18143,7 +17830,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -18178,13 +17865,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18195,7 +17881,7 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  *
@@ -18230,13 +17916,12 @@ export interface IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAnt
    * @schema IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18247,5 +17932,5 @@ export function toJson_IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 

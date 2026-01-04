@@ -47,7 +47,7 @@ export class IngressRoute extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -74,13 +74,12 @@ export interface IngressRouteProps {
    * @schema IngressRoute#spec
    */
   readonly spec: IngressRouteSpec;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteProps(obj: IngressRouteProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -90,7 +89,7 @@ export function toJson_IngressRouteProps(obj: IngressRouteProps | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * IngressRouteSpec defines the desired state of IngressRoute.
@@ -122,13 +121,12 @@ export interface IngressRouteSpec {
    * @schema IngressRouteSpec#tls
    */
   readonly tls?: IngressRouteSpecTls;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteSpec(obj: IngressRouteSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -139,7 +137,7 @@ export function toJson_IngressRouteSpec(obj: IngressRouteSpec | undefined): Reco
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Route holds the HTTP route configuration.
@@ -204,13 +202,12 @@ export interface IngressRouteSpecRoutes {
    * @schema IngressRouteSpecRoutes#syntax
    */
   readonly syntax?: string;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecRoutes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteSpecRoutes(obj: IngressRouteSpecRoutes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -225,7 +222,7 @@ export function toJson_IngressRouteSpecRoutes(obj: IngressRouteSpecRoutes | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TLS defines the TLS configuration.
@@ -274,13 +271,12 @@ export interface IngressRouteSpecTls {
    * @schema IngressRouteSpecTls#store
    */
   readonly store?: IngressRouteSpecTlsStore;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecTls' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteSpecTls(obj: IngressRouteSpecTls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -293,7 +289,7 @@ export function toJson_IngressRouteSpecTls(obj: IngressRouteSpecTls | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kind defines the kind of the route.
@@ -326,13 +322,12 @@ export interface IngressRouteSpecRoutesMiddlewares {
    * @schema IngressRouteSpecRoutesMiddlewares#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecRoutesMiddlewares' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteSpecRoutesMiddlewares(obj: IngressRouteSpecRoutesMiddlewares | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -342,7 +337,7 @@ export function toJson_IngressRouteSpecRoutesMiddlewares(obj: IngressRouteSpecRo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Observability defines the observability configuration for a router.
@@ -378,13 +373,12 @@ export interface IngressRouteSpecRoutesObservability {
    * @schema IngressRouteSpecRoutesObservability#tracing
    */
   readonly tracing?: boolean;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecRoutesObservability' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteSpecRoutesObservability(obj: IngressRouteSpecRoutesObservability | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -396,7 +390,7 @@ export function toJson_IngressRouteSpecRoutesObservability(obj: IngressRouteSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Service defines an upstream HTTP service to proxy traffic to.
@@ -517,13 +511,12 @@ export interface IngressRouteSpecRoutesServices {
    * @schema IngressRouteSpecRoutesServices#weight
    */
   readonly weight?: number;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecRoutesServices' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteSpecRoutesServices(obj: IngressRouteSpecRoutesServices | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -545,7 +538,7 @@ export function toJson_IngressRouteSpecRoutesServices(obj: IngressRouteSpecRoute
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Domain holds a domain name with SANs.
@@ -566,13 +559,12 @@ export interface IngressRouteSpecTlsDomains {
    * @schema IngressRouteSpecTlsDomains#sans
    */
   readonly sans?: string[];
-
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecTlsDomains' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteSpecTlsDomains(obj: IngressRouteSpecTlsDomains | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -582,7 +574,7 @@ export function toJson_IngressRouteSpecTlsDomains(obj: IngressRouteSpecTlsDomain
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Options defines the reference to a TLSOption, that specifies the parameters of the TLS connection.
@@ -607,13 +599,12 @@ export interface IngressRouteSpecTlsOptions {
    * @schema IngressRouteSpecTlsOptions#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecTlsOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteSpecTlsOptions(obj: IngressRouteSpecTlsOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -623,7 +614,7 @@ export function toJson_IngressRouteSpecTlsOptions(obj: IngressRouteSpecTlsOption
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Store defines the reference to the TLSStore, that will be used to store certificates.
@@ -647,13 +638,12 @@ export interface IngressRouteSpecTlsStore {
    * @schema IngressRouteSpecTlsStore#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecTlsStore' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteSpecTlsStore(obj: IngressRouteSpecTlsStore | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -663,7 +653,7 @@ export function toJson_IngressRouteSpecTlsStore(obj: IngressRouteSpecTlsStore | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TraceVerbosity defines the verbosity level of the tracing for this router.
@@ -773,13 +763,12 @@ export interface IngressRouteSpecRoutesServicesHealthCheck {
    * @schema IngressRouteSpecRoutesServicesHealthCheck#unhealthyInterval
    */
   readonly unhealthyInterval?: IngressRouteSpecRoutesServicesHealthCheckUnhealthyInterval;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecRoutesServicesHealthCheck' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteSpecRoutesServicesHealthCheck(obj: IngressRouteSpecRoutesServicesHealthCheck | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -799,7 +788,7 @@ export function toJson_IngressRouteSpecRoutesServicesHealthCheck(obj: IngressRou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kind defines the kind of the Service.
@@ -846,13 +835,12 @@ export interface IngressRouteSpecRoutesServicesResponseForwarding {
    * @schema IngressRouteSpecRoutesServicesResponseForwarding#flushInterval
    */
   readonly flushInterval?: string;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecRoutesServicesResponseForwarding' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteSpecRoutesServicesResponseForwarding(obj: IngressRouteSpecRoutesServicesResponseForwarding | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -861,7 +849,7 @@ export function toJson_IngressRouteSpecRoutesServicesResponseForwarding(obj: Ing
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Sticky defines the sticky sessions configuration.
@@ -876,13 +864,12 @@ export interface IngressRouteSpecRoutesServicesSticky {
    * @schema IngressRouteSpecRoutesServicesSticky#cookie
    */
   readonly cookie?: IngressRouteSpecRoutesServicesStickyCookie;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecRoutesServicesSticky' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteSpecRoutesServicesSticky(obj: IngressRouteSpecRoutesServicesSticky | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -891,7 +878,7 @@ export function toJson_IngressRouteSpecRoutesServicesSticky(obj: IngressRouteSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Strategy defines the load balancing strategy between the servers.
@@ -1021,13 +1008,12 @@ export interface IngressRouteSpecRoutesServicesStickyCookie {
    * @schema IngressRouteSpecRoutesServicesStickyCookie#secure
    */
   readonly secure?: boolean;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecRoutesServicesStickyCookie' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteSpecRoutesServicesStickyCookie(obj: IngressRouteSpecRoutesServicesStickyCookie | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1042,7 +1028,7 @@ export function toJson_IngressRouteSpecRoutesServicesStickyCookie(obj: IngressRo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SameSite defines the same site policy.
@@ -1104,7 +1090,7 @@ export class IngressRouteTcp extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -1131,13 +1117,12 @@ export interface IngressRouteTcpProps {
    * @schema IngressRouteTCP#spec
    */
   readonly spec: IngressRouteTcpSpec;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteTcpProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteTcpProps(obj: IngressRouteTcpProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1147,7 +1132,7 @@ export function toJson_IngressRouteTcpProps(obj: IngressRouteTcpProps | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * IngressRouteTCPSpec defines the desired state of IngressRouteTCP.
@@ -1179,13 +1164,12 @@ export interface IngressRouteTcpSpec {
    * @schema IngressRouteTcpSpec#tls
    */
   readonly tls?: IngressRouteTcpSpecTls;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteTcpSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteTcpSpec(obj: IngressRouteTcpSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1196,7 +1180,7 @@ export function toJson_IngressRouteTcpSpec(obj: IngressRouteTcpSpec | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * RouteTCP holds the TCP route configuration.
@@ -1242,13 +1226,12 @@ export interface IngressRouteTcpSpecRoutes {
    * @schema IngressRouteTcpSpecRoutes#syntax
    */
   readonly syntax?: IngressRouteTcpSpecRoutesSyntax;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteTcpSpecRoutes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteTcpSpecRoutes(obj: IngressRouteTcpSpecRoutes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1261,7 +1244,7 @@ export function toJson_IngressRouteTcpSpecRoutes(obj: IngressRouteTcpSpecRoutes 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TLS defines the TLS configuration on a layer 4 / TCP Route.
@@ -1317,13 +1300,12 @@ export interface IngressRouteTcpSpecTls {
    * @schema IngressRouteTcpSpecTls#store
    */
   readonly store?: IngressRouteTcpSpecTlsStore;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteTcpSpecTls' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteTcpSpecTls(obj: IngressRouteTcpSpecTls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1337,7 +1319,7 @@ export function toJson_IngressRouteTcpSpecTls(obj: IngressRouteTcpSpecTls | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ObjectReference is a generic reference to a Traefik resource.
@@ -1358,13 +1340,12 @@ export interface IngressRouteTcpSpecRoutesMiddlewares {
    * @schema IngressRouteTcpSpecRoutesMiddlewares#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteTcpSpecRoutesMiddlewares' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteTcpSpecRoutesMiddlewares(obj: IngressRouteTcpSpecRoutesMiddlewares | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1374,7 +1355,7 @@ export function toJson_IngressRouteTcpSpecRoutesMiddlewares(obj: IngressRouteTcp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ServiceTCP defines an upstream TCP service to proxy traffic to.
@@ -1466,13 +1447,12 @@ export interface IngressRouteTcpSpecRoutesServices {
    * @schema IngressRouteTcpSpecRoutesServices#weight
    */
   readonly weight?: number;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteTcpSpecRoutesServices' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteTcpSpecRoutesServices(obj: IngressRouteTcpSpecRoutesServices | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1490,7 +1470,7 @@ export function toJson_IngressRouteTcpSpecRoutesServices(obj: IngressRouteTcpSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Syntax defines the router's rule syntax.
@@ -1525,13 +1505,12 @@ export interface IngressRouteTcpSpecTlsDomains {
    * @schema IngressRouteTcpSpecTlsDomains#sans
    */
   readonly sans?: string[];
-
 }
 
 /**
  * Converts an object of type 'IngressRouteTcpSpecTlsDomains' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteTcpSpecTlsDomains(obj: IngressRouteTcpSpecTlsDomains | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1541,7 +1520,7 @@ export function toJson_IngressRouteTcpSpecTlsDomains(obj: IngressRouteTcpSpecTls
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Options defines the reference to a TLSOption, that specifies the parameters of the TLS connection.
@@ -1564,13 +1543,12 @@ export interface IngressRouteTcpSpecTlsOptions {
    * @schema IngressRouteTcpSpecTlsOptions#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteTcpSpecTlsOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteTcpSpecTlsOptions(obj: IngressRouteTcpSpecTlsOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1580,7 +1558,7 @@ export function toJson_IngressRouteTcpSpecTlsOptions(obj: IngressRouteTcpSpecTls
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Store defines the reference to the TLSStore, that will be used to store certificates.
@@ -1602,13 +1580,12 @@ export interface IngressRouteTcpSpecTlsStore {
    * @schema IngressRouteTcpSpecTlsStore#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteTcpSpecTlsStore' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteTcpSpecTlsStore(obj: IngressRouteTcpSpecTlsStore | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1618,7 +1595,7 @@ export function toJson_IngressRouteTcpSpecTlsStore(obj: IngressRouteTcpSpecTlsSt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Port defines the port of a Kubernetes Service.
@@ -1650,13 +1627,12 @@ export interface IngressRouteTcpSpecRoutesServicesProxyProtocol {
    * @schema IngressRouteTcpSpecRoutesServicesProxyProtocol#version
    */
   readonly version?: number;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteTcpSpecRoutesServicesProxyProtocol' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteTcpSpecRoutesServicesProxyProtocol(obj: IngressRouteTcpSpecRoutesServicesProxyProtocol | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1665,7 +1641,7 @@ export function toJson_IngressRouteTcpSpecRoutesServicesProxyProtocol(obj: Ingre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -1712,7 +1688,7 @@ export class IngressRouteUdp extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -1739,13 +1715,12 @@ export interface IngressRouteUdpProps {
    * @schema IngressRouteUDP#spec
    */
   readonly spec: IngressRouteUdpSpec;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteUdpProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteUdpProps(obj: IngressRouteUdpProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1755,7 +1730,7 @@ export function toJson_IngressRouteUdpProps(obj: IngressRouteUdpProps | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * IngressRouteUDPSpec defines the desired state of a IngressRouteUDP.
@@ -1779,13 +1754,12 @@ export interface IngressRouteUdpSpec {
    * @schema IngressRouteUdpSpec#routes
    */
   readonly routes: IngressRouteUdpSpecRoutes[];
-
 }
 
 /**
  * Converts an object of type 'IngressRouteUdpSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteUdpSpec(obj: IngressRouteUdpSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1795,7 +1769,7 @@ export function toJson_IngressRouteUdpSpec(obj: IngressRouteUdpSpec | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * RouteUDP holds the UDP route configuration.
@@ -1809,13 +1783,12 @@ export interface IngressRouteUdpSpecRoutes {
    * @schema IngressRouteUdpSpecRoutes#services
    */
   readonly services?: IngressRouteUdpSpecRoutesServices[];
-
 }
 
 /**
  * Converts an object of type 'IngressRouteUdpSpecRoutes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteUdpSpecRoutes(obj: IngressRouteUdpSpecRoutes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1824,7 +1797,7 @@ export function toJson_IngressRouteUdpSpecRoutes(obj: IngressRouteUdpSpecRoutes 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ServiceUDP defines an upstream UDP service to proxy traffic to.
@@ -1880,13 +1853,12 @@ export interface IngressRouteUdpSpecRoutesServices {
    * @schema IngressRouteUdpSpecRoutesServices#weight
    */
   readonly weight?: number;
-
 }
 
 /**
  * Converts an object of type 'IngressRouteUdpSpecRoutesServices' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_IngressRouteUdpSpecRoutesServices(obj: IngressRouteUdpSpecRoutesServices | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1900,7 +1872,7 @@ export function toJson_IngressRouteUdpSpecRoutesServices(obj: IngressRouteUdpSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Port defines the port of a Kubernetes Service.
@@ -1965,7 +1937,7 @@ export class Middleware extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -1993,13 +1965,12 @@ export interface MiddlewareProps {
    * @schema Middleware#spec
    */
   readonly spec: MiddlewareSpec;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareProps(obj: MiddlewareProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2009,7 +1980,7 @@ export function toJson_MiddlewareProps(obj: MiddlewareProps | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * MiddlewareSpec defines the desired state of a Middleware.
@@ -2235,13 +2206,12 @@ export interface MiddlewareSpec {
    * @schema MiddlewareSpec#stripPrefixRegex
    */
   readonly stripPrefixRegex?: MiddlewareSpecStripPrefixRegex;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpec(obj: MiddlewareSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2274,7 +2244,7 @@ export function toJson_MiddlewareSpec(obj: MiddlewareSpec | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AddPrefix holds the add prefix middleware configuration.
@@ -2291,13 +2261,12 @@ export interface MiddlewareSpecAddPrefix {
    * @schema MiddlewareSpecAddPrefix#prefix
    */
   readonly prefix?: string;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecAddPrefix' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecAddPrefix(obj: MiddlewareSpecAddPrefix | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2306,7 +2275,7 @@ export function toJson_MiddlewareSpecAddPrefix(obj: MiddlewareSpecAddPrefix | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * BasicAuth holds the basic auth middleware configuration.
@@ -2346,13 +2315,12 @@ export interface MiddlewareSpecBasicAuth {
    * @schema MiddlewareSpecBasicAuth#secret
    */
   readonly secret?: string;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecBasicAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecBasicAuth(obj: MiddlewareSpecBasicAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2364,7 +2332,7 @@ export function toJson_MiddlewareSpecBasicAuth(obj: MiddlewareSpecBasicAuth | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Buffering holds the buffering middleware configuration.
@@ -2416,13 +2384,12 @@ export interface MiddlewareSpecBuffering {
    * @schema MiddlewareSpecBuffering#retryExpression
    */
   readonly retryExpression?: string;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecBuffering' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecBuffering(obj: MiddlewareSpecBuffering | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2435,7 +2402,7 @@ export function toJson_MiddlewareSpecBuffering(obj: MiddlewareSpecBuffering | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Chain holds the configuration of the chain middleware.
@@ -2451,13 +2418,12 @@ export interface MiddlewareSpecChain {
    * @schema MiddlewareSpecChain#middlewares
    */
   readonly middlewares?: MiddlewareSpecChainMiddlewares[];
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecChain' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecChain(obj: MiddlewareSpecChain | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2466,7 +2432,7 @@ export function toJson_MiddlewareSpecChain(obj: MiddlewareSpecChain | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * CircuitBreaker holds the circuit breaker configuration.
@@ -2508,13 +2474,12 @@ export interface MiddlewareSpecCircuitBreaker {
    * @schema MiddlewareSpecCircuitBreaker#responseCode
    */
   readonly responseCode?: number;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecCircuitBreaker' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecCircuitBreaker(obj: MiddlewareSpecCircuitBreaker | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2527,7 +2492,7 @@ export function toJson_MiddlewareSpecCircuitBreaker(obj: MiddlewareSpecCircuitBr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Compress holds the compress middleware configuration.
@@ -2573,13 +2538,12 @@ export interface MiddlewareSpecCompress {
    * @schema MiddlewareSpecCompress#minResponseBodyBytes
    */
   readonly minResponseBodyBytes?: number;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecCompress' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecCompress(obj: MiddlewareSpecCompress | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2592,7 +2556,7 @@ export function toJson_MiddlewareSpecCompress(obj: MiddlewareSpecCompress | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ContentType holds the content-type middleware configuration.
@@ -2609,13 +2573,12 @@ export interface MiddlewareSpecContentType {
    * @schema MiddlewareSpecContentType#autoDetect
    */
   readonly autoDetect?: boolean;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecContentType' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecContentType(obj: MiddlewareSpecContentType | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2624,7 +2587,7 @@ export function toJson_MiddlewareSpecContentType(obj: MiddlewareSpecContentType 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * DigestAuth holds the digest auth middleware configuration.
@@ -2663,13 +2626,12 @@ export interface MiddlewareSpecDigestAuth {
    * @schema MiddlewareSpecDigestAuth#secret
    */
   readonly secret?: string;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecDigestAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecDigestAuth(obj: MiddlewareSpecDigestAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2681,7 +2643,7 @@ export function toJson_MiddlewareSpecDigestAuth(obj: MiddlewareSpecDigestAuth | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ErrorPage holds the custom error middleware configuration.
@@ -2727,13 +2689,12 @@ export interface MiddlewareSpecErrors {
    * @schema MiddlewareSpecErrors#statusRewrites
    */
   readonly statusRewrites?: { [key: string]: number };
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecErrors' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecErrors(obj: MiddlewareSpecErrors | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2745,7 +2706,7 @@ export function toJson_MiddlewareSpecErrors(obj: MiddlewareSpecErrors | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ForwardAuth holds the forward auth middleware configuration.
@@ -2841,13 +2802,12 @@ export interface MiddlewareSpecForwardAuth {
    * @schema MiddlewareSpecForwardAuth#trustForwardHeader
    */
   readonly trustForwardHeader?: boolean;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecForwardAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecForwardAuth(obj: MiddlewareSpecForwardAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2867,7 +2827,7 @@ export function toJson_MiddlewareSpecForwardAuth(obj: MiddlewareSpecForwardAuth 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * GrpcWeb holds the gRPC web middleware configuration.
@@ -2883,13 +2843,12 @@ export interface MiddlewareSpecGrpcWeb {
    * @schema MiddlewareSpecGrpcWeb#allowOrigins
    */
   readonly allowOrigins?: string[];
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecGrpcWeb' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecGrpcWeb(obj: MiddlewareSpecGrpcWeb | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2898,7 +2857,7 @@ export function toJson_MiddlewareSpecGrpcWeb(obj: MiddlewareSpecGrpcWeb | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Headers holds the headers middleware configuration.
@@ -3147,13 +3106,12 @@ export interface MiddlewareSpecHeaders {
    * @schema MiddlewareSpecHeaders#stsSeconds
    */
   readonly stsSeconds?: number;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecHeaders' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecHeaders(obj: MiddlewareSpecHeaders | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3194,7 +3152,7 @@ export function toJson_MiddlewareSpecHeaders(obj: MiddlewareSpecHeaders | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * InFlightReq holds the in-flight request middleware configuration.
@@ -3221,13 +3179,12 @@ export interface MiddlewareSpecInFlightReq {
    * @schema MiddlewareSpecInFlightReq#sourceCriterion
    */
   readonly sourceCriterion?: MiddlewareSpecInFlightReqSourceCriterion;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecInFlightReq' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecInFlightReq(obj: MiddlewareSpecInFlightReq | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3237,7 +3194,7 @@ export function toJson_MiddlewareSpecInFlightReq(obj: MiddlewareSpecInFlightReq 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * IPAllowList holds the IP allowlist middleware configuration.
@@ -3269,13 +3226,12 @@ export interface MiddlewareSpecIpAllowList {
    * @schema MiddlewareSpecIpAllowList#sourceRange
    */
   readonly sourceRange?: string[];
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecIpAllowList' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecIpAllowList(obj: MiddlewareSpecIpAllowList | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3286,7 +3242,7 @@ export function toJson_MiddlewareSpecIpAllowList(obj: MiddlewareSpecIpAllowList 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Deprecated: please use IPAllowList instead.
@@ -3308,13 +3264,12 @@ export interface MiddlewareSpecIpWhiteList {
    * @schema MiddlewareSpecIpWhiteList#sourceRange
    */
   readonly sourceRange?: string[];
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecIpWhiteList' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecIpWhiteList(obj: MiddlewareSpecIpWhiteList | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3324,7 +3279,7 @@ export function toJson_MiddlewareSpecIpWhiteList(obj: MiddlewareSpecIpWhiteList 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PassTLSClientCert holds the pass TLS client cert middleware configuration.
@@ -3347,13 +3302,12 @@ export interface MiddlewareSpecPassTlsClientCert {
    * @schema MiddlewareSpecPassTlsClientCert#pem
    */
   readonly pem?: boolean;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecPassTlsClientCert' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecPassTlsClientCert(obj: MiddlewareSpecPassTlsClientCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3363,7 +3317,7 @@ export function toJson_MiddlewareSpecPassTlsClientCert(obj: MiddlewareSpecPassTl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * RateLimit holds the rate limit configuration.
@@ -3414,13 +3368,12 @@ export interface MiddlewareSpecRateLimit {
    * @schema MiddlewareSpecRateLimit#sourceCriterion
    */
   readonly sourceCriterion?: MiddlewareSpecRateLimitSourceCriterion;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecRateLimit' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecRateLimit(obj: MiddlewareSpecRateLimit | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3433,7 +3386,7 @@ export function toJson_MiddlewareSpecRateLimit(obj: MiddlewareSpecRateLimit | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * RedirectRegex holds the redirect regex middleware configuration.
@@ -3463,13 +3416,12 @@ export interface MiddlewareSpecRedirectRegex {
    * @schema MiddlewareSpecRedirectRegex#replacement
    */
   readonly replacement?: string;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecRedirectRegex' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecRedirectRegex(obj: MiddlewareSpecRedirectRegex | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3480,7 +3432,7 @@ export function toJson_MiddlewareSpecRedirectRegex(obj: MiddlewareSpecRedirectRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * RedirectScheme holds the redirect scheme middleware configuration.
@@ -3510,13 +3462,12 @@ export interface MiddlewareSpecRedirectScheme {
    * @schema MiddlewareSpecRedirectScheme#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecRedirectScheme' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecRedirectScheme(obj: MiddlewareSpecRedirectScheme | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3527,7 +3478,7 @@ export function toJson_MiddlewareSpecRedirectScheme(obj: MiddlewareSpecRedirectS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ReplacePath holds the replace path middleware configuration.
@@ -3543,13 +3494,12 @@ export interface MiddlewareSpecReplacePath {
    * @schema MiddlewareSpecReplacePath#path
    */
   readonly path?: string;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecReplacePath' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecReplacePath(obj: MiddlewareSpecReplacePath | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3558,7 +3508,7 @@ export function toJson_MiddlewareSpecReplacePath(obj: MiddlewareSpecReplacePath 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ReplacePathRegex holds the replace path regex middleware configuration.
@@ -3581,13 +3531,12 @@ export interface MiddlewareSpecReplacePathRegex {
    * @schema MiddlewareSpecReplacePathRegex#replacement
    */
   readonly replacement?: string;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecReplacePathRegex' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecReplacePathRegex(obj: MiddlewareSpecReplacePathRegex | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3597,7 +3546,7 @@ export function toJson_MiddlewareSpecReplacePathRegex(obj: MiddlewareSpecReplace
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Retry holds the retry middleware configuration.
@@ -3625,13 +3574,12 @@ export interface MiddlewareSpecRetry {
    * @schema MiddlewareSpecRetry#initialInterval
    */
   readonly initialInterval?: MiddlewareSpecRetryInitialInterval;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecRetry' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecRetry(obj: MiddlewareSpecRetry | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3641,7 +3589,7 @@ export function toJson_MiddlewareSpecRetry(obj: MiddlewareSpecRetry | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * StripPrefix holds the strip prefix middleware configuration.
@@ -3666,13 +3614,12 @@ export interface MiddlewareSpecStripPrefix {
    * @schema MiddlewareSpecStripPrefix#prefixes
    */
   readonly prefixes?: string[];
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecStripPrefix' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecStripPrefix(obj: MiddlewareSpecStripPrefix | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3682,7 +3629,7 @@ export function toJson_MiddlewareSpecStripPrefix(obj: MiddlewareSpecStripPrefix 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * StripPrefixRegex holds the strip prefix regex middleware configuration.
@@ -3698,13 +3645,12 @@ export interface MiddlewareSpecStripPrefixRegex {
    * @schema MiddlewareSpecStripPrefixRegex#regex
    */
   readonly regex?: string[];
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecStripPrefixRegex' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecStripPrefixRegex(obj: MiddlewareSpecStripPrefixRegex | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3713,7 +3659,7 @@ export function toJson_MiddlewareSpecStripPrefixRegex(obj: MiddlewareSpecStripPr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * MiddlewareRef is a reference to a Middleware resource.
@@ -3734,13 +3680,12 @@ export interface MiddlewareSpecChainMiddlewares {
    * @schema MiddlewareSpecChainMiddlewares#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecChainMiddlewares' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecChainMiddlewares(obj: MiddlewareSpecChainMiddlewares | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3750,7 +3695,7 @@ export function toJson_MiddlewareSpecChainMiddlewares(obj: MiddlewareSpecChainMi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * CheckPeriod is the interval between successive checks of the circuit breaker condition (when in standby state).
@@ -3920,13 +3865,12 @@ export interface MiddlewareSpecErrorsService {
    * @schema MiddlewareSpecErrorsService#weight
    */
   readonly weight?: number;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecErrorsService' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecErrorsService(obj: MiddlewareSpecErrorsService | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3948,7 +3892,7 @@ export function toJson_MiddlewareSpecErrorsService(obj: MiddlewareSpecErrorsServ
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TLS defines the configuration used to secure the connection to the authentication server.
@@ -3985,13 +3929,12 @@ export interface MiddlewareSpecForwardAuthTls {
    * @schema MiddlewareSpecForwardAuthTls#insecureSkipVerify
    */
   readonly insecureSkipVerify?: boolean;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecForwardAuthTls' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecForwardAuthTls(obj: MiddlewareSpecForwardAuthTls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4003,7 +3946,7 @@ export function toJson_MiddlewareSpecForwardAuthTls(obj: MiddlewareSpecForwardAu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SourceCriterion defines what criterion is used to group requests as originating from a common source.
@@ -4035,13 +3978,12 @@ export interface MiddlewareSpecInFlightReqSourceCriterion {
    * @schema MiddlewareSpecInFlightReqSourceCriterion#requestHost
    */
   readonly requestHost?: boolean;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecInFlightReqSourceCriterion' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecInFlightReqSourceCriterion(obj: MiddlewareSpecInFlightReqSourceCriterion | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4052,7 +3994,7 @@ export function toJson_MiddlewareSpecInFlightReqSourceCriterion(obj: MiddlewareS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP.
@@ -4081,13 +4023,12 @@ export interface MiddlewareSpecIpAllowListIpStrategy {
    * @schema MiddlewareSpecIpAllowListIpStrategy#ipv6Subnet
    */
   readonly ipv6Subnet?: number;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecIpAllowListIpStrategy' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecIpAllowListIpStrategy(obj: MiddlewareSpecIpAllowListIpStrategy | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4098,7 +4039,7 @@ export function toJson_MiddlewareSpecIpAllowListIpStrategy(obj: MiddlewareSpecIp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP.
@@ -4127,13 +4068,12 @@ export interface MiddlewareSpecIpWhiteListIpStrategy {
    * @schema MiddlewareSpecIpWhiteListIpStrategy#ipv6Subnet
    */
   readonly ipv6Subnet?: number;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecIpWhiteListIpStrategy' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecIpWhiteListIpStrategy(obj: MiddlewareSpecIpWhiteListIpStrategy | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4144,7 +4084,7 @@ export function toJson_MiddlewareSpecIpWhiteListIpStrategy(obj: MiddlewareSpecIp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Info selects the specific client certificate details you want to add to the X-Forwarded-Tls-Client-Cert-Info header.
@@ -4193,13 +4133,12 @@ export interface MiddlewareSpecPassTlsClientCertInfo {
    * @schema MiddlewareSpecPassTlsClientCertInfo#subject
    */
   readonly subject?: MiddlewareSpecPassTlsClientCertInfoSubject;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecPassTlsClientCertInfo' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecPassTlsClientCertInfo(obj: MiddlewareSpecPassTlsClientCertInfo | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4213,7 +4152,7 @@ export function toJson_MiddlewareSpecPassTlsClientCertInfo(obj: MiddlewareSpecPa
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Period, in combination with Average, defines the actual maximum rate, such as:
@@ -4317,13 +4256,12 @@ export interface MiddlewareSpecRateLimitRedis {
    * @schema MiddlewareSpecRateLimitRedis#writeTimeout
    */
   readonly writeTimeout?: MiddlewareSpecRateLimitRedisWriteTimeout;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecRateLimitRedis' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecRateLimitRedis(obj: MiddlewareSpecRateLimitRedis | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4341,7 +4279,7 @@ export function toJson_MiddlewareSpecRateLimitRedis(obj: MiddlewareSpecRateLimit
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SourceCriterion defines what criterion is used to group requests as originating from a common source.
@@ -4372,13 +4310,12 @@ export interface MiddlewareSpecRateLimitSourceCriterion {
    * @schema MiddlewareSpecRateLimitSourceCriterion#requestHost
    */
   readonly requestHost?: boolean;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecRateLimitSourceCriterion' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecRateLimitSourceCriterion(obj: MiddlewareSpecRateLimitSourceCriterion | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4389,7 +4326,7 @@ export function toJson_MiddlewareSpecRateLimitSourceCriterion(obj: MiddlewareSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * InitialInterval defines the first wait time in the exponential backoff series.
@@ -4507,13 +4444,12 @@ export interface MiddlewareSpecErrorsServiceHealthCheck {
    * @schema MiddlewareSpecErrorsServiceHealthCheck#unhealthyInterval
    */
   readonly unhealthyInterval?: MiddlewareSpecErrorsServiceHealthCheckUnhealthyInterval;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecErrorsServiceHealthCheck' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecErrorsServiceHealthCheck(obj: MiddlewareSpecErrorsServiceHealthCheck | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4533,7 +4469,7 @@ export function toJson_MiddlewareSpecErrorsServiceHealthCheck(obj: MiddlewareSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kind defines the kind of the Service.
@@ -4580,13 +4516,12 @@ export interface MiddlewareSpecErrorsServiceResponseForwarding {
    * @schema MiddlewareSpecErrorsServiceResponseForwarding#flushInterval
    */
   readonly flushInterval?: string;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecErrorsServiceResponseForwarding' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecErrorsServiceResponseForwarding(obj: MiddlewareSpecErrorsServiceResponseForwarding | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4595,7 +4530,7 @@ export function toJson_MiddlewareSpecErrorsServiceResponseForwarding(obj: Middle
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Sticky defines the sticky sessions configuration.
@@ -4610,13 +4545,12 @@ export interface MiddlewareSpecErrorsServiceSticky {
    * @schema MiddlewareSpecErrorsServiceSticky#cookie
    */
   readonly cookie?: MiddlewareSpecErrorsServiceStickyCookie;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecErrorsServiceSticky' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecErrorsServiceSticky(obj: MiddlewareSpecErrorsServiceSticky | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4625,7 +4559,7 @@ export function toJson_MiddlewareSpecErrorsServiceSticky(obj: MiddlewareSpecErro
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Strategy defines the load balancing strategy between the servers.
@@ -4670,13 +4604,12 @@ export interface MiddlewareSpecInFlightReqSourceCriterionIpStrategy {
    * @schema MiddlewareSpecInFlightReqSourceCriterionIpStrategy#ipv6Subnet
    */
   readonly ipv6Subnet?: number;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecInFlightReqSourceCriterionIpStrategy' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecInFlightReqSourceCriterionIpStrategy(obj: MiddlewareSpecInFlightReqSourceCriterionIpStrategy | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4687,7 +4620,7 @@ export function toJson_MiddlewareSpecInFlightReqSourceCriterionIpStrategy(obj: M
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Issuer defines the client certificate issuer details to add to the X-Forwarded-Tls-Client-Cert-Info header.
@@ -4743,13 +4676,12 @@ export interface MiddlewareSpecPassTlsClientCertInfoIssuer {
    * @schema MiddlewareSpecPassTlsClientCertInfoIssuer#serialNumber
    */
   readonly serialNumber?: boolean;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecPassTlsClientCertInfoIssuer' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecPassTlsClientCertInfoIssuer(obj: MiddlewareSpecPassTlsClientCertInfoIssuer | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4764,7 +4696,7 @@ export function toJson_MiddlewareSpecPassTlsClientCertInfoIssuer(obj: Middleware
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Subject defines the client certificate subject details to add to the X-Forwarded-Tls-Client-Cert-Info header.
@@ -4827,13 +4759,12 @@ export interface MiddlewareSpecPassTlsClientCertInfoSubject {
    * @schema MiddlewareSpecPassTlsClientCertInfoSubject#serialNumber
    */
   readonly serialNumber?: boolean;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecPassTlsClientCertInfoSubject' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecPassTlsClientCertInfoSubject(obj: MiddlewareSpecPassTlsClientCertInfoSubject | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4849,7 +4780,7 @@ export function toJson_MiddlewareSpecPassTlsClientCertInfoSubject(obj: Middlewar
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * DialTimeout sets the timeout for establishing new connections.
@@ -4914,13 +4845,12 @@ export interface MiddlewareSpecRateLimitRedisTls {
    * @schema MiddlewareSpecRateLimitRedisTls#insecureSkipVerify
    */
   readonly insecureSkipVerify?: boolean;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecRateLimitRedisTls' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecRateLimitRedisTls(obj: MiddlewareSpecRateLimitRedisTls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4931,7 +4861,7 @@ export function toJson_MiddlewareSpecRateLimitRedisTls(obj: MiddlewareSpecRateLi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * WriteTimeout defines the timeout for socket write operations.
@@ -4977,13 +4907,12 @@ export interface MiddlewareSpecRateLimitSourceCriterionIpStrategy {
    * @schema MiddlewareSpecRateLimitSourceCriterionIpStrategy#ipv6Subnet
    */
   readonly ipv6Subnet?: number;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecRateLimitSourceCriterionIpStrategy' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecRateLimitSourceCriterionIpStrategy(obj: MiddlewareSpecRateLimitSourceCriterionIpStrategy | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4994,7 +4923,7 @@ export function toJson_MiddlewareSpecRateLimitSourceCriterionIpStrategy(obj: Mid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Interval defines the frequency of the health check calls for healthy targets.
@@ -5108,13 +5037,12 @@ export interface MiddlewareSpecErrorsServiceStickyCookie {
    * @schema MiddlewareSpecErrorsServiceStickyCookie#secure
    */
   readonly secure?: boolean;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecErrorsServiceStickyCookie' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareSpecErrorsServiceStickyCookie(obj: MiddlewareSpecErrorsServiceStickyCookie | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5129,7 +5057,7 @@ export function toJson_MiddlewareSpecErrorsServiceStickyCookie(obj: MiddlewareSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SameSite defines the same site policy.
@@ -5192,7 +5120,7 @@ export class MiddlewareTcp extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -5220,13 +5148,12 @@ export interface MiddlewareTcpProps {
    * @schema MiddlewareTCP#spec
    */
   readonly spec: MiddlewareTcpSpec;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareTcpProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareTcpProps(obj: MiddlewareTcpProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5236,7 +5163,7 @@ export function toJson_MiddlewareTcpProps(obj: MiddlewareTcpProps | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * MiddlewareTCPSpec defines the desired state of a MiddlewareTCP.
@@ -5269,13 +5196,12 @@ export interface MiddlewareTcpSpec {
    * @schema MiddlewareTcpSpec#ipWhiteList
    */
   readonly ipWhiteList?: MiddlewareTcpSpecIpWhiteList;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareTcpSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareTcpSpec(obj: MiddlewareTcpSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5286,7 +5212,7 @@ export function toJson_MiddlewareTcpSpec(obj: MiddlewareTcpSpec | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * InFlightConn defines the InFlightConn middleware configuration.
@@ -5301,13 +5227,12 @@ export interface MiddlewareTcpSpecInFlightConn {
    * @schema MiddlewareTcpSpecInFlightConn#amount
    */
   readonly amount?: number;
-
 }
 
 /**
  * Converts an object of type 'MiddlewareTcpSpecInFlightConn' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareTcpSpecInFlightConn(obj: MiddlewareTcpSpecInFlightConn | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5316,7 +5241,7 @@ export function toJson_MiddlewareTcpSpecInFlightConn(obj: MiddlewareTcpSpecInFli
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * IPAllowList defines the IPAllowList middleware configuration.
@@ -5332,13 +5257,12 @@ export interface MiddlewareTcpSpecIpAllowList {
    * @schema MiddlewareTcpSpecIpAllowList#sourceRange
    */
   readonly sourceRange?: string[];
-
 }
 
 /**
  * Converts an object of type 'MiddlewareTcpSpecIpAllowList' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareTcpSpecIpAllowList(obj: MiddlewareTcpSpecIpAllowList | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5347,7 +5271,7 @@ export function toJson_MiddlewareTcpSpecIpAllowList(obj: MiddlewareTcpSpecIpAllo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * IPWhiteList defines the IPWhiteList middleware configuration.
@@ -5364,13 +5288,12 @@ export interface MiddlewareTcpSpecIpWhiteList {
    * @schema MiddlewareTcpSpecIpWhiteList#sourceRange
    */
   readonly sourceRange?: string[];
-
 }
 
 /**
  * Converts an object of type 'MiddlewareTcpSpecIpWhiteList' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_MiddlewareTcpSpecIpWhiteList(obj: MiddlewareTcpSpecIpWhiteList | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5379,7 +5302,7 @@ export function toJson_MiddlewareTcpSpecIpWhiteList(obj: MiddlewareTcpSpecIpWhit
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -5429,7 +5352,7 @@ export class ServersTransport extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -5459,13 +5382,12 @@ export interface ServersTransportProps {
    * @schema ServersTransport#spec
    */
   readonly spec: ServersTransportSpec;
-
 }
 
 /**
  * Converts an object of type 'ServersTransportProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ServersTransportProps(obj: ServersTransportProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5475,7 +5397,7 @@ export function toJson_ServersTransportProps(obj: ServersTransportProps | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ServersTransportSpec defines the desired state of a ServersTransport.
@@ -5553,13 +5475,12 @@ export interface ServersTransportSpec {
    * @schema ServersTransportSpec#spiffe
    */
   readonly spiffe?: ServersTransportSpecSpiffe;
-
 }
 
 /**
  * Converts an object of type 'ServersTransportSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ServersTransportSpec(obj: ServersTransportSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5577,7 +5498,7 @@ export function toJson_ServersTransportSpec(obj: ServersTransportSpec | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ForwardingTimeouts defines the timeouts for requests forwarded to the backend servers.
@@ -5619,13 +5540,12 @@ export interface ServersTransportSpecForwardingTimeouts {
    * @schema ServersTransportSpecForwardingTimeouts#responseHeaderTimeout
    */
   readonly responseHeaderTimeout?: ServersTransportSpecForwardingTimeoutsResponseHeaderTimeout;
-
 }
 
 /**
  * Converts an object of type 'ServersTransportSpecForwardingTimeouts' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ServersTransportSpecForwardingTimeouts(obj: ServersTransportSpecForwardingTimeouts | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5638,7 +5558,7 @@ export function toJson_ServersTransportSpecForwardingTimeouts(obj: ServersTransp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * RootCA defines a reference to a Secret or a ConfigMap that holds a CA certificate.
@@ -5662,13 +5582,12 @@ export interface ServersTransportSpecRootCAs {
    * @schema ServersTransportSpecRootCAs#secret
    */
   readonly secret?: string;
-
 }
 
 /**
  * Converts an object of type 'ServersTransportSpecRootCAs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ServersTransportSpecRootCAs(obj: ServersTransportSpecRootCAs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5678,7 +5597,7 @@ export function toJson_ServersTransportSpecRootCAs(obj: ServersTransportSpecRoot
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Spiffe defines the SPIFFE configuration.
@@ -5699,13 +5618,12 @@ export interface ServersTransportSpecSpiffe {
    * @schema ServersTransportSpecSpiffe#trustDomain
    */
   readonly trustDomain?: string;
-
 }
 
 /**
  * Converts an object of type 'ServersTransportSpecSpiffe' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ServersTransportSpecSpiffe(obj: ServersTransportSpecSpiffe | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5715,7 +5633,7 @@ export function toJson_ServersTransportSpecSpiffe(obj: ServersTransportSpecSpiff
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * DialTimeout is the amount of time to wait until a connection to a backend server can be established.
@@ -5845,7 +5763,7 @@ export class ServersTransportTcp extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -5875,13 +5793,12 @@ export interface ServersTransportTcpProps {
    * @schema ServersTransportTCP#spec
    */
   readonly spec: ServersTransportTcpSpec;
-
 }
 
 /**
  * Converts an object of type 'ServersTransportTcpProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ServersTransportTcpProps(obj: ServersTransportTcpProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5891,7 +5808,7 @@ export function toJson_ServersTransportTcpProps(obj: ServersTransportTcpProps | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ServersTransportTCPSpec defines the desired state of a ServersTransportTCP.
@@ -5926,13 +5843,12 @@ export interface ServersTransportTcpSpec {
    * @schema ServersTransportTcpSpec#tls
    */
   readonly tls?: ServersTransportTcpSpecTls;
-
 }
 
 /**
  * Converts an object of type 'ServersTransportTcpSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ServersTransportTcpSpec(obj: ServersTransportTcpSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5944,7 +5860,7 @@ export function toJson_ServersTransportTcpSpec(obj: ServersTransportTcpSpec | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * DialKeepAlive is the interval between keep-alive probes for an active network connection. If zero, keep-alive probes are sent with a default value (currently 15 seconds), if supported by the protocol and operating system. Network protocols or operating systems that do not support keep-alives ignore this field. If negative, keep-alive probes are disabled.
@@ -6050,13 +5966,12 @@ export interface ServersTransportTcpSpecTls {
    * @schema ServersTransportTcpSpecTls#spiffe
    */
   readonly spiffe?: ServersTransportTcpSpecTlsSpiffe;
-
 }
 
 /**
  * Converts an object of type 'ServersTransportTcpSpecTls' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ServersTransportTcpSpecTls(obj: ServersTransportTcpSpecTls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6071,7 +5986,7 @@ export function toJson_ServersTransportTcpSpecTls(obj: ServersTransportTcpSpecTl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * RootCA defines a reference to a Secret or a ConfigMap that holds a CA certificate.
@@ -6095,13 +6010,12 @@ export interface ServersTransportTcpSpecTlsRootCAs {
    * @schema ServersTransportTcpSpecTlsRootCAs#secret
    */
   readonly secret?: string;
-
 }
 
 /**
  * Converts an object of type 'ServersTransportTcpSpecTlsRootCAs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ServersTransportTcpSpecTlsRootCAs(obj: ServersTransportTcpSpecTlsRootCAs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6111,7 +6025,7 @@ export function toJson_ServersTransportTcpSpecTlsRootCAs(obj: ServersTransportTc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Spiffe defines the SPIFFE configuration.
@@ -6132,13 +6046,12 @@ export interface ServersTransportTcpSpecTlsSpiffe {
    * @schema ServersTransportTcpSpecTlsSpiffe#trustDomain
    */
   readonly trustDomain?: string;
-
 }
 
 /**
  * Converts an object of type 'ServersTransportTcpSpecTlsSpiffe' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ServersTransportTcpSpecTlsSpiffe(obj: ServersTransportTcpSpecTlsSpiffe | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6148,7 +6061,7 @@ export function toJson_ServersTransportTcpSpecTlsSpiffe(obj: ServersTransportTcp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -6196,7 +6109,7 @@ export class TlsOption extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -6224,13 +6137,12 @@ export interface TlsOptionProps {
    * @schema TLSOption#spec
    */
   readonly spec: TlsOptionSpec;
-
 }
 
 /**
  * Converts an object of type 'TlsOptionProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TlsOptionProps(obj: TlsOptionProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6240,7 +6152,7 @@ export function toJson_TlsOptionProps(obj: TlsOptionProps | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TLSOptionSpec defines the desired state of a TLSOption.
@@ -6319,13 +6231,12 @@ export interface TlsOptionSpec {
    * @schema TlsOptionSpec#sniStrict
    */
   readonly sniStrict?: boolean;
-
 }
 
 /**
  * Converts an object of type 'TlsOptionSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TlsOptionSpec(obj: TlsOptionSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6342,7 +6253,7 @@ export function toJson_TlsOptionSpec(obj: TlsOptionSpec | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ClientAuth defines the server's policy for TLS Client Authentication.
@@ -6363,13 +6274,12 @@ export interface TlsOptionSpecClientAuth {
    * @schema TlsOptionSpecClientAuth#secretNames
    */
   readonly secretNames?: string[];
-
 }
 
 /**
  * Converts an object of type 'TlsOptionSpecClientAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TlsOptionSpecClientAuth(obj: TlsOptionSpecClientAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6379,7 +6289,7 @@ export function toJson_TlsOptionSpecClientAuth(obj: TlsOptionSpecClientAuth | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ClientAuthType defines the client authentication type to apply.
@@ -6447,7 +6357,7 @@ export class TlsStore extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -6477,13 +6387,12 @@ export interface TlsStoreProps {
    * @schema TLSStore#spec
    */
   readonly spec: TlsStoreSpec;
-
 }
 
 /**
  * Converts an object of type 'TlsStoreProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TlsStoreProps(obj: TlsStoreProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6493,7 +6402,7 @@ export function toJson_TlsStoreProps(obj: TlsStoreProps | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TLSStoreSpec defines the desired state of a TLSStore.
@@ -6521,13 +6430,12 @@ export interface TlsStoreSpec {
    * @schema TlsStoreSpec#defaultGeneratedCert
    */
   readonly defaultGeneratedCert?: TlsStoreSpecDefaultGeneratedCert;
-
 }
 
 /**
  * Converts an object of type 'TlsStoreSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TlsStoreSpec(obj: TlsStoreSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6538,7 +6446,7 @@ export function toJson_TlsStoreSpec(obj: TlsStoreSpec | undefined): Record<strin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Certificate holds a secret name for the TLSStore resource.
@@ -6552,13 +6460,12 @@ export interface TlsStoreSpecCertificates {
    * @schema TlsStoreSpecCertificates#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
  * Converts an object of type 'TlsStoreSpecCertificates' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TlsStoreSpecCertificates(obj: TlsStoreSpecCertificates | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6567,7 +6474,7 @@ export function toJson_TlsStoreSpecCertificates(obj: TlsStoreSpecCertificates | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * DefaultCertificate defines the default certificate configuration.
@@ -6581,13 +6488,12 @@ export interface TlsStoreSpecDefaultCertificate {
    * @schema TlsStoreSpecDefaultCertificate#secretName
    */
   readonly secretName: string;
-
 }
 
 /**
  * Converts an object of type 'TlsStoreSpecDefaultCertificate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TlsStoreSpecDefaultCertificate(obj: TlsStoreSpecDefaultCertificate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6596,7 +6502,7 @@ export function toJson_TlsStoreSpecDefaultCertificate(obj: TlsStoreSpecDefaultCe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * DefaultGeneratedCert defines the default generated certificate configuration.
@@ -6617,13 +6523,12 @@ export interface TlsStoreSpecDefaultGeneratedCert {
    * @schema TlsStoreSpecDefaultGeneratedCert#resolver
    */
   readonly resolver?: string;
-
 }
 
 /**
  * Converts an object of type 'TlsStoreSpecDefaultGeneratedCert' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TlsStoreSpecDefaultGeneratedCert(obj: TlsStoreSpecDefaultGeneratedCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6633,7 +6538,7 @@ export function toJson_TlsStoreSpecDefaultGeneratedCert(obj: TlsStoreSpecDefault
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Domain is the domain definition for the DefaultCertificate.
@@ -6654,13 +6559,12 @@ export interface TlsStoreSpecDefaultGeneratedCertDomain {
    * @schema TlsStoreSpecDefaultGeneratedCertDomain#sans
    */
   readonly sans?: string[];
-
 }
 
 /**
  * Converts an object of type 'TlsStoreSpecDefaultGeneratedCertDomain' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TlsStoreSpecDefaultGeneratedCertDomain(obj: TlsStoreSpecDefaultGeneratedCertDomain | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6670,7 +6574,7 @@ export function toJson_TlsStoreSpecDefaultGeneratedCertDomain(obj: TlsStoreSpecD
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -6721,7 +6625,7 @@ export class TraefikService extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -6752,13 +6656,12 @@ export interface TraefikServiceProps {
    * @schema TraefikService#spec
    */
   readonly spec: TraefikServiceSpec;
-
 }
 
 /**
  * Converts an object of type 'TraefikServiceProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TraefikServiceProps(obj: TraefikServiceProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6768,7 +6671,7 @@ export function toJson_TraefikServiceProps(obj: TraefikServiceProps | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TraefikServiceSpec defines the desired state of a TraefikService.
@@ -6789,13 +6692,12 @@ export interface TraefikServiceSpec {
    * @schema TraefikServiceSpec#weighted
    */
   readonly weighted?: TraefikServiceSpecWeighted;
-
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TraefikServiceSpec(obj: TraefikServiceSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6805,7 +6707,7 @@ export function toJson_TraefikServiceSpec(obj: TraefikServiceSpec | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Mirroring defines the Mirroring service configuration.
@@ -6950,13 +6852,12 @@ export interface TraefikServiceSpecMirroring {
    * @schema TraefikServiceSpecMirroring#weight
    */
   readonly weight?: number;
-
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroring' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TraefikServiceSpecMirroring(obj: TraefikServiceSpecMirroring | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6981,7 +6882,7 @@ export function toJson_TraefikServiceSpecMirroring(obj: TraefikServiceSpecMirror
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Weighted defines the Weighted Round Robin configuration.
@@ -7003,13 +6904,12 @@ export interface TraefikServiceSpecWeighted {
    * @schema TraefikServiceSpecWeighted#sticky
    */
   readonly sticky?: TraefikServiceSpecWeightedSticky;
-
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecWeighted' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TraefikServiceSpecWeighted(obj: TraefikServiceSpecWeighted | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7019,7 +6919,7 @@ export function toJson_TraefikServiceSpecWeighted(obj: TraefikServiceSpecWeighte
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Healthcheck defines health checks for ExternalName services.
@@ -7117,13 +7017,12 @@ export interface TraefikServiceSpecMirroringHealthCheck {
    * @schema TraefikServiceSpecMirroringHealthCheck#unhealthyInterval
    */
   readonly unhealthyInterval?: TraefikServiceSpecMirroringHealthCheckUnhealthyInterval;
-
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroringHealthCheck' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TraefikServiceSpecMirroringHealthCheck(obj: TraefikServiceSpecMirroringHealthCheck | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7143,7 +7042,7 @@ export function toJson_TraefikServiceSpecMirroringHealthCheck(obj: TraefikServic
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kind defines the kind of the Service.
@@ -7284,13 +7183,12 @@ export interface TraefikServiceSpecMirroringMirrors {
    * @schema TraefikServiceSpecMirroringMirrors#weight
    */
   readonly weight?: number;
-
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroringMirrors' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TraefikServiceSpecMirroringMirrors(obj: TraefikServiceSpecMirroringMirrors | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7313,7 +7211,7 @@ export function toJson_TraefikServiceSpecMirroringMirrors(obj: TraefikServiceSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Port defines the port of a Kubernetes Service.
@@ -7348,13 +7246,12 @@ export interface TraefikServiceSpecMirroringResponseForwarding {
    * @schema TraefikServiceSpecMirroringResponseForwarding#flushInterval
    */
   readonly flushInterval?: string;
-
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroringResponseForwarding' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TraefikServiceSpecMirroringResponseForwarding(obj: TraefikServiceSpecMirroringResponseForwarding | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7363,7 +7260,7 @@ export function toJson_TraefikServiceSpecMirroringResponseForwarding(obj: Traefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Sticky defines the sticky sessions configuration.
@@ -7378,13 +7275,12 @@ export interface TraefikServiceSpecMirroringSticky {
    * @schema TraefikServiceSpecMirroringSticky#cookie
    */
   readonly cookie?: TraefikServiceSpecMirroringStickyCookie;
-
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroringSticky' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TraefikServiceSpecMirroringSticky(obj: TraefikServiceSpecMirroringSticky | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7393,7 +7289,7 @@ export function toJson_TraefikServiceSpecMirroringSticky(obj: TraefikServiceSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Strategy defines the load balancing strategy between the servers.
@@ -7530,13 +7426,12 @@ export interface TraefikServiceSpecWeightedServices {
    * @schema TraefikServiceSpecWeightedServices#weight
    */
   readonly weight?: number;
-
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecWeightedServices' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TraefikServiceSpecWeightedServices(obj: TraefikServiceSpecWeightedServices | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7558,7 +7453,7 @@ export function toJson_TraefikServiceSpecWeightedServices(obj: TraefikServiceSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Sticky defines whether sticky sessions are enabled.
@@ -7573,13 +7468,12 @@ export interface TraefikServiceSpecWeightedSticky {
    * @schema TraefikServiceSpecWeightedSticky#cookie
    */
   readonly cookie?: TraefikServiceSpecWeightedStickyCookie;
-
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecWeightedSticky' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TraefikServiceSpecWeightedSticky(obj: TraefikServiceSpecWeightedSticky | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7588,7 +7482,7 @@ export function toJson_TraefikServiceSpecWeightedSticky(obj: TraefikServiceSpecW
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Interval defines the frequency of the health check calls for healthy targets.
@@ -7738,13 +7632,12 @@ export interface TraefikServiceSpecMirroringMirrorsHealthCheck {
    * @schema TraefikServiceSpecMirroringMirrorsHealthCheck#unhealthyInterval
    */
   readonly unhealthyInterval?: TraefikServiceSpecMirroringMirrorsHealthCheckUnhealthyInterval;
-
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroringMirrorsHealthCheck' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TraefikServiceSpecMirroringMirrorsHealthCheck(obj: TraefikServiceSpecMirroringMirrorsHealthCheck | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7764,7 +7657,7 @@ export function toJson_TraefikServiceSpecMirroringMirrorsHealthCheck(obj: Traefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kind defines the kind of the Service.
@@ -7811,13 +7704,12 @@ export interface TraefikServiceSpecMirroringMirrorsResponseForwarding {
    * @schema TraefikServiceSpecMirroringMirrorsResponseForwarding#flushInterval
    */
   readonly flushInterval?: string;
-
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroringMirrorsResponseForwarding' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TraefikServiceSpecMirroringMirrorsResponseForwarding(obj: TraefikServiceSpecMirroringMirrorsResponseForwarding | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7826,7 +7718,7 @@ export function toJson_TraefikServiceSpecMirroringMirrorsResponseForwarding(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Sticky defines the sticky sessions configuration.
@@ -7841,13 +7733,12 @@ export interface TraefikServiceSpecMirroringMirrorsSticky {
    * @schema TraefikServiceSpecMirroringMirrorsSticky#cookie
    */
   readonly cookie?: TraefikServiceSpecMirroringMirrorsStickyCookie;
-
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroringMirrorsSticky' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TraefikServiceSpecMirroringMirrorsSticky(obj: TraefikServiceSpecMirroringMirrorsSticky | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7856,7 +7747,7 @@ export function toJson_TraefikServiceSpecMirroringMirrorsSticky(obj: TraefikServ
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Strategy defines the load balancing strategy between the servers.
@@ -7934,13 +7825,12 @@ export interface TraefikServiceSpecMirroringStickyCookie {
    * @schema TraefikServiceSpecMirroringStickyCookie#secure
    */
   readonly secure?: boolean;
-
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroringStickyCookie' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TraefikServiceSpecMirroringStickyCookie(obj: TraefikServiceSpecMirroringStickyCookie | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7955,7 +7845,7 @@ export function toJson_TraefikServiceSpecMirroringStickyCookie(obj: TraefikServi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Healthcheck defines health checks for ExternalName services.
@@ -8053,13 +7943,12 @@ export interface TraefikServiceSpecWeightedServicesHealthCheck {
    * @schema TraefikServiceSpecWeightedServicesHealthCheck#unhealthyInterval
    */
   readonly unhealthyInterval?: TraefikServiceSpecWeightedServicesHealthCheckUnhealthyInterval;
-
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecWeightedServicesHealthCheck' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TraefikServiceSpecWeightedServicesHealthCheck(obj: TraefikServiceSpecWeightedServicesHealthCheck | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8079,7 +7968,7 @@ export function toJson_TraefikServiceSpecWeightedServicesHealthCheck(obj: Traefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Kind defines the kind of the Service.
@@ -8126,13 +8015,12 @@ export interface TraefikServiceSpecWeightedServicesResponseForwarding {
    * @schema TraefikServiceSpecWeightedServicesResponseForwarding#flushInterval
    */
   readonly flushInterval?: string;
-
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecWeightedServicesResponseForwarding' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TraefikServiceSpecWeightedServicesResponseForwarding(obj: TraefikServiceSpecWeightedServicesResponseForwarding | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8141,7 +8029,7 @@ export function toJson_TraefikServiceSpecWeightedServicesResponseForwarding(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Sticky defines the sticky sessions configuration.
@@ -8156,13 +8044,12 @@ export interface TraefikServiceSpecWeightedServicesSticky {
    * @schema TraefikServiceSpecWeightedServicesSticky#cookie
    */
   readonly cookie?: TraefikServiceSpecWeightedServicesStickyCookie;
-
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecWeightedServicesSticky' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TraefikServiceSpecWeightedServicesSticky(obj: TraefikServiceSpecWeightedServicesSticky | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8171,7 +8058,7 @@ export function toJson_TraefikServiceSpecWeightedServicesSticky(obj: TraefikServ
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Strategy defines the load balancing strategy between the servers.
@@ -8249,13 +8136,12 @@ export interface TraefikServiceSpecWeightedStickyCookie {
    * @schema TraefikServiceSpecWeightedStickyCookie#secure
    */
   readonly secure?: boolean;
-
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecWeightedStickyCookie' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TraefikServiceSpecWeightedStickyCookie(obj: TraefikServiceSpecWeightedStickyCookie | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8270,7 +8156,7 @@ export function toJson_TraefikServiceSpecWeightedStickyCookie(obj: TraefikServic
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Interval defines the frequency of the health check calls for healthy targets.
@@ -8384,13 +8270,12 @@ export interface TraefikServiceSpecMirroringMirrorsStickyCookie {
    * @schema TraefikServiceSpecMirroringMirrorsStickyCookie#secure
    */
   readonly secure?: boolean;
-
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroringMirrorsStickyCookie' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TraefikServiceSpecMirroringMirrorsStickyCookie(obj: TraefikServiceSpecMirroringMirrorsStickyCookie | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8405,7 +8290,7 @@ export function toJson_TraefikServiceSpecMirroringMirrorsStickyCookie(obj: Traef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SameSite defines the same site policy.
@@ -8534,13 +8419,12 @@ export interface TraefikServiceSpecWeightedServicesStickyCookie {
    * @schema TraefikServiceSpecWeightedServicesStickyCookie#secure
    */
   readonly secure?: boolean;
-
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecWeightedServicesStickyCookie' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_TraefikServiceSpecWeightedServicesStickyCookie(obj: TraefikServiceSpecWeightedServicesStickyCookie | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8555,7 +8439,7 @@ export function toJson_TraefikServiceSpecWeightedServicesStickyCookie(obj: Traef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SameSite defines the same site policy.

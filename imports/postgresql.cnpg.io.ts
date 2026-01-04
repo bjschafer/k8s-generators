@@ -47,7 +47,7 @@ export class Backup extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -75,13 +75,12 @@ export interface BackupProps {
    * @schema Backup#spec
    */
   readonly spec: BackupSpec;
-
 }
 
 /**
  * Converts an object of type 'BackupProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_BackupProps(obj: BackupProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -91,7 +90,7 @@ export function toJson_BackupProps(obj: BackupProps | undefined): Record<string,
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specification of the desired behavior of the backup.
@@ -151,13 +150,12 @@ export interface BackupSpec {
    * @schema BackupSpec#target
    */
   readonly target?: BackupSpecTarget;
-
 }
 
 /**
  * Converts an object of type 'BackupSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_BackupSpec(obj: BackupSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -171,7 +169,7 @@ export function toJson_BackupSpec(obj: BackupSpec | undefined): Record<string, a
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The cluster to backup
@@ -185,13 +183,12 @@ export interface BackupSpecCluster {
    * @schema BackupSpecCluster#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'BackupSpecCluster' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_BackupSpecCluster(obj: BackupSpecCluster | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -200,7 +197,7 @@ export function toJson_BackupSpecCluster(obj: BackupSpecCluster | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The backup method to be used, possible options are `barmanObjectStore`,
@@ -250,13 +247,12 @@ export interface BackupSpecOnlineConfiguration {
    * @schema BackupSpecOnlineConfiguration#waitForArchive
    */
   readonly waitForArchive?: boolean;
-
 }
 
 /**
  * Converts an object of type 'BackupSpecOnlineConfiguration' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_BackupSpecOnlineConfiguration(obj: BackupSpecOnlineConfiguration | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -266,7 +262,7 @@ export function toJson_BackupSpecOnlineConfiguration(obj: BackupSpecOnlineConfig
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configuration parameters passed to the plugin managing this backup
@@ -288,13 +284,12 @@ export interface BackupSpecPluginConfiguration {
    * @schema BackupSpecPluginConfiguration#parameters
    */
   readonly parameters?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'BackupSpecPluginConfiguration' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_BackupSpecPluginConfiguration(obj: BackupSpecPluginConfiguration | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -304,7 +299,7 @@ export function toJson_BackupSpecPluginConfiguration(obj: BackupSpecPluginConfig
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The policy to decide which instance should perform this backup. If empty,
@@ -369,7 +364,7 @@ export class Cluster extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -398,13 +393,12 @@ export interface ClusterProps {
    * @schema Cluster#spec
    */
   readonly spec: ClusterSpec;
-
 }
 
 /**
  * Converts an object of type 'ClusterProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterProps(obj: ClusterProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -414,7 +408,7 @@ export function toJson_ClusterProps(obj: ClusterProps | undefined): Record<strin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specification of the desired behavior of the cluster.
@@ -644,6 +638,16 @@ export interface ClusterSpec {
   readonly plugins?: ClusterSpecPlugins[];
 
   /**
+   * Override the PodSecurityContext applied to every Pod of the cluster.
+   * When set, this overrides the operator's default PodSecurityContext for the cluster.
+   * If omitted, the operator defaults are used.
+   * This field doesn't have any effect if SecurityContextConstraints are present.
+   *
+   * @schema ClusterSpec#podSecurityContext
+   */
+  readonly podSecurityContext?: ClusterSpecPodSecurityContext;
+
+  /**
    * The GID of the `postgres` user inside the image, defaults to `26`
    *
    * @schema ClusterSpec#postgresGID
@@ -667,7 +671,10 @@ export interface ClusterSpec {
   /**
    * Method to follow to upgrade the primary server during a rolling
    * update procedure, after all replicas have been successfully updated:
-   * it can be with a switchover (`switchover`) or in-place (`restart` - default)
+   * it can be with a switchover (`switchover`) or in-place (`restart` - default).
+   * Note: when using `switchover`, the operator will reject updates that change both
+   * the image name and PostgreSQL configuration parameters simultaneously to avoid
+   * configuration mismatches during the switchover process.
    *
    * @schema ClusterSpec#primaryUpdateMethod
    */
@@ -751,6 +758,15 @@ export interface ClusterSpec {
   readonly seccompProfile?: ClusterSpecSeccompProfile;
 
   /**
+   * Override the SecurityContext applied to every Container in the Pod of the cluster.
+   * When set, this overrides the operator's default Container SecurityContext.
+   * If omitted, the operator defaults are used.
+   *
+   * @schema ClusterSpec#securityContext
+   */
+  readonly securityContext?: ClusterSpecSecurityContext;
+
+  /**
    * Configure the generation of the service account
    *
    * @schema ClusterSpec#serviceAccountTemplate
@@ -831,13 +847,12 @@ export interface ClusterSpec {
    * @schema ClusterSpec#walStorage
    */
   readonly walStorage?: ClusterSpecWalStorage;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpec(obj: ClusterSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -868,6 +883,7 @@ export function toJson_ClusterSpec(obj: ClusterSpec | undefined): Record<string,
     'monitoring': toJson_ClusterSpecMonitoring(obj.monitoring),
     'nodeMaintenanceWindow': toJson_ClusterSpecNodeMaintenanceWindow(obj.nodeMaintenanceWindow),
     'plugins': obj.plugins?.map(y => toJson_ClusterSpecPlugins(y)),
+    'podSecurityContext': toJson_ClusterSpecPodSecurityContext(obj.podSecurityContext),
     'postgresGID': obj.postgresGid,
     'postgresUID': obj.postgresUid,
     'postgresql': toJson_ClusterSpecPostgresql(obj.postgresql),
@@ -881,6 +897,7 @@ export function toJson_ClusterSpec(obj: ClusterSpec | undefined): Record<string,
     'resources': toJson_ClusterSpecResources(obj.resources),
     'schedulerName': obj.schedulerName,
     'seccompProfile': toJson_ClusterSpecSeccompProfile(obj.seccompProfile),
+    'securityContext': toJson_ClusterSpecSecurityContext(obj.securityContext),
     'serviceAccountTemplate': toJson_ClusterSpecServiceAccountTemplate(obj.serviceAccountTemplate),
     'smartShutdownTimeout': obj.smartShutdownTimeout,
     'startDelay': obj.startDelay,
@@ -895,7 +912,7 @@ export function toJson_ClusterSpec(obj: ClusterSpec | undefined): Record<string,
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Affinity/Anti-affinity rules for Pods
@@ -971,13 +988,12 @@ export interface ClusterSpecAffinity {
    * @schema ClusterSpecAffinity#topologyKey
    */
   readonly topologyKey?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinity(obj: ClusterSpecAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -993,7 +1009,7 @@ export function toJson_ClusterSpecAffinity(obj: ClusterSpecAffinity | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The configuration to be used for backups
@@ -1035,13 +1051,12 @@ export interface ClusterSpecBackup {
    * @schema ClusterSpecBackup#volumeSnapshot
    */
   readonly volumeSnapshot?: ClusterSpecBackupVolumeSnapshot;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBackup' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBackup(obj: ClusterSpecBackup | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1053,7 +1068,7 @@ export function toJson_ClusterSpecBackup(obj: ClusterSpecBackup | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Instructions to bootstrap this cluster
@@ -1082,13 +1097,12 @@ export interface ClusterSpecBootstrap {
    * @schema ClusterSpecBootstrap#recovery
    */
   readonly recovery?: ClusterSpecBootstrapRecovery;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrap' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrap(obj: ClusterSpecBootstrap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1099,7 +1113,7 @@ export function toJson_ClusterSpecBootstrap(obj: ClusterSpecBootstrap | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The configuration for the CA and related certificates
@@ -1163,13 +1177,12 @@ export interface ClusterSpecCertificates {
    * @schema ClusterSpecCertificates#serverTLSSecret
    */
   readonly serverTlsSecret?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecCertificates' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecCertificates(obj: ClusterSpecCertificates | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1182,7 +1195,7 @@ export function toJson_ClusterSpecCertificates(obj: ClusterSpecCertificates | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * EnvVar represents an environment variable present in a Container.
@@ -1220,13 +1233,12 @@ export interface ClusterSpecEnv {
    * @schema ClusterSpecEnv#valueFrom
    */
   readonly valueFrom?: ClusterSpecEnvValueFrom;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecEnv' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecEnv(obj: ClusterSpecEnv | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1237,7 +1249,7 @@ export function toJson_ClusterSpecEnv(obj: ClusterSpecEnv | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * EnvFromSource represents the source of a set of ConfigMaps or Secrets
@@ -1266,13 +1278,12 @@ export interface ClusterSpecEnvFrom {
    * @schema ClusterSpecEnvFrom#secretRef
    */
   readonly secretRef?: ClusterSpecEnvFromSecretRef;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecEnvFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecEnvFrom(obj: ClusterSpecEnvFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1283,7 +1294,7 @@ export function toJson_ClusterSpecEnvFrom(obj: ClusterSpecEnvFrom | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * EphemeralVolumeSource allows the user to configure the source of ephemeral volumes.
@@ -1317,13 +1328,12 @@ export interface ClusterSpecEphemeralVolumeSource {
    * @schema ClusterSpecEphemeralVolumeSource#volumeClaimTemplate
    */
   readonly volumeClaimTemplate?: ClusterSpecEphemeralVolumeSourceVolumeClaimTemplate;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecEphemeralVolumeSource' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecEphemeralVolumeSource(obj: ClusterSpecEphemeralVolumeSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1332,7 +1342,7 @@ export function toJson_ClusterSpecEphemeralVolumeSource(obj: ClusterSpecEphemera
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * EphemeralVolumesSizeLimit allows the user to set the limits for the ephemeral
@@ -1354,13 +1364,12 @@ export interface ClusterSpecEphemeralVolumesSizeLimit {
    * @schema ClusterSpecEphemeralVolumesSizeLimit#temporaryData
    */
   readonly temporaryData?: ClusterSpecEphemeralVolumesSizeLimitTemporaryData;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecEphemeralVolumesSizeLimit' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecEphemeralVolumesSizeLimit(obj: ClusterSpecEphemeralVolumesSizeLimit | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1370,7 +1379,7 @@ export function toJson_ClusterSpecEphemeralVolumesSizeLimit(obj: ClusterSpecEphe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ExternalCluster represents the connection parameters to an
@@ -1444,13 +1453,12 @@ export interface ClusterSpecExternalClusters {
    * @schema ClusterSpecExternalClusters#sslRootCert
    */
   readonly sslRootCert?: ClusterSpecExternalClustersSslRootCert;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClusters' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClusters(obj: ClusterSpecExternalClusters | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1466,7 +1474,7 @@ export function toJson_ClusterSpecExternalClusters(obj: ClusterSpecExternalClust
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Defines the major PostgreSQL version we want to use within an ImageCatalog
@@ -1503,13 +1511,12 @@ export interface ClusterSpecImageCatalogRef {
    * @schema ClusterSpecImageCatalogRef#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecImageCatalogRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecImageCatalogRef(obj: ClusterSpecImageCatalogRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1521,7 +1528,7 @@ export function toJson_ClusterSpecImageCatalogRef(obj: ClusterSpecImageCatalogRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * LocalObjectReference contains enough information to let you locate a
@@ -1536,13 +1543,12 @@ export interface ClusterSpecImagePullSecrets {
    * @schema ClusterSpecImagePullSecrets#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecImagePullSecrets' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecImagePullSecrets(obj: ClusterSpecImagePullSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1551,7 +1557,7 @@ export function toJson_ClusterSpecImagePullSecrets(obj: ClusterSpecImagePullSecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Metadata that will be inherited by all objects related to the Cluster
@@ -1568,13 +1574,12 @@ export interface ClusterSpecInheritedMetadata {
    * @schema ClusterSpecInheritedMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecInheritedMetadata' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecInheritedMetadata(obj: ClusterSpecInheritedMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1584,7 +1589,7 @@ export function toJson_ClusterSpecInheritedMetadata(obj: ClusterSpecInheritedMet
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The instances' log level, one of the following values: error, warning, info (default), debug, trace
@@ -1623,13 +1628,12 @@ export interface ClusterSpecManaged {
    * @schema ClusterSpecManaged#services
    */
   readonly services?: ClusterSpecManagedServices;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecManaged' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecManaged(obj: ClusterSpecManaged | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1639,7 +1643,7 @@ export function toJson_ClusterSpecManaged(obj: ClusterSpecManaged | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The configuration of the monitoring infrastructure of this cluster
@@ -1681,6 +1685,17 @@ export interface ClusterSpecMonitoring {
   readonly enablePodMonitor?: boolean;
 
   /**
+   * The interval during which metrics computed from queries are considered current.
+   * Once it is exceeded, a new scrape will trigger a rerun
+   * of the queries.
+   * If not set, defaults to 30 seconds, in line with Prometheus scraping defaults.
+   * Setting this to zero disables the caching mechanism and can cause heavy load on the PostgreSQL server.
+   *
+   * @schema ClusterSpecMonitoring#metricsQueriesTTL
+   */
+  readonly metricsQueriesTtl?: string;
+
+  /**
    * The list of metric relabelings for the `PodMonitor`. Applied to samples before ingestion.
    *
    * Deprecated: This feature will be removed in an upcoming release. If
@@ -1707,13 +1722,12 @@ export interface ClusterSpecMonitoring {
    * @schema ClusterSpecMonitoring#tls
    */
   readonly tls?: ClusterSpecMonitoringTls;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecMonitoring' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecMonitoring(obj: ClusterSpecMonitoring | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1721,6 +1735,7 @@ export function toJson_ClusterSpecMonitoring(obj: ClusterSpecMonitoring | undefi
     'customQueriesSecret': obj.customQueriesSecret?.map(y => toJson_ClusterSpecMonitoringCustomQueriesSecret(y)),
     'disableDefaultQueries': obj.disableDefaultQueries,
     'enablePodMonitor': obj.enablePodMonitor,
+    'metricsQueriesTTL': obj.metricsQueriesTtl,
     'podMonitorMetricRelabelings': obj.podMonitorMetricRelabelings?.map(y => toJson_ClusterSpecMonitoringPodMonitorMetricRelabelings(y)),
     'podMonitorRelabelings': obj.podMonitorRelabelings?.map(y => toJson_ClusterSpecMonitoringPodMonitorRelabelings(y)),
     'tls': toJson_ClusterSpecMonitoringTls(obj.tls),
@@ -1728,7 +1743,7 @@ export function toJson_ClusterSpecMonitoring(obj: ClusterSpecMonitoring | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Define a maintenance window for the Kubernetes nodes
@@ -1750,13 +1765,12 @@ export interface ClusterSpecNodeMaintenanceWindow {
    * @schema ClusterSpecNodeMaintenanceWindow#reusePVC
    */
   readonly reusePvc?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecNodeMaintenanceWindow' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecNodeMaintenanceWindow(obj: ClusterSpecNodeMaintenanceWindow | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1766,7 +1780,7 @@ export function toJson_ClusterSpecNodeMaintenanceWindow(obj: ClusterSpecNodeMain
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PluginConfiguration specifies a plugin that need to be loaded for this
@@ -1804,13 +1818,12 @@ export interface ClusterSpecPlugins {
    * @schema ClusterSpecPlugins#parameters
    */
   readonly parameters?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecPlugins' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecPlugins(obj: ClusterSpecPlugins | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1822,7 +1835,211 @@ export function toJson_ClusterSpecPlugins(obj: ClusterSpecPlugins | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Override the PodSecurityContext applied to every Pod of the cluster.
+ * When set, this overrides the operator's default PodSecurityContext for the cluster.
+ * If omitted, the operator defaults are used.
+ * This field doesn't have any effect if SecurityContextConstraints are present.
+ *
+ * @schema ClusterSpecPodSecurityContext
+ */
+export interface ClusterSpecPodSecurityContext {
+  /**
+   * appArmorProfile is the AppArmor options to use by the containers in this pod.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterSpecPodSecurityContext#appArmorProfile
+   */
+  readonly appArmorProfile?: ClusterSpecPodSecurityContextAppArmorProfile;
+
+  /**
+   * A special supplemental group that applies to all containers in a pod.
+   * Some volume types allow the Kubelet to change the ownership of that volume
+   * to be owned by the pod:
+   *
+   * 1. The owning GID will be the FSGroup
+   * 2. The setgid bit is set (new files created in the volume will be owned by FSGroup)
+   * 3. The permission bits are OR'd with rw-rw----
+   *
+   * If unset, the Kubelet will not modify the ownership and permissions of any volume.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterSpecPodSecurityContext#fsGroup
+   */
+  readonly fsGroup?: number;
+
+  /**
+   * fsGroupChangePolicy defines behavior of changing ownership and permission of the volume
+   * before being exposed inside Pod. This field will only apply to
+   * volume types which support fsGroup based ownership(and permissions).
+   * It will have no effect on ephemeral volume types such as: secret, configmaps
+   * and emptydir.
+   * Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterSpecPodSecurityContext#fsGroupChangePolicy
+   */
+  readonly fsGroupChangePolicy?: string;
+
+  /**
+   * The GID to run the entrypoint of the container process.
+   * Uses runtime default if unset.
+   * May also be set in SecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence
+   * for that container.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterSpecPodSecurityContext#runAsGroup
+   */
+  readonly runAsGroup?: number;
+
+  /**
+   * Indicates that the container must run as a non-root user.
+   * If true, the Kubelet will validate the image at runtime to ensure that it
+   * does not run as UID 0 (root) and fail to start the container if it does.
+   * If unset or false, no such validation will be performed.
+   * May also be set in SecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   *
+   * @schema ClusterSpecPodSecurityContext#runAsNonRoot
+   */
+  readonly runAsNonRoot?: boolean;
+
+  /**
+   * The UID to run the entrypoint of the container process.
+   * Defaults to user specified in image metadata if unspecified.
+   * May also be set in SecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence
+   * for that container.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default user specified in image metadata if unspecified.
+   * @schema ClusterSpecPodSecurityContext#runAsUser
+   */
+  readonly runAsUser?: number;
+
+  /**
+   * seLinuxChangePolicy defines how the container's SELinux label is applied to all volumes used by the Pod.
+   * It has no effect on nodes that do not support SELinux or to volumes does not support SELinux.
+   * Valid values are "MountOption" and "Recursive".
+   *
+   * "Recursive" means relabeling of all files on all Pod volumes by the container runtime.
+   * This may be slow for large volumes, but allows mixing privileged and unprivileged Pods sharing the same volume on the same node.
+   *
+   * "MountOption" mounts all eligible Pod volumes with `-o context` mount option.
+   * This requires all Pods that share the same volume to use the same SELinux label.
+   * It is not possible to share the same volume among privileged and unprivileged Pods.
+   * Eligible volumes are in-tree FibreChannel and iSCSI volumes, and all CSI volumes
+   * whose CSI driver announces SELinux support by setting spec.seLinuxMount: true in their
+   * CSIDriver instance. Other volumes are always re-labelled recursively.
+   * "MountOption" value is allowed only when SELinuxMount feature gate is enabled.
+   *
+   * If not specified and SELinuxMount feature gate is enabled, "MountOption" is used.
+   * If not specified and SELinuxMount feature gate is disabled, "MountOption" is used for ReadWriteOncePod volumes
+   * and "Recursive" for all other volumes.
+   *
+   * This field affects only Pods that have SELinux label set, either in PodSecurityContext or in SecurityContext of all containers.
+   *
+   * All Pods that use the same volume should use the same seLinuxChangePolicy, otherwise some pods can get stuck in ContainerCreating state.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterSpecPodSecurityContext#seLinuxChangePolicy
+   */
+  readonly seLinuxChangePolicy?: string;
+
+  /**
+   * The SELinux context to be applied to all containers.
+   * If unspecified, the container runtime will allocate a random SELinux context for each
+   * container.  May also be set in SecurityContext.  If set in
+   * both SecurityContext and PodSecurityContext, the value specified in SecurityContext
+   * takes precedence for that container.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterSpecPodSecurityContext#seLinuxOptions
+   */
+  readonly seLinuxOptions?: ClusterSpecPodSecurityContextSeLinuxOptions;
+
+  /**
+   * The seccomp options to use by the containers in this pod.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterSpecPodSecurityContext#seccompProfile
+   */
+  readonly seccompProfile?: ClusterSpecPodSecurityContextSeccompProfile;
+
+  /**
+   * A list of groups applied to the first process run in each container, in
+   * addition to the container's primary GID and fsGroup (if specified).  If
+   * the SupplementalGroupsPolicy feature is enabled, the
+   * supplementalGroupsPolicy field determines whether these are in addition
+   * to or instead of any group memberships defined in the container image.
+   * If unspecified, no additional groups are added, though group memberships
+   * defined in the container image may still be used, depending on the
+   * supplementalGroupsPolicy field.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterSpecPodSecurityContext#supplementalGroups
+   */
+  readonly supplementalGroups?: number[];
+
+  /**
+   * Defines how supplemental groups of the first container processes are calculated.
+   * Valid values are "Merge" and "Strict". If not specified, "Merge" is used.
+   * (Alpha) Using the field requires the SupplementalGroupsPolicy feature gate to be enabled
+   * and the container runtime must implement support for this feature.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterSpecPodSecurityContext#supplementalGroupsPolicy
+   */
+  readonly supplementalGroupsPolicy?: string;
+
+  /**
+   * Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported
+   * sysctls (by the container runtime) might fail to launch.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterSpecPodSecurityContext#sysctls
+   */
+  readonly sysctls?: ClusterSpecPodSecurityContextSysctls[];
+
+  /**
+   * The Windows specific settings applied to all containers.
+   * If unspecified, the options within a container's SecurityContext will be used.
+   * If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
+   * Note that this field cannot be set when spec.os.name is linux.
+   *
+   * @schema ClusterSpecPodSecurityContext#windowsOptions
+   */
+  readonly windowsOptions?: ClusterSpecPodSecurityContextWindowsOptions;
+}
+
+/**
+ * Converts an object of type 'ClusterSpecPodSecurityContext' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecPodSecurityContext(obj: ClusterSpecPodSecurityContext | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'appArmorProfile': toJson_ClusterSpecPodSecurityContextAppArmorProfile(obj.appArmorProfile),
+    'fsGroup': obj.fsGroup,
+    'fsGroupChangePolicy': obj.fsGroupChangePolicy,
+    'runAsGroup': obj.runAsGroup,
+    'runAsNonRoot': obj.runAsNonRoot,
+    'runAsUser': obj.runAsUser,
+    'seLinuxChangePolicy': obj.seLinuxChangePolicy,
+    'seLinuxOptions': toJson_ClusterSpecPodSecurityContextSeLinuxOptions(obj.seLinuxOptions),
+    'seccompProfile': toJson_ClusterSpecPodSecurityContextSeccompProfile(obj.seccompProfile),
+    'supplementalGroups': obj.supplementalGroups?.map(y => y),
+    'supplementalGroupsPolicy': obj.supplementalGroupsPolicy,
+    'sysctls': obj.sysctls?.map(y => toJson_ClusterSpecPodSecurityContextSysctls(y)),
+    'windowsOptions': toJson_ClusterSpecPodSecurityContextWindowsOptions(obj.windowsOptions),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configuration of the PostgreSQL server
@@ -1908,13 +2125,12 @@ export interface ClusterSpecPostgresql {
    * @schema ClusterSpecPostgresql#synchronous
    */
   readonly synchronous?: ClusterSpecPostgresqlSynchronous;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecPostgresql' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecPostgresql(obj: ClusterSpecPostgresql | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1932,12 +2148,15 @@ export function toJson_ClusterSpecPostgresql(obj: ClusterSpecPostgresql | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Method to follow to upgrade the primary server during a rolling
  * update procedure, after all replicas have been successfully updated:
- * it can be with a switchover (`switchover`) or in-place (`restart` - default)
+ * it can be with a switchover (`switchover`) or in-place (`restart` - default).
+ * Note: when using `switchover`, the operator will reject updates that change both
+ * the image name and PostgreSQL configuration parameters simultaneously to avoid
+ * configuration mismatches during the switchover process.
  *
  * @schema ClusterSpecPrimaryUpdateMethod
  */
@@ -1989,13 +2208,12 @@ export interface ClusterSpecProbes {
    * @schema ClusterSpecProbes#startup
    */
   readonly startup?: ClusterSpecProbesStartup;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecProbes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecProbes(obj: ClusterSpecProbes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2006,7 +2224,7 @@ export function toJson_ClusterSpecProbes(obj: ClusterSpecProbes | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Template to be used to define projected volumes, projected volumes will be mounted
@@ -2034,13 +2252,12 @@ export interface ClusterSpecProjectedVolumeTemplate {
    * @schema ClusterSpecProjectedVolumeTemplate#sources
    */
   readonly sources?: ClusterSpecProjectedVolumeTemplateSources[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecProjectedVolumeTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecProjectedVolumeTemplate(obj: ClusterSpecProjectedVolumeTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2050,7 +2267,7 @@ export function toJson_ClusterSpecProjectedVolumeTemplate(obj: ClusterSpecProjec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Replica cluster configuration
@@ -2109,13 +2326,12 @@ export interface ClusterSpecReplica {
    * @schema ClusterSpecReplica#source
    */
   readonly source: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecReplica' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecReplica(obj: ClusterSpecReplica | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2129,7 +2345,7 @@ export function toJson_ClusterSpecReplica(obj: ClusterSpecReplica | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Replication slots management configuration
@@ -2158,13 +2374,12 @@ export interface ClusterSpecReplicationSlots {
    * @schema ClusterSpecReplicationSlots#updateInterval
    */
   readonly updateInterval?: number;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecReplicationSlots' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecReplicationSlots(obj: ClusterSpecReplicationSlots | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2175,7 +2390,7 @@ export function toJson_ClusterSpecReplicationSlots(obj: ClusterSpecReplicationSl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Resources requirements of every generated Pod. Please refer to
@@ -2215,13 +2430,12 @@ export interface ClusterSpecResources {
    * @schema ClusterSpecResources#requests
    */
   readonly requests?: { [key: string]: ClusterSpecResourcesRequests };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecResources' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecResources(obj: ClusterSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2232,7 +2446,7 @@ export function toJson_ClusterSpecResources(obj: ClusterSpecResources | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SeccompProfile applied to every Pod and Container.
@@ -2263,13 +2477,12 @@ export interface ClusterSpecSeccompProfile {
    * @schema ClusterSpecSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecSeccompProfile(obj: ClusterSpecSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2279,7 +2492,171 @@ export function toJson_ClusterSpecSeccompProfile(obj: ClusterSpecSeccompProfile 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Override the SecurityContext applied to every Container in the Pod of the cluster.
+ * When set, this overrides the operator's default Container SecurityContext.
+ * If omitted, the operator defaults are used.
+ *
+ * @schema ClusterSpecSecurityContext
+ */
+export interface ClusterSpecSecurityContext {
+  /**
+   * AllowPrivilegeEscalation controls whether a process can gain more
+   * privileges than its parent process. This bool directly controls if
+   * the no_new_privs flag will be set on the container process.
+   * AllowPrivilegeEscalation is true always when the container is:
+   * 1) run as Privileged
+   * 2) has CAP_SYS_ADMIN
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterSpecSecurityContext#allowPrivilegeEscalation
+   */
+  readonly allowPrivilegeEscalation?: boolean;
+
+  /**
+   * appArmorProfile is the AppArmor options to use by this container. If set, this profile
+   * overrides the pod's appArmorProfile.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterSpecSecurityContext#appArmorProfile
+   */
+  readonly appArmorProfile?: ClusterSpecSecurityContextAppArmorProfile;
+
+  /**
+   * The capabilities to add/drop when running containers.
+   * Defaults to the default set of capabilities granted by the container runtime.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default the default set of capabilities granted by the container runtime.
+   * @schema ClusterSpecSecurityContext#capabilities
+   */
+  readonly capabilities?: ClusterSpecSecurityContextCapabilities;
+
+  /**
+   * Run container in privileged mode.
+   * Processes in privileged containers are essentially equivalent to root on the host.
+   * Defaults to false.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default false.
+   * @schema ClusterSpecSecurityContext#privileged
+   */
+  readonly privileged?: boolean;
+
+  /**
+   * procMount denotes the type of proc mount to use for the containers.
+   * The default value is Default which uses the container runtime defaults for
+   * readonly paths and masked paths.
+   * This requires the ProcMountType feature flag to be enabled.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterSpecSecurityContext#procMount
+   */
+  readonly procMount?: string;
+
+  /**
+   * Whether this container has a read-only root filesystem.
+   * Default is false.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default false.
+   * @schema ClusterSpecSecurityContext#readOnlyRootFilesystem
+   */
+  readonly readOnlyRootFilesystem?: boolean;
+
+  /**
+   * The GID to run the entrypoint of the container process.
+   * Uses runtime default if unset.
+   * May also be set in PodSecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterSpecSecurityContext#runAsGroup
+   */
+  readonly runAsGroup?: number;
+
+  /**
+   * Indicates that the container must run as a non-root user.
+   * If true, the Kubelet will validate the image at runtime to ensure that it
+   * does not run as UID 0 (root) and fail to start the container if it does.
+   * If unset or false, no such validation will be performed.
+   * May also be set in PodSecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   *
+   * @schema ClusterSpecSecurityContext#runAsNonRoot
+   */
+  readonly runAsNonRoot?: boolean;
+
+  /**
+   * The UID to run the entrypoint of the container process.
+   * Defaults to user specified in image metadata if unspecified.
+   * May also be set in PodSecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @default user specified in image metadata if unspecified.
+   * @schema ClusterSpecSecurityContext#runAsUser
+   */
+  readonly runAsUser?: number;
+
+  /**
+   * The SELinux context to be applied to the container.
+   * If unspecified, the container runtime will allocate a random SELinux context for each
+   * container.  May also be set in PodSecurityContext.  If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterSpecSecurityContext#seLinuxOptions
+   */
+  readonly seLinuxOptions?: ClusterSpecSecurityContextSeLinuxOptions;
+
+  /**
+   * The seccomp options to use by this container. If seccomp options are
+   * provided at both the pod & container level, the container options
+   * override the pod options.
+   * Note that this field cannot be set when spec.os.name is windows.
+   *
+   * @schema ClusterSpecSecurityContext#seccompProfile
+   */
+  readonly seccompProfile?: ClusterSpecSecurityContextSeccompProfile;
+
+  /**
+   * The Windows specific settings applied to all containers.
+   * If unspecified, the options from the PodSecurityContext will be used.
+   * If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
+   * Note that this field cannot be set when spec.os.name is linux.
+   *
+   * @schema ClusterSpecSecurityContext#windowsOptions
+   */
+  readonly windowsOptions?: ClusterSpecSecurityContextWindowsOptions;
+}
+
+/**
+ * Converts an object of type 'ClusterSpecSecurityContext' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecSecurityContext(obj: ClusterSpecSecurityContext | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'allowPrivilegeEscalation': obj.allowPrivilegeEscalation,
+    'appArmorProfile': toJson_ClusterSpecSecurityContextAppArmorProfile(obj.appArmorProfile),
+    'capabilities': toJson_ClusterSpecSecurityContextCapabilities(obj.capabilities),
+    'privileged': obj.privileged,
+    'procMount': obj.procMount,
+    'readOnlyRootFilesystem': obj.readOnlyRootFilesystem,
+    'runAsGroup': obj.runAsGroup,
+    'runAsNonRoot': obj.runAsNonRoot,
+    'runAsUser': obj.runAsUser,
+    'seLinuxOptions': toJson_ClusterSpecSecurityContextSeLinuxOptions(obj.seLinuxOptions),
+    'seccompProfile': toJson_ClusterSpecSecurityContextSeccompProfile(obj.seccompProfile),
+    'windowsOptions': toJson_ClusterSpecSecurityContextWindowsOptions(obj.windowsOptions),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configure the generation of the service account
@@ -2294,13 +2671,12 @@ export interface ClusterSpecServiceAccountTemplate {
    * @schema ClusterSpecServiceAccountTemplate#metadata
    */
   readonly metadata: ClusterSpecServiceAccountTemplateMetadata;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecServiceAccountTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecServiceAccountTemplate(obj: ClusterSpecServiceAccountTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2309,7 +2685,7 @@ export function toJson_ClusterSpecServiceAccountTemplate(obj: ClusterSpecService
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configuration of the storage of the instances
@@ -2349,13 +2725,12 @@ export interface ClusterSpecStorage {
    * @schema ClusterSpecStorage#storageClass
    */
   readonly storageClass?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecStorage' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecStorage(obj: ClusterSpecStorage | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2367,7 +2742,7 @@ export function toJson_ClusterSpecStorage(obj: ClusterSpecStorage | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The secret containing the superuser password. If not defined a new
@@ -2382,13 +2757,12 @@ export interface ClusterSpecSuperuserSecret {
    * @schema ClusterSpecSuperuserSecret#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecSuperuserSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecSuperuserSecret(obj: ClusterSpecSuperuserSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2397,7 +2771,7 @@ export function toJson_ClusterSpecSuperuserSecret(obj: ClusterSpecSuperuserSecre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TablespaceConfiguration is the configuration of a tablespace, and includes
@@ -2436,13 +2810,12 @@ export interface ClusterSpecTablespaces {
    * @schema ClusterSpecTablespaces#temporary
    */
   readonly temporary?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecTablespaces' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecTablespaces(obj: ClusterSpecTablespaces | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2454,7 +2827,7 @@ export function toJson_ClusterSpecTablespaces(obj: ClusterSpecTablespaces | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TopologySpreadConstraint specifies how to spread matching pods among the given topology.
@@ -2599,13 +2972,12 @@ export interface ClusterSpecTopologySpreadConstraints {
    * @schema ClusterSpecTopologySpreadConstraints#whenUnsatisfiable
    */
   readonly whenUnsatisfiable: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecTopologySpreadConstraints' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecTopologySpreadConstraints(obj: ClusterSpecTopologySpreadConstraints | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2621,7 +2993,7 @@ export function toJson_ClusterSpecTopologySpreadConstraints(obj: ClusterSpecTopo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configuration of the storage for PostgreSQL WAL (Write-Ahead Log)
@@ -2661,13 +3033,12 @@ export interface ClusterSpecWalStorage {
    * @schema ClusterSpecWalStorage#storageClass
    */
   readonly storageClass?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecWalStorage' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecWalStorage(obj: ClusterSpecWalStorage | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2679,7 +3050,7 @@ export function toJson_ClusterSpecWalStorage(obj: ClusterSpecWalStorage | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AdditionalPodAffinity allows to specify pod affinity terms to be passed to all the cluster's pods.
@@ -2714,13 +3085,12 @@ export interface ClusterSpecAffinityAdditionalPodAffinity {
    * @schema ClusterSpecAffinityAdditionalPodAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAffinity(obj: ClusterSpecAffinityAdditionalPodAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2730,7 +3100,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAffinity(obj: ClusterSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * AdditionalPodAntiAffinity allows to specify pod anti-affinity terms to be added to the ones generated
@@ -2766,13 +3136,12 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinity {
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAntiAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinity(obj: ClusterSpecAffinityAdditionalPodAntiAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2782,7 +3151,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinity(obj: Cluster
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * NodeAffinity describes node affinity scheduling rules for the pod.
@@ -2816,13 +3185,12 @@ export interface ClusterSpecAffinityNodeAffinity {
    * @schema ClusterSpecAffinityNodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityNodeAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityNodeAffinity(obj: ClusterSpecAffinityNodeAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2832,7 +3200,7 @@ export function toJson_ClusterSpecAffinityNodeAffinity(obj: ClusterSpecAffinityN
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The pod this Toleration is attached to tolerates any taint that matches
@@ -2885,13 +3253,12 @@ export interface ClusterSpecAffinityTolerations {
    * @schema ClusterSpecAffinityTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityTolerations' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityTolerations(obj: ClusterSpecAffinityTolerations | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2904,7 +3271,7 @@ export function toJson_ClusterSpecAffinityTolerations(obj: ClusterSpecAffinityTo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The configuration for the barman-cloud tool suite
@@ -3001,13 +3368,12 @@ export interface ClusterSpecBackupBarmanObjectStore {
    * @schema ClusterSpecBackupBarmanObjectStore#wal
    */
   readonly wal?: ClusterSpecBackupBarmanObjectStoreWal;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBackupBarmanObjectStore' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBackupBarmanObjectStore(obj: ClusterSpecBackupBarmanObjectStore | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3026,7 +3392,7 @@ export function toJson_ClusterSpecBackupBarmanObjectStore(obj: ClusterSpecBackup
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The policy to decide which instance should perform backups. Available
@@ -3107,13 +3473,12 @@ export interface ClusterSpecBackupVolumeSnapshot {
    * @schema ClusterSpecBackupVolumeSnapshot#walClassName
    */
   readonly walClassName?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBackupVolumeSnapshot' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBackupVolumeSnapshot(obj: ClusterSpecBackupVolumeSnapshot | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3129,7 +3494,7 @@ export function toJson_ClusterSpecBackupVolumeSnapshot(obj: ClusterSpecBackupVol
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Bootstrap the cluster via initdb
@@ -3225,6 +3590,7 @@ export interface ClusterSpecBootstrapInitdb {
 
   /**
    * The list of options that must be passed to initdb when creating the cluster.
+   *
    * Deprecated: This could lead to inconsistent configurations,
    * please use the explicit provided parameters instead.
    * If defined, explicit values will be ignored.
@@ -3324,13 +3690,12 @@ export interface ClusterSpecBootstrapInitdb {
    * @schema ClusterSpecBootstrapInitdb#walSegmentSize
    */
   readonly walSegmentSize?: number;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapInitdb' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapInitdb(obj: ClusterSpecBootstrapInitdb | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3359,7 +3724,7 @@ export function toJson_ClusterSpecBootstrapInitdb(obj: ClusterSpecBootstrapInitd
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Bootstrap the cluster taking a physical backup of another compatible
@@ -3399,13 +3764,12 @@ export interface ClusterSpecBootstrapPgBasebackup {
    * @schema ClusterSpecBootstrapPgBasebackup#source
    */
   readonly source: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapPgBasebackup' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapPgBasebackup(obj: ClusterSpecBootstrapPgBasebackup | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3417,7 +3781,7 @@ export function toJson_ClusterSpecBootstrapPgBasebackup(obj: ClusterSpecBootstra
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Bootstrap the cluster from a backup
@@ -3494,13 +3858,12 @@ export interface ClusterSpecBootstrapRecovery {
    * @schema ClusterSpecBootstrapRecovery#volumeSnapshots
    */
   readonly volumeSnapshots?: ClusterSpecBootstrapRecoveryVolumeSnapshots;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapRecovery' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapRecovery(obj: ClusterSpecBootstrapRecovery | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3515,7 +3878,7 @@ export function toJson_ClusterSpecBootstrapRecovery(obj: ClusterSpecBootstrapRec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Source for the environment variable's value. Cannot be used if value is not empty.
@@ -3560,13 +3923,12 @@ export interface ClusterSpecEnvValueFrom {
    * @schema ClusterSpecEnvValueFrom#secretKeyRef
    */
   readonly secretKeyRef?: ClusterSpecEnvValueFromSecretKeyRef;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecEnvValueFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecEnvValueFrom(obj: ClusterSpecEnvValueFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3579,7 +3941,7 @@ export function toJson_ClusterSpecEnvValueFrom(obj: ClusterSpecEnvValueFrom | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The ConfigMap to select from
@@ -3604,13 +3966,12 @@ export interface ClusterSpecEnvFromConfigMapRef {
    * @schema ClusterSpecEnvFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecEnvFromConfigMapRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecEnvFromConfigMapRef(obj: ClusterSpecEnvFromConfigMapRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3620,7 +3981,7 @@ export function toJson_ClusterSpecEnvFromConfigMapRef(obj: ClusterSpecEnvFromCon
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Secret to select from
@@ -3645,13 +4006,12 @@ export interface ClusterSpecEnvFromSecretRef {
    * @schema ClusterSpecEnvFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecEnvFromSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecEnvFromSecretRef(obj: ClusterSpecEnvFromSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3661,7 +4021,7 @@ export function toJson_ClusterSpecEnvFromSecretRef(obj: ClusterSpecEnvFromSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Will be used to create a stand-alone PVC to provision the volume.
@@ -3707,13 +4067,12 @@ export interface ClusterSpecEphemeralVolumeSourceVolumeClaimTemplate {
    * @schema ClusterSpecEphemeralVolumeSourceVolumeClaimTemplate#spec
    */
   readonly spec: ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpec;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecEphemeralVolumeSourceVolumeClaimTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecEphemeralVolumeSourceVolumeClaimTemplate(obj: ClusterSpecEphemeralVolumeSourceVolumeClaimTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3723,7 +4082,7 @@ export function toJson_ClusterSpecEphemeralVolumeSourceVolumeClaimTemplate(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Shm is the size limit of the shared memory volume
@@ -3852,13 +4211,12 @@ export interface ClusterSpecExternalClustersBarmanObjectStore {
    * @schema ClusterSpecExternalClustersBarmanObjectStore#wal
    */
   readonly wal?: ClusterSpecExternalClustersBarmanObjectStoreWal;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersBarmanObjectStore' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersBarmanObjectStore(obj: ClusterSpecExternalClustersBarmanObjectStore | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3877,7 +4235,7 @@ export function toJson_ClusterSpecExternalClustersBarmanObjectStore(obj: Cluster
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The reference to the password to be used to connect to the server.
@@ -3915,13 +4273,12 @@ export interface ClusterSpecExternalClustersPassword {
    * @schema ClusterSpecExternalClustersPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersPassword' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersPassword(obj: ClusterSpecExternalClustersPassword | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3932,7 +4289,7 @@ export function toJson_ClusterSpecExternalClustersPassword(obj: ClusterSpecExter
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The configuration of the plugin that is taking care
@@ -3970,13 +4327,12 @@ export interface ClusterSpecExternalClustersPlugin {
    * @schema ClusterSpecExternalClustersPlugin#parameters
    */
   readonly parameters?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersPlugin' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersPlugin(obj: ClusterSpecExternalClustersPlugin | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3988,7 +4344,7 @@ export function toJson_ClusterSpecExternalClustersPlugin(obj: ClusterSpecExterna
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The reference to an SSL certificate to be used to connect to this
@@ -4021,13 +4377,12 @@ export interface ClusterSpecExternalClustersSslCert {
    * @schema ClusterSpecExternalClustersSslCert#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersSslCert' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersSslCert(obj: ClusterSpecExternalClustersSslCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4038,7 +4393,7 @@ export function toJson_ClusterSpecExternalClustersSslCert(obj: ClusterSpecExtern
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The reference to an SSL private key to be used to connect to this
@@ -4071,13 +4426,12 @@ export interface ClusterSpecExternalClustersSslKey {
    * @schema ClusterSpecExternalClustersSslKey#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersSslKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersSslKey(obj: ClusterSpecExternalClustersSslKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4088,7 +4442,7 @@ export function toJson_ClusterSpecExternalClustersSslKey(obj: ClusterSpecExterna
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The reference to an SSL CA public key to be used to connect to this
@@ -4121,13 +4475,12 @@ export interface ClusterSpecExternalClustersSslRootCert {
    * @schema ClusterSpecExternalClustersSslRootCert#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersSslRootCert' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersSslRootCert(obj: ClusterSpecExternalClustersSslRootCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4138,7 +4491,7 @@ export function toJson_ClusterSpecExternalClustersSslRootCert(obj: ClusterSpecEx
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * RoleConfiguration is the representation, in Kubernetes, of a PostgreSQL role
@@ -4283,13 +4636,12 @@ export interface ClusterSpecManagedRoles {
    * @schema ClusterSpecManagedRoles#validUntil
    */
   readonly validUntil?: Date;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecManagedRoles' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecManagedRoles(obj: ClusterSpecManagedRoles | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4312,7 +4664,7 @@ export function toJson_ClusterSpecManagedRoles(obj: ClusterSpecManagedRoles | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Services roles managed by the `Cluster`
@@ -4334,13 +4686,12 @@ export interface ClusterSpecManagedServices {
    * @schema ClusterSpecManagedServices#disabledDefaultServices
    */
   readonly disabledDefaultServices?: ClusterSpecManagedServicesDisabledDefaultServices[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecManagedServices' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecManagedServices(obj: ClusterSpecManagedServices | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4350,7 +4701,7 @@ export function toJson_ClusterSpecManagedServices(obj: ClusterSpecManagedService
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ConfigMapKeySelector contains enough information to let you locate
@@ -4372,13 +4723,12 @@ export interface ClusterSpecMonitoringCustomQueriesConfigMap {
    * @schema ClusterSpecMonitoringCustomQueriesConfigMap#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecMonitoringCustomQueriesConfigMap' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecMonitoringCustomQueriesConfigMap(obj: ClusterSpecMonitoringCustomQueriesConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4388,7 +4738,7 @@ export function toJson_ClusterSpecMonitoringCustomQueriesConfigMap(obj: ClusterS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretKeySelector contains enough information to let you locate
@@ -4410,13 +4760,12 @@ export interface ClusterSpecMonitoringCustomQueriesSecret {
    * @schema ClusterSpecMonitoringCustomQueriesSecret#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecMonitoringCustomQueriesSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecMonitoringCustomQueriesSecret(obj: ClusterSpecMonitoringCustomQueriesSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4426,7 +4775,7 @@ export function toJson_ClusterSpecMonitoringCustomQueriesSecret(obj: ClusterSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * RelabelConfig allows dynamic rewriting of the label set for targets, alerts,
@@ -4502,13 +4851,12 @@ export interface ClusterSpecMonitoringPodMonitorMetricRelabelings {
    * @schema ClusterSpecMonitoringPodMonitorMetricRelabelings#targetLabel
    */
   readonly targetLabel?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecMonitoringPodMonitorMetricRelabelings' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecMonitoringPodMonitorMetricRelabelings(obj: ClusterSpecMonitoringPodMonitorMetricRelabelings | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4523,7 +4871,7 @@ export function toJson_ClusterSpecMonitoringPodMonitorMetricRelabelings(obj: Clu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * RelabelConfig allows dynamic rewriting of the label set for targets, alerts,
@@ -4599,13 +4947,12 @@ export interface ClusterSpecMonitoringPodMonitorRelabelings {
    * @schema ClusterSpecMonitoringPodMonitorRelabelings#targetLabel
    */
   readonly targetLabel?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecMonitoringPodMonitorRelabelings' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecMonitoringPodMonitorRelabelings(obj: ClusterSpecMonitoringPodMonitorRelabelings | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4620,7 +4967,7 @@ export function toJson_ClusterSpecMonitoringPodMonitorRelabelings(obj: ClusterSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configure TLS communication for the metrics endpoint.
@@ -4636,13 +4983,12 @@ export interface ClusterSpecMonitoringTls {
    * @schema ClusterSpecMonitoringTls#enabled
    */
   readonly enabled?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecMonitoringTls' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecMonitoringTls(obj: ClusterSpecMonitoringTls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4651,7 +4997,253 @@ export function toJson_ClusterSpecMonitoringTls(obj: ClusterSpecMonitoringTls | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * appArmorProfile is the AppArmor options to use by the containers in this pod.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
+ * @schema ClusterSpecPodSecurityContextAppArmorProfile
+ */
+export interface ClusterSpecPodSecurityContextAppArmorProfile {
+  /**
+   * localhostProfile indicates a profile loaded on the node that should be used.
+   * The profile must be preconfigured on the node to work.
+   * Must match the loaded name of the profile.
+   * Must be set if and only if type is "Localhost".
+   *
+   * @schema ClusterSpecPodSecurityContextAppArmorProfile#localhostProfile
+   */
+  readonly localhostProfile?: string;
+
+  /**
+   * type indicates which kind of AppArmor profile will be applied.
+   * Valid options are:
+   * Localhost - a profile pre-loaded on the node.
+   * RuntimeDefault - the container runtime's default profile.
+   * Unconfined - no AppArmor enforcement.
+   *
+   * @schema ClusterSpecPodSecurityContextAppArmorProfile#type
+   */
+  readonly type: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSpecPodSecurityContextAppArmorProfile' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecPodSecurityContextAppArmorProfile(obj: ClusterSpecPodSecurityContextAppArmorProfile | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'localhostProfile': obj.localhostProfile,
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The SELinux context to be applied to all containers.
+ * If unspecified, the container runtime will allocate a random SELinux context for each
+ * container.  May also be set in SecurityContext.  If set in
+ * both SecurityContext and PodSecurityContext, the value specified in SecurityContext
+ * takes precedence for that container.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
+ * @schema ClusterSpecPodSecurityContextSeLinuxOptions
+ */
+export interface ClusterSpecPodSecurityContextSeLinuxOptions {
+  /**
+   * Level is SELinux level label that applies to the container.
+   *
+   * @schema ClusterSpecPodSecurityContextSeLinuxOptions#level
+   */
+  readonly level?: string;
+
+  /**
+   * Role is a SELinux role label that applies to the container.
+   *
+   * @schema ClusterSpecPodSecurityContextSeLinuxOptions#role
+   */
+  readonly role?: string;
+
+  /**
+   * Type is a SELinux type label that applies to the container.
+   *
+   * @schema ClusterSpecPodSecurityContextSeLinuxOptions#type
+   */
+  readonly type?: string;
+
+  /**
+   * User is a SELinux user label that applies to the container.
+   *
+   * @schema ClusterSpecPodSecurityContextSeLinuxOptions#user
+   */
+  readonly user?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSpecPodSecurityContextSeLinuxOptions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecPodSecurityContextSeLinuxOptions(obj: ClusterSpecPodSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'level': obj.level,
+    'role': obj.role,
+    'type': obj.type,
+    'user': obj.user,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The seccomp options to use by the containers in this pod.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
+ * @schema ClusterSpecPodSecurityContextSeccompProfile
+ */
+export interface ClusterSpecPodSecurityContextSeccompProfile {
+  /**
+   * localhostProfile indicates a profile defined in a file on the node should be used.
+   * The profile must be preconfigured on the node to work.
+   * Must be a descending path, relative to the kubelet's configured seccomp profile location.
+   * Must be set if type is "Localhost". Must NOT be set for any other type.
+   *
+   * @schema ClusterSpecPodSecurityContextSeccompProfile#localhostProfile
+   */
+  readonly localhostProfile?: string;
+
+  /**
+   * type indicates which kind of seccomp profile will be applied.
+   * Valid options are:
+   *
+   * Localhost - a profile defined in a file on the node should be used.
+   * RuntimeDefault - the container runtime default profile should be used.
+   * Unconfined - no profile should be applied.
+   *
+   * @schema ClusterSpecPodSecurityContextSeccompProfile#type
+   */
+  readonly type: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSpecPodSecurityContextSeccompProfile' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecPodSecurityContextSeccompProfile(obj: ClusterSpecPodSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'localhostProfile': obj.localhostProfile,
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Sysctl defines a kernel parameter to be set
+ *
+ * @schema ClusterSpecPodSecurityContextSysctls
+ */
+export interface ClusterSpecPodSecurityContextSysctls {
+  /**
+   * Name of a property to set
+   *
+   * @schema ClusterSpecPodSecurityContextSysctls#name
+   */
+  readonly name: string;
+
+  /**
+   * Value of a property to set
+   *
+   * @schema ClusterSpecPodSecurityContextSysctls#value
+   */
+  readonly value: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSpecPodSecurityContextSysctls' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecPodSecurityContextSysctls(obj: ClusterSpecPodSecurityContextSysctls | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The Windows specific settings applied to all containers.
+ * If unspecified, the options within a container's SecurityContext will be used.
+ * If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
+ * Note that this field cannot be set when spec.os.name is linux.
+ *
+ * @schema ClusterSpecPodSecurityContextWindowsOptions
+ */
+export interface ClusterSpecPodSecurityContextWindowsOptions {
+  /**
+   * GMSACredentialSpec is where the GMSA admission webhook
+   * (https://github.com/kubernetes-sigs/windows-gmsa) inlines the contents of the
+   * GMSA credential spec named by the GMSACredentialSpecName field.
+   *
+   * @schema ClusterSpecPodSecurityContextWindowsOptions#gmsaCredentialSpec
+   */
+  readonly gmsaCredentialSpec?: string;
+
+  /**
+   * GMSACredentialSpecName is the name of the GMSA credential spec to use.
+   *
+   * @schema ClusterSpecPodSecurityContextWindowsOptions#gmsaCredentialSpecName
+   */
+  readonly gmsaCredentialSpecName?: string;
+
+  /**
+   * HostProcess determines if a container should be run as a 'Host Process' container.
+   * All of a Pod's containers must have the same effective HostProcess value
+   * (it is not allowed to have a mix of HostProcess containers and non-HostProcess containers).
+   * In addition, if HostProcess is true then HostNetwork must also be set to true.
+   *
+   * @schema ClusterSpecPodSecurityContextWindowsOptions#hostProcess
+   */
+  readonly hostProcess?: boolean;
+
+  /**
+   * The UserName in Windows to run the entrypoint of the container process.
+   * Defaults to the user specified in image metadata if unspecified.
+   * May also be set in PodSecurityContext. If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   *
+   * @default the user specified in image metadata if unspecified.
+   * @schema ClusterSpecPodSecurityContextWindowsOptions#runAsUserName
+   */
+  readonly runAsUserName?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSpecPodSecurityContextWindowsOptions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecPodSecurityContextWindowsOptions(obj: ClusterSpecPodSecurityContextWindowsOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'gmsaCredentialSpec': obj.gmsaCredentialSpec,
+    'gmsaCredentialSpecName': obj.gmsaCredentialSpecName,
+    'hostProcess': obj.hostProcess,
+    'runAsUserName': obj.runAsUserName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ExtensionConfiguration is the configuration used to add
@@ -4696,13 +5288,12 @@ export interface ClusterSpecPostgresqlExtensions {
    * @schema ClusterSpecPostgresqlExtensions#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecPostgresqlExtensions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecPostgresqlExtensions(obj: ClusterSpecPostgresqlExtensions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4715,7 +5306,7 @@ export function toJson_ClusterSpecPostgresqlExtensions(obj: ClusterSpecPostgresq
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Options to specify LDAP configuration
@@ -4764,13 +5355,12 @@ export interface ClusterSpecPostgresqlLdap {
    * @schema ClusterSpecPostgresqlLdap#tls
    */
   readonly tls?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecPostgresqlLdap' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecPostgresqlLdap(obj: ClusterSpecPostgresqlLdap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4784,7 +5374,7 @@ export function toJson_ClusterSpecPostgresqlLdap(obj: ClusterSpecPostgresqlLdap 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Requirements to be met by sync replicas. This will affect how the "synchronous_standby_names" parameter will be
@@ -4806,13 +5396,12 @@ export interface ClusterSpecPostgresqlSyncReplicaElectionConstraint {
    * @schema ClusterSpecPostgresqlSyncReplicaElectionConstraint#nodeLabelsAntiAffinity
    */
   readonly nodeLabelsAntiAffinity?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecPostgresqlSyncReplicaElectionConstraint' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecPostgresqlSyncReplicaElectionConstraint(obj: ClusterSpecPostgresqlSyncReplicaElectionConstraint | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4822,7 +5411,7 @@ export function toJson_ClusterSpecPostgresqlSyncReplicaElectionConstraint(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configuration of the PostgreSQL synchronous replication feature
@@ -4843,6 +5432,15 @@ export interface ClusterSpecPostgresqlSynchronous {
    * @schema ClusterSpecPostgresqlSynchronous#dataDurability
    */
   readonly dataDurability?: ClusterSpecPostgresqlSynchronousDataDurability;
+
+  /**
+   * FailoverQuorum enables a quorum-based check before failover, improving
+   * data durability and safety during failover events in CloudNativePG-managed
+   * PostgreSQL clusters.
+   *
+   * @schema ClusterSpecPostgresqlSynchronous#failoverQuorum
+   */
+  readonly failoverQuorum?: boolean;
 
   /**
    * Specifies the maximum number of local cluster pods that can be
@@ -4887,17 +5485,17 @@ export interface ClusterSpecPostgresqlSynchronous {
    * @schema ClusterSpecPostgresqlSynchronous#standbyNamesPre
    */
   readonly standbyNamesPre?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecPostgresqlSynchronous' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecPostgresqlSynchronous(obj: ClusterSpecPostgresqlSynchronous | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'dataDurability': obj.dataDurability,
+    'failoverQuorum': obj.failoverQuorum,
     'maxStandbyNamesFromCluster': obj.maxStandbyNamesFromCluster,
     'method': obj.method,
     'number': obj.number,
@@ -4907,7 +5505,7 @@ export function toJson_ClusterSpecPostgresqlSynchronous(obj: ClusterSpecPostgres
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The liveness probe configuration
@@ -4986,13 +5584,12 @@ export interface ClusterSpecProbesLiveness {
    * @schema ClusterSpecProbesLiveness#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecProbesLiveness' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecProbesLiveness(obj: ClusterSpecProbesLiveness | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5007,7 +5604,7 @@ export function toJson_ClusterSpecProbesLiveness(obj: ClusterSpecProbesLiveness 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The readiness probe configuration
@@ -5089,13 +5686,12 @@ export interface ClusterSpecProbesReadiness {
    * @schema ClusterSpecProbesReadiness#type
    */
   readonly type?: ClusterSpecProbesReadinessType;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecProbesReadiness' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecProbesReadiness(obj: ClusterSpecProbesReadiness | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5111,7 +5707,7 @@ export function toJson_ClusterSpecProbesReadiness(obj: ClusterSpecProbesReadines
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The startup probe configuration
@@ -5193,13 +5789,12 @@ export interface ClusterSpecProbesStartup {
    * @schema ClusterSpecProbesStartup#type
    */
   readonly type?: ClusterSpecProbesStartupType;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecProbesStartup' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecProbesStartup(obj: ClusterSpecProbesStartup | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5215,7 +5810,7 @@ export function toJson_ClusterSpecProbesStartup(obj: ClusterSpecProbesStartup | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Projection that may be projected along with other supported volume types.
@@ -5310,13 +5905,12 @@ export interface ClusterSpecProjectedVolumeTemplateSources {
    * @schema ClusterSpecProjectedVolumeTemplateSources#serviceAccountToken
    */
   readonly serviceAccountToken?: ClusterSpecProjectedVolumeTemplateSourcesServiceAccountToken;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecProjectedVolumeTemplateSources' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecProjectedVolumeTemplateSources(obj: ClusterSpecProjectedVolumeTemplateSources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5330,7 +5924,7 @@ export function toJson_ClusterSpecProjectedVolumeTemplateSources(obj: ClusterSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Replication slots for high availability configuration
@@ -5371,13 +5965,12 @@ export interface ClusterSpecReplicationSlotsHighAvailability {
    * @schema ClusterSpecReplicationSlotsHighAvailability#synchronizeLogicalDecoding
    */
   readonly synchronizeLogicalDecoding?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecReplicationSlotsHighAvailability' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecReplicationSlotsHighAvailability(obj: ClusterSpecReplicationSlotsHighAvailability | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5388,7 +5981,7 @@ export function toJson_ClusterSpecReplicationSlotsHighAvailability(obj: ClusterS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configures the synchronization of the user defined physical replication slots
@@ -5409,13 +6002,12 @@ export interface ClusterSpecReplicationSlotsSynchronizeReplicas {
    * @schema ClusterSpecReplicationSlotsSynchronizeReplicas#excludePatterns
    */
   readonly excludePatterns?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecReplicationSlotsSynchronizeReplicas' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecReplicationSlotsSynchronizeReplicas(obj: ClusterSpecReplicationSlotsSynchronizeReplicas | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5425,7 +6017,7 @@ export function toJson_ClusterSpecReplicationSlotsSynchronizeReplicas(obj: Clust
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ResourceClaim references one entry in PodSpec.ResourceClaims.
@@ -5450,13 +6042,12 @@ export interface ClusterSpecResourcesClaims {
    * @schema ClusterSpecResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecResourcesClaims' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecResourcesClaims(obj: ClusterSpecResourcesClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5466,7 +6057,7 @@ export function toJson_ClusterSpecResourcesClaims(obj: ClusterSpecResourcesClaim
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSpecResourcesLimits
@@ -5495,6 +6086,257 @@ export class ClusterSpecResourcesRequests {
   private constructor(public readonly value: number | string) {
   }
 }
+
+/**
+ * appArmorProfile is the AppArmor options to use by this container. If set, this profile
+ * overrides the pod's appArmorProfile.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
+ * @schema ClusterSpecSecurityContextAppArmorProfile
+ */
+export interface ClusterSpecSecurityContextAppArmorProfile {
+  /**
+   * localhostProfile indicates a profile loaded on the node that should be used.
+   * The profile must be preconfigured on the node to work.
+   * Must match the loaded name of the profile.
+   * Must be set if and only if type is "Localhost".
+   *
+   * @schema ClusterSpecSecurityContextAppArmorProfile#localhostProfile
+   */
+  readonly localhostProfile?: string;
+
+  /**
+   * type indicates which kind of AppArmor profile will be applied.
+   * Valid options are:
+   * Localhost - a profile pre-loaded on the node.
+   * RuntimeDefault - the container runtime's default profile.
+   * Unconfined - no AppArmor enforcement.
+   *
+   * @schema ClusterSpecSecurityContextAppArmorProfile#type
+   */
+  readonly type: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSpecSecurityContextAppArmorProfile' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecSecurityContextAppArmorProfile(obj: ClusterSpecSecurityContextAppArmorProfile | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'localhostProfile': obj.localhostProfile,
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The capabilities to add/drop when running containers.
+ * Defaults to the default set of capabilities granted by the container runtime.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
+ * @default the default set of capabilities granted by the container runtime.
+ * @schema ClusterSpecSecurityContextCapabilities
+ */
+export interface ClusterSpecSecurityContextCapabilities {
+  /**
+   * Added capabilities
+   *
+   * @schema ClusterSpecSecurityContextCapabilities#add
+   */
+  readonly add?: string[];
+
+  /**
+   * Removed capabilities
+   *
+   * @schema ClusterSpecSecurityContextCapabilities#drop
+   */
+  readonly drop?: string[];
+}
+
+/**
+ * Converts an object of type 'ClusterSpecSecurityContextCapabilities' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecSecurityContextCapabilities(obj: ClusterSpecSecurityContextCapabilities | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'add': obj.add?.map(y => y),
+    'drop': obj.drop?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The SELinux context to be applied to the container.
+ * If unspecified, the container runtime will allocate a random SELinux context for each
+ * container.  May also be set in PodSecurityContext.  If set in both SecurityContext and
+ * PodSecurityContext, the value specified in SecurityContext takes precedence.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
+ * @schema ClusterSpecSecurityContextSeLinuxOptions
+ */
+export interface ClusterSpecSecurityContextSeLinuxOptions {
+  /**
+   * Level is SELinux level label that applies to the container.
+   *
+   * @schema ClusterSpecSecurityContextSeLinuxOptions#level
+   */
+  readonly level?: string;
+
+  /**
+   * Role is a SELinux role label that applies to the container.
+   *
+   * @schema ClusterSpecSecurityContextSeLinuxOptions#role
+   */
+  readonly role?: string;
+
+  /**
+   * Type is a SELinux type label that applies to the container.
+   *
+   * @schema ClusterSpecSecurityContextSeLinuxOptions#type
+   */
+  readonly type?: string;
+
+  /**
+   * User is a SELinux user label that applies to the container.
+   *
+   * @schema ClusterSpecSecurityContextSeLinuxOptions#user
+   */
+  readonly user?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSpecSecurityContextSeLinuxOptions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecSecurityContextSeLinuxOptions(obj: ClusterSpecSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'level': obj.level,
+    'role': obj.role,
+    'type': obj.type,
+    'user': obj.user,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The seccomp options to use by this container. If seccomp options are
+ * provided at both the pod & container level, the container options
+ * override the pod options.
+ * Note that this field cannot be set when spec.os.name is windows.
+ *
+ * @schema ClusterSpecSecurityContextSeccompProfile
+ */
+export interface ClusterSpecSecurityContextSeccompProfile {
+  /**
+   * localhostProfile indicates a profile defined in a file on the node should be used.
+   * The profile must be preconfigured on the node to work.
+   * Must be a descending path, relative to the kubelet's configured seccomp profile location.
+   * Must be set if type is "Localhost". Must NOT be set for any other type.
+   *
+   * @schema ClusterSpecSecurityContextSeccompProfile#localhostProfile
+   */
+  readonly localhostProfile?: string;
+
+  /**
+   * type indicates which kind of seccomp profile will be applied.
+   * Valid options are:
+   *
+   * Localhost - a profile defined in a file on the node should be used.
+   * RuntimeDefault - the container runtime default profile should be used.
+   * Unconfined - no profile should be applied.
+   *
+   * @schema ClusterSpecSecurityContextSeccompProfile#type
+   */
+  readonly type: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSpecSecurityContextSeccompProfile' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecSecurityContextSeccompProfile(obj: ClusterSpecSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'localhostProfile': obj.localhostProfile,
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The Windows specific settings applied to all containers.
+ * If unspecified, the options from the PodSecurityContext will be used.
+ * If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
+ * Note that this field cannot be set when spec.os.name is linux.
+ *
+ * @schema ClusterSpecSecurityContextWindowsOptions
+ */
+export interface ClusterSpecSecurityContextWindowsOptions {
+  /**
+   * GMSACredentialSpec is where the GMSA admission webhook
+   * (https://github.com/kubernetes-sigs/windows-gmsa) inlines the contents of the
+   * GMSA credential spec named by the GMSACredentialSpecName field.
+   *
+   * @schema ClusterSpecSecurityContextWindowsOptions#gmsaCredentialSpec
+   */
+  readonly gmsaCredentialSpec?: string;
+
+  /**
+   * GMSACredentialSpecName is the name of the GMSA credential spec to use.
+   *
+   * @schema ClusterSpecSecurityContextWindowsOptions#gmsaCredentialSpecName
+   */
+  readonly gmsaCredentialSpecName?: string;
+
+  /**
+   * HostProcess determines if a container should be run as a 'Host Process' container.
+   * All of a Pod's containers must have the same effective HostProcess value
+   * (it is not allowed to have a mix of HostProcess containers and non-HostProcess containers).
+   * In addition, if HostProcess is true then HostNetwork must also be set to true.
+   *
+   * @schema ClusterSpecSecurityContextWindowsOptions#hostProcess
+   */
+  readonly hostProcess?: boolean;
+
+  /**
+   * The UserName in Windows to run the entrypoint of the container process.
+   * Defaults to the user specified in image metadata if unspecified.
+   * May also be set in PodSecurityContext. If set in both SecurityContext and
+   * PodSecurityContext, the value specified in SecurityContext takes precedence.
+   *
+   * @default the user specified in image metadata if unspecified.
+   * @schema ClusterSpecSecurityContextWindowsOptions#runAsUserName
+   */
+  readonly runAsUserName?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSpecSecurityContextWindowsOptions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecSecurityContextWindowsOptions(obj: ClusterSpecSecurityContextWindowsOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'gmsaCredentialSpec': obj.gmsaCredentialSpec,
+    'gmsaCredentialSpecName': obj.gmsaCredentialSpecName,
+    'hostProcess': obj.hostProcess,
+    'runAsUserName': obj.runAsUserName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Metadata are the metadata to be used for the generated
@@ -5529,13 +6371,12 @@ export interface ClusterSpecServiceAccountTemplateMetadata {
    * @schema ClusterSpecServiceAccountTemplateMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecServiceAccountTemplateMetadata' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecServiceAccountTemplateMetadata(obj: ClusterSpecServiceAccountTemplateMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5546,7 +6387,7 @@ export function toJson_ClusterSpecServiceAccountTemplateMetadata(obj: ClusterSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Template to be used to generate the Persistent Volume Claim
@@ -5661,13 +6502,12 @@ export interface ClusterSpecStoragePvcTemplate {
    * @schema ClusterSpecStoragePvcTemplate#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecStoragePvcTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecStoragePvcTemplate(obj: ClusterSpecStoragePvcTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5684,7 +6524,7 @@ export function toJson_ClusterSpecStoragePvcTemplate(obj: ClusterSpecStoragePvcT
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Owner is the PostgreSQL user owning the tablespace
@@ -5696,13 +6536,12 @@ export interface ClusterSpecTablespacesOwner {
    * @schema ClusterSpecTablespacesOwner#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecTablespacesOwner' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecTablespacesOwner(obj: ClusterSpecTablespacesOwner | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5711,7 +6550,7 @@ export function toJson_ClusterSpecTablespacesOwner(obj: ClusterSpecTablespacesOw
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The storage configuration for the tablespace
@@ -5751,13 +6590,12 @@ export interface ClusterSpecTablespacesStorage {
    * @schema ClusterSpecTablespacesStorage#storageClass
    */
   readonly storageClass?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecTablespacesStorage' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecTablespacesStorage(obj: ClusterSpecTablespacesStorage | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5769,7 +6607,7 @@ export function toJson_ClusterSpecTablespacesStorage(obj: ClusterSpecTablespaces
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * LabelSelector is used to find matching pods.
@@ -5794,13 +6632,12 @@ export interface ClusterSpecTopologySpreadConstraintsLabelSelector {
    * @schema ClusterSpecTopologySpreadConstraintsLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecTopologySpreadConstraintsLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecTopologySpreadConstraintsLabelSelector(obj: ClusterSpecTopologySpreadConstraintsLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5810,7 +6647,7 @@ export function toJson_ClusterSpecTopologySpreadConstraintsLabelSelector(obj: Cl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Template to be used to generate the Persistent Volume Claim
@@ -5925,13 +6762,12 @@ export interface ClusterSpecWalStoragePvcTemplate {
    * @schema ClusterSpecWalStoragePvcTemplate#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecWalStoragePvcTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecWalStoragePvcTemplate(obj: ClusterSpecWalStoragePvcTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5948,7 +6784,7 @@ export function toJson_ClusterSpecWalStoragePvcTemplate(obj: ClusterSpecWalStora
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -5970,13 +6806,12 @@ export interface ClusterSpecAffinityAdditionalPodAffinityPreferredDuringScheduli
    * @schema ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5986,7 +6821,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -6066,13 +6901,12 @@ export interface ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulin
    * @schema ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6086,7 +6920,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSch
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -6108,13 +6942,12 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSche
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6124,7 +6957,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -6204,13 +7037,12 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSched
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6224,7 +7056,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDurin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * An empty preferred scheduling term matches all objects with implicit weight 0
@@ -6246,13 +7078,12 @@ export interface ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnored
    * @schema ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6262,7 +7093,7 @@ export function toJson_ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingI
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * If the affinity requirements specified by this field are not met at
@@ -6280,13 +7111,12 @@ export interface ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredD
    * @schema ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution#nodeSelectorTerms
    */
   readonly nodeSelectorTerms: ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6295,7 +7125,7 @@ export function toJson_ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIg
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The credentials to use to upload data to Azure Blob Storage
@@ -6339,13 +7169,12 @@ export interface ClusterSpecBackupBarmanObjectStoreAzureCredentials {
    * @schema ClusterSpecBackupBarmanObjectStoreAzureCredentials#storageSasToken
    */
   readonly storageSasToken?: ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageSasToken;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBackupBarmanObjectStoreAzureCredentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBackupBarmanObjectStoreAzureCredentials(obj: ClusterSpecBackupBarmanObjectStoreAzureCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6358,7 +7187,7 @@ export function toJson_ClusterSpecBackupBarmanObjectStoreAzureCredentials(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The configuration to be used to backup the data files
@@ -6426,13 +7255,12 @@ export interface ClusterSpecBackupBarmanObjectStoreData {
    * @schema ClusterSpecBackupBarmanObjectStoreData#jobs
    */
   readonly jobs?: number;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBackupBarmanObjectStoreData' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBackupBarmanObjectStoreData(obj: ClusterSpecBackupBarmanObjectStoreData | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6445,7 +7273,7 @@ export function toJson_ClusterSpecBackupBarmanObjectStoreData(obj: ClusterSpecBa
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * EndpointCA store the CA bundle of the barman endpoint.
@@ -6468,13 +7296,12 @@ export interface ClusterSpecBackupBarmanObjectStoreEndpointCa {
    * @schema ClusterSpecBackupBarmanObjectStoreEndpointCa#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBackupBarmanObjectStoreEndpointCa' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBackupBarmanObjectStoreEndpointCa(obj: ClusterSpecBackupBarmanObjectStoreEndpointCa | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6484,7 +7311,7 @@ export function toJson_ClusterSpecBackupBarmanObjectStoreEndpointCa(obj: Cluster
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The credentials to use to upload data to Google Cloud Storage
@@ -6506,13 +7333,12 @@ export interface ClusterSpecBackupBarmanObjectStoreGoogleCredentials {
    * @schema ClusterSpecBackupBarmanObjectStoreGoogleCredentials#gkeEnvironment
    */
   readonly gkeEnvironment?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBackupBarmanObjectStoreGoogleCredentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBackupBarmanObjectStoreGoogleCredentials(obj: ClusterSpecBackupBarmanObjectStoreGoogleCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6522,7 +7348,7 @@ export function toJson_ClusterSpecBackupBarmanObjectStoreGoogleCredentials(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The credentials to use to upload data to S3
@@ -6564,13 +7390,12 @@ export interface ClusterSpecBackupBarmanObjectStoreS3Credentials {
    * @schema ClusterSpecBackupBarmanObjectStoreS3Credentials#sessionToken
    */
   readonly sessionToken?: ClusterSpecBackupBarmanObjectStoreS3CredentialsSessionToken;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBackupBarmanObjectStoreS3Credentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBackupBarmanObjectStoreS3Credentials(obj: ClusterSpecBackupBarmanObjectStoreS3Credentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6583,7 +7408,7 @@ export function toJson_ClusterSpecBackupBarmanObjectStoreS3Credentials(obj: Clus
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The configuration for the backup of the WAL stream.
@@ -6661,13 +7486,12 @@ export interface ClusterSpecBackupBarmanObjectStoreWal {
    * @schema ClusterSpecBackupBarmanObjectStoreWal#restoreAdditionalCommandArgs
    */
   readonly restoreAdditionalCommandArgs?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBackupBarmanObjectStoreWal' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBackupBarmanObjectStoreWal(obj: ClusterSpecBackupBarmanObjectStoreWal | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6680,7 +7504,7 @@ export function toJson_ClusterSpecBackupBarmanObjectStoreWal(obj: ClusterSpecBac
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configuration parameters to control the online/hot backup with volume snapshots
@@ -6713,13 +7537,12 @@ export interface ClusterSpecBackupVolumeSnapshotOnlineConfiguration {
    * @schema ClusterSpecBackupVolumeSnapshotOnlineConfiguration#waitForArchive
    */
   readonly waitForArchive?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBackupVolumeSnapshotOnlineConfiguration' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBackupVolumeSnapshotOnlineConfiguration(obj: ClusterSpecBackupVolumeSnapshotOnlineConfiguration | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6729,7 +7552,7 @@ export function toJson_ClusterSpecBackupVolumeSnapshotOnlineConfiguration(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SnapshotOwnerReference indicates the type of owner reference the snapshot should have
@@ -6760,24 +7583,67 @@ export interface ClusterSpecBootstrapInitdbImport {
   readonly databases: string[];
 
   /**
-   * List of custom options to pass to the `pg_dump` command. IMPORTANT:
-   * Use these options with caution and at your own risk, as the operator
-   * does not validate their content. Be aware that certain options may
-   * conflict with the operator's intended functionality or design.
+   * List of custom options to pass to the `pg_dump` command.
+   *
+   * IMPORTANT: Use with caution. The operator does not validate these options,
+   * and certain flags may interfere with its intended functionality or design.
+   * You are responsible for ensuring that the provided options are compatible
+   * with your environment and desired behavior.
    *
    * @schema ClusterSpecBootstrapInitdbImport#pgDumpExtraOptions
    */
   readonly pgDumpExtraOptions?: string[];
 
   /**
-   * List of custom options to pass to the `pg_restore` command. IMPORTANT:
-   * Use these options with caution and at your own risk, as the operator
-   * does not validate their content. Be aware that certain options may
-   * conflict with the operator's intended functionality or design.
+   * Custom options to pass to the `pg_restore` command during the `data`
+   * section. This setting overrides the generic `pgRestoreExtraOptions` value.
+   *
+   * IMPORTANT: Use with caution. The operator does not validate these options,
+   * and certain flags may interfere with its intended functionality or design.
+   * You are responsible for ensuring that the provided options are compatible
+   * with your environment and desired behavior.
+   *
+   * @schema ClusterSpecBootstrapInitdbImport#pgRestoreDataOptions
+   */
+  readonly pgRestoreDataOptions?: string[];
+
+  /**
+   * List of custom options to pass to the `pg_restore` command.
+   *
+   * IMPORTANT: Use with caution. The operator does not validate these options,
+   * and certain flags may interfere with its intended functionality or design.
+   * You are responsible for ensuring that the provided options are compatible
+   * with your environment and desired behavior.
    *
    * @schema ClusterSpecBootstrapInitdbImport#pgRestoreExtraOptions
    */
   readonly pgRestoreExtraOptions?: string[];
+
+  /**
+   * Custom options to pass to the `pg_restore` command during the `post-data`
+   * section. This setting overrides the generic `pgRestoreExtraOptions` value.
+   *
+   * IMPORTANT: Use with caution. The operator does not validate these options,
+   * and certain flags may interfere with its intended functionality or design.
+   * You are responsible for ensuring that the provided options are compatible
+   * with your environment and desired behavior.
+   *
+   * @schema ClusterSpecBootstrapInitdbImport#pgRestorePostdataOptions
+   */
+  readonly pgRestorePostdataOptions?: string[];
+
+  /**
+   * Custom options to pass to the `pg_restore` command during the `pre-data`
+   * section. This setting overrides the generic `pgRestoreExtraOptions` value.
+   *
+   * IMPORTANT: Use with caution. The operator does not validate these options,
+   * and certain flags may interfere with its intended functionality or design.
+   * You are responsible for ensuring that the provided options are compatible
+   * with your environment and desired behavior.
+   *
+   * @schema ClusterSpecBootstrapInitdbImport#pgRestorePredataOptions
+   */
+  readonly pgRestorePredataOptions?: string[];
 
   /**
    * List of SQL queries to be executed as a superuser in the application
@@ -6816,19 +7682,21 @@ export interface ClusterSpecBootstrapInitdbImport {
    * @schema ClusterSpecBootstrapInitdbImport#type
    */
   readonly type: ClusterSpecBootstrapInitdbImportType;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapInitdbImport' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapInitdbImport(obj: ClusterSpecBootstrapInitdbImport | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'databases': obj.databases?.map(y => y),
     'pgDumpExtraOptions': obj.pgDumpExtraOptions?.map(y => y),
+    'pgRestoreDataOptions': obj.pgRestoreDataOptions?.map(y => y),
     'pgRestoreExtraOptions': obj.pgRestoreExtraOptions?.map(y => y),
+    'pgRestorePostdataOptions': obj.pgRestorePostdataOptions?.map(y => y),
+    'pgRestorePredataOptions': obj.pgRestorePredataOptions?.map(y => y),
     'postImportApplicationSQL': obj.postImportApplicationSql?.map(y => y),
     'roles': obj.roles?.map(y => y),
     'schemaOnly': obj.schemaOnly,
@@ -6838,7 +7706,7 @@ export function toJson_ClusterSpecBootstrapInitdbImport(obj: ClusterSpecBootstra
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * List of references to ConfigMaps or Secrets containing SQL files
@@ -6865,13 +7733,12 @@ export interface ClusterSpecBootstrapInitdbPostInitApplicationSqlRefs {
    * @schema ClusterSpecBootstrapInitdbPostInitApplicationSqlRefs#secretRefs
    */
   readonly secretRefs?: ClusterSpecBootstrapInitdbPostInitApplicationSqlRefsSecretRefs[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapInitdbPostInitApplicationSqlRefs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapInitdbPostInitApplicationSqlRefs(obj: ClusterSpecBootstrapInitdbPostInitApplicationSqlRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6881,7 +7748,7 @@ export function toJson_ClusterSpecBootstrapInitdbPostInitApplicationSqlRefs(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * List of references to ConfigMaps or Secrets containing SQL files
@@ -6908,13 +7775,12 @@ export interface ClusterSpecBootstrapInitdbPostInitSqlRefs {
    * @schema ClusterSpecBootstrapInitdbPostInitSqlRefs#secretRefs
    */
   readonly secretRefs?: ClusterSpecBootstrapInitdbPostInitSqlRefsSecretRefs[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapInitdbPostInitSqlRefs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapInitdbPostInitSqlRefs(obj: ClusterSpecBootstrapInitdbPostInitSqlRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6924,7 +7790,7 @@ export function toJson_ClusterSpecBootstrapInitdbPostInitSqlRefs(obj: ClusterSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * List of references to ConfigMaps or Secrets containing SQL files
@@ -6951,13 +7817,12 @@ export interface ClusterSpecBootstrapInitdbPostInitTemplateSqlRefs {
    * @schema ClusterSpecBootstrapInitdbPostInitTemplateSqlRefs#secretRefs
    */
   readonly secretRefs?: ClusterSpecBootstrapInitdbPostInitTemplateSqlRefsSecretRefs[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapInitdbPostInitTemplateSqlRefs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapInitdbPostInitTemplateSqlRefs(obj: ClusterSpecBootstrapInitdbPostInitTemplateSqlRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6967,7 +7832,7 @@ export function toJson_ClusterSpecBootstrapInitdbPostInitTemplateSqlRefs(obj: Cl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Name of the secret containing the initial credentials for the
@@ -6983,13 +7848,12 @@ export interface ClusterSpecBootstrapInitdbSecret {
    * @schema ClusterSpecBootstrapInitdbSecret#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapInitdbSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapInitdbSecret(obj: ClusterSpecBootstrapInitdbSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6998,7 +7862,7 @@ export function toJson_ClusterSpecBootstrapInitdbSecret(obj: ClusterSpecBootstra
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Name of the secret containing the initial credentials for the
@@ -7014,13 +7878,12 @@ export interface ClusterSpecBootstrapPgBasebackupSecret {
    * @schema ClusterSpecBootstrapPgBasebackupSecret#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapPgBasebackupSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapPgBasebackupSecret(obj: ClusterSpecBootstrapPgBasebackupSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7029,7 +7892,7 @@ export function toJson_ClusterSpecBootstrapPgBasebackupSecret(obj: ClusterSpecBo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The backup object containing the physical base backup from which to
@@ -7054,13 +7917,12 @@ export interface ClusterSpecBootstrapRecoveryBackup {
    * @schema ClusterSpecBootstrapRecoveryBackup#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapRecoveryBackup' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapRecoveryBackup(obj: ClusterSpecBootstrapRecoveryBackup | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7070,7 +7932,7 @@ export function toJson_ClusterSpecBootstrapRecoveryBackup(obj: ClusterSpecBootst
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * By default, the recovery process applies all the available
@@ -7143,13 +8005,12 @@ export interface ClusterSpecBootstrapRecoveryRecoveryTarget {
    * @schema ClusterSpecBootstrapRecoveryRecoveryTarget#targetXID
    */
   readonly targetXid?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapRecoveryRecoveryTarget' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapRecoveryRecoveryTarget(obj: ClusterSpecBootstrapRecoveryRecoveryTarget | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7165,7 +8026,7 @@ export function toJson_ClusterSpecBootstrapRecoveryRecoveryTarget(obj: ClusterSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Name of the secret containing the initial credentials for the
@@ -7181,13 +8042,12 @@ export interface ClusterSpecBootstrapRecoverySecret {
    * @schema ClusterSpecBootstrapRecoverySecret#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapRecoverySecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapRecoverySecret(obj: ClusterSpecBootstrapRecoverySecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7196,7 +8056,7 @@ export function toJson_ClusterSpecBootstrapRecoverySecret(obj: ClusterSpecBootst
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The static PVC data source(s) from which to initiate the
@@ -7231,13 +8091,12 @@ export interface ClusterSpecBootstrapRecoveryVolumeSnapshots {
    * @schema ClusterSpecBootstrapRecoveryVolumeSnapshots#walStorage
    */
   readonly walStorage?: ClusterSpecBootstrapRecoveryVolumeSnapshotsWalStorage;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapRecoveryVolumeSnapshots' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapRecoveryVolumeSnapshots(obj: ClusterSpecBootstrapRecoveryVolumeSnapshots | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7248,7 +8107,7 @@ export function toJson_ClusterSpecBootstrapRecoveryVolumeSnapshots(obj: ClusterS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selects a key of a ConfigMap.
@@ -7280,13 +8139,12 @@ export interface ClusterSpecEnvValueFromConfigMapKeyRef {
    * @schema ClusterSpecEnvValueFromConfigMapKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecEnvValueFromConfigMapKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecEnvValueFromConfigMapKeyRef(obj: ClusterSpecEnvValueFromConfigMapKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7297,7 +8155,7 @@ export function toJson_ClusterSpecEnvValueFromConfigMapKeyRef(obj: ClusterSpecEn
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selects a field of the pod: supports metadata.name, metadata.namespace, `metadata.labels['<KEY>']`, `metadata.annotations['<KEY>']`,
@@ -7319,13 +8177,12 @@ export interface ClusterSpecEnvValueFromFieldRef {
    * @schema ClusterSpecEnvValueFromFieldRef#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecEnvValueFromFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecEnvValueFromFieldRef(obj: ClusterSpecEnvValueFromFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7335,7 +8192,7 @@ export function toJson_ClusterSpecEnvValueFromFieldRef(obj: ClusterSpecEnvValueF
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * FileKeyRef selects a key of the env file.
@@ -7380,13 +8237,12 @@ export interface ClusterSpecEnvValueFromFileKeyRef {
    * @schema ClusterSpecEnvValueFromFileKeyRef#volumeName
    */
   readonly volumeName: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecEnvValueFromFileKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecEnvValueFromFileKeyRef(obj: ClusterSpecEnvValueFromFileKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7398,7 +8254,7 @@ export function toJson_ClusterSpecEnvValueFromFileKeyRef(obj: ClusterSpecEnvValu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selects a resource of the container: only resources limits and requests
@@ -7427,13 +8283,12 @@ export interface ClusterSpecEnvValueFromResourceFieldRef {
    * @schema ClusterSpecEnvValueFromResourceFieldRef#resource
    */
   readonly resource: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecEnvValueFromResourceFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecEnvValueFromResourceFieldRef(obj: ClusterSpecEnvValueFromResourceFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7444,7 +8299,7 @@ export function toJson_ClusterSpecEnvValueFromResourceFieldRef(obj: ClusterSpecE
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selects a key of a secret in the pod's namespace
@@ -7476,13 +8331,12 @@ export interface ClusterSpecEnvValueFromSecretKeyRef {
    * @schema ClusterSpecEnvValueFromSecretKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecEnvValueFromSecretKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecEnvValueFromSecretKeyRef(obj: ClusterSpecEnvValueFromSecretKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7493,7 +8347,7 @@ export function toJson_ClusterSpecEnvValueFromSecretKeyRef(obj: ClusterSpecEnvVa
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The specification for the PersistentVolumeClaim. The entire content is
@@ -7611,13 +8465,12 @@ export interface ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpec {
    * @schema ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpec#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpec(obj: ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7634,7 +8487,7 @@ export function toJson_ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpec(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The credentials to use to upload data to Azure Blob Storage
@@ -7678,13 +8531,12 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreAzureCredentials {
    * @schema ClusterSpecExternalClustersBarmanObjectStoreAzureCredentials#storageSasToken
    */
   readonly storageSasToken?: ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageSasToken;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersBarmanObjectStoreAzureCredentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersBarmanObjectStoreAzureCredentials(obj: ClusterSpecExternalClustersBarmanObjectStoreAzureCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7697,7 +8549,7 @@ export function toJson_ClusterSpecExternalClustersBarmanObjectStoreAzureCredenti
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The configuration to be used to backup the data files
@@ -7765,13 +8617,12 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreData {
    * @schema ClusterSpecExternalClustersBarmanObjectStoreData#jobs
    */
   readonly jobs?: number;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersBarmanObjectStoreData' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersBarmanObjectStoreData(obj: ClusterSpecExternalClustersBarmanObjectStoreData | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7784,7 +8635,7 @@ export function toJson_ClusterSpecExternalClustersBarmanObjectStoreData(obj: Clu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * EndpointCA store the CA bundle of the barman endpoint.
@@ -7807,13 +8658,12 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreEndpointCa {
    * @schema ClusterSpecExternalClustersBarmanObjectStoreEndpointCa#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersBarmanObjectStoreEndpointCa' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersBarmanObjectStoreEndpointCa(obj: ClusterSpecExternalClustersBarmanObjectStoreEndpointCa | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7823,7 +8673,7 @@ export function toJson_ClusterSpecExternalClustersBarmanObjectStoreEndpointCa(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The credentials to use to upload data to Google Cloud Storage
@@ -7845,13 +8695,12 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreGoogleCredentials {
    * @schema ClusterSpecExternalClustersBarmanObjectStoreGoogleCredentials#gkeEnvironment
    */
   readonly gkeEnvironment?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersBarmanObjectStoreGoogleCredentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersBarmanObjectStoreGoogleCredentials(obj: ClusterSpecExternalClustersBarmanObjectStoreGoogleCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7861,7 +8710,7 @@ export function toJson_ClusterSpecExternalClustersBarmanObjectStoreGoogleCredent
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The credentials to use to upload data to S3
@@ -7903,13 +8752,12 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreS3Credentials {
    * @schema ClusterSpecExternalClustersBarmanObjectStoreS3Credentials#sessionToken
    */
   readonly sessionToken?: ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsSessionToken;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersBarmanObjectStoreS3Credentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersBarmanObjectStoreS3Credentials(obj: ClusterSpecExternalClustersBarmanObjectStoreS3Credentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7922,7 +8770,7 @@ export function toJson_ClusterSpecExternalClustersBarmanObjectStoreS3Credentials
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The configuration for the backup of the WAL stream.
@@ -8000,13 +8848,12 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreWal {
    * @schema ClusterSpecExternalClustersBarmanObjectStoreWal#restoreAdditionalCommandArgs
    */
   readonly restoreAdditionalCommandArgs?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersBarmanObjectStoreWal' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersBarmanObjectStoreWal(obj: ClusterSpecExternalClustersBarmanObjectStoreWal | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8019,7 +8866,7 @@ export function toJson_ClusterSpecExternalClustersBarmanObjectStoreWal(obj: Clus
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Ensure the role is `present` or `absent` - defaults to "present"
@@ -8046,13 +8893,12 @@ export interface ClusterSpecManagedRolesPasswordSecret {
    * @schema ClusterSpecManagedRolesPasswordSecret#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecManagedRolesPasswordSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecManagedRolesPasswordSecret(obj: ClusterSpecManagedRolesPasswordSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8061,7 +8907,7 @@ export function toJson_ClusterSpecManagedRolesPasswordSecret(obj: ClusterSpecMan
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ManagedService represents a specific service managed by the cluster.
@@ -8091,13 +8937,12 @@ export interface ClusterSpecManagedServicesAdditional {
    * @schema ClusterSpecManagedServicesAdditional#updateStrategy
    */
   readonly updateStrategy?: ClusterSpecManagedServicesAdditionalUpdateStrategy;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecManagedServicesAdditional' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecManagedServicesAdditional(obj: ClusterSpecManagedServicesAdditional | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8108,7 +8953,7 @@ export function toJson_ClusterSpecManagedServicesAdditional(obj: ClusterSpecMana
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ServiceSelectorType describes a valid value for generating the service selectors.
@@ -8224,13 +9069,12 @@ export interface ClusterSpecPostgresqlExtensionsImage {
    * @schema ClusterSpecPostgresqlExtensionsImage#reference
    */
   readonly reference?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecPostgresqlExtensionsImage' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecPostgresqlExtensionsImage(obj: ClusterSpecPostgresqlExtensionsImage | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8240,7 +9084,7 @@ export function toJson_ClusterSpecPostgresqlExtensionsImage(obj: ClusterSpecPost
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Bind as authentication configuration
@@ -8261,13 +9105,12 @@ export interface ClusterSpecPostgresqlLdapBindAsAuth {
    * @schema ClusterSpecPostgresqlLdapBindAsAuth#suffix
    */
   readonly suffix?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecPostgresqlLdapBindAsAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecPostgresqlLdapBindAsAuth(obj: ClusterSpecPostgresqlLdapBindAsAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8277,7 +9120,7 @@ export function toJson_ClusterSpecPostgresqlLdapBindAsAuth(obj: ClusterSpecPostg
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Bind+Search authentication configuration
@@ -8319,13 +9162,12 @@ export interface ClusterSpecPostgresqlLdapBindSearchAuth {
    * @schema ClusterSpecPostgresqlLdapBindSearchAuth#searchFilter
    */
   readonly searchFilter?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecPostgresqlLdapBindSearchAuth' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecPostgresqlLdapBindSearchAuth(obj: ClusterSpecPostgresqlLdapBindSearchAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8338,7 +9180,7 @@ export function toJson_ClusterSpecPostgresqlLdapBindSearchAuth(obj: ClusterSpecP
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * LDAP schema to be used, possible options are `ldap` and `ldaps`
@@ -8415,13 +9257,12 @@ export interface ClusterSpecProbesLivenessIsolationCheck {
    * @schema ClusterSpecProbesLivenessIsolationCheck#requestTimeout
    */
   readonly requestTimeout?: number;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecProbesLivenessIsolationCheck' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecProbesLivenessIsolationCheck(obj: ClusterSpecProbesLivenessIsolationCheck | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8432,7 +9273,7 @@ export function toJson_ClusterSpecProbesLivenessIsolationCheck(obj: ClusterSpecP
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Lag limit. Used only for `streaming` strategy
@@ -8556,13 +9397,12 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundle {
    * @schema ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundle#signerName
    */
   readonly signerName?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundle' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundle(obj: ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundle | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8575,7 +9415,7 @@ export function toJson_ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBund
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * configMap information about the configMap data to project
@@ -8613,13 +9453,12 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesConfigMap {
    * @schema ClusterSpecProjectedVolumeTemplateSourcesConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecProjectedVolumeTemplateSourcesConfigMap' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecProjectedVolumeTemplateSourcesConfigMap(obj: ClusterSpecProjectedVolumeTemplateSourcesConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8630,7 +9469,7 @@ export function toJson_ClusterSpecProjectedVolumeTemplateSourcesConfigMap(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * downwardAPI information about the downwardAPI data to project
@@ -8644,13 +9483,12 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesDownwardApi {
    * @schema ClusterSpecProjectedVolumeTemplateSourcesDownwardApi#items
    */
   readonly items?: ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItems[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecProjectedVolumeTemplateSourcesDownwardApi' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecProjectedVolumeTemplateSourcesDownwardApi(obj: ClusterSpecProjectedVolumeTemplateSourcesDownwardApi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8659,7 +9497,7 @@ export function toJson_ClusterSpecProjectedVolumeTemplateSourcesDownwardApi(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Projects an auto-rotating credential bundle (private key and certificate
@@ -8780,13 +9618,12 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesPodCertificate {
    * @schema ClusterSpecProjectedVolumeTemplateSourcesPodCertificate#signerName
    */
   readonly signerName: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecProjectedVolumeTemplateSourcesPodCertificate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecProjectedVolumeTemplateSourcesPodCertificate(obj: ClusterSpecProjectedVolumeTemplateSourcesPodCertificate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8800,7 +9637,7 @@ export function toJson_ClusterSpecProjectedVolumeTemplateSourcesPodCertificate(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * secret information about the secret data to project
@@ -8838,13 +9675,12 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesSecret {
    * @schema ClusterSpecProjectedVolumeTemplateSourcesSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecProjectedVolumeTemplateSourcesSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecProjectedVolumeTemplateSourcesSecret(obj: ClusterSpecProjectedVolumeTemplateSourcesSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8855,7 +9691,7 @@ export function toJson_ClusterSpecProjectedVolumeTemplateSourcesSecret(obj: Clus
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * serviceAccountToken is information about the serviceAccountToken data to project
@@ -8893,13 +9729,12 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesServiceAccountToken {
    * @schema ClusterSpecProjectedVolumeTemplateSourcesServiceAccountToken#path
    */
   readonly path: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecProjectedVolumeTemplateSourcesServiceAccountToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecProjectedVolumeTemplateSourcesServiceAccountToken(obj: ClusterSpecProjectedVolumeTemplateSourcesServiceAccountToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8910,7 +9745,7 @@ export function toJson_ClusterSpecProjectedVolumeTemplateSourcesServiceAccountTo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * dataSource field can be used to specify either:
@@ -8947,13 +9782,12 @@ export interface ClusterSpecStoragePvcTemplateDataSource {
    * @schema ClusterSpecStoragePvcTemplateDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecStoragePvcTemplateDataSource' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecStoragePvcTemplateDataSource(obj: ClusterSpecStoragePvcTemplateDataSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8964,7 +9798,7 @@ export function toJson_ClusterSpecStoragePvcTemplateDataSource(obj: ClusterSpecS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * dataSourceRef specifies the object from which to populate the volume with data, if a non-empty
@@ -9025,13 +9859,12 @@ export interface ClusterSpecStoragePvcTemplateDataSourceRef {
    * @schema ClusterSpecStoragePvcTemplateDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecStoragePvcTemplateDataSourceRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecStoragePvcTemplateDataSourceRef(obj: ClusterSpecStoragePvcTemplateDataSourceRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9043,7 +9876,7 @@ export function toJson_ClusterSpecStoragePvcTemplateDataSourceRef(obj: ClusterSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * resources represents the minimum resources the volume should have.
@@ -9072,13 +9905,12 @@ export interface ClusterSpecStoragePvcTemplateResources {
    * @schema ClusterSpecStoragePvcTemplateResources#requests
    */
   readonly requests?: { [key: string]: ClusterSpecStoragePvcTemplateResourcesRequests };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecStoragePvcTemplateResources' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecStoragePvcTemplateResources(obj: ClusterSpecStoragePvcTemplateResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9088,7 +9920,7 @@ export function toJson_ClusterSpecStoragePvcTemplateResources(obj: ClusterSpecSt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * selector is a label query over volumes to consider for binding.
@@ -9111,13 +9943,12 @@ export interface ClusterSpecStoragePvcTemplateSelector {
    * @schema ClusterSpecStoragePvcTemplateSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecStoragePvcTemplateSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecStoragePvcTemplateSelector(obj: ClusterSpecStoragePvcTemplateSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9127,7 +9958,7 @@ export function toJson_ClusterSpecStoragePvcTemplateSelector(obj: ClusterSpecSto
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Template to be used to generate the Persistent Volume Claim
@@ -9242,13 +10073,12 @@ export interface ClusterSpecTablespacesStoragePvcTemplate {
    * @schema ClusterSpecTablespacesStoragePvcTemplate#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecTablespacesStoragePvcTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecTablespacesStoragePvcTemplate(obj: ClusterSpecTablespacesStoragePvcTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9265,7 +10095,7 @@ export function toJson_ClusterSpecTablespacesStoragePvcTemplate(obj: ClusterSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -9298,13 +10128,12 @@ export interface ClusterSpecTopologySpreadConstraintsLabelSelectorMatchExpressio
    * @schema ClusterSpecTopologySpreadConstraintsLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecTopologySpreadConstraintsLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecTopologySpreadConstraintsLabelSelectorMatchExpressions(obj: ClusterSpecTopologySpreadConstraintsLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9315,7 +10144,7 @@ export function toJson_ClusterSpecTopologySpreadConstraintsLabelSelectorMatchExp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * dataSource field can be used to specify either:
@@ -9352,13 +10181,12 @@ export interface ClusterSpecWalStoragePvcTemplateDataSource {
    * @schema ClusterSpecWalStoragePvcTemplateDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecWalStoragePvcTemplateDataSource' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecWalStoragePvcTemplateDataSource(obj: ClusterSpecWalStoragePvcTemplateDataSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9369,7 +10197,7 @@ export function toJson_ClusterSpecWalStoragePvcTemplateDataSource(obj: ClusterSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * dataSourceRef specifies the object from which to populate the volume with data, if a non-empty
@@ -9430,13 +10258,12 @@ export interface ClusterSpecWalStoragePvcTemplateDataSourceRef {
    * @schema ClusterSpecWalStoragePvcTemplateDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecWalStoragePvcTemplateDataSourceRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecWalStoragePvcTemplateDataSourceRef(obj: ClusterSpecWalStoragePvcTemplateDataSourceRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9448,7 +10275,7 @@ export function toJson_ClusterSpecWalStoragePvcTemplateDataSourceRef(obj: Cluste
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * resources represents the minimum resources the volume should have.
@@ -9477,13 +10304,12 @@ export interface ClusterSpecWalStoragePvcTemplateResources {
    * @schema ClusterSpecWalStoragePvcTemplateResources#requests
    */
   readonly requests?: { [key: string]: ClusterSpecWalStoragePvcTemplateResourcesRequests };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecWalStoragePvcTemplateResources' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecWalStoragePvcTemplateResources(obj: ClusterSpecWalStoragePvcTemplateResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9493,7 +10319,7 @@ export function toJson_ClusterSpecWalStoragePvcTemplateResources(obj: ClusterSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * selector is a label query over volumes to consider for binding.
@@ -9516,13 +10342,12 @@ export interface ClusterSpecWalStoragePvcTemplateSelector {
    * @schema ClusterSpecWalStoragePvcTemplateSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecWalStoragePvcTemplateSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecWalStoragePvcTemplateSelector(obj: ClusterSpecWalStoragePvcTemplateSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9532,7 +10357,7 @@ export function toJson_ClusterSpecWalStoragePvcTemplateSelector(obj: ClusterSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -9607,13 +10432,12 @@ export interface ClusterSpecAffinityAdditionalPodAffinityPreferredDuringScheduli
    * @schema ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9627,7 +10451,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -9651,13 +10475,12 @@ export interface ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulin
    * @schema ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9667,7 +10490,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSch
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -9694,13 +10517,12 @@ export interface ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulin
    * @schema ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9710,7 +10532,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSch
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -9785,13 +10607,12 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSche
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9805,7 +10626,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -9829,13 +10650,12 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSched
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9845,7 +10665,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDurin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -9872,13 +10692,12 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSched
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9888,7 +10707,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDurin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A node selector term, associated with the corresponding weight.
@@ -9909,13 +10728,12 @@ export interface ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnored
    * @schema ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchFields
    */
   readonly matchFields?: ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference(obj: ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9925,7 +10743,7 @@ export function toJson_ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingI
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A null or empty node selector term matches no objects. The requirements of
@@ -9948,13 +10766,12 @@ export interface ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredD
    * @schema ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchFields
    */
   readonly matchFields?: ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms(obj: ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9964,7 +10781,7 @@ export function toJson_ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIg
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The connection string to be used
@@ -9985,13 +10802,12 @@ export interface ClusterSpecBackupBarmanObjectStoreAzureCredentialsConnectionStr
    * @schema ClusterSpecBackupBarmanObjectStoreAzureCredentialsConnectionString#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBackupBarmanObjectStoreAzureCredentialsConnectionString' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBackupBarmanObjectStoreAzureCredentialsConnectionString(obj: ClusterSpecBackupBarmanObjectStoreAzureCredentialsConnectionString | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10001,7 +10817,7 @@ export function toJson_ClusterSpecBackupBarmanObjectStoreAzureCredentialsConnect
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The storage account where to upload data
@@ -10022,13 +10838,12 @@ export interface ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageAccoun
    * @schema ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageAccount#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageAccount' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageAccount(obj: ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageAccount | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10038,7 +10853,7 @@ export function toJson_ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorage
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The storage account key to be used in conjunction
@@ -10060,13 +10875,12 @@ export interface ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageKey {
    * @schema ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageKey#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageKey(obj: ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10076,7 +10890,7 @@ export function toJson_ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorage
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A shared-access-signature to be used in conjunction with
@@ -10098,13 +10912,12 @@ export interface ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageSasTok
    * @schema ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageSasToken#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageSasToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageSasToken(obj: ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageSasToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10114,7 +10927,7 @@ export function toJson_ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorage
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Compress a backup file (a tar file per tablespace) while streaming it
@@ -10166,13 +10979,12 @@ export interface ClusterSpecBackupBarmanObjectStoreGoogleCredentialsApplicationC
    * @schema ClusterSpecBackupBarmanObjectStoreGoogleCredentialsApplicationCredentials#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBackupBarmanObjectStoreGoogleCredentialsApplicationCredentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBackupBarmanObjectStoreGoogleCredentialsApplicationCredentials(obj: ClusterSpecBackupBarmanObjectStoreGoogleCredentialsApplicationCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10182,7 +10994,7 @@ export function toJson_ClusterSpecBackupBarmanObjectStoreGoogleCredentialsApplic
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The reference to the access key id
@@ -10203,13 +11015,12 @@ export interface ClusterSpecBackupBarmanObjectStoreS3CredentialsAccessKeyId {
    * @schema ClusterSpecBackupBarmanObjectStoreS3CredentialsAccessKeyId#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBackupBarmanObjectStoreS3CredentialsAccessKeyId' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBackupBarmanObjectStoreS3CredentialsAccessKeyId(obj: ClusterSpecBackupBarmanObjectStoreS3CredentialsAccessKeyId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10219,7 +11030,7 @@ export function toJson_ClusterSpecBackupBarmanObjectStoreS3CredentialsAccessKeyI
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The reference to the secret containing the region name
@@ -10240,13 +11051,12 @@ export interface ClusterSpecBackupBarmanObjectStoreS3CredentialsRegion {
    * @schema ClusterSpecBackupBarmanObjectStoreS3CredentialsRegion#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBackupBarmanObjectStoreS3CredentialsRegion' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBackupBarmanObjectStoreS3CredentialsRegion(obj: ClusterSpecBackupBarmanObjectStoreS3CredentialsRegion | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10256,7 +11066,7 @@ export function toJson_ClusterSpecBackupBarmanObjectStoreS3CredentialsRegion(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The reference to the secret access key
@@ -10277,13 +11087,12 @@ export interface ClusterSpecBackupBarmanObjectStoreS3CredentialsSecretAccessKey 
    * @schema ClusterSpecBackupBarmanObjectStoreS3CredentialsSecretAccessKey#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBackupBarmanObjectStoreS3CredentialsSecretAccessKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBackupBarmanObjectStoreS3CredentialsSecretAccessKey(obj: ClusterSpecBackupBarmanObjectStoreS3CredentialsSecretAccessKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10293,7 +11102,7 @@ export function toJson_ClusterSpecBackupBarmanObjectStoreS3CredentialsSecretAcce
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The references to the session key
@@ -10314,13 +11123,12 @@ export interface ClusterSpecBackupBarmanObjectStoreS3CredentialsSessionToken {
    * @schema ClusterSpecBackupBarmanObjectStoreS3CredentialsSessionToken#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBackupBarmanObjectStoreS3CredentialsSessionToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBackupBarmanObjectStoreS3CredentialsSessionToken(obj: ClusterSpecBackupBarmanObjectStoreS3CredentialsSessionToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10330,7 +11138,7 @@ export function toJson_ClusterSpecBackupBarmanObjectStoreS3CredentialsSessionTok
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Compress a WAL file before sending it to the object store. Available
@@ -10381,13 +11189,12 @@ export interface ClusterSpecBootstrapInitdbImportSource {
    * @schema ClusterSpecBootstrapInitdbImportSource#externalCluster
    */
   readonly externalCluster: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapInitdbImportSource' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapInitdbImportSource(obj: ClusterSpecBootstrapInitdbImportSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10396,7 +11203,7 @@ export function toJson_ClusterSpecBootstrapInitdbImportSource(obj: ClusterSpecBo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The import type. Can be `microservice` or `monolith`.
@@ -10430,13 +11237,12 @@ export interface ClusterSpecBootstrapInitdbPostInitApplicationSqlRefsConfigMapRe
    * @schema ClusterSpecBootstrapInitdbPostInitApplicationSqlRefsConfigMapRefs#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapInitdbPostInitApplicationSqlRefsConfigMapRefs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapInitdbPostInitApplicationSqlRefsConfigMapRefs(obj: ClusterSpecBootstrapInitdbPostInitApplicationSqlRefsConfigMapRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10446,7 +11252,7 @@ export function toJson_ClusterSpecBootstrapInitdbPostInitApplicationSqlRefsConfi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretKeySelector contains enough information to let you locate
@@ -10468,13 +11274,12 @@ export interface ClusterSpecBootstrapInitdbPostInitApplicationSqlRefsSecretRefs 
    * @schema ClusterSpecBootstrapInitdbPostInitApplicationSqlRefsSecretRefs#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapInitdbPostInitApplicationSqlRefsSecretRefs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapInitdbPostInitApplicationSqlRefsSecretRefs(obj: ClusterSpecBootstrapInitdbPostInitApplicationSqlRefsSecretRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10484,7 +11289,7 @@ export function toJson_ClusterSpecBootstrapInitdbPostInitApplicationSqlRefsSecre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ConfigMapKeySelector contains enough information to let you locate
@@ -10506,13 +11311,12 @@ export interface ClusterSpecBootstrapInitdbPostInitSqlRefsConfigMapRefs {
    * @schema ClusterSpecBootstrapInitdbPostInitSqlRefsConfigMapRefs#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapInitdbPostInitSqlRefsConfigMapRefs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapInitdbPostInitSqlRefsConfigMapRefs(obj: ClusterSpecBootstrapInitdbPostInitSqlRefsConfigMapRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10522,7 +11326,7 @@ export function toJson_ClusterSpecBootstrapInitdbPostInitSqlRefsConfigMapRefs(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretKeySelector contains enough information to let you locate
@@ -10544,13 +11348,12 @@ export interface ClusterSpecBootstrapInitdbPostInitSqlRefsSecretRefs {
    * @schema ClusterSpecBootstrapInitdbPostInitSqlRefsSecretRefs#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapInitdbPostInitSqlRefsSecretRefs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapInitdbPostInitSqlRefsSecretRefs(obj: ClusterSpecBootstrapInitdbPostInitSqlRefsSecretRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10560,7 +11363,7 @@ export function toJson_ClusterSpecBootstrapInitdbPostInitSqlRefsSecretRefs(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ConfigMapKeySelector contains enough information to let you locate
@@ -10582,13 +11385,12 @@ export interface ClusterSpecBootstrapInitdbPostInitTemplateSqlRefsConfigMapRefs 
    * @schema ClusterSpecBootstrapInitdbPostInitTemplateSqlRefsConfigMapRefs#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapInitdbPostInitTemplateSqlRefsConfigMapRefs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapInitdbPostInitTemplateSqlRefsConfigMapRefs(obj: ClusterSpecBootstrapInitdbPostInitTemplateSqlRefsConfigMapRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10598,7 +11400,7 @@ export function toJson_ClusterSpecBootstrapInitdbPostInitTemplateSqlRefsConfigMa
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecretKeySelector contains enough information to let you locate
@@ -10620,13 +11422,12 @@ export interface ClusterSpecBootstrapInitdbPostInitTemplateSqlRefsSecretRefs {
    * @schema ClusterSpecBootstrapInitdbPostInitTemplateSqlRefsSecretRefs#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapInitdbPostInitTemplateSqlRefsSecretRefs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapInitdbPostInitTemplateSqlRefsSecretRefs(obj: ClusterSpecBootstrapInitdbPostInitTemplateSqlRefsSecretRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10636,7 +11437,7 @@ export function toJson_ClusterSpecBootstrapInitdbPostInitTemplateSqlRefsSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * EndpointCA store the CA bundle of the barman endpoint.
@@ -10659,13 +11460,12 @@ export interface ClusterSpecBootstrapRecoveryBackupEndpointCa {
    * @schema ClusterSpecBootstrapRecoveryBackupEndpointCa#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapRecoveryBackupEndpointCa' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapRecoveryBackupEndpointCa(obj: ClusterSpecBootstrapRecoveryBackupEndpointCa | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10675,7 +11475,7 @@ export function toJson_ClusterSpecBootstrapRecoveryBackupEndpointCa(obj: Cluster
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configuration of the storage of the instances
@@ -10705,13 +11505,12 @@ export interface ClusterSpecBootstrapRecoveryVolumeSnapshotsStorage {
    * @schema ClusterSpecBootstrapRecoveryVolumeSnapshotsStorage#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapRecoveryVolumeSnapshotsStorage' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapRecoveryVolumeSnapshotsStorage(obj: ClusterSpecBootstrapRecoveryVolumeSnapshotsStorage | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10722,7 +11521,7 @@ export function toJson_ClusterSpecBootstrapRecoveryVolumeSnapshotsStorage(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TypedLocalObjectReference contains enough information to let you locate the
@@ -10753,13 +11552,12 @@ export interface ClusterSpecBootstrapRecoveryVolumeSnapshotsTablespaceStorage {
    * @schema ClusterSpecBootstrapRecoveryVolumeSnapshotsTablespaceStorage#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapRecoveryVolumeSnapshotsTablespaceStorage' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapRecoveryVolumeSnapshotsTablespaceStorage(obj: ClusterSpecBootstrapRecoveryVolumeSnapshotsTablespaceStorage | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10770,7 +11568,7 @@ export function toJson_ClusterSpecBootstrapRecoveryVolumeSnapshotsTablespaceStor
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configuration of the storage for PostgreSQL WAL (Write-Ahead Log)
@@ -10800,13 +11598,12 @@ export interface ClusterSpecBootstrapRecoveryVolumeSnapshotsWalStorage {
    * @schema ClusterSpecBootstrapRecoveryVolumeSnapshotsWalStorage#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecBootstrapRecoveryVolumeSnapshotsWalStorage' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecBootstrapRecoveryVolumeSnapshotsWalStorage(obj: ClusterSpecBootstrapRecoveryVolumeSnapshotsWalStorage | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10817,7 +11614,7 @@ export function toJson_ClusterSpecBootstrapRecoveryVolumeSnapshotsWalStorage(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specifies the output format of the exposed resources, defaults to "1"
@@ -10870,13 +11667,12 @@ export interface ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecDataSour
    * @schema ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecDataSource' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecDataSource(obj: ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecDataSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10887,7 +11683,7 @@ export function toJson_ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecDa
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * dataSourceRef specifies the object from which to populate the volume with data, if a non-empty
@@ -10948,13 +11744,12 @@ export interface ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecDataSour
    * @schema ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecDataSourceRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecDataSourceRef(obj: ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecDataSourceRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10966,7 +11761,7 @@ export function toJson_ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecDa
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * resources represents the minimum resources the volume should have.
@@ -10995,13 +11790,12 @@ export interface ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecResource
    * @schema ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecResources#requests
    */
   readonly requests?: { [key: string]: ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecResourcesRequests };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecResources' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecResources(obj: ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11011,7 +11805,7 @@ export function toJson_ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * selector is a label query over volumes to consider for binding.
@@ -11034,13 +11828,12 @@ export interface ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecSelector
    * @schema ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecSelector(obj: ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11050,7 +11843,7 @@ export function toJson_ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The connection string to be used
@@ -11071,13 +11864,12 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsCon
    * @schema ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsConnectionString#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsConnectionString' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsConnectionString(obj: ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsConnectionString | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11087,7 +11879,7 @@ export function toJson_ClusterSpecExternalClustersBarmanObjectStoreAzureCredenti
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The storage account where to upload data
@@ -11108,13 +11900,12 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsSto
    * @schema ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageAccount#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageAccount' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageAccount(obj: ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageAccount | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11124,7 +11915,7 @@ export function toJson_ClusterSpecExternalClustersBarmanObjectStoreAzureCredenti
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The storage account key to be used in conjunction
@@ -11146,13 +11937,12 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsSto
    * @schema ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageKey#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageKey(obj: ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11162,7 +11952,7 @@ export function toJson_ClusterSpecExternalClustersBarmanObjectStoreAzureCredenti
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A shared-access-signature to be used in conjunction with
@@ -11184,13 +11974,12 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsSto
    * @schema ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageSasToken#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageSasToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageSasToken(obj: ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageSasToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11200,7 +11989,7 @@ export function toJson_ClusterSpecExternalClustersBarmanObjectStoreAzureCredenti
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Compress a backup file (a tar file per tablespace) while streaming it
@@ -11252,13 +12041,12 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreGoogleCredentialsAp
    * @schema ClusterSpecExternalClustersBarmanObjectStoreGoogleCredentialsApplicationCredentials#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersBarmanObjectStoreGoogleCredentialsApplicationCredentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersBarmanObjectStoreGoogleCredentialsApplicationCredentials(obj: ClusterSpecExternalClustersBarmanObjectStoreGoogleCredentialsApplicationCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11268,7 +12056,7 @@ export function toJson_ClusterSpecExternalClustersBarmanObjectStoreGoogleCredent
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The reference to the access key id
@@ -11289,13 +12077,12 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsAccess
    * @schema ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsAccessKeyId#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsAccessKeyId' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsAccessKeyId(obj: ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsAccessKeyId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11305,7 +12092,7 @@ export function toJson_ClusterSpecExternalClustersBarmanObjectStoreS3Credentials
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The reference to the secret containing the region name
@@ -11326,13 +12113,12 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsRegion
    * @schema ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsRegion#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsRegion' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsRegion(obj: ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsRegion | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11342,7 +12128,7 @@ export function toJson_ClusterSpecExternalClustersBarmanObjectStoreS3Credentials
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The reference to the secret access key
@@ -11363,13 +12149,12 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsSecret
    * @schema ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsSecretAccessKey#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsSecretAccessKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsSecretAccessKey(obj: ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsSecretAccessKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11379,7 +12164,7 @@ export function toJson_ClusterSpecExternalClustersBarmanObjectStoreS3Credentials
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The references to the session key
@@ -11400,13 +12185,12 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsSessio
    * @schema ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsSessionToken#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsSessionToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsSessionToken(obj: ClusterSpecExternalClustersBarmanObjectStoreS3CredentialsSessionToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11416,7 +12200,7 @@ export function toJson_ClusterSpecExternalClustersBarmanObjectStoreS3Credentials
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Compress a WAL file before sending it to the object store. Available
@@ -11491,13 +12275,12 @@ export interface ClusterSpecManagedServicesAdditionalServiceTemplate {
    * @schema ClusterSpecManagedServicesAdditionalServiceTemplate#spec
    */
   readonly spec?: ClusterSpecManagedServicesAdditionalServiceTemplateSpec;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecManagedServicesAdditionalServiceTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecManagedServicesAdditionalServiceTemplate(obj: ClusterSpecManagedServicesAdditionalServiceTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11507,7 +12290,7 @@ export function toJson_ClusterSpecManagedServicesAdditionalServiceTemplate(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * UpdateStrategy describes how the service differences should be reconciled
@@ -11551,13 +12334,12 @@ export interface ClusterSpecPostgresqlLdapBindSearchAuthBindPassword {
    * @schema ClusterSpecPostgresqlLdapBindSearchAuthBindPassword#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecPostgresqlLdapBindSearchAuthBindPassword' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecPostgresqlLdapBindSearchAuthBindPassword(obj: ClusterSpecPostgresqlLdapBindSearchAuthBindPassword | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11568,7 +12350,7 @@ export function toJson_ClusterSpecPostgresqlLdapBindSearchAuthBindPassword(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Select all ClusterTrustBundles that match this label selector.  Only has
@@ -11594,13 +12376,12 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundleLabe
    * @schema ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundleLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundleLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundleLabelSelector(obj: ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundleLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11610,7 +12391,7 @@ export function toJson_ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBund
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -11646,13 +12427,12 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesConfigMapItems {
    * @schema ClusterSpecProjectedVolumeTemplateSourcesConfigMapItems#path
    */
   readonly path: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecProjectedVolumeTemplateSourcesConfigMapItems' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecProjectedVolumeTemplateSourcesConfigMapItems(obj: ClusterSpecProjectedVolumeTemplateSourcesConfigMapItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11663,7 +12443,7 @@ export function toJson_ClusterSpecProjectedVolumeTemplateSourcesConfigMapItems(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * DownwardAPIVolumeFile represents information to create the file containing the pod field
@@ -11704,13 +12484,12 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItems {
    * @schema ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItems#resourceFieldRef
    */
   readonly resourceFieldRef?: ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItemsResourceFieldRef;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItems' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItems(obj: ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11722,7 +12501,7 @@ export function toJson_ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItems
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -11758,13 +12537,12 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesSecretItems {
    * @schema ClusterSpecProjectedVolumeTemplateSourcesSecretItems#path
    */
   readonly path: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecProjectedVolumeTemplateSourcesSecretItems' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecProjectedVolumeTemplateSourcesSecretItems(obj: ClusterSpecProjectedVolumeTemplateSourcesSecretItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11775,7 +12553,7 @@ export function toJson_ClusterSpecProjectedVolumeTemplateSourcesSecretItems(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSpecStoragePvcTemplateResourcesLimits
@@ -11836,13 +12614,12 @@ export interface ClusterSpecStoragePvcTemplateSelectorMatchExpressions {
    * @schema ClusterSpecStoragePvcTemplateSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecStoragePvcTemplateSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecStoragePvcTemplateSelectorMatchExpressions(obj: ClusterSpecStoragePvcTemplateSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11853,7 +12630,7 @@ export function toJson_ClusterSpecStoragePvcTemplateSelectorMatchExpressions(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * dataSource field can be used to specify either:
@@ -11890,13 +12667,12 @@ export interface ClusterSpecTablespacesStoragePvcTemplateDataSource {
    * @schema ClusterSpecTablespacesStoragePvcTemplateDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecTablespacesStoragePvcTemplateDataSource' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecTablespacesStoragePvcTemplateDataSource(obj: ClusterSpecTablespacesStoragePvcTemplateDataSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11907,7 +12683,7 @@ export function toJson_ClusterSpecTablespacesStoragePvcTemplateDataSource(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * dataSourceRef specifies the object from which to populate the volume with data, if a non-empty
@@ -11968,13 +12744,12 @@ export interface ClusterSpecTablespacesStoragePvcTemplateDataSourceRef {
    * @schema ClusterSpecTablespacesStoragePvcTemplateDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecTablespacesStoragePvcTemplateDataSourceRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecTablespacesStoragePvcTemplateDataSourceRef(obj: ClusterSpecTablespacesStoragePvcTemplateDataSourceRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11986,7 +12761,7 @@ export function toJson_ClusterSpecTablespacesStoragePvcTemplateDataSourceRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * resources represents the minimum resources the volume should have.
@@ -12015,13 +12790,12 @@ export interface ClusterSpecTablespacesStoragePvcTemplateResources {
    * @schema ClusterSpecTablespacesStoragePvcTemplateResources#requests
    */
   readonly requests?: { [key: string]: ClusterSpecTablespacesStoragePvcTemplateResourcesRequests };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecTablespacesStoragePvcTemplateResources' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecTablespacesStoragePvcTemplateResources(obj: ClusterSpecTablespacesStoragePvcTemplateResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12031,7 +12805,7 @@ export function toJson_ClusterSpecTablespacesStoragePvcTemplateResources(obj: Cl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * selector is a label query over volumes to consider for binding.
@@ -12054,13 +12828,12 @@ export interface ClusterSpecTablespacesStoragePvcTemplateSelector {
    * @schema ClusterSpecTablespacesStoragePvcTemplateSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecTablespacesStoragePvcTemplateSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecTablespacesStoragePvcTemplateSelector(obj: ClusterSpecTablespacesStoragePvcTemplateSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12070,7 +12843,7 @@ export function toJson_ClusterSpecTablespacesStoragePvcTemplateSelector(obj: Clu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSpecWalStoragePvcTemplateResourcesLimits
@@ -12131,13 +12904,12 @@ export interface ClusterSpecWalStoragePvcTemplateSelectorMatchExpressions {
    * @schema ClusterSpecWalStoragePvcTemplateSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecWalStoragePvcTemplateSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecWalStoragePvcTemplateSelectorMatchExpressions(obj: ClusterSpecWalStoragePvcTemplateSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12148,7 +12920,7 @@ export function toJson_ClusterSpecWalStoragePvcTemplateSelectorMatchExpressions(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -12172,13 +12944,12 @@ export interface ClusterSpecAffinityAdditionalPodAffinityPreferredDuringScheduli
    * @schema ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12188,7 +12959,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -12215,13 +12986,12 @@ export interface ClusterSpecAffinityAdditionalPodAffinityPreferredDuringScheduli
    * @schema ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12231,7 +13001,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -12264,13 +13034,12 @@ export interface ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulin
    * @schema ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12281,7 +13050,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSch
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -12314,13 +13083,12 @@ export interface ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulin
    * @schema ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12331,7 +13099,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAffinityRequiredDuringSch
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -12355,13 +13123,12 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSche
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12371,7 +13138,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -12398,13 +13165,12 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSche
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12414,7 +13180,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -12447,13 +13213,12 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSched
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12464,7 +13229,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDurin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -12497,13 +13262,12 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSched
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12514,7 +13278,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityRequiredDurin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -12548,13 +13312,12 @@ export interface ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnored
    * @schema ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions(obj: ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12565,7 +13328,7 @@ export function toJson_ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingI
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -12599,13 +13362,12 @@ export interface ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnored
    * @schema ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields(obj: ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12616,7 +13378,7 @@ export function toJson_ClusterSpecAffinityNodeAffinityPreferredDuringSchedulingI
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -12650,13 +13412,12 @@ export interface ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredD
    * @schema ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions(obj: ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12667,7 +13428,7 @@ export function toJson_ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIg
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -12701,13 +13462,12 @@ export interface ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredD
    * @schema ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields(obj: ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12718,7 +13478,7 @@ export function toJson_ClusterSpecAffinityNodeAffinityRequiredDuringSchedulingIg
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecResourcesLimits
@@ -12779,13 +13539,12 @@ export interface ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecSelector
    * @schema ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecSelectorMatchExpressions(obj: ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12796,7 +13555,7 @@ export function toJson_ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Standard object's metadata.
@@ -12831,13 +13590,12 @@ export interface ClusterSpecManagedServicesAdditionalServiceTemplateMetadata {
    * @schema ClusterSpecManagedServicesAdditionalServiceTemplateMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecManagedServicesAdditionalServiceTemplateMetadata' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecManagedServicesAdditionalServiceTemplateMetadata(obj: ClusterSpecManagedServicesAdditionalServiceTemplateMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12848,7 +13606,7 @@ export function toJson_ClusterSpecManagedServicesAdditionalServiceTemplateMetada
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specification of the desired behavior of the service.
@@ -13151,13 +13909,12 @@ export interface ClusterSpecManagedServicesAdditionalServiceTemplateSpec {
    * @schema ClusterSpecManagedServicesAdditionalServiceTemplateSpec#type
    */
   readonly type?: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecManagedServicesAdditionalServiceTemplateSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecManagedServicesAdditionalServiceTemplateSpec(obj: ClusterSpecManagedServicesAdditionalServiceTemplateSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13185,7 +13942,7 @@ export function toJson_ClusterSpecManagedServicesAdditionalServiceTemplateSpec(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -13218,13 +13975,12 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundleLabe
    * @schema ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundleLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundleLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundleLabelSelectorMatchExpressions(obj: ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBundleLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13235,7 +13991,7 @@ export function toJson_ClusterSpecProjectedVolumeTemplateSourcesClusterTrustBund
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Required: Selects a field of the pod: only annotations, labels, name, namespace and uid are supported.
@@ -13256,13 +14012,12 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItemsFieldR
    * @schema ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItemsFieldRef#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItemsFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItemsFieldRef(obj: ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItemsFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13272,7 +14027,7 @@ export function toJson_ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItems
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selects a resource of the container: only resources limits and requests
@@ -13301,13 +14056,12 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItemsResour
    * @schema ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItemsResourceFieldRef#resource
    */
   readonly resource: string;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItemsResourceFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItemsResourceFieldRef(obj: ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItemsResourceFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13318,7 +14072,7 @@ export function toJson_ClusterSpecProjectedVolumeTemplateSourcesDownwardApiItems
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ClusterSpecTablespacesStoragePvcTemplateResourcesLimits
@@ -13379,13 +14133,12 @@ export interface ClusterSpecTablespacesStoragePvcTemplateSelectorMatchExpression
    * @schema ClusterSpecTablespacesStoragePvcTemplateSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecTablespacesStoragePvcTemplateSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecTablespacesStoragePvcTemplateSelectorMatchExpressions(obj: ClusterSpecTablespacesStoragePvcTemplateSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13396,7 +14149,7 @@ export function toJson_ClusterSpecTablespacesStoragePvcTemplateSelectorMatchExpr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -13429,13 +14182,12 @@ export interface ClusterSpecAffinityAdditionalPodAffinityPreferredDuringScheduli
    * @schema ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13446,7 +14198,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -13479,13 +14231,12 @@ export interface ClusterSpecAffinityAdditionalPodAffinityPreferredDuringScheduli
    * @schema ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13496,7 +14247,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAffinityPreferredDuringSc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -13529,13 +14280,12 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSche
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13546,7 +14296,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -13579,13 +14329,12 @@ export interface ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSche
    * @schema ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13596,7 +14345,7 @@ export function toJson_ClusterSpecAffinityAdditionalPodAntiAffinityPreferredDuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ServicePort contains information on service's port.
@@ -13680,13 +14429,12 @@ export interface ClusterSpecManagedServicesAdditionalServiceTemplateSpecPorts {
    * @schema ClusterSpecManagedServicesAdditionalServiceTemplateSpecPorts#targetPort
    */
   readonly targetPort?: ClusterSpecManagedServicesAdditionalServiceTemplateSpecPortsTargetPort;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecManagedServicesAdditionalServiceTemplateSpecPorts' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecManagedServicesAdditionalServiceTemplateSpecPorts(obj: ClusterSpecManagedServicesAdditionalServiceTemplateSpecPorts | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13700,7 +14448,7 @@ export function toJson_ClusterSpecManagedServicesAdditionalServiceTemplateSpecPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * sessionAffinityConfig contains the configurations of session affinity.
@@ -13714,13 +14462,12 @@ export interface ClusterSpecManagedServicesAdditionalServiceTemplateSpecSessionA
    * @schema ClusterSpecManagedServicesAdditionalServiceTemplateSpecSessionAffinityConfig#clientIP
    */
   readonly clientIp?: ClusterSpecManagedServicesAdditionalServiceTemplateSpecSessionAffinityConfigClientIp;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecManagedServicesAdditionalServiceTemplateSpecSessionAffinityConfig' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecManagedServicesAdditionalServiceTemplateSpecSessionAffinityConfig(obj: ClusterSpecManagedServicesAdditionalServiceTemplateSpecSessionAffinityConfig | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13729,7 +14476,7 @@ export function toJson_ClusterSpecManagedServicesAdditionalServiceTemplateSpecSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specifies the output format of the exposed resources, defaults to "1"
@@ -13784,13 +14531,12 @@ export interface ClusterSpecManagedServicesAdditionalServiceTemplateSpecSessionA
    * @schema ClusterSpecManagedServicesAdditionalServiceTemplateSpecSessionAffinityConfigClientIp#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
  * Converts an object of type 'ClusterSpecManagedServicesAdditionalServiceTemplateSpecSessionAffinityConfigClientIp' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSpecManagedServicesAdditionalServiceTemplateSpecSessionAffinityConfigClientIp(obj: ClusterSpecManagedServicesAdditionalServiceTemplateSpecSessionAffinityConfigClientIp | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13799,7 +14545,7 @@ export function toJson_ClusterSpecManagedServicesAdditionalServiceTemplateSpecSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -13846,7 +14592,7 @@ export class ClusterImageCatalog extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -13874,13 +14620,12 @@ export interface ClusterImageCatalogProps {
    * @schema ClusterImageCatalog#spec
    */
   readonly spec: ClusterImageCatalogSpec;
-
 }
 
 /**
  * Converts an object of type 'ClusterImageCatalogProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterImageCatalogProps(obj: ClusterImageCatalogProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13890,7 +14635,7 @@ export function toJson_ClusterImageCatalogProps(obj: ClusterImageCatalogProps | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specification of the desired behavior of the ClusterImageCatalog.
@@ -13905,13 +14650,12 @@ export interface ClusterImageCatalogSpec {
    * @schema ClusterImageCatalogSpec#images
    */
   readonly images: ClusterImageCatalogSpecImages[];
-
 }
 
 /**
  * Converts an object of type 'ClusterImageCatalogSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterImageCatalogSpec(obj: ClusterImageCatalogSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13920,7 +14664,7 @@ export function toJson_ClusterImageCatalogSpec(obj: ClusterImageCatalogSpec | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * CatalogImage defines the image and major version
@@ -13941,13 +14685,12 @@ export interface ClusterImageCatalogSpecImages {
    * @schema ClusterImageCatalogSpecImages#major
    */
   readonly major: number;
-
 }
 
 /**
  * Converts an object of type 'ClusterImageCatalogSpecImages' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterImageCatalogSpecImages(obj: ClusterImageCatalogSpecImages | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13957,7 +14700,7 @@ export function toJson_ClusterImageCatalogSpecImages(obj: ClusterImageCatalogSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -14004,7 +14747,7 @@ export class Database extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -14032,13 +14775,12 @@ export interface DatabaseProps {
    * @schema Database#spec
    */
   readonly spec: DatabaseSpec;
-
 }
 
 /**
  * Converts an object of type 'DatabaseProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_DatabaseProps(obj: DatabaseProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14048,7 +14790,7 @@ export function toJson_DatabaseProps(obj: DatabaseProps | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specification of the desired Database.
@@ -14127,6 +14869,13 @@ export interface DatabaseSpec {
    * @schema DatabaseSpec#extensions
    */
   readonly extensions?: DatabaseSpecExtensions[];
+
+  /**
+   * The list of foreign data wrappers to be managed in the database
+   *
+   * @schema DatabaseSpec#fdws
+   */
+  readonly fdws?: DatabaseSpecFdws[];
 
   /**
    * Maps to the `ICU_LOCALE` parameter of `CREATE DATABASE`. This
@@ -14215,6 +14964,13 @@ export interface DatabaseSpec {
   readonly schemas?: DatabaseSpecSchemas[];
 
   /**
+   * The list of foreign servers to be managed in the database
+   *
+   * @schema DatabaseSpec#servers
+   */
+  readonly servers?: DatabaseSpecServers[];
+
+  /**
    * Maps to the `TABLESPACE` parameter of `CREATE DATABASE`.
    * Maps to the `SET TABLESPACE` command of `ALTER DATABASE`.
    * The name of the tablespace (in PostgreSQL) that will be associated
@@ -14233,13 +14989,12 @@ export interface DatabaseSpec {
    * @schema DatabaseSpec#template
    */
   readonly template?: string;
-
 }
 
 /**
  * Converts an object of type 'DatabaseSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_DatabaseSpec(obj: DatabaseSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14252,6 +15007,7 @@ export function toJson_DatabaseSpec(obj: DatabaseSpec | undefined): Record<strin
     'encoding': obj.encoding,
     'ensure': obj.ensure,
     'extensions': obj.extensions?.map(y => toJson_DatabaseSpecExtensions(y)),
+    'fdws': obj.fdws?.map(y => toJson_DatabaseSpecFdws(y)),
     'icuLocale': obj.icuLocale,
     'icuRules': obj.icuRules,
     'isTemplate': obj.isTemplate,
@@ -14262,13 +15018,14 @@ export function toJson_DatabaseSpec(obj: DatabaseSpec | undefined): Record<strin
     'name': obj.name,
     'owner': obj.owner,
     'schemas': obj.schemas?.map(y => toJson_DatabaseSpecSchemas(y)),
+    'servers': obj.servers?.map(y => toJson_DatabaseSpecServers(y)),
     'tablespace': obj.tablespace,
     'template': obj.template,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The name of the PostgreSQL cluster hosting the database.
@@ -14286,13 +15043,12 @@ export interface DatabaseSpecCluster {
    * @schema DatabaseSpecCluster#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'DatabaseSpecCluster' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_DatabaseSpecCluster(obj: DatabaseSpecCluster | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14301,7 +15057,7 @@ export function toJson_DatabaseSpecCluster(obj: DatabaseSpecCluster | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The policy for end-of-life maintenance of this database.
@@ -14334,17 +15090,17 @@ export enum DatabaseSpecEnsure {
  */
 export interface DatabaseSpecExtensions {
   /**
-   * Specifies whether an extension/schema should be present or absent in
-   * the database. If set to `present`, the extension/schema will be
-   * created if it does not exist. If set to `absent`, the
-   * extension/schema will be removed if it exists.
+   * Specifies whether an object (e.g schema) should be present or absent
+   * in the database. If set to `present`, the object will be created if
+   * it does not exist. If set to `absent`, the extension/schema will be
+   * removed if it exists.
    *
    * @schema DatabaseSpecExtensions#ensure
    */
   readonly ensure?: DatabaseSpecExtensionsEnsure;
 
   /**
-   * Name of the extension/schema
+   * Name of the object (extension, schema, FDW, server)
    *
    * @schema DatabaseSpecExtensions#name
    */
@@ -14369,13 +15125,12 @@ export interface DatabaseSpecExtensions {
    * @schema DatabaseSpecExtensions#version
    */
   readonly version?: string;
-
 }
 
 /**
  * Converts an object of type 'DatabaseSpecExtensions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_DatabaseSpecExtensions(obj: DatabaseSpecExtensions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14387,7 +15142,91 @@ export function toJson_DatabaseSpecExtensions(obj: DatabaseSpecExtensions | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * FDWSpec configures an Foreign Data Wrapper in a database
+ *
+ * @schema DatabaseSpecFdws
+ */
+export interface DatabaseSpecFdws {
+  /**
+   * Specifies whether an object (e.g schema) should be present or absent
+   * in the database. If set to `present`, the object will be created if
+   * it does not exist. If set to `absent`, the extension/schema will be
+   * removed if it exists.
+   *
+   * @schema DatabaseSpecFdws#ensure
+   */
+  readonly ensure?: DatabaseSpecFdwsEnsure;
+
+  /**
+   * Name of the handler function (e.g., "postgres_fdw_handler").
+   * This will be empty if no handler is specified. In that case,
+   * the default handler is registered when the FDW extension is created.
+   *
+   * @schema DatabaseSpecFdws#handler
+   */
+  readonly handler?: string;
+
+  /**
+   * Name of the object (extension, schema, FDW, server)
+   *
+   * @schema DatabaseSpecFdws#name
+   */
+  readonly name: string;
+
+  /**
+   * Options specifies the configuration options for the FDW.
+   *
+   * @schema DatabaseSpecFdws#options
+   */
+  readonly options?: DatabaseSpecFdwsOptions[];
+
+  /**
+   * Owner specifies the database role that will own the Foreign Data Wrapper.
+   * The role must have superuser privileges in the target database.
+   *
+   * @schema DatabaseSpecFdws#owner
+   */
+  readonly owner?: string;
+
+  /**
+   * List of roles for which `USAGE` privileges on the FDW are granted or revoked.
+   *
+   * @schema DatabaseSpecFdws#usage
+   */
+  readonly usage?: DatabaseSpecFdwsUsage[];
+
+  /**
+   * Name of the validator function (e.g., "postgres_fdw_validator").
+   * This will be empty if no validator is specified. In that case,
+   * the default validator is registered when the FDW extension is created.
+   *
+   * @schema DatabaseSpecFdws#validator
+   */
+  readonly validator?: string;
+}
+
+/**
+ * Converts an object of type 'DatabaseSpecFdws' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_DatabaseSpecFdws(obj: DatabaseSpecFdws | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'ensure': obj.ensure,
+    'handler': obj.handler,
+    'name': obj.name,
+    'options': obj.options?.map(y => toJson_DatabaseSpecFdwsOptions(y)),
+    'owner': obj.owner,
+    'usage': obj.usage?.map(y => toJson_DatabaseSpecFdwsUsage(y)),
+    'validator': obj.validator,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SchemaSpec configures a schema in a database
@@ -14396,17 +15235,17 @@ export function toJson_DatabaseSpecExtensions(obj: DatabaseSpecExtensions | unde
  */
 export interface DatabaseSpecSchemas {
   /**
-   * Specifies whether an extension/schema should be present or absent in
-   * the database. If set to `present`, the extension/schema will be
-   * created if it does not exist. If set to `absent`, the
-   * extension/schema will be removed if it exists.
+   * Specifies whether an object (e.g schema) should be present or absent
+   * in the database. If set to `present`, the object will be created if
+   * it does not exist. If set to `absent`, the extension/schema will be
+   * removed if it exists.
    *
    * @schema DatabaseSpecSchemas#ensure
    */
   readonly ensure?: DatabaseSpecSchemasEnsure;
 
   /**
-   * Name of the extension/schema
+   * Name of the object (extension, schema, FDW, server)
    *
    * @schema DatabaseSpecSchemas#name
    */
@@ -14420,13 +15259,12 @@ export interface DatabaseSpecSchemas {
    * @schema DatabaseSpecSchemas#owner
    */
   readonly owner?: string;
-
 }
 
 /**
  * Converts an object of type 'DatabaseSpecSchemas' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_DatabaseSpecSchemas(obj: DatabaseSpecSchemas | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14437,13 +15275,77 @@ export function toJson_DatabaseSpecSchemas(obj: DatabaseSpecSchemas | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Specifies whether an extension/schema should be present or absent in
- * the database. If set to `present`, the extension/schema will be
- * created if it does not exist. If set to `absent`, the
- * extension/schema will be removed if it exists.
+ * ServerSpec configures a server of a foreign data wrapper
+ *
+ * @schema DatabaseSpecServers
+ */
+export interface DatabaseSpecServers {
+  /**
+   * Specifies whether an object (e.g schema) should be present or absent
+   * in the database. If set to `present`, the object will be created if
+   * it does not exist. If set to `absent`, the extension/schema will be
+   * removed if it exists.
+   *
+   * @schema DatabaseSpecServers#ensure
+   */
+  readonly ensure?: DatabaseSpecServersEnsure;
+
+  /**
+   * The name of the Foreign Data Wrapper (FDW)
+   *
+   * @schema DatabaseSpecServers#fdw
+   */
+  readonly fdw: string;
+
+  /**
+   * Name of the object (extension, schema, FDW, server)
+   *
+   * @schema DatabaseSpecServers#name
+   */
+  readonly name: string;
+
+  /**
+   * Options specifies the configuration options for the server
+   * (key is the option name, value is the option value).
+   *
+   * @schema DatabaseSpecServers#options
+   */
+  readonly options?: DatabaseSpecServersOptions[];
+
+  /**
+   * List of roles for which `USAGE` privileges on the server are granted or revoked.
+   *
+   * @schema DatabaseSpecServers#usage
+   */
+  readonly usage?: DatabaseSpecServersUsage[];
+}
+
+/**
+ * Converts an object of type 'DatabaseSpecServers' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_DatabaseSpecServers(obj: DatabaseSpecServers | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'ensure': obj.ensure,
+    'fdw': obj.fdw,
+    'name': obj.name,
+    'options': obj.options?.map(y => toJson_DatabaseSpecServersOptions(y)),
+    'usage': obj.usage?.map(y => toJson_DatabaseSpecServersUsage(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Specifies whether an object (e.g schema) should be present or absent
+ * in the database. If set to `present`, the object will be created if
+ * it does not exist. If set to `absent`, the extension/schema will be
+ * removed if it exists.
  *
  * @schema DatabaseSpecExtensionsEnsure
  */
@@ -14455,10 +15357,108 @@ export enum DatabaseSpecExtensionsEnsure {
 }
 
 /**
- * Specifies whether an extension/schema should be present or absent in
- * the database. If set to `present`, the extension/schema will be
- * created if it does not exist. If set to `absent`, the
- * extension/schema will be removed if it exists.
+ * Specifies whether an object (e.g schema) should be present or absent
+ * in the database. If set to `present`, the object will be created if
+ * it does not exist. If set to `absent`, the extension/schema will be
+ * removed if it exists.
+ *
+ * @schema DatabaseSpecFdwsEnsure
+ */
+export enum DatabaseSpecFdwsEnsure {
+  /** present */
+  PRESENT = "present",
+  /** absent */
+  ABSENT = "absent",
+}
+
+/**
+ * OptionSpec holds the name, value and the ensure field for an option
+ *
+ * @schema DatabaseSpecFdwsOptions
+ */
+export interface DatabaseSpecFdwsOptions {
+  /**
+   * Specifies whether an option should be present or absent in
+   * the database. If set to `present`, the option will be
+   * created if it does not exist. If set to `absent`, the
+   * option will be removed if it exists.
+   *
+   * @schema DatabaseSpecFdwsOptions#ensure
+   */
+  readonly ensure?: DatabaseSpecFdwsOptionsEnsure;
+
+  /**
+   * Name of the option
+   *
+   * @schema DatabaseSpecFdwsOptions#name
+   */
+  readonly name: string;
+
+  /**
+   * Value of the option
+   *
+   * @schema DatabaseSpecFdwsOptions#value
+   */
+  readonly value: string;
+}
+
+/**
+ * Converts an object of type 'DatabaseSpecFdwsOptions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_DatabaseSpecFdwsOptions(obj: DatabaseSpecFdwsOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'ensure': obj.ensure,
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * UsageSpec configures a usage for a foreign data wrapper
+ *
+ * @schema DatabaseSpecFdwsUsage
+ */
+export interface DatabaseSpecFdwsUsage {
+  /**
+   * Name of the usage
+   *
+   * @schema DatabaseSpecFdwsUsage#name
+   */
+  readonly name: string;
+
+  /**
+   * The type of usage
+   *
+   * @schema DatabaseSpecFdwsUsage#type
+   */
+  readonly type?: DatabaseSpecFdwsUsageType;
+}
+
+/**
+ * Converts an object of type 'DatabaseSpecFdwsUsage' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_DatabaseSpecFdwsUsage(obj: DatabaseSpecFdwsUsage | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Specifies whether an object (e.g schema) should be present or absent
+ * in the database. If set to `present`, the object will be created if
+ * it does not exist. If set to `absent`, the extension/schema will be
+ * removed if it exists.
  *
  * @schema DatabaseSpecSchemasEnsure
  */
@@ -14467,6 +15467,158 @@ export enum DatabaseSpecSchemasEnsure {
   PRESENT = "present",
   /** absent */
   ABSENT = "absent",
+}
+
+/**
+ * Specifies whether an object (e.g schema) should be present or absent
+ * in the database. If set to `present`, the object will be created if
+ * it does not exist. If set to `absent`, the extension/schema will be
+ * removed if it exists.
+ *
+ * @schema DatabaseSpecServersEnsure
+ */
+export enum DatabaseSpecServersEnsure {
+  /** present */
+  PRESENT = "present",
+  /** absent */
+  ABSENT = "absent",
+}
+
+/**
+ * OptionSpec holds the name, value and the ensure field for an option
+ *
+ * @schema DatabaseSpecServersOptions
+ */
+export interface DatabaseSpecServersOptions {
+  /**
+   * Specifies whether an option should be present or absent in
+   * the database. If set to `present`, the option will be
+   * created if it does not exist. If set to `absent`, the
+   * option will be removed if it exists.
+   *
+   * @schema DatabaseSpecServersOptions#ensure
+   */
+  readonly ensure?: DatabaseSpecServersOptionsEnsure;
+
+  /**
+   * Name of the option
+   *
+   * @schema DatabaseSpecServersOptions#name
+   */
+  readonly name: string;
+
+  /**
+   * Value of the option
+   *
+   * @schema DatabaseSpecServersOptions#value
+   */
+  readonly value: string;
+}
+
+/**
+ * Converts an object of type 'DatabaseSpecServersOptions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_DatabaseSpecServersOptions(obj: DatabaseSpecServersOptions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'ensure': obj.ensure,
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * UsageSpec configures a usage for a foreign data wrapper
+ *
+ * @schema DatabaseSpecServersUsage
+ */
+export interface DatabaseSpecServersUsage {
+  /**
+   * Name of the usage
+   *
+   * @schema DatabaseSpecServersUsage#name
+   */
+  readonly name: string;
+
+  /**
+   * The type of usage
+   *
+   * @schema DatabaseSpecServersUsage#type
+   */
+  readonly type?: DatabaseSpecServersUsageType;
+}
+
+/**
+ * Converts an object of type 'DatabaseSpecServersUsage' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_DatabaseSpecServersUsage(obj: DatabaseSpecServersUsage | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Specifies whether an option should be present or absent in
+ * the database. If set to `present`, the option will be
+ * created if it does not exist. If set to `absent`, the
+ * option will be removed if it exists.
+ *
+ * @schema DatabaseSpecFdwsOptionsEnsure
+ */
+export enum DatabaseSpecFdwsOptionsEnsure {
+  /** present */
+  PRESENT = "present",
+  /** absent */
+  ABSENT = "absent",
+}
+
+/**
+ * The type of usage
+ *
+ * @schema DatabaseSpecFdwsUsageType
+ */
+export enum DatabaseSpecFdwsUsageType {
+  /** grant */
+  GRANT = "grant",
+  /** revoke */
+  REVOKE = "revoke",
+}
+
+/**
+ * Specifies whether an option should be present or absent in
+ * the database. If set to `present`, the option will be
+ * created if it does not exist. If set to `absent`, the
+ * option will be removed if it exists.
+ *
+ * @schema DatabaseSpecServersOptionsEnsure
+ */
+export enum DatabaseSpecServersOptionsEnsure {
+  /** present */
+  PRESENT = "present",
+  /** absent */
+  ABSENT = "absent",
+}
+
+/**
+ * The type of usage
+ *
+ * @schema DatabaseSpecServersUsageType
+ */
+export enum DatabaseSpecServersUsageType {
+  /** grant */
+  GRANT = "grant",
+  /** revoke */
+  REVOKE = "revoke",
 }
 
 
@@ -14517,7 +15669,7 @@ export class FailoverQuorum extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -14540,13 +15692,12 @@ export interface FailoverQuorumProps {
    * @schema FailoverQuorum#metadata
    */
   readonly metadata: ApiObjectMetadata;
-
 }
 
 /**
  * Converts an object of type 'FailoverQuorumProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_FailoverQuorumProps(obj: FailoverQuorumProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14555,7 +15706,7 @@ export function toJson_FailoverQuorumProps(obj: FailoverQuorumProps | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -14602,7 +15753,7 @@ export class ImageCatalog extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -14630,13 +15781,12 @@ export interface ImageCatalogProps {
    * @schema ImageCatalog#spec
    */
   readonly spec: ImageCatalogSpec;
-
 }
 
 /**
  * Converts an object of type 'ImageCatalogProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ImageCatalogProps(obj: ImageCatalogProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14646,7 +15796,7 @@ export function toJson_ImageCatalogProps(obj: ImageCatalogProps | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specification of the desired behavior of the ImageCatalog.
@@ -14661,13 +15811,12 @@ export interface ImageCatalogSpec {
    * @schema ImageCatalogSpec#images
    */
   readonly images: ImageCatalogSpecImages[];
-
 }
 
 /**
  * Converts an object of type 'ImageCatalogSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ImageCatalogSpec(obj: ImageCatalogSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14676,7 +15825,7 @@ export function toJson_ImageCatalogSpec(obj: ImageCatalogSpec | undefined): Reco
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * CatalogImage defines the image and major version
@@ -14697,13 +15846,12 @@ export interface ImageCatalogSpecImages {
    * @schema ImageCatalogSpecImages#major
    */
   readonly major: number;
-
 }
 
 /**
  * Converts an object of type 'ImageCatalogSpecImages' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ImageCatalogSpecImages(obj: ImageCatalogSpecImages | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14713,7 +15861,7 @@ export function toJson_ImageCatalogSpecImages(obj: ImageCatalogSpecImages | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -14760,7 +15908,7 @@ export class Pooler extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -14788,13 +15936,12 @@ export interface PoolerProps {
    * @schema Pooler#spec
    */
   readonly spec: PoolerSpec;
-
 }
 
 /**
  * Converts an object of type 'PoolerProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerProps(obj: PoolerProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14804,7 +15951,7 @@ export function toJson_PoolerProps(obj: PoolerProps | undefined): Record<string,
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specification of the desired behavior of the Pooler.
@@ -14872,13 +16019,12 @@ export interface PoolerSpec {
    * @schema PoolerSpec#type
    */
   readonly type?: PoolerSpecType;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpec(obj: PoolerSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14894,7 +16040,7 @@ export function toJson_PoolerSpec(obj: PoolerSpec | undefined): Record<string, a
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * This is the cluster reference on which the Pooler will work.
@@ -14909,13 +16055,12 @@ export interface PoolerSpecCluster {
    * @schema PoolerSpecCluster#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecCluster' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecCluster(obj: PoolerSpecCluster | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14924,7 +16069,7 @@ export function toJson_PoolerSpecCluster(obj: PoolerSpecCluster | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The deployment strategy to use for pgbouncer to replace existing pods with new ones
@@ -14947,13 +16092,12 @@ export interface PoolerSpecDeploymentStrategy {
    * @schema PoolerSpecDeploymentStrategy#type
    */
   readonly type?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecDeploymentStrategy' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecDeploymentStrategy(obj: PoolerSpecDeploymentStrategy | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14963,7 +16107,7 @@ export function toJson_PoolerSpecDeploymentStrategy(obj: PoolerSpecDeploymentStr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The configuration of the monitoring infrastructure of this pooler.
@@ -14994,13 +16138,12 @@ export interface PoolerSpecMonitoring {
    * @schema PoolerSpecMonitoring#podMonitorRelabelings
    */
   readonly podMonitorRelabelings?: PoolerSpecMonitoringPodMonitorRelabelings[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecMonitoring' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecMonitoring(obj: PoolerSpecMonitoring | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15011,7 +16154,7 @@ export function toJson_PoolerSpecMonitoring(obj: PoolerSpecMonitoring | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The PgBouncer configuration
@@ -15035,9 +16178,27 @@ export interface PoolerSpecPgbouncer {
    * (e.g. "SELECT usename, passwd FROM pg_catalog.pg_shadow WHERE usename=$1")
    * has to be specified and no automatic CNPG Cluster integration will be triggered.
    *
+   * Deprecated.
+   *
    * @schema PoolerSpecPgbouncer#authQuerySecret
    */
   readonly authQuerySecret?: PoolerSpecPgbouncerAuthQuerySecret;
+
+  /**
+   * ClientCASecret provides PgBouncer’s client_tls_ca_file, the root
+   * CA for validating client certificates
+   *
+   * @schema PoolerSpecPgbouncer#clientCASecret
+   */
+  readonly clientCaSecret?: PoolerSpecPgbouncerClientCaSecret;
+
+  /**
+   * ClientTLSSecret provides PgBouncer’s client_tls_key_file (private key)
+   * and client_tls_cert_file (certificate) used to accept client connections
+   *
+   * @schema PoolerSpecPgbouncer#clientTLSSecret
+   */
+  readonly clientTlsSecret?: PoolerSpecPgbouncerClientTlsSecret;
 
   /**
    * Additional parameters to be passed to PgBouncer - please check
@@ -15072,26 +16233,46 @@ export interface PoolerSpecPgbouncer {
    */
   readonly poolMode?: PoolerSpecPgbouncerPoolMode;
 
+  /**
+   * ServerCASecret provides PgBouncer’s server_tls_ca_file, the root
+   * CA for validating PostgreSQL certificates
+   *
+   * @schema PoolerSpecPgbouncer#serverCASecret
+   */
+  readonly serverCaSecret?: PoolerSpecPgbouncerServerCaSecret;
+
+  /**
+   * ServerTLSSecret, when pointing to a TLS secret, provides pgbouncer's
+   * `server_tls_key_file` and `server_tls_cert_file`, used when
+   * authenticating against PostgreSQL.
+   *
+   * @schema PoolerSpecPgbouncer#serverTLSSecret
+   */
+  readonly serverTlsSecret?: PoolerSpecPgbouncerServerTlsSecret;
 }
 
 /**
  * Converts an object of type 'PoolerSpecPgbouncer' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecPgbouncer(obj: PoolerSpecPgbouncer | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'authQuery': obj.authQuery,
     'authQuerySecret': toJson_PoolerSpecPgbouncerAuthQuerySecret(obj.authQuerySecret),
+    'clientCASecret': toJson_PoolerSpecPgbouncerClientCaSecret(obj.clientCaSecret),
+    'clientTLSSecret': toJson_PoolerSpecPgbouncerClientTlsSecret(obj.clientTlsSecret),
     'parameters': ((obj.parameters) === undefined) ? undefined : (Object.entries(obj.parameters).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'paused': obj.paused,
     'pg_hba': obj.pgHba?.map(y => y),
     'poolMode': obj.poolMode,
+    'serverCASecret': toJson_PoolerSpecPgbouncerServerCaSecret(obj.serverCaSecret),
+    'serverTLSSecret': toJson_PoolerSpecPgbouncerServerTlsSecret(obj.serverTlsSecret),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Template for the Service to be created
@@ -15114,13 +16295,12 @@ export interface PoolerSpecServiceTemplate {
    * @schema PoolerSpecServiceTemplate#spec
    */
   readonly spec?: PoolerSpecServiceTemplateSpec;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecServiceTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecServiceTemplate(obj: PoolerSpecServiceTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15130,7 +16310,7 @@ export function toJson_PoolerSpecServiceTemplate(obj: PoolerSpecServiceTemplate 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The template of the Pod to be created
@@ -15153,13 +16333,12 @@ export interface PoolerSpecTemplate {
    * @schema PoolerSpecTemplate#spec
    */
   readonly spec?: PoolerSpecTemplateSpec;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplate(obj: PoolerSpecTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15169,7 +16348,7 @@ export function toJson_PoolerSpecTemplate(obj: PoolerSpecTemplate | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Type of service to forward traffic to. Default: `rw`.
@@ -15226,13 +16405,12 @@ export interface PoolerSpecDeploymentStrategyRollingUpdate {
    * @schema PoolerSpecDeploymentStrategyRollingUpdate#maxUnavailable
    */
   readonly maxUnavailable?: PoolerSpecDeploymentStrategyRollingUpdateMaxUnavailable;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecDeploymentStrategyRollingUpdate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecDeploymentStrategyRollingUpdate(obj: PoolerSpecDeploymentStrategyRollingUpdate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15242,7 +16420,7 @@ export function toJson_PoolerSpecDeploymentStrategyRollingUpdate(obj: PoolerSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * RelabelConfig allows dynamic rewriting of the label set for targets, alerts,
@@ -15318,13 +16496,12 @@ export interface PoolerSpecMonitoringPodMonitorMetricRelabelings {
    * @schema PoolerSpecMonitoringPodMonitorMetricRelabelings#targetLabel
    */
   readonly targetLabel?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecMonitoringPodMonitorMetricRelabelings' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecMonitoringPodMonitorMetricRelabelings(obj: PoolerSpecMonitoringPodMonitorMetricRelabelings | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15339,7 +16516,7 @@ export function toJson_PoolerSpecMonitoringPodMonitorMetricRelabelings(obj: Pool
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * RelabelConfig allows dynamic rewriting of the label set for targets, alerts,
@@ -15415,13 +16592,12 @@ export interface PoolerSpecMonitoringPodMonitorRelabelings {
    * @schema PoolerSpecMonitoringPodMonitorRelabelings#targetLabel
    */
   readonly targetLabel?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecMonitoringPodMonitorRelabelings' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecMonitoringPodMonitorRelabelings(obj: PoolerSpecMonitoringPodMonitorRelabelings | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15436,13 +16612,15 @@ export function toJson_PoolerSpecMonitoringPodMonitorRelabelings(obj: PoolerSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The credentials of the user that need to be used for the authentication
  * query. In case it is specified, also an AuthQuery
  * (e.g. "SELECT usename, passwd FROM pg_catalog.pg_shadow WHERE usename=$1")
  * has to be specified and no automatic CNPG Cluster integration will be triggered.
+ *
+ * Deprecated.
  *
  * @schema PoolerSpecPgbouncerAuthQuerySecret
  */
@@ -15453,13 +16631,12 @@ export interface PoolerSpecPgbouncerAuthQuerySecret {
    * @schema PoolerSpecPgbouncerAuthQuerySecret#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecPgbouncerAuthQuerySecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecPgbouncerAuthQuerySecret(obj: PoolerSpecPgbouncerAuthQuerySecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15468,7 +16645,65 @@ export function toJson_PoolerSpecPgbouncerAuthQuerySecret(obj: PoolerSpecPgbounc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ClientCASecret provides PgBouncer’s client_tls_ca_file, the root
+ * CA for validating client certificates
+ *
+ * @schema PoolerSpecPgbouncerClientCaSecret
+ */
+export interface PoolerSpecPgbouncerClientCaSecret {
+  /**
+   * Name of the referent.
+   *
+   * @schema PoolerSpecPgbouncerClientCaSecret#name
+   */
+  readonly name: string;
+}
+
+/**
+ * Converts an object of type 'PoolerSpecPgbouncerClientCaSecret' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_PoolerSpecPgbouncerClientCaSecret(obj: PoolerSpecPgbouncerClientCaSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ClientTLSSecret provides PgBouncer’s client_tls_key_file (private key)
+ * and client_tls_cert_file (certificate) used to accept client connections
+ *
+ * @schema PoolerSpecPgbouncerClientTlsSecret
+ */
+export interface PoolerSpecPgbouncerClientTlsSecret {
+  /**
+   * Name of the referent.
+   *
+   * @schema PoolerSpecPgbouncerClientTlsSecret#name
+   */
+  readonly name: string;
+}
+
+/**
+ * Converts an object of type 'PoolerSpecPgbouncerClientTlsSecret' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_PoolerSpecPgbouncerClientTlsSecret(obj: PoolerSpecPgbouncerClientTlsSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The pool mode. Default: `session`.
@@ -15481,6 +16716,65 @@ export enum PoolerSpecPgbouncerPoolMode {
   /** transaction */
   TRANSACTION = "transaction",
 }
+
+/**
+ * ServerCASecret provides PgBouncer’s server_tls_ca_file, the root
+ * CA for validating PostgreSQL certificates
+ *
+ * @schema PoolerSpecPgbouncerServerCaSecret
+ */
+export interface PoolerSpecPgbouncerServerCaSecret {
+  /**
+   * Name of the referent.
+   *
+   * @schema PoolerSpecPgbouncerServerCaSecret#name
+   */
+  readonly name: string;
+}
+
+/**
+ * Converts an object of type 'PoolerSpecPgbouncerServerCaSecret' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_PoolerSpecPgbouncerServerCaSecret(obj: PoolerSpecPgbouncerServerCaSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ServerTLSSecret, when pointing to a TLS secret, provides pgbouncer's
+ * `server_tls_key_file` and `server_tls_cert_file`, used when
+ * authenticating against PostgreSQL.
+ *
+ * @schema PoolerSpecPgbouncerServerTlsSecret
+ */
+export interface PoolerSpecPgbouncerServerTlsSecret {
+  /**
+   * Name of the referent.
+   *
+   * @schema PoolerSpecPgbouncerServerTlsSecret#name
+   */
+  readonly name: string;
+}
+
+/**
+ * Converts an object of type 'PoolerSpecPgbouncerServerTlsSecret' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_PoolerSpecPgbouncerServerTlsSecret(obj: PoolerSpecPgbouncerServerTlsSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Standard object's metadata.
@@ -15515,13 +16809,12 @@ export interface PoolerSpecServiceTemplateMetadata {
    * @schema PoolerSpecServiceTemplateMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecServiceTemplateMetadata' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecServiceTemplateMetadata(obj: PoolerSpecServiceTemplateMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15532,7 +16825,7 @@ export function toJson_PoolerSpecServiceTemplateMetadata(obj: PoolerSpecServiceT
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specification of the desired behavior of the service.
@@ -15835,13 +17128,12 @@ export interface PoolerSpecServiceTemplateSpec {
    * @schema PoolerSpecServiceTemplateSpec#type
    */
   readonly type?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecServiceTemplateSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecServiceTemplateSpec(obj: PoolerSpecServiceTemplateSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15869,7 +17161,7 @@ export function toJson_PoolerSpecServiceTemplateSpec(obj: PoolerSpecServiceTempl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Standard object's metadata.
@@ -15904,13 +17196,12 @@ export interface PoolerSpecTemplateMetadata {
    * @schema PoolerSpecTemplateMetadata#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateMetadata' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateMetadata(obj: PoolerSpecTemplateMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15921,7 +17212,7 @@ export function toJson_PoolerSpecTemplateMetadata(obj: PoolerSpecTemplateMetadat
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specification of the desired behavior of the pod.
@@ -16391,13 +17682,12 @@ export interface PoolerSpecTemplateSpec {
    * @schema PoolerSpecTemplateSpec#volumes
    */
   readonly volumes?: PoolerSpecTemplateSpecVolumes[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpec(obj: PoolerSpecTemplateSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16446,7 +17736,7 @@ export function toJson_PoolerSpecTemplateSpec(obj: PoolerSpecTemplateSpec | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The maximum number of pods that can be scheduled above the desired number of
@@ -16653,13 +17943,12 @@ export interface PoolerSpecServiceTemplateSpecPorts {
    * @schema PoolerSpecServiceTemplateSpecPorts#targetPort
    */
   readonly targetPort?: PoolerSpecServiceTemplateSpecPortsTargetPort;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecServiceTemplateSpecPorts' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecServiceTemplateSpecPorts(obj: PoolerSpecServiceTemplateSpecPorts | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16673,7 +17962,7 @@ export function toJson_PoolerSpecServiceTemplateSpecPorts(obj: PoolerSpecService
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * sessionAffinityConfig contains the configurations of session affinity.
@@ -16687,13 +17976,12 @@ export interface PoolerSpecServiceTemplateSpecSessionAffinityConfig {
    * @schema PoolerSpecServiceTemplateSpecSessionAffinityConfig#clientIP
    */
   readonly clientIp?: PoolerSpecServiceTemplateSpecSessionAffinityConfigClientIp;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecServiceTemplateSpecSessionAffinityConfig' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecServiceTemplateSpecSessionAffinityConfig(obj: PoolerSpecServiceTemplateSpecSessionAffinityConfig | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16702,7 +17990,7 @@ export function toJson_PoolerSpecServiceTemplateSpecSessionAffinityConfig(obj: P
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * If specified, the pod's scheduling constraints
@@ -16730,13 +18018,12 @@ export interface PoolerSpecTemplateSpecAffinity {
    * @schema PoolerSpecTemplateSpecAffinity#podAntiAffinity
    */
   readonly podAntiAffinity?: PoolerSpecTemplateSpecAffinityPodAntiAffinity;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinity(obj: PoolerSpecTemplateSpecAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16747,7 +18034,7 @@ export function toJson_PoolerSpecTemplateSpecAffinity(obj: PoolerSpecTemplateSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A single application container that you want to run within a pod.
@@ -17036,13 +18323,12 @@ export interface PoolerSpecTemplateSpecContainers {
    * @schema PoolerSpecTemplateSpecContainers#workingDir
    */
   readonly workingDir?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainers' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainers(obj: PoolerSpecTemplateSpecContainers | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17075,7 +18361,7 @@ export function toJson_PoolerSpecTemplateSpecContainers(obj: PoolerSpecTemplateS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specifies the DNS parameters of a pod.
@@ -17112,13 +18398,12 @@ export interface PoolerSpecTemplateSpecDnsConfig {
    * @schema PoolerSpecTemplateSpecDnsConfig#searches
    */
   readonly searches?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecDnsConfig' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecDnsConfig(obj: PoolerSpecTemplateSpecDnsConfig | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17129,7 +18414,7 @@ export function toJson_PoolerSpecTemplateSpecDnsConfig(obj: PoolerSpecTemplateSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * An EphemeralContainer is a temporary container that you may add to an existing Pod for
@@ -17393,13 +18678,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainers {
    * @schema PoolerSpecTemplateSpecEphemeralContainers#workingDir
    */
   readonly workingDir?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainers' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainers(obj: PoolerSpecTemplateSpecEphemeralContainers | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17433,7 +18717,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainers(obj: PoolerSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HostAlias holds the mapping between IP and hostnames that will be injected as an entry in the
@@ -17455,13 +18739,12 @@ export interface PoolerSpecTemplateSpecHostAliases {
    * @schema PoolerSpecTemplateSpecHostAliases#ip
    */
   readonly ip: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecHostAliases' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecHostAliases(obj: PoolerSpecTemplateSpecHostAliases | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17471,7 +18754,7 @@ export function toJson_PoolerSpecTemplateSpecHostAliases(obj: PoolerSpecTemplate
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * LocalObjectReference contains enough information to let you locate the
@@ -17490,13 +18773,12 @@ export interface PoolerSpecTemplateSpecImagePullSecrets {
    * @schema PoolerSpecTemplateSpecImagePullSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecImagePullSecrets' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecImagePullSecrets(obj: PoolerSpecTemplateSpecImagePullSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17505,7 +18787,7 @@ export function toJson_PoolerSpecTemplateSpecImagePullSecrets(obj: PoolerSpecTem
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A single application container that you want to run within a pod.
@@ -17794,13 +19076,12 @@ export interface PoolerSpecTemplateSpecInitContainers {
    * @schema PoolerSpecTemplateSpecInitContainers#workingDir
    */
   readonly workingDir?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainers' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainers(obj: PoolerSpecTemplateSpecInitContainers | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17833,7 +19114,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainers(obj: PoolerSpecTempl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specifies the OS of the containers in the pod.
@@ -17881,13 +19162,12 @@ export interface PoolerSpecTemplateSpecOs {
    * @schema PoolerSpecTemplateSpecOs#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecOs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecOs(obj: PoolerSpecTemplateSpecOs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17896,7 +19176,7 @@ export function toJson_PoolerSpecTemplateSpecOs(obj: PoolerSpecTemplateSpecOs | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema PoolerSpecTemplateSpecOverhead
@@ -17924,13 +19204,12 @@ export interface PoolerSpecTemplateSpecReadinessGates {
    * @schema PoolerSpecTemplateSpecReadinessGates#conditionType
    */
   readonly conditionType: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecReadinessGates' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecReadinessGates(obj: PoolerSpecTemplateSpecReadinessGates | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17939,7 +19218,7 @@ export function toJson_PoolerSpecTemplateSpecReadinessGates(obj: PoolerSpecTempl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PodResourceClaim references exactly one ResourceClaim, either directly
@@ -17991,13 +19270,12 @@ export interface PoolerSpecTemplateSpecResourceClaims {
    * @schema PoolerSpecTemplateSpecResourceClaims#resourceClaimTemplateName
    */
   readonly resourceClaimTemplateName?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecResourceClaims' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecResourceClaims(obj: PoolerSpecTemplateSpecResourceClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18008,7 +19286,7 @@ export function toJson_PoolerSpecTemplateSpecResourceClaims(obj: PoolerSpecTempl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Resources is the total amount of CPU and Memory resources required by all
@@ -18054,13 +19332,12 @@ export interface PoolerSpecTemplateSpecResources {
    * @schema PoolerSpecTemplateSpecResources#requests
    */
   readonly requests?: { [key: string]: PoolerSpecTemplateSpecResourcesRequests };
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecResources' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecResources(obj: PoolerSpecTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18071,7 +19348,7 @@ export function toJson_PoolerSpecTemplateSpecResources(obj: PoolerSpecTemplateSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PodSchedulingGate is associated to a Pod to guard its scheduling.
@@ -18086,13 +19363,12 @@ export interface PoolerSpecTemplateSpecSchedulingGates {
    * @schema PoolerSpecTemplateSpecSchedulingGates#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecSchedulingGates' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecSchedulingGates(obj: PoolerSpecTemplateSpecSchedulingGates | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18101,7 +19377,7 @@ export function toJson_PoolerSpecTemplateSpecSchedulingGates(obj: PoolerSpecTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecurityContext holds pod-level security attributes and common container settings.
@@ -18278,13 +19554,12 @@ export interface PoolerSpecTemplateSpecSecurityContext {
    * @schema PoolerSpecTemplateSpecSecurityContext#windowsOptions
    */
   readonly windowsOptions?: PoolerSpecTemplateSpecSecurityContextWindowsOptions;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecSecurityContext' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecSecurityContext(obj: PoolerSpecTemplateSpecSecurityContext | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18305,7 +19580,7 @@ export function toJson_PoolerSpecTemplateSpecSecurityContext(obj: PoolerSpecTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The pod this Toleration is attached to tolerates any taint that matches
@@ -18358,13 +19633,12 @@ export interface PoolerSpecTemplateSpecTolerations {
    * @schema PoolerSpecTemplateSpecTolerations#value
    */
   readonly value?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecTolerations' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecTolerations(obj: PoolerSpecTemplateSpecTolerations | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18377,7 +19651,7 @@ export function toJson_PoolerSpecTemplateSpecTolerations(obj: PoolerSpecTemplate
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TopologySpreadConstraint specifies how to spread matching pods among the given topology.
@@ -18522,13 +19796,12 @@ export interface PoolerSpecTemplateSpecTopologySpreadConstraints {
    * @schema PoolerSpecTemplateSpecTopologySpreadConstraints#whenUnsatisfiable
    */
   readonly whenUnsatisfiable: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecTopologySpreadConstraints' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecTopologySpreadConstraints(obj: PoolerSpecTemplateSpecTopologySpreadConstraints | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18544,7 +19817,7 @@ export function toJson_PoolerSpecTemplateSpecTopologySpreadConstraints(obj: Pool
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Volume represents a named volume in a pod that may be accessed by any container in the pod.
@@ -18850,13 +20123,12 @@ export interface PoolerSpecTemplateSpecVolumes {
    * @schema PoolerSpecTemplateSpecVolumes#vsphereVolume
    */
   readonly vsphereVolume?: PoolerSpecTemplateSpecVolumesVsphereVolume;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumes(obj: PoolerSpecTemplateSpecVolumes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18895,7 +20167,7 @@ export function toJson_PoolerSpecTemplateSpecVolumes(obj: PoolerSpecTemplateSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Number or name of the port to access on the pods targeted by the service.
@@ -18934,13 +20206,12 @@ export interface PoolerSpecServiceTemplateSpecSessionAffinityConfigClientIp {
    * @schema PoolerSpecServiceTemplateSpecSessionAffinityConfigClientIp#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecServiceTemplateSpecSessionAffinityConfigClientIp' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecServiceTemplateSpecSessionAffinityConfigClientIp(obj: PoolerSpecServiceTemplateSpecSessionAffinityConfigClientIp | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18949,7 +20220,7 @@ export function toJson_PoolerSpecServiceTemplateSpecSessionAffinityConfigClientI
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Describes node affinity scheduling rules for the pod.
@@ -18982,13 +20253,12 @@ export interface PoolerSpecTemplateSpecAffinityNodeAffinity {
    * @schema PoolerSpecTemplateSpecAffinityNodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityNodeAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityNodeAffinity(obj: PoolerSpecTemplateSpecAffinityNodeAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18998,7 +20268,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityNodeAffinity(obj: PoolerSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Describes pod affinity scheduling rules (e.g. co-locate this pod in the same node, zone, etc. as some other pod(s)).
@@ -19033,13 +20303,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinity {
    * @schema PoolerSpecTemplateSpecAffinityPodAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAffinity(obj: PoolerSpecTemplateSpecAffinityPodAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19049,7 +20318,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAffinity(obj: PoolerSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Describes pod anti-affinity scheduling rules (e.g. avoid putting this pod in the same node, zone, etc. as some other pod(s)).
@@ -19084,13 +20353,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinity {
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAntiAffinity' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinity(obj: PoolerSpecTemplateSpecAffinityPodAntiAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19100,7 +20368,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinity(obj: Pooler
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * EnvVar represents an environment variable present in a Container.
@@ -19138,13 +20406,12 @@ export interface PoolerSpecTemplateSpecContainersEnv {
    * @schema PoolerSpecTemplateSpecContainersEnv#valueFrom
    */
   readonly valueFrom?: PoolerSpecTemplateSpecContainersEnvValueFrom;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersEnv' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersEnv(obj: PoolerSpecTemplateSpecContainersEnv | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19155,7 +20422,7 @@ export function toJson_PoolerSpecTemplateSpecContainersEnv(obj: PoolerSpecTempla
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * EnvFromSource represents the source of a set of ConfigMaps or Secrets
@@ -19184,13 +20451,12 @@ export interface PoolerSpecTemplateSpecContainersEnvFrom {
    * @schema PoolerSpecTemplateSpecContainersEnvFrom#secretRef
    */
   readonly secretRef?: PoolerSpecTemplateSpecContainersEnvFromSecretRef;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersEnvFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersEnvFrom(obj: PoolerSpecTemplateSpecContainersEnvFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19201,7 +20467,7 @@ export function toJson_PoolerSpecTemplateSpecContainersEnvFrom(obj: PoolerSpecTe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Actions that the management system should take in response to container lifecycle events.
@@ -19243,13 +20509,12 @@ export interface PoolerSpecTemplateSpecContainersLifecycle {
    * @schema PoolerSpecTemplateSpecContainersLifecycle#stopSignal
    */
   readonly stopSignal?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersLifecycle' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersLifecycle(obj: PoolerSpecTemplateSpecContainersLifecycle | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19260,7 +20525,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecycle(obj: PoolerSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Periodic probe of container liveness.
@@ -19359,13 +20624,12 @@ export interface PoolerSpecTemplateSpecContainersLivenessProbe {
    * @schema PoolerSpecTemplateSpecContainersLivenessProbe#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersLivenessProbe' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersLivenessProbe(obj: PoolerSpecTemplateSpecContainersLivenessProbe | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19383,7 +20647,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLivenessProbe(obj: Pooler
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ContainerPort represents a network port in a single container.
@@ -19433,13 +20697,12 @@ export interface PoolerSpecTemplateSpecContainersPorts {
    * @schema PoolerSpecTemplateSpecContainersPorts#protocol
    */
   readonly protocol?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersPorts' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersPorts(obj: PoolerSpecTemplateSpecContainersPorts | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19452,7 +20715,7 @@ export function toJson_PoolerSpecTemplateSpecContainersPorts(obj: PoolerSpecTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Periodic probe of container service readiness.
@@ -19551,13 +20814,12 @@ export interface PoolerSpecTemplateSpecContainersReadinessProbe {
    * @schema PoolerSpecTemplateSpecContainersReadinessProbe#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersReadinessProbe' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersReadinessProbe(obj: PoolerSpecTemplateSpecContainersReadinessProbe | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19575,7 +20837,7 @@ export function toJson_PoolerSpecTemplateSpecContainersReadinessProbe(obj: Poole
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ContainerResizePolicy represents resource resize policy for the container.
@@ -19598,13 +20860,12 @@ export interface PoolerSpecTemplateSpecContainersResizePolicy {
    * @schema PoolerSpecTemplateSpecContainersResizePolicy#restartPolicy
    */
   readonly restartPolicy: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersResizePolicy' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersResizePolicy(obj: PoolerSpecTemplateSpecContainersResizePolicy | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19614,7 +20875,7 @@ export function toJson_PoolerSpecTemplateSpecContainersResizePolicy(obj: PoolerS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Compute Resources required by this container.
@@ -19654,13 +20915,12 @@ export interface PoolerSpecTemplateSpecContainersResources {
    * @schema PoolerSpecTemplateSpecContainersResources#requests
    */
   readonly requests?: { [key: string]: PoolerSpecTemplateSpecContainersResourcesRequests };
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersResources' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersResources(obj: PoolerSpecTemplateSpecContainersResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19671,7 +20931,7 @@ export function toJson_PoolerSpecTemplateSpecContainersResources(obj: PoolerSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ContainerRestartRule describes how a container exit is handled.
@@ -19694,13 +20954,12 @@ export interface PoolerSpecTemplateSpecContainersRestartPolicyRules {
    * @schema PoolerSpecTemplateSpecContainersRestartPolicyRules#exitCodes
    */
   readonly exitCodes?: PoolerSpecTemplateSpecContainersRestartPolicyRulesExitCodes;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersRestartPolicyRules' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersRestartPolicyRules(obj: PoolerSpecTemplateSpecContainersRestartPolicyRules | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19710,7 +20969,7 @@ export function toJson_PoolerSpecTemplateSpecContainersRestartPolicyRules(obj: P
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecurityContext defines the security options the container should be run with.
@@ -19849,13 +21108,12 @@ export interface PoolerSpecTemplateSpecContainersSecurityContext {
    * @schema PoolerSpecTemplateSpecContainersSecurityContext#windowsOptions
    */
   readonly windowsOptions?: PoolerSpecTemplateSpecContainersSecurityContextWindowsOptions;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersSecurityContext' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersSecurityContext(obj: PoolerSpecTemplateSpecContainersSecurityContext | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19875,7 +21133,7 @@ export function toJson_PoolerSpecTemplateSpecContainersSecurityContext(obj: Pool
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * StartupProbe indicates that the Pod has successfully initialized.
@@ -19977,13 +21235,12 @@ export interface PoolerSpecTemplateSpecContainersStartupProbe {
    * @schema PoolerSpecTemplateSpecContainersStartupProbe#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersStartupProbe' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersStartupProbe(obj: PoolerSpecTemplateSpecContainersStartupProbe | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20001,7 +21258,7 @@ export function toJson_PoolerSpecTemplateSpecContainersStartupProbe(obj: PoolerS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * volumeDevice describes a mapping of a raw block device within a container.
@@ -20022,13 +21279,12 @@ export interface PoolerSpecTemplateSpecContainersVolumeDevices {
    * @schema PoolerSpecTemplateSpecContainersVolumeDevices#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersVolumeDevices' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersVolumeDevices(obj: PoolerSpecTemplateSpecContainersVolumeDevices | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20038,7 +21294,7 @@ export function toJson_PoolerSpecTemplateSpecContainersVolumeDevices(obj: Pooler
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * VolumeMount describes a mounting of a Volume within a container.
@@ -20123,13 +21379,12 @@ export interface PoolerSpecTemplateSpecContainersVolumeMounts {
    * @schema PoolerSpecTemplateSpecContainersVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersVolumeMounts' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersVolumeMounts(obj: PoolerSpecTemplateSpecContainersVolumeMounts | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20144,7 +21399,7 @@ export function toJson_PoolerSpecTemplateSpecContainersVolumeMounts(obj: PoolerS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PodDNSConfigOption defines DNS resolver options of a pod.
@@ -20166,13 +21421,12 @@ export interface PoolerSpecTemplateSpecDnsConfigOptions {
    * @schema PoolerSpecTemplateSpecDnsConfigOptions#value
    */
   readonly value?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecDnsConfigOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecDnsConfigOptions(obj: PoolerSpecTemplateSpecDnsConfigOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20182,7 +21436,7 @@ export function toJson_PoolerSpecTemplateSpecDnsConfigOptions(obj: PoolerSpecTem
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * EnvVar represents an environment variable present in a Container.
@@ -20220,13 +21474,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnv {
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnv#valueFrom
    */
   readonly valueFrom?: PoolerSpecTemplateSpecEphemeralContainersEnvValueFrom;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersEnv' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnv(obj: PoolerSpecTemplateSpecEphemeralContainersEnv | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20237,7 +21490,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnv(obj: PoolerS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * EnvFromSource represents the source of a set of ConfigMaps or Secrets
@@ -20266,13 +21519,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvFrom {
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvFrom#secretRef
    */
   readonly secretRef?: PoolerSpecTemplateSpecEphemeralContainersEnvFromSecretRef;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersEnvFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvFrom(obj: PoolerSpecTemplateSpecEphemeralContainersEnvFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20283,7 +21535,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvFrom(obj: Poo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Lifecycle is not allowed for ephemeral containers.
@@ -20324,13 +21576,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecycle {
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecycle#stopSignal
    */
   readonly stopSignal?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersLifecycle' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecycle(obj: PoolerSpecTemplateSpecEphemeralContainersLifecycle | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20341,7 +21592,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecycle(obj: P
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Probes are not allowed for ephemeral containers.
@@ -20437,13 +21688,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLivenessProbe {
    * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbe#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersLivenessProbe' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersLivenessProbe(obj: PoolerSpecTemplateSpecEphemeralContainersLivenessProbe | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20461,7 +21711,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLivenessProbe(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ContainerPort represents a network port in a single container.
@@ -20511,13 +21761,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersPorts {
    * @schema PoolerSpecTemplateSpecEphemeralContainersPorts#protocol
    */
   readonly protocol?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersPorts' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersPorts(obj: PoolerSpecTemplateSpecEphemeralContainersPorts | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20530,7 +21779,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersPorts(obj: Poole
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Probes are not allowed for ephemeral containers.
@@ -20626,13 +21875,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersReadinessProbe {
    * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbe#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersReadinessProbe' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersReadinessProbe(obj: PoolerSpecTemplateSpecEphemeralContainersReadinessProbe | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20650,7 +21898,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersReadinessProbe(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ContainerResizePolicy represents resource resize policy for the container.
@@ -20673,13 +21921,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersResizePolicy {
    * @schema PoolerSpecTemplateSpecEphemeralContainersResizePolicy#restartPolicy
    */
   readonly restartPolicy: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersResizePolicy' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersResizePolicy(obj: PoolerSpecTemplateSpecEphemeralContainersResizePolicy | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20689,7 +21936,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersResizePolicy(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Resources are not allowed for ephemeral containers. Ephemeral containers use spare resources
@@ -20728,13 +21975,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersResources {
    * @schema PoolerSpecTemplateSpecEphemeralContainersResources#requests
    */
   readonly requests?: { [key: string]: PoolerSpecTemplateSpecEphemeralContainersResourcesRequests };
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersResources' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersResources(obj: PoolerSpecTemplateSpecEphemeralContainersResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20745,7 +21991,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersResources(obj: P
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ContainerRestartRule describes how a container exit is handled.
@@ -20768,13 +22014,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRules {
    * @schema PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRules#exitCodes
    */
   readonly exitCodes?: PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRulesExitCodes;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRules' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRules(obj: PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRules | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20784,7 +22029,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRul
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Optional: SecurityContext defines the security options the ephemeral container should be run with.
@@ -20922,13 +22167,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersSecurityContext {
    * @schema PoolerSpecTemplateSpecEphemeralContainersSecurityContext#windowsOptions
    */
   readonly windowsOptions?: PoolerSpecTemplateSpecEphemeralContainersSecurityContextWindowsOptions;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersSecurityContext' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersSecurityContext(obj: PoolerSpecTemplateSpecEphemeralContainersSecurityContext | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20948,7 +22192,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersSecurityContext(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Probes are not allowed for ephemeral containers.
@@ -21044,13 +22288,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersStartupProbe {
    * @schema PoolerSpecTemplateSpecEphemeralContainersStartupProbe#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersStartupProbe' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersStartupProbe(obj: PoolerSpecTemplateSpecEphemeralContainersStartupProbe | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21068,7 +22311,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersStartupProbe(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * volumeDevice describes a mapping of a raw block device within a container.
@@ -21089,13 +22332,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersVolumeDevices {
    * @schema PoolerSpecTemplateSpecEphemeralContainersVolumeDevices#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersVolumeDevices' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersVolumeDevices(obj: PoolerSpecTemplateSpecEphemeralContainersVolumeDevices | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21105,7 +22347,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersVolumeDevices(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * VolumeMount describes a mounting of a Volume within a container.
@@ -21190,13 +22432,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersVolumeMounts {
    * @schema PoolerSpecTemplateSpecEphemeralContainersVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersVolumeMounts' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersVolumeMounts(obj: PoolerSpecTemplateSpecEphemeralContainersVolumeMounts | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21211,7 +22452,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersVolumeMounts(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * EnvVar represents an environment variable present in a Container.
@@ -21249,13 +22490,12 @@ export interface PoolerSpecTemplateSpecInitContainersEnv {
    * @schema PoolerSpecTemplateSpecInitContainersEnv#valueFrom
    */
   readonly valueFrom?: PoolerSpecTemplateSpecInitContainersEnvValueFrom;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersEnv' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersEnv(obj: PoolerSpecTemplateSpecInitContainersEnv | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21266,7 +22506,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersEnv(obj: PoolerSpecTe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * EnvFromSource represents the source of a set of ConfigMaps or Secrets
@@ -21295,13 +22535,12 @@ export interface PoolerSpecTemplateSpecInitContainersEnvFrom {
    * @schema PoolerSpecTemplateSpecInitContainersEnvFrom#secretRef
    */
   readonly secretRef?: PoolerSpecTemplateSpecInitContainersEnvFromSecretRef;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersEnvFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersEnvFrom(obj: PoolerSpecTemplateSpecInitContainersEnvFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21312,7 +22551,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersEnvFrom(obj: PoolerSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Actions that the management system should take in response to container lifecycle events.
@@ -21354,13 +22593,12 @@ export interface PoolerSpecTemplateSpecInitContainersLifecycle {
    * @schema PoolerSpecTemplateSpecInitContainersLifecycle#stopSignal
    */
   readonly stopSignal?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersLifecycle' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersLifecycle(obj: PoolerSpecTemplateSpecInitContainersLifecycle | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21371,7 +22609,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecycle(obj: Pooler
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Periodic probe of container liveness.
@@ -21470,13 +22708,12 @@ export interface PoolerSpecTemplateSpecInitContainersLivenessProbe {
    * @schema PoolerSpecTemplateSpecInitContainersLivenessProbe#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersLivenessProbe' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersLivenessProbe(obj: PoolerSpecTemplateSpecInitContainersLivenessProbe | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21494,7 +22731,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLivenessProbe(obj: Po
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ContainerPort represents a network port in a single container.
@@ -21544,13 +22781,12 @@ export interface PoolerSpecTemplateSpecInitContainersPorts {
    * @schema PoolerSpecTemplateSpecInitContainersPorts#protocol
    */
   readonly protocol?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersPorts' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersPorts(obj: PoolerSpecTemplateSpecInitContainersPorts | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21563,7 +22799,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersPorts(obj: PoolerSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Periodic probe of container service readiness.
@@ -21662,13 +22898,12 @@ export interface PoolerSpecTemplateSpecInitContainersReadinessProbe {
    * @schema PoolerSpecTemplateSpecInitContainersReadinessProbe#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersReadinessProbe' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersReadinessProbe(obj: PoolerSpecTemplateSpecInitContainersReadinessProbe | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21686,7 +22921,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersReadinessProbe(obj: P
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ContainerResizePolicy represents resource resize policy for the container.
@@ -21709,13 +22944,12 @@ export interface PoolerSpecTemplateSpecInitContainersResizePolicy {
    * @schema PoolerSpecTemplateSpecInitContainersResizePolicy#restartPolicy
    */
   readonly restartPolicy: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersResizePolicy' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersResizePolicy(obj: PoolerSpecTemplateSpecInitContainersResizePolicy | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21725,7 +22959,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersResizePolicy(obj: Poo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Compute Resources required by this container.
@@ -21765,13 +22999,12 @@ export interface PoolerSpecTemplateSpecInitContainersResources {
    * @schema PoolerSpecTemplateSpecInitContainersResources#requests
    */
   readonly requests?: { [key: string]: PoolerSpecTemplateSpecInitContainersResourcesRequests };
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersResources' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersResources(obj: PoolerSpecTemplateSpecInitContainersResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21782,7 +23015,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersResources(obj: Pooler
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ContainerRestartRule describes how a container exit is handled.
@@ -21805,13 +23038,12 @@ export interface PoolerSpecTemplateSpecInitContainersRestartPolicyRules {
    * @schema PoolerSpecTemplateSpecInitContainersRestartPolicyRules#exitCodes
    */
   readonly exitCodes?: PoolerSpecTemplateSpecInitContainersRestartPolicyRulesExitCodes;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersRestartPolicyRules' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersRestartPolicyRules(obj: PoolerSpecTemplateSpecInitContainersRestartPolicyRules | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21821,7 +23053,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersRestartPolicyRules(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SecurityContext defines the security options the container should be run with.
@@ -21960,13 +23192,12 @@ export interface PoolerSpecTemplateSpecInitContainersSecurityContext {
    * @schema PoolerSpecTemplateSpecInitContainersSecurityContext#windowsOptions
    */
   readonly windowsOptions?: PoolerSpecTemplateSpecInitContainersSecurityContextWindowsOptions;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersSecurityContext' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersSecurityContext(obj: PoolerSpecTemplateSpecInitContainersSecurityContext | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21986,7 +23217,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersSecurityContext(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * StartupProbe indicates that the Pod has successfully initialized.
@@ -22088,13 +23319,12 @@ export interface PoolerSpecTemplateSpecInitContainersStartupProbe {
    * @schema PoolerSpecTemplateSpecInitContainersStartupProbe#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersStartupProbe' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersStartupProbe(obj: PoolerSpecTemplateSpecInitContainersStartupProbe | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22112,7 +23342,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersStartupProbe(obj: Poo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * volumeDevice describes a mapping of a raw block device within a container.
@@ -22133,13 +23363,12 @@ export interface PoolerSpecTemplateSpecInitContainersVolumeDevices {
    * @schema PoolerSpecTemplateSpecInitContainersVolumeDevices#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersVolumeDevices' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersVolumeDevices(obj: PoolerSpecTemplateSpecInitContainersVolumeDevices | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22149,7 +23378,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersVolumeDevices(obj: Po
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * VolumeMount describes a mounting of a Volume within a container.
@@ -22234,13 +23463,12 @@ export interface PoolerSpecTemplateSpecInitContainersVolumeMounts {
    * @schema PoolerSpecTemplateSpecInitContainersVolumeMounts#subPathExpr
    */
   readonly subPathExpr?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersVolumeMounts' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersVolumeMounts(obj: PoolerSpecTemplateSpecInitContainersVolumeMounts | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22255,7 +23483,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersVolumeMounts(obj: Poo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ResourceClaim references one entry in PodSpec.ResourceClaims.
@@ -22280,13 +23508,12 @@ export interface PoolerSpecTemplateSpecResourcesClaims {
    * @schema PoolerSpecTemplateSpecResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecResourcesClaims' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecResourcesClaims(obj: PoolerSpecTemplateSpecResourcesClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22296,7 +23523,7 @@ export function toJson_PoolerSpecTemplateSpecResourcesClaims(obj: PoolerSpecTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema PoolerSpecTemplateSpecResourcesLimits
@@ -22353,13 +23580,12 @@ export interface PoolerSpecTemplateSpecSecurityContextAppArmorProfile {
    * @schema PoolerSpecTemplateSpecSecurityContextAppArmorProfile#type
    */
   readonly type: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecSecurityContextAppArmorProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecSecurityContextAppArmorProfile(obj: PoolerSpecTemplateSpecSecurityContextAppArmorProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22369,7 +23595,7 @@ export function toJson_PoolerSpecTemplateSpecSecurityContextAppArmorProfile(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SELinux context to be applied to all containers.
@@ -22409,13 +23635,12 @@ export interface PoolerSpecTemplateSpecSecurityContextSeLinuxOptions {
    * @schema PoolerSpecTemplateSpecSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecSecurityContextSeLinuxOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecSecurityContextSeLinuxOptions(obj: PoolerSpecTemplateSpecSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22427,7 +23652,7 @@ export function toJson_PoolerSpecTemplateSpecSecurityContextSeLinuxOptions(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The seccomp options to use by the containers in this pod.
@@ -22457,13 +23682,12 @@ export interface PoolerSpecTemplateSpecSecurityContextSeccompProfile {
    * @schema PoolerSpecTemplateSpecSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecSecurityContextSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecSecurityContextSeccompProfile(obj: PoolerSpecTemplateSpecSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22473,7 +23697,7 @@ export function toJson_PoolerSpecTemplateSpecSecurityContextSeccompProfile(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Sysctl defines a kernel parameter to be set
@@ -22494,13 +23718,12 @@ export interface PoolerSpecTemplateSpecSecurityContextSysctls {
    * @schema PoolerSpecTemplateSpecSecurityContextSysctls#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecSecurityContextSysctls' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecSecurityContextSysctls(obj: PoolerSpecTemplateSpecSecurityContextSysctls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22510,7 +23733,7 @@ export function toJson_PoolerSpecTemplateSpecSecurityContextSysctls(obj: PoolerS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Windows specific settings applied to all containers.
@@ -22557,13 +23780,12 @@ export interface PoolerSpecTemplateSpecSecurityContextWindowsOptions {
    * @schema PoolerSpecTemplateSpecSecurityContextWindowsOptions#runAsUserName
    */
   readonly runAsUserName?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecSecurityContextWindowsOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecSecurityContextWindowsOptions(obj: PoolerSpecTemplateSpecSecurityContextWindowsOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22575,7 +23797,7 @@ export function toJson_PoolerSpecTemplateSpecSecurityContextWindowsOptions(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * LabelSelector is used to find matching pods.
@@ -22600,13 +23822,12 @@ export interface PoolerSpecTemplateSpecTopologySpreadConstraintsLabelSelector {
    * @schema PoolerSpecTemplateSpecTopologySpreadConstraintsLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecTopologySpreadConstraintsLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecTopologySpreadConstraintsLabelSelector(obj: PoolerSpecTemplateSpecTopologySpreadConstraintsLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22616,7 +23837,7 @@ export function toJson_PoolerSpecTemplateSpecTopologySpreadConstraintsLabelSelec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * awsElasticBlockStore represents an AWS Disk resource that is attached to a
@@ -22663,13 +23884,12 @@ export interface PoolerSpecTemplateSpecVolumesAwsElasticBlockStore {
    * @schema PoolerSpecTemplateSpecVolumesAwsElasticBlockStore#volumeID
    */
   readonly volumeId: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesAwsElasticBlockStore' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesAwsElasticBlockStore(obj: PoolerSpecTemplateSpecVolumesAwsElasticBlockStore | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22681,7 +23901,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesAwsElasticBlockStore(obj: Po
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * azureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
@@ -22736,13 +23956,12 @@ export interface PoolerSpecTemplateSpecVolumesAzureDisk {
    * @schema PoolerSpecTemplateSpecVolumesAzureDisk#readOnly
    */
   readonly readOnly?: boolean;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesAzureDisk' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesAzureDisk(obj: PoolerSpecTemplateSpecVolumesAzureDisk | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22756,7 +23975,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesAzureDisk(obj: PoolerSpecTem
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * azureFile represents an Azure File Service mount on the host and bind mount to the pod.
@@ -22787,13 +24006,12 @@ export interface PoolerSpecTemplateSpecVolumesAzureFile {
    * @schema PoolerSpecTemplateSpecVolumesAzureFile#shareName
    */
   readonly shareName: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesAzureFile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesAzureFile(obj: PoolerSpecTemplateSpecVolumesAzureFile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22804,7 +24022,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesAzureFile(obj: PoolerSpecTem
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * cephFS represents a Ceph FS mount on the host that shares a pod's lifetime.
@@ -22861,13 +24079,12 @@ export interface PoolerSpecTemplateSpecVolumesCephfs {
    * @schema PoolerSpecTemplateSpecVolumesCephfs#user
    */
   readonly user?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesCephfs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesCephfs(obj: PoolerSpecTemplateSpecVolumesCephfs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22881,7 +24098,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesCephfs(obj: PoolerSpecTempla
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * cinder represents a cinder volume attached and mounted on kubelets host machine.
@@ -22926,13 +24143,12 @@ export interface PoolerSpecTemplateSpecVolumesCinder {
    * @schema PoolerSpecTemplateSpecVolumesCinder#volumeID
    */
   readonly volumeId: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesCinder' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesCinder(obj: PoolerSpecTemplateSpecVolumesCinder | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22944,7 +24160,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesCinder(obj: PoolerSpecTempla
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * configMap represents a configMap that should populate this volume
@@ -22996,13 +24212,12 @@ export interface PoolerSpecTemplateSpecVolumesConfigMap {
    * @schema PoolerSpecTemplateSpecVolumesConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesConfigMap' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesConfigMap(obj: PoolerSpecTemplateSpecVolumesConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23014,7 +24229,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesConfigMap(obj: PoolerSpecTem
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * csi (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers.
@@ -23066,13 +24281,12 @@ export interface PoolerSpecTemplateSpecVolumesCsi {
    * @schema PoolerSpecTemplateSpecVolumesCsi#volumeAttributes
    */
   readonly volumeAttributes?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesCsi' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesCsi(obj: PoolerSpecTemplateSpecVolumesCsi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23085,7 +24299,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesCsi(obj: PoolerSpecTemplateS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * downwardAPI represents downward API about the pod that should populate this volume
@@ -23114,13 +24328,12 @@ export interface PoolerSpecTemplateSpecVolumesDownwardApi {
    * @schema PoolerSpecTemplateSpecVolumesDownwardApi#items
    */
   readonly items?: PoolerSpecTemplateSpecVolumesDownwardApiItems[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesDownwardApi' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesDownwardApi(obj: PoolerSpecTemplateSpecVolumesDownwardApi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23130,7 +24343,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesDownwardApi(obj: PoolerSpecT
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * emptyDir represents a temporary directory that shares a pod's lifetime.
@@ -23160,13 +24373,12 @@ export interface PoolerSpecTemplateSpecVolumesEmptyDir {
    * @schema PoolerSpecTemplateSpecVolumesEmptyDir#sizeLimit
    */
   readonly sizeLimit?: PoolerSpecTemplateSpecVolumesEmptyDirSizeLimit;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesEmptyDir' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesEmptyDir(obj: PoolerSpecTemplateSpecVolumesEmptyDir | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23176,7 +24388,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesEmptyDir(obj: PoolerSpecTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ephemeral represents a volume that is handled by a cluster storage driver.
@@ -23233,13 +24445,12 @@ export interface PoolerSpecTemplateSpecVolumesEphemeral {
    * @schema PoolerSpecTemplateSpecVolumesEphemeral#volumeClaimTemplate
    */
   readonly volumeClaimTemplate?: PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplate;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesEphemeral' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesEphemeral(obj: PoolerSpecTemplateSpecVolumesEphemeral | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23248,7 +24459,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesEphemeral(obj: PoolerSpecTem
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * fc represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod.
@@ -23295,13 +24506,12 @@ export interface PoolerSpecTemplateSpecVolumesFc {
    * @schema PoolerSpecTemplateSpecVolumesFc#wwids
    */
   readonly wwids?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesFc' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesFc(obj: PoolerSpecTemplateSpecVolumesFc | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23314,7 +24524,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesFc(obj: PoolerSpecTemplateSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * flexVolume represents a generic volume resource that is
@@ -23365,13 +24575,12 @@ export interface PoolerSpecTemplateSpecVolumesFlexVolume {
    * @schema PoolerSpecTemplateSpecVolumesFlexVolume#secretRef
    */
   readonly secretRef?: PoolerSpecTemplateSpecVolumesFlexVolumeSecretRef;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesFlexVolume' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesFlexVolume(obj: PoolerSpecTemplateSpecVolumesFlexVolume | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23384,7 +24593,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesFlexVolume(obj: PoolerSpecTe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * flocker represents a Flocker volume attached to a kubelet's host machine. This depends on the Flocker control service being running.
@@ -23407,13 +24616,12 @@ export interface PoolerSpecTemplateSpecVolumesFlocker {
    * @schema PoolerSpecTemplateSpecVolumesFlocker#datasetUUID
    */
   readonly datasetUuid?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesFlocker' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesFlocker(obj: PoolerSpecTemplateSpecVolumesFlocker | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23423,7 +24631,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesFlocker(obj: PoolerSpecTempl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * gcePersistentDisk represents a GCE Disk resource that is attached to a
@@ -23473,13 +24681,12 @@ export interface PoolerSpecTemplateSpecVolumesGcePersistentDisk {
    * @schema PoolerSpecTemplateSpecVolumesGcePersistentDisk#readOnly
    */
   readonly readOnly?: boolean;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesGcePersistentDisk' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesGcePersistentDisk(obj: PoolerSpecTemplateSpecVolumesGcePersistentDisk | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23491,7 +24698,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesGcePersistentDisk(obj: Poole
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * gitRepo represents a git repository at a particular revision.
@@ -23525,13 +24732,12 @@ export interface PoolerSpecTemplateSpecVolumesGitRepo {
    * @schema PoolerSpecTemplateSpecVolumesGitRepo#revision
    */
   readonly revision?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesGitRepo' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesGitRepo(obj: PoolerSpecTemplateSpecVolumesGitRepo | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23542,7 +24748,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesGitRepo(obj: PoolerSpecTempl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * glusterfs represents a Glusterfs mount on the host that shares a pod's lifetime.
@@ -23575,13 +24781,12 @@ export interface PoolerSpecTemplateSpecVolumesGlusterfs {
    * @schema PoolerSpecTemplateSpecVolumesGlusterfs#readOnly
    */
   readonly readOnly?: boolean;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesGlusterfs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesGlusterfs(obj: PoolerSpecTemplateSpecVolumesGlusterfs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23592,7 +24797,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesGlusterfs(obj: PoolerSpecTem
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * hostPath represents a pre-existing file or directory on the host
@@ -23622,13 +24827,12 @@ export interface PoolerSpecTemplateSpecVolumesHostPath {
    * @schema PoolerSpecTemplateSpecVolumesHostPath#type
    */
   readonly type?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesHostPath' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesHostPath(obj: PoolerSpecTemplateSpecVolumesHostPath | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23638,7 +24842,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesHostPath(obj: PoolerSpecTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * image represents an OCI object (a container image or artifact) pulled and mounted on the kubelet's host machine.
@@ -23682,13 +24886,12 @@ export interface PoolerSpecTemplateSpecVolumesImage {
    * @schema PoolerSpecTemplateSpecVolumesImage#reference
    */
   readonly reference?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesImage' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesImage(obj: PoolerSpecTemplateSpecVolumesImage | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23698,7 +24901,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesImage(obj: PoolerSpecTemplat
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * iscsi represents an ISCSI Disk resource that is attached to a
@@ -23795,13 +24998,12 @@ export interface PoolerSpecTemplateSpecVolumesIscsi {
    * @schema PoolerSpecTemplateSpecVolumesIscsi#targetPortal
    */
   readonly targetPortal: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesIscsi' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesIscsi(obj: PoolerSpecTemplateSpecVolumesIscsi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23820,7 +25022,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesIscsi(obj: PoolerSpecTemplat
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * nfs represents an NFS mount on the host that shares a pod's lifetime
@@ -23854,13 +25056,12 @@ export interface PoolerSpecTemplateSpecVolumesNfs {
    * @schema PoolerSpecTemplateSpecVolumesNfs#server
    */
   readonly server: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesNfs' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesNfs(obj: PoolerSpecTemplateSpecVolumesNfs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23871,7 +25072,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesNfs(obj: PoolerSpecTemplateS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * persistentVolumeClaimVolumeSource represents a reference to a
@@ -23896,13 +25097,12 @@ export interface PoolerSpecTemplateSpecVolumesPersistentVolumeClaim {
    * @schema PoolerSpecTemplateSpecVolumesPersistentVolumeClaim#readOnly
    */
   readonly readOnly?: boolean;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesPersistentVolumeClaim' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesPersistentVolumeClaim(obj: PoolerSpecTemplateSpecVolumesPersistentVolumeClaim | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23912,7 +25112,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesPersistentVolumeClaim(obj: P
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine.
@@ -23936,13 +25136,12 @@ export interface PoolerSpecTemplateSpecVolumesPhotonPersistentDisk {
    * @schema PoolerSpecTemplateSpecVolumesPhotonPersistentDisk#pdID
    */
   readonly pdId: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesPhotonPersistentDisk' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesPhotonPersistentDisk(obj: PoolerSpecTemplateSpecVolumesPhotonPersistentDisk | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23952,7 +25151,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesPhotonPersistentDisk(obj: Po
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * portworxVolume represents a portworx volume attached and mounted on kubelets host machine.
@@ -23986,13 +25185,12 @@ export interface PoolerSpecTemplateSpecVolumesPortworxVolume {
    * @schema PoolerSpecTemplateSpecVolumesPortworxVolume#volumeID
    */
   readonly volumeId: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesPortworxVolume' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesPortworxVolume(obj: PoolerSpecTemplateSpecVolumesPortworxVolume | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24003,7 +25201,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesPortworxVolume(obj: PoolerSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * projected items for all in one resources secrets, configmaps, and downward API
@@ -24030,13 +25228,12 @@ export interface PoolerSpecTemplateSpecVolumesProjected {
    * @schema PoolerSpecTemplateSpecVolumesProjected#sources
    */
   readonly sources?: PoolerSpecTemplateSpecVolumesProjectedSources[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesProjected' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesProjected(obj: PoolerSpecTemplateSpecVolumesProjected | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24046,7 +25243,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesProjected(obj: PoolerSpecTem
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * quobyte represents a Quobyte mount on the host that shares a pod's lifetime.
@@ -24105,13 +25302,12 @@ export interface PoolerSpecTemplateSpecVolumesQuobyte {
    * @schema PoolerSpecTemplateSpecVolumesQuobyte#volume
    */
   readonly volume: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesQuobyte' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesQuobyte(obj: PoolerSpecTemplateSpecVolumesQuobyte | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24125,7 +25321,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesQuobyte(obj: PoolerSpecTempl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * rbd represents a Rados Block Device mount on the host that shares a pod's lifetime.
@@ -24210,13 +25406,12 @@ export interface PoolerSpecTemplateSpecVolumesRbd {
    * @schema PoolerSpecTemplateSpecVolumesRbd#user
    */
   readonly user?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesRbd' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesRbd(obj: PoolerSpecTemplateSpecVolumesRbd | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24232,7 +25427,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesRbd(obj: PoolerSpecTemplateS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * scaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
@@ -24320,13 +25515,12 @@ export interface PoolerSpecTemplateSpecVolumesScaleIo {
    * @schema PoolerSpecTemplateSpecVolumesScaleIo#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesScaleIo' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesScaleIo(obj: PoolerSpecTemplateSpecVolumesScaleIo | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24344,7 +25538,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesScaleIo(obj: PoolerSpecTempl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * secret represents a secret that should populate this volume.
@@ -24394,13 +25588,12 @@ export interface PoolerSpecTemplateSpecVolumesSecret {
    * @schema PoolerSpecTemplateSpecVolumesSecret#secretName
    */
   readonly secretName?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesSecret(obj: PoolerSpecTemplateSpecVolumesSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24412,7 +25605,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesSecret(obj: PoolerSpecTempla
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * storageOS represents a StorageOS volume attached and mounted on Kubernetes nodes.
@@ -24465,13 +25658,12 @@ export interface PoolerSpecTemplateSpecVolumesStorageos {
    * @schema PoolerSpecTemplateSpecVolumesStorageos#volumeNamespace
    */
   readonly volumeNamespace?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesStorageos' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesStorageos(obj: PoolerSpecTemplateSpecVolumesStorageos | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24484,7 +25676,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesStorageos(obj: PoolerSpecTem
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine.
@@ -24523,13 +25715,12 @@ export interface PoolerSpecTemplateSpecVolumesVsphereVolume {
    * @schema PoolerSpecTemplateSpecVolumesVsphereVolume#volumePath
    */
   readonly volumePath: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesVsphereVolume' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesVsphereVolume(obj: PoolerSpecTemplateSpecVolumesVsphereVolume | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24541,7 +25732,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesVsphereVolume(obj: PoolerSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * An empty preferred scheduling term matches all objects with implicit weight 0
@@ -24563,13 +25754,12 @@ export interface PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedu
    * @schema PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24579,7 +25769,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuring
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * If the affinity requirements specified by this field are not met at
@@ -24597,13 +25787,12 @@ export interface PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedul
    * @schema PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution#nodeSelectorTerms
    */
   readonly nodeSelectorTerms: PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24612,7 +25801,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -24634,13 +25823,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedul
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24650,7 +25838,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -24730,13 +25918,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringScheduli
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24750,7 +25937,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -24772,13 +25959,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSch
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24788,7 +25974,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDur
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -24868,13 +26054,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSche
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24888,7 +26073,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Source for the environment variable's value. Cannot be used if value is not empty.
@@ -24933,13 +26118,12 @@ export interface PoolerSpecTemplateSpecContainersEnvValueFrom {
    * @schema PoolerSpecTemplateSpecContainersEnvValueFrom#secretKeyRef
    */
   readonly secretKeyRef?: PoolerSpecTemplateSpecContainersEnvValueFromSecretKeyRef;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersEnvValueFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersEnvValueFrom(obj: PoolerSpecTemplateSpecContainersEnvValueFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24952,7 +26136,7 @@ export function toJson_PoolerSpecTemplateSpecContainersEnvValueFrom(obj: PoolerS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The ConfigMap to select from
@@ -24977,13 +26161,12 @@ export interface PoolerSpecTemplateSpecContainersEnvFromConfigMapRef {
    * @schema PoolerSpecTemplateSpecContainersEnvFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersEnvFromConfigMapRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersEnvFromConfigMapRef(obj: PoolerSpecTemplateSpecContainersEnvFromConfigMapRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24993,7 +26176,7 @@ export function toJson_PoolerSpecTemplateSpecContainersEnvFromConfigMapRef(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Secret to select from
@@ -25018,13 +26201,12 @@ export interface PoolerSpecTemplateSpecContainersEnvFromSecretRef {
    * @schema PoolerSpecTemplateSpecContainersEnvFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersEnvFromSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersEnvFromSecretRef(obj: PoolerSpecTemplateSpecContainersEnvFromSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25034,7 +26216,7 @@ export function toJson_PoolerSpecTemplateSpecContainersEnvFromSecretRef(obj: Poo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PostStart is called immediately after a container is created. If the handler fails,
@@ -25074,13 +26256,12 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePostStart {
    * @schema PoolerSpecTemplateSpecContainersLifecyclePostStart#tcpSocket
    */
   readonly tcpSocket?: PoolerSpecTemplateSpecContainersLifecyclePostStartTcpSocket;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersLifecyclePostStart' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersLifecyclePostStart(obj: PoolerSpecTemplateSpecContainersLifecyclePostStart | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25092,7 +26273,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePostStart(obj: P
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PreStop is called immediately before a container is terminated due to an
@@ -25137,13 +26318,12 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePreStop {
    * @schema PoolerSpecTemplateSpecContainersLifecyclePreStop#tcpSocket
    */
   readonly tcpSocket?: PoolerSpecTemplateSpecContainersLifecyclePreStopTcpSocket;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersLifecyclePreStop' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersLifecyclePreStop(obj: PoolerSpecTemplateSpecContainersLifecyclePreStop | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25155,7 +26335,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePreStop(obj: Poo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Exec specifies a command to execute in the container.
@@ -25173,13 +26353,12 @@ export interface PoolerSpecTemplateSpecContainersLivenessProbeExec {
    * @schema PoolerSpecTemplateSpecContainersLivenessProbeExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersLivenessProbeExec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersLivenessProbeExec(obj: PoolerSpecTemplateSpecContainersLivenessProbeExec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25188,7 +26367,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLivenessProbeExec(obj: Po
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * GRPC specifies a GRPC HealthCheckRequest.
@@ -25212,13 +26391,12 @@ export interface PoolerSpecTemplateSpecContainersLivenessProbeGrpc {
    * @schema PoolerSpecTemplateSpecContainersLivenessProbeGrpc#service
    */
   readonly service?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersLivenessProbeGrpc' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersLivenessProbeGrpc(obj: PoolerSpecTemplateSpecContainersLivenessProbeGrpc | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25228,7 +26406,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLivenessProbeGrpc(obj: Po
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HTTPGet specifies an HTTP GET request to perform.
@@ -25275,13 +26453,12 @@ export interface PoolerSpecTemplateSpecContainersLivenessProbeHttpGet {
    * @schema PoolerSpecTemplateSpecContainersLivenessProbeHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersLivenessProbeHttpGet' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersLivenessProbeHttpGet(obj: PoolerSpecTemplateSpecContainersLivenessProbeHttpGet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25294,7 +26471,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLivenessProbeHttpGet(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TCPSocket specifies a connection to a TCP port.
@@ -25317,13 +26494,12 @@ export interface PoolerSpecTemplateSpecContainersLivenessProbeTcpSocket {
    * @schema PoolerSpecTemplateSpecContainersLivenessProbeTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecContainersLivenessProbeTcpSocketPort;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersLivenessProbeTcpSocket' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersLivenessProbeTcpSocket(obj: PoolerSpecTemplateSpecContainersLivenessProbeTcpSocket | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25333,7 +26509,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLivenessProbeTcpSocket(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Exec specifies a command to execute in the container.
@@ -25351,13 +26527,12 @@ export interface PoolerSpecTemplateSpecContainersReadinessProbeExec {
    * @schema PoolerSpecTemplateSpecContainersReadinessProbeExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersReadinessProbeExec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersReadinessProbeExec(obj: PoolerSpecTemplateSpecContainersReadinessProbeExec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25366,7 +26541,7 @@ export function toJson_PoolerSpecTemplateSpecContainersReadinessProbeExec(obj: P
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * GRPC specifies a GRPC HealthCheckRequest.
@@ -25390,13 +26565,12 @@ export interface PoolerSpecTemplateSpecContainersReadinessProbeGrpc {
    * @schema PoolerSpecTemplateSpecContainersReadinessProbeGrpc#service
    */
   readonly service?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersReadinessProbeGrpc' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersReadinessProbeGrpc(obj: PoolerSpecTemplateSpecContainersReadinessProbeGrpc | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25406,7 +26580,7 @@ export function toJson_PoolerSpecTemplateSpecContainersReadinessProbeGrpc(obj: P
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HTTPGet specifies an HTTP GET request to perform.
@@ -25453,13 +26627,12 @@ export interface PoolerSpecTemplateSpecContainersReadinessProbeHttpGet {
    * @schema PoolerSpecTemplateSpecContainersReadinessProbeHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersReadinessProbeHttpGet' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersReadinessProbeHttpGet(obj: PoolerSpecTemplateSpecContainersReadinessProbeHttpGet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25472,7 +26645,7 @@ export function toJson_PoolerSpecTemplateSpecContainersReadinessProbeHttpGet(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TCPSocket specifies a connection to a TCP port.
@@ -25495,13 +26668,12 @@ export interface PoolerSpecTemplateSpecContainersReadinessProbeTcpSocket {
    * @schema PoolerSpecTemplateSpecContainersReadinessProbeTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecContainersReadinessProbeTcpSocketPort;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersReadinessProbeTcpSocket' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersReadinessProbeTcpSocket(obj: PoolerSpecTemplateSpecContainersReadinessProbeTcpSocket | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25511,7 +26683,7 @@ export function toJson_PoolerSpecTemplateSpecContainersReadinessProbeTcpSocket(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ResourceClaim references one entry in PodSpec.ResourceClaims.
@@ -25536,13 +26708,12 @@ export interface PoolerSpecTemplateSpecContainersResourcesClaims {
    * @schema PoolerSpecTemplateSpecContainersResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersResourcesClaims' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersResourcesClaims(obj: PoolerSpecTemplateSpecContainersResourcesClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25552,7 +26723,7 @@ export function toJson_PoolerSpecTemplateSpecContainersResourcesClaims(obj: Pool
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema PoolerSpecTemplateSpecContainersResourcesLimits
@@ -25607,13 +26778,12 @@ export interface PoolerSpecTemplateSpecContainersRestartPolicyRulesExitCodes {
    * @schema PoolerSpecTemplateSpecContainersRestartPolicyRulesExitCodes#values
    */
   readonly values?: number[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersRestartPolicyRulesExitCodes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersRestartPolicyRulesExitCodes(obj: PoolerSpecTemplateSpecContainersRestartPolicyRulesExitCodes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25623,7 +26793,7 @@ export function toJson_PoolerSpecTemplateSpecContainersRestartPolicyRulesExitCod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * appArmorProfile is the AppArmor options to use by this container. If set, this profile
@@ -25653,13 +26823,12 @@ export interface PoolerSpecTemplateSpecContainersSecurityContextAppArmorProfile 
    * @schema PoolerSpecTemplateSpecContainersSecurityContextAppArmorProfile#type
    */
   readonly type: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersSecurityContextAppArmorProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersSecurityContextAppArmorProfile(obj: PoolerSpecTemplateSpecContainersSecurityContextAppArmorProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25669,7 +26838,7 @@ export function toJson_PoolerSpecTemplateSpecContainersSecurityContextAppArmorPr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The capabilities to add/drop when running containers.
@@ -25693,13 +26862,12 @@ export interface PoolerSpecTemplateSpecContainersSecurityContextCapabilities {
    * @schema PoolerSpecTemplateSpecContainersSecurityContextCapabilities#drop
    */
   readonly drop?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersSecurityContextCapabilities' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersSecurityContextCapabilities(obj: PoolerSpecTemplateSpecContainersSecurityContextCapabilities | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25709,7 +26877,7 @@ export function toJson_PoolerSpecTemplateSpecContainersSecurityContextCapabiliti
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SELinux context to be applied to the container.
@@ -25748,13 +26916,12 @@ export interface PoolerSpecTemplateSpecContainersSecurityContextSeLinuxOptions {
    * @schema PoolerSpecTemplateSpecContainersSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersSecurityContextSeLinuxOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersSecurityContextSeLinuxOptions(obj: PoolerSpecTemplateSpecContainersSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25766,7 +26933,7 @@ export function toJson_PoolerSpecTemplateSpecContainersSecurityContextSeLinuxOpt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The seccomp options to use by this container. If seccomp options are
@@ -25798,13 +26965,12 @@ export interface PoolerSpecTemplateSpecContainersSecurityContextSeccompProfile {
    * @schema PoolerSpecTemplateSpecContainersSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersSecurityContextSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersSecurityContextSeccompProfile(obj: PoolerSpecTemplateSpecContainersSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25814,7 +26980,7 @@ export function toJson_PoolerSpecTemplateSpecContainersSecurityContextSeccompPro
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Windows specific settings applied to all containers.
@@ -25861,13 +27027,12 @@ export interface PoolerSpecTemplateSpecContainersSecurityContextWindowsOptions {
    * @schema PoolerSpecTemplateSpecContainersSecurityContextWindowsOptions#runAsUserName
    */
   readonly runAsUserName?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersSecurityContextWindowsOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersSecurityContextWindowsOptions(obj: PoolerSpecTemplateSpecContainersSecurityContextWindowsOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25879,7 +27044,7 @@ export function toJson_PoolerSpecTemplateSpecContainersSecurityContextWindowsOpt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Exec specifies a command to execute in the container.
@@ -25897,13 +27062,12 @@ export interface PoolerSpecTemplateSpecContainersStartupProbeExec {
    * @schema PoolerSpecTemplateSpecContainersStartupProbeExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersStartupProbeExec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersStartupProbeExec(obj: PoolerSpecTemplateSpecContainersStartupProbeExec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25912,7 +27076,7 @@ export function toJson_PoolerSpecTemplateSpecContainersStartupProbeExec(obj: Poo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * GRPC specifies a GRPC HealthCheckRequest.
@@ -25936,13 +27100,12 @@ export interface PoolerSpecTemplateSpecContainersStartupProbeGrpc {
    * @schema PoolerSpecTemplateSpecContainersStartupProbeGrpc#service
    */
   readonly service?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersStartupProbeGrpc' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersStartupProbeGrpc(obj: PoolerSpecTemplateSpecContainersStartupProbeGrpc | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25952,7 +27115,7 @@ export function toJson_PoolerSpecTemplateSpecContainersStartupProbeGrpc(obj: Poo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HTTPGet specifies an HTTP GET request to perform.
@@ -25999,13 +27162,12 @@ export interface PoolerSpecTemplateSpecContainersStartupProbeHttpGet {
    * @schema PoolerSpecTemplateSpecContainersStartupProbeHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersStartupProbeHttpGet' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersStartupProbeHttpGet(obj: PoolerSpecTemplateSpecContainersStartupProbeHttpGet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26018,7 +27180,7 @@ export function toJson_PoolerSpecTemplateSpecContainersStartupProbeHttpGet(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TCPSocket specifies a connection to a TCP port.
@@ -26041,13 +27203,12 @@ export interface PoolerSpecTemplateSpecContainersStartupProbeTcpSocket {
    * @schema PoolerSpecTemplateSpecContainersStartupProbeTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecContainersStartupProbeTcpSocketPort;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersStartupProbeTcpSocket' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersStartupProbeTcpSocket(obj: PoolerSpecTemplateSpecContainersStartupProbeTcpSocket | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26057,7 +27218,7 @@ export function toJson_PoolerSpecTemplateSpecContainersStartupProbeTcpSocket(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Source for the environment variable's value. Cannot be used if value is not empty.
@@ -26102,13 +27263,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvValueFrom {
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvValueFrom#secretKeyRef
    */
   readonly secretKeyRef?: PoolerSpecTemplateSpecEphemeralContainersEnvValueFromSecretKeyRef;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersEnvValueFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFrom(obj: PoolerSpecTemplateSpecEphemeralContainersEnvValueFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26121,7 +27281,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFrom(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The ConfigMap to select from
@@ -26146,13 +27306,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvFromConfigMapRef {
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersEnvFromConfigMapRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvFromConfigMapRef(obj: PoolerSpecTemplateSpecEphemeralContainersEnvFromConfigMapRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26162,7 +27321,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvFromConfigMap
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Secret to select from
@@ -26187,13 +27346,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvFromSecretRef {
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersEnvFromSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvFromSecretRef(obj: PoolerSpecTemplateSpecEphemeralContainersEnvFromSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26203,7 +27361,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvFromSecretRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PostStart is called immediately after a container is created. If the handler fails,
@@ -26243,13 +27401,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStart {
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStart#tcpSocket
    */
   readonly tcpSocket?: PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartTcpSocket;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStart' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStart(obj: PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStart | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26261,7 +27418,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePostSta
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PreStop is called immediately before a container is terminated due to an
@@ -26306,13 +27463,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop {
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop#tcpSocket
    */
   readonly tcpSocket?: PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopTcpSocket;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop(obj: PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26324,7 +27480,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Exec specifies a command to execute in the container.
@@ -26342,13 +27498,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLivenessProbeExec {
    * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbeExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersLivenessProbeExec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersLivenessProbeExec(obj: PoolerSpecTemplateSpecEphemeralContainersLivenessProbeExec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26357,7 +27512,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLivenessProbeExe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * GRPC specifies a GRPC HealthCheckRequest.
@@ -26381,13 +27536,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLivenessProbeGrpc {
    * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbeGrpc#service
    */
   readonly service?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersLivenessProbeGrpc' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersLivenessProbeGrpc(obj: PoolerSpecTemplateSpecEphemeralContainersLivenessProbeGrpc | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26397,7 +27551,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLivenessProbeGrp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HTTPGet specifies an HTTP GET request to perform.
@@ -26444,13 +27598,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLivenessProbeHttpGet {
    * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbeHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersLivenessProbeHttpGet' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersLivenessProbeHttpGet(obj: PoolerSpecTemplateSpecEphemeralContainersLivenessProbeHttpGet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26463,7 +27616,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLivenessProbeHtt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TCPSocket specifies a connection to a TCP port.
@@ -26486,13 +27639,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLivenessProbeTcpSocket
    * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbeTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecEphemeralContainersLivenessProbeTcpSocketPort;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersLivenessProbeTcpSocket' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersLivenessProbeTcpSocket(obj: PoolerSpecTemplateSpecEphemeralContainersLivenessProbeTcpSocket | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26502,7 +27654,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLivenessProbeTcp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Exec specifies a command to execute in the container.
@@ -26520,13 +27672,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersReadinessProbeExec {
    * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbeExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersReadinessProbeExec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersReadinessProbeExec(obj: PoolerSpecTemplateSpecEphemeralContainersReadinessProbeExec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26535,7 +27686,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersReadinessProbeEx
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * GRPC specifies a GRPC HealthCheckRequest.
@@ -26559,13 +27710,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersReadinessProbeGrpc {
    * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbeGrpc#service
    */
   readonly service?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersReadinessProbeGrpc' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersReadinessProbeGrpc(obj: PoolerSpecTemplateSpecEphemeralContainersReadinessProbeGrpc | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26575,7 +27725,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersReadinessProbeGr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HTTPGet specifies an HTTP GET request to perform.
@@ -26622,13 +27772,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersReadinessProbeHttpGet 
    * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbeHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersReadinessProbeHttpGet' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersReadinessProbeHttpGet(obj: PoolerSpecTemplateSpecEphemeralContainersReadinessProbeHttpGet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26641,7 +27790,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersReadinessProbeHt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TCPSocket specifies a connection to a TCP port.
@@ -26664,13 +27813,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersReadinessProbeTcpSocke
    * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbeTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecEphemeralContainersReadinessProbeTcpSocketPort;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersReadinessProbeTcpSocket' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersReadinessProbeTcpSocket(obj: PoolerSpecTemplateSpecEphemeralContainersReadinessProbeTcpSocket | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26680,7 +27828,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersReadinessProbeTc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ResourceClaim references one entry in PodSpec.ResourceClaims.
@@ -26705,13 +27853,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersResourcesClaims {
    * @schema PoolerSpecTemplateSpecEphemeralContainersResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersResourcesClaims' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersResourcesClaims(obj: PoolerSpecTemplateSpecEphemeralContainersResourcesClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26721,7 +27868,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersResourcesClaims(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema PoolerSpecTemplateSpecEphemeralContainersResourcesLimits
@@ -26776,13 +27923,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRulesExit
    * @schema PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRulesExitCodes#values
    */
   readonly values?: number[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRulesExitCodes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRulesExitCodes(obj: PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRulesExitCodes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26792,7 +27938,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersRestartPolicyRul
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * appArmorProfile is the AppArmor options to use by this container. If set, this profile
@@ -26822,13 +27968,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersSecurityContextAppArmo
    * @schema PoolerSpecTemplateSpecEphemeralContainersSecurityContextAppArmorProfile#type
    */
   readonly type: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersSecurityContextAppArmorProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersSecurityContextAppArmorProfile(obj: PoolerSpecTemplateSpecEphemeralContainersSecurityContextAppArmorProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26838,7 +27983,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersSecurityContextA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The capabilities to add/drop when running containers.
@@ -26862,13 +28007,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersSecurityContextCapabil
    * @schema PoolerSpecTemplateSpecEphemeralContainersSecurityContextCapabilities#drop
    */
   readonly drop?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersSecurityContextCapabilities' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersSecurityContextCapabilities(obj: PoolerSpecTemplateSpecEphemeralContainersSecurityContextCapabilities | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26878,7 +28022,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersSecurityContextC
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SELinux context to be applied to the container.
@@ -26917,13 +28061,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersSecurityContextSeLinux
    * @schema PoolerSpecTemplateSpecEphemeralContainersSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersSecurityContextSeLinuxOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersSecurityContextSeLinuxOptions(obj: PoolerSpecTemplateSpecEphemeralContainersSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26935,7 +28078,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersSecurityContextS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The seccomp options to use by this container. If seccomp options are
@@ -26967,13 +28110,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersSecurityContextSeccomp
    * @schema PoolerSpecTemplateSpecEphemeralContainersSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersSecurityContextSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersSecurityContextSeccompProfile(obj: PoolerSpecTemplateSpecEphemeralContainersSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26983,7 +28125,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersSecurityContextS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Windows specific settings applied to all containers.
@@ -27030,13 +28172,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersSecurityContextWindows
    * @schema PoolerSpecTemplateSpecEphemeralContainersSecurityContextWindowsOptions#runAsUserName
    */
   readonly runAsUserName?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersSecurityContextWindowsOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersSecurityContextWindowsOptions(obj: PoolerSpecTemplateSpecEphemeralContainersSecurityContextWindowsOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27048,7 +28189,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersSecurityContextW
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Exec specifies a command to execute in the container.
@@ -27066,13 +28207,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersStartupProbeExec {
    * @schema PoolerSpecTemplateSpecEphemeralContainersStartupProbeExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersStartupProbeExec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersStartupProbeExec(obj: PoolerSpecTemplateSpecEphemeralContainersStartupProbeExec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27081,7 +28221,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersStartupProbeExec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * GRPC specifies a GRPC HealthCheckRequest.
@@ -27105,13 +28245,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersStartupProbeGrpc {
    * @schema PoolerSpecTemplateSpecEphemeralContainersStartupProbeGrpc#service
    */
   readonly service?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersStartupProbeGrpc' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersStartupProbeGrpc(obj: PoolerSpecTemplateSpecEphemeralContainersStartupProbeGrpc | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27121,7 +28260,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersStartupProbeGrpc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HTTPGet specifies an HTTP GET request to perform.
@@ -27168,13 +28307,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersStartupProbeHttpGet {
    * @schema PoolerSpecTemplateSpecEphemeralContainersStartupProbeHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersStartupProbeHttpGet' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersStartupProbeHttpGet(obj: PoolerSpecTemplateSpecEphemeralContainersStartupProbeHttpGet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27187,7 +28325,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersStartupProbeHttp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TCPSocket specifies a connection to a TCP port.
@@ -27210,13 +28348,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersStartupProbeTcpSocket 
    * @schema PoolerSpecTemplateSpecEphemeralContainersStartupProbeTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecEphemeralContainersStartupProbeTcpSocketPort;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersStartupProbeTcpSocket' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersStartupProbeTcpSocket(obj: PoolerSpecTemplateSpecEphemeralContainersStartupProbeTcpSocket | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27226,7 +28363,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersStartupProbeTcpS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Source for the environment variable's value. Cannot be used if value is not empty.
@@ -27271,13 +28408,12 @@ export interface PoolerSpecTemplateSpecInitContainersEnvValueFrom {
    * @schema PoolerSpecTemplateSpecInitContainersEnvValueFrom#secretKeyRef
    */
   readonly secretKeyRef?: PoolerSpecTemplateSpecInitContainersEnvValueFromSecretKeyRef;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersEnvValueFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersEnvValueFrom(obj: PoolerSpecTemplateSpecInitContainersEnvValueFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27290,7 +28426,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersEnvValueFrom(obj: Poo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The ConfigMap to select from
@@ -27315,13 +28451,12 @@ export interface PoolerSpecTemplateSpecInitContainersEnvFromConfigMapRef {
    * @schema PoolerSpecTemplateSpecInitContainersEnvFromConfigMapRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersEnvFromConfigMapRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersEnvFromConfigMapRef(obj: PoolerSpecTemplateSpecInitContainersEnvFromConfigMapRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27331,7 +28466,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersEnvFromConfigMapRef(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Secret to select from
@@ -27356,13 +28491,12 @@ export interface PoolerSpecTemplateSpecInitContainersEnvFromSecretRef {
    * @schema PoolerSpecTemplateSpecInitContainersEnvFromSecretRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersEnvFromSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersEnvFromSecretRef(obj: PoolerSpecTemplateSpecInitContainersEnvFromSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27372,7 +28506,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersEnvFromSecretRef(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PostStart is called immediately after a container is created. If the handler fails,
@@ -27412,13 +28546,12 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePostStart {
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePostStart#tcpSocket
    */
   readonly tcpSocket?: PoolerSpecTemplateSpecInitContainersLifecyclePostStartTcpSocket;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersLifecyclePostStart' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePostStart(obj: PoolerSpecTemplateSpecInitContainersLifecyclePostStart | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27430,7 +28563,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePostStart(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PreStop is called immediately before a container is terminated due to an
@@ -27475,13 +28608,12 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePreStop {
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePreStop#tcpSocket
    */
   readonly tcpSocket?: PoolerSpecTemplateSpecInitContainersLifecyclePreStopTcpSocket;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersLifecyclePreStop' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePreStop(obj: PoolerSpecTemplateSpecInitContainersLifecyclePreStop | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27493,7 +28625,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePreStop(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Exec specifies a command to execute in the container.
@@ -27511,13 +28643,12 @@ export interface PoolerSpecTemplateSpecInitContainersLivenessProbeExec {
    * @schema PoolerSpecTemplateSpecInitContainersLivenessProbeExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersLivenessProbeExec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersLivenessProbeExec(obj: PoolerSpecTemplateSpecInitContainersLivenessProbeExec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27526,7 +28657,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLivenessProbeExec(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * GRPC specifies a GRPC HealthCheckRequest.
@@ -27550,13 +28681,12 @@ export interface PoolerSpecTemplateSpecInitContainersLivenessProbeGrpc {
    * @schema PoolerSpecTemplateSpecInitContainersLivenessProbeGrpc#service
    */
   readonly service?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersLivenessProbeGrpc' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersLivenessProbeGrpc(obj: PoolerSpecTemplateSpecInitContainersLivenessProbeGrpc | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27566,7 +28696,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLivenessProbeGrpc(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HTTPGet specifies an HTTP GET request to perform.
@@ -27613,13 +28743,12 @@ export interface PoolerSpecTemplateSpecInitContainersLivenessProbeHttpGet {
    * @schema PoolerSpecTemplateSpecInitContainersLivenessProbeHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersLivenessProbeHttpGet' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersLivenessProbeHttpGet(obj: PoolerSpecTemplateSpecInitContainersLivenessProbeHttpGet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27632,7 +28761,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLivenessProbeHttpGet(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TCPSocket specifies a connection to a TCP port.
@@ -27655,13 +28784,12 @@ export interface PoolerSpecTemplateSpecInitContainersLivenessProbeTcpSocket {
    * @schema PoolerSpecTemplateSpecInitContainersLivenessProbeTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecInitContainersLivenessProbeTcpSocketPort;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersLivenessProbeTcpSocket' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersLivenessProbeTcpSocket(obj: PoolerSpecTemplateSpecInitContainersLivenessProbeTcpSocket | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27671,7 +28799,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLivenessProbeTcpSocke
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Exec specifies a command to execute in the container.
@@ -27689,13 +28817,12 @@ export interface PoolerSpecTemplateSpecInitContainersReadinessProbeExec {
    * @schema PoolerSpecTemplateSpecInitContainersReadinessProbeExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersReadinessProbeExec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersReadinessProbeExec(obj: PoolerSpecTemplateSpecInitContainersReadinessProbeExec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27704,7 +28831,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersReadinessProbeExec(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * GRPC specifies a GRPC HealthCheckRequest.
@@ -27728,13 +28855,12 @@ export interface PoolerSpecTemplateSpecInitContainersReadinessProbeGrpc {
    * @schema PoolerSpecTemplateSpecInitContainersReadinessProbeGrpc#service
    */
   readonly service?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersReadinessProbeGrpc' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersReadinessProbeGrpc(obj: PoolerSpecTemplateSpecInitContainersReadinessProbeGrpc | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27744,7 +28870,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersReadinessProbeGrpc(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HTTPGet specifies an HTTP GET request to perform.
@@ -27791,13 +28917,12 @@ export interface PoolerSpecTemplateSpecInitContainersReadinessProbeHttpGet {
    * @schema PoolerSpecTemplateSpecInitContainersReadinessProbeHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersReadinessProbeHttpGet' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersReadinessProbeHttpGet(obj: PoolerSpecTemplateSpecInitContainersReadinessProbeHttpGet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27810,7 +28935,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersReadinessProbeHttpGet
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TCPSocket specifies a connection to a TCP port.
@@ -27833,13 +28958,12 @@ export interface PoolerSpecTemplateSpecInitContainersReadinessProbeTcpSocket {
    * @schema PoolerSpecTemplateSpecInitContainersReadinessProbeTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecInitContainersReadinessProbeTcpSocketPort;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersReadinessProbeTcpSocket' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersReadinessProbeTcpSocket(obj: PoolerSpecTemplateSpecInitContainersReadinessProbeTcpSocket | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27849,7 +28973,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersReadinessProbeTcpSock
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ResourceClaim references one entry in PodSpec.ResourceClaims.
@@ -27874,13 +28998,12 @@ export interface PoolerSpecTemplateSpecInitContainersResourcesClaims {
    * @schema PoolerSpecTemplateSpecInitContainersResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersResourcesClaims' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersResourcesClaims(obj: PoolerSpecTemplateSpecInitContainersResourcesClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27890,7 +29013,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersResourcesClaims(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema PoolerSpecTemplateSpecInitContainersResourcesLimits
@@ -27945,13 +29068,12 @@ export interface PoolerSpecTemplateSpecInitContainersRestartPolicyRulesExitCodes
    * @schema PoolerSpecTemplateSpecInitContainersRestartPolicyRulesExitCodes#values
    */
   readonly values?: number[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersRestartPolicyRulesExitCodes' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersRestartPolicyRulesExitCodes(obj: PoolerSpecTemplateSpecInitContainersRestartPolicyRulesExitCodes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27961,7 +29083,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersRestartPolicyRulesExi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * appArmorProfile is the AppArmor options to use by this container. If set, this profile
@@ -27991,13 +29113,12 @@ export interface PoolerSpecTemplateSpecInitContainersSecurityContextAppArmorProf
    * @schema PoolerSpecTemplateSpecInitContainersSecurityContextAppArmorProfile#type
    */
   readonly type: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersSecurityContextAppArmorProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersSecurityContextAppArmorProfile(obj: PoolerSpecTemplateSpecInitContainersSecurityContextAppArmorProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28007,7 +29128,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersSecurityContextAppArm
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The capabilities to add/drop when running containers.
@@ -28031,13 +29152,12 @@ export interface PoolerSpecTemplateSpecInitContainersSecurityContextCapabilities
    * @schema PoolerSpecTemplateSpecInitContainersSecurityContextCapabilities#drop
    */
   readonly drop?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersSecurityContextCapabilities' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersSecurityContextCapabilities(obj: PoolerSpecTemplateSpecInitContainersSecurityContextCapabilities | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28047,7 +29167,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersSecurityContextCapabi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SELinux context to be applied to the container.
@@ -28086,13 +29206,12 @@ export interface PoolerSpecTemplateSpecInitContainersSecurityContextSeLinuxOptio
    * @schema PoolerSpecTemplateSpecInitContainersSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersSecurityContextSeLinuxOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersSecurityContextSeLinuxOptions(obj: PoolerSpecTemplateSpecInitContainersSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28104,7 +29223,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersSecurityContextSeLinu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The seccomp options to use by this container. If seccomp options are
@@ -28136,13 +29255,12 @@ export interface PoolerSpecTemplateSpecInitContainersSecurityContextSeccompProfi
    * @schema PoolerSpecTemplateSpecInitContainersSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersSecurityContextSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersSecurityContextSeccompProfile(obj: PoolerSpecTemplateSpecInitContainersSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28152,7 +29270,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersSecurityContextSeccom
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Windows specific settings applied to all containers.
@@ -28199,13 +29317,12 @@ export interface PoolerSpecTemplateSpecInitContainersSecurityContextWindowsOptio
    * @schema PoolerSpecTemplateSpecInitContainersSecurityContextWindowsOptions#runAsUserName
    */
   readonly runAsUserName?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersSecurityContextWindowsOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersSecurityContextWindowsOptions(obj: PoolerSpecTemplateSpecInitContainersSecurityContextWindowsOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28217,7 +29334,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersSecurityContextWindow
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Exec specifies a command to execute in the container.
@@ -28235,13 +29352,12 @@ export interface PoolerSpecTemplateSpecInitContainersStartupProbeExec {
    * @schema PoolerSpecTemplateSpecInitContainersStartupProbeExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersStartupProbeExec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersStartupProbeExec(obj: PoolerSpecTemplateSpecInitContainersStartupProbeExec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28250,7 +29366,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersStartupProbeExec(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * GRPC specifies a GRPC HealthCheckRequest.
@@ -28274,13 +29390,12 @@ export interface PoolerSpecTemplateSpecInitContainersStartupProbeGrpc {
    * @schema PoolerSpecTemplateSpecInitContainersStartupProbeGrpc#service
    */
   readonly service?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersStartupProbeGrpc' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersStartupProbeGrpc(obj: PoolerSpecTemplateSpecInitContainersStartupProbeGrpc | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28290,7 +29405,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersStartupProbeGrpc(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HTTPGet specifies an HTTP GET request to perform.
@@ -28337,13 +29452,12 @@ export interface PoolerSpecTemplateSpecInitContainersStartupProbeHttpGet {
    * @schema PoolerSpecTemplateSpecInitContainersStartupProbeHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersStartupProbeHttpGet' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersStartupProbeHttpGet(obj: PoolerSpecTemplateSpecInitContainersStartupProbeHttpGet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28356,7 +29470,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersStartupProbeHttpGet(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * TCPSocket specifies a connection to a TCP port.
@@ -28379,13 +29493,12 @@ export interface PoolerSpecTemplateSpecInitContainersStartupProbeTcpSocket {
    * @schema PoolerSpecTemplateSpecInitContainersStartupProbeTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecInitContainersStartupProbeTcpSocketPort;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersStartupProbeTcpSocket' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersStartupProbeTcpSocket(obj: PoolerSpecTemplateSpecInitContainersStartupProbeTcpSocket | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28395,7 +29508,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersStartupProbeTcpSocket
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -28428,13 +29541,12 @@ export interface PoolerSpecTemplateSpecTopologySpreadConstraintsLabelSelectorMat
    * @schema PoolerSpecTemplateSpecTopologySpreadConstraintsLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecTopologySpreadConstraintsLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecTopologySpreadConstraintsLabelSelectorMatchExpressions(obj: PoolerSpecTemplateSpecTopologySpreadConstraintsLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28445,7 +29557,7 @@ export function toJson_PoolerSpecTemplateSpecTopologySpreadConstraintsLabelSelec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * secretRef is Optional: SecretRef is reference to the authentication secret for User, default is empty.
@@ -28464,13 +29576,12 @@ export interface PoolerSpecTemplateSpecVolumesCephfsSecretRef {
    * @schema PoolerSpecTemplateSpecVolumesCephfsSecretRef#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesCephfsSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesCephfsSecretRef(obj: PoolerSpecTemplateSpecVolumesCephfsSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28479,7 +29590,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesCephfsSecretRef(obj: PoolerS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * secretRef is optional: points to a secret object containing parameters used to connect
@@ -28498,13 +29609,12 @@ export interface PoolerSpecTemplateSpecVolumesCinderSecretRef {
    * @schema PoolerSpecTemplateSpecVolumesCinderSecretRef#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesCinderSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesCinderSecretRef(obj: PoolerSpecTemplateSpecVolumesCinderSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28513,7 +29623,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesCinderSecretRef(obj: PoolerS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -28549,13 +29659,12 @@ export interface PoolerSpecTemplateSpecVolumesConfigMapItems {
    * @schema PoolerSpecTemplateSpecVolumesConfigMapItems#path
    */
   readonly path: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesConfigMapItems' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesConfigMapItems(obj: PoolerSpecTemplateSpecVolumesConfigMapItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28566,7 +29675,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesConfigMapItems(obj: PoolerSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * nodePublishSecretRef is a reference to the secret object containing
@@ -28588,13 +29697,12 @@ export interface PoolerSpecTemplateSpecVolumesCsiNodePublishSecretRef {
    * @schema PoolerSpecTemplateSpecVolumesCsiNodePublishSecretRef#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesCsiNodePublishSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesCsiNodePublishSecretRef(obj: PoolerSpecTemplateSpecVolumesCsiNodePublishSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28603,7 +29711,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesCsiNodePublishSecretRef(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * DownwardAPIVolumeFile represents information to create the file containing the pod field
@@ -28644,13 +29752,12 @@ export interface PoolerSpecTemplateSpecVolumesDownwardApiItems {
    * @schema PoolerSpecTemplateSpecVolumesDownwardApiItems#resourceFieldRef
    */
   readonly resourceFieldRef?: PoolerSpecTemplateSpecVolumesDownwardApiItemsResourceFieldRef;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesDownwardApiItems' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesDownwardApiItems(obj: PoolerSpecTemplateSpecVolumesDownwardApiItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28662,7 +29769,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesDownwardApiItems(obj: Pooler
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * sizeLimit is the total amount of local storage required for this EmptyDir volume.
@@ -28729,13 +29836,12 @@ export interface PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplate {
    * @schema PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplate#spec
    */
   readonly spec: PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpec;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplate(obj: PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28745,7 +29851,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplate
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * secretRef is Optional: secretRef is reference to the secret object containing
@@ -28767,13 +29873,12 @@ export interface PoolerSpecTemplateSpecVolumesFlexVolumeSecretRef {
    * @schema PoolerSpecTemplateSpecVolumesFlexVolumeSecretRef#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesFlexVolumeSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesFlexVolumeSecretRef(obj: PoolerSpecTemplateSpecVolumesFlexVolumeSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28782,7 +29887,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesFlexVolumeSecretRef(obj: Poo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * secretRef is the CHAP Secret for iSCSI target and initiator authentication
@@ -28800,13 +29905,12 @@ export interface PoolerSpecTemplateSpecVolumesIscsiSecretRef {
    * @schema PoolerSpecTemplateSpecVolumesIscsiSecretRef#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesIscsiSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesIscsiSecretRef(obj: PoolerSpecTemplateSpecVolumesIscsiSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28815,7 +29919,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesIscsiSecretRef(obj: PoolerSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Projection that may be projected along with other supported volume types.
@@ -28910,13 +30014,12 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSources {
    * @schema PoolerSpecTemplateSpecVolumesProjectedSources#serviceAccountToken
    */
   readonly serviceAccountToken?: PoolerSpecTemplateSpecVolumesProjectedSourcesServiceAccountToken;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesProjectedSources' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesProjectedSources(obj: PoolerSpecTemplateSpecVolumesProjectedSources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28930,7 +30033,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesProjectedSources(obj: Pooler
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * secretRef is name of the authentication secret for RBDUser. If provided
@@ -28952,13 +30055,12 @@ export interface PoolerSpecTemplateSpecVolumesRbdSecretRef {
    * @schema PoolerSpecTemplateSpecVolumesRbdSecretRef#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesRbdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesRbdSecretRef(obj: PoolerSpecTemplateSpecVolumesRbdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28967,7 +30069,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesRbdSecretRef(obj: PoolerSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * secretRef references to the secret for ScaleIO user and other
@@ -28986,13 +30088,12 @@ export interface PoolerSpecTemplateSpecVolumesScaleIoSecretRef {
    * @schema PoolerSpecTemplateSpecVolumesScaleIoSecretRef#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesScaleIoSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesScaleIoSecretRef(obj: PoolerSpecTemplateSpecVolumesScaleIoSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29001,7 +30102,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesScaleIoSecretRef(obj: Pooler
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -29037,13 +30138,12 @@ export interface PoolerSpecTemplateSpecVolumesSecretItems {
    * @schema PoolerSpecTemplateSpecVolumesSecretItems#path
    */
   readonly path: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesSecretItems' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesSecretItems(obj: PoolerSpecTemplateSpecVolumesSecretItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29054,7 +30154,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesSecretItems(obj: PoolerSpecT
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * secretRef specifies the secret to use for obtaining the StorageOS API
@@ -29073,13 +30173,12 @@ export interface PoolerSpecTemplateSpecVolumesStorageosSecretRef {
    * @schema PoolerSpecTemplateSpecVolumesStorageosSecretRef#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesStorageosSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesStorageosSecretRef(obj: PoolerSpecTemplateSpecVolumesStorageosSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29088,7 +30187,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesStorageosSecretRef(obj: Pool
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A node selector term, associated with the corresponding weight.
@@ -29109,13 +30208,12 @@ export interface PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedu
    * @schema PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchFields
    */
   readonly matchFields?: PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference(obj: PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29125,7 +30223,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuring
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A null or empty node selector term matches no objects. The requirements of
@@ -29148,13 +30246,12 @@ export interface PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedul
    * @schema PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchFields
    */
   readonly matchFields?: PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms(obj: PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29164,7 +30261,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -29239,13 +30336,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedul
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29259,7 +30355,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -29283,13 +30379,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringScheduli
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29299,7 +30394,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -29326,13 +30421,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringScheduli
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29342,7 +30436,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -29417,13 +30511,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSch
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29437,7 +30530,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDur
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -29461,13 +30554,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSche
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29477,7 +30569,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -29504,13 +30596,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSche
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29520,7 +30611,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selects a key of a ConfigMap.
@@ -29552,13 +30643,12 @@ export interface PoolerSpecTemplateSpecContainersEnvValueFromConfigMapKeyRef {
    * @schema PoolerSpecTemplateSpecContainersEnvValueFromConfigMapKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersEnvValueFromConfigMapKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersEnvValueFromConfigMapKeyRef(obj: PoolerSpecTemplateSpecContainersEnvValueFromConfigMapKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29569,7 +30659,7 @@ export function toJson_PoolerSpecTemplateSpecContainersEnvValueFromConfigMapKeyR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selects a field of the pod: supports metadata.name, metadata.namespace, `metadata.labels['<KEY>']`, `metadata.annotations['<KEY>']`,
@@ -29591,13 +30681,12 @@ export interface PoolerSpecTemplateSpecContainersEnvValueFromFieldRef {
    * @schema PoolerSpecTemplateSpecContainersEnvValueFromFieldRef#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersEnvValueFromFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersEnvValueFromFieldRef(obj: PoolerSpecTemplateSpecContainersEnvValueFromFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29607,7 +30696,7 @@ export function toJson_PoolerSpecTemplateSpecContainersEnvValueFromFieldRef(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * FileKeyRef selects a key of the env file.
@@ -29652,13 +30741,12 @@ export interface PoolerSpecTemplateSpecContainersEnvValueFromFileKeyRef {
    * @schema PoolerSpecTemplateSpecContainersEnvValueFromFileKeyRef#volumeName
    */
   readonly volumeName: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersEnvValueFromFileKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersEnvValueFromFileKeyRef(obj: PoolerSpecTemplateSpecContainersEnvValueFromFileKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29670,7 +30758,7 @@ export function toJson_PoolerSpecTemplateSpecContainersEnvValueFromFileKeyRef(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selects a resource of the container: only resources limits and requests
@@ -29699,13 +30787,12 @@ export interface PoolerSpecTemplateSpecContainersEnvValueFromResourceFieldRef {
    * @schema PoolerSpecTemplateSpecContainersEnvValueFromResourceFieldRef#resource
    */
   readonly resource: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersEnvValueFromResourceFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersEnvValueFromResourceFieldRef(obj: PoolerSpecTemplateSpecContainersEnvValueFromResourceFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29716,7 +30803,7 @@ export function toJson_PoolerSpecTemplateSpecContainersEnvValueFromResourceField
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selects a key of a secret in the pod's namespace
@@ -29748,13 +30835,12 @@ export interface PoolerSpecTemplateSpecContainersEnvValueFromSecretKeyRef {
    * @schema PoolerSpecTemplateSpecContainersEnvValueFromSecretKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersEnvValueFromSecretKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersEnvValueFromSecretKeyRef(obj: PoolerSpecTemplateSpecContainersEnvValueFromSecretKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29765,7 +30851,7 @@ export function toJson_PoolerSpecTemplateSpecContainersEnvValueFromSecretKeyRef(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Exec specifies a command to execute in the container.
@@ -29783,13 +30869,12 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePostStartExec {
    * @schema PoolerSpecTemplateSpecContainersLifecyclePostStartExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersLifecyclePostStartExec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersLifecyclePostStartExec(obj: PoolerSpecTemplateSpecContainersLifecyclePostStartExec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29798,7 +30883,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePostStartExec(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HTTPGet specifies an HTTP GET request to perform.
@@ -29845,13 +30930,12 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePostStartHttpGet {
    * @schema PoolerSpecTemplateSpecContainersLifecyclePostStartHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersLifecyclePostStartHttpGet' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersLifecyclePostStartHttpGet(obj: PoolerSpecTemplateSpecContainersLifecyclePostStartHttpGet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29864,7 +30948,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePostStartHttpGet
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Sleep represents a duration that the container should sleep.
@@ -29878,13 +30962,12 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePostStartSleep {
    * @schema PoolerSpecTemplateSpecContainersLifecyclePostStartSleep#seconds
    */
   readonly seconds: number;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersLifecyclePostStartSleep' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersLifecyclePostStartSleep(obj: PoolerSpecTemplateSpecContainersLifecyclePostStartSleep | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29893,7 +30976,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePostStartSleep(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
@@ -29918,13 +31001,12 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePostStartTcpSocket {
    * @schema PoolerSpecTemplateSpecContainersLifecyclePostStartTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecContainersLifecyclePostStartTcpSocketPort;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersLifecyclePostStartTcpSocket' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersLifecyclePostStartTcpSocket(obj: PoolerSpecTemplateSpecContainersLifecyclePostStartTcpSocket | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29934,7 +31016,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePostStartTcpSock
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Exec specifies a command to execute in the container.
@@ -29952,13 +31034,12 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePreStopExec {
    * @schema PoolerSpecTemplateSpecContainersLifecyclePreStopExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersLifecyclePreStopExec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersLifecyclePreStopExec(obj: PoolerSpecTemplateSpecContainersLifecyclePreStopExec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29967,7 +31048,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePreStopExec(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HTTPGet specifies an HTTP GET request to perform.
@@ -30014,13 +31095,12 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePreStopHttpGet {
    * @schema PoolerSpecTemplateSpecContainersLifecyclePreStopHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersLifecyclePreStopHttpGet' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersLifecyclePreStopHttpGet(obj: PoolerSpecTemplateSpecContainersLifecyclePreStopHttpGet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30033,7 +31113,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePreStopHttpGet(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Sleep represents a duration that the container should sleep.
@@ -30047,13 +31127,12 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePreStopSleep {
    * @schema PoolerSpecTemplateSpecContainersLifecyclePreStopSleep#seconds
    */
   readonly seconds: number;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersLifecyclePreStopSleep' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersLifecyclePreStopSleep(obj: PoolerSpecTemplateSpecContainersLifecyclePreStopSleep | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30062,7 +31141,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePreStopSleep(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
@@ -30087,13 +31166,12 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePreStopTcpSocket {
    * @schema PoolerSpecTemplateSpecContainersLifecyclePreStopTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecContainersLifecyclePreStopTcpSocketPort;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersLifecyclePreStopTcpSocket' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersLifecyclePreStopTcpSocket(obj: PoolerSpecTemplateSpecContainersLifecyclePreStopTcpSocket | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30103,7 +31181,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePreStopTcpSocket
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HTTPHeader describes a custom header to be used in HTTP probes
@@ -30125,13 +31203,12 @@ export interface PoolerSpecTemplateSpecContainersLivenessProbeHttpGetHttpHeaders
    * @schema PoolerSpecTemplateSpecContainersLivenessProbeHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersLivenessProbeHttpGetHttpHeaders' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersLivenessProbeHttpGetHttpHeaders(obj: PoolerSpecTemplateSpecContainersLivenessProbeHttpGetHttpHeaders | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30141,7 +31218,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLivenessProbeHttpGetHttpH
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Name or number of the port to access on the container.
@@ -30199,13 +31276,12 @@ export interface PoolerSpecTemplateSpecContainersReadinessProbeHttpGetHttpHeader
    * @schema PoolerSpecTemplateSpecContainersReadinessProbeHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersReadinessProbeHttpGetHttpHeaders' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersReadinessProbeHttpGetHttpHeaders(obj: PoolerSpecTemplateSpecContainersReadinessProbeHttpGetHttpHeaders | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30215,7 +31291,7 @@ export function toJson_PoolerSpecTemplateSpecContainersReadinessProbeHttpGetHttp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Name or number of the port to access on the container.
@@ -30273,13 +31349,12 @@ export interface PoolerSpecTemplateSpecContainersStartupProbeHttpGetHttpHeaders 
    * @schema PoolerSpecTemplateSpecContainersStartupProbeHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersStartupProbeHttpGetHttpHeaders' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersStartupProbeHttpGetHttpHeaders(obj: PoolerSpecTemplateSpecContainersStartupProbeHttpGetHttpHeaders | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30289,7 +31364,7 @@ export function toJson_PoolerSpecTemplateSpecContainersStartupProbeHttpGetHttpHe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Name or number of the port to access on the container.
@@ -30357,13 +31432,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvValueFromConfigMapK
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvValueFromConfigMapKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersEnvValueFromConfigMapKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFromConfigMapKeyRef(obj: PoolerSpecTemplateSpecEphemeralContainersEnvValueFromConfigMapKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30374,7 +31448,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFromConf
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selects a field of the pod: supports metadata.name, metadata.namespace, `metadata.labels['<KEY>']`, `metadata.annotations['<KEY>']`,
@@ -30396,13 +31470,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFieldRef {
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFieldRef#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFieldRef(obj: PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30412,7 +31485,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFiel
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * FileKeyRef selects a key of the env file.
@@ -30457,13 +31530,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFileKeyRef
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFileKeyRef#volumeName
    */
   readonly volumeName: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFileKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFileKeyRef(obj: PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFileKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30475,7 +31547,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFromFile
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selects a resource of the container: only resources limits and requests
@@ -30504,13 +31576,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvValueFromResourceFi
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvValueFromResourceFieldRef#resource
    */
   readonly resource: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersEnvValueFromResourceFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFromResourceFieldRef(obj: PoolerSpecTemplateSpecEphemeralContainersEnvValueFromResourceFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30521,7 +31592,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFromReso
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selects a key of a secret in the pod's namespace
@@ -30553,13 +31624,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersEnvValueFromSecretKeyR
    * @schema PoolerSpecTemplateSpecEphemeralContainersEnvValueFromSecretKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersEnvValueFromSecretKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFromSecretKeyRef(obj: PoolerSpecTemplateSpecEphemeralContainersEnvValueFromSecretKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30570,7 +31640,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersEnvValueFromSecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Exec specifies a command to execute in the container.
@@ -30588,13 +31658,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartExec
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartExec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartExec(obj: PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartExec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30603,7 +31672,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePostSta
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HTTPGet specifies an HTTP GET request to perform.
@@ -30650,13 +31719,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartHttp
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartHttpGet' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartHttpGet(obj: PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartHttpGet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30669,7 +31737,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePostSta
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Sleep represents a duration that the container should sleep.
@@ -30683,13 +31751,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartSlee
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartSleep#seconds
    */
   readonly seconds: number;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartSleep' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartSleep(obj: PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartSleep | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30698,7 +31765,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePostSta
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
@@ -30723,13 +31790,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartTcpS
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartTcpSocketPort;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartTcpSocket' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartTcpSocket(obj: PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartTcpSocket | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30739,7 +31805,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePostSta
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Exec specifies a command to execute in the container.
@@ -30757,13 +31823,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopExec {
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopExec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopExec(obj: PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopExec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30772,7 +31837,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HTTPGet specifies an HTTP GET request to perform.
@@ -30819,13 +31884,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopHttpGe
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopHttpGet' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopHttpGet(obj: PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopHttpGet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30838,7 +31902,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Sleep represents a duration that the container should sleep.
@@ -30852,13 +31916,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopSleep 
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopSleep#seconds
    */
   readonly seconds: number;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopSleep' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopSleep(obj: PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopSleep | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30867,7 +31930,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
@@ -30892,13 +31955,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopTcpSoc
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopTcpSocketPort;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopTcpSocket' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopTcpSocket(obj: PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopTcpSocket | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30908,7 +31970,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HTTPHeader describes a custom header to be used in HTTP probes
@@ -30930,13 +31992,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLivenessProbeHttpGetHt
    * @schema PoolerSpecTemplateSpecEphemeralContainersLivenessProbeHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersLivenessProbeHttpGetHttpHeaders' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersLivenessProbeHttpGetHttpHeaders(obj: PoolerSpecTemplateSpecEphemeralContainersLivenessProbeHttpGetHttpHeaders | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30946,7 +32007,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLivenessProbeHtt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Name or number of the port to access on the container.
@@ -31004,13 +32065,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersReadinessProbeHttpGetH
    * @schema PoolerSpecTemplateSpecEphemeralContainersReadinessProbeHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersReadinessProbeHttpGetHttpHeaders' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersReadinessProbeHttpGetHttpHeaders(obj: PoolerSpecTemplateSpecEphemeralContainersReadinessProbeHttpGetHttpHeaders | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31020,7 +32080,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersReadinessProbeHt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Name or number of the port to access on the container.
@@ -31078,13 +32138,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersStartupProbeHttpGetHtt
    * @schema PoolerSpecTemplateSpecEphemeralContainersStartupProbeHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersStartupProbeHttpGetHttpHeaders' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersStartupProbeHttpGetHttpHeaders(obj: PoolerSpecTemplateSpecEphemeralContainersStartupProbeHttpGetHttpHeaders | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31094,7 +32153,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersStartupProbeHttp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Name or number of the port to access on the container.
@@ -31162,13 +32221,12 @@ export interface PoolerSpecTemplateSpecInitContainersEnvValueFromConfigMapKeyRef
    * @schema PoolerSpecTemplateSpecInitContainersEnvValueFromConfigMapKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersEnvValueFromConfigMapKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersEnvValueFromConfigMapKeyRef(obj: PoolerSpecTemplateSpecInitContainersEnvValueFromConfigMapKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31179,7 +32237,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersEnvValueFromConfigMap
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selects a field of the pod: supports metadata.name, metadata.namespace, `metadata.labels['<KEY>']`, `metadata.annotations['<KEY>']`,
@@ -31201,13 +32259,12 @@ export interface PoolerSpecTemplateSpecInitContainersEnvValueFromFieldRef {
    * @schema PoolerSpecTemplateSpecInitContainersEnvValueFromFieldRef#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersEnvValueFromFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersEnvValueFromFieldRef(obj: PoolerSpecTemplateSpecInitContainersEnvValueFromFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31217,7 +32274,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersEnvValueFromFieldRef(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * FileKeyRef selects a key of the env file.
@@ -31262,13 +32319,12 @@ export interface PoolerSpecTemplateSpecInitContainersEnvValueFromFileKeyRef {
    * @schema PoolerSpecTemplateSpecInitContainersEnvValueFromFileKeyRef#volumeName
    */
   readonly volumeName: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersEnvValueFromFileKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersEnvValueFromFileKeyRef(obj: PoolerSpecTemplateSpecInitContainersEnvValueFromFileKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31280,7 +32336,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersEnvValueFromFileKeyRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selects a resource of the container: only resources limits and requests
@@ -31309,13 +32365,12 @@ export interface PoolerSpecTemplateSpecInitContainersEnvValueFromResourceFieldRe
    * @schema PoolerSpecTemplateSpecInitContainersEnvValueFromResourceFieldRef#resource
    */
   readonly resource: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersEnvValueFromResourceFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersEnvValueFromResourceFieldRef(obj: PoolerSpecTemplateSpecInitContainersEnvValueFromResourceFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31326,7 +32381,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersEnvValueFromResourceF
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selects a key of a secret in the pod's namespace
@@ -31358,13 +32413,12 @@ export interface PoolerSpecTemplateSpecInitContainersEnvValueFromSecretKeyRef {
    * @schema PoolerSpecTemplateSpecInitContainersEnvValueFromSecretKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersEnvValueFromSecretKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersEnvValueFromSecretKeyRef(obj: PoolerSpecTemplateSpecInitContainersEnvValueFromSecretKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31375,7 +32429,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersEnvValueFromSecretKey
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Exec specifies a command to execute in the container.
@@ -31393,13 +32447,12 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePostStartExec {
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePostStartExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersLifecyclePostStartExec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePostStartExec(obj: PoolerSpecTemplateSpecInitContainersLifecyclePostStartExec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31408,7 +32461,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePostStartExe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HTTPGet specifies an HTTP GET request to perform.
@@ -31455,13 +32508,12 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePostStartHttpGet {
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePostStartHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersLifecyclePostStartHttpGet' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePostStartHttpGet(obj: PoolerSpecTemplateSpecInitContainersLifecyclePostStartHttpGet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31474,7 +32526,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePostStartHtt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Sleep represents a duration that the container should sleep.
@@ -31488,13 +32540,12 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePostStartSleep {
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePostStartSleep#seconds
    */
   readonly seconds: number;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersLifecyclePostStartSleep' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePostStartSleep(obj: PoolerSpecTemplateSpecInitContainersLifecyclePostStartSleep | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31503,7 +32554,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePostStartSle
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
@@ -31528,13 +32579,12 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePostStartTcpSocket
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePostStartTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecInitContainersLifecyclePostStartTcpSocketPort;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersLifecyclePostStartTcpSocket' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePostStartTcpSocket(obj: PoolerSpecTemplateSpecInitContainersLifecyclePostStartTcpSocket | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31544,7 +32594,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePostStartTcp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Exec specifies a command to execute in the container.
@@ -31562,13 +32612,12 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePreStopExec {
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePreStopExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersLifecyclePreStopExec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePreStopExec(obj: PoolerSpecTemplateSpecInitContainersLifecyclePreStopExec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31577,7 +32626,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePreStopExec(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HTTPGet specifies an HTTP GET request to perform.
@@ -31624,13 +32673,12 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePreStopHttpGet {
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePreStopHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersLifecyclePreStopHttpGet' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePreStopHttpGet(obj: PoolerSpecTemplateSpecInitContainersLifecyclePreStopHttpGet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31643,7 +32691,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePreStopHttpG
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Sleep represents a duration that the container should sleep.
@@ -31657,13 +32705,12 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePreStopSleep {
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePreStopSleep#seconds
    */
   readonly seconds: number;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersLifecyclePreStopSleep' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePreStopSleep(obj: PoolerSpecTemplateSpecInitContainersLifecyclePreStopSleep | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31672,7 +32719,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePreStopSleep
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
@@ -31697,13 +32744,12 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePreStopTcpSocket {
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePreStopTcpSocket#port
    */
   readonly port: PoolerSpecTemplateSpecInitContainersLifecyclePreStopTcpSocketPort;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersLifecyclePreStopTcpSocket' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePreStopTcpSocket(obj: PoolerSpecTemplateSpecInitContainersLifecyclePreStopTcpSocket | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31713,7 +32759,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePreStopTcpSo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HTTPHeader describes a custom header to be used in HTTP probes
@@ -31735,13 +32781,12 @@ export interface PoolerSpecTemplateSpecInitContainersLivenessProbeHttpGetHttpHea
    * @schema PoolerSpecTemplateSpecInitContainersLivenessProbeHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersLivenessProbeHttpGetHttpHeaders' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersLivenessProbeHttpGetHttpHeaders(obj: PoolerSpecTemplateSpecInitContainersLivenessProbeHttpGetHttpHeaders | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31751,7 +32796,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLivenessProbeHttpGetH
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Name or number of the port to access on the container.
@@ -31809,13 +32854,12 @@ export interface PoolerSpecTemplateSpecInitContainersReadinessProbeHttpGetHttpHe
    * @schema PoolerSpecTemplateSpecInitContainersReadinessProbeHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersReadinessProbeHttpGetHttpHeaders' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersReadinessProbeHttpGetHttpHeaders(obj: PoolerSpecTemplateSpecInitContainersReadinessProbeHttpGetHttpHeaders | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31825,7 +32869,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersReadinessProbeHttpGet
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Name or number of the port to access on the container.
@@ -31883,13 +32927,12 @@ export interface PoolerSpecTemplateSpecInitContainersStartupProbeHttpGetHttpHead
    * @schema PoolerSpecTemplateSpecInitContainersStartupProbeHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersStartupProbeHttpGetHttpHeaders' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersStartupProbeHttpGetHttpHeaders(obj: PoolerSpecTemplateSpecInitContainersStartupProbeHttpGetHttpHeaders | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31899,7 +32942,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersStartupProbeHttpGetHt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Name or number of the port to access on the container.
@@ -31956,13 +32999,12 @@ export interface PoolerSpecTemplateSpecVolumesDownwardApiItemsFieldRef {
    * @schema PoolerSpecTemplateSpecVolumesDownwardApiItemsFieldRef#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesDownwardApiItemsFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesDownwardApiItemsFieldRef(obj: PoolerSpecTemplateSpecVolumesDownwardApiItemsFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31972,7 +33014,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesDownwardApiItemsFieldRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selects a resource of the container: only resources limits and requests
@@ -32001,13 +33043,12 @@ export interface PoolerSpecTemplateSpecVolumesDownwardApiItemsResourceFieldRef {
    * @schema PoolerSpecTemplateSpecVolumesDownwardApiItemsResourceFieldRef#resource
    */
   readonly resource: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesDownwardApiItemsResourceFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesDownwardApiItemsResourceFieldRef(obj: PoolerSpecTemplateSpecVolumesDownwardApiItemsResourceFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32018,7 +33059,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesDownwardApiItemsResourceFiel
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The specification for the PersistentVolumeClaim. The entire content is
@@ -32136,13 +33177,12 @@ export interface PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpec {
    * @schema PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpec#volumeName
    */
   readonly volumeName?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpec(obj: PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32159,7 +33199,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplate
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ClusterTrustBundle allows a pod to access the `.spec.trustBundle` field
@@ -32223,13 +33263,12 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundle
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundle#signerName
    */
   readonly signerName?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundle' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundle(obj: PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundle | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32242,7 +33281,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrust
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * configMap information about the configMap data to project
@@ -32280,13 +33319,12 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesConfigMap {
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesConfigMap#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesProjectedSourcesConfigMap' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesConfigMap(obj: PoolerSpecTemplateSpecVolumesProjectedSourcesConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32297,7 +33335,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesConfigMap(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * downwardAPI information about the downwardAPI data to project
@@ -32311,13 +33349,12 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApi {
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApi#items
    */
   readonly items?: PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItems[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApi' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApi(obj: PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32326,7 +33363,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApi(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Projects an auto-rotating credential bundle (private key and certificate
@@ -32447,13 +33484,12 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate {
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate#signerName
    */
   readonly signerName: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate(obj: PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32467,7 +33503,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertifica
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * secret information about the secret data to project
@@ -32505,13 +33541,12 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesSecret {
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesSecret#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesProjectedSourcesSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesSecret(obj: PoolerSpecTemplateSpecVolumesProjectedSourcesSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32522,7 +33557,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesSecret(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * serviceAccountToken is information about the serviceAccountToken data to project
@@ -32560,13 +33595,12 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesServiceAccountToke
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesServiceAccountToken#path
    */
   readonly path: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesProjectedSourcesServiceAccountToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesServiceAccountToken(obj: PoolerSpecTemplateSpecVolumesProjectedSourcesServiceAccountToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32577,7 +33611,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesServiceAccou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -32611,13 +33645,12 @@ export interface PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedu
    * @schema PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions(obj: PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32628,7 +33661,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuring
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -32662,13 +33695,12 @@ export interface PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedu
    * @schema PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields(obj: PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32679,7 +33711,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityNodeAffinityPreferredDuring
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -32713,13 +33745,12 @@ export interface PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedul
    * @schema PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions(obj: PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32730,7 +33761,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -32764,13 +33795,12 @@ export interface PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedul
    * @schema PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields(obj: PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32781,7 +33811,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityNodeAffinityRequiredDuringS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -32805,13 +33835,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedul
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32821,7 +33850,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -32848,13 +33877,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedul
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32864,7 +33892,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -32897,13 +33925,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringScheduli
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32914,7 +33941,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -32947,13 +33974,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringScheduli
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -32964,7 +33990,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityRequiredDuringSc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -32988,13 +34014,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSch
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33004,7 +34029,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDur
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -33031,13 +34056,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSch
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33047,7 +34071,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDur
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -33080,13 +34104,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSche
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33097,7 +34120,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -33130,13 +34153,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSche
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33147,7 +34169,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityRequiredDuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specifies the output format of the exposed resources, defaults to "1"
@@ -33185,13 +34207,12 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePostStartHttpGetHttpHe
    * @schema PoolerSpecTemplateSpecContainersLifecyclePostStartHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersLifecyclePostStartHttpGetHttpHeaders' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersLifecyclePostStartHttpGetHttpHeaders(obj: PoolerSpecTemplateSpecContainersLifecyclePostStartHttpGetHttpHeaders | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33201,7 +34222,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePostStartHttpGet
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Name or number of the port to access on the container.
@@ -33259,13 +34280,12 @@ export interface PoolerSpecTemplateSpecContainersLifecyclePreStopHttpGetHttpHead
    * @schema PoolerSpecTemplateSpecContainersLifecyclePreStopHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecContainersLifecyclePreStopHttpGetHttpHeaders' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecContainersLifecyclePreStopHttpGetHttpHeaders(obj: PoolerSpecTemplateSpecContainersLifecyclePreStopHttpGetHttpHeaders | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33275,7 +34295,7 @@ export function toJson_PoolerSpecTemplateSpecContainersLifecyclePreStopHttpGetHt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Name or number of the port to access on the container.
@@ -33349,13 +34369,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartHttp
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartHttpGetHttpHeaders' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartHttpGetHttpHeaders(obj: PoolerSpecTemplateSpecEphemeralContainersLifecyclePostStartHttpGetHttpHeaders | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33365,7 +34384,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePostSta
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Name or number of the port to access on the container.
@@ -33423,13 +34442,12 @@ export interface PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopHttpGe
    * @schema PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopHttpGetHttpHeaders' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopHttpGetHttpHeaders(obj: PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStopHttpGetHttpHeaders | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33439,7 +34457,7 @@ export function toJson_PoolerSpecTemplateSpecEphemeralContainersLifecyclePreStop
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Name or number of the port to access on the container.
@@ -33513,13 +34531,12 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePostStartHttpGetHt
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePostStartHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersLifecyclePostStartHttpGetHttpHeaders' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePostStartHttpGetHttpHeaders(obj: PoolerSpecTemplateSpecInitContainersLifecyclePostStartHttpGetHttpHeaders | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33529,7 +34546,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePostStartHtt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Name or number of the port to access on the container.
@@ -33587,13 +34604,12 @@ export interface PoolerSpecTemplateSpecInitContainersLifecyclePreStopHttpGetHttp
    * @schema PoolerSpecTemplateSpecInitContainersLifecyclePreStopHttpGetHttpHeaders#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecInitContainersLifecyclePreStopHttpGetHttpHeaders' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePreStopHttpGetHttpHeaders(obj: PoolerSpecTemplateSpecInitContainersLifecyclePreStopHttpGetHttpHeaders | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33603,7 +34619,7 @@ export function toJson_PoolerSpecTemplateSpecInitContainersLifecyclePreStopHttpG
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Name or number of the port to access on the container.
@@ -33692,13 +34708,12 @@ export interface PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecDa
    * @schema PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecDataSource#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecDataSource' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecDataSource(obj: PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecDataSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33709,7 +34724,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplate
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * dataSourceRef specifies the object from which to populate the volume with data, if a non-empty
@@ -33770,13 +34785,12 @@ export interface PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecDa
    * @schema PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecDataSourceRef#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecDataSourceRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecDataSourceRef(obj: PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecDataSourceRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33788,7 +34802,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplate
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * resources represents the minimum resources the volume should have.
@@ -33817,13 +34831,12 @@ export interface PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecRe
    * @schema PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecResources#requests
    */
   readonly requests?: { [key: string]: PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesRequests };
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecResources' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecResources(obj: PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33833,7 +34846,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplate
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * selector is a label query over volumes to consider for binding.
@@ -33856,13 +34869,12 @@ export interface PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecSe
    * @schema PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecSelector(obj: PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33872,7 +34884,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplate
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Select all ClusterTrustBundles that match this label selector.  Only has
@@ -33898,13 +34910,12 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundle
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector(obj: PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundleLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33914,7 +34925,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrust
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -33950,13 +34961,12 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesConfigMapItems {
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesConfigMapItems#path
    */
   readonly path: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesProjectedSourcesConfigMapItems' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesConfigMapItems(obj: PoolerSpecTemplateSpecVolumesProjectedSourcesConfigMapItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -33967,7 +34977,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesConfigMapIte
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * DownwardAPIVolumeFile represents information to create the file containing the pod field
@@ -34008,13 +35018,12 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItems {
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItems#resourceFieldRef
    */
   readonly resourceFieldRef?: PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItemsResourceFieldRef;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItems' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItems(obj: PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34026,7 +35035,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiI
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -34062,13 +35071,12 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesSecretItems {
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesSecretItems#path
    */
   readonly path: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesProjectedSourcesSecretItems' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesSecretItems(obj: PoolerSpecTemplateSpecVolumesProjectedSourcesSecretItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34079,7 +35087,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesSecretItems(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -34112,13 +35120,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedul
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34129,7 +35136,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -34162,13 +35169,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedul
    * @schema PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34179,7 +35185,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAffinityPreferredDuringS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -34212,13 +35218,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSch
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34229,7 +35234,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDur
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -34262,13 +35267,12 @@ export interface PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSch
    * @schema PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34279,7 +35283,7 @@ export function toJson_PoolerSpecTemplateSpecAffinityPodAntiAffinityPreferredDur
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecResourcesLimits
@@ -34340,13 +35344,12 @@ export interface PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecSe
    * @schema PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions(obj: PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34357,7 +35360,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplate
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -34390,13 +35393,12 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundle
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions(obj: PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34407,7 +35409,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesClusterTrust
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Required: Selects a field of the pod: only annotations, labels, name, namespace and uid are supported.
@@ -34428,13 +35430,12 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItemsFi
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItemsFieldRef#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItemsFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItemsFieldRef(obj: PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItemsFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34444,7 +35445,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiI
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selects a resource of the container: only resources limits and requests
@@ -34473,13 +35474,12 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItemsRe
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItemsResourceFieldRef#resource
    */
   readonly resource: string;
-
 }
 
 /**
  * Converts an object of type 'PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItemsResourceFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItemsResourceFieldRef(obj: PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiItemsResourceFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34490,7 +35490,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesDownwardApiI
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specifies the output format of the exposed resources, defaults to "1"
@@ -34553,7 +35553,7 @@ export class Publication extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -34580,13 +35580,12 @@ export interface PublicationProps {
    * @schema Publication#spec
    */
   readonly spec: PublicationSpec;
-
 }
 
 /**
  * Converts an object of type 'PublicationProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PublicationProps(obj: PublicationProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34596,7 +35595,7 @@ export function toJson_PublicationProps(obj: PublicationProps | undefined): Reco
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PublicationSpec defines the desired state of Publication
@@ -34647,13 +35646,12 @@ export interface PublicationSpec {
    * @schema PublicationSpec#target
    */
   readonly target: PublicationSpecTarget;
-
 }
 
 /**
  * Converts an object of type 'PublicationSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PublicationSpec(obj: PublicationSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34667,7 +35665,7 @@ export function toJson_PublicationSpec(obj: PublicationSpec | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The name of the PostgreSQL cluster that identifies the "publisher"
@@ -34685,13 +35683,12 @@ export interface PublicationSpecCluster {
    * @schema PublicationSpecCluster#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'PublicationSpecCluster' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PublicationSpecCluster(obj: PublicationSpecCluster | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34700,7 +35697,7 @@ export function toJson_PublicationSpecCluster(obj: PublicationSpecCluster | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The policy for end-of-life maintenance of this publication
@@ -34735,13 +35732,12 @@ export interface PublicationSpecTarget {
    * @schema PublicationSpecTarget#objects
    */
   readonly objects?: PublicationSpecTargetObjects[];
-
 }
 
 /**
  * Converts an object of type 'PublicationSpecTarget' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PublicationSpecTarget(obj: PublicationSpecTarget | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34751,7 +35747,7 @@ export function toJson_PublicationSpecTarget(obj: PublicationSpecTarget | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * PublicationTargetObject is an object to publish
@@ -34775,13 +35771,12 @@ export interface PublicationSpecTargetObjects {
    * @schema PublicationSpecTargetObjects#tablesInSchema
    */
   readonly tablesInSchema?: string;
-
 }
 
 /**
  * Converts an object of type 'PublicationSpecTargetObjects' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PublicationSpecTargetObjects(obj: PublicationSpecTargetObjects | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34791,7 +35786,7 @@ export function toJson_PublicationSpecTargetObjects(obj: PublicationSpecTargetOb
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specifies a list of tables to add to the publication. Corresponding
@@ -34827,13 +35822,12 @@ export interface PublicationSpecTargetObjectsTable {
    * @schema PublicationSpecTargetObjectsTable#schema
    */
   readonly schema?: string;
-
 }
 
 /**
  * Converts an object of type 'PublicationSpecTargetObjectsTable' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_PublicationSpecTargetObjectsTable(obj: PublicationSpecTargetObjectsTable | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34845,7 +35839,7 @@ export function toJson_PublicationSpecTargetObjectsTable(obj: PublicationSpecTar
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -34892,7 +35886,7 @@ export class ScheduledBackup extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -34920,13 +35914,12 @@ export interface ScheduledBackupProps {
    * @schema ScheduledBackup#spec
    */
   readonly spec: ScheduledBackupSpec;
-
 }
 
 /**
  * Converts an object of type 'ScheduledBackupProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ScheduledBackupProps(obj: ScheduledBackupProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -34936,7 +35929,7 @@ export function toJson_ScheduledBackupProps(obj: ScheduledBackupProps | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specification of the desired behavior of the ScheduledBackup.
@@ -35029,13 +36022,12 @@ export interface ScheduledBackupSpec {
    * @schema ScheduledBackupSpec#target
    */
   readonly target?: ScheduledBackupSpecTarget;
-
 }
 
 /**
  * Converts an object of type 'ScheduledBackupSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ScheduledBackupSpec(obj: ScheduledBackupSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35053,7 +36045,7 @@ export function toJson_ScheduledBackupSpec(obj: ScheduledBackupSpec | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Indicates which ownerReference should be put inside the created backup resources.<br />
@@ -35084,13 +36076,12 @@ export interface ScheduledBackupSpecCluster {
    * @schema ScheduledBackupSpecCluster#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ScheduledBackupSpecCluster' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ScheduledBackupSpecCluster(obj: ScheduledBackupSpecCluster | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35099,7 +36090,7 @@ export function toJson_ScheduledBackupSpecCluster(obj: ScheduledBackupSpecCluste
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The backup method to be used, possible options are `barmanObjectStore`,
@@ -35149,13 +36140,12 @@ export interface ScheduledBackupSpecOnlineConfiguration {
    * @schema ScheduledBackupSpecOnlineConfiguration#waitForArchive
    */
   readonly waitForArchive?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ScheduledBackupSpecOnlineConfiguration' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ScheduledBackupSpecOnlineConfiguration(obj: ScheduledBackupSpecOnlineConfiguration | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35165,7 +36155,7 @@ export function toJson_ScheduledBackupSpecOnlineConfiguration(obj: ScheduledBack
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configuration parameters passed to the plugin managing this backup
@@ -35187,13 +36177,12 @@ export interface ScheduledBackupSpecPluginConfiguration {
    * @schema ScheduledBackupSpecPluginConfiguration#parameters
    */
   readonly parameters?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ScheduledBackupSpecPluginConfiguration' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ScheduledBackupSpecPluginConfiguration(obj: ScheduledBackupSpecPluginConfiguration | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35203,7 +36192,7 @@ export function toJson_ScheduledBackupSpecPluginConfiguration(obj: ScheduledBack
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The policy to decide which instance should perform this backup. If empty,
@@ -35267,7 +36256,7 @@ export class Subscription extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -35294,13 +36283,12 @@ export interface SubscriptionProps {
    * @schema Subscription#spec
    */
   readonly spec: SubscriptionSpec;
-
 }
 
 /**
  * Converts an object of type 'SubscriptionProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SubscriptionProps(obj: SubscriptionProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35310,7 +36298,7 @@ export function toJson_SubscriptionProps(obj: SubscriptionProps | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * SubscriptionSpec defines the desired state of Subscription
@@ -35381,13 +36369,12 @@ export interface SubscriptionSpec {
    * @schema SubscriptionSpec#subscriptionReclaimPolicy
    */
   readonly subscriptionReclaimPolicy?: SubscriptionSpecSubscriptionReclaimPolicy;
-
 }
 
 /**
  * Converts an object of type 'SubscriptionSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SubscriptionSpec(obj: SubscriptionSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35403,7 +36390,7 @@ export function toJson_SubscriptionSpec(obj: SubscriptionSpec | undefined): Reco
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The name of the PostgreSQL cluster that identifies the "subscriber"
@@ -35421,13 +36408,12 @@ export interface SubscriptionSpecCluster {
    * @schema SubscriptionSpecCluster#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'SubscriptionSpecCluster' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SubscriptionSpecCluster(obj: SubscriptionSpecCluster | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -35436,7 +36422,7 @@ export function toJson_SubscriptionSpecCluster(obj: SubscriptionSpecCluster | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The policy for end-of-life maintenance of this subscription

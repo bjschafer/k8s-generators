@@ -3,4 +3,3 @@ pluginsDirectory: /Users/bschafer/.cdk8s/plugins
 language: typescript
 imports:
   - k8s@1.33.0
-  - /dev/fd/63
