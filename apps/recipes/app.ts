@@ -109,41 +109,6 @@ class Tandoor extends Chart {
         },
       },
       securityContext: DEFAULT_SECURITY_CONTEXT,
-      initContainers: [
-        {
-          name: "init-chown-data",
-          image: image,
-          securityContext: DEFAULT_SECURITY_CONTEXT,
-          command: [
-            "sh",
-            "-c",
-            heredoc`
-              set -e
-              source venv/bin/activate
-              echo "Updating database"
-              python manage.py migrate
-              python manage.py collectstatic_js_reverse
-              python manage.py collectstatic --noinput
-              echo "Setting media file attributes"
-              chown -R 65534:65534 /opt/recipes/mediafiles
-              find /opt/recipes/mediafiles -type d | xargs -r chmod 755
-              find /opt/recipes/mediafiles -type f | xargs -r chmod 644
-              echo "Done"
-              `,
-          ],
-          envFrom: [new EnvFrom(cm), new EnvFrom(undefined, undefined, secret)],
-          resources: {
-            cpu: {
-              request: Cpu.millis(250),
-              limit: Cpu.millis(1000),
-            },
-            memory: {
-              request: Size.mebibytes(64),
-              limit: Size.mebibytes(256),
-            },
-          },
-        },
-      ],
       containers: [
         {
           name: "tandoor",

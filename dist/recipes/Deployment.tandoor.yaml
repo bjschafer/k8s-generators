@@ -68,42 +68,6 @@ spec:
               subPath: static
       dnsPolicy: ClusterFirst
       hostNetwork: false
-      initContainers:
-        - command:
-            - sh
-            - -c
-            - |
-              set -e
-              source venv/bin/activate
-              echo "Updating database"
-              python manage.py migrate
-              python manage.py collectstatic_js_reverse
-              python manage.py collectstatic --noinput
-              echo "Setting media file attributes"
-              chown -R 65534:65534 /opt/recipes/mediafiles
-              find /opt/recipes/mediafiles -type d | xargs -r chmod 755
-              find /opt/recipes/mediafiles -type f | xargs -r chmod 644
-              echo "Done"
-          envFrom:
-            - configMapRef:
-                name: tandoor-config
-            - secretRef:
-                name: secrets
-          image: ghcr.io/tandoorrecipes/recipes
-          imagePullPolicy: Always
-          name: init-chown-data
-          resources:
-            limits:
-              cpu: 1000m
-              memory: 256Mi
-            requests:
-              cpu: 250m
-              memory: 64Mi
-          securityContext:
-            allowPrivilegeEscalation: false
-            privileged: false
-            readOnlyRootFilesystem: false
-            runAsNonRoot: false
       restartPolicy: Always
       securityContext:
         fsGroupChangePolicy: Always
