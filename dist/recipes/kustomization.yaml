@@ -1,5 +1,4 @@
 resources:
-  - ConfigMap.nginx-config.yaml
   - ConfigMap.tandoor-config.yaml
   - Deployment.tandoor.yaml
   - Ingress.tandoor.yaml

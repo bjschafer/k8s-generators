@@ -58,38 +58,6 @@ class Tandoor extends Chart {
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
-    const nginx_cm = new ConfigMap(this, "nginx-config", {
-      metadata: {
-        name: "nginx-config",
-        namespace: namespace,
-      },
-      data: {
-        config: heredoc`
-          events {
-            worker_connections 1024;
-          }
-          http {
-            include mime.types;
-            server {
-              listen 80;
-              server_name _;
-
-              client_max_body_size 16M;
-
-              # serve static files
-              location /static/ {
-                alias /static/;
-              }
-              # serve media files
-              location /media/ {
-                alias /media/;
-              }
-            }
-          }
-          `,
-      },
-    });
-
     const cm = new ConfigMap(this, "tandoor-config", {
       metadata: {
         name: "tandoor-config",
@@ -183,21 +151,9 @@ class Tandoor extends Chart {
           image: image,
           ports: [
             {
-              number: port,
-              name: "gunicorn",
+              number: 80,
+              name: "http",
             },
-          ],
-          command: [
-            "/opt/recipes/venv/bin/gunicorn",
-            "-b",
-            ":8080",
-            "--access-logfile",
-            "-",
-            "--error-logfile",
-            "-",
-            "--log-level",
-            "INFO",
-            "recipes.wsgi",
           ],
           envFrom: [new EnvFrom(cm), new EnvFrom(undefined, undefined, secret)],
           resources: {
@@ -217,48 +173,17 @@ class Tandoor extends Chart {
             port: port,
           }),
         },
-        {
-          name: "nginx",
-          securityContext: DEFAULT_SECURITY_CONTEXT,
-          image: "public.ecr.aws/nginx/nginx",
-          ports: [
-            {
-              number: 80,
-              name: "http",
-            },
-          ],
-          resources: {
-            cpu: {
-              request: Cpu.millis(250),
-              limit: Cpu.millis(1000),
-            },
-            memory: {
-              request: Size.mebibytes(64),
-              limit: Size.mebibytes(256),
-            },
-          },
-        },
       ],
     });
 
-    const nginx_cm_vol = Volume.fromConfigMap(this, "nginx-cm-vol", nginx_cm);
     const pvc_vol = Volume.fromPersistentVolumeClaim(this, "data-vol", pvc);
-    deploy.containers[1].mount("/etc/nginx/nginx.conf", nginx_cm_vol, {
-      subPath: "config",
-    });
 
-    for (const container of deploy.containers.concat(deploy.initContainers)) {
-      const mediaPath =
-        container.name === "nginx" ? "/media" : "/opt/recipes/mediafiles";
-      const staticPath =
-        container.name === "nginx" ? "/static" : "/opt/recipes/staticfiles";
-      container.mount(mediaPath, pvc_vol, {
-        subPath: "media",
-      });
-      container.mount(staticPath, pvc_vol, {
-        subPath: "static",
-      });
-    }
+    deploy.containers[0].mount("/opt/recipes/mediafiles", pvc_vol, {
+      subPath: "media",
+    });
+    deploy.containers[0].mount("/opt/recipes/staticfiles", pvc_vol, {
+      subPath: "static",
+    });
 
     const svc = deploy.exposeViaService({
       name: "tandoor",
@@ -267,11 +192,6 @@ class Tandoor extends Chart {
           name: "http",
           port: 80,
           targetPort: 80,
-        },
-        {
-          name: "metrics",
-          port: port,
-          targetPort: port,
         },
       ],
     });
@@ -293,16 +213,6 @@ class Tandoor extends Chart {
       ingress.addHostRule(
         host,
         "/",
-        IngressBackend.fromService(svc, { port: 8080 }),
-      );
-      ingress.addHostRule(
-        host,
-        "/media",
-        IngressBackend.fromService(svc, { port: 80 }),
-      );
-      ingress.addHostRule(
-        host,
-        "/static",
         IngressBackend.fromService(svc, { port: 80 }),
       );
     }

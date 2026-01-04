@@ -24,18 +24,7 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-        - command:
-            - /opt/recipes/venv/bin/gunicorn
-            - -b
-            - :8080
-            - --access-logfile
-            - "-"
-            - --error-logfile
-            - "-"
-            - --log-level
-            - INFO
-            - recipes.wsgi
-          envFrom:
+        - envFrom:
             - configMapRef:
                 name: tandoor-config
             - secretRef:
@@ -50,8 +39,8 @@ spec:
               scheme: HTTP
           name: tandoor
           ports:
-            - containerPort: 8080
-              name: gunicorn
+            - containerPort: 80
+              name: http
           readinessProbe:
             failureThreshold: 3
             httpGet:
@@ -75,34 +64,6 @@ spec:
               name: pvc-data
               subPath: media
             - mountPath: /opt/recipes/staticfiles
-              name: pvc-data
-              subPath: static
-        - image: public.ecr.aws/nginx/nginx
-          imagePullPolicy: Always
-          name: nginx
-          ports:
-            - containerPort: 80
-              name: http
-          resources:
-            limits:
-              cpu: 1000m
-              memory: 256Mi
-            requests:
-              cpu: 250m
-              memory: 64Mi
-          securityContext:
-            allowPrivilegeEscalation: false
-            privileged: false
-            readOnlyRootFilesystem: false
-            runAsNonRoot: false
-          volumeMounts:
-            - mountPath: /etc/nginx/nginx.conf
-              name: configmap-nginx-config
-              subPath: config
-            - mountPath: /media
-              name: pvc-data
-              subPath: media
-            - mountPath: /static
               name: pvc-data
               subPath: static
       dnsPolicy: ClusterFirst
@@ -143,13 +104,6 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
-          volumeMounts:
-            - mountPath: /opt/recipes/mediafiles
-              name: pvc-data
-              subPath: media
-            - mountPath: /opt/recipes/staticfiles
-              name: pvc-data
-              subPath: static
       restartPolicy: Always
       securityContext:
         fsGroupChangePolicy: Always
@@ -162,6 +116,3 @@ spec:
           persistentVolumeClaim:
             claimName: data
             readOnly: false
-        - configMap:
-            name: nginx-config
-          name: configmap-nginx-config
