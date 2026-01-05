@@ -87,10 +87,10 @@ spec:
               port: 9000
           resources:
             limits:
-              cpu: 250m
+              cpu: 1000m
               memory: 1024Mi
             requests:
-              cpu: 20m
+              cpu: 100m
               memory: 512Mi
           securityContext:
             allowPrivilegeEscalation: false
