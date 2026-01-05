@@ -17,4 +17,5 @@ data:
   SOCIAL_DEFAULT_ACCESS: "1"
   SOCIAL_DEFAULT_GROUP: user
   SOCIAL_PROVIDERS: allauth.socialaccount.providers.openid_connect
+  TANDOOR_PORT: "80"
 immutable: false

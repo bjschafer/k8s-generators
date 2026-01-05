@@ -72,6 +72,7 @@ class Tandoor extends Chart {
         SOCIAL_PROVIDERS: "allauth.socialaccount.providers.openid_connect",
         SOCIAL_DEFAULT_ACCESS: "1",
         SOCIAL_DEFAULT_GROUP: "user",
+        TANDOOR_PORT: "80",
       },
     });
 
