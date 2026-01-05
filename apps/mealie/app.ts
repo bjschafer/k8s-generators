@@ -6,6 +6,7 @@ import { NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS, TZ } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
+import { BitwardenSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -24,6 +25,15 @@ NewArgoApp(name, {
     ],
   },
 });
+
+const aiSecrets = new BitwardenSecret(app, "ai-secrets", {
+    name: "ai",
+    namespace: namespace,
+    data: {
+      OPENAI_BASE_URL: "90a0d4c6-87fc-4636-9be6-b3c90019c136",
+      OPENAI_API_KEY: "8144578e-f1ce-4360-b797-b3c90019d91e", 
+    },
+})
 
 new AppPlus(app, `${name}-app`, {
   name: name,
@@ -84,6 +94,10 @@ new AppPlus(app, `${name}-app`, {
     OIDC_ADMIN_GROUP: EnvValue.fromValue("wheel"),
     OIDC_USER_GROUP: EnvValue.fromValue("Mealie users"),
     OIDC_PROVIDER_NAME: EnvValue.fromValue("Cmdcentral Login"),
+
+    // ai config
+    OPENAI_MODEL: EnvValue.fromValue("@cf/openai/gpt-oss-120b"),
+    ...aiSecrets.toEnvValues(),
   },
   envFrom: [
     new EnvFrom(

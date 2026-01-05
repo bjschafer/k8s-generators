@@ -63,6 +63,18 @@ spec:
               value: Mealie users
             - name: OIDC_PROVIDER_NAME
               value: Cmdcentral Login
+            - name: OPENAI_MODEL
+              value: "@cf/openai/gpt-oss-120b"
+            - name: OPENAI_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  key: OPENAI_BASE_URL
+                  name: ai
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: OPENAI_API_KEY
+                  name: ai
           envFrom:
             - secretRef:
                 name: db-creds

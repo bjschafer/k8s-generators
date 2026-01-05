@@ -1,5 +1,6 @@
 resources:
   - Deployment.mealie.yaml
+  - ExternalSecret.ai.yaml
   - Ingress.mealie.yaml
   - PersistentVolumeClaim.config.yaml
   - Service.mealie.yaml
