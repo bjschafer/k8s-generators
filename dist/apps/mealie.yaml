@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    app.kubernetes.io/name: mealie
+  name: mealie
+  namespace: argocd
+spec:
+  destination:
+    namespace: mealie
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: dist/mealie
+    repoURL: git@github.com:bjschafer/k8s-generators.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  labels:
+    app.kubernetes.io/name: mealie
+  name: mealie-updater
+  namespace: argocd
+spec:
+  applicationRefs:
+    - images:
+        - alias: mealie
+          commonUpdateSettings:
+            updateStrategy: semver
+          imageName: ghcr.io/mealie-recipes/mealie:v3.x.x
+      namePattern: mealie
+  namespace: argocd
+  writeBackConfig:
+    gitConfig:
+      branch: main
+    method: git

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: mealie
+  name: mealie
+  namespace: mealie
+spec:
+  externalIPs: []
+  ports:
+    - name: http
+      port: 9000
+      targetPort: 9000
+  selector:
+    cdk8s.io/metadata.addr: mealie-app-mealie-app-deployment-c87eaad2
+  type: ClusterIP

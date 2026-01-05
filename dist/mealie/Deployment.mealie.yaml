@@ -1,0 +1,116 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: mealie
+  name: mealie
+  namespace: mealie
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: mealie-app-mealie-app-deployment-c87eaad2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        backup.velero.io/backup-volumes: pvc-config
+      labels:
+        app.kubernetes.io/name: mealie
+        cdk8s.io/metadata.addr: mealie-app-mealie-app-deployment-c87eaad2
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: API_URL
+              value: http://mealie-api:9000
+            - name: API_PORT
+              value: "9000"
+            - name: BASE_URL
+              value: https://mealie.cmdcentral.xyz
+            - name: TZ
+              value: America/Chicago
+            - name: DB_ENGINE
+              value: postgres
+            - name: POSTGRES_USER
+              value: mealie
+            - name: POSTGRES_SERVER
+              value: prod.postgres.svc.cluster.local
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: POSTGRES_DB
+              value: mealie
+            - name: OIDC_AUTH_ENABLED
+              value: "true"
+            - name: OIDC_SIGNUP_ENABLED
+              value: "true"
+            - name: OIDC_CONFIGURATION_URL
+              value: https://login.cmdcentral.xyz/application/o/mealie/.well-known/openid-configuration
+            - name: OIDC_CLIENT_ID
+              value: rjTPdiqrJJrjrFYasLpcZG9gNfU0xoaqLdNZJXX9
+            - name: OIDC_AUTO_REDIRECT
+              value: "true"
+            - name: OIDC_REMEMBER_ME
+              value: "true"
+            - name: OIDC_ADMIN_GROUP
+              value: wheel
+            - name: OIDC_USER_GROUP
+              value: Mealie users
+            - name: OIDC_PROVIDER_NAME
+              value: Cmdcentral Login
+          envFrom:
+            - secretRef:
+                name: db-creds
+            - secretRef:
+                name: oidc-creds
+          image: ghcr.io/mealie-recipes/mealie
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 45
+            periodSeconds: 20
+            tcpSocket:
+              port: 9000
+          name: mealie
+          ports:
+            - containerPort: 9000
+          readinessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 45
+            periodSeconds: 20
+            tcpSocket:
+              port: 9000
+          resources:
+            limits:
+              cpu: 250m
+              memory: 1024Mi
+            requests:
+              cpu: 20m
+              memory: 512Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /app/data/
+              name: pvc-config
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: pvc-config
+          persistentVolumeClaim:
+            claimName: config
+            readOnly: false
