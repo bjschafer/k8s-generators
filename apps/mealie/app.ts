@@ -96,7 +96,7 @@ new AppPlus(app, `${name}-app`, {
     OIDC_PROVIDER_NAME: EnvValue.fromValue("Cmdcentral Login"),
 
     // ai config
-    OPENAI_MODEL: EnvValue.fromValue("@cf/openai/gpt-oss-120b"),
+    OPENAI_MODEL: EnvValue.fromValue("@cf/meta/llama-4-scout-17b-16e-instruct"),
     ...aiSecrets.toEnvValues(),
   },
   envFrom: [

@@ -64,7 +64,7 @@ spec:
             - name: OIDC_PROVIDER_NAME
               value: Cmdcentral Login
             - name: OPENAI_MODEL
-              value: "@cf/openai/gpt-oss-120b"
+              value: "@cf/meta/llama-4-scout-17b-16e-instruct"
             - name: OPENAI_BASE_URL
               valueFrom:
                 secretKeyRef:
