@@ -1,7 +1,0 @@
-resources:
-  - ConfigMap.tandoor-config.yaml
-  - Deployment.tandoor.yaml
-  - Ingress.tandoor.yaml
-  - PersistentVolumeClaim.data.yaml
-  - Service.tandoor.yaml
-  - VMServiceScrape.tandoor.yaml
