@@ -23,6 +23,12 @@ spec:
   instances: 3
   managed:
     roles:
+      - comment: Noms database owner
+        ensure: present
+        login: true
+        name: noms
+        passwordSecret:
+          name: noms-db-credentials
       - comment: ROMM database owner
         ensure: present
         login: true

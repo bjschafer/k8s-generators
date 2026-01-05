@@ -1,0 +1,6 @@
+resources:
+  - Deployment.noms.yaml
+  - ExternalSecret.noms-db-credentials.yaml
+  - ExternalSecret.secrets.yaml
+  - Ingress.noms.yaml
+  - Service.noms.yaml

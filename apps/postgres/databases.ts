@@ -44,6 +44,13 @@ export interface DatabaseConfig {
  */
 export const DATABASES: DatabaseConfig[] = [
   {
+    name: "noms",
+    comment: "Noms database owner",
+    bitwardenPasswordId: "f0107fac-b3ae-4d80-978b-b3c90172d46b",
+    appNamespace: "noms",
+  },
+
+  {
     name: "romm",
     comment: "ROMM database owner",
     bitwardenPasswordId: "efb8a53a-dfd4-4f3a-b2e2-b39200423731",

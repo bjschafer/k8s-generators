@@ -48,10 +48,12 @@ export class ProxmoxExporter extends Chart {
       labels: labels,
       annotations: RELOADER_ENABLED,
       image: "prompve/prometheus-pve-exporter",
-      ports: [{
-        name: "metrics",
-        number: port,
-      }],
+      ports: [
+        {
+          name: "metrics",
+          number: port,
+        },
+      ],
       extraEnv: {
         PVE_USER: EnvValue.fromValue("prometheus@pve"),
         PVE_TOKEN_NAME: EnvValue.fromValue("k8s"),

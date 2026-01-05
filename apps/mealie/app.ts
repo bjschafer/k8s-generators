@@ -27,13 +27,13 @@ NewArgoApp(name, {
 });
 
 const aiSecrets = new BitwardenSecret(app, "ai-secrets", {
-    name: "ai",
-    namespace: namespace,
-    data: {
-      OPENAI_BASE_URL: "90a0d4c6-87fc-4636-9be6-b3c90019c136",
-      OPENAI_API_KEY: "8144578e-f1ce-4360-b797-b3c90019d91e", 
-    },
-})
+  name: "ai",
+  namespace: namespace,
+  data: {
+    OPENAI_BASE_URL: "90a0d4c6-87fc-4636-9be6-b3c90019c136",
+    OPENAI_API_KEY: "8144578e-f1ce-4360-b797-b3c90019d91e",
+  },
+});
 
 new AppPlus(app, `${name}-app`, {
   name: name,

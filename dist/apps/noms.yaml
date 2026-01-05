@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    app.kubernetes.io/name: noms
+  name: noms
+  namespace: argocd
+spec:
+  destination:
+    namespace: noms
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: dist/noms
+    repoURL: git@github.com:bjschafer/k8s-generators.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  labels:
+    app.kubernetes.io/name: noms
+  name: noms-updater
+  namespace: argocd
+spec:
+  applicationRefs:
+    - images:
+        - alias: noms
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: registry.cmdcentral.xyz/cmdcentral/noms:main
+      namePattern: noms
+  namespace: argocd
+  writeBackConfig:
+    gitConfig:
+      branch: main
+    method: git

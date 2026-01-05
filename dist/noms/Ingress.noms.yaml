@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: noms
+  namespace: noms
+spec:
+  rules:
+    - host: noms.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: noms
+                port:
+                  number: 3000
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - noms.cmdcentral.xyz
+      secretName: noms-tls

@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: noms
+  name: noms
+  namespace: noms
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: noms-noms-deployment-c8aaa0dc
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: noms
+        cdk8s.io/metadata.addr: noms-noms-deployment-c8aaa0dc
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: CF_ACCOUNT_ID
+              valueFrom:
+                secretKeyRef:
+                  key: CF_ACCOUNT_ID
+                  name: secrets
+            - name: CF_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: CF_API_TOKEN
+                  name: secrets
+            - name: TZ
+              value: America/Chicago
+            - name: LLM_PROVIDER
+              value: cloudflare
+            - name: LLM_MODEL
+              value: "@cf/openai/gpt-oss-120b"
+            - name: PORT
+              value: "3000"
+            - name: DB_HOST
+              value: prod.postgres.svc.cluster.local
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: noms
+            - name: DB_USER
+              value: noms
+            - name: DB_PASSWD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: noms-db-credentials
+          image: registry.cmdcentral.xyz/cmdcentral/noms:main
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 10
+          name: noms
+          ports:
+            - containerPort: 3000
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 10
+          resources:
+            limits:
+              cpu: 750m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30

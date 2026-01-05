@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: noms
+  namespace: noms
+spec:
+  externalIPs: []
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+  selector:
+    cdk8s.io/metadata.addr: noms-noms-deployment-c8aaa0dc
+  type: ClusterIP
