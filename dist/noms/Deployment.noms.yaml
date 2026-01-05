@@ -54,7 +54,7 @@ spec:
               value: noms
             - name: DB_USER
               value: noms
-            - name: DB_PASSWD
+            - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: password

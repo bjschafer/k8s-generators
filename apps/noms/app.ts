@@ -66,7 +66,7 @@ new AppPlus(app, name, {
     DB_PORT: EnvValue.fromValue("5432"),
     DB_NAME: EnvValue.fromValue(name),
     DB_USER: EnvValue.fromValue(name),
-    DB_PASSWD: EnvValue.fromSecretValue({
+    DB_PASSWORD: EnvValue.fromSecretValue({
       secret: dbCreds.secret,
       key: "password",
     }),
