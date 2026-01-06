@@ -42,6 +42,8 @@ spec:
               value: America/Chicago
             - name: LLM_PROVIDER
               value: cloudflare
+            - name: CF_GATEWAY_ID
+              value: cmdcentral
             - name: LLM_MODEL
               value: "@cf/openai/gpt-oss-120b"
             - name: PORT

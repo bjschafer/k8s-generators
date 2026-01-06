@@ -59,6 +59,7 @@ new AppPlus(app, name, {
     ...nomsSecrets.toEnvValues(),
     TZ: EnvValue.fromValue("America/Chicago"),
     LLM_PROVIDER: EnvValue.fromValue("cloudflare"),
+    CF_GATEWAY_ID: EnvValue.fromValue("cmdcentral"),
     LLM_MODEL: EnvValue.fromValue("@cf/openai/gpt-oss-120b"),
     PORT: EnvValue.fromValue(port.toString()),
 
