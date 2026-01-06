@@ -1,3 +1,0 @@
-kustomize:
-  images:
-  - registry.cmdcentral.xyz/cmdcentral/noms:main@sha256:716556865f58be06ca8f5d0997cca2a8fc7e22522c6e73025ffa7f711f3f4e9a
