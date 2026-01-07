@@ -71,7 +71,7 @@ spec:
             - name: WEB_SEARCH_PROVIDER
               value: brave
             - name: SEARCH_CLASSIFIER_MODEL
-              value: "@cf/meta/llama-3.2-1b-instruct"
+              value: "@cf/meta/llama-3.2-3b-instruct"
           image: registry.cmdcentral.xyz/cmdcentral/noms:main
           imagePullPolicy: Always
           livenessProbe:

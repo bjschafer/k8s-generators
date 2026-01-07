@@ -76,7 +76,7 @@ new AppPlus(app, name, {
     WEB_SEARCH_ENABLED: EnvValue.fromValue("true"),
     WEB_SEARCH_PROVIDER: EnvValue.fromValue("brave"),
     SEARCH_CLASSIFIER_MODEL: EnvValue.fromValue(
-      "@cf/meta/llama-3.2-1b-instruct",
+      "@cf/meta/llama-3.2-3b-instruct",
     ),
   },
   livenessProbe: Probe.fromHttpGet("/health", {
