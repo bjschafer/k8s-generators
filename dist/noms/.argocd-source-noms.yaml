@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - registry.cmdcentral.xyz/cmdcentral/noms:main@sha256:7b56aa5f1551eeab5fff2508b9dcf43333e92695520897928053afd5c3ca0caa
+  - registry.cmdcentral.xyz/cmdcentral/noms:main@sha256:e7989872ce15a5607efe4df8a6824f820545a16b5f936b43efe84a8d6e461c62
