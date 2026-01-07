@@ -37,6 +37,7 @@ const nomsSecrets = new BitwardenSecret(app, "noms-secrets", {
   data: {
     CF_ACCOUNT_ID: "8be44aed-b92e-49dd-9c58-b3c901742785",
     CF_API_TOKEN: "06b6eb68-a6a9-4715-b2ab-b3c90174460c",
+    BRAVE_API_KEY: "8fe64461-304b-4ea1-9e3d-b3cb0024d794",
   },
 });
 
@@ -71,6 +72,12 @@ new AppPlus(app, name, {
       secret: dbCreds.secret,
       key: "password",
     }),
+
+    WEB_SEARCH_ENABLED: EnvValue.fromValue("true"),
+    WEB_SEARCH_PROVIDER: EnvValue.fromValue("brave"),
+    SEARCH_CLASSIFIER_MODEL: EnvValue.fromValue(
+      "@cf/meta/llama-3.2-1b-instruct",
+    ),
   },
   livenessProbe: Probe.fromHttpGet("/health", {
     initialDelaySeconds: Duration.seconds(10),

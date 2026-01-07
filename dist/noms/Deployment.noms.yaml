@@ -38,6 +38,11 @@ spec:
                 secretKeyRef:
                   key: CF_API_TOKEN
                   name: secrets
+            - name: BRAVE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: BRAVE_API_KEY
+                  name: secrets
             - name: TZ
               value: America/Chicago
             - name: LLM_PROVIDER
@@ -61,6 +66,12 @@ spec:
                 secretKeyRef:
                   key: password
                   name: noms-db-credentials
+            - name: WEB_SEARCH_ENABLED
+              value: "true"
+            - name: WEB_SEARCH_PROVIDER
+              value: brave
+            - name: SEARCH_CLASSIFIER_MODEL
+              value: "@cf/meta/llama-3.2-1b-instruct"
           image: registry.cmdcentral.xyz/cmdcentral/noms:main
           imagePullPolicy: Always
           livenessProbe:
