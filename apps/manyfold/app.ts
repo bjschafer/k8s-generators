@@ -114,7 +114,7 @@ const nfsMount = Volume.fromPersistentVolumeClaim(
 );
 server.Deployment.addVolume(nfsMount);
 server.Deployment.containers[0].mount("/models", nfsMount, {
-  subPath: "STLs",
+  subPath: "managed",
 });
 
 app.synth();

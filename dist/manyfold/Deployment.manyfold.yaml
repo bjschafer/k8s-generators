@@ -88,7 +88,7 @@ spec:
           volumeMounts:
             - mountPath: /models
               name: pvc-nfs-3dprinting
-              subPath: STLs
+              subPath: managed
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
