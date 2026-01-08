@@ -57,20 +57,22 @@ spec:
           image: ghcr.io/manyfold3d/manyfold
           imagePullPolicy: Always
           livenessProbe:
-            failureThreshold: 3
+            failureThreshold: 5
             httpGet:
               path: /health
               port: 3214
               scheme: HTTP
+            initialDelaySeconds: 45
           name: manyfold
           ports:
             - containerPort: 3214
           readinessProbe:
-            failureThreshold: 3
+            failureThreshold: 5
             httpGet:
               path: /health
               port: 3214
               scheme: HTTP
+            initialDelaySeconds: 45
           resources:
             limits:
               cpu: "4"

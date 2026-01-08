@@ -1,4 +1,4 @@
-import { App, Size } from "cdk8s";
+import { App, Duration, Size } from "cdk8s";
 import { Cpu, EnvValue, Probe, Volume } from "cdk8s-plus-33";
 import { Quantity } from "cdk8s-plus-33/lib/imports/k8s";
 import { basename } from "path";
@@ -95,9 +95,13 @@ const server = new AppPlus(app, name, {
     ...manyfoldSecrets.toEnvValues(),
   },
   livenessProbe: Probe.fromHttpGet("/health", {
+    initialDelaySeconds: Duration.seconds(45),
+    failureThreshold: 5,
     port: port,
   }),
   readinessProbe: Probe.fromHttpGet("/health", {
+    initialDelaySeconds: Duration.seconds(45),
+    failureThreshold: 5,
     port: port,
   }),
   extraIngressHosts: ["models.cmdcentral.xyz", "stls.cmdcentral.xyz"],
