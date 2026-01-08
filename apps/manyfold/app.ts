@@ -75,8 +75,8 @@ const server = new AppPlus(app, name, {
       limit: Cpu.units(4),
     },
     memory: {
-      request: Size.mebibytes(128),
-      limit: Size.mebibytes(256),
+      request: Size.mebibytes(512),
+      limit: Size.mebibytes(2048),
     },
   },
   extraEnv: {
