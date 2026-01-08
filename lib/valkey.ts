@@ -1,13 +1,13 @@
 import { Chart } from "cdk8s";
+import { ISecret, Secret } from "cdk8s-plus-33";
+import { Quantity, ResourceRequirements } from "cdk8s-plus-33/lib/imports/k8s";
 import { Construct } from "constructs";
 import {
   IntOrString,
+  KubeSecret,
   KubeService,
   KubeStatefulSet,
-  KubeSecret,
 } from "../imports/k8s";
-import { ISecret, Secret } from "cdk8s-plus-33";
-import { Quantity, ResourceRequirements } from "cdk8s-plus-33/lib/imports/k8s";
 
 export type ValkeyVersion = "7" | "7-alpine";
 
@@ -20,12 +20,13 @@ export interface ValkeyProps {
   storageSize?: Quantity;
   storageClass?: string;
   password?: string;
+  noAuth?: boolean;
 }
 
 export class Valkey extends Chart {
   public readonly Service: KubeService;
-  public readonly Secret: KubeSecret;
-  public readonly secret: ISecret; // cdk8s-plus compatible secret reference
+  public readonly Secret?: KubeSecret;
+  public readonly secret?: ISecret; // cdk8s-plus compatible secret reference
 
   constructor(scope: Construct, id: string, props: ValkeyProps) {
     super(scope, id);
@@ -37,26 +38,28 @@ export class Valkey extends Chart {
       ...props.extraLabels,
     };
 
-    this.Secret = new KubeSecret(this, `${id}-secret`, {
-      metadata: {
-        name: `${props.name}-valkey`,
-        namespace: props.namespace,
-        labels: labels,
-      },
-      type: "Opaque",
-      data: {
-        "valkey-password": Buffer.from(props.password || "changeme").toString(
-          "base64",
-        ),
-      },
-    });
+    if (!props.noAuth) {
+      this.Secret = new KubeSecret(this, `${id}-secret`, {
+        metadata: {
+          name: `${props.name}-valkey`,
+          namespace: props.namespace,
+          labels: labels,
+        },
+        type: "Opaque",
+        data: {
+          "valkey-password": Buffer.from(props.password || "changeme").toString(
+            "base64",
+          ),
+        },
+      });
 
-    // Create cdk8s-plus compatible secret reference for use with EnvValue APIs
-    this.secret = Secret.fromSecretName(
-      this,
-      `${id}-isecret`,
-      `${props.name}-valkey`,
-    );
+      // Create cdk8s-plus compatible secret reference for use with EnvValue APIs
+      this.secret = Secret.fromSecretName(
+        this,
+        `${id}-isecret`,
+        `${props.name}-valkey`,
+      );
+    }
 
     const volumeConfig = props.storageSize
       ? {}
@@ -112,25 +115,29 @@ export class Valkey extends Chart {
                 image: `ghcr.io/valkey-io/valkey:${props.version}`,
                 imagePullPolicy: "IfNotPresent",
                 command: ["valkey-server"],
-                args: [
-                  "--requirepass",
-                  "$(VALKEY_PASSWORD)",
-                  "--appendonly",
-                  "yes",
-                  "--save",
-                  "",
-                ],
-                env: [
-                  {
-                    name: "VALKEY_PASSWORD",
-                    valueFrom: {
-                      secretKeyRef: {
-                        name: this.Secret.name,
-                        key: "valkey-password",
+                args: props.noAuth
+                  ? ["--appendonly", "yes", "--save", ""]
+                  : [
+                      "--requirepass",
+                      "$(VALKEY_PASSWORD)",
+                      "--appendonly",
+                      "yes",
+                      "--save",
+                      "",
+                    ],
+                env: props.noAuth
+                  ? []
+                  : [
+                      {
+                        name: "VALKEY_PASSWORD",
+                        valueFrom: {
+                          secretKeyRef: {
+                            name: this.Secret!.name,
+                            key: "valkey-password",
+                          },
+                        },
                       },
-                    },
-                  },
-                ],
+                    ],
                 ports: [
                   {
                     name: "valkey",
@@ -143,13 +150,15 @@ export class Valkey extends Chart {
                 },
                 livenessProbe: {
                   exec: {
-                    command: [
-                      "valkey-cli",
-                      "--no-auth-warning",
-                      "-a",
-                      "$(VALKEY_PASSWORD)",
-                      "ping",
-                    ],
+                    command: props.noAuth
+                      ? ["valkey-cli", "ping"]
+                      : [
+                          "valkey-cli",
+                          "--no-auth-warning",
+                          "-a",
+                          "$(VALKEY_PASSWORD)",
+                          "ping",
+                        ],
                   },
                   initialDelaySeconds: 20,
                   periodSeconds: 5,
@@ -159,13 +168,15 @@ export class Valkey extends Chart {
                 },
                 readinessProbe: {
                   exec: {
-                    command: [
-                      "valkey-cli",
-                      "--no-auth-warning",
-                      "-a",
-                      "$(VALKEY_PASSWORD)",
-                      "ping",
-                    ],
+                    command: props.noAuth
+                      ? ["valkey-cli", "ping"]
+                      : [
+                          "valkey-cli",
+                          "--no-auth-warning",
+                          "-a",
+                          "$(VALKEY_PASSWORD)",
+                          "ping",
+                        ],
                   },
                   initialDelaySeconds: 20,
                   periodSeconds: 5,

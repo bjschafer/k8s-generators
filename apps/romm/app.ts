@@ -113,7 +113,7 @@ const server = new AppPlus(app, name, {
 
     REDIS_HOST: EnvValue.fromValue(valkey.Service.name),
     REDIS_PASSWORD: EnvValue.fromSecretValue({
-      secret: valkey.secret,
+      secret: valkey.secret!,
       key: "valkey-password",
     }),
 
