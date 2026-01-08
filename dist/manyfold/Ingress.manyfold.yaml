@@ -1,0 +1,45 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: manyfold
+  namespace: manyfold
+spec:
+  rules:
+    - host: manyfold.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: manyfold
+                port:
+                  number: 3214
+            path: /
+            pathType: Prefix
+    - host: models.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: manyfold
+                port:
+                  number: 3214
+            path: /
+            pathType: Prefix
+    - host: stls.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: manyfold
+                port:
+                  number: 3214
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - manyfold.cmdcentral.xyz
+        - models.cmdcentral.xyz
+        - stls.cmdcentral.xyz
+      secretName: manyfold-tls

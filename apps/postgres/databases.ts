@@ -44,6 +44,13 @@ export interface DatabaseConfig {
  */
 export const DATABASES: DatabaseConfig[] = [
   {
+    name: "manyfold",
+    comment: "Manyfold database owner",
+    bitwardenPasswordId: "730357ee-1202-496f-ad6e-b3cc001af9a3",
+    appNamespace: "manyfold",
+  },
+
+  {
     name: "noms",
     comment: "Noms database owner",
     bitwardenPasswordId: "f0107fac-b3ae-4d80-978b-b3c90172d46b",
