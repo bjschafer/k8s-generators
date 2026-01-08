@@ -1,12 +1,12 @@
-import { basename } from "path";
-import { DEFAULT_APP_PROPS, TZ } from "../../lib/consts";
 import { App, Duration, Size } from "cdk8s";
-import { NewArgoApp } from "../../lib/argo";
-import { AppPlus } from "../../lib/app-plus";
 import { Cpu, EnvFrom, EnvValue, Probe, Secret } from "cdk8s-plus-33";
+import { basename } from "path";
+import { AppPlus } from "../../lib/app-plus";
+import { NewArgoApp } from "../../lib/argo";
+import { DEFAULT_APP_PROPS, TZ } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
-import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
 import { WellKnownLabels } from "../../lib/labels";
+import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -67,6 +67,9 @@ new AppPlus(app, `${name}-app`, {
     ),
     AUTH_PROXY_HEADER: EnvValue.fromValue(
       "HTTP_CF_ACCESS_AUTHENTICATED_USER_EMAIL",
+    ),
+    TRUSTED_REVERSE_PROXY_NETWORKS: EnvValue.fromValue(
+      "127.0.0.1/8,10.42.0.0/16,10.43.0.0/16",
     ),
     AUTH_PROXY_USER_CREATION: EnvValue.fromValue("true"),
     DISABLE_LOCAL_AUTH: EnvValue.fromValue("true"),

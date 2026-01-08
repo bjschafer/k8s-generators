@@ -38,6 +38,8 @@ spec:
               value: 127.0.0.1/8,10.42.0.0/16,10.43.0.0/16
             - name: AUTH_PROXY_HEADER
               value: HTTP_CF_ACCESS_AUTHENTICATED_USER_EMAIL
+            - name: TRUSTED_REVERSE_PROXY_NETWORKS
+              value: 127.0.0.1/8,10.42.0.0/16,10.43.0.0/16
             - name: AUTH_PROXY_USER_CREATION
               value: "true"
             - name: DISABLE_LOCAL_AUTH
