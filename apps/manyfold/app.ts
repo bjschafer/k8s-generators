@@ -61,6 +61,7 @@ const valkey = new Valkey(app, "valkey", {
       memory: Quantity.fromString("64Mi"),
     },
   },
+  noAuth: true,
 });
 
 const server = new AppPlus(app, name, {

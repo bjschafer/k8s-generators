@@ -37,29 +37,19 @@ spec:
               weight: 1
       containers:
         - args:
-            - --requirepass
-            - $(VALKEY_PASSWORD)
             - --appendonly
             - "yes"
             - --save
             - ""
           command:
             - valkey-server
-          env:
-            - name: VALKEY_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: valkey-password
-                  name: manyfold-valkey
+          env: []
           image: ghcr.io/valkey-io/valkey:7-alpine
           imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:
               command:
                 - valkey-cli
-                - --no-auth-warning
-                - -a
-                - $(VALKEY_PASSWORD)
                 - ping
             failureThreshold: 5
             initialDelaySeconds: 20
@@ -74,9 +64,6 @@ spec:
             exec:
               command:
                 - valkey-cli
-                - --no-auth-warning
-                - -a
-                - $(VALKEY_PASSWORD)
                 - ping
             failureThreshold: 5
             initialDelaySeconds: 20
