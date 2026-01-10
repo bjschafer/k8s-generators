@@ -34,7 +34,7 @@ switch (argv[2]) {
     break;
   }
   case "velero": {
-    updater = new VeleroUpdater().WithVersion("v1.17.0");
+    updater = new VeleroUpdater().WithVersion("v1.17.1");
     break;
   }
 
