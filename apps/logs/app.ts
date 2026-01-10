@@ -20,7 +20,7 @@ import { addAlerts } from "./alerts";
 export const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
-const version = "0.11.18";
+const version = "0.11.24";
 
 NewArgoApp(name, {
   sync_policy: {
