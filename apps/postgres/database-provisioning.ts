@@ -1,6 +1,10 @@
 import { Chart } from "cdk8s";
 import { Construct } from "constructs";
 import {
+  ExternalSecret,
+  ExternalSecretSpecSecretStoreRefKind,
+} from "../../imports/external-secrets.io";
+import {
   ClusterSpecManagedRoles,
   ClusterSpecManagedRolesEnsure,
   Database as CnpgDatabase,
@@ -40,13 +44,40 @@ export function createManagedRoles(
  * These secrets are referenced by the managed roles.
  */
 export function createPostgresSecrets(scope: Construct): void {
+  const chart = new Chart(scope, "db-credentials");
+
   for (const db of DATABASES) {
     if (db.bitwardenPasswordId) {
-      new BitwardenSecret(scope, `${db.name}-db-secret`, {
-        name: `${db.name}-db-credentials`,
-        namespace: "postgres",
-        data: {
-          password: db.bitwardenPasswordId,
+      // CNPG managed roles require both username and password keys in the secret.
+      // Username must be a literal matching the role name, password from Bitwarden.
+      new ExternalSecret(chart, `${db.name}-db-secret`, {
+        metadata: {
+          name: `${db.name}-db-credentials`,
+          namespace: "postgres",
+        },
+        spec: {
+          secretStoreRef: {
+            kind: ExternalSecretSpecSecretStoreRefKind.CLUSTER_SECRET_STORE,
+            name: "bitwarden",
+          },
+          data: [
+            {
+              secretKey: "password",
+              remoteRef: {
+                key: db.bitwardenPasswordId,
+              },
+            },
+          ],
+          target: {
+            name: `${db.name}-db-credentials`,
+            template: {
+              type: "kubernetes.io/basic-auth",
+              data: {
+                username: db.name,
+                password: "{{ .password }}",
+              },
+            },
+          },
         },
       });
     }
