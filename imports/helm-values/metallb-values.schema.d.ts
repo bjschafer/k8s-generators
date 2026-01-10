@@ -179,6 +179,27 @@ export interface Values {
       };
       [k: string]: unknown;
     };
+    initContainers?: {
+      cpFrrFiles?: {
+        resources?: {
+          [k: string]: unknown;
+        };
+        [k: string]: unknown;
+      };
+      cpReloader?: {
+        resources?: {
+          [k: string]: unknown;
+        };
+        [k: string]: unknown;
+      };
+      cpMetrics?: {
+        resources?: {
+          [k: string]: unknown;
+        };
+        [k: string]: unknown;
+      };
+      [k: string]: unknown;
+    };
     extraContainers?: {
       [k: string]: unknown;
     }[];
