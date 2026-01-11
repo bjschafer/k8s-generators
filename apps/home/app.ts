@@ -111,6 +111,13 @@ new HomeConfig(app, `${name}-config`, {
           iconBubble: false,
         },
         {
+          name: "Homebox",
+          uri: "https://homebox.cmdcentral.xyz",
+          icon: "homebox",
+          description: "Home inventory",
+          iconBubble: false,
+        },
+        {
           name: "Miniflux",
           uri: "https://rss.cmdcentral.xyz",
           icon: "miniflux-light",
@@ -291,11 +298,6 @@ new HomeConfig(app, `${name}-config`, {
           name: "DNS Admin",
           uri: "https://dnsadmin.cmdcentral.xyz",
           icon: "powerdns",
-        },
-        {
-          name: "Minio",
-          uri: "https://minio.cmdcentral.xyz",
-          icon: "minio-light",
         },
         {
           name: "Netbox",
