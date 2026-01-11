@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/instance: velero
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: velero
-    helm.sh/chart: velero-11.1.1
+    helm.sh/chart: velero-11.3.2
   name: node-agent
   namespace: velero
 spec:
@@ -22,7 +22,7 @@ spec:
         app.kubernetes.io/instance: velero
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: velero
-        helm.sh/chart: velero-11.1.1
+        helm.sh/chart: velero-11.3.2
         name: node-agent
         role: node-agent
     spec:
@@ -53,7 +53,7 @@ spec:
               value: /credentials/cloud
             - name: ALIBABA_CLOUD_CREDENTIALS_FILE
               value: /credentials/cloud
-          image: velero/velero:v1.17.0
+          image: velero/velero:v1.17.1
           imagePullPolicy: IfNotPresent
           name: node-agent
           ports:

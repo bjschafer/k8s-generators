@@ -15,7 +15,7 @@ import { VmPodScrape } from "../../imports/operator.victoriametrics.com";
 const namespace = "metallb-system";
 const name = "metallb";
 const app = new App(DEFAULT_APP_PROPS(name));
-const version = "0.14.9";
+const version = "0.15.3";
 
 NewArgoApp(name, {
   namespace: namespace,

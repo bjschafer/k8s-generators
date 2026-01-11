@@ -10,7 +10,7 @@ import { VmResources } from "./vmresources";
 
 export const namespace = basename(__dirname);
 export const name = namespace;
-export const version = "0.66.1";
+export const version = "0.67.0";
 export const hostname = "metrics.cmdcentral.xyz";
 
 const app = new App(DEFAULT_APP_PROPS(namespace));

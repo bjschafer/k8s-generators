@@ -18,14 +18,21 @@ spec:
         - action: replace
           sourceLabels:
             - __address__
+          source_labels:
+            - __address__
           targetLabel: __param_target
+          target_label: __param_target
         - action: replace
           sourceLabels:
             - __param_target
+          source_labels:
+            - __param_target
           targetLabel: instance
+          target_label: instance
         - action: replace
           replacement: klipper-exporter:9101
           targetLabel: __address__
+          target_label: __address__
       targets:
         - pandora.cmdcentral.xyz:7125
         - trident.cmdcentral.xyz:7125

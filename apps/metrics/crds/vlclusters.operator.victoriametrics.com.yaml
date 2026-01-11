@@ -313,7 +313,11 @@ spec:
                         description: EnvVar represents an environment variable present in a Container.
                         properties:
                           name:
-                            description: Name of the environment variable. Must be a C_IDENTIFIER.
+                            description: >-
+                              Name of the environment variable.
+
+                              May consist of any printable ASCII characters
+                              except '='.
                             type: string
                           value:
                             description: >-
@@ -353,7 +357,8 @@ spec:
 
                         could either be secret or configmap
                       items:
-                        description: EnvFromSource represents the source of a set of ConfigMaps
+                        description: EnvFromSource represents the source of a set of ConfigMaps or
+                          Secrets
                         properties:
                           configMapRef:
                             description: The ConfigMap to select from
@@ -373,8 +378,12 @@ spec:
                             type: object
                             x-kubernetes-map-type: atomic
                           prefix:
-                            description: An optional identifier to prepend to each key in the ConfigMap.
-                              Must be a C_IDENTIFIER.
+                            description: >-
+                              Optional text to prepend to the name of each
+                              environment variable.
+
+                              May consist of any printable ASCII characters
+                              except '='.
                             type: string
                           secretRef:
                             description: The Secret to select from
@@ -600,6 +609,24 @@ spec:
 
                             it's useful when you need to create custom budget
                           type: object
+                        unhealthyPodEvictionPolicy:
+                          description: >-
+                            UnhealthyPodEvictionPolicy defines the criteria for
+                            when unhealthy pods
+
+
+                            Valid policies are IfHealthyBudget and AlwaysAllow.
+
+                            If no policy is specified, the default behavior will
+                            be used,
+
+                            which corresponds to the IfHealthyBudget policy.
+
+                            Available from operator v0.64.0
+                          enum:
+                            - IfHealthyBudget
+                            - AlwaysAllow
+                          type: string
                       type: object
                     podMetadata:
                       description: PodMetadata configures Labels and Annotations which are propagated
@@ -673,7 +700,7 @@ spec:
                             that are used by this container.
 
 
-                            This is an alpha field and requires enabling the
+                            This field depends on the
 
                             DynamicResourceAllocation feature gate.
 
@@ -1442,7 +1469,11 @@ spec:
                         description: EnvVar represents an environment variable present in a Container.
                         properties:
                           name:
-                            description: Name of the environment variable. Must be a C_IDENTIFIER.
+                            description: >-
+                              Name of the environment variable.
+
+                              May consist of any printable ASCII characters
+                              except '='.
                             type: string
                           value:
                             description: >-
@@ -1482,7 +1513,8 @@ spec:
 
                         could either be secret or configmap
                       items:
-                        description: EnvFromSource represents the source of a set of ConfigMaps
+                        description: EnvFromSource represents the source of a set of ConfigMaps or
+                          Secrets
                         properties:
                           configMapRef:
                             description: The ConfigMap to select from
@@ -1502,8 +1534,12 @@ spec:
                             type: object
                             x-kubernetes-map-type: atomic
                           prefix:
-                            description: An optional identifier to prepend to each key in the ConfigMap.
-                              Must be a C_IDENTIFIER.
+                            description: >-
+                              Optional text to prepend to the name of each
+                              environment variable.
+
+                              May consist of any printable ASCII characters
+                              except '='.
                             type: string
                           secretRef:
                             description: The Secret to select from
@@ -1522,6 +1558,18 @@ spec:
                                 type: boolean
                             type: object
                             x-kubernetes-map-type: atomic
+                        type: object
+                      type: array
+                    extraStorageNodes:
+                      description: ExtraStorageNodes - defines additional storage nodes to VLSelect
+                      items:
+                        description: VLStorageNode defines slice of additional vlstorage nodes
+                        properties:
+                          addr:
+                            description: Addr defines storage node address
+                            type: string
+                        required:
+                          - addr
                         type: object
                       type: array
                     host_aliases:
@@ -1729,6 +1777,24 @@ spec:
 
                             it's useful when you need to create custom budget
                           type: object
+                        unhealthyPodEvictionPolicy:
+                          description: >-
+                            UnhealthyPodEvictionPolicy defines the criteria for
+                            when unhealthy pods
+
+
+                            Valid policies are IfHealthyBudget and AlwaysAllow.
+
+                            If no policy is specified, the default behavior will
+                            be used,
+
+                            which corresponds to the IfHealthyBudget policy.
+
+                            Available from operator v0.64.0
+                          enum:
+                            - IfHealthyBudget
+                            - AlwaysAllow
+                          type: string
                       type: object
                     podMetadata:
                       description: PodMetadata configures Labels and Annotations which are propagated
@@ -1802,7 +1868,7 @@ spec:
                             that are used by this container.
 
 
-                            This is an alpha field and requires enabling the
+                            This field depends on the
 
                             DynamicResourceAllocation feature gate.
 
@@ -2425,7 +2491,11 @@ spec:
                         description: EnvVar represents an environment variable present in a Container.
                         properties:
                           name:
-                            description: Name of the environment variable. Must be a C_IDENTIFIER.
+                            description: >-
+                              Name of the environment variable.
+
+                              May consist of any printable ASCII characters
+                              except '='.
                             type: string
                           value:
                             description: >-
@@ -2465,7 +2535,8 @@ spec:
 
                         could either be secret or configmap
                       items:
-                        description: EnvFromSource represents the source of a set of ConfigMaps
+                        description: EnvFromSource represents the source of a set of ConfigMaps or
+                          Secrets
                         properties:
                           configMapRef:
                             description: The ConfigMap to select from
@@ -2485,8 +2556,12 @@ spec:
                             type: object
                             x-kubernetes-map-type: atomic
                           prefix:
-                            description: An optional identifier to prepend to each key in the ConfigMap.
-                              Must be a C_IDENTIFIER.
+                            description: >-
+                              Optional text to prepend to the name of each
+                              environment variable.
+
+                              May consist of any printable ASCII characters
+                              except '='.
                             type: string
                           secretRef:
                             description: The Secret to select from
@@ -2787,6 +2862,24 @@ spec:
 
                             it's useful when you need to create custom budget
                           type: object
+                        unhealthyPodEvictionPolicy:
+                          description: >-
+                            UnhealthyPodEvictionPolicy defines the criteria for
+                            when unhealthy pods
+
+
+                            Valid policies are IfHealthyBudget and AlwaysAllow.
+
+                            If no policy is specified, the default behavior will
+                            be used,
+
+                            which corresponds to the IfHealthyBudget policy.
+
+                            Available from operator v0.64.0
+                          enum:
+                            - IfHealthyBudget
+                            - AlwaysAllow
+                          type: string
                       type: object
                     podMetadata:
                       description: PodMetadata configures Labels and Annotations which are propagated
@@ -2860,7 +2953,7 @@ spec:
                             that are used by this container.
 
 
-                            This is an alpha field and requires enabling the
+                            This field depends on the
 
                             DynamicResourceAllocation feature gate.
 

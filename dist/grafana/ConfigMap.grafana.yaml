@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/name: grafana
     app.kubernetes.io/version: 12.3.1
-    helm.sh/chart: grafana-10.4.3
+    helm.sh/chart: grafana-10.5.5
   name: grafana
   namespace: grafana
 data:
@@ -46,4 +46,6 @@ data:
     [server]
     domain = grafana.cmdcentral.xyz
     root_url = https://grafana.cmdcentral.xyz
+    [unified_storage]
+    index_path = /var/lib/grafana-search/bleve
   plugins: grafana-googlesheets-datasource,grafana-piechart-panel,grafana-worldmap-panel,grafana-clock-panel,marcusolsson-dynamictext-panel,victoriametrics-metrics-datasource,victoriametrics-logs-datasource

@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: metallb
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: metallb
-    app.kubernetes.io/version: v0.14.9
-    helm.sh/chart: metallb-0.14.9
+    app.kubernetes.io/version: v0.15.3
+    helm.sh/chart: metallb-0.15.3
   name: metallb-speaker
   namespace: metallb-system
 spec:
@@ -50,7 +50,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
-          image: quay.io/metallb/speaker:v0.14.9
+          image: quay.io/metallb/speaker:v0.15.3
           livenessProbe:
             failureThreshold: 3
             httpGet:
