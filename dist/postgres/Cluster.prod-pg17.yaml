@@ -23,6 +23,12 @@ spec:
   instances: 3
   managed:
     roles:
+      - comment: Homebox database owner
+        ensure: present
+        login: true
+        name: homebox
+        passwordSecret:
+          name: homebox-db-credentials
       - comment: Manyfold database owner
         ensure: present
         login: true

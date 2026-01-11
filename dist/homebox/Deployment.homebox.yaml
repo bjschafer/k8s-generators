@@ -1,0 +1,109 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: homebox
+  name: homebox
+  namespace: homebox
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: homebox-homebox-deployment-c8dfc64b
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        backup.velero.io/backup-volumes: pvc-data
+      labels:
+        app.kubernetes.io/name: homebox
+        cdk8s.io/metadata.addr: homebox-homebox-deployment-c8dfc64b
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: HBOX_OPTIONS_ALLOW_REGISTRATION
+              value: "false"
+            - name: TZ
+              value: America/Chicago
+            - name: HBOX_DATABASE_DRIVER
+              value: postgres
+            - name: HBOX_DATABASE_HOST
+              value: prod.postgres.svc.cluster.local
+            - name: HBOX_DATABASE_PORT
+              value: "5432"
+            - name: HBOX_DATABASE_DATABASE
+              value: homebox
+            - name: HBOX_DATABASE_USERNAME
+              value: homebox
+            - name: HBOX_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: romm-db-credentials
+            - name: HBOX_OIDC_ENABLED
+              value: "true"
+            - name: HBOX_OIDC_ISSUER_URL
+              value: https://login.cmdcentral.xyz/application/o/homebox/
+            - name: HBOX_OIDC_CLIENT_ID
+              value: szrAnUchZOMEJ6oc8ajcYh1jqMBsuUVPeErulame
+            - name: HBOX_OIDC_ALLOWED_GROUPS
+              value: Family
+            - name: HBOX_OIDC_AUTO_REDIRECT
+              value: "true"
+            - name: HBOX_OPTIONS_ALLOW_LOCAL_LOGIN
+              value: "false"
+            - name: HBOX_OIDC_BUTTON_TEXT
+              value: Cmdcentral Login
+            - name: HBOX_OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: HBOX_OIDC_CLIENT_SECRET
+                  name: secrets
+          image: ghcr.io/sysadminsmedia/homebox
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 7745
+          name: homebox
+          ports:
+            - containerPort: 7745
+          readinessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 7745
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /data
+              name: pvc-data
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: pvc-data
+          persistentVolumeClaim:
+            claimName: data
+            readOnly: false

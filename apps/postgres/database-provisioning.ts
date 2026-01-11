@@ -1,14 +1,14 @@
 import { Chart } from "cdk8s";
 import { Construct } from "constructs";
 import {
-    ExternalSecret,
-    ExternalSecretSpecSecretStoreRefKind,
+  ExternalSecret,
+  ExternalSecretSpecSecretStoreRefKind,
 } from "../../imports/external-secrets.io";
 import {
-    ClusterSpecManagedRoles,
-    ClusterSpecManagedRolesEnsure,
-    Database as CnpgDatabase,
-    DatabaseSpecEnsure,
+  ClusterSpecManagedRoles,
+  ClusterSpecManagedRolesEnsure,
+  Database as CnpgDatabase,
+  DatabaseSpecEnsure,
 } from "../../imports/postgresql.cnpg.io";
 import { BitwardenSecret } from "../../lib/secrets";
 import { DATABASES } from "./databases";
