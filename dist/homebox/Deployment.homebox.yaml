@@ -31,6 +31,8 @@ spec:
               value: "false"
             - name: TZ
               value: America/Chicago
+            - name: HBOX_OPTIONS_TRUST_PROXY
+              value: "true"
             - name: HBOX_DATABASE_DRIVER
               value: postgres
             - name: HBOX_DATABASE_HOST

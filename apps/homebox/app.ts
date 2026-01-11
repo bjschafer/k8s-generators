@@ -58,6 +58,7 @@ new AppPlus(app, name, {
   extraEnv: {
     HBOX_OPTIONS_ALLOW_REGISTRATION: EnvValue.fromValue("false"),
     TZ: EnvValue.fromValue("America/Chicago"),
+    HBOX_OPTIONS_TRUST_PROXY: EnvValue.fromValue("true"),
 
     // database
     HBOX_DATABASE_DRIVER: EnvValue.fromValue("postgres"),
