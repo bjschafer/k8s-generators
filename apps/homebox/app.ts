@@ -29,7 +29,7 @@ NewArgoApp(name, {
 
 // Create a copy of the database credentials in this namespace
 // The database and role are defined in apps/postgres/databases.ts
-const dbCreds = createAppDatabaseSecret(app, "romm");
+const dbCreds = createAppDatabaseSecret(app, "homebox");
 
 const secrets = new BitwardenSecret(app, "secrets", {
   name: "secrets",

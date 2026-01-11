@@ -1,6 +1,6 @@
 resources:
   - Deployment.homebox.yaml
-  - ExternalSecret.romm-db-credentials.yaml
+  - ExternalSecret.homebox-db-credentials.yaml
   - ExternalSecret.secrets.yaml
   - Ingress.homebox.yaml
   - PersistentVolumeClaim.data.yaml

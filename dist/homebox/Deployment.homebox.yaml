@@ -45,7 +45,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: password
-                  name: romm-db-credentials
+                  name: homebox-db-credentials
             - name: HBOX_OIDC_ENABLED
               value: "true"
             - name: HBOX_OIDC_ISSUER_URL
