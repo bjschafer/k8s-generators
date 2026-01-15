@@ -121,6 +121,26 @@ export function addAlerts(scope: Construct, id: string): void {
     ],
   });
 
+  new Alert(scope, `${id}-externalsecrets`, {
+    name: "externalsecrets",
+    namespace: namespace,
+    rules: [
+      {
+        alert: "ExternalSecretSyncFailed",
+        expr: `external_secrets_sync_calls_error{status="error"} > 0`,
+        for: "15m",
+        labels: {
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary:
+            "ExternalSecret {{ $labels.name }} in {{ $labels.namespace }} failed to sync",
+        },
+      },
+    ],
+  });
+
   new Alert(scope, `${id}-certmanager`, {
     name: "certmanager",
     namespace: namespace,
