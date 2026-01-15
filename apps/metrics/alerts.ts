@@ -1006,6 +1006,19 @@ export function addAlerts(scope: Construct, id: string): void {
             "ZFS ARC hit ratio on {{ $labels.instance }}\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
       },
+      {
+        alert: "ZfsPoolDegraded",
+        expr: `node_zfs_zpool_state{state!="online"} == 1`,
+        for: "1m",
+        labels: {
+          priority: PRIORITY.HIGH,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary:
+            "ZFS pool {{ $labels.zpool }} is {{ $labels.state }} on {{ $labels.instance }}",
+        },
+      },
     ],
   });
 }
