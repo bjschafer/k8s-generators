@@ -216,7 +216,7 @@ class ProdPostgres extends Chart {
                   "512Mi",
                 ),
               cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                "500m",
+                "1",
               ),
             },
             limits: {
@@ -225,7 +225,7 @@ class ProdPostgres extends Chart {
                   "512Mi",
                 ),
               cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                "500m",
+                "1",
               ),
             },
           },
@@ -442,7 +442,7 @@ class VectorPostgres extends Chart {
                   "512Mi",
                 ),
               cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                "500m",
+                "1",
               ),
             },
             limits: {
@@ -451,7 +451,7 @@ class VectorPostgres extends Chart {
                   "512Mi",
                 ),
               cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                "500m",
+                "1",
               ),
             },
           },
