@@ -203,6 +203,44 @@ export function addAlerts(scope: Construct, id: string): void {
           summary: "CNPG pod {{ $labels.pod }}'s connections are > 90% used",
         },
       },
+      {
+        alert: "CNPGClusterNotHealthy",
+        expr: `cnpg_cluster_instances_status{status!="ready"} > 0`,
+        for: "5m",
+        labels: {
+          priority: PRIORITY.HIGH,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary:
+            "CNPG cluster {{ $labels.cluster }} has unhealthy instances",
+        },
+      },
+      {
+        alert: "CNPGReplicationLag",
+        expr: "cnpg_pg_replication_lag > 60",
+        for: "5m",
+        labels: {
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary:
+            "CNPG replication lag on {{ $labels.pod }} is {{ $value }}s",
+        },
+      },
+      {
+        alert: "CNPGBackupFailed",
+        expr: "increase(cnpg_collector_last_failed_backup_timestamp[1h]) > 0",
+        for: "0m",
+        labels: {
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary: "CNPG backup failed for cluster {{ $labels.cluster }}",
+        },
+      },
     ],
   });
 
