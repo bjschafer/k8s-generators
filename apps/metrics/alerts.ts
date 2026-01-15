@@ -121,6 +121,39 @@ export function addAlerts(scope: Construct, id: string): void {
     ],
   });
 
+  new Alert(scope, `${id}-certmanager`, {
+    name: "certmanager",
+    namespace: namespace,
+    rules: [
+      {
+        alert: "CertificateExpiringSoon",
+        expr: "(certmanager_certificate_expiration_timestamp_seconds - time()) / 86400 < 14",
+        for: "1h",
+        labels: {
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary:
+            'Certificate {{ $labels.name }} in {{ $labels.namespace }} expires in {{ $value | printf "%.0f" }} days',
+        },
+      },
+      {
+        alert: "CertificateNotReady",
+        expr: `certmanager_certificate_ready_status{condition="False"} == 1`,
+        for: "15m",
+        labels: {
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary:
+            "Certificate {{ $labels.name }} in {{ $labels.namespace }} is not ready",
+        },
+      },
+    ],
+  });
+
   new Alert(scope, `${id}-database`, {
     name: "database",
     namespace: namespace,
