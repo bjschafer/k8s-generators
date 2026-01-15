@@ -854,6 +854,37 @@ export function addAlerts(scope: Construct, id: string): void {
     ],
   });
 
+  new Alert(scope, `${id}-gitlab`, {
+    name: "gitlab",
+    namespace: namespace,
+    rules: [
+      {
+        alert: "GitLabSidekiqJobsQueuedHigh",
+        expr: "gitlab_sidekiq_queue_size > 1000",
+        for: "15m",
+        labels: {
+          priority: PRIORITY.NORMAL,
+        },
+        annotations: {
+          summary:
+            "GitLab Sidekiq queue {{ $labels.name }} has {{ $value }} jobs backed up",
+        },
+      },
+      {
+        alert: "GitLabSidekiqJobsFailing",
+        expr: "increase(gitlab_sidekiq_jobs_failed_total[5m]) > 0",
+        for: "15m",
+        labels: {
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary: "GitLab Sidekiq jobs failing in queue {{ $labels.queue }}",
+        },
+      },
+    ],
+  });
+
   new Alert(scope, `${id}-smarthome`, {
     name: "smarthome",
     namespace: namespace,
