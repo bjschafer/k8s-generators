@@ -801,6 +801,31 @@ export function addAlerts(scope: Construct, id: string): void {
     namespace: namespace,
     rules: [
       {
+        alert: "UpsOnBattery",
+        expr: "nut_status{status='OB'} == 1",
+        for: "0m",
+        labels: {
+          priority: PRIORITY.HIGH,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary: "UPS {{ $labels.ups }} is running on battery!",
+        },
+      },
+      {
+        alert: "UpsLowBattery",
+        expr: "nut_battery_charge < 50",
+        for: "1m",
+        labels: {
+          priority: PRIORITY.HIGH,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary:
+            "UPS {{ $labels.ups }} battery is below 50% ({{ $value }}%)",
+        },
+      },
+      {
         alert: "UpsHighLoad",
         expr: "nut_load * 100 > 75",
         for: "5m",
@@ -811,6 +836,17 @@ export function addAlerts(scope: Construct, id: string): void {
           summary: "UPS load over 75% on UPS {{ $labels.ups }}",
           description:
             "UPS load on {{ $labels.ups }}\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
+        },
+      },
+      {
+        alert: "UpsBatteryReplacementNeeded",
+        expr: "nut_battery_mfr_date_seconds > 0 and (time() - nut_battery_mfr_date_seconds) > (3 * 365 * 24 * 3600)",
+        for: "1d",
+        labels: {
+          priority: PRIORITY.LOW,
+        },
+        annotations: {
+          summary: "UPS {{ $labels.ups }} battery is over 3 years old",
         },
       },
     ],
