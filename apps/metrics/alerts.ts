@@ -782,7 +782,7 @@ export function addAlerts(scope: Construct, id: string): void {
       },
       {
         alert: "SmartHomeBadAirQuality",
-        expr: "max_over_time(hass_sensor_pm25_u0xb5g_per_mu0xb3[1h]) > 20",
+        expr: "max_over_time(hass_sensor_pm25_u0xb5g_per_mu0xb3[1h]) > 100",
         for: "60m",
         labels: {
           priority: PRIORITY.LOW,
@@ -790,7 +790,7 @@ export function addAlerts(scope: Construct, id: string): void {
         },
         annotations: {
           summary:
-            "PM2.5 in living room has been > 20 for the past hour ({{ $value }})",
+            "PM2.5 in living room has been > 100 for the past hour ({{ $value }})",
         },
       },
     ],

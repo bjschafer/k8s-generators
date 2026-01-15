@@ -20,8 +20,8 @@ spec:
             push_notify: "true"
         - alert: SmartHomeBadAirQuality
           annotations:
-            summary: PM2.5 in living room has been > 20 for the past hour ({{ $value }})
-          expr: max_over_time(hass_sensor_pm25_u0xb5g_per_mu0xb3[1h]) > 20
+            summary: PM2.5 in living room has been > 100 for the past hour ({{ $value }})
+          expr: max_over_time(hass_sensor_pm25_u0xb5g_per_mu0xb3[1h]) > 100
           for: 60m
           labels:
             namespace: metrics
