@@ -1,5 +1,7 @@
 This repository contains CDK8S definitions in TypeScript for my homelab Kubernetes cluster. Always use Context7 MCP server to look up API documentation for CDK8S. Always use cdk8s-plus when practicable, and include a justifying comment if you must fall back to base CDK8S.
 
+Write commit messages using Conventional Commits. The "component" should always be the name of the app or namespace.
+
 Avoid adding new dependencies without getting confirmation from me first.
 
 Do not create new documentation files or update the readme without getting confirmation from me first.

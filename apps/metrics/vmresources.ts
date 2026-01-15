@@ -4,17 +4,17 @@ import { Construct } from "constructs";
 import { join } from "path";
 import { IngressRule } from "../../imports/k8s";
 import {
-  VmAgent,
-  VmAgentSpecResourcesLimits,
-  VmAgentSpecResourcesRequests,
-  VmAlert,
-  VmAlertmanager,
-  VmAlertmanagerConfig,
-  VmAlertmanagerSpecResourcesLimits,
-  VmAlertmanagerSpecResourcesRequests,
-  VmSingle,
-  VmSingleSpecResourcesLimits,
-  VmSingleSpecResourcesRequests,
+    VmAgent,
+    VmAgentSpecResourcesLimits,
+    VmAgentSpecResourcesRequests,
+    VmAlert,
+    VmAlertmanager,
+    VmAlertmanagerConfig,
+    VmAlertmanagerSpecResourcesLimits,
+    VmAlertmanagerSpecResourcesRequests,
+    VmSingle,
+    VmSingleSpecResourcesLimits,
+    VmSingleSpecResourcesRequests,
 } from "../../imports/operator.victoriametrics.com";
 import { BACKUP_ANNOTATION_NAME } from "../../lib/consts";
 import { AddCRDs } from "../../lib/util";
@@ -165,7 +165,7 @@ export class VmResources extends Chart {
                   name: "alertmanager-secrets",
                 },
                 // -2 to 2
-                priority: `{{if .CommonLabels.priority }}{{$CommonLabels.priority}}{{else}}0{{end}}`,
+                priority: `{{if .CommonLabels.priority }}{{.CommonLabels.priority}}{{else}}0{{end}}`,
               },
             ],
           },

@@ -32,7 +32,7 @@ spec:
           chat_id: 834388479
     - name: pushover
       pushover_configs:
-        - priority: "{{if .CommonLabels.priority }}{{$CommonLabels.priority}}{{else}}0{{end}}"
+        - priority: "{{if .CommonLabels.priority }}{{.CommonLabels.priority}}{{else}}0{{end}}"
           token:
             key: pushover_token
             name: alertmanager-secrets
