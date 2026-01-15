@@ -915,6 +915,19 @@ export function addAlerts(scope: Construct, id: string): void {
             "PM2.5 in living room has been > 100 for the past hour ({{ $value }})",
         },
       },
+      {
+        alert: "HomeAssistantEntityUnavailable",
+        expr: "hass_entity_available == 0",
+        for: "30m",
+        labels: {
+          priority: PRIORITY.LOW,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary:
+            "Home Assistant entity {{ $labels.entity }} has been unavailable for 30+ minutes",
+        },
+      },
     ],
   });
 
