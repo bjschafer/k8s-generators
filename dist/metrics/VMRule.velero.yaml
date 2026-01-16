@@ -27,10 +27,19 @@ spec:
             namespace: metrics
             priority: "0"
             push_notify: "true"
-        - alert: VeleroBackupStale
+        - alert: VeleroBackupStaleDaily
           annotations:
             summary: Velero schedule {{ $labels.schedule }} hasn't had a successful backup in 2 days
-          expr: time() - velero_backup_last_successful_timestamp{schedule!=""} > 86400 * 2
+          expr: time() - velero_backup_last_successful_timestamp{schedule!="",schedule!~".*weekly.*"} > 86400 * 2
+          for: 1h
+          labels:
+            namespace: metrics
+            priority: "0"
+            push_notify: "true"
+        - alert: VeleroBackupStaleWeekly
+          annotations:
+            summary: Velero schedule {{ $labels.schedule }} hasn't had a successful backup in 8 days
+          expr: time() - velero_backup_last_successful_timestamp{schedule=~".*weekly.*"} > 86400 * 8
           for: 1h
           labels:
             namespace: metrics

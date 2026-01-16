@@ -998,8 +998,8 @@ export function addAlerts(scope: Construct, id: string): void {
         },
       },
       {
-        alert: "VeleroBackupStale",
-        expr: `time() - velero_backup_last_successful_timestamp{schedule!=""} > 86400 * 2`,
+        alert: "VeleroBackupStaleDaily",
+        expr: `time() - velero_backup_last_successful_timestamp{schedule!="",schedule!~".*weekly.*"} > 86400 * 2`,
         for: "1h",
         labels: {
           priority: PRIORITY.NORMAL,
@@ -1008,6 +1008,19 @@ export function addAlerts(scope: Construct, id: string): void {
         annotations: {
           summary:
             "Velero schedule {{ $labels.schedule }} hasn't had a successful backup in 2 days",
+        },
+      },
+      {
+        alert: "VeleroBackupStaleWeekly",
+        expr: `time() - velero_backup_last_successful_timestamp{schedule=~".*weekly.*"} > 86400 * 8`,
+        for: "1h",
+        labels: {
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary:
+            "Velero schedule {{ $labels.schedule }} hasn't had a successful backup in 8 days",
         },
       },
     ],
