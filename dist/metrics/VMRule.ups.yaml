@@ -20,8 +20,8 @@ spec:
             push_notify: "true"
         - alert: UpsLowBattery
           annotations:
-            summary: UPS {{ $labels.ups }} battery is below 50% ({{ $value }}%)
-          expr: nut_battery_charge < 50
+            summary: UPS {{ $labels.ups }} battery is below 50% ({{ $value }})
+          expr: nut_battery_charge < 0.5
           for: 1m
           labels:
             namespace: metrics

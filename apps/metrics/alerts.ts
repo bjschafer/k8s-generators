@@ -931,14 +931,14 @@ export function addAlerts(scope: Construct, id: string): void {
       },
       {
         alert: "UpsLowBattery",
-        expr: "nut_battery_charge < 50",
+        expr: "nut_battery_charge < 0.5",
         for: "1m",
         labels: {
           priority: PRIORITY.HIGH,
           ...SEND_TO_PUSHOVER,
         },
         annotations: {
-          summary: "UPS {{ $labels.ups }} battery is below 50% ({{ $value }}%)",
+          summary: "UPS {{ $labels.ups }} battery is below 50% ({{ $value }})",
         },
       },
       {
