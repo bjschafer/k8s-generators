@@ -9,6 +9,24 @@ spec:
   groups:
     - name: ups
       rules:
+        - alert: UpsOnBattery
+          annotations:
+            summary: UPS {{ $labels.ups }} is running on battery!
+          expr: nut_status{status='OB'} == 1
+          for: 0m
+          labels:
+            namespace: metrics
+            priority: "1"
+            push_notify: "true"
+        - alert: UpsLowBattery
+          annotations:
+            summary: UPS {{ $labels.ups }} battery is below 50% ({{ $value }}%)
+          expr: nut_battery_charge < 50
+          for: 1m
+          labels:
+            namespace: metrics
+            priority: "1"
+            push_notify: "true"
         - alert: UpsHighLoad
           annotations:
             description: |-
@@ -21,3 +39,10 @@ spec:
           labels:
             namespace: metrics
             priority: "0"
+        - alert: UpsBatteryReplacementNeeded
+          annotations:
+            summary: UPS {{ $labels.ups }} battery is over 3 years old
+          expr: nut_battery_mfr_date_seconds > 0 and (time() - nut_battery_mfr_date_seconds) > (3 * 365 * 24 * 3600)
+          for: 1d
+          labels:
+            priority: "-1"

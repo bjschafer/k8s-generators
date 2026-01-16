@@ -27,3 +27,30 @@ spec:
             namespace: metrics
             priority: "0"
             push_notify: "true"
+        - alert: CNPGClusterNotHealthy
+          annotations:
+            summary: CNPG cluster {{ $labels.cluster }} has unhealthy instances
+          expr: cnpg_cluster_instances_status{status!="ready"} > 0
+          for: 5m
+          labels:
+            namespace: metrics
+            priority: "1"
+            push_notify: "true"
+        - alert: CNPGReplicationLag
+          annotations:
+            summary: CNPG replication lag on {{ $labels.pod }} is {{ $value }}s
+          expr: cnpg_pg_replication_lag > 60
+          for: 5m
+          labels:
+            namespace: metrics
+            priority: "0"
+            push_notify: "true"
+        - alert: CNPGBackupFailed
+          annotations:
+            summary: CNPG backup failed for cluster {{ $labels.cluster }}
+          expr: increase(cnpg_collector_last_failed_backup_timestamp[1h]) > 0
+          for: 0m
+          labels:
+            namespace: metrics
+            priority: "0"
+            push_notify: "true"

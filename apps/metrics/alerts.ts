@@ -212,8 +212,7 @@ export function addAlerts(scope: Construct, id: string): void {
           ...SEND_TO_PUSHOVER,
         },
         annotations: {
-          summary:
-            "CNPG cluster {{ $labels.cluster }} has unhealthy instances",
+          summary: "CNPG cluster {{ $labels.cluster }} has unhealthy instances",
         },
       },
       {
@@ -225,8 +224,7 @@ export function addAlerts(scope: Construct, id: string): void {
           ...SEND_TO_PUSHOVER,
         },
         annotations: {
-          summary:
-            "CNPG replication lag on {{ $labels.pod }} is {{ $value }}s",
+          summary: "CNPG replication lag on {{ $labels.pod }} is {{ $value }}s",
         },
       },
       {
@@ -895,7 +893,6 @@ export function addAlerts(scope: Construct, id: string): void {
         for: "5m",
         labels: {
           priority: PRIORITY.LOW,
-          push_notify: "true",
         },
         annotations: {
           summary:
@@ -908,11 +905,9 @@ export function addAlerts(scope: Construct, id: string): void {
         for: "60m",
         labels: {
           priority: PRIORITY.LOW,
-          push_notify: "true",
         },
         annotations: {
-          summary:
-            "PM2.5 in living room has been > 100 for the past hour ({{ $value }})",
+          summary: "PM2.5 has been > 100 for the past hour ({{ $value }})",
         },
       },
     ],
@@ -943,8 +938,7 @@ export function addAlerts(scope: Construct, id: string): void {
           ...SEND_TO_PUSHOVER,
         },
         annotations: {
-          summary:
-            "UPS {{ $labels.ups }} battery is below 50% ({{ $value }}%)",
+          summary: "UPS {{ $labels.ups }} battery is below 50% ({{ $value }}%)",
         },
       },
       {

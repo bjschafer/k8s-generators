@@ -15,15 +15,11 @@ spec:
           expr: delta(hass_sensor_pm25_u0xb5g_per_mu0xb3[30m]) > 2.5
           for: 5m
           labels:
-            namespace: metrics
             priority: "-1"
-            push_notify: "true"
         - alert: SmartHomeBadAirQuality
           annotations:
-            summary: PM2.5 in living room has been > 100 for the past hour ({{ $value }})
+            summary: PM2.5 has been > 100 for the past hour ({{ $value }})
           expr: max_over_time(hass_sensor_pm25_u0xb5g_per_mu0xb3[1h]) > 100
           for: 60m
           labels:
-            namespace: metrics
             priority: "-1"
-            push_notify: "true"

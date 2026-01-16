@@ -1,0 +1,28 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  labels:
+    alerts.cmdcentral.xyz/kind: metrics
+  name: gitlab
+  namespace: metrics
+spec:
+  groups:
+    - name: gitlab
+      rules:
+        - alert: GitLabSidekiqJobsQueuedHigh
+          annotations:
+            summary: GitLab Sidekiq queue {{ $labels.name }} has {{ $value }} jobs backed up
+          expr: gitlab_sidekiq_queue_size > 1000
+          for: 15m
+          labels:
+            namespace: metrics
+            priority: "0"
+        - alert: GitLabSidekiqJobsFailing
+          annotations:
+            summary: GitLab Sidekiq jobs failing in queue {{ $labels.queue }}
+          expr: increase(gitlab_sidekiq_jobs_failed_total[5m]) > 0
+          for: 15m
+          labels:
+            namespace: metrics
+            priority: "0"
+            push_notify: "true"

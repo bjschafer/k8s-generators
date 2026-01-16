@@ -1,0 +1,29 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  labels:
+    alerts.cmdcentral.xyz/kind: metrics
+  name: certmanager
+  namespace: metrics
+spec:
+  groups:
+    - name: certmanager
+      rules:
+        - alert: CertificateExpiringSoon
+          annotations:
+            summary: Certificate {{ $labels.name }} in {{ $labels.namespace }} expires in {{ $value | printf "%.0f" }} days
+          expr: (certmanager_certificate_expiration_timestamp_seconds - time()) / 86400 < 14
+          for: 1h
+          labels:
+            namespace: metrics
+            priority: "0"
+            push_notify: "true"
+        - alert: CertificateNotReady
+          annotations:
+            summary: Certificate {{ $labels.name }} in {{ $labels.namespace }} is not ready
+          expr: certmanager_certificate_ready_status{condition="False"} == 1
+          for: 15m
+          labels:
+            namespace: metrics
+            priority: "0"
+            push_notify: "true"
