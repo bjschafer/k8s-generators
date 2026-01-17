@@ -1,0 +1,60 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    app.kubernetes.io/name: paperless
+  name: paperless
+  namespace: argocd
+spec:
+  destination:
+    namespace: paperless
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: dist/paperless
+    repoURL: git@github.com:bjschafer/k8s-generators.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  labels:
+    app.kubernetes.io/name: paperless
+  name: paperless-updater
+  namespace: argocd
+spec:
+  applicationRefs:
+    - images:
+        - alias: paperless-ngx
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: ghcr.io/paperless-ngx/paperless-ngx:latest
+        - alias: pure-ftpd
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: stilliard/pure-ftpd:latest
+        - alias: tika
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: docker.io/apache/tika:latest
+        - alias: gotenberg
+          commonUpdateSettings:
+            updateStrategy: semver
+          imageName: gotenberg/gotenberg:8.x.x
+        - alias: valkey
+          commonUpdateSettings:
+            allowTags: regexp:^[v]?[0-9]+\.[0-9]+\.[0-9]+$
+            updateStrategy: semver
+          imageName: ghcr.io/valkey-io/valkey:7-alpine
+      namePattern: paperless
+  namespace: argocd
+  writeBackConfig:
+    gitConfig:
+      branch: main
+    method: git

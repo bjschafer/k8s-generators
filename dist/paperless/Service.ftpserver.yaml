@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cmdcentral.xyz/hostname: paperless-ftp.cmdcentral.xyz
+  labels:
+    app: ftpserver
+  name: ftpserver
+  namespace: paperless
+spec:
+  externalIPs: []
+  ports:
+    - name: ftp
+      port: 21
+      targetPort: 21
+    - name: http-1
+      port: 30000
+      targetPort: 30000
+    - name: http-2
+      port: 30001
+      targetPort: 30001
+    - name: http-3
+      port: 30002
+      targetPort: 30002
+    - name: http-4
+      port: 30003
+      targetPort: 30003
+    - name: http-5
+      port: 30004
+      targetPort: 30004
+    - name: http-6
+      port: 30005
+      targetPort: 30005
+    - name: http-7
+      port: 30006
+      targetPort: 30006
+    - name: http-8
+      port: 30007
+      targetPort: 30007
+    - name: http-9
+      port: 30008
+      targetPort: 30008
+    - name: http-10
+      port: 30009
+      targetPort: 30009
+  selector:
+    cdk8s.io/metadata.addr: ftpserver-ftpserver-deployment-c81a5fa1
+  type: LoadBalancer

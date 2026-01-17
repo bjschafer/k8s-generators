@@ -1,0 +1,16 @@
+resources:
+  - ConfigMap.paperless-web-config.yaml
+  - Deployment.ftpserver.yaml
+  - Deployment.gotenberg.yaml
+  - Deployment.paperless-web.yaml
+  - Deployment.tika.yaml
+  - Ingress.paperless.yaml
+  - PersistentVolumeClaim.data.yaml
+  - PersistentVolumeClaim.ftp.yaml
+  - Secret.paperless-valkey.yaml
+  - Service.ftpserver.yaml
+  - Service.gotenberg.yaml
+  - Service.paperless-valkey-master.yaml
+  - Service.paperless-web.yaml
+  - Service.tika.yaml
+  - StatefulSet.paperless-valkey-master.yaml

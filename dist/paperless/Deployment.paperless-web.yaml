@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: paperless
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: paperless-web
+    component: web
+  name: paperless-web
+  namespace: paperless
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: paperless-web-paperless-web-deployment-c8ac15e0
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        backup.velero.io/backup-volumes: storage
+        backup.velero.io/backup-volumes-excludes: ftp
+      labels:
+        app.kubernetes.io/name: paperless-web
+        cdk8s.io/metadata.addr: paperless-web-paperless-web-deployment-c8ac15e0
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - envFrom:
+            - configMapRef:
+                name: paperless-web-config
+            - secretRef:
+                name: paperless-db-creds
+            - secretRef:
+                name: paperless-oidc
+          image: ghcr.io/paperless-ngx/paperless-ngx:latest
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8000
+              scheme: HTTP
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          name: paperless-web
+          ports:
+            - containerPort: 8000
+              name: http
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8000
+              scheme: HTTP
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          resources:
+            limits:
+              memory: 2560Mi
+            requests:
+              cpu: 250m
+              memory: 512Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /usr/src/paperless/data
+              name: pvc-data
+              subPath: data
+            - mountPath: /usr/src/paperless/media
+              name: pvc-data
+              subPath: media
+            - mountPath: /usr/src/paperless/export
+              name: pvc-data
+              subPath: export
+            - mountPath: /usr/src/paperless/consume
+              name: pvc-ftp
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: pvc-data
+          persistentVolumeClaim:
+            claimName: data
+            readOnly: false
+        - name: pvc-ftp
+          persistentVolumeClaim:
+            claimName: ftp
+            readOnly: false

@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: paperless
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: gotenberg
+    component: gotenberg
+  name: gotenberg
+  namespace: paperless
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: gotenberg-gotenberg-deployment-c8b9f228
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: gotenberg
+        cdk8s.io/metadata.addr: gotenberg-gotenberg-deployment-c8b9f228
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - args:
+            - gotenberg
+            - --chromium-disable-routes=true
+          env:
+            - name: DISABLE_GOOGLE_CHROME
+              value: "1"
+          image: gotenberg/gotenberg:7.8.3
+          imagePullPolicy: Always
+          name: gotenberg
+          ports:
+            - containerPort: 3000
+              name: web
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30

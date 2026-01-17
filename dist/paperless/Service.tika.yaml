@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: paperless
+    component: tika
+  name: tika
+  namespace: paperless
+spec:
+  externalIPs: []
+  ports:
+    - name: web
+      port: 9998
+      targetPort: 9998
+  selector:
+    cdk8s.io/metadata.addr: tika-tika-deployment-c88b096a
+  type: ClusterIP

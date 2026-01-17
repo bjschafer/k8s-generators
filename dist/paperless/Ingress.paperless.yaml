@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: paperless
+  namespace: paperless
+spec:
+  rules:
+    - host: paperless.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: paperless-web
+                port:
+                  number: 8000
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - paperless.cmdcentral.xyz
+      secretName: paperless-tls

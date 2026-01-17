@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: paperless-web-config
+  namespace: paperless
+data:
+  PAPERLESS_APPS: allauth.socialaccount.providers.openid_connect
+  PAPERLESS_CONSUMER_POLLING: "60"
+  PAPERLESS_DBHOST: prod.postgres.svc.cluster.local
+  PAPERLESS_DBNAME: paperless
+  PAPERLESS_DBUSER: paperless
+  PAPERLESS_DISABLE_REGULAR_LOGIN: "true"
+  PAPERLESS_OCR_LANGUAGE: eng
+  PAPERLESS_OCR_USER_ARGS: '{"continue_on_soft_render_error": true}'
+  PAPERLESS_REDIRECT_LOGIN_TO_SSO: "true"
+  PAPERLESS_REDIS: redis://:paperless@paperless-valkey-master:6379
+  PAPERLESS_TIKA_ENABLED: "1"
+  PAPERLESS_TIKA_ENDPOINT: http://tika:9998
+  PAPERLESS_TIKA_GOTENBERG_ENTPOINT: http://gotenberg:3000
+  PAPERLESS_TIME_ZONE: America/Chicago
+  PAPERLESS_URL: https://paperless.cmdcentral.xyz
+  USERMAP_GID: "1000"
+  USERMAP_UID: "1000"
