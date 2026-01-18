@@ -47,7 +47,7 @@ export class HelmChart extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -74,13 +74,12 @@ export interface HelmChartProps {
    * @schema HelmChart#spec
    */
   readonly spec?: HelmChartSpec;
-
 }
 
 /**
  * Converts an object of type 'HelmChartProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartProps(obj: HelmChartProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -90,7 +89,7 @@ export function toJson_HelmChartProps(obj: HelmChartProps | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HelmChartSpec represents the user-configurable details for installation and upgrade of a Helm chart release.
@@ -290,13 +289,12 @@ export interface HelmChartSpec {
    * @schema HelmChartSpec#version
    */
   readonly version?: string;
-
 }
 
 /**
  * Converts an object of type 'HelmChartSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpec(obj: HelmChartSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -329,7 +327,7 @@ export function toJson_HelmChartSpec(obj: HelmChartSpec | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to Secret of type kubernetes.io/basic-auth holding Basic auth credentials for the Chart repo.
@@ -347,13 +345,12 @@ export interface HelmChartSpecAuthSecret {
    * @schema HelmChartSpecAuthSecret#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'HelmChartSpecAuthSecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecAuthSecret(obj: HelmChartSpecAuthSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -362,7 +359,7 @@ export function toJson_HelmChartSpecAuthSecret(obj: HelmChartSpecAuthSecret | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to Secret of type kubernetes.io/dockerconfigjson holding Docker auth credentials for the OCI-based registry acting as the Chart repo.
@@ -380,13 +377,12 @@ export interface HelmChartSpecDockerRegistrySecret {
    * @schema HelmChartSpecDockerRegistrySecret#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'HelmChartSpecDockerRegistrySecret' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecDockerRegistrySecret(obj: HelmChartSpecDockerRegistrySecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -395,7 +391,7 @@ export function toJson_HelmChartSpecDockerRegistrySecret(obj: HelmChartSpecDocke
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configures handling of failed chart installation or upgrades.
@@ -584,13 +580,12 @@ export interface HelmChartSpecPodSecurityContext {
    * @schema HelmChartSpecPodSecurityContext#windowsOptions
    */
   readonly windowsOptions?: HelmChartSpecPodSecurityContextWindowsOptions;
-
 }
 
 /**
  * Converts an object of type 'HelmChartSpecPodSecurityContext' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecPodSecurityContext(obj: HelmChartSpecPodSecurityContext | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -611,7 +606,7 @@ export function toJson_HelmChartSpecPodSecurityContext(obj: HelmChartSpecPodSecu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Reference to a ConfigMap containing CA Certificates to be be trusted by Helm. Can be used along with or instead of `.spec.repoCA`
@@ -630,13 +625,12 @@ export interface HelmChartSpecRepoCaConfigMap {
    * @schema HelmChartSpecRepoCaConfigMap#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'HelmChartSpecRepoCaConfigMap' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecRepoCaConfigMap(obj: HelmChartSpecRepoCaConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -645,7 +639,7 @@ export function toJson_HelmChartSpecRepoCaConfigMap(obj: HelmChartSpecRepoCaConf
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * custom SecurityContext for the helm job pod.
@@ -782,13 +776,12 @@ export interface HelmChartSpecSecurityContext {
    * @schema HelmChartSpecSecurityContext#windowsOptions
    */
   readonly windowsOptions?: HelmChartSpecSecurityContextWindowsOptions;
-
 }
 
 /**
  * Converts an object of type 'HelmChartSpecSecurityContext' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecSecurityContext(obj: HelmChartSpecSecurityContext | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -808,7 +801,7 @@ export function toJson_HelmChartSpecSecurityContext(obj: HelmChartSpecSecurityCo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema HelmChartSpecSet
@@ -852,13 +845,12 @@ export interface HelmChartSpecValuesSecrets {
    * @schema HelmChartSpecValuesSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'HelmChartSpecValuesSecrets' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecValuesSecrets(obj: HelmChartSpecValuesSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -869,7 +861,7 @@ export function toJson_HelmChartSpecValuesSecrets(obj: HelmChartSpecValuesSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * appArmorProfile is the AppArmor options to use by the containers in this pod.
@@ -898,13 +890,12 @@ export interface HelmChartSpecPodSecurityContextAppArmorProfile {
    * @schema HelmChartSpecPodSecurityContextAppArmorProfile#type
    */
   readonly type: string;
-
 }
 
 /**
  * Converts an object of type 'HelmChartSpecPodSecurityContextAppArmorProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecPodSecurityContextAppArmorProfile(obj: HelmChartSpecPodSecurityContextAppArmorProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -914,7 +905,7 @@ export function toJson_HelmChartSpecPodSecurityContextAppArmorProfile(obj: HelmC
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SELinux context to be applied to all containers.
@@ -954,13 +945,12 @@ export interface HelmChartSpecPodSecurityContextSeLinuxOptions {
    * @schema HelmChartSpecPodSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
  * Converts an object of type 'HelmChartSpecPodSecurityContextSeLinuxOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecPodSecurityContextSeLinuxOptions(obj: HelmChartSpecPodSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -972,7 +962,7 @@ export function toJson_HelmChartSpecPodSecurityContextSeLinuxOptions(obj: HelmCh
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The seccomp options to use by the containers in this pod.
@@ -1002,13 +992,12 @@ export interface HelmChartSpecPodSecurityContextSeccompProfile {
    * @schema HelmChartSpecPodSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
  * Converts an object of type 'HelmChartSpecPodSecurityContextSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecPodSecurityContextSeccompProfile(obj: HelmChartSpecPodSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1018,7 +1007,7 @@ export function toJson_HelmChartSpecPodSecurityContextSeccompProfile(obj: HelmCh
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Sysctl defines a kernel parameter to be set
@@ -1039,13 +1028,12 @@ export interface HelmChartSpecPodSecurityContextSysctls {
    * @schema HelmChartSpecPodSecurityContextSysctls#value
    */
   readonly value: string;
-
 }
 
 /**
  * Converts an object of type 'HelmChartSpecPodSecurityContextSysctls' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecPodSecurityContextSysctls(obj: HelmChartSpecPodSecurityContextSysctls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1055,7 +1043,7 @@ export function toJson_HelmChartSpecPodSecurityContextSysctls(obj: HelmChartSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Windows specific settings applied to all containers.
@@ -1102,13 +1090,12 @@ export interface HelmChartSpecPodSecurityContextWindowsOptions {
    * @schema HelmChartSpecPodSecurityContextWindowsOptions#runAsUserName
    */
   readonly runAsUserName?: string;
-
 }
 
 /**
  * Converts an object of type 'HelmChartSpecPodSecurityContextWindowsOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecPodSecurityContextWindowsOptions(obj: HelmChartSpecPodSecurityContextWindowsOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1120,7 +1107,7 @@ export function toJson_HelmChartSpecPodSecurityContextWindowsOptions(obj: HelmCh
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * appArmorProfile is the AppArmor options to use by this container. If set, this profile
@@ -1150,13 +1137,12 @@ export interface HelmChartSpecSecurityContextAppArmorProfile {
    * @schema HelmChartSpecSecurityContextAppArmorProfile#type
    */
   readonly type: string;
-
 }
 
 /**
  * Converts an object of type 'HelmChartSpecSecurityContextAppArmorProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecSecurityContextAppArmorProfile(obj: HelmChartSpecSecurityContextAppArmorProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1166,7 +1152,7 @@ export function toJson_HelmChartSpecSecurityContextAppArmorProfile(obj: HelmChar
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The capabilities to add/drop when running containers.
@@ -1190,13 +1176,12 @@ export interface HelmChartSpecSecurityContextCapabilities {
    * @schema HelmChartSpecSecurityContextCapabilities#drop
    */
   readonly drop?: string[];
-
 }
 
 /**
  * Converts an object of type 'HelmChartSpecSecurityContextCapabilities' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecSecurityContextCapabilities(obj: HelmChartSpecSecurityContextCapabilities | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1206,7 +1191,7 @@ export function toJson_HelmChartSpecSecurityContextCapabilities(obj: HelmChartSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The SELinux context to be applied to the container.
@@ -1245,13 +1230,12 @@ export interface HelmChartSpecSecurityContextSeLinuxOptions {
    * @schema HelmChartSpecSecurityContextSeLinuxOptions#user
    */
   readonly user?: string;
-
 }
 
 /**
  * Converts an object of type 'HelmChartSpecSecurityContextSeLinuxOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecSecurityContextSeLinuxOptions(obj: HelmChartSpecSecurityContextSeLinuxOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1263,7 +1247,7 @@ export function toJson_HelmChartSpecSecurityContextSeLinuxOptions(obj: HelmChart
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The seccomp options to use by this container. If seccomp options are
@@ -1295,13 +1279,12 @@ export interface HelmChartSpecSecurityContextSeccompProfile {
    * @schema HelmChartSpecSecurityContextSeccompProfile#type
    */
   readonly type: string;
-
 }
 
 /**
  * Converts an object of type 'HelmChartSpecSecurityContextSeccompProfile' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecSecurityContextSeccompProfile(obj: HelmChartSpecSecurityContextSeccompProfile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1311,7 +1294,7 @@ export function toJson_HelmChartSpecSecurityContextSeccompProfile(obj: HelmChart
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The Windows specific settings applied to all containers.
@@ -1358,13 +1341,12 @@ export interface HelmChartSpecSecurityContextWindowsOptions {
    * @schema HelmChartSpecSecurityContextWindowsOptions#runAsUserName
    */
   readonly runAsUserName?: string;
-
 }
 
 /**
  * Converts an object of type 'HelmChartSpecSecurityContextWindowsOptions' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartSpecSecurityContextWindowsOptions(obj: HelmChartSpecSecurityContextWindowsOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1376,7 +1358,7 @@ export function toJson_HelmChartSpecSecurityContextWindowsOptions(obj: HelmChart
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -1425,7 +1407,7 @@ export class HelmChartConfig extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -1455,13 +1437,12 @@ export interface HelmChartConfigProps {
    * @schema HelmChartConfig#spec
    */
   readonly spec?: HelmChartConfigSpec;
-
 }
 
 /**
  * Converts an object of type 'HelmChartConfigProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartConfigProps(obj: HelmChartConfigProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1471,7 +1452,7 @@ export function toJson_HelmChartConfigProps(obj: HelmChartConfigProps | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * HelmChartConfigSpec represents additional user-configurable details of an installed and configured Helm chart release.
@@ -1504,13 +1485,12 @@ export interface HelmChartConfigSpec {
    * @schema HelmChartConfigSpec#valuesSecrets
    */
   readonly valuesSecrets?: HelmChartConfigSpecValuesSecrets[];
-
 }
 
 /**
  * Converts an object of type 'HelmChartConfigSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartConfigSpec(obj: HelmChartConfigSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1521,7 +1501,7 @@ export function toJson_HelmChartConfigSpec(obj: HelmChartConfigSpec | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Configures handling of failed chart installation or upgrades.
@@ -1565,13 +1545,12 @@ export interface HelmChartConfigSpecValuesSecrets {
    * @schema HelmChartConfigSpecValuesSecrets#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'HelmChartConfigSpecValuesSecrets' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_HelmChartConfigSpecValuesSecrets(obj: HelmChartConfigSpecValuesSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1582,5 +1561,5 @@ export function toJson_HelmChartConfigSpecValuesSecrets(obj: HelmChartConfigSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 

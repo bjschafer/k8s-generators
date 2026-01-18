@@ -4,3 +4,4 @@ language: typescript
 imports:
   - k8s@1.33.0
   - /proc/self/fd/11
+  - /dev/fd/11

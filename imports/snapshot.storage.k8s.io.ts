@@ -47,7 +47,7 @@ export class VolumeSnapshot extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -74,13 +74,12 @@ export interface VolumeSnapshotProps {
    * @schema VolumeSnapshot#spec
    */
   readonly spec: VolumeSnapshotSpec;
-
 }
 
 /**
  * Converts an object of type 'VolumeSnapshotProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VolumeSnapshotProps(obj: VolumeSnapshotProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -90,7 +89,7 @@ export function toJson_VolumeSnapshotProps(obj: VolumeSnapshotProps | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * spec defines the desired characteristics of a snapshot requested by a user. More info: https://kubernetes.io/docs/concepts/storage/volume-snapshots#volumesnapshots Required.
@@ -111,13 +110,12 @@ export interface VolumeSnapshotSpec {
    * @schema VolumeSnapshotSpec#volumeSnapshotClassName
    */
   readonly volumeSnapshotClassName?: string;
-
 }
 
 /**
  * Converts an object of type 'VolumeSnapshotSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VolumeSnapshotSpec(obj: VolumeSnapshotSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -127,7 +125,7 @@ export function toJson_VolumeSnapshotSpec(obj: VolumeSnapshotSpec | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * source specifies where a snapshot will be created from. This field is immutable after creation. Required.
@@ -148,13 +146,12 @@ export interface VolumeSnapshotSpecSource {
    * @schema VolumeSnapshotSpecSource#volumeSnapshotContentName
    */
   readonly volumeSnapshotContentName?: string;
-
 }
 
 /**
  * Converts an object of type 'VolumeSnapshotSpecSource' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VolumeSnapshotSpecSource(obj: VolumeSnapshotSpecSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -164,7 +161,7 @@ export function toJson_VolumeSnapshotSpecSource(obj: VolumeSnapshotSpecSource | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -211,7 +208,7 @@ export class VolumeSnapshotV1Beta1 extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -238,13 +235,12 @@ export interface VolumeSnapshotV1Beta1Props {
    * @schema VolumeSnapshotV1Beta1#spec
    */
   readonly spec: VolumeSnapshotV1Beta1Spec;
-
 }
 
 /**
  * Converts an object of type 'VolumeSnapshotV1Beta1Props' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VolumeSnapshotV1Beta1Props(obj: VolumeSnapshotV1Beta1Props | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -254,7 +250,7 @@ export function toJson_VolumeSnapshotV1Beta1Props(obj: VolumeSnapshotV1Beta1Prop
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * spec defines the desired characteristics of a snapshot requested by a user. More info: https://kubernetes.io/docs/concepts/storage/volume-snapshots#volumesnapshots Required.
@@ -275,13 +271,12 @@ export interface VolumeSnapshotV1Beta1Spec {
    * @schema VolumeSnapshotV1Beta1Spec#volumeSnapshotClassName
    */
   readonly volumeSnapshotClassName?: string;
-
 }
 
 /**
  * Converts an object of type 'VolumeSnapshotV1Beta1Spec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VolumeSnapshotV1Beta1Spec(obj: VolumeSnapshotV1Beta1Spec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -291,7 +286,7 @@ export function toJson_VolumeSnapshotV1Beta1Spec(obj: VolumeSnapshotV1Beta1Spec 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * source specifies where a snapshot will be created from. This field is immutable after creation. Required.
@@ -312,13 +307,12 @@ export interface VolumeSnapshotV1Beta1SpecSource {
    * @schema VolumeSnapshotV1Beta1SpecSource#volumeSnapshotContentName
    */
   readonly volumeSnapshotContentName?: string;
-
 }
 
 /**
  * Converts an object of type 'VolumeSnapshotV1Beta1SpecSource' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VolumeSnapshotV1Beta1SpecSource(obj: VolumeSnapshotV1Beta1SpecSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -328,7 +322,7 @@ export function toJson_VolumeSnapshotV1Beta1SpecSource(obj: VolumeSnapshotV1Beta
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -375,7 +369,7 @@ export class VolumeSnapshotClass extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -416,13 +410,12 @@ export interface VolumeSnapshotClassProps {
    * @schema VolumeSnapshotClass#parameters
    */
   readonly parameters?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'VolumeSnapshotClassProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VolumeSnapshotClassProps(obj: VolumeSnapshotClassProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -434,7 +427,7 @@ export function toJson_VolumeSnapshotClassProps(obj: VolumeSnapshotClassProps | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * deletionPolicy determines whether a VolumeSnapshotContent created through the VolumeSnapshotClass should be deleted when its bound VolumeSnapshot is deleted. Supported values are "Retain" and "Delete". "Retain" means that the VolumeSnapshotContent and its physical snapshot on underlying storage system are kept. "Delete" means that the VolumeSnapshotContent and its physical snapshot on underlying storage system are deleted. Required.
@@ -493,7 +486,7 @@ export class VolumeSnapshotClassV1Beta1 extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -534,13 +527,12 @@ export interface VolumeSnapshotClassV1Beta1Props {
    * @schema VolumeSnapshotClassV1Beta1#parameters
    */
   readonly parameters?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'VolumeSnapshotClassV1Beta1Props' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VolumeSnapshotClassV1Beta1Props(obj: VolumeSnapshotClassV1Beta1Props | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -552,7 +544,7 @@ export function toJson_VolumeSnapshotClassV1Beta1Props(obj: VolumeSnapshotClassV
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * deletionPolicy determines whether a VolumeSnapshotContent created through the VolumeSnapshotClass should be deleted when its bound VolumeSnapshot is deleted. Supported values are "Retain" and "Delete". "Retain" means that the VolumeSnapshotContent and its physical snapshot on underlying storage system are kept. "Delete" means that the VolumeSnapshotContent and its physical snapshot on underlying storage system are deleted. Required.
@@ -611,7 +603,7 @@ export class VolumeSnapshotContent extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -638,13 +630,12 @@ export interface VolumeSnapshotContentProps {
    * @schema VolumeSnapshotContent#spec
    */
   readonly spec: VolumeSnapshotContentSpec;
-
 }
 
 /**
  * Converts an object of type 'VolumeSnapshotContentProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VolumeSnapshotContentProps(obj: VolumeSnapshotContentProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -654,7 +645,7 @@ export function toJson_VolumeSnapshotContentProps(obj: VolumeSnapshotContentProp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * spec defines properties of a VolumeSnapshotContent created by the underlying storage system. Required.
@@ -703,13 +694,12 @@ export interface VolumeSnapshotContentSpec {
    * @schema VolumeSnapshotContentSpec#volumeSnapshotRef
    */
   readonly volumeSnapshotRef: VolumeSnapshotContentSpecVolumeSnapshotRef;
-
 }
 
 /**
  * Converts an object of type 'VolumeSnapshotContentSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VolumeSnapshotContentSpec(obj: VolumeSnapshotContentSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -723,7 +713,7 @@ export function toJson_VolumeSnapshotContentSpec(obj: VolumeSnapshotContentSpec 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * deletionPolicy determines whether this VolumeSnapshotContent and its physical snapshot on the underlying storage system should be deleted when its bound VolumeSnapshot is deleted. Supported values are "Retain" and "Delete". "Retain" means that the VolumeSnapshotContent and its physical snapshot on underlying storage system are kept. "Delete" means that the VolumeSnapshotContent and its physical snapshot on underlying storage system are deleted. For dynamically provisioned snapshots, this field will automatically be filled in by the CSI snapshotter sidecar with the "DeletionPolicy" field defined in the corresponding VolumeSnapshotClass. For pre-existing snapshots, users MUST specify this field when creating the VolumeSnapshotContent object. Required.
@@ -756,13 +746,12 @@ export interface VolumeSnapshotContentSpecSource {
    * @schema VolumeSnapshotContentSpecSource#volumeHandle
    */
   readonly volumeHandle?: string;
-
 }
 
 /**
  * Converts an object of type 'VolumeSnapshotContentSpecSource' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VolumeSnapshotContentSpecSource(obj: VolumeSnapshotContentSpecSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -772,7 +761,7 @@ export function toJson_VolumeSnapshotContentSpecSource(obj: VolumeSnapshotConten
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * volumeSnapshotRef specifies the VolumeSnapshot object to which this VolumeSnapshotContent object is bound. VolumeSnapshot.Spec.VolumeSnapshotContentName field must reference to this VolumeSnapshotContent's name for the bidirectional binding to be valid. For a pre-existing VolumeSnapshotContent object, name and namespace of the VolumeSnapshot object MUST be provided for binding to happen. This field is immutable after creation. Required.
@@ -828,13 +817,12 @@ export interface VolumeSnapshotContentSpecVolumeSnapshotRef {
    * @schema VolumeSnapshotContentSpecVolumeSnapshotRef#uid
    */
   readonly uid?: string;
-
 }
 
 /**
  * Converts an object of type 'VolumeSnapshotContentSpecVolumeSnapshotRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VolumeSnapshotContentSpecVolumeSnapshotRef(obj: VolumeSnapshotContentSpecVolumeSnapshotRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -849,7 +837,7 @@ export function toJson_VolumeSnapshotContentSpecVolumeSnapshotRef(obj: VolumeSna
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -896,7 +884,7 @@ export class VolumeSnapshotContentV1Beta1 extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -923,13 +911,12 @@ export interface VolumeSnapshotContentV1Beta1Props {
    * @schema VolumeSnapshotContentV1Beta1#spec
    */
   readonly spec: VolumeSnapshotContentV1Beta1Spec;
-
 }
 
 /**
  * Converts an object of type 'VolumeSnapshotContentV1Beta1Props' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VolumeSnapshotContentV1Beta1Props(obj: VolumeSnapshotContentV1Beta1Props | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -939,7 +926,7 @@ export function toJson_VolumeSnapshotContentV1Beta1Props(obj: VolumeSnapshotCont
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * spec defines properties of a VolumeSnapshotContent created by the underlying storage system. Required.
@@ -981,13 +968,12 @@ export interface VolumeSnapshotContentV1Beta1Spec {
    * @schema VolumeSnapshotContentV1Beta1Spec#volumeSnapshotRef
    */
   readonly volumeSnapshotRef: VolumeSnapshotContentV1Beta1SpecVolumeSnapshotRef;
-
 }
 
 /**
  * Converts an object of type 'VolumeSnapshotContentV1Beta1Spec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VolumeSnapshotContentV1Beta1Spec(obj: VolumeSnapshotContentV1Beta1Spec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1000,7 +986,7 @@ export function toJson_VolumeSnapshotContentV1Beta1Spec(obj: VolumeSnapshotConte
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * deletionPolicy determines whether this VolumeSnapshotContent and its physical snapshot on the underlying storage system should be deleted when its bound VolumeSnapshot is deleted. Supported values are "Retain" and "Delete". "Retain" means that the VolumeSnapshotContent and its physical snapshot on underlying storage system are kept. "Delete" means that the VolumeSnapshotContent and its physical snapshot on underlying storage system are deleted. For dynamically provisioned snapshots, this field will automatically be filled in by the CSI snapshotter sidecar with the "DeletionPolicy" field defined in the corresponding VolumeSnapshotClass. For pre-existing snapshots, users MUST specify this field when creating the  VolumeSnapshotContent object. Required.
@@ -1033,13 +1019,12 @@ export interface VolumeSnapshotContentV1Beta1SpecSource {
    * @schema VolumeSnapshotContentV1Beta1SpecSource#volumeHandle
    */
   readonly volumeHandle?: string;
-
 }
 
 /**
  * Converts an object of type 'VolumeSnapshotContentV1Beta1SpecSource' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VolumeSnapshotContentV1Beta1SpecSource(obj: VolumeSnapshotContentV1Beta1SpecSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1049,7 +1034,7 @@ export function toJson_VolumeSnapshotContentV1Beta1SpecSource(obj: VolumeSnapsho
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * volumeSnapshotRef specifies the VolumeSnapshot object to which this VolumeSnapshotContent object is bound. VolumeSnapshot.Spec.VolumeSnapshotContentName field must reference to this VolumeSnapshotContent's name for the bidirectional binding to be valid. For a pre-existing VolumeSnapshotContent object, name and namespace of the VolumeSnapshot object MUST be provided for binding to happen. This field is immutable after creation. Required.
@@ -1105,13 +1090,12 @@ export interface VolumeSnapshotContentV1Beta1SpecVolumeSnapshotRef {
    * @schema VolumeSnapshotContentV1Beta1SpecVolumeSnapshotRef#uid
    */
   readonly uid?: string;
-
 }
 
 /**
  * Converts an object of type 'VolumeSnapshotContentV1Beta1SpecVolumeSnapshotRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_VolumeSnapshotContentV1Beta1SpecVolumeSnapshotRef(obj: VolumeSnapshotContentV1Beta1SpecVolumeSnapshotRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1126,5 +1110,5 @@ export function toJson_VolumeSnapshotContentV1Beta1SpecVolumeSnapshotRef(obj: Vo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
