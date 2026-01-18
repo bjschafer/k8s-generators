@@ -11,21 +11,14 @@ spec:
         - action: replace
           sourceLabels:
             - __address__
-          source_labels:
-            - __address__
           targetLabel: __param_target
-          target_label: __param_target
         - action: replace
           sourceLabels:
             - __param_target
-          source_labels:
-            - __param_target
           targetLabel: instance
-          target_label: instance
         - action: replace
           replacement: proxmox-exporter:9221
           targetLabel: __address__
-          target_label: __address__
       targets:
         - vmhost.cmdcentral.xyz:443
   vmProberSpec:
