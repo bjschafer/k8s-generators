@@ -62,7 +62,9 @@ new AppPlus(app, name, {
 
     // database
     HBOX_DATABASE_DRIVER: EnvValue.fromValue("postgres"),
-    HBOX_DATABASE_HOST: EnvValue.fromValue("prod.postgres.svc.cluster.local"),
+    HBOX_DATABASE_HOST: EnvValue.fromValue(
+      "prod-pg17-rw.postgres.svc.cluster.local",
+    ),
     HBOX_DATABASE_PORT: EnvValue.fromValue("5432"),
     HBOX_DATABASE_DATABASE: EnvValue.fromValue(name),
     HBOX_DATABASE_USERNAME: EnvValue.fromValue(name),

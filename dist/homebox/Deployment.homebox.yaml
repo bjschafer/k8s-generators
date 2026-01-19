@@ -36,7 +36,7 @@ spec:
             - name: HBOX_DATABASE_DRIVER
               value: postgres
             - name: HBOX_DATABASE_HOST
-              value: prod.postgres.svc.cluster.local
+              value: prod-pg17-rw.postgres.svc.cluster.local
             - name: HBOX_DATABASE_PORT
               value: "5432"
             - name: HBOX_DATABASE_DATABASE
