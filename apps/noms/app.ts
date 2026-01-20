@@ -38,6 +38,8 @@ const nomsSecrets = new BitwardenSecret(app, "noms-secrets", {
     CF_ACCOUNT_ID: "8be44aed-b92e-49dd-9c58-b3c901742785",
     CF_API_TOKEN: "06b6eb68-a6a9-4715-b2ab-b3c90174460c",
     BRAVE_API_KEY: "8fe64461-304b-4ea1-9e3d-b3cb0024d794",
+    PUSHOVER_APP_TOKEN: "203996e5-50e2-417f-8b81-b3d80048fa52",
+    PUSHOVER_USER_KEY: "46c60eb3-caaf-406c-974d-b3d800493492",
   },
 });
 

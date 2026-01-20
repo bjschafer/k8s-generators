@@ -43,6 +43,16 @@ spec:
                 secretKeyRef:
                   key: BRAVE_API_KEY
                   name: secrets
+            - name: PUSHOVER_APP_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: PUSHOVER_APP_TOKEN
+                  name: secrets
+            - name: PUSHOVER_USER_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: PUSHOVER_USER_KEY
+                  name: secrets
             - name: TZ
               value: America/Chicago
             - name: LLM_PROVIDER
