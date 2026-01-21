@@ -3,9 +3,9 @@ kind: Service
 metadata:
   labels:
     app.kubernetes.io/component: master
-    app.kubernetes.io/instance: paperless
+    app.kubernetes.io/instance: broker
     app.kubernetes.io/name: valkey
-  name: paperless-valkey-master
+  name: broker-valkey-master
   namespace: paperless
 spec:
   ports:
@@ -14,6 +14,6 @@ spec:
       targetPort: valkey
   selector:
     app.kubernetes.io/component: master
-    app.kubernetes.io/instance: paperless
+    app.kubernetes.io/instance: broker
     app.kubernetes.io/name: valkey
   type: ClusterIP

@@ -4,9 +4,9 @@ metadata:
   labels:
     app: paperless
     app.kubernetes.io/managed-by: generators
-    app.kubernetes.io/name: paperless-web
+    app.kubernetes.io/name: paperless
     component: web
-  name: paperless-web
+  name: paperless
   namespace: paperless
 spec:
   minReadySeconds: 0
@@ -24,7 +24,7 @@ spec:
         backup.velero.io/backup-volumes: storage
         backup.velero.io/backup-volumes-excludes: ftp
       labels:
-        app.kubernetes.io/name: paperless-web
+        app.kubernetes.io/name: paperless
         cdk8s.io/metadata.addr: paperless-web-paperless-web-deployment-c8ac15e0
     spec:
       automountServiceAccountToken: false
@@ -46,7 +46,7 @@ spec:
               scheme: HTTP
             initialDelaySeconds: 20
             periodSeconds: 10
-          name: paperless-web
+          name: paperless
           ports:
             - containerPort: 8000
               name: http

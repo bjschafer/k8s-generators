@@ -13,16 +13,14 @@ import {
 } from "cdk8s-plus-33";
 import {
   KubeConfigMap,
-  KubeIngress,
   KubePersistentVolumeClaim,
-  Quantity,
+  Quantity
 } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
 import {
   BACKUP_ANNOTATION_NAME,
-  CLUSTER_ISSUER,
-  DEFAULT_APP_PROPS,
+  DEFAULT_APP_PROPS
 } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { basename } from "../../lib/util";
@@ -65,7 +63,7 @@ NewArgoApp(namespace, {
 
 // Valkey broker for Paperless task queue
 const valkey = new Valkey(app, "valkey", {
-  name: "paperless",
+  name: "broker",
   namespace: namespace,
   version: "7-alpine",
   password: "paperless",
@@ -164,7 +162,7 @@ const oidcSecret = Secret.fromSecretName(app, "oidc", "paperless-oidc");
 
 // Main Paperless deployment
 const paperless = new AppPlus(app, "paperless-web", {
-  name: "paperless-web",
+  name: "paperless",
   namespace: namespace,
   image: "ghcr.io/paperless-ngx/paperless-ngx:latest",
   labels: {
@@ -196,7 +194,6 @@ const paperless = new AppPlus(app, "paperless-web", {
     new EnvFrom(undefined, undefined, dbCredsSecret),
     new EnvFrom(undefined, undefined, oidcSecret),
   ],
-  disableIngress: true,
   deploymentStrategy: DeploymentStrategy.recreate(),
 });
 
@@ -372,54 +369,6 @@ const ftpVolForFtpServer = Volume.fromPersistentVolumeClaim(
 );
 ftpserver.Deployment.addVolume(ftpVolForFtpServer);
 ftpserver.Deployment.containers[0].mount("/home/scanner", ftpVolForFtpServer);
-
-// Ingress - wrapped in Chart since cdk8s-plus Ingress needs Chart context
-class IngressChart extends Chart {
-  constructor(scope: App, id: string) {
-    super(scope, id);
-
-    new KubeIngress(this, "ingress", {
-      metadata: {
-        name: "paperless",
-        namespace: namespace,
-        annotations: {
-          "cert-manager.io/cluster-issuer": CLUSTER_ISSUER.name,
-        },
-      },
-      spec: {
-        rules: [
-          {
-            host: "paperless.cmdcentral.xyz",
-            http: {
-              paths: [
-                {
-                  path: "/",
-                  pathType: "Prefix",
-                  backend: {
-                    service: {
-                      name: "paperless-web",
-                      port: {
-                        number: 8000,
-                      },
-                    },
-                  },
-                },
-              ],
-            },
-          },
-        ],
-        tls: [
-          {
-            hosts: ["paperless.cmdcentral.xyz"],
-            secretName: "paperless-tls",
-          },
-        ],
-      },
-    });
-  }
-}
-
-new IngressChart(app, "ingress");
 
 app.synth();
 NewKustomize(app.outdir);

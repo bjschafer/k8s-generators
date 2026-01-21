@@ -4,7 +4,7 @@ metadata:
   labels:
     app: paperless
     component: web
-  name: paperless-web
+  name: paperless
   namespace: paperless
 spec:
   externalIPs: []

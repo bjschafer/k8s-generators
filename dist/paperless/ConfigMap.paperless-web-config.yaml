@@ -13,7 +13,7 @@ data:
   PAPERLESS_OCR_LANGUAGE: eng
   PAPERLESS_OCR_USER_ARGS: '{"continue_on_soft_render_error": true}'
   PAPERLESS_REDIRECT_LOGIN_TO_SSO: "true"
-  PAPERLESS_REDIS: redis://:paperless@paperless-valkey-master:6379
+  PAPERLESS_REDIS: redis://:paperless@broker-valkey-master:6379
   PAPERLESS_TIKA_ENABLED: "1"
   PAPERLESS_TIKA_ENDPOINT: http://tika:9998
   PAPERLESS_TIKA_GOTENBERG_ENTPOINT: http://gotenberg:3000

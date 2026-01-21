@@ -3,6 +3,9 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
+  labels:
+    app: paperless
+    component: web
   name: paperless
   namespace: paperless
 spec:
@@ -12,7 +15,7 @@ spec:
         paths:
           - backend:
               service:
-                name: paperless-web
+                name: paperless
                 port:
                   number: 8000
             path: /
