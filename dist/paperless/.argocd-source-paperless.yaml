@@ -1,6 +1,6 @@
 kustomize:
   images:
-  - ghcr.io/paperless-ngx/paperless-ngx:latest@sha256:59521628c3b4aa4e37c976924f74c30e507acd89eea2dbc74f13f0354159f536
+  - ghcr.io/paperless-ngx/paperless-ngx:latest@sha256:665f2f5cc5482ea2e44f90a7fa170908aaeb95d8d3c70e17f746de8fcb81f644
   - stilliard/pure-ftpd:latest@sha256:bfdfe0d725bee473b6c06ec0c39d6956dcaa2a504a1e33825ecf41242f05b436
   - docker.io/apache/tika:latest@sha256:c0154cb95587cde64be74f35ada1a2bd7892219f3f0ac3c9dc6cab34046b3573
   - gotenberg/gotenberg:8.25.1
