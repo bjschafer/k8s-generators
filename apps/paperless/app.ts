@@ -195,6 +195,7 @@ const paperless = new AppPlus(app, "paperless-web", {
     new EnvFrom(undefined, undefined, oidcSecret),
   ],
   deploymentStrategy: DeploymentStrategy.recreate(),
+  enableServiceLinks: false,
 });
 
 // Mount volumes with subPaths for data, media, export

@@ -82,6 +82,7 @@ export interface AppPlusProps {
   readonly service?: ServiceProps;
   readonly dns?: PodDnsProps;
   readonly deploymentStrategy?: DeploymentStrategy;
+  readonly enableServiceLinks?: boolean;
 }
 
 export class AppPlus extends Chart {
@@ -187,6 +188,7 @@ export class AppPlus extends Chart {
       securityContext: DEFAULT_SECURITY_CONTEXT,
       serviceAccount: serviceAccount,
       automountServiceAccountToken: props.automountServiceAccount,
+      enableServiceLinks: props.enableServiceLinks,
       dns: props.dns,
       containers: [
         {

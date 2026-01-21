@@ -82,6 +82,7 @@ spec:
             - mountPath: /usr/src/paperless/consume
               name: pvc-ftp
       dnsPolicy: ClusterFirst
+      enableServiceLinks: false
       hostNetwork: false
       restartPolicy: Always
       securityContext:
