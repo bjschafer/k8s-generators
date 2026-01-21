@@ -2,13 +2,14 @@ import { App, Chart, Duration, Size } from "cdk8s";
 import {
   ConfigMap,
   Cpu,
+  DeploymentStrategy,
   EnvFrom,
   EnvValue,
   PersistentVolumeClaim,
   Probe,
   Secret,
   ServiceType,
-  Volume,
+  Volume
 } from "cdk8s-plus-33";
 import {
   KubeConfigMap,
@@ -196,6 +197,7 @@ const paperless = new AppPlus(app, "paperless-web", {
     new EnvFrom(undefined, undefined, oidcSecret),
   ],
   disableIngress: true,
+  deploymentStrategy: DeploymentStrategy.recreate(),
 });
 
 // Mount volumes with subPaths for data, media, export

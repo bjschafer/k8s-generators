@@ -37,6 +37,7 @@ export interface AppPlusVolume {
   readonly name: string;
   readonly mountPath: string;
   readonly enableBackups: boolean;
+  readonly subPath?: string;
 }
 
 export interface ConfigMapVolume {
@@ -80,6 +81,7 @@ export interface AppPlusProps {
   readonly backendHTTPS?: boolean;
   readonly service?: ServiceProps;
   readonly dns?: PodDnsProps;
+  readonly deploymentStrategy?: DeploymentStrategy;
 }
 
 export class AppPlus extends Chart {
@@ -175,7 +177,7 @@ export class AppPlus extends Chart {
         ).some((am) => am === PersistentVolumeAccessMode.READ_WRITE_ONCE),
       )
         ? DeploymentStrategy.recreate()
-        : undefined,
+        : props.deploymentStrategy,
       podMetadata: {
         labels: {
           "app.kubernetes.io/name": props.name,
@@ -219,7 +221,9 @@ export class AppPlus extends Chart {
 
     for (let i = 0; i < volumes.length; i++) {
       deploy.addVolume(volumes[i]);
-      deploy.containers[0].mount(props.volumes![i].mountPath, volumes[i]);
+      deploy.containers[0].mount(props.volumes![i].mountPath, volumes[i], {
+        subPath: props.volumes![i].subPath,
+      });
     }
 
     if (props.configmapMounts) {

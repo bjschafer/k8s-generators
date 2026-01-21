@@ -17,10 +17,7 @@ spec:
     matchLabels:
       cdk8s.io/metadata.addr: paperless-web-paperless-web-deployment-c8ac15e0
   strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
+    type: Recreate
   template:
     metadata:
       annotations:
