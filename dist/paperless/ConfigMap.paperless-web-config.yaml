@@ -6,10 +6,12 @@ metadata:
 data:
   PAPERLESS_APPS: allauth.socialaccount.providers.openid_connect
   PAPERLESS_CONSUMER_POLLING: "60"
+  PAPERLESS_DATA_DIR: /data/data
   PAPERLESS_DBHOST: prod.postgres.svc.cluster.local
   PAPERLESS_DBNAME: paperless
   PAPERLESS_DBUSER: paperless
   PAPERLESS_DISABLE_REGULAR_LOGIN: "true"
+  PAPERLESS_MEDIA_ROOT: /data/media
   PAPERLESS_OCR_LANGUAGE: eng
   PAPERLESS_OCR_USER_ARGS: '{"continue_on_soft_render_error": true}'
   PAPERLESS_REDIRECT_LOGIN_TO_SSO: "true"
@@ -21,3 +23,4 @@ data:
   PAPERLESS_URL: https://paperless.cmdcentral.xyz
   USERMAP_GID: "1000"
   USERMAP_UID: "1000"
+immutable: false

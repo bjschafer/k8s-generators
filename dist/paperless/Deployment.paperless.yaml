@@ -21,8 +21,7 @@ spec:
   template:
     metadata:
       annotations:
-        backup.velero.io/backup-volumes: storage
-        backup.velero.io/backup-volumes-excludes: ftp
+        backup.velero.io/backup-volumes: pvc-data
       labels:
         app.kubernetes.io/name: paperless
         cdk8s.io/metadata.addr: paperless-web-paperless-web-deployment-c8ac15e0
@@ -70,15 +69,8 @@ spec:
             readOnlyRootFilesystem: false
             runAsNonRoot: false
           volumeMounts:
-            - mountPath: /usr/src/paperless/data
+            - mountPath: /data
               name: pvc-data
-              subPath: data
-            - mountPath: /usr/src/paperless/media
-              name: pvc-data
-              subPath: media
-            - mountPath: /usr/src/paperless/export
-              name: pvc-data
-              subPath: export
             - mountPath: /usr/src/paperless/consume
               name: pvc-ftp
       dnsPolicy: ClusterFirst

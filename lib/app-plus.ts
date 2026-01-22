@@ -37,7 +37,6 @@ export interface AppPlusVolume {
   readonly name: string;
   readonly mountPath: string;
   readonly enableBackups: boolean;
-  readonly subPath?: string;
 }
 
 export interface ConfigMapVolume {
@@ -223,9 +222,7 @@ export class AppPlus extends Chart {
 
     for (let i = 0; i < volumes.length; i++) {
       deploy.addVolume(volumes[i]);
-      deploy.containers[0].mount(props.volumes![i].mountPath, volumes[i], {
-        subPath: props.volumes![i].subPath,
-      });
+      deploy.containers[0].mount(props.volumes![i].mountPath, volumes[i]);
     }
 
     if (props.configmapMounts) {
