@@ -9,7 +9,7 @@ import {
   KubeStatefulSet,
 } from "../imports/k8s";
 
-export type ValkeyVersion = "7" | "7-alpine";
+export type ValkeyVersion = "7" | "7-alpine" | "8" | "8-alpine";
 
 export interface ValkeyProps {
   name: string;

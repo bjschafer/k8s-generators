@@ -51,7 +51,7 @@ spec:
           commonUpdateSettings:
             allowTags: regexp:^[v]?[0-9]+\.[0-9]+\.[0-9]+$
             updateStrategy: semver
-          imageName: ghcr.io/valkey-io/valkey:7-alpine
+          imageName: ghcr.io/valkey-io/valkey:8-alpine
       namePattern: paperless
   namespace: argocd
   writeBackConfig:

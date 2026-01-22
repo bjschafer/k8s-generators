@@ -2,7 +2,6 @@ import { App, Chart, Duration, Size } from "cdk8s";
 import {
   ConfigMap,
   Cpu,
-  DeploymentStrategy,
   EnvFrom,
   EnvValue,
   PersistentVolumeAccessMode,
@@ -49,7 +48,7 @@ NewArgoApp(namespace, {
       {
         image: "ghcr.io/valkey-io/valkey",
         strategy: "semver",
-        versionConstraint: "7-alpine",
+        versionConstraint: "8-alpine",
         allowTags: "^[v]?[0-9]+\\.[0-9]+\\.[0-9]+$",
       },
     ],
@@ -60,7 +59,7 @@ NewArgoApp(namespace, {
 const valkey = new Valkey(app, "valkey", {
   name: "broker",
   namespace: namespace,
-  version: "7-alpine",
+  version: "8-alpine",
   password: "paperless",
   resources: {
     requests: {
