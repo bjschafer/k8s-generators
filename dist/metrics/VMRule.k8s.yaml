@@ -49,11 +49,10 @@ spec:
         - alert: KubernetesContainerOomKilled
           annotations:
             description: |-
-              Container {{ $labels.container }} in pod {{ $labels.namespace }}/{{ $labels.pod }} has been OOMKilled {{ $value }}.
-                VALUE = {{ $value }}
+              Container {{ $labels.container }} in pod {{ $labels.namespace }}/{{ $labels.pod }} has been OOMKilled.
                 LABELS = {{ $labels }}
-            summary: Kubernetes container oom killed (instance {{ $labels.instance }})
-          expr: sum by(namespace, pod) (kube_pod_container_status_last_terminated_reason{reason="OOMKilled"}) > 0
+            summary: Container {{ $labels.container }} in {{ $labels.namespace }}/{{ $labels.pod }} was OOMKilled
+          expr: kube_pod_container_status_last_terminated_reason{reason="OOMKilled"} > 0
           for: 0m
           labels:
             namespace: metrics

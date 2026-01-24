@@ -447,7 +447,7 @@ export function addAlerts(scope: Construct, id: string): void {
       },
       {
         alert: "HostOomKillDetected",
-        expr: "increase(node_vmstat_oom_kill[1m]) > 0",
+        expr: 'increase(node_vmstat_oom_kill{job!="node-exporter"}[1m]) > 0',
         labels: {
           priority: PRIORITY.NORMAL,
           ...SEND_TO_PUSHOVER,
@@ -535,7 +535,7 @@ export function addAlerts(scope: Construct, id: string): void {
       },
       {
         alert: "KubernetesContainerOomKilled",
-        expr: 'sum by(namespace, pod) (kube_pod_container_status_last_terminated_reason{reason="OOMKilled"}) > 0',
+        expr: 'kube_pod_container_status_last_terminated_reason{reason="OOMKilled"} > 0',
         for: "0m",
         labels: {
           priority: PRIORITY.NORMAL,
@@ -543,9 +543,9 @@ export function addAlerts(scope: Construct, id: string): void {
         },
         annotations: {
           summary:
-            "Kubernetes container oom killed (instance {{ $labels.instance }})",
+            "Container {{ $labels.container }} in {{ $labels.namespace }}/{{ $labels.pod }} was OOMKilled",
           description:
-            "Container {{ $labels.container }} in pod {{ $labels.namespace }}/{{ $labels.pod }} has been OOMKilled {{ $value }}.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
+            "Container {{ $labels.container }} in pod {{ $labels.namespace }}/{{ $labels.pod }} has been OOMKilled.\n  LABELS = {{ $labels }}",
         },
       },
       {
