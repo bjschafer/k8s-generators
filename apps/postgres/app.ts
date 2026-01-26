@@ -194,6 +194,7 @@ class ProdPostgres extends Chart {
         namespace: namespace,
       },
       spec: {
+        retentionPolicy: "30d",
         configuration: {
           endpointUrl: "https://garage.cmdcentral.xyz",
           destinationPath: "s3://postgres/k8s/prod-pg17",
@@ -420,6 +421,7 @@ class VectorPostgres extends Chart {
         namespace: namespace,
       },
       spec: {
+        retentionPolicy: "30d",
         configuration: {
           endpointUrl: "https://garage.cmdcentral.xyz",
           destinationPath: `s3://postgres/k8s/${name}`,

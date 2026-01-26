@@ -22,3 +22,4 @@ spec:
       requests:
         cpu: "1"
         memory: 512Mi
+  retentionPolicy: 30d
