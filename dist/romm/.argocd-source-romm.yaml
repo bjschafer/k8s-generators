@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - ghcr.io/rommapp/romm:latest@sha256:9e5d7a85be7aa11088f1a82a62367ea8e70b25a23017cd9ffb4481f19ed81b83
+  - ghcr.io/rommapp/romm:latest@sha256:7f8b04e2e7652ae3121f19e712373bc021530b3c500e0c077c69a9cfe431395c
