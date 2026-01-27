@@ -21,7 +21,7 @@ spec:
     - isWALArchiver: true
       name: barman-cloud.cloudnative-pg.io
       parameters:
-        barmanObjectName: prod
+        barmanObjectName: immich-pg16
   postgresql:
     parameters:
       max_slot_wal_keep_size: 1GB

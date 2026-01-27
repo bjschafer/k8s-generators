@@ -3,28 +3,28 @@ import { IntOrString, KubeService } from "cdk8s-plus-33/lib/imports/k8s";
 import { Construct } from "constructs";
 import { basename } from "path";
 import {
-  ObjectStore,
-  ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests,
+    ObjectStore,
+    ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests,
 } from "../../imports/barmancloud.cnpg.io";
 import { Quantity } from "../../imports/k8s";
 import { VmPodScrape } from "../../imports/operator.victoriametrics.com";
 import {
-  Cluster,
-  ClusterSpec,
-  ClusterSpecBootstrapInitdbImportType,
-  ClusterSpecManagedRoles,
-  ImageCatalog,
-  Pooler,
-  PoolerSpecPgbouncerPoolMode,
-  PoolerSpecType,
-  ScheduledBackup,
-  ScheduledBackupSpecBackupOwnerReference,
-  ScheduledBackupSpecMethod,
+    Cluster,
+    ClusterSpec,
+    ClusterSpecBootstrapInitdbImportType,
+    ClusterSpecManagedRoles,
+    ImageCatalog,
+    Pooler,
+    PoolerSpecPgbouncerPoolMode,
+    PoolerSpecType,
+    ScheduledBackup,
+    ScheduledBackupSpecBackupOwnerReference,
+    ScheduledBackupSpecMethod,
 } from "../../imports/postgresql.cnpg.io";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import {
-  DEFAULT_APP_PROPS,
-  EXTERNAL_DNS_ANNOTATION_KEY,
+    DEFAULT_APP_PROPS,
+    EXTERNAL_DNS_ANNOTATION_KEY,
 } from "../../lib/consts";
 import { BitwardenSecret } from "../../lib/secrets";
 import { StorageClass } from "../../lib/volume";
@@ -407,7 +407,7 @@ class VectorPostgres extends Chart {
             name: barmanPluginName,
             isWalArchiver: true,
             parameters: {
-              barmanObjectName: "prod",
+              barmanObjectName: "immich-pg16",
             },
           },
         ],
@@ -506,9 +506,9 @@ export const PROD_CLUSTER = prod_pg_17;
 
 // Import database provisioning functions
 import {
-  createDatabases,
-  createManagedRoles,
-  createPostgresSecrets,
+    createDatabases,
+    createManagedRoles,
+    createPostgresSecrets,
 } from "./database-provisioning";
 
 // Create secrets for all database credentials in postgres namespace
