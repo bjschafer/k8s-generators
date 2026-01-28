@@ -4,16 +4,39 @@
  * This is the ONLY file you need to edit when adding a new database.
  * Just add an entry to the DATABASES array below.
  *
- * Example:
+ * Example with Bitwarden password:
  * {
  *   name: "myapp",                      // Database and role name
  *   comment: "MyApp database owner",    // Human-readable description
- *   bitwardenPasswordId: "bw-item-id",  // Bitwarden item ID for password (optional)
+ *   bitwardenPasswordId: "bw-item-id",  // Bitwarden item ID for password
  *   appNamespace: "myapp",              // Your app's namespace (optional)
+ * }
+ *
+ * Example with auto-generated password (no Bitwarden required):
+ * {
+ *   name: "myapp",                      // Database and role name
+ *   comment: "MyApp database owner",    // Human-readable description
+ *   appNamespace: "myapp",              // Your app's namespace (optional)
+ *   // Password will be auto-generated when bitwardenPasswordId is omitted
  * }
  */
 
 import { ClusterSpecManagedRoles } from "../../imports/postgresql.cnpg.io";
+
+/**
+ * Password generation configuration for auto-generated passwords.
+ * Used when bitwardenPasswordId is not set.
+ */
+export interface PasswordGenerationConfig {
+  /** Length of password. Default: 32 */
+  length?: number;
+  /** Number of digit characters. Default: 6 */
+  digits?: number;
+  /** Number of symbol characters. Default: 4 */
+  symbols?: number;
+  /** Symbol characters to use. Default: "-_$@" (safe for most apps) */
+  symbolCharacters?: string;
+}
 
 /**
  * Configuration for a managed database and its owner role
@@ -29,6 +52,8 @@ export interface DatabaseConfig {
   appNamespace?: string;
   /** Additional role configuration */
   roleConfig?: Partial<ClusterSpecManagedRoles>;
+  /** Password generation config when not using Bitwarden. Uses defaults if omitted. */
+  passwordGeneration?: PasswordGenerationConfig;
 }
 
 /**

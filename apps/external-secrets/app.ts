@@ -14,6 +14,7 @@ import { ENABLE_SERVERSIDE_APPLY, NewArgoApp } from "../../lib/argo";
 import {
   ClusterSecretStore,
   ClusterSecretStoreSpecProviderBitwardensecretsmanagerCaProviderType,
+  ClusterSecretStoreSpecProviderKubernetesServerCaProviderType,
 } from "../../imports/external-secrets.io";
 
 const namespace = basename(__dirname);
@@ -219,6 +220,37 @@ class EsoConfig extends Chart {
               namespace: namespace,
               name: caSecretName,
               key: "ca.crt",
+            },
+          },
+        },
+      },
+    });
+
+    // Kubernetes secret store for cross-namespace secret access
+    // Used to copy generated database passwords from postgres namespace to app namespaces
+    new ClusterSecretStore(this, "k8s-secret-store", {
+      metadata: {
+        name: "kubernetes",
+      },
+      spec: {
+        provider: {
+          kubernetes: {
+            // Read secrets from the postgres namespace
+            remoteNamespace: "postgres",
+            auth: {
+              serviceAccount: {
+                name: "external-secrets",
+                namespace: namespace,
+              },
+            },
+            server: {
+              // Use the cluster CA from the standard ConfigMap
+              caProvider: {
+                type: ClusterSecretStoreSpecProviderKubernetesServerCaProviderType.CONFIG_MAP,
+                name: "kube-root-ca.crt",
+                namespace: "kube-system",
+                key: "ca.crt",
+              },
             },
           },
         },
