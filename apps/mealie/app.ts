@@ -84,7 +84,7 @@ new AppPlus(app, `${name}-app`, {
     OIDC_AUTH_ENABLED: EnvValue.fromValue("true"),
     OIDC_SIGNUP_ENABLED: EnvValue.fromValue("true"),
     OIDC_CONFIGURATION_URL: EnvValue.fromValue(
-      "https://login.cmdcentral.xyz/application/o/mealie/.well-known/openid-configuration",
+      "https://login.cmdcentral.xyz/application/o/recipes/.well-known/openid-configuration",
     ),
     OIDC_CLIENT_ID: EnvValue.fromValue(
       "rjTPdiqrJJrjrFYasLpcZG9gNfU0xoaqLdNZJXX9",

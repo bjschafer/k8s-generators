@@ -50,7 +50,7 @@ spec:
             - name: OIDC_SIGNUP_ENABLED
               value: "true"
             - name: OIDC_CONFIGURATION_URL
-              value: https://login.cmdcentral.xyz/application/o/mealie/.well-known/openid-configuration
+              value: https://login.cmdcentral.xyz/application/o/recipes/.well-known/openid-configuration
             - name: OIDC_CLIENT_ID
               value: rjTPdiqrJJrjrFYasLpcZG9gNfU0xoaqLdNZJXX9
             - name: OIDC_AUTO_REDIRECT
