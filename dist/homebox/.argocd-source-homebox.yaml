@@ -1,4 +1,4 @@
 kustomize:
   images:
   - ghcr.io/hay-kot/homebox@sha256:b1fbca6fc1ad2bd3634d13056d1bc0242cf92e9bad4ca21ce57589be3fe4987e
-  - ghcr.io/sysadminsmedia/homebox:latest@sha256:b6c1362ab0450ca8fc1a347c13614a0b4f5674e1ecfa9a57a8c456612921842b
+  - ghcr.io/sysadminsmedia/homebox:latest@sha256:eabc0de4dbbcfb59289397d88ad80f768abf2e08c03f8c197be35ba953a10826
