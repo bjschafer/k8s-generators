@@ -51,7 +51,7 @@ new AppPlus(app, name, {
     },
     memory: {
       request: Size.mebibytes(64),
-      limit: Size.mebibytes(256),
+      limit: Size.mebibytes(512),
     },
   },
   extraIngressHosts: ["inventory.cmdcentral.xyz"],
