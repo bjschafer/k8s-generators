@@ -84,6 +84,7 @@ class Paperless extends Chart {
       },
       data: {
         PAPERLESS_CONSUMER_POLLING: "60",
+        PAPERLESS_CONSUMER_RECURSIVE: "true",
         PAPERLESS_DBHOST: "prod.postgres.svc.cluster.local",
         PAPERLESS_DBNAME: "paperless",
         PAPERLESS_DBUSER: "paperless",
