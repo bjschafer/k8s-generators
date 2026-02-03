@@ -579,7 +579,7 @@ export function addAlerts(scope: Construct, id: string): void {
       {
         alert: "KubernetesPersistentvolumeError",
         expr: 'kube_persistentvolume_status_phase{phase=~"Failed|Pending", job="kube-state-metrics"} > 0',
-        for: "0m",
+        for: "15m",
         labels: {
           priority: PRIORITY.HIGH,
         },

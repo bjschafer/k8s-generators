@@ -89,7 +89,7 @@ spec:
                 LABELS = {{ $labels }}
             summary: Kubernetes PersistentVolume error (instance {{ $labels.instance }})
           expr: kube_persistentvolume_status_phase{phase=~"Failed|Pending", job="kube-state-metrics"} > 0
-          for: 0m
+          for: 15m
           labels:
             namespace: metrics
             priority: "1"
