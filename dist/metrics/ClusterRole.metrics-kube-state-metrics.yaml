@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kube-state-metrics
     app.kubernetes.io/part-of: kube-state-metrics
-    app.kubernetes.io/version: 2.17.0
-    helm.sh/chart: kube-state-metrics-6.4.2
+    app.kubernetes.io/version: 2.18.0
+    helm.sh/chart: kube-state-metrics-7.1.0
   name: metrics-kube-state-metrics
 rules:
   - apiGroups:
@@ -47,9 +47,9 @@ rules:
       - list
       - watch
   - apiGroups:
-      - ""
+      - discovery.k8s.io
     resources:
-      - endpoints
+      - endpointslices
     verbs:
       - list
       - watch
