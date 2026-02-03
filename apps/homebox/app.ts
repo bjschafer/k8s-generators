@@ -59,6 +59,7 @@ new AppPlus(app, name, {
     HBOX_OPTIONS_ALLOW_REGISTRATION: EnvValue.fromValue("false"),
     TZ: EnvValue.fromValue("America/Chicago"),
     HBOX_OPTIONS_TRUST_PROXY: EnvValue.fromValue("true"),
+    HBOX_WEB_MAX_UPLOAD_SIZE: EnvValue.fromValue("50"), // MB
 
     // database
     HBOX_DATABASE_DRIVER: EnvValue.fromValue("postgres"),

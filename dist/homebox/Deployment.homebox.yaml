@@ -33,6 +33,8 @@ spec:
               value: America/Chicago
             - name: HBOX_OPTIONS_TRUST_PROXY
               value: "true"
+            - name: HBOX_WEB_MAX_UPLOAD_SIZE
+              value: "50"
             - name: HBOX_DATABASE_DRIVER
               value: postgres
             - name: HBOX_DATABASE_HOST
