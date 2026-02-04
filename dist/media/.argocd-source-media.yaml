@@ -3,7 +3,7 @@ kustomize:
   - ghcr.io/navidrome/navidrome:latest@sha256:5d0f6ab343397c043c7063db14ae10e4e3980e54ae7388031cbce47e84af6657
   - ghcr.io/linuxserver/sonarr:latest@sha256:02b4d538d351d6e35882a021c08e8600fe95d28860fb1dd724b597166e7221ca
   - ghcr.io/linuxserver/radarr:latest@sha256:ba2693dd704b84eb0b404d40b3902bd3e62a1768dc5ee0d89b1f1d7cd51a66eb
-  - ghcr.io/linuxserver/lidarr:latest@sha256:fbc96b5d7eab74230feb5bcbdb29fcbfaa6d0afa7a2cb2fe28171209ea9bc956
+  - ghcr.io/linuxserver/lidarr:latest@sha256:6fba990e5b460ea53a3f91ebac823a3471f2254669ea96036d9411fedf0f65be
   - lscr.io/linuxserver/readarr:latest@dummy
   - ghcr.io/linuxserver/sabnzbd:latest@sha256:a4f65481b436424d90c53f0975f3d5cc6cabb95f5c00624b78c370dddf9b83ad
   - ghcr.io/linuxserver/prowlarr:latest@sha256:d3e9307b320b6772749a2cf8fc2712e9e824c4930b034680ad4d08a9e2f25884
