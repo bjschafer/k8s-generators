@@ -461,7 +461,7 @@ export function addAlerts(scope: Construct, id: string): void {
       {
         alert: "HostNetworkInterfaceSaturated",
         expr: '(\n    rate(\n        node_network_receive_bytes_total{device!~"tap.*",job!="vmhost"}[1m]\n    )\n    +\n    rate(\n        node_network_transmit_bytes_total{device!~"tap.*",job!="vmhost"}[1m]\n    )\n) / node_network_speed_bytes{device!~"tap.*",job!="vmhost"} > 0.8 < 10000',
-        for: "1m",
+        for: "10m",
         labels: {
           priority: PRIORITY.LOW,
           ...SEND_TO_PUSHOVER,

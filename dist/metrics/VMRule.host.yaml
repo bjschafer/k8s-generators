@@ -209,7 +209,7 @@ spec:
                     node_network_transmit_bytes_total{device!~"tap.*",job!="vmhost"}[1m]
                 )
             ) / node_network_speed_bytes{device!~"tap.*",job!="vmhost"} > 0.8 < 10000
-          for: 1m
+          for: 10m
           labels:
             namespace: metrics
             priority: "-1"
