@@ -54,6 +54,14 @@ spec:
                 attach_metadata:
                   description: AttachMetadata configures metadata attaching from service discovery
                   properties:
+                    namespace:
+                      description: >-
+                        Namespace instructs vmagent to add namespace specific
+                        metadata from service discovery
+
+                        Valid for roles: pod, service, endpoints, endpointslice,
+                        ingress.
+                      type: boolean
                     node:
                       description: >-
                         Node instructs vmagent to add node specific metadata
@@ -91,6 +99,14 @@ spec:
                       attach_metadata:
                         description: AttachMetadata configures metadata attaching from service discovery
                         properties:
+                          namespace:
+                            description: >-
+                              Namespace instructs vmagent to add namespace
+                              specific metadata from service discovery
+
+                              Valid for roles: pod, service, endpoints,
+                              endpointslice, ingress.
+                            type: boolean
                           node:
                             description: >-
                               Node instructs vmagent to add node specific
@@ -303,7 +319,7 @@ spec:
                               description: |-
                                 UnderScoreSourceLabels - additional form of source labels source_labels
                                 for compatibility with original relabel config.
-                                if set  both sourceLabels and source_labels, sourceLabels has priority.
+                                if set both sourceLabels and source_labels, sourceLabels has priority.
                                 for details https://github.com/VictoriaMetrics/operator/issues/131
                               items:
                                 type: string
@@ -324,7 +340,7 @@ spec:
                               description: |-
                                 UnderScoreTargetLabel - additional form of target label - target_label
                                 for compatibility with original relabel config.
-                                if set  both targetLabel and target_label, targetLabel has priority.
+                                if set both targetLabel and target_label, targetLabel has priority.
                                 for details https://github.com/VictoriaMetrics/operator/issues/131
                               type: string
                             targetLabel:
@@ -515,7 +531,7 @@ spec:
                               description: |-
                                 UnderScoreSourceLabels - additional form of source labels source_labels
                                 for compatibility with original relabel config.
-                                if set  both sourceLabels and source_labels, sourceLabels has priority.
+                                if set both sourceLabels and source_labels, sourceLabels has priority.
                                 for details https://github.com/VictoriaMetrics/operator/issues/131
                               items:
                                 type: string
@@ -536,7 +552,7 @@ spec:
                               description: |-
                                 UnderScoreTargetLabel - additional form of target label - target_label
                                 for compatibility with original relabel config.
-                                if set  both targetLabel and target_label, targetLabel has priority.
+                                if set both targetLabel and target_label, targetLabel has priority.
                                 for details https://github.com/VictoriaMetrics/operator/issues/131
                               type: string
                             targetLabel:

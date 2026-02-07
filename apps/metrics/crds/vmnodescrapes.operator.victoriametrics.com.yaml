@@ -254,7 +254,7 @@ spec:
 
                           for compatibility with original relabel config.
 
-                          if set  both sourceLabels and source_labels,
+                          if set both sourceLabels and source_labels,
                           sourceLabels has priority.
 
                           for details
@@ -281,7 +281,7 @@ spec:
 
                           for compatibility with original relabel config.
 
-                          if set  both targetLabel and target_label, targetLabel
+                          if set both targetLabel and target_label, targetLabel
                           has priority.
 
                           for details
@@ -471,7 +471,7 @@ spec:
 
                           for compatibility with original relabel config.
 
-                          if set  both sourceLabels and source_labels,
+                          if set both sourceLabels and source_labels,
                           sourceLabels has priority.
 
                           for details
@@ -498,7 +498,7 @@ spec:
 
                           for compatibility with original relabel config.
 
-                          if set  both targetLabel and target_label, targetLabel
+                          if set both targetLabel and target_label, targetLabel
                           has priority.
 
                           for details

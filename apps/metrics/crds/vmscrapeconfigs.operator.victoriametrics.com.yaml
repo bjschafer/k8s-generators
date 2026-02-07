@@ -1753,6 +1753,14 @@ spec:
                       attach_metadata:
                         description: AttachMetadata configures metadata attaching from service discovery
                         properties:
+                          namespace:
+                            description: >-
+                              Namespace instructs vmagent to add namespace
+                              specific metadata from service discovery
+
+                              Valid for roles: pod, service, endpoints,
+                              endpointslice, ingress.
+                            type: boolean
                           node:
                             description: >-
                               Node instructs vmagent to add node specific
@@ -2087,6 +2095,13 @@ spec:
                         type: string
                       role:
                         description: Role of the Kubernetes entities that should be discovered.
+                        enum:
+                          - node
+                          - pod
+                          - service
+                          - endpoints
+                          - endpointslice
+                          - ingress
                         type: string
                       selectors:
                         description: Selector to select objects.
@@ -2098,6 +2113,13 @@ spec:
                             label:
                               type: string
                             role:
+                              enum:
+                                - node
+                                - pod
+                                - service
+                                - endpoints
+                                - endpointslice
+                                - ingress
                               type: string
                           required:
                             - role
@@ -2301,7 +2323,7 @@ spec:
 
                           for compatibility with original relabel config.
 
-                          if set  both sourceLabels and source_labels,
+                          if set both sourceLabels and source_labels,
                           sourceLabels has priority.
 
                           for details
@@ -2328,7 +2350,7 @@ spec:
 
                           for compatibility with original relabel config.
 
-                          if set  both targetLabel and target_label, targetLabel
+                          if set both targetLabel and target_label, targetLabel
                           has priority.
 
                           for details
@@ -2819,7 +2841,7 @@ spec:
 
                           for compatibility with original relabel config.
 
-                          if set  both sourceLabels and source_labels,
+                          if set both sourceLabels and source_labels,
                           sourceLabels has priority.
 
                           for details
@@ -2846,7 +2868,7 @@ spec:
 
                           for compatibility with original relabel config.
 
-                          if set  both targetLabel and target_label, targetLabel
+                          if set both targetLabel and target_label, targetLabel
                           has priority.
 
                           for details
