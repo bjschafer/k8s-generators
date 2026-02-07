@@ -11,7 +11,7 @@ import {
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
-const version = "10.5.15";
+const version = "11.0.1";
 
 NewArgoApp(name, {
   namespace: namespace,
@@ -23,7 +23,7 @@ class Grafana extends Chart {
 
     new Helm(this, "grafana", {
       chart: "grafana",
-      repo: "https://grafana.github.io/helm-charts",
+      repo: "https://grafana-community.github.io/helm-charts",
       version: version,
       releaseName: name,
       namespace: namespace,
