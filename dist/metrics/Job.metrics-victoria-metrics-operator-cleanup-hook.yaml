@@ -32,7 +32,7 @@ spec:
             - --ignore-not-found=true
           command:
             - kubectl
-          image: rancher/kubectl:v1.34.0
+          image: rancher/kubectl:v1.35.0
           imagePullPolicy: IfNotPresent
           name: kubectl
           resources:

@@ -1,7 +1,0 @@
-resources:
-  - Deployment.netboot.yaml
-  - Ingress.netboot.yaml
-  - PersistentVolumeClaim.assets.yaml
-  - PersistentVolumeClaim.config.yaml
-  - Service.netboot-tftp.yaml
-  - Service.netboot.yaml
