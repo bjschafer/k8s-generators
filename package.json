@@ -5,19 +5,7 @@
     "types": "main.ts",
     "license": "Apache-2.0",
     "private": true,
-    "scripts": {
-        "import": "cdk8s import",
-        "synth": "for file in apps/*/*.js; do npx node \"${file}\"; done",
-        "compile": "tsc --build",
-        "watch": "tsc --build -w",
-        "test": "jest",
-        "upgrade": "ncu -u && npm install",
-        "lint": "npx eslint \"**/*.ts\"",
-        "fmt": "npx prettier --check --write \"**/*.ts\"",
-        "clean": "find dist -type f \\! \\( -name '.argocd-source-*.yaml' -o -name 'sealedsecret.*.yaml' \\) -delete ; find dist -type d -empty -delete",
-        "fullbuild": "yarn run clean && yarn run fmt && yarn run lint && yarn run compile && yarn run synth",
-        "build": "yarn run clean && yarn run compile && yarn run synth"
-    },
+    "scripts": {},
     "dependencies": {
         "@typescript-eslint/eslint-plugin": "^8.54.0",
         "@typescript-eslint/parser": "^8.54.0",
