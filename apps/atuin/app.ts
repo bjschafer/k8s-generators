@@ -42,7 +42,7 @@ new AppPlus(app, "atuin", {
   labels: {
     [WellKnownLabels.Instance]: name,
   },
-  args: ["server", "start"],
+  args: ["start"],
   resources: {
     cpu: {
       request: Cpu.millis(5),

@@ -29,7 +29,6 @@ spec:
       automountServiceAccountToken: false
       containers:
         - args:
-            - server
             - start
           env:
             - name: ATUIN_HOST
