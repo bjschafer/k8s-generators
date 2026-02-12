@@ -20,3 +20,24 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+---
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  labels:
+    app.kubernetes.io/name: authentik
+  name: authentik-updater
+  namespace: argocd
+spec:
+  applicationRefs:
+    - images:
+        - alias: server
+          commonUpdateSettings:
+            updateStrategy: semver
+          imageName: ghcr.io/goauthentik/server:2025.12.x
+      namePattern: authentik
+  namespace: argocd
+  writeBackConfig:
+    gitConfig:
+      branch: main
+    method: git

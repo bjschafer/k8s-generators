@@ -28,6 +28,15 @@ const version = "2025.12.4";
 
 NewArgoApp(namespace, {
   namespace: namespace,
+  autoUpdate: {
+    images: [
+      {
+        image: `ghcr.io/goauthentik/server`,
+        strategy: "semver",
+        versionConstraint: `${version.slice(0, version.lastIndexOf("."))}.x`,
+      },
+    ],
+  },
 });
 
 class AuthentikRBAC extends Chart {
