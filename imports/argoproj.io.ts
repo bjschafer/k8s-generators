@@ -1648,11 +1648,39 @@ export function toJson_ApplicationSpecSourcePlugin(obj: ApplicationSpecSourcePlu
  */
 export interface ApplicationSpecSourceHydratorDrySource {
   /**
+   * Directory specifies path/directory specific options
+   *
+   * @schema ApplicationSpecSourceHydratorDrySource#directory
+   */
+  readonly directory?: ApplicationSpecSourceHydratorDrySourceDirectory;
+
+  /**
+   * Helm specifies helm specific options
+   *
+   * @schema ApplicationSpecSourceHydratorDrySource#helm
+   */
+  readonly helm?: ApplicationSpecSourceHydratorDrySourceHelm;
+
+  /**
+   * Kustomize specifies kustomize specific options
+   *
+   * @schema ApplicationSpecSourceHydratorDrySource#kustomize
+   */
+  readonly kustomize?: ApplicationSpecSourceHydratorDrySourceKustomize;
+
+  /**
    * Path is a directory path within the Git repository where the manifests are located
    *
    * @schema ApplicationSpecSourceHydratorDrySource#path
    */
   readonly path: string;
+
+  /**
+   * Plugin specifies config management plugin specific options
+   *
+   * @schema ApplicationSpecSourceHydratorDrySource#plugin
+   */
+  readonly plugin?: ApplicationSpecSourceHydratorDrySourcePlugin;
 
   /**
    * RepoURL is the URL to the git repository that contains the application manifests
@@ -1676,7 +1704,11 @@ export interface ApplicationSpecSourceHydratorDrySource {
 export function toJson_ApplicationSpecSourceHydratorDrySource(obj: ApplicationSpecSourceHydratorDrySource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'directory': toJson_ApplicationSpecSourceHydratorDrySourceDirectory(obj.directory),
+    'helm': toJson_ApplicationSpecSourceHydratorDrySourceHelm(obj.helm),
+    'kustomize': toJson_ApplicationSpecSourceHydratorDrySourceKustomize(obj.kustomize),
     'path': obj.path,
+    'plugin': toJson_ApplicationSpecSourceHydratorDrySourcePlugin(obj.plugin),
     'repoURL': obj.repoUrl,
     'targetRevision': obj.targetRevision,
   };
@@ -3428,6 +3460,406 @@ export function toJson_ApplicationSpecSourcePluginParameters(obj: ApplicationSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Directory specifies path/directory specific options
+ *
+ * @schema ApplicationSpecSourceHydratorDrySourceDirectory
+ */
+export interface ApplicationSpecSourceHydratorDrySourceDirectory {
+  /**
+   * Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceDirectory#exclude
+   */
+  readonly exclude?: string;
+
+  /**
+   * Include contains a glob pattern to match paths against that should be explicitly included during manifest generation
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceDirectory#include
+   */
+  readonly include?: string;
+
+  /**
+   * Jsonnet holds options specific to Jsonnet
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceDirectory#jsonnet
+   */
+  readonly jsonnet?: ApplicationSpecSourceHydratorDrySourceDirectoryJsonnet;
+
+  /**
+   * Recurse specifies whether to scan a directory recursively for manifests
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceDirectory#recurse
+   */
+  readonly recurse?: boolean;
+}
+
+/**
+ * Converts an object of type 'ApplicationSpecSourceHydratorDrySourceDirectory' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ApplicationSpecSourceHydratorDrySourceDirectory(obj: ApplicationSpecSourceHydratorDrySourceDirectory | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'exclude': obj.exclude,
+    'include': obj.include,
+    'jsonnet': toJson_ApplicationSpecSourceHydratorDrySourceDirectoryJsonnet(obj.jsonnet),
+    'recurse': obj.recurse,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Helm specifies helm specific options
+ *
+ * @schema ApplicationSpecSourceHydratorDrySourceHelm
+ */
+export interface ApplicationSpecSourceHydratorDrySourceHelm {
+  /**
+   * APIVersions specifies the Kubernetes resource API versions to pass to Helm when templating manifests. By default,
+   * Argo CD uses the API versions of the target cluster. The format is [group/]version/kind.
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceHelm#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
+   * FileParameters are file parameters to the helm template
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceHelm#fileParameters
+   */
+  readonly fileParameters?: ApplicationSpecSourceHydratorDrySourceHelmFileParameters[];
+
+  /**
+   * IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceHelm#ignoreMissingValueFiles
+   */
+  readonly ignoreMissingValueFiles?: boolean;
+
+  /**
+   * KubeVersion specifies the Kubernetes API version to pass to Helm when templating manifests. By default, Argo CD
+   * uses the Kubernetes version of the target cluster.
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceHelm#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace.
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceHelm#namespace
+   */
+  readonly namespace?: string;
+
+  /**
+   * Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceHelm#parameters
+   */
+  readonly parameters?: ApplicationSpecSourceHydratorDrySourceHelmParameters[];
+
+  /**
+   * PassCredentials pass credentials to all domains (Helm's --pass-credentials)
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceHelm#passCredentials
+   */
+  readonly passCredentials?: boolean;
+
+  /**
+   * ReleaseName is the Helm release name to use. If omitted it will use the application name
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceHelm#releaseName
+   */
+  readonly releaseName?: string;
+
+  /**
+   * SkipCrds skips custom resource definition installation step (Helm's --skip-crds)
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceHelm#skipCrds
+   */
+  readonly skipCrds?: boolean;
+
+  /**
+   * SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceHelm#skipSchemaValidation
+   */
+  readonly skipSchemaValidation?: boolean;
+
+  /**
+   * SkipTests skips test manifest installation step (Helm's --skip-tests).
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceHelm#skipTests
+   */
+  readonly skipTests?: boolean;
+
+  /**
+   * ValuesFiles is a list of Helm value files to use when generating a template
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceHelm#valueFiles
+   */
+  readonly valueFiles?: string[];
+
+  /**
+   * Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other.
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceHelm#values
+   */
+  readonly values?: string;
+
+  /**
+   * ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values.
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceHelm#valuesObject
+   */
+  readonly valuesObject?: any;
+
+  /**
+   * Version is the Helm version to use for templating ("3")
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceHelm#version
+   */
+  readonly version?: string;
+}
+
+/**
+ * Converts an object of type 'ApplicationSpecSourceHydratorDrySourceHelm' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ApplicationSpecSourceHydratorDrySourceHelm(obj: ApplicationSpecSourceHydratorDrySourceHelm | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
+    'fileParameters': obj.fileParameters?.map(y => toJson_ApplicationSpecSourceHydratorDrySourceHelmFileParameters(y)),
+    'ignoreMissingValueFiles': obj.ignoreMissingValueFiles,
+    'kubeVersion': obj.kubeVersion,
+    'namespace': obj.namespace,
+    'parameters': obj.parameters?.map(y => toJson_ApplicationSpecSourceHydratorDrySourceHelmParameters(y)),
+    'passCredentials': obj.passCredentials,
+    'releaseName': obj.releaseName,
+    'skipCrds': obj.skipCrds,
+    'skipSchemaValidation': obj.skipSchemaValidation,
+    'skipTests': obj.skipTests,
+    'valueFiles': obj.valueFiles?.map(y => y),
+    'values': obj.values,
+    'valuesObject': obj.valuesObject,
+    'version': obj.version,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Kustomize specifies kustomize specific options
+ *
+ * @schema ApplicationSpecSourceHydratorDrySourceKustomize
+ */
+export interface ApplicationSpecSourceHydratorDrySourceKustomize {
+  /**
+   * APIVersions specifies the Kubernetes resource API versions to pass to Helm when templating manifests. By default,
+   * Argo CD uses the API versions of the target cluster. The format is [group/]version/kind.
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomize#apiVersions
+   */
+  readonly apiVersions?: string[];
+
+  /**
+   * CommonAnnotations is a list of additional annotations to add to rendered manifests
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomize#commonAnnotations
+   */
+  readonly commonAnnotations?: { [key: string]: string };
+
+  /**
+   * CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomize#commonAnnotationsEnvsubst
+   */
+  readonly commonAnnotationsEnvsubst?: boolean;
+
+  /**
+   * CommonLabels is a list of additional labels to add to rendered manifests
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomize#commonLabels
+   */
+  readonly commonLabels?: { [key: string]: string };
+
+  /**
+   * Components specifies a list of kustomize components to add to the kustomization before building
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomize#components
+   */
+  readonly components?: string[];
+
+  /**
+   * ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomize#forceCommonAnnotations
+   */
+  readonly forceCommonAnnotations?: boolean;
+
+  /**
+   * ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomize#forceCommonLabels
+   */
+  readonly forceCommonLabels?: boolean;
+
+  /**
+   * IgnoreMissingComponents prevents kustomize from failing when components do not exist locally by not appending them to kustomization file
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomize#ignoreMissingComponents
+   */
+  readonly ignoreMissingComponents?: boolean;
+
+  /**
+   * Images is a list of Kustomize image override specifications
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomize#images
+   */
+  readonly images?: string[];
+
+  /**
+   * KubeVersion specifies the Kubernetes API version to pass to Helm when templating manifests. By default, Argo CD
+   * uses the Kubernetes version of the target cluster.
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomize#kubeVersion
+   */
+  readonly kubeVersion?: string;
+
+  /**
+   * LabelIncludeTemplates specifies whether to apply common labels to resource templates or not
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomize#labelIncludeTemplates
+   */
+  readonly labelIncludeTemplates?: boolean;
+
+  /**
+   * LabelWithoutSelector specifies whether to apply common labels to resource selectors or not
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomize#labelWithoutSelector
+   */
+  readonly labelWithoutSelector?: boolean;
+
+  /**
+   * NamePrefix is a prefix appended to resources for Kustomize apps
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomize#namePrefix
+   */
+  readonly namePrefix?: string;
+
+  /**
+   * NameSuffix is a suffix appended to resources for Kustomize apps
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomize#nameSuffix
+   */
+  readonly nameSuffix?: string;
+
+  /**
+   * Namespace sets the namespace that Kustomize adds to all resources
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomize#namespace
+   */
+  readonly namespace?: string;
+
+  /**
+   * Patches is a list of Kustomize patches
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomize#patches
+   */
+  readonly patches?: ApplicationSpecSourceHydratorDrySourceKustomizePatches[];
+
+  /**
+   * Replicas is a list of Kustomize Replicas override specifications
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomize#replicas
+   */
+  readonly replicas?: ApplicationSpecSourceHydratorDrySourceKustomizeReplicas[];
+
+  /**
+   * Version controls which version of Kustomize to use for rendering manifests
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomize#version
+   */
+  readonly version?: string;
+}
+
+/**
+ * Converts an object of type 'ApplicationSpecSourceHydratorDrySourceKustomize' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ApplicationSpecSourceHydratorDrySourceKustomize(obj: ApplicationSpecSourceHydratorDrySourceKustomize | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apiVersions': obj.apiVersions?.map(y => y),
+    'commonAnnotations': ((obj.commonAnnotations) === undefined) ? undefined : (Object.entries(obj.commonAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'commonAnnotationsEnvsubst': obj.commonAnnotationsEnvsubst,
+    'commonLabels': ((obj.commonLabels) === undefined) ? undefined : (Object.entries(obj.commonLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'components': obj.components?.map(y => y),
+    'forceCommonAnnotations': obj.forceCommonAnnotations,
+    'forceCommonLabels': obj.forceCommonLabels,
+    'ignoreMissingComponents': obj.ignoreMissingComponents,
+    'images': obj.images?.map(y => y),
+    'kubeVersion': obj.kubeVersion,
+    'labelIncludeTemplates': obj.labelIncludeTemplates,
+    'labelWithoutSelector': obj.labelWithoutSelector,
+    'namePrefix': obj.namePrefix,
+    'nameSuffix': obj.nameSuffix,
+    'namespace': obj.namespace,
+    'patches': obj.patches?.map(y => toJson_ApplicationSpecSourceHydratorDrySourceKustomizePatches(y)),
+    'replicas': obj.replicas?.map(y => toJson_ApplicationSpecSourceHydratorDrySourceKustomizeReplicas(y)),
+    'version': obj.version,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Plugin specifies config management plugin specific options
+ *
+ * @schema ApplicationSpecSourceHydratorDrySourcePlugin
+ */
+export interface ApplicationSpecSourceHydratorDrySourcePlugin {
+  /**
+   * Env is a list of environment variable entries
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourcePlugin#env
+   */
+  readonly env?: ApplicationSpecSourceHydratorDrySourcePluginEnv[];
+
+  /**
+   * @schema ApplicationSpecSourceHydratorDrySourcePlugin#name
+   */
+  readonly name?: string;
+
+  /**
+   * @schema ApplicationSpecSourceHydratorDrySourcePlugin#parameters
+   */
+  readonly parameters?: ApplicationSpecSourceHydratorDrySourcePluginParameters[];
+}
+
+/**
+ * Converts an object of type 'ApplicationSpecSourceHydratorDrySourcePlugin' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ApplicationSpecSourceHydratorDrySourcePlugin(obj: ApplicationSpecSourceHydratorDrySourcePlugin | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'env': obj.env?.map(y => toJson_ApplicationSpecSourceHydratorDrySourcePluginEnv(y)),
+    'name': obj.name,
+    'parameters': obj.parameters?.map(y => toJson_ApplicationSpecSourceHydratorDrySourcePluginParameters(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * Jsonnet holds options specific to Jsonnet
  *
  * @schema ApplicationSpecSourcesDirectoryJsonnet
@@ -4482,6 +4914,292 @@ export class ApplicationSpecSourceKustomizeReplicasCount {
 }
 
 /**
+ * Jsonnet holds options specific to Jsonnet
+ *
+ * @schema ApplicationSpecSourceHydratorDrySourceDirectoryJsonnet
+ */
+export interface ApplicationSpecSourceHydratorDrySourceDirectoryJsonnet {
+  /**
+   * ExtVars is a list of Jsonnet External Variables
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceDirectoryJsonnet#extVars
+   */
+  readonly extVars?: ApplicationSpecSourceHydratorDrySourceDirectoryJsonnetExtVars[];
+
+  /**
+   * Additional library search dirs
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceDirectoryJsonnet#libs
+   */
+  readonly libs?: string[];
+
+  /**
+   * TLAS is a list of Jsonnet Top-level Arguments
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceDirectoryJsonnet#tlas
+   */
+  readonly tlas?: ApplicationSpecSourceHydratorDrySourceDirectoryJsonnetTlas[];
+}
+
+/**
+ * Converts an object of type 'ApplicationSpecSourceHydratorDrySourceDirectoryJsonnet' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ApplicationSpecSourceHydratorDrySourceDirectoryJsonnet(obj: ApplicationSpecSourceHydratorDrySourceDirectoryJsonnet | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'extVars': obj.extVars?.map(y => toJson_ApplicationSpecSourceHydratorDrySourceDirectoryJsonnetExtVars(y)),
+    'libs': obj.libs?.map(y => y),
+    'tlas': obj.tlas?.map(y => toJson_ApplicationSpecSourceHydratorDrySourceDirectoryJsonnetTlas(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * HelmFileParameter is a file parameter that's passed to helm template during manifest generation
+ *
+ * @schema ApplicationSpecSourceHydratorDrySourceHelmFileParameters
+ */
+export interface ApplicationSpecSourceHydratorDrySourceHelmFileParameters {
+  /**
+   * Name is the name of the Helm parameter
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceHelmFileParameters#name
+   */
+  readonly name?: string;
+
+  /**
+   * Path is the path to the file containing the values for the Helm parameter
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceHelmFileParameters#path
+   */
+  readonly path?: string;
+}
+
+/**
+ * Converts an object of type 'ApplicationSpecSourceHydratorDrySourceHelmFileParameters' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ApplicationSpecSourceHydratorDrySourceHelmFileParameters(obj: ApplicationSpecSourceHydratorDrySourceHelmFileParameters | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'path': obj.path,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * HelmParameter is a parameter that's passed to helm template during manifest generation
+ *
+ * @schema ApplicationSpecSourceHydratorDrySourceHelmParameters
+ */
+export interface ApplicationSpecSourceHydratorDrySourceHelmParameters {
+  /**
+   * ForceString determines whether to tell Helm to interpret booleans and numbers as strings
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceHelmParameters#forceString
+   */
+  readonly forceString?: boolean;
+
+  /**
+   * Name is the name of the Helm parameter
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceHelmParameters#name
+   */
+  readonly name?: string;
+
+  /**
+   * Value is the value for the Helm parameter
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceHelmParameters#value
+   */
+  readonly value?: string;
+}
+
+/**
+ * Converts an object of type 'ApplicationSpecSourceHydratorDrySourceHelmParameters' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ApplicationSpecSourceHydratorDrySourceHelmParameters(obj: ApplicationSpecSourceHydratorDrySourceHelmParameters | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'forceString': obj.forceString,
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema ApplicationSpecSourceHydratorDrySourceKustomizePatches
+ */
+export interface ApplicationSpecSourceHydratorDrySourceKustomizePatches {
+  /**
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomizePatches#options
+   */
+  readonly options?: { [key: string]: boolean };
+
+  /**
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomizePatches#patch
+   */
+  readonly patch?: string;
+
+  /**
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomizePatches#path
+   */
+  readonly path?: string;
+
+  /**
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomizePatches#target
+   */
+  readonly target?: ApplicationSpecSourceHydratorDrySourceKustomizePatchesTarget;
+}
+
+/**
+ * Converts an object of type 'ApplicationSpecSourceHydratorDrySourceKustomizePatches' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ApplicationSpecSourceHydratorDrySourceKustomizePatches(obj: ApplicationSpecSourceHydratorDrySourceKustomizePatches | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'options': ((obj.options) === undefined) ? undefined : (Object.entries(obj.options).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'patch': obj.patch,
+    'path': obj.path,
+    'target': toJson_ApplicationSpecSourceHydratorDrySourceKustomizePatchesTarget(obj.target),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema ApplicationSpecSourceHydratorDrySourceKustomizeReplicas
+ */
+export interface ApplicationSpecSourceHydratorDrySourceKustomizeReplicas {
+  /**
+   * Number of replicas
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomizeReplicas#count
+   */
+  readonly count: ApplicationSpecSourceHydratorDrySourceKustomizeReplicasCount;
+
+  /**
+   * Name of Deployment or StatefulSet
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomizeReplicas#name
+   */
+  readonly name: string;
+}
+
+/**
+ * Converts an object of type 'ApplicationSpecSourceHydratorDrySourceKustomizeReplicas' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ApplicationSpecSourceHydratorDrySourceKustomizeReplicas(obj: ApplicationSpecSourceHydratorDrySourceKustomizeReplicas | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'count': obj.count?.value,
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * EnvEntry represents an entry in the application's environment
+ *
+ * @schema ApplicationSpecSourceHydratorDrySourcePluginEnv
+ */
+export interface ApplicationSpecSourceHydratorDrySourcePluginEnv {
+  /**
+   * Name is the name of the variable, usually expressed in uppercase
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourcePluginEnv#name
+   */
+  readonly name: string;
+
+  /**
+   * Value is the value of the variable
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourcePluginEnv#value
+   */
+  readonly value: string;
+}
+
+/**
+ * Converts an object of type 'ApplicationSpecSourceHydratorDrySourcePluginEnv' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ApplicationSpecSourceHydratorDrySourcePluginEnv(obj: ApplicationSpecSourceHydratorDrySourcePluginEnv | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema ApplicationSpecSourceHydratorDrySourcePluginParameters
+ */
+export interface ApplicationSpecSourceHydratorDrySourcePluginParameters {
+  /**
+   * Array is the value of an array type parameter.
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourcePluginParameters#array
+   */
+  readonly array?: string[];
+
+  /**
+   * Map is the value of a map type parameter.
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourcePluginParameters#map
+   */
+  readonly map?: { [key: string]: string };
+
+  /**
+   * Name is the name identifying a parameter.
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourcePluginParameters#name
+   */
+  readonly name?: string;
+
+  /**
+   * String_ is the value of a string type parameter.
+   *
+   * @schema ApplicationSpecSourceHydratorDrySourcePluginParameters#string
+   */
+  readonly string?: string;
+}
+
+/**
+ * Converts an object of type 'ApplicationSpecSourceHydratorDrySourcePluginParameters' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ApplicationSpecSourceHydratorDrySourcePluginParameters(obj: ApplicationSpecSourceHydratorDrySourcePluginParameters | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'array': obj.array?.map(y => y),
+    'map': ((obj.map) === undefined) ? undefined : (Object.entries(obj.map).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'name': obj.name,
+    'string': obj.string,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * JsonnetVar represents a variable to be passed to jsonnet during manifest generation
  *
  * @schema ApplicationSpecSourcesDirectoryJsonnetExtVars
@@ -4932,6 +5650,158 @@ export class ApplicationOperationSyncSourcesKustomizeReplicasCount {
   }
   public static fromString(value: string): ApplicationOperationSyncSourcesKustomizeReplicasCount {
     return new ApplicationOperationSyncSourcesKustomizeReplicasCount(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * JsonnetVar represents a variable to be passed to jsonnet during manifest generation
+ *
+ * @schema ApplicationSpecSourceHydratorDrySourceDirectoryJsonnetExtVars
+ */
+export interface ApplicationSpecSourceHydratorDrySourceDirectoryJsonnetExtVars {
+  /**
+   * @schema ApplicationSpecSourceHydratorDrySourceDirectoryJsonnetExtVars#code
+   */
+  readonly code?: boolean;
+
+  /**
+   * @schema ApplicationSpecSourceHydratorDrySourceDirectoryJsonnetExtVars#name
+   */
+  readonly name: string;
+
+  /**
+   * @schema ApplicationSpecSourceHydratorDrySourceDirectoryJsonnetExtVars#value
+   */
+  readonly value: string;
+}
+
+/**
+ * Converts an object of type 'ApplicationSpecSourceHydratorDrySourceDirectoryJsonnetExtVars' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ApplicationSpecSourceHydratorDrySourceDirectoryJsonnetExtVars(obj: ApplicationSpecSourceHydratorDrySourceDirectoryJsonnetExtVars | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'code': obj.code,
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * JsonnetVar represents a variable to be passed to jsonnet during manifest generation
+ *
+ * @schema ApplicationSpecSourceHydratorDrySourceDirectoryJsonnetTlas
+ */
+export interface ApplicationSpecSourceHydratorDrySourceDirectoryJsonnetTlas {
+  /**
+   * @schema ApplicationSpecSourceHydratorDrySourceDirectoryJsonnetTlas#code
+   */
+  readonly code?: boolean;
+
+  /**
+   * @schema ApplicationSpecSourceHydratorDrySourceDirectoryJsonnetTlas#name
+   */
+  readonly name: string;
+
+  /**
+   * @schema ApplicationSpecSourceHydratorDrySourceDirectoryJsonnetTlas#value
+   */
+  readonly value: string;
+}
+
+/**
+ * Converts an object of type 'ApplicationSpecSourceHydratorDrySourceDirectoryJsonnetTlas' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ApplicationSpecSourceHydratorDrySourceDirectoryJsonnetTlas(obj: ApplicationSpecSourceHydratorDrySourceDirectoryJsonnetTlas | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'code': obj.code,
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema ApplicationSpecSourceHydratorDrySourceKustomizePatchesTarget
+ */
+export interface ApplicationSpecSourceHydratorDrySourceKustomizePatchesTarget {
+  /**
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomizePatchesTarget#annotationSelector
+   */
+  readonly annotationSelector?: string;
+
+  /**
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomizePatchesTarget#group
+   */
+  readonly group?: string;
+
+  /**
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomizePatchesTarget#kind
+   */
+  readonly kind?: string;
+
+  /**
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomizePatchesTarget#labelSelector
+   */
+  readonly labelSelector?: string;
+
+  /**
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomizePatchesTarget#name
+   */
+  readonly name?: string;
+
+  /**
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomizePatchesTarget#namespace
+   */
+  readonly namespace?: string;
+
+  /**
+   * @schema ApplicationSpecSourceHydratorDrySourceKustomizePatchesTarget#version
+   */
+  readonly version?: string;
+}
+
+/**
+ * Converts an object of type 'ApplicationSpecSourceHydratorDrySourceKustomizePatchesTarget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ApplicationSpecSourceHydratorDrySourceKustomizePatchesTarget(obj: ApplicationSpecSourceHydratorDrySourceKustomizePatchesTarget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'annotationSelector': obj.annotationSelector,
+    'group': obj.group,
+    'kind': obj.kind,
+    'labelSelector': obj.labelSelector,
+    'name': obj.name,
+    'namespace': obj.namespace,
+    'version': obj.version,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Number of replicas
+ *
+ * @schema ApplicationSpecSourceHydratorDrySourceKustomizeReplicasCount
+ */
+export class ApplicationSpecSourceHydratorDrySourceKustomizeReplicasCount {
+  public static fromNumber(value: number): ApplicationSpecSourceHydratorDrySourceKustomizeReplicasCount {
+    return new ApplicationSpecSourceHydratorDrySourceKustomizeReplicasCount(value);
+  }
+  public static fromString(value: string): ApplicationSpecSourceHydratorDrySourceKustomizeReplicasCount {
+    return new ApplicationSpecSourceHydratorDrySourceKustomizeReplicasCount(value);
   }
   private constructor(public readonly value: number | string) {
   }
@@ -64316,8 +65186,7 @@ export function toJson_AppProjectSpec(obj: AppProjectSpec | undefined): Record<s
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * GroupKind specifies a Group and a Kind, but does not force a version.  This is useful for identifying
- * concepts during lookup stages without having partially valid types
+ * ClusterResourceRestrictionItem is a cluster resource that is restricted by the project's whitelist or blacklist
  *
  * @schema AppProjectSpecClusterResourceBlacklist
  */
@@ -64331,6 +65200,14 @@ export interface AppProjectSpecClusterResourceBlacklist {
    * @schema AppProjectSpecClusterResourceBlacklist#kind
    */
   readonly kind: string;
+
+  /**
+   * Name is the name of the restricted resource. Glob patterns using Go's filepath.Match syntax are supported.
+   * Unlike the group and kind fields, if no name is specified, all resources of the specified group/kind are matched.
+   *
+   * @schema AppProjectSpecClusterResourceBlacklist#name
+   */
+  readonly name?: string;
 }
 
 /**
@@ -64342,6 +65219,7 @@ export function toJson_AppProjectSpecClusterResourceBlacklist(obj: AppProjectSpe
   const result = {
     'group': obj.group,
     'kind': obj.kind,
+    'name': obj.name,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -64349,8 +65227,7 @@ export function toJson_AppProjectSpecClusterResourceBlacklist(obj: AppProjectSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * GroupKind specifies a Group and a Kind, but does not force a version.  This is useful for identifying
- * concepts during lookup stages without having partially valid types
+ * ClusterResourceRestrictionItem is a cluster resource that is restricted by the project's whitelist or blacklist
  *
  * @schema AppProjectSpecClusterResourceWhitelist
  */
@@ -64364,6 +65241,14 @@ export interface AppProjectSpecClusterResourceWhitelist {
    * @schema AppProjectSpecClusterResourceWhitelist#kind
    */
   readonly kind: string;
+
+  /**
+   * Name is the name of the restricted resource. Glob patterns using Go's filepath.Match syntax are supported.
+   * Unlike the group and kind fields, if no name is specified, all resources of the specified group/kind are matched.
+   *
+   * @schema AppProjectSpecClusterResourceWhitelist#name
+   */
+  readonly name?: string;
 }
 
 /**
@@ -64375,6 +65260,7 @@ export function toJson_AppProjectSpecClusterResourceWhitelist(obj: AppProjectSpe
   const result = {
     'group': obj.group,
     'kind': obj.kind,
+    'name': obj.name,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});

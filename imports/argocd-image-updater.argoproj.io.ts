@@ -163,6 +163,7 @@ export interface ImageUpdaterSpecApplicationRefs {
   /**
    * CommonUpdateSettings overrides the global CommonUpdateSettings for applications
    * matched by this selector.
+   * This field is ignored when UseAnnotations is true.
    *
    * @schema ImageUpdaterSpecApplicationRefs#commonUpdateSettings
    */
@@ -172,10 +173,11 @@ export interface ImageUpdaterSpecApplicationRefs {
    * Images contains a list of configurations that how images should be updated.
    * These rules apply to applications selected by namePattern in ApplicationRefs, and each
    * image can override global/ApplicationRef settings.
+   * This field is ignored when UseAnnotations is true.
    *
    * @schema ImageUpdaterSpecApplicationRefs#images
    */
-  readonly images: ImageUpdaterSpecApplicationRefsImages[];
+  readonly images?: ImageUpdaterSpecApplicationRefsImages[];
 
   /**
    * LabelSelectors indicates the label selectors to apply for application selection
@@ -192,8 +194,21 @@ export interface ImageUpdaterSpecApplicationRefs {
   readonly namePattern: string;
 
   /**
+   * UseAnnotations When true, read image configuration from Application's
+   * argocd-image-updater.argoproj.io/* annotations instead of
+   * requiring explicit Images[] configuration in this CR.
+   * When this field is set to true, only namePattern and labelSelectors are used for
+   * application selection. All other fields (CommonUpdateSettings, WriteBackConfig, Images)
+   * are ignored.
+   *
+   * @schema ImageUpdaterSpecApplicationRefs#useAnnotations
+   */
+  readonly useAnnotations?: boolean;
+
+  /**
    * WriteBackConfig overrides the global WriteBackConfig settings for applications
    * matched by this selector.
+   * This field is ignored when UseAnnotations is true.
    *
    * @schema ImageUpdaterSpecApplicationRefs#writeBackConfig
    */
@@ -211,6 +226,7 @@ export function toJson_ImageUpdaterSpecApplicationRefs(obj: ImageUpdaterSpecAppl
     'images': obj.images?.map(y => toJson_ImageUpdaterSpecApplicationRefsImages(y)),
     'labelSelectors': toJson_ImageUpdaterSpecApplicationRefsLabelSelectors(obj.labelSelectors),
     'namePattern': obj.namePattern,
+    'useAnnotations': obj.useAnnotations,
     'writeBackConfig': toJson_ImageUpdaterSpecApplicationRefsWriteBackConfig(obj.writeBackConfig),
   };
   // filter undefined values
@@ -337,6 +353,7 @@ export function toJson_ImageUpdaterSpecWriteBackConfig(obj: ImageUpdaterSpecWrit
 /**
  * CommonUpdateSettings overrides the global CommonUpdateSettings for applications
  * matched by this selector.
+ * This field is ignored when UseAnnotations is true.
  *
  * @schema ImageUpdaterSpecApplicationRefsCommonUpdateSettings
  */
@@ -512,6 +529,7 @@ export function toJson_ImageUpdaterSpecApplicationRefsLabelSelectors(obj: ImageU
 /**
  * WriteBackConfig overrides the global WriteBackConfig settings for applications
  * matched by this selector.
+ * This field is ignored when UseAnnotations is true.
  *
  * @schema ImageUpdaterSpecApplicationRefsWriteBackConfig
  */
@@ -826,18 +844,18 @@ export interface ImageUpdaterSpecApplicationRefsImagesManifestTargetsHelm {
   /**
    * Name is the dot-separated path to the Helm key for the image repository/name part.
    * Example: "image.repository", "frontend.deployment.image.name".
-   * This field is required if the Helm target is used.
+   * If neither spec nor name/tag are set, defaults to "image.name".
+   * If spec is set, this field is ignored.
    *
    * @schema ImageUpdaterSpecApplicationRefsImagesManifestTargetsHelm#name
    */
-  readonly name: string;
+  readonly name?: string;
 
   /**
-   * Spec is an optional dot-separated path to a Helm key where the full image string
+   * Spec is the dot-separated path to a Helm key where the full image string
    * (e.g., "image/name:1.0") should be written.
    * Use this if your Helm chart expects the entire image reference in a single field,
-   * rather than separate name/tag fields. If this is set, other Helm parameter-related
-   * options will be ignored.
+   * rather than separate name/tag fields. If this is set, name and tag will be ignored.
    *
    * @schema ImageUpdaterSpecApplicationRefsImagesManifestTargetsHelm#spec
    */
@@ -846,11 +864,12 @@ export interface ImageUpdaterSpecApplicationRefsImagesManifestTargetsHelm {
   /**
    * Tag is the dot-separated path to the Helm key for the image tag part.
    * Example: "image.tag", "frontend.deployment.image.version".
-   * This field is required if the Helm target is used.
+   * If neither spec nor name/tag are set, defaults to "image.tag".
+   * If spec is set, this field is ignored.
    *
    * @schema ImageUpdaterSpecApplicationRefsImagesManifestTargetsHelm#tag
    */
-  readonly tag: string;
+  readonly tag?: string;
 }
 
 /**

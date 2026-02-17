@@ -3227,9 +3227,10 @@ export interface ClusterSpecAffinityTolerations {
 
   /**
    * Operator represents a key's relationship to the value.
-   * Valid operators are Exists and Equal. Defaults to Equal.
+   * Valid operators are Exists, Equal, Lt, and Gt. Defaults to Equal.
    * Exists is equivalent to wildcard for value, so that a pod can
    * tolerate all taints of a particular category.
+   * Lt and Gt perform numeric comparisons (requires feature gate TaintTolerationComparisonOperators).
    *
    * @default Equal.
    * @schema ClusterSpecAffinityTolerations#operator
@@ -6448,7 +6449,7 @@ export interface ClusterSpecStoragePvcTemplate {
 
   /**
    * resources represents the minimum resources the volume should have.
-   * If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements
+   * Users are allowed to specify resource requirements
    * that are lower than previous value but must still be higher than capacity recorded in the
    * status field of the claim.
    * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
@@ -6708,7 +6709,7 @@ export interface ClusterSpecWalStoragePvcTemplate {
 
   /**
    * resources represents the minimum resources the volume should have.
-   * If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements
+   * Users are allowed to specify resource requirements
    * that are lower than previous value but must still be higher than capacity recorded in the
    * status field of the claim.
    * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
@@ -7169,6 +7170,14 @@ export interface ClusterSpecBackupBarmanObjectStoreAzureCredentials {
    * @schema ClusterSpecBackupBarmanObjectStoreAzureCredentials#storageSasToken
    */
   readonly storageSasToken?: ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageSasToken;
+
+  /**
+   * Use the default Azure authentication flow, which includes DefaultAzureCredential.
+   * This allows authentication using environment variables and managed identities.
+   *
+   * @schema ClusterSpecBackupBarmanObjectStoreAzureCredentials#useDefaultAzureCredentials
+   */
+  readonly useDefaultAzureCredentials?: boolean;
 }
 
 /**
@@ -7183,6 +7192,7 @@ export function toJson_ClusterSpecBackupBarmanObjectStoreAzureCredentials(obj: C
     'storageAccount': toJson_ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageAccount(obj.storageAccount),
     'storageKey': toJson_ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageKey(obj.storageKey),
     'storageSasToken': toJson_ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorageSasToken(obj.storageSasToken),
+    'useDefaultAzureCredentials': obj.useDefaultAzureCredentials,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -7993,7 +8003,8 @@ export interface ClusterSpecBootstrapRecoveryRecoveryTarget {
   readonly targetTli?: string;
 
   /**
-   * The target time as a timestamp in the RFC3339 standard
+   * The target time as a timestamp in RFC3339 format or PostgreSQL timestamp format.
+   * Timestamps without an explicit timezone are interpreted as UTC.
    *
    * @schema ClusterSpecBootstrapRecoveryRecoveryTarget#targetTime
    */
@@ -8411,7 +8422,7 @@ export interface ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpec {
 
   /**
    * resources represents the minimum resources the volume should have.
-   * If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements
+   * Users are allowed to specify resource requirements
    * that are lower than previous value but must still be higher than capacity recorded in the
    * status field of the claim.
    * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
@@ -8531,6 +8542,14 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreAzureCredentials {
    * @schema ClusterSpecExternalClustersBarmanObjectStoreAzureCredentials#storageSasToken
    */
   readonly storageSasToken?: ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageSasToken;
+
+  /**
+   * Use the default Azure authentication flow, which includes DefaultAzureCredential.
+   * This allows authentication using environment variables and managed identities.
+   *
+   * @schema ClusterSpecExternalClustersBarmanObjectStoreAzureCredentials#useDefaultAzureCredentials
+   */
+  readonly useDefaultAzureCredentials?: boolean;
 }
 
 /**
@@ -8545,6 +8564,7 @@ export function toJson_ClusterSpecExternalClustersBarmanObjectStoreAzureCredenti
     'storageAccount': toJson_ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageAccount(obj.storageAccount),
     'storageKey': toJson_ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageKey(obj.storageKey),
     'storageSasToken': toJson_ClusterSpecExternalClustersBarmanObjectStoreAzureCredentialsStorageSasToken(obj.storageSasToken),
+    'useDefaultAzureCredentials': obj.useDefaultAzureCredentials,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -9618,6 +9638,25 @@ export interface ClusterSpecProjectedVolumeTemplateSourcesPodCertificate {
    * @schema ClusterSpecProjectedVolumeTemplateSourcesPodCertificate#signerName
    */
   readonly signerName: string;
+
+  /**
+   * userAnnotations allow pod authors to pass additional information to
+   * the signer implementation.  Kubernetes does not restrict or validate this
+   * metadata in any way.
+   *
+   * These values are copied verbatim into the `spec.unverifiedUserAnnotations` field of
+   * the PodCertificateRequest objects that Kubelet creates.
+   *
+   * Entries are subject to the same validation as object metadata annotations,
+   * with the addition that all keys must be domain-prefixed. No restrictions
+   * are placed on values, except an overall size limitation on the entire field.
+   *
+   * Signers should document the keys and values they support. Signers should
+   * deny requests that contain keys they do not recognize.
+   *
+   * @schema ClusterSpecProjectedVolumeTemplateSourcesPodCertificate#userAnnotations
+   */
+  readonly userAnnotations?: { [key: string]: string };
 }
 
 /**
@@ -9633,6 +9672,7 @@ export function toJson_ClusterSpecProjectedVolumeTemplateSourcesPodCertificate(o
     'keyType': obj.keyType,
     'maxExpirationSeconds': obj.maxExpirationSeconds,
     'signerName': obj.signerName,
+    'userAnnotations': ((obj.userAnnotations) === undefined) ? undefined : (Object.entries(obj.userAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -9880,7 +9920,7 @@ export function toJson_ClusterSpecStoragePvcTemplateDataSourceRef(obj: ClusterSp
 
 /**
  * resources represents the minimum resources the volume should have.
- * If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements
+ * Users are allowed to specify resource requirements
  * that are lower than previous value but must still be higher than capacity recorded in the
  * status field of the claim.
  * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
@@ -10019,7 +10059,7 @@ export interface ClusterSpecTablespacesStoragePvcTemplate {
 
   /**
    * resources represents the minimum resources the volume should have.
-   * If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements
+   * Users are allowed to specify resource requirements
    * that are lower than previous value but must still be higher than capacity recorded in the
    * status field of the claim.
    * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
@@ -10279,7 +10319,7 @@ export function toJson_ClusterSpecWalStoragePvcTemplateDataSourceRef(obj: Cluste
 
 /**
  * resources represents the minimum resources the volume should have.
- * If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements
+ * Users are allowed to specify resource requirements
  * that are lower than previous value but must still be higher than capacity recorded in the
  * status field of the claim.
  * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
@@ -11765,7 +11805,7 @@ export function toJson_ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecDa
 
 /**
  * resources represents the minimum resources the volume should have.
- * If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements
+ * Users are allowed to specify resource requirements
  * that are lower than previous value but must still be higher than capacity recorded in the
  * status field of the claim.
  * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
@@ -12765,7 +12805,7 @@ export function toJson_ClusterSpecTablespacesStoragePvcTemplateDataSourceRef(obj
 
 /**
  * resources represents the minimum resources the volume should have.
- * If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements
+ * Users are allowed to specify resource requirements
  * that are lower than previous value but must still be higher than capacity recorded in the
  * status field of the claim.
  * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
@@ -17522,8 +17562,8 @@ export interface PoolerSpecTemplateSpec {
    * will be made available to those containers which consume them
    * by name.
    *
-   * This is an alpha field and requires enabling the
-   * DynamicResourceAllocation feature gate.
+   * This is a stable field but requires that the
+   * DynamicResourceAllocation feature gate is enabled.
    *
    * This field is immutable.
    *
@@ -17682,6 +17722,19 @@ export interface PoolerSpecTemplateSpec {
    * @schema PoolerSpecTemplateSpec#volumes
    */
   readonly volumes?: PoolerSpecTemplateSpecVolumes[];
+
+  /**
+   * WorkloadRef provides a reference to the Workload object that this Pod belongs to.
+   * This field is used by the scheduler to identify the PodGroup and apply the
+   * correct group scheduling policies. The Workload object referenced
+   * by this field may not exist at the time the Pod is created.
+   * This field is immutable, but a Workload object with the same name
+   * may be recreated with different policies. Doing this during pod scheduling
+   * may result in the placement not conforming to the expected policies.
+   *
+   * @schema PoolerSpecTemplateSpec#workloadRef
+   */
+  readonly workloadRef?: PoolerSpecTemplateSpecWorkloadRef;
 }
 
 /**
@@ -17732,6 +17785,7 @@ export function toJson_PoolerSpecTemplateSpec(obj: PoolerSpecTemplateSpec | unde
     'tolerations': obj.tolerations?.map(y => toJson_PoolerSpecTemplateSpecTolerations(y)),
     'topologySpreadConstraints': obj.topologySpreadConstraints?.map(y => toJson_PoolerSpecTemplateSpecTopologySpreadConstraints(y)),
     'volumes': obj.volumes?.map(y => toJson_PoolerSpecTemplateSpecVolumes(y)),
+    'workloadRef': toJson_PoolerSpecTemplateSpecWorkloadRef(obj.workloadRef),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -18164,6 +18218,7 @@ export interface PoolerSpecTemplateSpecContainers {
 
   /**
    * Resources resize policy for the container.
+   * This field cannot be set on ephemeral containers.
    *
    * @schema PoolerSpecTemplateSpecContainers#resizePolicy
    */
@@ -18917,6 +18972,7 @@ export interface PoolerSpecTemplateSpecInitContainers {
 
   /**
    * Resources resize policy for the container.
+   * This field cannot be set on ephemeral containers.
    *
    * @schema PoolerSpecTemplateSpecInitContainers#resizePolicy
    */
@@ -19607,9 +19663,10 @@ export interface PoolerSpecTemplateSpecTolerations {
 
   /**
    * Operator represents a key's relationship to the value.
-   * Valid operators are Exists and Equal. Defaults to Equal.
+   * Valid operators are Exists, Equal, Lt, and Gt. Defaults to Equal.
    * Exists is equivalent to wildcard for value, so that a pod can
    * tolerate all taints of a particular category.
+   * Lt and Gt perform numeric comparisons (requires feature gate TaintTolerationComparisonOperators).
    *
    * @default Equal.
    * @schema PoolerSpecTemplateSpecTolerations#operator
@@ -20163,6 +20220,66 @@ export function toJson_PoolerSpecTemplateSpecVolumes(obj: PoolerSpecTemplateSpec
     'secret': toJson_PoolerSpecTemplateSpecVolumesSecret(obj.secret),
     'storageos': toJson_PoolerSpecTemplateSpecVolumesStorageos(obj.storageos),
     'vsphereVolume': toJson_PoolerSpecTemplateSpecVolumesVsphereVolume(obj.vsphereVolume),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * WorkloadRef provides a reference to the Workload object that this Pod belongs to.
+ * This field is used by the scheduler to identify the PodGroup and apply the
+ * correct group scheduling policies. The Workload object referenced
+ * by this field may not exist at the time the Pod is created.
+ * This field is immutable, but a Workload object with the same name
+ * may be recreated with different policies. Doing this during pod scheduling
+ * may result in the placement not conforming to the expected policies.
+ *
+ * @schema PoolerSpecTemplateSpecWorkloadRef
+ */
+export interface PoolerSpecTemplateSpecWorkloadRef {
+  /**
+   * Name defines the name of the Workload object this Pod belongs to.
+   * Workload must be in the same namespace as the Pod.
+   * If it doesn't match any existing Workload, the Pod will remain unschedulable
+   * until a Workload object is created and observed by the kube-scheduler.
+   * It must be a DNS subdomain.
+   *
+   * @schema PoolerSpecTemplateSpecWorkloadRef#name
+   */
+  readonly name: string;
+
+  /**
+   * PodGroup is the name of the PodGroup within the Workload that this Pod
+   * belongs to. If it doesn't match any existing PodGroup within the Workload,
+   * the Pod will remain unschedulable until the Workload object is recreated
+   * and observed by the kube-scheduler. It must be a DNS label.
+   *
+   * @schema PoolerSpecTemplateSpecWorkloadRef#podGroup
+   */
+  readonly podGroup: string;
+
+  /**
+   * PodGroupReplicaKey specifies the replica key of the PodGroup to which this
+   * Pod belongs. It is used to distinguish pods belonging to different replicas
+   * of the same pod group. The pod group policy is applied separately to each replica.
+   * When set, it must be a DNS label.
+   *
+   * @schema PoolerSpecTemplateSpecWorkloadRef#podGroupReplicaKey
+   */
+  readonly podGroupReplicaKey?: string;
+}
+
+/**
+ * Converts an object of type 'PoolerSpecTemplateSpecWorkloadRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_PoolerSpecTemplateSpecWorkloadRef(obj: PoolerSpecTemplateSpecWorkloadRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'podGroup': obj.podGroup,
+    'podGroupReplicaKey': obj.podGroupReplicaKey,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -33123,7 +33240,7 @@ export interface PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpec {
 
   /**
    * resources represents the minimum resources the volume should have.
-   * If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements
+   * Users are allowed to specify resource requirements
    * that are lower than previous value but must still be higher than capacity recorded in the
    * status field of the claim.
    * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
@@ -33484,6 +33601,25 @@ export interface PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate {
    * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate#signerName
    */
   readonly signerName: string;
+
+  /**
+   * userAnnotations allow pod authors to pass additional information to
+   * the signer implementation.  Kubernetes does not restrict or validate this
+   * metadata in any way.
+   *
+   * These values are copied verbatim into the `spec.unverifiedUserAnnotations` field of
+   * the PodCertificateRequest objects that Kubelet creates.
+   *
+   * Entries are subject to the same validation as object metadata annotations,
+   * with the addition that all keys must be domain-prefixed. No restrictions
+   * are placed on values, except an overall size limitation on the entire field.
+   *
+   * Signers should document the keys and values they support. Signers should
+   * deny requests that contain keys they do not recognize.
+   *
+   * @schema PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertificate#userAnnotations
+   */
+  readonly userAnnotations?: { [key: string]: string };
 }
 
 /**
@@ -33499,6 +33635,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesProjectedSourcesPodCertifica
     'keyType': obj.keyType,
     'maxExpirationSeconds': obj.maxExpirationSeconds,
     'signerName': obj.signerName,
+    'userAnnotations': ((obj.userAnnotations) === undefined) ? undefined : (Object.entries(obj.userAnnotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -34806,7 +34943,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplate
 
 /**
  * resources represents the minimum resources the volume should have.
- * If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements
+ * Users are allowed to specify resource requirements
  * that are lower than previous value but must still be higher than capacity recorded in the
  * status field of the claim.
  * More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources

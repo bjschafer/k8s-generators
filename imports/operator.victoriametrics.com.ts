@@ -231,6 +231,21 @@ export interface VlAgentSpec {
   readonly initContainers?: any[];
 
   /**
+   * K8sCollector configures VLAgent logs collection from K8s pods
+   *
+   * @schema VlAgentSpec#k8sCollector
+   */
+  readonly k8SCollector?: VlAgentSpecK8SCollector;
+
+  /**
+   * License allows to configure license key to be used for enterprise features.
+   * See [here](https://docs.victoriametrics.com/victoriametrics/enterprise/#victorialogs-enterprise-features)
+   *
+   * @schema VlAgentSpec#license
+   */
+  readonly license?: VlAgentSpecLicense;
+
+  /**
    * LivenessProbe that will be added CRD pod
    *
    * @schema VlAgentSpec#livenessProbe
@@ -377,7 +392,7 @@ export interface VlAgentSpec {
   readonly revisionHistoryLimitCount?: number;
 
   /**
-   * StatefulRollingUpdateStrategy allows configuration for strategyType
+   * RollingUpdateStrategy allows configuration for strategyType
    * set it to RollingUpdate for disabling operator statefulSet rollingUpdate
    *
    * @schema VlAgentSpec#rollingUpdateStrategy
@@ -445,7 +460,7 @@ export interface VlAgentSpec {
   readonly startupProbe?: any;
 
   /**
-   * StatefulStorage configures storage for StatefulSet
+   * Storage configures storage for StatefulSet
    *
    * @schema VlAgentSpec#storage
    */
@@ -464,6 +479,16 @@ export interface VlAgentSpec {
    * @schema VlAgentSpec#terminationGracePeriodSeconds
    */
   readonly terminationGracePeriodSeconds?: number;
+
+  /**
+   * Path to directory where temporary data for vlagent stored
+   * Defaults to /vlagent-data or /var/lib/vlagent-data in collector mode
+   * If defined, operator ignores spec.storage field and skips adding volume and volumeMount for tmp data
+   *
+   * @default vlagent-data or /var/lib/vlagent-data in collector mode
+   * @schema VlAgentSpec#tmpDataPath
+   */
+  readonly tmpDataPath?: string;
 
   /**
    * Tolerations If specified, the pod's tolerations.
@@ -541,6 +566,8 @@ export function toJson_VlAgentSpec(obj: VlAgentSpec | undefined): Record<string,
     'image': toJson_VlAgentSpecImage(obj.image),
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VlAgentSpecImagePullSecrets(y)),
     'initContainers': obj.initContainers?.map(y => y),
+    'k8sCollector': toJson_VlAgentSpecK8SCollector(obj.k8SCollector),
+    'license': toJson_VlAgentSpecLicense(obj.license),
     'livenessProbe': obj.livenessProbe,
     'logFormat': obj.logFormat,
     'logLevel': obj.logLevel,
@@ -572,6 +599,7 @@ export function toJson_VlAgentSpec(obj: VlAgentSpec | undefined): Record<string,
     'storage': toJson_VlAgentSpecStorage(obj.storage),
     'syslogSpec': toJson_VlAgentSpecSyslogSpec(obj.syslogSpec),
     'terminationGracePeriodSeconds': obj.terminationGracePeriodSeconds,
+    'tmpDataPath': obj.tmpDataPath,
     'tolerations': obj.tolerations?.map(y => toJson_VlAgentSpecTolerations(y)),
     'topologySpreadConstraints': obj.topologySpreadConstraints?.map(y => y),
     'useDefaultResources': obj.useDefaultResources,
@@ -908,6 +936,197 @@ export function toJson_VlAgentSpecImagePullSecrets(obj: VlAgentSpecImagePullSecr
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * K8sCollector configures VLAgent logs collection from K8s pods
+ *
+ * @schema VlAgentSpecK8SCollector
+ */
+export interface VlAgentSpecK8SCollector {
+  /**
+   * CheckpointsPath configures path to file where logs checkpoints are stored.
+   * By default it's stored at host's /var/lib/vlagent-data/checkpoints.json.
+   *
+   * @schema VlAgentSpecK8SCollector#checkpointsPath
+   */
+  readonly checkpointsPath?: string;
+
+  /**
+   * DecolorizeFields defines fields to remove ANSI color codes across logs ingested from Kubernetes
+   *
+   * @schema VlAgentSpecK8SCollector#decolorizeFields
+   */
+  readonly decolorizeFields?: string[];
+
+  /**
+   * Enabled switches VLAgent to log collection mode.
+   * Note, for this purpose operator uses DaemonSet, while by default VLAgent uses StatefulSet.
+   * Switching this option will drop all persisted data.
+   *
+   * @schema VlAgentSpecK8SCollector#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
+   * ExcludeFilter defines logsql expression that allows to filter out containers to collect logs from
+   *
+   * @schema VlAgentSpecK8SCollector#excludeFilter
+   */
+  readonly excludeFilter?: string;
+
+  /**
+   * ExtraFields defines extra fields as JSON string which should be added to each collected log line
+   * Example: '{"env":"dev","cluster":"staging"}'
+   *
+   * @schema VlAgentSpecK8SCollector#extraFields
+   */
+  readonly extraFields?: string;
+
+  /**
+   * IgnoreFields defines fields to ignore across logs ingested from Kubernetes
+   *
+   * @schema VlAgentSpecK8SCollector#ignoreFields
+   */
+  readonly ignoreFields?: string[];
+
+  /**
+   * IncludeNodeAnnotations enables attachment of node annotations to log entries
+   *
+   * @schema VlAgentSpecK8SCollector#includeNodeAnnotations
+   */
+  readonly includeNodeAnnotations?: boolean;
+
+  /**
+   * IncludeNodeLabels enables attachment of node labels to log entries
+   *
+   * @schema VlAgentSpecK8SCollector#includeNodeLabels
+   */
+  readonly includeNodeLabels?: boolean;
+
+  /**
+   * IncludePodAnnotations enables attachment of pod annotations to log entries
+   *
+   * @schema VlAgentSpecK8SCollector#includePodAnnotations
+   */
+  readonly includePodAnnotations?: boolean;
+
+  /**
+   * IncludePodLabels enables attachment of pod labels to log entries
+   *
+   * @schema VlAgentSpecK8SCollector#includePodLabels
+   */
+  readonly includePodLabels?: boolean;
+
+  /**
+   * LogsPath configures root for logs path
+   * By default VLAgent collects logs from /var/log/containers
+   *
+   * @schema VlAgentSpecK8SCollector#logsPath
+   */
+  readonly logsPath?: string;
+
+  /**
+   * MsgField defines fields that may contain the _msg field
+   *
+   * @schema VlAgentSpecK8SCollector#msgFields
+   */
+  readonly msgFields?: string[];
+
+  /**
+   * TenantID defines default tenant ID to use for logs collected from pods in format: <accountID>:<projectID>
+   *
+   * @schema VlAgentSpecK8SCollector#tenantID
+   */
+  readonly tenantId?: string;
+
+  /**
+   * TimeFields defines fields that may contain the _time field
+   *
+   * @schema VlAgentSpecK8SCollector#timeFields
+   */
+  readonly timeFields?: string[];
+}
+
+/**
+ * Converts an object of type 'VlAgentSpecK8SCollector' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlAgentSpecK8SCollector(obj: VlAgentSpecK8SCollector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'checkpointsPath': obj.checkpointsPath,
+    'decolorizeFields': obj.decolorizeFields?.map(y => y),
+    'enabled': obj.enabled,
+    'excludeFilter': obj.excludeFilter,
+    'extraFields': obj.extraFields,
+    'ignoreFields': obj.ignoreFields?.map(y => y),
+    'includeNodeAnnotations': obj.includeNodeAnnotations,
+    'includeNodeLabels': obj.includeNodeLabels,
+    'includePodAnnotations': obj.includePodAnnotations,
+    'includePodLabels': obj.includePodLabels,
+    'logsPath': obj.logsPath,
+    'msgFields': obj.msgFields?.map(y => y),
+    'tenantID': obj.tenantId,
+    'timeFields': obj.timeFields?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * License allows to configure license key to be used for enterprise features.
+ * See [here](https://docs.victoriametrics.com/victoriametrics/enterprise/#victorialogs-enterprise-features)
+ *
+ * @schema VlAgentSpecLicense
+ */
+export interface VlAgentSpecLicense {
+  /**
+   * Enforce offline verification of the license key.
+   *
+   * @schema VlAgentSpecLicense#forceOffline
+   */
+  readonly forceOffline?: boolean;
+
+  /**
+   * Enterprise license key. This flag is available only in [VictoriaMetrics enterprise](https://docs.victoriametrics.com/victoriametrics/enterprise/).
+   * To request a trial license, [go to](https://victoriametrics.com/products/enterprise/trial)
+   *
+   * @schema VlAgentSpecLicense#key
+   */
+  readonly key?: string;
+
+  /**
+   * KeyRef is reference to secret with license key for enterprise features.
+   *
+   * @schema VlAgentSpecLicense#keyRef
+   */
+  readonly keyRef?: VlAgentSpecLicenseKeyRef;
+
+  /**
+   * Interval to be used for checking for license key changes. Note that this is only applicable when using KeyRef.
+   *
+   * @schema VlAgentSpecLicense#reloadInterval
+   */
+  readonly reloadInterval?: string;
+}
+
+/**
+ * Converts an object of type 'VlAgentSpecLicense' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlAgentSpecLicense(obj: VlAgentSpecLicense | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'forceOffline': obj.forceOffline,
+    'key': obj.key,
+    'keyRef': toJson_VlAgentSpecLicenseKeyRef(obj.keyRef),
+    'reloadInterval': obj.reloadInterval,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -1315,9 +1534,10 @@ export interface VlAgentSpecRemoteWriteSettings {
   readonly showUrl?: boolean;
 
   /**
-   * Path to directory where temporary data for remote write component is stored (default /vlagent_pq/vlagent-remotewrite-data)
-   * If defined, operator ignores spec.storage field and skips adding volume and volumeMount for pq
+   * Path to directory where temporary data for remote write component is stored.
+   * Defaults to /vlagent-data/vlagent-remotewrite-data or /var/lib/vlagent-data/vlagent-remotewrite-data in collector mode
    *
+   * @default vlagent-data/vlagent-remotewrite-data or /var/lib/vlagent-data/vlagent-remotewrite-data in collector mode
    * @schema VlAgentSpecRemoteWriteSettings#tmpDataPath
    */
   readonly tmpDataPath?: string;
@@ -1444,7 +1664,7 @@ export function toJson_VlAgentSpecServiceSpec(obj: VlAgentSpecServiceSpec | unde
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * StatefulStorage configures storage for StatefulSet
+ * Storage configures storage for StatefulSet
  *
  * @schema VlAgentSpecStorage
  */
@@ -2093,6 +2313,54 @@ export interface VlAgentSpecExtraEnvsFromSecretRef {
 export function toJson_VlAgentSpecExtraEnvsFromSecretRef(obj: VlAgentSpecExtraEnvsFromSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * KeyRef is reference to secret with license key for enterprise features.
+ *
+ * @schema VlAgentSpecLicenseKeyRef
+ */
+export interface VlAgentSpecLicenseKeyRef {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema VlAgentSpecLicenseKeyRef#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VlAgentSpecLicenseKeyRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema VlAgentSpecLicenseKeyRef#optional
+   */
+  readonly optional?: boolean;
+}
+
+/**
+ * Converts an object of type 'VlAgentSpecLicenseKeyRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlAgentSpecLicenseKeyRef(obj: VlAgentSpecLicenseKeyRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
     'name': obj.name,
     'optional': obj.optional,
   };
@@ -4509,6 +4777,14 @@ export interface VlClusterSpec {
   readonly imagePullSecrets?: VlClusterSpecImagePullSecrets[];
 
   /**
+   * License allows to configure license key to be used for enterprise features.
+   * See [here](https://docs.victoriametrics.com/victoriametrics/enterprise/#victorialogs-enterprise-features)
+   *
+   * @schema VlClusterSpec#license
+   */
+  readonly license?: VlClusterSpecLicense;
+
+  /**
    * ManagedMetadata defines metadata that will be added to the all objects
    * created by operator for the given CustomResource
    *
@@ -4583,6 +4859,7 @@ export function toJson_VlClusterSpec(obj: VlClusterSpec | undefined): Record<str
     'clusterDomainName': obj.clusterDomainName,
     'clusterVersion': obj.clusterVersion,
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VlClusterSpecImagePullSecrets(y)),
+    'license': toJson_VlClusterSpecLicense(obj.license),
     'managedMetadata': toJson_VlClusterSpecManagedMetadata(obj.managedMetadata),
     'paused': obj.paused,
     'requestsLoadBalancer': toJson_VlClusterSpecRequestsLoadBalancer(obj.requestsLoadBalancer),
@@ -4624,6 +4901,60 @@ export function toJson_VlClusterSpecImagePullSecrets(obj: VlClusterSpecImagePull
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * License allows to configure license key to be used for enterprise features.
+ * See [here](https://docs.victoriametrics.com/victoriametrics/enterprise/#victorialogs-enterprise-features)
+ *
+ * @schema VlClusterSpecLicense
+ */
+export interface VlClusterSpecLicense {
+  /**
+   * Enforce offline verification of the license key.
+   *
+   * @schema VlClusterSpecLicense#forceOffline
+   */
+  readonly forceOffline?: boolean;
+
+  /**
+   * Enterprise license key. This flag is available only in [VictoriaMetrics enterprise](https://docs.victoriametrics.com/victoriametrics/enterprise/).
+   * To request a trial license, [go to](https://victoriametrics.com/products/enterprise/trial)
+   *
+   * @schema VlClusterSpecLicense#key
+   */
+  readonly key?: string;
+
+  /**
+   * KeyRef is reference to secret with license key for enterprise features.
+   *
+   * @schema VlClusterSpecLicense#keyRef
+   */
+  readonly keyRef?: VlClusterSpecLicenseKeyRef;
+
+  /**
+   * Interval to be used for checking for license key changes. Note that this is only applicable when using KeyRef.
+   *
+   * @schema VlClusterSpecLicense#reloadInterval
+   */
+  readonly reloadInterval?: string;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecLicense' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecLicense(obj: VlClusterSpecLicense | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'forceOffline': obj.forceOffline,
+    'key': obj.key,
+    'keyRef': toJson_VlClusterSpecLicenseKeyRef(obj.keyRef),
+    'reloadInterval': obj.reloadInterval,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -5739,6 +6070,14 @@ export interface VlClusterSpecVlstorage {
 
 
   /**
+   * Configures horizontal pod autoscaling.
+   * Note, downscaling is not supported.
+   *
+   * @schema VlClusterSpecVlstorage#hpa
+   */
+  readonly hpa?: VlClusterSpecVlstorageHpa;
+
+  /**
    * Image - docker image settings
    * if no specified operator uses default version from operator config
    *
@@ -6100,6 +6439,7 @@ export function toJson_VlClusterSpecVlstorage(obj: VlClusterSpecVlstorage | unde
     'futureRetention': obj.futureRetention,
     'hostAliases': obj.hostAliases?.map(y => toJson_VlClusterSpecVlstorageHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
+    'hpa': toJson_VlClusterSpecVlstorageHpa(obj.hpa),
     'image': toJson_VlClusterSpecVlstorageImage(obj.image),
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VlClusterSpecVlstorageImagePullSecrets(y)),
     'initContainers': obj.initContainers?.map(y => y),
@@ -6143,6 +6483,54 @@ export function toJson_VlClusterSpecVlstorage(obj: VlClusterSpecVlstorage | unde
     'useStrictSecurity': obj.useStrictSecurity,
     'volumeMounts': obj.volumeMounts?.map(y => toJson_VlClusterSpecVlstorageVolumeMounts(y)),
     'volumes': obj.volumes?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * KeyRef is reference to secret with license key for enterprise features.
+ *
+ * @schema VlClusterSpecLicenseKeyRef
+ */
+export interface VlClusterSpecLicenseKeyRef {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema VlClusterSpecLicenseKeyRef#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VlClusterSpecLicenseKeyRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema VlClusterSpecLicenseKeyRef#optional
+   */
+  readonly optional?: boolean;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecLicenseKeyRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecLicenseKeyRef(obj: VlClusterSpecLicenseKeyRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -7961,6 +8349,54 @@ export function toJson_VlClusterSpecVlstorageHostAliases(obj: VlClusterSpecVlsto
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Configures horizontal pod autoscaling.
+ * Note, downscaling is not supported.
+ *
+ * @schema VlClusterSpecVlstorageHpa
+ */
+export interface VlClusterSpecVlstorageHpa {
+  /**
+   * HorizontalPodAutoscalerBehavior configures the scaling behavior of the target
+   * in both Up and Down directions (scaleUp and scaleDown fields respectively).
+   *
+   * @schema VlClusterSpecVlstorageHpa#behaviour
+   */
+  readonly behaviour?: VlClusterSpecVlstorageHpaBehaviour;
+
+  /**
+   * @schema VlClusterSpecVlstorageHpa#maxReplicas
+   */
+  readonly maxReplicas?: number;
+
+  /**
+   * @schema VlClusterSpecVlstorageHpa#metrics
+   */
+  readonly metrics?: VlClusterSpecVlstorageHpaMetrics[];
+
+  /**
+   * @schema VlClusterSpecVlstorageHpa#minReplicas
+   */
+  readonly minReplicas?: number;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpa' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpa(obj: VlClusterSpecVlstorageHpa | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'behaviour': toJson_VlClusterSpecVlstorageHpaBehaviour(obj.behaviour),
+    'maxReplicas': obj.maxReplicas,
+    'metrics': obj.metrics?.map(y => toJson_VlClusterSpecVlstorageHpaMetrics(y)),
+    'minReplicas': obj.minReplicas,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * Image - docker image settings
  * if no specified operator uses default version from operator config
  *
@@ -9581,6 +10017,135 @@ export function toJson_VlClusterSpecVlstorageExtraEnvsFromSecretRef(obj: VlClust
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * HorizontalPodAutoscalerBehavior configures the scaling behavior of the target
+ * in both Up and Down directions (scaleUp and scaleDown fields respectively).
+ *
+ * @schema VlClusterSpecVlstorageHpaBehaviour
+ */
+export interface VlClusterSpecVlstorageHpaBehaviour {
+  /**
+   * scaleDown is scaling policy for scaling Down.
+   * If not set, the default value is to allow to scale down to minReplicas pods, with a
+   * 300 second stabilization window (i.e., the highest recommendation for
+   * the last 300sec is used).
+   *
+   * @schema VlClusterSpecVlstorageHpaBehaviour#scaleDown
+   */
+  readonly scaleDown?: VlClusterSpecVlstorageHpaBehaviourScaleDown;
+
+  /**
+   * scaleUp is scaling policy for scaling Up.
+   * If not set, the default value is the higher of:
+   * * increase no more than 4 pods per 60 seconds
+   * * double the number of pods per 60 seconds
+   * No stabilization is used.
+   *
+   * @schema VlClusterSpecVlstorageHpaBehaviour#scaleUp
+   */
+  readonly scaleUp?: VlClusterSpecVlstorageHpaBehaviourScaleUp;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaBehaviour' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaBehaviour(obj: VlClusterSpecVlstorageHpaBehaviour | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'scaleDown': toJson_VlClusterSpecVlstorageHpaBehaviourScaleDown(obj.scaleDown),
+    'scaleUp': toJson_VlClusterSpecVlstorageHpaBehaviourScaleUp(obj.scaleUp),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * MetricSpec specifies how to scale based on a single metric
+ * (only `type` and one other matching field should be set at once).
+ *
+ * @schema VlClusterSpecVlstorageHpaMetrics
+ */
+export interface VlClusterSpecVlstorageHpaMetrics {
+  /**
+   * containerResource refers to a resource metric (such as those specified in
+   * requests and limits) known to Kubernetes describing a single container in
+   * each pod of the current scale target (e.g. CPU or memory). Such metrics are
+   * built in to Kubernetes, and have special scaling options on top of those
+   * available to normal per-pod metrics using the "pods" source.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetrics#containerResource
+   */
+  readonly containerResource?: VlClusterSpecVlstorageHpaMetricsContainerResource;
+
+  /**
+   * external refers to a global metric that is not associated
+   * with any Kubernetes object. It allows autoscaling based on information
+   * coming from components running outside of cluster
+   * (for example length of queue in cloud messaging service, or
+   * QPS from loadbalancer running outside of cluster).
+   *
+   * @schema VlClusterSpecVlstorageHpaMetrics#external
+   */
+  readonly external?: VlClusterSpecVlstorageHpaMetricsExternal;
+
+  /**
+   * object refers to a metric describing a single kubernetes object
+   * (for example, hits-per-second on an Ingress object).
+   *
+   * @schema VlClusterSpecVlstorageHpaMetrics#object
+   */
+  readonly object?: VlClusterSpecVlstorageHpaMetricsObject;
+
+  /**
+   * pods refers to a metric describing each pod in the current scale target
+   * (for example, transactions-processed-per-second).  The values will be
+   * averaged together before being compared to the target value.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetrics#pods
+   */
+  readonly pods?: VlClusterSpecVlstorageHpaMetricsPods;
+
+  /**
+   * resource refers to a resource metric (such as those specified in
+   * requests and limits) known to Kubernetes describing each pod in the
+   * current scale target (e.g. CPU or memory). Such metrics are built in to
+   * Kubernetes, and have special scaling options on top of those available
+   * to normal per-pod metrics using the "pods" source.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetrics#resource
+   */
+  readonly resource?: VlClusterSpecVlstorageHpaMetricsResource;
+
+  /**
+   * type is the type of metric source.  It should be one of "ContainerResource", "External",
+   * "Object", "Pods" or "Resource", each mapping to a matching field in the object.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetrics#type
+   */
+  readonly type: string;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetrics' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetrics(obj: VlClusterSpecVlstorageHpaMetrics | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'containerResource': toJson_VlClusterSpecVlstorageHpaMetricsContainerResource(obj.containerResource),
+    'external': toJson_VlClusterSpecVlstorageHpaMetricsExternal(obj.external),
+    'object': toJson_VlClusterSpecVlstorageHpaMetricsObject(obj.object),
+    'pods': toJson_VlClusterSpecVlstorageHpaMetricsPods(obj.pods),
+    'resource': toJson_VlClusterSpecVlstorageHpaMetricsResource(obj.resource),
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * An eviction is allowed if at most "maxUnavailable" pods selected by
  * "selector" are unavailable after the eviction, i.e. even in absence of
  * the evicted pod. For example, one can prevent all voluntary evictions
@@ -9878,6 +10443,366 @@ export function toJson_VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfig(obj:
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * scaleDown is scaling policy for scaling Down.
+ * If not set, the default value is to allow to scale down to minReplicas pods, with a
+ * 300 second stabilization window (i.e., the highest recommendation for
+ * the last 300sec is used).
+ *
+ * @schema VlClusterSpecVlstorageHpaBehaviourScaleDown
+ */
+export interface VlClusterSpecVlstorageHpaBehaviourScaleDown {
+  /**
+   * policies is a list of potential scaling polices which can be used during scaling.
+   * If not set, use the default values:
+   * - For scale up: allow doubling the number of pods, or an absolute change of 4 pods in a 15s window.
+   * - For scale down: allow all pods to be removed in a 15s window.
+   *
+   * @schema VlClusterSpecVlstorageHpaBehaviourScaleDown#policies
+   */
+  readonly policies?: VlClusterSpecVlstorageHpaBehaviourScaleDownPolicies[];
+
+  /**
+   * selectPolicy is used to specify which policy should be used.
+   * If not set, the default value Max is used.
+   *
+   * @schema VlClusterSpecVlstorageHpaBehaviourScaleDown#selectPolicy
+   */
+  readonly selectPolicy?: string;
+
+  /**
+   * stabilizationWindowSeconds is the number of seconds for which past recommendations should be
+   * considered while scaling up or scaling down.
+   * StabilizationWindowSeconds must be greater than or equal to zero and less than or equal to 3600 (one hour).
+   * If not set, use the default values:
+   * - For scale up: 0 (i.e. no stabilization is done).
+   * - For scale down: 300 (i.e. the stabilization window is 300 seconds long).
+   *
+   * @schema VlClusterSpecVlstorageHpaBehaviourScaleDown#stabilizationWindowSeconds
+   */
+  readonly stabilizationWindowSeconds?: number;
+
+  /**
+   * tolerance is the tolerance on the ratio between the current and desired
+   * metric value under which no updates are made to the desired number of
+   * replicas (e.g. 0.01 for 1%). Must be greater than or equal to zero. If not
+   * set, the default cluster-wide tolerance is applied (by default 10%).
+   *
+   * For example, if autoscaling is configured with a memory consumption target of 100Mi,
+   * and scale-down and scale-up tolerances of 5% and 1% respectively, scaling will be
+   * triggered when the actual consumption falls below 95Mi or exceeds 101Mi.
+   *
+   * This is an alpha field and requires enabling the HPAConfigurableTolerance
+   * feature gate.
+   *
+   * @schema VlClusterSpecVlstorageHpaBehaviourScaleDown#tolerance
+   */
+  readonly tolerance?: VlClusterSpecVlstorageHpaBehaviourScaleDownTolerance;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaBehaviourScaleDown' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaBehaviourScaleDown(obj: VlClusterSpecVlstorageHpaBehaviourScaleDown | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'policies': obj.policies?.map(y => toJson_VlClusterSpecVlstorageHpaBehaviourScaleDownPolicies(y)),
+    'selectPolicy': obj.selectPolicy,
+    'stabilizationWindowSeconds': obj.stabilizationWindowSeconds,
+    'tolerance': obj.tolerance?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * scaleUp is scaling policy for scaling Up.
+ * If not set, the default value is the higher of:
+ * * increase no more than 4 pods per 60 seconds
+ * * double the number of pods per 60 seconds
+ * No stabilization is used.
+ *
+ * @schema VlClusterSpecVlstorageHpaBehaviourScaleUp
+ */
+export interface VlClusterSpecVlstorageHpaBehaviourScaleUp {
+  /**
+   * policies is a list of potential scaling polices which can be used during scaling.
+   * If not set, use the default values:
+   * - For scale up: allow doubling the number of pods, or an absolute change of 4 pods in a 15s window.
+   * - For scale down: allow all pods to be removed in a 15s window.
+   *
+   * @schema VlClusterSpecVlstorageHpaBehaviourScaleUp#policies
+   */
+  readonly policies?: VlClusterSpecVlstorageHpaBehaviourScaleUpPolicies[];
+
+  /**
+   * selectPolicy is used to specify which policy should be used.
+   * If not set, the default value Max is used.
+   *
+   * @schema VlClusterSpecVlstorageHpaBehaviourScaleUp#selectPolicy
+   */
+  readonly selectPolicy?: string;
+
+  /**
+   * stabilizationWindowSeconds is the number of seconds for which past recommendations should be
+   * considered while scaling up or scaling down.
+   * StabilizationWindowSeconds must be greater than or equal to zero and less than or equal to 3600 (one hour).
+   * If not set, use the default values:
+   * - For scale up: 0 (i.e. no stabilization is done).
+   * - For scale down: 300 (i.e. the stabilization window is 300 seconds long).
+   *
+   * @schema VlClusterSpecVlstorageHpaBehaviourScaleUp#stabilizationWindowSeconds
+   */
+  readonly stabilizationWindowSeconds?: number;
+
+  /**
+   * tolerance is the tolerance on the ratio between the current and desired
+   * metric value under which no updates are made to the desired number of
+   * replicas (e.g. 0.01 for 1%). Must be greater than or equal to zero. If not
+   * set, the default cluster-wide tolerance is applied (by default 10%).
+   *
+   * For example, if autoscaling is configured with a memory consumption target of 100Mi,
+   * and scale-down and scale-up tolerances of 5% and 1% respectively, scaling will be
+   * triggered when the actual consumption falls below 95Mi or exceeds 101Mi.
+   *
+   * This is an alpha field and requires enabling the HPAConfigurableTolerance
+   * feature gate.
+   *
+   * @schema VlClusterSpecVlstorageHpaBehaviourScaleUp#tolerance
+   */
+  readonly tolerance?: VlClusterSpecVlstorageHpaBehaviourScaleUpTolerance;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaBehaviourScaleUp' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaBehaviourScaleUp(obj: VlClusterSpecVlstorageHpaBehaviourScaleUp | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'policies': obj.policies?.map(y => toJson_VlClusterSpecVlstorageHpaBehaviourScaleUpPolicies(y)),
+    'selectPolicy': obj.selectPolicy,
+    'stabilizationWindowSeconds': obj.stabilizationWindowSeconds,
+    'tolerance': obj.tolerance?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * containerResource refers to a resource metric (such as those specified in
+ * requests and limits) known to Kubernetes describing a single container in
+ * each pod of the current scale target (e.g. CPU or memory). Such metrics are
+ * built in to Kubernetes, and have special scaling options on top of those
+ * available to normal per-pod metrics using the "pods" source.
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsContainerResource
+ */
+export interface VlClusterSpecVlstorageHpaMetricsContainerResource {
+  /**
+   * container is the name of the container in the pods of the scaling target
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsContainerResource#container
+   */
+  readonly container: string;
+
+  /**
+   * name is the name of the resource in question.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsContainerResource#name
+   */
+  readonly name: string;
+
+  /**
+   * target specifies the target value for the given metric
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsContainerResource#target
+   */
+  readonly target: VlClusterSpecVlstorageHpaMetricsContainerResourceTarget;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetricsContainerResource' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetricsContainerResource(obj: VlClusterSpecVlstorageHpaMetricsContainerResource | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'container': obj.container,
+    'name': obj.name,
+    'target': toJson_VlClusterSpecVlstorageHpaMetricsContainerResourceTarget(obj.target),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * external refers to a global metric that is not associated
+ * with any Kubernetes object. It allows autoscaling based on information
+ * coming from components running outside of cluster
+ * (for example length of queue in cloud messaging service, or
+ * QPS from loadbalancer running outside of cluster).
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsExternal
+ */
+export interface VlClusterSpecVlstorageHpaMetricsExternal {
+  /**
+   * metric identifies the target metric by name and selector
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsExternal#metric
+   */
+  readonly metric: VlClusterSpecVlstorageHpaMetricsExternalMetric;
+
+  /**
+   * target specifies the target value for the given metric
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsExternal#target
+   */
+  readonly target: VlClusterSpecVlstorageHpaMetricsExternalTarget;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetricsExternal' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetricsExternal(obj: VlClusterSpecVlstorageHpaMetricsExternal | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metric': toJson_VlClusterSpecVlstorageHpaMetricsExternalMetric(obj.metric),
+    'target': toJson_VlClusterSpecVlstorageHpaMetricsExternalTarget(obj.target),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * object refers to a metric describing a single kubernetes object
+ * (for example, hits-per-second on an Ingress object).
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsObject
+ */
+export interface VlClusterSpecVlstorageHpaMetricsObject {
+  /**
+   * describedObject specifies the descriptions of a object,such as kind,name apiVersion
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsObject#describedObject
+   */
+  readonly describedObject: VlClusterSpecVlstorageHpaMetricsObjectDescribedObject;
+
+  /**
+   * metric identifies the target metric by name and selector
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsObject#metric
+   */
+  readonly metric: VlClusterSpecVlstorageHpaMetricsObjectMetric;
+
+  /**
+   * target specifies the target value for the given metric
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsObject#target
+   */
+  readonly target: VlClusterSpecVlstorageHpaMetricsObjectTarget;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetricsObject' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetricsObject(obj: VlClusterSpecVlstorageHpaMetricsObject | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'describedObject': toJson_VlClusterSpecVlstorageHpaMetricsObjectDescribedObject(obj.describedObject),
+    'metric': toJson_VlClusterSpecVlstorageHpaMetricsObjectMetric(obj.metric),
+    'target': toJson_VlClusterSpecVlstorageHpaMetricsObjectTarget(obj.target),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * pods refers to a metric describing each pod in the current scale target
+ * (for example, transactions-processed-per-second).  The values will be
+ * averaged together before being compared to the target value.
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsPods
+ */
+export interface VlClusterSpecVlstorageHpaMetricsPods {
+  /**
+   * metric identifies the target metric by name and selector
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsPods#metric
+   */
+  readonly metric: VlClusterSpecVlstorageHpaMetricsPodsMetric;
+
+  /**
+   * target specifies the target value for the given metric
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsPods#target
+   */
+  readonly target: VlClusterSpecVlstorageHpaMetricsPodsTarget;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetricsPods' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetricsPods(obj: VlClusterSpecVlstorageHpaMetricsPods | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metric': toJson_VlClusterSpecVlstorageHpaMetricsPodsMetric(obj.metric),
+    'target': toJson_VlClusterSpecVlstorageHpaMetricsPodsTarget(obj.target),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * resource refers to a resource metric (such as those specified in
+ * requests and limits) known to Kubernetes describing each pod in the
+ * current scale target (e.g. CPU or memory). Such metrics are built in to
+ * Kubernetes, and have special scaling options on top of those available
+ * to normal per-pod metrics using the "pods" source.
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsResource
+ */
+export interface VlClusterSpecVlstorageHpaMetricsResource {
+  /**
+   * name is the name of the resource in question.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsResource#name
+   */
+  readonly name: string;
+
+  /**
+   * target specifies the target value for the given metric
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsResource#target
+   */
+  readonly target: VlClusterSpecVlstorageHpaMetricsResourceTarget;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetricsResource' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetricsResource(obj: VlClusterSpecVlstorageHpaMetricsResource | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'target': toJson_VlClusterSpecVlstorageHpaMetricsResourceTarget(obj.target),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * sizeLimit is the total amount of local storage required for this EmptyDir volume.
  * The size limit is also applicable for memory medium.
  * The maximum usage on memory medium EmptyDir would be the minimum value between
@@ -9990,6 +10915,1020 @@ export function toJson_VlClusterSpecVlinsertSyslogSpecTcpListenersTlsConfigKeySe
     'key': obj.key,
     'name': obj.name,
     'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * HPAScalingPolicy is a single policy which must hold true for a specified past interval.
+ *
+ * @schema VlClusterSpecVlstorageHpaBehaviourScaleDownPolicies
+ */
+export interface VlClusterSpecVlstorageHpaBehaviourScaleDownPolicies {
+  /**
+   * periodSeconds specifies the window of time for which the policy should hold true.
+   * PeriodSeconds must be greater than zero and less than or equal to 1800 (30 min).
+   *
+   * @schema VlClusterSpecVlstorageHpaBehaviourScaleDownPolicies#periodSeconds
+   */
+  readonly periodSeconds: number;
+
+  /**
+   * type is used to specify the scaling policy.
+   *
+   * @schema VlClusterSpecVlstorageHpaBehaviourScaleDownPolicies#type
+   */
+  readonly type: string;
+
+  /**
+   * value contains the amount of change which is permitted by the policy.
+   * It must be greater than zero
+   *
+   * @schema VlClusterSpecVlstorageHpaBehaviourScaleDownPolicies#value
+   */
+  readonly value: number;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaBehaviourScaleDownPolicies' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaBehaviourScaleDownPolicies(obj: VlClusterSpecVlstorageHpaBehaviourScaleDownPolicies | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'periodSeconds': obj.periodSeconds,
+    'type': obj.type,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * tolerance is the tolerance on the ratio between the current and desired
+ * metric value under which no updates are made to the desired number of
+ * replicas (e.g. 0.01 for 1%). Must be greater than or equal to zero. If not
+ * set, the default cluster-wide tolerance is applied (by default 10%).
+ *
+ * For example, if autoscaling is configured with a memory consumption target of 100Mi,
+ * and scale-down and scale-up tolerances of 5% and 1% respectively, scaling will be
+ * triggered when the actual consumption falls below 95Mi or exceeds 101Mi.
+ *
+ * This is an alpha field and requires enabling the HPAConfigurableTolerance
+ * feature gate.
+ *
+ * @schema VlClusterSpecVlstorageHpaBehaviourScaleDownTolerance
+ */
+export class VlClusterSpecVlstorageHpaBehaviourScaleDownTolerance {
+  public static fromNumber(value: number): VlClusterSpecVlstorageHpaBehaviourScaleDownTolerance {
+    return new VlClusterSpecVlstorageHpaBehaviourScaleDownTolerance(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlstorageHpaBehaviourScaleDownTolerance {
+    return new VlClusterSpecVlstorageHpaBehaviourScaleDownTolerance(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * HPAScalingPolicy is a single policy which must hold true for a specified past interval.
+ *
+ * @schema VlClusterSpecVlstorageHpaBehaviourScaleUpPolicies
+ */
+export interface VlClusterSpecVlstorageHpaBehaviourScaleUpPolicies {
+  /**
+   * periodSeconds specifies the window of time for which the policy should hold true.
+   * PeriodSeconds must be greater than zero and less than or equal to 1800 (30 min).
+   *
+   * @schema VlClusterSpecVlstorageHpaBehaviourScaleUpPolicies#periodSeconds
+   */
+  readonly periodSeconds: number;
+
+  /**
+   * type is used to specify the scaling policy.
+   *
+   * @schema VlClusterSpecVlstorageHpaBehaviourScaleUpPolicies#type
+   */
+  readonly type: string;
+
+  /**
+   * value contains the amount of change which is permitted by the policy.
+   * It must be greater than zero
+   *
+   * @schema VlClusterSpecVlstorageHpaBehaviourScaleUpPolicies#value
+   */
+  readonly value: number;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaBehaviourScaleUpPolicies' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaBehaviourScaleUpPolicies(obj: VlClusterSpecVlstorageHpaBehaviourScaleUpPolicies | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'periodSeconds': obj.periodSeconds,
+    'type': obj.type,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * tolerance is the tolerance on the ratio between the current and desired
+ * metric value under which no updates are made to the desired number of
+ * replicas (e.g. 0.01 for 1%). Must be greater than or equal to zero. If not
+ * set, the default cluster-wide tolerance is applied (by default 10%).
+ *
+ * For example, if autoscaling is configured with a memory consumption target of 100Mi,
+ * and scale-down and scale-up tolerances of 5% and 1% respectively, scaling will be
+ * triggered when the actual consumption falls below 95Mi or exceeds 101Mi.
+ *
+ * This is an alpha field and requires enabling the HPAConfigurableTolerance
+ * feature gate.
+ *
+ * @schema VlClusterSpecVlstorageHpaBehaviourScaleUpTolerance
+ */
+export class VlClusterSpecVlstorageHpaBehaviourScaleUpTolerance {
+  public static fromNumber(value: number): VlClusterSpecVlstorageHpaBehaviourScaleUpTolerance {
+    return new VlClusterSpecVlstorageHpaBehaviourScaleUpTolerance(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlstorageHpaBehaviourScaleUpTolerance {
+    return new VlClusterSpecVlstorageHpaBehaviourScaleUpTolerance(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * target specifies the target value for the given metric
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsContainerResourceTarget
+ */
+export interface VlClusterSpecVlstorageHpaMetricsContainerResourceTarget {
+  /**
+   * averageUtilization is the target value of the average of the
+   * resource metric across all relevant pods, represented as a percentage of
+   * the requested value of the resource for the pods.
+   * Currently only valid for Resource metric source type
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsContainerResourceTarget#averageUtilization
+   */
+  readonly averageUtilization?: number;
+
+  /**
+   * averageValue is the target value of the average of the
+   * metric across all relevant pods (as a quantity)
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsContainerResourceTarget#averageValue
+   */
+  readonly averageValue?: VlClusterSpecVlstorageHpaMetricsContainerResourceTargetAverageValue;
+
+  /**
+   * type represents whether the metric type is Utilization, Value, or AverageValue
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsContainerResourceTarget#type
+   */
+  readonly type: string;
+
+  /**
+   * value is the target value of the metric (as a quantity).
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsContainerResourceTarget#value
+   */
+  readonly value?: VlClusterSpecVlstorageHpaMetricsContainerResourceTargetValue;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetricsContainerResourceTarget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetricsContainerResourceTarget(obj: VlClusterSpecVlstorageHpaMetricsContainerResourceTarget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'averageUtilization': obj.averageUtilization,
+    'averageValue': obj.averageValue?.value,
+    'type': obj.type,
+    'value': obj.value?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * metric identifies the target metric by name and selector
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsExternalMetric
+ */
+export interface VlClusterSpecVlstorageHpaMetricsExternalMetric {
+  /**
+   * name is the name of the given metric
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsExternalMetric#name
+   */
+  readonly name: string;
+
+  /**
+   * selector is the string-encoded form of a standard kubernetes label selector for the given metric
+   * When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
+   * When unset, just the metricName will be used to gather metrics.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsExternalMetric#selector
+   */
+  readonly selector?: VlClusterSpecVlstorageHpaMetricsExternalMetricSelector;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetricsExternalMetric' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetricsExternalMetric(obj: VlClusterSpecVlstorageHpaMetricsExternalMetric | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'selector': toJson_VlClusterSpecVlstorageHpaMetricsExternalMetricSelector(obj.selector),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * target specifies the target value for the given metric
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsExternalTarget
+ */
+export interface VlClusterSpecVlstorageHpaMetricsExternalTarget {
+  /**
+   * averageUtilization is the target value of the average of the
+   * resource metric across all relevant pods, represented as a percentage of
+   * the requested value of the resource for the pods.
+   * Currently only valid for Resource metric source type
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsExternalTarget#averageUtilization
+   */
+  readonly averageUtilization?: number;
+
+  /**
+   * averageValue is the target value of the average of the
+   * metric across all relevant pods (as a quantity)
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsExternalTarget#averageValue
+   */
+  readonly averageValue?: VlClusterSpecVlstorageHpaMetricsExternalTargetAverageValue;
+
+  /**
+   * type represents whether the metric type is Utilization, Value, or AverageValue
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsExternalTarget#type
+   */
+  readonly type: string;
+
+  /**
+   * value is the target value of the metric (as a quantity).
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsExternalTarget#value
+   */
+  readonly value?: VlClusterSpecVlstorageHpaMetricsExternalTargetValue;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetricsExternalTarget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetricsExternalTarget(obj: VlClusterSpecVlstorageHpaMetricsExternalTarget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'averageUtilization': obj.averageUtilization,
+    'averageValue': obj.averageValue?.value,
+    'type': obj.type,
+    'value': obj.value?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * describedObject specifies the descriptions of a object,such as kind,name apiVersion
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsObjectDescribedObject
+ */
+export interface VlClusterSpecVlstorageHpaMetricsObjectDescribedObject {
+  /**
+   * apiVersion is the API version of the referent
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsObjectDescribedObject#apiVersion
+   */
+  readonly apiVersion?: string;
+
+  /**
+   * kind is the kind of the referent; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsObjectDescribedObject#kind
+   */
+  readonly kind: string;
+
+  /**
+   * name is the name of the referent; More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsObjectDescribedObject#name
+   */
+  readonly name: string;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetricsObjectDescribedObject' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetricsObjectDescribedObject(obj: VlClusterSpecVlstorageHpaMetricsObjectDescribedObject | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apiVersion': obj.apiVersion,
+    'kind': obj.kind,
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * metric identifies the target metric by name and selector
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsObjectMetric
+ */
+export interface VlClusterSpecVlstorageHpaMetricsObjectMetric {
+  /**
+   * name is the name of the given metric
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsObjectMetric#name
+   */
+  readonly name: string;
+
+  /**
+   * selector is the string-encoded form of a standard kubernetes label selector for the given metric
+   * When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
+   * When unset, just the metricName will be used to gather metrics.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsObjectMetric#selector
+   */
+  readonly selector?: VlClusterSpecVlstorageHpaMetricsObjectMetricSelector;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetricsObjectMetric' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetricsObjectMetric(obj: VlClusterSpecVlstorageHpaMetricsObjectMetric | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'selector': toJson_VlClusterSpecVlstorageHpaMetricsObjectMetricSelector(obj.selector),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * target specifies the target value for the given metric
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsObjectTarget
+ */
+export interface VlClusterSpecVlstorageHpaMetricsObjectTarget {
+  /**
+   * averageUtilization is the target value of the average of the
+   * resource metric across all relevant pods, represented as a percentage of
+   * the requested value of the resource for the pods.
+   * Currently only valid for Resource metric source type
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsObjectTarget#averageUtilization
+   */
+  readonly averageUtilization?: number;
+
+  /**
+   * averageValue is the target value of the average of the
+   * metric across all relevant pods (as a quantity)
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsObjectTarget#averageValue
+   */
+  readonly averageValue?: VlClusterSpecVlstorageHpaMetricsObjectTargetAverageValue;
+
+  /**
+   * type represents whether the metric type is Utilization, Value, or AverageValue
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsObjectTarget#type
+   */
+  readonly type: string;
+
+  /**
+   * value is the target value of the metric (as a quantity).
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsObjectTarget#value
+   */
+  readonly value?: VlClusterSpecVlstorageHpaMetricsObjectTargetValue;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetricsObjectTarget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetricsObjectTarget(obj: VlClusterSpecVlstorageHpaMetricsObjectTarget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'averageUtilization': obj.averageUtilization,
+    'averageValue': obj.averageValue?.value,
+    'type': obj.type,
+    'value': obj.value?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * metric identifies the target metric by name and selector
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsPodsMetric
+ */
+export interface VlClusterSpecVlstorageHpaMetricsPodsMetric {
+  /**
+   * name is the name of the given metric
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsPodsMetric#name
+   */
+  readonly name: string;
+
+  /**
+   * selector is the string-encoded form of a standard kubernetes label selector for the given metric
+   * When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
+   * When unset, just the metricName will be used to gather metrics.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsPodsMetric#selector
+   */
+  readonly selector?: VlClusterSpecVlstorageHpaMetricsPodsMetricSelector;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetricsPodsMetric' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetricsPodsMetric(obj: VlClusterSpecVlstorageHpaMetricsPodsMetric | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'selector': toJson_VlClusterSpecVlstorageHpaMetricsPodsMetricSelector(obj.selector),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * target specifies the target value for the given metric
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsPodsTarget
+ */
+export interface VlClusterSpecVlstorageHpaMetricsPodsTarget {
+  /**
+   * averageUtilization is the target value of the average of the
+   * resource metric across all relevant pods, represented as a percentage of
+   * the requested value of the resource for the pods.
+   * Currently only valid for Resource metric source type
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsPodsTarget#averageUtilization
+   */
+  readonly averageUtilization?: number;
+
+  /**
+   * averageValue is the target value of the average of the
+   * metric across all relevant pods (as a quantity)
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsPodsTarget#averageValue
+   */
+  readonly averageValue?: VlClusterSpecVlstorageHpaMetricsPodsTargetAverageValue;
+
+  /**
+   * type represents whether the metric type is Utilization, Value, or AverageValue
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsPodsTarget#type
+   */
+  readonly type: string;
+
+  /**
+   * value is the target value of the metric (as a quantity).
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsPodsTarget#value
+   */
+  readonly value?: VlClusterSpecVlstorageHpaMetricsPodsTargetValue;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetricsPodsTarget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetricsPodsTarget(obj: VlClusterSpecVlstorageHpaMetricsPodsTarget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'averageUtilization': obj.averageUtilization,
+    'averageValue': obj.averageValue?.value,
+    'type': obj.type,
+    'value': obj.value?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * target specifies the target value for the given metric
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsResourceTarget
+ */
+export interface VlClusterSpecVlstorageHpaMetricsResourceTarget {
+  /**
+   * averageUtilization is the target value of the average of the
+   * resource metric across all relevant pods, represented as a percentage of
+   * the requested value of the resource for the pods.
+   * Currently only valid for Resource metric source type
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsResourceTarget#averageUtilization
+   */
+  readonly averageUtilization?: number;
+
+  /**
+   * averageValue is the target value of the average of the
+   * metric across all relevant pods (as a quantity)
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsResourceTarget#averageValue
+   */
+  readonly averageValue?: VlClusterSpecVlstorageHpaMetricsResourceTargetAverageValue;
+
+  /**
+   * type represents whether the metric type is Utilization, Value, or AverageValue
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsResourceTarget#type
+   */
+  readonly type: string;
+
+  /**
+   * value is the target value of the metric (as a quantity).
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsResourceTarget#value
+   */
+  readonly value?: VlClusterSpecVlstorageHpaMetricsResourceTargetValue;
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetricsResourceTarget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetricsResourceTarget(obj: VlClusterSpecVlstorageHpaMetricsResourceTarget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'averageUtilization': obj.averageUtilization,
+    'averageValue': obj.averageValue?.value,
+    'type': obj.type,
+    'value': obj.value?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * averageValue is the target value of the average of the
+ * metric across all relevant pods (as a quantity)
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsContainerResourceTargetAverageValue
+ */
+export class VlClusterSpecVlstorageHpaMetricsContainerResourceTargetAverageValue {
+  public static fromNumber(value: number): VlClusterSpecVlstorageHpaMetricsContainerResourceTargetAverageValue {
+    return new VlClusterSpecVlstorageHpaMetricsContainerResourceTargetAverageValue(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlstorageHpaMetricsContainerResourceTargetAverageValue {
+    return new VlClusterSpecVlstorageHpaMetricsContainerResourceTargetAverageValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * value is the target value of the metric (as a quantity).
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsContainerResourceTargetValue
+ */
+export class VlClusterSpecVlstorageHpaMetricsContainerResourceTargetValue {
+  public static fromNumber(value: number): VlClusterSpecVlstorageHpaMetricsContainerResourceTargetValue {
+    return new VlClusterSpecVlstorageHpaMetricsContainerResourceTargetValue(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlstorageHpaMetricsContainerResourceTargetValue {
+    return new VlClusterSpecVlstorageHpaMetricsContainerResourceTargetValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * selector is the string-encoded form of a standard kubernetes label selector for the given metric
+ * When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
+ * When unset, just the metricName will be used to gather metrics.
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsExternalMetricSelector
+ */
+export interface VlClusterSpecVlstorageHpaMetricsExternalMetricSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsExternalMetricSelector#matchExpressions
+   */
+  readonly matchExpressions?: VlClusterSpecVlstorageHpaMetricsExternalMetricSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsExternalMetricSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetricsExternalMetricSelector' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetricsExternalMetricSelector(obj: VlClusterSpecVlstorageHpaMetricsExternalMetricSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_VlClusterSpecVlstorageHpaMetricsExternalMetricSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * averageValue is the target value of the average of the
+ * metric across all relevant pods (as a quantity)
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsExternalTargetAverageValue
+ */
+export class VlClusterSpecVlstorageHpaMetricsExternalTargetAverageValue {
+  public static fromNumber(value: number): VlClusterSpecVlstorageHpaMetricsExternalTargetAverageValue {
+    return new VlClusterSpecVlstorageHpaMetricsExternalTargetAverageValue(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlstorageHpaMetricsExternalTargetAverageValue {
+    return new VlClusterSpecVlstorageHpaMetricsExternalTargetAverageValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * value is the target value of the metric (as a quantity).
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsExternalTargetValue
+ */
+export class VlClusterSpecVlstorageHpaMetricsExternalTargetValue {
+  public static fromNumber(value: number): VlClusterSpecVlstorageHpaMetricsExternalTargetValue {
+    return new VlClusterSpecVlstorageHpaMetricsExternalTargetValue(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlstorageHpaMetricsExternalTargetValue {
+    return new VlClusterSpecVlstorageHpaMetricsExternalTargetValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * selector is the string-encoded form of a standard kubernetes label selector for the given metric
+ * When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
+ * When unset, just the metricName will be used to gather metrics.
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsObjectMetricSelector
+ */
+export interface VlClusterSpecVlstorageHpaMetricsObjectMetricSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsObjectMetricSelector#matchExpressions
+   */
+  readonly matchExpressions?: VlClusterSpecVlstorageHpaMetricsObjectMetricSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsObjectMetricSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetricsObjectMetricSelector' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetricsObjectMetricSelector(obj: VlClusterSpecVlstorageHpaMetricsObjectMetricSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_VlClusterSpecVlstorageHpaMetricsObjectMetricSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * averageValue is the target value of the average of the
+ * metric across all relevant pods (as a quantity)
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsObjectTargetAverageValue
+ */
+export class VlClusterSpecVlstorageHpaMetricsObjectTargetAverageValue {
+  public static fromNumber(value: number): VlClusterSpecVlstorageHpaMetricsObjectTargetAverageValue {
+    return new VlClusterSpecVlstorageHpaMetricsObjectTargetAverageValue(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlstorageHpaMetricsObjectTargetAverageValue {
+    return new VlClusterSpecVlstorageHpaMetricsObjectTargetAverageValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * value is the target value of the metric (as a quantity).
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsObjectTargetValue
+ */
+export class VlClusterSpecVlstorageHpaMetricsObjectTargetValue {
+  public static fromNumber(value: number): VlClusterSpecVlstorageHpaMetricsObjectTargetValue {
+    return new VlClusterSpecVlstorageHpaMetricsObjectTargetValue(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlstorageHpaMetricsObjectTargetValue {
+    return new VlClusterSpecVlstorageHpaMetricsObjectTargetValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * selector is the string-encoded form of a standard kubernetes label selector for the given metric
+ * When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
+ * When unset, just the metricName will be used to gather metrics.
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsPodsMetricSelector
+ */
+export interface VlClusterSpecVlstorageHpaMetricsPodsMetricSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsPodsMetricSelector#matchExpressions
+   */
+  readonly matchExpressions?: VlClusterSpecVlstorageHpaMetricsPodsMetricSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsPodsMetricSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetricsPodsMetricSelector' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetricsPodsMetricSelector(obj: VlClusterSpecVlstorageHpaMetricsPodsMetricSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_VlClusterSpecVlstorageHpaMetricsPodsMetricSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * averageValue is the target value of the average of the
+ * metric across all relevant pods (as a quantity)
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsPodsTargetAverageValue
+ */
+export class VlClusterSpecVlstorageHpaMetricsPodsTargetAverageValue {
+  public static fromNumber(value: number): VlClusterSpecVlstorageHpaMetricsPodsTargetAverageValue {
+    return new VlClusterSpecVlstorageHpaMetricsPodsTargetAverageValue(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlstorageHpaMetricsPodsTargetAverageValue {
+    return new VlClusterSpecVlstorageHpaMetricsPodsTargetAverageValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * value is the target value of the metric (as a quantity).
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsPodsTargetValue
+ */
+export class VlClusterSpecVlstorageHpaMetricsPodsTargetValue {
+  public static fromNumber(value: number): VlClusterSpecVlstorageHpaMetricsPodsTargetValue {
+    return new VlClusterSpecVlstorageHpaMetricsPodsTargetValue(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlstorageHpaMetricsPodsTargetValue {
+    return new VlClusterSpecVlstorageHpaMetricsPodsTargetValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * averageValue is the target value of the average of the
+ * metric across all relevant pods (as a quantity)
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsResourceTargetAverageValue
+ */
+export class VlClusterSpecVlstorageHpaMetricsResourceTargetAverageValue {
+  public static fromNumber(value: number): VlClusterSpecVlstorageHpaMetricsResourceTargetAverageValue {
+    return new VlClusterSpecVlstorageHpaMetricsResourceTargetAverageValue(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlstorageHpaMetricsResourceTargetAverageValue {
+    return new VlClusterSpecVlstorageHpaMetricsResourceTargetAverageValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * value is the target value of the metric (as a quantity).
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsResourceTargetValue
+ */
+export class VlClusterSpecVlstorageHpaMetricsResourceTargetValue {
+  public static fromNumber(value: number): VlClusterSpecVlstorageHpaMetricsResourceTargetValue {
+    return new VlClusterSpecVlstorageHpaMetricsResourceTargetValue(value);
+  }
+  public static fromString(value: string): VlClusterSpecVlstorageHpaMetricsResourceTargetValue {
+    return new VlClusterSpecVlstorageHpaMetricsResourceTargetValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsExternalMetricSelectorMatchExpressions
+ */
+export interface VlClusterSpecVlstorageHpaMetricsExternalMetricSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsExternalMetricSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsExternalMetricSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsExternalMetricSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetricsExternalMetricSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetricsExternalMetricSelectorMatchExpressions(obj: VlClusterSpecVlstorageHpaMetricsExternalMetricSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsObjectMetricSelectorMatchExpressions
+ */
+export interface VlClusterSpecVlstorageHpaMetricsObjectMetricSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsObjectMetricSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsObjectMetricSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsObjectMetricSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetricsObjectMetricSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetricsObjectMetricSelectorMatchExpressions(obj: VlClusterSpecVlstorageHpaMetricsObjectMetricSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema VlClusterSpecVlstorageHpaMetricsPodsMetricSelectorMatchExpressions
+ */
+export interface VlClusterSpecVlstorageHpaMetricsPodsMetricSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsPodsMetricSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsPodsMetricSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema VlClusterSpecVlstorageHpaMetricsPodsMetricSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+}
+
+/**
+ * Converts an object of type 'VlClusterSpecVlstorageHpaMetricsPodsMetricSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlClusterSpecVlstorageHpaMetricsPodsMetricSelectorMatchExpressions(obj: VlClusterSpecVlstorageHpaMetricsPodsMetricSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -10320,6 +12259,14 @@ export interface VlSingleSpec {
   readonly initContainers?: any[];
 
   /**
+   * License allows to configure license key to be used for enterprise features.
+   * See [here](https://docs.victoriametrics.com/victoriametrics/enterprise/#victorialogs-enterprise-features)
+   *
+   * @schema VlSingleSpec#license
+   */
+  readonly license?: VlSingleSpecLicense;
+
+  /**
    * LivenessProbe that will be added CRD pod
    *
    * @schema VlSingleSpec#livenessProbe
@@ -10639,6 +12586,7 @@ export function toJson_VlSingleSpec(obj: VlSingleSpec | undefined): Record<strin
     'image': toJson_VlSingleSpecImage(obj.image),
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VlSingleSpecImagePullSecrets(y)),
     'initContainers': obj.initContainers?.map(y => y),
+    'license': toJson_VlSingleSpecLicense(obj.license),
     'livenessProbe': obj.livenessProbe,
     'logFormat': obj.logFormat,
     'logIngestedRows': obj.logIngestedRows,
@@ -10936,6 +12884,60 @@ export function toJson_VlSingleSpecImagePullSecrets(obj: VlSingleSpecImagePullSe
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * License allows to configure license key to be used for enterprise features.
+ * See [here](https://docs.victoriametrics.com/victoriametrics/enterprise/#victorialogs-enterprise-features)
+ *
+ * @schema VlSingleSpecLicense
+ */
+export interface VlSingleSpecLicense {
+  /**
+   * Enforce offline verification of the license key.
+   *
+   * @schema VlSingleSpecLicense#forceOffline
+   */
+  readonly forceOffline?: boolean;
+
+  /**
+   * Enterprise license key. This flag is available only in [VictoriaMetrics enterprise](https://docs.victoriametrics.com/victoriametrics/enterprise/).
+   * To request a trial license, [go to](https://victoriametrics.com/products/enterprise/trial)
+   *
+   * @schema VlSingleSpecLicense#key
+   */
+  readonly key?: string;
+
+  /**
+   * KeyRef is reference to secret with license key for enterprise features.
+   *
+   * @schema VlSingleSpecLicense#keyRef
+   */
+  readonly keyRef?: VlSingleSpecLicenseKeyRef;
+
+  /**
+   * Interval to be used for checking for license key changes. Note that this is only applicable when using KeyRef.
+   *
+   * @schema VlSingleSpecLicense#reloadInterval
+   */
+  readonly reloadInterval?: string;
+}
+
+/**
+ * Converts an object of type 'VlSingleSpecLicense' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlSingleSpecLicense(obj: VlSingleSpecLicense | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'forceOffline': obj.forceOffline,
+    'key': obj.key,
+    'keyRef': toJson_VlSingleSpecLicenseKeyRef(obj.keyRef),
+    'reloadInterval': obj.reloadInterval,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -11712,6 +13714,54 @@ export interface VlSingleSpecExtraEnvsFromSecretRef {
 export function toJson_VlSingleSpecExtraEnvsFromSecretRef(obj: VlSingleSpecExtraEnvsFromSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * KeyRef is reference to secret with license key for enterprise features.
+ *
+ * @schema VlSingleSpecLicenseKeyRef
+ */
+export interface VlSingleSpecLicenseKeyRef {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema VlSingleSpecLicenseKeyRef#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VlSingleSpecLicenseKeyRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema VlSingleSpecLicenseKeyRef#optional
+   */
+  readonly optional?: boolean;
+}
+
+/**
+ * Converts an object of type 'VlSingleSpecLicenseKeyRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VlSingleSpecLicenseKeyRef(obj: VlSingleSpecLicenseKeyRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
     'name': obj.name,
     'optional': obj.optional,
   };
@@ -12539,17 +14589,6 @@ export function toJson_VmAgentProps(obj: VmAgentProps | undefined): Record<strin
  */
 export interface VmAgentSpec {
   /**
-   * APIServerConfig allows specifying a host and auth methods to access apiserver.
-   * If left empty, VMAgent is assumed to run inside of the cluster
-   * and will discover API servers automatically and use the pod's CA certificate
-   * and bearer token file at /var/run/secrets/kubernetes.io/serviceaccount/.
-   * aPIServerConfig is deprecated use apiServerConfig instead
-   *
-   * @schema VmAgentSpec#aPIServerConfig
-   */
-  readonly aPiServerConfig?: any;
-
-  /**
    * AdditionalScrapeConfigs As scrape configs are appended, the user is responsible to make sure it
    * is valid. Note that using this feature may expose the possibility to
    * break upgrades of VMAgent. It is advised to review VMAgent release
@@ -12620,7 +14659,15 @@ export interface VmAgentSpec {
   readonly configReloaderExtraArgs?: { [key: string]: string };
 
   /**
+   * ConfigReloaderImage defines image:tag for config-reloader container
+   *
+   * @schema VmAgentSpec#configReloaderImage
+   */
+  readonly configReloaderImage?: string;
+
+  /**
    * ConfigReloaderImageTag defines image:tag for config-reloader container
+   * Deprecated: use configReloaderImage instead
    *
    * @schema VmAgentSpec#configReloaderImageTag
    */
@@ -12708,6 +14755,16 @@ export interface VmAgentSpec {
   readonly enforcedNamespaceLabel?: string;
 
   /**
+   * ExternalLabelName Name of external label used to denote scraping agent instance
+   * name. Defaults to the value of `prometheus`. External label will
+   * _not_ be added when value is set to empty string (`""`).
+   *
+   * @default the value of `prometheus`. External label will
+   * @schema VmAgentSpec#externalLabelName
+   */
+  readonly externalLabelName?: string;
+
+  /**
    * ExternalLabels The labels to add to any time series scraped by vmagent.
    * it doesn't affect metrics ingested directly by push API's
    *
@@ -12772,7 +14829,7 @@ export interface VmAgentSpec {
   /**
    * IgnoreNamespaceSelectors if set to true will ignore NamespaceSelector settings from
    * scrape objects, and they will only discover endpoints
-   * within their current namespace.  Defaults to false.
+   * within their current namespace. Defaults to false.
    *
    * @default false.
    * @schema VmAgentSpec#ignoreNamespaceSelectors
@@ -12947,7 +15004,7 @@ export interface VmAgentSpec {
 
   /**
    * OverrideHonorLabels if set to true overrides all user configured honor_labels.
-   * If HonorLabels is set in scrape objects  to true, this overrides honor_labels to false.
+   * If HonorLabels is set in scrape objects to true, this overrides honor_labels to false.
    *
    * @schema VmAgentSpec#overrideHonorLabels
    */
@@ -13142,6 +15199,13 @@ export interface VmAgentSpec {
    * @schema VmAgentSpec#runtimeClassName
    */
   readonly runtimeClassName?: string;
+
+  /**
+   * SampleLimit defines global per target limit of scraped samples
+   *
+   * @schema VmAgentSpec#sampleLimit
+   */
+  readonly sampleLimit?: number;
 
   /**
    * SchedulerName - defines kubernetes scheduler name
@@ -13408,6 +15472,7 @@ export interface VmAgentSpec {
    * UseVMConfigReloader replaces prometheus-like config-reloader
    * with vm one. It uses secrets watch instead of file watch
    * which greatly increases speed of config updates
+   * Removed since v0.67.0: this property is ignored and no longer needed
    *
    * @schema VmAgentSpec#useVMConfigReloader
    */
@@ -13417,6 +15482,7 @@ export interface VmAgentSpec {
    * VMAgentExternalLabelName Name of vmAgent external label used to denote vmAgent instance
    * name. Defaults to the value of `prometheus`. External label will
    * _not_ be added when value is set to empty string (`""`).
+   * Deprecated: use externalLabelName instead. will be removed in v0.69.0
    *
    * @default the value of `prometheus`. External label will
    * @schema VmAgentSpec#vmAgentExternalLabelName
@@ -13448,7 +15514,6 @@ export interface VmAgentSpec {
 export function toJson_VmAgentSpec(obj: VmAgentSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'aPIServerConfig': obj.aPiServerConfig,
     'additionalScrapeConfigs': toJson_VmAgentSpecAdditionalScrapeConfigs(obj.additionalScrapeConfigs),
     'affinity': obj.affinity,
     'apiServerConfig': toJson_VmAgentSpecApiServerConfig(obj.apiServerConfig),
@@ -13457,6 +15522,7 @@ export function toJson_VmAgentSpec(obj: VmAgentSpec | undefined): Record<string,
     'configMaps': obj.configMaps?.map(y => y),
     'configReloadAuthKeySecret': toJson_VmAgentSpecConfigReloadAuthKeySecret(obj.configReloadAuthKeySecret),
     'configReloaderExtraArgs': ((obj.configReloaderExtraArgs) === undefined) ? undefined : (Object.entries(obj.configReloaderExtraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'configReloaderImage': obj.configReloaderImage,
     'configReloaderImageTag': obj.configReloaderImageTag,
     'configReloaderResources': toJson_VmAgentSpecConfigReloaderResources(obj.configReloaderResources),
     'containers': obj.containers?.map(y => y),
@@ -13467,6 +15533,7 @@ export function toJson_VmAgentSpec(obj: VmAgentSpec | undefined): Record<string,
     'dnsPolicy': obj.dnsPolicy,
     'enableKubernetesAPISelectors': obj.enableKubernetesApiSelectors,
     'enforcedNamespaceLabel': obj.enforcedNamespaceLabel,
+    'externalLabelName': obj.externalLabelName,
     'externalLabels': ((obj.externalLabels) === undefined) ? undefined : (Object.entries(obj.externalLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'extraArgs': ((obj.extraArgs) === undefined) ? undefined : (Object.entries(obj.extraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'extraEnvs': obj.extraEnvs?.map(y => toJson_VmAgentSpecExtraEnvs(y)),
@@ -13519,6 +15586,7 @@ export function toJson_VmAgentSpec(obj: VmAgentSpec | undefined): Record<string,
     'revisionHistoryLimitCount': obj.revisionHistoryLimitCount,
     'rollingUpdate': toJson_VmAgentSpecRollingUpdate(obj.rollingUpdate),
     'runtimeClassName': obj.runtimeClassName,
+    'sampleLimit': obj.sampleLimit,
     'schedulerName': obj.schedulerName,
     'scrapeClasses': obj.scrapeClasses?.map(y => toJson_VmAgentSpecScrapeClasses(y)),
     'scrapeConfigNamespaceSelector': toJson_VmAgentSpecScrapeConfigNamespaceSelector(obj.scrapeConfigNamespaceSelector),
@@ -18669,6 +20737,14 @@ export class VmAgentSpecRollingUpdateMaxUnavailable {
  */
 export interface VmAgentSpecScrapeClassesAttachMetadata {
   /**
+   * Namespace instructs vmagent to add namespace specific metadata from service discovery
+   * Valid for roles: pod, service, endpoints, endpointslice, ingress.
+   *
+   * @schema VmAgentSpecScrapeClassesAttachMetadata#namespace
+   */
+  readonly namespace?: boolean;
+
+  /**
    * Node instructs vmagent to add node specific metadata from service discovery
    * Valid for roles: pod, endpoints, endpointslice.
    *
@@ -18684,6 +20760,7 @@ export interface VmAgentSpecScrapeClassesAttachMetadata {
 export function toJson_VmAgentSpecScrapeClassesAttachMetadata(obj: VmAgentSpecScrapeClassesAttachMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'namespace': obj.namespace,
     'node': obj.node,
   };
   // filter undefined values
@@ -23674,7 +25751,15 @@ export interface VmAlertSpec {
   readonly configReloaderExtraArgs?: { [key: string]: string };
 
   /**
+   * ConfigReloaderImage defines image:tag for config-reloader container
+   *
+   * @schema VmAlertSpec#configReloaderImage
+   */
+  readonly configReloaderImage?: string;
+
+  /**
    * ConfigReloaderImageTag defines image:tag for config-reloader container
+   * Deprecated: use configReloaderImage instead
    *
    * @schema VmAlertSpec#configReloaderImageTag
    */
@@ -24172,6 +26257,7 @@ export interface VmAlertSpec {
    * UseVMConfigReloader replaces prometheus-like config-reloader
    * with vm one. It uses secrets watch instead of file watch
    * which greatly increases speed of config updates
+   * Removed since v0.67.0: this property is ignored and no longer needed
    *
    * @schema VmAlertSpec#useVMConfigReloader
    */
@@ -24206,6 +26292,7 @@ export function toJson_VmAlertSpec(obj: VmAlertSpec | undefined): Record<string,
     'configMaps': obj.configMaps?.map(y => y),
     'configReloadAuthKeySecret': toJson_VmAlertSpecConfigReloadAuthKeySecret(obj.configReloadAuthKeySecret),
     'configReloaderExtraArgs': ((obj.configReloaderExtraArgs) === undefined) ? undefined : (Object.entries(obj.configReloaderExtraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'configReloaderImage': obj.configReloaderImage,
     'configReloaderImageTag': obj.configReloaderImageTag,
     'configReloaderResources': toJson_VmAlertSpecConfigReloaderResources(obj.configReloaderResources),
     'containers': obj.containers?.map(y => y),
@@ -27910,7 +29997,15 @@ export interface VmAlertmanagerSpec {
   readonly configReloaderExtraArgs?: { [key: string]: string };
 
   /**
+   * ConfigReloaderImage defines image:tag for config-reloader container
+   *
+   * @schema VmAlertmanagerSpec#configReloaderImage
+   */
+  readonly configReloaderImage?: string;
+
+  /**
    * ConfigReloaderImageTag defines image:tag for config-reloader container
+   * Deprecated: use configReloaderImage instead
    *
    * @schema VmAlertmanagerSpec#configReloaderImageTag
    */
@@ -28415,6 +30510,7 @@ export interface VmAlertmanagerSpec {
    * UseVMConfigReloader replaces prometheus-like config-reloader
    * with vm one. It uses secrets watch instead of file watch
    * which greatly increases speed of config updates
+   * Removed since v0.67.0: this property is ignored and no longer needed
    *
    * @schema VmAlertmanagerSpec#useVMConfigReloader
    */
@@ -28463,6 +30559,7 @@ export function toJson_VmAlertmanagerSpec(obj: VmAlertmanagerSpec | undefined): 
     'configRawYaml': obj.configRawYaml,
     'configReloadAuthKeySecret': toJson_VmAlertmanagerSpecConfigReloadAuthKeySecret(obj.configReloadAuthKeySecret),
     'configReloaderExtraArgs': ((obj.configReloaderExtraArgs) === undefined) ? undefined : (Object.entries(obj.configReloaderExtraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'configReloaderImage': obj.configReloaderImage,
     'configReloaderImageTag': obj.configReloaderImageTag,
     'configReloaderResources': toJson_VmAlertmanagerSpecConfigReloaderResources(obj.configReloaderResources),
     'configSecret': obj.configSecret,
@@ -43642,6 +45739,13 @@ export interface VmAnomalySpec {
   readonly securityContext?: any;
 
   /**
+   * Server configures HTTP server for VMAnomaly
+   *
+   * @schema VmAnomalySpec#server
+   */
+  readonly server?: VmAnomalySpecServer;
+
+  /**
    * ServiceAccountName is the name of the ServiceAccount to use to run the pods
    *
    * @schema VmAnomalySpec#serviceAccountName
@@ -43795,6 +45899,7 @@ export function toJson_VmAnomalySpec(obj: VmAnomalySpec | undefined): Record<str
     'schedulerName': obj.schedulerName,
     'secrets': obj.secrets?.map(y => y),
     'securityContext': obj.securityContext,
+    'server': toJson_VmAnomalySpecServer(obj.server),
     'serviceAccountName': obj.serviceAccountName,
     'serviceScrapeSpec': obj.serviceScrapeSpec,
     'shardCount': obj.shardCount,
@@ -44735,6 +46840,67 @@ export function toJson_VmAnomalySpecResources(obj: VmAnomalySpecResources | unde
     'claims': obj.claims?.map(y => toJson_VmAnomalySpecResourcesClaims(y)),
     'limits': ((obj.limits) === undefined) ? undefined : (Object.entries(obj.limits).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
     'requests': ((obj.requests) === undefined) ? undefined : (Object.entries(obj.requests).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.value }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Server configures HTTP server for VMAnomaly
+ *
+ * @schema VmAnomalySpecServer
+ */
+export interface VmAnomalySpecServer {
+  /**
+   * Addr defines IP address to listen on
+   *
+   * @schema VmAnomalySpecServer#addr
+   */
+  readonly addr?: string;
+
+  /**
+   * MaxConcurrentTasks defines maximum number of concurrent anomaly detection tasks
+   *
+   * @schema VmAnomalySpecServer#maxConcurrentTasks
+   */
+  readonly maxConcurrentTasks?: number;
+
+  /**
+   * PathPrefix defines optional URL path prefix for all HTTP routes
+   * If set to 'my-app' or '/my-app', routes will be served under '/my-app/...'
+   *
+   * @schema VmAnomalySpecServer#pathPrefix
+   */
+  readonly pathPrefix?: string;
+
+  /**
+   * Port defines port to listen on
+   *
+   * @schema VmAnomalySpecServer#port
+   */
+  readonly port?: string;
+
+  /**
+   * UIDefaultState defines default query state for anomaly UI
+   *
+   * @schema VmAnomalySpecServer#uiDefaultState
+   */
+  readonly uiDefaultState?: string;
+}
+
+/**
+ * Converts an object of type 'VmAnomalySpecServer' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAnomalySpecServer(obj: VmAnomalySpecServer | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'addr': obj.addr,
+    'maxConcurrentTasks': obj.maxConcurrentTasks,
+    'pathPrefix': obj.pathPrefix,
+    'port': obj.port,
+    'uiDefaultState': obj.uiDefaultState,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -49141,7 +51307,15 @@ export interface VmAuthSpec {
   readonly configReloaderExtraArgs?: { [key: string]: string };
 
   /**
+   * ConfigReloaderImage defines image:tag for config-reloader container
+   *
+   * @schema VmAuthSpec#configReloaderImage
+   */
+  readonly configReloaderImage?: string;
+
+  /**
    * ConfigReloaderImageTag defines image:tag for config-reloader container
+   * Deprecated: use configReloaderImage instead
    *
    * @schema VmAuthSpec#configReloaderImageTag
    */
@@ -49603,6 +51777,7 @@ export interface VmAuthSpec {
    * UseVMConfigReloader replaces prometheus-like config-reloader
    * with vm one. It uses secrets watch instead of file watch
    * which greatly increases speed of config updates
+   * Removed since v0.67.0: this property is ignored and no longer needed
    *
    * @schema VmAuthSpec#useVMConfigReloader
    */
@@ -49658,6 +51833,7 @@ export function toJson_VmAuthSpec(obj: VmAuthSpec | undefined): Record<string, a
     'configMaps': obj.configMaps?.map(y => y),
     'configReloadAuthKeySecret': toJson_VmAuthSpecConfigReloadAuthKeySecret(obj.configReloadAuthKeySecret),
     'configReloaderExtraArgs': ((obj.configReloaderExtraArgs) === undefined) ? undefined : (Object.entries(obj.configReloaderExtraArgs).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'configReloaderImage': obj.configReloaderImage,
     'configReloaderImageTag': obj.configReloaderImageTag,
     'configReloaderResources': toJson_VmAuthSpecConfigReloaderResources(obj.configReloaderResources),
     'configSecret': obj.configSecret,
@@ -50977,6 +53153,13 @@ export interface VmAuthSpecUnauthorizedUserAccessSpec {
   readonly retryStatusCodes?: number[];
 
   /**
+   * TargetRefs - reference to endpoints, which user may access.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpec#targetRefs
+   */
+  readonly targetRefs?: VmAuthSpecUnauthorizedUserAccessSpecTargetRefs[];
+
+  /**
    * TLSConfig defines tls configuration for the backend connection
    *
    * @schema VmAuthSpecUnauthorizedUserAccessSpec#tlsConfig
@@ -50984,12 +53167,16 @@ export interface VmAuthSpecUnauthorizedUserAccessSpec {
   readonly tlsConfig?: VmAuthSpecUnauthorizedUserAccessSpecTlsConfig;
 
   /**
+   * URLMap defines url map for destination
+   * Deprecated since 0.67: use targetRefs instead
+   *
    * @schema VmAuthSpecUnauthorizedUserAccessSpec#url_map
    */
   readonly urlMap?: VmAuthSpecUnauthorizedUserAccessSpecUrlMap[];
 
   /**
-   * URLPrefix defines prefix prefix for destination
+   * URLPrefix defines url prefix for destination
+   * Deprecated since 0.67: use targetRefs instead
    *
    * @schema VmAuthSpecUnauthorizedUserAccessSpec#url_prefix
    */
@@ -51014,6 +53201,7 @@ export function toJson_VmAuthSpecUnauthorizedUserAccessSpec(obj: VmAuthSpecUnaut
     'metric_labels': ((obj.metricLabels) === undefined) ? undefined : (Object.entries(obj.metricLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'response_headers': obj.responseHeaders?.map(y => y),
     'retry_status_codes': obj.retryStatusCodes?.map(y => y),
+    'targetRefs': obj.targetRefs?.map(y => toJson_VmAuthSpecUnauthorizedUserAccessSpecTargetRefs(y)),
     'tlsConfig': toJson_VmAuthSpecUnauthorizedUserAccessSpecTlsConfig(obj.tlsConfig),
     'url_map': obj.urlMap?.map(y => toJson_VmAuthSpecUnauthorizedUserAccessSpecUrlMap(y)),
     'url_prefix': obj.urlPrefix,
@@ -52186,6 +54374,164 @@ export enum VmAuthSpecUnauthorizedUserAccessSpecLoadBalancingPolicy {
 }
 
 /**
+ * TargetRef describes target for user traffic forwarding.
+ * one of target types can be chosen:
+ * crd or static per targetRef.
+ * user can define multiple targetRefs with different ref Types.
+ *
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefs
+ */
+export interface VmAuthSpecUnauthorizedUserAccessSpecTargetRefs {
+  /**
+   * CRD describes exist operator's CRD object,
+   * operator generates access url based on CRD params.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefs#crd
+   */
+  readonly crd?: VmAuthSpecUnauthorizedUserAccessSpecTargetRefsCrd;
+
+  /**
+   * DiscoverBackendIPs instructs discovering URLPrefix backend IPs via DNS.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefs#discover_backend_ips
+   */
+  readonly discoverBackendIps?: boolean;
+
+  /**
+   * DropSrcPathPrefixParts is the number of `/`-delimited request path prefix parts to drop before proxying the request to backend.
+   * See [here](https://docs.victoriametrics.com/victoriametrics/vmauth/#dropping-request-path-prefix) for more details.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefs#drop_src_path_prefix_parts
+   */
+  readonly dropSrcPathPrefixParts?: number;
+
+  /**
+   * RequestHeaders represent additional http headers, that vmauth uses
+   * in form of ["header_key: header_value"]
+   * multiple values for header key:
+   * ["header_key: value1,value2"]
+   * it's available since 1.68.0 version of vmauth
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefs#headers
+   */
+  readonly headers?: string[];
+
+  /**
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefs#hosts
+   */
+  readonly hosts?: string[];
+
+  /**
+   * LoadBalancingPolicy defines load balancing policy to use for backend urls.
+   * Supported policies: least_loaded, first_available.
+   * See [here](https://docs.victoriametrics.com/victoriametrics/vmauth/#load-balancing) for more details (default "least_loaded")
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefs#load_balancing_policy
+   */
+  readonly loadBalancingPolicy?: VmAuthSpecUnauthorizedUserAccessSpecTargetRefsLoadBalancingPolicy;
+
+  /**
+   * Paths - matched path to route.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefs#paths
+   */
+  readonly paths?: string[];
+
+  /**
+   * QueryArgs appends list of query arguments to generated URL
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefs#query_args
+   */
+  readonly queryArgs?: VmAuthSpecUnauthorizedUserAccessSpecTargetRefsQueryArgs[];
+
+  /**
+   * ResponseHeaders represent additional http headers, that vmauth adds for request response
+   * in form of ["header_key: header_value"]
+   * multiple values for header key:
+   * ["header_key: value1,value2"]
+   * it's available since 1.93.0 version of vmauth
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefs#response_headers
+   */
+  readonly responseHeaders?: string[];
+
+  /**
+   * RetryStatusCodes defines http status codes in numeric format for request retries
+   * Can be defined per target or at VMUser.spec level
+   * e.g. [429,503]
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefs#retry_status_codes
+   */
+  readonly retryStatusCodes?: number[];
+
+  /**
+   * SrcHeaders is an optional list of headers, which must match request headers.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefs#src_headers
+   */
+  readonly srcHeaders?: string[];
+
+  /**
+   * SrcQueryArgs is an optional list of query args, which must match request URL query args.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefs#src_query_args
+   */
+  readonly srcQueryArgs?: string[];
+
+  /**
+   * Static - user defined url for traffic forward,
+   * for instance http://vmsingle:8428
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefs#static
+   */
+  readonly static?: VmAuthSpecUnauthorizedUserAccessSpecTargetRefsStatic;
+
+  /**
+   * TargetRefBasicAuth allow an target endpoint to authenticate over basic authentication
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefs#targetRefBasicAuth
+   */
+  readonly targetRefBasicAuth?: VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuth;
+
+  /**
+   * TargetPathSuffix allows to add some suffix to the target path
+   * It allows to hide tenant configuration from user with crd as ref.
+   * it also may contain any url encoded params.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefs#target_path_suffix
+   */
+  readonly targetPathSuffix?: string;
+}
+
+/**
+ * Converts an object of type 'VmAuthSpecUnauthorizedUserAccessSpecTargetRefs' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAuthSpecUnauthorizedUserAccessSpecTargetRefs(obj: VmAuthSpecUnauthorizedUserAccessSpecTargetRefs | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'crd': toJson_VmAuthSpecUnauthorizedUserAccessSpecTargetRefsCrd(obj.crd),
+    'discover_backend_ips': obj.discoverBackendIps,
+    'drop_src_path_prefix_parts': obj.dropSrcPathPrefixParts,
+    'headers': obj.headers?.map(y => y),
+    'hosts': obj.hosts?.map(y => y),
+    'load_balancing_policy': obj.loadBalancingPolicy,
+    'paths': obj.paths?.map(y => y),
+    'query_args': obj.queryArgs?.map(y => toJson_VmAuthSpecUnauthorizedUserAccessSpecTargetRefsQueryArgs(y)),
+    'response_headers': obj.responseHeaders?.map(y => y),
+    'retry_status_codes': obj.retryStatusCodes?.map(y => y),
+    'src_headers': obj.srcHeaders?.map(y => y),
+    'src_query_args': obj.srcQueryArgs?.map(y => y),
+    'static': toJson_VmAuthSpecUnauthorizedUserAccessSpecTargetRefsStatic(obj.static),
+    'targetRefBasicAuth': toJson_VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuth(obj.targetRefBasicAuth),
+    'target_path_suffix': obj.targetPathSuffix,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * TLSConfig defines tls configuration for the backend connection
  *
  * @schema VmAuthSpecUnauthorizedUserAccessSpecTlsConfig
@@ -52876,6 +55222,179 @@ export function toJson_VmAuthSpecIngressExtraRulesHttp(obj: VmAuthSpecIngressExt
   if (obj === undefined) { return undefined; }
   const result = {
     'paths': obj.paths?.map(y => toJson_VmAuthSpecIngressExtraRulesHttpPaths(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * CRD describes exist operator's CRD object,
+ * operator generates access url based on CRD params.
+ *
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsCrd
+ */
+export interface VmAuthSpecUnauthorizedUserAccessSpecTargetRefsCrd {
+  /**
+   * Kind one of:
+   * VMAgent,VMAlert, VMSingle, VMCluster/vmselect, VMCluster/vmstorage,VMCluster/vminsert,VMAlertManager, VLSingle, VLCluster/vlinsert, VLCluster/vlselect, VLCluster/vlstorage, VTSingle, VTCluster/vtinsert, VTCluster/vtselect, VTCluster/vtstorage and VLAgent
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsCrd#kind
+   */
+  readonly kind: VmAuthSpecUnauthorizedUserAccessSpecTargetRefsCrdKind;
+
+  /**
+   * Name target CRD object name
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsCrd#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace target CRD object namespace.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsCrd#namespace
+   */
+  readonly namespace: string;
+}
+
+/**
+ * Converts an object of type 'VmAuthSpecUnauthorizedUserAccessSpecTargetRefsCrd' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAuthSpecUnauthorizedUserAccessSpecTargetRefsCrd(obj: VmAuthSpecUnauthorizedUserAccessSpecTargetRefsCrd | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'kind': obj.kind,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LoadBalancingPolicy defines load balancing policy to use for backend urls.
+ * Supported policies: least_loaded, first_available.
+ * See [here](https://docs.victoriametrics.com/victoriametrics/vmauth/#load-balancing) for more details (default "least_loaded")
+ *
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsLoadBalancingPolicy
+ */
+export enum VmAuthSpecUnauthorizedUserAccessSpecTargetRefsLoadBalancingPolicy {
+  /** least_loaded */
+  LEAST_UNDERSCORE_LOADED = "least_loaded",
+  /** first_available */
+  FIRST_UNDERSCORE_AVAILABLE = "first_available",
+}
+
+/**
+ * QueryArg defines item for query arguments
+ *
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsQueryArgs
+ */
+export interface VmAuthSpecUnauthorizedUserAccessSpecTargetRefsQueryArgs {
+  /**
+   * Name of query argument
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsQueryArgs#name
+   */
+  readonly name: string;
+
+  /**
+   * Values of query argument
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsQueryArgs#values
+   */
+  readonly values: string[];
+}
+
+/**
+ * Converts an object of type 'VmAuthSpecUnauthorizedUserAccessSpecTargetRefsQueryArgs' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAuthSpecUnauthorizedUserAccessSpecTargetRefsQueryArgs(obj: VmAuthSpecUnauthorizedUserAccessSpecTargetRefsQueryArgs | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Static - user defined url for traffic forward,
+ * for instance http://vmsingle:8428
+ *
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsStatic
+ */
+export interface VmAuthSpecUnauthorizedUserAccessSpecTargetRefsStatic {
+  /**
+   * URL http url for given staticRef.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsStatic#url
+   */
+  readonly url?: string;
+
+  /**
+   * URLs allows setting multiple urls for load-balancing at vmauth-side.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsStatic#urls
+   */
+  readonly urls?: string[];
+}
+
+/**
+ * Converts an object of type 'VmAuthSpecUnauthorizedUserAccessSpecTargetRefsStatic' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAuthSpecUnauthorizedUserAccessSpecTargetRefsStatic(obj: VmAuthSpecUnauthorizedUserAccessSpecTargetRefsStatic | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'url': obj.url,
+    'urls': obj.urls?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * TargetRefBasicAuth allow an target endpoint to authenticate over basic authentication
+ *
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuth
+ */
+export interface VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuth {
+  /**
+   * The secret in the service scrape namespace that contains the password
+   * for authentication.
+   * It must be at them same namespace as CRD
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuth#password
+   */
+  readonly password: VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuthPassword;
+
+  /**
+   * The secret in the service scrape namespace that contains the username
+   * for authentication.
+   * It must be at them same namespace as CRD
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuth#username
+   */
+  readonly username: VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuthUsername;
+}
+
+/**
+ * Converts an object of type 'VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuth' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuth(obj: VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuth | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'password': toJson_VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuthPassword(obj.password),
+    'username': toJson_VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuthUsername(obj.username),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -53654,6 +56173,149 @@ export function toJson_VmAuthSpecIngressExtraRulesHttpPaths(obj: VmAuthSpecIngre
     'backend': toJson_VmAuthSpecIngressExtraRulesHttpPathsBackend(obj.backend),
     'path': obj.path,
     'pathType': obj.pathType,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Kind one of:
+ * VMAgent,VMAlert, VMSingle, VMCluster/vmselect, VMCluster/vmstorage,VMCluster/vminsert,VMAlertManager, VLSingle, VLCluster/vlinsert, VLCluster/vlselect, VLCluster/vlstorage, VTSingle, VTCluster/vtinsert, VTCluster/vtselect, VTCluster/vtstorage and VLAgent
+ *
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsCrdKind
+ */
+export enum VmAuthSpecUnauthorizedUserAccessSpecTargetRefsCrdKind {
+  /** VMAgent */
+  VM_AGENT = "VMAgent",
+  /** VMAlert */
+  VM_ALERT = "VMAlert",
+  /** VMSingle */
+  VM_SINGLE = "VMSingle",
+  /** VLogs */
+  V_LOGS = "VLogs",
+  /** VMAlertManager */
+  VM_ALERT_MANAGER = "VMAlertManager",
+  /** VMCluster/vmselect */
+  VM_CLUSTER_FORWARD_SLASH_VMSELECT = "VMCluster/vmselect",
+  /** VMCluster/vmstorage */
+  VM_CLUSTER_FORWARD_SLASH_VMSTORAGE = "VMCluster/vmstorage",
+  /** VMCluster/vminsert */
+  VM_CLUSTER_FORWARD_SLASH_VMINSERT = "VMCluster/vminsert",
+  /** VLSingle */
+  VL_SINGLE = "VLSingle",
+  /** VLCluster/vlinsert */
+  VL_CLUSTER_FORWARD_SLASH_VLINSERT = "VLCluster/vlinsert",
+  /** VLCluster/vlselect */
+  VL_CLUSTER_FORWARD_SLASH_VLSELECT = "VLCluster/vlselect",
+  /** VLCluster/vlstorage */
+  VL_CLUSTER_FORWARD_SLASH_VLSTORAGE = "VLCluster/vlstorage",
+  /** VLAgent */
+  VL_AGENT = "VLAgent",
+  /** VTCluster/vtinsert */
+  VT_CLUSTER_FORWARD_SLASH_VTINSERT = "VTCluster/vtinsert",
+  /** VTCluster/vtselect */
+  VT_CLUSTER_FORWARD_SLASH_VTSELECT = "VTCluster/vtselect",
+  /** VTCluster/vtstorage */
+  VT_CLUSTER_FORWARD_SLASH_VTSTORAGE = "VTCluster/vtstorage",
+  /** VTSingle */
+  VT_SINGLE = "VTSingle",
+}
+
+/**
+ * The secret in the service scrape namespace that contains the password
+ * for authentication.
+ * It must be at them same namespace as CRD
+ *
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuthPassword
+ */
+export interface VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuthPassword {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuthPassword#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuthPassword#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuthPassword#optional
+   */
+  readonly optional?: boolean;
+}
+
+/**
+ * Converts an object of type 'VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuthPassword' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuthPassword(obj: VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuthPassword | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The secret in the service scrape namespace that contains the username
+ * for authentication.
+ * It must be at them same namespace as CRD
+ *
+ * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuthUsername
+ */
+export interface VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuthUsername {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuthUsername#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuthUsername#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuthUsername#optional
+   */
+  readonly optional?: boolean;
+}
+
+/**
+ * Converts an object of type 'VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuthUsername' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuthUsername(obj: VmAuthSpecUnauthorizedUserAccessSpecTargetRefsTargetRefBasicAuthUsername | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -55536,15 +58198,6 @@ export interface VmClusterSpecVmselect {
   readonly paused?: boolean;
 
   /**
-   * PersistentVolume - add persistent volume for cacheMountPath
-   * its useful for persistent cache
-   * use storage instead of persistentVolume.
-   *
-   * @schema VmClusterSpecVmselect#persistentVolume
-   */
-  readonly persistentVolume?: VmClusterSpecVmselectPersistentVolume;
-
-  /**
    * PersistentVolumeClaimRetentionPolicy allows configuration of PVC retention policy
    *
    * @schema VmClusterSpecVmselect#persistentVolumeClaimRetentionPolicy
@@ -55790,7 +58443,6 @@ export function toJson_VmClusterSpecVmselect(obj: VmClusterSpecVmselect | undefi
     'minReadySeconds': obj.minReadySeconds,
     'nodeSelector': ((obj.nodeSelector) === undefined) ? undefined : (Object.entries(obj.nodeSelector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'paused': obj.paused,
-    'persistentVolume': toJson_VmClusterSpecVmselectPersistentVolume(obj.persistentVolume),
     'persistentVolumeClaimRetentionPolicy': toJson_VmClusterSpecVmselectPersistentVolumeClaimRetentionPolicy(obj.persistentVolumeClaimRetentionPolicy),
     'podDisruptionBudget': toJson_VmClusterSpecVmselectPodDisruptionBudget(obj.podDisruptionBudget),
     'podMetadata': toJson_VmClusterSpecVmselectPodMetadata(obj.podMetadata),
@@ -55934,6 +58586,14 @@ export interface VmClusterSpecVmstorage {
    */
   readonly hostNetwork?: boolean;
 
+
+  /**
+   * Configures horizontal pod autoscaling.
+   * Note, downscaling is not supported.
+   *
+   * @schema VmClusterSpecVmstorage#hpa
+   */
+  readonly hpa?: VmClusterSpecVmstorageHpa;
 
   /**
    * Image - docker image settings
@@ -56285,6 +58945,7 @@ export function toJson_VmClusterSpecVmstorage(obj: VmClusterSpecVmstorage | unde
     'extraEnvsFrom': obj.extraEnvsFrom?.map(y => toJson_VmClusterSpecVmstorageExtraEnvsFrom(y)),
     'hostAliases': obj.hostAliases?.map(y => toJson_VmClusterSpecVmstorageHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
+    'hpa': toJson_VmClusterSpecVmstorageHpa(obj.hpa),
     'image': toJson_VmClusterSpecVmstorageImage(obj.image),
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VmClusterSpecVmstorageImagePullSecrets(y)),
     'initContainers': obj.initContainers?.map(y => y),
@@ -57507,54 +60168,6 @@ export enum VmClusterSpecVmselectLogLevel {
 }
 
 /**
- * PersistentVolume - add persistent volume for cacheMountPath
- * its useful for persistent cache
- * use storage instead of persistentVolume.
- *
- * @schema VmClusterSpecVmselectPersistentVolume
- */
-export interface VmClusterSpecVmselectPersistentVolume {
-  /**
-   * Deprecated: subPath usage will be disabled by default in a future release, this option will become unnecessary.
-   * DisableMountSubPath allows to remove any subPath usage in volume mounts.
-   *
-   * @schema VmClusterSpecVmselectPersistentVolume#disableMountSubPath
-   */
-  readonly disableMountSubPath?: boolean;
-
-  /**
-   * EmptyDirVolumeSource to be used by the Prometheus StatefulSets. If specified, used in place of any volumeClaimTemplate. More
-   * info: https://kubernetes.io/docs/concepts/storage/volumes/#emptydir
-   *
-   * @schema VmClusterSpecVmselectPersistentVolume#emptyDir
-   */
-  readonly emptyDir?: VmClusterSpecVmselectPersistentVolumeEmptyDir;
-
-  /**
-   * A PVC spec to be used by the StatefulSets/Deployments.
-   *
-   * @schema VmClusterSpecVmselectPersistentVolume#volumeClaimTemplate
-   */
-  readonly volumeClaimTemplate?: any;
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmselectPersistentVolume' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmselectPersistentVolume(obj: VmClusterSpecVmselectPersistentVolume | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'disableMountSubPath': obj.disableMountSubPath,
-    'emptyDir': toJson_VmClusterSpecVmselectPersistentVolumeEmptyDir(obj.emptyDir),
-    'volumeClaimTemplate': obj.volumeClaimTemplate,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * PersistentVolumeClaimRetentionPolicy allows configuration of PVC retention policy
  *
  * @schema VmClusterSpecVmselectPersistentVolumeClaimRetentionPolicy
@@ -58274,6 +60887,54 @@ export function toJson_VmClusterSpecVmstorageHostAliases(obj: VmClusterSpecVmsto
   const result = {
     'hostnames': obj.hostnames?.map(y => y),
     'ip': obj.ip,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Configures horizontal pod autoscaling.
+ * Note, downscaling is not supported.
+ *
+ * @schema VmClusterSpecVmstorageHpa
+ */
+export interface VmClusterSpecVmstorageHpa {
+  /**
+   * HorizontalPodAutoscalerBehavior configures the scaling behavior of the target
+   * in both Up and Down directions (scaleUp and scaleDown fields respectively).
+   *
+   * @schema VmClusterSpecVmstorageHpa#behaviour
+   */
+  readonly behaviour?: VmClusterSpecVmstorageHpaBehaviour;
+
+  /**
+   * @schema VmClusterSpecVmstorageHpa#maxReplicas
+   */
+  readonly maxReplicas?: number;
+
+  /**
+   * @schema VmClusterSpecVmstorageHpa#metrics
+   */
+  readonly metrics?: VmClusterSpecVmstorageHpaMetrics[];
+
+  /**
+   * @schema VmClusterSpecVmstorageHpa#minReplicas
+   */
+  readonly minReplicas?: number;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpa' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpa(obj: VmClusterSpecVmstorageHpa | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'behaviour': toJson_VmClusterSpecVmstorageHpaBehaviour(obj.behaviour),
+    'maxReplicas': obj.maxReplicas,
+    'metrics': obj.metrics?.map(y => toJson_VmClusterSpecVmstorageHpaMetrics(y)),
+    'minReplicas': obj.minReplicas,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -59606,51 +62267,6 @@ export function toJson_VmClusterSpecVmselectExtraEnvsFromSecretRef(obj: VmCluste
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * EmptyDirVolumeSource to be used by the Prometheus StatefulSets. If specified, used in place of any volumeClaimTemplate. More
- * info: https://kubernetes.io/docs/concepts/storage/volumes/#emptydir
- *
- * @schema VmClusterSpecVmselectPersistentVolumeEmptyDir
- */
-export interface VmClusterSpecVmselectPersistentVolumeEmptyDir {
-  /**
-   * medium represents what type of storage medium should back this directory.
-   * The default is "" which means to use the node's default medium.
-   * Must be an empty string (default) or Memory.
-   * More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
-   *
-   * @schema VmClusterSpecVmselectPersistentVolumeEmptyDir#medium
-   */
-  readonly medium?: string;
-
-  /**
-   * sizeLimit is the total amount of local storage required for this EmptyDir volume.
-   * The size limit is also applicable for memory medium.
-   * The maximum usage on memory medium EmptyDir would be the minimum value between
-   * the SizeLimit specified here and the sum of memory limits of all containers in a pod.
-   * The default is nil which means that the limit is undefined.
-   * More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
-   *
-   * @schema VmClusterSpecVmselectPersistentVolumeEmptyDir#sizeLimit
-   */
-  readonly sizeLimit?: VmClusterSpecVmselectPersistentVolumeEmptyDirSizeLimit;
-}
-
-/**
- * Converts an object of type 'VmClusterSpecVmselectPersistentVolumeEmptyDir' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_VmClusterSpecVmselectPersistentVolumeEmptyDir(obj: VmClusterSpecVmselectPersistentVolumeEmptyDir | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'medium': obj.medium,
-    'sizeLimit': obj.sizeLimit?.value,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * An eviction is allowed if at most "maxUnavailable" pods selected by
  * "selector" are unavailable after the eviction, i.e. even in absence of
  * the evicted pod. For example, one can prevent all voluntary evictions
@@ -60072,6 +62688,135 @@ export function toJson_VmClusterSpecVmstorageExtraEnvsFromSecretRef(obj: VmClust
   const result = {
     'name': obj.name,
     'optional': obj.optional,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * HorizontalPodAutoscalerBehavior configures the scaling behavior of the target
+ * in both Up and Down directions (scaleUp and scaleDown fields respectively).
+ *
+ * @schema VmClusterSpecVmstorageHpaBehaviour
+ */
+export interface VmClusterSpecVmstorageHpaBehaviour {
+  /**
+   * scaleDown is scaling policy for scaling Down.
+   * If not set, the default value is to allow to scale down to minReplicas pods, with a
+   * 300 second stabilization window (i.e., the highest recommendation for
+   * the last 300sec is used).
+   *
+   * @schema VmClusterSpecVmstorageHpaBehaviour#scaleDown
+   */
+  readonly scaleDown?: VmClusterSpecVmstorageHpaBehaviourScaleDown;
+
+  /**
+   * scaleUp is scaling policy for scaling Up.
+   * If not set, the default value is the higher of:
+   * * increase no more than 4 pods per 60 seconds
+   * * double the number of pods per 60 seconds
+   * No stabilization is used.
+   *
+   * @schema VmClusterSpecVmstorageHpaBehaviour#scaleUp
+   */
+  readonly scaleUp?: VmClusterSpecVmstorageHpaBehaviourScaleUp;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaBehaviour' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaBehaviour(obj: VmClusterSpecVmstorageHpaBehaviour | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'scaleDown': toJson_VmClusterSpecVmstorageHpaBehaviourScaleDown(obj.scaleDown),
+    'scaleUp': toJson_VmClusterSpecVmstorageHpaBehaviourScaleUp(obj.scaleUp),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * MetricSpec specifies how to scale based on a single metric
+ * (only `type` and one other matching field should be set at once).
+ *
+ * @schema VmClusterSpecVmstorageHpaMetrics
+ */
+export interface VmClusterSpecVmstorageHpaMetrics {
+  /**
+   * containerResource refers to a resource metric (such as those specified in
+   * requests and limits) known to Kubernetes describing a single container in
+   * each pod of the current scale target (e.g. CPU or memory). Such metrics are
+   * built in to Kubernetes, and have special scaling options on top of those
+   * available to normal per-pod metrics using the "pods" source.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetrics#containerResource
+   */
+  readonly containerResource?: VmClusterSpecVmstorageHpaMetricsContainerResource;
+
+  /**
+   * external refers to a global metric that is not associated
+   * with any Kubernetes object. It allows autoscaling based on information
+   * coming from components running outside of cluster
+   * (for example length of queue in cloud messaging service, or
+   * QPS from loadbalancer running outside of cluster).
+   *
+   * @schema VmClusterSpecVmstorageHpaMetrics#external
+   */
+  readonly external?: VmClusterSpecVmstorageHpaMetricsExternal;
+
+  /**
+   * object refers to a metric describing a single kubernetes object
+   * (for example, hits-per-second on an Ingress object).
+   *
+   * @schema VmClusterSpecVmstorageHpaMetrics#object
+   */
+  readonly object?: VmClusterSpecVmstorageHpaMetricsObject;
+
+  /**
+   * pods refers to a metric describing each pod in the current scale target
+   * (for example, transactions-processed-per-second).  The values will be
+   * averaged together before being compared to the target value.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetrics#pods
+   */
+  readonly pods?: VmClusterSpecVmstorageHpaMetricsPods;
+
+  /**
+   * resource refers to a resource metric (such as those specified in
+   * requests and limits) known to Kubernetes describing each pod in the
+   * current scale target (e.g. CPU or memory). Such metrics are built in to
+   * Kubernetes, and have special scaling options on top of those available
+   * to normal per-pod metrics using the "pods" source.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetrics#resource
+   */
+  readonly resource?: VmClusterSpecVmstorageHpaMetricsResource;
+
+  /**
+   * type is the type of metric source.  It should be one of "ContainerResource", "External",
+   * "Object", "Pods" or "Resource", each mapping to a matching field in the object.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetrics#type
+   */
+  readonly type: string;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetrics' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetrics(obj: VmClusterSpecVmstorageHpaMetrics | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'containerResource': toJson_VmClusterSpecVmstorageHpaMetricsContainerResource(obj.containerResource),
+    'external': toJson_VmClusterSpecVmstorageHpaMetricsExternal(obj.external),
+    'object': toJson_VmClusterSpecVmstorageHpaMetricsObject(obj.object),
+    'pods': toJson_VmClusterSpecVmstorageHpaMetricsPods(obj.pods),
+    'resource': toJson_VmClusterSpecVmstorageHpaMetricsResource(obj.resource),
+    'type': obj.type,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -60739,27 +63484,6 @@ export function toJson_VmClusterSpecVmstorageVmBackupVolumeMounts(obj: VmCluster
  * The default is nil which means that the limit is undefined.
  * More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
  *
- * @schema VmClusterSpecVmselectPersistentVolumeEmptyDirSizeLimit
- */
-export class VmClusterSpecVmselectPersistentVolumeEmptyDirSizeLimit {
-  public static fromNumber(value: number): VmClusterSpecVmselectPersistentVolumeEmptyDirSizeLimit {
-    return new VmClusterSpecVmselectPersistentVolumeEmptyDirSizeLimit(value);
-  }
-  public static fromString(value: string): VmClusterSpecVmselectPersistentVolumeEmptyDirSizeLimit {
-    return new VmClusterSpecVmselectPersistentVolumeEmptyDirSizeLimit(value);
-  }
-  private constructor(public readonly value: number | string) {
-  }
-}
-
-/**
- * sizeLimit is the total amount of local storage required for this EmptyDir volume.
- * The size limit is also applicable for memory medium.
- * The maximum usage on memory medium EmptyDir would be the minimum value between
- * the SizeLimit specified here and the sum of memory limits of all containers in a pod.
- * The default is nil which means that the limit is undefined.
- * More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
- *
  * @schema VmClusterSpecVmselectStorageEmptyDirSizeLimit
  */
 export class VmClusterSpecVmselectStorageEmptyDirSizeLimit {
@@ -61105,6 +63829,366 @@ export function toJson_VmClusterSpecVmselectStorageVolumeClaimTemplateStatus(obj
     'currentVolumeAttributesClassName': obj.currentVolumeAttributesClassName,
     'modifyVolumeStatus': toJson_VmClusterSpecVmselectStorageVolumeClaimTemplateStatusModifyVolumeStatus(obj.modifyVolumeStatus),
     'phase': obj.phase,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * scaleDown is scaling policy for scaling Down.
+ * If not set, the default value is to allow to scale down to minReplicas pods, with a
+ * 300 second stabilization window (i.e., the highest recommendation for
+ * the last 300sec is used).
+ *
+ * @schema VmClusterSpecVmstorageHpaBehaviourScaleDown
+ */
+export interface VmClusterSpecVmstorageHpaBehaviourScaleDown {
+  /**
+   * policies is a list of potential scaling polices which can be used during scaling.
+   * If not set, use the default values:
+   * - For scale up: allow doubling the number of pods, or an absolute change of 4 pods in a 15s window.
+   * - For scale down: allow all pods to be removed in a 15s window.
+   *
+   * @schema VmClusterSpecVmstorageHpaBehaviourScaleDown#policies
+   */
+  readonly policies?: VmClusterSpecVmstorageHpaBehaviourScaleDownPolicies[];
+
+  /**
+   * selectPolicy is used to specify which policy should be used.
+   * If not set, the default value Max is used.
+   *
+   * @schema VmClusterSpecVmstorageHpaBehaviourScaleDown#selectPolicy
+   */
+  readonly selectPolicy?: string;
+
+  /**
+   * stabilizationWindowSeconds is the number of seconds for which past recommendations should be
+   * considered while scaling up or scaling down.
+   * StabilizationWindowSeconds must be greater than or equal to zero and less than or equal to 3600 (one hour).
+   * If not set, use the default values:
+   * - For scale up: 0 (i.e. no stabilization is done).
+   * - For scale down: 300 (i.e. the stabilization window is 300 seconds long).
+   *
+   * @schema VmClusterSpecVmstorageHpaBehaviourScaleDown#stabilizationWindowSeconds
+   */
+  readonly stabilizationWindowSeconds?: number;
+
+  /**
+   * tolerance is the tolerance on the ratio between the current and desired
+   * metric value under which no updates are made to the desired number of
+   * replicas (e.g. 0.01 for 1%). Must be greater than or equal to zero. If not
+   * set, the default cluster-wide tolerance is applied (by default 10%).
+   *
+   * For example, if autoscaling is configured with a memory consumption target of 100Mi,
+   * and scale-down and scale-up tolerances of 5% and 1% respectively, scaling will be
+   * triggered when the actual consumption falls below 95Mi or exceeds 101Mi.
+   *
+   * This is an alpha field and requires enabling the HPAConfigurableTolerance
+   * feature gate.
+   *
+   * @schema VmClusterSpecVmstorageHpaBehaviourScaleDown#tolerance
+   */
+  readonly tolerance?: VmClusterSpecVmstorageHpaBehaviourScaleDownTolerance;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaBehaviourScaleDown' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaBehaviourScaleDown(obj: VmClusterSpecVmstorageHpaBehaviourScaleDown | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'policies': obj.policies?.map(y => toJson_VmClusterSpecVmstorageHpaBehaviourScaleDownPolicies(y)),
+    'selectPolicy': obj.selectPolicy,
+    'stabilizationWindowSeconds': obj.stabilizationWindowSeconds,
+    'tolerance': obj.tolerance?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * scaleUp is scaling policy for scaling Up.
+ * If not set, the default value is the higher of:
+ * * increase no more than 4 pods per 60 seconds
+ * * double the number of pods per 60 seconds
+ * No stabilization is used.
+ *
+ * @schema VmClusterSpecVmstorageHpaBehaviourScaleUp
+ */
+export interface VmClusterSpecVmstorageHpaBehaviourScaleUp {
+  /**
+   * policies is a list of potential scaling polices which can be used during scaling.
+   * If not set, use the default values:
+   * - For scale up: allow doubling the number of pods, or an absolute change of 4 pods in a 15s window.
+   * - For scale down: allow all pods to be removed in a 15s window.
+   *
+   * @schema VmClusterSpecVmstorageHpaBehaviourScaleUp#policies
+   */
+  readonly policies?: VmClusterSpecVmstorageHpaBehaviourScaleUpPolicies[];
+
+  /**
+   * selectPolicy is used to specify which policy should be used.
+   * If not set, the default value Max is used.
+   *
+   * @schema VmClusterSpecVmstorageHpaBehaviourScaleUp#selectPolicy
+   */
+  readonly selectPolicy?: string;
+
+  /**
+   * stabilizationWindowSeconds is the number of seconds for which past recommendations should be
+   * considered while scaling up or scaling down.
+   * StabilizationWindowSeconds must be greater than or equal to zero and less than or equal to 3600 (one hour).
+   * If not set, use the default values:
+   * - For scale up: 0 (i.e. no stabilization is done).
+   * - For scale down: 300 (i.e. the stabilization window is 300 seconds long).
+   *
+   * @schema VmClusterSpecVmstorageHpaBehaviourScaleUp#stabilizationWindowSeconds
+   */
+  readonly stabilizationWindowSeconds?: number;
+
+  /**
+   * tolerance is the tolerance on the ratio between the current and desired
+   * metric value under which no updates are made to the desired number of
+   * replicas (e.g. 0.01 for 1%). Must be greater than or equal to zero. If not
+   * set, the default cluster-wide tolerance is applied (by default 10%).
+   *
+   * For example, if autoscaling is configured with a memory consumption target of 100Mi,
+   * and scale-down and scale-up tolerances of 5% and 1% respectively, scaling will be
+   * triggered when the actual consumption falls below 95Mi or exceeds 101Mi.
+   *
+   * This is an alpha field and requires enabling the HPAConfigurableTolerance
+   * feature gate.
+   *
+   * @schema VmClusterSpecVmstorageHpaBehaviourScaleUp#tolerance
+   */
+  readonly tolerance?: VmClusterSpecVmstorageHpaBehaviourScaleUpTolerance;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaBehaviourScaleUp' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaBehaviourScaleUp(obj: VmClusterSpecVmstorageHpaBehaviourScaleUp | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'policies': obj.policies?.map(y => toJson_VmClusterSpecVmstorageHpaBehaviourScaleUpPolicies(y)),
+    'selectPolicy': obj.selectPolicy,
+    'stabilizationWindowSeconds': obj.stabilizationWindowSeconds,
+    'tolerance': obj.tolerance?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * containerResource refers to a resource metric (such as those specified in
+ * requests and limits) known to Kubernetes describing a single container in
+ * each pod of the current scale target (e.g. CPU or memory). Such metrics are
+ * built in to Kubernetes, and have special scaling options on top of those
+ * available to normal per-pod metrics using the "pods" source.
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsContainerResource
+ */
+export interface VmClusterSpecVmstorageHpaMetricsContainerResource {
+  /**
+   * container is the name of the container in the pods of the scaling target
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsContainerResource#container
+   */
+  readonly container: string;
+
+  /**
+   * name is the name of the resource in question.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsContainerResource#name
+   */
+  readonly name: string;
+
+  /**
+   * target specifies the target value for the given metric
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsContainerResource#target
+   */
+  readonly target: VmClusterSpecVmstorageHpaMetricsContainerResourceTarget;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetricsContainerResource' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetricsContainerResource(obj: VmClusterSpecVmstorageHpaMetricsContainerResource | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'container': obj.container,
+    'name': obj.name,
+    'target': toJson_VmClusterSpecVmstorageHpaMetricsContainerResourceTarget(obj.target),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * external refers to a global metric that is not associated
+ * with any Kubernetes object. It allows autoscaling based on information
+ * coming from components running outside of cluster
+ * (for example length of queue in cloud messaging service, or
+ * QPS from loadbalancer running outside of cluster).
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsExternal
+ */
+export interface VmClusterSpecVmstorageHpaMetricsExternal {
+  /**
+   * metric identifies the target metric by name and selector
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsExternal#metric
+   */
+  readonly metric: VmClusterSpecVmstorageHpaMetricsExternalMetric;
+
+  /**
+   * target specifies the target value for the given metric
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsExternal#target
+   */
+  readonly target: VmClusterSpecVmstorageHpaMetricsExternalTarget;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetricsExternal' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetricsExternal(obj: VmClusterSpecVmstorageHpaMetricsExternal | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metric': toJson_VmClusterSpecVmstorageHpaMetricsExternalMetric(obj.metric),
+    'target': toJson_VmClusterSpecVmstorageHpaMetricsExternalTarget(obj.target),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * object refers to a metric describing a single kubernetes object
+ * (for example, hits-per-second on an Ingress object).
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsObject
+ */
+export interface VmClusterSpecVmstorageHpaMetricsObject {
+  /**
+   * describedObject specifies the descriptions of a object,such as kind,name apiVersion
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsObject#describedObject
+   */
+  readonly describedObject: VmClusterSpecVmstorageHpaMetricsObjectDescribedObject;
+
+  /**
+   * metric identifies the target metric by name and selector
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsObject#metric
+   */
+  readonly metric: VmClusterSpecVmstorageHpaMetricsObjectMetric;
+
+  /**
+   * target specifies the target value for the given metric
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsObject#target
+   */
+  readonly target: VmClusterSpecVmstorageHpaMetricsObjectTarget;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetricsObject' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetricsObject(obj: VmClusterSpecVmstorageHpaMetricsObject | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'describedObject': toJson_VmClusterSpecVmstorageHpaMetricsObjectDescribedObject(obj.describedObject),
+    'metric': toJson_VmClusterSpecVmstorageHpaMetricsObjectMetric(obj.metric),
+    'target': toJson_VmClusterSpecVmstorageHpaMetricsObjectTarget(obj.target),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * pods refers to a metric describing each pod in the current scale target
+ * (for example, transactions-processed-per-second).  The values will be
+ * averaged together before being compared to the target value.
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsPods
+ */
+export interface VmClusterSpecVmstorageHpaMetricsPods {
+  /**
+   * metric identifies the target metric by name and selector
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsPods#metric
+   */
+  readonly metric: VmClusterSpecVmstorageHpaMetricsPodsMetric;
+
+  /**
+   * target specifies the target value for the given metric
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsPods#target
+   */
+  readonly target: VmClusterSpecVmstorageHpaMetricsPodsTarget;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetricsPods' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetricsPods(obj: VmClusterSpecVmstorageHpaMetricsPods | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metric': toJson_VmClusterSpecVmstorageHpaMetricsPodsMetric(obj.metric),
+    'target': toJson_VmClusterSpecVmstorageHpaMetricsPodsTarget(obj.target),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * resource refers to a resource metric (such as those specified in
+ * requests and limits) known to Kubernetes describing each pod in the
+ * current scale target (e.g. CPU or memory). Such metrics are built in to
+ * Kubernetes, and have special scaling options on top of those available
+ * to normal per-pod metrics using the "pods" source.
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsResource
+ */
+export interface VmClusterSpecVmstorageHpaMetricsResource {
+  /**
+   * name is the name of the resource in question.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsResource#name
+   */
+  readonly name: string;
+
+  /**
+   * target specifies the target value for the given metric
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsResource#target
+   */
+  readonly target: VmClusterSpecVmstorageHpaMetricsResourceTarget;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetricsResource' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetricsResource(obj: VmClusterSpecVmstorageHpaMetricsResource | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'target': toJson_VmClusterSpecVmstorageHpaMetricsResourceTarget(obj.target),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -61732,6 +64816,588 @@ export function toJson_VmClusterSpecVmselectStorageVolumeClaimTemplateStatusModi
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * HPAScalingPolicy is a single policy which must hold true for a specified past interval.
+ *
+ * @schema VmClusterSpecVmstorageHpaBehaviourScaleDownPolicies
+ */
+export interface VmClusterSpecVmstorageHpaBehaviourScaleDownPolicies {
+  /**
+   * periodSeconds specifies the window of time for which the policy should hold true.
+   * PeriodSeconds must be greater than zero and less than or equal to 1800 (30 min).
+   *
+   * @schema VmClusterSpecVmstorageHpaBehaviourScaleDownPolicies#periodSeconds
+   */
+  readonly periodSeconds: number;
+
+  /**
+   * type is used to specify the scaling policy.
+   *
+   * @schema VmClusterSpecVmstorageHpaBehaviourScaleDownPolicies#type
+   */
+  readonly type: string;
+
+  /**
+   * value contains the amount of change which is permitted by the policy.
+   * It must be greater than zero
+   *
+   * @schema VmClusterSpecVmstorageHpaBehaviourScaleDownPolicies#value
+   */
+  readonly value: number;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaBehaviourScaleDownPolicies' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaBehaviourScaleDownPolicies(obj: VmClusterSpecVmstorageHpaBehaviourScaleDownPolicies | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'periodSeconds': obj.periodSeconds,
+    'type': obj.type,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * tolerance is the tolerance on the ratio between the current and desired
+ * metric value under which no updates are made to the desired number of
+ * replicas (e.g. 0.01 for 1%). Must be greater than or equal to zero. If not
+ * set, the default cluster-wide tolerance is applied (by default 10%).
+ *
+ * For example, if autoscaling is configured with a memory consumption target of 100Mi,
+ * and scale-down and scale-up tolerances of 5% and 1% respectively, scaling will be
+ * triggered when the actual consumption falls below 95Mi or exceeds 101Mi.
+ *
+ * This is an alpha field and requires enabling the HPAConfigurableTolerance
+ * feature gate.
+ *
+ * @schema VmClusterSpecVmstorageHpaBehaviourScaleDownTolerance
+ */
+export class VmClusterSpecVmstorageHpaBehaviourScaleDownTolerance {
+  public static fromNumber(value: number): VmClusterSpecVmstorageHpaBehaviourScaleDownTolerance {
+    return new VmClusterSpecVmstorageHpaBehaviourScaleDownTolerance(value);
+  }
+  public static fromString(value: string): VmClusterSpecVmstorageHpaBehaviourScaleDownTolerance {
+    return new VmClusterSpecVmstorageHpaBehaviourScaleDownTolerance(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * HPAScalingPolicy is a single policy which must hold true for a specified past interval.
+ *
+ * @schema VmClusterSpecVmstorageHpaBehaviourScaleUpPolicies
+ */
+export interface VmClusterSpecVmstorageHpaBehaviourScaleUpPolicies {
+  /**
+   * periodSeconds specifies the window of time for which the policy should hold true.
+   * PeriodSeconds must be greater than zero and less than or equal to 1800 (30 min).
+   *
+   * @schema VmClusterSpecVmstorageHpaBehaviourScaleUpPolicies#periodSeconds
+   */
+  readonly periodSeconds: number;
+
+  /**
+   * type is used to specify the scaling policy.
+   *
+   * @schema VmClusterSpecVmstorageHpaBehaviourScaleUpPolicies#type
+   */
+  readonly type: string;
+
+  /**
+   * value contains the amount of change which is permitted by the policy.
+   * It must be greater than zero
+   *
+   * @schema VmClusterSpecVmstorageHpaBehaviourScaleUpPolicies#value
+   */
+  readonly value: number;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaBehaviourScaleUpPolicies' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaBehaviourScaleUpPolicies(obj: VmClusterSpecVmstorageHpaBehaviourScaleUpPolicies | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'periodSeconds': obj.periodSeconds,
+    'type': obj.type,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * tolerance is the tolerance on the ratio between the current and desired
+ * metric value under which no updates are made to the desired number of
+ * replicas (e.g. 0.01 for 1%). Must be greater than or equal to zero. If not
+ * set, the default cluster-wide tolerance is applied (by default 10%).
+ *
+ * For example, if autoscaling is configured with a memory consumption target of 100Mi,
+ * and scale-down and scale-up tolerances of 5% and 1% respectively, scaling will be
+ * triggered when the actual consumption falls below 95Mi or exceeds 101Mi.
+ *
+ * This is an alpha field and requires enabling the HPAConfigurableTolerance
+ * feature gate.
+ *
+ * @schema VmClusterSpecVmstorageHpaBehaviourScaleUpTolerance
+ */
+export class VmClusterSpecVmstorageHpaBehaviourScaleUpTolerance {
+  public static fromNumber(value: number): VmClusterSpecVmstorageHpaBehaviourScaleUpTolerance {
+    return new VmClusterSpecVmstorageHpaBehaviourScaleUpTolerance(value);
+  }
+  public static fromString(value: string): VmClusterSpecVmstorageHpaBehaviourScaleUpTolerance {
+    return new VmClusterSpecVmstorageHpaBehaviourScaleUpTolerance(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * target specifies the target value for the given metric
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsContainerResourceTarget
+ */
+export interface VmClusterSpecVmstorageHpaMetricsContainerResourceTarget {
+  /**
+   * averageUtilization is the target value of the average of the
+   * resource metric across all relevant pods, represented as a percentage of
+   * the requested value of the resource for the pods.
+   * Currently only valid for Resource metric source type
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsContainerResourceTarget#averageUtilization
+   */
+  readonly averageUtilization?: number;
+
+  /**
+   * averageValue is the target value of the average of the
+   * metric across all relevant pods (as a quantity)
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsContainerResourceTarget#averageValue
+   */
+  readonly averageValue?: VmClusterSpecVmstorageHpaMetricsContainerResourceTargetAverageValue;
+
+  /**
+   * type represents whether the metric type is Utilization, Value, or AverageValue
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsContainerResourceTarget#type
+   */
+  readonly type: string;
+
+  /**
+   * value is the target value of the metric (as a quantity).
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsContainerResourceTarget#value
+   */
+  readonly value?: VmClusterSpecVmstorageHpaMetricsContainerResourceTargetValue;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetricsContainerResourceTarget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetricsContainerResourceTarget(obj: VmClusterSpecVmstorageHpaMetricsContainerResourceTarget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'averageUtilization': obj.averageUtilization,
+    'averageValue': obj.averageValue?.value,
+    'type': obj.type,
+    'value': obj.value?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * metric identifies the target metric by name and selector
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsExternalMetric
+ */
+export interface VmClusterSpecVmstorageHpaMetricsExternalMetric {
+  /**
+   * name is the name of the given metric
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsExternalMetric#name
+   */
+  readonly name: string;
+
+  /**
+   * selector is the string-encoded form of a standard kubernetes label selector for the given metric
+   * When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
+   * When unset, just the metricName will be used to gather metrics.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsExternalMetric#selector
+   */
+  readonly selector?: VmClusterSpecVmstorageHpaMetricsExternalMetricSelector;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetricsExternalMetric' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetricsExternalMetric(obj: VmClusterSpecVmstorageHpaMetricsExternalMetric | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'selector': toJson_VmClusterSpecVmstorageHpaMetricsExternalMetricSelector(obj.selector),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * target specifies the target value for the given metric
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsExternalTarget
+ */
+export interface VmClusterSpecVmstorageHpaMetricsExternalTarget {
+  /**
+   * averageUtilization is the target value of the average of the
+   * resource metric across all relevant pods, represented as a percentage of
+   * the requested value of the resource for the pods.
+   * Currently only valid for Resource metric source type
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsExternalTarget#averageUtilization
+   */
+  readonly averageUtilization?: number;
+
+  /**
+   * averageValue is the target value of the average of the
+   * metric across all relevant pods (as a quantity)
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsExternalTarget#averageValue
+   */
+  readonly averageValue?: VmClusterSpecVmstorageHpaMetricsExternalTargetAverageValue;
+
+  /**
+   * type represents whether the metric type is Utilization, Value, or AverageValue
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsExternalTarget#type
+   */
+  readonly type: string;
+
+  /**
+   * value is the target value of the metric (as a quantity).
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsExternalTarget#value
+   */
+  readonly value?: VmClusterSpecVmstorageHpaMetricsExternalTargetValue;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetricsExternalTarget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetricsExternalTarget(obj: VmClusterSpecVmstorageHpaMetricsExternalTarget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'averageUtilization': obj.averageUtilization,
+    'averageValue': obj.averageValue?.value,
+    'type': obj.type,
+    'value': obj.value?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * describedObject specifies the descriptions of a object,such as kind,name apiVersion
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsObjectDescribedObject
+ */
+export interface VmClusterSpecVmstorageHpaMetricsObjectDescribedObject {
+  /**
+   * apiVersion is the API version of the referent
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsObjectDescribedObject#apiVersion
+   */
+  readonly apiVersion?: string;
+
+  /**
+   * kind is the kind of the referent; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsObjectDescribedObject#kind
+   */
+  readonly kind: string;
+
+  /**
+   * name is the name of the referent; More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsObjectDescribedObject#name
+   */
+  readonly name: string;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetricsObjectDescribedObject' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetricsObjectDescribedObject(obj: VmClusterSpecVmstorageHpaMetricsObjectDescribedObject | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apiVersion': obj.apiVersion,
+    'kind': obj.kind,
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * metric identifies the target metric by name and selector
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsObjectMetric
+ */
+export interface VmClusterSpecVmstorageHpaMetricsObjectMetric {
+  /**
+   * name is the name of the given metric
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsObjectMetric#name
+   */
+  readonly name: string;
+
+  /**
+   * selector is the string-encoded form of a standard kubernetes label selector for the given metric
+   * When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
+   * When unset, just the metricName will be used to gather metrics.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsObjectMetric#selector
+   */
+  readonly selector?: VmClusterSpecVmstorageHpaMetricsObjectMetricSelector;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetricsObjectMetric' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetricsObjectMetric(obj: VmClusterSpecVmstorageHpaMetricsObjectMetric | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'selector': toJson_VmClusterSpecVmstorageHpaMetricsObjectMetricSelector(obj.selector),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * target specifies the target value for the given metric
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsObjectTarget
+ */
+export interface VmClusterSpecVmstorageHpaMetricsObjectTarget {
+  /**
+   * averageUtilization is the target value of the average of the
+   * resource metric across all relevant pods, represented as a percentage of
+   * the requested value of the resource for the pods.
+   * Currently only valid for Resource metric source type
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsObjectTarget#averageUtilization
+   */
+  readonly averageUtilization?: number;
+
+  /**
+   * averageValue is the target value of the average of the
+   * metric across all relevant pods (as a quantity)
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsObjectTarget#averageValue
+   */
+  readonly averageValue?: VmClusterSpecVmstorageHpaMetricsObjectTargetAverageValue;
+
+  /**
+   * type represents whether the metric type is Utilization, Value, or AverageValue
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsObjectTarget#type
+   */
+  readonly type: string;
+
+  /**
+   * value is the target value of the metric (as a quantity).
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsObjectTarget#value
+   */
+  readonly value?: VmClusterSpecVmstorageHpaMetricsObjectTargetValue;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetricsObjectTarget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetricsObjectTarget(obj: VmClusterSpecVmstorageHpaMetricsObjectTarget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'averageUtilization': obj.averageUtilization,
+    'averageValue': obj.averageValue?.value,
+    'type': obj.type,
+    'value': obj.value?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * metric identifies the target metric by name and selector
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsPodsMetric
+ */
+export interface VmClusterSpecVmstorageHpaMetricsPodsMetric {
+  /**
+   * name is the name of the given metric
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsPodsMetric#name
+   */
+  readonly name: string;
+
+  /**
+   * selector is the string-encoded form of a standard kubernetes label selector for the given metric
+   * When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
+   * When unset, just the metricName will be used to gather metrics.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsPodsMetric#selector
+   */
+  readonly selector?: VmClusterSpecVmstorageHpaMetricsPodsMetricSelector;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetricsPodsMetric' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetricsPodsMetric(obj: VmClusterSpecVmstorageHpaMetricsPodsMetric | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'selector': toJson_VmClusterSpecVmstorageHpaMetricsPodsMetricSelector(obj.selector),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * target specifies the target value for the given metric
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsPodsTarget
+ */
+export interface VmClusterSpecVmstorageHpaMetricsPodsTarget {
+  /**
+   * averageUtilization is the target value of the average of the
+   * resource metric across all relevant pods, represented as a percentage of
+   * the requested value of the resource for the pods.
+   * Currently only valid for Resource metric source type
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsPodsTarget#averageUtilization
+   */
+  readonly averageUtilization?: number;
+
+  /**
+   * averageValue is the target value of the average of the
+   * metric across all relevant pods (as a quantity)
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsPodsTarget#averageValue
+   */
+  readonly averageValue?: VmClusterSpecVmstorageHpaMetricsPodsTargetAverageValue;
+
+  /**
+   * type represents whether the metric type is Utilization, Value, or AverageValue
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsPodsTarget#type
+   */
+  readonly type: string;
+
+  /**
+   * value is the target value of the metric (as a quantity).
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsPodsTarget#value
+   */
+  readonly value?: VmClusterSpecVmstorageHpaMetricsPodsTargetValue;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetricsPodsTarget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetricsPodsTarget(obj: VmClusterSpecVmstorageHpaMetricsPodsTarget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'averageUtilization': obj.averageUtilization,
+    'averageValue': obj.averageValue?.value,
+    'type': obj.type,
+    'value': obj.value?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * target specifies the target value for the given metric
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsResourceTarget
+ */
+export interface VmClusterSpecVmstorageHpaMetricsResourceTarget {
+  /**
+   * averageUtilization is the target value of the average of the
+   * resource metric across all relevant pods, represented as a percentage of
+   * the requested value of the resource for the pods.
+   * Currently only valid for Resource metric source type
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsResourceTarget#averageUtilization
+   */
+  readonly averageUtilization?: number;
+
+  /**
+   * averageValue is the target value of the average of the
+   * metric across all relevant pods (as a quantity)
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsResourceTarget#averageValue
+   */
+  readonly averageValue?: VmClusterSpecVmstorageHpaMetricsResourceTargetAverageValue;
+
+  /**
+   * type represents whether the metric type is Utilization, Value, or AverageValue
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsResourceTarget#type
+   */
+  readonly type: string;
+
+  /**
+   * value is the target value of the metric (as a quantity).
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsResourceTarget#value
+   */
+  readonly value?: VmClusterSpecVmstorageHpaMetricsResourceTargetValue;
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetricsResourceTarget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetricsResourceTarget(obj: VmClusterSpecVmstorageHpaMetricsResourceTarget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'averageUtilization': obj.averageUtilization,
+    'averageValue': obj.averageValue?.value,
+    'type': obj.type,
+    'value': obj.value?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * Selects a key of a ConfigMap.
  *
  * @schema VmClusterSpecVmstorageVmBackupExtraEnvsValueFromConfigMapKeyRef
@@ -62049,6 +65715,291 @@ export function toJson_VmClusterSpecVmselectStorageVolumeClaimTemplateSpecSelect
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * averageValue is the target value of the average of the
+ * metric across all relevant pods (as a quantity)
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsContainerResourceTargetAverageValue
+ */
+export class VmClusterSpecVmstorageHpaMetricsContainerResourceTargetAverageValue {
+  public static fromNumber(value: number): VmClusterSpecVmstorageHpaMetricsContainerResourceTargetAverageValue {
+    return new VmClusterSpecVmstorageHpaMetricsContainerResourceTargetAverageValue(value);
+  }
+  public static fromString(value: string): VmClusterSpecVmstorageHpaMetricsContainerResourceTargetAverageValue {
+    return new VmClusterSpecVmstorageHpaMetricsContainerResourceTargetAverageValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * value is the target value of the metric (as a quantity).
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsContainerResourceTargetValue
+ */
+export class VmClusterSpecVmstorageHpaMetricsContainerResourceTargetValue {
+  public static fromNumber(value: number): VmClusterSpecVmstorageHpaMetricsContainerResourceTargetValue {
+    return new VmClusterSpecVmstorageHpaMetricsContainerResourceTargetValue(value);
+  }
+  public static fromString(value: string): VmClusterSpecVmstorageHpaMetricsContainerResourceTargetValue {
+    return new VmClusterSpecVmstorageHpaMetricsContainerResourceTargetValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * selector is the string-encoded form of a standard kubernetes label selector for the given metric
+ * When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
+ * When unset, just the metricName will be used to gather metrics.
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsExternalMetricSelector
+ */
+export interface VmClusterSpecVmstorageHpaMetricsExternalMetricSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsExternalMetricSelector#matchExpressions
+   */
+  readonly matchExpressions?: VmClusterSpecVmstorageHpaMetricsExternalMetricSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsExternalMetricSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetricsExternalMetricSelector' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetricsExternalMetricSelector(obj: VmClusterSpecVmstorageHpaMetricsExternalMetricSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_VmClusterSpecVmstorageHpaMetricsExternalMetricSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * averageValue is the target value of the average of the
+ * metric across all relevant pods (as a quantity)
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsExternalTargetAverageValue
+ */
+export class VmClusterSpecVmstorageHpaMetricsExternalTargetAverageValue {
+  public static fromNumber(value: number): VmClusterSpecVmstorageHpaMetricsExternalTargetAverageValue {
+    return new VmClusterSpecVmstorageHpaMetricsExternalTargetAverageValue(value);
+  }
+  public static fromString(value: string): VmClusterSpecVmstorageHpaMetricsExternalTargetAverageValue {
+    return new VmClusterSpecVmstorageHpaMetricsExternalTargetAverageValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * value is the target value of the metric (as a quantity).
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsExternalTargetValue
+ */
+export class VmClusterSpecVmstorageHpaMetricsExternalTargetValue {
+  public static fromNumber(value: number): VmClusterSpecVmstorageHpaMetricsExternalTargetValue {
+    return new VmClusterSpecVmstorageHpaMetricsExternalTargetValue(value);
+  }
+  public static fromString(value: string): VmClusterSpecVmstorageHpaMetricsExternalTargetValue {
+    return new VmClusterSpecVmstorageHpaMetricsExternalTargetValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * selector is the string-encoded form of a standard kubernetes label selector for the given metric
+ * When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
+ * When unset, just the metricName will be used to gather metrics.
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsObjectMetricSelector
+ */
+export interface VmClusterSpecVmstorageHpaMetricsObjectMetricSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsObjectMetricSelector#matchExpressions
+   */
+  readonly matchExpressions?: VmClusterSpecVmstorageHpaMetricsObjectMetricSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsObjectMetricSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetricsObjectMetricSelector' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetricsObjectMetricSelector(obj: VmClusterSpecVmstorageHpaMetricsObjectMetricSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_VmClusterSpecVmstorageHpaMetricsObjectMetricSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * averageValue is the target value of the average of the
+ * metric across all relevant pods (as a quantity)
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsObjectTargetAverageValue
+ */
+export class VmClusterSpecVmstorageHpaMetricsObjectTargetAverageValue {
+  public static fromNumber(value: number): VmClusterSpecVmstorageHpaMetricsObjectTargetAverageValue {
+    return new VmClusterSpecVmstorageHpaMetricsObjectTargetAverageValue(value);
+  }
+  public static fromString(value: string): VmClusterSpecVmstorageHpaMetricsObjectTargetAverageValue {
+    return new VmClusterSpecVmstorageHpaMetricsObjectTargetAverageValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * value is the target value of the metric (as a quantity).
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsObjectTargetValue
+ */
+export class VmClusterSpecVmstorageHpaMetricsObjectTargetValue {
+  public static fromNumber(value: number): VmClusterSpecVmstorageHpaMetricsObjectTargetValue {
+    return new VmClusterSpecVmstorageHpaMetricsObjectTargetValue(value);
+  }
+  public static fromString(value: string): VmClusterSpecVmstorageHpaMetricsObjectTargetValue {
+    return new VmClusterSpecVmstorageHpaMetricsObjectTargetValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * selector is the string-encoded form of a standard kubernetes label selector for the given metric
+ * When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
+ * When unset, just the metricName will be used to gather metrics.
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsPodsMetricSelector
+ */
+export interface VmClusterSpecVmstorageHpaMetricsPodsMetricSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsPodsMetricSelector#matchExpressions
+   */
+  readonly matchExpressions?: VmClusterSpecVmstorageHpaMetricsPodsMetricSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsPodsMetricSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetricsPodsMetricSelector' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetricsPodsMetricSelector(obj: VmClusterSpecVmstorageHpaMetricsPodsMetricSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_VmClusterSpecVmstorageHpaMetricsPodsMetricSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * averageValue is the target value of the average of the
+ * metric across all relevant pods (as a quantity)
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsPodsTargetAverageValue
+ */
+export class VmClusterSpecVmstorageHpaMetricsPodsTargetAverageValue {
+  public static fromNumber(value: number): VmClusterSpecVmstorageHpaMetricsPodsTargetAverageValue {
+    return new VmClusterSpecVmstorageHpaMetricsPodsTargetAverageValue(value);
+  }
+  public static fromString(value: string): VmClusterSpecVmstorageHpaMetricsPodsTargetAverageValue {
+    return new VmClusterSpecVmstorageHpaMetricsPodsTargetAverageValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * value is the target value of the metric (as a quantity).
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsPodsTargetValue
+ */
+export class VmClusterSpecVmstorageHpaMetricsPodsTargetValue {
+  public static fromNumber(value: number): VmClusterSpecVmstorageHpaMetricsPodsTargetValue {
+    return new VmClusterSpecVmstorageHpaMetricsPodsTargetValue(value);
+  }
+  public static fromString(value: string): VmClusterSpecVmstorageHpaMetricsPodsTargetValue {
+    return new VmClusterSpecVmstorageHpaMetricsPodsTargetValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * averageValue is the target value of the average of the
+ * metric across all relevant pods (as a quantity)
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsResourceTargetAverageValue
+ */
+export class VmClusterSpecVmstorageHpaMetricsResourceTargetAverageValue {
+  public static fromNumber(value: number): VmClusterSpecVmstorageHpaMetricsResourceTargetAverageValue {
+    return new VmClusterSpecVmstorageHpaMetricsResourceTargetAverageValue(value);
+  }
+  public static fromString(value: string): VmClusterSpecVmstorageHpaMetricsResourceTargetAverageValue {
+    return new VmClusterSpecVmstorageHpaMetricsResourceTargetAverageValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * value is the target value of the metric (as a quantity).
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsResourceTargetValue
+ */
+export class VmClusterSpecVmstorageHpaMetricsResourceTargetValue {
+  public static fromNumber(value: number): VmClusterSpecVmstorageHpaMetricsResourceTargetValue {
+    return new VmClusterSpecVmstorageHpaMetricsResourceTargetValue(value);
+  }
+  public static fromString(value: string): VmClusterSpecVmstorageHpaMetricsResourceTargetValue {
+    return new VmClusterSpecVmstorageHpaMetricsResourceTargetValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
  * Specifies the output format of the exposed resources, defaults to "1"
  *
  * @schema VmClusterSpecVmstorageVmBackupExtraEnvsValueFromResourceFieldRefDivisor
@@ -62063,6 +66014,153 @@ export class VmClusterSpecVmstorageVmBackupExtraEnvsValueFromResourceFieldRefDiv
   private constructor(public readonly value: number | string) {
   }
 }
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsExternalMetricSelectorMatchExpressions
+ */
+export interface VmClusterSpecVmstorageHpaMetricsExternalMetricSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsExternalMetricSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsExternalMetricSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsExternalMetricSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetricsExternalMetricSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetricsExternalMetricSelectorMatchExpressions(obj: VmClusterSpecVmstorageHpaMetricsExternalMetricSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsObjectMetricSelectorMatchExpressions
+ */
+export interface VmClusterSpecVmstorageHpaMetricsObjectMetricSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsObjectMetricSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsObjectMetricSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsObjectMetricSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetricsObjectMetricSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetricsObjectMetricSelectorMatchExpressions(obj: VmClusterSpecVmstorageHpaMetricsObjectMetricSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema VmClusterSpecVmstorageHpaMetricsPodsMetricSelectorMatchExpressions
+ */
+export interface VmClusterSpecVmstorageHpaMetricsPodsMetricSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsPodsMetricSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsPodsMetricSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema VmClusterSpecVmstorageHpaMetricsPodsMetricSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+}
+
+/**
+ * Converts an object of type 'VmClusterSpecVmstorageHpaMetricsPodsMetricSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VmClusterSpecVmstorageHpaMetricsPodsMetricSelectorMatchExpressions(obj: VmClusterSpecVmstorageHpaMetricsPodsMetricSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
@@ -64190,6 +68288,14 @@ export function toJson_VmPodScrapeSpec(obj: VmPodScrapeSpec | undefined): Record
  */
 export interface VmPodScrapeSpecAttachMetadata {
   /**
+   * Namespace instructs vmagent to add namespace specific metadata from service discovery
+   * Valid for roles: pod, service, endpoints, endpointslice, ingress.
+   *
+   * @schema VmPodScrapeSpecAttachMetadata#namespace
+   */
+  readonly namespace?: boolean;
+
+  /**
    * Node instructs vmagent to add node specific metadata from service discovery
    * Valid for roles: pod, endpoints, endpointslice.
    *
@@ -64205,6 +68311,7 @@ export interface VmPodScrapeSpecAttachMetadata {
 export function toJson_VmPodScrapeSpecAttachMetadata(obj: VmPodScrapeSpecAttachMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'namespace': obj.namespace,
     'node': obj.node,
   };
   // filter undefined values
@@ -64537,6 +68644,14 @@ export function toJson_VmPodScrapeSpecSelector(obj: VmPodScrapeSpecSelector | un
  */
 export interface VmPodScrapeSpecPodMetricsEndpointsAttachMetadata {
   /**
+   * Namespace instructs vmagent to add namespace specific metadata from service discovery
+   * Valid for roles: pod, service, endpoints, endpointslice, ingress.
+   *
+   * @schema VmPodScrapeSpecPodMetricsEndpointsAttachMetadata#namespace
+   */
+  readonly namespace?: boolean;
+
+  /**
    * Node instructs vmagent to add node specific metadata from service discovery
    * Valid for roles: pod, endpoints, endpointslice.
    *
@@ -64552,6 +68667,7 @@ export interface VmPodScrapeSpecPodMetricsEndpointsAttachMetadata {
 export function toJson_VmPodScrapeSpecPodMetricsEndpointsAttachMetadata(obj: VmPodScrapeSpecPodMetricsEndpointsAttachMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'namespace': obj.namespace,
     'node': obj.node,
   };
   // filter undefined values
@@ -70020,7 +74136,7 @@ export interface VmScrapeConfigSpecKubernetesSdConfigs {
    *
    * @schema VmScrapeConfigSpecKubernetesSdConfigs#role
    */
-  readonly role: string;
+  readonly role: VmScrapeConfigSpecKubernetesSdConfigsRole;
 
   /**
    * Selector to select objects.
@@ -71980,6 +76096,14 @@ export function toJson_VmScrapeConfigSpecHttpSdConfigsTlsConfig(obj: VmScrapeCon
  */
 export interface VmScrapeConfigSpecKubernetesSdConfigsAttachMetadata {
   /**
+   * Namespace instructs vmagent to add namespace specific metadata from service discovery
+   * Valid for roles: pod, service, endpoints, endpointslice, ingress.
+   *
+   * @schema VmScrapeConfigSpecKubernetesSdConfigsAttachMetadata#namespace
+   */
+  readonly namespace?: boolean;
+
+  /**
    * Node instructs vmagent to add node specific metadata from service discovery
    * Valid for roles: pod, endpoints, endpointslice.
    *
@@ -71995,6 +76119,7 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsAttachMetadata {
 export function toJson_VmScrapeConfigSpecKubernetesSdConfigsAttachMetadata(obj: VmScrapeConfigSpecKubernetesSdConfigsAttachMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'namespace': obj.namespace,
     'node': obj.node,
   };
   // filter undefined values
@@ -72268,6 +76393,26 @@ export function toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfig(ob
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Role of the Kubernetes entities that should be discovered.
+ *
+ * @schema VmScrapeConfigSpecKubernetesSdConfigsRole
+ */
+export enum VmScrapeConfigSpecKubernetesSdConfigsRole {
+  /** node */
+  NODE = "node",
+  /** pod */
+  POD = "pod",
+  /** service */
+  SERVICE = "service",
+  /** endpoints */
+  ENDPOINTS = "endpoints",
+  /** endpointslice */
+  ENDPOINTSLICE = "endpointslice",
+  /** ingress */
+  INGRESS = "ingress",
+}
+
+/**
  * K8SSelectorConfig is Kubernetes Selector Config
  *
  * @schema VmScrapeConfigSpecKubernetesSdConfigsSelectors
@@ -72286,7 +76431,7 @@ export interface VmScrapeConfigSpecKubernetesSdConfigsSelectors {
   /**
    * @schema VmScrapeConfigSpecKubernetesSdConfigsSelectors#role
    */
-  readonly role: string;
+  readonly role: VmScrapeConfigSpecKubernetesSdConfigsSelectorsRole;
 }
 
 /**
@@ -74327,6 +78472,24 @@ export function toJson_VmScrapeConfigSpecKubernetesSdConfigsProxyClientConfigBea
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema VmScrapeConfigSpecKubernetesSdConfigsSelectorsRole
+ */
+export enum VmScrapeConfigSpecKubernetesSdConfigsSelectorsRole {
+  /** node */
+  NODE = "node",
+  /** pod */
+  POD = "pod",
+  /** service */
+  SERVICE = "service",
+  /** endpoints */
+  ENDPOINTS = "endpoints",
+  /** endpointslice */
+  ENDPOINTSLICE = "endpointslice",
+  /** ingress */
+  INGRESS = "ingress",
+}
 
 /**
  * Struct containing the CA cert to use for the targets.
@@ -76904,6 +81067,14 @@ export function toJson_VmServiceScrapeSpec(obj: VmServiceScrapeSpec | undefined)
  */
 export interface VmServiceScrapeSpecAttachMetadata {
   /**
+   * Namespace instructs vmagent to add namespace specific metadata from service discovery
+   * Valid for roles: pod, service, endpoints, endpointslice, ingress.
+   *
+   * @schema VmServiceScrapeSpecAttachMetadata#namespace
+   */
+  readonly namespace?: boolean;
+
+  /**
    * Node instructs vmagent to add node specific metadata from service discovery
    * Valid for roles: pod, endpoints, endpointslice.
    *
@@ -76919,6 +81090,7 @@ export interface VmServiceScrapeSpecAttachMetadata {
 export function toJson_VmServiceScrapeSpecAttachMetadata(obj: VmServiceScrapeSpecAttachMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'namespace': obj.namespace,
     'node': obj.node,
   };
   // filter undefined values
@@ -77251,6 +81423,14 @@ export function toJson_VmServiceScrapeSpecSelector(obj: VmServiceScrapeSpecSelec
  */
 export interface VmServiceScrapeSpecEndpointsAttachMetadata {
   /**
+   * Namespace instructs vmagent to add namespace specific metadata from service discovery
+   * Valid for roles: pod, service, endpoints, endpointslice, ingress.
+   *
+   * @schema VmServiceScrapeSpecEndpointsAttachMetadata#namespace
+   */
+  readonly namespace?: boolean;
+
+  /**
    * Node instructs vmagent to add node specific metadata from service discovery
    * Valid for roles: pod, endpoints, endpointslice.
    *
@@ -77266,6 +81446,7 @@ export interface VmServiceScrapeSpecEndpointsAttachMetadata {
 export function toJson_VmServiceScrapeSpecEndpointsAttachMetadata(obj: VmServiceScrapeSpecEndpointsAttachMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'namespace': obj.namespace,
     'node': obj.node,
   };
   // filter undefined values
@@ -84841,7 +89022,7 @@ export interface VmUserSpec {
   readonly tokenRef?: VmUserSpecTokenRef;
 
   /**
-   * UserName basic auth user name for accessing protected endpoint,
+   * Username basic auth user name for accessing protected endpoint,
    * will be replaced with metadata.name of VMUser if omitted.
    *
    * @schema VmUserSpec#username
@@ -87284,6 +91465,14 @@ export interface VtClusterSpecStorage {
 
 
   /**
+   * Configures horizontal pod autoscaling.
+   * Note, downscaling is not supported.
+   *
+   * @schema VtClusterSpecStorage#hpa
+   */
+  readonly hpa?: VtClusterSpecStorageHpa;
+
+  /**
    * Image - docker image settings
    * if no specified operator uses default version from operator config
    *
@@ -87647,6 +91836,7 @@ export function toJson_VtClusterSpecStorage(obj: VtClusterSpecStorage | undefine
     'futureRetention': obj.futureRetention,
     'hostAliases': obj.hostAliases?.map(y => toJson_VtClusterSpecStorageHostAliases(y)),
     'hostNetwork': obj.hostNetwork,
+    'hpa': toJson_VtClusterSpecStorageHpa(obj.hpa),
     'image': toJson_VtClusterSpecStorageImage(obj.image),
     'imagePullSecrets': obj.imagePullSecrets?.map(y => toJson_VtClusterSpecStorageImagePullSecrets(y)),
     'initContainers': obj.initContainers?.map(y => y),
@@ -89472,6 +93662,54 @@ export function toJson_VtClusterSpecStorageHostAliases(obj: VtClusterSpecStorage
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Configures horizontal pod autoscaling.
+ * Note, downscaling is not supported.
+ *
+ * @schema VtClusterSpecStorageHpa
+ */
+export interface VtClusterSpecStorageHpa {
+  /**
+   * HorizontalPodAutoscalerBehavior configures the scaling behavior of the target
+   * in both Up and Down directions (scaleUp and scaleDown fields respectively).
+   *
+   * @schema VtClusterSpecStorageHpa#behaviour
+   */
+  readonly behaviour?: VtClusterSpecStorageHpaBehaviour;
+
+  /**
+   * @schema VtClusterSpecStorageHpa#maxReplicas
+   */
+  readonly maxReplicas?: number;
+
+  /**
+   * @schema VtClusterSpecStorageHpa#metrics
+   */
+  readonly metrics?: VtClusterSpecStorageHpaMetrics[];
+
+  /**
+   * @schema VtClusterSpecStorageHpa#minReplicas
+   */
+  readonly minReplicas?: number;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpa' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpa(obj: VtClusterSpecStorageHpa | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'behaviour': toJson_VtClusterSpecStorageHpaBehaviour(obj.behaviour),
+    'maxReplicas': obj.maxReplicas,
+    'metrics': obj.metrics?.map(y => toJson_VtClusterSpecStorageHpaMetrics(y)),
+    'minReplicas': obj.minReplicas,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * Image - docker image settings
  * if no specified operator uses default version from operator config
  *
@@ -90938,6 +95176,135 @@ export function toJson_VtClusterSpecStorageExtraEnvsFromSecretRef(obj: VtCluster
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * HorizontalPodAutoscalerBehavior configures the scaling behavior of the target
+ * in both Up and Down directions (scaleUp and scaleDown fields respectively).
+ *
+ * @schema VtClusterSpecStorageHpaBehaviour
+ */
+export interface VtClusterSpecStorageHpaBehaviour {
+  /**
+   * scaleDown is scaling policy for scaling Down.
+   * If not set, the default value is to allow to scale down to minReplicas pods, with a
+   * 300 second stabilization window (i.e., the highest recommendation for
+   * the last 300sec is used).
+   *
+   * @schema VtClusterSpecStorageHpaBehaviour#scaleDown
+   */
+  readonly scaleDown?: VtClusterSpecStorageHpaBehaviourScaleDown;
+
+  /**
+   * scaleUp is scaling policy for scaling Up.
+   * If not set, the default value is the higher of:
+   * * increase no more than 4 pods per 60 seconds
+   * * double the number of pods per 60 seconds
+   * No stabilization is used.
+   *
+   * @schema VtClusterSpecStorageHpaBehaviour#scaleUp
+   */
+  readonly scaleUp?: VtClusterSpecStorageHpaBehaviourScaleUp;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaBehaviour' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaBehaviour(obj: VtClusterSpecStorageHpaBehaviour | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'scaleDown': toJson_VtClusterSpecStorageHpaBehaviourScaleDown(obj.scaleDown),
+    'scaleUp': toJson_VtClusterSpecStorageHpaBehaviourScaleUp(obj.scaleUp),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * MetricSpec specifies how to scale based on a single metric
+ * (only `type` and one other matching field should be set at once).
+ *
+ * @schema VtClusterSpecStorageHpaMetrics
+ */
+export interface VtClusterSpecStorageHpaMetrics {
+  /**
+   * containerResource refers to a resource metric (such as those specified in
+   * requests and limits) known to Kubernetes describing a single container in
+   * each pod of the current scale target (e.g. CPU or memory). Such metrics are
+   * built in to Kubernetes, and have special scaling options on top of those
+   * available to normal per-pod metrics using the "pods" source.
+   *
+   * @schema VtClusterSpecStorageHpaMetrics#containerResource
+   */
+  readonly containerResource?: VtClusterSpecStorageHpaMetricsContainerResource;
+
+  /**
+   * external refers to a global metric that is not associated
+   * with any Kubernetes object. It allows autoscaling based on information
+   * coming from components running outside of cluster
+   * (for example length of queue in cloud messaging service, or
+   * QPS from loadbalancer running outside of cluster).
+   *
+   * @schema VtClusterSpecStorageHpaMetrics#external
+   */
+  readonly external?: VtClusterSpecStorageHpaMetricsExternal;
+
+  /**
+   * object refers to a metric describing a single kubernetes object
+   * (for example, hits-per-second on an Ingress object).
+   *
+   * @schema VtClusterSpecStorageHpaMetrics#object
+   */
+  readonly object?: VtClusterSpecStorageHpaMetricsObject;
+
+  /**
+   * pods refers to a metric describing each pod in the current scale target
+   * (for example, transactions-processed-per-second).  The values will be
+   * averaged together before being compared to the target value.
+   *
+   * @schema VtClusterSpecStorageHpaMetrics#pods
+   */
+  readonly pods?: VtClusterSpecStorageHpaMetricsPods;
+
+  /**
+   * resource refers to a resource metric (such as those specified in
+   * requests and limits) known to Kubernetes describing each pod in the
+   * current scale target (e.g. CPU or memory). Such metrics are built in to
+   * Kubernetes, and have special scaling options on top of those available
+   * to normal per-pod metrics using the "pods" source.
+   *
+   * @schema VtClusterSpecStorageHpaMetrics#resource
+   */
+  readonly resource?: VtClusterSpecStorageHpaMetricsResource;
+
+  /**
+   * type is the type of metric source.  It should be one of "ContainerResource", "External",
+   * "Object", "Pods" or "Resource", each mapping to a matching field in the object.
+   *
+   * @schema VtClusterSpecStorageHpaMetrics#type
+   */
+  readonly type: string;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetrics' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetrics(obj: VtClusterSpecStorageHpaMetrics | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'containerResource': toJson_VtClusterSpecStorageHpaMetricsContainerResource(obj.containerResource),
+    'external': toJson_VtClusterSpecStorageHpaMetricsExternal(obj.external),
+    'object': toJson_VtClusterSpecStorageHpaMetricsObject(obj.object),
+    'pods': toJson_VtClusterSpecStorageHpaMetricsPods(obj.pods),
+    'resource': toJson_VtClusterSpecStorageHpaMetricsResource(obj.resource),
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * An eviction is allowed if at most "maxUnavailable" pods selected by
  * "selector" are unavailable after the eviction, i.e. even in absence of
  * the evicted pod. For example, one can prevent all voluntary evictions
@@ -91179,6 +95546,366 @@ export function toJson_VtClusterSpecStorageStorageEmptyDir(obj: VtClusterSpecSto
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * scaleDown is scaling policy for scaling Down.
+ * If not set, the default value is to allow to scale down to minReplicas pods, with a
+ * 300 second stabilization window (i.e., the highest recommendation for
+ * the last 300sec is used).
+ *
+ * @schema VtClusterSpecStorageHpaBehaviourScaleDown
+ */
+export interface VtClusterSpecStorageHpaBehaviourScaleDown {
+  /**
+   * policies is a list of potential scaling polices which can be used during scaling.
+   * If not set, use the default values:
+   * - For scale up: allow doubling the number of pods, or an absolute change of 4 pods in a 15s window.
+   * - For scale down: allow all pods to be removed in a 15s window.
+   *
+   * @schema VtClusterSpecStorageHpaBehaviourScaleDown#policies
+   */
+  readonly policies?: VtClusterSpecStorageHpaBehaviourScaleDownPolicies[];
+
+  /**
+   * selectPolicy is used to specify which policy should be used.
+   * If not set, the default value Max is used.
+   *
+   * @schema VtClusterSpecStorageHpaBehaviourScaleDown#selectPolicy
+   */
+  readonly selectPolicy?: string;
+
+  /**
+   * stabilizationWindowSeconds is the number of seconds for which past recommendations should be
+   * considered while scaling up or scaling down.
+   * StabilizationWindowSeconds must be greater than or equal to zero and less than or equal to 3600 (one hour).
+   * If not set, use the default values:
+   * - For scale up: 0 (i.e. no stabilization is done).
+   * - For scale down: 300 (i.e. the stabilization window is 300 seconds long).
+   *
+   * @schema VtClusterSpecStorageHpaBehaviourScaleDown#stabilizationWindowSeconds
+   */
+  readonly stabilizationWindowSeconds?: number;
+
+  /**
+   * tolerance is the tolerance on the ratio between the current and desired
+   * metric value under which no updates are made to the desired number of
+   * replicas (e.g. 0.01 for 1%). Must be greater than or equal to zero. If not
+   * set, the default cluster-wide tolerance is applied (by default 10%).
+   *
+   * For example, if autoscaling is configured with a memory consumption target of 100Mi,
+   * and scale-down and scale-up tolerances of 5% and 1% respectively, scaling will be
+   * triggered when the actual consumption falls below 95Mi or exceeds 101Mi.
+   *
+   * This is an alpha field and requires enabling the HPAConfigurableTolerance
+   * feature gate.
+   *
+   * @schema VtClusterSpecStorageHpaBehaviourScaleDown#tolerance
+   */
+  readonly tolerance?: VtClusterSpecStorageHpaBehaviourScaleDownTolerance;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaBehaviourScaleDown' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaBehaviourScaleDown(obj: VtClusterSpecStorageHpaBehaviourScaleDown | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'policies': obj.policies?.map(y => toJson_VtClusterSpecStorageHpaBehaviourScaleDownPolicies(y)),
+    'selectPolicy': obj.selectPolicy,
+    'stabilizationWindowSeconds': obj.stabilizationWindowSeconds,
+    'tolerance': obj.tolerance?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * scaleUp is scaling policy for scaling Up.
+ * If not set, the default value is the higher of:
+ * * increase no more than 4 pods per 60 seconds
+ * * double the number of pods per 60 seconds
+ * No stabilization is used.
+ *
+ * @schema VtClusterSpecStorageHpaBehaviourScaleUp
+ */
+export interface VtClusterSpecStorageHpaBehaviourScaleUp {
+  /**
+   * policies is a list of potential scaling polices which can be used during scaling.
+   * If not set, use the default values:
+   * - For scale up: allow doubling the number of pods, or an absolute change of 4 pods in a 15s window.
+   * - For scale down: allow all pods to be removed in a 15s window.
+   *
+   * @schema VtClusterSpecStorageHpaBehaviourScaleUp#policies
+   */
+  readonly policies?: VtClusterSpecStorageHpaBehaviourScaleUpPolicies[];
+
+  /**
+   * selectPolicy is used to specify which policy should be used.
+   * If not set, the default value Max is used.
+   *
+   * @schema VtClusterSpecStorageHpaBehaviourScaleUp#selectPolicy
+   */
+  readonly selectPolicy?: string;
+
+  /**
+   * stabilizationWindowSeconds is the number of seconds for which past recommendations should be
+   * considered while scaling up or scaling down.
+   * StabilizationWindowSeconds must be greater than or equal to zero and less than or equal to 3600 (one hour).
+   * If not set, use the default values:
+   * - For scale up: 0 (i.e. no stabilization is done).
+   * - For scale down: 300 (i.e. the stabilization window is 300 seconds long).
+   *
+   * @schema VtClusterSpecStorageHpaBehaviourScaleUp#stabilizationWindowSeconds
+   */
+  readonly stabilizationWindowSeconds?: number;
+
+  /**
+   * tolerance is the tolerance on the ratio between the current and desired
+   * metric value under which no updates are made to the desired number of
+   * replicas (e.g. 0.01 for 1%). Must be greater than or equal to zero. If not
+   * set, the default cluster-wide tolerance is applied (by default 10%).
+   *
+   * For example, if autoscaling is configured with a memory consumption target of 100Mi,
+   * and scale-down and scale-up tolerances of 5% and 1% respectively, scaling will be
+   * triggered when the actual consumption falls below 95Mi or exceeds 101Mi.
+   *
+   * This is an alpha field and requires enabling the HPAConfigurableTolerance
+   * feature gate.
+   *
+   * @schema VtClusterSpecStorageHpaBehaviourScaleUp#tolerance
+   */
+  readonly tolerance?: VtClusterSpecStorageHpaBehaviourScaleUpTolerance;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaBehaviourScaleUp' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaBehaviourScaleUp(obj: VtClusterSpecStorageHpaBehaviourScaleUp | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'policies': obj.policies?.map(y => toJson_VtClusterSpecStorageHpaBehaviourScaleUpPolicies(y)),
+    'selectPolicy': obj.selectPolicy,
+    'stabilizationWindowSeconds': obj.stabilizationWindowSeconds,
+    'tolerance': obj.tolerance?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * containerResource refers to a resource metric (such as those specified in
+ * requests and limits) known to Kubernetes describing a single container in
+ * each pod of the current scale target (e.g. CPU or memory). Such metrics are
+ * built in to Kubernetes, and have special scaling options on top of those
+ * available to normal per-pod metrics using the "pods" source.
+ *
+ * @schema VtClusterSpecStorageHpaMetricsContainerResource
+ */
+export interface VtClusterSpecStorageHpaMetricsContainerResource {
+  /**
+   * container is the name of the container in the pods of the scaling target
+   *
+   * @schema VtClusterSpecStorageHpaMetricsContainerResource#container
+   */
+  readonly container: string;
+
+  /**
+   * name is the name of the resource in question.
+   *
+   * @schema VtClusterSpecStorageHpaMetricsContainerResource#name
+   */
+  readonly name: string;
+
+  /**
+   * target specifies the target value for the given metric
+   *
+   * @schema VtClusterSpecStorageHpaMetricsContainerResource#target
+   */
+  readonly target: VtClusterSpecStorageHpaMetricsContainerResourceTarget;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetricsContainerResource' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetricsContainerResource(obj: VtClusterSpecStorageHpaMetricsContainerResource | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'container': obj.container,
+    'name': obj.name,
+    'target': toJson_VtClusterSpecStorageHpaMetricsContainerResourceTarget(obj.target),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * external refers to a global metric that is not associated
+ * with any Kubernetes object. It allows autoscaling based on information
+ * coming from components running outside of cluster
+ * (for example length of queue in cloud messaging service, or
+ * QPS from loadbalancer running outside of cluster).
+ *
+ * @schema VtClusterSpecStorageHpaMetricsExternal
+ */
+export interface VtClusterSpecStorageHpaMetricsExternal {
+  /**
+   * metric identifies the target metric by name and selector
+   *
+   * @schema VtClusterSpecStorageHpaMetricsExternal#metric
+   */
+  readonly metric: VtClusterSpecStorageHpaMetricsExternalMetric;
+
+  /**
+   * target specifies the target value for the given metric
+   *
+   * @schema VtClusterSpecStorageHpaMetricsExternal#target
+   */
+  readonly target: VtClusterSpecStorageHpaMetricsExternalTarget;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetricsExternal' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetricsExternal(obj: VtClusterSpecStorageHpaMetricsExternal | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metric': toJson_VtClusterSpecStorageHpaMetricsExternalMetric(obj.metric),
+    'target': toJson_VtClusterSpecStorageHpaMetricsExternalTarget(obj.target),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * object refers to a metric describing a single kubernetes object
+ * (for example, hits-per-second on an Ingress object).
+ *
+ * @schema VtClusterSpecStorageHpaMetricsObject
+ */
+export interface VtClusterSpecStorageHpaMetricsObject {
+  /**
+   * describedObject specifies the descriptions of a object,such as kind,name apiVersion
+   *
+   * @schema VtClusterSpecStorageHpaMetricsObject#describedObject
+   */
+  readonly describedObject: VtClusterSpecStorageHpaMetricsObjectDescribedObject;
+
+  /**
+   * metric identifies the target metric by name and selector
+   *
+   * @schema VtClusterSpecStorageHpaMetricsObject#metric
+   */
+  readonly metric: VtClusterSpecStorageHpaMetricsObjectMetric;
+
+  /**
+   * target specifies the target value for the given metric
+   *
+   * @schema VtClusterSpecStorageHpaMetricsObject#target
+   */
+  readonly target: VtClusterSpecStorageHpaMetricsObjectTarget;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetricsObject' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetricsObject(obj: VtClusterSpecStorageHpaMetricsObject | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'describedObject': toJson_VtClusterSpecStorageHpaMetricsObjectDescribedObject(obj.describedObject),
+    'metric': toJson_VtClusterSpecStorageHpaMetricsObjectMetric(obj.metric),
+    'target': toJson_VtClusterSpecStorageHpaMetricsObjectTarget(obj.target),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * pods refers to a metric describing each pod in the current scale target
+ * (for example, transactions-processed-per-second).  The values will be
+ * averaged together before being compared to the target value.
+ *
+ * @schema VtClusterSpecStorageHpaMetricsPods
+ */
+export interface VtClusterSpecStorageHpaMetricsPods {
+  /**
+   * metric identifies the target metric by name and selector
+   *
+   * @schema VtClusterSpecStorageHpaMetricsPods#metric
+   */
+  readonly metric: VtClusterSpecStorageHpaMetricsPodsMetric;
+
+  /**
+   * target specifies the target value for the given metric
+   *
+   * @schema VtClusterSpecStorageHpaMetricsPods#target
+   */
+  readonly target: VtClusterSpecStorageHpaMetricsPodsTarget;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetricsPods' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetricsPods(obj: VtClusterSpecStorageHpaMetricsPods | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metric': toJson_VtClusterSpecStorageHpaMetricsPodsMetric(obj.metric),
+    'target': toJson_VtClusterSpecStorageHpaMetricsPodsTarget(obj.target),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * resource refers to a resource metric (such as those specified in
+ * requests and limits) known to Kubernetes describing each pod in the
+ * current scale target (e.g. CPU or memory). Such metrics are built in to
+ * Kubernetes, and have special scaling options on top of those available
+ * to normal per-pod metrics using the "pods" source.
+ *
+ * @schema VtClusterSpecStorageHpaMetricsResource
+ */
+export interface VtClusterSpecStorageHpaMetricsResource {
+  /**
+   * name is the name of the resource in question.
+   *
+   * @schema VtClusterSpecStorageHpaMetricsResource#name
+   */
+  readonly name: string;
+
+  /**
+   * target specifies the target value for the given metric
+   *
+   * @schema VtClusterSpecStorageHpaMetricsResource#target
+   */
+  readonly target: VtClusterSpecStorageHpaMetricsResourceTarget;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetricsResource' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetricsResource(obj: VtClusterSpecStorageHpaMetricsResource | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'target': toJson_VtClusterSpecStorageHpaMetricsResourceTarget(obj.target),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * sizeLimit is the total amount of local storage required for this EmptyDir volume.
  * The size limit is also applicable for memory medium.
  * The maximum usage on memory medium EmptyDir would be the minimum value between
@@ -91198,6 +95925,1020 @@ export class VtClusterSpecStorageStorageEmptyDirSizeLimit {
   private constructor(public readonly value: number | string) {
   }
 }
+
+/**
+ * HPAScalingPolicy is a single policy which must hold true for a specified past interval.
+ *
+ * @schema VtClusterSpecStorageHpaBehaviourScaleDownPolicies
+ */
+export interface VtClusterSpecStorageHpaBehaviourScaleDownPolicies {
+  /**
+   * periodSeconds specifies the window of time for which the policy should hold true.
+   * PeriodSeconds must be greater than zero and less than or equal to 1800 (30 min).
+   *
+   * @schema VtClusterSpecStorageHpaBehaviourScaleDownPolicies#periodSeconds
+   */
+  readonly periodSeconds: number;
+
+  /**
+   * type is used to specify the scaling policy.
+   *
+   * @schema VtClusterSpecStorageHpaBehaviourScaleDownPolicies#type
+   */
+  readonly type: string;
+
+  /**
+   * value contains the amount of change which is permitted by the policy.
+   * It must be greater than zero
+   *
+   * @schema VtClusterSpecStorageHpaBehaviourScaleDownPolicies#value
+   */
+  readonly value: number;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaBehaviourScaleDownPolicies' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaBehaviourScaleDownPolicies(obj: VtClusterSpecStorageHpaBehaviourScaleDownPolicies | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'periodSeconds': obj.periodSeconds,
+    'type': obj.type,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * tolerance is the tolerance on the ratio between the current and desired
+ * metric value under which no updates are made to the desired number of
+ * replicas (e.g. 0.01 for 1%). Must be greater than or equal to zero. If not
+ * set, the default cluster-wide tolerance is applied (by default 10%).
+ *
+ * For example, if autoscaling is configured with a memory consumption target of 100Mi,
+ * and scale-down and scale-up tolerances of 5% and 1% respectively, scaling will be
+ * triggered when the actual consumption falls below 95Mi or exceeds 101Mi.
+ *
+ * This is an alpha field and requires enabling the HPAConfigurableTolerance
+ * feature gate.
+ *
+ * @schema VtClusterSpecStorageHpaBehaviourScaleDownTolerance
+ */
+export class VtClusterSpecStorageHpaBehaviourScaleDownTolerance {
+  public static fromNumber(value: number): VtClusterSpecStorageHpaBehaviourScaleDownTolerance {
+    return new VtClusterSpecStorageHpaBehaviourScaleDownTolerance(value);
+  }
+  public static fromString(value: string): VtClusterSpecStorageHpaBehaviourScaleDownTolerance {
+    return new VtClusterSpecStorageHpaBehaviourScaleDownTolerance(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * HPAScalingPolicy is a single policy which must hold true for a specified past interval.
+ *
+ * @schema VtClusterSpecStorageHpaBehaviourScaleUpPolicies
+ */
+export interface VtClusterSpecStorageHpaBehaviourScaleUpPolicies {
+  /**
+   * periodSeconds specifies the window of time for which the policy should hold true.
+   * PeriodSeconds must be greater than zero and less than or equal to 1800 (30 min).
+   *
+   * @schema VtClusterSpecStorageHpaBehaviourScaleUpPolicies#periodSeconds
+   */
+  readonly periodSeconds: number;
+
+  /**
+   * type is used to specify the scaling policy.
+   *
+   * @schema VtClusterSpecStorageHpaBehaviourScaleUpPolicies#type
+   */
+  readonly type: string;
+
+  /**
+   * value contains the amount of change which is permitted by the policy.
+   * It must be greater than zero
+   *
+   * @schema VtClusterSpecStorageHpaBehaviourScaleUpPolicies#value
+   */
+  readonly value: number;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaBehaviourScaleUpPolicies' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaBehaviourScaleUpPolicies(obj: VtClusterSpecStorageHpaBehaviourScaleUpPolicies | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'periodSeconds': obj.periodSeconds,
+    'type': obj.type,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * tolerance is the tolerance on the ratio between the current and desired
+ * metric value under which no updates are made to the desired number of
+ * replicas (e.g. 0.01 for 1%). Must be greater than or equal to zero. If not
+ * set, the default cluster-wide tolerance is applied (by default 10%).
+ *
+ * For example, if autoscaling is configured with a memory consumption target of 100Mi,
+ * and scale-down and scale-up tolerances of 5% and 1% respectively, scaling will be
+ * triggered when the actual consumption falls below 95Mi or exceeds 101Mi.
+ *
+ * This is an alpha field and requires enabling the HPAConfigurableTolerance
+ * feature gate.
+ *
+ * @schema VtClusterSpecStorageHpaBehaviourScaleUpTolerance
+ */
+export class VtClusterSpecStorageHpaBehaviourScaleUpTolerance {
+  public static fromNumber(value: number): VtClusterSpecStorageHpaBehaviourScaleUpTolerance {
+    return new VtClusterSpecStorageHpaBehaviourScaleUpTolerance(value);
+  }
+  public static fromString(value: string): VtClusterSpecStorageHpaBehaviourScaleUpTolerance {
+    return new VtClusterSpecStorageHpaBehaviourScaleUpTolerance(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * target specifies the target value for the given metric
+ *
+ * @schema VtClusterSpecStorageHpaMetricsContainerResourceTarget
+ */
+export interface VtClusterSpecStorageHpaMetricsContainerResourceTarget {
+  /**
+   * averageUtilization is the target value of the average of the
+   * resource metric across all relevant pods, represented as a percentage of
+   * the requested value of the resource for the pods.
+   * Currently only valid for Resource metric source type
+   *
+   * @schema VtClusterSpecStorageHpaMetricsContainerResourceTarget#averageUtilization
+   */
+  readonly averageUtilization?: number;
+
+  /**
+   * averageValue is the target value of the average of the
+   * metric across all relevant pods (as a quantity)
+   *
+   * @schema VtClusterSpecStorageHpaMetricsContainerResourceTarget#averageValue
+   */
+  readonly averageValue?: VtClusterSpecStorageHpaMetricsContainerResourceTargetAverageValue;
+
+  /**
+   * type represents whether the metric type is Utilization, Value, or AverageValue
+   *
+   * @schema VtClusterSpecStorageHpaMetricsContainerResourceTarget#type
+   */
+  readonly type: string;
+
+  /**
+   * value is the target value of the metric (as a quantity).
+   *
+   * @schema VtClusterSpecStorageHpaMetricsContainerResourceTarget#value
+   */
+  readonly value?: VtClusterSpecStorageHpaMetricsContainerResourceTargetValue;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetricsContainerResourceTarget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetricsContainerResourceTarget(obj: VtClusterSpecStorageHpaMetricsContainerResourceTarget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'averageUtilization': obj.averageUtilization,
+    'averageValue': obj.averageValue?.value,
+    'type': obj.type,
+    'value': obj.value?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * metric identifies the target metric by name and selector
+ *
+ * @schema VtClusterSpecStorageHpaMetricsExternalMetric
+ */
+export interface VtClusterSpecStorageHpaMetricsExternalMetric {
+  /**
+   * name is the name of the given metric
+   *
+   * @schema VtClusterSpecStorageHpaMetricsExternalMetric#name
+   */
+  readonly name: string;
+
+  /**
+   * selector is the string-encoded form of a standard kubernetes label selector for the given metric
+   * When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
+   * When unset, just the metricName will be used to gather metrics.
+   *
+   * @schema VtClusterSpecStorageHpaMetricsExternalMetric#selector
+   */
+  readonly selector?: VtClusterSpecStorageHpaMetricsExternalMetricSelector;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetricsExternalMetric' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetricsExternalMetric(obj: VtClusterSpecStorageHpaMetricsExternalMetric | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'selector': toJson_VtClusterSpecStorageHpaMetricsExternalMetricSelector(obj.selector),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * target specifies the target value for the given metric
+ *
+ * @schema VtClusterSpecStorageHpaMetricsExternalTarget
+ */
+export interface VtClusterSpecStorageHpaMetricsExternalTarget {
+  /**
+   * averageUtilization is the target value of the average of the
+   * resource metric across all relevant pods, represented as a percentage of
+   * the requested value of the resource for the pods.
+   * Currently only valid for Resource metric source type
+   *
+   * @schema VtClusterSpecStorageHpaMetricsExternalTarget#averageUtilization
+   */
+  readonly averageUtilization?: number;
+
+  /**
+   * averageValue is the target value of the average of the
+   * metric across all relevant pods (as a quantity)
+   *
+   * @schema VtClusterSpecStorageHpaMetricsExternalTarget#averageValue
+   */
+  readonly averageValue?: VtClusterSpecStorageHpaMetricsExternalTargetAverageValue;
+
+  /**
+   * type represents whether the metric type is Utilization, Value, or AverageValue
+   *
+   * @schema VtClusterSpecStorageHpaMetricsExternalTarget#type
+   */
+  readonly type: string;
+
+  /**
+   * value is the target value of the metric (as a quantity).
+   *
+   * @schema VtClusterSpecStorageHpaMetricsExternalTarget#value
+   */
+  readonly value?: VtClusterSpecStorageHpaMetricsExternalTargetValue;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetricsExternalTarget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetricsExternalTarget(obj: VtClusterSpecStorageHpaMetricsExternalTarget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'averageUtilization': obj.averageUtilization,
+    'averageValue': obj.averageValue?.value,
+    'type': obj.type,
+    'value': obj.value?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * describedObject specifies the descriptions of a object,such as kind,name apiVersion
+ *
+ * @schema VtClusterSpecStorageHpaMetricsObjectDescribedObject
+ */
+export interface VtClusterSpecStorageHpaMetricsObjectDescribedObject {
+  /**
+   * apiVersion is the API version of the referent
+   *
+   * @schema VtClusterSpecStorageHpaMetricsObjectDescribedObject#apiVersion
+   */
+  readonly apiVersion?: string;
+
+  /**
+   * kind is the kind of the referent; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+   *
+   * @schema VtClusterSpecStorageHpaMetricsObjectDescribedObject#kind
+   */
+  readonly kind: string;
+
+  /**
+   * name is the name of the referent; More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VtClusterSpecStorageHpaMetricsObjectDescribedObject#name
+   */
+  readonly name: string;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetricsObjectDescribedObject' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetricsObjectDescribedObject(obj: VtClusterSpecStorageHpaMetricsObjectDescribedObject | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apiVersion': obj.apiVersion,
+    'kind': obj.kind,
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * metric identifies the target metric by name and selector
+ *
+ * @schema VtClusterSpecStorageHpaMetricsObjectMetric
+ */
+export interface VtClusterSpecStorageHpaMetricsObjectMetric {
+  /**
+   * name is the name of the given metric
+   *
+   * @schema VtClusterSpecStorageHpaMetricsObjectMetric#name
+   */
+  readonly name: string;
+
+  /**
+   * selector is the string-encoded form of a standard kubernetes label selector for the given metric
+   * When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
+   * When unset, just the metricName will be used to gather metrics.
+   *
+   * @schema VtClusterSpecStorageHpaMetricsObjectMetric#selector
+   */
+  readonly selector?: VtClusterSpecStorageHpaMetricsObjectMetricSelector;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetricsObjectMetric' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetricsObjectMetric(obj: VtClusterSpecStorageHpaMetricsObjectMetric | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'selector': toJson_VtClusterSpecStorageHpaMetricsObjectMetricSelector(obj.selector),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * target specifies the target value for the given metric
+ *
+ * @schema VtClusterSpecStorageHpaMetricsObjectTarget
+ */
+export interface VtClusterSpecStorageHpaMetricsObjectTarget {
+  /**
+   * averageUtilization is the target value of the average of the
+   * resource metric across all relevant pods, represented as a percentage of
+   * the requested value of the resource for the pods.
+   * Currently only valid for Resource metric source type
+   *
+   * @schema VtClusterSpecStorageHpaMetricsObjectTarget#averageUtilization
+   */
+  readonly averageUtilization?: number;
+
+  /**
+   * averageValue is the target value of the average of the
+   * metric across all relevant pods (as a quantity)
+   *
+   * @schema VtClusterSpecStorageHpaMetricsObjectTarget#averageValue
+   */
+  readonly averageValue?: VtClusterSpecStorageHpaMetricsObjectTargetAverageValue;
+
+  /**
+   * type represents whether the metric type is Utilization, Value, or AverageValue
+   *
+   * @schema VtClusterSpecStorageHpaMetricsObjectTarget#type
+   */
+  readonly type: string;
+
+  /**
+   * value is the target value of the metric (as a quantity).
+   *
+   * @schema VtClusterSpecStorageHpaMetricsObjectTarget#value
+   */
+  readonly value?: VtClusterSpecStorageHpaMetricsObjectTargetValue;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetricsObjectTarget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetricsObjectTarget(obj: VtClusterSpecStorageHpaMetricsObjectTarget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'averageUtilization': obj.averageUtilization,
+    'averageValue': obj.averageValue?.value,
+    'type': obj.type,
+    'value': obj.value?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * metric identifies the target metric by name and selector
+ *
+ * @schema VtClusterSpecStorageHpaMetricsPodsMetric
+ */
+export interface VtClusterSpecStorageHpaMetricsPodsMetric {
+  /**
+   * name is the name of the given metric
+   *
+   * @schema VtClusterSpecStorageHpaMetricsPodsMetric#name
+   */
+  readonly name: string;
+
+  /**
+   * selector is the string-encoded form of a standard kubernetes label selector for the given metric
+   * When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
+   * When unset, just the metricName will be used to gather metrics.
+   *
+   * @schema VtClusterSpecStorageHpaMetricsPodsMetric#selector
+   */
+  readonly selector?: VtClusterSpecStorageHpaMetricsPodsMetricSelector;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetricsPodsMetric' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetricsPodsMetric(obj: VtClusterSpecStorageHpaMetricsPodsMetric | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'selector': toJson_VtClusterSpecStorageHpaMetricsPodsMetricSelector(obj.selector),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * target specifies the target value for the given metric
+ *
+ * @schema VtClusterSpecStorageHpaMetricsPodsTarget
+ */
+export interface VtClusterSpecStorageHpaMetricsPodsTarget {
+  /**
+   * averageUtilization is the target value of the average of the
+   * resource metric across all relevant pods, represented as a percentage of
+   * the requested value of the resource for the pods.
+   * Currently only valid for Resource metric source type
+   *
+   * @schema VtClusterSpecStorageHpaMetricsPodsTarget#averageUtilization
+   */
+  readonly averageUtilization?: number;
+
+  /**
+   * averageValue is the target value of the average of the
+   * metric across all relevant pods (as a quantity)
+   *
+   * @schema VtClusterSpecStorageHpaMetricsPodsTarget#averageValue
+   */
+  readonly averageValue?: VtClusterSpecStorageHpaMetricsPodsTargetAverageValue;
+
+  /**
+   * type represents whether the metric type is Utilization, Value, or AverageValue
+   *
+   * @schema VtClusterSpecStorageHpaMetricsPodsTarget#type
+   */
+  readonly type: string;
+
+  /**
+   * value is the target value of the metric (as a quantity).
+   *
+   * @schema VtClusterSpecStorageHpaMetricsPodsTarget#value
+   */
+  readonly value?: VtClusterSpecStorageHpaMetricsPodsTargetValue;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetricsPodsTarget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetricsPodsTarget(obj: VtClusterSpecStorageHpaMetricsPodsTarget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'averageUtilization': obj.averageUtilization,
+    'averageValue': obj.averageValue?.value,
+    'type': obj.type,
+    'value': obj.value?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * target specifies the target value for the given metric
+ *
+ * @schema VtClusterSpecStorageHpaMetricsResourceTarget
+ */
+export interface VtClusterSpecStorageHpaMetricsResourceTarget {
+  /**
+   * averageUtilization is the target value of the average of the
+   * resource metric across all relevant pods, represented as a percentage of
+   * the requested value of the resource for the pods.
+   * Currently only valid for Resource metric source type
+   *
+   * @schema VtClusterSpecStorageHpaMetricsResourceTarget#averageUtilization
+   */
+  readonly averageUtilization?: number;
+
+  /**
+   * averageValue is the target value of the average of the
+   * metric across all relevant pods (as a quantity)
+   *
+   * @schema VtClusterSpecStorageHpaMetricsResourceTarget#averageValue
+   */
+  readonly averageValue?: VtClusterSpecStorageHpaMetricsResourceTargetAverageValue;
+
+  /**
+   * type represents whether the metric type is Utilization, Value, or AverageValue
+   *
+   * @schema VtClusterSpecStorageHpaMetricsResourceTarget#type
+   */
+  readonly type: string;
+
+  /**
+   * value is the target value of the metric (as a quantity).
+   *
+   * @schema VtClusterSpecStorageHpaMetricsResourceTarget#value
+   */
+  readonly value?: VtClusterSpecStorageHpaMetricsResourceTargetValue;
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetricsResourceTarget' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetricsResourceTarget(obj: VtClusterSpecStorageHpaMetricsResourceTarget | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'averageUtilization': obj.averageUtilization,
+    'averageValue': obj.averageValue?.value,
+    'type': obj.type,
+    'value': obj.value?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * averageValue is the target value of the average of the
+ * metric across all relevant pods (as a quantity)
+ *
+ * @schema VtClusterSpecStorageHpaMetricsContainerResourceTargetAverageValue
+ */
+export class VtClusterSpecStorageHpaMetricsContainerResourceTargetAverageValue {
+  public static fromNumber(value: number): VtClusterSpecStorageHpaMetricsContainerResourceTargetAverageValue {
+    return new VtClusterSpecStorageHpaMetricsContainerResourceTargetAverageValue(value);
+  }
+  public static fromString(value: string): VtClusterSpecStorageHpaMetricsContainerResourceTargetAverageValue {
+    return new VtClusterSpecStorageHpaMetricsContainerResourceTargetAverageValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * value is the target value of the metric (as a quantity).
+ *
+ * @schema VtClusterSpecStorageHpaMetricsContainerResourceTargetValue
+ */
+export class VtClusterSpecStorageHpaMetricsContainerResourceTargetValue {
+  public static fromNumber(value: number): VtClusterSpecStorageHpaMetricsContainerResourceTargetValue {
+    return new VtClusterSpecStorageHpaMetricsContainerResourceTargetValue(value);
+  }
+  public static fromString(value: string): VtClusterSpecStorageHpaMetricsContainerResourceTargetValue {
+    return new VtClusterSpecStorageHpaMetricsContainerResourceTargetValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * selector is the string-encoded form of a standard kubernetes label selector for the given metric
+ * When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
+ * When unset, just the metricName will be used to gather metrics.
+ *
+ * @schema VtClusterSpecStorageHpaMetricsExternalMetricSelector
+ */
+export interface VtClusterSpecStorageHpaMetricsExternalMetricSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema VtClusterSpecStorageHpaMetricsExternalMetricSelector#matchExpressions
+   */
+  readonly matchExpressions?: VtClusterSpecStorageHpaMetricsExternalMetricSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema VtClusterSpecStorageHpaMetricsExternalMetricSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetricsExternalMetricSelector' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetricsExternalMetricSelector(obj: VtClusterSpecStorageHpaMetricsExternalMetricSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_VtClusterSpecStorageHpaMetricsExternalMetricSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * averageValue is the target value of the average of the
+ * metric across all relevant pods (as a quantity)
+ *
+ * @schema VtClusterSpecStorageHpaMetricsExternalTargetAverageValue
+ */
+export class VtClusterSpecStorageHpaMetricsExternalTargetAverageValue {
+  public static fromNumber(value: number): VtClusterSpecStorageHpaMetricsExternalTargetAverageValue {
+    return new VtClusterSpecStorageHpaMetricsExternalTargetAverageValue(value);
+  }
+  public static fromString(value: string): VtClusterSpecStorageHpaMetricsExternalTargetAverageValue {
+    return new VtClusterSpecStorageHpaMetricsExternalTargetAverageValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * value is the target value of the metric (as a quantity).
+ *
+ * @schema VtClusterSpecStorageHpaMetricsExternalTargetValue
+ */
+export class VtClusterSpecStorageHpaMetricsExternalTargetValue {
+  public static fromNumber(value: number): VtClusterSpecStorageHpaMetricsExternalTargetValue {
+    return new VtClusterSpecStorageHpaMetricsExternalTargetValue(value);
+  }
+  public static fromString(value: string): VtClusterSpecStorageHpaMetricsExternalTargetValue {
+    return new VtClusterSpecStorageHpaMetricsExternalTargetValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * selector is the string-encoded form of a standard kubernetes label selector for the given metric
+ * When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
+ * When unset, just the metricName will be used to gather metrics.
+ *
+ * @schema VtClusterSpecStorageHpaMetricsObjectMetricSelector
+ */
+export interface VtClusterSpecStorageHpaMetricsObjectMetricSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema VtClusterSpecStorageHpaMetricsObjectMetricSelector#matchExpressions
+   */
+  readonly matchExpressions?: VtClusterSpecStorageHpaMetricsObjectMetricSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema VtClusterSpecStorageHpaMetricsObjectMetricSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetricsObjectMetricSelector' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetricsObjectMetricSelector(obj: VtClusterSpecStorageHpaMetricsObjectMetricSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_VtClusterSpecStorageHpaMetricsObjectMetricSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * averageValue is the target value of the average of the
+ * metric across all relevant pods (as a quantity)
+ *
+ * @schema VtClusterSpecStorageHpaMetricsObjectTargetAverageValue
+ */
+export class VtClusterSpecStorageHpaMetricsObjectTargetAverageValue {
+  public static fromNumber(value: number): VtClusterSpecStorageHpaMetricsObjectTargetAverageValue {
+    return new VtClusterSpecStorageHpaMetricsObjectTargetAverageValue(value);
+  }
+  public static fromString(value: string): VtClusterSpecStorageHpaMetricsObjectTargetAverageValue {
+    return new VtClusterSpecStorageHpaMetricsObjectTargetAverageValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * value is the target value of the metric (as a quantity).
+ *
+ * @schema VtClusterSpecStorageHpaMetricsObjectTargetValue
+ */
+export class VtClusterSpecStorageHpaMetricsObjectTargetValue {
+  public static fromNumber(value: number): VtClusterSpecStorageHpaMetricsObjectTargetValue {
+    return new VtClusterSpecStorageHpaMetricsObjectTargetValue(value);
+  }
+  public static fromString(value: string): VtClusterSpecStorageHpaMetricsObjectTargetValue {
+    return new VtClusterSpecStorageHpaMetricsObjectTargetValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * selector is the string-encoded form of a standard kubernetes label selector for the given metric
+ * When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
+ * When unset, just the metricName will be used to gather metrics.
+ *
+ * @schema VtClusterSpecStorageHpaMetricsPodsMetricSelector
+ */
+export interface VtClusterSpecStorageHpaMetricsPodsMetricSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema VtClusterSpecStorageHpaMetricsPodsMetricSelector#matchExpressions
+   */
+  readonly matchExpressions?: VtClusterSpecStorageHpaMetricsPodsMetricSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema VtClusterSpecStorageHpaMetricsPodsMetricSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetricsPodsMetricSelector' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetricsPodsMetricSelector(obj: VtClusterSpecStorageHpaMetricsPodsMetricSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_VtClusterSpecStorageHpaMetricsPodsMetricSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * averageValue is the target value of the average of the
+ * metric across all relevant pods (as a quantity)
+ *
+ * @schema VtClusterSpecStorageHpaMetricsPodsTargetAverageValue
+ */
+export class VtClusterSpecStorageHpaMetricsPodsTargetAverageValue {
+  public static fromNumber(value: number): VtClusterSpecStorageHpaMetricsPodsTargetAverageValue {
+    return new VtClusterSpecStorageHpaMetricsPodsTargetAverageValue(value);
+  }
+  public static fromString(value: string): VtClusterSpecStorageHpaMetricsPodsTargetAverageValue {
+    return new VtClusterSpecStorageHpaMetricsPodsTargetAverageValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * value is the target value of the metric (as a quantity).
+ *
+ * @schema VtClusterSpecStorageHpaMetricsPodsTargetValue
+ */
+export class VtClusterSpecStorageHpaMetricsPodsTargetValue {
+  public static fromNumber(value: number): VtClusterSpecStorageHpaMetricsPodsTargetValue {
+    return new VtClusterSpecStorageHpaMetricsPodsTargetValue(value);
+  }
+  public static fromString(value: string): VtClusterSpecStorageHpaMetricsPodsTargetValue {
+    return new VtClusterSpecStorageHpaMetricsPodsTargetValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * averageValue is the target value of the average of the
+ * metric across all relevant pods (as a quantity)
+ *
+ * @schema VtClusterSpecStorageHpaMetricsResourceTargetAverageValue
+ */
+export class VtClusterSpecStorageHpaMetricsResourceTargetAverageValue {
+  public static fromNumber(value: number): VtClusterSpecStorageHpaMetricsResourceTargetAverageValue {
+    return new VtClusterSpecStorageHpaMetricsResourceTargetAverageValue(value);
+  }
+  public static fromString(value: string): VtClusterSpecStorageHpaMetricsResourceTargetAverageValue {
+    return new VtClusterSpecStorageHpaMetricsResourceTargetAverageValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * value is the target value of the metric (as a quantity).
+ *
+ * @schema VtClusterSpecStorageHpaMetricsResourceTargetValue
+ */
+export class VtClusterSpecStorageHpaMetricsResourceTargetValue {
+  public static fromNumber(value: number): VtClusterSpecStorageHpaMetricsResourceTargetValue {
+    return new VtClusterSpecStorageHpaMetricsResourceTargetValue(value);
+  }
+  public static fromString(value: string): VtClusterSpecStorageHpaMetricsResourceTargetValue {
+    return new VtClusterSpecStorageHpaMetricsResourceTargetValue(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema VtClusterSpecStorageHpaMetricsExternalMetricSelectorMatchExpressions
+ */
+export interface VtClusterSpecStorageHpaMetricsExternalMetricSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema VtClusterSpecStorageHpaMetricsExternalMetricSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema VtClusterSpecStorageHpaMetricsExternalMetricSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema VtClusterSpecStorageHpaMetricsExternalMetricSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetricsExternalMetricSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetricsExternalMetricSelectorMatchExpressions(obj: VtClusterSpecStorageHpaMetricsExternalMetricSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema VtClusterSpecStorageHpaMetricsObjectMetricSelectorMatchExpressions
+ */
+export interface VtClusterSpecStorageHpaMetricsObjectMetricSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema VtClusterSpecStorageHpaMetricsObjectMetricSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema VtClusterSpecStorageHpaMetricsObjectMetricSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema VtClusterSpecStorageHpaMetricsObjectMetricSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetricsObjectMetricSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetricsObjectMetricSelectorMatchExpressions(obj: VtClusterSpecStorageHpaMetricsObjectMetricSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema VtClusterSpecStorageHpaMetricsPodsMetricSelectorMatchExpressions
+ */
+export interface VtClusterSpecStorageHpaMetricsPodsMetricSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema VtClusterSpecStorageHpaMetricsPodsMetricSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema VtClusterSpecStorageHpaMetricsPodsMetricSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema VtClusterSpecStorageHpaMetricsPodsMetricSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+}
+
+/**
+ * Converts an object of type 'VtClusterSpecStorageHpaMetricsPodsMetricSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_VtClusterSpecStorageHpaMetricsPodsMetricSelectorMatchExpressions(obj: VtClusterSpecStorageHpaMetricsPodsMetricSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 
 /**
