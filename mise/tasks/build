@@ -9,8 +9,6 @@ set -euo pipefail
 find dist -type f ! \( -name '.argocd-source-*.yaml' -o -name 'sealedsecret.*.yaml' \) -delete
 find dist -type d -empty -delete
 
+NPROC=$(getconf _NPROCESSORS_ONLN)
 apps=($(find apps -maxdepth 1 -mindepth 1 -type d | sort))
-for app in "${apps[@]}"; do
-  bun run "$app/app.ts" &
-done
-wait
+printf '%s\n' "${apps[@]}" | xargs -P "$NPROC" -I{} sh -c 'echo "bun run {}/app.ts"; bun run "{}/app.ts"'
