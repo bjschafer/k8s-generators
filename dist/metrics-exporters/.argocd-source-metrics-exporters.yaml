@@ -2,4 +2,4 @@ kustomize:
   images:
   - ghcr.io/scross01/prometheus-klipper-exporter:latest@sha256:bcdf9067764d94c8109565e90cf43ee9292109f9e2348af8c61bb740fa3985d4
   - prompve/prometheus-pve-exporter:latest@sha256:c0a6d578f116b6a26670f03a33f8949bc6036caa71d4ec3c199fd490c1b71644
-  - ghcr.io/unpoller/unpoller:latest@sha256:654764c5202f936601aa66a9892783c9d0fca13eba619ed170f6e921623dbc51
+  - ghcr.io/unpoller/unpoller:latest@sha256:73423ddfe304e866b2cda2d3ecf8e68c15317c93a22945ad7d941d3ca3a6d022
