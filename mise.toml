@@ -34,12 +34,12 @@ depends = ["fmt"]
 [tasks.fmt]
 description = "Format TypeScript files"
 depends = ["install"]
-run = 'bun x prettier --check --write "**/*.ts"'
+run = 'bun x oxfmt --write "**/*.ts"'
 
 [tasks.lint]
 description = "Lint TypeScript files"
 depends = ["install"]
-run = 'bun x eslint --fix "**/*.ts"'
+run = 'bun x oxlint "**/*.ts"'
 
 [tasks.test]
 description = "Run tests"
