@@ -37,16 +37,14 @@ export class BitwardenSecret extends Chart {
           kind: ExternalSecretSpecSecretStoreRefKind.CLUSTER_SECRET_STORE,
           name: "bitwarden",
         },
-        data: Object.entries(props.data).map(
-          (value: [string, string]): ExternalSecretSpecData => {
-            return {
-              secretKey: value[0],
-              remoteRef: {
-                key: value[1],
-              },
-            };
-          },
-        ),
+        data: Object.entries(props.data).map((value: [string, string]): ExternalSecretSpecData => {
+          return {
+            secretKey: value[0],
+            remoteRef: {
+              key: value[1],
+            },
+          };
+        }),
         target: {
           name: props.name,
         },

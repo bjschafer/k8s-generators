@@ -1,11 +1,5 @@
 import { Chart, Size } from "cdk8s";
-import {
-  ConfigMap,
-  Cpu,
-  EnvValue,
-  Probe,
-  ResourceFieldPaths,
-} from "cdk8s-plus-33";
+import { ConfigMap, Cpu, EnvValue, Probe, ResourceFieldPaths } from "cdk8s-plus-33";
 import { Construct } from "constructs";
 import heredoc from "tsheredoc";
 import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";

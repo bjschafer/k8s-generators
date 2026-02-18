@@ -2,11 +2,7 @@ import { App, Chart, Size } from "cdk8s";
 import { Cpu, Secret } from "cdk8s-plus-33";
 import { Construct } from "constructs";
 import { Certificate } from "../../imports/cert-manager.io";
-import {
-  ArgoAppSource,
-  ArgoUpdaterImageProps,
-  NewArgoApp,
-} from "../../lib/argo";
+import { ArgoAppSource, ArgoUpdaterImageProps, NewArgoApp } from "../../lib/argo";
 import { CLUSTER_ISSUER, DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { MediaApp, MediaAppProps } from "../../lib/media-app";
@@ -62,10 +58,7 @@ nfsVols.Add("nfs-media-videos-tvshows", {
   },
 });
 
-const mediaApps: Omit<
-  MediaAppProps,
-  "namespace" | "ingressSecret" | "resources"
->[] = [
+const mediaApps: Omit<MediaAppProps, "namespace" | "ingressSecret" | "resources">[] = [
   {
     name: "sonarr",
     port: 8989,

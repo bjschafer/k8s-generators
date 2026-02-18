@@ -3,13 +3,7 @@ import { App, Duration, Size } from "cdk8s";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
-import {
-  Cpu,
-  EnvValue,
-  PersistentVolumeAccessMode,
-  Probe,
-  Secret,
-} from "cdk8s-plus-33";
+import { Cpu, EnvValue, PersistentVolumeAccessMode, Probe, Secret } from "cdk8s-plus-33";
 import { StorageClass } from "../../lib/volume";
 import { NewKustomize } from "../../lib/kustomize";
 

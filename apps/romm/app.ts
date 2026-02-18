@@ -98,12 +98,8 @@ const server = new AppPlus(app, name, {
     DISABLE_USERPASS_LOGIN: EnvValue.fromValue("true"),
     OIDC_ENABLED: EnvValue.fromValue("true"),
     OIDC_PROVIDER: EnvValue.fromValue("authentik"),
-    OIDC_CLIENT_ID: EnvValue.fromValue(
-      "fU7QdKmVDx3WeOV0UGAkUbMNAJsMOX2j7gc7ExX5",
-    ),
-    OIDC_REDIRECT_URI: EnvValue.fromValue(
-      "https://roms.cmdcentral.xyz/api/oauth/openid",
-    ),
+    OIDC_CLIENT_ID: EnvValue.fromValue("fU7QdKmVDx3WeOV0UGAkUbMNAJsMOX2j7gc7ExX5"),
+    OIDC_REDIRECT_URI: EnvValue.fromValue("https://roms.cmdcentral.xyz/api/oauth/openid"),
     OIDC_SERVER_APPLICATION_URL: EnvValue.fromValue(
       "https://login.cmdcentral.xyz/application/o/romm",
     ),

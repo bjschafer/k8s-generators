@@ -16,11 +16,7 @@ import {
   Secret,
   Volume,
 } from "cdk8s-plus-33";
-import {
-  BACKUP_ANNOTATION_NAME,
-  DEFAULT_SECURITY_CONTEXT,
-  LSIO_ENVVALUE,
-} from "../../lib/consts";
+import { BACKUP_ANNOTATION_NAME, DEFAULT_SECURITY_CONTEXT, LSIO_ENVVALUE } from "../../lib/consts";
 import { StorageClass } from "../../lib/volume";
 import {
   IngressRoute,
@@ -81,19 +77,13 @@ export class Navidrome extends Chart {
           },
           envVariables: {
             ND_PROMETHEUS_ENABLED: EnvValue.fromValue("true"),
-            ND_REVERSEPROXYWHITELIST: EnvValue.fromValue(
-              "10.0.0.0/8,127.0.0.0/8",
-            ),
-            ND_REVERSEPROXYUSERHEADER: EnvValue.fromValue(
-              "X-authentik-username",
-            ),
+            ND_REVERSEPROXYWHITELIST: EnvValue.fromValue("10.0.0.0/8,127.0.0.0/8"),
+            ND_REVERSEPROXYUSERHEADER: EnvValue.fromValue("X-authentik-username"),
             ND_ENABLEUSEREDITING: EnvValue.fromValue("false"),
             ...LSIO_ENVVALUE,
           },
           envFrom: [
-            Env.fromSecret(
-              Secret.fromSecretName(this, `${name}-lastfm`, "navidrome-lastfm"),
-            ),
+            Env.fromSecret(Secret.fromSecretName(this, `${name}-lastfm`, "navidrome-lastfm")),
           ],
           readiness: Probe.fromHttpGet("/ping", {
             port: 4533,
@@ -124,11 +114,7 @@ export class Navidrome extends Chart {
     const nfs = Volume.fromPersistentVolumeClaim(
       this,
       "navidrome-nfs-vol",
-      PersistentVolumeClaim.fromClaimName(
-        this,
-        "nfs-media-music",
-        "nfs-media-music",
-      ),
+      PersistentVolumeClaim.fromClaimName(this, "nfs-media-music", "nfs-media-music"),
     );
 
     deploy.addVolume(pvc);
@@ -160,8 +146,7 @@ export class Navidrome extends Chart {
         routes: [
           {
             kind: IngressRouteSpecRoutesKind.RULE,
-            match:
-              "Host(`music.cmdcentral.xyz`) || Host(`navidrome.cmdcentral.xyz`)",
+            match: "Host(`music.cmdcentral.xyz`) || Host(`navidrome.cmdcentral.xyz`)",
             priority: 10,
             middlewares: [
               {

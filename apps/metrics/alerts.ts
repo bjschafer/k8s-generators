@@ -16,8 +16,7 @@ export function addAlerts(scope: Construct, id: string): void {
           severity: "warning",
         },
         annotations: {
-          summary:
-            "Argo app {{ $labels.name }} not synced for at least 15 minutes",
+          summary: "Argo app {{ $labels.name }} not synced for at least 15 minutes",
         },
       },
       {
@@ -134,8 +133,7 @@ export function addAlerts(scope: Construct, id: string): void {
           ...SEND_TO_PUSHOVER,
         },
         annotations: {
-          summary:
-            "ExternalSecret {{ $labels.name }} in {{ $labels.namespace }} failed to sync",
+          summary: "ExternalSecret {{ $labels.name }} in {{ $labels.namespace }} failed to sync",
         },
       },
     ],
@@ -167,8 +165,7 @@ export function addAlerts(scope: Construct, id: string): void {
           ...SEND_TO_PUSHOVER,
         },
         annotations: {
-          summary:
-            "Certificate {{ $labels.name }} in {{ $labels.namespace }} is not ready",
+          summary: "Certificate {{ $labels.name }} in {{ $labels.namespace }} is not ready",
         },
       },
     ],
@@ -187,8 +184,7 @@ export function addAlerts(scope: Construct, id: string): void {
           ...SEND_TO_PUSHOVER,
         },
         annotations: {
-          summary:
-            "CNPG volume {{ $labels.persistentvolumeclaim }} is > 85% full",
+          summary: "CNPG volume {{ $labels.persistentvolumeclaim }} is > 85% full",
         },
       },
       {
@@ -279,8 +275,7 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.NORMAL,
         },
         annotations: {
-          summary:
-            "Host memory under memory pressure (instance {{ $labels.instance }})",
+          summary: "Host memory under memory pressure (instance {{ $labels.instance }})",
           description:
             '"The node is under heavy memory pressure. High rate of major page faults\\n VALUE = {{ $value }}\\n LABELS = {{ $labels }}"',
         },
@@ -319,8 +314,7 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.LOW,
         },
         annotations: {
-          summary:
-            "Host inodes will fill in 24 hours (instance {{ $labels.instance }})",
+          summary: "Host inodes will fill in 24 hours (instance {{ $labels.instance }})",
           description:
             "Filesystem is predicted to run out of inodes within the next 24 hours at current write rate\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
@@ -333,8 +327,7 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.LOW,
         },
         annotations: {
-          summary:
-            "Host disk will fill in 24 hours (instance {{ $labels.instance }})",
+          summary: "Host disk will fill in 24 hours (instance {{ $labels.instance }})",
           description:
             '"Filesystem is predicted to run out of space within the next 24 hours at current write rate\\n VALUE = {{ $value }}\\n LABELS = {{ $labels }}"',
         },
@@ -347,8 +340,7 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.LOW,
         },
         annotations: {
-          summary:
-            "Host unusual disk read latency (instance {{ $labels.instance }})",
+          summary: "Host unusual disk read latency (instance {{ $labels.instance }})",
           description:
             '"Disk latency is growing (read operations > 100ms)\\n VALUE = {{ $value }}\\n LABELS = {{ $labels }}"',
         },
@@ -361,8 +353,7 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.LOW,
         },
         annotations: {
-          summary:
-            "Host unusual disk write latency (instance {{ $labels.instance }})",
+          summary: "Host unusual disk write latency (instance {{ $labels.instance }})",
           description:
             '"Disk latency is growing (write operations > 100ms)\\n VALUE = {{ $value }}\\n LABELS = {{ $labels }}"',
         },
@@ -388,8 +379,7 @@ export function addAlerts(scope: Construct, id: string): void {
         },
         annotations: {
           summary: "Host high CPU load (instance {{ $labels.instance }})",
-          description:
-            "CPU load is > 80%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
+          description: "CPU load is > 80%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
       },
       {
@@ -399,8 +389,7 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.LOW,
         },
         annotations: {
-          summary:
-            "Host CPU steal noisy neighbor (instance {{ $labels.instance }})",
+          summary: "Host CPU steal noisy neighbor (instance {{ $labels.instance }})",
           description:
             "CPU steal is > 10%. A noisy neighbor is killing VM performances or a spot instance may be out of credit.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
@@ -439,10 +428,8 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.LOW,
         },
         annotations: {
-          summary:
-            "Host systemd service crashed (instance {{ $labels.instance }})",
-          description:
-            "systemd service crashed\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
+          summary: "Host systemd service crashed (instance {{ $labels.instance }})",
+          description: "systemd service crashed\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
       },
       {
@@ -454,8 +441,7 @@ export function addAlerts(scope: Construct, id: string): void {
         },
         annotations: {
           summary: "Host {{ $labels.instance }} OOM kill detected",
-          description:
-            "OOM kill detected\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
+          description: "OOM kill detected\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
       },
       {
@@ -514,8 +500,7 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.HIGH,
         },
         annotations: {
-          summary:
-            "Kubernetes memory pressure (instance {{ $labels.instance }})",
+          summary: "Kubernetes memory pressure (instance {{ $labels.instance }})",
           description:
             "{{ $labels.node }} has MemoryPressure condition\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
@@ -556,8 +541,7 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.LOW,
         },
         annotations: {
-          summary:
-            "Kubernetes PersistentVolumeClaim pending (instance {{ $labels.instance }})",
+          summary: "Kubernetes PersistentVolumeClaim pending (instance {{ $labels.instance }})",
           description:
             "PersistentVolumeClaim {{ $labels.namespace }}/{{ $labels.persistentvolumeclaim }} is pending\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
@@ -570,8 +554,7 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.NORMAL,
         },
         annotations: {
-          summary:
-            "Kubernetes Volume out of disk space (instance {{ $labels.instance }})",
+          summary: "Kubernetes Volume out of disk space (instance {{ $labels.instance }})",
           description:
             "Volume is almost full (< 10% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
@@ -584,8 +567,7 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.HIGH,
         },
         annotations: {
-          summary:
-            "Kubernetes PersistentVolume error (instance {{ $labels.instance }})",
+          summary: "Kubernetes PersistentVolume error (instance {{ $labels.instance }})",
           description:
             "Persistent volume is in bad state\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
@@ -598,10 +580,8 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.HIGH,
         },
         annotations: {
-          summary:
-            "Kubernetes StatefulSet down (instance {{ $labels.instance }})",
-          description:
-            "A StatefulSet went down\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
+          summary: "Kubernetes StatefulSet down (instance {{ $labels.instance }})",
+          description: "A StatefulSet went down\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
       },
       {
@@ -612,8 +592,7 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.LOW,
         },
         annotations: {
-          summary:
-            "Kubernetes HPA scale capability (instance {{ $labels.instance }})",
+          summary: "Kubernetes HPA scale capability (instance {{ $labels.instance }})",
           description:
             "The maximum number of desired Pods has been hit\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
@@ -642,8 +621,7 @@ export function addAlerts(scope: Construct, id: string): void {
           push_notify: "true",
         },
         annotations: {
-          summary:
-            "Kubernetes pod crash looping (instance {{ $labels.instance }})",
+          summary: "Kubernetes pod crash looping (instance {{ $labels.instance }})",
           description:
             "Pod {{ $labels.pod }} is crash looping\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
@@ -656,8 +634,7 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.HIGH,
         },
         annotations: {
-          summary:
-            "Kubernetes Deployment generation mismatch (instance {{ $labels.instance }})",
+          summary: "Kubernetes Deployment generation mismatch (instance {{ $labels.instance }})",
           description:
             "A Deployment has failed but has not been rolled back.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
@@ -670,8 +647,7 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.HIGH,
         },
         annotations: {
-          summary:
-            "Kubernetes StatefulSet generation mismatch (instance {{ $labels.instance }})",
+          summary: "Kubernetes StatefulSet generation mismatch (instance {{ $labels.instance }})",
           description:
             "A StatefulSet has failed but has not been rolled back.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
@@ -684,8 +660,7 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.NORMAL,
         },
         annotations: {
-          summary:
-            "Kubernetes StatefulSet update not rolled out (instance {{ $labels.instance }})",
+          summary: "Kubernetes StatefulSet update not rolled out (instance {{ $labels.instance }})",
           description:
             "StatefulSet update has not been rolled out.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
@@ -699,8 +674,7 @@ export function addAlerts(scope: Construct, id: string): void {
           push_notify: "true",
         },
         annotations: {
-          summary:
-            "Kubernetes DaemonSet rollout stuck (instance {{ $labels.instance }})",
+          summary: "Kubernetes DaemonSet rollout stuck (instance {{ $labels.instance }})",
           description:
             "Some Pods of DaemonSet are not scheduled or not ready\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
@@ -713,8 +687,7 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.HIGH,
         },
         annotations: {
-          summary:
-            "Kubernetes DaemonSet misscheduled (instance {{ $labels.instance }})",
+          summary: "Kubernetes DaemonSet misscheduled (instance {{ $labels.instance }})",
           description:
             "Some DaemonSet Pods are running where they are not supposed to run\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
@@ -740,8 +713,7 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.HIGH,
         },
         annotations: {
-          summary:
-            "Kubernetes API client errors (instance {{ $labels.instance }})",
+          summary: "Kubernetes API client errors (instance {{ $labels.instance }})",
           description:
             "Kubernetes API client is experiencing high error rate\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
@@ -785,8 +757,7 @@ export function addAlerts(scope: Construct, id: string): void {
             "{{ $labels.node }} requires being rebooted, and the reboot daemon has failed to do so for 4 hours",
           impact:
             "Cluster nodes more vulnerable to security exploits. Eventually, no disk space left.",
-          description:
-            "Machine(s) require being rebooted, probably due to kernel update.",
+          description: "Machine(s) require being rebooted, probably due to kernel update.",
         },
       },
       {
@@ -798,8 +769,7 @@ export function addAlerts(scope: Construct, id: string): void {
           push_notify: "true",
         },
         annotations: {
-          summary:
-            "{{ $value }} nodes are not running the same kubelet version as the others",
+          summary: "{{ $value }} nodes are not running the same kubelet version as the others",
         },
       },
       {
@@ -831,8 +801,7 @@ export function addAlerts(scope: Construct, id: string): void {
         },
         annotations: {
           summary: "Ping loss from at least one source > 10%",
-          description:
-            "Ping loss from at least one source > 10%\n  VALUE = {{ $value }}",
+          description: "Ping loss from at least one source > 10%\n  VALUE = {{ $value }}",
         },
       },
       {
@@ -845,8 +814,7 @@ export function addAlerts(scope: Construct, id: string): void {
         },
         annotations: {
           summary: "Ping loss across all sources > 10%",
-          description:
-            "Ping loss across all sources > 10%\n  VALUE = {{ $value }}",
+          description: "Ping loss across all sources > 10%\n  VALUE = {{ $value }}",
         },
       },
     ],
@@ -864,8 +832,7 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.NORMAL,
         },
         annotations: {
-          summary:
-            "GitLab Sidekiq queue {{ $labels.name }} has {{ $value }} jobs backed up",
+          summary: "GitLab Sidekiq queue {{ $labels.name }} has {{ $value }} jobs backed up",
         },
       },
       {
@@ -895,8 +862,7 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.LOW,
         },
         annotations: {
-          summary:
-            "PM2.5 in living room is rising rapidly (delta {{ $value }})",
+          summary: "PM2.5 in living room is rising rapidly (delta {{ $value }})",
         },
       },
       {
@@ -975,8 +941,7 @@ export function addAlerts(scope: Construct, id: string): void {
       {
         alert: "VeleroBackupPartialFailures",
         annotations: {
-          message:
-            "Velero backup {{ $labels.schedule }} has partially failed backups.",
+          message: "Velero backup {{ $labels.schedule }} has partially failed backups.",
         },
         expr: 'sum by (schedule) (increase(velero_backup_partial_failure_total{schedule!=""}[1h])) > 0',
         for: "0m",
@@ -1038,8 +1003,7 @@ export function addAlerts(scope: Construct, id: string): void {
           priority: PRIORITY.LOW,
         },
         annotations: {
-          summary:
-            "ZFS ARC hit ratio below 90% (instance {{ $labels.instance }})",
+          summary: "ZFS ARC hit ratio below 90% (instance {{ $labels.instance }})",
           description:
             "ZFS ARC hit ratio on {{ $labels.instance }}\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
@@ -1053,8 +1017,7 @@ export function addAlerts(scope: Construct, id: string): void {
           ...SEND_TO_PUSHOVER,
         },
         annotations: {
-          summary:
-            "ZFS pool {{ $labels.zpool }} is {{ $labels.state }} on {{ $labels.instance }}",
+          summary: "ZFS pool {{ $labels.zpool }} is {{ $labels.state }} on {{ $labels.instance }}",
         },
       },
     ],

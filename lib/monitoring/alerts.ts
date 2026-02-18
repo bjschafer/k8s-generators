@@ -1,9 +1,6 @@
 import { Chart } from "cdk8s";
 import { Construct } from "constructs";
-import {
-  VmRule,
-  VmRuleSpecGroupsRules,
-} from "../../imports/operator.victoriametrics.com";
+import { VmRule, VmRuleSpecGroupsRules } from "../../imports/operator.victoriametrics.com";
 
 export const SEND_TO_PUSHOVER = {
   push_notify: "true",

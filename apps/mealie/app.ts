@@ -86,9 +86,7 @@ new AppPlus(app, `${name}-app`, {
     OIDC_CONFIGURATION_URL: EnvValue.fromValue(
       "https://login.cmdcentral.xyz/application/o/recipes/.well-known/openid-configuration",
     ),
-    OIDC_CLIENT_ID: EnvValue.fromValue(
-      "rjTPdiqrJJrjrFYasLpcZG9gNfU0xoaqLdNZJXX9",
-    ),
+    OIDC_CLIENT_ID: EnvValue.fromValue("rjTPdiqrJJrjrFYasLpcZG9gNfU0xoaqLdNZJXX9"),
     OIDC_AUTO_REDIRECT: EnvValue.fromValue("true"),
     OIDC_REMEMBER_ME: EnvValue.fromValue("true"),
     OIDC_ADMIN_GROUP: EnvValue.fromValue("wheel"),
@@ -100,11 +98,7 @@ new AppPlus(app, `${name}-app`, {
     ...aiSecrets.toEnvValues(),
   },
   envFrom: [
-    new EnvFrom(
-      undefined,
-      undefined,
-      Secret.fromSecretName(app, `${name}-db-creds`, "db-creds"),
-    ),
+    new EnvFrom(undefined, undefined, Secret.fromSecretName(app, `${name}-db-creds`, "db-creds")),
     new EnvFrom(
       undefined,
       undefined,

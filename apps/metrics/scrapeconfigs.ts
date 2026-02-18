@@ -124,10 +124,7 @@ export class ScrapeConfigs extends Chart {
       spec: {
         staticConfigs: [
           {
-            targets: [
-              "infra1.cmdcentral.xyz:9100",
-              "infra2.cmdcentral.xyz:9100",
-            ],
+            targets: ["infra1.cmdcentral.xyz:9100", "infra2.cmdcentral.xyz:9100"],
             labels: { job: "infra" },
           },
         ],
@@ -250,10 +247,7 @@ export class ScrapeConfigs extends Chart {
       spec: {
         staticConfigs: [
           {
-            targets: [
-              "pandora.cmdcentral.xyz:9100",
-              "trident.cmdcentral.xyz:9100",
-            ],
+            targets: ["pandora.cmdcentral.xyz:9100", "trident.cmdcentral.xyz:9100"],
             labels: { job: "printers" },
           },
         ],
@@ -268,10 +262,7 @@ export class ScrapeConfigs extends Chart {
       spec: {
         staticConfigs: [
           {
-            targets: [
-              "jellyfin.cmdcentral.xyz:9100",
-              "plex.cmdcentral.xyz:9100",
-            ],
+            targets: ["jellyfin.cmdcentral.xyz:9100", "plex.cmdcentral.xyz:9100"],
             labels: { job: "servers" },
           },
         ],
@@ -328,8 +319,7 @@ export class ScrapeConfigs extends Chart {
         },
         podMetricsEndpoints: [
           {
-            targetPort:
-              VmPodScrapeSpecPodMetricsEndpointsTargetPort.fromNumber(8080),
+            targetPort: VmPodScrapeSpecPodMetricsEndpointsTargetPort.fromNumber(8080),
           },
         ],
         selector: {
@@ -349,10 +339,7 @@ export class ScrapeConfigs extends Chart {
         serviceName: "applicationset-controller",
       },
     ].forEach((obj: { name: string; serviceName: string }) => {
-      const name =
-        obj.name === "argocd"
-          ? `${obj.name}-metrics`
-          : `argocd-${obj.name}-metrics`;
+      const name = obj.name === "argocd" ? `${obj.name}-metrics` : `argocd-${obj.name}-metrics`;
       new VmServiceScrape(this, name, {
         metadata: {
           name: name,
@@ -386,33 +373,24 @@ export class ScrapeConfigs extends Chart {
         metrics_path: "/-/metrics",
         scheme: "https",
       },
-    ].forEach(
-      (obj: {
-        job_name: string;
-        port: number;
-        metrics_path?: string;
-        scheme?: string;
-      }) => {
-        new VmScrapeConfig(this, `scrape-${obj.job_name}`, {
-          metadata: {
-            name: obj.job_name,
-            namespace: namespace,
-          },
-          spec: {
-            staticConfigs: [
-              {
-                targets: [`gitlab.cmdcentral.xyz:${obj.port}`],
-                labels: { job: obj.job_name },
-              },
-            ],
-            path: obj.metrics_path,
-            scheme:
-              obj.scheme === "https"
-                ? VmScrapeConfigSpecScheme.HTTPS
-                : VmScrapeConfigSpecScheme.HTTP,
-          },
-        });
-      },
-    );
+    ].forEach((obj: { job_name: string; port: number; metrics_path?: string; scheme?: string }) => {
+      new VmScrapeConfig(this, `scrape-${obj.job_name}`, {
+        metadata: {
+          name: obj.job_name,
+          namespace: namespace,
+        },
+        spec: {
+          staticConfigs: [
+            {
+              targets: [`gitlab.cmdcentral.xyz:${obj.port}`],
+              labels: { job: obj.job_name },
+            },
+          ],
+          path: obj.metrics_path,
+          scheme:
+            obj.scheme === "https" ? VmScrapeConfigSpecScheme.HTTPS : VmScrapeConfigSpecScheme.HTTP,
+        },
+      });
+    });
   }
 }

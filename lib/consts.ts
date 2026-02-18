@@ -50,8 +50,7 @@ export function DEFAULT_APP_PROPS(namespace: string): AppProps {
 }
 
 // Set by mise from the pinned kubectl version; see mise.toml [env]
-if (!process.env.KUBE_VERSION)
-  throw new Error("KUBE_VERSION is not set — run via mise");
+if (!process.env.KUBE_VERSION) throw new Error("KUBE_VERSION is not set — run via mise");
 export const KUBE_VERSION = process.env.KUBE_VERSION;
 
 export const INGRESS_CLASS_NAME = "traefik";
@@ -78,10 +77,7 @@ export function GET_SERVICE_URL(
   return pieces.join("");
 }
 
-export function GET_COMMON_LABELS(
-  name: string,
-  instance?: string,
-): { [name: string]: string } {
+export function GET_COMMON_LABELS(name: string, instance?: string): { [name: string]: string } {
   return {
     "app.kubernetes.io/name": name,
     "app.kubernetes.io/instance": instance ?? name,
@@ -110,6 +106,5 @@ export const RELOADER_ENABLED = {
   "reloader.stakater.com/auto": "true",
 };
 
-export const EXTERNAL_DNS_ANNOTATION_KEY =
-  "external-dns.alpha.kubernetes.io/hostname";
+export const EXTERNAL_DNS_ANNOTATION_KEY = "external-dns.alpha.kubernetes.io/hostname";
 export const METALLB_IP_ANNOTATION_KEY = "metallb.io/loadBalancerIPs";

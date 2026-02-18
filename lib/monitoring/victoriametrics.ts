@@ -16,11 +16,7 @@ export interface CmdcentralServiceMonitorProps {
 }
 
 export class CmdcentralServiceMonitor extends Chart {
-  constructor(
-    scope: Construct,
-    id: string,
-    props: CmdcentralServiceMonitorProps,
-  ) {
+  constructor(scope: Construct, id: string, props: CmdcentralServiceMonitorProps) {
     super(scope, id);
 
     new VmServiceScrape(this, "servicemonitor", {

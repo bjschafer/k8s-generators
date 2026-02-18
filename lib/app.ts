@@ -15,18 +15,8 @@ import {
   VolumeMount,
 } from "../imports/k8s";
 import { ImagePullPolicy } from "cdk8s-plus-33";
-import {
-  DEFAULT_CPU_LIMIT,
-  DEFAULT_MEM_LIMIT,
-  DNS_NAMESERVERS,
-  DNS_SEARCH,
-} from "./consts";
-import {
-  CustomVolume,
-  CustomVolumeProps,
-  PVCProps,
-  StorageClass,
-} from "./volume";
+import { DEFAULT_CPU_LIMIT, DEFAULT_MEM_LIMIT, DNS_NAMESERVERS, DNS_SEARCH } from "./consts";
+import { CustomVolume, CustomVolumeProps, PVCProps, StorageClass } from "./volume";
 
 export interface BasicAppProps {
   readonly namespace: string;
@@ -175,10 +165,7 @@ export class BasicApp extends Chart {
   }
 
   private getStrategy(): DeploymentStrategy {
-    if (
-      this.props.pvcProps &&
-      this.props.pvcProps.storageClass == StorageClass.LONGHORN
-    ) {
+    if (this.props.pvcProps && this.props.pvcProps.storageClass == StorageClass.LONGHORN) {
       return {
         type: "Recreate",
       };
@@ -266,9 +253,7 @@ export class CustomApp extends Chart {
           },
           spec: {
             // TODO nodeSelector / arch
-            containers: props.containers.map(function (
-              container: CustomContainerProps,
-            ): Container {
+            containers: props.containers.map(function (container: CustomContainerProps): Container {
               return {
                 name: container.name ?? props.name,
                 image: container.image,
@@ -277,9 +262,7 @@ export class CustomApp extends Chart {
                 env: container.env,
                 ports: container.ports,
                 resources: container.resources,
-                volumeMounts: volumes.map<VolumeMount>(function (
-                  vol: CustomVolume,
-                ): VolumeMount {
+                volumeMounts: volumes.map<VolumeMount>(function (vol: CustomVolume): VolumeMount {
                   return vol.GetVolumeMount();
                 }),
               };

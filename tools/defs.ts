@@ -35,15 +35,10 @@ export class WebUpdater implements Updater {
   }
 }
 
-export function parseConstStringFromAppTs(
-  appName: string,
-  constName: string,
-): string {
+export function parseConstStringFromAppTs(appName: string, constName: string): string {
   const appTsPath = join(__dirname, "..", "apps", appName, "app.ts");
   const src = readFileSync(appTsPath, "utf8");
-  const re = new RegExp(
-    "\\bconst\\s+" + constName + "\\s*=\\s*[\"'`](.*?)[\"'\\`]",
-  );
+  const re = new RegExp("\\bconst\\s+" + constName + "\\s*=\\s*[\"'`](.*?)[\"'\\`]");
   const m = re.exec(src);
   if (!m) {
     throw new Error(`Could not find const ${constName} in ${appTsPath}`);
@@ -91,9 +86,7 @@ abstract class CommandUpdater implements Updater {
     if (this.version) {
       const foundVersion = this.versionDetector();
       if (foundVersion !== this.version) {
-        throw new Error(
-          `Found version ${foundVersion} doesn't match requested ${this.version}`,
-        );
+        throw new Error(`Found version ${foundVersion} doesn't match requested ${this.version}`);
       }
     }
 
@@ -123,8 +116,7 @@ abstract class CommandUpdater implements Updater {
 
 export class VMUpdater extends CommandUpdater {
   command = "helm";
-  args =
-    "show crds oci://ghcr.io/victoriametrics/helm-charts/victoria-metrics-k8s-stack";
+  args = "show crds oci://ghcr.io/victoriametrics/helm-charts/victoria-metrics-k8s-stack";
   outputDir = "metrics/crds";
 
   versionDetector(): string {
@@ -138,9 +130,7 @@ export class VeleroUpdater extends CommandUpdater {
   outputDir = "velero/crds";
 
   versionDetector(): string {
-    return execSync(
-      `${this.command} version --client-only | awk '/Version/ { print $2 }'`,
-    )
+    return execSync(`${this.command} version --client-only | awk '/Version/ { print $2 }'`)
       .toString()
       .trim();
   }

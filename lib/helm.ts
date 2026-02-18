@@ -1,10 +1,5 @@
 import { App, Chart, Helm, HelmProps } from "cdk8s";
-import {
-  ARGO_DEFAULT_PROPS,
-  ARGO_DESTINATION_SERVER,
-  ARGO_NAMESPACE,
-  ArgoAppProps,
-} from "./argo";
+import { ARGO_DEFAULT_PROPS, ARGO_DESTINATION_SERVER, ARGO_NAMESPACE, ArgoAppProps } from "./argo";
 import { KUBE_VERSION } from "./consts";
 import { Construct } from "constructs";
 import { Application } from "../imports/argoproj.io";
@@ -62,10 +57,7 @@ interface values {
   [key: string]: any;
 }
 
-export interface HelmAppProps<T extends values> extends Omit<
-  HelmProps,
-  "values"
-> {
+export interface HelmAppProps<T extends values> extends Omit<HelmProps, "values"> {
   readonly chart: string;
   readonly repo: string;
   readonly version: string;

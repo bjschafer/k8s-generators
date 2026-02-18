@@ -56,9 +56,7 @@ export class CustomVolume {
         name: this.props.name,
       },
       spec: {
-        accessModes: [
-          this.props.accessMode ?? PersistentVolumeAccessMode.READ_WRITE_ONCE,
-        ],
+        accessModes: [this.props.accessMode ?? PersistentVolumeAccessMode.READ_WRITE_ONCE],
         capacity: {
           storage: this.props.size,
         },
@@ -74,9 +72,7 @@ export class CustomVolume {
         namespace: this.props.namespace,
       },
       spec: {
-        accessModes: [
-          this.props.accessMode ?? PersistentVolumeAccessMode.READ_WRITE_ONCE,
-        ],
+        accessModes: [this.props.accessMode ?? PersistentVolumeAccessMode.READ_WRITE_ONCE],
         resources: {
           requests: {
             storage: this.props.size,

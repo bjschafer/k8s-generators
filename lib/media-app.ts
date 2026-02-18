@@ -81,11 +81,7 @@ export class MediaApp extends Chart {
         storageClassName: StorageClass.CEPH_RBD,
         volumeMode: PersistentVolumeMode.FILE_SYSTEM,
       });
-      configVol = Volume.fromPersistentVolumeClaim(
-        this,
-        `${props.name}-vol`,
-        pvc,
-      );
+      configVol = Volume.fromPersistentVolumeClaim(this, `${props.name}-vol`, pvc);
     }
 
     const deploy = new Deployment(this, `${props.name}-deployment`, {
@@ -135,19 +131,14 @@ export class MediaApp extends Chart {
 
     if (props.configVolume) {
       deploy.addVolume(configVol!);
-      deploy.containers[0].mount(
-        props.configVolume.mountPath ?? "/config",
-        configVol!,
-      );
+      deploy.containers[0].mount(props.configVolume.mountPath ?? "/config", configVol!);
     }
 
     const existingVolumes = new Map<string, Volume>();
 
     for (const nfsMount of props.nfsMounts ?? []) {
       // we need to handle the edge case where the same volume is mounted at multiple (sub)paths.
-      const existingVol = existingVolumes.get(
-        nfsMount.nfsConcreteVolume.volume.name,
-      );
+      const existingVol = existingVolumes.get(nfsMount.nfsConcreteVolume.volume.name);
       let vol: Volume;
       if (!existingVol) {
         vol = Volume.fromPersistentVolumeClaim(
@@ -161,11 +152,7 @@ export class MediaApp extends Chart {
         vol = existingVol;
       }
 
-      deploy.containers[0].mount(
-        nfsMount.mountPoint,
-        vol,
-        nfsMount.mountOptions,
-      );
+      deploy.containers[0].mount(nfsMount.mountPoint, vol, nfsMount.mountOptions);
     }
 
     const labels = deploy.matchLabels;
@@ -191,9 +178,7 @@ export class MediaApp extends Chart {
           GOMAXPROCS: EnvValue.fromResource(ResourceFieldPaths.CPU_LIMIT),
           GOMEMLIMIT: EnvValue.fromResource(ResourceFieldPaths.MEMORY_LIMIT),
           PORT: EnvValue.fromValue(`${exportarrPort}`),
-          URL: EnvValue.fromValue(
-            GET_SERVICE_URL(props.name, props.namespace, true, props.port),
-          ),
+          URL: EnvValue.fromValue(GET_SERVICE_URL(props.name, props.namespace, true, props.port)),
           ...apiKey,
         },
         resources: {
@@ -275,14 +260,8 @@ export class MediaApp extends Chart {
       IngressBackend.fromService(svc, { port: props.port }),
     );
     for (const hostname of props.extraHostnames ?? []) {
-      ingress.addHostRule(
-        hostname,
-        "/",
-        IngressBackend.fromService(svc, { port: props.port }),
-      );
+      ingress.addHostRule(hostname, "/", IngressBackend.fromService(svc, { port: props.port }));
     }
-    ingress.addTls([
-      { hosts: [`${props.name}.cmdcentral.xyz`], secret: props.ingressSecret },
-    ]);
+    ingress.addTls([{ hosts: [`${props.name}.cmdcentral.xyz`], secret: props.ingressSecret }]);
   }
 }

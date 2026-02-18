@@ -25,10 +25,7 @@ export class NFSVolumeContainer extends Chart {
 
   constructor(scope: Construct, name: string) {
     super(scope, name);
-    this.nfsVols = new Map<
-      string,
-      { volume: NFSVolume; pvc: PersistentVolumeClaim }
-    >();
+    this.nfsVols = new Map<string, { volume: NFSVolume; pvc: PersistentVolumeClaim }>();
   }
 
   public Add(name: string, props: NFSVolumeProps) {

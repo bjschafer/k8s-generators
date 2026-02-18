@@ -97,10 +97,7 @@ export class Redis extends Chart {
               {
                 image: `public.ecr.aws/bitnami/redis:${props.version}`,
                 name: "redis",
-                args: [
-                  "-c",
-                  "/opt/bitnami/scripts/start-scripts/start-master.sh",
-                ],
+                args: ["-c", "/opt/bitnami/scripts/start-scripts/start-master.sh"],
                 command: ["/bin/bash"],
                 ports: [
                   {

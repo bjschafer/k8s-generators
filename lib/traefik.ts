@@ -22,11 +22,7 @@ export interface AuthentikIngressRouteProps {
 }
 
 export class AuthentikIngressRoute extends Chart {
-  constructor(
-    scope: Construct,
-    name: string,
-    props: AuthentikIngressRouteProps,
-  ) {
+  constructor(scope: Construct, name: string, props: AuthentikIngressRouteProps) {
     super(scope, `${name}-authentik-ingressroute`);
 
     if (props.createCertificate) {

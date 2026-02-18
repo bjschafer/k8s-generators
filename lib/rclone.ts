@@ -16,12 +16,7 @@ import {
 } from "cdk8s-plus-33";
 import { Construct } from "constructs";
 import { Chart } from "cdk8s";
-import {
-  CLUSTER_ISSUER,
-  DEFAULT_SECURITY_CONTEXT,
-  GET_COMMON_LABELS,
-  IP_CIDRS_V4,
-} from "./consts";
+import { CLUSTER_ISSUER, DEFAULT_SECURITY_CONTEXT, GET_COMMON_LABELS, IP_CIDRS_V4 } from "./consts";
 
 const DEFAULT_IMAGE = "rclone/rclone";
 
@@ -54,16 +49,8 @@ export class Rclone extends Chart {
   constructor(scope: Construct, id: string, props: RcloneProps) {
     super(scope, id);
 
-    const configSecret = Secret.fromSecretName(
-      this,
-      `${id}-config-secret`,
-      props.configSecretName,
-    );
-    const tlsSecret = Secret.fromSecretName(
-      this,
-      `${props.name}-tls`,
-      `${props.name}-tls`,
-    );
+    const configSecret = Secret.fromSecretName(this, `${id}-config-secret`, props.configSecretName);
+    const tlsSecret = Secret.fromSecretName(this, `${props.name}-tls`, `${props.name}-tls`);
     const configVolume = Volume.fromSecret(this, `${id}-config`, configSecret);
     const peers: NetworkPolicyIpBlock[] = [
       IP_CIDRS_V4.WIRED_LAN,
@@ -71,11 +58,7 @@ export class Rclone extends Chart {
       IP_CIDRS_V4.SERVERS_STATIC,
       IP_CIDRS_V4.SERVERS_DHCP,
     ].map((cidr: string, index: number): NetworkPolicyIpBlock => {
-      return NetworkPolicyIpBlock.ipv4(
-        this,
-        `${props.name}-local-peers-${index}`,
-        cidr,
-      );
+      return NetworkPolicyIpBlock.ipv4(this, `${props.name}-local-peers-${index}`, cidr);
     });
 
     for (const backend of props.backends) {
@@ -170,14 +153,12 @@ export class Rclone extends Chart {
           },
           selector: deploy,
           ingress: {
-            rules: peers.map(
-              (peer: NetworkPolicyIpBlock): NetworkPolicyRule => {
-                return {
-                  peer: peer,
-                  ports: [NetworkPolicyPort.tcp(backend.port)],
-                };
-              },
-            ),
+            rules: peers.map((peer: NetworkPolicyIpBlock): NetworkPolicyRule => {
+              return {
+                peer: peer,
+                ports: [NetworkPolicyPort.tcp(backend.port)],
+              };
+            }),
           },
         });
       }
@@ -187,25 +168,21 @@ export class Rclone extends Chart {
           names: backend.allowIngressFromNS,
         });
 
-        new NetworkPolicy(
-          this,
-          `${this.getBackendName(props, backend)}-ns-allow`,
-          {
-            metadata: {
-              name: `${this.getBackendName(props, backend)}-allow-namespaces`,
-              namespace: props.namespace,
-            },
-            selector: deploy,
-            ingress: {
-              rules: [
-                {
-                  peer: nsSelector,
-                  ports: [NetworkPolicyPort.tcp(backend.port)],
-                },
-              ],
-            },
+        new NetworkPolicy(this, `${this.getBackendName(props, backend)}-ns-allow`, {
+          metadata: {
+            name: `${this.getBackendName(props, backend)}-allow-namespaces`,
+            namespace: props.namespace,
           },
-        );
+          selector: deploy,
+          ingress: {
+            rules: [
+              {
+                peer: nsSelector,
+                ports: [NetworkPolicyPort.tcp(backend.port)],
+              },
+            ],
+          },
+        });
       }
 
       const traefikNS = Namespaces.select(this, `${baseName}-traefik-ns`, {
@@ -250,10 +227,7 @@ export class Rclone extends Chart {
     }
   }
 
-  private getBackendName(
-    props: RcloneProps,
-    backend: RcloneServeBackend,
-  ): string {
+  private getBackendName(props: RcloneProps, backend: RcloneServeBackend): string {
     return backend.serviceName ?? `${props.name}-gateway-${backend.name}`;
   }
 }

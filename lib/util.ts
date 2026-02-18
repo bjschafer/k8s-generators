@@ -9,10 +9,7 @@ export function basename(path: string): string {
   return path.split("/").reverse()[0];
 }
 
-export function toApiEndpoint(
-  apiGroup: string,
-  resourceType: string,
-): IApiEndpoint {
+export function toApiEndpoint(apiGroup: string, resourceType: string): IApiEndpoint {
   return new (class implements IApiEndpoint {
     asApiResource(): IApiResource | undefined {
       return new (class implements IApiResource {

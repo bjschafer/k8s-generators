@@ -10,10 +10,7 @@ import {
   Volume,
 } from "cdk8s-plus-33";
 import { Construct } from "constructs";
-import {
-  VmProbe,
-  VmServiceScrape,
-} from "../../imports/operator.victoriametrics.com";
+import { VmProbe, VmServiceScrape } from "../../imports/operator.victoriametrics.com";
 import { DEFAULT_SECURITY_CONTEXT, RELOADER_ENABLED } from "../../lib/consts";
 import { Alert, SEND_TO_PUSHOVER } from "../../lib/monitoring/alerts";
 import { namespace } from "./app";
@@ -191,12 +188,7 @@ export class BlackboxExporter extends Chart {
     this.newBlackboxProbe("bgp", "http_2xx", ["https://vmhost.cmdcentral.xyz"]);
 
     this.newBlackboxProbe("dns", "dns_udp", ["10.0.10.100", "10.0.10.101"]);
-    this.newBlackboxProbe("ping-dns", "ping", [
-      "1.1.1.1",
-      "8.8.8.8",
-      "9.9.9.9",
-      "208.67.222.222",
-    ]);
+    this.newBlackboxProbe("ping-dns", "ping", ["1.1.1.1", "8.8.8.8", "9.9.9.9", "208.67.222.222"]);
 
     this.newBlackboxProbe("ping-lakelair", "ping", [
       "192.168.0.1", // gateway
@@ -224,8 +216,7 @@ export class BlackboxExporter extends Chart {
             ...SEND_TO_PUSHOVER,
           },
           annotations: {
-            summary:
-              "Blackbox DNS probes failing for 15 minutes for {{ $labels.instance }}",
+            summary: "Blackbox DNS probes failing for 15 minutes for {{ $labels.instance }}",
           },
         },
         {
@@ -237,19 +228,14 @@ export class BlackboxExporter extends Chart {
             ...SEND_TO_PUSHOVER,
           },
           annotations: {
-            summary:
-              "Blackbox HTTP probes to {{ $labels.instance }} returning {{ $value }}",
+            summary: "Blackbox HTTP probes to {{ $labels.instance }} returning {{ $value }}",
           },
         },
       ],
     });
   }
 
-  private newBlackboxProbe(
-    probeName: string,
-    module: blackbox_module,
-    targets: string[],
-  ) {
+  private newBlackboxProbe(probeName: string, module: blackbox_module, targets: string[]) {
     new VmProbe(this, `probe-${probeName}`, {
       metadata: {
         name: probeName,

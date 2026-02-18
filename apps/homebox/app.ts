@@ -63,9 +63,7 @@ new AppPlus(app, name, {
 
     // database
     HBOX_DATABASE_DRIVER: EnvValue.fromValue("postgres"),
-    HBOX_DATABASE_HOST: EnvValue.fromValue(
-      "prod-pg17-rw.postgres.svc.cluster.local",
-    ),
+    HBOX_DATABASE_HOST: EnvValue.fromValue("prod-pg17-rw.postgres.svc.cluster.local"),
     HBOX_DATABASE_PORT: EnvValue.fromValue("5432"),
     HBOX_DATABASE_DATABASE: EnvValue.fromValue(name),
     HBOX_DATABASE_USERNAME: EnvValue.fromValue(name),
@@ -76,12 +74,8 @@ new AppPlus(app, name, {
 
     // oidc
     HBOX_OIDC_ENABLED: EnvValue.fromValue("true"),
-    HBOX_OIDC_ISSUER_URL: EnvValue.fromValue(
-      "https://login.cmdcentral.xyz/application/o/homebox/",
-    ),
-    HBOX_OIDC_CLIENT_ID: EnvValue.fromValue(
-      "szrAnUchZOMEJ6oc8ajcYh1jqMBsuUVPeErulame",
-    ),
+    HBOX_OIDC_ISSUER_URL: EnvValue.fromValue("https://login.cmdcentral.xyz/application/o/homebox/"),
+    HBOX_OIDC_CLIENT_ID: EnvValue.fromValue("szrAnUchZOMEJ6oc8ajcYh1jqMBsuUVPeErulame"),
     HBOX_OIDC_ALLOWED_GROUPS: EnvValue.fromValue("Family"),
     HBOX_OIDC_AUTO_REDIRECT: EnvValue.fromValue("true"),
     HBOX_OPTIONS_ALLOW_LOCAL_LOGIN: EnvValue.fromValue("false"),

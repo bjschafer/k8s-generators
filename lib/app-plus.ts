@@ -24,11 +24,7 @@ import {
   Volume,
 } from "cdk8s-plus-33";
 import { Construct } from "constructs";
-import {
-  BACKUP_ANNOTATION_NAME,
-  CLUSTER_ISSUER,
-  DEFAULT_SECURITY_CONTEXT,
-} from "./consts";
+import { BACKUP_ANNOTATION_NAME, CLUSTER_ISSUER, DEFAULT_SECURITY_CONTEXT } from "./consts";
 import { WellKnownLabels } from "./labels";
 import { StorageClass } from "./volume";
 
@@ -103,20 +99,12 @@ export class AppPlus extends Chart {
             namespace: props.namespace,
             labels: props.labels,
           },
-          accessModes: vol.props.accessModes ?? [
-            PersistentVolumeAccessMode.READ_WRITE_ONCE,
-          ],
+          accessModes: vol.props.accessModes ?? [PersistentVolumeAccessMode.READ_WRITE_ONCE],
           storage: vol.props.storage ?? Size.gibibytes(5),
           storageClassName: vol.props.storageClassName ?? StorageClass.CEPH_RBD,
           volumeMode: vol.props.volumeMode ?? PersistentVolumeMode.FILE_SYSTEM,
         });
-        volumes.push(
-          Volume.fromPersistentVolumeClaim(
-            this,
-            `${id}-${vol.mountPath}-vol`,
-            pvc,
-          ),
-        );
+        volumes.push(Volume.fromPersistentVolumeClaim(this, `${id}-${vol.mountPath}-vol`, pvc));
       }
       // backup annotation is comma-separated volume name
       volumeBackupAnnotation = {
@@ -172,9 +160,9 @@ export class AppPlus extends Chart {
       replicas: props.replicas ?? 1,
       // to avoid multiattach errors, deployments that mount RWO volumes get set to recreate
       strategy: props.volumes?.some((vol) =>
-        (
-          vol.props.accessModes ?? [PersistentVolumeAccessMode.READ_WRITE_ONCE]
-        ).some((am) => am === PersistentVolumeAccessMode.READ_WRITE_ONCE),
+        (vol.props.accessModes ?? [PersistentVolumeAccessMode.READ_WRITE_ONCE]).some(
+          (am) => am === PersistentVolumeAccessMode.READ_WRITE_ONCE,
+        ),
       )
         ? DeploymentStrategy.recreate()
         : props.deploymentStrategy,
@@ -201,12 +189,10 @@ export class AppPlus extends Chart {
           envVariables: props.extraEnv,
           readiness: props.disableProbes
             ? undefined
-            : (props.readinessProbe ??
-              Probe.fromTcpSocket({ port: ports[0]?.number })),
+            : (props.readinessProbe ?? Probe.fromTcpSocket({ port: ports[0]?.number })),
           liveness: props.disableProbes
             ? undefined
-            : (props.livenessProbe ??
-              Probe.fromTcpSocket({ port: ports[0]?.number })),
+            : (props.livenessProbe ?? Probe.fromTcpSocket({ port: ports[0]?.number })),
         },
       ],
     });
@@ -227,17 +213,8 @@ export class AppPlus extends Chart {
 
     if (props.configmapMounts) {
       for (const vol of props.configmapMounts) {
-        const cm = ConfigMap.fromConfigMapName(
-          this,
-          `${id}-${vol.name}-cm`,
-          vol.name,
-        );
-        const deployVol = Volume.fromConfigMap(
-          this,
-          `${id}-${vol.name}-vol`,
-          cm,
-          vol.options,
-        );
+        const cm = ConfigMap.fromConfigMapName(this, `${id}-${vol.name}-cm`, vol.name);
+        const deployVol = Volume.fromConfigMap(this, `${id}-${vol.name}-vol`, cm, vol.options);
         deploy.addVolume(deployVol);
         deploy.containers[0].mount(vol.mountPath, deployVol, {
           subPath: vol.subPath,
@@ -273,10 +250,7 @@ export class AppPlus extends Chart {
     }
 
     if (props.backendHTTPS) {
-      svc.metadata.addAnnotation(
-        "traefik.ingress.kubernetes.io/service.serversscheme",
-        "https",
-      );
+      svc.metadata.addAnnotation("traefik.ingress.kubernetes.io/service.serversscheme", "https");
     }
 
     if (props.disableIngress === undefined || props.disableIngress === false) {
@@ -297,20 +271,12 @@ export class AppPlus extends Chart {
       }
 
       for (const host of ingressHosts) {
-        ingress.addHostRule(
-          host,
-          "/",
-          IngressBackend.fromService(svc, { port: ports[0]?.number }),
-        );
+        ingress.addHostRule(host, "/", IngressBackend.fromService(svc, { port: ports[0]?.number }));
       }
       ingress.addTls([
         {
           hosts: ingressHosts,
-          secret: Secret.fromSecretName(
-            this,
-            `${props.name}-tls`,
-            `${props.name}-tls`,
-          ),
+          secret: Secret.fromSecretName(this, `${props.name}-tls`, `${props.name}-tls`),
         },
       ]);
 

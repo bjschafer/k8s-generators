@@ -29,9 +29,7 @@ export interface AppDatabaseSecretResult {
  * Creates managed roles for all configured databases.
  * Call this to register roles with the cluster.
  */
-export function createManagedRoles(
-  addRoleCallback: (role: ClusterSpecManagedRoles) => void,
-): void {
+export function createManagedRoles(addRoleCallback: (role: ClusterSpecManagedRoles) => void): void {
   for (const db of DATABASES) {
     const role: ClusterSpecManagedRoles = {
       name: db.name,
@@ -207,14 +205,10 @@ export function createAppDatabaseSecret(
 ): AppDatabaseSecretResult {
   const db = DATABASES.find((d) => d.name === databaseName);
   if (!db) {
-    throw new Error(
-      `Database '${databaseName}' not found in DATABASES configuration`,
-    );
+    throw new Error(`Database '${databaseName}' not found in DATABASES configuration`);
   }
   if (!db.appNamespace) {
-    throw new Error(
-      `Database '${databaseName}' does not have appNamespace configured`,
-    );
+    throw new Error(`Database '${databaseName}' does not have appNamespace configured`);
   }
 
   const secretName = `${databaseName}-db-credentials`;

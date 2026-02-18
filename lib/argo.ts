@@ -77,9 +77,7 @@ export class ArgoApp extends Chart {
     const providedSyncOptions = props.sync_policy?.syncOptions ?? [];
     const syncOptions = [
       ...defaultSyncOptions,
-      ...providedSyncOptions.filter(
-        (option) => !defaultSyncOptions.includes(option),
-      ),
+      ...providedSyncOptions.filter((option) => !defaultSyncOptions.includes(option)),
     ];
 
     const syncPolicy: ApplicationSpecSyncPolicy = {
@@ -100,10 +98,7 @@ export class ArgoApp extends Chart {
         },
         project: props.project ?? "default",
         source: {
-          path: path.join(
-            sources[source].basePath,
-            props.directoryName ?? name,
-          ),
+          path: path.join(sources[source].basePath, props.directoryName ?? name),
           repoUrl: sources[source].url,
           targetRevision: "main",
         },
@@ -113,8 +108,8 @@ export class ArgoApp extends Chart {
     });
 
     if (props.autoUpdate) {
-      const images: ImageUpdaterSpecApplicationRefsImages[] =
-        props.autoUpdate.images.map((image) => {
+      const images: ImageUpdaterSpecApplicationRefsImages[] = props.autoUpdate.images.map(
+        (image) => {
           const alias = this.getImageAlias(image.image);
           const versionConstraint = image.versionConstraint
             ? `:${image.versionConstraint}`
@@ -127,9 +122,7 @@ export class ArgoApp extends Chart {
             imageName: `${image.image}${versionConstraint}`,
             commonUpdateSettings: {
               updateStrategy,
-              allowTags: image.allowTags
-                ? `regexp:${image.allowTags}`
-                : undefined,
+              allowTags: image.allowTags ? `regexp:${image.allowTags}` : undefined,
               ignoreTags: image.ignoreTags,
               pullSecret: image.imagePullSecret
                 ? `${image.imagePullSecret.namespace}/${image.imagePullSecret.name}`
@@ -144,7 +137,8 @@ export class ArgoApp extends Chart {
                 }
               : undefined,
           };
-        });
+        },
+      );
 
       const writeBackMethod = props.autoUpdate.writebackMethod?.method ?? "git";
       const writeBackConfig: ImageUpdaterSpecWriteBackConfig = {
@@ -196,11 +190,7 @@ export class ArgoApp extends Chart {
   }
 }
 
-export type ArgoUpdateStrategy =
-  | "digest"
-  | "semver"
-  | "newest-build"
-  | "alphabetical";
+export type ArgoUpdateStrategy = "digest" | "semver" | "newest-build" | "alphabetical";
 
 export type ArgoWritebackMethod = "git" | "argocd";
 

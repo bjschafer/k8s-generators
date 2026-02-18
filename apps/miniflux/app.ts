@@ -43,14 +43,11 @@ new AppPlus(app, `${name}-app`, {
     },
   },
   ports: [port],
-  livenessProbe: Probe.fromCommand(
-    ["/usr/bin/miniflux", "-healthcheck", "auto"],
-    {
-      initialDelaySeconds: Duration.seconds(20),
-      periodSeconds: Duration.seconds(10),
-      timeoutSeconds: Duration.seconds(1),
-    },
-  ),
+  livenessProbe: Probe.fromCommand(["/usr/bin/miniflux", "-healthcheck", "auto"], {
+    initialDelaySeconds: Duration.seconds(20),
+    periodSeconds: Duration.seconds(10),
+    timeoutSeconds: Duration.seconds(1),
+  }),
   readinessProbe: Probe.fromHttpGet("/healthcheck", {
     initialDelaySeconds: Duration.seconds(20),
     periodSeconds: Duration.seconds(10),
@@ -62,31 +59,17 @@ new AppPlus(app, `${name}-app`, {
     TZ: EnvValue.fromValue(TZ),
     BASE_URL: EnvValue.fromValue("https://rss.cmdcentral.xyz"),
     METRICS_COLLECTOR: EnvValue.fromValue("1"),
-    METRICS_ALLOWED_NETWORKS: EnvValue.fromValue(
-      "127.0.0.1/8,10.42.0.0/16,10.43.0.0/16",
-    ),
-    AUTH_PROXY_HEADER: EnvValue.fromValue(
-      "HTTP_CF_ACCESS_AUTHENTICATED_USER_EMAIL",
-    ),
-    TRUSTED_REVERSE_PROXY_NETWORKS: EnvValue.fromValue(
-      "127.0.0.1/8,10.42.0.0/16,10.43.0.0/16",
-    ),
+    METRICS_ALLOWED_NETWORKS: EnvValue.fromValue("127.0.0.1/8,10.42.0.0/16,10.43.0.0/16"),
+    AUTH_PROXY_HEADER: EnvValue.fromValue("HTTP_CF_ACCESS_AUTHENTICATED_USER_EMAIL"),
+    TRUSTED_REVERSE_PROXY_NETWORKS: EnvValue.fromValue("127.0.0.1/8,10.42.0.0/16,10.43.0.0/16"),
     AUTH_PROXY_USER_CREATION: EnvValue.fromValue("true"),
     DISABLE_LOCAL_AUTH: EnvValue.fromValue("true"),
     OAUTH2_OIDC_PROVIDER_NAME: EnvValue.fromValue("Cmdcentral Login"),
     RUN_MIGRATIONS: EnvValue.fromValue("1"),
   },
   envFrom: [
-    new EnvFrom(
-      undefined,
-      undefined,
-      Secret.fromSecretName(app, `${name}-db-creds`, "db-creds"),
-    ),
-    new EnvFrom(
-      undefined,
-      undefined,
-      Secret.fromSecretName(app, `${name}-oauth`, "oauth"),
-    ),
+    new EnvFrom(undefined, undefined, Secret.fromSecretName(app, `${name}-db-creds`, "db-creds")),
+    new EnvFrom(undefined, undefined, Secret.fromSecretName(app, `${name}-oauth`, "oauth")),
   ],
 });
 

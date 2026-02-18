@@ -2,10 +2,7 @@ import { App, Chart } from "cdk8s";
 import { Construct } from "constructs";
 import { basename, join } from "path";
 import { SchemaForVeleroHelmChart } from "../../imports/helm-values/velero-values.schema";
-import {
-  VmPodScrape,
-  VmServiceScrape,
-} from "../../imports/operator.victoriametrics.com";
+import { VmPodScrape, VmServiceScrape } from "../../imports/operator.victoriametrics.com";
 import {
   Backup,
   BackupStorageLocation,
@@ -190,8 +187,7 @@ class Velero extends Chart {
           s3ForcePathStyle: "true",
           s3Url:
             "http://rclone-gateway-crypt-wasabi-cmdcentral-k8s-backups.rclone.svc.cluster.local:8042",
-          publicUrl:
-            "https://rclone-gateway-crypt-wasabi-cmdcentral-k8s-backups.cmdcentral.xyz",
+          publicUrl: "https://rclone-gateway-crypt-wasabi-cmdcentral-k8s-backups.cmdcentral.xyz",
         },
         objectStorage: {
           bucket: "velero",

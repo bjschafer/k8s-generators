@@ -68,11 +68,7 @@ export class MysqlInstance extends Chart {
       }),
     });
 
-    const secret = Secret.fromSecretName(
-      this,
-      `${name}-creds`,
-      `${name}-creds`,
-    );
+    const secret = Secret.fromSecretName(this, `${name}-creds`, `${name}-creds`);
 
     sts.addVolumeClaimTemplate({
       name: name,
@@ -82,14 +78,9 @@ export class MysqlInstance extends Chart {
     });
 
     const pvc = PersistentVolumeClaim.fromClaimName(this, `${name}-pvc`, name);
-    const volume = Volume.fromPersistentVolumeClaim(
-      this,
-      `${name}-volume`,
-      pvc,
-      {
-        name: name,
-      },
-    );
+    const volume = Volume.fromPersistentVolumeClaim(this, `${name}-volume`, pvc, {
+      name: name,
+    });
 
     sts.addVolume(volume);
 

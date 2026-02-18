@@ -1,11 +1,5 @@
 import { App, Duration, Size } from "cdk8s";
-import {
-  Cpu,
-  EnvValue,
-  PersistentVolumeAccessMode,
-  Probe,
-  Secret,
-} from "cdk8s-plus-33";
+import { Cpu, EnvValue, PersistentVolumeAccessMode, Probe, Secret } from "cdk8s-plus-33";
 import { AppPlus } from "../../lib/app-plus";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
@@ -66,9 +60,7 @@ new AppPlus(app, `${name}-app`, {
   },
   ports: [port],
   extraEnv: {
-    NEXTAUTH_URL: EnvValue.fromValue(
-      "https://bookmarks.cmdcentral.xyz/api/v1/auth",
-    ),
+    NEXTAUTH_URL: EnvValue.fromValue("https://bookmarks.cmdcentral.xyz/api/v1/auth"),
     NEXTAUTH_SECRET: EnvValue.fromSecretValue({
       secret: secrets,
       key: "NEXTAUTH_SECRET",
@@ -87,9 +79,7 @@ new AppPlus(app, `${name}-app`, {
     // Authentik SSO
     NEXT_PUBLIC_AUTHENTIK_ENABLED: EnvValue.fromValue("true"),
     AUTHENTIK_CUSTOM_NAME: EnvValue.fromValue("Cmdcentral Login"),
-    AUTHENTIK_ISSUER: EnvValue.fromValue(
-      "https://login.cmdcentral.xyz/application/o/bookmarks",
-    ),
+    AUTHENTIK_ISSUER: EnvValue.fromValue("https://login.cmdcentral.xyz/application/o/bookmarks"),
     AUTHENTIK_CLIENT_ID: EnvValue.fromSecretValue({
       secret: secrets,
       key: "AUTHENTIK_CLIENT_ID",

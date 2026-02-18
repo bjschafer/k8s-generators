@@ -199,11 +199,7 @@ export class Kometa extends Chart {
       storage: Size.gibibytes(5),
       volumeMode: PersistentVolumeMode.FILE_SYSTEM,
     });
-    const pvcVol = Volume.fromPersistentVolumeClaim(
-      this,
-      "config-pvc-vol",
-      pvc,
-    );
+    const pvcVol = Volume.fromPersistentVolumeClaim(this, "config-pvc-vol", pvc);
 
     const config = new ConfigMap(this, "configmap", {
       metadata: {
