@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.70.0
+    helm.sh/chart: victoria-metrics-k8s-stack-0.71.1
   name: metrics-victoria-metrics-k8s-stack-vm-health
   namespace: metrics
 spec:
@@ -73,9 +73,9 @@ spec:
         - alert: TooManyLogs
           annotations:
             description: |
-              Logging rate for job \"{{ $labels.job }}\" ({{ $labels.instance }}) is {{ $value }} for last 15m. Worth to check logs for specific error messages.
-            summary: Too many logs printed for job "{{ $labels.job }}" ({{ $labels.instance }})
-          expr: sum(increase(vm_log_messages_total{level="error"}[5m])) without(app_version,location) > 0
+              The job \"{{ $labels.job }}\" ({{ $labels.instance }}) generated {{ $value }} log messages with the level higher than info for the last 5 minutes. Check the logs for the given target. Check also the \"location\" label at the vm_log_messages_total metric if -loggerLevel command-line flag is set to value other than INFO. This label contains code locations responsible for generating log messages suppressed by -loggerLevel.
+            summary: Too many logs are generated for job "{{ $labels.job }}" ({{ $labels.instance }})
+          expr: sum(increase(vm_log_messages_total{level!="info"}[5m])) without(app_version,location,is_printed) > 0
           for: 15m
           labels:
             severity: warning
