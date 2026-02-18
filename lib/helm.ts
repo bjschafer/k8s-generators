@@ -5,6 +5,7 @@ import {
   ARGO_NAMESPACE,
   ArgoAppProps,
 } from "./argo";
+import { KUBE_VERSION } from "./consts";
 import { Construct } from "constructs";
 import { Application } from "../imports/argoproj.io";
 
@@ -75,6 +76,9 @@ export class HelmApp<T extends values> extends Chart {
   constructor(scope: Construct, id: string, props: HelmAppProps<T>) {
     super(scope, id);
 
-    new Helm(this, `${id}-chart`, props);
+    new Helm(this, `${id}-chart`, {
+      ...props,
+      helmFlags: [...(props.helmFlags ?? []), "--kube-version", KUBE_VERSION],
+    });
   }
 }

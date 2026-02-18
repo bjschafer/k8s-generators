@@ -4,6 +4,7 @@
 node_modules
 
 .idea/
+.mise/
 plaintextsecret*
 
 !imports/helm-values/*.d.ts

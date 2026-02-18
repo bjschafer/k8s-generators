@@ -49,6 +49,10 @@ export function DEFAULT_APP_PROPS(namespace: string): AppProps {
   };
 }
 
+// Set by mise from the pinned kubectl version; see mise.toml [env]
+if (!process.env.KUBE_VERSION) throw new Error("KUBE_VERSION is not set — run via mise");
+export const KUBE_VERSION = process.env.KUBE_VERSION;
+
 export const INGRESS_CLASS_NAME = "traefik";
 
 export const CLUSTER_ISSUER = {
