@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#MISE description="Import CRDs and k8s API types"
+
+set -euo pipefail
+
+VERSION=$(kubectl get node | tail -n1 | awk '{ print $NF }' | sed -e 's/+.*$//' -e 's/[0-9]$/0/' -e 's/^v//')
+cdk8s import "k8s@$VERSION"
+cdk8s import <(kubectl get crd -ojson)

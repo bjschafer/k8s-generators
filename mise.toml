@@ -7,27 +7,6 @@ helm = "3.20"
 # Derived from the pinned kubectl above so helm template uses the right .Capabilities.KubeVersion
 KUBE_VERSION = { value = "v{{ tools.kubectl.version }}", tools = true }
 
-[tasks.build]
-description = "Synthesize all apps"
-depends = ["clean", "install"]
-run = """
-#!/usr/bin/env bash
-set -euo pipefail
-apps=($(find apps -maxdepth 1 -mindepth 1 -type d | sort))
-for app in "${apps[@]}"; do
-  bun run "$app/app.ts" &
-done
-wait
-"""
-
-[tasks.clean]
-description = "Remove generated dist files (preserving ArgoCD sources and sealed secrets)"
-run = """
-#!/usr/bin/env bash
-set -euo pipefail
-find dist -type f ! \\( -name '.argocd-source-*.yaml' -o -name 'sealedsecret.*.yaml' \\) -delete
-find dist -type d -empty -delete
-"""
 
 [tasks.clean-full]
 description = "Remove all generated files"
@@ -70,16 +49,6 @@ run = "bun x jest --passWithNoTests"
 [tasks.check]
 description = "Format, lint, and test"
 depends = ["fmt", "lint", "test"]
-
-[tasks.imports]
-description = "Import CRDs and k8s API types"
-run = """
-#!/usr/bin/env bash
-set -euo pipefail
-VERSION=$(kubectl get node | tail -n1 | awk '{ print $NF }' | sed -e 's/\\+.*$//' -e 's/[0-9]$/0/' -e 's/^v//')
-cdk8s import "k8s@$VERSION"
-cdk8s import <(kubectl get crd -ojson)
-"""
 
 [tasks.schemas]
 description = "Generate TypeScript types from JSON schemas"

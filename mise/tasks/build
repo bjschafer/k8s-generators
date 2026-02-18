@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#MISE description="Synthesize all apps"
+#MISE depends=["install"]
+#MISE sources=["apps/**/*.ts", "lib/**/*.ts", "imports/**/*.ts", "package.json", "bun.lockb"]
+#MISE outputs=["dist/**/*.yaml"]
+
+set -euo pipefail
+
+find dist -type f ! \( -name '.argocd-source-*.yaml' -o -name 'sealedsecret.*.yaml' \) -delete
+find dist -type d -empty -delete
+
+apps=($(find apps -maxdepth 1 -mindepth 1 -type d | sort))
+for app in "${apps[@]}"; do
+  bun run "$app/app.ts" &
+done
+wait
