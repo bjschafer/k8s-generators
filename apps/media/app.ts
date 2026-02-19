@@ -235,7 +235,7 @@ class MediaCert extends Chart {
         dnsNames: [
           "music.cmdcentral.xyz",
           "navidrome.cmdcentral.xyz",
-          ...mediaApps.sort().map((props): string => {
+          ...mediaApps.toSorted().map((props): string => {
             return `${props.name}.cmdcentral.xyz`;
           }),
         ],
@@ -265,10 +265,10 @@ NewArgoApp("media", {
         versionConstraint: "latest",
         strategy: "digest",
       },
-      ...mediaApps.map(function (app): ArgoUpdaterImageProps {
+      ...mediaApps.map(function (mediaApp): ArgoUpdaterImageProps {
         return {
-          image: app.image.split(":")[0],
-          versionConstraint: app.image.split(":").at(1),
+          image: mediaApp.image.split(":")[0],
+          versionConstraint: mediaApp.image.split(":").at(1),
           strategy: "digest",
         };
       }),

@@ -207,9 +207,9 @@ export class VmResources extends Chart {
         },
       },
       spec: {
-        rules: am_hosts.map((hostname: string): IngressRule => {
+        rules: am_hosts.map((h: string): IngressRule => {
           return {
-            host: hostname,
+            host: h,
             http: {
               paths: [
                 {
