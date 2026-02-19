@@ -39,7 +39,7 @@ run = 'bun x oxfmt --write "**/*.ts"'
 [tasks.lint]
 description = "Lint TypeScript files"
 depends = ["install"]
-run = 'bun x oxlint apps/ lib/'
+run = 'bun x oxlint apps/ lib/ tools/'
 
 [tasks.test]
 description = "Run tests"
