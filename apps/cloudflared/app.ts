@@ -51,6 +51,7 @@ new AppPlus(app, `${name}-app`, {
       limit: Size.mebibytes(256),
     },
   },
+  replicas: 2,
   ports: [{ number: metricsPort, name: "metrics" }],
   disableIngress: true,
   // No inbound traffic — Service would be unused; VmPodScrape handles metrics collection directly
