@@ -1,5 +1,5 @@
 import { App } from "cdk8s";
-import { NewArgoApp, ArgoAppSource } from "../../lib/argo";
+import { NewArgoApp, ArgoAppSource, ENABLE_SERVERSIDE_APPLY } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { NewKustomize } from "../../lib/kustomize";
@@ -12,6 +12,7 @@ NewArgoApp(name, {
   namespace,
   directoryName: name,
   source: ArgoAppSource.GENERATORS,
+  ...ENABLE_SERVERSIDE_APPLY,
 });
 
 // 1. The operator manager (controller deployment)
@@ -45,6 +46,7 @@ new HelmApp(app, "drivers", {
       {
         name: "ceph",
         monitors: ["10.0.151.2:6789", "10.0.151.5:6789", "10.0.151.4:6789"],
+        crushLocationLabels: [],
       },
     ],
     clientProfiles: [
