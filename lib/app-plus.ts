@@ -83,7 +83,7 @@ export interface AppPlusProps {
 
 export class AppPlus extends Chart {
   public readonly Deployment: Deployment;
-  public readonly Service: Service;
+  public readonly Service: Service | undefined;
   public readonly Ingress?: Ingress;
 
   constructor(scope: Construct, id: string, props: AppPlusProps) {
@@ -91,6 +91,7 @@ export class AppPlus extends Chart {
 
     // set up PVCs first so we can get its name for backup config
     const volumes: Volume[] = [];
+    const backupVolumeNames: string[] = [];
     let volumeBackupAnnotation: { [key: string]: string } = {};
     if (props.volumes) {
       for (const vol of props.volumes) {
@@ -105,16 +106,17 @@ export class AppPlus extends Chart {
           storageClassName: vol.props.storageClassName ?? StorageClass.CEPH_RBD,
           volumeMode: vol.props.volumeMode ?? PersistentVolumeMode.FILE_SYSTEM,
         });
-        volumes.push(Volume.fromPersistentVolumeClaim(this, `${id}-${vol.mountPath}-vol`, pvc));
+        const v = Volume.fromPersistentVolumeClaim(this, `${id}-${vol.mountPath}-vol`, pvc);
+        volumes.push(v);
+        if (vol.enableBackups) {
+          backupVolumeNames.push(v.name);
+        }
       }
-      // backup annotation is comma-separated volume name
-      volumeBackupAnnotation = {
-        [BACKUP_ANNOTATION_NAME]: volumes
-          .map(function (vol: Volume): string {
-            return vol.name;
-          })
-          .join(","),
-      };
+      if (backupVolumeNames.length > 0) {
+        volumeBackupAnnotation = {
+          [BACKUP_ANNOTATION_NAME]: backupVolumeNames.join(","),
+        };
+      }
     }
     let serviceAccount;
     if (props.serviceAccountName) {
@@ -190,10 +192,10 @@ export class AppPlus extends Chart {
           envVariables: props.extraEnv,
           readiness: props.disableProbes
             ? undefined
-            : (props.readinessProbe ?? Probe.fromTcpSocket({ port: ports[0]?.number })),
+            : props.readinessProbe ?? (ports[0] ? Probe.fromTcpSocket({ port: ports[0].number }) : undefined),
           liveness: props.disableProbes
             ? undefined
-            : (props.livenessProbe ?? Probe.fromTcpSocket({ port: ports[0]?.number })),
+            : props.livenessProbe ?? (ports[0] ? Probe.fromTcpSocket({ port: ports[0].number }) : undefined),
         },
       ],
     });
@@ -223,23 +225,19 @@ export class AppPlus extends Chart {
       }
     }
 
-    const svcPorts: ServicePort[] = ports.map(function (
-      port: ContainerPort,
-      index: number,
-    ): ServicePort {
-      return {
-        targetPort: port.number,
-        port: port.number,
-        protocol: port.protocol,
-        name: port.name ?? (index === 0 ? "http" : `http-${index}`),
-      };
-    });
-    if (props.monitoringConfig) {
-      // No-op: monitoring port already included via container ports above
-    }
-
     let svc: Service | undefined;
     if (!props.disableService) {
+      const svcPorts: ServicePort[] = ports.map(function (
+        port: ContainerPort,
+        index: number,
+      ): ServicePort {
+        return {
+          targetPort: port.number,
+          port: port.number,
+          protocol: port.protocol,
+          name: port.name ?? (index === 0 ? "http" : `http-${index}`),
+        };
+      });
       svc = deploy.exposeViaService({
         name: props.name,
         ports: svcPorts,
@@ -257,7 +255,7 @@ export class AppPlus extends Chart {
       }
     }
 
-    if (props.disableIngress === undefined || props.disableIngress === false) {
+    if (!props.disableIngress) {
       if (!svc) throw new Error("Cannot create Ingress when disableService is true");
 
       const ingress = new Ingress(this, `${props.name}-ingress`, {
@@ -290,6 +288,6 @@ export class AppPlus extends Chart {
     }
 
     this.Deployment = deploy;
-    this.Service = svc!;
+    this.Service = svc;
   }
 }
