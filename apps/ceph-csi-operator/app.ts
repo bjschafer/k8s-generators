@@ -21,6 +21,8 @@ NewArgoApp(name, {
   ...ENABLE_SERVERSIDE_APPLY,
 });
 
+const clusterID = "e708730c-9bbe-4567-a37d-6386f6800180";
+
 // 1. The operator manager (controller deployment)
 new HelmApp(app, "operator", {
   chart: "ceph-csi-operator",
@@ -57,8 +59,7 @@ new HelmApp(app, "drivers", {
     ],
     clientProfiles: [
       {
-        // Name MUST match the clusterID in StorageClasses and SnapshotClasses
-        name: "e708730c-9bbe-4567-a37d-6386f6800180",
+        name: clusterID,
         cephConnection: { name: "ceph" },
       },
     ],
@@ -71,7 +72,6 @@ new HelmApp(app, "drivers", {
 });
 
 // 3. StorageClasses and VolumeSnapshotClasses
-const clusterID = "e708730c-9bbe-4567-a37d-6386f6800180";
 const secret = "csi-rbd-secret";
 
 class CephConfig extends Chart {
