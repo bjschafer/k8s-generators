@@ -78,6 +78,7 @@ export interface AppPlusProps {
   readonly dns?: PodDnsProps;
   readonly deploymentStrategy?: DeploymentStrategy;
   readonly enableServiceLinks?: boolean;
+  readonly disableService?: boolean;
 }
 
 export class AppPlus extends Chart {
@@ -237,23 +238,28 @@ export class AppPlus extends Chart {
       // No-op: monitoring port already included via container ports above
     }
 
-    const svc = deploy.exposeViaService({
-      name: props.name,
-      ports: svcPorts,
-      serviceType: props.service?.type,
-    });
-    for (const [key, val] of Object.entries(props.labels ?? {})) {
-      svc.metadata.addLabel(key, val);
-    }
-    for (const [key, val] of Object.entries(props.service?.annotations ?? {})) {
-      svc.metadata.addAnnotation(key, val);
-    }
+    let svc: Service | undefined;
+    if (!props.disableService) {
+      svc = deploy.exposeViaService({
+        name: props.name,
+        ports: svcPorts,
+        serviceType: props.service?.type,
+      });
+      for (const [key, val] of Object.entries(props.labels ?? {})) {
+        svc.metadata.addLabel(key, val);
+      }
+      for (const [key, val] of Object.entries(props.service?.annotations ?? {})) {
+        svc.metadata.addAnnotation(key, val);
+      }
 
-    if (props.backendHTTPS) {
-      svc.metadata.addAnnotation("traefik.ingress.kubernetes.io/service.serversscheme", "https");
+      if (props.backendHTTPS) {
+        svc.metadata.addAnnotation("traefik.ingress.kubernetes.io/service.serversscheme", "https");
+      }
     }
 
     if (props.disableIngress === undefined || props.disableIngress === false) {
+      if (!svc) throw new Error("Cannot create Ingress when disableService is true");
+
       const ingress = new Ingress(this, `${props.name}-ingress`, {
         metadata: {
           name: props.name,
@@ -284,6 +290,6 @@ export class AppPlus extends Chart {
     }
 
     this.Deployment = deploy;
-    this.Service = svc;
+    this.Service = svc!;
   }
 }

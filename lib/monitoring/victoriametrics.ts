@@ -1,5 +1,6 @@
 import { Chart } from "cdk8s";
 import {
+  VmPodScrape,
   VmRule,
   VmRuleSpecGroups,
   VmServiceScrape,
@@ -33,6 +34,36 @@ export class CmdcentralServiceMonitor extends Chart {
           matchLabels: props.matchLabels,
         },
         ...props.extraConfig,
+      },
+    });
+  }
+}
+
+export interface CmdcentralPodMonitorProps {
+  name: string;
+  namespace: string;
+  matchLabels: { [key: string]: string };
+  /** Port name on the pod (matches the named container port) */
+  portName: string;
+}
+
+export class CmdcentralPodMonitor extends Chart {
+  constructor(scope: Construct, id: string, props: CmdcentralPodMonitorProps) {
+    super(scope, id);
+
+    new VmPodScrape(this, "podmonitor", {
+      metadata: {
+        name: props.name,
+        namespace: props.namespace,
+      },
+      spec: {
+        namespaceSelector: {
+          matchNames: [props.namespace],
+        },
+        podMetricsEndpoints: [{ port: props.portName }],
+        selector: {
+          matchLabels: props.matchLabels,
+        },
       },
     });
   }

@@ -1,0 +1,4 @@
+resources:
+  - Deployment.cloudflared.yaml
+  - ExternalSecret.cloudflared.yaml
+  - VMPodScrape.cloudflared.yaml
