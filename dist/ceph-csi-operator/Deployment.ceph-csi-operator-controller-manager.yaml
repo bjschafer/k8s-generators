@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/instance: ceph-csi-operator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: ceph-csi-operator
+    app.kubernetes.io/version: v0.5.0
+    control-plane: controller-manager
+    helm.sh/chart: ceph-csi-operator-0.5.0
+  name: ceph-csi-operator-controller-manager
+  namespace: ceph
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: ceph-csi-operator
+      app.kubernetes.io/name: ceph-csi-operator
+      control-plane: ceph-csi-op-controller-manager
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/default-container: manager
+      labels:
+        app.kubernetes.io/instance: ceph-csi-operator
+        app.kubernetes.io/name: ceph-csi-operator
+        control-plane: ceph-csi-op-controller-manager
+    spec:
+      containers:
+        - args:
+            - --leader-elect
+          command:
+            - /manager
+          env:
+            - name: OPERATOR_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: CSI_SERVICE_ACCOUNT_PREFIX
+              value: ceph-csi-operator-
+            - name: WATCH_NAMESPACE
+              value: ""
+            - name: KUBERNETES_CLUSTER_DOMAIN
+              value: cluster.local
+          image: quay.io/cephcsi/ceph-csi-operator:v0.5.0
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8081
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          name: manager
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8081
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+      imagePullSecrets: []
+      securityContext:
+        runAsNonRoot: true
+      serviceAccountName: ceph-csi-operator-controller-manager
+      terminationGracePeriodSeconds: 10

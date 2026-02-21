@@ -1,0 +1,39 @@
+apiVersion: csi.ceph.io/v1
+kind: OperatorConfig
+metadata:
+  name: ceph-csi-operator-config
+spec:
+  driverSpecDefaults:
+    attachRequired: true
+    cephFsClientType: kernel
+    controllerPlugin:
+      affinity: {}
+      deploymentStrategy: {}
+      hostNetwork: false
+      imagePullPolicy: IfNotPresent
+      privileged: false
+      replicas: 1
+      tolerations: []
+      volumes: []
+    deployCsiAddons: false
+    enableMetadata: false
+    fsGroupPolicy: File
+    fuseMountOptions: {}
+    generateOMapInfo: false
+    grpcTimeout: 30
+    kernelMountOptions: {}
+    log:
+      rotation:
+        maxFiles: 7
+        maxLogSize: 10Gi
+        periodicity: daily
+      verbosity: 0
+    nodePlugin:
+      affinity: {}
+      annotations: {}
+      imagePullPolicy: IfNotPresent
+      kubeletDirPath: /var/lib/kubelet
+      labels: {}
+      tolerations: []
+      volumes: []
+    snapshotPolicy: none

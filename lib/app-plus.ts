@@ -192,10 +192,12 @@ export class AppPlus extends Chart {
           envVariables: props.extraEnv,
           readiness: props.disableProbes
             ? undefined
-            : props.readinessProbe ?? (ports[0] ? Probe.fromTcpSocket({ port: ports[0].number }) : undefined),
+            : (props.readinessProbe ??
+              (ports[0] ? Probe.fromTcpSocket({ port: ports[0].number }) : undefined)),
           liveness: props.disableProbes
             ? undefined
-            : props.livenessProbe ?? (ports[0] ? Probe.fromTcpSocket({ port: ports[0].number }) : undefined),
+            : (props.livenessProbe ??
+              (ports[0] ? Probe.fromTcpSocket({ port: ports[0].number }) : undefined)),
         },
       ],
     });

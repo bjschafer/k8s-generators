@@ -1,0 +1,38 @@
+apiVersion: csi.ceph.io/v1
+kind: Driver
+metadata:
+  name: cephfs.csi.ceph.com
+  namespace: ceph
+spec:
+  attachRequired: true
+  cephFsClientType: kernel
+  controllerPlugin:
+    deploymentStrategy: {}
+    hostNetwork: false
+    privileged: false
+    replicas: 1
+    serviceAccountName: cephfs-csi-ceph-com-ctrlplugin-sa
+    tolerations: []
+    volumes: []
+  deployCsiAddons: false
+  enableMetadata: false
+  fsGroupPolicy: None
+  fuseMountOptions: {}
+  generateOMapInfo: false
+  grpcTimeout: 30
+  kernelMountOptions: {}
+  log:
+    rotation:
+      maxFiles: 7
+      maxLogSize: 10Gi
+      periodicity: daily
+    verbosity: 0
+  nodePlugin:
+    affinity: {}
+    annotations: {}
+    imagePullPolicy: IfNotPresent
+    labels: {}
+    serviceAccountName: cephfs-csi-ceph-com-nodeplugin-sa
+    tolerations: []
+    volumes: []
+  snapshotPolicy: volumeSnapshot

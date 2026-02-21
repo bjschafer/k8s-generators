@@ -1,0 +1,11 @@
+apiVersion: csi.ceph.io/v1
+kind: CephConnection
+metadata:
+  name: ceph
+  namespace: ceph
+spec:
+  monitors:
+    - 10.0.151.2:6789
+    - 10.0.151.5:6789
+    - 10.0.151.4:6789
+  readAffinity: {}

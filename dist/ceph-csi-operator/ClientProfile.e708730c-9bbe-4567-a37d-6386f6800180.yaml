@@ -1,0 +1,8 @@
+apiVersion: csi.ceph.io/v1
+kind: ClientProfile
+metadata:
+  name: e708730c-9bbe-4567-a37d-6386f6800180
+  namespace: ceph
+spec:
+  cephConnectionRef:
+    name: ceph
