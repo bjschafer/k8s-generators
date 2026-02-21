@@ -22,8 +22,6 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      annotations:
-        backup.velero.io/backup-volumes: pvc-cache
       labels:
         app.kubernetes.io/name: immich-machine-learning
         cdk8s.io/metadata.addr: immich-machine-lear-immich-machine-learning-deployment-c8abd19c
