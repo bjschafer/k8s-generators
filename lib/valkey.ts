@@ -81,6 +81,9 @@ export class Valkey extends Chart {
         ]
       : [];
 
+    // Using raw KubeStatefulSet instead of cdk8s-plus StatefulSet because
+    // cdk8s-plus does not support volumeClaimTemplates with the flexibility
+    // needed here (conditional templates and inline resource specs).
     new KubeStatefulSet(this, `${id}-sts`, {
       metadata: {
         name: `${props.name}-valkey-master`,

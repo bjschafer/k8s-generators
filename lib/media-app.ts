@@ -103,10 +103,7 @@ export class MediaApp extends Chart {
       containers: [
         {
           name: props.name,
-          securityContext: {
-            ensureNonRoot: false,
-            readOnlyRootFilesystem: false,
-          },
+          securityContext: DEFAULT_SECURITY_CONTEXT,
           image: props.image,
           ports: [
             {

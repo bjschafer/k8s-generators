@@ -10,6 +10,7 @@ import {
   Volume,
 } from "cdk8s-plus-33";
 import { Construct } from "constructs";
+import { BACKUP_ANNOTATION_NAME } from "./consts";
 import { StorageClass } from "./volume";
 
 export interface MysqlInstanceProps {
@@ -99,7 +100,7 @@ export class MysqlInstance extends Chart {
       baseObj.addJsonPatch(
         JsonPatch.add("/spec/template/metadata/annotations", {}),
         JsonPatch.add(
-          "/spec/template/metadata/annotations/backup.velero.io~1backup-volumes",
+          `/spec/template/metadata/annotations/${BACKUP_ANNOTATION_NAME.replace("/", "~1")}`,
           volume.name,
         ),
       );
