@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  labels:
+    app.kubernetes.io/instance: snapshot-controller
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: conversion-webhook
+    app.kubernetes.io/version: v8.5.0
+    helm.sh/chart: conversion-webhook-5.0.3
+  name: snapshot-controller-conversion-webhook
+  namespace: ceph
+spec:
+  dnsNames:
+    - snapshot-controller-conversion-webhook.ceph.svc
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: webhook-selfsigned
+  privateKey:
+    rotationPolicy: Always
+  secretName: snapshot-controller-conversion-webhook

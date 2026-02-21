@@ -26,7 +26,16 @@ new HelmApp(app, "helm", {
       replicaCount: 2,
     },
     webhook: {
-      enabled: false,
+      enabled: true,
+      tls: {
+        // Use the cluster-wide self-signed ClusterIssuer so cert-manager manages
+        // the conversion webhook cert instead of committing a plain-text secret.
+        certManagerIssuerRef: {
+          kind: "ClusterIssuer",
+          group: "cert-manager.io",
+          name: "webhook-selfsigned",
+        },
+      },
     },
   },
 });
