@@ -46,7 +46,7 @@ new HelmApp(app, "drivers", {
       {
         name: "ceph",
         monitors: ["10.0.151.2:6789", "10.0.151.5:6789", "10.0.151.4:6789"],
-        crushLocationLabels: [],
+        crushLocationLabels: ["kubernetes.io/hostname"],
       },
     ],
     clientProfiles: [

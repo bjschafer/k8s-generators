@@ -8,4 +8,6 @@ spec:
     - 10.0.151.2:6789
     - 10.0.151.5:6789
     - 10.0.151.4:6789
-  readAffinity: {}
+  readAffinity:
+    crushLocationLabels:
+      - kubernetes.io/hostname
