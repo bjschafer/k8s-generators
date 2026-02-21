@@ -1,0 +1,17 @@
+resources:
+  - ClusterRole.snapshot-controller.yaml
+  - ClusterRoleBinding.snapshot-controller.yaml
+  - >-
+    CustomResourceDefinition.volumegroupsnapshotclasses.groupsnapshot.storage.k8s.io.yaml
+  - >-
+    CustomResourceDefinition.volumegroupsnapshotcontents.groupsnapshot.storage.k8s.io.yaml
+  - >-
+    CustomResourceDefinition.volumegroupsnapshots.groupsnapshot.storage.k8s.io.yaml
+  - CustomResourceDefinition.volumesnapshotclasses.snapshot.storage.k8s.io.yaml
+  - CustomResourceDefinition.volumesnapshotcontents.snapshot.storage.k8s.io.yaml
+  - CustomResourceDefinition.volumesnapshots.snapshot.storage.k8s.io.yaml
+  - Deployment.snapshot-controller.yaml
+  - Role.snapshot-controller.yaml
+  - RoleBinding.snapshot-controller.yaml
+  - Secret.snapshot-controller-conversion-webhook.yaml
+  - ServiceAccount.snapshot-controller.yaml
