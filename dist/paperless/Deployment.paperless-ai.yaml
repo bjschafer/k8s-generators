@@ -27,10 +27,7 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-        - env:
-            - name: CUSTOM_BASE_URL
-              value: https://gateway.ai.cloudflare.com/v1/$(CLOUDFLARE_ACCOUNT_ID)/cmdcentral/compat
-          envFrom:
+        - envFrom:
             - configMapRef:
                 name: paperless-ai-config
             - secretRef:
