@@ -4,6 +4,7 @@ import { Construct } from "constructs";
 import { basename } from "path";
 import {
   ObjectStore,
+  ObjectStoreSpecConfigurationDataCompression,
   ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests,
 } from "../../imports/barmancloud.cnpg.io";
 import { Quantity } from "../../imports/k8s";
@@ -204,6 +205,9 @@ class ProdPostgres extends Chart {
               name: s3Creds.secretName,
               key: "SECRET_ACCESS_KEY",
             },
+          },
+          data: {
+            compression: ObjectStoreSpecConfigurationDataCompression.GZIP,
           },
         },
         instanceSidecarConfiguration: {
