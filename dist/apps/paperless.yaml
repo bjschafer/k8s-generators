@@ -52,6 +52,10 @@ spec:
             allowTags: regexp:^[v]?[0-9]+\.[0-9]+\.[0-9]+$
             updateStrategy: semver
           imageName: ghcr.io/valkey-io/valkey:8-alpine
+        - alias: paperless-ai
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: clusterzx/paperless-ai:latest
       namePattern: paperless
   namespace: argocd
   writeBackConfig:

@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: paperless-ai
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: paperless-ai
+  name: paperless-ai
+  namespace: paperless
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 0
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: paperless-ai-paperless-ai-deployment-c88aa187
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        backup.velero.io/backup-volumes: pvc-paperless-ai-data
+      labels:
+        app.kubernetes.io/name: paperless-ai
+        cdk8s.io/metadata.addr: paperless-ai-paperless-ai-deployment-c88aa187
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - envFrom:
+            - configMapRef:
+                name: paperless-ai-config
+            - secretRef:
+                name: paperless-ai-secrets
+          image: clusterzx/paperless-ai:latest
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 3000
+          name: paperless-ai
+          ports:
+            - containerPort: 3000
+              name: http
+          readinessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 3000
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 50m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /app/data
+              name: pvc-paperless-ai-data
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: false
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: pvc-paperless-ai-data
+          persistentVolumeClaim:
+            claimName: paperless-ai-data
+            readOnly: false

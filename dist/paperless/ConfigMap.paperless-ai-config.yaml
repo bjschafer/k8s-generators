@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: paperless-ai-config
+  namespace: paperless
+data:
+  ACTIVATE_CORRESPONDENTS: "yes"
+  ACTIVATE_CUSTOM_FIELDS: "no"
+  ACTIVATE_DOCUMENT_TYPE: "yes"
+  ACTIVATE_TAGGING: "yes"
+  ACTIVATE_TITLE: "yes"
+  ADD_AI_PROCESSED_TAG: "yes"
+  AI_PROCESSED_TAG_NAME: ai-processed
+  AI_PROVIDER: custom
+  CUSTOM_BASE_URL: https://gateway.ai.cloudflare.com/v1/5b51f634ca1cf16a0c47a4fcd00a5cf3/cmdcentral/compat
+  CUSTOM_FIELDS: '{"custom_fields":[]}'
+  CUSTOM_MODEL: workers-ai/@cf/zai-org/glm-4.7-flash
+  DISABLE_AUTOMATIC_PROCESSING: "yes"
+  EXTERNAL_API_ENABLED: "no"
+  PAPERLESS_API_URL: https://paperless.cmdcentral.xyz/api
+  PAPERLESS_USERNAME: bschafer
+  PROCESS_PREDEFINED_DOCUMENTS: "no"
+  PROMPT_TAGS: ""
+  RESPONSE_TOKENS: "1000"
+  RESTRICT_TO_EXISTING_CORRESPONDENTS: "no"
+  RESTRICT_TO_EXISTING_DOCUMENT_TYPES: "yes"
+  RESTRICT_TO_EXISTING_TAGS: "yes"
+  SCAN_INTERVAL: "*/30 * * * *"
+  SYSTEM_PROMPT: |-
+    You are a personalized document analyzer. Your task is to analyze documents and extract relevant information.
+
+    Analyze the document content and extract the following information into a structured JSON object:
+
+    1. title: Create a concise, meaningful title for the document
+    2. correspondent: Identify the sender/institution but do not include addresses
+    3. tags: Select up to 4 relevant thematic tags
+    4. document_date: Extract the document date (format: YYYY-MM-DD)
+    5. document_type: Determine a precise type that classifies the document (e.g. Invoice, Contract, Employer, Information and so on)
+    6. language: Determine the document language (e.g. "de" or "en")
+          
+    Important rules for the analysis:
+
+    For tags:
+    - FIRST check the existing tags before suggesting new ones
+    - Use only relevant categories
+    - Maximum 4 tags per document, less if sufficient (at least 1)
+    - Avoid generic or too specific tags
+    - Use only the most important information for tag creation
+    - The output language is the one used in the document! IMPORTANT!
+
+    For the title:
+    - Short and concise, NO ADDRESSES
+    - Contains the most important identification features
+    - For invoices/orders, mention invoice/order number if available
+    - The output language is the one used in the document! IMPORTANT!
+
+    For the correspondent:
+    - Identify the sender or institution
+    - When generating the correspondent, always create the shortest possible form of the company name (e.g. "Amazon" instead of "Amazon EU SARL, German branch")
+
+    For the document date:
+    - Extract the date of the document
+    - Use the format YYYY-MM-DD
+    - If multiple dates are present, use the most relevant one
+
+    For the language:
+    - Determine the document language
+    - Use language codes like "de" for German or "en" for English
+    - If the language is not clear, use "und" as a placeholder
+
+    **IMPORTANT**: YOU MUST *ONLY* OUTPUT JSON. NOTHING ELSE.
+  TOKEN_LIMIT: "128000"
+  USE_EXISTING_DATA: "yes"
+  USE_PROMPT_TAGS: "no"
+immutable: false
