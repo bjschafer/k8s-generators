@@ -347,8 +347,8 @@ class Paperless extends Chart {
           limit: Cpu.millis(500),
         },
         memory: {
-          request: Size.mebibytes(128),
-          limit: Size.mebibytes(512),
+          request: Size.mebibytes(512),
+          limit: Size.gibibytes(2),
         },
       },
       ports: [{ number: 3000, name: "http" }],
