@@ -12,7 +12,6 @@ data:
   ADD_AI_PROCESSED_TAG: "yes"
   AI_PROCESSED_TAG_NAME: ai-processed
   AI_PROVIDER: custom
-  CUSTOM_BASE_URL: https://gateway.ai.cloudflare.com/v1/5b51f634ca1cf16a0c47a4fcd00a5cf3/cmdcentral/compat
   CUSTOM_FIELDS: '{"custom_fields":[]}'
   CUSTOM_MODEL: workers-ai/@cf/zai-org/glm-4.7-flash
   DISABLE_AUTOMATIC_PROCESSING: "yes"

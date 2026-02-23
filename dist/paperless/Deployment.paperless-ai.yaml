@@ -10,7 +10,7 @@ metadata:
 spec:
   minReadySeconds: 0
   progressDeadlineSeconds: 600
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -27,7 +27,10 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-        - envFrom:
+        - env:
+            - name: CUSTOM_BASE_URL
+              value: https://gateway.ai.cloudflare.com/v1/$(CLOUDFLARE_ACCOUNT_ID)/cmdcentral/compat
+          envFrom:
             - configMapRef:
                 name: paperless-ai-config
             - secretRef:

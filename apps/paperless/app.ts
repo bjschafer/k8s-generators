@@ -82,9 +82,10 @@ const paperlessAiSecrets = new BitwardenSecret(app, "paperless-ai-secrets", {
   name: "paperless-ai-secrets",
   namespace: namespace,
   data: {
-    PAPERLESS_API_TOKEN: "PLACEHOLDER-paperless-api-token",
-    CUSTOM_API_KEY: "PLACEHOLDER-cloudflare-workers-ai-key",
-    API_KEY: "PLACEHOLDER-paperless-ai-web-api-key",
+    PAPERLESS_API_TOKEN: "e28143d1-da02-4aaa-b13e-b3fa003d731a",
+    CUSTOM_API_KEY: "7f062e0d-213c-4f54-aa03-b3fa003da758",
+    API_KEY: "44f376da-3434-4cf6-8963-b3fa003dd595",
+    CLOUDFLARE_ACCOUNT_ID: "8be44aed-b92e-49dd-9c58-b3c901742785",
   },
 });
 
@@ -130,8 +131,6 @@ class Paperless extends Chart {
         PAPERLESS_API_URL: "https://paperless.cmdcentral.xyz/api",
         PAPERLESS_USERNAME: "bschafer",
         AI_PROVIDER: "custom",
-        CUSTOM_BASE_URL:
-          "https://gateway.ai.cloudflare.com/v1/5b51f634ca1cf16a0c47a4fcd00a5cf3/cmdcentral/compat",
         CUSTOM_MODEL: "workers-ai/@cf/zai-org/glm-4.7-flash",
         SCAN_INTERVAL: "*/30 * * * *",
         PROCESS_PREDEFINED_DOCUMENTS: "no",
@@ -334,12 +333,10 @@ class Paperless extends Chart {
     ftpserver.Deployment.containers[0].mount("/home/scanner", ftpVolForFtpServer);
 
     // paperless-ai: AI-powered companion for paperless-ngx
-    // Initial replicas: 0 — scale up after SQLite database migration (see plan)
     new AppPlus(app, "paperless-ai", {
       name: "paperless-ai",
       namespace: namespace,
       image: "clusterzx/paperless-ai:latest",
-      replicas: 0,
       labels: {
         app: "paperless-ai",
       },
@@ -358,6 +355,13 @@ class Paperless extends Chart {
         new EnvFrom(aiCm, undefined, undefined),
         new EnvFrom(undefined, undefined, paperlessAiSecrets.secret),
       ],
+      // CUSTOM_BASE_URL uses Kubernetes $(VAR_NAME) runtime substitution so the
+      // Cloudflare account ID is sourced from the injected secret at pod start time.
+      extraEnv: {
+        CUSTOM_BASE_URL: EnvValue.fromValue(
+          "https://gateway.ai.cloudflare.com/v1/$(CLOUDFLARE_ACCOUNT_ID)/cmdcentral/compat",
+        ),
+      },
       enableServiceLinks: false,
       volumes: [
         {
