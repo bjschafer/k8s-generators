@@ -34,7 +34,7 @@ spec:
         - alias: server
           commonUpdateSettings:
             updateStrategy: semver
-          imageName: ghcr.io/goauthentik/server:2025.2.x
+          imageName: ghcr.io/goauthentik/server:2026.2.x
       namePattern: authentik
   namespace: argocd
   writeBackConfig:

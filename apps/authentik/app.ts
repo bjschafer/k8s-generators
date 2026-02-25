@@ -24,7 +24,7 @@ import { BitwardenSecret } from "../../lib/secrets";
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
-const version = "2025.2.0";
+const version = "2026.2.0";
 
 NewArgoApp(namespace, {
   namespace: namespace,
