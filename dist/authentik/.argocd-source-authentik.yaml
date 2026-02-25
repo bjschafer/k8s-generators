@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - ghcr.io/goauthentik/server:2025.2.4
