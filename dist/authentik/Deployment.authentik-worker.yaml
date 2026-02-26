@@ -91,10 +91,10 @@ spec:
               name: metrics
           resources:
             limits:
-              memory: 1024Mi
+              memory: 1536Mi
             requests:
               cpu: 50m
-              memory: 768Mi
+              memory: 1024Mi
           securityContext:
             allowPrivilegeEscalation: false
             privileged: false
