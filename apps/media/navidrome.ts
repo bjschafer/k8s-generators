@@ -16,7 +16,7 @@ import {
   Secret,
   Volume,
 } from "cdk8s-plus-33";
-import { BACKUP_ANNOTATION_NAME, DEFAULT_SECURITY_CONTEXT, LSIO_ENVVALUE } from "../../lib/consts";
+import { DEFAULT_SECURITY_CONTEXT, LSIO_ENVVALUE } from "../../lib/consts";
 import { StorageClass } from "../../lib/volume";
 import {
   IngressRoute,
@@ -47,9 +47,6 @@ export class Navidrome extends Chart {
       podMetadata: {
         labels: {
           ...labels,
-        },
-        annotations: {
-          [BACKUP_ANNOTATION_NAME]: "config",
         },
       },
       securityContext: DEFAULT_SECURITY_CONTEXT,

@@ -21,7 +21,6 @@ import {
 } from "cdk8s-plus-33";
 import { StorageClass } from "./volume";
 import {
-  BACKUP_ANNOTATION_NAME,
   DEFAULT_SECURITY_CONTEXT,
   GET_SERVICE_URL,
   LSIO_ENVVALUE,
@@ -49,7 +48,6 @@ export interface MediaAppProps {
   readonly configVolume?: {
     size?: Size;
     mountPath?: string;
-    enableBackups: boolean;
   };
   readonly monitoringConfig?: {
     enableExportarr: boolean;
@@ -63,7 +61,6 @@ export class MediaApp extends Chart {
   constructor(scope: Construct, props: MediaAppProps) {
     super(scope, props.name);
 
-    // early setup of PVC so we can get its name for backup config
     const configPVCName = `${props.name}`;
 
     let configVol: Volume | undefined;
@@ -95,11 +92,6 @@ export class MediaApp extends Chart {
       replicas: 1,
       strategy: DeploymentStrategy.recreate(),
       securityContext: DEFAULT_SECURITY_CONTEXT,
-      podMetadata: {
-        annotations: props.configVolume?.enableBackups
-          ? { [BACKUP_ANNOTATION_NAME]: configVol!.name } // if backups are enabled, then configVol must be defined.
-          : {},
-      },
       containers: [
         {
           name: props.name,

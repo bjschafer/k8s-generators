@@ -1,4 +1,4 @@
-import { ApiObject, Chart, JsonPatch, Size } from "cdk8s";
+import { Chart, Size } from "cdk8s";
 import {
   ContainerResources,
   EnvValue,
@@ -10,13 +10,11 @@ import {
   Volume,
 } from "cdk8s-plus-33";
 import { Construct } from "constructs";
-import { BACKUP_ANNOTATION_NAME } from "./consts";
 import { StorageClass } from "./volume";
 
 export interface MysqlInstanceProps {
   namespace: string;
   instance?: string;
-  enableBackups: boolean;
   imageOverride?: string;
   resources: ContainerResources;
   pvcSize: Size;
@@ -95,15 +93,5 @@ export class MysqlInstance extends Chart {
       }),
     );
 
-    const baseObj = ApiObject.of(sts);
-    if (props.enableBackups) {
-      baseObj.addJsonPatch(
-        JsonPatch.add("/spec/template/metadata/annotations", {}),
-        JsonPatch.add(
-          `/spec/template/metadata/annotations/${BACKUP_ANNOTATION_NAME.replace("/", "~1")}`,
-          volume.name,
-        ),
-      );
-    }
   }
 }

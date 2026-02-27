@@ -17,8 +17,6 @@ spec:
     type: Recreate
   template:
     metadata:
-      annotations:
-        backup.velero.io/backup-volumes: pvc-lidarr
       labels:
         cdk8s.io/metadata.addr: lidarr-lidarr-deployment-c8c0031b
     spec:

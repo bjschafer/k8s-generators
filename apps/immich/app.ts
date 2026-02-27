@@ -157,7 +157,6 @@ new AppPlus(app, "immich-machine-learning", {
     {
       name: "cache",
       mountPath: "/cache",
-      enableBackups: false,
       props: {
         storageClassName: StorageClass.CEPHFS,
         accessModes: [PersistentVolumeAccessMode.READ_WRITE_MANY],

@@ -21,6 +21,7 @@ spec:
         app.kubernetes.io/component: master
         app.kubernetes.io/instance: immich
         app.kubernetes.io/name: valkey
+        velero.io/exclude-from-backup: "true"
     spec:
       affinity:
         podAntiAffinity:

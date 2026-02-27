@@ -102,7 +102,6 @@ new AppPlus(app, `${name}-app`, {
     {
       name: "data",
       mountPath: "/data/data",
-      enableBackups: true,
       props: {
         storage: Size.gibibytes(5),
         storageClassName: StorageClass.CEPH_RBD,

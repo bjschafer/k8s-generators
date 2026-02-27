@@ -20,6 +20,9 @@ spec:
     kind: ClusterImageCatalog
     major: 17
     name: postgresql
+  inheritedMetadata:
+    labels:
+      velero.io/exclude-from-backup: "true"
   instances: 3
   managed:
     roles:

@@ -133,7 +133,6 @@ const server = new AppPlus(app, name, {
     {
       name: "data",
       mountPath: "/romm",
-      enableBackups: true,
       props: {
         storage: Size.gibibytes(20),
       },

@@ -109,7 +109,6 @@ new AppPlus(app, `${name}-app`, {
     {
       name: "config",
       mountPath: "/app/data/",
-      enableBackups: true,
       props: {
         storage: Size.gibibytes(2),
       },

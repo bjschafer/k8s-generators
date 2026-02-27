@@ -1,5 +1,6 @@
 import { Chart } from "cdk8s";
 import { ISecret, Secret } from "cdk8s-plus-33";
+import { BACKUP_ANNOTATION_EXCLUDE } from "./consts";
 import { Quantity, ResourceRequirements } from "cdk8s-plus-33/lib/imports/k8s";
 import { Construct } from "constructs";
 import { IntOrString, KubeSecret, KubeService, KubeStatefulSet } from "../imports/k8s";
@@ -66,7 +67,7 @@ export class Valkey extends Chart {
           {
             metadata: {
               name: "valkey-data",
-              labels: labels,
+              labels: { ...labels, [BACKUP_ANNOTATION_EXCLUDE]: "true" },
             },
             spec: {
               accessModes: ["ReadWriteOnce"],
@@ -98,7 +99,7 @@ export class Valkey extends Chart {
         serviceName: `${props.name}-valkey-headless`,
         template: {
           metadata: {
-            labels: labels,
+            labels: { ...labels, [BACKUP_ANNOTATION_EXCLUDE]: "true" },
           },
           spec: {
             containers: [

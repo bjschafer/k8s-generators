@@ -24,7 +24,7 @@ import {
   Volume,
 } from "cdk8s-plus-33";
 import { Construct } from "constructs";
-import { BACKUP_ANNOTATION_NAME, CLUSTER_ISSUER, DEFAULT_SECURITY_CONTEXT } from "./consts";
+import { CLUSTER_ISSUER, DEFAULT_SECURITY_CONTEXT } from "./consts";
 import { WellKnownLabels } from "./labels";
 import { StorageClass } from "./volume";
 
@@ -32,7 +32,6 @@ export interface AppPlusVolume {
   readonly props: PersistentVolumeClaimProps;
   readonly name: string;
   readonly mountPath: string;
-  readonly enableBackups: boolean;
 }
 
 export interface ConfigMapVolume {
@@ -89,10 +88,7 @@ export class AppPlus extends Chart {
   constructor(scope: Construct, id: string, props: AppPlusProps) {
     super(scope, id);
 
-    // set up PVCs first so we can get its name for backup config
     const volumes: Volume[] = [];
-    const backupVolumeNames: string[] = [];
-    let volumeBackupAnnotation: { [key: string]: string } = {};
     if (props.volumes) {
       for (const vol of props.volumes) {
         const pvc = new PersistentVolumeClaim(this, `${id}-${vol.mountPath}`, {
@@ -108,14 +104,6 @@ export class AppPlus extends Chart {
         });
         const v = Volume.fromPersistentVolumeClaim(this, `${id}-${vol.mountPath}-vol`, pvc);
         volumes.push(v);
-        if (vol.enableBackups) {
-          backupVolumeNames.push(v.name);
-        }
-      }
-      if (backupVolumeNames.length > 0) {
-        volumeBackupAnnotation = {
-          [BACKUP_ANNOTATION_NAME]: backupVolumeNames.join(","),
-        };
       }
     }
     let serviceAccount;
@@ -173,7 +161,6 @@ export class AppPlus extends Chart {
         labels: {
           "app.kubernetes.io/name": props.name,
         },
-        annotations: volumeBackupAnnotation,
       },
       securityContext: DEFAULT_SECURITY_CONTEXT,
       serviceAccount: serviceAccount,

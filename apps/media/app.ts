@@ -166,7 +166,6 @@ for (const mediaApp of mediaApps) {
     nfsMounts: mediaApp.nfsMounts ?? [],
     configVolume: mediaApp.configVolume ?? {
       size: Size.gibibytes(5),
-      enableBackups: true,
     },
     monitoringConfig: mediaApp.monitoringConfig,
     ingressSecret: ingressSecret,
@@ -206,7 +205,6 @@ new MediaApp(app, {
   ],
   configVolume: {
     size: Size.gibibytes(1),
-    enableBackups: true,
     mountPath: "/config",
   },
   monitoringConfig: {

@@ -24,7 +24,6 @@ new ArgoApp(app, namespace, {
 new MysqlInstance(app, "db", {
   namespace: namespace,
   instance: namespace,
-  enableBackups: true,
   resources: {
     memory: {
       limit: Size.mebibytes(512),
@@ -59,7 +58,6 @@ new AppPlus(app, "monica-app", {
         accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
       },
       mountPath: "/var/www/html/storage",
-      enableBackups: true,
       name: "data",
     },
   ],

@@ -38,7 +38,6 @@ export const DNS_POLICY_NONE = {
   searches: DNS_SEARCH,
 };
 
-export const BACKUP_ANNOTATION_NAME = "backup.velero.io/backup-volumes";
 export const BACKUP_ANNOTATION_EXCLUDE = "velero.io/exclude-from-backup";
 
 export function DEFAULT_APP_PROPS(namespace: string): AppProps {

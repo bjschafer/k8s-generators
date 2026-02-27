@@ -13,8 +13,6 @@ spec:
   serviceName: db
   template:
     metadata:
-      annotations:
-        backup.velero.io/backup-volumes: db
       labels:
         cdk8s.io/metadata.addr: db-db-sts-c843c760
     spec:

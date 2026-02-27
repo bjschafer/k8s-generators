@@ -46,7 +46,6 @@ new AppPlus(app, name, {
     {
       name: "data",
       mountPath: "/data",
-      enableBackups: true,
       props: {
         storage: Size.gibibytes(5),
         accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],

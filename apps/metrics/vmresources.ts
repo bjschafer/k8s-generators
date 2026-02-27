@@ -16,7 +16,6 @@ import {
   VmSingleSpecResourcesLimits,
   VmSingleSpecResourcesRequests,
 } from "../../imports/operator.victoriametrics.com";
-import { BACKUP_ANNOTATION_NAME } from "../../lib/consts";
 import { AddCRDs } from "../../lib/util";
 import { StorageClass } from "../../lib/volume";
 import { hostname, namespace } from "./app";
@@ -243,11 +242,6 @@ export class VmResources extends Chart {
         namespace: namespace,
       },
       spec: {
-        podMetadata: {
-          annotations: {
-            [BACKUP_ANNOTATION_NAME]: "data",
-          },
-        },
         replicaCount: 1, // This'll set replicas=n on deployment, so you run into PVC multi-attach errors
         retentionPeriod: "90d",
         storage: {

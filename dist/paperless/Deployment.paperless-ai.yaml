@@ -19,8 +19,6 @@ spec:
     type: Recreate
   template:
     metadata:
-      annotations:
-        backup.velero.io/backup-volumes: pvc-paperless-ai-data
       labels:
         app.kubernetes.io/name: paperless-ai
         cdk8s.io/metadata.addr: paperless-ai-paperless-ai-deployment-c88aa187

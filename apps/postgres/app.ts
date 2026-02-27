@@ -23,7 +23,7 @@ import {
   ScheduledBackupSpecMethod,
 } from "../../imports/postgresql.cnpg.io";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
-import { DEFAULT_APP_PROPS, EXTERNAL_DNS_ANNOTATION_KEY } from "../../lib/consts";
+import { BACKUP_ANNOTATION_EXCLUDE, DEFAULT_APP_PROPS, EXTERNAL_DNS_ANNOTATION_KEY } from "../../lib/consts";
 import { BitwardenSecret } from "../../lib/secrets";
 import { StorageClass } from "../../lib/volume";
 
@@ -107,6 +107,9 @@ class ProdPostgres extends Chart {
             cpu: Quantity.fromString("1"),
             memory: Quantity.fromString("1Gi"),
           },
+        },
+        inheritedMetadata: {
+          labels: { [BACKUP_ANNOTATION_EXCLUDE]: "true" },
         },
         storage: {
           size: "15Gi",
@@ -376,6 +379,9 @@ class VectorPostgres extends Chart {
             cpu: Quantity.fromString("600m"),
             memory: Quantity.fromString("768Mi"),
           },
+        },
+        inheritedMetadata: {
+          labels: { [BACKUP_ANNOTATION_EXCLUDE]: "true" },
         },
         storage: {
           size: "15Gi",

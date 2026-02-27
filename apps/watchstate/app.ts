@@ -44,7 +44,6 @@ new AppPlus(app, "watchstate", {
     {
       name: "config",
       mountPath: "/config",
-      enableBackups: true,
       props: {
         storage: Size.gibibytes(5),
         accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],

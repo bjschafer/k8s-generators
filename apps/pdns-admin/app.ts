@@ -51,7 +51,6 @@ new AppPlus(app, `${name}-app`, {
         accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
       },
       mountPath: "/data",
-      enableBackups: true,
       name: "config",
     },
   ],

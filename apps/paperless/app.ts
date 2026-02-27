@@ -211,7 +211,6 @@ class Paperless extends Chart {
         {
           name: "data",
           mountPath: "/data",
-          enableBackups: true,
           props: {
             storage: Size.gibibytes(5),
             storageClassName: StorageClass.CEPH_RBD,
@@ -361,7 +360,6 @@ class Paperless extends Chart {
         {
           name: "paperless-ai-data",
           mountPath: "/app/data",
-          enableBackups: true,
           props: {
             storage: Size.gibibytes(1),
             storageClassName: StorageClass.CEPH_RBD,

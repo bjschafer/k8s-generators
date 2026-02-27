@@ -36,7 +36,6 @@ NewArgoApp(name, {
 new MysqlInstance(app, "db", {
   namespace: namespace,
   instance: namespace,
-  enableBackups: true,
   resources: {
     memory: {
       limit: Size.mebibytes(512),
@@ -69,7 +68,6 @@ new AppPlus(app, "pfwiki", {
     {
       name: "data",
       mountPath: "/config",
-      enableBackups: true,
       props: {
         storage: Size.gibibytes(5),
         storageClassName: StorageClass.CEPH_RBD,
