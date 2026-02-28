@@ -11,7 +11,7 @@ import {
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
-const version = "11.1.7";
+const version = "11.2.2";
 
 NewArgoApp(name, {
   namespace: namespace,
@@ -83,20 +83,23 @@ class Grafana extends Chart {
         },
         "grafana.ini": {
           auth: {
-            signout_redirect_url: "https://login.cmdcentral.xyz/application/o/grafana/end-session/",
+            signout_redirect_url:
+              "https://login.cmdcentral.xyz/application/o/grafana/end-session/",
             oauth_auto_login: true,
             oauth_allow_insecure_email_lookup: true,
           },
           "auth.generic_oauth": {
             enabled: true,
             client_id: "$__file{/etc/secrets/auth_cmdcentral_oauth/client_id}",
-            client_secret: "$__file{/etc/secrets/auth_cmdcentral_oauth/client_secret}",
+            client_secret:
+              "$__file{/etc/secrets/auth_cmdcentral_oauth/client_secret}",
             name: "Cmdcentral Login",
             scopes: "openid email profile",
             auth_url: "https://login.cmdcentral.xyz/application/o/authorize/",
             token_url: "https://login.cmdcentral.xyz/application/o/token/",
             api_url: "https://login.cmdcentral.xyz/application/o/userinfo/",
-            role_attribute_path: "contains(groups[*], 'wheel') && 'Admin' || 'Viewer'",
+            role_attribute_path:
+              "contains(groups[*], 'wheel') && 'Admin' || 'Viewer'",
           },
           "auth.proxy": {
             enabled: true,
