@@ -239,7 +239,7 @@ class ProdPostgres extends Chart {
         cluster: {
           name: name,
         },
-        schedule: "0 33 3 * * *",
+        schedule: "0 0 1 * * *",
         backupOwnerReference: ScheduledBackupSpecBackupOwnerReference.SELF,
         method: ScheduledBackupSpecMethod.PLUGIN,
         pluginConfiguration: {
@@ -455,7 +455,7 @@ class VectorPostgres extends Chart {
         cluster: {
           name: name,
         },
-        schedule: "0 33 4 * * *",
+        schedule: "0 30 1 * * *",
         backupOwnerReference: ScheduledBackupSpecBackupOwnerReference.SELF,
         method: ScheduledBackupSpecMethod.PLUGIN,
         pluginConfiguration: {
