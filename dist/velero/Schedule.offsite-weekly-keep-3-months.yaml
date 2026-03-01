@@ -18,7 +18,6 @@ spec:
       - paperless
       - rclone
       - spoolman
-      - velero
     snapshotMoveData: true
     storageLocation: wasabi
     ttl: 2232h0m0s

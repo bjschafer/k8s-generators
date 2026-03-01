@@ -224,7 +224,6 @@ class Velero extends Chart {
       "paperless",
       "rclone",
       "spoolman",
-      "velero",
     ];
 
     new Schedule(this, "weekly-keep-3-months", {
