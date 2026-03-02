@@ -247,7 +247,9 @@ class Velero extends Chart {
         namespace: namespace,
       },
       spec: {
-        schedule: "@every 24h",
+        // Pinned to 04:00 UTC to avoid CNPG backup window (01:00/01:30 UTC)
+        // and give the Sunday offsite weekly (02:33 UTC) time to finish first.
+        schedule: "0 4 * * *",
         template: {
           ...defaultScheduleSpec,
           ttl: `${24 * 7}h0m0s`,
