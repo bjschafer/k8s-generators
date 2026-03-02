@@ -418,6 +418,9 @@ class VectorPostgres extends Chart {
         configuration: {
           endpointUrl: "https://garage.cmdcentral.xyz",
           destinationPath: `s3://postgres/k8s/${name}`,
+          data: {
+            compression: ObjectStoreSpecConfigurationDataCompression.GZIP,
+          },
           s3Credentials: {
             accessKeyId: {
               name: s3Creds.secretName,
