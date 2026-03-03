@@ -2,6 +2,7 @@
 bun = "latest"
 kubectl = "1.34"
 helm = "3.20"
+promtool = "latest"
 
 [env]
 # Derived from the pinned kubectl above so helm template uses the right .Capabilities.KubeVersion
