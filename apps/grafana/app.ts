@@ -61,8 +61,7 @@ class Grafana extends Chart {
         env: {
           TZ: "America/Chicago",
           GF_DATABASE_TYPE: "postgres",
-          // Grafana doesn't like Transaction pooling mode
-          GF_DATABASE_HOST: "prod-pg17-rw.postgres.svc.cluster.local:5432",
+          GF_DATABASE_HOST: "prod-pg17-pooler-rw.postgres.svc.cluster.local:5432",
           GF_DATABASE_NAME: "grafana",
           GF_DATABASE_USER: "grafana",
           GF_DATABASE_SSL_MODE: "require",
