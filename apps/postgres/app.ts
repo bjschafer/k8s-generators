@@ -154,12 +154,11 @@ class ProdPostgres extends Chart {
         instances: 3,
         type: PoolerSpecType.RW,
         pgbouncer: {
-          poolMode: PoolerSpecPgbouncerPoolMode.TRANSACTION,
+          poolMode: PoolerSpecPgbouncerPoolMode.SESSION,
           parameters: {
             max_client_conn: "1000",
             default_pool_size: "20",
-            ignore_startup_parameters: "search_path",
-            max_prepared_statements: "200",
+            server_idle_timeout: "600",
           },
         },
       },

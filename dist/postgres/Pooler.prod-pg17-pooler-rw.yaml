@@ -10,8 +10,7 @@ spec:
   pgbouncer:
     parameters:
       default_pool_size: "20"
-      ignore_startup_parameters: search_path
       max_client_conn: "1000"
-      max_prepared_statements: "200"
-    poolMode: transaction
+      server_idle_timeout: "600"
+    poolMode: session
   type: rw
