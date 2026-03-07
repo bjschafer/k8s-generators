@@ -1,7 +1,10 @@
 import { Chart, Size } from "cdk8s";
 import { Cpu } from "cdk8s-plus-33";
 import { Construct } from "constructs";
-import { VmProbe, VmServiceScrape } from "../../imports/operator.victoriametrics.com";
+import {
+  VmProbe,
+  VmServiceScrape,
+} from "../../imports/operator.victoriametrics.com";
 import { AppPlus } from "../../lib/app-plus";
 import { DNS_POLICY_NONE } from "../../lib/consts";
 import { namespace } from "./app";
@@ -12,7 +15,7 @@ const labels = {
 };
 const port = 9101;
 
-const klipper_hosts = ["pandora.cmdcentral.xyz:7125", "trident.cmdcentral.xyz:7125"];
+const klipper_hosts = ["pandora.cmdcentral.xyz:7125"];
 
 export class KlipperExporter extends Chart {
   constructor(scope: Construct, id: string) {
@@ -78,7 +81,13 @@ export class KlipperExporter extends Chart {
           path: "/probe",
         },
         params: {
-          modules: ["process_stats", "job_queue", "system_info", "printer_objects", "history"],
+          modules: [
+            "process_stats",
+            "job_queue",
+            "system_info",
+            "printer_objects",
+            "history",
+          ],
         },
         targets: {
           staticConfig: {

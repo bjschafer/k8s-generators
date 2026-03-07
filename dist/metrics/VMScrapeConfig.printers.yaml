@@ -9,4 +9,3 @@ spec:
         job: printers
       targets:
         - pandora.cmdcentral.xyz:9100
-        - trident.cmdcentral.xyz:9100

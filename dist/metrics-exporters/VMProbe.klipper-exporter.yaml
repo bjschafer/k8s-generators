@@ -28,7 +28,6 @@ spec:
           targetLabel: __address__
       targets:
         - pandora.cmdcentral.xyz:7125
-        - trident.cmdcentral.xyz:7125
   vmProberSpec:
     path: /probe
     url: klipper-exporter.metrics-exporters.svc.cluster.local:9101
