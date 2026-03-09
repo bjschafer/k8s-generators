@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: book-club
+  name: book-club
+  namespace: book-club
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: book-club-book-club-deployment-c8b4c8f8
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: book-club
+        cdk8s.io/metadata.addr: book-club-book-club-deployment-c8b4c8f8
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: AUTH_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  key: AUTH_CLIENT_ID
+                  name: oidc-secrets
+            - name: AUTH_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: AUTH_CLIENT_SECRET
+                  name: oidc-secrets
+            - name: AUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: AUTH_SECRET
+                  name: auth-secret
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  key: DATABASE_URL
+                  name: book-club-database-url
+            - name: TZ
+              value: America/Chicago
+            - name: PORT
+              value: "3000"
+            - name: AUTH_ISSUER
+              value: https://login.cmdcentral.xyz/application/o/book-club/
+            - name: ADMIN_EMAILS
+              value: braxton@cmdcentral.xyz
+          image: registry.cmdcentral.xyz/cmdcentral/book-club:main
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 3000
+          name: book-club
+          ports:
+            - containerPort: 3000
+          readinessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 3000
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30

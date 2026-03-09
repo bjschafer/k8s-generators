@@ -50,6 +50,12 @@ spec:
         name: romm
         passwordSecret:
           name: romm-db-credentials
+      - comment: Book Club database owner
+        ensure: present
+        login: true
+        name: book-club
+        passwordSecret:
+          name: book-club-db-credentials
   monitoring:
     enablePodMonitor: false
   plugins:

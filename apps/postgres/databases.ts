@@ -95,4 +95,10 @@ export const DATABASES: DatabaseConfig[] = [
     bitwardenPasswordId: "efb8a53a-dfd4-4f3a-b2e2-b39200423731",
     appNamespace: "romm",
   },
+
+  {
+    name: "book-club",
+    comment: "Book Club database owner",
+    appNamespace: "book-club",
+  },
 ];
