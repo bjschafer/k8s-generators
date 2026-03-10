@@ -147,6 +147,7 @@ new AppPlus(app, name, {
   extraIngressHosts: ["book-club.whizkid.dev"],
   extraEnv: {
     ...oidcSecrets.toEnvValues(),
+    AUTH_TRUST_HOST: EnvValue.fromValue("true"),
     AUTH_SECRET: EnvValue.fromSecretValue({
       secret: authSecret,
       key: "AUTH_SECRET",
