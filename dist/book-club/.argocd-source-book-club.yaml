@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - registry.cmdcentral.xyz/cmdcentral/book-club:main@sha256:b10322b9f735d25486c06853ff1c628fb1754e8faff86e06fd7cfbadb8ae7426
+  - registry.cmdcentral.xyz/cmdcentral/book-club:main@sha256:10eae4191cedd34b4f41c64c26361c774d4a411dc13914f212d984671f6233d7
