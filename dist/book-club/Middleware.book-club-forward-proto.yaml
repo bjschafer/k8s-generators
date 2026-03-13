@@ -1,9 +1,0 @@
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: book-club-forward-proto
-  namespace: book-club
-spec:
-  headers:
-    customRequestHeaders:
-      X-Forwarded-Proto: https

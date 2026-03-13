@@ -3,7 +3,7 @@ import { Cpu, EnvValue, Secret } from "cdk8s-plus-33";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
-import { CLUSTER_ISSUER, DEFAULT_APP_PROPS } from "../../lib/consts";
+import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import {
   ExternalSecret,
   ExternalSecretSpecDataFromSourceRefGeneratorRefKind,
@@ -13,14 +13,6 @@ import { Password } from "../../imports/generators.external-secrets.io";
 import { NewKustomize } from "../../lib/kustomize";
 import { BitwardenSecret } from "../../lib/secrets";
 import { createAppDatabaseSecret } from "../postgres/database-provisioning";
-import { Certificate } from "../../imports/cert-manager.io";
-import {
-  IngressRoute,
-  IngressRouteSpecRoutesKind,
-  IngressRouteSpecRoutesServicesKind,
-  Middleware,
-} from "../../imports/traefik.io";
-import { IntOrString } from "../../imports/k8s";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -137,8 +129,6 @@ const oidcSecrets = new BitwardenSecret(app, "oidc-secrets", {
   },
 });
 
-const ingressHosts = [`${name}.cmdcentral.xyz`, "book-club.whizkid.dev"];
-
 new AppPlus(app, name, {
   name: name,
   namespace: namespace,
@@ -154,7 +144,7 @@ new AppPlus(app, name, {
       limit: Size.mebibytes(512),
     },
   },
-  disableIngress: true,
+  extraIngressHosts: ["book-club.whizkid.dev"],
   extraEnv: {
     ...oidcSecrets.toEnvValues(),
     AUTH_TRUST_HOST: EnvValue.fromValue("true"),
@@ -172,67 +162,6 @@ new AppPlus(app, name, {
       "https://login.cmdcentral.xyz/application/o/book-club/",
     ),
     ADMIN_EMAILS: EnvValue.fromValue("braxton@cmdcentral.xyz"),
-  },
-});
-
-// Explicitly issue the TLS cert for both hosts — required when using IngressRoute
-// since cert-manager only watches Ingress resources for auto-issuance
-const ingressChart = new Chart(app, "ingress");
-new Certificate(ingressChart, "tls-cert", {
-  metadata: {
-    name: `${name}-tls`,
-    namespace: namespace,
-  },
-  spec: {
-    secretName: `${name}-tls`,
-    issuerRef: CLUSTER_ISSUER,
-    dnsNames: ingressHosts,
-  },
-});
-
-// Ensure X-Forwarded-Proto is set to https so NextAuth constructs correct callback URLs
-new Middleware(ingressChart, "forward-proto", {
-  metadata: {
-    name: `${name}-forward-proto`,
-    namespace: namespace,
-  },
-  spec: {
-    headers: {
-      customRequestHeaders: {
-        "X-Forwarded-Proto": "https",
-      },
-    },
-  },
-});
-
-new IngressRoute(ingressChart, "ingressroute", {
-  metadata: {
-    name: name,
-    namespace: namespace,
-  },
-  spec: {
-    routes: [
-      {
-        kind: IngressRouteSpecRoutesKind.RULE,
-        match: ingressHosts.map((h) => `Host(\`${h}\`)`).join(" || "),
-        services: [
-          {
-            name: name,
-            kind: IngressRouteSpecRoutesServicesKind.SERVICE,
-            port: IntOrString.fromNumber(port),
-          },
-        ],
-        middlewares: [
-          {
-            name: `${name}-forward-proto`,
-            namespace: namespace,
-          },
-        ],
-      },
-    ],
-    tls: {
-      secretName: `${name}-tls`,
-    },
   },
 });
 

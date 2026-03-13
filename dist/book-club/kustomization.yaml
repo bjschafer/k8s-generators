@@ -1,11 +1,9 @@
 resources:
-  - Certificate.book-club-tls.yaml
   - Deployment.book-club.yaml
   - ExternalSecret.auth-secret.yaml
   - ExternalSecret.book-club-database-url.yaml
   - ExternalSecret.book-club-db-credentials.yaml
   - ExternalSecret.oidc-secrets.yaml
-  - IngressRoute.book-club.yaml
-  - Middleware.book-club-forward-proto.yaml
+  - Ingress.book-club.yaml
   - Password.book-club-auth-secret-generator.yaml
   - Service.book-club.yaml
