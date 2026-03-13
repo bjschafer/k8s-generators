@@ -38,6 +38,8 @@ spec:
                 secretKeyRef:
                   key: AUTH_CLIENT_SECRET
                   name: oidc-secrets
+            - name: AUTH_URL
+              value: https://book-club.whizkid.dev
             - name: AUTH_TRUST_HOST
               value: "true"
             - name: AUTH_SECRET
