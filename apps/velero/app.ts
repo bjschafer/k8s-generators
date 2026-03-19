@@ -1,6 +1,7 @@
 import { App, Chart } from "cdk8s";
 import { Construct } from "constructs";
 import { basename, join } from "path";
+import { KubeConfigMap } from "../../imports/k8s";
 import { SchemaForVeleroHelmChart } from "../../imports/helm-values/velero-values.schema";
 import { VmPodScrape, VmServiceScrape } from "../../imports/operator.victoriametrics.com";
 import {
@@ -88,6 +89,9 @@ class Velero extends Chart {
         nodeAgent: {
           podVolumePath: "/var/lib/kubelet/pods",
           dnsPolicy: "ClusterFirst",
+          // node-agent-config limits concurrent data uploads per node to avoid
+          // overwhelming Garage's LMDB under concurrent write load
+          extraArgs: ["--node-agent-configmap=node-agent-config"],
           resources: {
             requests: {
               cpu: "50m",
@@ -98,10 +102,26 @@ class Velero extends Chart {
               memory: "2Gi",
             },
           },
-        },
+        } as unknown as SchemaForVeleroHelmChart["nodeAgent"],
         backupsEnabled: false, // we manage our own BackupLocation
         snapshotsEnabled: false, // we manage our own VolumeStorageLocation
         upgradeCRDs: false, // we manage them ourselves, above
+      },
+    });
+
+    new KubeConfigMap(this, "node-agent-config", {
+      metadata: {
+        name: "node-agent-config",
+        namespace: namespace,
+      },
+      data: {
+        "load-concurrency": JSON.stringify({
+          loadConcurrency: {
+            // Limit concurrent data uploads per node to 3 to avoid overwhelming
+            // Garage's LMDB write path when many PVCs are backed up simultaneously.
+            globalConfig: 3,
+          },
+        }),
       },
     });
 
