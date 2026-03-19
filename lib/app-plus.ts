@@ -32,6 +32,7 @@ export interface AppPlusVolume {
   readonly props: PersistentVolumeClaimProps;
   readonly name: string;
   readonly mountPath: string;
+  readonly labels?: { [key: string]: string };
 }
 
 export interface ConfigMapVolume {
@@ -95,7 +96,7 @@ export class AppPlus extends Chart {
           metadata: {
             name: `${vol.name}`,
             namespace: props.namespace,
-            labels: props.labels,
+            labels: { ...props.labels, ...vol.labels },
           },
           accessModes: vol.props.accessModes ?? [PersistentVolumeAccessMode.READ_WRITE_ONCE],
           storage: vol.props.storage ?? Size.gibibytes(5),

@@ -4,7 +4,7 @@ import { basename } from "path";
 import { Quantity } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { BACKUP_ANNOTATION_EXCLUDE, DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
 import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
@@ -161,6 +161,9 @@ new AppPlus(app, "immich-machine-learning", {
         storageClassName: StorageClass.CEPHFS,
         accessModes: [PersistentVolumeAccessMode.READ_WRITE_MANY],
         storage: Size.gibibytes(10),
+      },
+      labels: {
+        [BACKUP_ANNOTATION_EXCLUDE]: "true",
       },
     },
   ],

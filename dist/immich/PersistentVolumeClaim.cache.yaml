@@ -4,6 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/component: machine-learning
     app.kubernetes.io/name: immich
+    velero.io/exclude-from-backup: "true"
   name: cache
   namespace: immich
 spec:
