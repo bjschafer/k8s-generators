@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/instance: metrics
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-operator
-    app.kubernetes.io/version: v0.67.0
-    helm.sh/chart: victoria-metrics-operator-0.58.1
+    app.kubernetes.io/version: v0.68.3
+    helm.sh/chart: victoria-metrics-operator-0.59.3
   name: metrics-victoria-metrics-operator-admission
 webhooks:
   - admissionReviewVersions:
@@ -67,7 +67,7 @@ webhooks:
           - vlclusters
     sideEffects: None
   - admissionReviewVersions:
-      - v1beta1
+      - v1
     clientConfig:
       service:
         name: metrics-victoria-metrics-operator
@@ -121,7 +121,7 @@ webhooks:
           - vlsingles
     sideEffects: None
   - admissionReviewVersions:
-      - v1beta1
+      - v1
     clientConfig:
       service:
         name: metrics-victoria-metrics-operator
@@ -148,7 +148,7 @@ webhooks:
           - vmagents
     sideEffects: None
   - admissionReviewVersions:
-      - v1beta1
+      - v1
     clientConfig:
       service:
         name: metrics-victoria-metrics-operator
@@ -175,7 +175,7 @@ webhooks:
           - vmalertmanagerconfigs
     sideEffects: None
   - admissionReviewVersions:
-      - v1beta1
+      - v1
     clientConfig:
       service:
         name: metrics-victoria-metrics-operator
@@ -202,7 +202,7 @@ webhooks:
           - vmalertmanagers
     sideEffects: None
   - admissionReviewVersions:
-      - v1beta1
+      - v1
     clientConfig:
       service:
         name: metrics-victoria-metrics-operator
@@ -256,7 +256,7 @@ webhooks:
           - vmanomalies
     sideEffects: None
   - admissionReviewVersions:
-      - v1beta1
+      - v1
     clientConfig:
       service:
         name: metrics-victoria-metrics-operator
@@ -283,7 +283,7 @@ webhooks:
           - vmauths
     sideEffects: None
   - admissionReviewVersions:
-      - v1beta1
+      - v1
     clientConfig:
       service:
         name: metrics-victoria-metrics-operator
@@ -310,7 +310,34 @@ webhooks:
           - vmclusters
     sideEffects: None
   - admissionReviewVersions:
-      - v1beta1
+      - v1
+    clientConfig:
+      service:
+        name: metrics-victoria-metrics-operator
+        namespace: metrics
+        path: /validate-operator-victoriametrics-com-v1alpha1-vmdistributed
+        port: 9443
+    failurePolicy: Fail
+    name: vmdistributed.operator.victoriametrics.com
+    objectSelector:
+      matchExpressions:
+        - key: app.kubernetes.io/name
+          operator: NotIn
+          values:
+            - victoria-metrics-operator
+    rules:
+      - apiGroups:
+          - operator.victoriametrics.com
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - vmdistributed
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1
     clientConfig:
       service:
         name: metrics-victoria-metrics-operator
@@ -337,7 +364,7 @@ webhooks:
           - vmnodescrapes
     sideEffects: None
   - admissionReviewVersions:
-      - v1beta1
+      - v1
     clientConfig:
       service:
         name: metrics-victoria-metrics-operator
@@ -364,7 +391,7 @@ webhooks:
           - vmpodscrapes
     sideEffects: None
   - admissionReviewVersions:
-      - v1beta1
+      - v1
     clientConfig:
       service:
         name: metrics-victoria-metrics-operator
@@ -391,7 +418,7 @@ webhooks:
           - vmprobes
     sideEffects: None
   - admissionReviewVersions:
-      - v1beta1
+      - v1
     clientConfig:
       service:
         name: metrics-victoria-metrics-operator
@@ -418,7 +445,7 @@ webhooks:
           - vmrules
     sideEffects: None
   - admissionReviewVersions:
-      - v1beta1
+      - v1
     clientConfig:
       service:
         name: metrics-victoria-metrics-operator
@@ -445,7 +472,7 @@ webhooks:
           - vmscrapeconfigs
     sideEffects: None
   - admissionReviewVersions:
-      - v1beta1
+      - v1
     clientConfig:
       service:
         name: metrics-victoria-metrics-operator
@@ -472,7 +499,7 @@ webhooks:
           - vmservicescrapes
     sideEffects: None
   - admissionReviewVersions:
-      - v1beta1
+      - v1
     clientConfig:
       service:
         name: metrics-victoria-metrics-operator
@@ -499,7 +526,7 @@ webhooks:
           - vmsingles
     sideEffects: None
   - admissionReviewVersions:
-      - v1beta1
+      - v1
     clientConfig:
       service:
         name: metrics-victoria-metrics-operator
@@ -526,7 +553,7 @@ webhooks:
           - vmstaticscrapes
     sideEffects: None
   - admissionReviewVersions:
-      - v1beta1
+      - v1
     clientConfig:
       service:
         name: metrics-victoria-metrics-operator
