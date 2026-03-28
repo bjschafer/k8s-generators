@@ -60,6 +60,8 @@ spec:
               value: https://login.cmdcentral.xyz/application/o/book-club/
             - name: ADMIN_EMAILS
               value: braxton@cmdcentral.xyz
+            - name: CF_ACCESS_AUD
+              value: aa6ef39240529f174bf2d2ea388eed6a1881778e1bbda9be478b70ec37894efb
           image: registry.cmdcentral.xyz/cmdcentral/book-club:main
           imagePullPolicy: Always
           livenessProbe:

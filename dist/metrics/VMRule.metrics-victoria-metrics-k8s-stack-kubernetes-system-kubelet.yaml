@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.71.1
+    helm.sh/chart: victoria-metrics-k8s-stack-0.72.5
   name: metrics-victoria-metrics-k8s-stack-kubernetes-system-kubelet
   namespace: metrics
 spec:
@@ -140,10 +140,10 @@ spec:
             severity: warning
         - alert: KubeletDown
           annotations:
-            description: Kubelet has disappeared from Prometheus target discovery.
+            description: Kubelet has disappeared from Prometheus target discovery on cluster {{ $labels.cluster }}.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletdown
             summary: Target disappeared from Prometheus target discovery.
-          expr: absent(up{job="kubelet",metrics_path="/metrics"})
+          expr: count(kube_node_info{job="kube-state-metrics"}) by(cluster) unless on(cluster) count(up{job="kubelet",metrics_path="/metrics"} == 1) by(cluster)
           for: 15m
           labels:
             severity: critical

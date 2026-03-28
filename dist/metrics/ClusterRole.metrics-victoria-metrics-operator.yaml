@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: metrics
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-operator
-    app.kubernetes.io/version: v0.67.0
-    helm.sh/chart: victoria-metrics-operator-0.58.1
+    app.kubernetes.io/version: v0.68.3
+    helm.sh/chart: victoria-metrics-operator-0.59.3
   name: metrics-victoria-metrics-operator
 rules:
   - nonResourceURLs:
@@ -40,7 +40,6 @@ rules:
     resources:
       - configmaps/status
       - nodes
-      - nodes/proxy
       - nodes/metrics
       - namespaces
     verbs:
@@ -171,6 +170,9 @@ rules:
       - vmclusters
       - vmclusters/finalizers
       - vmclusters/status
+      - vmdistributed
+      - vmdistributed/finalizers
+      - vmdistributed/status
       - vmnodescrapes
       - vmnodescrapes/finalizers
       - vmnodescrapes/status

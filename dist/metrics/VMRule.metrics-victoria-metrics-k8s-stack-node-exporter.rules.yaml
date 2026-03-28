@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.71.1
+    helm.sh/chart: victoria-metrics-k8s-stack-0.72.5
   name: metrics-victoria-metrics-k8s-stack-node-exporter.rules
   namespace: metrics
 spec:
@@ -60,3 +60,19 @@ spec:
           expr: sum(rate(node_network_transmit_drop_total{job="node-exporter",device!="lo"}[5m])) without(device)
           labels: {}
           record: instance:node_network_transmit_drop_excluding_lo:rate5m
+        - annotations: {}
+          expr: sum(rate(node_network_receive_bytes_total{job="node-exporter",device!~"lo|veth.+"}[5m])) without(device)
+          labels: {}
+          record: instance:node_network_receive_bytes_physical:rate5m
+        - annotations: {}
+          expr: sum(rate(node_network_transmit_bytes_total{job="node-exporter",device!~"lo|veth.+"}[5m])) without(device)
+          labels: {}
+          record: instance:node_network_transmit_bytes_physical:rate5m
+        - annotations: {}
+          expr: sum(rate(node_network_receive_drop_total{job="node-exporter",device!~"lo|veth.+"}[5m])) without(device)
+          labels: {}
+          record: instance:node_network_receive_drop_physical:rate5m
+        - annotations: {}
+          expr: sum(rate(node_network_transmit_drop_total{job="node-exporter",device!~"lo|veth.+"}[5m])) without(device)
+          labels: {}
+          record: instance:node_network_transmit_drop_physical:rate5m

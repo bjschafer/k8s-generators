@@ -9,8 +9,8 @@ metadata:
     app.kubernetes.io/instance: metrics
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-operator
-    app.kubernetes.io/version: v0.67.0
-    helm.sh/chart: victoria-metrics-operator-0.58.1
+    app.kubernetes.io/version: v0.68.3
+    helm.sh/chart: victoria-metrics-operator-0.59.3
   name: metrics-victoria-metrics-operator-cleanup-hook
   namespace: metrics
 spec:
@@ -20,19 +20,19 @@ spec:
         app.kubernetes.io/instance: metrics
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: victoria-metrics-operator
-        app.kubernetes.io/version: v0.67.0
-        helm.sh/chart: victoria-metrics-operator-0.58.1
+        app.kubernetes.io/version: v0.68.3
+        helm.sh/chart: victoria-metrics-operator-0.59.3
       name: metrics-victoria-metrics-operator
     spec:
       containers:
         - args:
             - delete
-            - vlagent,vlcluster,vlogs,vlsingle,vmagent,vmalert,vmalertmanager,vmalertmanagerconfig,vmanomaly,vmauth,vmcluster,vmnodescrape,vmpodscrape,vmprobe,vmrule,vmscrapeconfig,vmservicescrape,vmsingle,vmstaticscrape,vmuser,vtcluster,vtsingle
+            - vlagent,vlcluster,vlogs,vlsingle,vmagent,vmalert,vmalertmanager,vmalertmanagerconfig,vmanomaly,vmauth,vmcluster,vmdistributed,vmnodescrape,vmpodscrape,vmprobe,vmrule,vmscrapeconfig,vmservicescrape,vmsingle,vmstaticscrape,vmuser,vtcluster,vtsingle
             - --all
             - --ignore-not-found=true
           command:
             - kubectl
-          image: rancher/kubectl:v1.34.4
+          image: rancher/kubectl:v1.34.6
           imagePullPolicy: IfNotPresent
           name: kubectl
           resources:
