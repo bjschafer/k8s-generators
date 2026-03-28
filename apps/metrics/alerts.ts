@@ -225,14 +225,19 @@ export function addAlerts(scope: Construct, id: string): void {
       },
       {
         alert: "CNPGBackupFailed",
-        expr: "increase(cnpg_collector_last_failed_backup_timestamp[1h]) > 0",
-        for: "0m",
+        // Compare absolute timestamp instead of increase() to avoid false fires
+        // when pods restart or switchover resets the gauge to 0 then back to the
+        // historical failure value.  max by(job) deduplicates replica pods so we
+        // get one alert per cluster.  $labels.cluster doesn't exist on this
+        // metric; the cluster name is carried in the job label.
+        expr: "max by(job) (cnpg_collector_last_failed_backup_timestamp) > (time() - 86400)",
+        for: "5m",
         labels: {
           priority: PRIORITY.NORMAL,
           ...SEND_TO_PUSHOVER,
         },
         annotations: {
-          summary: "CNPG backup failed for cluster {{ $labels.cluster }}",
+          summary: "CNPG backup failed for cluster {{ $labels.job }}",
         },
       },
     ],

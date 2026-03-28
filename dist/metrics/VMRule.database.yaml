@@ -47,9 +47,9 @@ spec:
             push_notify: "true"
         - alert: CNPGBackupFailed
           annotations:
-            summary: CNPG backup failed for cluster {{ $labels.cluster }}
-          expr: increase(cnpg_collector_last_failed_backup_timestamp[1h]) > 0
-          for: 0m
+            summary: CNPG backup failed for cluster {{ $labels.job }}
+          expr: max by(job) (cnpg_collector_last_failed_backup_timestamp) > (time() - 86400)
+          for: 5m
           labels:
             namespace: metrics
             priority: "0"
