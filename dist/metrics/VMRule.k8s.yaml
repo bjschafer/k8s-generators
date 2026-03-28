@@ -277,7 +277,7 @@ spec:
         - alert: KubernetesPodCpuThrottling
           annotations:
             summary: Pod {{ $labels.pod }} in {{ $labels.namespace }} seeing 25% of CFS periods throttled.
-          expr: increase(container_cpu_cfs_throttled_periods_total{}[$__rate_interval]) / increase(container_cpu_cfs_periods_total{}[$__rate_interval]) * 100 > 25
+          expr: increase(container_cpu_cfs_throttled_periods_total{}[5m]) / increase(container_cpu_cfs_periods_total{}[5m]) * 100 > 25
           for: 30m
           labels:
             namespace: metrics

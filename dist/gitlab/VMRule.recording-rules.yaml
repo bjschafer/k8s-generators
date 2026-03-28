@@ -67,7 +67,7 @@ spec:
             description: Postgres database {{ $labels.instance }} had {{ $value | printf "%d" }} queries canceled due to deadlocks in the last 5 minutes.
             summary: Postgres database has queries canceled due to deadlocks
           expr: increase(pg_stat_database_deadlocks[5m]) > 0
-        - alert: WorkhorseHighErrorRate
+        - alert: WorkhorseHighErrorRateLowTraffic
           annotations:
             description: Workhorse route {{ $labels.route }} method {{ $labels.method }} has more than 50% errors ({{ $value | printf "%.1f" }}%) for the last 60 minutes.
             summary: Workhorse has high error rates

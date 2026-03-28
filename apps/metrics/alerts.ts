@@ -177,7 +177,7 @@ export function addAlerts(scope: Construct, id: string): void {
     rules: [
       {
         alert: "CNPGVolumeAlmostFull",
-        expr: `max(max by(persistentvolumeclaim) (1 - kubelet_volume_stats_available_bytes{namespace="postgres"} / kubelet_volume_stats_capacity_bytes{namespace="postgres"})) > 0.85`,
+        expr: `max by(persistentvolumeclaim) (1 - kubelet_volume_stats_available_bytes{namespace="postgres"} / kubelet_volume_stats_capacity_bytes{namespace="postgres"}) > 0.85`,
         for: "15m",
         labels: {
           priority: PRIORITY.NORMAL,
@@ -779,7 +779,7 @@ export function addAlerts(scope: Construct, id: string): void {
       },
       {
         alert: "KubernetesPodCpuThrottling",
-        expr: `increase(container_cpu_cfs_throttled_periods_total{}[$__rate_interval]) / increase(container_cpu_cfs_periods_total{}[$__rate_interval]) * 100 > 25`,
+        expr: `increase(container_cpu_cfs_throttled_periods_total{}[5m]) / increase(container_cpu_cfs_periods_total{}[5m]) * 100 > 25`,
         for: "30m",
         labels: {
           priority: PRIORITY.NORMAL,

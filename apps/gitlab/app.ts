@@ -178,7 +178,7 @@ new MonitoringRule(app, "recording-rules", {
           },
         },
         {
-          alert: "WorkhorseHighErrorRate",
+          alert: "WorkhorseHighErrorRateLowTraffic",
           expr: '(\n  sum without (job, code) (\n    job_route_method_code:gitlab_workhorse_http_request_duration_seconds_count:rate5m{code=~"5.."}\n  ) /\n  sum without (job,code) (\n    job_route_method_code:gitlab_workhorse_http_request_duration_seconds_count:rate5m\n  ) < 10\n) * 100 > 50\n',
           annotations: {
             summary: "Workhorse has high error rates",

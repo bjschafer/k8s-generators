@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#MISE description="Validate Prometheus alert rules with promtool and pint"
+#MISE depends=["build"]
+#MISE sources=["dist/**/VMRule.*.yaml"]
+
+set -euo pipefail
+
+bun run tools/validate-alerts.ts

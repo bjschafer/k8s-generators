@@ -3,6 +3,7 @@ bun = "latest"
 kubectl = "1.34"
 helm = "3.20"
 promtool = "latest"
+pint = "latest"
 
 [env]
 # Derived from the pinned kubectl above so helm template uses the right .Capabilities.KubeVersion
@@ -49,7 +50,7 @@ run = "bun x jest --passWithNoTests"
 
 [tasks.check]
 description = "Format, lint, and test"
-depends = ["fmt", "lint", "test"]
+depends = ["fmt", "lint", "test", "validate-alerts"]
 
 [tasks.schemas]
 description = "Generate TypeScript types from JSON schemas"
