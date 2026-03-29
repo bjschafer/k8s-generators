@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - ghcr.io/wizarrrr/wizarr:latest@sha256:855e2a9a98eb18ffee26f321aac5a58712bcb04a537f10c21b95d191f9407588
+  - ghcr.io/wizarrrr/wizarr:latest@sha256:dd53f7e3a9745f54b15f8363efaf4e8b20c8d1f80f1feab7beac3f0c9a0bf7ae
