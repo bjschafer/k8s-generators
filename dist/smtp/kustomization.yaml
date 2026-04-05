@@ -1,4 +1,5 @@
 resources:
+  - ConfigMap.smtp-header-checks.yaml
   - Deployment.smtp.yaml
   - ExternalSecret.smtp.yaml
   - Service.smtp.yaml

@@ -1,5 +1,6 @@
-import { App, Size } from "cdk8s";
-import { Cpu, EnvValue } from "cdk8s-plus-33";
+import { App, Chart, Size } from "cdk8s";
+import { ConfigMap, Cpu, EnvValue } from "cdk8s-plus-33";
+import { Construct } from "constructs";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
@@ -24,6 +25,19 @@ NewArgoApp(name, {
   },
 });
 
+// Strip incoming Message-ID headers so Postfix regenerates them with the correct FQDN.
+// Without this, Django/Authentik sets Message-IDs with pod hostnames that Cloudflare rejects.
+class SmtpConfig extends Chart {
+  constructor(scope: Construct, id: string) {
+    super(scope, id);
+    new ConfigMap(this, `${name}-header-checks`, {
+      metadata: { name: `${name}-header-checks`, namespace },
+      data: { header_checks: "/^Message-ID:/ IGNORE\n" },
+    });
+  }
+}
+new SmtpConfig(app, "smtp-config");
+
 // TODO: replace with the Bitwarden secret UUID for the Cloudflare SMTP API token
 const secrets = new BitwardenSecret(app, `${name}-secrets`, {
   name,
@@ -39,6 +53,13 @@ new AppPlus(app, `${name}-app`, {
   image: "boky/postfix:latest",
   disableIngress: true,
   ports: [port],
+  configmapMounts: [
+    {
+      name: `${name}-header-checks`,
+      mountPath: "/etc/postfix/header_checks",
+      subPath: "header_checks",
+    },
+  ],
   resources: {
     cpu: {
       request: Cpu.millis(10),
@@ -64,6 +85,8 @@ new AppPlus(app, `${name}-app`, {
     ALLOW_EMPTY_SENDER_DOMAINS: EnvValue.fromValue("true"),
     // Use a valid FQDN so Message-ID headers aren't rejected by Cloudflare
     POSTFIX_myhostname: EnvValue.fromValue("smtp.cmdcentral.net"),
+    // Strip incoming Message-IDs so Postfix regenerates them with the correct FQDN
+    POSTFIX_header_checks: EnvValue.fromValue("regexp:/etc/postfix/header_checks"),
   },
 });
 

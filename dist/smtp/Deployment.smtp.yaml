@@ -45,6 +45,8 @@ spec:
               value: "true"
             - name: POSTFIX_myhostname
               value: smtp.cmdcentral.net
+            - name: POSTFIX_header_checks
+              value: regexp:/etc/postfix/header_checks
           image: boky/postfix:latest
           imagePullPolicy: Always
           livenessProbe:
@@ -70,6 +72,10 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /etc/postfix/header_checks
+              name: configmap-smtp-header-checks
+              subPath: header_checks
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
@@ -79,3 +85,7 @@ spec:
       setHostnameAsFQDN: false
       shareProcessNamespace: false
       terminationGracePeriodSeconds: 30
+      volumes:
+        - configMap:
+            name: smtp-header-checks
+          name: configmap-smtp-header-checks
