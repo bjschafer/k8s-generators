@@ -33,21 +33,21 @@ class SmtpConfig extends Chart {
     new ConfigMap(this, `${name}-header-checks`, {
       metadata: { name: `${name}-header-checks`, namespace },
       data: {
-        header_checks: [
-          // Strip Received headers containing internal cluster hostnames/IPs.
-          // Must use smtp_header_checks (outgoing stage) not header_checks (cleanup stage),
-          // because Postfix adds its own Received header after cleanup runs.
-          "/^Received:/ IGNORE",
-          // Strip Message-ID so Cloudflare doesn't reject the pod hostname in it.
-          "/^Message-ID:/ IGNORE",
-        ].join("\n") + "\n",
+        header_checks:
+          [
+            // Strip Received headers containing internal cluster hostnames/IPs.
+            // Must use smtp_header_checks (outgoing stage) not header_checks (cleanup stage),
+            // because Postfix adds its own Received header after cleanup runs.
+            "/^Received:/ IGNORE",
+            // Strip Message-ID so Cloudflare doesn't reject the pod hostname in it.
+            "/^Message-ID:/ IGNORE",
+          ].join("\n") + "\n",
       },
     });
   }
 }
 new SmtpConfig(app, "smtp-config");
 
-// TODO: replace with the Bitwarden secret UUID for the Cloudflare SMTP API token
 const secrets = new BitwardenSecret(app, `${name}-secrets`, {
   name,
   namespace,
@@ -95,7 +95,9 @@ new AppPlus(app, `${name}-app`, {
     // Use a valid FQDN so Message-ID headers aren't rejected by Cloudflare
     POSTFIX_myhostname: EnvValue.fromValue("smtp.cmdcentral.net"),
     // Strip Received and Message-ID headers at the outgoing SMTP stage (before Cloudflare sees them)
-    POSTFIX_smtp_header_checks: EnvValue.fromValue("regexp:/etc/postfix/header_checks"),
+    POSTFIX_smtp_header_checks: EnvValue.fromValue(
+      "regexp:/etc/postfix/header_checks",
+    ),
   },
 });
 
