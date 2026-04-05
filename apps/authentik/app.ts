@@ -122,20 +122,18 @@ const creds = new BitwardenSecret(app, "creds", {
   data: {
     AUTHENTIK_SECRET_KEY: "8f697c41-0a3a-44e9-904e-b329003066c0",
     AUTHENTIK_POSTGRESQL__PASSWORD: "63b39599-c406-4fa1-b6e3-b32900304db5",
-    AUTHENTIK_EMAIL__PASSWORD: "78228577-9953-4482-be25-b32900303578",
   },
 });
 
 // Common environment variables
 const commonEnv: Record<string, EnvValue> = {
   AUTHENTIK_AVATARS: EnvValue.fromValue("gravatar"),
-  AUTHENTIK_EMAIL__FROM: EnvValue.fromValue("login@cmdcentral.xyz"),
-  AUTHENTIK_EMAIL__HOST: EnvValue.fromValue("smtp.fastmail.com"),
-  AUTHENTIK_EMAIL__PORT: EnvValue.fromValue("465"),
+  AUTHENTIK_EMAIL__FROM: EnvValue.fromValue("login@cmdcentral.net"),
+  AUTHENTIK_EMAIL__HOST: EnvValue.fromValue("smtp.smtp.svc.cluster.local"),
+  AUTHENTIK_EMAIL__PORT: EnvValue.fromValue("25"),
   AUTHENTIK_EMAIL__TIMEOUT: EnvValue.fromValue("30"),
-  AUTHENTIK_EMAIL__USE_SSL: EnvValue.fromValue("true"),
+  AUTHENTIK_EMAIL__USE_SSL: EnvValue.fromValue("false"),
   AUTHENTIK_EMAIL__USE_TLS: EnvValue.fromValue("false"),
-  AUTHENTIK_EMAIL__USERNAME: EnvValue.fromValue("braxton@cmdcentral.xyz"),
   AUTHENTIK_ERROR_REPORTING__ENABLED: EnvValue.fromValue("false"),
   AUTHENTIK_ERROR_REPORTING__ENVIRONMENT: EnvValue.fromValue("k8s"),
   AUTHENTIK_ERROR_REPORTING__SEND_PII: EnvValue.fromValue("false"),
