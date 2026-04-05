@@ -62,6 +62,8 @@ new AppPlus(app, `${name}-app`, {
     POSTFIX_smtp_tls_wrappermode: EnvValue.fromValue("yes"),
     // Allow any sender domain — internal clients won't always share a common domain
     ALLOW_EMPTY_SENDER_DOMAINS: EnvValue.fromValue("true"),
+    // Use a valid FQDN so Message-ID headers aren't rejected by Cloudflare
+    POSTFIX_myhostname: EnvValue.fromValue("smtp.cmdcentral.net"),
   },
 });
 

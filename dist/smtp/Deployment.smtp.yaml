@@ -43,6 +43,8 @@ spec:
               value: "yes"
             - name: ALLOW_EMPTY_SENDER_DOMAINS
               value: "true"
+            - name: POSTFIX_myhostname
+              value: smtp.cmdcentral.net
           image: boky/postfix:latest
           imagePullPolicy: Always
           livenessProbe:
