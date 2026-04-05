@@ -34,8 +34,12 @@ class SmtpConfig extends Chart {
       metadata: { name: `${name}-header-checks`, namespace },
       data: {
         header_checks: [
-          "/^Message-ID:/ IGNORE",
+          // Strip Received headers containing internal cluster hostnames/IPs.
+          // Must use smtp_header_checks (outgoing stage) not header_checks (cleanup stage),
+          // because Postfix adds its own Received header after cleanup runs.
           "/^Received:/ IGNORE",
+          // Strip Message-ID so Cloudflare doesn't reject the pod hostname in it.
+          "/^Message-ID:/ IGNORE",
         ].join("\n") + "\n",
       },
     });
@@ -90,8 +94,8 @@ new AppPlus(app, `${name}-app`, {
     ALLOW_EMPTY_SENDER_DOMAINS: EnvValue.fromValue("true"),
     // Use a valid FQDN so Message-ID headers aren't rejected by Cloudflare
     POSTFIX_myhostname: EnvValue.fromValue("smtp.cmdcentral.net"),
-    // Strip incoming Message-IDs so Postfix regenerates them with the correct FQDN
-    POSTFIX_header_checks: EnvValue.fromValue("regexp:/etc/postfix/header_checks"),
+    // Strip Received and Message-ID headers at the outgoing SMTP stage (before Cloudflare sees them)
+    POSTFIX_smtp_header_checks: EnvValue.fromValue("regexp:/etc/postfix/header_checks"),
   },
 });
 

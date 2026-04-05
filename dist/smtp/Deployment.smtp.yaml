@@ -45,7 +45,7 @@ spec:
               value: "true"
             - name: POSTFIX_myhostname
               value: smtp.cmdcentral.net
-            - name: POSTFIX_header_checks
+            - name: POSTFIX_smtp_header_checks
               value: regexp:/etc/postfix/header_checks
           image: boky/postfix:latest
           imagePullPolicy: Always

@@ -5,6 +5,6 @@ metadata:
   namespace: smtp
 data:
   header_checks: |
-    /^Message-ID:/ IGNORE
     /^Received:/ IGNORE
+    /^Message-ID:/ IGNORE
 immutable: false
