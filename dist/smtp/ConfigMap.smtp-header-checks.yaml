@@ -6,4 +6,5 @@ metadata:
 data:
   header_checks: |
     /^Message-ID:/ IGNORE
+    /^Received:/ IGNORE
 immutable: false

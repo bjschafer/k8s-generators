@@ -32,7 +32,12 @@ class SmtpConfig extends Chart {
     super(scope, id);
     new ConfigMap(this, `${name}-header-checks`, {
       metadata: { name: `${name}-header-checks`, namespace },
-      data: { header_checks: "/^Message-ID:/ IGNORE\n" },
+      data: {
+        header_checks: [
+          "/^Message-ID:/ IGNORE",
+          "/^Received:/ IGNORE",
+        ].join("\n") + "\n",
+      },
     });
   }
 }
