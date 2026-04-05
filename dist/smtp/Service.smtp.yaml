@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: smtp
+  namespace: smtp
+spec:
+  externalIPs: []
+  ports:
+    - name: http
+      port: 25
+      targetPort: 25
+  selector:
+    cdk8s.io/metadata.addr: smtp-app-smtp-app-deployment-c84da417
+  type: ClusterIP

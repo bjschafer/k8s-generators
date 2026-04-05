@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: smtp
+  name: smtp
+  namespace: smtp
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: smtp-app-smtp-app-deployment-c84da417
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: smtp
+        cdk8s.io/metadata.addr: smtp-app-smtp-app-deployment-c84da417
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: RELAYHOST
+              value: "[smtp.mx.cloudflare.net]:465"
+            - name: RELAYHOST_USERNAME
+              value: api_token
+            - name: RELAYHOST_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: RELAYHOST_PASSWORD
+                  name: smtp
+            - name: POSTFIX_smtp_tls_security_level
+              value: encrypt
+            - name: POSTFIX_smtp_tls_wrappermode
+              value: "yes"
+            - name: ALLOW_EMPTY_SENDER_DOMAINS
+              value: "true"
+          image: boky/postfix:latest
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 25
+          name: smtp
+          ports:
+            - containerPort: 25
+          readinessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 25
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30

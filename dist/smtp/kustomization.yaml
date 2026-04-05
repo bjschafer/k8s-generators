@@ -1,0 +1,4 @@
+resources:
+  - Deployment.smtp.yaml
+  - ExternalSecret.smtp.yaml
+  - Service.smtp.yaml

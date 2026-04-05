@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    app.kubernetes.io/name: smtp
+  name: smtp
+  namespace: argocd
+spec:
+  destination:
+    namespace: smtp
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: dist/smtp
+    repoURL: git@github.com:bjschafer/k8s-generators.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  labels:
+    app.kubernetes.io/name: smtp
+  name: smtp-updater
+  namespace: argocd
+spec:
+  applicationRefs:
+    - images:
+        - alias: postfix
+          commonUpdateSettings:
+            updateStrategy: semver
+          imageName: boky/postfix:latest
+      namePattern: smtp
+  namespace: argocd
+  writeBackConfig:
+    gitConfig:
+      branch: main
+    method: git
