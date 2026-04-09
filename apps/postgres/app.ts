@@ -23,7 +23,11 @@ import {
   ScheduledBackupSpecMethod,
 } from "../../imports/postgresql.cnpg.io";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
-import { BACKUP_ANNOTATION_EXCLUDE, DEFAULT_APP_PROPS, EXTERNAL_DNS_ANNOTATION_KEY } from "../../lib/consts";
+import {
+  BACKUP_ANNOTATION_EXCLUDE,
+  DEFAULT_APP_PROPS,
+  EXTERNAL_DNS_ANNOTATION_KEY,
+} from "../../lib/consts";
 import { BitwardenSecret } from "../../lib/secrets";
 import { StorageClass } from "../../lib/volume";
 
@@ -74,7 +78,7 @@ class ProdPostgres extends Chart {
           apiGroup: "postgresql.cnpg.io",
           kind: "ClusterImageCatalog",
           major: 17,
-          name: "postgresql",
+          name: "postgresql-minimal-trixie",
         },
         monitoring: {
           enablePodMonitor: false,
@@ -216,13 +220,21 @@ class ProdPostgres extends Chart {
           resources: {
             requests: {
               memory:
-                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("1"),
+                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                  "512Mi",
+                ),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                "1",
+              ),
             },
             limits: {
               memory:
-                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("1"),
+                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                  "512Mi",
+                ),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                "1",
+              ),
             },
           },
         },
@@ -291,7 +303,12 @@ export interface ImportProps {
 }
 
 class VectorPostgres extends Chart {
-  constructor(scope: Construct, id: string, name: string, importProps?: ImportProps) {
+  constructor(
+    scope: Construct,
+    id: string,
+    name: string,
+    importProps?: ImportProps,
+  ) {
     super(scope, id);
 
     const imageBase = "ghcr.io/tensorchord/cloudnative-vectorchord";
@@ -314,44 +331,45 @@ class VectorPostgres extends Chart {
       },
     });
 
-    const importConfig: Pick<ClusterSpec, "externalClusters" | "bootstrap"> | undefined =
-      importProps
-        ? {
-            externalClusters: [
-              {
-                name: importProps.sourceClusterName,
-                connectionParameters: {
-                  host: `${importProps.sourceClusterName}-r.${importProps.sourceClusterNamespace}.svc.cluster.local`,
-                  user: "postgres",
-                  sslmode: "require",
-                },
-                password: {
-                  name: `${importProps.sourceClusterName}-superuser`,
-                  key: "password",
-                },
+    const importConfig:
+      | Pick<ClusterSpec, "externalClusters" | "bootstrap">
+      | undefined = importProps
+      ? {
+          externalClusters: [
+            {
+              name: importProps.sourceClusterName,
+              connectionParameters: {
+                host: `${importProps.sourceClusterName}-r.${importProps.sourceClusterNamespace}.svc.cluster.local`,
+                user: "postgres",
+                sslmode: "require",
               },
-            ],
-            bootstrap: {
-              initdb: {
-                import: {
-                  type: ClusterSpecBootstrapInitdbImportType.MONOLITH,
-                  databases: importProps.databases,
-                  roles: importProps.roles,
-                  source: {
-                    externalCluster: importProps.sourceClusterName,
-                  },
-                },
-                postInitSql: ["CREATE EXTENSION IF NOT EXISTS vchord CASCADE;"],
+              password: {
+                name: `${importProps.sourceClusterName}-superuser`,
+                key: "password",
               },
             },
-          }
-        : {
-            bootstrap: {
-              initdb: {
-                postInitSql: ["CREATE EXTENSION IF NOT EXISTS vchord CASCADE;"],
+          ],
+          bootstrap: {
+            initdb: {
+              import: {
+                type: ClusterSpecBootstrapInitdbImportType.MONOLITH,
+                databases: importProps.databases,
+                roles: importProps.roles,
+                source: {
+                  externalCluster: importProps.sourceClusterName,
+                },
               },
+              postInitSql: ["CREATE EXTENSION IF NOT EXISTS vchord CASCADE;"],
             },
-          };
+          },
+        }
+      : {
+          bootstrap: {
+            initdb: {
+              postInitSql: ["CREATE EXTENSION IF NOT EXISTS vchord CASCADE;"],
+            },
+          },
+        };
 
     new Cluster(this, name, {
       metadata: {
@@ -435,13 +453,21 @@ class VectorPostgres extends Chart {
           resources: {
             requests: {
               memory:
-                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("1"),
+                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                  "512Mi",
+                ),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                "1",
+              ),
             },
             limits: {
               memory:
-                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("1"),
+                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                  "512Mi",
+                ),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                "1",
+              ),
             },
           },
         },
