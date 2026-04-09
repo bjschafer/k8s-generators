@@ -10,7 +10,7 @@ import heredoc from "tsheredoc";
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
-const version = "0.86.0";
+const version = "0.87.1";
 
 NewArgoApp(name, {
   sync_policy: {
@@ -230,11 +230,13 @@ new MonitoringRule(app, "recording-rules", {
           expr: "(sum(rate(redis_used_cpu_sys[1m])) + sum(rate(redis_used_cpu_user[1m]))) or (sum(rate(redis_cpu_sys_seconds_total[1m])) + sum(rate(redis_cpu_user_seconds_total[1m])))\n",
         },
         {
-          record: "gitlab_sli:code_method_route:workhorse_http_request_count:rate1m",
+          record:
+            "gitlab_sli:code_method_route:workhorse_http_request_count:rate1m",
           expr: "sum by (code,method,route) (\n  rate(gitlab_workhorse_http_request_duration_seconds_count[1m])\n)\n",
         },
         {
-          record: "gitlab_sli:code_method_route:workhorse_http_request_duration_seconds:rate1m",
+          record:
+            "gitlab_sli:code_method_route:workhorse_http_request_duration_seconds:rate1m",
           expr: "sum by (code,method,route) (\n  rate(gitlab_workhorse_http_request_duration_seconds_sum[1m])\n)\n",
         },
       ],
@@ -400,19 +402,23 @@ new MonitoringRule(app, "recording-rules", {
       interval: "5m",
       rules: [
         {
-          record: "gitlab_sli:gitlab_component_saturation:ratio:avg_over_time_1w",
+          record:
+            "gitlab_sli:gitlab_component_saturation:ratio:avg_over_time_1w",
           expr: "avg_over_time(gitlab_sli:gitlab_component_saturation:ratio[1w])\n",
         },
         {
-          record: "gitlab_sli:gitlab_component_saturation:ratio:predict_linear_2w",
+          record:
+            "gitlab_sli:gitlab_component_saturation:ratio:predict_linear_2w",
           expr: "predict_linear(gitlab_sli:gitlab_component_saturation:ratio:avg_over_time_1w[1w], 86400 * 14)\n",
         },
         {
-          record: "gitlab_sli:gitlab_component_saturation:ratio:predict_linear_30d",
+          record:
+            "gitlab_sli:gitlab_component_saturation:ratio:predict_linear_30d",
           expr: "predict_linear(gitlab_sli:gitlab_component_saturation:ratio:avg_over_time_1w[1w], 86400 * 30)\n",
         },
         {
-          record: "gitlab_sli:gitlab_component_saturation:ratio:sapdex:avg_over_time_1w",
+          record:
+            "gitlab_sli:gitlab_component_saturation:ratio:sapdex:avg_over_time_1w",
           expr: "avg_over_time(gitlab_sli:gitlab_component_saturation:ratio:sapdex[1w])\n",
         },
         {
@@ -459,15 +465,18 @@ new MonitoringRule(app, "recording-rules", {
           expr: "avg (instance:node_memory_utilization:ratio) by (instance)",
         },
         {
-          record: "gitlab_usage_ping:node_service_process_resident_memory_bytes:avg",
+          record:
+            "gitlab_usage_ping:node_service_process_resident_memory_bytes:avg",
           expr: 'avg by (instance, job) ({__name__ =~ "(ruby_){0,1}process_resident_memory_bytes", job != "gitlab_exporter_process"})',
         },
         {
-          record: "gitlab_usage_ping:node_service_process_unique_memory_bytes:avg",
+          record:
+            "gitlab_usage_ping:node_service_process_unique_memory_bytes:avg",
           expr: 'avg by (instance, job) ({__name__ =~ "(ruby_){0,1}process_unique_memory_bytes", job != "gitlab_exporter_process"})',
         },
         {
-          record: "gitlab_usage_ping:node_service_process_proportional_memory_bytes:avg",
+          record:
+            "gitlab_usage_ping:node_service_process_proportional_memory_bytes:avg",
           expr: 'avg by (instance, job) ({__name__ =~ "(ruby_){0,1}process_proportional_memory_bytes", job != "gitlab_exporter_process"})',
         },
         {
