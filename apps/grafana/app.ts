@@ -11,7 +11,7 @@ import {
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
-const version = "11.2.2";
+const version = "11.6.0";
 
 NewArgoApp(name, {
   namespace: namespace,
@@ -61,7 +61,8 @@ class Grafana extends Chart {
         env: {
           TZ: "America/Chicago",
           GF_DATABASE_TYPE: "postgres",
-          GF_DATABASE_HOST: "prod-pg17-pooler-rw.postgres.svc.cluster.local:5432",
+          GF_DATABASE_HOST:
+            "prod-pg17-pooler-rw.postgres.svc.cluster.local:5432",
           GF_DATABASE_NAME: "grafana",
           GF_DATABASE_USER: "grafana",
           GF_DATABASE_SSL_MODE: "require",
